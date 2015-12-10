@@ -1,0 +1,128 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:background="@drawable/main_bg"
+    android:paddingBottom="5dp"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".ActivityLogin">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="vertical">
+        </LinearLayout>
+
+    <ScrollView android:id="@+id/login_form"
+        android:layout_width="match_parent"
+        android:scrollbars="none"
+        android:layout_height="wrap_content">
+
+        <LinearLayout android:id="@+id/email_login_form"
+            android:layout_width="match_parent"
+            android:layout_margin="20dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/edittext_bg"
+            android:layout_height="50dp"
+            android:paddingLeft="10dp"
+            android:orientation="vertical">
+            <AutoCompleteTextView android:id="@+id/email"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:inputType="textEmailAddress"
+                android:maxLines="1"
+                android:textCursorDrawable="@null"
+                android:paddingLeft="15dp"
+                android:paddingRight="10dp"
+                android:layout_toRightOf="@+id/logo"
+                android:textColorHint="@android:color/white"
+                android:completionHint="Email"
+                android:hint="Email"
+                android:singleLine="true" />
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="35dp"
+                android:id="@+id/logo"
+                android:layout_centerVertical="true"
+                android:background="@drawable/email_icon"
+                android:layout_alignParentStart="true" />
+
+        </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/edittext_bg"
+                android:layout_height="50dp"
+                android:paddingLeft="10dp"
+                android:orientation="vertical">
+                <AutoCompleteTextView
+                    android:id="@+id/password"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:inputType="textEmailAddress"
+                    android:maxLines="1"
+                    android:textCursorDrawable="@null"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="10dp"
+                    android:layout_toRightOf="@+id/logo1"
+                    android:textColorHint="@android:color/white"
+                    android:completionHint="Email"
+                    android:hint="Password"
+                    android:singleLine="true" />
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="35dp"
+                    android:id="@+id/logo1"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/lock_icon"
+                    android:layout_alignParentStart="true" />
+
+            </RelativeLayout>
+
+            <Button android:id="@+id/email_sign_in_button"
+                android:layout_width="130dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="20dp"
+                android:layout_gravity="center"
+                android:onClick="LoginClick"
+                android:background="@drawable/sign_in_button"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:id="@+id/textView"
+                android:lines="2"
+                android:text="or"
+                android:textColor="@android:color/white"
+                android:ellipsize="end"
+                android:textStyle="bold"
+                android:textSize="19sp"
+                android:gravity="center|center_horizontal"
+                android:layout_gravity="center_horizontal" />
+            <Button android:id="@+id/linkedin_here"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:onClick="LinkedInClick"
+                android:background="@drawable/sign_in_withlinkedin"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp">
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="30dp">
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>
