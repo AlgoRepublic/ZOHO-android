@@ -14,17 +14,27 @@ import android.view.View;
 
 import com.algorepublic.zoho.fragments.FeedFragment;
 import com.algorepublic.zoho.fragments.dummy.DummyContent;
+import com.algorepublic.zoho.utils.BaseClass;
+import com.androidquery.AQuery;
 
 public class MainActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener, FeedFragment.OnListFragmentInteractionListener {
 
+    AQuery aq,aq_header;
+    BaseClass baseClass;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        baseClass = ((BaseClass) getApplicationContext());
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        View headerLayout =navigationView.getHeaderView(0);
+        aq_header = new AQuery(headerLayout);
         setSupportActionBar(toolbar);
-
+        aq= new AQuery(this);
+        aq_header.id(R.id.user_name).text(baseClass.getFirstName());
+        aq_header.id(R.id.email).text(baseClass.getEmail());
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -40,7 +50,6 @@ public class MainActivity extends BaseActivity
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
     }
 
@@ -54,27 +63,6 @@ public class MainActivity extends BaseActivity
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
