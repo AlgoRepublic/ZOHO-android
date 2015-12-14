@@ -1,6 +1,7 @@
 package com.algorepublic.zoho;
 
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
@@ -9,6 +10,7 @@ import android.support.v7.widget.PopupMenu;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
 import com.algorepublic.zoho.Models.GetUserModel;
@@ -86,6 +88,7 @@ public class ActivityLogin extends BaseActivity{
         }
         if(!baseClass.isNetworkAvailble(ActivityLogin.this))
             return;
+        baseClass.HideKeyPad(view);
         aq.id(R.id.loader).visibility(View.VISIBLE);
         loginService.login(aq.id(R.id.email).getText().toString(), aq.id(R.id.password).getText().toString(), true, new CallBack(ActivityLogin.this, "LoginCall"));
     }

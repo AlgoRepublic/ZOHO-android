@@ -17,6 +17,8 @@ import android.net.NetworkInfo;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.TypedValue;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -51,7 +53,6 @@ public class BaseClass extends Application {
     private String UserImageUrl = "UserImageUrl";
 
 
-
     @Override
     public void onCreate() {
         super.onCreate();
@@ -60,54 +61,66 @@ public class BaseClass extends Application {
         this.prefsEditor = appSharedPrefs.edit();
     }
 
-    public void setEmail(String email){
+    public void setEmail(String email) {
         prefsEditor.putString(Email, email).commit();
     }
-    public String getEmail(){
+
+    public String getEmail() {
         return appSharedPrefs.getString(Email, "");
     }
-    public void setFirstName(String userName){
+
+    public void setFirstName(String userName) {
         prefsEditor.putString(FirstName, userName).commit();
     }
-    public String getFirstName(){
+
+    public String getFirstName() {
         return appSharedPrefs.getString(FirstName, "");
     }
 
-    public void setUserId(String userName){
+    public void setUserId(String userName) {
         prefsEditor.putString(UserId, userName).commit();
     }
-    public String getUserId(){
+
+    public String getUserId() {
         return appSharedPrefs.getString(UserId, "");
     }
 
-    public void setUserWebsite(String userWebsite){
+    public void setUserWebsite(String userWebsite) {
         prefsEditor.putString(UserWebsite, userWebsite).commit();
     }
-    public String getUserWebsite(){
+
+    public String getUserWebsite() {
         return appSharedPrefs.getString(UserWebsite, "");
     }
-    public void setUserLocation(String userLocation){
+
+    public void setUserLocation(String userLocation) {
         prefsEditor.putString(UserLocation, userLocation).commit();
     }
-    public String getUserLocation(){
+
+    public String getUserLocation() {
         return appSharedPrefs.getString(UserLocation, "");
     }
-    public void setUserAboutMe(String userAboutme){
+
+    public void setUserAboutMe(String userAboutme) {
         prefsEditor.putString(UserAboutMe, userAboutme).commit();
     }
-    public String getUserAboutMe(){
+
+    public String getUserAboutMe() {
         return appSharedPrefs.getString(UserAboutMe, "");
     }
-    public void setUserImageUrl(String userImage){
+
+    public void setUserImageUrl(String userImage) {
         prefsEditor.putString(UserImageUrl, userImage).commit();
     }
-    public String getUserImageUrl(){
+
+    public String getUserImageUrl() {
         return appSharedPrefs.getString(UserImageUrl, "");
     }
 
-    public void clearSharedPrefs(){
+    public void clearSharedPrefs() {
         prefsEditor.clear().commit();
     }
+
     public boolean isNetworkAvailble(Context ctx) {
         ConnectivityManager conMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetwork = conMgr.getActiveNetworkInfo();
@@ -116,18 +129,17 @@ public class BaseClass extends Application {
 //            Crouton.makeText((Activity) ctx,
 //                    "Please check internet or server not responding", Style.ALERT).show();
             return false;
-        }
-        else
-            return  true;
+        } else
+            return true;
     }
+
     public static int isTabletDevice(Context activityContext) {
         boolean xlarge = ((activityContext.getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_XLARGE);
         UiModeManager uiModeManager = (UiModeManager) activityContext.getSystemService(UI_MODE_SERVICE);
 
         if (uiModeManager.getCurrentModeType() == Configuration.UI_MODE_TYPE_TELEVISION) {
             return 2;
-        }
-        else {
+        } else {
             if (xlarge) {
                 DisplayMetrics metrics = new DisplayMetrics();
                 Activity activity = (Activity) activityContext;
@@ -143,6 +155,7 @@ public class BaseClass extends Application {
             return 0;
         }
     }
+
     public boolean isMyServiceRunning(Class<?> serviceClass) {
         ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
         for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
@@ -152,7 +165,8 @@ public class BaseClass extends Application {
         }
         return false;
     }
-    public Boolean isActivityRunning(Class activityClass){
+
+    public Boolean isActivityRunning(Class activityClass) {
         ActivityManager activityManager = (ActivityManager) getBaseContext().getSystemService(Context.ACTIVITY_SERVICE);
         List<ActivityManager.RunningTaskInfo> tasks = activityManager.getRunningTasks(Integer.MAX_VALUE);
         for (ActivityManager.RunningTaskInfo task : tasks) {
@@ -161,7 +175,8 @@ public class BaseClass extends Application {
         }
         return false;
     }
-    public String TimeAgo (long time){
+
+    public String TimeAgo(long time) {
 
         List<Long> times = Arrays.asList(
                 TimeUnit.DAYS.toMillis(365),
@@ -171,8 +186,9 @@ public class BaseClass extends Application {
                 TimeUnit.MINUTES.toMillis(1),
                 TimeUnit.SECONDS.toMillis(1));
         List<String> timesString = Arrays.asList("year", "month", "day", "hour", "minute", "second");
-        return  toDuration(time,times,timesString);
+        return toDuration(time, times, timesString);
     }
+
     public Bitmap getBitmapFromURL(String src) {
         try {
             URL url = new URL(src);
@@ -187,7 +203,8 @@ public class BaseClass extends Application {
             return null;
         }
     }
-    public String toDuration(long duration,List<Long> times,List<String> timesString) {
+
+    public String toDuration(long duration, List<Long> times, List<String> timesString) {
 
         StringBuffer res = new StringBuffer();
         for (int i = 0; i < times.size(); i++) {
@@ -203,7 +220,8 @@ public class BaseClass extends Application {
         else
             return res.toString();
     }
-    public static Long getTimeStampToMilli(String date){
+
+    public static Long getTimeStampToMilli(String date) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
         try {
             Date obj = sdf.parse(date);
@@ -213,9 +231,16 @@ public class BaseClass extends Application {
         }
         return 0l;
     }
-    public static int getDpValue(int val, Context ctx){
+
+    public static int getDpValue(int val, Context ctx) {
         return (int) TypedValue.applyDimension(
                 TypedValue.COMPLEX_UNIT_DIP, val, ctx.getResources()
                         .getDisplayMetrics());
     }
+
+    public void HideKeyPad(View view) {
+    InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+    imm.hideSoftInputFromWindow(view.getWindowToken(),
+    InputMethodManager.RESULT_UNCHANGED_SHOWN);
+}
 }
