@@ -9,6 +9,7 @@ import android.support.v7.widget.PopupMenu;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.algorepublic.zoho.Models.GetUserModel;
 import com.algorepublic.zoho.Models.UserModel;
@@ -17,6 +18,7 @@ import com.algorepublic.zoho.services.LoginService;
 import com.algorepublic.zoho.utils.BaseClass;
 import com.algorepublic.zoho.utils.Constants;
 import com.androidquery.AQuery;
+import com.bumptech.glide.Glide;
 import com.linkedin.platform.APIHelper;
 import com.linkedin.platform.LISession;
 import com.linkedin.platform.LISessionManager;
@@ -47,7 +49,24 @@ public class ActivityLogin extends BaseActivity{
         setContentView(R.layout.activity_login);
         aq= new AQuery(this);
         baseClass = ((BaseClass) getApplicationContext());
+        if(baseClass.getUserId() !="") {
+            startActivity(new Intent(this, MainActivity.class));
+            ActivityLogin.this.finish();
+        }
         loginService = new LoginService(this);
+        Glide.with(this)
+                .load(R.drawable.loader)
+                .crossFade()
+                .into(aq.id(R.id.loader).getImageView());
+        aq.id(R.id.lang_text).clicked(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (aq.id(R.id.lang_text).getText().toString().equalsIgnoreCase("Arabic"))
+                    aq.id(R.id.lang_text).text("English");
+                else
+                    aq.id(R.id.lang_text).text("Arabic");
+            }
+        });
     }
     public void LoginClick(final View view) {
         if(isContentNull(aq.id(R.id.email).getText().toString())) {
@@ -68,53 +87,36 @@ public class ActivityLogin extends BaseActivity{
         if(!baseClass.isNetworkAvailble(ActivityLogin.this))
             return;
         aq.id(R.id.loader).visibility(View.VISIBLE);
-        aq.id(R.id.loader1).visibility(View.GONE);
         loginService.login(aq.id(R.id.email).getText().toString(), aq.id(R.id.password).getText().toString(), true, new CallBack(ActivityLogin.this, "LoginCall"));
     }
     public void LoginCall(Object caller, Object model) {
         UserModel.getInstance().setList((UserModel) model);
-        if (UserModel.getInstance().responseCode.equalsIgnoreCase("100")) {
+        if (UserModel.getInstance().responseCode.equalsIgnoreCase("100")
+                && !UserModel.getInstance().userToken.equalsIgnoreCase("0")) {
             baseClass.setUserId(UserModel.getInstance().userToken);
             loginService.GetById(baseClass.getUserId(),true,new CallBack(ActivityLogin.this,"GetById"));
         }
         else
         {
+            Toast.makeText(ActivityLogin.this, "Invalid User Credential!", Toast.LENGTH_SHORT).show();
             aq.id(R.id.loader).visibility(View.GONE);
-            aq.id(R.id.loader1).visibility(View.VISIBLE);
         }
     }
     public void GetById(Object caller,Object model) {
         GetUserModel.getInstance().setList((GetUserModel) model);
-        if (GetUserModel.getInstance().responseCode.equalsIgnoreCase("0")) {
+        if (GetUserModel.getInstance().responseCode.equalsIgnoreCase("0")
+                && GetUserModel.getInstance().user.toString() !="null") {
             baseClass.setFirstName(GetUserModel.getInstance().user.firstName);
             baseClass.setEmail(GetUserModel.getInstance().user.eMail);
-            startActivity(new Intent(this,MainActivity.class));
+            startActivity(new Intent(this, MainActivity.class));
+            ActivityLogin.this.finish();
         }else {
+            Toast.makeText(ActivityLogin.this, "Something went wrong.", Toast.LENGTH_SHORT).show();
             aq.id(R.id.loader).visibility(View.GONE);
-            aq.id(R.id.loader1).visibility(View.VISIBLE);
         }
     }
-    public void LanguageClick(final View view) {
 
-        PopupMenu popupMenu = new PopupMenu(this, view) {
-            @Override
-            public boolean onMenuItemSelected(MenuBuilder menu, MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.lang_arabic:
-                        aq.id(R.id.lang_text).text("Arabic");
-                        return true;
 
-                    case R.id.lang_english:
-                        aq.id(R.id.lang_text).text("English");
-                        return true;
-                    default:
-                        return super.onMenuItemSelected(menu, item);
-                }
-            }
-        };
-        popupMenu.inflate(R.menu.main);
-        popupMenu.show();
-    }
     public void LinkedInClick(final View view) {
         LISessionManager.getInstance(getApplicationContext()).init(ActivityLogin.this, buildScope(), new AuthListener() {
             @Override

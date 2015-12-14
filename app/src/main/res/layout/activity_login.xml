@@ -64,6 +64,7 @@
                 android:layout_height="match_parent"
                 android:inputType="textEmailAddress"
                 android:maxLines="1"
+                android:text="admin@admin.com"
                 android:imeOptions="actionNext"
                 android:textCursorDrawable="@null"
                 android:paddingLeft="10dp"
@@ -124,7 +125,7 @@
                 android:layout_marginTop="20dp"
                 android:layout_gravity="center"
                 android:onClick="LoginClick"
-                android:background="@drawable/sign_in_button"/>
+                android:background="@drawable/generic_button"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -149,25 +150,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="20dp">
             </LinearLayout>
+
             <ImageView
-                android:id="@+id/loader1"
-                android:layout_width="64dp"
-                android:layout_toLeftOf="@+id/lang_text"
-                android:layout_height="64dp"
-                android:onClick="LanguageClick"
-                android:layout_gravity="center_horizontal"
-                android:scaleType="fitXY"
-                android:src="@drawable/loader1" />
-            <pl.droidsonroids.gif.GifImageView
                 android:id="@+id/loader"
-                android:layout_width="64dp"
+                android:layout_width="50dp"
                 android:layout_toLeftOf="@+id/lang_text"
-                android:layout_height="64dp"
+                android:layout_height="50dp"
                 android:onClick="LanguageClick"
                 android:visibility="gone"
                 android:layout_gravity="center_horizontal"
-                android:scaleType="fitXY"
-                android:src="@drawable/loader" />
+                android:scaleType="fitXY" />
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="20dp">

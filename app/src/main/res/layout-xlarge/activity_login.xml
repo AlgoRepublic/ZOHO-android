@@ -153,9 +153,22 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="30dp">
+                android:layout_height="50dp">
             </LinearLayout>
 
+            <ImageView
+                android:id="@+id/loader"
+                android:layout_width="100dp"
+                android:layout_toLeftOf="@+id/lang_text"
+                android:layout_height="100dp"
+                android:onClick="LanguageClick"
+                android:visibility="gone"
+                android:layout_gravity="center_horizontal"
+                android:scaleType="fitXY" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp">
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 
