@@ -47,7 +47,7 @@ public class BaseClass extends Application {
     private String UserId = "UserId";
     private String FirstName = "FirstName";
     private String Email = "Email";
-    private String UserWebsite = "UserWebsite";
+    private String UserLanguage = "UserLanguage";
     private String UserLocation = "UserLocation";
     private String UserAboutMe = "UserAboutMe";
     private String UserImageUrl = "UserImageUrl";
@@ -85,12 +85,12 @@ public class BaseClass extends Application {
         return appSharedPrefs.getString(UserId, "");
     }
 
-    public void setUserWebsite(String userWebsite) {
-        prefsEditor.putString(UserWebsite, userWebsite).commit();
+    public void setUserLanguage(String userLanguage) {
+        prefsEditor.putString(UserLanguage, userLanguage).commit();
     }
 
-    public String getUserWebsite() {
-        return appSharedPrefs.getString(UserWebsite, "");
+    public String getUserLanguage() {
+        return appSharedPrefs.getString(UserLanguage, "");
     }
 
     public void setUserLocation(String userLocation) {
@@ -237,10 +237,4 @@ public class BaseClass extends Application {
                 TypedValue.COMPLEX_UNIT_DIP, val, ctx.getResources()
                         .getDisplayMetrics());
     }
-
-    public void HideKeyPad(View view) {
-    InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-    imm.hideSoftInputFromWindow(view.getWindowToken(),
-    InputMethodManager.RESULT_UNCHANGED_SHOWN);
-}
 }

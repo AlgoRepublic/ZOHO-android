@@ -19,7 +19,7 @@
         <activity android:name=".BaseActivity" />
         <activity
             android:name=".MainActivity"
-            android:label="@string/title_activity_main"
+            android:label="@string/feeds"
             android:screenOrientation="portrait"
             android:parentActivityName=".BaseActivity"
             android:theme="@style/AppTheme.NoActionBar">

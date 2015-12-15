@@ -1,30 +1,32 @@
 <resources>
     <string name="app_name">ZOHO</string>
     <string name="title_activity_main">Feeds</string>
-
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-
     <string name="action_settings">Settings</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="title_activity_login">Sign in</string>
 
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
-    <string name="prompt_password">Password (optional)</string>
-    <string name="action_sign_in">Sign in or register</string>
-    <string name="action_sign_in_short">Sign in</string>
-    <string name="error_invalid_email">This email address is invalid</string>
-    <string name="error_invalid_password">This password is too short</string>
-    <string name="error_incorrect_password">This password is incorrect</string>
-    <string name="error_field_required">This field is required</string>
+    <string name="prompt_password">Password</string>
+    <string name="enter_email">Please enter email</string>
+    <string name="enter_password">Please enter password</string>
+    <string name="error_invalid_email">Invalid email</string>
+    <string name="text_or">or</string>
+    <string name="arabic">Arabic</string>
+    <string name="english">English</string>
+    <string name="invalid_credential">Invalid User Credential!</string>
+    <string name="error_login_response">Please check your internet or server not responding</string>
+    //...............................................//
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
+    <!-- Strings related to Menu -->
     <string name="feeds">Feeds</string>
     <string name="tasks">Tasks</string>
     <string name="documents">Documents</string>
     <string name="settings">Settings</string>
+
+    <!-- Random Strings related to ZOHO -->
+    <string name="lang_arabic">ar_AE</string>
+    <string name="lang_english">en_US</string>
 </resources>
