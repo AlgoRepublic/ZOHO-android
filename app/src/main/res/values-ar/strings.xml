@@ -13,7 +13,6 @@
     <string name="error_invalid_email">بريد إلكتروني خاطئ</string>
     <string name="text_or">أو</string>
     <string name="arabic">العربية</string>
-    <string name="english">الإنجليزية</string>
     <string name="invalid_credential">الاعتماد العضو غير صالح !</string>
     <string name="error_login_response">يرجى التحقق من الإنترنت الخاص بك أو الخادم لا يستجيب</string>
     //...............................................//
@@ -27,6 +26,6 @@
     <string name="settings">إعدادات</string>
 
     <!-- Random Strings related to ZOHO -->
-    <string name="lang_arabic">ar_AE</string>
-    <string name="lang_english">en_US</string>
+    <string name="lang_arabic">ar</string>
+    <string name="lang_english">en</string>
 </resources>

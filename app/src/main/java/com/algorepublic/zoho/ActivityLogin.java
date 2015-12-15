@@ -56,11 +56,14 @@ public class ActivityLogin extends BaseActivity{
             startActivity(new Intent(this, MainActivity.class));
             ActivityLogin.this.finish();
         }
-        if(baseClass.getUserLanguage().equals("ar_ae")) {
+        Log.e("lang1",baseClass.getUserLanguage());
+        if(baseClass.getUserLanguage().equals(getString(R.string.lang_arabic))) {
             changeLanguage(getString(R.string.lang_arabic));
+            setContentView(R.layout.activity_login);
             aq.id(R.id.lang_text).text(getString(R.string.arabic));
         }else {
             changeLanguage(getString(R.string.lang_english));
+            setContentView(R.layout.activity_login);
             aq.id(R.id.lang_text).text(getString(R.string.english));
         }
 
@@ -80,18 +83,16 @@ public class ActivityLogin extends BaseActivity{
         aq.id(R.id.lang_text).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                if (aq.id(R.id.lang_text).getText().toString().equalsIgnoreCase("English")
-                    ||aq.id(R.id.lang_text).getText().toString().equalsIgnoreCase("إنجليزية")) {
+                if (aq.id(R.id.lang_text).getText().toString().equalsIgnoreCase("English")) {
                     changeLanguage(getString(R.string.lang_arabic));
-                    baseClass.setUserLanguage(BaseActivity.conf.locale.getLanguage());
+                    baseClass.setUserLanguage(getString(R.string.lang_arabic));
                 }
                 else {
                     changeLanguage(getString(R.string.lang_english));
-                    baseClass.setUserLanguage(BaseActivity.conf.locale.getLanguage());
+                    baseClass.setUserLanguage(getString(R.string.lang_english));
                 }
-                startActivity(new Intent(ActivityLogin.this, ActivityLogin.class));
-                ActivityLogin.this.finish();
+                startActivity(new Intent(ActivityLogin.this,ActivityLogin.class));
+                finish();
             }
         });
     }

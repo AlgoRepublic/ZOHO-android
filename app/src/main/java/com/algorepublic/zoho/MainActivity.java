@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.algorepublic.zoho.fragments.FeedFragment;
+import com.algorepublic.zoho.fragments.TasksFragment;
 import com.algorepublic.zoho.fragments.dummy.DummyContent;
 import com.algorepublic.zoho.utils.BaseClass;
 import com.androidquery.AQuery;
@@ -34,14 +35,14 @@ public class MainActivity extends BaseActivity
         aq= new AQuery(this);
         aq_header.id(R.id.user_name).text(baseClass.getFirstName());
         aq_header.id(R.id.email).text(baseClass.getEmail());
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+//        fab.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+//                        .setAction("Action", null).show();
+//            }
+//        });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -70,13 +71,15 @@ public class MainActivity extends BaseActivity
         int id = item.getItemId();
 
         if (id == R.id.feed) {
-            getSupportFragmentManager().beginTransaction().add(R.id.container, FeedFragment.newInstance(1), "FeedFragment").commit();
+            getSupportActionBar().setTitle(getString(R.string.feeds));
+            getSupportFragmentManager().beginTransaction().replace(R.id.container, FeedFragment.newInstance(1), "FeedFragment").commit();
         } else if (id == R.id.tasks) {
-
+            getSupportActionBar().setTitle(getString(R.string.tasks));
+            getSupportFragmentManager().beginTransaction().replace(R.id.container, TasksFragment.newInstance(), "TasksFragment").commit();
         } else if (id == R.id.documents) {
-
+            getActionBar().setTitle(getString(R.string.documents));
         } else if (id == R.id.settings) {
-
+            getActionBar().setTitle(getString(R.string.settings));
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

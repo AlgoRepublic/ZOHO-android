@@ -12,14 +12,11 @@ import java.util.Locale;
 
 public class BaseActivity extends AppCompatActivity {
 
-    public static android.content.res.Configuration conf;
-    Resources res; DisplayMetrics dm;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-         res = getResources();
-        dm = res.getDisplayMetrics();
-        conf = res.getConfiguration();
+
     }
     public void hideKeyPad(View view) {
         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -27,6 +24,9 @@ public class BaseActivity extends AppCompatActivity {
                 InputMethodManager.RESULT_UNCHANGED_SHOWN);
     }
     public void changeLanguage(String local_language){
+        Resources res = getResources();
+        DisplayMetrics dm = res.getDisplayMetrics();
+        android.content.res.Configuration conf = res.getConfiguration();
         conf.locale = new Locale(local_language);
         res.updateConfiguration(conf, dm);
     }

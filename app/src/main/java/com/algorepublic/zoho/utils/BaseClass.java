@@ -90,7 +90,7 @@ public class BaseClass extends Application {
     }
 
     public String getUserLanguage() {
-        return appSharedPrefs.getString(UserLanguage, "");
+        return appSharedPrefs.getString(UserLanguage, "en");
     }
 
     public void setUserLocation(String userLocation) {
