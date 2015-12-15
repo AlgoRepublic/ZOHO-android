@@ -2,16 +2,10 @@ package com.algorepublic.zoho;
 
 
 import android.content.Intent;
-import android.content.res.Configuration;
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
-import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.LinearInterpolator;
-import android.view.animation.RotateAnimation;
 import android.widget.Toast;
 
 import com.algorepublic.zoho.Models.GetUserModel;
@@ -35,7 +29,7 @@ import com.linkedin.platform.utils.Scope;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.Locale;
+import java.util.Objects;
 
 /**
  * Created by android on 12/10/15.
@@ -52,7 +46,7 @@ public class ActivityLogin extends BaseActivity{
         setContentView(R.layout.activity_login);
         aq= new AQuery(this);
         baseClass = ((BaseClass) getApplicationContext());
-        if(baseClass.getUserId() !="") {
+        if(!baseClass.getUserId().isEmpty()) {
             startActivity(new Intent(this, MainActivity.class));
             ActivityLogin.this.finish();
         }
@@ -91,8 +85,8 @@ public class ActivityLogin extends BaseActivity{
                     changeLanguage(getString(R.string.lang_english));
                     baseClass.setUserLanguage(getString(R.string.lang_english));
                 }
-                startActivity(new Intent(ActivityLogin.this,ActivityLogin.class));
-                finish();
+                startActivity(new Intent(ActivityLogin.this, ActivityLogin.class));
+                ActivityLogin.this.finish();
             }
         });
     }
@@ -135,7 +129,7 @@ public class ActivityLogin extends BaseActivity{
     public void GetById(Object caller,Object model) {
         GetUserModel.getInstance().setList((GetUserModel) model);
         if (GetUserModel.getInstance().responseCode.equalsIgnoreCase("0")
-                && GetUserModel.getInstance().user.toString() !="null") {
+                && !Objects.equals(GetUserModel.getInstance().user.toString(), "null")) {
             baseClass.setFirstName(GetUserModel.getInstance().user.firstName);
             baseClass.setEmail(GetUserModel.getInstance().user.eMail);
             startActivity(new Intent(this, MainActivity.class));

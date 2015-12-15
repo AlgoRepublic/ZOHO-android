@@ -7,9 +7,12 @@
     android:layout_height="wrap_content"
     android:layout_alignParentBottom="true"
     android:layout_alignParentRight="true"
+    android:layout_alignParentEnd="true"
     android:layout_marginRight="5dp"
+    android:layout_marginEnd="5dp"
     android:layout_marginBottom="5dp"
     android:layout_marginLeft="5dp"
+    android:layout_marginStart="5dp"
     fab:menu_fab_size="normal"
     fab:menu_showShadow="true"
     fab:menu_shadowColor="#66000000"
@@ -24,7 +27,7 @@
     fab:menu_buttonSpacing="0dp"
     fab:menu_openDirection="up"
     fab:menu_backgroundColor="@android:color/transparent"
-    android:layout_gravity="right|bottom">
+    android:layout_gravity="end|bottom">
 
     <com.github.clans.fab.FloatingActionButton
         android:id="@+id/menu_item_edit"

@@ -16,16 +16,22 @@
     <string name="invalid_credential">الاعتماد العضو غير صالح !</string>
     <string name="error_login_response">يرجى التحقق من الإنترنت الخاص بك أو الخادم لا يستجيب</string>
     //...............................................//
-    <string name="permission_rationale">"Contacts permissions are needed for providing email
-        completions."
-    </string>
     <!-- Strings related to Menu -->
     <string name="feeds">يغذي</string>
     <string name="tasks">المهام</string>
     <string name="documents">الوثائق</string>
     <string name="settings">إعدادات</string>
 
+    <!--Related to tasks-->
+    <string name="task_title">Task title:</string>
+    <string name="task_overview">Task Overview:</string>
+    <string name="task_category">Task Category:</string>
+    <string name="task_attachment">Attachment:</string>
+    <string name="task_employees">Employees:</string>
+    <string name="task_schedule">Schedule:</string>
+    <string name="task_priority">Priority:</string>
     <!-- Random Strings related to ZOHO -->
     <string name="lang_arabic">ar</string>
     <string name="lang_english">en</string>
+    <string name="english">English</string>
 </resources>
