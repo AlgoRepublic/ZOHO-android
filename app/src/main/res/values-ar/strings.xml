@@ -1,0 +1,31 @@
+<resources>
+    <string name="app_name">ZOHO</string>
+    <string name="title_activity_main">Feeds</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="action_settings">Settings</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_email">البريد الإلكتروني</string>
+    <string name="prompt_password">الرمز السري</string>
+    <string name="enter_email">يرجى إدخال البريد الإلكتروني</string>
+    <string name="enter_password">الرجاء إدخال كلمة المرور</string>
+    <string name="error_invalid_email">بريد إلكتروني خاطئ</string>
+    <string name="text_or">أو</string>
+    <string name="arabic">العربية</string>
+    <string name="invalid_credential">الاعتماد العضو غير صالح !</string>
+    <string name="error_login_response">يرجى التحقق من الإنترنت الخاص بك أو الخادم لا يستجيب</string>
+    //...............................................//
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
+    <!-- Strings related to Menu -->
+    <string name="feeds">يغذي</string>
+    <string name="tasks">المهام</string>
+    <string name="documents">الوثائق</string>
+    <string name="settings">إعدادات</string>
+
+    <!-- Random Strings related to ZOHO -->
+    <string name="lang_arabic">ar</string>
+    <string name="lang_english">en</string>
+</resources>

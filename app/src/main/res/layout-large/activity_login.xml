@@ -20,7 +20,6 @@
             android:layout_width="40dp"
             android:layout_toLeftOf="@+id/lang_text"
             android:layout_height="40dp"
-            android:onClick="LanguageClick"
             android:layout_centerVertical="true"
             android:scaleType="center"
             android:src="@drawable/ic_menu_add_task" />
@@ -29,7 +28,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/lang_text"
             android:singleLine="true"
-            android:text="Arabic"
+            android:text="@string/english"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:textColor="@android:color/white"
@@ -75,8 +74,8 @@
                 android:textColorHint="@android:color/white"
                 android:textColor="@android:color/white"
                 android:background="@android:color/transparent"
-                android:completionHint="Email"
-                android:hint="Email"
+                android:completionHint="@string/prompt_email"
+                android:hint="@string/prompt_email"
                 android:singleLine="true" />
             <ImageView
                 android:layout_width="60dp"
@@ -110,8 +109,8 @@
                     android:textColor="@android:color/white"
                     android:background="@android:color/transparent"
                     android:textColorHint="@android:color/white"
-                    android:completionHint="Email"
-                    android:hint="Password"
+                    android:completionHint="@string/prompt_password"
+                    android:hint="@string/prompt_password"
                     android:singleLine="true" />
                 <ImageView
                     android:layout_width="60dp"
@@ -137,7 +136,7 @@
                 android:id="@+id/textView"
                 android:singleLine="true"
                 android:layout_margin="10dp"
-                android:text="or"
+                android:text="@string/text_or"
                 android:textColor="@android:color/white"
                 android:ellipsize="end"
                 android:textStyle="bold"
