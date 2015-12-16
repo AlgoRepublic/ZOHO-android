@@ -30,7 +30,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/lang_text"
             android:singleLine="true"
-            android:text="@string/arabic"
+            android:text="@string/selected_language"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
             android:textColor="@android:color/white"

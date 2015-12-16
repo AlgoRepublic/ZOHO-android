@@ -20,20 +20,35 @@
         <activity
             android:name=".MainActivity"
             android:label="@string/feeds"
-            android:screenOrientation="portrait"
             android:parentActivityName=".BaseActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-
-        </activity>
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".ActivityLogin"
-            android:supportsRtl="true"
-            android:screenOrientation="portrait"
             android:parentActivityName=".BaseActivity"
+            android:screenOrientation="portrait"
+            android:supportsRtl="true"
             android:theme="@style/AppTheme.NoActionBar">
-            <!--<meta-data-->
-                <!--android:name="android.support.PARENT_ACTIVITY"-->
-                <!--android:value="com.algorepublic.zoho.BaseActivity" />-->
+
+            <!-- <meta-data -->
+            <!-- android:name="android.support.PARENT_ACTIVITY" -->
+            <!-- android:value="com.algorepublic.zoho.BaseActivity" /> -->
+           <!-- <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>-->
+        </activity>
+        <activity
+            android:name=".ActivityTask"
+            android:parentActivityName=".BaseActivity"
+            android:screenOrientation="portrait"
+            android:supportsRtl="true"
+            android:theme="@style/AppTheme.NoActionBar">
+
+            <!-- <meta-data -->
+            <!-- android:name="android.support.PARENT_ACTIVITY" -->
+            <!-- android:value="com.algorepublic.zoho.BaseActivity" /> -->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

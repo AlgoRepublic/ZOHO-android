@@ -12,12 +12,11 @@
     <string name="enter_password">Please enter password</string>
     <string name="error_invalid_email">Invalid email</string>
     <string name="text_or">or</string>
-    <string name="english">English</string>
-    <string name="arabic">Arabic</string>
+    <string name="selected_language">English</string>
     <string name="invalid_credential">Invalid User Credential!</string>
     <string name="error_login_response">Please check your internet or server not responding</string>
     //...............................................//
-   <!-- <string name="permission_rationale">"Contacts permissions are needed for providing email
+    <!-- <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>-->
     <!-- Strings related to Menu -->
@@ -33,6 +32,13 @@
     <string name="task_employees">Employees:</string>
     <string name="task_schedule">Schedule:</string>
     <string name="task_priority">Priority:</string>
+
+    <string name="priority">Priority</string>
+    <string name="image">Image</string>
+    <string name="task_title1">Task title</string>
+    <string name="category">Category</string>
+    <string name="employees">Employees</string>
+    <string name="schedule">Schedule</string>
     <!-- Random Strings related to ZOHO -->
     <string name="lang_arabic">ar</string>
     <string name="lang_english">en</string>
