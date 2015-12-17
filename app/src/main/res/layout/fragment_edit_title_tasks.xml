@@ -1,0 +1,21 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_alignParentBottom="true"
+    android:background="@color/colorLightgray"
+    android:orientation="vertical">
+    <EditText
+        android:id="@+id/first_name"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:hint="Task Title"
+        android:textCursorDrawable="@null"
+        android:textColor="@color/colorBackground"
+        android:padding="10dp"
+        android:gravity="top"
+        android:textSize="14sp"
+        android:layout_margin="20dp"
+        android:textColorHint="@color/colorLightgray"
+        android:background="@drawable/roundable_white"/>
+</LinearLayout>

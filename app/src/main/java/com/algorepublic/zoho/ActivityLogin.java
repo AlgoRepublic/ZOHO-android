@@ -63,10 +63,10 @@ public class ActivityLogin extends BaseActivity{
         }
         aq= new AQuery(this);
         loginService = new LoginService(this);
-        Glide.with(this)
-                .load(R.drawable.loader)
-                .crossFade()
-                .into(aq.id(R.id.loader).getImageView());
+//        Glide.with(this)
+//                .load(R.drawable.loader)
+//                .crossFade()
+//                .into(aq.id(R.id.loader).getImageView());
 //        final RotateAnimation anim = new RotateAnimation(0.0f, -10.0f * 360.0f, Animation.RELATIVE_TO_SELF, 0.0f, Animation.RELATIVE_TO_SELF,
 //                0.0f);
 //        anim.setInterpolator(new LinearInterpolator());
@@ -111,7 +111,6 @@ public class ActivityLogin extends BaseActivity{
         if(!baseClass.isNetworkAvailble(ActivityLogin.this))
             return;
         hideKeyPad(view);
-        aq.id(R.id.loader).visibility(View.VISIBLE);
         loginService.login(aq.id(R.id.email).getText().toString(), aq.id(R.id.password).getText().toString(), true, new CallBack(ActivityLogin.this, "LoginCall"));
     }
     public void LoginCall(Object caller, Object model) {
@@ -124,7 +123,7 @@ public class ActivityLogin extends BaseActivity{
         else
         {
             Toast.makeText(ActivityLogin.this, getString(R.string.invalid_credential), Toast.LENGTH_SHORT).show();
-            aq.id(R.id.loader).visibility(View.GONE);
+            aq.id(R.id.progress_bar).visibility(View.GONE);
         }
     }
     public void GetById(Object caller,Object model) {
@@ -137,7 +136,7 @@ public class ActivityLogin extends BaseActivity{
             ActivityLogin.this.finish();
         }else {
             Toast.makeText(ActivityLogin.this, getString(R.string.error_login_response), Toast.LENGTH_SHORT).show();
-            aq.id(R.id.loader).visibility(View.GONE);
+            aq.id(R.id.progress_bar).visibility(View.GONE);
         }
     }
 

@@ -3,6 +3,7 @@ package com.algorepublic.zoho;
 import android.content.Context;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
 import android.view.View;
@@ -29,5 +30,26 @@ public class BaseActivity extends AppCompatActivity {
         android.content.res.Configuration conf = res.getConfiguration();
         conf.locale = new Locale(local_language);
         res.updateConfiguration(conf, dm);
+    }
+    protected void callFragment(int containerId, Fragment fragment, String tag){
+        getSupportFragmentManager()
+                .beginTransaction()
+                .add(containerId, fragment, tag)
+                .commit();
+    }
+    public void callFragmentWithReplace(int containerId, Fragment fragment, String tag){
+
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(containerId, fragment, tag)
+                .commit();
+
+    }
+    public void callFragmentWithBackStack(int containerId, Fragment fragment, String tag){
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(containerId, fragment, tag)
+                .addToBackStack(null)
+                .commit();
     }
 }
