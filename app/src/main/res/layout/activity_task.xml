@@ -13,7 +13,7 @@
     <ScrollView
         android:id="@+id/scrollView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:scrollbars="none"
         android:layout_below="@+id/toolbar_actionbar"
         android:orientation="vertical">
@@ -162,12 +162,13 @@
                 android:layout_gravity="center_horizontal"
                 android:textSize="13dp" />
     </RadioGroup>
+
+</LinearLayout>
+    </ScrollView>
     <FrameLayout
         android:id="@+id/edittask_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/radioGroup2">
-</FrameLayout>
-</LinearLayout>
-    </ScrollView>
+        android:layout_below="@+id/scrollView">
+    </FrameLayout>
 </RelativeLayout>
