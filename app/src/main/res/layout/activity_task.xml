@@ -5,51 +5,28 @@
     android:layout_height="match_parent"
     android:background="@color/colorLightgray"
     tools:context="com.algorepublic.zoho.ActivityTask">
-    <RelativeLayout
+    <include
+        android:id="@+id/toolbar_actionbar"
+        layout="@layout/toolbar_default"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:id="@+id/top_layout"
-        android:paddingTop="1dp"
-        android:paddingBottom="1dp"
-        android:background="@color/colorBackground"
-        android:layout_gravity="center_horizontal">
+        android:layout_height="50dp" />
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none"
+        android:layout_below="@+id/toolbar_actionbar"
+        android:orientation="vertical">
 
-        <Button
-            android:layout_width="70dp"
-            android:layout_height="35dp"
-            android:layout_centerVertical="true"
-            android:id="@+id/cancel"
-            android:text="Cancel"
-            android:layout_alignParentLeft="true"
-            android:textAllCaps="false"
-            android:textColor="@android:color/white"
-            android:background="@android:color/transparent"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:text="Project Name"
-            android:layout_centerHorizontal="true"
-            android:textStyle="bold"
-            android:textColor="@android:color/white"
-            android:id="@+id/textView2"
-            android:layout_centerVertical="true" />
-        <Button
-            android:layout_width="70dp"
-            android:layout_height="35dp"
-            android:layout_centerVertical="true"
-            android:id="@+id/done"
-            android:text="Done"
-            android:layout_alignParentRight="true"
-            android:textAllCaps="false"
-            android:textColor="@android:color/white"
-            android:background="@android:color/transparent"/>
-    </RelativeLayout>
-
+    <LinearLayout
+        android:id="@+id/linear1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
     <RadioGroup
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/top_layout"
+        android:layout_below="@+id/toolbar_actionbar"
         android:weightSum="3"
         android:orientation="horizontal"
         android:id="@+id/radioGroup1">
@@ -58,7 +35,7 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:id="@+id/radioButton1"
+            android:id="@+id/edit_radioButton"
             android:button="@null"
             android:text="@string/task_title1"
             android:drawableTop="@drawable/edit_radiobutton"
@@ -77,7 +54,7 @@
             android:layout_height="wrap_content"
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:id="@+id/radioButton2"
+            android:id="@+id/category_radioButton"
             android:button="@null"
             android:text="@string/category"
             android:layout_marginLeft="1dp"
@@ -98,7 +75,7 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:id="@+id/radioButton3"
+                android:id="@+id/image_radioButton"
                 android:button="@null"
                 android:text="@string/image"
                 android:drawableTop="@drawable/image_radiobutton"
@@ -131,7 +108,7 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:id="@+id/radioButton4"
+                android:id="@+id/employees_radioButton"
                 android:button="@null"
                 android:text="@string/employees"
                 android:drawableTop="@drawable/user_radiobutton"
@@ -149,7 +126,7 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:id="@+id/radioButton5"
+                android:id="@+id/schedule_radioButton"
                 android:button="@null"
                 android:layout_marginLeft="1dp"
                 android:layout_marginRight="1dp"
@@ -170,7 +147,7 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:id="@+id/radioButton6"
+                android:id="@+id/priority_radioButton"
                 android:button="@null"
                 android:text="@string/priority"
                 android:drawableTop="@drawable/priority_radiobutton"
@@ -185,24 +162,12 @@
                 android:layout_gravity="center_horizontal"
                 android:textSize="13dp" />
     </RadioGroup>
-    <LinearLayout
+    <FrameLayout
+        android:id="@+id/edittask_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/radioGroup2"
-        android:background="@color/colorLightgray"
-        android:orientation="vertical">
-    <EditText
-        android:id="@+id/first_name"
-        android:layout_width="match_parent"
-        android:layout_height="fill_parent"
-        android:hint="Task Title"
-        android:textCursorDrawable="@null"
-        android:textColor="@color/colorBackground"
-        android:padding="10dp"
-        android:gravity="top"
-        android:textSize="14sp"
-        android:layout_margin="20dp"
-        android:textColorHint="@color/colorLightgray"
-        android:background="@drawable/roundable_white"/>
+        android:layout_below="@+id/radioGroup2">
+</FrameLayout>
 </LinearLayout>
+    </ScrollView>
 </RelativeLayout>

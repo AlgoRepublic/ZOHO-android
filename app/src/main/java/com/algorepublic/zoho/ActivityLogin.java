@@ -15,7 +15,6 @@ import com.algorepublic.zoho.services.LoginService;
 import com.algorepublic.zoho.utils.BaseClass;
 import com.algorepublic.zoho.utils.Constants;
 import com.androidquery.AQuery;
-import com.bumptech.glide.Glide;
 import com.linkedin.platform.APIHelper;
 import com.linkedin.platform.LISession;
 import com.linkedin.platform.LISessionManager;
@@ -55,28 +54,16 @@ public class ActivityLogin extends BaseActivity{
         }
         aq= new AQuery(this);
         loginService = new LoginService(this);
-        Glide.with(this)
-                .load(R.drawable.loader)
-                .crossFade()
-                .into(aq.id(R.id.loader).getImageView());
-//        final RotateAnimation anim = new RotateAnimation(0.0f, -10.0f * 360.0f, Animation.RELATIVE_TO_SELF, 0.0f, Animation.RELATIVE_TO_SELF,
-//                0.0f);
-//        anim.setInterpolator(new LinearInterpolator());
-//        anim.setRepeatCount(Animation.INFINITE);
-//        anim.setFillAfter(true);
-//        anim.setRepeatMode(1);
-//        anim.setDuration(5000);
-//        aq.id(R.id.loader).animate(anim);
         aq.id(R.id.lang_text).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (aq.id(R.id.lang_text).getText().toString().equalsIgnoreCase("English")) {
-                    changeLanguage(getString(R.string.lang_arabic));
-                    baseClass.setUserLanguage(getString(R.string.lang_arabic));
-                }
-                else {
                     changeLanguage(getString(R.string.lang_english));
                     baseClass.setUserLanguage(getString(R.string.lang_english));
+                }
+                else {
+                    changeLanguage(getString(R.string.lang_arabic));
+                    baseClass.setUserLanguage(getString(R.string.lang_arabic));
                 }
                 startActivity(new Intent(ActivityLogin.this,ActivityLogin.class));
                 finish();
@@ -103,7 +90,6 @@ public class ActivityLogin extends BaseActivity{
         if(!baseClass.isNetworkAvailble(ActivityLogin.this))
             return;
         hideKeyPad(view);
-        aq.id(R.id.loader).visibility(View.VISIBLE);
         loginService.login(aq.id(R.id.email).getText().toString(), aq.id(R.id.password).getText().toString(), true, new CallBack(ActivityLogin.this, "LoginCall"));
     }
     public void LoginCall(Object caller, Object model) {
@@ -116,7 +102,7 @@ public class ActivityLogin extends BaseActivity{
         else
         {
             Toast.makeText(ActivityLogin.this, getString(R.string.invalid_credential), Toast.LENGTH_SHORT).show();
-            aq.id(R.id.loader).visibility(View.GONE);
+            aq.id(R.id.progress_bar).visibility(View.GONE);
         }
     }
     public void GetById(Object caller,Object model) {
@@ -129,7 +115,7 @@ public class ActivityLogin extends BaseActivity{
             ActivityLogin.this.finish();
         }else {
             Toast.makeText(ActivityLogin.this, getString(R.string.error_login_response), Toast.LENGTH_SHORT).show();
-            aq.id(R.id.loader).visibility(View.GONE);
+            aq.id(R.id.progress_bar).visibility(View.GONE);
         }
     }
 

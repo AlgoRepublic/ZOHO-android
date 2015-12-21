@@ -92,38 +92,38 @@
                         android:layout_alignParentStart="true" />
 
                 </RelativeLayout>
-        <RelativeLayout
-                       android:layout_width="match_parent"
-                        android:layout_marginTop="15dp"
-                       android:background="@drawable/edittext_bg"
-                        android:layout_height="50dp"
-                        android:orientation="vertical">
-                        <AutoCompleteTextView
-                            android:id="@+id/password"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:inputType="textPassword"
-                            android:maxLines="1"
-                            android:imeOptions="actionDone"
-                            android:textCursorDrawable="@null"
-                            android:paddingLeft="10dp"
-                            android:paddingRight="10dp"
-                            android:layout_toRightOf="@+id/logo1"
-                            android:textColor="@android:color/white"
-                            android:background="@android:color/transparent"
-                            android:textColorHint="@android:color/white"
-                            android:completionHint="@string/prompt_password"
-                            android:hint="@string/prompt_password"
-                            android:singleLine="true" />
-                        <ImageView
-                            android:layout_width="45dp"
-                            android:layout_height="45dp"
-                            android:id="@+id/logo1"
-                            android:layout_centerVertical="true"
-                            android:src="@drawable/lock_icon"
-                            android:layout_alignParentStart="true" />
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="15dp"
+                    android:background="@drawable/edittext_bg"
+                    android:layout_height="50dp"
+                    android:orientation="vertical">
+                    <AutoCompleteTextView
+                        android:id="@+id/password"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:inputType="textPassword"
+                        android:maxLines="1"
+                        android:imeOptions="actionDone"
+                        android:textCursorDrawable="@null"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:layout_toRightOf="@+id/logo1"
+                        android:textColor="@android:color/white"
+                        android:background="@android:color/transparent"
+                        android:textColorHint="@android:color/white"
+                        android:completionHint="@string/prompt_password"
+                        android:hint="@string/prompt_password"
+                        android:singleLine="true" />
+                    <ImageView
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:id="@+id/logo1"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/lock_icon"
+                        android:layout_alignParentStart="true" />
 
-                    </RelativeLayout>
+                </RelativeLayout>
 
                 <Button android:id="@+id/email_sign_in_button"
                     android:layout_width="130dp"
@@ -171,7 +171,13 @@
                     android:layout_height="20dp">
                 </LinearLayout>
             </LinearLayout>
-
         </ScrollView>
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:visibility="gone"
+            android:layout_below="@id/login_form" />
     </RelativeLayout>
 </LinearLayout>

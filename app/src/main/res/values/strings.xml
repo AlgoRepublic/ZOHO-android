@@ -21,6 +21,7 @@
     </string>-->
     <!-- Strings related to Menu -->
     <string name="feeds">Feeds</string>
+    <string name="activity">Activities</string>
     <string name="tasks">Tasks</string>
     <string name="documents">Documents</string>
     <string name="settings">Settings</string>
@@ -42,4 +43,7 @@
     <!-- Random Strings related to ZOHO -->
     <string name="lang_arabic">ar</string>
     <string name="lang_english">en</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

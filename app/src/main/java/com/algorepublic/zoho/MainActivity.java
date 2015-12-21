@@ -1,5 +1,6 @@
 package com.algorepublic.zoho;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -74,8 +75,9 @@ public class MainActivity extends BaseActivity
             getSupportActionBar().setTitle(getString(R.string.feeds));
             getSupportFragmentManager().beginTransaction().replace(R.id.container, FeedFragment.newInstance(1), "FeedFragment").commit();
         } else if (id == R.id.tasks) {
-            getSupportActionBar().setTitle(getString(R.string.tasks));
-            getSupportFragmentManager().beginTransaction().replace(R.id.container, TasksFragment.newInstance(), "TasksFragment").commit();
+                startActivity(new Intent(this,ActivityTask.class));
+//            getSupportActionBar().setTitle(getString(R.string.tasks));
+//            getSupportFragmentManager().beginTransaction().replace(R.id.container, TasksFragment.newInstance(), "TasksFragment").commit();
         } else if (id == R.id.documents) {
             getActionBar().setTitle(getString(R.string.documents));
         } else if (id == R.id.settings) {
