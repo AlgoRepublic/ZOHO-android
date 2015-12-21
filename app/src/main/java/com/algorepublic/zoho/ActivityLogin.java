@@ -2,16 +2,10 @@ package com.algorepublic.zoho;
 
 
 import android.content.Intent;
-import android.content.res.Configuration;
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
-import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.LinearInterpolator;
-import android.view.animation.RotateAnimation;
 import android.widget.Toast;
 
 import com.algorepublic.zoho.Models.GetUserModel;
@@ -35,8 +29,6 @@ import com.linkedin.platform.utils.Scope;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.Locale;
-
 /**
  * Created by android on 12/10/15.
  */
@@ -50,10 +42,10 @@ public class ActivityLogin extends BaseActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         baseClass = ((BaseClass) getApplicationContext());
-        if(baseClass.getUserId() !="") {
-            startActivity(new Intent(this, MainActivity.class));
-            ActivityLogin.this.finish();
-        }
+//        if(!baseClass.getUserId().isEmpty()) {
+//            startActivity(new Intent(this, MainActivity.class));
+//            ActivityLogin.this.finish();
+//        }
         if(baseClass.getUserLanguage().equals(getString(R.string.lang_arabic))) {
             changeLanguage(getString(R.string.lang_arabic));
             setContentView(R.layout.activity_login);

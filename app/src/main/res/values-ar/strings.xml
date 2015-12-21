@@ -12,7 +12,7 @@
     <string name="enter_password">الرجاء إدخال كلمة المرور</string>
     <string name="error_invalid_email">بريد إلكتروني خاطئ</string>
     <string name="text_or">أو</string>
-    <string name="selected_language">العربية</string>
+    <string name="selected_language">English</string>
     <string name="invalid_credential">الاعتماد العضو غير صالح !</string>
     <string name="error_login_response">يرجى التحقق من الإنترنت الخاص بك أو الخادم لا يستجيب</string>
     //...............................................//
