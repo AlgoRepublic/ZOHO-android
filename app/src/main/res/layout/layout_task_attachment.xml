@@ -17,6 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center"
+            android:scaleType="fitXY"
             android:layout_margin="10dp"
             android:background="@android:drawable/ic_menu_report_image"
             android:layout_above="@+id/file_title"

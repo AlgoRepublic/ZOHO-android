@@ -8,7 +8,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.algorepublic.zoho.R;
+import com.algorepublic.zoho.adapters.AdapteAssignEmployees;
 import com.algorepublic.zoho.fragments.BaseFragment;
+import com.androidquery.AQuery;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -16,7 +20,7 @@ import com.algorepublic.zoho.fragments.BaseFragment;
 public class TaskAssignFragment extends BaseFragment {
 
     static TaskAssignFragment fragment;
-
+    AQuery aq;
 
 
     public TaskAssignFragment() {
@@ -36,7 +40,14 @@ public class TaskAssignFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_task_assign, container, false);
+       View view =  inflater.inflate(R.layout.fragment_task_assign, container, false);
+        aq = new AQuery(view);
+        ArrayList<String> arrayList = new ArrayList<>();
+        arrayList.add("General");
+        arrayList.add("External");
+        arrayList.add("Normal");
+        aq.id(R.id.listview_employees).adapter(new AdapteAssignEmployees(getActivity(),arrayList));
+        return  view;
     }
 
 }

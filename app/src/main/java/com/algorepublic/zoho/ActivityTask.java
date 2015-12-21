@@ -2,18 +2,33 @@ package com.algorepublic.zoho;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.RadioGroup;
 
+import com.algorepublic.zoho.FragmentsTasks.TaskAssignFragment;
 import com.algorepublic.zoho.FragmentsTasks.TaskAttachmentFragment;
 import com.algorepublic.zoho.FragmentsTasks.TaskEditTitleFragment;
+import com.algorepublic.zoho.FragmentsTasks.TaskPriorityFragment;
+import com.algorepublic.zoho.FragmentsTasks.TaskScheduleFragment;
 import com.androidquery.AQuery;
+
+import java.util.Date;
+
+import wincal.android.com.wincal.DatePickerFragment;
 
 public class ActivityTask extends BaseActivity{
     AQuery aq;
     RadioGroup radioGroup1,radioGroup2;
     RadioGroup.OnCheckedChangeListener changeListener1,changeListener2;
+    private DatePickerFragment mDatePickerFragment;
+    private DatePickerFragment mDatePickerDialogFragment;
+
+    private int mStartMonth;
+    private int mStartYear;
+    private int mStartDate;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,6 +36,12 @@ public class ActivityTask extends BaseActivity{
         aq =new AQuery(this);
         radioGroup1 = (RadioGroup) findViewById(R.id.radioGroup1);
         radioGroup2 = (RadioGroup) findViewById(R.id.radioGroup2);
+        aq.id(R.id.back_arrow).clicked(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
        changeListener1 = new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -43,15 +64,44 @@ public class ActivityTask extends BaseActivity{
                 callFragmentWithReplace(R.id.edittask_container, TaskEditTitleFragment.newInstance(), "TaskTitle");
             }
         });
+        aq.id(R.id.schedule_radioButton).clicked(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                callFragmentWithReplace(R.id.edittask_container, TaskAttachmentFragment.newInstance(), "TaskAttachment");
+            }
+        });
         aq.id(R.id.image_radioButton).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 callFragmentWithReplace(R.id.edittask_container, TaskAttachmentFragment.newInstance(), "TaskAttachment");
             }
         });
+        aq.id(R.id.schedule_radioButton).clicked(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                callFragmentWithReplace(R.id.edittask_container, TaskScheduleFragment.newInstance(), "TaskSchedule");
+            }
+        });
+        aq.id(R.id.employees_radioButton).clicked(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                callFragmentWithReplace(R.id.edittask_container, TaskAssignFragment.newInstance(), "TaskAssign");
+            }
+        });
+        aq.id(R.id.priority_radioButton).clicked(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                callFragmentWithReplace(R.id.edittask_container, TaskPriorityFragment.newInstance(), "TasksPriority");
+            }
+        });
         if(savedInstanceState==null){
-            callFragment(R.id.edittask_container, TaskEditTitleFragment.newInstance(), "TaskTitle");
+            callFragmentWithReplace(R.id.edittask_container, TaskEditTitleFragment.newInstance(), "TaskTitle");
         }
+       // mDatePickerFragment=new DatePickerFragment();
+//        if(savedInstanceState!=null){
+//            mDatePickerFragment.restoreStatesFromKey(savedInstanceState,"CALENDAR_SAVED_STATE");
+//        }
+
     }
     public void RadioGroup1(int checkedId) {
         switch (radioGroup1.indexOfChild(findViewById(checkedId))) {
