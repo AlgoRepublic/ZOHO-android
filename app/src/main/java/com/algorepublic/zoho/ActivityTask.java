@@ -15,20 +15,12 @@ import com.algorepublic.zoho.FragmentsTasks.TaskPriorityFragment;
 import com.algorepublic.zoho.FragmentsTasks.TaskScheduleFragment;
 import com.androidquery.AQuery;
 
-import java.util.Date;
-
-import wincal.android.com.wincal.DatePickerFragment;
 
 public class ActivityTask extends BaseActivity{
     AQuery aq;
     RadioGroup radioGroup1,radioGroup2;
     RadioGroup.OnCheckedChangeListener changeListener1,changeListener2;
-    private DatePickerFragment mDatePickerFragment;
-    private DatePickerFragment mDatePickerDialogFragment;
 
-    private int mStartMonth;
-    private int mStartYear;
-    private int mStartDate;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -19,6 +19,7 @@ public class BaseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
     }
+
     public void hideKeyPad(View view) {
         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(view.getWindowToken(),
@@ -52,4 +53,5 @@ public class BaseActivity extends AppCompatActivity {
                 .addToBackStack(null)
                 .commit();
     }
+
 }
