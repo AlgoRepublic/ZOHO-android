@@ -47,6 +47,4 @@
     <string name="lang_arabic">ar</string>
     <string name="lang_english">en</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

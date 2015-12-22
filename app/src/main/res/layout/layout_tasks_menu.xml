@@ -32,15 +32,15 @@
     <com.github.clans.fab.FloatingActionButton
         android:id="@+id/menu_item_edit"
         android:layout_width="wrap_content"
-        android:tint="@color/colorBackground"
-        fab:fab_colorNormal="@color/colorBackground"
+        android:tint="@color/colorPrimaryDark"
+        fab:fab_colorNormal="@color/colorPrimaryDark"
         android:layout_height="wrap_content"
         android:src="@drawable/edit"
         fab:fab_size="mini" />
     <com.github.clans.fab.FloatingActionButton
         android:id="@+id/menu_item_done"
         android:layout_width="wrap_content"
-        fab:fab_colorNormal="@color/colorBackground"
+        fab:fab_colorNormal="@color/colorPrimaryDark"
         android:layout_height="wrap_content"
         android:src="@drawable/edit"
         fab:fab_size="mini" />
@@ -48,21 +48,21 @@
         android:id="@+id/menu_cam"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        fab:fab_colorNormal="@color/colorBackground"
+        fab:fab_colorNormal="@color/colorPrimaryDark"
         android:src="@drawable/camera"
         fab:fab_size="mini"/>
     <com.github.clans.fab.FloatingActionButton
         android:id="@+id/menu_assign"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        fab:fab_colorNormal="@color/colorBackground"
+        fab:fab_colorNormal="@color/colorPrimaryDark"
         android:src="@drawable/user"
         fab:fab_size="mini" />
     <com.github.clans.fab.FloatingActionButton
         android:id="@+id/menu_calendar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        fab:fab_colorNormal="@color/colorBackground"
+        fab:fab_colorNormal="@color/colorPrimaryDark"
         android:src="@drawable/calendar"
         android:padding="20dp"
         fab:fab_size="mini" />
@@ -70,7 +70,7 @@
         android:id="@+id/menu_item_priority"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        fab:fab_colorNormal="@color/colorBackground"
+        fab:fab_colorNormal="@color/colorPrimaryDark"
         android:src="@drawable/alert"
         fab:fab_size="mini"/>
 

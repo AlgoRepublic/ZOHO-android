@@ -11,9 +11,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <com.flaviofaria.kenburnsview.KenBurnsView
+            android:id="@+id/main_bg"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/main_bg" />
+            android:scaleType="fitXY"
+            android:adjustViewBounds="true"
+            android:src="@drawable/main_bg" />
         <RelativeLayout
             android:id="@+id/language_selector"
             android:layout_width="match_parent"
