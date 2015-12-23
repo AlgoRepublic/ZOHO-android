@@ -75,9 +75,9 @@ public class MainActivity extends BaseActivity
             getSupportActionBar().setTitle(getString(R.string.tasks));
             getSupportFragmentManager().beginTransaction().replace(R.id.container, FragmentTasksList.newInstance(), "FragmentTasksList").commit();
         } else if (id == R.id.documents) {
-            getActionBar().setTitle(getString(R.string.documents));
+            getSupportActionBar().setTitle(getString(R.string.documents));
         } else if (id == R.id.settings) {
-            getActionBar().setTitle(getString(R.string.settings));
+            getSupportActionBar().setTitle(getString(R.string.settings));
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
