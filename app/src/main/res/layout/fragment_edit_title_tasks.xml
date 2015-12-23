@@ -6,7 +6,7 @@
     android:background="@color/colorLightgray"
     android:orientation="vertical">
     <EditText
-        android:id="@+id/first_name"
+        android:id="@+id/title_name"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:hint="Task Title"

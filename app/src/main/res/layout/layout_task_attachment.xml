@@ -33,6 +33,6 @@
             android:gravity="left"
             android:text="name"
             android:textColor="@color/colorAccent"
-            android:textSize="20sp" />
+            android:textSize="14sp" />
         </RelativeLayout>
     </RelativeLayout>

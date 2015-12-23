@@ -45,39 +45,48 @@ public class TaskScheduleFragment extends BaseFragment {
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_task_schedule, container, false);
         aq =  new AQuery(view);
-        if(start_date ==null)
-        {
-            start_day = Calendar.DAY_OF_MONTH;
-            start_month = Calendar.MONTH;
-            start_year = Calendar.YEAR;
-        }
-        if(end_date ==null)
-        {
-            end_day = Calendar.DAY_OF_MONTH;
-            end_month = Calendar.MONTH;
-            end_year = Calendar.YEAR;
-        }
         aq.id(R.id.btn_start_date).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                SplitStartDate();
                 Calendar calendar = Calendar.getInstance();
-                DatePickerDialog datePickerDialog = DatePickerDialog.newInstance(startDatePicker
-                        , calendar.get(Calendar.YEAR),
-                        calendar.get(Calendar.MONTH),
-                        calendar.get(Calendar.DAY_OF_MONTH),
-                        false);
+                DatePickerDialog datePickerDialog;
+                if(start_date==null) {
+                    datePickerDialog = DatePickerDialog.newInstance(startDatePicker
+                            , calendar.get(Calendar.YEAR),
+                            calendar.get(Calendar.MONTH),
+                            calendar.get(Calendar.DAY_OF_MONTH),
+                            false);
+                }else{
+                    datePickerDialog = DatePickerDialog.newInstance(startDatePicker
+                            ,start_year,
+                            start_month,
+                            start_day,
+                            false);
+                }
                 datePickerDialog.show(getFragmentManager(),DATEPICKER_TAG);
             }
         });
         aq.id(R.id.btn_end_date).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                SplitEndDate();
                 Calendar calendar = Calendar.getInstance();
-                DatePickerDialog datePickerDialog = DatePickerDialog.newInstance(endDatePicker
-                        , calendar.get(Calendar.YEAR),
-                        calendar.get(Calendar.MONTH),
-                        calendar.get(Calendar.DAY_OF_MONTH),
-                        false);
+                DatePickerDialog datePickerDialog;
+                if(end_date == null) {
+                    datePickerDialog = DatePickerDialog.newInstance(endDatePicker
+                            , calendar.get(Calendar.YEAR),
+                            calendar.get(Calendar.MONTH),
+                            calendar.get(Calendar.DAY_OF_MONTH),
+                            false);
+                }else
+                {
+                    datePickerDialog = DatePickerDialog.newInstance(endDatePicker
+                            ,end_year,
+                            end_month,
+                            end_day,
+                            false);
+                }
                 datePickerDialog.show(getFragmentManager(),DATEPICKER_TAG);
             }
         });
@@ -88,7 +97,7 @@ public class TaskScheduleFragment extends BaseFragment {
         @Override
         public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
            start_date = dayOfMonth+"/"+(++monthOfYear)+"/"+year;
-            start_day = dayOfMonth;start_month = ++monthOfYear;start_year = year;
+            start_day = dayOfMonth;start_month = monthOfYear;start_year = year;
            aq.id(R.id.btn_start_date).text(start_date);
         }
     };
@@ -96,8 +105,26 @@ public class TaskScheduleFragment extends BaseFragment {
         @Override
         public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
             end_date = dayOfMonth+"/"+(++monthOfYear)+"/"+year;
-            end_day = dayOfMonth;end_month = ++monthOfYear;end_year = year;
+            end_day = dayOfMonth;end_month = monthOfYear;end_year = year;
             aq.id(R.id.btn_end_date).text(end_date);
         }
     };
+    public void SplitStartDate(){
+        String start_date = aq.id(R.id.btn_start_date).getText().toString();
+        if(!start_date.equalsIgnoreCase("Start Date")) {
+            String[] splited = start_date.split("/");
+            start_day = Integer.parseInt(splited[0]);
+            start_month = Integer.parseInt(splited[1])-1;
+            start_year = Integer.parseInt(splited[2]);
+        }
+    }
+    public void SplitEndDate(){
+        String end_date = aq.id(R.id.btn_end_date).getText().toString();
+        if(!end_date.equalsIgnoreCase("End Date")) {
+            String[] splited = end_date.split("/");
+            end_day = Integer.parseInt(splited[0]);
+            end_month = Integer.parseInt(splited[1])-1;
+            end_year = Integer.parseInt(splited[2]);
+        }
+    }
 }

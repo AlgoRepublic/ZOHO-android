@@ -15,12 +15,18 @@ import com.androidquery.AQuery;
 public class ActivityTask extends BaseActivity{
     AQuery aq;
     RadioGroup radioGroup1,radioGroup2;
+    int position;
     RadioGroup.OnCheckedChangeListener changeListener1,changeListener2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_task);
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            position = Integer.parseInt(extras.get("pos").toString());
+        }
+
         aq =new AQuery(this);
         radioGroup1 = (RadioGroup) findViewById(R.id.radioGroup1);
         radioGroup2 = (RadioGroup) findViewById(R.id.radioGroup2);
@@ -49,7 +55,7 @@ public class ActivityTask extends BaseActivity{
         aq.id(R.id.edit_radioButton).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                callFragmentWithReplace(R.id.edittask_container, TaskEditTitleFragment.newInstance(), "TaskTitle");
+                callFragmentWithReplace(R.id.edittask_container, TaskEditTitleFragment.newInstance(position), "TaskTitle");
             }
         });
         aq.id(R.id.schedule_radioButton).clicked(new View.OnClickListener() {
@@ -83,7 +89,7 @@ public class ActivityTask extends BaseActivity{
             }
         });
         if(savedInstanceState==null){
-            callFragmentWithReplace(R.id.edittask_container, TaskEditTitleFragment.newInstance(), "TaskTitle");
+            callFragmentWithReplace(R.id.edittask_container, TaskEditTitleFragment.newInstance(position), "TaskTitle");
         }
        // mDatePickerFragment=new DatePickerFragment();
 //        if(savedInstanceState!=null){

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/layout_booklist"
     android:descendantFocusability="blocksDescendants"
@@ -16,8 +16,21 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="16sp"
+        android:layout_toLeftOf="@+id/checkbox"
+        android:layout_alignParentLeft="true"
+        android:layout_margin="10dp"
+        android:textColor="@color/colorPrimary"
+        />
+    <CheckBox
+        android:id="@+id/checkbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:button="@null"
+        android:background="@android:drawable/checkbox_on_background"
+        android:layout_alignParentRight="true"
         android:layout_margin="10dp"
         android:textColor="@color/colorPrimary"
         />
 
-</LinearLayout>
+</RelativeLayout>

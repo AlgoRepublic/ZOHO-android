@@ -6,9 +6,8 @@
 
     <!-- TODO: Update blank fragment layout -->
     <ListView
-        android:id="@+id/listview_employees"
+        android:id="@+id/list_taskslist"
         android:layout_width="match_parent"
-        android:choiceMode="singleChoice"
         android:layout_height="200dp"
         />
 

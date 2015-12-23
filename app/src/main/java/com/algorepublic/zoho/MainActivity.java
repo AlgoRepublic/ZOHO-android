@@ -2,9 +2,7 @@ package com.algorepublic.zoho;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -13,7 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.algorepublic.zoho.fragments.FeedFragment;
-import com.algorepublic.zoho.fragments.TasksFragment;
+import com.algorepublic.zoho.fragments.FragmentTasksList;
 import com.algorepublic.zoho.fragments.dummy.DummyContent;
 import com.algorepublic.zoho.utils.BaseClass;
 import com.androidquery.AQuery;
@@ -70,20 +68,17 @@ public class MainActivity extends BaseActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-
         if (id == R.id.feed) {
             getSupportActionBar().setTitle(getString(R.string.feeds));
             getSupportFragmentManager().beginTransaction().replace(R.id.container, FeedFragment.newInstance(1), "FeedFragment").commit();
         } else if (id == R.id.tasks) {
-                startActivity(new Intent(this,ActivityTask.class));
-//            getSupportActionBar().setTitle(getString(R.string.tasks));
-//            getSupportFragmentManager().beginTransaction().replace(R.id.container, TasksFragment.newInstance(), "TasksFragment").commit();
+            getSupportActionBar().setTitle(getString(R.string.tasks));
+            getSupportFragmentManager().beginTransaction().replace(R.id.container, FragmentTasksList.newInstance(), "FragmentTasksList").commit();
         } else if (id == R.id.documents) {
             getActionBar().setTitle(getString(R.string.documents));
         } else if (id == R.id.settings) {
             getActionBar().setTitle(getString(R.string.settings));
         }
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
