@@ -52,7 +52,7 @@
             android:scaleType="fitXY"
             android:textColor="@android:color/white"
             android:adjustViewBounds="true"
-            android:background="@color/colorBackground"
+            android:background="@color/colorPrimaryDark"
             android:layout_gravity="center_horizontal"
             android:textSize="13dp" />
 
@@ -73,7 +73,7 @@
             android:scaleType="fitXY"
             android:textColor="@android:color/white"
             android:adjustViewBounds="true"
-            android:background="@color/colorBackground"
+            android:background="@color/colorPrimaryDark"
             android:layout_gravity="center_horizontal"
             android:textSize="13dp" />
 
@@ -92,7 +92,7 @@
                 android:scaleType="fitXY"
                 android:textColor="@android:color/white"
                 android:adjustViewBounds="true"
-                android:background="@color/colorBackground"
+                android:background="@color/colorPrimaryDark"
                 android:layout_gravity="center_horizontal"
                 android:textSize="13dp" />
 
@@ -125,7 +125,7 @@
                 android:scaleType="fitXY"
                 android:textColor="@android:color/white"
                 android:adjustViewBounds="true"
-                android:background="@color/colorBackground"
+                android:background="@color/colorPrimaryDark"
                 android:layout_gravity="center_horizontal"
                 android:textSize="13dp" />
             <com.algorepublic.zoho.utils.MyRadioButton
@@ -145,7 +145,7 @@
                 android:scaleType="fitXY"
                 android:textColor="@android:color/white"
                 android:adjustViewBounds="true"
-                android:background="@color/colorBackground"
+                android:background="@color/colorPrimaryDark"
                 android:layout_gravity="center_horizontal"
                 android:textSize="13dp" />
 
@@ -164,7 +164,7 @@
                 android:scaleType="fitXY"
                 android:textColor="@android:color/white"
                 android:adjustViewBounds="true"
-                android:background="@color/colorBackground"
+                android:background="@color/colorPrimaryDark"
                 android:layout_gravity="center_horizontal"
                 android:textSize="13dp" />
     </RadioGroup>

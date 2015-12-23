@@ -41,10 +41,10 @@ public class ActivityLogin extends BaseActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         baseClass = ((BaseClass) getApplicationContext());
-        if(!baseClass.getUserId().isEmpty()) {
-            startActivity(new Intent(this, MainActivity.class));
-            ActivityLogin.this.finish();
-        }
+//        if(!baseClass.getUserId().isEmpty()) {
+//            startActivity(new Intent(this, MainActivity.class));
+//            ActivityLogin.this.finish();
+//        }
         if(baseClass.getUserLanguage().equals(getString(R.string.lang_arabic))) {
             changeLanguage(getString(R.string.lang_arabic));
             setContentView(R.layout.activity_login);
