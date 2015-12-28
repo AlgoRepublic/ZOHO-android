@@ -16,3 +16,4 @@
 #   public *;
 #}
 -keep class android.support.design.widget.NavigationView { *; }
+-keep class io.codetail.animation.arcanimator.** { *; }

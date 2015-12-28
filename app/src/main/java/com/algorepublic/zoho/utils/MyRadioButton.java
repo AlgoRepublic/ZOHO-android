@@ -23,8 +23,7 @@ public class MyRadioButton extends RadioButton {
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-
-    setMeasuredDimension(widthMeasureSpec,widthMeasureSpec );
+    setMeasuredDimension(widthMeasureSpec,widthMeasureSpec);
 
     }
 }

@@ -8,7 +8,45 @@
     <ListView
         android:id="@+id/list_taskslist"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_above="@+id/layout_bottom"
+        android:layout_height="match_parent"
         />
-
+    <LinearLayout
+        android:id="@+id/layout_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:weightSum="5"
+        android:orientation="horizontal"
+        android:background="@color/colorPrimary">
+        <Button
+            android:layout_width="0dp"
+            android:layout_weight=".7"
+            android:background="@drawable/user"
+            android:layout_height="50dp" />
+        <Button
+            android:layout_width="0dp"
+            android:layout_weight="1.2"
+            android:text="All"
+            android:textAllCaps="false"
+            android:layout_height="50dp" />
+        <Button
+            android:layout_width="0dp"
+            android:layout_weight="1.2"
+            android:text="Up Coming"
+            android:textAllCaps="false"
+            android:layout_height="50dp" />
+        <Button
+            android:layout_width="0dp"
+            android:layout_weight="1.2"
+            android:text="Over Due"
+            android:textAllCaps="false"
+            android:layout_height="50dp" />
+        <Button
+            android:id="@+id/sort"
+            android:layout_width="0dp"
+            android:layout_weight=".7"
+            android:background="@android:drawable/ic_menu_sort_by_size"
+            android:layout_height="50dp" />
+    </LinearLayout>
 </RelativeLayout>
