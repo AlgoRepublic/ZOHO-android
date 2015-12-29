@@ -1,36 +1,37 @@
 package com.algorepublic.zoho.fragments;
 
 
-import android.graphics.RectF;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.alamkanak.weekview.MonthLoader;
-import com.alamkanak.weekview.WeekView;
-import com.alamkanak.weekview.WeekViewEvent;
 import com.algorepublic.zoho.Models.TasksListModel;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.services.CallBack;
 import com.algorepublic.zoho.services.TaskListService;
 import com.androidquery.AQuery;
+import com.github.tibolte.agendacalendarview.AgendaCalendarView;
+import com.github.tibolte.agendacalendarview.CalendarPickerController;
+import com.github.tibolte.agendacalendarview.models.BaseCalendarEvent;
+import com.github.tibolte.agendacalendarview.models.CalendarEvent;
+import com.github.tibolte.agendacalendarview.models.DayItem;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 
 
 /**
  * Use the {@link CalendarFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class CalendarFragment extends BaseFragment implements
-        WeekView.EventClickListener, MonthLoader.MonthChangeListener, WeekView.EventLongPressListener {
+public class CalendarFragment extends BaseFragment implements CalendarPickerController {
 
     AQuery aq;
-    WeekView mWeekView;
+    AgendaCalendarView calendarView;
 
     public CalendarFragment() {
         // Required empty public constructor
@@ -81,78 +82,58 @@ public class CalendarFragment extends BaseFragment implements
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        // Get a reference for the week view in the layout.
-        mWeekView = (WeekView) aq.id(R.id.weekView).getView();
-
-        // Set an action when any event is clicked.
-        mWeekView.setOnEventClickListener(this);
-
-
-        // Set long press listener for events.
-        mWeekView.setEventLongPressListener(this);
-
-        if(!TasksListModel.getInstance().responseObject.isEmpty()){
+//        initCalendarView();
+        if(TasksListModel.getInstance().responseObject.isEmpty()){
             TaskListService service = new TaskListService(getActivity());
             service.getTasksList(true, new CallBack(this, "TasksList"));
+        }else{
+            initCalendarView();
         }
     }
 
-    /**
-     * Triggered when clicked on one existing event
-     *
-     * @param event     : event clicked.
-     * @param eventRect : view containing the clicked event.
-     */
-    @Override
-    public void onEventClick(WeekViewEvent event, RectF eventRect) {
-
-    }
-
-    /**
-     * Very important interface, it's the base to load events in the calendar.
-     * This method is called three times: once to load the previous month, once to load the next month and once to load the current month.<br/>
-     * <strong>That's why you can have three times the same event at the same place if you mess up with the configuration</strong>
-     *
-     * @param newYear  : year of the events required by the view.
-     * @param newMonth : month of the events required by the view <br/><strong>1 based (not like JAVA API) --> January = 1 and December = 12</strong>.
-     * @return a list of the events happening <strong>during the specified month</strong>.
-     */
-    @Override
-    public List<WeekViewEvent> onMonthChange(int newYear, int newMonth) {
-
-
-        ArrayList<WeekViewEvent> tasksList = new ArrayList<>();
+    public List<CalendarEvent> getTasksList() {
+        List<CalendarEvent> eventList = new ArrayList<>();
         for(int i = 0; i < TasksListModel.getInstance().responseObject.size(); i++) {
-            WeekViewEvent event = new WeekViewEvent();
-            event.setName(TasksListModel.getInstance().responseObject.get(i).Title);
-            Calendar cal = Calendar.getInstance();
-            cal.setTimeInMillis(Long.parseLong(Long.valueOf(TasksListModel.getInstance().responseObject.get(i).StartDate).toString().replaceAll("\\D+","")));
-            event.setStartTime(cal);
-            cal.setTimeInMillis(Long.parseLong(Long.valueOf(TasksListModel.getInstance().responseObject.get(i).EndDate).toString().replaceAll("\\D+","")));
-            event.setEndTime(cal);
-            event.setName(TasksListModel.getInstance().responseObject.get(i).Title);
-            event.setId(TasksListModel.getInstance().responseObject.get(i).ResponsibelID);
-            event.setColor(getPriorityWiseColor(TasksListModel.getInstance().responseObject.get(i).Priority));
-            tasksList.add(event);
+            TasksListModel.ResponseObject task = TasksListModel.getInstance().responseObject.get(i);
+            Calendar startTime = Calendar.getInstance();
+            startTime.setTimeInMillis(Long.parseLong(TasksListModel.getInstance().responseObject.get(i).StartDate.replaceAll("\\D+","")));
+
+            Calendar endTime = Calendar.getInstance();
+            endTime.setTimeInMillis(Long.parseLong(TasksListModel.getInstance().responseObject.get(i).EndDate.replaceAll("\\D+","")));
+
+            BaseCalendarEvent event = new BaseCalendarEvent(task.Title, task.projectName, "", getPriorityWiseColor(task.Priority), startTime, endTime, true);
+            eventList.add(event);
         }
-        return tasksList;
+        return eventList;
     }
 
-    /**
-     * Similar to {@link WeekView.EventClickListener} but with a long press.
-     *
-     * @param event     : event clicked.
-     * @param eventRect : view containing the clicked event.
-     */
-    @Override
-    public void onEventLongPress(WeekViewEvent event, RectF eventRect) {
-
-    }
 
     public void TasksList(Object caller, Object model) {
         TasksListModel.getInstance().setList((TasksListModel) model);
-        // The week view has infinite scrolling horizontally. We have to provide the events of a
-        // month every time the month changes on the week view.
-        mWeekView.setMonthChangeListener(this);
+        initCalendarView();
+    }
+
+    private void initCalendarView(){
+        // Get a reference for the week view in the layout.
+        calendarView = (AgendaCalendarView) aq.id(R.id.agenda_calendar_view).getView();
+
+        Calendar minDate = Calendar.getInstance();
+        Calendar maxDate = Calendar.getInstance();
+
+        minDate.add(Calendar.YEAR, -2);
+        minDate.set(Calendar.DAY_OF_MONTH, 1);
+        maxDate.add(Calendar.YEAR, 2);
+
+        calendarView.init(getTasksList(), minDate, maxDate, Locale.getDefault(), this);
+    }
+
+    @Override
+    public void onDaySelected(DayItem dayItem) {
+//        Log.d(LOG_TAG, String.format("Selected day: %s", dayItem));
+    }
+
+    @Override
+    public void onEventSelected(CalendarEvent event) {
+//        Log.d(LOG_TAG, String.format("Selected event: %s", event));
     }
 }
