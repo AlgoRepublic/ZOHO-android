@@ -63,6 +63,7 @@ public class AdapterTasksList extends BaseAdapter {
         }
         aq = new AQuery(convertView);
         aq.id(R.id.task_name).text(TasksListModel.getInstance().responseObject.get(position).Title);
+        aq.id(R.id.project_name).text(TasksListModel.getInstance().responseObject.get(position).projectName);
         return convertView;
     }
 

@@ -14,15 +14,27 @@
         android:layout_height="match_parent"
         android:layout_weight="0.02" >
     </View>
-    <TextView
-        android:id="@+id/task_name"
+    <RelativeLayout
+        android:layout_height="wrap_content"
         android:layout_width="0dp"
         android:layout_weight="0.98"
         android:padding="5dp"
+        android:layout_centerHorizontal="true" >
+    <TextView
+        android:id="@+id/task_name"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="16sp"
-        android:layout_margin="10dp"
         android:textColor="@color/colorPrimary"
         />
-
+        <TextView
+            android:id="@+id/project_name"
+            android:layout_width="match_parent"
+            android:layout_below="@+id/task_name"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:layout_marginTop="5dp"
+            android:textColor="@color/colorDarkgray"
+            />
+</RelativeLayout>
 </LinearLayout>

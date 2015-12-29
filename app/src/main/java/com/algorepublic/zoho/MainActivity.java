@@ -1,14 +1,20 @@
 package com.algorepublic.zoho;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.FrameLayout;
+import android.widget.RadioGroup;
+import android.widget.TextView;
 
 import com.algorepublic.zoho.fragments.FeedFragment;
 import com.algorepublic.zoho.fragments.FragmentTasksList;
@@ -17,10 +23,14 @@ import com.algorepublic.zoho.utils.BaseClass;
 import com.androidquery.AQuery;
 
 public class MainActivity extends BaseActivity
-        implements NavigationView.OnNavigationItemSelectedListener, FeedFragment.OnListFragmentInteractionListener {
+        implements FeedFragment.OnListFragmentInteractionListener {
 
     AQuery aq,aq_header;
     BaseClass baseClass;
+    DrawerLayout drawer;
+    RadioGroup radioGroup1,radioGroup2,radioGroup3;
+    RadioGroup.OnCheckedChangeListener changeListener1,changeListener2,changeListener3;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,27 +41,112 @@ public class MainActivity extends BaseActivity
         View headerLayout =navigationView.getHeaderView(0);
         aq_header = new AQuery(headerLayout);
         setSupportActionBar(toolbar);
+        radioGroup1 = (RadioGroup) headerLayout.findViewById(R.id.radioGroup1);
+        radioGroup2 = (RadioGroup) headerLayout.findViewById(R.id.radioGroup2);
+        radioGroup3 = (RadioGroup) headerLayout.findViewById(R.id.radioGroup3);
         aq= new AQuery(this);
         aq_header.id(R.id.user_name).text(baseClass.getFirstName());
         aq_header.id(R.id.email).text(baseClass.getEmail());
-//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-//            }
-//        });
+        changeListener1 = new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                RadioGroup1(checkedId);
+                UpdateRadioGroup2();
+                UpdateRadioGroup3();
+            }
+        };
+        changeListener2 = new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                RadioGroup2(checkedId);
+                UpdateRadioGroup1();
+                UpdateRadioGroup3();
+            }
+        };
+        changeListener3 = new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                RadioGroup3(checkedId);
+                UpdateRadioGroup1();
+                UpdateRadioGroup2();
+            }
+        };
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        radioGroup1.setOnCheckedChangeListener(changeListener1);
+        radioGroup2.setOnCheckedChangeListener(changeListener2);
+        radioGroup3.setOnCheckedChangeListener(changeListener3);
+        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        navigationView.setNavigationItemSelectedListener(this);
+       // navigationView.setNavigationItemSelectedListener(this);
     }
-
+    public void RadioGroup1(int checkedId) {
+        switch (radioGroup1.indexOfChild(findViewById(checkedId))) {
+            case 0:
+                drawer.closeDrawer(GravityCompat.START);
+                aq.id(R.id.feed_radioButton).textColor(getResources().getColor(R.color.colorAccent));
+                aq.id(R.id.schedule_radioButton).textColor(getResources().getColor(android.R.color.white));
+                break;
+            case 1:
+                drawer.closeDrawer(GravityCompat.START);
+                aq.id(R.id.schedule_radioButton).textColor(getResources().getColor(R.color.colorAccent));
+                aq.id(R.id.feed_radioButton).textColor(getResources().getColor(android.R.color.white));
+                break;
+        }
+    }
+    public void RadioGroup2(int checkedId) {
+        switch (radioGroup2.indexOfChild(findViewById(checkedId))) {
+            case 0:
+                getSupportActionBar().setTitle(getString(R.string.tasks));
+                getSupportFragmentManager().beginTransaction().replace(R.id.container, FragmentTasksList.newInstance(), "FragmentTasksList").commit();
+                drawer.closeDrawer(GravityCompat.START);
+                aq.id(R.id.tasks_radioButton).textColor(getResources().getColor(R.color.colorAccent));
+                aq.id(R.id.documents_radioButton).textColor(getResources().getColor(android.R.color.white));
+                break;
+            case 1:
+                drawer.closeDrawer(GravityCompat.START);
+                aq.id(R.id.documents_radioButton).textColor(getResources().getColor(R.color.colorAccent));
+                aq.id(R.id.tasks_radioButton).textColor(getResources().getColor(android.R.color.white));
+                break;
+        }
+    }
+    public void RadioGroup3(int checkedId) {
+        switch (radioGroup3.indexOfChild(findViewById(checkedId))) {
+            case 0:
+                drawer.closeDrawer(GravityCompat.START);
+                aq.id(R.id.user_radioButton).textColor(getResources().getColor(R.color.colorAccent));
+                break;
+            case 1:
+                aq.id(R.id.user_radioButton).textColor(getResources().getColor(android.R.color.white));
+                break;
+        }
+    }
+    public void UpdateRadioGroup1()
+    {
+        radioGroup1.setOnCheckedChangeListener(null);
+        radioGroup1.clearCheck();
+        radioGroup1.setOnCheckedChangeListener(changeListener1);
+        aq.id(R.id.feed_radioButton).textColor(getResources().getColor(android.R.color.white));
+        aq.id(R.id.schedule_radioButton).textColor(getResources().getColor(android.R.color.white));
+    }
+    public void UpdateRadioGroup2()
+    {
+        radioGroup2.setOnCheckedChangeListener(null);
+        radioGroup2.clearCheck();
+        radioGroup2.setOnCheckedChangeListener(changeListener2);
+        aq.id(R.id.tasks_radioButton).textColor(getResources().getColor(android.R.color.white));
+        aq.id(R.id.documents_radioButton).textColor(getResources().getColor(android.R.color.white));
+    }
+    public void UpdateRadioGroup3()
+    {
+        radioGroup3.setOnCheckedChangeListener(null);
+        radioGroup3.clearCheck();
+        radioGroup3.setOnCheckedChangeListener(changeListener3);
+        aq.id(R.id.user_radioButton).textColor(getResources().getColor(android.R.color.white));
+    }
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -63,26 +158,26 @@ public class MainActivity extends BaseActivity
     }
 
 
-    @SuppressWarnings("StatementWithEmptyBody")
-    @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
-        int id = item.getItemId();
-        if (id == R.id.feed) {
-            getSupportActionBar().setTitle(getString(R.string.feeds));
-            getSupportFragmentManager().beginTransaction().replace(R.id.container, FeedFragment.newInstance(1), "FeedFragment").commit();
-        } else if (id == R.id.tasks) {
-            getSupportActionBar().setTitle(getString(R.string.tasks));
-            getSupportFragmentManager().beginTransaction().replace(R.id.container, FragmentTasksList.newInstance(), "FragmentTasksList").commit();
-        } else if (id == R.id.documents) {
-            getSupportActionBar().setTitle(getString(R.string.documents));
-        } else if (id == R.id.settings) {
-            getSupportActionBar().setTitle(getString(R.string.settings));
-        }
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
-    }
+//    @SuppressWarnings("StatementWithEmptyBody")
+//    @Override
+//    public boolean onNavigationItemSelected(MenuItem item) {
+//        // Handle navigation view item clicks here.
+//        int id = item.getItemId();
+//        if (id == R.id.feed) {
+//            getSupportActionBar().setTitle(getString(R.string.feeds));
+//            getSupportFragmentManager().beginTransaction().replace(R.id.container, FeedFragment.newInstance(1), "FeedFragment").commit();
+//        } else if (id == R.id.tasks) {
+//            getSupportActionBar().setTitle(getString(R.string.tasks));
+//            getSupportFragmentManager().beginTransaction().replace(R.id.container, FragmentTasksList.newInstance(), "FragmentTasksList").commit();
+//        } else if (id == R.id.documents) {
+//            getSupportActionBar().setTitle(getString(R.string.documents));
+//        } else if (id == R.id.settings) {
+//            getSupportActionBar().setTitle(getString(R.string.settings));
+//        }
+//        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+//        drawer.closeDrawer(GravityCompat.START);
+//        return true;
+//    }
 
     @Override
     public void onListFragmentInteraction(DummyContent.DummyItem item) {
