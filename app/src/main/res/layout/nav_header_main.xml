@@ -6,6 +6,10 @@
     android:gravity="top"
     android:orientation="vertical"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
+    <View
+        android:layout_width="match_parent"
+        android:background="@color/colorPrimaryDark"
+        android:layout_height="24dp"/>
     <RelativeLayout
         android:id="@+id/parent"
         android:layout_width="match_parent"

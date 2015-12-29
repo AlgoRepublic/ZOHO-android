@@ -36,4 +36,8 @@ dependencies {
     compile project(':FlycoAnimation_Lib')
     compile project(':FlycoDialog_Lib')
     compile project(':datetimepicker')
+    compile 'se.emilsjolander:stickylistheaders:2.5.1'
+}
+repositories {
+    maven { url 'http://clinker.47deg.com/nexus/content/groups/public' }
 }

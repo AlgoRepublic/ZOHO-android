@@ -34,6 +34,7 @@ import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.fragments.BaseFragment;
 import com.androidquery.AQuery;
 import com.bumptech.glide.Glide;
+import com.flyco.dialog.entity.DialogMenuItem;
 import com.flyco.dialog.listener.OnOperItemClickL;
 import com.flyco.dialog.widget.ActionSheetDialog;
 import com.flyco.dialog.widget.internal.BaseAlertDialog;
@@ -46,6 +47,7 @@ import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 
 public class TaskAttachmentFragment extends BaseFragment {
 
@@ -83,8 +85,15 @@ public class TaskAttachmentFragment extends BaseFragment {
         return view;
     }
     private void CallForAttachments() {
-        final String[] stringItems = {"Camera", "Gallery", "Others"};
-        final ActionSheetDialog dialog = new ActionSheetDialog(getActivity(),stringItems, getView());
+        ArrayList<DialogMenuItem> menuItems = new ArrayList<>();
+        DialogMenuItem dialogMenuItem1 = new DialogMenuItem("Camera",R.drawable.camera);
+        DialogMenuItem dialogMenuItem2 = new DialogMenuItem("Gallery",R.drawable.ic_menu_gallery);
+        DialogMenuItem dialogMenuItem3 = new DialogMenuItem("Others",R.drawable.ic_menu_gallery);
+        menuItems.add(dialogMenuItem1);
+        menuItems.add(dialogMenuItem2);
+        menuItems.add(dialogMenuItem3);
+
+        final ActionSheetDialog dialog = new ActionSheetDialog(getActivity(),menuItems, getView());
         dialog.isTitleShow(false).show();
         dialog.setOnOperItemClickL(new OnOperItemClickL() {
             @Override

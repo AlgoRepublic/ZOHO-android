@@ -86,43 +86,41 @@ public class MainActivity extends BaseActivity
     public void RadioGroup1(int checkedId) {
         switch (radioGroup1.indexOfChild(findViewById(checkedId))) {
             case 0:
-                drawer.closeDrawer(GravityCompat.START);
                 aq.id(R.id.feed_radioButton).textColor(getResources().getColor(R.color.colorAccent));
                 aq.id(R.id.schedule_radioButton).textColor(getResources().getColor(android.R.color.white));
                 break;
             case 1:
-                drawer.closeDrawer(GravityCompat.START);
                 aq.id(R.id.schedule_radioButton).textColor(getResources().getColor(R.color.colorAccent));
                 aq.id(R.id.feed_radioButton).textColor(getResources().getColor(android.R.color.white));
                 break;
         }
+        drawer.closeDrawer(GravityCompat.START);
     }
     public void RadioGroup2(int checkedId) {
         switch (radioGroup2.indexOfChild(findViewById(checkedId))) {
             case 0:
                 getSupportActionBar().setTitle(getString(R.string.tasks));
                 getSupportFragmentManager().beginTransaction().replace(R.id.container, FragmentTasksList.newInstance(), "FragmentTasksList").commit();
-                drawer.closeDrawer(GravityCompat.START);
                 aq.id(R.id.tasks_radioButton).textColor(getResources().getColor(R.color.colorAccent));
                 aq.id(R.id.documents_radioButton).textColor(getResources().getColor(android.R.color.white));
                 break;
             case 1:
-                drawer.closeDrawer(GravityCompat.START);
                 aq.id(R.id.documents_radioButton).textColor(getResources().getColor(R.color.colorAccent));
                 aq.id(R.id.tasks_radioButton).textColor(getResources().getColor(android.R.color.white));
                 break;
         }
+        drawer.closeDrawer(GravityCompat.START);
     }
     public void RadioGroup3(int checkedId) {
         switch (radioGroup3.indexOfChild(findViewById(checkedId))) {
             case 0:
-                drawer.closeDrawer(GravityCompat.START);
                 aq.id(R.id.user_radioButton).textColor(getResources().getColor(R.color.colorAccent));
                 break;
             case 1:
                 aq.id(R.id.user_radioButton).textColor(getResources().getColor(android.R.color.white));
                 break;
         }
+        drawer.closeDrawer(GravityCompat.START);
     }
     public void UpdateRadioGroup1()
     {

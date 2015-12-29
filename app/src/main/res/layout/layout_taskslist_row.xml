@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@android:color/white"
-    android:weightSum="1"
     >
     <View
         android:id="@+id/sidebar"
@@ -36,5 +35,31 @@
             android:layout_marginTop="5dp"
             android:textColor="@color/colorDarkgray"
             />
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_below="@+id/project_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="2"
+            android:background="@android:color/white">
+            <TextView
+                android:id="@+id/start_date"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:textColor="@color/colorDarkgray"
+                />
+            <TextView
+                android:id="@+id/end_date"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_below="@+id/task_name"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:textColor="@color/colorDarkgray"
+                />
+        </LinearLayout>
 </RelativeLayout>
+
 </LinearLayout>

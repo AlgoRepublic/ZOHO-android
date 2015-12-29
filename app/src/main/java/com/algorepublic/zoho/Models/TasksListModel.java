@@ -42,49 +42,49 @@ public class TasksListModel {
 
         @SerializedName("Title")
         @Expose
-        public String Title;
+        public String title;
 
         @SerializedName("Description")
-        public String Description;
+        public String description;
 
         @SerializedName("projectName")
         public String projectName;
 
         @SerializedName("ResponsibelID")
-        public Integer ResponsibelID;
+        public Integer responsibelID;
 
         @SerializedName("Priority")
-        public Integer Priority;
+        public Integer priority;
 
         @SerializedName("OwnerID")
-        public Integer OwnerID;
+        public Integer ownerID;
 
         @SerializedName("CreateStatusId")
-        public Integer CreateStatusId;
+        public Integer createStatusId;
 
         @SerializedName("StartDate")
-        public String StartDate;
+        public String startDate;
 
         @SerializedName("EndDate")
-        public String EndDate;
+        public String endDate;
 
         @SerializedName("ProjectID")
-        public Integer ProjectID;
+        public Integer projectID;
 
         @SerializedName("MilestoneID")
-        public String MilestoneID;
+        public String milestoneID;
 
         @SerializedName("MilestoneName")
-        public Integer MilestoneName;
+        public Integer milestoneName;
 
         @SerializedName("ResponsibleName")
-        public String ResponsibleName;
+        public String responsibleName;
 
         @SerializedName("OwnerName")
-        public String OwnerName;
+        public String ownerName;
 
         @SerializedName("IsAttach")
-        public Integer IsAttach;
+        public Integer isAttach;
     }
 
 }

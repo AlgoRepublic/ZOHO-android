@@ -51,6 +51,7 @@ public class BaseClass extends Application {
     private String UserLocation = "UserLocation";
     private String UserAboutMe = "UserAboutMe";
     private String UserImageUrl = "UserImageUrl";
+    private String SortType = "SortType";
 
 
     @Override
@@ -93,29 +94,14 @@ public class BaseClass extends Application {
         return appSharedPrefs.getString(UserLanguage, "en");
     }
 
-    public void setUserLocation(String userLocation) {
-        prefsEditor.putString(UserLocation, userLocation).commit();
+    public void setSortType(String sortType) {
+        prefsEditor.putString(SortType, sortType).commit();
     }
 
-    public String getUserLocation() {
-        return appSharedPrefs.getString(UserLocation, "");
+    public String getSortType() {
+        return appSharedPrefs.getString(SortType, "Due Date");
     }
 
-    public void setUserAboutMe(String userAboutme) {
-        prefsEditor.putString(UserAboutMe, userAboutme).commit();
-    }
-
-    public String getUserAboutMe() {
-        return appSharedPrefs.getString(UserAboutMe, "");
-    }
-
-    public void setUserImageUrl(String userImage) {
-        prefsEditor.putString(UserImageUrl, userImage).commit();
-    }
-
-    public String getUserImageUrl() {
-        return appSharedPrefs.getString(UserImageUrl, "");
-    }
 
     public void clearSharedPrefs() {
         prefsEditor.clear().commit();

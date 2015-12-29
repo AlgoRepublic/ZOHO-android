@@ -39,7 +39,7 @@ public class TaskEditTitleFragment extends BaseFragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_edit_title_tasks, container, false);
         aq= new AQuery(view);
-        aq.id(R.id.title_name).text(TasksListModel.getInstance().responseObject.get(position).Title);
+        aq.id(R.id.title_name).text(TasksListModel.getInstance().responseObject.get(position).title);
         return view;
     }
 }
