@@ -2,11 +2,10 @@ package com.algorepublic.zoho.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.SystemClock;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -28,11 +27,8 @@ import com.flyco.dialog.widget.ActionSheetDialog;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Date;
-import java.util.HashSet;
 
 import se.emilsjolander.stickylistheaders.StickyListHeadersAdapter;
 import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
@@ -65,6 +61,18 @@ public class FragmentTasksList extends BaseFragment {
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.menu_tasklist, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        switch (item.getItemId()) {
+            case R.id.add_project:
+                startActivity(new Intent(getActivity(), ActivityTask.class));
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     @Override
@@ -119,7 +127,7 @@ public class FragmentTasksList extends BaseFragment {
     public void SetAdapterList(){
         if (TasksListModel.getInstance().responseCode == 0) {
             adapterTasksList = new AdapterTasksList(getActivity());
-            listView.setAreHeadersSticky(false);
+            listView.setAreHeadersSticky(true);
             listView.setAdapter(adapterTasksList);
         }
     }
@@ -138,7 +146,6 @@ public class FragmentTasksList extends BaseFragment {
         dialog.setOnOperItemClickL(new OnOperItemClickL() {
             @Override
             public void onOperItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Log.e("pos", "/" + position);
                 dialog.dismiss();
                 if (position == 0) {
                     baseClass.setSortType("Due Date");
@@ -199,7 +206,6 @@ public class FragmentTasksList extends BaseFragment {
     }
     public void AddChild(){
 //        for(int loop1=0;loop1<headerTasksLists.size();loop1++) {
-            ArrayList<ChildTasksList> childTasksLists = new ArrayList<>();
             for (int loop2 = 0; loop2 < TasksListModel.getInstance().responseObject.size(); loop2++) {
               //  if (headerTasksLists.get(loop2).getHeader().equalsIgnoreCase(DateFormatter(TasksListModel.getInstance().responseObject.get(loop2).startDate))) {
                     ChildTasksList tasksList = new ChildTasksList();
@@ -208,7 +214,7 @@ public class FragmentTasksList extends BaseFragment {
                     tasksList.setProjectName(TasksListModel.getInstance().responseObject.get(loop2).projectName);
                     tasksList.setStartDate(DateFormatter(TasksListModel.getInstance().responseObject.get(loop2).startDate));
                     tasksList.setEndDate(DateFormatter(TasksListModel.getInstance().responseObject.get(loop2).endDate));
-                    childTasksLists.add(tasksList);
+                    tasksList.setPriority(TasksListModel.getInstance().responseObject.get(loop2).priority);
                     list.add(tasksList);
                 }
             Collections.sort(list);

@@ -1,20 +1,15 @@
 package com.algorepublic.zoho.adapters;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.TextView;
 
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.fragments.FragmentTasksList;
 import com.algorepublic.zoho.utils.BaseClass;
 import com.androidquery.AQuery;
-
-import java.util.ArrayList;
-import java.util.Calendar;
 
 import se.emilsjolander.stickylistheaders.StickyListHeadersAdapter;
 
@@ -27,7 +22,6 @@ public class AdapterTasksList extends BaseAdapter implements StickyListHeadersAd
     AQuery aq,aq_header;
     BaseClass baseClass;
     private LayoutInflater l_Inflater;
-    ArrayList<ChildTasksList> tasksLists = new ArrayList<>();
 
 
     public AdapterTasksList(Context context) {
@@ -56,8 +50,10 @@ public class AdapterTasksList extends BaseAdapter implements StickyListHeadersAd
 
         convertView = l_Inflater.inflate(R.layout.layout_taskslist_row, null);
         aq = new AQuery(convertView);
-        aq.id(R.id.start_date).text("Start Date: "+FragmentTasksList.list.get(position).getStartDate());
-        aq.id(R.id.end_date).text("End Date: "+FragmentTasksList.list.get(position).getEndDate());
+        if(FragmentTasksList.list.get(position).getStartDate().equalsIgnoreCase("3/0/1"))
+            aq.id(R.id.start_date).text("No Due Date");
+        aq.id(R.id.start_date).text(FragmentTasksList.list.get(position).getStartDate());
+        aq.id(R.id.priority_bar).backgroundColor(getPriorityWiseColor(FragmentTasksList.list.get(position).priority));
         aq.id(R.id.task_name).text(FragmentTasksList.list.get(position).getTaskName());
         aq.id(R.id.project_name).text(FragmentTasksList.list.get(position).getProjectName());
         return convertView;
@@ -70,7 +66,7 @@ public class AdapterTasksList extends BaseAdapter implements StickyListHeadersAd
         if(FragmentTasksList.list.get(position).getStartDate().equalsIgnoreCase("3/0/1"))
             aq_header.id(R.id.header).text("No Due Date");
         else
-        aq_header.id(R.id.header).text(FragmentTasksList.list.get(position).getStartDate());
+            aq_header.id(R.id.header).text(FragmentTasksList.list.get(position).getStartDate());
         return convertView;
     }
 
@@ -79,14 +75,20 @@ public class AdapterTasksList extends BaseAdapter implements StickyListHeadersAd
         //return the first character of the country as ID because this is what headers are based upon
         return FragmentTasksList.list.get(position).getStartDate().subSequence(0,1).charAt(0);
     }
-    public String DateFormatter(String date){
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(Long.parseLong(date));
 
-        int mYear = calendar.get(Calendar.YEAR);
-        int mMonth = calendar.get(Calendar.MONTH);
-        int mDay = calendar.get(Calendar.DAY_OF_MONTH);
-        return (mDay+"/"+mMonth+"/"+mYear);
+    private int getPriorityWiseColor(int priority){
+        switch (priority){
+            case 0:
+                return ctx.getResources().getColor(android.R.color.darker_gray);
+            case 1:
+                return ctx.getResources().getColor(android.R.color.holo_orange_light);
+            case 2:
+                return ctx.getResources().getColor(android.R.color.holo_green_light);
+            case 3:
+                return ctx.getResources().getColor(android.R.color.holo_red_light);
+            default:
+                return ctx.getResources().getColor(android.R.color.darker_gray);
+        }
     }
 
 }

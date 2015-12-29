@@ -4,7 +4,7 @@
     <color name="colorPrimaryDark">#2C2D2F</color>
     <color name="colorAccent">#EC3523</color>
     <color name="colorLightgray">#EDEDED</color>
-    <color name="colorDarkgray">#929292</color>
+    <color name="colorDarkgray">#727272</color>
     <color name="calendar_future_days_bg">#FFFFFF</color>
     <color name="calendar_past_days_bg">#F5F5F5</color>
     <color name="calendar_text_current_day">#000000</color>

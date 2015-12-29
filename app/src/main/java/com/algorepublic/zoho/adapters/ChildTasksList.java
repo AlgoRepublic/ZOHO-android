@@ -1,9 +1,5 @@
 package com.algorepublic.zoho.adapters;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-
 /**
  * Created by android on 12/29/15.
  */
@@ -34,6 +30,8 @@ public class ChildTasksList implements Comparable<ChildTasksList> {
     public String getEndDate(){
         return endDate;
     }
+    public void setPriority(int priority){ this.priority = priority; }
+    public int getPriority(){ return priority; }
 
     public void setMilli(String milli){
         this.milli = milli;
@@ -50,5 +48,6 @@ public class ChildTasksList implements Comparable<ChildTasksList> {
     String endDate;
     String taskName;
     String projectName;
+    int priority;
 
 }
