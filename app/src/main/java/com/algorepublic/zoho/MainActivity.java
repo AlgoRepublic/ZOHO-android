@@ -80,10 +80,14 @@ public class MainActivity extends BaseActivity
     public void RadioGroup1(int checkedId) {
         switch (radioGroup1.indexOfChild(findViewById(checkedId))) {
             case 0:
+                getSupportActionBar().setTitle(getString(R.string.feeds));
+                getSupportFragmentManager().beginTransaction().replace(R.id.container, FeedFragment.newInstance(), "FragmentFeeds").commit();
                 aq.id(R.id.feed_radioButton).textColor(getResources().getColor(R.color.colorAccent));
                 aq.id(R.id.schedule_radioButton).textColor(getResources().getColor(android.R.color.white));
                 break;
             case 1:
+                getSupportActionBar().setTitle(getString(R.string.calendar));
+                getSupportFragmentManager().beginTransaction().replace(R.id.container, CalendarFragment.newInstance(), "FragmentCalendar").commit();
                 aq.id(R.id.schedule_radioButton).textColor(getResources().getColor(R.color.colorAccent));
                 aq.id(R.id.feed_radioButton).textColor(getResources().getColor(android.R.color.white));
                 break;
@@ -99,8 +103,6 @@ public class MainActivity extends BaseActivity
                 aq.id(R.id.documents_radioButton).textColor(getResources().getColor(android.R.color.white));
                 break;
             case 1:
-                getSupportActionBar().setTitle(getString(R.string.calendar));
-                getSupportFragmentManager().beginTransaction().replace(R.id.container, CalendarFragment.newInstance(), "FragmentCalendar").commit();
                 drawer.closeDrawer(GravityCompat.START);
                 aq.id(R.id.documents_radioButton).textColor(getResources().getColor(R.color.colorAccent));
                 aq.id(R.id.tasks_radioButton).textColor(getResources().getColor(android.R.color.white));

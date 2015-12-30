@@ -36,10 +36,10 @@ public class FeedFragment extends BaseFragment {
 
     // TODO: Customize parameter initialization
     @SuppressWarnings("unused")
-    public static FeedFragment newInstance(int columnCount) {
+    public static FeedFragment newInstance() {
         FeedFragment fragment = new FeedFragment();
         Bundle args = new Bundle();
-        args.putInt(ARG_COLUMN_COUNT, columnCount);
+//        args.putInt(ARG_COLUMN_COUNT, columnCount);
         fragment.setArguments(args);
         return fragment;
     }

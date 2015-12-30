@@ -2,10 +2,10 @@ package com.algorepublic.zoho.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -64,6 +64,18 @@ public class FragmentTasksList extends BaseFragment {
     }
 
     @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        switch (item.getItemId()) {
+            case R.id.add_project:
+                startActivity(new Intent(getActivity(), ActivityTask.class));
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
@@ -115,7 +127,7 @@ public class FragmentTasksList extends BaseFragment {
     public void SetAdapterList(){
         if (TasksListModel.getInstance().responseCode == 0) {
             adapterTasksList = new AdapterTasksList(getActivity());
-            listView.setAreHeadersSticky(false);
+            listView.setAreHeadersSticky(true);
             listView.setAdapter(adapterTasksList);
         }
     }
@@ -134,7 +146,6 @@ public class FragmentTasksList extends BaseFragment {
         dialog.setOnOperItemClickL(new OnOperItemClickL() {
             @Override
             public void onOperItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Log.e("pos", "/" + position);
                 dialog.dismiss();
                 if (position == 0) {
                     baseClass.setSortType("Due Date");
@@ -237,11 +248,6 @@ public class FragmentTasksList extends BaseFragment {
             return (Double.valueOf(lhs.getPriority()) > Double.valueOf(rhs.getPriority()) ? 1 : -1);
         }
     };
-//    Comparator<TasksList> byAlphabet = new Comparator<TasksList>() {
-//        public int compare(TasksList lhs, TasksList rhs) {
-//            return (lhs.getTaskName()) > Double.valueOf(rhs.getTaskName()) ? 1 : -1);
-//        }
-//    };
     Comparator<TasksList> Date = new Comparator<TasksList>() {
         public int compare(TasksList lhs, TasksList rhs) {
             return (Double.valueOf(lhs.getMilli()) > Double.valueOf(rhs.getMilli()) ? 1 : -1);

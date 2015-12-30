@@ -14,12 +14,6 @@ public class TasksList implements Comparable<TasksList>{
     public String getTaskName(){
         return taskName;
     }
-    public void setPriority(int priority){
-        this.priority = priority;
-    }
-    public int getPriority(){
-        return priority;
-    }
     public void setProjectName(String projectName){
         this.projectName = projectName;
     }
@@ -38,6 +32,8 @@ public class TasksList implements Comparable<TasksList>{
     public String getEndDate(){
         return endDate;
     }
+    public void setPriority(int priority){ this.priority = priority; }
+    public int getPriority(){ return priority; }
 
     public void setMilli(String milli){
         this.milli = milli;

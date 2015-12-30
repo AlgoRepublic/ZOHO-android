@@ -12,9 +12,6 @@ import com.algorepublic.zoho.fragments.FragmentTasksList;
 import com.algorepublic.zoho.utils.BaseClass;
 import com.androidquery.AQuery;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-
 import se.emilsjolander.stickylistheaders.StickyListHeadersAdapter;
 
 /**
@@ -54,9 +51,11 @@ public class AdapterTasksList extends BaseAdapter implements StickyListHeadersAd
 
         convertView = l_Inflater.inflate(R.layout.layout_taskslist_row, null);
         aq = new AQuery(convertView);
-        if(FragmentTasksList.generalList.get(position).getProjectName())
-        aq.id(R.id.start_date).text("Start Date: "+FragmentTasksList.generalList.get(position).getStartDate());
-        aq.id(R.id.end_date).text("End Date: "+FragmentTasksList.generalList.get(position).getEndDate());
+
+        if(FragmentTasksList.generalList.get(position).getStartDate().equalsIgnoreCase("3/0/1"))
+            aq.id(R.id.start_date).text("No Due Date");
+        aq.id(R.id.start_date).text(FragmentTasksList.generalList.get(position).getStartDate());
+        aq.id(R.id.priority_bar).backgroundColor(getPriorityWiseColor(FragmentTasksList.generalList.get(position).priority));
         aq.id(R.id.task_name).text(FragmentTasksList.generalList.get(position).getTaskName());
         aq.id(R.id.project_name).text(FragmentTasksList.generalList.get(position).getProjectName());
         return convertView;
@@ -66,6 +65,7 @@ public class AdapterTasksList extends BaseAdapter implements StickyListHeadersAd
 
         convertView = l_Inflater.inflate(R.layout.layout_taskslist_header, parent , false);
         aq_header = new AQuery(convertView);
+
         if(baseClass.getSortType().equalsIgnoreCase("Due Date")) {
             if (FragmentTasksList.generalList.get(position).getHeader().equalsIgnoreCase("3/0/1"))
                 aq_header.id(R.id.header).text("No Due Date");
@@ -74,7 +74,7 @@ public class AdapterTasksList extends BaseAdapter implements StickyListHeadersAd
         }
         if(baseClass.getSortType().equalsIgnoreCase("Priority"))
         {
-            Log.e("Header",position+"/"+FragmentTasksList.generalList.get(position).getPriority());
+            Log.e("Header", position + "/" + FragmentTasksList.generalList.get(position).getPriority());
             if(FragmentTasksList.generalList.get(position).getPriority()==0)
             {
                 aq_header.id(R.id.header).text("None");
@@ -113,6 +113,21 @@ public class AdapterTasksList extends BaseAdapter implements StickyListHeadersAd
 //            return FragmentTasksList.generalList.get(position).getHeaderID();
 
         return type;
+    }
+
+    private int getPriorityWiseColor(int priority){
+        switch (priority){
+            case 0:
+                return ctx.getResources().getColor(android.R.color.darker_gray);
+            case 1:
+                return ctx.getResources().getColor(android.R.color.holo_orange_light);
+            case 2:
+                return ctx.getResources().getColor(android.R.color.holo_green_light);
+            case 3:
+                return ctx.getResources().getColor(android.R.color.holo_red_light);
+            default:
+                return ctx.getResources().getColor(android.R.color.darker_gray);
+        }
     }
 
 }

@@ -19,16 +19,17 @@
         android:weightSum="5"
         android:orientation="horizontal"
         android:background="@color/colorPrimary">
-        <Button
+        <ImageView
             android:layout_width="0dp"
             android:layout_weight=".7"
-            android:background="@drawable/user"
-            android:layout_height="50dp" />
+            android:src="@drawable/user"
+            android:layout_gravity="center"
+            android:layout_height="40dp" />
         <Button
             android:id="@+id/all"
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:text="All"
+            android:text="@string/all"
             android:singleLine="true"
             android:ellipsize="end"
             android:textAllCaps="false"
@@ -37,7 +38,7 @@
             android:id="@+id/up_coming"
             android:layout_width="0dp"
             android:layout_weight="1.3"
-            android:text="Up Coming"
+            android:text="@string/upcoming"
             android:singleLine="true"
             android:ellipsize="end"
             android:textAllCaps="false"
@@ -46,7 +47,7 @@
             android:id="@+id/over_due"
             android:layout_width="0dp"
             android:layout_weight="1.3"
-            android:text="Over Due"
+            android:text="@string/overdue"
             android:singleLine="true"
             android:ellipsize="end"
             android:textAllCaps="false"
@@ -56,6 +57,7 @@
             android:layout_width="0dp"
             android:layout_weight=".7"
             android:background="@android:drawable/ic_menu_sort_by_size"
-            android:layout_height="50dp" />
+            android:layout_gravity="center"
+            android:layout_height="40dp" />
     </LinearLayout>
 </RelativeLayout>

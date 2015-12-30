@@ -4,13 +4,14 @@
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@android:color/white"
-    >
+    android:background="@android:color/white">
     <View
-        android:id="@+id/sidebar"
+        android:id="@+id/priority_bar"
         android:layout_width="0dp"
         android:background="@color/blue"
         android:layout_height="match_parent"
+        android:layout_marginTop="1dp"
+        android:layout_marginBottom="1dp"
         android:layout_weight="0.02" >
     </View>
     <RelativeLayout
@@ -19,13 +20,14 @@
         android:layout_weight="0.98"
         android:padding="5dp"
         android:layout_centerHorizontal="true" >
-    <TextView
-        android:id="@+id/task_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:textColor="@color/colorPrimary"
-        />
+        <TextView
+            android:id="@+id/task_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black"
+            />
         <TextView
             android:id="@+id/project_name"
             android:layout_width="match_parent"
@@ -47,19 +49,19 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:textSize="16sp"
-                android:textColor="@color/colorDarkgray"
-                />
-            <TextView
-                android:id="@+id/end_date"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_below="@+id/task_name"
-                android:layout_height="wrap_content"
                 android:textSize="14sp"
-                android:textColor="@color/colorDarkgray"
+                android:textColor="@android:color/holo_red_dark"
                 />
+            <!--<TextView-->
+                <!--android:id="@+id/end_date"-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_weight="1"-->
+                <!--android:layout_below="@+id/task_name"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:textSize="14sp"-->
+                <!--android:textColor="@color/colorDarkgray"-->
+                <!--/>-->
         </LinearLayout>
-</RelativeLayout>
+    </RelativeLayout>
 
 </LinearLayout>
