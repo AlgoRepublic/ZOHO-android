@@ -2,6 +2,7 @@ package com.algorepublic.zoho.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -19,6 +20,7 @@ import com.algorepublic.zoho.adapters.TasksList;
 import com.algorepublic.zoho.services.CallBack;
 import com.algorepublic.zoho.services.TaskListService;
 import com.algorepublic.zoho.utils.BaseClass;
+import com.algorepublic.zoho.utils.Constants;
 import com.androidquery.AQuery;
 import com.flyco.dialog.entity.DialogMenuItem;
 import com.flyco.dialog.listener.OnOperItemClickL;
@@ -125,7 +127,7 @@ public class FragmentTasksList extends BaseFragment {
         return view;
     }
     public void SetAdapterList(){
-        if (TasksListModel.getInstance().responseCode == 0) {
+        if (TasksListModel.getInstance().responseCode == 100) {
             adapterTasksList = new AdapterTasksList(getActivity());
             listView.setAreHeadersSticky(true);
             listView.setAdapter(adapterTasksList);
@@ -148,7 +150,7 @@ public class FragmentTasksList extends BaseFragment {
             public void onOperItemClick(AdapterView<?> parent, View view, int position, long id) {
                 dialog.dismiss();
                 if (position == 0) {
-                    baseClass.setSortType("Due Date");
+                    baseClass.setSortType("DueDate");
                 }
                 if (position == 1) {
                     baseClass.setSortType("Priority");
@@ -157,14 +159,14 @@ public class FragmentTasksList extends BaseFragment {
                     baseClass.setSortType("Alphabetically");
                 }
                 if (position == 3) {
-                    baseClass.setSortType("Task List");
+                    baseClass.setSortType("TaskList");
                 }
                 SortList();
             }
         });
     }
     public void SortList(){
-        if(baseClass.getSortType().equalsIgnoreCase("Due Date")){
+        if(baseClass.getSortType().equalsIgnoreCase("DueDate")){
             Collections.sort(generalList, Date);
         }
         if(baseClass.getSortType().equalsIgnoreCase("Priority")){
@@ -173,14 +175,14 @@ public class FragmentTasksList extends BaseFragment {
         if(baseClass.getSortType().equalsIgnoreCase("Alphabetically")){
             Collections.sort(generalList);
         }
-//        if(baseClass.getSortType().equalsIgnoreCase("Task List")){
-//
-//        }
+        if(baseClass.getSortType().equalsIgnoreCase("TaskList")){
+            Collections.sort(generalList,byTaskList);
+        }
         SetAdapterList();
     }
     public void TasksList(Object caller, Object model) {
         TasksListModel.getInstance().setList((TasksListModel) model);
-        if (TasksListModel.getInstance().responseCode == 0) {
+        if (TasksListModel.getInstance().responseCode == 100) {
             GetGeneralList();
             SortList();
         }
@@ -201,6 +203,8 @@ public class FragmentTasksList extends BaseFragment {
                     tasksList.setEndDate(DateFormatter(TasksListModel.getInstance().responseObject.get(loop).endDate));
                     tasksList.setHeader(DateFormatter(TasksListModel.getInstance().responseObject.get(loop).endDate));
                     tasksList.setPriority(TasksListModel.getInstance().responseObject.get(loop).priority);
+                    tasksList.setTaskListName(TasksListModel.getInstance().responseObject.get(loop).taskListName);
+                    tasksList.setCharToAscii(CharToASCII(TasksListModel.getInstance().responseObject.get(loop).taskListName));
                     generalList.add(tasksList);
             }
         SortList();
@@ -218,6 +222,8 @@ public class FragmentTasksList extends BaseFragment {
                 tasksList.setHeader(DateFormatter(TasksListModel.getInstance().responseObject.get(loop).startDate));
                 tasksList.setEndDate(DateFormatter(TasksListModel.getInstance().responseObject.get(loop).endDate));
                 tasksList.setPriority(TasksListModel.getInstance().responseObject.get(loop).priority);
+                tasksList.setTaskListName(TasksListModel.getInstance().responseObject.get(loop).taskListName);
+                tasksList.setCharToAscii(CharToASCII(TasksListModel.getInstance().responseObject.get(loop).taskListName));
                 generalList.add(tasksList);
             }
         }
@@ -237,6 +243,8 @@ public class FragmentTasksList extends BaseFragment {
                 tasksList.setEndDate(DateFormatter(TasksListModel.getInstance().responseObject.get(loop).endDate));
                 tasksList.setHeader(DateFormatter(TasksListModel.getInstance().responseObject.get(loop).endDate));
                 tasksList.setPriority(TasksListModel.getInstance().responseObject.get(loop).priority);
+                tasksList.setTaskListName(TasksListModel.getInstance().responseObject.get(loop).taskListName);
+                tasksList.setCharToAscii(CharToASCII(TasksListModel.getInstance().responseObject.get(loop).taskListName));
                 generalList.add(tasksList);
             }
         }
@@ -245,7 +253,12 @@ public class FragmentTasksList extends BaseFragment {
     }
     Comparator<TasksList> byPriority = new Comparator<TasksList>() {
         public int compare(TasksList lhs, TasksList rhs) {
-            return (Double.valueOf(lhs.getPriority()) > Double.valueOf(rhs.getPriority()) ? 1 : -1);
+            return (Double.valueOf(lhs.getPriority()) < Double.valueOf(rhs.getPriority()) ? 1 : -1);
+        }
+    };
+    Comparator<TasksList> byTaskList = new Comparator<TasksList>() {
+        public int compare(TasksList lhs, TasksList rhs) {
+            return (Double.valueOf(lhs.getCharToAscii()) > Double.valueOf(rhs.getCharToAscii()) ? 1 : -1);
         }
     };
     Comparator<TasksList> Date = new Comparator<TasksList>() {
@@ -257,14 +270,12 @@ public class FragmentTasksList extends BaseFragment {
 
         public int compare(TasksList ord1, TasksList ord2) {
             return (Long.parseLong(ord1.getMilli()) > System.currentTimeMillis() ? 1 : -1);     //descending
-            //  return (d1.getTime() > d2.getTime() ? 1 : -1);     //ascending
         }
     };
     Comparator<TasksList> byOverDate = new Comparator<TasksList>() {
 
         public int compare(TasksList ord1, TasksList ord2) {
             return (Long.parseLong(ord1.getMilli()) < System.currentTimeMillis() ? -1 : 1);     //descending
-            //  return (d1.getTime() > d2.getTime() ? 1 : -1);     //ascending
         }
     };
     public String DateFormatter(String date){
@@ -284,8 +295,6 @@ public class FragmentTasksList extends BaseFragment {
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(Long.parseLong(b));
 
-        int mYear = calendar.get(Calendar.YEAR);
-        int mMonth = calendar.get(Calendar.MONTH);
         int mDay = calendar.get(Calendar.DAY_OF_MONTH);
         return (mDay);
     }
@@ -293,5 +302,19 @@ public class FragmentTasksList extends BaseFragment {
         String a = date.replace("/Date(", "");
         String b = a.replace(")/", "");
         return b;
+    }
+    public long CharToASCII(String name){
+        long value;
+        if(name == null)
+        {
+            value =0;
+        }else {
+            StringBuilder ascii =  new StringBuilder();
+            for (int i = 0; i < name.length(); i++) {
+                 ascii.append(String.valueOf((int) name.charAt(i)));
+            }
+            value =  Long.parseLong(ascii.toString());
+        }
+        return value;
     }
 }

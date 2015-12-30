@@ -107,7 +107,7 @@ public class ActivityLogin extends BaseActivity{
     }
     public void GetById(Object caller,Object model) {
         GetUserModel.getInstance().setList((GetUserModel) model);
-        if (GetUserModel.getInstance().responseCode.equalsIgnoreCase("0")
+        if (GetUserModel.getInstance().responseCode.equalsIgnoreCase("100")
                 && GetUserModel.getInstance().user.toString() !="null") {
             baseClass.setFirstName(GetUserModel.getInstance().user.firstName);
             baseClass.setEmail(GetUserModel.getInstance().user.eMail);

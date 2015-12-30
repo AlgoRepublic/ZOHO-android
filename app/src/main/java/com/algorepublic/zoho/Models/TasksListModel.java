@@ -85,6 +85,9 @@ public class TasksListModel {
 
         @SerializedName("IsAttach")
         public Integer isAttach;
+
+        @SerializedName("TaskListName")
+        public String taskListName;
     }
 
 }

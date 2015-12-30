@@ -31,10 +31,8 @@ public class LoginService extends BaseService {
         Log.e("LoginService", url);
     }
     public void GetById(String id,boolean message, CallBack obj){
-        String url = Constants.GetUser_API;
-        HashMap<String, String> params = new HashMap<String, String>();
-        params.put("id", id);
-          this.post(url, params, obj, GetUserModel.getInstance(), message);
+        String url = Constants.GetUser_API+"?id="+id;
+        this.get(url, obj, GetUserModel.getInstance(), message);
 
         Log.e("IDService", url);
     }

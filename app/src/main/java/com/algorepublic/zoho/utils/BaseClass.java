@@ -99,7 +99,7 @@ public class BaseClass extends Application {
     }
 
     public String getSortType() {
-        return appSharedPrefs.getString(SortType, "Due Date");
+        return appSharedPrefs.getString(SortType, "DueDate");
     }
 
 

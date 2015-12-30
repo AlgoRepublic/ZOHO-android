@@ -14,6 +14,12 @@ public class TasksList implements Comparable<TasksList>{
     public String getTaskName(){
         return taskName;
     }
+    public void setTaskListName(String taskListName){
+        this.taskListName = taskListName;
+    }
+    public String getTaskListName(){
+        return taskListName;
+    }
     public void setProjectName(String projectName){
         this.projectName = projectName;
     }
@@ -55,6 +61,13 @@ public class TasksList implements Comparable<TasksList>{
         return header;
     }
 
+    public void setCharToAscii(long charToAscii){
+        this.charToAscii = charToAscii;
+    }
+    public long getCharToAscii(){
+        return charToAscii;
+    }
+
 
     @Override
     public int compareTo(TasksList object) {
@@ -65,9 +78,11 @@ public class TasksList implements Comparable<TasksList>{
     long headerID;
     String header;
     int priority;
+    long charToAscii;
     String startDate;
     String milli;
     String endDate;
     String taskName;
+    String taskListName;
     String projectName;
 }
