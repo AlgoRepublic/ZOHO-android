@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.TextView;
 
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.fragments.FragmentTasksList;
@@ -27,7 +26,6 @@ public class AdapterTasksList extends BaseAdapter implements StickyListHeadersAd
     AQuery aq,aq_header;
     BaseClass baseClass;
     private LayoutInflater l_Inflater;
-    ArrayList<ChildTasksList> tasksLists = new ArrayList<>();
 
 
     public AdapterTasksList(Context context) {
@@ -38,12 +36,12 @@ public class AdapterTasksList extends BaseAdapter implements StickyListHeadersAd
 
     @Override
     public int getCount() {
-        return FragmentTasksList.list.size();
+        return FragmentTasksList.generalList.size();
     }
 
     @Override
     public Object getItem(int pos) {
-        return FragmentTasksList.list.get(pos);
+        return FragmentTasksList.generalList.get(pos);
     }
 
     @Override
@@ -56,10 +54,11 @@ public class AdapterTasksList extends BaseAdapter implements StickyListHeadersAd
 
         convertView = l_Inflater.inflate(R.layout.layout_taskslist_row, null);
         aq = new AQuery(convertView);
-        aq.id(R.id.start_date).text("Start Date: "+FragmentTasksList.list.get(position).getStartDate());
-        aq.id(R.id.end_date).text("End Date: "+FragmentTasksList.list.get(position).getEndDate());
-        aq.id(R.id.task_name).text(FragmentTasksList.list.get(position).getTaskName());
-        aq.id(R.id.project_name).text(FragmentTasksList.list.get(position).getProjectName());
+        if(FragmentTasksList.generalList.get(position).getProjectName())
+        aq.id(R.id.start_date).text("Start Date: "+FragmentTasksList.generalList.get(position).getStartDate());
+        aq.id(R.id.end_date).text("End Date: "+FragmentTasksList.generalList.get(position).getEndDate());
+        aq.id(R.id.task_name).text(FragmentTasksList.generalList.get(position).getTaskName());
+        aq.id(R.id.project_name).text(FragmentTasksList.generalList.get(position).getProjectName());
         return convertView;
     }
     @Override
@@ -67,26 +66,53 @@ public class AdapterTasksList extends BaseAdapter implements StickyListHeadersAd
 
         convertView = l_Inflater.inflate(R.layout.layout_taskslist_header, parent , false);
         aq_header = new AQuery(convertView);
-        if(FragmentTasksList.list.get(position).getStartDate().equalsIgnoreCase("3/0/1"))
-            aq_header.id(R.id.header).text("No Due Date");
-        else
-        aq_header.id(R.id.header).text(FragmentTasksList.list.get(position).getStartDate());
+        if(baseClass.getSortType().equalsIgnoreCase("Due Date")) {
+            if (FragmentTasksList.generalList.get(position).getHeader().equalsIgnoreCase("3/0/1"))
+                aq_header.id(R.id.header).text("No Due Date");
+            else
+                aq_header.id(R.id.header).text(FragmentTasksList.generalList.get(position).getHeader());
+        }
+        if(baseClass.getSortType().equalsIgnoreCase("Priority"))
+        {
+            Log.e("Header",position+"/"+FragmentTasksList.generalList.get(position).getPriority());
+            if(FragmentTasksList.generalList.get(position).getPriority()==0)
+            {
+                aq_header.id(R.id.header).text("None");
+            }
+            if(FragmentTasksList.generalList.get(position).getPriority()==1)
+            {
+                aq_header.id(R.id.header).text("Low");
+            }
+            if(FragmentTasksList.generalList.get(position).getPriority()==2)
+            {
+                aq_header.id(R.id.header).text("Medium");
+            }
+            if(FragmentTasksList.generalList.get(position).getPriority()==3)
+            {
+                aq_header.id(R.id.header).text("High");
+            }
+        }
+        if(baseClass.getSortType().equalsIgnoreCase("Alphabetically"))
+        {
+            aq_header.id(R.id.header).text(FragmentTasksList.generalList.get(position).getTaskName().substring(0, 1));
+        }
         return convertView;
     }
 
     @Override
     public long getHeaderId(int position) {
+        long type = 0;
         //return the first character of the country as ID because this is what headers are based upon
-        return FragmentTasksList.list.get(position).getStartDate().subSequence(0,1).charAt(0);
-    }
-    public String DateFormatter(String date){
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(Long.parseLong(date));
+        if(baseClass.getSortType().equalsIgnoreCase("Due Date"))
+            type = FragmentTasksList.generalList.get(position).getHeaderID();
+        if(baseClass.getSortType().equalsIgnoreCase("Priority"))
+            type = FragmentTasksList.generalList.get(position).getPriority();
+        if(baseClass.getSortType().equalsIgnoreCase("Alphabetically"))
+            type = FragmentTasksList.generalList.get(position).getTaskName().charAt(0);
+//        if(baseClass.getSortType().equalsIgnoreCase("Task List"))
+//            return FragmentTasksList.generalList.get(position).getHeaderID();
 
-        int mYear = calendar.get(Calendar.YEAR);
-        int mMonth = calendar.get(Calendar.MONTH);
-        int mDay = calendar.get(Calendar.DAY_OF_MONTH);
-        return (mDay+"/"+mMonth+"/"+mYear);
+        return type;
     }
 
 }

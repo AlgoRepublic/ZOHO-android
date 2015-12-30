@@ -1,7 +1,6 @@
 package com.algorepublic.zoho.adapters;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 
 /**
  * Created by android on 12/29/15.
@@ -21,14 +20,14 @@ public class HeaderTasksList {
     public long getHeaderID(){
         return headerID;
     }
-    public void setChildList(ArrayList<ChildTasksList> tasksList){
+    public void setChildList(ArrayList<TasksList> tasksList){
         this.childList.addAll(tasksList);
     }
-    public ArrayList<ChildTasksList> getChildList(){
+    public ArrayList<TasksList> getChildList(){
         return childList;
     }
 
     public static String header;
     public static long headerID;
-    public static ArrayList<ChildTasksList> childList = new ArrayList<>();
+    public static ArrayList<TasksList> childList = new ArrayList<>();
 }

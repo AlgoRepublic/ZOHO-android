@@ -2,7 +2,6 @@ package com.algorepublic.zoho.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.SystemClock;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -16,8 +15,7 @@ import com.algorepublic.zoho.ActivityTask;
 import com.algorepublic.zoho.Models.TasksListModel;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.adapters.AdapterTasksList;
-import com.algorepublic.zoho.adapters.ChildTasksList;
-import com.algorepublic.zoho.adapters.HeaderTasksList;
+import com.algorepublic.zoho.adapters.TasksList;
 import com.algorepublic.zoho.services.CallBack;
 import com.algorepublic.zoho.services.TaskListService;
 import com.algorepublic.zoho.utils.BaseClass;
@@ -26,13 +24,12 @@ import com.flyco.dialog.entity.DialogMenuItem;
 import com.flyco.dialog.listener.OnOperItemClickL;
 import com.flyco.dialog.widget.ActionSheetDialog;
 
+import java.text.Collator;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Date;
-import java.util.HashSet;
 
 import se.emilsjolander.stickylistheaders.StickyListHeadersAdapter;
 import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
@@ -46,8 +43,7 @@ public class FragmentTasksList extends BaseFragment {
     TaskListService taskListService;
     StickyListHeadersAdapter adapterTasksList;
     AQuery aq;
-    public static ArrayList<HeaderTasksList> headerTasksLists;
-    public static ArrayList<ChildTasksList> list = new ArrayList<>();
+    public static ArrayList<TasksList> generalList = new ArrayList<>();
     BaseClass baseClass;
     StickyListHeadersListView listView;
 
@@ -99,7 +95,7 @@ public class FragmentTasksList extends BaseFragment {
         aq.id(R.id.all).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SortList();
+                GetGeneralList();
             }
         });
         aq.id(R.id.up_coming).clicked(new View.OnClickListener() {
@@ -111,7 +107,7 @@ public class FragmentTasksList extends BaseFragment {
         aq.id(R.id.over_due).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+            OverDueDate();
             }
         });
         return view;
@@ -158,22 +154,23 @@ public class FragmentTasksList extends BaseFragment {
     }
     public void SortList(){
         if(baseClass.getSortType().equalsIgnoreCase("Due Date")){
-            GetGeneralList();
+            Collections.sort(generalList, Date);
         }
         if(baseClass.getSortType().equalsIgnoreCase("Priority")){
-
+            Collections.sort(generalList, byPriority);
         }
         if(baseClass.getSortType().equalsIgnoreCase("Alphabetically")){
-
+            Collections.sort(generalList);
         }
-        if(baseClass.getSortType().equalsIgnoreCase("Task List")){
-
-        }
+//        if(baseClass.getSortType().equalsIgnoreCase("Task List")){
+//
+//        }
         SetAdapterList();
     }
     public void TasksList(Object caller, Object model) {
         TasksListModel.getInstance().setList((TasksListModel) model);
         if (TasksListModel.getInstance().responseCode == 0) {
+            GetGeneralList();
             SortList();
         }
         else
@@ -182,47 +179,85 @@ public class FragmentTasksList extends BaseFragment {
         }
     }
     public void GetGeneralList(){
-//        headerTasksLists = new ArrayList<>();
-//        for(int loop=0;loop<TasksListModel.getInstance().responseObject.size();loop++){
-////            HeaderTasksList headerTasksList = null;
-//
-//           // if(loop < headerTasksLists.size()) {
-//                if (!headerTasksLists..contains(DateFormatter(TasksListModel.getInstance().responseObject.get(loop).startDate))) {
-//                    HeaderTasksList headerTasksList = new HeaderTasksList();
-//                    headerTasksList.setHeaderID(loop);
-//                    headerTasksList.setHeader(DateFormatter(TasksListModel.getInstance().responseObject.get(loop).startDate));
-//                    headerTasksLists.add(headerTasksList);
-//                }
-//           // }
-//        }
-        AddChild();
-    }
-    public void AddChild(){
-//        for(int loop1=0;loop1<headerTasksLists.size();loop1++) {
-            ArrayList<ChildTasksList> childTasksLists = new ArrayList<>();
-            for (int loop2 = 0; loop2 < TasksListModel.getInstance().responseObject.size(); loop2++) {
-              //  if (headerTasksLists.get(loop2).getHeader().equalsIgnoreCase(DateFormatter(TasksListModel.getInstance().responseObject.get(loop2).startDate))) {
-                    ChildTasksList tasksList = new ChildTasksList();
-                    tasksList.setTaskName(TasksListModel.getInstance().responseObject.get(loop2).title);
-                    tasksList.setMilli(DateMilli(TasksListModel.getInstance().responseObject.get(loop2).startDate));
-                    tasksList.setProjectName(TasksListModel.getInstance().responseObject.get(loop2).projectName);
-                    tasksList.setStartDate(DateFormatter(TasksListModel.getInstance().responseObject.get(loop2).startDate));
-                    tasksList.setEndDate(DateFormatter(TasksListModel.getInstance().responseObject.get(loop2).endDate));
-                    childTasksLists.add(tasksList);
-                    list.add(tasksList);
-                }
-            Collections.sort(list);
-//            }
-//            headerTasksLists.get(loop1).setChildList(childTasksLists);
-       // }
+        generalList.clear();
+            for (int loop = 0; loop < TasksListModel.getInstance().responseObject.size(); loop++) {
+                    TasksList tasksList = new TasksList();
+                    tasksList.setTaskName(TasksListModel.getInstance().responseObject.get(loop).title);
+                    tasksList.setMilli(DateMilli(TasksListModel.getInstance().responseObject.get(loop).endDate));
+                    tasksList.setHeaderID(DateHeader(TasksListModel.getInstance().responseObject.get(loop).endDate));
+                    tasksList.setProjectName(TasksListModel.getInstance().responseObject.get(loop).projectName);
+                    tasksList.setStartDate(DateFormatter(TasksListModel.getInstance().responseObject.get(loop).startDate));
+                    tasksList.setEndDate(DateFormatter(TasksListModel.getInstance().responseObject.get(loop).endDate));
+                    tasksList.setHeader(DateFormatter(TasksListModel.getInstance().responseObject.get(loop).endDate));
+                    tasksList.setPriority(TasksListModel.getInstance().responseObject.get(loop).priority);
+                    generalList.add(tasksList);
+            }
+        SortList();
     }
     public void UpComing(){
-        SetAdapterList();
+        generalList.clear();
+        for (int loop = 0; loop < TasksListModel.getInstance().responseObject.size(); loop++) {
+            if(Long.parseLong(DateMilli(TasksListModel.getInstance().responseObject.get(loop).startDate)) > System.currentTimeMillis()) {
+                TasksList tasksList = new TasksList();
+                tasksList.setTaskName(TasksListModel.getInstance().responseObject.get(loop).title);
+                tasksList.setMilli(DateMilli(TasksListModel.getInstance().responseObject.get(loop).startDate));
+                tasksList.setHeaderID(DateHeader(TasksListModel.getInstance().responseObject.get(loop).startDate));
+                tasksList.setProjectName(TasksListModel.getInstance().responseObject.get(loop).projectName);
+                tasksList.setStartDate(DateFormatter(TasksListModel.getInstance().responseObject.get(loop).startDate));
+                tasksList.setHeader(DateFormatter(TasksListModel.getInstance().responseObject.get(loop).startDate));
+                tasksList.setEndDate(DateFormatter(TasksListModel.getInstance().responseObject.get(loop).endDate));
+                tasksList.setPriority(TasksListModel.getInstance().responseObject.get(loop).priority);
+                generalList.add(tasksList);
+            }
+        }
+        Collections.sort(generalList,byUpComingDate);
+        SortList();
     }
-    Comparator<ChildTasksList> byDate = new Comparator<ChildTasksList>() {
+    public void OverDueDate(){
+        generalList.clear();
+        for (int loop = 0; loop < TasksListModel.getInstance().responseObject.size(); loop++) {
+            if(Long.parseLong(DateMilli(TasksListModel.getInstance().responseObject.get(loop).endDate)) < System.currentTimeMillis()) {
+                TasksList tasksList = new TasksList();
+                tasksList.setTaskName(TasksListModel.getInstance().responseObject.get(loop).title);
+                tasksList.setMilli(DateMilli(TasksListModel.getInstance().responseObject.get(loop).endDate));
+                tasksList.setHeaderID(DateHeader(TasksListModel.getInstance().responseObject.get(loop).endDate));
+                tasksList.setProjectName(TasksListModel.getInstance().responseObject.get(loop).projectName);
+                tasksList.setStartDate(DateFormatter(TasksListModel.getInstance().responseObject.get(loop).startDate));
+                tasksList.setEndDate(DateFormatter(TasksListModel.getInstance().responseObject.get(loop).endDate));
+                tasksList.setHeader(DateFormatter(TasksListModel.getInstance().responseObject.get(loop).endDate));
+                tasksList.setPriority(TasksListModel.getInstance().responseObject.get(loop).priority);
+                generalList.add(tasksList);
+            }
+        }
+        Collections.sort(generalList,byOverDate);
+        SortList();
+    }
+    Comparator<TasksList> byPriority = new Comparator<TasksList>() {
+        public int compare(TasksList lhs, TasksList rhs) {
+            return (Double.valueOf(lhs.getPriority()) > Double.valueOf(rhs.getPriority()) ? 1 : -1);
+        }
+    };
+//    Comparator<TasksList> byAlphabet = new Comparator<TasksList>() {
+//        public int compare(TasksList lhs, TasksList rhs) {
+//            return (lhs.getTaskName()) > Double.valueOf(rhs.getTaskName()) ? 1 : -1);
+//        }
+//    };
+    Comparator<TasksList> Date = new Comparator<TasksList>() {
+        public int compare(TasksList lhs, TasksList rhs) {
+            return (Double.valueOf(lhs.getMilli()) > Double.valueOf(rhs.getMilli()) ? 1 : -1);
+        }
+    };
+    Comparator<TasksList> byUpComingDate = new Comparator<TasksList>() {
 
-        public int compare(ChildTasksList ord1, ChildTasksList ord2) {
-            return (Long.parseLong(ord1.getMilli()) > System.currentTimeMillis() ? -1 : 1);     //descending
+        public int compare(TasksList ord1, TasksList ord2) {
+            return (Long.parseLong(ord1.getMilli()) > System.currentTimeMillis() ? 1 : -1);     //descending
+            //  return (d1.getTime() > d2.getTime() ? 1 : -1);     //ascending
+        }
+    };
+    Comparator<TasksList> byOverDate = new Comparator<TasksList>() {
+
+        public int compare(TasksList ord1, TasksList ord2) {
+            return (Long.parseLong(ord1.getMilli()) < System.currentTimeMillis() ? -1 : 1);     //descending
             //  return (d1.getTime() > d2.getTime() ? 1 : -1);     //ascending
         }
     };
@@ -236,6 +271,17 @@ public class FragmentTasksList extends BaseFragment {
         int mMonth = calendar.get(Calendar.MONTH);
         int mDay = calendar.get(Calendar.DAY_OF_MONTH);
         return (mDay+"/"+mMonth+"/"+mYear);
+    }
+    public long DateHeader(String date){
+        String a = date.replace("/Date(", "");
+        String b =  a.replace(")/", "");
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(Long.parseLong(b));
+
+        int mYear = calendar.get(Calendar.YEAR);
+        int mMonth = calendar.get(Calendar.MONTH);
+        int mDay = calendar.get(Calendar.DAY_OF_MONTH);
+        return (mDay);
     }
     public String DateMilli(String date) {
         String a = date.replace("/Date(", "");

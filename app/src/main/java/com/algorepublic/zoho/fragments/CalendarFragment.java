@@ -96,12 +96,12 @@ public class CalendarFragment extends BaseFragment implements CalendarPickerCont
         for(int i = 0; i < TasksListModel.getInstance().responseObject.size(); i++) {
             TasksListModel.ResponseObject task = TasksListModel.getInstance().responseObject.get(i);
             Calendar startTime = Calendar.getInstance();
-            startTime.setTimeInMillis(Long.parseLong(TasksListModel.getInstance().responseObject.get(i).StartDate.replaceAll("\\D+","")));
+            startTime.setTimeInMillis(Long.parseLong(TasksListModel.getInstance().responseObject.get(i).startDate.replaceAll("\\D+","")));
 
             Calendar endTime = Calendar.getInstance();
-            endTime.setTimeInMillis(Long.parseLong(TasksListModel.getInstance().responseObject.get(i).EndDate.replaceAll("\\D+","")));
+            endTime.setTimeInMillis(Long.parseLong(TasksListModel.getInstance().responseObject.get(i).endDate.replaceAll("\\D+","")));
 
-            BaseCalendarEvent event = new BaseCalendarEvent(task.Title, task.projectName, "", getPriorityWiseColor(task.Priority), startTime, endTime, true);
+            BaseCalendarEvent event = new BaseCalendarEvent(task.title, task.projectName, "", getPriorityWiseColor(task.priority), startTime, endTime, true);
             eventList.add(event);
         }
         return eventList;

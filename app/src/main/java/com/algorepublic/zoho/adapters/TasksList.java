@@ -1,13 +1,11 @@
 package com.algorepublic.zoho.adapters;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
+import java.util.Comparator;
 
 /**
  * Created by android on 12/29/15.
  */
-public class ChildTasksList implements Comparable<ChildTasksList> {
+public class TasksList implements Comparable<TasksList>{
 
 
     public void setTaskName(String taskName){
@@ -15,6 +13,12 @@ public class ChildTasksList implements Comparable<ChildTasksList> {
     }
     public String getTaskName(){
         return taskName;
+    }
+    public void setPriority(int priority){
+        this.priority = priority;
+    }
+    public int getPriority(){
+        return priority;
     }
     public void setProjectName(String projectName){
         this.projectName = projectName;
@@ -41,14 +45,33 @@ public class ChildTasksList implements Comparable<ChildTasksList> {
     public String getMilli(){
         return milli;
     }
-    @Override
-    public int compareTo(ChildTasksList o) {
-        return getMilli().compareTo(o.getMilli());
+
+    public void setHeaderID(long headerid){
+        headerID = headerid;
     }
+    public long getHeaderID(){
+        return headerID;
+    }
+    public void setHeader(String headerList){
+        this.header = headerList;
+    }
+    public String getHeader(){
+        return header;
+    }
+
+
+    @Override
+    public int compareTo(TasksList object) {
+        return (this.getTaskName().compareTo(object.getTaskName()));
+    }
+
+
+    long headerID;
+    String header;
+    int priority;
     String startDate;
     String milli;
     String endDate;
     String taskName;
     String projectName;
-
 }
