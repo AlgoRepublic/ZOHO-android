@@ -113,7 +113,7 @@ public class AdapterTasksList extends BaseAdapter implements StickyListHeadersAd
         long type = 0;
         //return the first character of the country as ID because this is what headers are based upon
         if(baseClass.getSortType().equalsIgnoreCase("DueDate"))
-            type = FragmentTasksList.generalList.get(position).getHeaderID();
+            type = Long.parseLong(FragmentTasksList.generalList.get(position).getMilli());
         if(baseClass.getSortType().equalsIgnoreCase("Priority"))
             type = FragmentTasksList.generalList.get(position).getPriority();
         if(baseClass.getSortType().equalsIgnoreCase("Alphabetically"))

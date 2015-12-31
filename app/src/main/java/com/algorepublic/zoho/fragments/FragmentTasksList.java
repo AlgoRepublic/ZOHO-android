@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.algorepublic.zoho.ActivityTask;
@@ -44,7 +45,8 @@ public class FragmentTasksList extends BaseFragment {
     static FragmentTasksList fragment;
     TaskListService taskListService;
     StickyListHeadersAdapter adapterTasksList;
-    AQuery aq;
+    AQuery aq;View view;
+    RadioGroup radioGroup;
     public static ArrayList<TasksList> generalList = new ArrayList<>();
     BaseClass baseClass;
     StickyListHeadersListView listView;
@@ -85,19 +87,18 @@ public class FragmentTasksList extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_taskslist, container, false);
+        view = inflater.inflate(R.layout.fragment_taskslist, container, false);
+        radioGroup = (RadioGroup) view.findViewById(R.id.radioGroup);
         listView = (StickyListHeadersListView) view.findViewById(R.id.list_taskslist);
         aq = new AQuery(view);
         baseClass = ((BaseClass) getActivity().getApplicationContext());
         setHasOptionsMenu(true);
         taskListService = new TaskListService(getActivity());
         taskListService.getTasksList(true, new CallBack(FragmentTasksList.this, "TasksList"));
-        aq.id(R.id.list_taskslist).itemClicked(new AdapterView.OnItemClickListener() {
+       listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(getActivity(), ActivityTask.class);
-                intent.putExtra("pos", position);
-                startActivity(intent);
+                callFragmentWithBackStack(R.id.container,FragmentTaskDetail.newInstance(position),"TaskDetail");
             }
         });
         aq.id(R.id.sort).clicked(new View.OnClickListener() {
@@ -121,28 +122,37 @@ public class FragmentTasksList extends BaseFragment {
         aq.id(R.id.over_due).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            OverDueDate();
+                OverDueDate();
+            }
+        });
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                Log.e("id","/"+radioGroup.indexOfChild(view.findViewById(checkedId)));
+                switch (radioGroup.indexOfChild(view.findViewById(checkedId))) {
+                    case 0:
+                        aq.id(R.id.all).textColor(getResources().getColor(R.color.colorAccent));
+                        aq.id(R.id.up_coming).textColor(getResources().getColor(android.R.color.white));
+                        aq.id(R.id.over_due).textColor(getResources().getColor(android.R.color.white));
+                        break;
+                    case 1:
+                        aq.id(R.id.up_coming).textColor(getResources().getColor(R.color.colorAccent));
+                        aq.id(R.id.all).textColor(getResources().getColor(android.R.color.white));
+                        aq.id(R.id.over_due).textColor(getResources().getColor(android.R.color.white));
+                        break;
+                    case 2:
+                        aq.id(R.id.over_due).textColor(getResources().getColor(R.color.colorAccent));
+                        aq.id(R.id.all).textColor(getResources().getColor(android.R.color.white));
+                        aq.id(R.id.up_coming).textColor(getResources().getColor(android.R.color.white));
+                        break;
+                }
             }
         });
         return view;
     }
-    public void SetAdapterList(){
-        if (TasksListModel.getInstance().responseCode == 100) {
-            adapterTasksList = new AdapterTasksList(getActivity());
-            listView.setAreHeadersSticky(true);
-            listView.setAdapter(adapterTasksList);
-        }
-    }
+
     public void callForTaskSorting(){
-        ArrayList<DialogMenuItem> menuItems = new ArrayList<>();
-        DialogMenuItem dialogMenuItem1 = new DialogMenuItem("Due Date",R.drawable.calendar);
-        DialogMenuItem dialogMenuItem2 = new DialogMenuItem("Priority",R.drawable.alert);
-        DialogMenuItem dialogMenuItem3 = new DialogMenuItem("Alphabetically",android.R.drawable.ic_menu_sort_alphabetically);
-        DialogMenuItem dialogMenuItem4 = new DialogMenuItem("Task List",R.drawable.task);
-        menuItems.add(dialogMenuItem1);
-        menuItems.add(dialogMenuItem2);
-        menuItems.add(dialogMenuItem3);
-        menuItems.add(dialogMenuItem4);
+        String[] menuItems = {"Due Date","Priority","Alphabetically","Task List"};
         final ActionSheetDialog dialog = new ActionSheetDialog(getActivity(),menuItems, getView());
         dialog.isTitleShow(false).show();
         dialog.setOnOperItemClickL(new OnOperItemClickL() {
@@ -180,11 +190,17 @@ public class FragmentTasksList extends BaseFragment {
         }
         SetAdapterList();
     }
+    public void SetAdapterList(){
+        if (TasksListModel.getInstance().responseCode == 100) {
+            adapterTasksList = new AdapterTasksList(getActivity());
+            listView.setAreHeadersSticky(true);
+            listView.setAdapter(adapterTasksList);
+        }
+    }
     public void TasksList(Object caller, Object model) {
         TasksListModel.getInstance().setList((TasksListModel) model);
         if (TasksListModel.getInstance().responseCode == 100) {
             GetGeneralList();
-            SortList();
         }
         else
         {
@@ -290,18 +306,16 @@ public class FragmentTasksList extends BaseFragment {
         return (mDay+"/"+mMonth+"/"+mYear);
     }
     public long DateHeader(String date){
-        String a = date.replace("/Date(", "");
-        String b =  a.replace(")/", "");
+        String a = date.replaceAll("\\D+", "");
         Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(Long.parseLong(b));
+        calendar.setTimeInMillis(Long.parseLong(a));
 
         int mDay = calendar.get(Calendar.DAY_OF_MONTH);
         return (mDay);
     }
     public String DateMilli(String date) {
-        String a = date.replace("/Date(", "");
-        String b = a.replace(")/", "");
-        return b;
+        String a = date.replaceAll("\\D+", "");
+        return a;
     }
     public long CharToASCII(String name){
         long value;
