@@ -41,11 +41,17 @@ public class TasksList implements Comparable<TasksList>{
     public void setPriority(int priority){ this.priority = priority; }
     public int getPriority(){ return priority; }
 
-    public void setMilli(String milli){
-        this.milli = milli;
+    public void setStartMilli(String milli){
+        this.startDate = milli;
     }
-    public String getMilli(){
-        return milli;
+    public String getStartMilli(){
+        return startMilli;
+    }
+    public void setEndMilli(String milli){
+        this.endMilli = milli;
+    }
+    public String getEndMilli(){
+        return endMilli;
     }
 
     public void setHeaderID(long headerid){
@@ -80,7 +86,8 @@ public class TasksList implements Comparable<TasksList>{
     int priority;
     long charToAscii;
     String startDate;
-    String milli;
+    String startMilli;
+    String endMilli;
     String endDate;
     String taskName;
     String taskListName;

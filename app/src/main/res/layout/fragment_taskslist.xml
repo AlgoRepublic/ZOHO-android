@@ -35,6 +35,9 @@
             android:layout_weight="3.6"
             android:orientation="horizontal"
             android:id="@+id/radioGroup">
+            <View android:layout_height="fill_parent"
+                android:layout_width="2dp"
+                android:background="#90909090"/>
             <RadioButton
                 android:layout_width="0dp"
                 android:layout_weight="1"
@@ -49,7 +52,11 @@
                 android:adjustViewBounds="true"
                 android:background="@drawable/sortmenu_radiobutton"
                 android:layout_gravity="center"
-                android:textSize="13dp" />
+                android:textSize="12dp" />
+
+            <View android:layout_height="fill_parent"
+                android:layout_width="2dp"
+                android:background="#90909090"/>
             <RadioButton
                 android:layout_width="0dp"
                 android:layout_weight="1"
@@ -64,8 +71,10 @@
                 android:adjustViewBounds="true"
                 android:background="@drawable/sortmenu_radiobutton"
                 android:layout_gravity="center"
-                android:textSize="13dp" />
-
+                android:textSize="12dp" />
+            <View android:layout_height="fill_parent"
+                android:layout_width="2dp"
+                android:background="#90909090"/>
             <RadioButton
                 android:layout_width="0dp"
                 android:layout_weight="1"
@@ -80,7 +89,10 @@
                 android:adjustViewBounds="true"
                 android:background="@drawable/sortmenu_radiobutton"
                 android:layout_gravity="center"
-                android:textSize="13dp" />
+                android:textSize="12dp" />
+            <View android:layout_height="fill_parent"
+                android:layout_width="2dp"
+                android:background="#90909090"/>
         </RadioGroup>
         <Button
             android:id="@+id/sort"

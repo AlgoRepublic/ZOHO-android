@@ -72,10 +72,10 @@ public class TasksListModel {
         public Integer projectID;
 
         @SerializedName("MilestoneID")
-        public String milestoneID;
+        public Integer milestoneID;
 
         @SerializedName("MilestoneName")
-        public Integer milestoneName;
+        public String milestoneName;
 
         @SerializedName("ResponsibleName")
         public String responsibleName;
