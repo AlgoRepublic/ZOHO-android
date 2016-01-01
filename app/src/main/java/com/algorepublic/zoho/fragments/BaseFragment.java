@@ -60,4 +60,24 @@ public class BaseFragment extends Fragment {
                 return getResources().getColor(android.R.color.darker_gray);
         }
     }
+    protected void callFragment(int containerId, Fragment fragment, String tag){
+        getActivity().getSupportFragmentManager()
+                .beginTransaction()
+                .add(containerId, fragment, tag)
+                .commit();
+    }
+    public void callFragmentWithBackStack(int containerId, Fragment fragment, String tag){
+        getActivity().getSupportFragmentManager()
+                .beginTransaction()
+                .replace(containerId, fragment, tag)
+                .addToBackStack(null)
+                .commit();
+    }
+    public void callFragmentWithReplace(int containerId, Fragment fragment, String tag){
+        getActivity().getSupportFragmentManager()
+                .beginTransaction()
+                .replace(containerId, fragment, tag)
+                .commit();
+
+    }
 }
