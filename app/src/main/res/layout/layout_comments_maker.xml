@@ -11,7 +11,7 @@
         android:padding="10dp"
         android:layout_height="wrap_content">
     <com.makeramen.roundedimageview.RoundedImageView
-        android:id="@+id/uer_image"
+        android:id="@+id/user_image"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:scaleType="fitXY"

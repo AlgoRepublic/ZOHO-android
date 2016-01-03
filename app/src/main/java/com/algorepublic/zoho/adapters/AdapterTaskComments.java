@@ -1,14 +1,19 @@
 package com.algorepublic.zoho.adapters;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.algorepublic.zoho.R;
+import com.algorepublic.zoho.fragments.FragmentTaskComment;
 import com.androidquery.AQuery;
+import com.bumptech.glide.Glide;
+import com.makeramen.roundedimageview.RoundedImageView;
 
 /**
  * Created by android on 1/1/16.
@@ -24,11 +29,11 @@ public class AdapterTaskComments extends BaseAdapter {
     }
 
     public int getCount() {
-        return 0;
+        return FragmentTaskComment.arrayList.size();
     }
 
     public Object getItem(int position) {
-        return null;
+        return FragmentTaskComment.arrayList.get(position);
     }
 
     public long getItemId(int position) {
@@ -40,19 +45,26 @@ public class AdapterTaskComments extends BaseAdapter {
         if (convertView == null) {
             convertView = l_Inflater.inflate(R.layout.layout_comments_maker, null);
             holder = new ViewHolder();
-            holder.txt_Comment = (TextView) convertView.findViewById(R.id.comment_text);
+            holder.taskComment = (TextView) convertView.findViewById(R.id.comment_text);
+            holder.userName = (TextView) convertView.findViewById(R.id.user_name);
+            holder.userImage = (RoundedImageView) convertView.findViewById(R.id.user_image);
+            holder.dateTime = (TextView) convertView.findViewById(R.id.comment_datetime);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-
         AQuery aq = new AQuery(convertView);
-//        holder.txt_Comment.setText(itemDetailsrrayList.get(position).getComment());
-//        aq.id(R.id.comment_image).image(itemDetailsrrayList.get(position).getAuthor());
+        holder.taskComment.setText(FragmentTaskComment.arrayList.get(position).getComment());
+        holder.userName.setText(FragmentTaskComment.arrayList.get(position).getUserName());
+        Glide.with(ctx).load(FragmentTaskComment.arrayList.get(position).getUserImage()).into(holder.userImage);
+        holder.dateTime.setText(FragmentTaskComment.arrayList.get(position).getDateTime());
 
         return convertView;
     }
     static class ViewHolder {
-        TextView txt_Comment;
+        TextView taskComment;
+        TextView userName;
+        RoundedImageView userImage;
+        TextView dateTime;
     }
 }
