@@ -91,11 +91,6 @@ public class ActivityTask extends BaseActivity{
         if(savedInstanceState==null){
             callFragmentWithReplace(R.id.edittask_container, TaskEditTitleFragment.newInstance(position), "TaskTitle");
         }
-       // mDatePickerFragment=new DatePickerFragment();
-//        if(savedInstanceState!=null){
-//            mDatePickerFragment.restoreStatesFromKey(savedInstanceState,"CALENDAR_SAVED_STATE");
-//        }
-
     }
     public void RadioGroup1(int checkedId) {
         switch (radioGroup1.indexOfChild(findViewById(checkedId))) {

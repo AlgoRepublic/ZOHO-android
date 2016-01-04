@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 23
-    buildToolsVersion '23.0.2'
+    buildToolsVersion '23.0.1'
 
     defaultConfig {
         applicationId "com.algorepublic.zoho"
@@ -20,13 +20,12 @@ android {
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
     compile project(':linkedin-sdk')
     compile project(':FlycoAnimation_Lib')
     compile project(':FlycoDialog_Lib')
     compile project(':datetimepicker')
-    //    compile 'com.nineoldandroids:library:2.4.0'
     compile project(':agendacalendarview')
     compile 'com.android.support:appcompat-v7:23.1.1'
     compile 'com.google.code.gson:gson:2.5'
@@ -38,7 +37,9 @@ dependencies {
     compile 'com.github.clans:fab:1.6.2'
     compile 'com.flaviofaria:kenburnsview:1.0.6'
     compile 'se.emilsjolander:stickylistheaders:2.5.1'
+    compile 'com.minimize.library:seekbar-compat:0.2.4'
+    compile 'com.makeramen:roundedimageview:2.2.1'
 }
-repositories {
-    maven { url 'http://clinker.47deg.com/nexus/content/groups/public' }
-}
+//repositories {
+//    maven { url 'http://clinker.47deg.com/nexus/content/groups/public' }
+//}

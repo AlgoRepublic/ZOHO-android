@@ -21,16 +21,11 @@ import com.algorepublic.zoho.adapters.TasksList;
 import com.algorepublic.zoho.services.CallBack;
 import com.algorepublic.zoho.services.TaskListService;
 import com.algorepublic.zoho.utils.BaseClass;
-import com.algorepublic.zoho.utils.Constants;
 import com.androidquery.AQuery;
-import com.flyco.dialog.entity.DialogMenuItem;
 import com.flyco.dialog.listener.OnOperItemClickL;
 import com.flyco.dialog.widget.ActionSheetDialog;
 
-import java.text.Collator;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
 
@@ -95,7 +90,7 @@ public class FragmentTasksList extends BaseFragment {
         setHasOptionsMenu(true);
         taskListService = new TaskListService(getActivity());
         taskListService.getTasksList(true, new CallBack(FragmentTasksList.this, "TasksList"));
-       listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 callFragmentWithBackStack(R.id.container,FragmentTaskDetail.newInstance(position),"TaskDetail");
@@ -116,7 +111,7 @@ public class FragmentTasksList extends BaseFragment {
         aq.id(R.id.up_coming).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            UpComing();
+                UpComing();
             }
         });
         aq.id(R.id.over_due).clicked(new View.OnClickListener() {
@@ -130,17 +125,17 @@ public class FragmentTasksList extends BaseFragment {
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 Log.e("id","/"+radioGroup.indexOfChild(view.findViewById(checkedId)));
                 switch (radioGroup.indexOfChild(view.findViewById(checkedId))) {
-                    case 0:
+                    case 1:
                         aq.id(R.id.all).textColor(getResources().getColor(R.color.colorAccent));
                         aq.id(R.id.up_coming).textColor(getResources().getColor(android.R.color.white));
                         aq.id(R.id.over_due).textColor(getResources().getColor(android.R.color.white));
                         break;
-                    case 1:
+                    case 3:
                         aq.id(R.id.up_coming).textColor(getResources().getColor(R.color.colorAccent));
                         aq.id(R.id.all).textColor(getResources().getColor(android.R.color.white));
                         aq.id(R.id.over_due).textColor(getResources().getColor(android.R.color.white));
                         break;
-                    case 2:
+                    case 5:
                         aq.id(R.id.over_due).textColor(getResources().getColor(R.color.colorAccent));
                         aq.id(R.id.all).textColor(getResources().getColor(android.R.color.white));
                         aq.id(R.id.up_coming).textColor(getResources().getColor(android.R.color.white));
@@ -209,20 +204,21 @@ public class FragmentTasksList extends BaseFragment {
     }
     public void GetGeneralList(){
         generalList.clear();
-            for (int loop = 0; loop < TasksListModel.getInstance().responseObject.size(); loop++) {
-                    TasksList tasksList = new TasksList();
-                    tasksList.setTaskName(TasksListModel.getInstance().responseObject.get(loop).title);
-                    tasksList.setMilli(DateMilli(TasksListModel.getInstance().responseObject.get(loop).endDate));
-                    tasksList.setHeaderID(DateHeader(TasksListModel.getInstance().responseObject.get(loop).endDate));
-                    tasksList.setProjectName(TasksListModel.getInstance().responseObject.get(loop).projectName);
-                    tasksList.setStartDate(DateFormatter(TasksListModel.getInstance().responseObject.get(loop).startDate));
-                    tasksList.setEndDate(DateFormatter(TasksListModel.getInstance().responseObject.get(loop).endDate));
-                    tasksList.setHeader(DateFormatter(TasksListModel.getInstance().responseObject.get(loop).endDate));
-                    tasksList.setPriority(TasksListModel.getInstance().responseObject.get(loop).priority);
-                    tasksList.setTaskListName(TasksListModel.getInstance().responseObject.get(loop).taskListName);
-                    tasksList.setCharToAscii(CharToASCII(TasksListModel.getInstance().responseObject.get(loop).taskListName));
-                    generalList.add(tasksList);
-            }
+        for (int loop = 0; loop < TasksListModel.getInstance().responseObject.size(); loop++) {
+            TasksList tasksList = new TasksList();
+            tasksList.setTaskName(TasksListModel.getInstance().responseObject.get(loop).title);
+            tasksList.setEndMilli(DateMilli(TasksListModel.getInstance().responseObject.get(loop).endDate));
+            tasksList.setStartMilli(DateMilli(TasksListModel.getInstance().responseObject.get(loop).startDate));
+            tasksList.setHeaderID(DateHeader(TasksListModel.getInstance().responseObject.get(loop).endDate));
+            tasksList.setProjectName(TasksListModel.getInstance().responseObject.get(loop).projectName);
+            tasksList.setStartDate(DateFormatter(TasksListModel.getInstance().responseObject.get(loop).startDate));
+            tasksList.setEndDate(DateFormatter(TasksListModel.getInstance().responseObject.get(loop).endDate));
+            tasksList.setHeader(DateFormatter(TasksListModel.getInstance().responseObject.get(loop).endDate));
+            tasksList.setPriority(TasksListModel.getInstance().responseObject.get(loop).priority);
+            tasksList.setTaskListName(TasksListModel.getInstance().responseObject.get(loop).taskListName);
+            tasksList.setCharToAscii(CharToASCII(TasksListModel.getInstance().responseObject.get(loop).taskListName));
+            generalList.add(tasksList);
+        }
         SortList();
     }
     public void UpComing(){
@@ -231,7 +227,8 @@ public class FragmentTasksList extends BaseFragment {
             if(Long.parseLong(DateMilli(TasksListModel.getInstance().responseObject.get(loop).startDate)) > System.currentTimeMillis()) {
                 TasksList tasksList = new TasksList();
                 tasksList.setTaskName(TasksListModel.getInstance().responseObject.get(loop).title);
-                tasksList.setMilli(DateMilli(TasksListModel.getInstance().responseObject.get(loop).startDate));
+                tasksList.setEndMilli(DateMilli(TasksListModel.getInstance().responseObject.get(loop).endDate));
+                tasksList.setStartMilli(DateMilli(TasksListModel.getInstance().responseObject.get(loop).startDate));
                 tasksList.setHeaderID(DateHeader(TasksListModel.getInstance().responseObject.get(loop).startDate));
                 tasksList.setProjectName(TasksListModel.getInstance().responseObject.get(loop).projectName);
                 tasksList.setStartDate(DateFormatter(TasksListModel.getInstance().responseObject.get(loop).startDate));
@@ -252,7 +249,8 @@ public class FragmentTasksList extends BaseFragment {
             if(Long.parseLong(DateMilli(TasksListModel.getInstance().responseObject.get(loop).endDate)) < System.currentTimeMillis()) {
                 TasksList tasksList = new TasksList();
                 tasksList.setTaskName(TasksListModel.getInstance().responseObject.get(loop).title);
-                tasksList.setMilli(DateMilli(TasksListModel.getInstance().responseObject.get(loop).endDate));
+                tasksList.setEndMilli(DateMilli(TasksListModel.getInstance().responseObject.get(loop).endDate));
+                tasksList.setStartMilli(DateMilli(TasksListModel.getInstance().responseObject.get(loop).startDate));
                 tasksList.setHeaderID(DateHeader(TasksListModel.getInstance().responseObject.get(loop).endDate));
                 tasksList.setProjectName(TasksListModel.getInstance().responseObject.get(loop).projectName);
                 tasksList.setStartDate(DateFormatter(TasksListModel.getInstance().responseObject.get(loop).startDate));
@@ -279,56 +277,20 @@ public class FragmentTasksList extends BaseFragment {
     };
     Comparator<TasksList> Date = new Comparator<TasksList>() {
         public int compare(TasksList lhs, TasksList rhs) {
-            return (Double.valueOf(lhs.getMilli()) > Double.valueOf(rhs.getMilli()) ? 1 : -1);
+            return (Double.valueOf(lhs.getEndMilli()) > Double.valueOf(rhs.getEndMilli()) ? 1 : -1);
         }
     };
     Comparator<TasksList> byUpComingDate = new Comparator<TasksList>() {
 
         public int compare(TasksList ord1, TasksList ord2) {
-            return (Long.parseLong(ord1.getMilli()) > System.currentTimeMillis() ? 1 : -1);     //descending
+            return (Long.parseLong(ord1.getStartMilli()) > System.currentTimeMillis() ? 1 : -1);     //descending
         }
     };
     Comparator<TasksList> byOverDate = new Comparator<TasksList>() {
 
         public int compare(TasksList ord1, TasksList ord2) {
-            return (Long.parseLong(ord1.getMilli()) < System.currentTimeMillis() ? -1 : 1);     //descending
+            return (Long.parseLong(ord1.getEndMilli()) < System.currentTimeMillis() ? -1 : 1);     //descending
         }
     };
-    public String DateFormatter(String date){
-        String a = date.replace("/Date(", "");
-        String b =  a.replace(")/", "");
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(Long.parseLong(b));
 
-        int mYear = calendar.get(Calendar.YEAR);
-        int mMonth = calendar.get(Calendar.MONTH);
-        int mDay = calendar.get(Calendar.DAY_OF_MONTH);
-        return (mDay+"/"+mMonth+"/"+mYear);
-    }
-    public long DateHeader(String date){
-        String a = date.replaceAll("\\D+", "");
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(Long.parseLong(a));
-
-        int mDay = calendar.get(Calendar.DAY_OF_MONTH);
-        return (mDay);
-    }
-    public String DateMilli(String date) {
-        String a = date.replaceAll("\\D+", "");
-        return a;
-    }
-    public long CharToASCII(String name){
-        long value;
-        if(name == null)
-        {
-            value =0;
-        }else {
-            StringBuilder ascii =  new StringBuilder();
-            for (int i = 0; i < name.length(); i++) {
-                 ascii.append(String.valueOf((int) name.charAt(i)));
-            }
-            value =  Long.parseLong(ascii.toString());
-        }
-        return value;
-    }
 }

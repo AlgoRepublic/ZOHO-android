@@ -1,7 +1,6 @@
 package com.algorepublic.zoho.adapters;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -113,7 +112,7 @@ public class AdapterTasksList extends BaseAdapter implements StickyListHeadersAd
         long type = 0;
         //return the first character of the country as ID because this is what headers are based upon
         if(baseClass.getSortType().equalsIgnoreCase("DueDate"))
-            type = Long.parseLong(FragmentTasksList.generalList.get(position).getMilli());
+            type = Long.parseLong(FragmentTasksList.generalList.get(position).getEndMilli());
         if(baseClass.getSortType().equalsIgnoreCase("Priority"))
             type = FragmentTasksList.generalList.get(position).getPriority();
         if(baseClass.getSortType().equalsIgnoreCase("Alphabetically"))

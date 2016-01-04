@@ -6,6 +6,11 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
+import android.text.format.DateFormat;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.concurrent.TimeUnit;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -78,6 +83,67 @@ public class BaseFragment extends Fragment {
                 .beginTransaction()
                 .replace(containerId, fragment, tag)
                 .commit();
+    }
+    public String DaysDifference(String milli){
+        int millis;String days;
+        if (System.currentTimeMillis()> Long.parseLong(milli)) {
+            millis = (int)TimeUnit.MILLISECONDS.toDays(System.currentTimeMillis() - Long.parseLong(milli));
+            days = "Late by "+millis+" day(s)";
+        }
+        else{
+            millis = (int)TimeUnit.MILLISECONDS.toDays(Long.parseLong(milli) - System.currentTimeMillis());
+            days = +millis+" day(s) Left";
+        }
+        return days;
+    }
+    public String DateFormatter(String date){
+        String a = date.replaceAll("\\D+", "");
+        long timeInMillis = Long.parseLong(a);
+        if(timeInMillis < 0 )
+            return "";
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(timeInMillis);
 
+        int mYear = calendar.get(Calendar.YEAR);
+        int mMonth = calendar.get(Calendar.MONTH) + 1;
+        int mDay = calendar.get(Calendar.DAY_OF_MONTH);
+        return (mMonth+"/"+mDay+"/"+mYear);
+    }
+    public long DateHeader(String date){
+        String a = date.replaceAll("\\D+", "");
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(Long.parseLong(a));
+        return calendar.get(Calendar.DAY_OF_MONTH);
+    }
+    public String GetDateTime(){
+        Calendar calendar = Calendar.getInstance();
+        int mYear = calendar.get(Calendar.YEAR);
+        int mMonth = calendar.get(Calendar.MONTH);
+        int mDay = calendar.get(Calendar.DAY_OF_MONTH);
+
+        SimpleDateFormat month_date = new SimpleDateFormat("MMM");
+        String month_name = month_date.format(calendar.getTime());
+        String delegate = "hh:mm aaa";
+        String time  = (String) DateFormat.format(delegate, Calendar.getInstance().getTime());
+
+        return (month_name+" "+mDay +", "+mYear+" "+time);
+    }
+    public String DateMilli(String date) {
+        String a = date.replaceAll("\\D+", "");
+        return a;
+    }
+    public long CharToASCII(String name){
+        long value;
+        if(name == null)
+        {
+            value =0;
+        }else {
+            StringBuilder ascii =  new StringBuilder();
+            for (int i = 0; i < name.length(); i++) {
+                ascii.append(String.valueOf((int) name.charAt(i)));
+            }
+            value =  Long.parseLong(ascii.toString());
+        }
+        return value;
     }
 }

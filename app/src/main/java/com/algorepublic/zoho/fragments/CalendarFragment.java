@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.algorepublic.zoho.Models.TasksListModel;
 import com.algorepublic.zoho.R;
@@ -97,9 +98,11 @@ public class CalendarFragment extends BaseFragment implements CalendarPickerCont
             TasksListModel.ResponseObject task = TasksListModel.getInstance().responseObject.get(i);
             Calendar startTime = Calendar.getInstance();
             startTime.setTimeInMillis(Long.parseLong(TasksListModel.getInstance().responseObject.get(i).startDate.replaceAll("\\D+","")));
+            startTime.add(Calendar.MONTH, 1);
 
             Calendar endTime = Calendar.getInstance();
             endTime.setTimeInMillis(Long.parseLong(TasksListModel.getInstance().responseObject.get(i).endDate.replaceAll("\\D+","")));
+            endTime.add(Calendar.MONTH, 1);
 
             BaseCalendarEvent event = new BaseCalendarEvent(task.title, task.projectName, "", getPriorityWiseColor(task.priority), startTime, endTime, true);
             eventList.add(event);
@@ -123,8 +126,16 @@ public class CalendarFragment extends BaseFragment implements CalendarPickerCont
         minDate.add(Calendar.YEAR, -2);
         minDate.set(Calendar.DAY_OF_MONTH, 1);
         maxDate.add(Calendar.YEAR, 2);
-
-        calendarView.init(getTasksList(), minDate, maxDate, Locale.getDefault(), this);
+        List<CalendarEvent> events = getTasksList();
+        if(events.size() != 0 ){
+            try {
+                calendarView.init(events, minDate, maxDate, Locale.getDefault(), this);
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+        else
+            Toast.makeText(getActivity(), "No tasks found", Toast.LENGTH_SHORT).show();
     }
 
     @Override
