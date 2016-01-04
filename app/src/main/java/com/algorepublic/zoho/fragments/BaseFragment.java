@@ -7,7 +7,6 @@ import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.text.format.DateFormat;
-import android.util.Log;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -86,35 +85,35 @@ public class BaseFragment extends Fragment {
                 .commit();
     }
     public String DaysDifference(String milli){
-        int millies;String days;
-        if (System.currentTimeMillis()> Long.parseLong(milli))
-        {
-            millies = (int)TimeUnit.MILLISECONDS.toDays(System.currentTimeMillis() - Long.parseLong(milli));
-            days = "Late by "+millies+" day(s)";
-        }else
-        {
-            millies = (int)TimeUnit.MILLISECONDS.toDays(Long.parseLong(milli) - System.currentTimeMillis());
-            days = +millies+" day(s) Left";
+        int millis;String days;
+        if (System.currentTimeMillis()> Long.parseLong(milli)) {
+            millis = (int)TimeUnit.MILLISECONDS.toDays(System.currentTimeMillis() - Long.parseLong(milli));
+            days = "Late by "+millis+" day(s)";
+        }
+        else{
+            millis = (int)TimeUnit.MILLISECONDS.toDays(Long.parseLong(milli) - System.currentTimeMillis());
+            days = +millis+" day(s) Left";
         }
         return days;
     }
     public String DateFormatter(String date){
         String a = date.replaceAll("\\D+", "");
+        long timeInMillis = Long.parseLong(a);
+        if(timeInMillis < 0 )
+            return "";
         Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(Long.parseLong(a));
+        calendar.setTimeInMillis(timeInMillis);
 
         int mYear = calendar.get(Calendar.YEAR);
-        int mMonth = calendar.get(Calendar.MONTH);
+        int mMonth = calendar.get(Calendar.MONTH) + 1;
         int mDay = calendar.get(Calendar.DAY_OF_MONTH);
-        return (mDay+"/"+mMonth+"/"+mYear);
+        return (mMonth+"/"+mDay+"/"+mYear);
     }
     public long DateHeader(String date){
         String a = date.replaceAll("\\D+", "");
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(Long.parseLong(a));
-
-        int mDay = calendar.get(Calendar.DAY_OF_MONTH);
-        return (mDay);
+        return calendar.get(Calendar.DAY_OF_MONTH);
     }
     public String GetDateTime(){
         Calendar calendar = Calendar.getInstance();

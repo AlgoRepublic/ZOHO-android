@@ -21,16 +21,11 @@ import com.algorepublic.zoho.adapters.TasksList;
 import com.algorepublic.zoho.services.CallBack;
 import com.algorepublic.zoho.services.TaskListService;
 import com.algorepublic.zoho.utils.BaseClass;
-import com.algorepublic.zoho.utils.Constants;
 import com.androidquery.AQuery;
-import com.flyco.dialog.entity.DialogMenuItem;
 import com.flyco.dialog.listener.OnOperItemClickL;
 import com.flyco.dialog.widget.ActionSheetDialog;
 
-import java.text.Collator;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
 
@@ -95,7 +90,7 @@ public class FragmentTasksList extends BaseFragment {
         setHasOptionsMenu(true);
         taskListService = new TaskListService(getActivity());
         taskListService.getTasksList(true, new CallBack(FragmentTasksList.this, "TasksList"));
-       listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 callFragmentWithBackStack(R.id.container,FragmentTaskDetail.newInstance(position),"TaskDetail");
@@ -116,7 +111,7 @@ public class FragmentTasksList extends BaseFragment {
         aq.id(R.id.up_coming).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            UpComing();
+                UpComing();
             }
         });
         aq.id(R.id.over_due).clicked(new View.OnClickListener() {
@@ -209,21 +204,21 @@ public class FragmentTasksList extends BaseFragment {
     }
     public void GetGeneralList(){
         generalList.clear();
-            for (int loop = 0; loop < TasksListModel.getInstance().responseObject.size(); loop++) {
-                    TasksList tasksList = new TasksList();
-                    tasksList.setTaskName(TasksListModel.getInstance().responseObject.get(loop).title);
-                    tasksList.setEndMilli(DateMilli(TasksListModel.getInstance().responseObject.get(loop).endDate));
-                    tasksList.setStartMilli(DateMilli(TasksListModel.getInstance().responseObject.get(loop).startDate));
-                    tasksList.setHeaderID(DateHeader(TasksListModel.getInstance().responseObject.get(loop).endDate));
-                    tasksList.setProjectName(TasksListModel.getInstance().responseObject.get(loop).projectName);
-                    tasksList.setStartDate(DateFormatter(TasksListModel.getInstance().responseObject.get(loop).startDate));
-                    tasksList.setEndDate(DateFormatter(TasksListModel.getInstance().responseObject.get(loop).endDate));
-                    tasksList.setHeader(DateFormatter(TasksListModel.getInstance().responseObject.get(loop).endDate));
-                    tasksList.setPriority(TasksListModel.getInstance().responseObject.get(loop).priority);
-                    tasksList.setTaskListName(TasksListModel.getInstance().responseObject.get(loop).taskListName);
-                    tasksList.setCharToAscii(CharToASCII(TasksListModel.getInstance().responseObject.get(loop).taskListName));
-                    generalList.add(tasksList);
-            }
+        for (int loop = 0; loop < TasksListModel.getInstance().responseObject.size(); loop++) {
+            TasksList tasksList = new TasksList();
+            tasksList.setTaskName(TasksListModel.getInstance().responseObject.get(loop).title);
+            tasksList.setEndMilli(DateMilli(TasksListModel.getInstance().responseObject.get(loop).endDate));
+            tasksList.setStartMilli(DateMilli(TasksListModel.getInstance().responseObject.get(loop).startDate));
+            tasksList.setHeaderID(DateHeader(TasksListModel.getInstance().responseObject.get(loop).endDate));
+            tasksList.setProjectName(TasksListModel.getInstance().responseObject.get(loop).projectName);
+            tasksList.setStartDate(DateFormatter(TasksListModel.getInstance().responseObject.get(loop).startDate));
+            tasksList.setEndDate(DateFormatter(TasksListModel.getInstance().responseObject.get(loop).endDate));
+            tasksList.setHeader(DateFormatter(TasksListModel.getInstance().responseObject.get(loop).endDate));
+            tasksList.setPriority(TasksListModel.getInstance().responseObject.get(loop).priority);
+            tasksList.setTaskListName(TasksListModel.getInstance().responseObject.get(loop).taskListName);
+            tasksList.setCharToAscii(CharToASCII(TasksListModel.getInstance().responseObject.get(loop).taskListName));
+            generalList.add(tasksList);
+        }
         SortList();
     }
     public void UpComing(){

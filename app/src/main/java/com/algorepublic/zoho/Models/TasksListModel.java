@@ -4,7 +4,6 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by android on 12/23/15.
@@ -51,16 +50,16 @@ public class TasksListModel {
         public String projectName;
 
         @SerializedName("ResponsibelID")
-        public Integer responsibelID;
+        public int responsibelID;
 
         @SerializedName("Priority")
-        public Integer priority;
+        public int priority;
 
         @SerializedName("OwnerID")
-        public Integer ownerID;
+        public int ownerID;
 
         @SerializedName("CreateStatusId")
-        public Integer createStatusId;
+        public int createStatusId;
 
         @SerializedName("StartDate")
         public String startDate;
@@ -69,7 +68,7 @@ public class TasksListModel {
         public String endDate;
 
         @SerializedName("ProjectID")
-        public Integer projectID;
+        public int projectID;
 
         @SerializedName("MilestoneID")
         public Integer milestoneID;
@@ -84,7 +83,7 @@ public class TasksListModel {
         public String ownerName;
 
         @SerializedName("IsAttach")
-        public Integer isAttach;
+        public int isAttach;
 
         @SerializedName("TaskListName")
         public String taskListName;

@@ -25,16 +25,16 @@
             android:theme="@style/ThemeOverlay.AppCompat.Dark">
             <ImageView
                 android:id="@+id/notification"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:src="@drawable/notification" />
 
             <ImageView
                 android:id="@+id/settings"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
                 android:src="@drawable/settings" />
