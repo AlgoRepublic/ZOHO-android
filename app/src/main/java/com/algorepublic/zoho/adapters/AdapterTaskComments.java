@@ -53,7 +53,7 @@ public class AdapterTaskComments extends BaseAdapter {
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-        AQuery aq = new AQuery(convertView);
+
         holder.taskComment.setText(FragmentTaskComment.arrayList.get(position).getComment());
         holder.userName.setText(FragmentTaskComment.arrayList.get(position).getUserName());
         Glide.with(ctx).load(FragmentTaskComment.arrayList.get(position).getUserImage()).into(holder.userImage);

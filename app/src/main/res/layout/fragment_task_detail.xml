@@ -62,6 +62,31 @@
                 android:layout_alignTop="@+id/task_name"
                 android:layout_centerHorizontal="true"
                 android:layout_height="30dp" />
+
+            <RelativeLayout
+                android:id="@+id/layout_assignee"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_alignParentBottom="true">
+                <ImageView
+                    android:id="@+id/assignee"
+                    android:layout_width="30dp"
+                    android:src="@drawable/nav_user"
+                    android:layout_alignParentLeft="true"
+                    android:layout_height="match_parent" />
+                <TextView
+                    android:id="@+id/assignee_name"
+                    android:layout_width="match_parent"
+                    android:text="dsds"
+                    android:ellipsize="end"
+                    android:paddingLeft="5dp"
+                    android:layout_centerVertical="true"
+                    android:layout_height="wrap_content"
+                    android:textSize="14sp"
+                    android:layout_toRightOf="@+id/assignee"
+                    android:textColor="@android:color/black"
+                    />
+            </RelativeLayout>
         </RelativeLayout>
         <RelativeLayout
             android:id="@+id/layout3"
