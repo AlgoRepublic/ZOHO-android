@@ -9,7 +9,7 @@
         android:id="@+id/listview_employees"
         android:layout_width="match_parent"
         android:choiceMode="singleChoice"
-        android:layout_height="200dp"
+        android:layout_height="match_parent"
         />
 
 </RelativeLayout>

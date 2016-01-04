@@ -27,13 +27,11 @@ public class LoginService extends BaseService {
         params.put("username", mEmail);
         params.put("password", mPassword);
         this.post(url, params, obj, UserModel.getInstance(), message);
-
         Log.e("LoginService", url);
     }
     public void GetById(String id,boolean message, CallBack obj){
         String url = Constants.GetUser_API+"?id="+id;
         this.get(url, obj, GetUserModel.getInstance(), message);
-
         Log.e("IDService", url);
     }
 }

@@ -35,9 +35,9 @@ import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
 /**
  * Created by android on 12/15/15.
  */
-public class FragmentTasksList extends BaseFragment {
+public class TasksListFragment extends BaseFragment {
 
-    static FragmentTasksList fragment;
+    static TasksListFragment fragment;
     TaskListService taskListService;
     StickyListHeadersAdapter adapterTasksList;
     AQuery aq;View view;
@@ -46,13 +46,13 @@ public class FragmentTasksList extends BaseFragment {
     BaseClass baseClass;
     StickyListHeadersListView listView;
 
-    public FragmentTasksList() {
+    public TasksListFragment() {
     }
 
     @SuppressWarnings("unused")
-    public static FragmentTasksList newInstance() {
+    public static TasksListFragment newInstance() {
         if (fragment==null) {
-            fragment = new FragmentTasksList();
+            fragment = new TasksListFragment();
         }
         return fragment;
     }
@@ -89,11 +89,11 @@ public class FragmentTasksList extends BaseFragment {
         baseClass = ((BaseClass) getActivity().getApplicationContext());
         setHasOptionsMenu(true);
         taskListService = new TaskListService(getActivity());
-        taskListService.getTasksList(true, new CallBack(FragmentTasksList.this, "TasksList"));
+        taskListService.getTasksList(true, new CallBack(TasksListFragment.this, "TasksList"));
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                callFragmentWithBackStack(R.id.container,FragmentTaskDetail.newInstance(position),"TaskDetail");
+                callFragmentWithBackStack(R.id.container, TaskDetailFragment.newInstance(position),"TaskDetail");
             }
         });
         aq.id(R.id.sort).clicked(new View.OnClickListener() {
@@ -207,6 +207,7 @@ public class FragmentTasksList extends BaseFragment {
         for (int loop = 0; loop < TasksListModel.getInstance().responseObject.size(); loop++) {
             TasksList tasksList = new TasksList();
             tasksList.setTaskName(TasksListModel.getInstance().responseObject.get(loop).title);
+            tasksList.setTaskID(TasksListModel.getInstance().responseObject.get(loop).taskID);
             tasksList.setEndMilli(DateMilli(TasksListModel.getInstance().responseObject.get(loop).endDate));
             tasksList.setStartMilli(DateMilli(TasksListModel.getInstance().responseObject.get(loop).startDate));
             tasksList.setHeaderID(DateHeader(TasksListModel.getInstance().responseObject.get(loop).endDate));
@@ -215,6 +216,7 @@ public class FragmentTasksList extends BaseFragment {
             tasksList.setEndDate(DateFormatter(TasksListModel.getInstance().responseObject.get(loop).endDate));
             tasksList.setHeader(DateFormatter(TasksListModel.getInstance().responseObject.get(loop).endDate));
             tasksList.setPriority(TasksListModel.getInstance().responseObject.get(loop).priority);
+            tasksList.setProgress(TasksListModel.getInstance().responseObject.get(loop).progress);
             tasksList.setTaskListName(TasksListModel.getInstance().responseObject.get(loop).taskListName);
             tasksList.setCharToAscii(CharToASCII(TasksListModel.getInstance().responseObject.get(loop).taskListName));
             generalList.add(tasksList);
@@ -226,6 +228,7 @@ public class FragmentTasksList extends BaseFragment {
         for (int loop = 0; loop < TasksListModel.getInstance().responseObject.size(); loop++) {
             if(Long.parseLong(DateMilli(TasksListModel.getInstance().responseObject.get(loop).startDate)) > System.currentTimeMillis()) {
                 TasksList tasksList = new TasksList();
+                tasksList.setTaskID(TasksListModel.getInstance().responseObject.get(loop).taskID);
                 tasksList.setTaskName(TasksListModel.getInstance().responseObject.get(loop).title);
                 tasksList.setEndMilli(DateMilli(TasksListModel.getInstance().responseObject.get(loop).endDate));
                 tasksList.setStartMilli(DateMilli(TasksListModel.getInstance().responseObject.get(loop).startDate));
@@ -235,6 +238,7 @@ public class FragmentTasksList extends BaseFragment {
                 tasksList.setHeader(DateFormatter(TasksListModel.getInstance().responseObject.get(loop).startDate));
                 tasksList.setEndDate(DateFormatter(TasksListModel.getInstance().responseObject.get(loop).endDate));
                 tasksList.setPriority(TasksListModel.getInstance().responseObject.get(loop).priority);
+                tasksList.setProgress(TasksListModel.getInstance().responseObject.get(loop).progress);
                 tasksList.setTaskListName(TasksListModel.getInstance().responseObject.get(loop).taskListName);
                 tasksList.setCharToAscii(CharToASCII(TasksListModel.getInstance().responseObject.get(loop).taskListName));
                 generalList.add(tasksList);
@@ -248,6 +252,7 @@ public class FragmentTasksList extends BaseFragment {
         for (int loop = 0; loop < TasksListModel.getInstance().responseObject.size(); loop++) {
             if(Long.parseLong(DateMilli(TasksListModel.getInstance().responseObject.get(loop).endDate)) < System.currentTimeMillis()) {
                 TasksList tasksList = new TasksList();
+                tasksList.setTaskID(TasksListModel.getInstance().responseObject.get(loop).taskID);
                 tasksList.setTaskName(TasksListModel.getInstance().responseObject.get(loop).title);
                 tasksList.setEndMilli(DateMilli(TasksListModel.getInstance().responseObject.get(loop).endDate));
                 tasksList.setStartMilli(DateMilli(TasksListModel.getInstance().responseObject.get(loop).startDate));
@@ -256,6 +261,7 @@ public class FragmentTasksList extends BaseFragment {
                 tasksList.setStartDate(DateFormatter(TasksListModel.getInstance().responseObject.get(loop).startDate));
                 tasksList.setEndDate(DateFormatter(TasksListModel.getInstance().responseObject.get(loop).endDate));
                 tasksList.setHeader(DateFormatter(TasksListModel.getInstance().responseObject.get(loop).endDate));
+                tasksList.setProgress(TasksListModel.getInstance().responseObject.get(loop).progress);
                 tasksList.setPriority(TasksListModel.getInstance().responseObject.get(loop).priority);
                 tasksList.setTaskListName(TasksListModel.getInstance().responseObject.get(loop).taskListName);
                 tasksList.setCharToAscii(CharToASCII(TasksListModel.getInstance().responseObject.get(loop).taskListName));
@@ -277,7 +283,7 @@ public class FragmentTasksList extends BaseFragment {
     };
     Comparator<TasksList> Date = new Comparator<TasksList>() {
         public int compare(TasksList lhs, TasksList rhs) {
-            return (Double.valueOf(lhs.getEndMilli()) > Double.valueOf(rhs.getEndMilli()) ? 1 : -1);
+            return (Double.valueOf(lhs.getEndMilli()).compareTo(Double.valueOf(rhs.getEndMilli())));
         }
     };
     Comparator<TasksList> byUpComingDate = new Comparator<TasksList>() {

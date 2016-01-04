@@ -5,10 +5,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.algorepublic.zoho.Models.TasksListModel;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.fragments.BaseFragment;
-import com.algorepublic.zoho.fragments.FragmentTasksList;
+import com.algorepublic.zoho.fragments.TasksListFragment;
 import com.androidquery.AQuery;
 
 /**
@@ -40,7 +39,7 @@ public class TaskEditTitleFragment extends BaseFragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_edit_title_tasks, container, false);
         aq= new AQuery(view);
-        aq.id(R.id.title_name).text(FragmentTasksList.generalList.get(position).getTaskName());
+        aq.id(R.id.title_name).text(TasksListFragment.generalList.get(position).getTaskName());
         return view;
     }
 }

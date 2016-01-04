@@ -1,12 +1,20 @@
 package com.algorepublic.zoho.adapters;
 
+import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 
+import com.algorepublic.zoho.Models.TaskAssigneeModel;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.utils.BaseClass;
 import com.androidquery.AQuery;
@@ -16,16 +24,14 @@ import java.util.ArrayList;
 /**
  * Created by android on 7/2/15.
  */
-public class AdaptePriority extends BaseAdapter {
+public class AdapteTaskAssignee extends BaseAdapter {
 
     Context ctx;
     AQuery aq;
     BaseClass baseClass;
     private LayoutInflater l_Inflater;
-    ArrayList<String> arraylist = new ArrayList<String>();
 
-    public AdaptePriority(Context context, ArrayList<String> results) {
-        arraylist.addAll(results);
+    public AdapteTaskAssignee(Context context) {
         l_Inflater = LayoutInflater.from(context);
         this.ctx = context;
         baseClass = ((BaseClass) ctx.getApplicationContext());
@@ -33,12 +39,12 @@ public class AdaptePriority extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return arraylist.size();
+        return TaskAssigneeModel.getInstance().responseObject.size();
     }
 
     @Override
     public Object getItem(int pos) {
-        return arraylist.get(pos);
+        return TaskAssigneeModel.getInstance().responseObject.get(pos);
     }
 
     @Override
@@ -48,24 +54,11 @@ public class AdaptePriority extends BaseAdapter {
 
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
-        ViewHolder holder;
         if (convertView == null) {
-            holder = new ViewHolder();
                 convertView = l_Inflater.inflate(R.layout.layout_assignee_row, null);
-
-            convertView.setTag(holder);
-        } else {
-            holder = (ViewHolder) convertView.getTag();
         }
         aq = new AQuery(convertView);
-
-        aq.id(R.id.assignee_name).text(arraylist.get(position));
+        aq.id(R.id.assignee_name).text(TaskAssigneeModel.getInstance().responseObject.get(position).firstName);
         return convertView;
     }
-
-    static class ViewHolder {
-        TextView assignee;
-    }
-
-
 }

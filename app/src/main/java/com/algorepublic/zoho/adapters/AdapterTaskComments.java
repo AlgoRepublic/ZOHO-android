@@ -1,17 +1,14 @@
 package com.algorepublic.zoho.adapters;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.algorepublic.zoho.R;
-import com.algorepublic.zoho.fragments.FragmentTaskComment;
-import com.androidquery.AQuery;
+import com.algorepublic.zoho.fragments.TaskCommentFragment;
 import com.bumptech.glide.Glide;
 import com.makeramen.roundedimageview.RoundedImageView;
 
@@ -29,11 +26,11 @@ public class AdapterTaskComments extends BaseAdapter {
     }
 
     public int getCount() {
-        return FragmentTaskComment.arrayList.size();
+        return TaskCommentFragment.arrayList.size();
     }
 
     public Object getItem(int position) {
-        return FragmentTaskComment.arrayList.get(position);
+        return TaskCommentFragment.arrayList.get(position);
     }
 
     public long getItemId(int position) {
@@ -54,10 +51,10 @@ public class AdapterTaskComments extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
 
-        holder.taskComment.setText(FragmentTaskComment.arrayList.get(position).getComment());
-        holder.userName.setText(FragmentTaskComment.arrayList.get(position).getUserName());
-        Glide.with(ctx).load(FragmentTaskComment.arrayList.get(position).getUserImage()).into(holder.userImage);
-        holder.dateTime.setText(FragmentTaskComment.arrayList.get(position).getDateTime());
+        holder.taskComment.setText(TaskCommentFragment.arrayList.get(position).getComment());
+        holder.userName.setText(TaskCommentFragment.arrayList.get(position).getUserName());
+        Glide.with(ctx).load(TaskCommentFragment.arrayList.get(position).getUserImage()).into(holder.userImage);
+        holder.dateTime.setText(TaskCommentFragment.arrayList.get(position).getDateTime());
 
         return convertView;
     }

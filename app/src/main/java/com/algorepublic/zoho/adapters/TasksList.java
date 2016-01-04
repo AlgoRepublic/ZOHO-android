@@ -6,6 +6,12 @@ package com.algorepublic.zoho.adapters;
 public class TasksList implements Comparable<TasksList>{
 
 
+    public void setTaskID(int taskID){
+        this.taskID = taskID;
+    }
+    public int getTaskID(){
+        return taskID;
+    }
     public void setTaskName(String taskName){
         this.taskName = taskName;
     }
@@ -38,6 +44,9 @@ public class TasksList implements Comparable<TasksList>{
     }
     public void setPriority(int priority){ this.priority = priority; }
     public int getPriority(){ return priority; }
+
+    public void setProgress(int progress){ this.progress = progress; }
+    public int getProgress(){ return progress; }
 
     public void setStartMilli(String milli){
         this.startDate = milli;
@@ -82,12 +91,14 @@ public class TasksList implements Comparable<TasksList>{
     long headerID;
     String header;
     int priority;
+    int progress;
     long charToAscii;
     String startDate;
     String startMilli;
     String endMilli;
     String endDate;
     String taskName;
+    int taskID;
     String taskListName;
     String projectName;
 }

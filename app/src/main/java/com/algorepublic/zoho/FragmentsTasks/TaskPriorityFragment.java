@@ -1,7 +1,5 @@
 package com.algorepublic.zoho.FragmentsTasks;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -9,7 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.algorepublic.zoho.R;
-import com.algorepublic.zoho.adapters.AdapteAssignEmployees;
+import com.algorepublic.zoho.adapters.AdapteTaskPriority;
 import com.algorepublic.zoho.fragments.BaseFragment;
 import com.androidquery.AQuery;
 
@@ -48,8 +46,7 @@ public class TaskPriorityFragment extends BaseFragment {
         arrayList.add("Low");
         arrayList.add("Medium");
         arrayList.add("High");
-        aq.id(R.id.listview_priority).adapter(new AdapteAssignEmployees(getActivity(),arrayList));
+        aq.id(R.id.listview_priority).adapter(new AdapteTaskPriority(getActivity(), arrayList));
         return view;
     }
-
 }

@@ -40,6 +40,4 @@ dependencies {
     compile 'com.minimize.library:seekbar-compat:0.2.4'
     compile 'com.makeramen:roundedimageview:2.2.1'
 }
-//repositories {
-//    maven { url 'http://clinker.47deg.com/nexus/content/groups/public' }
-//}
+

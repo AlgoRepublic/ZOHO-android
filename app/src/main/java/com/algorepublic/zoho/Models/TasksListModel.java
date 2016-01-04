@@ -39,6 +39,10 @@ public class TasksListModel {
 
     public class ResponseObject{
 
+        @SerializedName("ID")
+        @Expose
+        public Integer taskID;
+
         @SerializedName("Title")
         @Expose
         public String title;
@@ -54,6 +58,9 @@ public class TasksListModel {
 
         @SerializedName("Priority")
         public int priority;
+
+        @SerializedName("Progess")
+        public int progress;
 
         @SerializedName("OwnerID")
         public int ownerID;

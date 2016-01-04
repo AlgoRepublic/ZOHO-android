@@ -13,7 +13,7 @@ import android.widget.RadioGroup;
 
 import com.algorepublic.zoho.fragments.CalendarFragment;
 import com.algorepublic.zoho.fragments.FeedFragment;
-import com.algorepublic.zoho.fragments.FragmentTasksList;
+import com.algorepublic.zoho.fragments.TasksListFragment;
 import com.algorepublic.zoho.fragments.dummy.DummyContent;
 import com.algorepublic.zoho.utils.BaseClass;
 import com.androidquery.AQuery;
@@ -109,7 +109,7 @@ public class MainActivity extends BaseActivity
         switch (radioGroup2.indexOfChild(findViewById(checkedId))) {
             case 0:
                 getSupportActionBar().setTitle(getString(R.string.tasks));
-                getSupportFragmentManager().beginTransaction().replace(R.id.container, FragmentTasksList.newInstance(), "FragmentTasksList").commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.container, TasksListFragment.newInstance(), "TasksListFragment").commit();
                 aq.id(R.id.tasks_radioButton).textColor(getResources().getColor(R.color.colorAccent));
                 aq.id(R.id.documents_radioButton).textColor(getResources().getColor(android.R.color.white));
                 break;
@@ -176,7 +176,7 @@ public class MainActivity extends BaseActivity
 //            getSupportFragmentManager().beginTransaction().replace(R.id.container, FeedFragment.newInstance(1), "FeedFragment").commit();
 //        } else if (id == R.id.tasks) {
 //            getSupportActionBar().setTitle(getString(R.string.tasks));
-//            getSupportFragmentManager().beginTransaction().replace(R.id.container, FragmentTasksList.newInstance(), "FragmentTasksList").commit();
+//            getSupportFragmentManager().beginTransaction().replace(R.id.container, TasksListFragment.newInstance(), "TasksListFragment").commit();
 //        } else if (id == R.id.documents) {
 //            getSupportActionBar().setTitle(getString(R.string.documents));
 //        } else if (id == R.id.settings) {

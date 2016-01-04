@@ -48,7 +48,7 @@
                 android:text="sd"
                 android:layout_alignParentRight="true" />
             <TextView
-                android:id="@+id/comment_datetime"
+                android:id="@+id/project_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/blue"
@@ -83,6 +83,7 @@
         android:ellipsize="end"
         android:textSize="16sp"
         android:padding="10dp"
-        android:text="sd"
+        android:text="Comment"
+        android:background="@color/colorLightgray"
         android:layout_alignParentBottom="true" />
 </LinearLayout>

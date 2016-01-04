@@ -49,8 +49,8 @@ public abstract class BaseAlertDialog<T extends BaseAlertDialog<T>> extends Base
     protected TextView tv_btn_right;
     protected TextView tv_btn_middle;
     /** btn text(按钮内容) */
-    protected String btnLeftText = "取消";
-    protected String btnRightText = "确定";
+    protected String btnLeftText = "Cancel";
+    protected String btnRightText = "Yes";
     protected String btnMiddleText = "继续";
     /** btn textcolor(按钮字体颜色) */
     protected int leftBtnTextColor;
@@ -61,7 +61,7 @@ public abstract class BaseAlertDialog<T extends BaseAlertDialog<T>> extends Base
     protected float rightBtnTextSize_SP = 15f;
     protected float middleBtnTextSize_SP = 15f;
     /** btn press color(按钮点击颜色) */
-    protected int btnPressColor = Color.parseColor("#E3E3E3");// #85D3EF,#ffcccccc,#E3E3E3
+    protected int btnPressColor = Color.parseColor("#3C3C3E");// #85D3EF,#ffcccccc,#E3E3E3
     /** left btn click listener(左按钮接口) */
     protected OnBtnClickL onBtnLeftClickL;
     /** right btn click listener(右按钮接口) */
@@ -72,7 +72,7 @@ public abstract class BaseAlertDialog<T extends BaseAlertDialog<T>> extends Base
     /** corner radius,dp(圆角程度,单位dp) */
     protected float cornerRadius_DP = 3;
     /** background color(背景颜色) */
-    protected int bgColor = Color.parseColor("#ffffff");
+    protected int bgColor = android.R.color.white;
 
     /**
      * method execute order:
@@ -86,6 +86,7 @@ public abstract class BaseAlertDialog<T extends BaseAlertDialog<T>> extends Base
         widthScale(0.88f);
 
         ll_container = new LinearLayout(context);
+        ll_container.setBackgroundColor(getContext().getResources().getColor(android.R.color.white));
         ll_container.setOrientation(LinearLayout.VERTICAL);
 
         /** title */
