@@ -9,7 +9,15 @@ import com.algorepublic.zoho.FragmentsTasks.TaskAttachmentFragment;
 import com.algorepublic.zoho.FragmentsTasks.TaskEditTitleFragment;
 import com.algorepublic.zoho.FragmentsTasks.TaskPriorityFragment;
 import com.algorepublic.zoho.FragmentsTasks.TaskScheduleFragment;
+import com.algorepublic.zoho.adapters.TasksList;
+import com.algorepublic.zoho.fragments.TasksListFragment;
 import com.androidquery.AQuery;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.File;
+import java.util.ArrayList;
 
 
 public class ActivityTask extends BaseActivity{
@@ -17,14 +25,19 @@ public class ActivityTask extends BaseActivity{
     RadioGroup radioGroup1,radioGroup2;
     int position;
     RadioGroup.OnCheckedChangeListener changeListener1,changeListener2;
+    public  static TasksList tasksObj;
+    public static ArrayList<File> filesList;
+    public static ArrayList<Integer> assigneeList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_task);
         Bundle extras = getIntent().getExtras();
+        tasksObj= new TasksList();
         if (extras != null) {
             position = Integer.parseInt(extras.get("pos").toString());
+            tasksObj = TasksListFragment.generalList.get(position);
         }
 
         aq =new AQuery(this);
@@ -58,7 +71,7 @@ public class ActivityTask extends BaseActivity{
                 callFragmentWithReplace(R.id.edittask_container, TaskEditTitleFragment.newInstance(position), "TaskTitle");
             }
         });
-        aq.id(R.id.schedule_radioButton).clicked(new View.OnClickListener() {
+        aq.id(R.id.category_radioButton).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 callFragmentWithReplace(R.id.edittask_container, TaskAttachmentFragment.newInstance(), "TaskAttachment");
@@ -148,5 +161,17 @@ public class ActivityTask extends BaseActivity{
         aq.id(R.id.employees_radioButton).textColor(getResources().getColor(android.R.color.white));
         aq.id(R.id.schedule_radioButton).textColor(getResources().getColor(android.R.color.white));
         aq.id(R.id.priority_radioButton).textColor(getResources().getColor(android.R.color.white));
+    }
+
+    public String  GetJsonObject() throws JSONException {
+
+        JSONObject object = new JSONObject();
+
+//        object.put("email", baseClass.getFirstName() + "@example.com");
+//        object.put("first_name", baseClass.getFirstName());
+//        object.put("last_name", baseClass.getLastName());
+//        object.put("password", "321321322");
+
+        return object.toString();
     }
 }

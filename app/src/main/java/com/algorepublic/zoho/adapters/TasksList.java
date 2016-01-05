@@ -49,7 +49,7 @@ public class TasksList implements Comparable<TasksList>{
     public int getProgress(){ return progress; }
 
     public void setStartMilli(String milli){
-        this.startDate = milli;
+        this.startMilli = milli;
     }
     public String getStartMilli(){
         return startMilli;

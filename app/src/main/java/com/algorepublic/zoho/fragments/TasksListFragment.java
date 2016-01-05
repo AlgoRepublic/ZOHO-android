@@ -273,12 +273,12 @@ public class TasksListFragment extends BaseFragment {
     }
     Comparator<TasksList> byPriority = new Comparator<TasksList>() {
         public int compare(TasksList lhs, TasksList rhs) {
-            return (Double.valueOf(lhs.getPriority()) < Double.valueOf(rhs.getPriority()) ? 1 : -1);
+            return (Double.valueOf(rhs.getPriority()).compareTo(Double.valueOf(lhs.getPriority())));
         }
     };
     Comparator<TasksList> byTaskList = new Comparator<TasksList>() {
         public int compare(TasksList lhs, TasksList rhs) {
-            return (Double.valueOf(lhs.getCharToAscii()) > Double.valueOf(rhs.getCharToAscii()) ? 1 : -1);
+            return (Double.valueOf(lhs.getCharToAscii()).compareTo(Double.valueOf(rhs.getCharToAscii())));
         }
     };
     Comparator<TasksList> Date = new Comparator<TasksList>() {
@@ -289,13 +289,13 @@ public class TasksListFragment extends BaseFragment {
     Comparator<TasksList> byUpComingDate = new Comparator<TasksList>() {
 
         public int compare(TasksList ord1, TasksList ord2) {
-            return (Long.parseLong(ord1.getStartMilli()) > System.currentTimeMillis() ? 1 : -1);     //descending
+            return (Double.valueOf(ord1.getStartMilli()).compareTo(Double.valueOf(String.valueOf(System.currentTimeMillis()))));     //descending
         }
     };
     Comparator<TasksList> byOverDate = new Comparator<TasksList>() {
 
         public int compare(TasksList ord1, TasksList ord2) {
-            return (Long.parseLong(ord1.getEndMilli()) < System.currentTimeMillis() ? -1 : 1);     //descending
+            return (Double.valueOf(ord1.getEndMilli()).compareTo(Double.valueOf(String.valueOf(System.currentTimeMillis()))));     //descending
         }
     };
 

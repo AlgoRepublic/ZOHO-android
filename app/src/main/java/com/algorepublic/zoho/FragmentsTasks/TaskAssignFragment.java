@@ -10,7 +10,7 @@ import android.widget.Toast;
 
 import com.algorepublic.zoho.Models.TaskAssigneeModel;
 import com.algorepublic.zoho.R;
-import com.algorepublic.zoho.adapters.AdapteTaskAssignee;
+import com.algorepublic.zoho.adapters.AdapterTaskAssignee;
 import com.algorepublic.zoho.fragments.BaseFragment;
 import com.algorepublic.zoho.services.CallBack;
 import com.algorepublic.zoho.services.TaskListService;
@@ -52,7 +52,7 @@ public class TaskAssignFragment extends BaseFragment {
     public void TaskAssignee(Object caller, Object model) {
         TaskAssigneeModel.getInstance().setList((TaskAssigneeModel) model);
         if (TaskAssigneeModel.getInstance().responseCode == 100) {
-            aq.id(R.id.listview_employees).adapter(new AdapteTaskAssignee(getActivity()));
+            aq.id(R.id.listview_employees).adapter(new AdapterTaskAssignee(getActivity()));
         }
         else
         {

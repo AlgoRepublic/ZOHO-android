@@ -2,6 +2,7 @@ package com.algorepublic.zoho.fragments;
 
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
@@ -39,6 +40,7 @@ public class TaskDetailFragment extends BaseFragment {
     static int position;
     int Progress,opt;
     TaskListService service;
+    int click=0;
     SeekBarCompat seekBarCompat;
 
     public TaskDetailFragment() {
@@ -107,24 +109,26 @@ public class TaskDetailFragment extends BaseFragment {
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-                service.updateTaskProgress(TasksListFragment.generalList.get(position).getTaskID()
-        ,Progress,true,new CallBack(TaskDetailFragment.this,"UpdateProgress"));
             }
         });
-
+        aq.id(R.id.comment).clicked(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+            callFragmentWithBackStack(R.id.container, TaskCommentFragment.newInstance(position),"TaskComment");
+            }
+        });
         aq.id(R.id.delete).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                service.deleteTask(TasksListFragment.generalList.get(position).getTaskID()
-                        , true, new CallBack(TaskDetailFragment.this, "DeleteTask"));
+                click = 1;
+                NormalDialogCustomAttr("Delete Task?");
             }
         });
         aq.id(R.id.mark_as_done).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                NormalDialogCustomAttr();
-//                service.completeTask(TasksListFragment.generalList.get(position).getTaskID()
-//                        ,opt, true, new CallBack(TaskDetailFragment.this, "CompleteTask"));
+                click = 2;
+                NormalDialogCustomAttr("Mark as done?");
             }
         });
         return view;
@@ -132,7 +136,7 @@ public class TaskDetailFragment extends BaseFragment {
     public void UpdateProgress(Object caller, Object model) {
         GeneralModel.getInstance().setList((GeneralModel) model);
         if (GeneralModel.getInstance().responseCode.equalsIgnoreCase("100")) {
-            Snackbar.make(getView(), "Progress Updated", Snackbar.LENGTH_SHORT).show();
+            seekBarCompat.setProgress(100);
         }
         else
         {
@@ -153,7 +157,8 @@ public class TaskDetailFragment extends BaseFragment {
         GeneralModel.getInstance().setList((GeneralModel) model);
         if (GeneralModel.getInstance().responseCode.equalsIgnoreCase("100")) {
             Snackbar.make(getView(), "Task done", Snackbar.LENGTH_SHORT).show();
-            seekBarCompat.setProgress(100);
+            service.updateTaskProgress(TasksListFragment.generalList.get(position).getTaskID()
+                    , Progress, true, new CallBack(TaskDetailFragment.this, "UpdateProgress"));
         }
         else
         {
@@ -172,22 +177,22 @@ public class TaskDetailFragment extends BaseFragment {
         if(TasksListFragment.generalList.get(position).getPriority()==3)
             aq.id(R.id.textView).text("High");
     }
-    private void NormalDialogCustomAttr() {
+    private void NormalDialogCustomAttr(String content) {
         final NormalDialog dialog = new NormalDialog(getActivity());
         dialog.isTitleShow(false)//
                 .bgColor(getResources().getColor(R.color.colorLightgray))//
                 .cornerRadius(5)//
-                .content("Delete Task?")//
+                .content(content)//
                 .contentGravity(Gravity.CENTER)//
                 .contentTextColor(getResources().getColor(R.color.colorPrimaryDark))//
                 .dividerColor(getResources().getColor(R.color.colorPrimary))//
                 .btnTextSize(15.5f, 15.5f)//
                         .btnTextColor(getResources().getColor(R.color.colorPrimaryDark)
                                 , getResources().getColor(R.color.colorPrimaryDark))//
-                                .btnPressColor(getResources().getColor(R.color.colorDarkgray))//
-                                        .widthScale(0.85f)//
-                                        .showAnim(new BounceLeftEnter())//
-                                        .dismissAnim(new SlideRightExit())//
+                .btnPressColor(getResources().getColor(R.color.colorDarkgray))//
+                .widthScale(0.85f)//
+                .showAnim(new BounceLeftEnter())//
+                .dismissAnim(new SlideRightExit())//
                 .show();
 
         dialog.setOnBtnClickL(
@@ -201,6 +206,16 @@ public class TaskDetailFragment extends BaseFragment {
                     @Override
                     public void onBtnClick() {
                         dialog.dismiss();
+                        if(click==1)
+                        {
+                            service.deleteTask(TasksListFragment.generalList.get(position).getTaskID()
+                                    , true, new CallBack(TaskDetailFragment.this, "DeleteTask"));
+                        }
+                        if (click==2)
+                        {
+                            service.completeTask(TasksListFragment.generalList.get(position).getTaskID()
+                                    , opt, true, new CallBack(TaskDetailFragment.this, "CompleteTask"));
+                        }
                     }
                 });
     }

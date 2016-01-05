@@ -5,9 +5,10 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 
 import com.algorepublic.zoho.R;
-import com.algorepublic.zoho.adapters.AdapteTaskPriority;
+import com.algorepublic.zoho.adapters.AdapterTaskPriority;
 import com.algorepublic.zoho.fragments.BaseFragment;
 import com.androidquery.AQuery;
 
@@ -19,6 +20,7 @@ import java.util.ArrayList;
 public class TaskPriorityFragment extends BaseFragment {
 
     static TaskPriorityFragment fragment;
+    AdapterTaskPriority adapter;
     AQuery aq;
 
 
@@ -46,7 +48,15 @@ public class TaskPriorityFragment extends BaseFragment {
         arrayList.add("Low");
         arrayList.add("Medium");
         arrayList.add("High");
-        aq.id(R.id.listview_priority).adapter(new AdapteTaskPriority(getActivity(), arrayList));
+        aq.id(R.id.listview_priority).itemClicked(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                adapter.setSelectedIndex(position);
+                adapter.notifyDataSetChanged();
+            }
+        });
+        adapter = new AdapterTaskPriority(getActivity(), arrayList);
+        aq.id(R.id.listview_priority).adapter(adapter);
         return view;
     }
 }

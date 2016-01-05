@@ -66,7 +66,7 @@ public class TaskCommentFragment extends BaseFragment {
         adapter = new AdapterTaskComments(getActivity());
         listView.setAdapter(adapter);
         baseClass = ((BaseClass) getActivity().getApplicationContext());
-       service.getCommentsByTask(TasksListFragment.generalList.get(position).getTaskID(),
+       service.getCommentsByTask(4,
                true,new CallBack(TaskCommentFragment.this,"TaskComments"));
         aq.id(R.id.comment_user).getTextView().setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override

@@ -1,20 +1,12 @@
 package com.algorepublic.zoho.adapters;
 
-import android.app.Activity;
-import android.app.Dialog;
 import android.content.Context;
-import android.database.sqlite.SQLiteDatabase;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.PopupWindow;
 import android.widget.TextView;
 
-import com.algorepublic.zoho.Models.TaskAssigneeModel;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.utils.BaseClass;
 import com.androidquery.AQuery;
@@ -24,14 +16,17 @@ import java.util.ArrayList;
 /**
  * Created by android on 7/2/15.
  */
-public class AdapteTaskAssignee extends BaseAdapter {
+public class AdapterTaskPriority extends BaseAdapter {
 
     Context ctx;
     AQuery aq;
     BaseClass baseClass;
+    int selectedIndex =-1;
     private LayoutInflater l_Inflater;
+    ArrayList<String> arraylist = new ArrayList<String>();
 
-    public AdapteTaskAssignee(Context context) {
+    public AdapterTaskPriority(Context context, ArrayList<String> results) {
+        arraylist.addAll(results);
         l_Inflater = LayoutInflater.from(context);
         this.ctx = context;
         baseClass = ((BaseClass) ctx.getApplicationContext());
@@ -39,12 +34,12 @@ public class AdapteTaskAssignee extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return TaskAssigneeModel.getInstance().responseObject.size();
+        return arraylist.size();
     }
 
     @Override
     public Object getItem(int pos) {
-        return TaskAssigneeModel.getInstance().responseObject.get(pos);
+        return arraylist.get(pos);
     }
 
     @Override
@@ -55,10 +50,22 @@ public class AdapteTaskAssignee extends BaseAdapter {
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
-                convertView = l_Inflater.inflate(R.layout.layout_assignee_row, null);
+                convertView = l_Inflater.inflate(R.layout.layout_priorty_row, null);
         }
         aq = new AQuery(convertView);
-        aq.id(R.id.assignee_name).text(TaskAssigneeModel.getInstance().responseObject.get(position).firstName);
+        if(selectedIndex == position)
+        {
+            aq.id(R.id.priority_checkbox).checked(true);
+        }
+        else
+        {
+            aq.id(R.id.priority_checkbox).checked(false);
+        }
+        aq.id(R.id.priority).text(arraylist.get(position));
         return convertView;
+    }
+    public void setSelectedIndex(int index)
+    {
+        selectedIndex = index;
     }
 }

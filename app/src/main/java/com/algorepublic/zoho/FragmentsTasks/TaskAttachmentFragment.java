@@ -27,10 +27,13 @@ import android.webkit.MimeTypeMap;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.algorepublic.zoho.R;
+import com.algorepublic.zoho.adapters.TasksList;
 import com.algorepublic.zoho.fragments.BaseFragment;
 import com.androidquery.AQuery;
 import com.bumptech.glide.Glide;
@@ -57,7 +60,7 @@ public class TaskAttachmentFragment extends BaseFragment {
     private static final int TAKE_PICTURE = 1;
     public static final int RESULT_GALLERY = 2;
     public static final int PICK_File = 3;
-    String imageUri;
+    int Tag = 0;
     public TaskAttachmentFragment() {
     }
     @SuppressWarnings("unused")
@@ -85,14 +88,7 @@ public class TaskAttachmentFragment extends BaseFragment {
         return view;
     }
     private void CallForAttachments() {
-        ArrayList<DialogMenuItem> menuItems = new ArrayList<>();
-        DialogMenuItem dialogMenuItem1 = new DialogMenuItem("Camera",R.drawable.camera);
-        DialogMenuItem dialogMenuItem2 = new DialogMenuItem("Gallery",R.drawable.ic_menu_gallery);
-        DialogMenuItem dialogMenuItem3 = new DialogMenuItem("Others",R.drawable.ic_menu_gallery);
-        menuItems.add(dialogMenuItem1);
-        menuItems.add(dialogMenuItem2);
-        menuItems.add(dialogMenuItem3);
-
+        String[] menuItems = {"Camera","Gallery","Others"};
         final ActionSheetDialog dialog = new ActionSheetDialog(getActivity(),menuItems, getView());
         dialog.isTitleShow(false).show();
         dialog.setOnOperItemClickL(new OnOperItemClickL() {
@@ -164,15 +160,27 @@ public class TaskAttachmentFragment extends BaseFragment {
 
     private void showFileInList(Uri file,String fileName) {
         try {
-                final LinearLayout item = (LinearLayout) aq
+                final LinearLayout linearLayout = (LinearLayout) aq
                         .id(R.id.images_layout).visible().getView();
                 final View child = getActivity().getLayoutInflater().inflate(
                         R.layout.layout_task_attachment, null);
-                ImageView image = (ImageView) child.findViewById(R.id.file_added);
+                ImageView addFile = (ImageView) child.findViewById(R.id.file_added);
+                ImageView deleteFile = (ImageView) child.findViewById(R.id.file_delete);
                 TextView text = (TextView) child.findViewById(R.id.file_title);
-                Glide.with(this).load(file).into(image);
+                Glide.with(this).load(file).into(addFile);
                 text.setText(fileName);
-                item.addView(child);
+                deleteFile.setTag(Tag);
+            child.setId(Tag);
+            Tag++;
+            linearLayout.addView(child);
+            deleteFile.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    RelativeLayout layout = (RelativeLayout) linearLayout.findViewById(Integer
+                            .parseInt(v.getTag().toString()));
+                    linearLayout.removeView(layout);
+                }
+            });
             } catch (Exception e) {
                 Toast.makeText(getActivity(), "Failed to load",
                         Toast.LENGTH_SHORT).show();
