@@ -60,12 +60,11 @@ public class BaseService{
                         Object obj = model;
                         if (json != null) {
                             _.log("JSON::"+ json.toString());
-                            if(validateToken(json))
-                            {
+                            if(validateToken(json)) {
                                 return;
                             }
                             Gson gson = new Gson();
-                            obj = gson.fromJson(json.toString(),obj.getClass());
+                            obj = gson.fromJson(json.toString(), obj.getClass());
 
                             if (progressBar != null && showProgress)  {
                                 progressBar.setVisibility(View.GONE);
@@ -91,7 +90,7 @@ public class BaseService{
 //                    mAlertDialogBuilder.show();
 //
 //                }
-                NetworkUtil.showStatusDialog(context, context.getResources().getString(R.string.app_name), "" + json.getJSONObject("response").getString("msg").toString(), true);
+                NetworkUtil.showStatusDialog(context, context.getResources().getString(R.string.app_name), "" + json.getJSONObject("response").getString("msg"), true);
                 if(progressBar != null){
                     progressBar.setVisibility(View.GONE);
                 }

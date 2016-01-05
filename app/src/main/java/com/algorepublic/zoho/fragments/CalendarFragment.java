@@ -86,7 +86,7 @@ public class CalendarFragment extends BaseFragment implements CalendarPickerCont
 //        initCalendarView();
         if(TasksListModel.getInstance().responseObject.isEmpty()){
             TaskListService service = new TaskListService(getActivity());
-            service.getTasksList(true, new CallBack(this, "TasksList"));
+            service.getTasksList(true, new CallBack(CalendarFragment.this, "TasksList"));
         }else{
             initCalendarView();
         }
@@ -97,15 +97,14 @@ public class CalendarFragment extends BaseFragment implements CalendarPickerCont
         for(int i = 0; i < TasksListModel.getInstance().responseObject.size(); i++) {
             TasksListModel.ResponseObject task = TasksListModel.getInstance().responseObject.get(i);
             Calendar startTime = Calendar.getInstance();
-            startTime.setTimeInMillis(Long.parseLong(TasksListModel.getInstance().responseObject.get(i).startDate.replaceAll("\\D+","")));
-            startTime.add(Calendar.MONTH, 1);
+            long startInMillis = Long.parseLong(DateMilli(task.startDate));
+            startTime.setTimeInMillis(startInMillis);
 
             Calendar endTime = Calendar.getInstance();
-            endTime.setTimeInMillis(Long.parseLong(TasksListModel.getInstance().responseObject.get(i).endDate.replaceAll("\\D+","")));
-            endTime.add(Calendar.MONTH, 1);
+            long endInMillis = Long.parseLong(DateMilli(task.endDate));
+            endTime.setTimeInMillis(endInMillis);
 
-            BaseCalendarEvent event = new BaseCalendarEvent(task.title, task.projectName, "", getPriorityWiseColor(task.priority), startTime, endTime, true);
-            eventList.add(event);
+            eventList.add(new BaseCalendarEvent(task.title, task.projectName, "", getPriorityWiseColor(task.priority), startTime, endTime, true));
         }
         return eventList;
     }
@@ -123,7 +122,7 @@ public class CalendarFragment extends BaseFragment implements CalendarPickerCont
         Calendar minDate = Calendar.getInstance();
         Calendar maxDate = Calendar.getInstance();
 
-        minDate.add(Calendar.YEAR, -2);
+        minDate.add(Calendar.MONTH, -11);
         minDate.set(Calendar.DAY_OF_MONTH, 1);
         maxDate.add(Calendar.YEAR, 2);
         List<CalendarEvent> events = getTasksList();
