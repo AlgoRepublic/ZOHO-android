@@ -204,7 +204,7 @@ public class ActivityTask extends BaseActivity{
 
                 httpClient = new GenericHttpClient();
                 response = httpClient.postAddTask(Constants.CreateTask_API
-                        , assigneeList,filesList,GetJsonObject());
+                        , assigneeList,filesList);
             } catch (IOException e) {
                 e.printStackTrace();
             } catch (JSONException e) {
@@ -238,12 +238,12 @@ public class ActivityTask extends BaseActivity{
         if(getIntent().getExtras()!=null) {
             object.put("ID", tasksObj.getTaskID());
         }
-        object.put("CreateBy", 1);
-        object.put("UpdateBy", 1);
-        object.put("OwnerID", 1);
-        object.put("Priority", 1);
-        object.put("Title", baseClass.db.getString("TaskName"));
-        object.put("ProjectID", 4);
+        BaseClass.db.putInt("CreateBy", 1);
+        BaseClass.db.putInt("UpdateBy", 1);
+        BaseClass.db.putInt("OwnerID", 1);
+        BaseClass.db.putInt("Priority", 1);
+        BaseClass.db.putString("Title", baseClass.db.getString("TaskName"));
+        BaseClass.db.putInt("ProjectID", 4);
         Log.e("task",object.toString());
         return object.toString();
     }

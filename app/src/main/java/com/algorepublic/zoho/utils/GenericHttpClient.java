@@ -37,7 +37,7 @@ public class GenericHttpClient {
         return result.toArray(new Header[]{});
     }
 
-    public String postAddTask(String url,ArrayList<Integer> assignee,ArrayList<File> files ,String obj) throws IOException {
+    public String postAddTask(String url,ArrayList<Integer> assignee,ArrayList<File> files ) throws IOException {
 
         HttpClient hc = new DefaultHttpClient();
         String message =null;
@@ -52,7 +52,12 @@ public class GenericHttpClient {
                 Log.e("Assignee","/"+i);
                 mpEntity.addPart("taskResponsible["+i+"]", new StringBody(Integer.toString(assignee.get(i))));
             }
-            mpEntity.addPart("task", new StringBody(obj));
+            mpEntity.addPart("CreateBy",new StringBody(Integer.toString(BaseClass.db.getInt("CreateBy"))));
+            mpEntity.addPart("UpdateBy",new StringBody(Integer.toString(BaseClass.db.getInt("UpdateBy"))));
+            mpEntity.addPart("OwnerID", new StringBody(Integer.toString(BaseClass.db.getInt("OwnerID"))));
+            mpEntity.addPart("Priority", new StringBody(Integer.toString(BaseClass.db.getInt("Priority"))));
+            mpEntity.addPart("ProjectID", new StringBody(Integer.toString(4)));
+            mpEntity.addPart("Title", new StringBody(BaseClass.db.getString("TaskName")));
             p.setEntity(mpEntity);
             HttpResponse resp = hc.execute(p);
             if (resp != null) {
