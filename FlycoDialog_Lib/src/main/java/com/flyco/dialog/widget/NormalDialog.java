@@ -20,11 +20,11 @@ public class NormalDialog extends BaseAlertDialog<NormalDialog> {
     /** horizontal line above btns */
     private View v_line_horizontal;
     /** title underline color(标题下划线颜色) */
-    private int titleLineColor = Color.parseColor("#ffffff");
+    private int titleLineColor = Color.parseColor("#61AEDC");
     /** title underline height(标题下划线高度) */
     private float titleLineHeight_DP = 1f;
     /** btn divider line color(对话框之间的分割线颜色(水平+垂直)) */
-    private int dividerColor = Color.parseColor("#3C3C3E");
+    private int dividerColor = Color.parseColor("#DCDCDC");
 
     public static final int STYLE_ONE = 0;
     public static final int STYLE_TWO = 1;
@@ -34,13 +34,13 @@ public class NormalDialog extends BaseAlertDialog<NormalDialog> {
         super(context);
 
         /** default value*/
-//        titleTextColor = Color.parseColor("#61AEDC");
-//        titleTextSize_SP = 22f;
-//        contentTextColor = Color.parseColor("#383838");
-//        contentTextSize_SP = 17f;
-//        leftBtnTextColor = Color.parseColor("#8a000000");
-//        rightBtnTextColor = Color.parseColor("#8a000000");
-//        middleBtnTextColor = Color.parseColor("#8a000000");
+        titleTextColor = Color.parseColor("#61AEDC");
+        titleTextSize_SP = 22f;
+        contentTextColor = Color.parseColor("#383838");
+        contentTextSize_SP = 17f;
+        leftBtnTextColor = Color.parseColor("#8a000000");
+        rightBtnTextColor = Color.parseColor("#8a000000");
+        middleBtnTextColor = Color.parseColor("#8a000000");
         /** default value*/
     }
 

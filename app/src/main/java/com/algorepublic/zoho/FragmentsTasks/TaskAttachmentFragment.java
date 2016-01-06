@@ -32,6 +32,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.algorepublic.zoho.ActivityTask;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.adapters.TasksList;
 import com.algorepublic.zoho.fragments.BaseFragment;
@@ -132,13 +133,13 @@ public class TaskAttachmentFragment extends BaseFragment {
                 if (resultCode == getActivity().RESULT_OK) {
                     Uri selectedImageUri = data.getData();
                     File destination = new File(getRealPathFromURI(selectedImageUri));
-                    showFileInList(selectedImageUri,destination.getName());
+                    showFileInList(selectedImageUri,destination.getName(),destination);
                 }
                 break;
             case RESULT_GALLERY:
                 if (null != data) {
                     File  newFile = new File(URI.create("file://"+getDataColumn(getActivity(), data.getData(),null,null)));
-                     showFileInList(data.getData(), newFile.getName());
+                     showFileInList(data.getData(), newFile.getName(),newFile);
                 }
                 break;
             case PICK_File:
@@ -147,7 +148,7 @@ public class TaskAttachmentFragment extends BaseFragment {
                     File  newFile = null;
                     try {
                         newFile = new File(new URI("file://"+getDataColumn(getActivity(), contactData,null,null)));
-                        showFileInList(contactData, newFile.getName());
+                        showFileInList(contactData, newFile.getName(),newFile);
                     } catch (URISyntaxException e) {
                         e.printStackTrace();
                     }
@@ -158,8 +159,9 @@ public class TaskAttachmentFragment extends BaseFragment {
         }
     }
 
-    private void showFileInList(Uri file,String fileName) {
+    private void showFileInList(Uri date,String fileName,File file) {
         try {
+            ActivityTask.filesList.add(file);
                 final LinearLayout linearLayout = (LinearLayout) aq
                         .id(R.id.images_layout).visible().getView();
                 final View child = getActivity().getLayoutInflater().inflate(
@@ -167,7 +169,7 @@ public class TaskAttachmentFragment extends BaseFragment {
                 ImageView addFile = (ImageView) child.findViewById(R.id.file_added);
                 ImageView deleteFile = (ImageView) child.findViewById(R.id.file_delete);
                 TextView text = (TextView) child.findViewById(R.id.file_title);
-                Glide.with(this).load(file).into(addFile);
+                Glide.with(this).load(date).into(addFile);
                 text.setText(fileName);
                 deleteFile.setTag(Tag);
             child.setId(Tag);
@@ -179,6 +181,8 @@ public class TaskAttachmentFragment extends BaseFragment {
                     RelativeLayout layout = (RelativeLayout) linearLayout.findViewById(Integer
                             .parseInt(v.getTag().toString()));
                     linearLayout.removeView(layout);
+                    ActivityTask.filesList.remove(Integer
+                            .parseInt(v.getTag().toString()));
                 }
             });
             } catch (Exception e) {

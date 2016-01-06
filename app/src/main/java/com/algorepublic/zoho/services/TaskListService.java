@@ -72,13 +72,4 @@ public class TaskListService extends BaseService {
         this.get(url, obj, TaskAssigneeModel.getInstance(), message);
         Log.e("TaskAssigneeService", url);
     }
-    public void createTask(String task, int[] taskassignee,ArrayList<File> files, boolean message, CallBack obj){
-        String url = Constants.CreateTask_API;
-        HashMap<String, String> params = new HashMap<String, String>();
-        params.put("task", task);
-        params.put("taskResponsible", String.valueOf(taskassignee));
-        params.put("file", String.valueOf(files));
-        this.post(url, params, obj, GeneralModel.getInstance(), message);
-        Log.e("CompleteTaskService", url);
-    }
 }

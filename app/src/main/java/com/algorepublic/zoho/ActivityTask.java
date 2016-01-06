@@ -1,6 +1,9 @@
 package com.algorepublic.zoho;
 
+import android.graphics.Color;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.RadioGroup;
 
@@ -11,19 +14,29 @@ import com.algorepublic.zoho.FragmentsTasks.TaskPriorityFragment;
 import com.algorepublic.zoho.FragmentsTasks.TaskScheduleFragment;
 import com.algorepublic.zoho.adapters.TasksList;
 import com.algorepublic.zoho.fragments.TasksListFragment;
+import com.algorepublic.zoho.utils.BaseClass;
+import com.algorepublic.zoho.utils.Constants;
+import com.algorepublic.zoho.utils.GenericHttpClient;
+import com.algorepublic.zoho.utils.TinyDB;
 import com.androidquery.AQuery;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+
+import cc.cloudist.acplibrary.ACProgressConstant;
+import cc.cloudist.acplibrary.ACProgressFlower;
 
 
 public class ActivityTask extends BaseActivity{
     AQuery aq;
     RadioGroup radioGroup1,radioGroup2;
     int position;
+    BaseClass baseClass;
+    public static ACProgressFlower dialog;
     RadioGroup.OnCheckedChangeListener changeListener1,changeListener2;
     public  static TasksList tasksObj;
     public static ArrayList<File> filesList;
@@ -33,11 +46,18 @@ public class ActivityTask extends BaseActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_task);
+        filesList = new ArrayList<>();
+        assigneeList = new ArrayList<>();
+        baseClass = ((BaseClass) getApplicationContext());
+        dialog = new ACProgressFlower.Builder(this)
+                .direction(ACProgressConstant.DIRECT_CLOCKWISE)
+                .themeColor(Color.WHITE)
+                .fadeColor(Color.DKGRAY).build();
         Bundle extras = getIntent().getExtras();
         tasksObj= new TasksList();
         if (extras != null) {
             position = Integer.parseInt(extras.get("pos").toString());
-            tasksObj = TasksListFragment.generalList.get(position);
+            setTaskValuesTinyDB();
         }
 
         aq =new AQuery(this);
@@ -47,6 +67,12 @@ public class ActivityTask extends BaseActivity{
             @Override
             public void onClick(View v) {
                 ActivityTask.this.finish();
+            }
+        });
+        aq.id(R.id.done).clicked(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new AsyncTry().execute();
             }
         });
        changeListener1 = new RadioGroup.OnCheckedChangeListener() {
@@ -162,16 +188,70 @@ public class ActivityTask extends BaseActivity{
         aq.id(R.id.schedule_radioButton).textColor(getResources().getColor(android.R.color.white));
         aq.id(R.id.priority_radioButton).textColor(getResources().getColor(android.R.color.white));
     }
+    public class AsyncTry extends AsyncTask<Void, Void, String> {
+        GenericHttpClient httpClient;
+        String response= null;
 
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            dialog.show();
+        }
+
+        @Override
+        protected String doInBackground(Void... voids) {
+            try {
+
+                httpClient = new GenericHttpClient();
+                response = httpClient.postAddTask(Constants.CreateTask_API
+                        , assigneeList,filesList,GetJsonObject());
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            return response;
+        }
+        @Override
+        protected void onPostExecute(String result){
+            dialog.dismiss();
+            PopulateModel(result);
+        }
+    }
+    private void PopulateModel (String json) {
+        Log.e("Json","/"+json);
+        JSONObject jsonObj;
+//        try {
+//            jsonObj = new JSONObject(json.toString());
+//            Gson gson = new Gson();
+//            RegisterUserModel obj ;
+//            obj = gson.fromJson(jsonObj.toString(),
+//                    RegisterUserModel.class);
+//            RegisterUserModel.getInstance().setList(obj);
+//            Log.e("status","/"+RegisterUserModel.getInstance().status+RegisterUserModel.getInstance().message);
+
+//        }catch (Exception e){}
+    }
     public String  GetJsonObject() throws JSONException {
 
         JSONObject object = new JSONObject();
-
-//        object.put("email", baseClass.getFirstName() + "@example.com");
-//        object.put("first_name", baseClass.getFirstName());
-//        object.put("last_name", baseClass.getLastName());
-//        object.put("password", "321321322");
-
+        if(getIntent().getExtras()!=null) {
+            object.put("ID", tasksObj.getTaskID());
+        }
+        object.put("CreateBy", 1);
+        object.put("UpdateBy", 1);
+        object.put("OwnerID", 1);
+        object.put("Priority", 1);
+        object.put("Title", baseClass.db.getString("TaskName"));
+        object.put("ProjectID", 4);
+        Log.e("task",object.toString());
         return object.toString();
+    }
+    public void setTaskValuesTinyDB(){
+     //   baseClass.db.putString("TaskListName",TasksListFragment.generalList.get(position).getTaskListName());
+        baseClass.db.putString("TaskName",TasksListFragment.generalList.get(position).getTaskName());
+        baseClass.db.putString("StartDate",TasksListFragment.generalList.get(position).getStartDate());
+        baseClass.db.putString("EndDate",TasksListFragment.generalList.get(position).getEndDate());
+        baseClass.db.putInt("Priority", TasksListFragment.generalList.get(position).getPriority());
     }
 }

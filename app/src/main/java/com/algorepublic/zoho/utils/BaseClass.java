@@ -54,12 +54,15 @@ public class BaseClass extends Application {
     private String SortType = "SortType";
 
 
+    public static TinyDB db;
+
     @Override
     public void onCreate() {
         super.onCreate();
         this.appSharedPrefs = getSharedPreferences(SHARED_NAME,
                 Activity.MODE_PRIVATE);
         this.prefsEditor = appSharedPrefs.edit();
+        db = new TinyDB(this);
     }
 
     public void setEmail(String email) {
