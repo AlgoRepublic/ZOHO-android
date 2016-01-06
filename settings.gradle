@@ -1,1 +1,1 @@
-include ':app', ':linkedin-sdk', ':FlycoAnimation_Lib', ':FlycoDialog_Lib', ':datetimepicker', ':agendacalendarview'
+include ':app', ':linkedin-sdk', ':FlycoAnimation_Lib', ':datetimepicker', ':agendacalendarview', ':FlycoDialog_Lib'

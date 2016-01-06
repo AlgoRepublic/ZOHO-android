@@ -41,7 +41,7 @@ public class TaskAssigneeModel {
 
         @SerializedName("ID")
         @Expose
-        public Integer taskID;
+        public Integer ID;
 
         @SerializedName("Email")
         @Expose

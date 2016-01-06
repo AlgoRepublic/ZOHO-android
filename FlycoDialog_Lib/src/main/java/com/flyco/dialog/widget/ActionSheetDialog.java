@@ -66,7 +66,7 @@ public class ActionSheetDialog extends BottomBaseDialog {
     /**
      * title textcolor(标题颜色)
      */
-    private int titleTextColor = Color.parseColor("#8F8F8F");
+    private int titleTextColor = Color.parseColor("#2C2D2F");
     /**
      * title textsize(标题字体大小,单位sp)
      */
@@ -78,7 +78,7 @@ public class ActionSheetDialog extends BottomBaseDialog {
     /**
      * divider color(ListView divider颜色)
      */
-    private int dividerColor = Color.parseColor("#D7D7D9");
+    private int dividerColor = Color.parseColor("#727272");
     /**
      * divider height(ListView divider高度)
      */
@@ -86,11 +86,11 @@ public class ActionSheetDialog extends BottomBaseDialog {
     /**
      * item press color(ListView item按住颜色)
      */
-    private int itemPressColor = Color.parseColor("#ffcccccc");
+    private int itemPressColor = Color.parseColor("#9C9CA0");
     /**
      * item textcolor(ListView item文字颜色)
      */
-    private int itemTextColor = Color.parseColor("#44A2FF");
+    private int itemTextColor = Color.parseColor("#3C3C3E");
     /**
      * item textsize(ListView item文字大小)
      */
