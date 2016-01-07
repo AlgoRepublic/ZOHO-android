@@ -121,14 +121,14 @@ public class TaskDetailFragment extends BaseFragment {
             @Override
             public void onClick(View v) {
                 click = 1;
-                NormalDialogCustomAttr("Delete Task?");
+                NormalDialogCustomAttr(getString(R.string.delete_task));
             }
         });
         aq.id(R.id.mark_as_done).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 click = 2;
-                NormalDialogCustomAttr("Mark as done?");
+                NormalDialogCustomAttr(getString(R.string.mark_as_done));
             }
         });
         return view;
@@ -146,7 +146,7 @@ public class TaskDetailFragment extends BaseFragment {
     public void DeleteTask(Object caller, Object model) {
         GeneralModel.getInstance().setList((GeneralModel) model);
         if (GeneralModel.getInstance().responseCode.equalsIgnoreCase("100")) {
-            Snackbar.make(getView(), "Task deleted", Snackbar.LENGTH_SHORT).show();
+            Snackbar.make(getView(), getString(R.string.task_deleted), Snackbar.LENGTH_SHORT).show();
         }
         else
         {
@@ -156,7 +156,7 @@ public class TaskDetailFragment extends BaseFragment {
     public void CompleteTask(Object caller, Object model) {
         GeneralModel.getInstance().setList((GeneralModel) model);
         if (GeneralModel.getInstance().responseCode.equalsIgnoreCase("100")) {
-            Snackbar.make(getView(), "Task done", Snackbar.LENGTH_SHORT).show();
+            Snackbar.make(getView(), getString(R.string.task_done), Snackbar.LENGTH_SHORT).show();
             service.updateTaskProgress(TasksListFragment.generalList.get(position).getTaskID()
                     , Progress, true, new CallBack(TaskDetailFragment.this, "UpdateProgress"));
         }

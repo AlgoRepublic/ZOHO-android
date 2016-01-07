@@ -16,21 +16,19 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
+        android:transcriptMode="alwaysScroll"
+        android:stackFromBottom="true"
         android:layout_above="@+id/layout_comment"
         android:id="@+id/listView_comments" />
-    <RelativeLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_alignParentBottom="true"
-        android:id="@+id/layout_comment"
-        android:layout_margin="5dp"
-        android:layout_height="40dp">
+
 
         <LinearLayout
             android:orientation="horizontal"
             android:weightSum="2"
+            android:layout_alignParentBottom="true"
+            android:id="@+id/layout_comment"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="40dp">
         <EditText
             android:id="@+id/comment_user"
             android:layout_width="0dp"
@@ -40,6 +38,7 @@
             android:layout_marginLeft="3dp"
             android:background="@android:color/white"
             android:textColor="@android:color/black"
+            android:textCursorDrawable="@null"
             android:hint="Send a comment"
             android:singleLine="true"
             android:ellipsize="end"
@@ -49,7 +48,7 @@
             android:paddingLeft="5dp"
             android:paddingRight="5dp"
             android:scrollHorizontally="true"
-            android:textSize="11sp"
+            android:textSize="13sp"
             android:layout_gravity="center_vertical" />
         <requestFocus/>
 
@@ -67,5 +66,4 @@
             android:textStyle="bold"/>
         </LinearLayout>
         </RelativeLayout>
-</RelativeLayout>
 </LinearLayout>

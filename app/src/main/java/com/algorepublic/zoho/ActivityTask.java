@@ -207,8 +207,6 @@ public class ActivityTask extends BaseActivity{
                         , assigneeList,filesList);
             } catch (IOException e) {
                 e.printStackTrace();
-            } catch (JSONException e) {
-                e.printStackTrace();
             }
             return response;
         }

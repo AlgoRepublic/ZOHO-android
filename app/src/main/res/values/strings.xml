@@ -116,4 +116,9 @@
 
     <string name="pref_title_vibrate">Vibrate</string>
 
+    <!-- Task Details Strings -->
+    <string name="mark_as_done">Mark as done?</string>
+    <string name="task_done">Task done</string>
+    <string name="delete_task">Delete Task?</string>
+    <string name="task_deleted">Task Deleted</string>
 </resources>

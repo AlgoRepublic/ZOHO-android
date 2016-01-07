@@ -48,8 +48,8 @@ public class TaskScheduleFragment extends BaseFragment {
         View view =  inflater.inflate(R.layout.fragment_task_schedule, container, false);
         aq =  new AQuery(view);
         baseClass = ((BaseClass) getActivity().getApplicationContext());
-        aq.id(R.id.btn_start_date).text(baseClass.db.getString("StartDate"));
-        aq.id(R.id.btn_end_date).text(baseClass.db.getString("EndDate"));
+        aq.id(R.id.btn_start_date).text(BaseClass.db.getString("StartDate"));
+        aq.id(R.id.btn_end_date).text(BaseClass.db.getString("EndDate"));
         SplitStartDate(); SplitEndDate();
 
         aq.id(R.id.btn_start_date).clicked(new View.OnClickListener() {
@@ -80,9 +80,10 @@ public class TaskScheduleFragment extends BaseFragment {
 
         @Override
         public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
-           start_date = dayOfMonth+"/"+(++monthOfYear)+"/"+year;
+            start_date = dayOfMonth+"/"+(++monthOfYear)+"/"+year;
             start_day = dayOfMonth;start_month = monthOfYear;start_year = year;
-           aq.id(R.id.btn_start_date).text(start_date);
+            aq.id(R.id.btn_start_date).text(start_date);
+            BaseClass.db.putString("StartDate", start_date);
         }
     };
     DatePickerDialog.OnDateSetListener endDatePicker = new DatePickerDialog.OnDateSetListener() {
@@ -91,6 +92,7 @@ public class TaskScheduleFragment extends BaseFragment {
             end_date = dayOfMonth+"/"+(++monthOfYear)+"/"+year;
             end_day = dayOfMonth;end_month = monthOfYear;end_year = year;
             aq.id(R.id.btn_end_date).text(end_date);
+            BaseClass.db.putString("EndDate", end_date);
         }
     };
     public void SplitStartDate(){
