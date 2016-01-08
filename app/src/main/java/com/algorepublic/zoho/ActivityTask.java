@@ -17,7 +17,6 @@ import com.algorepublic.zoho.fragments.TasksListFragment;
 import com.algorepublic.zoho.utils.BaseClass;
 import com.algorepublic.zoho.utils.Constants;
 import com.algorepublic.zoho.utils.GenericHttpClient;
-import com.algorepublic.zoho.utils.TinyDB;
 import com.androidquery.AQuery;
 
 import org.json.JSONException;
@@ -206,8 +205,6 @@ public class ActivityTask extends BaseActivity{
                 response = httpClient.postAddTask(Constants.CreateTask_API
                         , assigneeList,filesList);
             } catch (IOException e) {
-                e.printStackTrace();
-            } catch (JSONException e) {
                 e.printStackTrace();
             }
             return response;
