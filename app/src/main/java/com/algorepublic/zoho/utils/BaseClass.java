@@ -19,11 +19,16 @@ import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.webkit.MimeTypeMap;
+
+import com.algorepublic.zoho.R;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -225,5 +230,55 @@ public class BaseClass extends Application {
         return (int) TypedValue.applyDimension(
                 TypedValue.COMPLEX_UNIT_DIP, val, ctx.getResources()
                         .getDisplayMetrics());
+    }
+
+    static int icon[] = {
+            R.drawable.image_icon,
+            R.drawable.docs_icon
+    };
+
+    public static int getIcon(int type){
+        int iconType = icon[0];
+        if(type==0)
+            iconType = icon[0];
+        if(type==1)
+            iconType = icon[1];
+        return iconType;
+    }
+    public static int getExtension(String fileName) {
+        String encoded;int type=0;
+        try { encoded = URLEncoder.encode(fileName, "UTF-8").replace("+", "%20"); }
+        catch(UnsupportedEncodingException e) { encoded = fileName; }
+        String extention = MimeTypeMap.getFileExtensionFromUrl(encoded).toLowerCase();
+        if(extention.contains("jpg"))
+            type=1;
+        if(extention.contains("jpeg"))
+            type=2;
+        if(extention.contains("png"))
+            type=3;
+        if(extention.contains("gif"))
+            type=4;
+        if(extention.contains("pdf"))
+            type=5;
+        if(extention.contains("doc"))
+            type=6;
+        if(extention.contains("docx"))
+            type=7;
+        if(extention.contains("mpeg"))
+            type=8;
+        if(extention.contains("mp4"))
+            type=9;
+        if(extention.contains("wav"))
+            type=10;
+        if(extention.contains("3gpp"))
+            type=11;
+        if(extention.contains("plain"))
+            type=12;
+        if(extention.contains("xml"))
+            type=13;
+        if(extention.contains("html"))
+            type=14;
+
+        return type;
     }
 }
