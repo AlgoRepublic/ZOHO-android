@@ -2,6 +2,7 @@ package com.algorepublic.zoho.utils;
 
 public class Constants {
 	public static String BASE_URL = "http://api.jitpac.com";
+	public static String Image_URL = "http://jitpac.com";
 	public static String Login_API = BASE_URL + "/User/Login";
 	public static String GetUser_API = BASE_URL+ "/User/GetById";
 	public static String GetAssigneeByTask_API = BASE_URL+ "/User/GetListByProject";//ProjectID
@@ -15,5 +16,7 @@ public class Constants {
 
 	public static String GetProjectsList_API = BASE_URL+ "/Projects/GetList";
 	public static String AddPeopleToTask_API = BASE_URL+ "/Task/AddPeopletoTask"; //PeopleInThisTask,projectID,taskID
+
+	public static String GetDocuments_API = BASE_URL+ "/Document/GetListByProjectID?"; //projectID
 	public static String LinkedIn_API = "https://api.linkedin.com/v1/people/~:(id,first-name,last-name,headline,pictureUrl)";
 }

@@ -59,6 +59,12 @@
             <!-- android:value="com.algorepublic.zoho.BaseActivity" /> -->
         </activity>
         <activity
+            android:name=".ActivityUploadDocs"
+            android:parentActivityName=".BaseActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <activity
             android:name=".SettingsActivity"
             android:label="@string/title_activity_settings"/>
     </application>

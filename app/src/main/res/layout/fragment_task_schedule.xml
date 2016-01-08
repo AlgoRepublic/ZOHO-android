@@ -7,6 +7,35 @@
     <!-- TODO: Update blank fragment layout -->
     <LinearLayout
         android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:weightSum="2"
+        android:orientation="horizontal" >
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:background="@drawable/underline_textview"
+        android:paddingBottom="2dp"
+        android:text="@string/start_date"
+        android:gravity="center"
+        android:textColor="@color/colorPrimary"
+        android:textSize="13.33sp"
+        android:typeface="monospace" />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:background="@drawable/underline_textview"
+            android:paddingBottom="2dp"
+            android:text="@string/end_date"
+            android:gravity="center"
+            android:textColor="@color/colorPrimary"
+            android:textSize="13.33sp"
+            android:typeface="monospace" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="50dp"
         android:weightSum="2"
         android:layout_gravity="center_vertical"

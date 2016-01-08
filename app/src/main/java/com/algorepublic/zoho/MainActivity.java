@@ -13,6 +13,7 @@ import android.widget.RadioGroup;
 
 import com.algorepublic.zoho.fragments.CalendarFragment;
 import com.algorepublic.zoho.fragments.FeedFragment;
+import com.algorepublic.zoho.fragments.DocumentsFragment;
 import com.algorepublic.zoho.fragments.TasksListFragment;
 import com.algorepublic.zoho.fragments.dummy.DummyContent;
 import com.algorepublic.zoho.services.CallBack;
@@ -126,7 +127,8 @@ public class MainActivity extends BaseActivity
                 aq.id(R.id.documents_radioButton).textColor(getResources().getColor(android.R.color.white));
                 break;
             case 1:
-                drawer.closeDrawer(GravityCompat.START);
+                getSupportActionBar().setTitle(getString(R.string.documents));
+                getSupportFragmentManager().beginTransaction().replace(R.id.container, DocumentsFragment.newInstance(), "DocumentsFragment").commit();
                 aq.id(R.id.documents_radioButton).textColor(getResources().getColor(R.color.colorAccent));
                 aq.id(R.id.tasks_radioButton).textColor(getResources().getColor(android.R.color.white));
                 break;

@@ -45,7 +45,7 @@ public class TaskEditTitleFragment extends BaseFragment {
         View view = inflater.inflate(R.layout.fragment_edit_title_tasks, container, false);
         baseClass = ((BaseClass) getActivity().getApplicationContext());
         aq= new AQuery(view);
-        aq.id(R.id.title_name).text(baseClass.db.getString("TaskName"));
+        aq.id(R.id.title_name).text(BaseClass.db.getString("TaskName"));
         aq.id(R.id.title_name).getEditText().addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -54,7 +54,7 @@ public class TaskEditTitleFragment extends BaseFragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                baseClass.db.putString("TaskName", s.toString());
+                BaseClass.db.putString("TaskName", s.toString());
             }
 
             @Override

@@ -45,12 +45,12 @@ public class GenericHttpClient {
         MultipartEntity mpEntity = new MultipartEntity(HttpMultipartMode.BROWSER_COMPATIBLE);
         try {
             for(int i=0;i<files.size();i++) {
-                Log.e("File","/"+i);
-                mpEntity.addPart("file["+i+"]",new FileBody(files.get(i), "application/octet-stream"));
+                Log.e("File","/"+files.get(i).getName());
+                mpEntity.addPart("file[]",new FileBody(files.get(i), "application"));
             }
             for(int i=0;i<assignee.size();i++) {
-                Log.e("Assignee","/"+i);
-                mpEntity.addPart("taskResponsible["+i+"]", new StringBody(Integer.toString(assignee.get(i))));
+                Log.e("Assignee","/"+assignee.get(i));
+                mpEntity.addPart("taskResponsible[]["+i+"]", new StringBody(Integer.toString(assignee.get(i))));
             }
             mpEntity.addPart("CreateBy",new StringBody(Integer.toString(BaseClass.db.getInt("CreateBy"))));
             mpEntity.addPart("UpdateBy",new StringBody(Integer.toString(BaseClass.db.getInt("UpdateBy"))));
