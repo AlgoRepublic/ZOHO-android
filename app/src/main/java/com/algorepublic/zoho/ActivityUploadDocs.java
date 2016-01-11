@@ -274,8 +274,8 @@ public class ActivityUploadDocs extends BaseActivity implements GoogleApiClient.
             ImageView addFile = (ImageView) child.findViewById(R.id.file_added);
             ImageView deleteFile = (ImageView) child.findViewById(R.id.file_delete);
             TextView text = (TextView) child.findViewById(R.id.file_title);
-            if(BaseClass.getExtension(file.getName())==1 && BaseClass.getExtension(file.getName())==2
-            && BaseClass.getExtension(file.getName())==3 && BaseClass.getExtension(file.getName())==4) {
+            if(BaseClass.getExtension(file.getName())==1 || BaseClass.getExtension(file.getName())==2
+            || BaseClass.getExtension(file.getName())==3 || BaseClass.getExtension(file.getName())==4) {
                 Glide.with(this).load(date).into(addFile);
             }else{
                 Glide.with(this).load(BaseClass.getIcon(BaseClass.getExtension(file.getName()))).into(addFile);
@@ -291,7 +291,7 @@ public class ActivityUploadDocs extends BaseActivity implements GoogleApiClient.
                     RelativeLayout layout = (RelativeLayout) linearLayout.findViewById(Integer
                             .parseInt(v.getTag().toString()));
                     linearLayout.removeView(layout);
-                    ActivityTask.filesList.remove(Integer
+                    filesList.remove(Integer
                             .parseInt(v.getTag().toString()));
                 }
             });

@@ -3,6 +3,7 @@ package com.algorepublic.zoho.services;
 import android.app.Activity;
 import android.util.Log;
 
+import com.algorepublic.zoho.Models.CreateCommentModel;
 import com.algorepublic.zoho.Models.GeneralModel;
 import com.algorepublic.zoho.Models.GetUserModel;
 import com.algorepublic.zoho.Models.TaskAssigneeModel;
@@ -41,7 +42,7 @@ public class TaskListService extends BaseService {
         params.put("message", comment);
         params.put("taskID", String.valueOf(taskID));
         params.put("userID", String.valueOf(userID));
-        this.post(url, params, obj, TaskCommentsModel.getInstance(), message);
+        this.post(url, params, obj, CreateCommentModel.getInstance(), message);
         Log.e("CreateCommentService", url);
     }
     public void updateTaskProgress(int taskID, int progress, boolean message, CallBack obj){
