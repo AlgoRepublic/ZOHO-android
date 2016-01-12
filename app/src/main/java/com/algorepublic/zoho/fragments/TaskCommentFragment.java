@@ -1,6 +1,7 @@
 package com.algorepublic.zoho.fragments;
 
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +10,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.algorepublic.zoho.Models.CreateCommentModel;
+import com.algorepublic.zoho.Models.GeneralModel;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.adapters.AdapterTaskComments;
 import com.algorepublic.zoho.adapters.TaskComments;
@@ -96,9 +99,21 @@ public class TaskCommentFragment extends BaseFragment {
 //            Toast.makeText(getActivity(), getString(R.string.invalid_credential), Toast.LENGTH_SHORT).show();
 //        }
     }
+    public void CreateComment(Object caller, Object model) {
+        CreateCommentModel.getInstance().setList((CreateCommentModel) model);
+        if (CreateCommentModel.getInstance().responseCode ==100){
+            Snackbar.make(getView(),"Comment Added",Snackbar.LENGTH_SHORT).show();
+        }
+        else
+        {
+            Toast.makeText(getActivity(), getString(R.string.invalid_credential), Toast.LENGTH_SHORT).show();
+        }
+    }
     public void PerformAction()
     {
         String comment = aq.id(R.id.comment_user).getText().toString();
+        service.createComment(comment,4,Integer.parseInt(baseClass.getUserId()),false,
+                new CallBack(TaskCommentFragment.this,"CreateComment"));
         if(aq.id(R.id.comment_user).getText().toString().equalsIgnoreCase("")) {
             Toast.makeText(getActivity(), "Enter Your Comment!", Toast.LENGTH_SHORT).show();
             return;

@@ -56,14 +56,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         fab:fab_colorNormal="@color/colorPrimaryDark"
-        android:src="@drawable/user"
+        android:src="@mipmap/user_white"
         fab:fab_size="mini" />
     <com.github.clans.fab.FloatingActionButton
         android:id="@+id/menu_calendar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         fab:fab_colorNormal="@color/colorPrimaryDark"
-        android:src="@drawable/calendar"
+        android:src="@mipmap/calendar_white"
         android:padding="20dp"
         fab:fab_size="mini" />
     <com.github.clans.fab.FloatingActionButton

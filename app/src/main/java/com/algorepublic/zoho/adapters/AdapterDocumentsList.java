@@ -25,10 +25,6 @@ public class AdapterDocumentsList extends BaseAdapter implements StickyListHeade
     BaseClass baseClass;
     private LayoutInflater l_Inflater;
 
-    int icon[] = {
-            R.drawable.image_icon,
-            R.drawable.docs_icon
-    };
 
 
     public AdapterDocumentsList(Context context) {
@@ -59,7 +55,7 @@ public class AdapterDocumentsList extends BaseAdapter implements StickyListHeade
         aq = new AQuery(convertView);
 
         aq.id(R.id.file_name).text(DocumentsFragment.docsList.get(position).getFileName());
-        Glide.with(ctx).load(getIcon(DocumentsFragment.docsList.
+        Glide.with(ctx).load(BaseClass.getIcon(DocumentsFragment.docsList.
                 get(position).getFileTypeID())).into(aq.id(R.id.file_image).getImageView());
 
         return convertView;
@@ -82,14 +78,6 @@ public class AdapterDocumentsList extends BaseAdapter implements StickyListHeade
     public long getHeaderId(int position) {
         //return the first character of the country as ID because this is what headers are based upon
         return Long.parseLong(DocumentsFragment.docsList.get(position).getCreatedMilli());
-    }
-    public int getIcon(int type){
-        int iconType = icon[0];
-        if(type==0)
-            iconType = icon[0];
-        if(type==1)
-            iconType = icon[1];
-        return iconType;
     }
 
 }

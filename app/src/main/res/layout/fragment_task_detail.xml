@@ -15,7 +15,7 @@
         android:orientation="vertical">
         <ImageView
             android:layout_width="80dp"
-            android:src="@drawable/user"
+            android:src="@mipmap/user_white"
             android:layout_centerHorizontal="true"
             android:layout_height="30dp" />
     <RelativeLayout
