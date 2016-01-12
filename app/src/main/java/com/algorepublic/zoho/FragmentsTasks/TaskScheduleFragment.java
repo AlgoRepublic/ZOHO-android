@@ -48,8 +48,16 @@ public class TaskScheduleFragment extends BaseFragment {
         View view =  inflater.inflate(R.layout.fragment_task_schedule, container, false);
         aq =  new AQuery(view);
         baseClass = ((BaseClass) getActivity().getApplicationContext());
-        aq.id(R.id.btn_start_date).text(BaseClass.db.getString("StartDate"));
-        aq.id(R.id.btn_end_date).text(BaseClass.db.getString("EndDate"));
+        if(!BaseClass.db.getString("StartDate").equalsIgnoreCase("")) {
+            aq.id(R.id.btn_start_date).text(BaseClass.db.getString("StartDate"));
+        }else{
+            aq.id(R.id.btn_start_date).text(getString(R.string.start_date));
+        }
+        if(!BaseClass.db.getString("EndDate").equalsIgnoreCase("")) {
+            aq.id(R.id.btn_end_date).text(BaseClass.db.getString("EndDate"));
+        }else{
+            aq.id(R.id.btn_end_date).text(getString(R.string.end_date));
+        }
         SplitStartDate(); SplitEndDate();
 
         aq.id(R.id.btn_start_date).clicked(new View.OnClickListener() {

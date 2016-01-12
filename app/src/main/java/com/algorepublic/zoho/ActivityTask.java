@@ -200,7 +200,11 @@ public class ActivityTask extends BaseActivity{
         @Override
         protected String doInBackground(Void... voids) {
             try {
-
+                try {
+                    GetJsonObject();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
                 httpClient = new GenericHttpClient();
                 response = httpClient.postAddTask(Constants.CreateTask_API
                         , assigneeList,filesList);

@@ -16,6 +16,7 @@ import org.apache.http.entity.mime.content.FileBody;
 import org.apache.http.entity.mime.content.StringBody;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicHeader;
+import org.apache.http.util.EntityUtils;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -34,6 +35,7 @@ public class GenericHttpClient {
 
         List<Header> result = new ArrayList<Header>();
         result.add(new BasicHeader("Content-type", "application/json/octet-stream"));
+        result.add(new BasicHeader("Accept", "text/html,application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5"));
         return result.toArray(new Header[]{});
     }
 
@@ -46,11 +48,11 @@ public class GenericHttpClient {
         try {
             for(int i=0;i<files.size();i++) {
                 Log.e("File","/"+files.get(i).getName());
-                mpEntity.addPart("file[]",new FileBody(files.get(i), "application"));
+                mpEntity.addPart("file["+i+"]",new FileBody(files.get(i)));
             }
             for(int i=0;i<assignee.size();i++) {
-                Log.e("Assignee","/"+assignee.get(i));
-                mpEntity.addPart("taskResponsible[]["+i+"]", new StringBody(Integer.toString(assignee.get(i))));
+                Log.e("Assignee", "/" + assignee.get(i));
+                mpEntity.addPart("taskResponsible["+i+"]", new StringBody(Integer.toString(assignee.get(i))));
             }
             mpEntity.addPart("CreateBy",new StringBody(Integer.toString(BaseClass.db.getInt("CreateBy"))));
             mpEntity.addPart("UpdateBy",new StringBody(Integer.toString(BaseClass.db.getInt("UpdateBy"))));
@@ -59,6 +61,7 @@ public class GenericHttpClient {
             mpEntity.addPart("ProjectID", new StringBody(Integer.toString(4)));
             mpEntity.addPart("Title", new StringBody(BaseClass.db.getString("TaskName")));
             p.setEntity(mpEntity);
+
             HttpResponse resp = hc.execute(p);
             if (resp != null) {
                 message = convertStreamToString(resp.getEntity().getContent());
@@ -68,7 +71,32 @@ public class GenericHttpClient {
         }
         return message;
     }
+    public String uploadDocuments(String url,ArrayList<File> files,int folderID ) throws IOException {
 
+        HttpClient hc = new DefaultHttpClient();
+        String message =null;
+        HttpPost p = new HttpPost(url);
+        MultipartEntity mpEntity = new MultipartEntity(HttpMultipartMode.BROWSER_COMPATIBLE);
+        try {
+            for(int i=0;i<files.size();i++) {
+                Log.e("File","/"+files.get(i).getName());
+                mpEntity.addPart("files["+i+"]",new FileBody(files.get(i)));
+            }
+            mpEntity.addPart("folderID", new StringBody(Integer.toString(folderID)));
+            mpEntity.addPart("ProjectID", new StringBody(Integer.toString(4)));
+            mpEntity.addPart("CreateBy",new StringBody(Integer.toString(BaseClass.db.getInt("CreateBy"))));
+            mpEntity.addPart("UpdateBy",new StringBody(Integer.toString(BaseClass.db.getInt("UpdateBy"))));
+            p.setEntity(mpEntity);
+
+            HttpResponse resp = hc.execute(p);
+            if (resp != null) {
+                message = convertStreamToString(resp.getEntity().getContent());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return message;
+    }
     public String get(String url) throws IOException {
 
         HttpClient hc = new DefaultHttpClient();

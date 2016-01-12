@@ -55,9 +55,14 @@ public class AdapterDocumentsList extends BaseAdapter implements StickyListHeade
         aq = new AQuery(convertView);
 
         aq.id(R.id.file_name).text(DocumentsFragment.docsList.get(position).getFileName());
-        Glide.with(ctx).load(BaseClass.getIcon(DocumentsFragment.docsList.
-                get(position).getFileTypeID())).into(aq.id(R.id.file_image).getImageView());
-
+        if(DocumentsFragment.docsList.get(position).getFileTypeID()>=0 &&
+                DocumentsFragment.docsList.get(position).getFileTypeID()<=4 ){
+            Glide.with(ctx).load(Constants.Image_URL+DocumentsFragment.docsList.
+                    get(position).getFileName()).into(aq.id(R.id.file_image).getImageView());
+        }else {
+            Glide.with(ctx).load(BaseClass.getIcon(DocumentsFragment.docsList.
+                    get(position).getFileTypeID())).into(aq.id(R.id.file_image).getImageView());
+        }
         return convertView;
     }
     @Override

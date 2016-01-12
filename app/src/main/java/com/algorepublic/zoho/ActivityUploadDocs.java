@@ -7,6 +7,7 @@ import android.content.IntentSender;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
@@ -24,6 +25,8 @@ import android.widget.Toast;
 
 import com.algorepublic.zoho.adapters.TasksList;
 import com.algorepublic.zoho.utils.BaseClass;
+import com.algorepublic.zoho.utils.Constants;
+import com.algorepublic.zoho.utils.GenericHttpClient;
 import com.androidquery.AQuery;
 import com.bumptech.glide.Glide;
 import com.dropbox.chooser.android.DbxChooser;
@@ -48,6 +51,9 @@ import com.google.android.gms.drive.DriveResource;
 import com.google.android.gms.drive.Metadata;
 import com.google.android.gms.drive.OpenFileActivityBuilder;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
@@ -63,6 +69,7 @@ import java.net.URISyntaxException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 
+import cc.cloudist.acplibrary.ACProgressConstant;
 import cc.cloudist.acplibrary.ACProgressFlower;
 
 /**
@@ -91,6 +98,10 @@ public class ActivityUploadDocs extends BaseActivity implements GoogleApiClient.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_upload_docs);
         aq = new AQuery(this);
+        dialog = new ACProgressFlower.Builder(this)
+                .direction(ACProgressConstant.DIRECT_CLOCKWISE)
+                .themeColor(Color.WHITE)
+                .fadeColor(Color.DKGRAY).build();
         aq.id(R.id.add_file).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -103,6 +114,16 @@ public class ActivityUploadDocs extends BaseActivity implements GoogleApiClient.
                 finish();
             }
         });
+        aq.id(R.id.done).clicked(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+            new AsyncTry().execute();
+            }
+        });
+        for (int loop=0;loop<filesList.size();loop++)
+        {
+            showFileInList(filesList.get(loop));
+        }
     }
 
     private void buildGoogleApiClient() {
@@ -166,13 +187,13 @@ public class ActivityUploadDocs extends BaseActivity implements GoogleApiClient.
                 if (resultCode == RESULT_OK) {
                     Uri selectedImageUri = data.getData();
                     File destination = new File(getRealPathFromURI(selectedImageUri));
-                    showFileInList(selectedImageUri,destination);
+                    checkFileLenght(destination);
                 }
                 break;
             case RESULT_GALLERY:
                 if (null != data) {
                     File  newFile = new File(URI.create("file://" + getDataColumn(this, data.getData(), null, null)));
-                    showFileInList(data.getData(),newFile);
+                    checkFileLenght(newFile);
                 }
                 break;
             case PICK_File:
@@ -181,7 +202,7 @@ public class ActivityUploadDocs extends BaseActivity implements GoogleApiClient.
                     File  newFile = null;
                     try {
                         newFile = new File(new URI("file://"+getDataColumn(this, contactData,null,null)));
-                        showFileInList(contactData,newFile);
+                        checkFileLenght(newFile);
                     } catch (URISyntaxException e) {
                         e.printStackTrace();
                     }
@@ -202,7 +223,7 @@ public class ActivityUploadDocs extends BaseActivity implements GoogleApiClient.
                     } catch (URISyntaxException e) {
                         e.printStackTrace();
                     }
-                    showFileInList(Uri.parse(path),file);
+                    checkFileLenght(file);
                 }
                 break;
             case RESULT_GOOGLEDRIVE:
@@ -256,17 +277,20 @@ public class ActivityUploadDocs extends BaseActivity implements GoogleApiClient.
                     } catch (URISyntaxException e) {
                         e.printStackTrace();
                     }
-                    showFileInList(Uri.parse(path),file);
+                    checkFileLenght(file);
                 }
             };
-    private void showFileInList(Uri date,File file) {
+    private void checkFileLenght(File file){
         if(file.length() > 1048576 * 5) {
             MaterialAlertDialog();
             return;
-        }
-
-        try {
+        }else {
             filesList.add(file);
+            showFileInList(file);
+        }
+    }
+    private void showFileInList(File file) {
+        try {
             final LinearLayout linearLayout = (LinearLayout) aq
                     .id(R.id.images_layout).visible().getView();
             final View child = getLayoutInflater().inflate(
@@ -274,9 +298,9 @@ public class ActivityUploadDocs extends BaseActivity implements GoogleApiClient.
             ImageView addFile = (ImageView) child.findViewById(R.id.file_added);
             ImageView deleteFile = (ImageView) child.findViewById(R.id.file_delete);
             TextView text = (TextView) child.findViewById(R.id.file_title);
-            if(BaseClass.getExtension(file.getName())==1 || BaseClass.getExtension(file.getName())==2
-            || BaseClass.getExtension(file.getName())==3 || BaseClass.getExtension(file.getName())==4) {
-                Glide.with(this).load(date).into(addFile);
+            if(BaseClass.getExtension(file.getName())>=0 &&
+                 BaseClass.getExtension(file.getName())<=4 ) {
+                Glide.with(this).load(file).into(addFile);
             }else{
                 Glide.with(this).load(BaseClass.getIcon(BaseClass.getExtension(file.getName()))).into(addFile);
             }
@@ -352,5 +376,46 @@ public class ActivityUploadDocs extends BaseActivity implements GoogleApiClient.
     @Override
     public void onResult(Result result) {
 
+    }
+    public class AsyncTry extends AsyncTask<Void, Void, String> {
+        GenericHttpClient httpClient;
+        String response= null;
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            dialog.show();
+        }
+
+        @Override
+        protected String doInBackground(Void... voids) {
+            try {
+                httpClient = new GenericHttpClient();
+                response = httpClient.uploadDocuments(Constants.UploadDocuments_API
+                        , filesList, 1);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return response;
+        }
+        @Override
+        protected void onPostExecute(String result){
+            dialog.dismiss();
+            PopulateModel(result);
+        }
+    }
+    private void PopulateModel (String json) {
+        Log.e("Json","/"+json);
+        JSONObject jsonObj;
+//        try {
+//            jsonObj = new JSONObject(json.toString());
+//            Gson gson = new Gson();
+//            RegisterUserModel obj ;
+//            obj = gson.fromJson(jsonObj.toString(),
+//                    RegisterUserModel.class);
+//            RegisterUserModel.getInstance().setList(obj);
+//            Log.e("status","/"+RegisterUserModel.getInstance().status+RegisterUserModel.getInstance().message);
+
+//        }catch (Exception e){}
     }
 }
