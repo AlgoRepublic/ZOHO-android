@@ -16,5 +16,6 @@ public class Constants {
 	public static String AddPeopleToTask_API = BASE_URL+ "/Task/AddPeopletoTask"; //PeopleInThisTask,projectID,taskID
 
 	public static String GetDocuments_API = BASE_URL+ "/Document/GetListByProjectID?"; //projectID
+	public static String UploadDocuments_API = BASE_URL+ "/Document/FileUpload?"; //fileObj,files,folderID
 	public static String LinkedIn_API = "https://api.linkedin.com/v1/people/~:(id,first-name,last-name,headline,pictureUrl)";
 }

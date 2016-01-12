@@ -233,17 +233,22 @@ public class BaseClass extends Application {
     }
 
     static int icon[] = {
-            R.drawable.image_icon,
-            R.drawable.docs_icon
+            1,2,3,4,
+            R.mipmap.ic_listview_pdf,
+            R.mipmap.ic_listview_doc,
+            R.mipmap.ic_listview_documents,
+            R.mipmap.ic_listview_audio,
+            R.mipmap.ic_listview_video,
+            R.mipmap.ic_listview_video,
+            R.mipmap.ic_listview_video,
+            R.mipmap.ic_listview_video,
+            R.mipmap.ic_listview_txt,
+            R.mipmap.ic_listview_xml,
+            R.mipmap.ic_listview_html,
     };
 
     public static int getIcon(int type){
-        int iconType = icon[0];
-        if(type==0)
-            iconType = icon[0];
-        if(type==1)
-            iconType = icon[1];
-        return iconType;
+        return icon[type];
     }
     public static int getExtension(String fileName) {
         String encoded;int type=0;
