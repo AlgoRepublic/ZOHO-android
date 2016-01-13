@@ -59,7 +59,7 @@ public class AdapterDocumentsList extends BaseAdapter implements StickyListHeade
         if(DocumentsFragment.docsList.get(position).getFileTypeID()>=0 &&
                 DocumentsFragment.docsList.get(position).getFileTypeID()<=4 ){
             Glide.with(ctx).load(Constants.Image_URL+DocumentsFragment.docsList.
-                    get(position).getFileName()).into(aq.id(R.id.file_image).getImageView());
+                    get(position).getFileDescription()).into(aq.id(R.id.file_image).getImageView());
         }else {
             Glide.with(ctx).load(BaseClass.getIcon(DocumentsFragment.docsList.
                     get(position).getFileTypeID())).into(aq.id(R.id.file_image).getImageView());

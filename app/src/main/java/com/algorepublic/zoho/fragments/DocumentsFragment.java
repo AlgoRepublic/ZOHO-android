@@ -8,6 +8,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Toast;
 
 import com.algorepublic.zoho.ActivityUploadDocs;
@@ -87,6 +88,12 @@ public class DocumentsFragment extends BaseFragment {
         setHasOptionsMenu(true);
         service = new DocumentsService(getActivity());
         service.getDocuments(4, true, new CallBack(DocumentsFragment.this, "DocumentsList"));
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                callFragmentWithBackStack(R.id.container,DocsPreviewFragment.newInstance(position),"DocsPreview");
+            }
+        });
         return view;
     }
 
