@@ -48,11 +48,11 @@ public class GenericHttpClient {
         try {
             for(int i=0;i<files.size();i++) {
                 Log.e("File","/"+files.get(i).getName());
-                mpEntity.addPart("file["+i+"]",new FileBody(files.get(i)));
+                mpEntity.addPart("["+i+"]",new FileBody(files.get(i)));
             }
             for(int i=0;i<assignee.size();i++) {
                 Log.e("Assignee", "/" + assignee.get(i));
-                mpEntity.addPart("taskResponsible["+i+"]", new StringBody(Integer.toString(assignee.get(i))));
+                mpEntity.addPart("["+i+"]", new StringBody(Integer.toString(assignee.get(i))));
             }
             mpEntity.addPart("CreateBy",new StringBody(Integer.toString(BaseClass.db.getInt("CreateBy"))));
             mpEntity.addPart("UpdateBy",new StringBody(Integer.toString(BaseClass.db.getInt("UpdateBy"))));
@@ -80,12 +80,12 @@ public class GenericHttpClient {
         try {
             for(int i=0;i<files.size();i++) {
                 Log.e("File","/"+files.get(i).getName());
-                mpEntity.addPart("files["+i+"]",new FileBody(files.get(i)));
+                mpEntity.addPart("files[]",new FileBody(files.get(i)));
             }
             mpEntity.addPart("folderID", new StringBody(Integer.toString(folderID)));
             mpEntity.addPart("ProjectID", new StringBody(Integer.toString(4)));
-            mpEntity.addPart("CreateBy",new StringBody(Integer.toString(BaseClass.db.getInt("CreateBy"))));
-            mpEntity.addPart("UpdateBy",new StringBody(Integer.toString(BaseClass.db.getInt("UpdateBy"))));
+            mpEntity.addPart("CreateBy",new StringBody(Integer.toString(1)));
+            mpEntity.addPart("UpdateBy",new StringBody(Integer.toString(1)));
             p.setEntity(mpEntity);
 
             HttpResponse resp = hc.execute(p);

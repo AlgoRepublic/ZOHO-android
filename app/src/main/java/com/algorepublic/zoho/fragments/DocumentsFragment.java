@@ -15,12 +15,15 @@ import com.algorepublic.zoho.Models.DocumentsListModel;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.adapters.AdapterDocumentsList;
 import com.algorepublic.zoho.adapters.DocumentsList;
+import com.algorepublic.zoho.adapters.TasksList;
 import com.algorepublic.zoho.services.CallBack;
 import com.algorepublic.zoho.services.DocumentsService;
 import com.algorepublic.zoho.utils.BaseClass;
 import com.androidquery.AQuery;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 import se.emilsjolander.stickylistheaders.StickyListHeadersAdapter;
 import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
@@ -113,5 +116,6 @@ public class DocumentsFragment extends BaseFragment {
                 docsList.add(documentsList);
             }
         }
+        Collections.sort(docsList);
     }
 }

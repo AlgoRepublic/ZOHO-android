@@ -54,15 +54,15 @@ public class BaseFragment extends Fragment {
     protected int getPriorityWiseColor(int priority){
         switch (priority){
             case 0:
-                return getResources().getColor(android.R.color.darker_gray);
+                return getActivity().getResources().getColor(android.R.color.darker_gray);
             case 1:
-                return getResources().getColor(android.R.color.holo_orange_light);
+                return getActivity().getResources().getColor(android.R.color.holo_orange_light);
             case 2:
-                return getResources().getColor(android.R.color.holo_green_light);
+                return getActivity().getResources().getColor(android.R.color.holo_green_light);
             case 3:
-                return getResources().getColor(android.R.color.holo_red_light);
+                return getActivity().getResources().getColor(android.R.color.holo_red_light);
             default:
-                return getResources().getColor(android.R.color.darker_gray);
+                return getActivity().getResources().getColor(android.R.color.darker_gray);
         }
     }
     protected void callFragment(int containerId, Fragment fragment, String tag){

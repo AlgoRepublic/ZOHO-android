@@ -156,7 +156,7 @@ public class ActivityUploadDocs extends BaseActivity implements GoogleApiClient.
                     startActivityForResult(galleryIntent, RESULT_GALLERY);
                 }
                 if (position == 2) {
-                    if (Build.VERSION.SDK_INT < 19) {
+                    if (Build.VERSION.SDK_INT > 19) {
                         Intent mediaIntent = new Intent(Intent.ACTION_GET_CONTENT);
                         mediaIntent.setType("*/file"); //set mime type as per requirement
                         startActivityForResult(mediaIntent, PICK_File);
@@ -283,7 +283,6 @@ public class ActivityUploadDocs extends BaseActivity implements GoogleApiClient.
     private void checkFileLenght(File file){
         if(file.length() > 1048576 * 5) {
             MaterialAlertDialog();
-            return;
         }else {
             filesList.add(file);
             showFileInList(file);
@@ -392,7 +391,7 @@ public class ActivityUploadDocs extends BaseActivity implements GoogleApiClient.
             try {
                 httpClient = new GenericHttpClient();
                 response = httpClient.uploadDocuments(Constants.UploadDocuments_API
-                        , filesList, 1);
+                        , filesList, 4);
             } catch (IOException e) {
                 e.printStackTrace();
             }
