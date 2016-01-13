@@ -16,6 +16,8 @@ import com.algorepublic.zoho.fragments.FeedFragment;
 import com.algorepublic.zoho.fragments.DocumentsFragment;
 import com.algorepublic.zoho.fragments.TasksListFragment;
 import com.algorepublic.zoho.fragments.dummy.DummyContent;
+import com.algorepublic.zoho.services.CallBack;
+import com.algorepublic.zoho.services.ProjectsListService;
 import com.algorepublic.zoho.utils.BaseClass;
 import com.androidquery.AQuery;
 
@@ -85,6 +87,16 @@ public class MainActivity extends BaseActivity
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(MainActivity.this, SettingsActivity.class));
+            }
+        });
+
+
+        ProjectsListService service = new ProjectsListService(this);
+        service.getProjectsList(baseClass.getUserId(), false, new CallBack(this, "ProjectsListCallback"));
+        aq_header.id(R.id.show_projects).clicked(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
             }
         });
        // navigationView.setNavigationItemSelectedListener(this);
@@ -165,6 +177,21 @@ public class MainActivity extends BaseActivity
         } else {
             super.onBackPressed();
         }
+    }
+
+//    public void TasksList(Object caller, Object model) {
+//        TasksListModel.getInstance().setList((TasksListModel) model);
+//        if (TasksListModel.getInstance().responseCode == 100) {
+//            GetGeneralList();
+//        }
+//        else
+//        {
+//            Toast.makeText(getActivity(), getString(R.string.invalid_credential), Toast.LENGTH_SHORT).show();
+//        }
+//    }
+
+    public void ProjectsListCallback(Object caller, Object model){
+
     }
 
 

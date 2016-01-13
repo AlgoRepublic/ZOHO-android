@@ -17,7 +17,6 @@ import com.algorepublic.zoho.fragments.TasksListFragment;
 import com.algorepublic.zoho.utils.BaseClass;
 import com.algorepublic.zoho.utils.Constants;
 import com.algorepublic.zoho.utils.GenericHttpClient;
-import com.algorepublic.zoho.utils.TinyDB;
 import com.androidquery.AQuery;
 
 import org.json.JSONException;
