@@ -54,13 +54,16 @@ public class AdapterTasksList extends BaseAdapter implements StickyListHeadersAd
         aq = new AQuery(convertView);
 
         if(TasksListFragment.generalList.get(position).getStartDate().equalsIgnoreCase("3/0/1"))
-            aq.id(R.id.end_date).text("No Due Date");
+            aq.id(R.id.task_date).text("No Due Date");
         else
-            aq.id(R.id.end_date).text(TasksListFragment.generalList.get(position).getEndDate());
+            aq.id(R.id.task_date).text(TasksListFragment.generalList.get(position).getEndDate());
 
             aq.id(R.id.priority_bar).backgroundColor(getPriorityWiseColor(TasksListFragment.generalList.get(position).priority));
             aq.id(R.id.task_name).text(TasksListFragment.generalList.get(position).getTaskName());
-            aq.id(R.id.project_name).text(TasksListFragment.generalList.get(position).getProjectName());
+        if(TasksListFragment.generalList.get(position).getProjectName().equalsIgnoreCase(""))
+            aq.id(R.id.general).text("General");
+        else
+            aq.id(R.id.general).text(TasksListFragment.generalList.get(position).getProjectName());
 
         return convertView;
     }

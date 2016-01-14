@@ -96,7 +96,7 @@ public class TasksListFragment extends BaseFragment {
         if(allTaskList.size()==0) {
             taskListService.getTasksList(true, new CallBack(TasksListFragment.this, "TasksList"));
         }else{
-            SortList();
+            GetGeneralList();
         }
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -115,8 +115,7 @@ public class TasksListFragment extends BaseFragment {
             public void onClick(View v) {
                 if(isLoaded()) {
                     if(allTaskList.size()>0) {
-                        generalList.clear();
-                        generalList.addAll(allTaskList);
+                      GetGeneralList();
                     }
                 }
             }
@@ -211,6 +210,7 @@ public class TasksListFragment extends BaseFragment {
     public void TasksList(Object caller, Object model) {
         TasksListModel.getInstance().setList((TasksListModel) model);
         if (TasksListModel.getInstance().responseCode == 100) {
+            AddAllTasks();
             GetGeneralList();
         }
         else
@@ -220,6 +220,10 @@ public class TasksListFragment extends BaseFragment {
     }
     public void GetGeneralList(){
         generalList.clear();
+        generalList.addAll(allTaskList);
+        SortList();
+    }
+    public void AddAllTasks(){
         allTaskList.clear();
         for (int loop = 0; loop < TasksListModel.getInstance().responseObject.size(); loop++) {
             TasksList tasksList = new TasksList();
@@ -231,7 +235,6 @@ public class TasksListFragment extends BaseFragment {
             tasksList.setTaskID(TasksListModel.getInstance().responseObject.get(loop).taskID);
             tasksList.setEndMilli(DateMilli(TasksListModel.getInstance().responseObject.get(loop).endDate));
             tasksList.setStartMilli(DateMilli(TasksListModel.getInstance().responseObject.get(loop).startDate));
-            tasksList.setHeaderID(DateHeader(TasksListModel.getInstance().responseObject.get(loop).endDate));
             tasksList.setProjectName(TasksListModel.getInstance().responseObject.get(loop).projectName);
             tasksList.setStartDate(DateFormatter(TasksListModel.getInstance().responseObject.get(loop).startDate));
             tasksList.setEndDate(DateFormatter(TasksListModel.getInstance().responseObject.get(loop).endDate));
@@ -241,33 +244,13 @@ public class TasksListFragment extends BaseFragment {
             tasksList.setTaskListName(TasksListModel.getInstance().responseObject.get(loop).taskListName);
             tasksList.setCharToAscii(CharToASCII(TasksListModel.getInstance().responseObject.get(loop).taskListName));
             allTaskList.add(tasksList);
-            generalList.add(tasksList);
         }
-        SortList();
     }
     public void UpComing(){
         generalList.clear();
         for (int loop = 0; loop < allTaskList.size(); loop++) {
-            if(Long.parseLong(DateMilli(allTaskList.get(loop).getStartDate())) > System.currentTimeMillis()) {
-                TasksList tasksList = new TasksList();
-                tasksList.setTaskID(allTaskList.get(loop).getTaskID());
-                if(allTaskList.get(loop).getTaskName().equalsIgnoreCase("")){
-                    tasksList.setTaskName("-");
-                }else {
-                    tasksList.setTaskName(allTaskList.get(loop).getTaskName());
-                }
-                tasksList.setEndMilli(DateMilli(allTaskList.get(loop).getEndDate()));
-                tasksList.setStartMilli(DateMilli(allTaskList.get(loop).getStartDate()));
-                tasksList.setHeaderID(DateHeader(allTaskList.get(loop).getStartDate()));
-                tasksList.setProjectName(allTaskList.get(loop).getProjectName());
-                tasksList.setStartDate(DateFormatter(allTaskList.get(loop).getStartDate()));
-                tasksList.setHeader(DateFormatter(allTaskList.get(loop).getStartDate()));
-                tasksList.setEndDate(DateFormatter(allTaskList.get(loop).getEndDate()));
-                tasksList.setPriority(allTaskList.get(loop).getPriority());
-                tasksList.setProgress(allTaskList.get(loop).getProgress());
-                tasksList.setTaskListName(allTaskList.get(loop).getTaskListName());
-                tasksList.setCharToAscii(CharToASCII(allTaskList.get(loop).getTaskListName()));
-                generalList.add(tasksList);
+            if(Long.parseLong(allTaskList.get(loop).getStartMilli()) > System.currentTimeMillis()) {
+                generalList.add(allTaskList.get(loop));
             }
         }
         Collections.sort(generalList,byUpComingDate);
@@ -276,26 +259,8 @@ public class TasksListFragment extends BaseFragment {
     public void OverDueDate(){
         generalList.clear();
         for (int loop = 0; loop < allTaskList.size(); loop++) {
-            if(Long.parseLong(DateMilli(allTaskList.get(loop).getEndDate())) < System.currentTimeMillis()) {
-                TasksList tasksList = new TasksList();
-                tasksList.setTaskID(allTaskList.get(loop).getTaskID());
-                if(allTaskList.get(loop).getTaskName().equalsIgnoreCase("")){
-                    tasksList.setTaskName("-");
-                }else {
-                    tasksList.setTaskName(allTaskList.get(loop).getTaskName());
-                }
-                tasksList.setEndMilli(DateMilli(allTaskList.get(loop).getEndDate()));
-                tasksList.setStartMilli(DateMilli(allTaskList.get(loop).getStartDate()));
-                tasksList.setHeaderID(DateHeader(allTaskList.get(loop).getEndDate()));
-                tasksList.setProjectName(allTaskList.get(loop).getProjectName());
-                tasksList.setStartDate(DateFormatter(allTaskList.get(loop).getStartDate()));
-                tasksList.setEndDate(DateFormatter(allTaskList.get(loop).getEndDate()));
-                tasksList.setHeader(DateFormatter(allTaskList.get(loop).getEndDate()));
-                tasksList.setProgress(allTaskList.get(loop).getProgress());
-                tasksList.setPriority(allTaskList.get(loop).getPriority());
-                tasksList.setTaskListName(allTaskList.get(loop).getTaskListName());
-                tasksList.setCharToAscii(CharToASCII(allTaskList.get(loop).getTaskListName()));
-                generalList.add(tasksList);
+            if(Long.parseLong(allTaskList.get(loop).getEndMilli()) < System.currentTimeMillis()) {
+                generalList.add(allTaskList.get(loop));
             }
         }
         Collections.sort(generalList,byOverDate);
@@ -330,7 +295,7 @@ public class TasksListFragment extends BaseFragment {
     };
     public boolean isLoaded(){
         Boolean isloading=false;
-        if(generalList.size()==0)
+        if(allTaskList.size()==0)
             isloading = false;
         else
             isloading= true;
