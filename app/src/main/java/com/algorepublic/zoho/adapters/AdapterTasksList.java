@@ -1,6 +1,12 @@
 package com.algorepublic.zoho.adapters;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
+import android.graphics.drawable.ShapeDrawable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -53,13 +59,17 @@ public class AdapterTasksList extends BaseAdapter implements StickyListHeadersAd
         convertView = l_Inflater.inflate(R.layout.layout_taskslist_row, null);
         aq = new AQuery(convertView);
 
+        Drawable shapeDrawable = (Drawable) aq.id(R.id.priority_bar).getView().getBackground();
+        GradientDrawable colorDrawable = (GradientDrawable) shapeDrawable;
+        colorDrawable.setColor(getPriorityWiseColor(TasksListFragment.generalList.get(position).getPriority()));
+        aq.id(R.id.priority_bar).getView().setBackground(shapeDrawable);
+
+        aq.id(R.id.task_name).text(TasksListFragment.generalList.get(position).getTaskName());
         if(TasksListFragment.generalList.get(position).getStartDate().equalsIgnoreCase("3/0/1"))
             aq.id(R.id.task_date).text("No Due Date");
         else
             aq.id(R.id.task_date).text(TasksListFragment.generalList.get(position).getEndDate());
 
-            aq.id(R.id.priority_bar).backgroundColor(getPriorityWiseColor(TasksListFragment.generalList.get(position).priority));
-            aq.id(R.id.task_name).text(TasksListFragment.generalList.get(position).getTaskName());
         if(TasksListFragment.generalList.get(position).getProjectName().equalsIgnoreCase(""))
             aq.id(R.id.general).text("General");
         else

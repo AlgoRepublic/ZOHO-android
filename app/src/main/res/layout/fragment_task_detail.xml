@@ -27,7 +27,8 @@
                 android:text="@string/task_name"
                 android:layout_height="wrap_content"
                 android:textSize="18sp"
-                android:layout_centerHorizontal="true"
+                android:gravity="left"
+                android:padding="10dp"
                 android:layout_centerVertical="true"
                 android:textStyle="bold"
                 android:textColor="@color/white"
@@ -53,34 +54,45 @@
                 android:orientation="horizontal">
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_weight="1"
+                    android:layout_weight=".8"
+                    android:text="@string/task_startdate"
+                    android:layout_height="wrap_content"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:layout_toLeftOf="@+id/textView"
+                    android:textColor="@color/colorPrimaryDark"
+                    />
+                <TextView
+                    android:id="@+id/start_date"
+                    android:layout_width="0dp"
+                    android:layout_weight=".8"
+                    android:text="dsds"
+                    android:layout_height="wrap_content"
+                    android:textSize="14sp"
+                    android:layout_toLeftOf="@+id/textView"
+                    android:textColor="@color/colorPrimaryDark"
+                    />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight=".7"
                     android:text="@string/category"
                     android:layout_height="wrap_content"
-                    android:textSize="16sp"
+                    android:textSize="14sp"
                     android:textStyle="bold"
                     android:layout_toLeftOf="@+id/textView"
                     android:textColor="@color/colorPrimaryDark"
                     />
                 <TextView
+                    android:id="@+id/category"
                     android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:text="@string/priority"
+                    android:layout_weight=".7"
+                    android:text="dsds"
                     android:layout_height="wrap_content"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
+                    android:textSize="14sp"
                     android:layout_toLeftOf="@+id/textView"
                     android:textColor="@color/colorPrimaryDark"
                     />
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:text="@string/task_added"
-                    android:layout_height="wrap_content"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    android:layout_toLeftOf="@+id/textView"
-                    android:textColor="@color/colorPrimaryDark"
-                    />
+
             </LinearLayout>
             <LinearLayout
                 android:id="@+id/header_layout2"
@@ -88,31 +100,46 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:weightSum="3"
+                android:layout_marginTop="10dp"
                 android:orientation="horizontal">
+
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_weight="1"
+                    android:layout_weight=".8"
+                    android:text="@string/task_enddate"
+                    android:layout_height="wrap_content"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:layout_toLeftOf="@+id/textView"
+                    android:textColor="@color/colorPrimaryDark"
+                    />
+                <TextView
+                    android:id="@+id/added_date"
+                    android:layout_width="0dp"
+                    android:layout_weight=".8"
                     android:text="dsds"
                     android:layout_height="wrap_content"
-                    android:textSize="16sp"
+                    android:textSize="14sp"
                     android:layout_toLeftOf="@+id/textView"
                     android:textColor="@color/colorPrimaryDark"
                     />
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:text="dsds"
+                    android:layout_weight=".7"
+                    android:text="@string/priority"
                     android:layout_height="wrap_content"
-                    android:textSize="16sp"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
                     android:layout_toLeftOf="@+id/textView"
                     android:textColor="@color/colorPrimaryDark"
                     />
                 <TextView
+                    android:id="@+id/priority"
                     android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:text="dsds"
+                    android:layout_weight=".7"
+                    android:text="@string/task_added"
                     android:layout_height="wrap_content"
-                    android:textSize="16sp"
+                    android:textSize="14sp"
                     android:layout_toLeftOf="@+id/textView"
                     android:textColor="@color/colorPrimaryDark"
                     />
@@ -122,14 +149,14 @@
                 android:layout_below="@+id/header_layout2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="10dp"
                 android:orientation="vertical">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/task_details"
                     android:layout_height="wrap_content"
-                    android:textSize="16sp"
+                    android:textSize="14sp"
                     android:textStyle="bold"
                     android:layout_toLeftOf="@+id/textView"
                     android:textColor="@color/colorPrimaryDark"
@@ -137,10 +164,10 @@
             <TextView
                 android:id="@+id/task_desc"
                 android:layout_width="match_parent"
-                android:text="dsds"
                 android:layout_below="@+id/task_name"
                 android:layout_height="wrap_content"
-                android:textSize="16sp"
+                android:textSize="14sp"
+                android:lines="4"
                 android:ellipsize="end"
                 android:textColor="@color/colorPrimaryDark"
                 />
@@ -150,7 +177,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:weightSum="3"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="10dp"
                 android:layout_below="@+id/header_layout3"
                 android:orientation="horizontal">
                 <TextView
@@ -158,31 +185,12 @@
                     android:layout_weight="1"
                     android:text="@string/task_users"
                     android:layout_height="wrap_content"
-                    android:textSize="16sp"
+                    android:textSize="14sp"
                     android:textStyle="bold"
                     android:layout_toLeftOf="@+id/textView"
                     android:textColor="@color/colorPrimaryDark"
                     />
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:text="@string/task_startdate"
-                    android:layout_height="wrap_content"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    android:layout_toLeftOf="@+id/textView"
-                    android:textColor="@color/colorPrimaryDark"
-                    />
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:text="@string/task_enddate"
-                    android:layout_height="wrap_content"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    android:layout_toLeftOf="@+id/textView"
-                    android:textColor="@color/colorPrimaryDark"
-                    />
+
             </LinearLayout>
             <LinearLayout
                 android:id="@+id/header_layout5"
@@ -196,25 +204,7 @@
                     android:layout_weight="1"
                     android:text="dsds"
                     android:layout_height="wrap_content"
-                    android:textSize="16sp"
-                    android:layout_toLeftOf="@+id/textView"
-                    android:textColor="@color/colorPrimaryDark"
-                    />
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:text="dsds"
-                    android:layout_height="wrap_content"
-                    android:textSize="16sp"
-                    android:layout_toLeftOf="@+id/textView"
-                    android:textColor="@color/colorPrimaryDark"
-                    />
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:text="dsds"
-                    android:layout_height="wrap_content"
-                    android:textSize="16sp"
+                    android:textSize="14sp"
                     android:layout_toLeftOf="@+id/textView"
                     android:textColor="@color/colorPrimaryDark"
                     />
@@ -238,10 +228,9 @@
                     android:layout_width="120dp"
                     android:layout_height="30dp"
                     android:maxHeight="300sp"
-                    app:progressColor="#AFF123"
+                    android:thumb="@drawable/inactive_dot"
+                    app:progressColor="@color/colorAccent"
                     android:layout_centerVertical="true"
-                    app:progressBackgroundColor="#000"
-                    app:thumbColor="#FF4444"
                     app:thumbAlpha="1.0"/>
 
                 <TextView

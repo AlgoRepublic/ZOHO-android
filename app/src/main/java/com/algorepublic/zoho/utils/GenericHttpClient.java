@@ -34,7 +34,7 @@ public class GenericHttpClient {
     private Header[] generateHttpRequestHeaders() {
 
         List<Header> result = new ArrayList<Header>();
-        result.add(new BasicHeader("Content-type", "application/json/octet-stream"));
+        result.add(new BasicHeader("Content-type", "text/html/application/json/octet-stream"));
         result.add(new BasicHeader("Accept", "text/html,application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5"));
         return result.toArray(new Header[]{});
     }
@@ -76,25 +76,21 @@ public class GenericHttpClient {
         HttpClient hc = new DefaultHttpClient();
         String message =null;
         HttpPost p = new HttpPost(url);
+        p.setHeaders(generateHttpRequestHeaders());
         MultipartEntity mpEntity = new MultipartEntity(HttpMultipartMode.BROWSER_COMPATIBLE);
-        try {
-            for(int i=0;i<files.size();i++) {
-                Log.e("File","/"+files.get(i).getName());
-                mpEntity.addPart("files[]",new FileBody(files.get(i)));
-            }
-            mpEntity.addPart("folderID", new StringBody(Integer.toString(folderID)));
-            mpEntity.addPart("ProjectID", new StringBody(Integer.toString(4)));
-            mpEntity.addPart("CreateBy",new StringBody(Integer.toString(1)));
-            mpEntity.addPart("UpdateBy",new StringBody(Integer.toString(1)));
+        Log.e("File", "/" + files.get(0).getName());
+        mpEntity.addPart("status[image]",new FileBody(files.get(0)));
+
+//            mpEntity.addPart("folderID", new StringBody(Integer.toString(folderID)));
+//            mpEntity.addPart("ProjectID", new StringBody(Integer.toString(4)));
+//            mpEntity.addPart("CreateBy",new StringBody(Integer.toString(1)));
+//            mpEntity.addPart("UpdateBy",new StringBody(Integer.toString(1)));
             p.setEntity(mpEntity);
 
             HttpResponse resp = hc.execute(p);
             if (resp != null) {
                 message = convertStreamToString(resp.getEntity().getContent());
             }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
         return message;
     }
     public String get(String url) throws IOException {

@@ -3,6 +3,8 @@ package com.algorepublic.zoho.fragments;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
@@ -95,6 +97,12 @@ public class TaskDetailFragment extends BaseFragment {
         aq.id(R.id.task_desc).text(TasksListFragment.generalList.get(position).getTaskListName());
         aq.id(R.id.taskdate).text(DaysDifference(TasksListFragment.generalList.get(position).getEndMilli()));
         seekBarCompat.setProgress(TasksListFragment.generalList.get(position).getProgress());
+
+        Drawable shapeDrawable = (Drawable) aq.id(R.id.layout_tasktitle).getView().getBackground();
+        GradientDrawable colorDrawable = (GradientDrawable) shapeDrawable;
+        colorDrawable.setColor(getPriorityWiseColor(TasksListFragment.generalList.get(position).getPriority()));
+        aq.id(R.id.layout_tasktitle).getView().setBackground(shapeDrawable);
+
         seekBarCompat.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {

@@ -1,31 +1,25 @@
 package com.algorepublic.zoho;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.IntentSender;
-import android.database.Cursor;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
-import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
-import android.webkit.MimeTypeMap;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.algorepublic.zoho.adapters.TasksList;
+import com.algorepublic.zoho.Models.GeneralModel;
+import com.algorepublic.zoho.services.DocumentsService;
 import com.algorepublic.zoho.utils.BaseClass;
-import com.algorepublic.zoho.utils.Constants;
 import com.algorepublic.zoho.utils.GenericHttpClient;
 import com.androidquery.AQuery;
 import com.bumptech.glide.Glide;
@@ -45,28 +39,19 @@ import com.google.android.gms.drive.Drive;
 import com.google.android.gms.drive.DriveApi;
 import com.google.android.gms.drive.DriveContents;
 import com.google.android.gms.drive.DriveFile;
-import com.google.android.gms.drive.DriveFolder;
 import com.google.android.gms.drive.DriveId;
 import com.google.android.gms.drive.DriveResource;
 import com.google.android.gms.drive.Metadata;
 import com.google.android.gms.drive.OpenFileActivityBuilder;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedInputStream;
 import java.io.BufferedReader;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.net.URLEncoder;
 import java.util.ArrayList;
 
 import cc.cloudist.acplibrary.ACProgressConstant;
@@ -89,6 +74,7 @@ public class ActivityUploadDocs extends BaseActivity implements GoogleApiClient.
     GoogleApiClient mGoogleApiClient;
     DriveFile selectedFile;
     BaseClass baseClass;
+    DocumentsService service;
     public static ACProgressFlower dialog;
     public static ArrayList<File> filesList = new ArrayList<>();
 
@@ -98,6 +84,7 @@ public class ActivityUploadDocs extends BaseActivity implements GoogleApiClient.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_upload_docs);
         aq = new AQuery(this);
+        service = new DocumentsService(this);
         dialog = new ACProgressFlower.Builder(this)
                 .direction(ACProgressConstant.DIRECT_CLOCKWISE)
                 .themeColor(Color.WHITE)
@@ -118,6 +105,8 @@ public class ActivityUploadDocs extends BaseActivity implements GoogleApiClient.
             @Override
             public void onClick(View v) {
             new AsyncTry().execute();
+           //service.uploadDocuments(filesList.get(0),true,new CallBack(this,"Upload"));
+//
             }
         });
         for (int loop=0;loop<filesList.size();loop++)
@@ -177,6 +166,14 @@ public class ActivityUploadDocs extends BaseActivity implements GoogleApiClient.
                 }
             }
         });
+    }
+    public void DocumentsList(Object caller, Object model) {
+        GeneralModel.getInstance().setList((GeneralModel) model);
+        if (GeneralModel.getInstance().responseCode.equalsIgnoreCase("100")) {
+
+        } else {
+            Toast.makeText(this, getString(R.string.invalid_credential), Toast.LENGTH_SHORT).show();
+        }
     }
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -390,7 +387,7 @@ public class ActivityUploadDocs extends BaseActivity implements GoogleApiClient.
         protected String doInBackground(Void... voids) {
             try {
                 httpClient = new GenericHttpClient();
-                response = httpClient.uploadDocuments(Constants.UploadDocuments_API
+                response = httpClient.uploadDocuments("http://www.jitpac.com/FileUploadsManager/uploads/"
                         , filesList, 4);
             } catch (IOException e) {
                 e.printStackTrace();
