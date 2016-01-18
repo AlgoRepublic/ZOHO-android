@@ -8,6 +8,7 @@ import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -20,6 +21,7 @@ import android.widget.SeekBar;
 import com.algorepublic.zoho.ActivityTask;
 import com.algorepublic.zoho.Models.GeneralModel;
 import com.algorepublic.zoho.R;
+import com.algorepublic.zoho.circularseekbar.CircularSeekBar;
 import com.algorepublic.zoho.services.CallBack;
 import com.algorepublic.zoho.services.TaskListService;
 import com.androidquery.AQuery;
@@ -27,7 +29,6 @@ import com.flyco.animation.BounceEnter.BounceLeftEnter;
 import com.flyco.animation.SlideExit.SlideRightExit;
 import com.flyco.dialog.listener.OnBtnClickL;
 import com.flyco.dialog.widget.NormalDialog;
-import com.github.lzyzsd.circleprogress.ArcProgress;
 
 import app.minimize.com.seek_bar_compat.SeekBarCompat;
 
@@ -42,10 +43,9 @@ public class TaskDetailFragment extends BaseFragment {
     static TaskDetailFragment fragment;
     static int position;
     int Progress,opt;
-    ArcProgress arcProgress;
     TaskListService service;
     int click=0;
-    SeekBarCompat seekBarCompat;
+    CircularSeekBar seekBarCompat;
 
     public TaskDetailFragment() {
         // Required empty public constructor
@@ -87,12 +87,13 @@ public class TaskDetailFragment extends BaseFragment {
         // Inflate the layout for this fragment
         final View view =  inflater.inflate(R.layout.fragment_task_detail, container, false);
         setHasOptionsMenu(true);
-        seekBarCompat = (SeekBarCompat) view.findViewById(R.id.seekBar);
+        seekBarCompat = (CircularSeekBar) view.findViewById(R.id.arc_progress);
         aq = new AQuery(view);
         setPriority();
         service = new TaskListService(getActivity());
-        arcProgress = (ArcProgress) view.findViewById(R.id.arc_progress);
-        arcProgress.setProgress(TasksListFragment.generalList.get(position).getProgress());
+        seekBarCompat.setProgress(TasksListFragment.generalList.get(position).getProgress());
+        aq.id(R.id.percentage).text(TasksListFragment.generalList.get(position).getProgress() + "%");
+        Log.e("Progress", "/" + TasksListFragment.generalList.get(position).getProgress());
         aq.id(R.id.task_name).text(TasksListFragment.generalList.get(position).getTaskName());
         aq.id(R.id.task_desc).text(TasksListFragment.generalList.get(position).getTaskListName());
         aq.id(R.id.taskdate).text(DaysDifference(TasksListFragment.generalList.get(position).getEndMilli()));
@@ -103,11 +104,11 @@ public class TaskDetailFragment extends BaseFragment {
         colorDrawable.setColor(getPriorityWiseColor(TasksListFragment.generalList.get(position).getPriority()));
         aq.id(R.id.layout_tasktitle).getView().setBackground(shapeDrawable);
 
-        seekBarCompat.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+        seekBarCompat.setOnSeekBarChangeListener(new CircularSeekBar.OnCircularSeekBarChangeListener() {
             @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                arcProgress.setProgress(progress);
+            public void onProgressChanged(CircularSeekBar circularSeekBar, int progress, boolean fromUser) {
                 Progress = progress;
+                aq.id(R.id.percentage).text(progress+"%");
                 if(progress==100)
                     opt= 1;
                 else
@@ -115,12 +116,13 @@ public class TaskDetailFragment extends BaseFragment {
             }
 
             @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
+            public void onStopTrackingTouch(CircularSeekBar seekBar) {
 
             }
 
             @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
+            public void onStartTrackingTouch(CircularSeekBar seekBar) {
+
             }
         });
         aq.id(R.id.comment).clicked(new View.OnClickListener() {

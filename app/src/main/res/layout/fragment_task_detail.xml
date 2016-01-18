@@ -223,23 +223,12 @@
                 android:layout_height="40dp"
                 android:layout_alignParentTop="true">
 
-                <app.minimize.com.seek_bar_compat.SeekBarCompat
-                    android:id="@+id/seekBar"
-                    android:layout_width="120dp"
-                    android:layout_height="30dp"
-                    android:maxHeight="300sp"
-                    android:thumb="@drawable/inactive_dot"
-                    app:progressColor="@color/colorAccent"
-                    android:layout_centerVertical="true"
-                    app:thumbAlpha="1.0"/>
-
                 <TextView
                     android:id="@+id/taskdate"
                     android:layout_width="wrap_content"
                     android:text="23%"
                     android:padding="5dp"
                     android:gravity="right"
-                    android:layout_toRightOf="@+id/seekBar"
                     android:layout_centerVertical="true"
                     android:layout_alignParentRight="true"
                     android:layout_height="wrap_content"
@@ -247,20 +236,38 @@
                     android:textColor="@color/colorAccent"
                     />
             </RelativeLayout>
-            <com.github.lzyzsd.circleprogress.ArcProgress
+
+            <TextView
+                android:id="@+id/percentage"
+                android:layout_width="wrap_content"
+                android:text="100%"
+                android:padding="5dp"
+                android:gravity="right"
+                android:layout_height="wrap_content"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                android:textColor="@color/colorAccent"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true" />
+            <com.algorepublic.zoho.circularseekbar.CircularSeekBar
                 android:id="@+id/arc_progress"
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
                 android:layout_below="@+id/layout4"
                 android:layout_width="120dp"
                 android:layout_height="120dp"
-                app:arc_progress="70"
-                app:arc_bottom_text_size="16sp"
-                app:arc_suffix_text="%"
-                app:arc_text_color="@color/colorAccent"
-                app:arc_stroke_width="5dp"
-                app:arc_unfinished_color="@android:color/transparent"
-                app:arc_finished_color="@color/colorAccent"/>
+                app:start_angle="270"
+                app:end_angle="270"
+                app:circle_x_radius="100dp"
+                app:circle_y_radius="100dp"
+                app:use_custom_radii="true"
+                app:progress="45"
+                app:max="100"
+                app:circle_progress_color="@color/colorAccent"
+                app:circle_color="@color/colorDarkgray"
+                app:pointer_alpha_ontouch="100"
+                app:pointer_color="@color/colorAccent"
+                app:pointer_halo_color="@color/colorAccent"/>
         </RelativeLayout>
 
         </RelativeLayout>
@@ -306,7 +313,6 @@
             android:gravity="center"
             android:layout_weight="1.6"
             android:layout_gravity="center"
-            android:layout_toRightOf="@id/seekBar"
             android:layout_height="match_parent"
             android:textSize="14sp"
             android:textColor="@android:color/white"

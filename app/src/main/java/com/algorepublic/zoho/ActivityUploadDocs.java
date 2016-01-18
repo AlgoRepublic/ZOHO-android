@@ -20,6 +20,7 @@ import android.widget.Toast;
 import com.algorepublic.zoho.Models.GeneralModel;
 import com.algorepublic.zoho.services.DocumentsService;
 import com.algorepublic.zoho.utils.BaseClass;
+import com.algorepublic.zoho.utils.Constants;
 import com.algorepublic.zoho.utils.GenericHttpClient;
 import com.androidquery.AQuery;
 import com.bumptech.glide.Glide;
@@ -387,8 +388,7 @@ public class ActivityUploadDocs extends BaseActivity implements GoogleApiClient.
         protected String doInBackground(Void... voids) {
             try {
                 httpClient = new GenericHttpClient();
-                response = httpClient.uploadDocuments("http://www.jitpac.com/FileUploadsManager/uploads/"
-                        , filesList, 4);
+                response = httpClient.uploadDocuments(Constants.UploadDocuments_API,filesList, 4);
             } catch (IOException e) {
                 e.printStackTrace();
             }
