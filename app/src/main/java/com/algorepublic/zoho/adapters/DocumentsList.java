@@ -3,7 +3,7 @@ package com.algorepublic.zoho.adapters;
 /**
  * Created by android on 1/7/16.
  */
-public class DocumentsList {
+public class DocumentsList  implements Comparable<DocumentsList>{
 
     public String getFileName() {
         return fileName;
@@ -52,4 +52,9 @@ public class DocumentsList {
     private String createdAt;
     private String createdMilli;
     private int fileTypeID;
+
+    @Override
+    public int compareTo(DocumentsList another) {
+        return (Long.valueOf(this.getCreatedMilli()).compareTo(Long.valueOf(another.getCreatedMilli())));
+    }
 }

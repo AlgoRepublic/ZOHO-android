@@ -3,6 +3,8 @@ package com.algorepublic.zoho.fragments;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
@@ -25,6 +27,7 @@ import com.flyco.animation.BounceEnter.BounceLeftEnter;
 import com.flyco.animation.SlideExit.SlideRightExit;
 import com.flyco.dialog.listener.OnBtnClickL;
 import com.flyco.dialog.widget.NormalDialog;
+import com.github.lzyzsd.circleprogress.ArcProgress;
 
 import app.minimize.com.seek_bar_compat.SeekBarCompat;
 
@@ -39,6 +42,7 @@ public class TaskDetailFragment extends BaseFragment {
     static TaskDetailFragment fragment;
     static int position;
     int Progress,opt;
+    ArcProgress arcProgress;
     TaskListService service;
     int click=0;
     SeekBarCompat seekBarCompat;
@@ -81,20 +85,28 @@ public class TaskDetailFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view =  inflater.inflate(R.layout.fragment_task_detail, container, false);
+        final View view =  inflater.inflate(R.layout.fragment_task_detail, container, false);
         setHasOptionsMenu(true);
         seekBarCompat = (SeekBarCompat) view.findViewById(R.id.seekBar);
         aq = new AQuery(view);
         setPriority();
         service = new TaskListService(getActivity());
+        arcProgress = (ArcProgress) view.findViewById(R.id.arc_progress);
+        arcProgress.setProgress(TasksListFragment.generalList.get(position).getProgress());
         aq.id(R.id.task_name).text(TasksListFragment.generalList.get(position).getTaskName());
         aq.id(R.id.task_desc).text(TasksListFragment.generalList.get(position).getTaskListName());
         aq.id(R.id.taskdate).text(DaysDifference(TasksListFragment.generalList.get(position).getEndMilli()));
         seekBarCompat.setProgress(TasksListFragment.generalList.get(position).getProgress());
+
+        Drawable shapeDrawable = (Drawable) aq.id(R.id.layout_tasktitle).getView().getBackground();
+        GradientDrawable colorDrawable = (GradientDrawable) shapeDrawable;
+        colorDrawable.setColor(getPriorityWiseColor(TasksListFragment.generalList.get(position).getPriority()));
+        aq.id(R.id.layout_tasktitle).getView().setBackground(shapeDrawable);
+
         seekBarCompat.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                aq.id(R.id.percentage).text(progress + "%");
+                arcProgress.setProgress(progress);
                 Progress = progress;
                 if(progress==100)
                     opt= 1;

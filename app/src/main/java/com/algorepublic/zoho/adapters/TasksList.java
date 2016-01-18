@@ -61,12 +61,6 @@ public class TasksList implements Comparable<TasksList>{
         return endMilli;
     }
 
-    public void setHeaderID(long headerid){
-        headerID = headerid;
-    }
-    public long getHeaderID(){
-        return headerID;
-    }
     public void setHeader(String headerList){
         this.header = headerList;
     }
@@ -88,7 +82,6 @@ public class TasksList implements Comparable<TasksList>{
     }
 
 
-    long headerID;
     String header;
     int priority;
     int progress;

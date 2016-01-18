@@ -38,9 +38,13 @@ import com.algorepublic.zoho.adapters.TasksList;
 import com.algorepublic.zoho.fragments.BaseFragment;
 import com.androidquery.AQuery;
 import com.bumptech.glide.Glide;
+import com.flyco.animation.SlideEnter.SlideLeftEnter;
+import com.flyco.animation.SlideExit.SlideRightExit;
 import com.flyco.dialog.entity.DialogMenuItem;
+import com.flyco.dialog.listener.OnBtnClickL;
 import com.flyco.dialog.listener.OnOperItemClickL;
 import com.flyco.dialog.widget.ActionSheetDialog;
+import com.flyco.dialog.widget.MaterialDialog;
 import com.flyco.dialog.widget.internal.BaseAlertDialog;
 
 import java.io.ByteArrayOutputStream;
@@ -114,7 +118,7 @@ public class TaskAttachmentFragment extends BaseFragment {
                     startActivityForResult(galleryIntent, RESULT_GALLERY);
                 }
                 if (position == 2) {
-                    if (Build.VERSION.SDK_INT < 19) {
+                    if (Build.VERSION.SDK_INT > 19) {
                         Intent mediaIntent = new Intent(Intent.ACTION_GET_CONTENT);
                         mediaIntent.setType("*/file"); //set mime type as per requirement
                         startActivityForResult(mediaIntent, PICK_File);
@@ -138,15 +142,13 @@ public class TaskAttachmentFragment extends BaseFragment {
                 if (resultCode == getActivity().RESULT_OK) {
                     Uri selectedImageUri = data.getData();
                     File newFile = new File(getRealPathFromURI(selectedImageUri));
-                    showFileInList(newFile);
-                    ActivityTask.filesList.add(newFile);
+                    checkFileLenght(newFile);
                 }
                 break;
             case RESULT_GALLERY:
                 if (null != data) {
                     File  newFile = new File(URI.create("file://"+getDataColumn(getActivity(), data.getData(),null,null)));
-                     showFileInList(newFile);
-                    ActivityTask.filesList.add(newFile);
+                    checkFileLenght(newFile);
                 }
                 break;
             case PICK_File:
@@ -155,8 +157,7 @@ public class TaskAttachmentFragment extends BaseFragment {
                     File  newFile = null;
                     try {
                         newFile = new File(new URI("file://"+getDataColumn(getActivity(), contactData,null,null)));
-                        showFileInList(newFile);
-                        ActivityTask.filesList.add(newFile);
+                        checkFileLenght(newFile);
                     } catch (URISyntaxException e) {
                         e.printStackTrace();
                     }
@@ -166,7 +167,14 @@ public class TaskAttachmentFragment extends BaseFragment {
                 break;
         }
     }
-
+    private void checkFileLenght(File file){
+        if(file.length() > 1048576 * 5) {
+            MaterialAlertDialog();
+        }else {
+            ActivityTask.filesList.add(file);
+            showFileInList(file);
+        }
+    }
     private void showFileInList(File file) {
         try {
                 final LinearLayout linearLayout = (LinearLayout) aq
@@ -197,4 +205,25 @@ public class TaskAttachmentFragment extends BaseFragment {
                         Toast.LENGTH_SHORT).show();
             }
         }
+    public void MaterialAlertDialog(){
+        final MaterialDialog dialog = new MaterialDialog(getActivity());
+        dialog//
+                .btnNum(1)
+                .title("File size alert!")
+                .titleTextColor(getResources().getColor(R.color.colorPrimaryDark))
+                .content("File size should be less than (5) five MB")//
+                .contentTextColor(getResources().getColor(R.color.colorPrimary))
+                .btnText("OK")//
+                .btnTextColor(getResources().getColor(R.color.colorPrimary))
+                .showAnim(new SlideLeftEnter())//
+                .dismissAnim(new SlideRightExit())//
+                .show();
+
+        dialog.setOnBtnClickL(new OnBtnClickL() {
+            @Override
+            public void onBtnClick() {
+                dialog.dismiss();
+            }
+        });
+    }
 }

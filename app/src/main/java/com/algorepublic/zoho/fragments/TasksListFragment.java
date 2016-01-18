@@ -42,6 +42,7 @@ public class TasksListFragment extends BaseFragment {
     StickyListHeadersAdapter adapterTasksList;
     AQuery aq;View view;
     RadioGroup radioGroup;
+    public static ArrayList<TasksList> allTaskList = new ArrayList<>();
     public static ArrayList<TasksList> generalList = new ArrayList<>();
     BaseClass baseClass;
     StickyListHeadersListView listView;
@@ -92,7 +93,11 @@ public class TasksListFragment extends BaseFragment {
         baseClass = ((BaseClass) getActivity().getApplicationContext());
         setHasOptionsMenu(true);
         taskListService = new TaskListService(getActivity());
-        taskListService.getTasksList(true, new CallBack(TasksListFragment.this, "TasksList"));
+        if(allTaskList.size()==0) {
+            taskListService.getTasksList(true, new CallBack(TasksListFragment.this, "TasksList"));
+        }else{
+            GetGeneralList();
+        }
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -108,18 +113,24 @@ public class TasksListFragment extends BaseFragment {
         aq.id(R.id.all).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                GetGeneralList();
+                if(isLoaded()) {
+                    if(allTaskList.size()>0) {
+                      GetGeneralList();
+                    }
+                }
             }
         });
         aq.id(R.id.up_coming).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(isLoaded())
                 UpComing();
             }
         });
         aq.id(R.id.over_due).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(isLoaded())
                 OverDueDate();
             }
         });
@@ -157,9 +168,10 @@ public class TasksListFragment extends BaseFragment {
             @Override
             public void onOperItemClick(AdapterView<?> parent, View view, int position, long id) {
                 dialog.dismiss();
-                if (position == 0) {
-                    baseClass.setSortType("DueDate");
-                }
+                if (isLoaded())
+                    if (position == 0) {
+                        baseClass.setSortType("DueDate");
+                    }
                 if (position == 1) {
                     baseClass.setSortType("Priority");
                 }
@@ -184,7 +196,7 @@ public class TasksListFragment extends BaseFragment {
             Collections.sort(generalList);
         }
         if(baseClass.getSortType().equalsIgnoreCase("TaskList")){
-            Collections.sort(generalList,byTaskList);
+            Collections.sort(generalList, byTaskList);
         }
         SetAdapterList();
     }
@@ -198,6 +210,7 @@ public class TasksListFragment extends BaseFragment {
     public void TasksList(Object caller, Object model) {
         TasksListModel.getInstance().setList((TasksListModel) model);
         if (TasksListModel.getInstance().responseCode == 100) {
+            AddAllTasks();
             GetGeneralList();
         }
         else
@@ -207,13 +220,21 @@ public class TasksListFragment extends BaseFragment {
     }
     public void GetGeneralList(){
         generalList.clear();
+        generalList.addAll(allTaskList);
+        SortList();
+    }
+    public void AddAllTasks(){
+        allTaskList.clear();
         for (int loop = 0; loop < TasksListModel.getInstance().responseObject.size(); loop++) {
             TasksList tasksList = new TasksList();
-            tasksList.setTaskName(TasksListModel.getInstance().responseObject.get(loop).title);
+            if(TasksListModel.getInstance().responseObject.get(loop).title== null){
+                tasksList.setTaskName("-");
+            }else {
+                tasksList.setTaskName(TasksListModel.getInstance().responseObject.get(loop).title);
+            }
             tasksList.setTaskID(TasksListModel.getInstance().responseObject.get(loop).taskID);
             tasksList.setEndMilli(DateMilli(TasksListModel.getInstance().responseObject.get(loop).endDate));
             tasksList.setStartMilli(DateMilli(TasksListModel.getInstance().responseObject.get(loop).startDate));
-            tasksList.setHeaderID(DateHeader(TasksListModel.getInstance().responseObject.get(loop).endDate));
             tasksList.setProjectName(TasksListModel.getInstance().responseObject.get(loop).projectName);
             tasksList.setStartDate(DateFormatter(TasksListModel.getInstance().responseObject.get(loop).startDate));
             tasksList.setEndDate(DateFormatter(TasksListModel.getInstance().responseObject.get(loop).endDate));
@@ -222,29 +243,14 @@ public class TasksListFragment extends BaseFragment {
             tasksList.setProgress(TasksListModel.getInstance().responseObject.get(loop).progress);
             tasksList.setTaskListName(TasksListModel.getInstance().responseObject.get(loop).taskListName);
             tasksList.setCharToAscii(CharToASCII(TasksListModel.getInstance().responseObject.get(loop).taskListName));
-            generalList.add(tasksList);
+            allTaskList.add(tasksList);
         }
-        SortList();
     }
     public void UpComing(){
         generalList.clear();
-        for (int loop = 0; loop < TasksListModel.getInstance().responseObject.size(); loop++) {
-            if(Long.parseLong(DateMilli(TasksListModel.getInstance().responseObject.get(loop).startDate)) > System.currentTimeMillis()) {
-                TasksList tasksList = new TasksList();
-                tasksList.setTaskID(TasksListModel.getInstance().responseObject.get(loop).taskID);
-                tasksList.setTaskName(TasksListModel.getInstance().responseObject.get(loop).title);
-                tasksList.setEndMilli(DateMilli(TasksListModel.getInstance().responseObject.get(loop).endDate));
-                tasksList.setStartMilli(DateMilli(TasksListModel.getInstance().responseObject.get(loop).startDate));
-                tasksList.setHeaderID(DateHeader(TasksListModel.getInstance().responseObject.get(loop).startDate));
-                tasksList.setProjectName(TasksListModel.getInstance().responseObject.get(loop).projectName);
-                tasksList.setStartDate(DateFormatter(TasksListModel.getInstance().responseObject.get(loop).startDate));
-                tasksList.setHeader(DateFormatter(TasksListModel.getInstance().responseObject.get(loop).startDate));
-                tasksList.setEndDate(DateFormatter(TasksListModel.getInstance().responseObject.get(loop).endDate));
-                tasksList.setPriority(TasksListModel.getInstance().responseObject.get(loop).priority);
-                tasksList.setProgress(TasksListModel.getInstance().responseObject.get(loop).progress);
-                tasksList.setTaskListName(TasksListModel.getInstance().responseObject.get(loop).taskListName);
-                tasksList.setCharToAscii(CharToASCII(TasksListModel.getInstance().responseObject.get(loop).taskListName));
-                generalList.add(tasksList);
+        for (int loop = 0; loop < allTaskList.size(); loop++) {
+            if(Long.parseLong(allTaskList.get(loop).getStartMilli()) > System.currentTimeMillis()) {
+                generalList.add(allTaskList.get(loop));
             }
         }
         Collections.sort(generalList,byUpComingDate);
@@ -252,23 +258,9 @@ public class TasksListFragment extends BaseFragment {
     }
     public void OverDueDate(){
         generalList.clear();
-        for (int loop = 0; loop < TasksListModel.getInstance().responseObject.size(); loop++) {
-            if(Long.parseLong(DateMilli(TasksListModel.getInstance().responseObject.get(loop).endDate)) < System.currentTimeMillis()) {
-                TasksList tasksList = new TasksList();
-                tasksList.setTaskID(TasksListModel.getInstance().responseObject.get(loop).taskID);
-                tasksList.setTaskName(TasksListModel.getInstance().responseObject.get(loop).title);
-                tasksList.setEndMilli(DateMilli(TasksListModel.getInstance().responseObject.get(loop).endDate));
-                tasksList.setStartMilli(DateMilli(TasksListModel.getInstance().responseObject.get(loop).startDate));
-                tasksList.setHeaderID(DateHeader(TasksListModel.getInstance().responseObject.get(loop).endDate));
-                tasksList.setProjectName(TasksListModel.getInstance().responseObject.get(loop).projectName);
-                tasksList.setStartDate(DateFormatter(TasksListModel.getInstance().responseObject.get(loop).startDate));
-                tasksList.setEndDate(DateFormatter(TasksListModel.getInstance().responseObject.get(loop).endDate));
-                tasksList.setHeader(DateFormatter(TasksListModel.getInstance().responseObject.get(loop).endDate));
-                tasksList.setProgress(TasksListModel.getInstance().responseObject.get(loop).progress);
-                tasksList.setPriority(TasksListModel.getInstance().responseObject.get(loop).priority);
-                tasksList.setTaskListName(TasksListModel.getInstance().responseObject.get(loop).taskListName);
-                tasksList.setCharToAscii(CharToASCII(TasksListModel.getInstance().responseObject.get(loop).taskListName));
-                generalList.add(tasksList);
+        for (int loop = 0; loop < allTaskList.size(); loop++) {
+            if(Long.parseLong(allTaskList.get(loop).getEndMilli()) < System.currentTimeMillis()) {
+                generalList.add(allTaskList.get(loop));
             }
         }
         Collections.sort(generalList,byOverDate);
@@ -301,5 +293,13 @@ public class TasksListFragment extends BaseFragment {
             return (Double.valueOf(ord1.getEndMilli()).compareTo(Double.valueOf(String.valueOf(System.currentTimeMillis()))));     //descending
         }
     };
+    public boolean isLoaded(){
+        Boolean isloading=false;
+        if(allTaskList.size()==0)
+            isloading = false;
+        else
+            isloading= true;
 
+        return isloading;
+    }
 }

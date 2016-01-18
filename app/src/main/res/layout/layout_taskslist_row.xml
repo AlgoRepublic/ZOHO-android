@@ -3,15 +3,18 @@
     android:descendantFocusability="blocksDescendants"
     android:orientation="horizontal"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@android:color/white">
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:weightSum="1">
     <View
         android:id="@+id/priority_bar"
         android:layout_width="0dp"
-        android:background="@color/blue"
+        android:background="@drawable/roundable_prioritybar"
         android:layout_height="match_parent"
-        android:layout_marginTop="1dp"
-        android:layout_marginBottom="1dp"
         android:layout_weight="0.02" >
     </View>
     <RelativeLayout
@@ -19,49 +22,65 @@
         android:layout_width="0dp"
         android:layout_weight="0.98"
         android:padding="5dp"
-        android:layout_centerHorizontal="true" >
-        <TextView
-            android:id="@+id/task_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:textColor="@android:color/black"
-            />
-        <TextView
-            android:id="@+id/project_name"
-            android:layout_width="match_parent"
-            android:layout_below="@+id/task_name"
-            android:layout_height="wrap_content"
-            android:textSize="14sp"
-            android:layout_marginTop="5dp"
-            android:textColor="@color/colorDarkgray"
-            />
+        android:background="@drawable/roundable_white_listitem" >
         <LinearLayout
+            android:id="@+id/layout1"
             android:orientation="horizontal"
-            android:layout_below="@+id/project_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:weightSum="2"
-            android:background="@android:color/white">
-           <!-- <TextView
-                android:id="@+id/start_date"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:textSize="14sp"
-                android:textColor="@android:color/holo_red_dark"
-                />-->
+            android:weightSum="2">
             <TextView
-                android:id="@+id/end_date"
+                android:id="@+id/task_name"
                 android:layout_width="0dp"
                 android:layout_weight="1"
+                android:gravity="left"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="@android:color/holo_red_dark"
+                />
+            <TextView
+                android:id="@+id/task_date"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:gravity="right"
                 android:layout_below="@+id/task_name"
                 android:layout_height="wrap_content"
-                android:textSize="14sp"
+                android:textSize="18sp"
                 android:textColor="@color/colorDarkgray"
                 />
         </LinearLayout>
+        <TextView
+            android:id="@+id/general"
+            android:layout_below="@+id/layout1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:textColor="@color/colorDarkgray"
+            />
+    <RelativeLayout
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_below="@+id/general" >
+        <TextView
+            android:id="@+id/comment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:gravity="left"
+            android:text="1 Comment"
+            android:layout_marginTop="5dp"
+            android:textColor="@android:color/holo_blue_dark"
+            />
+        <LinearLayout
+            android:id="@+id/layout_assignee"
+            android:orientation="horizontal"
+            android:gravity="right"
+            android:layout_alignParentRight="true"
+            android:layout_toRightOf="@+id/comment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+</RelativeLayout>
     </RelativeLayout>
-
+        </LinearLayout>
 </LinearLayout>

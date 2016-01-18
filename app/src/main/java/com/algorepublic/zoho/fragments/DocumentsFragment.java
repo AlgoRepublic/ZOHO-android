@@ -8,6 +8,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Toast;
 
 import com.algorepublic.zoho.ActivityUploadDocs;
@@ -15,12 +16,15 @@ import com.algorepublic.zoho.Models.DocumentsListModel;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.adapters.AdapterDocumentsList;
 import com.algorepublic.zoho.adapters.DocumentsList;
+import com.algorepublic.zoho.adapters.TasksList;
 import com.algorepublic.zoho.services.CallBack;
 import com.algorepublic.zoho.services.DocumentsService;
 import com.algorepublic.zoho.utils.BaseClass;
 import com.androidquery.AQuery;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 import se.emilsjolander.stickylistheaders.StickyListHeadersAdapter;
 import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
@@ -84,6 +88,12 @@ public class DocumentsFragment extends BaseFragment {
         setHasOptionsMenu(true);
         service = new DocumentsService(getActivity());
         service.getDocuments(4, true, new CallBack(DocumentsFragment.this, "DocumentsList"));
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                callFragmentWithBackStack(R.id.container,DocsPreviewFragment.newInstance(position),"DocsPreview");
+            }
+        });
         return view;
     }
 
@@ -113,5 +123,6 @@ public class DocumentsFragment extends BaseFragment {
                 docsList.add(documentsList);
             }
         }
+        Collections.sort(docsList);
     }
 }
