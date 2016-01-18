@@ -220,6 +220,7 @@
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
+                        android:id="@+id/project_radioButton"
                         android:button="@null"
                         android:paddingTop="45dp"
                         android:paddingBottom="35dp"
