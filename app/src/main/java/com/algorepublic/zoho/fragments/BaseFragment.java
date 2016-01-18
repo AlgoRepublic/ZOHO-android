@@ -8,6 +8,8 @@ import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.text.format.DateFormat;
 
+import com.algorepublic.zoho.R;
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.concurrent.TimeUnit;
@@ -56,11 +58,11 @@ public class BaseFragment extends Fragment {
             case 0:
                 return getResources().getColor(android.R.color.darker_gray);
             case 1:
-                return getResources().getColor(android.R.color.holo_orange_light);
+                return getResources().getColor(R.color.medium_priority);
             case 2:
-                return getResources().getColor(android.R.color.holo_green_light);
+                return getResources().getColor(R.color.low_priority);
             case 3:
-                return getResources().getColor(android.R.color.holo_red_light);
+                return getResources().getColor(R.color.high_priority);
             default:
                 return getResources().getColor(android.R.color.darker_gray);
         }

@@ -19,4 +19,7 @@
     <color name="theme_light_primary">#BBDEFB</color>
     <color name="theme_accent">#FFEB3B</color>
     <color name="theme_text_icons">#FFFFFF</color>
+    <color name="medium_priority">#FF7F06</color>
+    <color name="low_priority">#59BB03</color>
+    <color name="high_priority">#FC1006</color>
 </resources>
