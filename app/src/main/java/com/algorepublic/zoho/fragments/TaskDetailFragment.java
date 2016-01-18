@@ -95,6 +95,9 @@ public class TaskDetailFragment extends BaseFragment {
         aq.id(R.id.percentage).text(TasksListFragment.generalList.get(position).getProgress() + "%");
         Log.e("Progress", "/" + TasksListFragment.generalList.get(position).getProgress());
         aq.id(R.id.task_name).text(TasksListFragment.generalList.get(position).getTaskName());
+        aq.id(R.id.start_date).text(TasksListFragment.generalList.get(position).getStartDate());
+        aq.id(R.id.end_date).text(TasksListFragment.generalList.get(position).getEndDate());
+        aq.id(R.id.category).text(TasksListFragment.generalList.get(position).getTaskListName());
         aq.id(R.id.task_desc).text(TasksListFragment.generalList.get(position).getTaskListName());
         aq.id(R.id.taskdate).text(DaysDifference(TasksListFragment.generalList.get(position).getEndMilli()));
         seekBarCompat.setProgress(TasksListFragment.generalList.get(position).getProgress());
@@ -180,16 +183,14 @@ public class TaskDetailFragment extends BaseFragment {
         }
     }
     public void setPriority(){
-        aq.id(R.id.textView).backgroundColor(
-                getPriorityWiseColor(TasksListFragment.generalList.get(position).getPriority()));
         if(TasksListFragment.generalList.get(position).getPriority()==0)
-            aq.id(R.id.textView).text("None");
+            aq.id(R.id.priority).text("None");
         if(TasksListFragment.generalList.get(position).getPriority()==1)
-            aq.id(R.id.textView).text("Low");
+            aq.id(R.id.priority).text("Low");
         if(TasksListFragment.generalList.get(position).getPriority()==2)
-            aq.id(R.id.textView).text("Medium");
+            aq.id(R.id.priority).text("Medium");
         if(TasksListFragment.generalList.get(position).getPriority()==3)
-            aq.id(R.id.textView).text("High");
+            aq.id(R.id.priority).text("High");
     }
     private void NormalDialogCustomAttr(String content) {
         final NormalDialog dialog = new NormalDialog(getActivity());

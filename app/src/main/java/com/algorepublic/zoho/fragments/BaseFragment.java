@@ -128,6 +128,7 @@ public class BaseFragment extends Fragment {
 
         return (month_name+" "+mDay +", "+mYear+" "+time);
     }
+
     public String DateMilli(String date) {
         String a = date.replaceAll("\\D+", "");
         return a;

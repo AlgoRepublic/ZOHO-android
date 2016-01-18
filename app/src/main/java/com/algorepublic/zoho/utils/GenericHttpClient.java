@@ -9,9 +9,11 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.FileEntity;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.entity.mime.HttpMultipartMode;
 import org.apache.http.entity.mime.MultipartEntity;
+import org.apache.http.entity.mime.MultipartEntityBuilder;
 import org.apache.http.entity.mime.content.ContentBody;
 import org.apache.http.entity.mime.content.FileBody;
 import org.apache.http.entity.mime.content.InputStreamBody;
@@ -40,7 +42,6 @@ public class GenericHttpClient {
 
         List<Header> result = new ArrayList<Header>();
         result.add(new BasicHeader("Content-type", "application/x-www-form-urlencoded/octet-stream"));
-      //  result.add(new BasicHeader("Accept", "image/png/text/html,application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5"));
         return result.toArray(new Header[]{});
     }
 
@@ -53,7 +54,7 @@ public class GenericHttpClient {
         try {
             for(int i=0;i<files.size();i++) {
                 Log.e("File","/"+files.get(i).getName());
-                mpEntity.addPart("["+i+"]",new FileBody(files.get(i)));
+                mpEntity.addPart("file["+i+"]",new FileBody(files.get(i)));
             }
             for(int i=0;i<assignee.size();i++) {
                 Log.e("Assignee", "/" + assignee.get(i));
@@ -81,19 +82,18 @@ public class GenericHttpClient {
         HttpClient hc = new DefaultHttpClient();
         String message =null;
         HttpPost p = new HttpPost(url);
-        p.setHeaders(generateHttpRequestHeaders());
+       // p.setHeaders(generateHttpRequestHeaders());
         MultipartEntity mpEntity = new MultipartEntity(HttpMultipartMode.BROWSER_COMPATIBLE);
         for(int i=0;i<files.size();i++) {
-            Log.e("File", "/" + files.get(0).getName());
-            mpEntity.addPart("files[]", new FileBody(files.get(0)));
+            Log.e("File", "/" + files.get(i).getName());
+            mpEntity.addPart("files["+i+"]", new FileBody(files.get(i)));
         }
 
         mpEntity.addPart("folderID", new StringBody(Integer.toString(4)));
         mpEntity.addPart("ProjectId", new StringBody(Integer.toString(4)));
-        mpEntity.addPart("CreateBy",new StringBody(Integer.toString(1)));
-        mpEntity.addPart("UpdateBy",new StringBody(Integer.toString(1)));
+        mpEntity.addPart("CreateBy", new StringBody(Integer.toString(1)));
+        mpEntity.addPart("UpdateBy", new StringBody(Integer.toString(1)));
         p.setEntity(mpEntity);
-
         HttpResponse resp = hc.execute(p);
         if (resp != null) {
             message = convertStreamToString(resp.getEntity().getContent());

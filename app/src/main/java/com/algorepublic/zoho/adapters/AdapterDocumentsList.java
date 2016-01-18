@@ -1,18 +1,20 @@
 package com.algorepublic.zoho.adapters;
 
 import android.content.Context;
-import android.util.Log;
+import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
 import com.algorepublic.zoho.R;
-import com.algorepublic.zoho.fragments.DocumentsFragment;
+import com.algorepublic.zoho.fragments.DocumentsListFragment;
 import com.algorepublic.zoho.utils.BaseClass;
 import com.algorepublic.zoho.utils.Constants;
 import com.androidquery.AQuery;
 import com.bumptech.glide.Glide;
+
+import java.util.Calendar;
 
 import se.emilsjolander.stickylistheaders.StickyListHeadersAdapter;
 
@@ -36,12 +38,12 @@ public class AdapterDocumentsList extends BaseAdapter implements StickyListHeade
 
     @Override
     public int getCount() {
-        return DocumentsFragment.docsList.size();
+        return DocumentsListFragment.docsList.size();
     }
 
     @Override
     public Object getItem(int pos) {
-        return DocumentsFragment.docsList.get(pos);
+        return DocumentsListFragment.docsList.get(pos);
     }
 
     @Override
@@ -55,15 +57,11 @@ public class AdapterDocumentsList extends BaseAdapter implements StickyListHeade
         convertView = l_Inflater.inflate(R.layout.layout_docs_row, null);
         aq = new AQuery(convertView);
 
-        aq.id(R.id.file_name).text(DocumentsFragment.docsList.get(position).getFileName());
-        if(DocumentsFragment.docsList.get(position).getFileTypeID()>=0 &&
-                DocumentsFragment.docsList.get(position).getFileTypeID()<=4 ){
-            Glide.with(ctx).load(Constants.Image_URL+DocumentsFragment.docsList.
-                    get(position).getFileDescription()).into(aq.id(R.id.file_image).getImageView());
-        }else {
-            Glide.with(ctx).load(BaseClass.getIcon(DocumentsFragment.docsList.
-                    get(position).getFileTypeID())).into(aq.id(R.id.file_image).getImageView());
-        }
+        aq.id(R.id.file_name).text(DocumentsListFragment.docsList.get(position).getFileName());
+        aq.id(R.id.file_time).text(GetTime(DocumentsListFragment.docsList.get(position).getCreatedMilli()));
+        aq.id(R.id.file_image).image(BaseClass.getIcon(DocumentsListFragment.docsList.
+                get(position).getFileTypeID()));
+
         return convertView;
     }
     @Override
@@ -72,17 +70,25 @@ public class AdapterDocumentsList extends BaseAdapter implements StickyListHeade
         convertView = l_Inflater.inflate(R.layout.layout_taskslist_header, parent , false);
         aq_header = new AQuery(convertView);
 
-        if (DocumentsFragment.docsList.get(position).getCreatedAt().equalsIgnoreCase("3/0/1"))
+        if (DocumentsListFragment.docsList.get(position).getCreatedAt().equalsIgnoreCase("3/0/1"))
             aq_header.id(R.id.header).text("No Date");
         else
-            aq_header.id(R.id.header).text(DocumentsFragment.docsList.get(position).getCreatedAt());
+            aq_header.id(R.id.header).text(DocumentsListFragment.docsList.get(position).getCreatedAt());
         return convertView;
     }
 
     @Override
     public long getHeaderId(int position) {
         //return the first character of the country as ID because this is what headers are based upon
-        return Long.parseLong(DocumentsFragment.docsList.get(position).getCreatedMilli().substring(0,5));
+        return Long.parseLong(DocumentsListFragment.docsList.get(position).getCreatedMilli().substring(0,5));
     }
+    public String GetTime(String milli){
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(Long.parseLong(milli));
 
+        String delegate = "hh:mm aaa";
+        String time  = (String) DateFormat.format(delegate, Calendar.getInstance().getTime());
+
+        return (time);
+    }
 }

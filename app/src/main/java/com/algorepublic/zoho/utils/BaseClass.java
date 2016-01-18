@@ -233,15 +233,18 @@ public class BaseClass extends Application {
     }
 
     static int icon[] = {
-            1,2,3,4,
+            R.mipmap.ic_listview_jpg,
+            R.mipmap.ic_listview_jpeg,
+            R.mipmap.ic_listview_png,
+            R.mipmap.ic_listview_gif,
             R.mipmap.ic_listview_pdf,
-            R.mipmap.ic_listview_doc,
-            R.mipmap.ic_listview_documents,
-            R.mipmap.ic_listview_audio,
-            R.mipmap.ic_listview_video,
-            R.mipmap.ic_listview_video,
-            R.mipmap.ic_listview_video,
-            R.mipmap.ic_listview_video,
+            R.mipmap.ic_listview_word,
+            R.mipmap.ic_listview_word,
+            R.mipmap.ic_listview_mp3,
+            R.mipmap.ic_listview_mp4a,
+            R.mipmap.ic_listview_wav,
+            R.mipmap.ic_listview_mp4,
+            R.mipmap.ic_listview_3gp,
             R.mipmap.ic_listview_txt,
             R.mipmap.ic_listview_xml,
             R.mipmap.ic_listview_html,
@@ -269,20 +272,22 @@ public class BaseClass extends Application {
             type=6;
         if(extention.contains("docx"))
             type=7;
-        if(extention.contains("mpeg"))
+        if(extention.contains("mp3/mpeg"))
             type=8;
         if(extention.contains("mp4"))
             type=9;
         if(extention.contains("wav"))
             type=10;
-        if(extention.contains("3gpp"))
+        if(extention.contains("mp4"))
             type=11;
-        if(extention.contains("plain"))
+        if(extention.contains("3gpp"))
             type=12;
-        if(extention.contains("xml"))
+        if(extention.contains("text/plain"))
             type=13;
-        if(extention.contains("html"))
+        if(extention.contains("xml"))
             type=14;
+        if(extention.contains("html"))
+            type=15;
 
         return type;
     }
