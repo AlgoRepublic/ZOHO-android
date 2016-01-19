@@ -12,7 +12,7 @@ import android.widget.ImageView;
 import android.widget.RadioGroup;
 
 import com.algorepublic.zoho.fragments.CalendarFragment;
-import com.algorepublic.zoho.fragments.DocumentsFragment;
+import com.algorepublic.zoho.fragments.DocumentsListFragment;
 import com.algorepublic.zoho.fragments.FeedFragment;
 import com.algorepublic.zoho.fragments.ProjectsFragment;
 import com.algorepublic.zoho.fragments.TasksListFragment;
@@ -119,7 +119,7 @@ public class MainActivity extends BaseActivity
                 break;
             case 1:
                 getSupportActionBar().setTitle(getString(R.string.documents));
-                getSupportFragmentManager().beginTransaction().replace(R.id.container, DocumentsFragment.newInstance(), "DocumentsFragment").commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.container, DocumentsListFragment.newInstance(), "DocumentsListFragment").commit();
                 aq.id(R.id.documents_radioButton).textColor(getResources().getColor(R.color.colorAccent));
                 aq.id(R.id.tasks_radioButton).textColor(getResources().getColor(android.R.color.white));
                 break;

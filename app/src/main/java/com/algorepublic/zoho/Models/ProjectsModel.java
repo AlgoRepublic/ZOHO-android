@@ -24,7 +24,7 @@ public class ProjectsModel {
 
 
     @SerializedName("responseObject")
-    public ArrayList<Response> reponseData;
+    public ArrayList<Response> responseData;
 
     public class Response{
         @SerializedName("Name")

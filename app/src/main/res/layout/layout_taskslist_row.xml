@@ -4,30 +4,31 @@
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:weightSum="1">
-    <View
-        android:id="@+id/priority_bar"
-        android:layout_width="0dp"
-        android:background="@drawable/roundable_prioritybar"
-        android:layout_height="match_parent"
-        android:layout_weight="0.02" >
-    </View>
     <RelativeLayout
         android:layout_height="wrap_content"
-        android:layout_width="0dp"
-        android:layout_weight="0.98"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginEnd="10dp"
         android:padding="5dp"
-        android:background="@drawable/roundable_white_listitem" >
+        android:background="@drawable/list_background" >
+        <View
+            android:id="@+id/priority_bar"
+            android:layout_width="4dp"
+            android:background="@drawable/roundable_prioritybar"
+            android:layout_height="match_parent">
+        </View>
         <LinearLayout
             android:id="@+id/layout1"
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginStart="5dp"
+            android:layout_toRightOf="@id/priority_bar"
+            android:layout_toEndOf="@id/priority_bar"
             android:weightSum="2">
             <TextView
                 android:id="@+id/task_name"
@@ -35,18 +36,18 @@
                 android:layout_weight="1"
                 android:gravity="left"
                 android:layout_height="wrap_content"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:textStyle="bold"
-                android:textColor="@android:color/holo_red_dark"
+                android:textColor="@color/colorPrimaryDark"
                 />
             <TextView
                 android:id="@+id/task_date"
                 android:layout_width="0dp"
                 android:layout_weight="1"
-                android:gravity="right"
-                android:layout_below="@+id/task_name"
+                android:gravity="right|end"
                 android:layout_height="wrap_content"
-                android:textSize="18sp"
+                android:textSize="16sp"
+                android:layout_marginRight="5dp"
                 android:textColor="@color/colorDarkgray"
                 />
         </LinearLayout>
@@ -55,32 +56,39 @@
             android:layout_below="@+id/layout1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="18sp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginStart="5dp"
+            android:layout_toRightOf="@id/priority_bar"
+            android:layout_toEndOf="@id/priority_bar"
+            android:textSize="16sp"
             android:textColor="@color/colorDarkgray"
             />
-    <RelativeLayout
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        android:layout_below="@+id/general" >
-        <TextView
-            android:id="@+id/comment"
-            android:layout_width="wrap_content"
+        <RelativeLayout
             android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:gravity="left"
-            android:text="1 Comment"
-            android:layout_marginTop="5dp"
-            android:textColor="@android:color/holo_blue_dark"
-            />
-        <LinearLayout
-            android:id="@+id/layout_assignee"
-            android:orientation="horizontal"
-            android:gravity="right"
-            android:layout_alignParentRight="true"
-            android:layout_toRightOf="@+id/comment"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-</RelativeLayout>
+            android:layout_width="match_parent"
+            android:layout_marginLeft="5dp"
+            android:layout_marginStart="5dp"
+            android:layout_toRightOf="@id/priority_bar"
+            android:layout_toEndOf="@id/priority_bar"
+            android:layout_below="@+id/general" >
+            <TextView
+                android:id="@+id/comment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:gravity="left"
+                android:text="1 Comment"
+                android:layout_marginTop="5dp"
+                android:textColor="@android:color/holo_blue_dark"
+                />
+            <LinearLayout
+                android:id="@+id/layout_assignee"
+                android:orientation="horizontal"
+                android:gravity="right"
+                android:layout_alignParentRight="true"
+                android:layout_toRightOf="@+id/comment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </RelativeLayout>
     </RelativeLayout>
-        </LinearLayout>
 </LinearLayout>

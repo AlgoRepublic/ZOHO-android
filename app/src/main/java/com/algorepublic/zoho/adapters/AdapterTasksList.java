@@ -1,20 +1,16 @@
 package com.algorepublic.zoho.adapters;
 
 import android.content.Context;
-import android.graphics.Color;
-import android.graphics.PorterDuff;
-import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
-import android.graphics.drawable.ShapeDrawable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.BaseAdapter;
 
 import com.algorepublic.zoho.R;
-import com.algorepublic.zoho.fragments.DocumentsFragment;
 import com.algorepublic.zoho.fragments.TasksListFragment;
 import com.algorepublic.zoho.utils.BaseClass;
 import com.androidquery.AQuery;
@@ -30,6 +26,7 @@ public class AdapterTasksList extends BaseAdapter implements StickyListHeadersAd
     AQuery aq,aq_header;
     BaseClass baseClass;
     private LayoutInflater l_Inflater;
+    private int lastPosition = -1;
 
 
     public AdapterTasksList(Context context) {
@@ -59,7 +56,7 @@ public class AdapterTasksList extends BaseAdapter implements StickyListHeadersAd
         convertView = l_Inflater.inflate(R.layout.layout_taskslist_row, null);
         aq = new AQuery(convertView);
 
-        Drawable shapeDrawable = (Drawable) aq.id(R.id.priority_bar).getView().getBackground();
+        Drawable shapeDrawable = aq.id(R.id.priority_bar).getView().getBackground();
         GradientDrawable colorDrawable = (GradientDrawable) shapeDrawable;
         colorDrawable.setColor(getPriorityWiseColor(TasksListFragment.generalList.get(position).getPriority()));
         aq.id(R.id.priority_bar).getView().setBackground(shapeDrawable);
@@ -74,6 +71,10 @@ public class AdapterTasksList extends BaseAdapter implements StickyListHeadersAd
             aq.id(R.id.general).text("General");
         else
             aq.id(R.id.general).text(TasksListFragment.generalList.get(position).getProjectName());
+
+        Animation animation = AnimationUtils.loadAnimation(ctx, (position > lastPosition) ? R.anim.up_from_bottom : R.anim.down_from_top);
+        convertView.startAnimation(animation);
+        lastPosition = position;
 
         return convertView;
     }

@@ -1,7 +1,6 @@
 package com.algorepublic.zoho.fragments;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,10 +11,7 @@ import android.widget.Toast;
 
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.adapters.AdapterDocsComments;
-import com.algorepublic.zoho.adapters.AdapterTaskComments;
 import com.algorepublic.zoho.adapters.TaskComments;
-import com.algorepublic.zoho.services.CallBack;
-import com.algorepublic.zoho.services.TaskListService;
 import com.algorepublic.zoho.utils.BaseClass;
 import com.algorepublic.zoho.utils.Constants;
 import com.androidquery.AQuery;
@@ -59,15 +55,15 @@ public class DocsPreviewFragment extends BaseFragment {
         baseClass = ((BaseClass) getActivity().getApplicationContext());
         adapter = new AdapterDocsComments(getActivity());
         listView.setAdapter(adapter);
-        aq.id(R.id.user_name).text(DocumentsFragment.docsList.get(position).getFileName());
-        aq.id(R.id.doc_title).text(DocumentsFragment.docsList.get(position).getFileName());
-        aq.id(R.id.doc_size).text(DocumentsFragment.docsList.get(position).getFileSizeInByte());
-        if(DocumentsFragment.docsList.get(position).getFileTypeID()>=0 &&
-                DocumentsFragment.docsList.get(position).getFileTypeID()<=4 ){
-            Glide.with(getActivity()).load(Constants.Image_URL + DocumentsFragment.docsList.
+        aq.id(R.id.user_name).text(DocumentsListFragment.docsList.get(position).getFileName());
+        aq.id(R.id.doc_title).text(DocumentsListFragment.docsList.get(position).getFileName());
+        aq.id(R.id.doc_size).text(DocumentsListFragment.docsList.get(position).getFileSizeInByte());
+        if(DocumentsListFragment.docsList.get(position).getFileTypeID()>=0 &&
+                DocumentsListFragment.docsList.get(position).getFileTypeID()<=4 ){
+            Glide.with(getActivity()).load(Constants.Image_URL + DocumentsListFragment.docsList.
                     get(position).getFileDescription()).into(aq.id(R.id.doc_image).getImageView());
         }else {
-            Glide.with(getActivity()).load(BaseClass.getIcon(DocumentsFragment.docsList.
+            Glide.with(getActivity()).load(BaseClass.getIcon(DocumentsListFragment.docsList.
                     get(position).getFileTypeID())).into(aq.id(R.id.doc_image).getImageView());
         }
         aq.id(R.id.comment_user).getTextView().setOnEditorActionListener(new TextView.OnEditorActionListener() {

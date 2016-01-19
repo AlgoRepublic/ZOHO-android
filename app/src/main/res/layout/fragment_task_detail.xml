@@ -54,7 +54,7 @@
                 android:orientation="horizontal">
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_weight=".8"
+                    android:layout_weight=".7"
                     android:text="@string/task_startdate"
                     android:layout_height="wrap_content"
                     android:textSize="14sp"
@@ -65,10 +65,10 @@
                 <TextView
                     android:id="@+id/start_date"
                     android:layout_width="0dp"
-                    android:layout_weight=".8"
+                    android:layout_weight=".9"
                     android:text="dsds"
                     android:layout_height="wrap_content"
-                    android:textSize="14sp"
+                    android:textSize="13sp"
                     android:layout_toLeftOf="@+id/textView"
                     android:textColor="@color/colorPrimaryDark"
                     />
@@ -88,7 +88,7 @@
                     android:layout_weight=".7"
                     android:text="dsds"
                     android:layout_height="wrap_content"
-                    android:textSize="14sp"
+                    android:textSize="13sp"
                     android:layout_toLeftOf="@+id/textView"
                     android:textColor="@color/colorPrimaryDark"
                     />
@@ -105,7 +105,7 @@
 
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_weight=".8"
+                    android:layout_weight=".7"
                     android:text="@string/task_enddate"
                     android:layout_height="wrap_content"
                     android:textSize="14sp"
@@ -114,12 +114,12 @@
                     android:textColor="@color/colorPrimaryDark"
                     />
                 <TextView
-                    android:id="@+id/added_date"
+                    android:id="@+id/end_date"
                     android:layout_width="0dp"
-                    android:layout_weight=".8"
+                    android:layout_weight=".9"
                     android:text="dsds"
                     android:layout_height="wrap_content"
-                    android:textSize="14sp"
+                    android:textSize="13sp"
                     android:layout_toLeftOf="@+id/textView"
                     android:textColor="@color/colorPrimaryDark"
                     />
@@ -139,7 +139,7 @@
                     android:layout_weight=".7"
                     android:text="@string/task_added"
                     android:layout_height="wrap_content"
-                    android:textSize="14sp"
+                    android:textSize="13sp"
                     android:layout_toLeftOf="@+id/textView"
                     android:textColor="@color/colorPrimaryDark"
                     />
@@ -166,7 +166,7 @@
                 android:layout_width="match_parent"
                 android:layout_below="@+id/task_name"
                 android:layout_height="wrap_content"
-                android:textSize="14sp"
+                android:textSize="13sp"
                 android:lines="4"
                 android:ellipsize="end"
                 android:textColor="@color/colorPrimaryDark"
@@ -204,7 +204,7 @@
                     android:layout_weight="1"
                     android:text="dsds"
                     android:layout_height="wrap_content"
-                    android:textSize="14sp"
+                    android:textSize="13sp"
                     android:layout_toLeftOf="@+id/textView"
                     android:textColor="@color/colorPrimaryDark"
                     />
