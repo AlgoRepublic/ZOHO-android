@@ -2,6 +2,7 @@ package com.algorepublic.zoho.adapters;
 
 import android.content.Context;
 import android.text.format.DateFormat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -56,7 +57,6 @@ public class AdapterDocumentsList extends BaseAdapter implements StickyListHeade
 
         convertView = l_Inflater.inflate(R.layout.layout_docs_row, null);
         aq = new AQuery(convertView);
-
         aq.id(R.id.file_name).text(DocumentsListFragment.docsList.get(position).getFileName());
         aq.id(R.id.file_time).text(GetTime(DocumentsListFragment.docsList.get(position).getCreatedMilli()));
         aq.id(R.id.file_image).image(BaseClass.getIcon(DocumentsListFragment.docsList.
@@ -87,8 +87,7 @@ public class AdapterDocumentsList extends BaseAdapter implements StickyListHeade
         calendar.setTimeInMillis(Long.parseLong(milli));
 
         String delegate = "hh:mm aaa";
-        String time  = (String) DateFormat.format(delegate, Calendar.getInstance().getTime());
-
+        String time  = (String) DateFormat.format(delegate, calendar.getTime());
         return (time);
     }
 }
