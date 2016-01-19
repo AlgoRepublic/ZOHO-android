@@ -1,2 +1,2 @@
 include ':app', ':linkedin-sdk', ':FlycoAnimation_Lib', ':datetimepicker',
-        ':agendacalendarview', ':FlycoDialog_Lib', 'dropboxChooserSDK', ':CircleSeekBar'
+        ':agendacalendarview', ':FlycoDialog_Lib', 'dropboxChooserSDK', ':CircleSeekBar', ':TwoWayView', ':core'

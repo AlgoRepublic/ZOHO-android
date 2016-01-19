@@ -54,9 +54,7 @@ public class TaskDetailFragment extends BaseFragment {
     // TODO: Rename and change types and number of parameters
     public static TaskDetailFragment newInstance(int pos) {
         position =pos;
-        if(fragment==null){
-            fragment = new TaskDetailFragment();
-        }
+        fragment = new TaskDetailFragment();
         return fragment;
     }
 
@@ -97,13 +95,14 @@ public class TaskDetailFragment extends BaseFragment {
         aq.id(R.id.category).text(TasksListFragment.generalList.get(position).getTaskListName());
         aq.id(R.id.task_desc).text(TasksListFragment.generalList.get(position).getTaskListName());
         aq.id(R.id.taskdate).text(DaysDifference(TasksListFragment.generalList.get(position).getEndMilli()));
+        seekBarCompat.setValue(TasksListFragment.generalList.get(position).getProgress());
 
         Drawable shapeDrawable = (Drawable) aq.id(R.id.layout_tasktitle).getView().getBackground();
         GradientDrawable colorDrawable = (GradientDrawable) shapeDrawable;
         colorDrawable.setColor(getPriorityWiseColor(TasksListFragment.generalList.get(position).getPriority()));
         aq.id(R.id.layout_tasktitle).getView().setBackground(shapeDrawable);
 
-        HoloCircleSeekBar.OnCircleSeekBarChangeListener changeListener= new HoloCircleSeekBar.OnCircleSeekBarChangeListener() {
+        seekBarCompat.setOnSeekBarChangeListener(new HoloCircleSeekBar.OnCircleSeekBarChangeListener() {
             @Override
             public void onStartTrackingTouch(HoloCircleSeekBar seekBar) {
                 // Nothing to do
@@ -122,9 +121,8 @@ public class TaskDetailFragment extends BaseFragment {
                 else
                     opt = 0;
             }
-        };
-        seekBarCompat.setOnSeekBarChangeListener(changeListener);
-        seekBarCompat.setValue((float) TasksListFragment.generalList.get(position).getProgress());
+        });
+
         aq.id(R.id.comment).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -195,23 +195,14 @@
                     />
 
             </LinearLayout>
-            <LinearLayout
-                android:id="@+id/header_layout5"
+            <org.lucasr.twowayview.widget.TwoWayView
+                android:id="@+id/task_assignee"
                 android:layout_below="@+id/header_layout4"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
                 android:weightSum="3"
                 android:orientation="horizontal">
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:text="dsds"
-                    android:layout_height="wrap_content"
-                    android:textSize="13sp"
-                    android:layout_toLeftOf="@+id/textView"
-                    android:textColor="@color/colorPrimaryDark"
-                    />
-            </LinearLayout>
+            </org.lucasr.twowayview.widget.TwoWayView>
         </RelativeLayout>
         <RelativeLayout
             android:layout_below="@+id/layout3"
@@ -256,6 +247,14 @@
                 app:text_size="22sp"
                 app:wheel_active_color="@color/colorAccent"
                 app:wheel_unactive_color="@color/colorDarkgray"/>
+            <org.lucasr.twowayview.widget.TwoWayView
+                android:id="@+id/task_docs"
+                android:layout_below="@+id/seekBar"
+                android:layout_width="match_parent"
+                android:layout_height="90dp"
+                android:weightSum="3"
+                android:orientation="horizontal">
+            </org.lucasr.twowayview.widget.TwoWayView>
         </RelativeLayout>
 
         </RelativeLayout>
