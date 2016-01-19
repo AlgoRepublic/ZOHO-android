@@ -6,14 +6,14 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.BaseAdapter;
 
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.fragments.DocumentsListFragment;
 import com.algorepublic.zoho.utils.BaseClass;
-import com.algorepublic.zoho.utils.Constants;
 import com.androidquery.AQuery;
-import com.bumptech.glide.Glide;
 
 import java.util.Calendar;
 
@@ -28,8 +28,7 @@ public class AdapterDocumentsList extends BaseAdapter implements StickyListHeade
     AQuery aq,aq_header;
     BaseClass baseClass;
     private LayoutInflater l_Inflater;
-
-
+    private int lastPosition = -1;
 
     public AdapterDocumentsList(Context context) {
         l_Inflater = LayoutInflater.from(context);
@@ -74,6 +73,10 @@ public class AdapterDocumentsList extends BaseAdapter implements StickyListHeade
             aq_header.id(R.id.header).text("No Date");
         else
             aq_header.id(R.id.header).text(DocumentsListFragment.docsList.get(position).getCreatedAt());
+
+        Animation animation = AnimationUtils.loadAnimation(ctx, (position > lastPosition) ? R.anim.up_from_bottom : R.anim.down_from_top);
+        convertView.startAnimation(animation);
+        lastPosition = position;
         return convertView;
     }
 

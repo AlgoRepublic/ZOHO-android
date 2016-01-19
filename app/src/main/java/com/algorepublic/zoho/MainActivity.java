@@ -12,12 +12,11 @@ import android.widget.ImageView;
 import android.widget.RadioGroup;
 
 import com.algorepublic.zoho.fragments.CalendarFragment;
-import com.algorepublic.zoho.fragments.FeedFragment;
 import com.algorepublic.zoho.fragments.DocumentsListFragment;
+import com.algorepublic.zoho.fragments.FeedFragment;
+import com.algorepublic.zoho.fragments.ProjectsFragment;
 import com.algorepublic.zoho.fragments.TasksListFragment;
 import com.algorepublic.zoho.fragments.dummy.DummyContent;
-import com.algorepublic.zoho.services.CallBack;
-import com.algorepublic.zoho.services.ProjectsListService;
 import com.algorepublic.zoho.utils.BaseClass;
 import com.androidquery.AQuery;
 
@@ -91,14 +90,6 @@ public class MainActivity extends BaseActivity
         });
 
 
-        ProjectsListService service = new ProjectsListService(this);
-        service.getProjectsList(baseClass.getUserId(), false, new CallBack(this, "ProjectsListCallback"));
-        aq_header.id(R.id.show_projects).clicked(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
        // navigationView.setNavigationItemSelectedListener(this);
     }
     public void RadioGroup1(int checkedId) {
@@ -139,8 +130,12 @@ public class MainActivity extends BaseActivity
         switch (radioGroup3.indexOfChild(findViewById(checkedId))) {
             case 0:
                 aq.id(R.id.user_radioButton).textColor(getResources().getColor(R.color.colorAccent));
+                aq.id(R.id.project_radioButton).textColor(getResources().getColor(android.R.color.white));
                 break;
             case 1:
+                getSupportActionBar().setTitle(getString(R.string.projects));
+                getSupportFragmentManager().beginTransaction().replace(R.id.container, ProjectsFragment.newInstance(), "ProjectsFragment").commit();
+                aq.id(R.id.project_radioButton).textColor(getResources().getColor(R.color.colorAccent));
                 aq.id(R.id.user_radioButton).textColor(getResources().getColor(android.R.color.white));
                 break;
         }
@@ -191,6 +186,7 @@ public class MainActivity extends BaseActivity
 //    }
 
     public void ProjectsListCallback(Object caller, Object model){
+
 
     }
 

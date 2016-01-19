@@ -1,5 +1,7 @@
 package com.algorepublic.zoho.adapters;
 
+import java.util.ArrayList;
+
 /**
  * Created by android on 12/29/15.
  */
@@ -75,13 +77,21 @@ public class TasksList implements Comparable<TasksList>{
         return charToAscii;
     }
 
+    public void setListAssignees(ArrayList<TaskListAssignee> listAssignees){
+        this.listAssignees.addAll(listAssignees);
+    }
+    public ArrayList<TaskListAssignee> getListAssignees(){
+        return listAssignees;
+    }
+
+
 
     @Override
     public int compareTo(TasksList object) {
         return (this.getTaskName().compareTo(object.getTaskName()));
     }
 
-
+    ArrayList<TaskListAssignee> listAssignees = new ArrayList<>();
     String header;
     int priority;
     int progress;

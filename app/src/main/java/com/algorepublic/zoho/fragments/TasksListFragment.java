@@ -17,6 +17,7 @@ import com.algorepublic.zoho.ActivityTask;
 import com.algorepublic.zoho.Models.TasksListModel;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.adapters.AdapterTasksList;
+import com.algorepublic.zoho.adapters.TaskListAssignee;
 import com.algorepublic.zoho.adapters.TasksList;
 import com.algorepublic.zoho.services.CallBack;
 import com.algorepublic.zoho.services.TaskListService;
@@ -243,6 +244,17 @@ public class TasksListFragment extends BaseFragment {
             tasksList.setProgress(TasksListModel.getInstance().responseObject.get(loop).progress);
             tasksList.setTaskListName(TasksListModel.getInstance().responseObject.get(loop).taskListName);
             tasksList.setCharToAscii(CharToASCII(TasksListModel.getInstance().responseObject.get(loop).taskListName));
+            //************** Assignee List ************//
+            ArrayList<TaskListAssignee> listAssignees = new ArrayList<>();
+            for(int loop1=0;loop1<TasksListModel.getInstance().responseObject.get(loop).userObject.size();loop1++){
+                TaskListAssignee assignee = new TaskListAssignee();
+                assignee.setUserID(TasksListModel.getInstance().responseObject.get(loop).userObject.get(loop1).responsibleID);
+                assignee.setFirstName(TasksListModel.getInstance().responseObject.get(loop).userObject.get(loop1).firstName);
+                assignee.setLastName(TasksListModel.getInstance().responseObject.get(loop).userObject.get(loop1).lastName);
+                listAssignees.add(assignee);
+            }
+            tasksList.setListAssignees(listAssignees);
+            //************** ******* ************//
             allTaskList.add(tasksList);
         }
     }

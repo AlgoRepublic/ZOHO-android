@@ -2,7 +2,6 @@ package com.algorepublic.zoho.fragments;
 
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
@@ -16,11 +15,13 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.SeekBar;
 
 import com.algorepublic.zoho.ActivityTask;
 import com.algorepublic.zoho.Models.GeneralModel;
+import com.algorepublic.zoho.Models.TaskAttachmentsModel;
 import com.algorepublic.zoho.R;
+import com.algorepublic.zoho.adapters.AdapterTaskDetailAssignee;
+import com.algorepublic.zoho.adapters.AdapterTaskDetailAttachments;
 import com.algorepublic.zoho.services.CallBack;
 import com.algorepublic.zoho.services.TaskListService;
 import com.androidquery.AQuery;
@@ -30,7 +31,8 @@ import com.flyco.dialog.listener.OnBtnClickL;
 import com.flyco.dialog.widget.NormalDialog;
 import com.jesusm.holocircleseekbar.lib.HoloCircleSeekBar;
 
-import app.minimize.com.seek_bar_compat.SeekBarCompat;
+import org.lucasr.twowayview.TwoWayLayoutManager;
+import org.lucasr.twowayview.widget.TwoWayView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -46,6 +48,9 @@ public class TaskDetailFragment extends BaseFragment {
     TaskListService service;
     int click=0;
     HoloCircleSeekBar seekBarCompat;
+    TwoWayView twoWayAssignee;
+    TwoWayView twoWayAttachments;
+
 
     public TaskDetailFragment() {
         // Required empty public constructor
@@ -86,9 +91,19 @@ public class TaskDetailFragment extends BaseFragment {
         final View view =  inflater.inflate(R.layout.fragment_task_detail, container, false);
         setHasOptionsMenu(true);
         seekBarCompat = (HoloCircleSeekBar) view.findViewById(R.id.seekBar);
+        twoWayAssignee = (TwoWayView) view.findViewById(R.id.task_assignee);
+        twoWayAttachments = (TwoWayView) view.findViewById(R.id.taskdetail_attachments);
+        twoWayAssignee.setHasFixedSize(true); twoWayAttachments.setHasFixedSize(true);
+        twoWayAssignee.setLongClickable(true);twoWayAttachments.setLongClickable(true);
+        twoWayAssignee.setOrientation(TwoWayLayoutManager.Orientation.HORIZONTAL);
+        twoWayAttachments.setOrientation(TwoWayLayoutManager.Orientation.HORIZONTAL);
+        twoWayAssignee.setAdapter(new AdapterTaskDetailAssignee(getActivity(),
+                TasksListFragment.generalList.get(position).getListAssignees()));
+
         aq = new AQuery(view);
         setPriority();
         service = new TaskListService(getActivity());
+        service.getTaskAttachments(10,true,new CallBack(TaskDetailFragment.this,"TaskAttachments"));
         aq.id(R.id.task_name).text(TasksListFragment.generalList.get(position).getTaskName());
         aq.id(R.id.start_date).text(TasksListFragment.generalList.get(position).getStartDate());
         aq.id(R.id.end_date).text(TasksListFragment.generalList.get(position).getEndDate());
@@ -144,6 +159,16 @@ public class TaskDetailFragment extends BaseFragment {
             }
         });
         return view;
+    }
+    public void TaskAttachments(Object caller, Object model) {
+        TaskAttachmentsModel.getInstance().setList((TaskAttachmentsModel) model);
+        if (TaskAttachmentsModel.getInstance().responseCode == 100) {
+            twoWayAttachments.setAdapter(new AdapterTaskDetailAttachments(getActivity()));
+        }
+        else
+        {
+            Snackbar.make(getView(), getString(R.string.invalid_credential), Snackbar.LENGTH_SHORT).show();
+        }
     }
     public void UpdateProgress(Object caller, Object model) {
         GeneralModel.getInstance().setList((GeneralModel) model);

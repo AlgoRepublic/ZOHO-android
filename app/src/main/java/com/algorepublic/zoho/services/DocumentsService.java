@@ -5,10 +5,8 @@ import android.util.Log;
 
 import com.algorepublic.zoho.Models.DocumentsListModel;
 import com.algorepublic.zoho.Models.GeneralModel;
-import com.algorepublic.zoho.Models.GetUserModel;
 import com.algorepublic.zoho.Models.UserModel;
 import com.algorepublic.zoho.utils.Constants;
-import com.google.common.collect.HashBiMap;
 
 import java.io.File;
 import java.util.HashMap;

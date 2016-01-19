@@ -115,7 +115,7 @@
     <string name="pref_ringtone_silent">Silent</string>
 
     <string name="pref_title_vibrate">Vibrate</string>
-    <string name="select_project">Select Project</string>
+    <string name="projects">Projects</string>
 
     <!-- Task Details Strings -->
     <string name="mark_as_done">Mark as done?</string>
@@ -128,4 +128,5 @@
     <string name="task_users">Users:</string>
     <string name="task_startdate">Start Date:</string>
     <string name="task_enddate">End Date:</string>
+    <string name="projects_list_empty">Project list is empty</string>
 </resources>

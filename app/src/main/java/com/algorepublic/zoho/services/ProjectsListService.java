@@ -3,7 +3,7 @@ package com.algorepublic.zoho.services;
 import android.app.Activity;
 import android.util.Log;
 
-import com.algorepublic.zoho.Models.TasksListModel;
+import com.algorepublic.zoho.Models.ProjectsModel;
 import com.algorepublic.zoho.utils.Constants;
 
 /**
@@ -17,7 +17,7 @@ public class ProjectsListService extends BaseService {
 
     public void getProjectsList(String ownerID, boolean message, CallBack obj){
         String url = Constants.GetProjectsList_API+ "?OwnerID=" + ownerID;
-        this.get(url, obj, TasksListModel.getInstance(), message);
+        this.get(url, obj, ProjectsModel.getInstance(), message);
         Log.e("TaskListService", url);
     }
 

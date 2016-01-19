@@ -94,6 +94,23 @@ public class TasksListModel {
 
         @SerializedName("TaskListName")
         public String taskListName;
-    }
 
+        @SerializedName("Users")
+        @Expose
+        public ArrayList<Users> userObject = new ArrayList<Users>();
+    }
+    public class Users {
+
+        @SerializedName("ID")
+        @Expose
+        public Integer responsibleID;
+
+        @SerializedName("FirstName")
+        @Expose
+        public String firstName;
+
+        @SerializedName("LastName")
+        @Expose
+        public String lastName;
+    }
 }

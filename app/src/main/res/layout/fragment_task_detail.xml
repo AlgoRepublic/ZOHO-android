@@ -57,7 +57,7 @@
                 android:orientation="horizontal">
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_weight=".7"
+                    android:layout_weight=".75"
                     android:text="@string/task_startdate"
                     android:layout_height="wrap_content"
                     android:textSize="14sp"
@@ -201,6 +201,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:weightSum="3"
+                app:twowayview_layoutManager="ListLayoutManager"
                 android:orientation="horizontal">
             </org.lucasr.twowayview.widget.TwoWayView>
         </RelativeLayout>
@@ -248,11 +249,12 @@
                 app:wheel_active_color="@color/colorAccent"
                 app:wheel_unactive_color="@color/colorDarkgray"/>
             <org.lucasr.twowayview.widget.TwoWayView
-                android:id="@+id/task_docs"
+                android:id="@+id/taskdetail_attachments"
                 android:layout_below="@+id/seekBar"
                 android:layout_width="match_parent"
                 android:layout_height="90dp"
                 android:weightSum="3"
+                app:twowayview_layoutManager="ListLayoutManager"
                 android:orientation="horizontal">
             </org.lucasr.twowayview.widget.TwoWayView>
         </RelativeLayout>

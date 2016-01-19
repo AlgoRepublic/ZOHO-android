@@ -7,6 +7,7 @@ import com.algorepublic.zoho.Models.CreateCommentModel;
 import com.algorepublic.zoho.Models.GeneralModel;
 import com.algorepublic.zoho.Models.GetUserModel;
 import com.algorepublic.zoho.Models.TaskAssigneeModel;
+import com.algorepublic.zoho.Models.TaskAttachmentsModel;
 import com.algorepublic.zoho.Models.TaskCommentsModel;
 import com.algorepublic.zoho.Models.TasksListModel;
 import com.algorepublic.zoho.Models.UserModel;
@@ -73,4 +74,10 @@ public class TaskListService extends BaseService {
         this.get(url, obj, TaskAssigneeModel.getInstance(), message);
         Log.e("TaskAssigneeService", url);
     }
+    public void getTaskAttachments(int taskID, boolean message, CallBack obj){
+        String url = Constants.TaskAttachments_API+"?taskID="+taskID;
+        this.get(url, obj, TaskAttachmentsModel.getInstance(), message);
+        Log.e("TaskAttachmentService", url);
+    }
+
 }

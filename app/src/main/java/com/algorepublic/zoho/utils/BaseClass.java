@@ -3,22 +3,16 @@ package com.algorepublic.zoho.utils;
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.Application;
-import android.app.ProgressDialog;
 import android.app.UiModeManager;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.util.TypedValue;
-import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.webkit.MimeTypeMap;
 
 import com.algorepublic.zoho.R;
@@ -31,7 +25,6 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -53,6 +46,7 @@ public class BaseClass extends Application {
     private String FirstName = "FirstName";
     private String Email = "Email";
     private String UserLanguage = "UserLanguage";
+    private String SELECTED_PROJECT = "selected_project";
     private String UserLocation = "UserLocation";
     private String UserAboutMe = "UserAboutMe";
     private String UserImageUrl = "UserImageUrl";
@@ -233,6 +227,7 @@ public class BaseClass extends Application {
     }
 
     static int icon[] = {
+            0,
             R.mipmap.ic_listview_jpg,
             R.mipmap.ic_listview_jpeg,
             R.mipmap.ic_listview_png,
@@ -290,5 +285,12 @@ public class BaseClass extends Application {
             type=15;
 
         return type;
+    }
+
+    public void setSelectedProject(String selectedProject) {
+        prefsEditor.putString(SELECTED_PROJECT, selectedProject).commit();
+    }
+    public String getSelectedProject() {
+        return appSharedPrefs.getString(SELECTED_PROJECT, "");
     }
 }

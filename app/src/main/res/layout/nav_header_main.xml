@@ -220,11 +220,14 @@
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
+                        android:id="@+id/project_radioButton"
                         android:button="@null"
                         android:paddingTop="45dp"
                         android:paddingBottom="35dp"
                         android:gravity="bottom|center"
                         android:textAlignment="gravity"
+                        android:drawableTop="@drawable/project_raiobutton"
+                        android:text="@string/projects"
                         android:scaleType="fitXY"
                         android:layout_marginLeft="1dp"
                         android:textColor="@android:color/white"
@@ -234,16 +237,6 @@
                         android:textSize="16sp" />
                 </RadioGroup>
             </RelativeLayout>
-            <TextView
-                android:id="@+id/show_projects"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_gravity="bottom"
-                android:background="@color/colorPrimaryDark"
-                android:textColor="@color/colorAccent"
-                android:layout_marginTop="20dp"
-                android:gravity="center"
-                android:text="@string/select_project" />
         </LinearLayout>
     </ScrollView>
 

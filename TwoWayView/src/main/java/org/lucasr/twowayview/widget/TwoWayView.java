@@ -113,4 +113,5 @@ public class TwoWayView extends RecyclerView {
         TwoWayLayoutManager layout = (TwoWayLayoutManager) getLayoutManager();
         return layout.getLastVisiblePosition();
     }
+
 }
