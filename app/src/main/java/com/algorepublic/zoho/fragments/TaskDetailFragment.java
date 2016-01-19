@@ -21,7 +21,6 @@ import android.widget.SeekBar;
 import com.algorepublic.zoho.ActivityTask;
 import com.algorepublic.zoho.Models.GeneralModel;
 import com.algorepublic.zoho.R;
-import com.algorepublic.zoho.circularseekbar.CircularSeekBar;
 import com.algorepublic.zoho.services.CallBack;
 import com.algorepublic.zoho.services.TaskListService;
 import com.androidquery.AQuery;
@@ -29,6 +28,7 @@ import com.flyco.animation.BounceEnter.BounceLeftEnter;
 import com.flyco.animation.SlideExit.SlideRightExit;
 import com.flyco.dialog.listener.OnBtnClickL;
 import com.flyco.dialog.widget.NormalDialog;
+import com.jesusm.holocircleseekbar.lib.HoloCircleSeekBar;
 
 import app.minimize.com.seek_bar_compat.SeekBarCompat;
 
@@ -45,7 +45,7 @@ public class TaskDetailFragment extends BaseFragment {
     int Progress,opt;
     TaskListService service;
     int click=0;
-    CircularSeekBar seekBarCompat;
+    HoloCircleSeekBar seekBarCompat;
 
     public TaskDetailFragment() {
         // Required empty public constructor
@@ -87,51 +87,48 @@ public class TaskDetailFragment extends BaseFragment {
         // Inflate the layout for this fragment
         final View view =  inflater.inflate(R.layout.fragment_task_detail, container, false);
         setHasOptionsMenu(true);
-        seekBarCompat = (CircularSeekBar) view.findViewById(R.id.arc_progress);
+        seekBarCompat = (HoloCircleSeekBar) view.findViewById(R.id.seekBar);
         aq = new AQuery(view);
         setPriority();
         service = new TaskListService(getActivity());
-        seekBarCompat.setProgress(TasksListFragment.generalList.get(position).getProgress());
-        aq.id(R.id.percentage).text(TasksListFragment.generalList.get(position).getProgress() + "%");
-        Log.e("Progress", "/" + TasksListFragment.generalList.get(position).getProgress());
         aq.id(R.id.task_name).text(TasksListFragment.generalList.get(position).getTaskName());
         aq.id(R.id.start_date).text(TasksListFragment.generalList.get(position).getStartDate());
         aq.id(R.id.end_date).text(TasksListFragment.generalList.get(position).getEndDate());
         aq.id(R.id.category).text(TasksListFragment.generalList.get(position).getTaskListName());
         aq.id(R.id.task_desc).text(TasksListFragment.generalList.get(position).getTaskListName());
         aq.id(R.id.taskdate).text(DaysDifference(TasksListFragment.generalList.get(position).getEndMilli()));
-        seekBarCompat.setProgress(TasksListFragment.generalList.get(position).getProgress());
 
         Drawable shapeDrawable = (Drawable) aq.id(R.id.layout_tasktitle).getView().getBackground();
         GradientDrawable colorDrawable = (GradientDrawable) shapeDrawable;
         colorDrawable.setColor(getPriorityWiseColor(TasksListFragment.generalList.get(position).getPriority()));
         aq.id(R.id.layout_tasktitle).getView().setBackground(shapeDrawable);
 
-        seekBarCompat.setOnSeekBarChangeListener(new CircularSeekBar.OnCircularSeekBarChangeListener() {
+        HoloCircleSeekBar.OnCircleSeekBarChangeListener changeListener= new HoloCircleSeekBar.OnCircleSeekBarChangeListener() {
             @Override
-            public void onProgressChanged(CircularSeekBar circularSeekBar, int progress, boolean fromUser) {
+            public void onStartTrackingTouch(HoloCircleSeekBar seekBar) {
+                // Nothing to do
+            }
+
+            @Override
+            public void onStopTrackingTouch(HoloCircleSeekBar seekBar) {
+                // Nothing to do
+            }
+
+            @Override
+            public void onProgressChanged(HoloCircleSeekBar seekBar, int progress, boolean fromUser) {
                 Progress = progress;
-                aq.id(R.id.percentage).text(progress+"%");
-                if(progress==100)
-                    opt= 1;
+                if (progress == 100)
+                    opt = 1;
                 else
-                    opt=0;
+                    opt = 0;
             }
-
-            @Override
-            public void onStopTrackingTouch(CircularSeekBar seekBar) {
-
-            }
-
-            @Override
-            public void onStartTrackingTouch(CircularSeekBar seekBar) {
-
-            }
-        });
+        };
+        seekBarCompat.setOnSeekBarChangeListener(changeListener);
+        seekBarCompat.setValue((float) TasksListFragment.generalList.get(position).getProgress());
         aq.id(R.id.comment).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            callFragmentWithBackStack(R.id.container, TaskCommentFragment.newInstance(position),"TaskComment");
+                callFragmentWithBackStack(R.id.container, TaskCommentFragment.newInstance(position), "TaskComment");
             }
         });
         aq.id(R.id.delete).clicked(new View.OnClickListener() {
@@ -153,7 +150,7 @@ public class TaskDetailFragment extends BaseFragment {
     public void UpdateProgress(Object caller, Object model) {
         GeneralModel.getInstance().setList((GeneralModel) model);
         if (GeneralModel.getInstance().responseCode.equalsIgnoreCase("100")) {
-            seekBarCompat.setProgress(100);
+            //seekBarCompat.setProgress(100);
         }
         else
         {
