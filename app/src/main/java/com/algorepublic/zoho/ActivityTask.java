@@ -57,6 +57,8 @@ public class ActivityTask extends BaseActivity{
         if (extras != null) {
             position = Integer.parseInt(extras.get("pos").toString());
             setTaskValuesTinyDB();
+        }else{
+            position=-1;
         }
 
         aq =new AQuery(this);
@@ -99,31 +101,31 @@ public class ActivityTask extends BaseActivity{
         aq.id(R.id.category_radioButton).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                callFragmentWithReplace(R.id.edittask_container, TaskAttachmentFragment.newInstance(), "TaskAttachment");
+                callFragmentWithReplace(R.id.edittask_container, TaskAttachmentFragment.newInstance(position), "TaskAttachment");
             }
         });
         aq.id(R.id.image_radioButton).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                callFragmentWithReplace(R.id.edittask_container, TaskAttachmentFragment.newInstance(), "TaskAttachment");
+                callFragmentWithReplace(R.id.edittask_container, TaskAttachmentFragment.newInstance(position), "TaskAttachment");
             }
         });
         aq.id(R.id.schedule_radioButton).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                callFragmentWithReplace(R.id.edittask_container, TaskScheduleFragment.newInstance(), "TaskSchedule");
+                callFragmentWithReplace(R.id.edittask_container, TaskScheduleFragment.newInstance(position), "TaskSchedule");
             }
         });
         aq.id(R.id.employees_radioButton).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                callFragmentWithReplace(R.id.edittask_container, TaskAssignFragment.newInstance(), "TaskAssign");
+                callFragmentWithReplace(R.id.edittask_container, TaskAssignFragment.newInstance(position), "TaskAssign");
             }
         });
         aq.id(R.id.priority_radioButton).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                callFragmentWithReplace(R.id.edittask_container, TaskPriorityFragment.newInstance(), "TasksPriority");
+                callFragmentWithReplace(R.id.edittask_container, TaskPriorityFragment.newInstance(position), "TasksPriority");
             }
         });
         if(savedInstanceState==null){
@@ -250,9 +252,11 @@ public class ActivityTask extends BaseActivity{
     }
     public void setTaskValuesTinyDB(){
      //   baseClass.db.putString("TaskListName",TasksListFragment.generalList.get(position).getTaskListName());
-        baseClass.db.putString("TaskName",TasksListFragment.generalList.get(position).getTaskName());
-        baseClass.db.putString("StartDate",TasksListFragment.generalList.get(position).getStartDate());
-        baseClass.db.putString("EndDate",TasksListFragment.generalList.get(position).getEndDate());
-        baseClass.db.putInt("Priority", TasksListFragment.generalList.get(position).getPriority());
+        if(position!=-1) {
+            baseClass.db.putString("TaskName", TasksListFragment.generalList.get(position).getTaskName());
+            baseClass.db.putString("StartDate", TasksListFragment.generalList.get(position).getStartDate());
+            baseClass.db.putString("EndDate", TasksListFragment.generalList.get(position).getEndDate());
+            baseClass.db.putInt("Priority", TasksListFragment.generalList.get(position).getPriority());
+        }
     }
 }

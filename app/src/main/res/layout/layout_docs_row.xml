@@ -3,7 +3,7 @@
     android:descendantFocusability="blocksDescendants"
     android:orientation="horizontal"
     android:layout_width="match_parent"
-    android:layout_height="80dp"
+    android:layout_height="match_parent"
     android:padding="5dp"
     android:background="@drawable/list_background">
     <ImageView
@@ -21,6 +21,7 @@
         android:layout_alignBottom="@+id/file_image"
         android:layout_height="match_parent"
         android:layout_width="match_parent"
+        android:background="@color/colorAccent"
         android:layout_toRightOf="@+id/file_image" >
         <TextView
             android:id="@+id/file_name"
@@ -28,8 +29,8 @@
             android:layout_height="wrap_content"
             android:textSize="14sp"
             android:text="File"
-            android:layout_marginTop="4dp"
-            android:maxLines="2"
+            android:layout_marginTop="3dp"
+            android:lines="2"
             android:ellipsize="end"
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
@@ -37,7 +38,7 @@
             />
     <RelativeLayout
         android:id="@+id/layout2"
-        android:layout_marginBottom="4dp"
+        android:layout_marginBottom="3dp"
         android:layout_alignParentBottom="true"
         android:layout_height="wrap_content"
         android:layout_width="match_parent" >

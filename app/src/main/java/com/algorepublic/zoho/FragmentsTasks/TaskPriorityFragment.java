@@ -24,12 +24,13 @@ public class TaskPriorityFragment extends BaseFragment {
     AdapterTaskPriority adapter;
     AQuery aq;
     BaseClass baseClass;
-
+    public static int position;
 
     public TaskPriorityFragment() {
     }
     @SuppressWarnings("unused")
-    public static TaskPriorityFragment newInstance() {
+    public static TaskPriorityFragment newInstance(int pos) {
+        position = pos;
         if (fragment==null) {
             fragment = new TaskPriorityFragment();
         }

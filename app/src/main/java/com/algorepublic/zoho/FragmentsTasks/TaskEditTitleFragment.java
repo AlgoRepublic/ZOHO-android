@@ -23,7 +23,6 @@ public class TaskEditTitleFragment extends BaseFragment {
     public static int position;
     AQuery aq;
     BaseClass baseClass;
-
     public TaskEditTitleFragment() {
     }
     @SuppressWarnings("unused")

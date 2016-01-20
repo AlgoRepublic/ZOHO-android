@@ -33,9 +33,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.algorepublic.zoho.ActivityTask;
+import com.algorepublic.zoho.Models.TaskAttachmentsModel;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.adapters.TasksList;
 import com.algorepublic.zoho.fragments.BaseFragment;
+import com.algorepublic.zoho.utils.BaseClass;
+import com.algorepublic.zoho.utils.Constants;
 import com.androidquery.AQuery;
 import com.bumptech.glide.Glide;
 import com.flyco.animation.SlideEnter.SlideLeftEnter;
@@ -54,6 +57,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 
@@ -66,10 +70,12 @@ public class TaskAttachmentFragment extends BaseFragment {
     public static final int RESULT_GALLERY = 2;
     public static final int PICK_File = 3;
     int Tag = 0;
+    public static int position;
     public TaskAttachmentFragment() {
     }
     @SuppressWarnings("unused")
-    public static TaskAttachmentFragment newInstance() {
+    public static TaskAttachmentFragment newInstance(int pos) {
+        position = pos;
         if (fragment==null) {
             fragment = new TaskAttachmentFragment();
         }
@@ -91,9 +97,16 @@ public class TaskAttachmentFragment extends BaseFragment {
             }
         });
 
+        for(int loop=0;loop<TaskAttachmentsModel.getInstance().responseObject.size();loop++)
+        {
+            File file = null;
+            showFileInList(file ,Constants.Image_URL +
+                    TaskAttachmentsModel.getInstance().responseObject.get(loop).fileName);
+        }
+
         for (int loop=0;loop<ActivityTask.filesList.size();loop++)
         {
-            showFileInList(ActivityTask.filesList.get(loop));
+            showFileInList(ActivityTask.filesList.get(loop),"");
         }
         return view;
     }
@@ -172,10 +185,10 @@ public class TaskAttachmentFragment extends BaseFragment {
             MaterialAlertDialog();
         }else {
             ActivityTask.filesList.add(file);
-            showFileInList(file);
+            showFileInList(file,"");
         }
     }
-    private void showFileInList(File file) {
+    private void showFileInList(File file,String ApiUrl) {
         try {
                 final LinearLayout linearLayout = (LinearLayout) aq
                         .id(R.id.images_layout).visible().getView();
@@ -184,9 +197,16 @@ public class TaskAttachmentFragment extends BaseFragment {
                 ImageView addFile = (ImageView) child.findViewById(R.id.file_added);
                 ImageView deleteFile = (ImageView) child.findViewById(R.id.file_delete);
                 TextView text = (TextView) child.findViewById(R.id.file_title);
+            if(file !=null) {
                 Glide.with(this).load(file).into(addFile);
                 text.setText(file.getName());
-                deleteFile.setTag(Tag);
+            }else{
+                Glide.with(this).load(ApiUrl).into(addFile);
+                String fullname = new File(
+                        new URI(ApiUrl).getPath()).getName();
+                text.setText(fullname);
+            }
+            deleteFile.setTag(Tag);
             child.setId(Tag);
             Tag++;
             linearLayout.addView(child);
