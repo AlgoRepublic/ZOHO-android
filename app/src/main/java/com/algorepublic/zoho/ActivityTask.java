@@ -15,6 +15,8 @@ import com.algorepublic.zoho.FragmentsTasks.TaskScheduleFragment;
 import com.algorepublic.zoho.adapters.TasksList;
 import com.algorepublic.zoho.fragments.TasksListFragment;
 import com.algorepublic.zoho.utils.BaseClass;
+import com.algorepublic.zoho.utils.Constants;
+import com.algorepublic.zoho.utils.GenericHttpClient;
 import com.androidquery.AQuery;
 
 import org.json.JSONException;
@@ -69,7 +71,7 @@ public class ActivityTask extends BaseActivity{
         aq.id(R.id.done).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               // new AsyncTry().execute();
+                new AsyncTry().execute();
             }
         });
        changeListener1 = new RadioGroup.OnCheckedChangeListener() {
@@ -185,38 +187,38 @@ public class ActivityTask extends BaseActivity{
         aq.id(R.id.schedule_radioButton).textColor(getResources().getColor(android.R.color.white));
         aq.id(R.id.priority_radioButton).textColor(getResources().getColor(android.R.color.white));
     }
-//    public class AsyncTry extends AsyncTask<Void, Void, String> {
-//        GenericHttpClient httpClient;
-//        String response= null;
-//
-//        @Override
-//        protected void onPreExecute() {
-//            super.onPreExecute();
-//            dialog.show();
-//        }
-//
-//        @Override
-//        protected String doInBackground(Void... voids) {
-//            try {
-//                try {
-//                    GetJsonObject();
-//                } catch (JSONException e) {
-//                    e.printStackTrace();
-//                }
-//                httpClient = new GenericHttpClient();
-//                response = httpClient.postAddTask(Constants.CreateTask_API
-//                        , assigneeList,filesList);
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//            return response;
-//        }
-//        @Override
-//        protected void onPostExecute(String result){
-//            dialog.dismiss();
-//            PopulateModel(result);
-//        }
-//    }
+    public class AsyncTry extends AsyncTask<Void, Void, String> {
+        GenericHttpClient httpClient;
+        String response= null;
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            dialog.show();
+        }
+
+        @Override
+        protected String doInBackground(Void... voids) {
+            try {
+                try {
+                    GetJsonObject();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                httpClient = new GenericHttpClient();
+                response = httpClient.postAddTask(Constants.CreateTask_API
+                        , assigneeList,filesList);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return response;
+        }
+        @Override
+        protected void onPostExecute(String result){
+            dialog.dismiss();
+            PopulateModel(result);
+        }
+    }
     private void PopulateModel (String json) {
         Log.e("Json","/"+json);
         JSONObject jsonObj;

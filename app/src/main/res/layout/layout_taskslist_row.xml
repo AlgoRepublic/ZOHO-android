@@ -7,19 +7,23 @@
     <RelativeLayout
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
-        android:layout_marginLeft="10dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginEnd="10dp"
-        android:padding="5dp"
+        android:layout_margin="5dp"
         android:background="@drawable/list_background" >
         <View
             android:id="@+id/priority_bar"
             android:layout_width="4dp"
+            android:layout_alignBottom="@+id/layout2"
+            android:layout_alignTop="@+id/layout2"
             android:background="@drawable/roundable_prioritybar"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true">
         </View>
+    <RelativeLayout
+        android:layout_toRightOf="@+id/priority_bar"
+        android:layout_height="match_parent"
+        android:padding="5dp"
+        android:id="@+id/layout2"
+        android:layout_width="match_parent" >
         <LinearLayout
             android:id="@+id/layout1"
             android:orientation="horizontal"
@@ -27,8 +31,6 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:layout_marginStart="5dp"
-            android:layout_toRightOf="@id/priority_bar"
-            android:layout_toEndOf="@id/priority_bar"
             android:weightSum="2">
             <TextView
                 android:id="@+id/task_name"
@@ -58,8 +60,6 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:layout_marginStart="5dp"
-            android:layout_toRightOf="@id/priority_bar"
-            android:layout_toEndOf="@id/priority_bar"
             android:textSize="16sp"
             android:textColor="@color/colorDarkgray"
             />
@@ -68,8 +68,6 @@
             android:layout_width="match_parent"
             android:layout_marginLeft="5dp"
             android:layout_marginStart="5dp"
-            android:layout_toRightOf="@id/priority_bar"
-            android:layout_toEndOf="@id/priority_bar"
             android:layout_below="@+id/general" >
             <TextView
                 android:id="@+id/comment"
@@ -89,6 +87,7 @@
                 android:layout_toRightOf="@+id/comment"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
+        </RelativeLayout>
         </RelativeLayout>
     </RelativeLayout>
 </LinearLayout>

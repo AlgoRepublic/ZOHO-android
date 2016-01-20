@@ -58,12 +58,12 @@ public class GenericHttpClient {
             }
             for(int i=0;i<assignee.size();i++) {
                 Log.e("Assignee", "/" + assignee.get(i));
-                mpEntity.addPart("["+i+"]", new StringBody(Integer.toString(assignee.get(i))));
+                mpEntity.addPart("taskResponsible["+i+"]", new StringBody(Integer.toString(assignee.get(i))));
             }
-            mpEntity.addPart("CreateBy",new StringBody(Integer.toString(BaseClass.db.getInt("CreateBy"))));
-            mpEntity.addPart("UpdateBy",new StringBody(Integer.toString(BaseClass.db.getInt("UpdateBy"))));
-            mpEntity.addPart("OwnerID", new StringBody(Integer.toString(BaseClass.db.getInt("OwnerID"))));
-            mpEntity.addPart("Priority", new StringBody(Integer.toString(BaseClass.db.getInt("Priority"))));
+            mpEntity.addPart("CreateBy",new StringBody(Integer.toString(1)));
+            mpEntity.addPart("UpdateBy",new StringBody(Integer.toString(1)));
+            mpEntity.addPart("OwnerID", new StringBody(Integer.toString(1)));
+            mpEntity.addPart("Priority", new StringBody(Integer.toString(1)));
             mpEntity.addPart("ProjectID", new StringBody(Integer.toString(4)));
             mpEntity.addPart("Title", new StringBody(BaseClass.db.getString("TaskName")));
             p.setEntity(mpEntity);
@@ -89,7 +89,7 @@ public class GenericHttpClient {
             mpEntity.addPart("files["+i+"]", new FileBody(files.get(i)));
         }
 
-        mpEntity.addPart("folderID", new StringBody(Integer.toString(4)));
+        mpEntity.addPart("folderID", new StringBody(Integer.toString(7)));
         mpEntity.addPart("ProjectId", new StringBody(Integer.toString(4)));
         mpEntity.addPart("CreateBy", new StringBody(Integer.toString(1)));
         mpEntity.addPart("UpdateBy", new StringBody(Integer.toString(1)));

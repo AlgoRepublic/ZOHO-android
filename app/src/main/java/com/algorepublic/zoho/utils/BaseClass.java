@@ -227,7 +227,7 @@ public class BaseClass extends Application {
     }
 
     static int icon[] = {
-            0,
+            R.mipmap.ic_listview_txt,
             R.mipmap.ic_listview_jpg,
             R.mipmap.ic_listview_jpeg,
             R.mipmap.ic_listview_png,
