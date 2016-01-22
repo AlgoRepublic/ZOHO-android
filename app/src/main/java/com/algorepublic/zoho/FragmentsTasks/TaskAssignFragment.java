@@ -49,12 +49,13 @@ public class TaskAssignFragment extends BaseFragment {
        View view =  inflater.inflate(R.layout.fragment_task_assign, container, false);
         aq = new AQuery(view);
         ActivityTask.assigneeList.clear();
-        for(int loop=0;
-            loop<TasksListFragment.generalList.get(position).getListAssignees().size();loop++)
-        {
-            ActivityTask.assigneeList.add(
-                    TasksListFragment.generalList.get(position).getListAssignees().get(loop).getUserID());
-        }
+        try {
+            for (int loop = 0;
+                 loop < TasksListFragment.generalList.get(position).getListAssignees().size(); loop++) {
+                ActivityTask.assigneeList.add(
+                        TasksListFragment.generalList.get(position).getListAssignees().get(loop).getUserID());
+            }
+        }catch (IndexOutOfBoundsException e){}
         aq.id(R.id.listview_employees).adapter(new AdapterTaskAssignee(getActivity()));
 //        service = new TaskListService(getActivity());
 //        service.getTaskAssignee(4, true, new CallBack(TaskAssignFragment.this, "TaskAssignee"));
