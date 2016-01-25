@@ -24,18 +24,7 @@ public class BaseActivity extends AppCompatActivity {
 
     }
 
-    public void hideKeyPad(View view) {
-        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.hideSoftInputFromWindow(view.getWindowToken(),
-                InputMethodManager.RESULT_UNCHANGED_SHOWN);
-    }
-    public void changeLanguage(String local_language){
-        Resources res = getResources();
-        DisplayMetrics dm = res.getDisplayMetrics();
-        android.content.res.Configuration conf = res.getConfiguration();
-        conf.locale = new Locale(local_language);
-        res.updateConfiguration(conf, dm);
-    }
+
     protected void callFragment(int containerId, Fragment fragment, String tag){
         getSupportFragmentManager()
                 .beginTransaction()
@@ -49,6 +38,13 @@ public class BaseActivity extends AppCompatActivity {
                 .replace(containerId, fragment, tag)
                 .commit();
 
+    }
+    public void callFragmentWithStateLoss(int containerId, Fragment fragment, String tag){
+
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(containerId, fragment, tag)
+                .commitAllowingStateLoss();
     }
     public void callFragmentWithBackStack(int containerId, Fragment fragment, String tag){
         getSupportFragmentManager()

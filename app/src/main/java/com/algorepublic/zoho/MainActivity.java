@@ -80,14 +80,14 @@ public class MainActivity extends BaseActivity
         toggle.syncState();
 
 
-        ImageView settings = (ImageView) headerLayout.findViewById(R.id.settings);
-
-        settings.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, SettingsActivity.class));
-            }
-        });
+//        ImageView settings = (ImageView) headerLayout.findViewById(R.id.settings);
+//
+//        settings.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                startActivity(new Intent(MainActivity.this, SettingsActivity.class));
+//            }
+//        });
 
 
        // navigationView.setNavigationItemSelectedListener(this);

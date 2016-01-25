@@ -12,7 +12,7 @@ android {
         versionCode 1
         versionName "1.0"
 
-       multiDexEnabled true
+        multiDexEnabled true
     }
     dexOptions {
         incremental true
@@ -39,6 +39,19 @@ dependencies {
     compile project(':FlycoAnimation_Lib')
     compile project(':datetimepicker')
     compile project(':agendacalendarview')
+    compile project(':FlycoDialog_Lib')
+    compile project(':dropboxChooserSDK')
+    compile project(':CircleSeekBar')
+    compile project(':TwoWayView')
+    compile('com.google.api-client:google-api-client-android:1.20.0') {
+        exclude group: 'org.apache.httpcomponents'
+        exclude group: 'com.google.guava'
+    }
+    compile('com.google.apis:google-api-services-drive:v3-rev5-1.21.0') {
+        exclude group: 'org.apache.httpcomponents'
+        exclude group: 'com.google.guava'
+    }
+    compile project(':libraryLoaders')
     compile 'com.android.support:appcompat-v7:23.1.1'
     compile 'com.google.code.gson:gson:2.5'
     compile 'com.github.bumptech.glide:glide:3.6.1'
@@ -54,21 +67,11 @@ dependencies {
     compile 'org.apache.httpcomponents:httpmime:4.3.4'
     compile 'org.apache.httpcomponents:httpcore:4.3.2'
     compile 'cc.cloudist.acplibrary:library:1.2.1'
-    compile project(':FlycoDialog_Lib')
-    compile project(':dropboxChooserSDK')
     compile 'com.google.android.gms:play-services-drive:8.4.0'
     compile 'com.facebook.rebound:rebound:0.3.7'
-    compile project(':CircleSeekBar')
-    compile project(':TwoWayView')
     compile 'com.google.android.gms:play-services-identity:8.4.0'
-    compile('com.google.api-client:google-api-client-android:1.20.0') {
-        exclude group: 'org.apache.httpcomponents'
-        exclude group: 'com.google.guava'
-    }
-    compile('com.google.apis:google-api-services-drive:v3-rev5-1.21.0') {
-        exclude group: 'org.apache.httpcomponents'
-        exclude group: 'com.google.guava'
-    }
     compile 'commons-io:commons-io:2.4'
 }
+
+
 
