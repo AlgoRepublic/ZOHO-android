@@ -26,7 +26,6 @@ public class MainActivity extends BaseActivity
 
     AQuery aq,aq_header;
     BaseClass baseClass;
-    DrawerLayout drawer;
     RadioGroup radioGroup1,radioGroup2,radioGroup3;
     RadioGroup.OnCheckedChangeListener changeListener1,changeListener2,changeListener3;
 
@@ -34,12 +33,13 @@ public class MainActivity extends BaseActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        setToolbar();
         baseClass = ((BaseClass) getApplicationContext());
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         View headerLayout =navigationView.getHeaderView(0);
         aq_header = new AQuery(headerLayout);
-        setSupportActionBar(toolbar);
         radioGroup1 = (RadioGroup) headerLayout.findViewById(R.id.radioGroup1);
         radioGroup2 = (RadioGroup) headerLayout.findViewById(R.id.radioGroup2);
         radioGroup3 = (RadioGroup) headerLayout.findViewById(R.id.radioGroup3);
@@ -77,21 +77,17 @@ public class MainActivity extends BaseActivity
         radioGroup1.setOnCheckedChangeListener(changeListener1);
         radioGroup2.setOnCheckedChangeListener(changeListener2);
         radioGroup3.setOnCheckedChangeListener(changeListener3);
-        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.setDrawerListener(toggle);
-        toggle.syncState();
 
 
-//        ImageView settings = (ImageView) headerLayout.findViewById(R.id.settings);
-//
-//        settings.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                startActivity(new Intent(MainActivity.this, SettingsActivity.class));
-//            }
-//        });
+
+        ImageView settings = (ImageView) headerLayout.findViewById(R.id.settings);
+
+        settings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, SettingsActivity.class));
+            }
+        });
 
 
        // navigationView.setNavigationItemSelectedListener(this);
@@ -100,13 +96,13 @@ public class MainActivity extends BaseActivity
         switch (radioGroup1.indexOfChild(findViewById(checkedId))) {
             case 0:
                 getSupportActionBar().setTitle(getString(R.string.feeds));
-                getSupportFragmentManager().beginTransaction().replace(R.id.container, FeedFragment.newInstance(), "FragmentFeeds").commit();
+                callFragmentWithReplace(R.id.container, FeedFragment.newInstance(), "FragmentFeeds");
                 aq.id(R.id.feed_radioButton).textColor(getResources().getColor(R.color.colorAccent));
                 aq.id(R.id.schedule_radioButton).textColor(getResources().getColor(android.R.color.white));
                 break;
             case 1:
                 getSupportActionBar().setTitle(getString(R.string.calendar));
-                getSupportFragmentManager().beginTransaction().replace(R.id.container, CalendarFragment.newInstance(), "FragmentCalendar").commit();
+                callFragmentWithReplace(R.id.container, CalendarFragment.newInstance(), "FragmentCalendar");
                 aq.id(R.id.schedule_radioButton).textColor(getResources().getColor(R.color.colorAccent));
                 aq.id(R.id.feed_radioButton).textColor(getResources().getColor(android.R.color.white));
                 break;
@@ -117,13 +113,13 @@ public class MainActivity extends BaseActivity
         switch (radioGroup2.indexOfChild(findViewById(checkedId))) {
             case 0:
                 getSupportActionBar().setTitle(getString(R.string.tasks));
-                getSupportFragmentManager().beginTransaction().replace(R.id.container, TasksListFragment.newInstance(), "TasksListFragment").commit();
+                callFragmentWithReplace(R.id.container, TasksListFragment.newInstance(), "TasksListFragment");
                 aq.id(R.id.tasks_radioButton).textColor(getResources().getColor(R.color.colorAccent));
                 aq.id(R.id.documents_radioButton).textColor(getResources().getColor(android.R.color.white));
                 break;
             case 1:
                 getSupportActionBar().setTitle(getString(R.string.documents));
-                getSupportFragmentManager().beginTransaction().replace(R.id.container, DocumentsListFragment.newInstance(), "DocumentsListFragment").commit();
+                callFragmentWithReplace(R.id.container, DocumentsListFragment.newInstance(), "DocumentsListFragment");
                 aq.id(R.id.documents_radioButton).textColor(getResources().getColor(R.color.colorAccent));
                 aq.id(R.id.tasks_radioButton).textColor(getResources().getColor(android.R.color.white));
                 break;
@@ -138,7 +134,7 @@ public class MainActivity extends BaseActivity
                 break;
             case 1:
                 getSupportActionBar().setTitle(getString(R.string.projects));
-                getSupportFragmentManager().beginTransaction().replace(R.id.container, ProjectsFragment.newInstance(), "ProjectsFragment").commit();
+                callFragmentWithReplace(R.id.container, ProjectsFragment.newInstance(), "ProjectsFragment");
                 aq.id(R.id.project_radioButton).textColor(getResources().getColor(R.color.colorAccent));
                 aq.id(R.id.user_radioButton).textColor(getResources().getColor(android.R.color.white));
                 break;
@@ -177,44 +173,6 @@ public class MainActivity extends BaseActivity
             super.onBackPressed();
         }
     }
-
-//    public void TasksList(Object caller, Object model) {
-//        TasksListModel.getInstance().setList((TasksListModel) model);
-//        if (TasksListModel.getInstance().responseCode == 100) {
-//            GetGeneralList();
-//        }
-//        else
-//        {
-//            Toast.makeText(getActivity(), getString(R.string.invalid_credential), Toast.LENGTH_SHORT).show();
-//        }
-//    }
-
-    public void ProjectsListCallback(Object caller, Object model){
-
-
-    }
-
-
-//    @SuppressWarnings("StatementWithEmptyBody")
-//    @Override
-//    public boolean onNavigationItemSelected(MenuItem item) {
-//        // Handle navigation view item clicks here.
-//        int id = item.getItemId();
-//        if (id == R.id.feed) {
-//            getSupportActionBar().setTitle(getString(R.string.feeds));
-//            getSupportFragmentManager().beginTransaction().replace(R.id.container, FeedFragment.newInstance(1), "FeedFragment").commit();
-//        } else if (id == R.id.tasks) {
-//            getSupportActionBar().setTitle(getString(R.string.tasks));
-//            getSupportFragmentManager().beginTransaction().replace(R.id.container, TasksListFragment.newInstance(), "TasksListFragment").commit();
-//        } else if (id == R.id.documents) {
-//            getSupportActionBar().setTitle(getString(R.string.documents));
-//        } else if (id == R.id.settings) {
-//            getSupportActionBar().setTitle(getString(R.string.settings));
-//        }
-//        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-//        drawer.closeDrawer(GravityCompat.START);
-//        return true;
-//    }
 
     @Override
     public void onListFragmentInteraction(DummyContent.DummyItem item) {

@@ -2,6 +2,7 @@ package com.algorepublic.zoho.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -12,6 +13,7 @@ import android.widget.AdapterView;
 import android.widget.Toast;
 
 import com.algorepublic.zoho.ActivityUploadDocs;
+import com.algorepublic.zoho.MainActivity;
 import com.algorepublic.zoho.Models.DocumentsListModel;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.adapters.AdapterDocumentsList;
@@ -52,22 +54,6 @@ public class DocumentsListFragment extends BaseFragment {
         return fragment;
     }
 
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.menu_docs, menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle item selection
-        switch (item.getItemId()) {
-            case R.id.add_files:
-                startActivity(new Intent(getActivity(), ActivityUploadDocs.class));
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
@@ -81,7 +67,15 @@ public class DocumentsListFragment extends BaseFragment {
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_documents, container, false);
         listView = (StickyListHeadersListView) view.findViewById(R.id.list_documents);
+        MainActivity.toolbar = (Toolbar) view.findViewById(R.id.toolbar);
+        setToolbar();
         aq = new AQuery(view);
+        aq.id(R.id.upload_files).clicked(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), ActivityUploadDocs.class));
+            }
+        });
         baseClass = ((BaseClass) getActivity().getApplicationContext());
         setHasOptionsMenu(true);
         service = new DocumentsService(getActivity());
