@@ -1,6 +1,7 @@
 package com.algorepublic.zoho;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -43,6 +44,9 @@ public class MainActivity extends BaseActivity
         radioGroup2 = (RadioGroup) headerLayout.findViewById(R.id.radioGroup2);
         radioGroup3 = (RadioGroup) headerLayout.findViewById(R.id.radioGroup3);
         aq= new AQuery(this);
+        if (android.os.Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+            aq_header.id(R.id.view).visibility(View.GONE);
+        }
         aq_header.id(R.id.user_name).text(baseClass.getFirstName());
         aq_header.id(R.id.email).text(baseClass.getEmail());
         changeListener1 = new RadioGroup.OnCheckedChangeListener() {

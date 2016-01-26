@@ -12,6 +12,13 @@
         android:layout_above="@+id/layout_bottom"
         android:layout_height="match_parent"
         android:divider="@android:color/transparent"
+        android:scrollX="0px"
+        android:scrollY="0px"
+        android:fadeScrollbars="false"
+        android:scrollbarAlwaysDrawVerticalTrack="true"
+        android:scrollbarSize="20dp"
+        android:scrollbarStyle="outsideOverlay"
+        android:scrollbars="vertical"
         />
     <LinearLayout
         android:id="@+id/layout_bottom"

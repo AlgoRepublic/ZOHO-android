@@ -1,4 +1,4 @@
-package com.algorepublic.zoho.SplashToLoadingFragments;
+package com.algorepublic.zoho.LoginToLoadingFragments;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,7 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.algorepublic.zoho.ActivitySplashToLoading;
+import com.algorepublic.zoho.ActivityLoginToLoading;
 import com.algorepublic.zoho.MainActivity;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.fragments.BaseFragment;
@@ -77,7 +77,7 @@ public class LoginFragment extends BaseFragment {
                     changeLanguage(getString(R.string.lang_arabic));
                     baseClass.setUserLanguage(getString(R.string.lang_arabic));
                 }
-                startActivity(new Intent(getActivity(), ActivitySplashToLoading.class));
+                startActivity(new Intent(getActivity(), ActivityLoginToLoading.class));
                 getActivity().finish();
             }
         });
@@ -87,6 +87,13 @@ public class LoginFragment extends BaseFragment {
                LoginClick(v);
             }
         });
+        aq.id(R.id.linkedin_here).clicked(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               LinkedInClick(v);
+            }
+        });
+
         return view;
     }
 
@@ -109,7 +116,7 @@ public class LoginFragment extends BaseFragment {
         if(!baseClass.isNetworkAvailble(getActivity()))
             return;
         hideKeyPad(view);
-        callFragmentWithReplace(R.id.splashtoloading_container, LoginLoadingFragment.newInstance(aq), "LoginLoadingFragment");
+        callFragmentWithReplace(R.id.logintoloading_container, LoginLoadingFragment.newInstance(aq), "LoginLoadingFragment");
     }
 
     public void LinkedInClick(final View view) {
@@ -177,21 +184,6 @@ public class LoginFragment extends BaseFragment {
     private boolean isContentNull(String content) {
         //TODO: Replace this with your own logic
         return content.length()==0;
-    }
-    @Override
-    public void onDetach() {
-        super.onDetach();
-
-        try {
-            Field childFragmentManager = Fragment.class.getDeclaredField("mChildFragmentManager");
-            childFragmentManager.setAccessible(true);
-            childFragmentManager.set(this, null);
-
-        } catch (NoSuchFieldException e) {
-            throw new RuntimeException(e);
-        } catch (IllegalAccessException e) {
-            throw new RuntimeException(e);
-        }
     }
 }
 

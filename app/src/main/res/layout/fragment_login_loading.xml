@@ -9,7 +9,6 @@
         android:id="@+id/avloadingIndicatorView"
         android:layout_width="140dp"
         android:layout_height="140dp"
-        android:visibility="visible"
         app:indicator="BallSpinFadeLoader"
         app:indicator_color="@color/colorPrimary"
         android:layout_centerVertical="true"
@@ -20,7 +19,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/editText"
         android:layout_marginTop="15dp"
-        android:text="Connecting to user"
+        android:text="Connecting to User"
         android:textColor="@color/colorPrimary"
         android:layout_below="@+id/avloadingIndicatorView"
         android:layout_centerHorizontal="true" />
@@ -37,7 +36,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/editText2"
-        android:text="Loading "
+        android:text="Loading"
+        android:textAllCaps="true"
         android:textColor="@color/colorPrimary"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />
