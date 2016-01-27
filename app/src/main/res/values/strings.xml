@@ -11,7 +11,7 @@
     <string name="enter_email">Please enter email</string>
     <string name="enter_password">Please enter password</string>
     <string name="error_invalid_email">Invalid email</string>
-    <string name="text_or">or</string>
+    <string name="text_or">Sign In using</string>
     <string name="selected_language">العربية</string>
     <string name="invalid_credential">Invalid User Credential!</string>
     <string name="error_login_response">Please check your internet or server not responding</string>

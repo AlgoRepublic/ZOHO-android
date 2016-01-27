@@ -1,17 +1,18 @@
-package com.algorepublic.zoho;
-
+package com.algorepublic.zoho.SplashToLoadingFragments;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Toast;
+import android.view.ViewGroup;
 
-import com.algorepublic.zoho.Models.GetUserModel;
-import com.algorepublic.zoho.Models.UserModel;
-import com.algorepublic.zoho.services.CallBack;
-import com.algorepublic.zoho.services.LoginService;
+import com.algorepublic.zoho.ActivitySplashToLoading;
+import com.algorepublic.zoho.MainActivity;
+import com.algorepublic.zoho.R;
+import com.algorepublic.zoho.fragments.BaseFragment;
 import com.algorepublic.zoho.utils.BaseClass;
 import com.algorepublic.zoho.utils.Constants;
 import com.androidquery.AQuery;
@@ -28,47 +29,65 @@ import com.linkedin.platform.utils.Scope;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-/**
- * Created by android on 12/10/15.
- */
-public class ActivityLogin extends BaseActivity{
+import java.lang.reflect.Field;
 
-    LoginService loginService;
+/**
+ * Created by ahmad on 6/22/15.
+ */
+public class LoginFragment extends BaseFragment {
+
+    static LoginFragment fragment;
+    View view;AQuery aq;
     BaseClass baseClass;
-    AQuery aq;
+    public LoginFragment() {
+    }
+
+    @SuppressWarnings("unused")
+    public static LoginFragment newInstance() {
+        if (fragment == null) {
+            fragment = new LoginFragment();
+        }
+        return fragment;
+    }
+
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        baseClass = ((BaseClass) getApplicationContext());
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        baseClass = ((BaseClass) getActivity().getApplicationContext());
         if(!baseClass.getUserId().isEmpty()) {
-            startActivity(new Intent(this, MainActivity.class));
-            ActivityLogin.this.finish();
+            startActivity(new Intent(getActivity(), MainActivity.class));
+            getActivity().finish();
         }
         if(baseClass.getUserLanguage().equals(getString(R.string.lang_arabic))) {
             changeLanguage(getString(R.string.lang_arabic));
-            setContentView(R.layout.activity_login);
+            view  = inflater.inflate(R.layout.fragment_login, container, false);
         }else {
             changeLanguage(getString(R.string.lang_english));
-            setContentView(R.layout.activity_login);
+            view  = inflater.inflate(R.layout.fragment_login, container, false);
         }
-        aq= new AQuery(this);
-        loginService = new LoginService(this);
+        aq= new AQuery(getActivity(),view);
         aq.id(R.id.lang_text).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (aq.id(R.id.lang_text).getText().toString().equalsIgnoreCase("English")) {
                     changeLanguage(getString(R.string.lang_english));
                     baseClass.setUserLanguage(getString(R.string.lang_english));
-                }
-                else {
+                } else {
                     changeLanguage(getString(R.string.lang_arabic));
                     baseClass.setUserLanguage(getString(R.string.lang_arabic));
                 }
-                startActivity(new Intent(ActivityLogin.this,ActivityLogin.class));
-                finish();
+                startActivity(new Intent(getActivity(), ActivitySplashToLoading.class));
+                getActivity().finish();
             }
         });
+        aq.id(R.id.email_sign_in_button).clicked(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               LoginClick(v);
+            }
+        });
+        return view;
     }
 
     public void LoginClick(final View view) {
@@ -87,41 +106,14 @@ public class ActivityLogin extends BaseActivity{
             aq.id(R.id.password).getEditText().setError(getString(R.string.enter_password));
             return;
         }
-        if(!baseClass.isNetworkAvailble(ActivityLogin.this))
+        if(!baseClass.isNetworkAvailble(getActivity()))
             return;
         hideKeyPad(view);
-        loginService.login(aq.id(R.id.email).getText().toString(), aq.id(R.id.password).getText().toString(), true, new CallBack(ActivityLogin.this, "LoginCall"));
+        callFragmentWithReplace(R.id.splashtoloading_container, LoginLoadingFragment.newInstance(aq), "LoginLoadingFragment");
     }
-    public void LoginCall(Object caller, Object model) {
-        UserModel.getInstance().setList((UserModel) model);
-        if (UserModel.getInstance().responseCode.equalsIgnoreCase("100")
-                && !UserModel.getInstance().userToken.equalsIgnoreCase("0")) {
-            baseClass.setUserId(UserModel.getInstance().userToken);
-            loginService.GetById(baseClass.getUserId(),true,new CallBack(ActivityLogin.this,"GetById"));
-        }
-        else
-        {
-            Toast.makeText(ActivityLogin.this, getString(R.string.invalid_credential), Toast.LENGTH_SHORT).show();
-            aq.id(R.id.progress_bar).visibility(View.GONE);
-        }
-    }
-    public void GetById(Object caller,Object model) {
-        GetUserModel.getInstance().setList((GetUserModel) model);
-        if (GetUserModel.getInstance().responseCode.equalsIgnoreCase("100")
-                && GetUserModel.getInstance().user.toString() !="null") {
-            baseClass.setFirstName(GetUserModel.getInstance().user.firstName);
-            baseClass.setEmail(GetUserModel.getInstance().user.eMail);
-            startActivity(new Intent(this, MainActivity.class));
-            ActivityLogin.this.finish();
-        }else {
-            Toast.makeText(ActivityLogin.this, getString(R.string.error_login_response), Toast.LENGTH_SHORT).show();
-            aq.id(R.id.progress_bar).visibility(View.GONE);
-        }
-    }
-
 
     public void LinkedInClick(final View view) {
-        LISessionManager.getInstance(getApplicationContext()).init(ActivityLogin.this, buildScope(), new AuthListener() {
+        LISessionManager.getInstance(getActivity()).init(getActivity(), buildScope(), new AuthListener() {
             @Override
             public void onAuthSuccess() {
                 Snackbar.make(view, "Login !", Snackbar.LENGTH_LONG).show();
@@ -141,13 +133,13 @@ public class ActivityLogin extends BaseActivity{
     }
 
     private void setUpdateState() {
-        LISessionManager sessionManager = LISessionManager.getInstance(getApplicationContext());
+        LISessionManager sessionManager = LISessionManager.getInstance(getActivity());
         LISession session = sessionManager.getSession();
         boolean accessTokenValid = session.isValid();
         session.getAccessToken();
         Log.e("accessTokenValid", session.getAccessToken().toString());
         if (accessTokenValid) {
-            APIHelper.getInstance(this).getRequest(this, Constants.LinkedIn_API, new ApiListener() {
+            APIHelper.getInstance(getActivity()).getRequest(getActivity(), Constants.LinkedIn_API, new ApiListener() {
                 @Override
                 public void onApiSuccess(ApiResponse apiResponse) {
                     Log.e("accessTokenValid1", "/" + apiResponse.getResponseDataAsJson());
@@ -186,4 +178,20 @@ public class ActivityLogin extends BaseActivity{
         //TODO: Replace this with your own logic
         return content.length()==0;
     }
+    @Override
+    public void onDetach() {
+        super.onDetach();
+
+        try {
+            Field childFragmentManager = Fragment.class.getDeclaredField("mChildFragmentManager");
+            childFragmentManager.setAccessible(true);
+            childFragmentManager.set(this, null);
+
+        } catch (NoSuchFieldException e) {
+            throw new RuntimeException(e);
+        } catch (IllegalAccessException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
+
