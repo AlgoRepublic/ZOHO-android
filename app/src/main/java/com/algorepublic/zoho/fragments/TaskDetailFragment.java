@@ -8,14 +8,11 @@ import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.SeekBar;
 
 import com.algorepublic.zoho.ActivityTask;
 import com.algorepublic.zoho.MainActivity;
@@ -31,7 +28,7 @@ import com.flyco.animation.BounceEnter.BounceLeftEnter;
 import com.flyco.animation.SlideExit.SlideRightExit;
 import com.flyco.dialog.listener.OnBtnClickL;
 import com.flyco.dialog.widget.NormalDialog;
-import com.jesusm.holocircleseekbar.lib.HoloCircleSeekBar;
+import com.github.lzyzsd.circleprogress.DonutProgress;
 
 import org.lucasr.twowayview.TwoWayLayoutManager;
 import org.lucasr.twowayview.widget.TwoWayView;
@@ -49,10 +46,11 @@ public class TaskDetailFragment extends BaseFragment {
     int Progress,opt;
     TaskListService service;
     int click=0;
-    HoloCircleSeekBar seekBarCompat;
+    DonutProgress seekBarCompat;
     TwoWayView twoWayAssignee;
     TwoWayView twoWayAttachments;
-
+    SeekBar seekBar;
+    View views;
 
     public TaskDetailFragment() {
         // Required empty public constructor
@@ -66,15 +64,24 @@ public class TaskDetailFragment extends BaseFragment {
     }
 
     @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         final View view =  inflater.inflate(R.layout.fragment_task_detail, container, false);
         setHasOptionsMenu(true);
-        seekBarCompat = (HoloCircleSeekBar) view.findViewById(R.id.seekBar);
+        seekBarCompat = (DonutProgress) view.findViewById(R.id.circularprogressBar);
+        seekBar =(SeekBar) view.findViewById(R.id.progressBar);
         twoWayAssignee = (TwoWayView) view.findViewById(R.id.task_assignee);
       //  twoWayAttachments = (TwoWayView) view.findViewById(R.id.taskdetail_attachments);
         twoWayAssignee.setHasFixedSize(true); //twoWayAttachments.setHasFixedSize(true);
+        views =(View) view.findViewById(R.id.priority_bar);
+//        twoWayAttachments = (TwoWayView) view.findViewById(R.id.taskdetail_attachments);
+        twoWayAssignee.setHasFixedSize(true);// twoWayAttachments.setHasFixedSize(true);
         twoWayAssignee.setLongClickable(true);//twoWayAttachments.setLongClickable(true);
         twoWayAssignee.setOrientation(TwoWayLayoutManager.Orientation.HORIZONTAL);
         //twoWayAttachments.setOrientation(TwoWayLayoutManager.Orientation.HORIZONTAL);
@@ -84,21 +91,21 @@ public class TaskDetailFragment extends BaseFragment {
         aq = new AQuery(view);
         MainActivity.toolbar = (Toolbar) view.findViewById(R.id.toolbar);
         setToolbar();
-        setPriority();
         service = new TaskListService(getActivity());
-        service.getTaskAttachments(10,true,new CallBack(TaskDetailFragment.this,"TaskAttachments"));
-        aq.id(R.id.task_name).text(TasksListFragment.generalList.get(position).getTaskName());
+        service.getTaskAttachments(10, true, new CallBack(TaskDetailFragment.this, "TaskAttachments"));
         aq.id(R.id.start_date).text(TasksListFragment.generalList.get(position).getStartDate());
         aq.id(R.id.end_date).text(TasksListFragment.generalList.get(position).getEndDate());
         aq.id(R.id.category).text(TasksListFragment.generalList.get(position).getTaskListName());
         aq.id(R.id.task_desc).text(TasksListFragment.generalList.get(position).getTaskListName());
-        aq.id(R.id.taskdate).text(DaysDifference(TasksListFragment.generalList.get(position).getEndMilli()));
-        seekBarCompat.setValue(TasksListFragment.generalList.get(position).getProgress());
+//        aq.id(R.id.taskdate).text(DaysDifference(TasksListFragment.generalList.get(position).getEndMilli()));
+//        seekBarCompat.setValue(TasksListFragment.generalList.get(position).getProgress());
+        seekBar.setProgress(TasksListFragment.generalList.get(position).getProgress());
+        seekBarCompat.setProgress(TasksListFragment.generalList.get(position).getProgress());
 
-        Drawable shapeDrawable = (Drawable) aq.id(R.id.layout_tasktitle).getView().getBackground();
+        Drawable shapeDrawable = (Drawable) aq.id(R.id.priority_bar).getView().getBackground();
         GradientDrawable colorDrawable = (GradientDrawable) shapeDrawable;
         colorDrawable.setColor(getPriorityWiseColor(TasksListFragment.generalList.get(position).getPriority()));
-        aq.id(R.id.layout_tasktitle).getView().setBackground(shapeDrawable);
+        aq.id(R.id.priority_bar).getView().setBackground(shapeDrawable);
         aq.id(R.id.edit_task).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -107,26 +114,25 @@ public class TaskDetailFragment extends BaseFragment {
                 startActivity(intent);
             }
         });
-        seekBarCompat.setOnSeekBarChangeListener(new HoloCircleSeekBar.OnCircleSeekBarChangeListener() {
-            @Override
-            public void onStartTrackingTouch(HoloCircleSeekBar seekBar) {
-                // Nothing to do
-            }
 
-            @Override
-            public void onStopTrackingTouch(HoloCircleSeekBar seekBar) {
-                // Nothing to do
-            }
+        views.setBackgroundColor(getPriorityWiseColor(TasksListFragment.generalList.get(position).getPriority()));
+      seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+          @Override
+          public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+              seekBarCompat.setProgress(progress);
+          }
 
-            @Override
-            public void onProgressChanged(HoloCircleSeekBar seekBar, int progress, boolean fromUser) {
-                Progress = progress;
-                if (progress == 100)
-                    opt = 1;
-                else
-                    opt = 0;
-            }
-        });
+          @Override
+          public void onStartTrackingTouch(SeekBar seekBar) {
+
+          }
+
+          @Override
+          public void onStopTrackingTouch(SeekBar seekBar) {
+
+          }
+      });
+
 
         aq.id(R.id.comment).clicked(new View.OnClickListener() {
             @Override
@@ -192,16 +198,7 @@ public class TaskDetailFragment extends BaseFragment {
             Snackbar.make(getView(), getString(R.string.invalid_credential), Snackbar.LENGTH_SHORT).show();
         }
     }
-    public void setPriority(){
-        if(TasksListFragment.generalList.get(position).getPriority()==0)
-            aq.id(R.id.priority).text("None");
-        if(TasksListFragment.generalList.get(position).getPriority()==1)
-            aq.id(R.id.priority).text("Low");
-        if(TasksListFragment.generalList.get(position).getPriority()==2)
-            aq.id(R.id.priority).text("Medium");
-        if(TasksListFragment.generalList.get(position).getPriority()==3)
-            aq.id(R.id.priority).text("High");
-    }
+
     private void NormalDialogCustomAttr(String content) {
         final NormalDialog dialog = new NormalDialog(getActivity());
         dialog.isTitleShow(false)//
@@ -212,8 +209,8 @@ public class TaskDetailFragment extends BaseFragment {
                 .contentTextColor(getResources().getColor(R.color.colorPrimaryDark))//
                 .dividerColor(getResources().getColor(R.color.colorPrimary))//
                 .btnTextSize(15.5f, 15.5f)//
-                        .btnTextColor(getResources().getColor(R.color.colorPrimaryDark)
-                                , getResources().getColor(R.color.colorPrimaryDark))//
+                .btnTextColor(getResources().getColor(R.color.colorPrimaryDark)
+                        , getResources().getColor(R.color.colorPrimaryDark))//
                 .btnPressColor(getResources().getColor(R.color.colorDarkgray))//
                 .widthScale(0.85f)//
                 .showAnim(new BounceLeftEnter())//
@@ -224,7 +221,7 @@ public class TaskDetailFragment extends BaseFragment {
                 new OnBtnClickL() {
                     @Override
                     public void onBtnClick() {
-                    dialog.dismiss();
+                        dialog.dismiss();
                     }
                 },
                 new OnBtnClickL() {
