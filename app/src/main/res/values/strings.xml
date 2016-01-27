@@ -127,6 +127,6 @@
     <string name="task_added">Added</string>
     <string name="task_users">Users:</string>
     <string name="task_startdate">Start Date:</string>
-    <string name="task_enddate">End Date:</string>
+    <string name="task_duedate">Due Date:</string>
     <string name="projects_list_empty">Project list is empty</string>
 </resources>
