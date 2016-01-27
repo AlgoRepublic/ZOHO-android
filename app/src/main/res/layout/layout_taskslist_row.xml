@@ -20,8 +20,8 @@
         </View>
         <ImageView
             android:id="@+id/task_image"
-            android:layout_width="30dp"
-            android:layout_height="35dp"
+            android:layout_width="20dp"
+            android:layout_height="25dp"
             android:layout_margin="5dp"
             android:scaleType="fitXY"
             android:adjustViewBounds="true"
@@ -32,6 +32,7 @@
         android:layout_toRightOf="@+id/task_image"
         android:layout_height="match_parent"
         android:id="@+id/layout1"
+        android:padding="5dp"
         android:orientation="vertical"
         android:layout_width="match_parent" >
         <LinearLayout
@@ -39,8 +40,6 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:layout_marginStart="5dp"
             android:weightSum="2">
             <TextView
                 android:id="@+id/task_name"
@@ -58,7 +57,7 @@
                 android:layout_weight="1"
                 android:gravity="right|end"
                 android:layout_height="wrap_content"
-                android:textSize="16sp"
+                android:textSize="12sp"
                 android:layout_marginRight="5dp"
                 android:textColor="@color/colorDarkgray"
                 />
@@ -67,15 +66,16 @@
             android:id="@+id/layout3"
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="20dp"
             android:layout_marginLeft="5dp"
             android:layout_marginStart="5dp"
             android:weightSum="2">
             <TextView
                 android:id="@+id/project_name"
                 android:layout_width="0dp"
-                android:layout_weight="1"
+                android:layout_weight=".8"
                 android:gravity="left"
+                android:layout_gravity="center_vertical"
                 android:layout_height="wrap_content"
                 android:textSize="16sp"
                 android:textStyle="bold"
@@ -83,28 +83,39 @@
                 />
             <RelativeLayout
                 android:layout_height="wrap_content"
-                android:layout_width="match_parent"
-                android:layout_marginLeft="5dp"
-                android:layout_marginStart="5dp"
+                android:layout_width="0dp"
+                android:layout_weight="1.2"
                 android:layout_below="@+id/general" >
                 <TextView
                     android:id="@+id/comment"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="14sp"
+                    android:textSize="12sp"
                     android:gravity="left"
-                    android:text="1 Comment"
-                    android:layout_marginTop="5dp"
+                    android:text="10 Comments"
+                    android:layout_toLeftOf="@+id/bar"
+                    android:layout_centerVertical="true"
                     android:textColor="@android:color/holo_blue_dark"
                     />
-                <LinearLayout
-                    android:id="@+id/layout_assignee"
-                    android:orientation="horizontal"
-                    android:gravity="right"
-                    android:layout_alignParentRight="true"
-                    android:layout_toRightOf="@+id/comment"
+                <View
+                    android:id="@+id/bar"
+                    android:layout_width="1dp"
+                    android:layout_margin="5dp"
+                    android:layout_toLeftOf="@+id/task_users"
+                    android:background="@drawable/roundable_prioritybar"
+                    android:layout_height="match_parent">
+                </View>
+                <TextView
+                    android:id="@+id/task_users"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    android:gravity="left"
+                    android:text="10 Users"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:textColor="@android:color/holo_blue_dark"
+                    />
             </RelativeLayout>
         </LinearLayout>
 

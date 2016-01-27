@@ -1,17 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.AppBarLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:theme="@style/AppTheme.AppBarOverlay"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 <android.support.v7.widget.Toolbar
     style="@style/ToolBarStyle"
-    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:paddingTop="5dp"
     android:paddingBottom="5dp"
+    app:popupTheme="@style/AppTheme.PopupOverlay"
     android:fitsSystemWindows="true"
     android:background="@color/colorPrimary"
     android:minHeight="@dimen/abc_action_bar_default_height_material">
 
     <RelativeLayout
-        android:id="@+id/search_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
@@ -57,3 +62,4 @@
 
     </RelativeLayout>
 </android.support.v7.widget.Toolbar>
+</android.support.design.widget.AppBarLayout>

@@ -3,9 +3,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragments.DocumentsListFragment">
-
+    <include android:id="@+id/include"
+        layout="@layout/toolbar_docslist"/>
     <se.emilsjolander.stickylistheaders.StickyListHeadersListView
         android:id="@+id/list_documents"
+        android:layout_below="@+id/include"
         android:layout_width="match_parent"
         android:focusableInTouchMode="false"
         android:layout_height="match_parent"
