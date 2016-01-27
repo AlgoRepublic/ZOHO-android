@@ -23,17 +23,26 @@
             android:layout_marginRight="5dp"
             android:gravity="center_vertical"
             android:orientation="horizontal">
-
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:text="Projects"
+                android:layout_centerHorizontal="true"
+                android:textStyle="bold"
+                android:textColor="@android:color/white"
+                android:id="@+id/textView2"
+                android:layout_centerVertical="true" />
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="35dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:layout_centerVertical="true"
-                android:id="@+id/upload_files"
+                android:id="@+id/add_project"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 android:layout_alignParentRight="true"
                 android:textAllCaps="false"
-                android:background="@drawable/ic_cloud_upload"/>
+                android:background="@drawable/fab_add"/>
 
         </RelativeLayout>
     </android.support.v7.widget.Toolbar>

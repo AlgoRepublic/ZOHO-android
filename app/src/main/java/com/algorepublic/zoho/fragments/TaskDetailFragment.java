@@ -7,6 +7,7 @@ import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -17,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.algorepublic.zoho.ActivityTask;
+import com.algorepublic.zoho.MainActivity;
 import com.algorepublic.zoho.Models.GeneralModel;
 import com.algorepublic.zoho.Models.TaskAttachmentsModel;
 import com.algorepublic.zoho.R;
@@ -64,27 +66,6 @@ public class TaskDetailFragment extends BaseFragment {
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.menu_taskdetail, menu);
-    }
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle item selection
-        switch (item.getItemId()) {
-            case R.id.edit_task:
-               Intent intent = new Intent(getActivity(), ActivityTask.class);
-                intent.putExtra("pos",position);
-                startActivity(intent);
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
@@ -92,15 +73,17 @@ public class TaskDetailFragment extends BaseFragment {
         setHasOptionsMenu(true);
         seekBarCompat = (HoloCircleSeekBar) view.findViewById(R.id.seekBar);
         twoWayAssignee = (TwoWayView) view.findViewById(R.id.task_assignee);
-        twoWayAttachments = (TwoWayView) view.findViewById(R.id.taskdetail_attachments);
-        twoWayAssignee.setHasFixedSize(true); twoWayAttachments.setHasFixedSize(true);
-        twoWayAssignee.setLongClickable(true);twoWayAttachments.setLongClickable(true);
+      //  twoWayAttachments = (TwoWayView) view.findViewById(R.id.taskdetail_attachments);
+        twoWayAssignee.setHasFixedSize(true); //twoWayAttachments.setHasFixedSize(true);
+        twoWayAssignee.setLongClickable(true);//twoWayAttachments.setLongClickable(true);
         twoWayAssignee.setOrientation(TwoWayLayoutManager.Orientation.HORIZONTAL);
-        twoWayAttachments.setOrientation(TwoWayLayoutManager.Orientation.HORIZONTAL);
+        //twoWayAttachments.setOrientation(TwoWayLayoutManager.Orientation.HORIZONTAL);
         twoWayAssignee.setAdapter(new AdapterTaskDetailAssignee(getActivity(),
                 TasksListFragment.generalList.get(position).getListAssignees()));
 
         aq = new AQuery(view);
+        MainActivity.toolbar = (Toolbar) view.findViewById(R.id.toolbar);
+        setToolbar();
         setPriority();
         service = new TaskListService(getActivity());
         service.getTaskAttachments(10,true,new CallBack(TaskDetailFragment.this,"TaskAttachments"));
@@ -116,7 +99,14 @@ public class TaskDetailFragment extends BaseFragment {
         GradientDrawable colorDrawable = (GradientDrawable) shapeDrawable;
         colorDrawable.setColor(getPriorityWiseColor(TasksListFragment.generalList.get(position).getPriority()));
         aq.id(R.id.layout_tasktitle).getView().setBackground(shapeDrawable);
-
+        aq.id(R.id.edit_task).clicked(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), ActivityTask.class);
+                intent.putExtra("pos",position);
+                startActivity(intent);
+            }
+        });
         seekBarCompat.setOnSeekBarChangeListener(new HoloCircleSeekBar.OnCircleSeekBarChangeListener() {
             @Override
             public void onStartTrackingTouch(HoloCircleSeekBar seekBar) {

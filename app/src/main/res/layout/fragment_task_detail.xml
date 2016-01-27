@@ -6,11 +6,13 @@
     android:layout_height="wrap_content"
     tools:context=".fragments.TaskDetailFragment"
     android:background="@color/colorLightgray">
+    <include android:id="@+id/include"
+        layout="@layout/toolbar_taskdetail"/>
     <ScrollView
         android:id="@+id/scrollView"
+        android:layout_below="@+id/include"
         android:layout_above="@+id/parent2"
         android:layout_width="match_parent"
-        android:layout_alignParentTop="true"
         android:layout_height="wrap_content">
     <RelativeLayout
         android:id="@+id/parent1"
@@ -249,15 +251,7 @@
                 app:text_size="22sp"
                 app:wheel_active_color="@color/colorAccent"
                 app:wheel_unactive_color="@color/colorDarkgray"/>
-            <org.lucasr.twowayview.widget.TwoWayView
-                android:id="@+id/taskdetail_attachments"
-                android:layout_below="@+id/seekBar"
-                android:layout_width="match_parent"
-                android:layout_height="90dp"
-                android:weightSum="3"
-                app:twowayview_layoutManager="ListLayoutManager"
-                android:orientation="horizontal">
-            </org.lucasr.twowayview.widget.TwoWayView>
+
         </RelativeLayout>
 
         </RelativeLayout>

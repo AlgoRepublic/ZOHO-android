@@ -14,10 +14,15 @@
     <RelativeLayout
         android:id="@+id/layout_menu"
         android:layout_width="match_parent"
-        android:padding="5dp"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/colorPrimaryDark"
-        android:orientation="vertical">
+        android:background="@color/colorPrimaryDark">
+       <RelativeLayout
+        android:id="@+id/layout_menu1"
+        android:layout_width="44dp"
+        android:layout_alignParentRight="true"
+        android:layout_height="match_parent">
         <TextView
             android:id="@+id/notify_alert"
             android:layout_width="25dp"
@@ -34,17 +39,17 @@
             android:id="@+id/notification"
             android:layout_width="28dp"
             android:layout_height="28dp"
+            android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
-            android:layout_toLeftOf="@+id/notify_alert"
             android:src="@drawable/notification" />
-
+        </RelativeLayout>
         <ImageView
             android:id="@+id/settings"
             android:layout_width="28dp"
             android:layout_height="28dp"
             android:layout_marginRight="10dp"
             android:layout_centerVertical="true"
-            android:layout_toLeftOf="@+id/notification"
+            android:layout_toLeftOf="@+id/layout_menu1"
             android:src="@drawable/settings" />
     </RelativeLayout>
     <ScrollView

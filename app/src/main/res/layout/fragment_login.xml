@@ -38,14 +38,18 @@
                 android:ellipsize="end"
                 android:textSize="20sp" />
         </RelativeLayout>
-        <LinearLayout
+        <RelativeLayout
             android:id="@+id/spacer"
+            android:layout_below="@+id/language_selector"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="@drawable/nav_user"
-            android:layout_below="@id/language_selector"
-            android:orientation="vertical">
-        </LinearLayout>
+            android:layout_height="40dp">
+            <ImageView
+                android:layout_width="200dp"
+                android:layout_height="match_parent"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true"
+                android:background="@mipmap/fastlink_black"/>
+        </RelativeLayout>
         <ScrollView android:id="@+id/login_form"
             android:layout_width="match_parent"
             android:scrollbars="none"
@@ -128,17 +132,13 @@
                 </RelativeLayout>
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_marginTop="10dp"
-                    android:layout_height="40dp"
-                    android:orientation="vertical">
+                    android:layout_height="40dp">
                 <Button android:id="@+id/email_sign_in_button"
                     android:layout_width="130dp"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="20dp"
                     android:layout_centerVertical="true"
                     android:layout_centerHorizontal="true"
-                    android:text="Login In"
-                    android:background="@drawable/generic_button"/>
+                    android:background="@mipmap/login"/>
                 </RelativeLayout>
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -160,13 +160,14 @@
                 </RelativeLayout>
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_marginTop="10dp"
                     android:layout_height="40dp"
                     android:orientation="vertical">
                 <Button android:id="@+id/linkedin_here"
-                    android:layout_width="wrap_content"
+                    android:layout_width="130dp"
+                    android:layout_centerVertical="true"
+                    android:layout_centerHorizontal="true"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/sign_in_withlinkedin"/>
+                    android:background="@mipmap/linkedin"/>
                  </RelativeLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
