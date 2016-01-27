@@ -207,10 +207,11 @@
             <RelativeLayout
                 android:id="@+id/layout4"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="60dp"
                 android:layout_alignParentTop="true">
 
                 <SeekBar
+                    style="@style/Base.Widget.AppCompat.SeekBar"
                     android:id="@+id/seekBar1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -220,10 +221,7 @@
                     android:thumbTint="@color/colorPrimary"
                     android:progressTint="@color/colorPrimary"
                     android:foreground="@color/colorPrimary"
-                    android:paddingLeft="30px"
-                    android:paddingRight="30px"
-                    android:minHeight="6dip"
-                    android:maxHeight="6dip"
+                    android:maxHeight="50000dip"
                     android:max="100" >
                 </SeekBar>
             </RelativeLayout>
@@ -238,6 +236,8 @@
                 android:layout_marginTop="10dp"
                 android:layout_centerInParent="true"
                 custom:donut_text_color="@color/colorPrimary"
+                custom:donut_finished_stroke_width="4dp"
+                custom:donut_unfinished_stroke_width="4dp"
                 custom:donut_finished_color="@color/colorPrimary"
 
                 />

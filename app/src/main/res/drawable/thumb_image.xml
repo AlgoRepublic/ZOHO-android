@@ -8,7 +8,7 @@
 
                 android:width="25dp" />
 
-            <solid android:color="@color/colorPrimary" />
+            <solid android:color="@color/colorDarkgray" />
 
         </shape>
     </item>
