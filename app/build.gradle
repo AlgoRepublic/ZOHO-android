@@ -12,14 +12,14 @@ android {
         versionCode 1
         versionName "1.0"
 
-        multiDexEnabled true
+        multiDexEnabled false
     }
     dexOptions {
         incremental true
     }
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
@@ -67,6 +67,8 @@ dependencies {
     compile 'org.apache.httpcomponents:httpmime:4.3.4'
     compile 'org.apache.httpcomponents:httpcore:4.3.2'
     compile 'cc.cloudist.acplibrary:library:1.2.1'
+    compile project(':FlycoDialog_Lib')
+    compile project(':dropboxChooserSDK')
     compile 'com.google.android.gms:play-services-drive:8.4.0'
     compile 'com.facebook.rebound:rebound:0.3.7'
     compile 'com.google.android.gms:play-services-identity:8.4.0'
