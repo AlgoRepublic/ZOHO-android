@@ -75,7 +75,7 @@ public class TaskDetailFragment extends BaseFragment {
         final View view =  inflater.inflate(R.layout.fragment_task_detail, container, false);
         setHasOptionsMenu(true);
         seekBarCompat = (DonutProgress) view.findViewById(R.id.circularprogressBar);
-        seekBar =(SeekBar) view.findViewById(R.id.progressBar);
+        seekBar =(SeekBar) view.findViewById(R.id.seekBar);
         twoWayAssignee = (TwoWayView) view.findViewById(R.id.task_assignee);
       //  twoWayAttachments = (TwoWayView) view.findViewById(R.id.taskdetail_attachments);
         twoWayAssignee.setHasFixedSize(true); //twoWayAttachments.setHasFixedSize(true);
