@@ -61,6 +61,7 @@ public class LoginLoadingFragment extends BaseFragment {
         else
         {
             Toast.makeText(getActivity(), getString(R.string.invalid_credential), Toast.LENGTH_SHORT).show();
+            callFragmentWithReplace(R.id.logintoloading_container, LoginFragment.newInstance(), "LoginFragment");
         }
     }
     public void GetById(Object caller,Object model) {

@@ -12,7 +12,7 @@ public class ActivitySplash extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_splash_zoho);
+        setContentView(R.layout.activity_splash_zoho);
         final int splashScreenDispalyTime = 3000;
         Thread welcomeScreenThread = new Thread(){
             int wait = 0;

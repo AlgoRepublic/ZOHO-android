@@ -1,19 +1,21 @@
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:descendantFocusability="blocksDescendants"
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="5dp">
+    android:padding="2dp">
 
-    <ImageView
+    <com.mikhaellopez.circularimageview.CircularImageView
         android:id="@+id/assignee_image"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
         android:scaleType="fitXY"
-        android:background="@drawable/nav_user"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
-        android:textColor="@android:color/black"
+        app:shadow="true"
+        app:shadow_radius="3"
+        app:border_width="0dp"
+        app:shadow_color="@color/colorDarkgray"
         />
 </RelativeLayout>

@@ -11,6 +11,7 @@
     android:layout_height="wrap_content"
     android:paddingTop="5dp"
     android:paddingBottom="5dp"
+    android:id="@+id/toolbar"
     app:popupTheme="@style/AppTheme.PopupOverlay"
     android:fitsSystemWindows="true"
     android:background="@color/colorPrimary"

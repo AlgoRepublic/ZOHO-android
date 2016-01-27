@@ -4,6 +4,7 @@ package com.algorepublic.zoho.fragments;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,7 @@ import android.widget.AdapterView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.algorepublic.zoho.MainActivity;
 import com.algorepublic.zoho.Models.ProjectsModel;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.adapters.AdapterProjectsList;
@@ -25,7 +27,7 @@ import com.androidquery.AQuery;
  * Use the {@link ProjectsFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ProjectsFragment extends Fragment implements AdapterView.OnItemClickListener{
+public class ProjectsFragment extends BaseFragment implements AdapterView.OnItemClickListener{
 
     private AQuery aq;
     private BaseClass baseClass;
@@ -52,6 +54,8 @@ public class ProjectsFragment extends Fragment implements AdapterView.OnItemClic
         // Inflate the layout for this fragment
         View view  = inflater.inflate(R.layout.fragment_projects, container, false);
         aq = new AQuery(getActivity(), view);
+        MainActivity.toolbar = (Toolbar) view.findViewById(R.id.toolbar);
+        setToolbar();
         return view;
     }
 
