@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <FrameLayout
-        android:id="@+id/splashtoloading_container"
+        android:id="@+id/logintoloading_container"
         android:layout_height="match_parent"
         android:layout_gravity="fill"
         android:padding="10dp"

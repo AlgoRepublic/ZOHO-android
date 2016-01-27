@@ -1,4 +1,4 @@
-package com.algorepublic.zoho.SplashToLoadingFragments;
+package com.algorepublic.zoho.LoginToLoadingFragments;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -73,22 +73,7 @@ public class LoginLoadingFragment extends BaseFragment {
             getActivity().finish();
         }else {
             Toast.makeText(getActivity(), getString(R.string.error_login_response), Toast.LENGTH_SHORT).show();
-            callFragmentWithReplace(R.id.splashtoloading_container, LoginFragment.newInstance(), "LoginFragment");
-        }
-    }
-    @Override
-    public void onDetach() {
-        super.onDetach();
-
-        try {
-            Field childFragmentManager = Fragment.class.getDeclaredField("mChildFragmentManager");
-            childFragmentManager.setAccessible(true);
-            childFragmentManager.set(this, null);
-
-        } catch (NoSuchFieldException e) {
-            throw new RuntimeException(e);
-        } catch (IllegalAccessException e) {
-            throw new RuntimeException(e);
+            callFragmentWithReplace(R.id.logintoloading_container, LoginFragment.newInstance(), "LoginFragment");
         }
     }
 }
