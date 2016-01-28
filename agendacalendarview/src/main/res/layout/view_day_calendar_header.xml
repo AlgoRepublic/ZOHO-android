@@ -3,5 +3,7 @@
     android:layout_width="0dip"
     android:layout_height="match_parent"
     android:layout_weight="1"
-    android:textColor="@android:color/white"
+    android:textColor="@android:color/black"
+    android:textStyle="bold"
+    android:textSize="18sp"
     android:gravity="center"></TextView>

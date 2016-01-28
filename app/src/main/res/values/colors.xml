@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3C3C3E</color>
+    <color name="colorPrimary">#414042</color>
     <color name="colorPrimaryGray">#F2F3F6</color>
     <color name="colorPrimaryDark">#2C2D2F</color>
     <color name="colorAccent">#EC3523</color>
@@ -21,6 +21,6 @@
     <color name="theme_accent">#FFC107</color>
     <color name="theme_text_icons">#FFFFFF</color>
     <color name="medium_priority">#FF7F06</color>
-    <color name="low_priority">#00796B</color>
     <color name="high_priority">#ef5350</color>
+    <color name="low_priority">#39B54B</color>
 </resources>
