@@ -20,19 +20,23 @@
         </View>
         <ImageView
             android:id="@+id/task_image"
-            android:layout_width="20dp"
+            android:layout_width="25dp"
             android:layout_height="25dp"
-            android:layout_margin="5dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
             android:scaleType="fitXY"
             android:adjustViewBounds="true"
             android:layout_toRightOf="@+id/priority_bar"
-            android:src="@mipmap/user_white"
+            android:src="@drawable/ic_check_circle_black_24dp"
             android:layout_gravity="center" />
     <LinearLayout
         android:layout_toRightOf="@+id/task_image"
         android:layout_height="match_parent"
         android:id="@+id/layout1"
-        android:padding="5dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:paddingRight="10dp"
         android:orientation="vertical"
         android:layout_width="match_parent" >
         <LinearLayout
@@ -47,7 +51,7 @@
                 android:layout_weight="1"
                 android:gravity="left"
                 android:layout_height="wrap_content"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 android:textStyle="bold"
                 android:textColor="@color/colorPrimaryDark"
                 />
@@ -58,8 +62,7 @@
                 android:gravity="right|end"
                 android:layout_height="wrap_content"
                 android:textSize="12sp"
-                android:layout_marginRight="5dp"
-                android:textColor="@color/colorDarkgray"
+                android:textColor="@color/colorDarkGray"
                 />
         </LinearLayout>
         <LinearLayout
@@ -67,8 +70,6 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="20dp"
-            android:layout_marginLeft="5dp"
-            android:layout_marginStart="5dp"
             android:weightSum="2">
             <TextView
                 android:id="@+id/project_name"
@@ -77,7 +78,7 @@
                 android:gravity="left"
                 android:layout_gravity="center_vertical"
                 android:layout_height="wrap_content"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 android:textStyle="bold"
                 android:textColor="@color/colorPrimaryDark"
                 />
@@ -102,7 +103,7 @@
                     android:layout_width="1dp"
                     android:layout_margin="5dp"
                     android:layout_toLeftOf="@+id/task_users"
-                    android:background="@drawable/roundable_prioritybar"
+                    android:background="@color/colorPrimary"
                     android:layout_height="match_parent">
                 </View>
                 <TextView
