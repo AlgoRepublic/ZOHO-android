@@ -17,9 +17,19 @@
         android:text="Attachments"
         android:gravity="center_horizontal"
         android:textColor="@color/colorPrimary"
-        android:textSize="13.33sp"
+        android:textSize="14sp"
         android:typeface="monospace" />
-
+    <Button
+        android:id="@+id/add_file"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_margin="10dp"
+        android:padding="5dp"
+        android:textAllCaps="false"
+        android:textSize="12sp"
+        android:background="@drawable/roundable_gray"
+        android:textColor="@color/colorPrimaryGray"
+        android:text="Add"/>
     <LinearLayout
         android:id="@+id/images_layout"
         android:layout_width="match_parent"
@@ -30,17 +40,6 @@
         android:visibility="visible" >
     </LinearLayout>
 
-    <Button
-        android:id="@+id/add_file"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:layout_marginTop="5dp"
-        android:padding="15dp"
-        android:textAllCaps="false"
-        android:background="@color/colorDarkgray"
-        android:textColor="@color/colorPrimaryGray"
-        android:text="Add"/>
 
 </LinearLayout>
 </ScrollView>

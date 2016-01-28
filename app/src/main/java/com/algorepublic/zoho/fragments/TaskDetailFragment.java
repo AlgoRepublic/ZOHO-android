@@ -97,8 +97,6 @@ public class TaskDetailFragment extends BaseFragment {
         aq.id(R.id.end_date).text(TasksListFragment.generalList.get(position).getEndDate());
         aq.id(R.id.category).text(TasksListFragment.generalList.get(position).getTaskListName());
         aq.id(R.id.task_desc).text(TasksListFragment.generalList.get(position).getTaskListName());
-//        aq.id(R.id.taskdate).text(DaysDifference(TasksListFragment.generalList.get(position).getEndMilli()));
-//        seekBarCompat.setValue(TasksListFragment.generalList.get(position).getProgress());
         seekBar.setProgress(TasksListFragment.generalList.get(position).getProgress());
         seekBarCompat.setProgress(TasksListFragment.generalList.get(position).getProgress());
 
@@ -211,7 +209,7 @@ public class TaskDetailFragment extends BaseFragment {
                 .btnTextSize(15.5f, 15.5f)//
                 .btnTextColor(getResources().getColor(R.color.colorPrimaryDark)
                         , getResources().getColor(R.color.colorPrimaryDark))//
-                .btnPressColor(getResources().getColor(R.color.colorDarkgray))//
+                .btnPressColor(getResources().getColor(R.color.colorDarkGray))//
                 .widthScale(0.85f)//
                 .showAnim(new BounceLeftEnter())//
                 .dismissAnim(new SlideRightExit())//
