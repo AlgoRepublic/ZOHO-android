@@ -3,7 +3,13 @@
     android:exitFadeDuration="@android:integer/config_shortAnimTime"
     android:enterFadeDuration="@android:integer/config_shortAnimTime">
 
-    <item android:drawable="@mipmap/user_red"  android:color="@color/colorAccent" android:state_checked="true"/>
-    <item android:drawable="@mipmap/user_red"  android:color="@color/colorAccent" android:state_pressed="true"/>
-    <item android:drawable="@mipmap/user_white"  android:color="@android:color/white" android:state_checked="false"/>
+    <item android:drawable="@mipmap/users_blue"
+        android:color="@color/colorAccent"
+        android:state_checked="true"/>
+    <item android:drawable="@mipmap/users_blue"
+        android:color="@color/colorAccent"
+        android:state_pressed="true"/>
+    <item android:drawable="@mipmap/users_white"
+        android:color="@android:color/white"
+        android:state_checked="false"/>
 </selector>

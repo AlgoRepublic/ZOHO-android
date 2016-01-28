@@ -66,4 +66,5 @@
             android:text="@string/task_priority"
             android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
     </LinearLayout>
+
 </FrameLayout>

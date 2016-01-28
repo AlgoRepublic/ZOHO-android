@@ -222,6 +222,7 @@
                 android:layout_height="wrap_content">
 
                 <SeekBar
+                    style="@style/tallerBarStyle"
                     android:id="@+id/seekBar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -230,7 +231,6 @@
                     android:thumbTint="@color/colorPrimary"
                     android:progressTint="@color/colorPrimary"
                     android:foreground="@color/colorPrimary"
-                    android:maxHeight="50000dip"
                     android:max="100" >
                 </SeekBar>
             </RelativeLayout>

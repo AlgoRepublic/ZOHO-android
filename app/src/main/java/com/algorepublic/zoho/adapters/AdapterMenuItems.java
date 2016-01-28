@@ -4,7 +4,6 @@ import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -108,9 +107,12 @@ public class AdapterMenuItems extends BaseAdapter{
                     if (aq.id(R.id.checkbox).isChecked()) {
                         if (position == loop) {
                             aq.id(R.id.imageview).image(menu_icon_blue[position]);
-                            holder.title.setTextColor(ctx.getResources().getColor(R.color.blue_selected));
-                        } else {
+                            holder.title.setTextColor(ctx.getResources().getColor(R.color.colorPrimaryBlue));
+                        }
+                        else {
                             aq.id(R.id.checkbox).checked(false);
+                            aq.id(R.id.imageview).image(menu_icon_white[position]);
+                            holder.title.setTextColor(ctx.getResources().getColor(R.color.white));
                         }
                     } else {
                         aq.id(R.id.imageview).image(menu_icon_white[position]);

@@ -3,12 +3,12 @@
     android:exitFadeDuration="@android:integer/config_shortAnimTime"
     android:enterFadeDuration="@android:integer/config_shortAnimTime">
 
-
-    <item android:drawable="@mipmap/departments_blue"
+    <item android:drawable="@mipmap/project_pressed_blue"
         android:state_checked="true"/>
-    <item android:drawable="@mipmap/departments_blue"
+    <item android:drawable="@mipmap/project_pressed_blue"
+
         android:state_pressed="true"/>
-    <item android:drawable="@mipmap/departments_white"
+    <item android:drawable="@mipmap/project"
         android:color="@android:color/white"
         android:state_checked="false"/>
 
