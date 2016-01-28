@@ -20,10 +20,10 @@
         <shape>
             <corners android:radius="5dip" />
             <gradient
-                android:startColor="@color/calendar_text_default"
-                android:centerColor="@color/calendar_text_default"
+                android:startColor="#D3D3D3"
+                android:centerColor="#D3D3D3"
                 android:centerY="0.75"
-                android:endColor="@color/calendar_text_default"
+                android:endColor="#D3D3D3"
                 android:angle="270"
                 />
         </shape>
