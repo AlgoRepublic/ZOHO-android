@@ -1,9 +1,8 @@
 package com.algorepublic.zoho.adapters;
 
-import android.app.Activity;
 import android.content.Context;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
+import android.support.v4.view.GravityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,14 +13,13 @@ import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.algorepublic.zoho.BaseActivity;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.fragments.CalendarFragment;
 import com.algorepublic.zoho.fragments.DocumentsListFragment;
 import com.algorepublic.zoho.fragments.ProjectsFragment;
 import com.algorepublic.zoho.fragments.TasksListFragment;
 import com.androidquery.AQuery;
-
-import java.util.ArrayList;
 
 /**
  * Created by android on 8/24/15.
@@ -40,16 +38,27 @@ public class AdapterMenuItems extends BaseAdapter{
             R.string.start_rating,
             R.string.departments,
     };
-    int[] menu_icon = {
-            R.mipmap.dashboard,
-            R.mipmap.dashboard,
-            R.mipmap.dashboard,
-            R.mipmap.dashboard,
-            R.mipmap.dashboard,
-            R.mipmap.dashboard,
-            R.mipmap.dashboard,
-            R.mipmap.dashboard,
-            R.mipmap.dashboard,
+    int[] menu_icon_white = {
+            R.mipmap.dashboard_white,
+            R.mipmap.projects_white,
+            R.mipmap.tasks_white,
+            R.mipmap.calender_white,
+            R.mipmap.document_white,
+            R.mipmap.users_white,
+            R.mipmap.forums_white,
+            R.mipmap.star_white,
+            R.mipmap.departments_white
+    };
+    int[] menu_icon_blue = {
+            R.mipmap.dashboard_blue,
+            R.mipmap.projects_blue,
+            R.mipmap.tasks_blue,
+            R.mipmap.calender_blue,
+            R.mipmap.document_blue,
+            R.mipmap.users_blue,
+            R.mipmap.forums_blue,
+            R.mipmap.star_blue,
+            R.mipmap.departments_blue
     };
     public AdapterMenuItems(Context context) {
         this.ctx = context;
@@ -91,21 +100,20 @@ public class AdapterMenuItems extends BaseAdapter{
         }
         final AQuery aq = new AQuery(convertView);
         holder.title.setText(menu_names[position]);
-        aq.id(R.id.imageview).image(menu_icon[position]);
-
+        aq.id(R.id.imageview).image(menu_icon_white[position]);
         aq.id(R.id.checkbox).getCheckBox().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 for (int loop = 0; loop < menu_names.length; loop++) {
-                   // if (aq.id(R.id.checkbox).isChecked()) {
-                    Log.e("Log", "/" + aq.id(R.id.checkbox).isChecked());
-
-                    if (position == loop) {
-                        aq.id(R.id.checkbox).checked(true);
-                        holder.title.setTextColor(ctx.getResources().getColor(R.color.blue_selected));
-                    }else
-                    {
-                        aq.id(R.id.checkbox).checked(false);
+                    if (aq.id(R.id.checkbox).isChecked()) {
+                        if (position == loop) {
+                            aq.id(R.id.imageview).image(menu_icon_blue[position]);
+                            holder.title.setTextColor(ctx.getResources().getColor(R.color.blue_selected));
+                        } else {
+                            aq.id(R.id.checkbox).checked(false);
+                        }
+                    } else {
+                        aq.id(R.id.imageview).image(menu_icon_white[position]);
                         holder.title.setTextColor(ctx.getResources().getColor(R.color.white));
                     }
                 }
@@ -134,7 +142,7 @@ public class AdapterMenuItems extends BaseAdapter{
         }if(position==8){
 
         }
-
+        BaseActivity.drawer.closeDrawer(GravityCompat.START);
     }
     public void callFragmentWithReplace(int containerId, Fragment fragment, String tag){
 

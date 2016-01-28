@@ -10,6 +10,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.RadioGroup;
 
@@ -58,7 +59,7 @@ public class MainActivity extends BaseActivity
                 startActivity(new Intent(MainActivity.this, SettingsActivity.class));
             }
         });
-        aq_header.id(R.id.gridview).adapter(new AdapterMenuItems(getApplicationContext()));
+        aq_header.id(R.id.gridview).adapter(new AdapterMenuItems(this));
     }
 
     @Override

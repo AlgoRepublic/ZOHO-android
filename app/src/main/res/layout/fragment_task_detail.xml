@@ -37,7 +37,15 @@
                 android:layout_height="match_parent"
                 android:layout_alignParentLeft="true">
             </View>
-
+            <ImageView
+                android:id="@+id/icon"
+                android:layout_width="15dp"
+                android:layout_marginLeft="7dp"
+                android:layout_toRightOf="@+id/priority_bar"
+                android:src="@mipmap/taskdetail_icon"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true"
+                android:layout_height="20dp" />
             <TextView
                 android:id="@+id/task_name"
                 android:layout_width="fill_parent"
@@ -45,7 +53,8 @@
                 android:layout_height="wrap_content"
                 android:textSize="14sp"
                 android:gravity="left"
-                android:layout_toRightOf="@+id/priority_bar"
+                android:layout_marginLeft="7dp"
+                android:layout_toRightOf="@+id/icon"
                 android:layout_centerVertical="true"
                 android:textStyle="bold"
                 android:textColor="@color/white"
