@@ -117,7 +117,7 @@ public class TaskDetailFragment extends BaseFragment {
       seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
           @Override
           public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-              seekBarCompat.setProgress(progress);
+              seekBarCompat.setProgress(progress) ;
           }
 
           @Override
