@@ -25,8 +25,8 @@
             android:layout_centerHorizontal="true" />
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="60dp"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
             android:layout_marginTop="13dp"
             android:id="@+id/imageView3"
             android:layout_marginRight="35dp"
@@ -36,8 +36,8 @@
             android:layout_centerHorizontal="true" />
 
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
         android:id="@+id/imageView4"
         android:background="@mipmap/img_splashh"
         android:layout_marginLeft="30dp"
