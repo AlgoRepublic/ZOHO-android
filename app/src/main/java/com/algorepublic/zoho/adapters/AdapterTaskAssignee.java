@@ -42,6 +42,7 @@ public class AdapterTaskAssignee extends BaseAdapter {
 
     @Override
     public int getCount() {
+
         return TaskAssigneeModel.getInstance().responseObject.size();
     }
 

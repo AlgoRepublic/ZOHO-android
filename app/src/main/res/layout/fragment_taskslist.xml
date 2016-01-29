@@ -13,6 +13,7 @@
         android:layout_width="match_parent"
         android:layout_above="@+id/layout_bottom"
         android:layout_height="match_parent"
+        android:background="@android:color/white"
         android:divider="@android:color/transparent"
         android:fadeScrollbars="false"
         android:scrollbarAlwaysDrawVerticalTrack="true"
@@ -26,12 +27,11 @@
     <LinearLayout
         android:id="@+id/layout_bottom"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="54dp"
         android:layout_alignParentBottom="true"
         android:weightSum="4"
-        android:padding="2dp"
         android:orientation="horizontal"
-        android:background="@color/colorPrimary">
+        android:background="@color/gunsmoke">
         <RadioGroup
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -55,11 +55,11 @@
                 android:adjustViewBounds="true"
                 android:background="@drawable/sortmenu_radiobutton"
                 android:layout_gravity="center"
-                android:textSize="12dp" />
+                android:textSize="14sp" />
 
             <View android:layout_height="fill_parent"
                 android:layout_width="2dp"
-                android:background="#90909090"/>
+                android:background="@color/white"/>
             <RadioButton
                 android:layout_width="0dp"
                 android:layout_weight="1.1"
@@ -74,10 +74,10 @@
                 android:adjustViewBounds="true"
                 android:background="@drawable/sortmenu_radiobutton"
                 android:layout_gravity="center"
-                android:textSize="12dp" />
+                android:textSize="14sp" />
             <View android:layout_height="fill_parent"
                 android:layout_width="2dp"
-                android:background="#90909090"/>
+                android:background="@color/white"/>
             <RadioButton
                 android:layout_width="0dp"
                 android:layout_weight="1.1"
@@ -92,18 +92,20 @@
                 android:adjustViewBounds="true"
                 android:background="@drawable/sortmenu_radiobutton"
                 android:layout_gravity="center"
-                android:textSize="12dp" />
+                android:textSize="14sp" />
         </RadioGroup>
         <View android:layout_height="fill_parent"
             android:layout_width="2dp"
-            android:background="#90909090"/>
+            android:background="@color/white"/>
         <Button
             android:id="@+id/sort"
             android:layout_width="0dp"
             android:layout_weight=".7"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:background="@android:drawable/ic_menu_sort_by_size"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="12dp"
+            android:background="@mipmap/task_image"
             android:layout_gravity="center"
             android:layout_height="match_parent" />
     </LinearLayout>

@@ -1,55 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+
 <RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@drawable/rounded_border_red_radiobutton"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_marginTop="20dp"
+    android:layout_marginBottom="20dp"
+    android:layout_marginRight="10dp"
+    android:layout_marginLeft="10dp"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <RelativeLayout
-        android:background="@drawable/rounded_border_red_radiobutton"
-        android:layout_width="match_parent"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_height="match_parent">
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:weightSum="3"
-        android:layout_centerHorizontal="true">
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_gravity="center"
-            android:id="@+id/imageView"
-            android:scaleType="fitXY"
-            android:adjustViewBounds="true"
-            android:background="@mipmap/fastlink_white"
-            android:layout_weight="2"
-            />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_marginTop="10dp"
-            android:layout_weight="1"
-            android:scaleType="fitXY"
-            android:adjustViewBounds="true"
-            android:background="@mipmap/fastlink_white"
-            android:layout_gravity="center"
+            android:layout_width="130dp"
+            android:layout_height="120dp"
             android:id="@+id/imageView2"
-            />
-        </LinearLayout>
+            android:background="@mipmap/img_splash"
+            android:layout_marginTop="123dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:layout_marginTop="13dp"
+            android:id="@+id/imageView3"
+            android:layout_marginRight="35dp"
+            android:layout_marginLeft="35dp"
+            android:layout_below="@+id/imageView2"
+            android:background="@mipmap/fastlink_white"
+            android:layout_centerHorizontal="true" />
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/imageView3"
+        android:id="@+id/imageView4"
+        android:background="@mipmap/img_splashh"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="10dp"/>
-    </RelativeLayout>
+        android:layout_centerHorizontal="true" />
+
 </RelativeLayout>

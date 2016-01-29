@@ -19,13 +19,13 @@
         android:layout_above="@+id/layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="5dp">
+        >
         <RelativeLayout
             android:id="@+id/layout_tasktitle"
             android:layout_width="fill_parent"
             android:layout_height="30dp"
-            android:layout_marginTop="30dp"
-            android:background="@color/colorPrimary"
+            android:layout_marginTop="20dp"
+            android:background="@color/gunsmoke"
             android:layout_alignParentTop="true">
             <View
                 android:id="@+id/priority_bar"
@@ -37,7 +37,15 @@
                 android:layout_height="match_parent"
                 android:layout_alignParentLeft="true">
             </View>
-
+            <ImageView
+                android:id="@+id/icon"
+                android:layout_width="15dp"
+                android:layout_marginLeft="7dp"
+                android:layout_toRightOf="@+id/priority_bar"
+                android:src="@mipmap/taskdetail_icon"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true"
+                android:layout_height="20dp" />
             <TextView
                 android:id="@+id/task_name"
                 android:layout_width="fill_parent"
@@ -45,7 +53,8 @@
                 android:layout_height="wrap_content"
                 android:textSize="14sp"
                 android:gravity="left"
-                android:layout_toRightOf="@+id/priority_bar"
+                android:layout_marginLeft="7dp"
+                android:layout_toRightOf="@+id/icon"
                 android:layout_centerVertical="true"
                 android:textStyle="bold"
                 android:textColor="@color/white"
@@ -58,39 +67,63 @@
         android:layout_height="match_parent">
         <RelativeLayout
             android:id="@+id/layout3"
-            android:padding="10dp"
+            android:padding="15dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <LinearLayout
+            <RelativeLayout
                 android:id="@+id/header_layout1"
                 android:layout_width="match_parent"
                 android:layout_alignParentTop="true"
-                android:layout_height="wrap_content"
-                android:weightSum="3"
-                android:orientation="horizontal">
+                android:layout_height="wrap_content">
                 <TextView
-                    android:layout_width="0dp"
-                    android:layout_weight=".7"
+                    android:id="@+id/text2"
+                    android:layout_width="wrap_content"
                     android:text="@string/task_startdate"
                     android:layout_height="wrap_content"
                     android:textSize="12sp"
                     android:textStyle="bold"
-                    android:layout_toLeftOf="@+id/textView"
+                    android:layout_alignParentLeft="true"
                     android:textColor="@color/colorPrimaryDark"
                     />
                 <TextView
                     android:id="@+id/start_date"
-                    android:layout_width="0dp"
-                    android:layout_weight=".9"
+                    android:layout_width="wrap_content"
                     android:text="dsds"
                     android:layout_height="wrap_content"
                     android:textSize="12sp"
-                    android:layout_toLeftOf="@+id/textView"
+                    android:layout_toRightOf="@+id/text2"
+                    android:textColor="@color/colorPrimaryDark"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:text="@string/task_duedate"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:layout_toLeftOf="@+id/end_date"
                     android:textColor="@color/colorPrimaryDark"
                     />
                 <TextView
-                    android:layout_width="0dp"
-                    android:layout_weight=".7"
+                    android:id="@+id/end_date"
+                    android:layout_width="wrap_content"
+                    android:text="dsds"
+                    android:layout_height="wrap_content"
+                    android:textSize="13sp"
+                    android:layout_alignParentRight="true"
+                    android:layout_toLeftOf="@+id/textView"
+                    android:textColor="@color/colorPrimaryDark"
+                    />
+
+            </RelativeLayout>
+            <LinearLayout
+                android:id="@+id/header_layout2"
+                android:layout_below="@+id/header_layout1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
+                <TextView
+                    android:layout_width="wrap_content"
                     android:text="@string/category"
                     android:layout_height="wrap_content"
                     android:textSize="12sp"
@@ -100,46 +133,13 @@
                     />
                 <TextView
                     android:id="@+id/category"
-                    android:layout_width="0dp"
-                    android:layout_weight=".7"
+                    android:layout_width="wrap_content"
                     android:text="dsds"
                     android:layout_height="wrap_content"
                     android:textSize="12sp"
                     android:layout_toLeftOf="@+id/textView"
                     android:textColor="@color/colorPrimaryDark"
                     />
-
-            </LinearLayout>
-            <LinearLayout
-                android:id="@+id/header_layout2"
-                android:layout_below="@+id/header_layout1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:weightSum="3"
-                android:layout_marginTop="10dp"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_weight=".7"
-                    android:text="@string/task_duedate"
-                    android:layout_height="wrap_content"
-                    android:textSize="12sp"
-                    android:textStyle="bold"
-                    android:layout_toLeftOf="@+id/textView"
-                    android:textColor="@color/colorPrimaryDark"
-                    />
-                <TextView
-                    android:id="@+id/end_date"
-                    android:layout_width="0dp"
-                    android:layout_weight=".9"
-                    android:text="dsds"
-                    android:layout_height="wrap_content"
-                    android:textSize="13sp"
-                    android:layout_toLeftOf="@+id/textView"
-                    android:textColor="@color/colorPrimaryDark"
-                    />
-
             </LinearLayout>
             <LinearLayout
                 android:id="@+id/header_layout3"
@@ -194,7 +194,6 @@
                 android:layout_below="@+id/header_layout4"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:weightSum="3"
                 app:twowayview_layoutManager="ListLayoutManager"
                 android:orientation="horizontal">
             </org.lucasr.twowayview.widget.TwoWayView>
@@ -203,7 +202,7 @@
             android:layout_below="@+id/layout3"
             android:id="@+id/layout_assignee"
             android:layout_width="match_parent"
-            android:layout_marginTop="10dp"
+            android:padding="10dp"
             android:layout_height="wrap_content">
             <TextView
                 android:id="@+id/project_status"
@@ -220,19 +219,18 @@
                 android:layout_below="@+id/project_status"
                 android:id="@+id/layout4"
                 android:layout_width="match_parent"
-                android:layout_height="50dp">
+                android:layout_height="wrap_content">
 
                 <SeekBar
+                    style="@style/tallerBarStyle"
                     android:id="@+id/seekBar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
                     android:layout_centerVertical="true"
                     android:thumb="@drawable/thumb_image"
                     android:thumbTint="@color/colorPrimary"
                     android:progressTint="@color/colorPrimary"
                     android:foreground="@color/colorPrimary"
-                    android:maxHeight="50000dip"
                     android:max="100" >
                 </SeekBar>
             </RelativeLayout>
@@ -262,45 +260,147 @@
     <LinearLayout
         android:id="@+id/parent2"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:weightSum="4"
+        android:layout_height="60dp"
+        android:weightSum="4.72"
         android:layout_alignParentBottom="true"
-        android:padding="5dp"
         android:background="@drawable/topborder"
         android:orientation="horizontal">
+<RelativeLayout
+    android:layout_width="0dp"
+    android:layout_weight=".9"
+    android:layout_gravity="center"
+    android:layout_marginLeft="2dp"
+    android:layout_marginRight="2dp"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="60dp"
+        android:layout_gravity="center"
+        android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/notify_alert1"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:text="112"
+            android:gravity="center"
+            android:singleLine="true"
+            android:textSize="8dp"
+            android:layout_alignParentRight="true"
+            android:background="@mipmap/bubble_alert"
+            android:layout_alignParentTop="true"
+            android:textColor="@color/colorPrimaryGray" />
 
+        <ImageView
+            android:id="@+id/delete1"
+            android:layout_width="25dp"
+            android:src="@drawable/ic_comment"
+            android:layout_marginBottom="14dp"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            android:layout_height="25dp" />
+        </RelativeLayout>
+        </RelativeLayout>
+        <View android:layout_height="fill_parent"
+            android:layout_width="0dp"
+            android:layout_weight=".03"
+            android:background="@color/white"/>
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_weight=".9"
+            android:layout_gravity="center"
+            android:layout_marginLeft="2dp"
+            android:layout_marginRight="2dp"
+            android:layout_height="match_parent">
+            <RelativeLayout
+                android:layout_width="60dp"
+                android:layout_gravity="center"
+                android:layout_height="match_parent">
+                <TextView
+                    android:id="@+id/notify_alert2"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:text="112"
+                    android:gravity="center"
+                    android:singleLine="true"
+                    android:textSize="8dp"
+                    android:layout_alignParentRight="true"
+                    android:background="@mipmap/bubble_alert"
+                    android:layout_alignParentTop="true"
+                    android:textColor="@color/colorPrimaryGray" />
+
+                <ImageView
+                    android:id="@+id/comment"
+                    android:layout_width="25dp"
+                    android:src="@drawable/ic_comment"
+                    android:layout_marginBottom="14dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_height="25dp" />
+            </RelativeLayout>
+        </RelativeLayout>
+        <View android:layout_height="fill_parent"
+            android:layout_width="0dp"
+            android:layout_weight=".03"
+            android:background="@color/white"/>
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_weight=".9"
+            android:layout_gravity="center"
+            android:layout_marginLeft="2dp"
+            android:layout_marginRight="2dp"
+            android:layout_height="match_parent">
+            <RelativeLayout
+                android:layout_width="60dp"
+                android:layout_gravity="center"
+                android:layout_height="match_parent">
+                <TextView
+                    android:id="@+id/notify_alert"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:text="112"
+                    android:gravity="center"
+                    android:singleLine="true"
+                    android:textSize="8dp"
+                    android:layout_alignParentRight="true"
+                    android:background="@mipmap/bubble_alert"
+                    android:layout_alignParentTop="true"
+                    android:textColor="@color/colorPrimaryGray" />
+
+                <ImageView
+                    android:id="@+id/alarm"
+                    android:layout_width="25dp"
+                    android:src="@drawable/ic_comment"
+                    android:layout_marginBottom="14dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_height="25dp" />
+            </RelativeLayout>
+        </RelativeLayout>
+        <View android:layout_height="fill_parent"
+            android:layout_width="0dp"
+            android:layout_weight=".03"
+            android:background="@color/white"/>
         <ImageView
             android:id="@+id/delete"
             android:layout_width="0dp"
-            android:layout_weight=".8"
+            android:layout_weight=".7"
+            android:padding="5dp"
             android:src="@drawable/ic_delete"
             android:layout_gravity="center"
             android:layout_height="match_parent" />
-        <ImageView
-            android:id="@+id/comment"
+        <View android:layout_height="fill_parent"
             android:layout_width="0dp"
-            android:layout_weight=".8"
-            android:src="@drawable/ic_comment"
-            android:layout_gravity="center"
-            android:layout_height="match_parent" />
-        <ImageView
-            android:id="@+id/alarm"
-            android:layout_width="0dp"
-            android:layout_weight=".8"
-            android:src="@drawable/ic_alarm_24dp"
-            android:layout_gravity="center"
-            android:layout_height="match_parent" />
-
+            android:layout_weight=".03"
+            android:background="@color/white"/>
         <TextView
             android:id="@+id/mark_as_done"
             android:layout_width="0dp"
             android:text="Mark as done"
             android:padding="2dp"
             android:gravity="center"
-            android:layout_weight="1.6"
+            android:layout_weight="1.2"
             android:layout_gravity="center"
             android:layout_height="match_parent"
-            android:textSize="14sp"
+            android:textSize="12sp"
             android:textColor="@android:color/white"
             />
     </LinearLayout>

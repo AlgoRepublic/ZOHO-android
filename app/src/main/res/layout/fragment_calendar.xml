@@ -5,18 +5,13 @@
     android:layout_height="match_parent"
     android:background="@color/colorPrimaryGray"
     tools:context="com.algorepublic.zoho.fragments.CalendarFragment">
-
-    <include
-        android:id="@+id/toolbar_actionbar"
-        layout="@layout/toolbar_default"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize" />
-
+    <include android:id="@+id/include"
+        layout="@layout/toolbar_tasklist"/>
     <com.github.tibolte.agendacalendarview.AgendaCalendarView
         android:id="@+id/agenda_calendar_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/toolbar_actionbar"
+        android:layout_below="@+id/include"
         agendaCalendar:agendaCurrentDayTextColor="@color/colorPrimary"
         agendaCalendar:calendarColor="@color/colorPrimaryGray"
         agendaCalendar:calendarDayTextColor="@color/colorPrimary"
