@@ -1,5 +1,9 @@
 package com.github.tibolte.agendacalendarview.render;
 
+import android.annotation.TargetApi;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
+import android.os.Build;
 import android.support.annotation.NonNull;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -15,10 +19,13 @@ public class DefaultEventRenderer extends EventRenderer<BaseCalendarEvent> {
 
     // region class - EventRenderer
 
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     @Override
     public void render(@NonNull View view, @NonNull BaseCalendarEvent event) {
         TextView txtTitle = (TextView) view.findViewById(R.id.view_agenda_event_title);
         TextView txtLocation = (TextView) view.findViewById(R.id.view_agenda_event_location);
+        TextView txtDescription = (TextView) view.findViewById(R.id.view_agenda_event_description);
+        View priority = view.findViewById(R.id.priority_bar);
         LinearLayout descriptionContainer = (LinearLayout) view.findViewById(R.id.view_agenda_event_description_container);
         LinearLayout locationContainer = (LinearLayout) view.findViewById(R.id.view_agenda_event_location_container);
 
@@ -34,12 +41,13 @@ public class DefaultEventRenderer extends EventRenderer<BaseCalendarEvent> {
             locationContainer.setVisibility(View.GONE);
         }
 
-        if (event.getTitle().equals(view.getResources().getString(R.string.agenda_event_no_events))) {
-            txtTitle.setTextColor(view.getResources().getColor(android.R.color.black));
-        } else {
-            txtTitle.setTextColor(view.getResources().getColor(R.color.theme_text_icons));
-        }
-        descriptionContainer.setBackgroundColor(event.getColor());
+        Drawable shapeDrawable = priority.getBackground();
+        GradientDrawable colorDrawable = (GradientDrawable) shapeDrawable;
+        colorDrawable.setColor(event.getColor());
+        priority.setBackground(shapeDrawable);
+
+        txtTitle.setTextColor(view.getResources().getColor(android.R.color.black));
+        txtDescription.setText(event.getDescription());
         txtLocation.setTextColor(view.getResources().getColor(R.color.theme_text_icons));
     }
 

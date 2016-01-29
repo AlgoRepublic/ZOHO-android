@@ -10,11 +10,43 @@
         android:id="@+id/toolbar_actionbar"
         layout="@layout/toolbar_default"
         android:layout_width="match_parent"
-        android:layout_height="50dp" />
+        android:layout_height="?attr/actionBarSize" />
+    <RelativeLayout
+        android:id="@+id/title_bar"
+        android:layout_width="match_parent"
+        android:background="@color/colorBaseMenu"
+        android:paddingTop="20dp"
+        android:paddingBottom="10dp"
+        android:layout_height="100dp">
+        <TextView
+            android:id="@+id/title_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Task Title"
+            android:textSize="22sp"
+            android:textColor="@color/white"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true" />
+        <Button
+            android:id="@+id/btn_title"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_toRightOf="@+id/title_text"
+            android:layout_centerVertical="true"
+            android:background="@drawable/fab_add" />
+
+    <View
+        android:layout_below="@+id/title_text"
+        android:layout_width="match_parent"
+        android:background="@color/colorBaseMenu"
+        android:paddingTop="20dp"
+        android:paddingBottom="10dp"
+        android:layout_height="wrap_content"/>
+    </RelativeLayout>
 
     <LinearLayout
         android:id="@+id/linear1"
-        android:layout_below="@+id/toolbar_actionbar"
+        android:layout_below="@+id/title_bar"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:weightSum="2"
