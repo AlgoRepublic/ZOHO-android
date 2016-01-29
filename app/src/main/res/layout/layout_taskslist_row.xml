@@ -2,7 +2,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:descendantFocusability="blocksDescendants"
-    android:layout_margin="5dp"
+    android:layout_margin="15dp"
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
@@ -10,7 +10,7 @@
         android:id="@+id/priority_bar"
         android:layout_width="8dp"
         android:layout_marginTop="4dp"
-        android:layout_marginBottom="6dp"
+        android:layout_marginBottom="8dp"
         android:background="@drawable/roundable_prioritybar"
         android:layout_height="match_parent">
     </View>
@@ -29,7 +29,7 @@
             android:layout_marginRight="8dp"
             android:layout_marginEnd="4dp"
             android:layout_marginBottom="8dp"
-            android:background="@color/colorPrimaryGray">
+            android:background="@color/colorBaseWrapper">
             <ImageView
                 android:id="@+id/task_image"
                 android:layout_width="25dp"
@@ -64,7 +64,7 @@
                         android:layout_height="wrap_content"
                         android:textSize="14sp"
                         android:textStyle="bold"
-                        android:textColor="@color/colorPrimaryDark"
+                        android:textColor="@color/colorBaseHeader"
                         />
                     <TextView
                         android:id="@+id/task_date"
@@ -73,7 +73,7 @@
                         android:gravity="right|end"
                         android:layout_height="wrap_content"
                         android:textSize="12sp"
-                        android:textColor="@color/colorDarkGray"
+                        android:textColor="@color/colorBaseHeader"
                         />
                 </LinearLayout>
                 <LinearLayout
@@ -91,7 +91,7 @@
                         android:layout_height="wrap_content"
                         android:textSize="14sp"
                         android:textStyle="bold"
-                        android:textColor="@color/colorPrimaryDark"
+                        android:textColor="@color/colorBaseHeader"
                         />
                     <RelativeLayout
                         android:layout_height="wrap_content"
@@ -107,14 +107,14 @@
                             android:text="10 Comments"
                             android:layout_toLeftOf="@+id/bar"
                             android:layout_centerVertical="true"
-                            android:textColor="@android:color/holo_blue_dark"
+                            android:textColor="@color/colorBaseHeader"
                             />
                         <View
                             android:id="@+id/bar"
                             android:layout_width="1dp"
                             android:layout_margin="5dp"
                             android:layout_toLeftOf="@+id/task_users"
-                            android:background="@color/colorPrimary"
+                            android:background="@color/colorBaseHeader"
                             android:layout_height="match_parent">
                         </View>
                         <TextView
@@ -126,7 +126,7 @@
                             android:text="10 Users"
                             android:layout_alignParentRight="true"
                             android:layout_centerVertical="true"
-                            android:textColor="@android:color/holo_blue_dark"
+                            android:textColor="@color/colorBaseHeader"
                             />
                     </RelativeLayout>
                 </LinearLayout>

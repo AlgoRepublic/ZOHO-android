@@ -1,6 +1,5 @@
 package com.algorepublic.zoho.adapters;
 
-import android.app.Activity;
 import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
@@ -30,20 +29,20 @@ public class AdapterTaskMenu extends BaseAdapter {
 
     Context ctx; private LayoutInflater inflater;
     int[] menu_names = {
-            R.string.dashboard,
-            R.string.projects,
-            R.string.tasks,
-            R.string.calendar,
-            R.string.documents,
-            R.string.users
+            R.string.task_desc,
+            R.string.category,
+            R.string.image,
+            R.string.employees,
+            R.string.schedule,
+            R.string.priority
     };
     int[] menu_icon_white = {
-            R.mipmap.dashboard_white,
-            R.mipmap.projects_white,
-            R.mipmap.tasks_white,
-            R.mipmap.calender_white,
-            R.mipmap.document_white,
-            R.mipmap.users_white
+            R.mipmap.task_desc_white,
+            R.mipmap.category,
+            R.mipmap.camera,
+            R.mipmap.employee,
+            R.mipmap.schedule,
+            R.mipmap.priority
     };
     int[] menu_icon_blue = {
             R.mipmap.dashboard_blue,
@@ -75,7 +74,6 @@ public class AdapterTaskMenu extends BaseAdapter {
 
         final ViewHolder holder;
         if (convertView == null) {
-            LayoutInflater inflater = ((Activity) ctx).getLayoutInflater();
             convertView = inflater.inflate(R.layout.layout_taskmenu, parent, false);
             holder = new ViewHolder();
             holder.title = (TextView) convertView.findViewById(R.id.textview);
@@ -96,14 +94,12 @@ public class AdapterTaskMenu extends BaseAdapter {
             public void onClick(View v) {
                 for (int loop = 0; loop < menu_names.length; loop++) {
                     if (loop==position) {
-                        holder.title.setTextColor(ctx.getResources().getColor(R.color.colorPrimaryBlue));
-                        aq.id(R.id.imageview).image(menu_icon_blue[loop]);
+                        aq.id(R.id.checkbox).getCheckBox().setBackgroundColor(ctx.getResources().getColor(R.color.colorBaseMenu));
                     }else {
                         View  view = getViewByPosition(loop, ActivityTask.gridViewTaskMenu);
                         AQuery aQuery =  new AQuery(view);
                         aQuery.id(R.id.checkbox).checked(false);
-                        aQuery.id(R.id.textview).textColor(ctx.getResources().getColor(R.color.white));
-                        aQuery.id(R.id.imageview).image(menu_icon_white[loop]);
+                        aQuery.id(R.id.checkbox).getCheckBox().setBackgroundColor(ctx.getResources().getColor(R.color.colorBaseHeader));
                     }
                 }
                 CallFragment(position);

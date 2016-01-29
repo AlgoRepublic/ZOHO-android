@@ -84,7 +84,6 @@ public class AdapterMenuItems extends BaseAdapter{
 
         final ViewHolder holder;
         if (convertView == null) {
-            LayoutInflater inflater = ((Activity) ctx).getLayoutInflater();
             convertView = inflater.inflate(R.layout.layout_menu_items, parent, false);
             holder = new ViewHolder();
             holder.title = (TextView) convertView.findViewById(R.id.textview);
@@ -99,20 +98,17 @@ public class AdapterMenuItems extends BaseAdapter{
         holder.title.setTextColor(ctx.getResources().getColor(R.color.white));
         aq.id(R.id.imageview).image(menu_icon_white[position]);
 
-
         aq.id(R.id.checkbox).getCheckBox().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 for (int loop = 0; loop < menu_names.length; loop++) {
                     if (loop==position) {
-                        holder.title.setTextColor(ctx.getResources().getColor(R.color.colorPrimaryBlue));
-                        aq.id(R.id.imageview).image(menu_icon_blue[loop]);
+                        aq.id(R.id.checkbox).getCheckBox().setBackgroundColor(ctx.getResources().getColor(R.color.colorBaseMenu));
                     }else {
                         View  view = getViewByPosition(loop,MainActivity.gridView);
                         AQuery aQuery =  new AQuery(view);
                         aQuery.id(R.id.checkbox).checked(false);
-                        aQuery.id(R.id.textview).textColor(ctx.getResources().getColor(R.color.white));
-                        aQuery.id(R.id.imageview).image(menu_icon_white[loop]);
+                        aQuery.id(R.id.checkbox).getCheckBox().setBackgroundColor(ctx.getResources().getColor(R.color.colorBaseHeader));
                     }
                 }
                 CallFragment(position);
