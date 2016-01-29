@@ -14,7 +14,7 @@
         android:paddingBottom="5dp"
         app:popupTheme="@style/AppTheme.PopupOverlay"
         android:fitsSystemWindows="true"
-        android:background="@color/colorPrimary"
+        android:background="@color/colorBaseHeader"
         android:minHeight="@dimen/abc_action_bar_default_height_material">
 
         <RelativeLayout

@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorLightgray"
+    android:background="@color/colorBaseWrapper"
+    android:orientation="vertical"
     tools:context="com.algorepublic.zoho.ActivityTask">
     <include
         android:id="@+id/toolbar_actionbar"
@@ -11,157 +12,33 @@
         android:layout_width="match_parent"
         android:layout_height="50dp" />
 
-    <RelativeLayout
+    <LinearLayout
         android:id="@+id/linear1"
         android:layout_below="@+id/toolbar_actionbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:weightSum="2"
         android:orientation="vertical">
 
-            <RadioGroup
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:weightSum="3"
-                android:orientation="horizontal"
-                android:id="@+id/radioGroup1">
-
-                <com.algorepublic.zoho.utils.MyRadioButton
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/edit_radioButton"
-                    android:button="@null"
-                    android:text="@string/task_title1"
-                    android:paddingTop="35dp"
-                    android:paddingBottom="25dp"
-                    android:gravity="bottom|center"
-                    android:textAlignment="gravity"
-                    android:scaleType="fitXY"
-                    android:textColor="@android:color/white"
-                    android:adjustViewBounds="true"
-                    android:background="@color/colorPrimaryDark"
-                    android:layout_gravity="center_horizontal"
-                    android:textSize="13dp" />
-
-                <com.algorepublic.zoho.utils.MyRadioButton
-                    android:layout_height="wrap_content"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:id="@+id/category_radioButton"
-                    android:button="@null"
-                    android:text="@string/category"
-                    android:layout_marginLeft="1dp"
-                    android:layout_marginRight="1dp"
-                    android:paddingTop="35dp"
-                    android:paddingBottom="25dp"
-                    android:gravity="bottom|center"
-                    android:textAlignment="gravity"
-                    android:scaleType="fitXY"
-                    android:textColor="@android:color/white"
-                    android:adjustViewBounds="true"
-                    android:background="@color/colorPrimaryDark"
-                    android:layout_gravity="center_horizontal"
-                    android:textSize="13dp" />
-
-                <com.algorepublic.zoho.utils.MyRadioButton
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/image_radioButton"
-                    android:button="@null"
-                    android:text="@string/image"
-                    android:drawableTop="@drawable/image_radiobutton"
-                    android:paddingTop="35dp"
-                    android:paddingBottom="25dp"
-                    android:gravity="bottom|center"
-                    android:textAlignment="gravity"
-                    android:scaleType="fitXY"
-                    android:textColor="@android:color/white"
-                    android:adjustViewBounds="true"
-                    android:background="@color/colorPrimaryDark"
-                    android:layout_gravity="center_horizontal"
-                    android:textSize="13dp" />
-
-            </RadioGroup>
-            <View
-                android:id="@+id/view"
-                android:layout_below="@+id/radioGroup1"
-                android:background="@color/colorLightgray"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"/>
-            <RadioGroup
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/view"
-                android:weightSum="3"
-                android:orientation="horizontal"
-                android:id="@+id/radioGroup2">
-                <com.algorepublic.zoho.utils.MyRadioButton
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/employees_radioButton"
-                    android:button="@null"
-                    android:text="@string/employees"
-                    android:paddingTop="35dp"
-                    android:paddingBottom="25dp"
-                    android:gravity="bottom|center"
-                    android:textAlignment="gravity"
-                    android:scaleType="fitXY"
-                    android:textColor="@android:color/white"
-                    android:adjustViewBounds="true"
-                    android:background="@color/colorPrimaryDark"
-                    android:layout_gravity="center_horizontal"
-                    android:textSize="13dp" />
-                <com.algorepublic.zoho.utils.MyRadioButton
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/schedule_radioButton"
-                    android:button="@null"
-                    android:layout_marginLeft="1dp"
-                    android:layout_marginRight="1dp"
-                    android:text="@string/schedule"
-                    android:drawableTop="@drawable/calendar_task_radiobutton"
-                    android:paddingTop="35dp"
-                    android:paddingBottom="25dp"
-                    android:gravity="bottom|center"
-                    android:textAlignment="gravity"
-                    android:scaleType="fitXY"
-                    android:textColor="@android:color/white"
-                    android:adjustViewBounds="true"
-                    android:background="@color/colorPrimaryDark"
-                    android:layout_gravity="center_horizontal"
-                    android:textSize="13dp" />
-
-                <com.algorepublic.zoho.utils.MyRadioButton
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/priority_radioButton"
-                    android:button="@null"
-                    android:text="@string/priority"
-                    android:drawableTop="@drawable/priority_radiobutton"
-                    android:paddingTop="35dp"
-                    android:paddingBottom="25dp"
-                    android:gravity="bottom|center"
-                    android:textAlignment="gravity"
-                    android:scaleType="fitXY"
-                    android:textColor="@android:color/white"
-                    android:adjustViewBounds="true"
-                    android:background="@color/colorPrimaryDark"
-                    android:layout_gravity="center_horizontal"
-                    android:textSize="13dp" />
-            </RadioGroup>
-        </RelativeLayout>
+        <GridView
+            android:id="@+id/gridview_taskmenu"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:numColumns="3"
+            android:background="@color/colorBaseMenu"
+            android:layout_weight=".9"
+            android:verticalSpacing="0dp"
+            android:horizontalSpacing="0dp"
+            android:stretchMode="columnWidth"
+            android:padding="5dp">
+        </GridView>
 
         <FrameLayout
-            android:layout_below="@+id/linear1"
             android:id="@+id/edittask_container"
-            android:layout_height="match_parent"
-            android:layout_gravity="fill"
+            android:layout_height="0dp"
+            android:layout_weight="1.1"
             android:padding="5dp"
             android:layout_width="match_parent">
         </FrameLayout>
-
-</RelativeLayout>
+    </LinearLayout>
+</LinearLayout>

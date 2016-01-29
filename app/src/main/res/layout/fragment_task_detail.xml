@@ -5,12 +5,59 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     tools:context=".fragments.TaskDetailFragment"
-    android:background="@color/colorLightgray">
+    android:background="@color/colorBaseWrapper">
     <include android:id="@+id/include"
         layout="@layout/toolbar_taskdetail"/>
+    <RelativeLayout
+        android:layout_below="@+id/include"
+        android:layout_width="match_parent"
+        android:layout_height="33dp"
+        android:layout_marginTop="20dp"
+        android:background="@android:drawable/dialog_holo_light_frame"
+        />
+    <RelativeLayout
+        android:id="@+id/layout_tasktitle"
+        android:layout_below="@+id/include"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginTop="20dp"
+        android:background="@color/colorContentWrapper">
+        <View
+            android:id="@+id/priority_bar"
+            android:layout_width="4dp"
+            android:layout_marginRight="3dp"
+            android:layout_alignBottom="@+id/layout1"
+            android:layout_alignTop="@+id/layout1"
+            android:background="@drawable/roundable_prioritybar"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true">
+        </View>
+        <ImageView
+            android:id="@+id/icon"
+            android:layout_width="15dp"
+            android:layout_marginLeft="7dp"
+            android:layout_toRightOf="@+id/priority_bar"
+            android:src="@mipmap/taskdetail_icon"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:layout_height="20dp" />
+        <TextView
+            android:id="@+id/task_name"
+            android:layout_width="fill_parent"
+            android:text="@string/task_name"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:gravity="left"
+            android:layout_marginLeft="7dp"
+            android:layout_toRightOf="@+id/icon"
+            android:layout_centerVertical="true"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            />
+    </RelativeLayout>
     <ScrollView
         android:id="@+id/scrollView"
-        android:layout_below="@+id/include"
+        android:layout_below="@+id/layout_tasktitle"
         android:layout_above="@+id/parent2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -20,49 +67,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="5dp">
-        <RelativeLayout
-            android:id="@+id/layout_tasktitle"
-            android:layout_width="fill_parent"
-            android:layout_height="30dp"
-            android:layout_marginTop="20dp"
-            android:background="@color/colorPrimary"
-            android:layout_alignParentTop="true">
-            <View
-                android:id="@+id/priority_bar"
-                android:layout_width="4dp"
-                android:layout_marginRight="3dp"
-                android:layout_alignBottom="@+id/layout1"
-                android:layout_alignTop="@+id/layout1"
-                android:background="@drawable/roundable_prioritybar"
-                android:layout_height="match_parent"
-                android:layout_alignParentLeft="true">
-            </View>
-            <ImageView
-                android:id="@+id/icon"
-                android:layout_width="15dp"
-                android:layout_marginLeft="7dp"
-                android:layout_toRightOf="@+id/priority_bar"
-                android:src="@mipmap/taskdetail_icon"
-                android:layout_centerVertical="true"
-                android:layout_centerHorizontal="true"
-                android:layout_height="20dp" />
-            <TextView
-                android:id="@+id/task_name"
-                android:layout_width="fill_parent"
-                android:text="@string/task_name"
-                android:layout_height="wrap_content"
-                android:textSize="14sp"
-                android:gravity="left"
-                android:layout_marginLeft="7dp"
-                android:layout_toRightOf="@+id/icon"
-                android:layout_centerVertical="true"
-                android:textStyle="bold"
-                android:textColor="@color/white"
-                />
-            </RelativeLayout>
+
     <RelativeLayout
         android:id="@+id/layout_parent"
-        android:layout_below="@+id/layout_tasktitle"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <RelativeLayout
@@ -83,7 +90,7 @@
                     android:textSize="12sp"
                     android:textStyle="bold"
                     android:layout_alignParentLeft="true"
-                    android:textColor="@color/colorPrimaryDark"
+                    android:textColor="@color/colorBaseHeader"
                     />
                 <TextView
                     android:id="@+id/start_date"
@@ -92,7 +99,7 @@
                     android:layout_height="wrap_content"
                     android:textSize="12sp"
                     android:layout_toRightOf="@+id/text2"
-                    android:textColor="@color/colorPrimaryDark"
+                    android:textColor="@color/colorBaseHeader"
                     />
 
                 <TextView
@@ -102,7 +109,7 @@
                     android:textSize="12sp"
                     android:textStyle="bold"
                     android:layout_toLeftOf="@+id/end_date"
-                    android:textColor="@color/colorPrimaryDark"
+                    android:textColor="@color/colorBaseHeader"
                     />
                 <TextView
                     android:id="@+id/end_date"
@@ -112,7 +119,7 @@
                     android:textSize="13sp"
                     android:layout_alignParentRight="true"
                     android:layout_toLeftOf="@+id/textView"
-                    android:textColor="@color/colorPrimaryDark"
+                    android:textColor="@color/colorBaseHeader"
                     />
 
             </RelativeLayout>
@@ -129,7 +136,7 @@
                     android:textSize="12sp"
                     android:textStyle="bold"
                     android:layout_toLeftOf="@+id/textView"
-                    android:textColor="@color/colorPrimaryDark"
+                    android:textColor="@color/colorBaseHeader"
                     />
                 <TextView
                     android:id="@+id/category"
@@ -138,7 +145,7 @@
                     android:layout_height="wrap_content"
                     android:textSize="12sp"
                     android:layout_toLeftOf="@+id/textView"
-                    android:textColor="@color/colorPrimaryDark"
+                    android:textColor="@color/colorBaseHeader"
                     />
             </LinearLayout>
             <LinearLayout
@@ -156,7 +163,7 @@
                     android:textSize="12sp"
                     android:textStyle="bold"
                     android:layout_toLeftOf="@+id/textView"
-                    android:textColor="@color/colorPrimaryDark"
+                    android:textColor="@color/colorBaseHeader"
                     />
             <TextView
                 android:id="@+id/task_desc"
@@ -166,7 +173,7 @@
                 android:textSize="12sp"
                 android:lines="4"
                 android:ellipsize="end"
-                android:textColor="@color/colorPrimaryDark"
+                android:textColor="@color/colorBaseHeader"
                 />
         </LinearLayout>
             <LinearLayout
@@ -185,7 +192,7 @@
                     android:textSize="12sp"
                     android:textStyle="bold"
                     android:layout_toLeftOf="@+id/textView"
-                    android:textColor="@color/colorPrimaryDark"
+                    android:textColor="@color/colorBaseHeader"
                     />
 
             </LinearLayout>
@@ -212,7 +219,7 @@
                 android:textSize="12sp"
                 android:textStyle="bold"
                 android:layout_toLeftOf="@+id/textView"
-                android:textColor="@color/colorPrimaryDark"
+                android:textColor="@color/colorBaseHeader"
                 />
 
             <RelativeLayout
@@ -228,9 +235,9 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:thumb="@drawable/thumb_image"
-                    android:thumbTint="@color/colorPrimary"
-                    android:progressTint="@color/colorPrimary"
-                    android:foreground="@color/colorPrimary"
+                    android:thumbTint="@color/colorContentWrapper"
+                    android:progressTint="@color/colorContentWrapper"
+                    android:foreground="@color/colorContentWrapper"
                     android:max="100" >
                 </SeekBar>
             </RelativeLayout>
@@ -247,10 +254,10 @@
                 android:layout_below="@+id/layout4"
                 android:layout_marginTop="10dp"
                 android:layout_centerInParent="true"
-                app:donut_text_color="@color/colorPrimary"
+                app:donut_text_color="@color/colorContentWrapper"
                 app:donut_finished_stroke_width="5dp"
                 app:donut_unfinished_stroke_width="5dp"
-                app:donut_finished_color="@color/colorPrimary"/>
+                app:donut_finished_color="@color/colorContentWrapper"/>
 
         </RelativeLayout>
 
@@ -287,7 +294,7 @@
             android:layout_alignParentRight="true"
             android:background="@mipmap/bubble_alert"
             android:layout_alignParentTop="true"
-            android:textColor="@color/colorPrimaryGray" />
+            android:textColor="@color/colorBaseWrapper" />
 
         <ImageView
             android:id="@+id/delete1"
@@ -325,7 +332,7 @@
                     android:layout_alignParentRight="true"
                     android:background="@mipmap/bubble_alert"
                     android:layout_alignParentTop="true"
-                    android:textColor="@color/colorPrimaryGray" />
+                    android:textColor="@color/colorBaseWrapper" />
 
                 <ImageView
                     android:id="@+id/comment"
@@ -363,7 +370,7 @@
                     android:layout_alignParentRight="true"
                     android:background="@mipmap/bubble_alert"
                     android:layout_alignParentTop="true"
-                    android:textColor="@color/colorPrimaryGray" />
+                    android:textColor="@color/colorBaseWrapper" />
 
                 <ImageView
                     android:id="@+id/alarm"

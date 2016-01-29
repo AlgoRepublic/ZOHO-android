@@ -2,10 +2,8 @@ package com.algorepublic.zoho;
 
 import android.accounts.AccountManager;
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.content.IntentSender;
-import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -42,8 +40,6 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.Result;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.drive.Drive;
-import com.google.android.gms.drive.DriveApi;
-import com.google.android.gms.drive.DriveContents;
 import com.google.android.gms.drive.DriveFile;
 import com.google.android.gms.drive.DriveId;
 import com.google.android.gms.drive.DriveResource;
@@ -60,20 +56,12 @@ import com.google.api.services.drive.DriveScopes;
 import org.apache.commons.io.FileUtils;
 import org.json.JSONObject;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.OutputStream;
-import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -406,11 +394,11 @@ public class ActivityUploadDocs extends BaseActivity implements GoogleApiClient.
         dialog//
                 .btnNum(1)
                 .title("File size alert!")
-                .titleTextColor(getResources().getColor(R.color.colorPrimaryDark))
+                .titleTextColor(getResources().getColor(R.color.colorBaseHeader))
                 .content("File size should be less than (5) five MB")//
-                .contentTextColor(getResources().getColor(R.color.colorPrimary))
+                .contentTextColor(getResources().getColor(R.color.colorContentWrapper))
                 .btnText("OK")//
-                .btnTextColor(getResources().getColor(R.color.colorPrimary))
+                .btnTextColor(getResources().getColor(R.color.colorContentWrapper))
                 .showAnim(new SlideLeftEnter())//
                 .dismissAnim(new SlideRightExit())//
                 .show();

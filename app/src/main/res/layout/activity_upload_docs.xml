@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorLightgray"
+    android:background="@color/colorBaseWrapper"
     tools:context="com.algorepublic.zoho.ActivityTask">
     <include
         android:id="@+id/toolbar_actionbar"
@@ -29,7 +29,7 @@
                 android:background="@drawable/underline_textview"
                 android:paddingBottom="2dp"
                 android:text="Files"
-                android:textColor="@color/colorPrimary"
+                android:textColor="@color/colorContentWrapper"
                 android:textSize="13.33sp"
                 android:typeface="monospace" />
 
@@ -42,7 +42,7 @@
                 android:textAllCaps="false"
                 android:textSize="12sp"
                 android:background="@drawable/roundable_gray"
-                android:textColor="@color/colorPrimaryGray"
+                android:textColor="@color/colorBaseWrapper"
                 android:text="Add"/>
 
             <LinearLayout

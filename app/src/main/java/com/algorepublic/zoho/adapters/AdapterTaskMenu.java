@@ -11,22 +11,22 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
 import android.widget.GridView;
-import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.algorepublic.zoho.ActivityTask;
 import com.algorepublic.zoho.BaseActivity;
-import com.algorepublic.zoho.MainActivity;
+import com.algorepublic.zoho.FragmentsTasks.TaskAssignFragment;
+import com.algorepublic.zoho.FragmentsTasks.TaskAttachmentFragment;
+import com.algorepublic.zoho.FragmentsTasks.TaskEditTitleFragment;
+import com.algorepublic.zoho.FragmentsTasks.TaskPriorityFragment;
+import com.algorepublic.zoho.FragmentsTasks.TaskScheduleFragment;
 import com.algorepublic.zoho.R;
-import com.algorepublic.zoho.fragments.CalendarFragment;
-import com.algorepublic.zoho.fragments.DocumentsListFragment;
-import com.algorepublic.zoho.fragments.ProjectsFragment;
-import com.algorepublic.zoho.fragments.TasksListFragment;
 import com.androidquery.AQuery;
 
 /**
- * Created by android on 8/24/15.
+ * Created by android on 1/29/16.
  */
-public class AdapterMenuItems extends BaseAdapter{
+public class AdapterTaskMenu extends BaseAdapter {
 
     Context ctx; private LayoutInflater inflater;
     int[] menu_names = {
@@ -35,10 +35,7 @@ public class AdapterMenuItems extends BaseAdapter{
             R.string.tasks,
             R.string.calendar,
             R.string.documents,
-            R.string.users,
-            R.string.forums,
-            R.string.start_rating,
-            R.string.departments,
+            R.string.users
     };
     int[] menu_icon_white = {
             R.mipmap.dashboard_white,
@@ -46,10 +43,7 @@ public class AdapterMenuItems extends BaseAdapter{
             R.mipmap.tasks_white,
             R.mipmap.calender_white,
             R.mipmap.document_white,
-            R.mipmap.users_white,
-            R.mipmap.forums_white,
-            R.mipmap.star_white,
-            R.mipmap.departments_white
+            R.mipmap.users_white
     };
     int[] menu_icon_blue = {
             R.mipmap.dashboard_blue,
@@ -57,14 +51,11 @@ public class AdapterMenuItems extends BaseAdapter{
             R.mipmap.tasks_blue,
             R.mipmap.calender_blue,
             R.mipmap.document_blue,
-            R.mipmap.users_blue,
-            R.mipmap.forums_blue,
-            R.mipmap.star_blue,
-            R.mipmap.departments_blue
+            R.mipmap.users_blue
     };
-    public AdapterMenuItems(Context context) {
+    public AdapterTaskMenu(Context context) {
         this.ctx = context;
-       inflater = LayoutInflater.from(context);
+        inflater = LayoutInflater.from(context);
     }
 
 
@@ -85,7 +76,7 @@ public class AdapterMenuItems extends BaseAdapter{
         final ViewHolder holder;
         if (convertView == null) {
             LayoutInflater inflater = ((Activity) ctx).getLayoutInflater();
-            convertView = inflater.inflate(R.layout.layout_menu_items, parent, false);
+            convertView = inflater.inflate(R.layout.layout_taskmenu, parent, false);
             holder = new ViewHolder();
             holder.title = (TextView) convertView.findViewById(R.id.textview);
             holder.checkBox = (CheckBox) convertView.findViewById(R.id.checkbox);
@@ -108,7 +99,7 @@ public class AdapterMenuItems extends BaseAdapter{
                         holder.title.setTextColor(ctx.getResources().getColor(R.color.colorPrimaryBlue));
                         aq.id(R.id.imageview).image(menu_icon_blue[loop]);
                     }else {
-                        View  view = getViewByPosition(loop,MainActivity.gridView);
+                        View  view = getViewByPosition(loop, ActivityTask.gridViewTaskMenu);
                         AQuery aQuery =  new AQuery(view);
                         aQuery.id(R.id.checkbox).checked(false);
                         aQuery.id(R.id.textview).textColor(ctx.getResources().getColor(R.color.white));
@@ -122,23 +113,17 @@ public class AdapterMenuItems extends BaseAdapter{
     }
     public void CallFragment(int position){
         if(position==0){
-
+            callFragmentWithReplace(R.id.edittask_container, TaskEditTitleFragment.newInstance(position), "TaskTitle");
         }if(position==1){
-            callFragmentWithReplace(R.id.container, ProjectsFragment.newInstance(), "ProjectsFragment");
+            callFragmentWithReplace(R.id.edittask_container, TaskAttachmentFragment.newInstance(position), "TaskAttachment");
         }if(position==2){
-            callFragmentWithReplace(R.id.container, TasksListFragment.newInstance(), "TasksListFragment");
+            callFragmentWithReplace(R.id.edittask_container, TaskAttachmentFragment.newInstance(position), "TaskAttachment");
         }if(position==3){
-            callFragmentWithReplace(R.id.container, CalendarFragment.newInstance(), "FragmentCalendar");
+            callFragmentWithReplace(R.id.edittask_container, TaskScheduleFragment.newInstance(position), "TaskSchedule");
         }if(position==4){
-            callFragmentWithReplace(R.id.container, DocumentsListFragment.newInstance(), "DocumentsListFragment");
+            callFragmentWithReplace(R.id.edittask_container, TaskAssignFragment.newInstance(position), "TaskAssign");
         }if(position==5){
-
-        }if(position==6){
-
-        }if(position==7){
-
-        }if(position==8){
-
+            callFragmentWithReplace(R.id.edittask_container, TaskPriorityFragment.newInstance(position), "TasksPriority");
         }
         BaseActivity.drawer.closeDrawer(GravityCompat.START);
     }
@@ -153,7 +138,6 @@ public class AdapterMenuItems extends BaseAdapter{
     static class ViewHolder {
         TextView title;
         CheckBox checkBox;
-        ImageView imageView;
     }
     public View getViewByPosition(int pos, GridView listView) {
         final int firstListItemPosition = listView.getFirstVisiblePosition();

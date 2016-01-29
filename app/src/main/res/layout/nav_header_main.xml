@@ -3,13 +3,13 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/colorPrimaryGray"
+    android:background="@color/colorBaseWrapper"
     android:gravity="top"
     android:orientation="vertical">
     <View
         android:id="@id/view"
         android:layout_width="match_parent"
-        android:background="@color/colorPrimaryDark"
+        android:background="@color/colorBaseHeader"
         android:layout_height="24dp"/>
 
     <RelativeLayout
@@ -18,7 +18,7 @@
         android:paddingLeft="5dp"
         android:paddingRight="5dp"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/colorPrimaryDark">
+        android:background="@color/colorBaseHeader">
        <RelativeLayout
         android:id="@+id/layout_menu1"
         android:layout_width="44dp"
@@ -35,7 +35,7 @@
             android:layout_alignParentRight="true"
             android:background="@mipmap/bubble_alert"
             android:layout_alignParentTop="true"
-            android:textColor="@color/colorPrimaryGray" />
+            android:textColor="@color/colorBaseWrapper" />
         <ImageView
             android:id="@+id/notification"
             android:layout_width="28dp"
@@ -108,7 +108,7 @@
                         android:lines="2"
                         android:textSize="18dp"
                         android:layout_centerVertical="true"
-                        android:textColor="@color/colorPrimary"
+                        android:textColor="@color/colorContentWrapper"
                         android:layout_toLeftOf="@+id/profile" />
                     <com.mikhaellopez.circularimageview.CircularImageView
                         android:id="@+id/profile"
@@ -119,9 +119,9 @@
                         app:shadow="true"
                         app:border="true"
                         app:border_width="4dp"
-                        app:border_color="@color/colorPrimary"
+                        app:border_color="@color/colorContentWrapper"
                         app:shadow_radius="3"
-                        app:shadow_color="@color/colorDarkGray"
+                        app:shadow_color="@color/colorBaseMenu"
                         android:src="@drawable/nav_user" />
                     <TextView
                         android:text="admin"
@@ -130,7 +130,7 @@
                         android:padding="5dp"
                         android:layout_centerVertical="true"
                         android:layout_toRightOf="@id/profile"
-                        android:textColor="@color/colorPrimary"
+                        android:textColor="@color/colorContentWrapper"
                         android:gravity="left"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" />
@@ -148,14 +148,14 @@
                         android:textSize="16sp"
                         android:gravity="center"
                         android:layout_centerHorizontal="true"
-                        android:textColor="@color/colorPrimary"
+                        android:textColor="@color/colorContentWrapper"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
                 </RelativeLayout>
             </RelativeLayout>
 
             <GridView
-                android:id="@+id/gridview"
+                android:id="@+id/gridview_menu"
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
                 android:numColumns="3"

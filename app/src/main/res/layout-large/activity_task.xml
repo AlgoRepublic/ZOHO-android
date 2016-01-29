@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorLightgray"
+    android:background="@color/colorBaseWrapper"
     tools:context="com.algorepublic.zoho.ActivityTask">
     <include
         android:id="@+id/toolbar_actionbar"
@@ -51,7 +51,7 @@
             android:scaleType="fitXY"
             android:textColor="@android:color/white"
             android:adjustViewBounds="true"
-            android:background="@color/colorPrimaryDark"
+            android:background="@color/colorBaseHeader"
             android:layout_gravity="center_horizontal"
             android:textSize="13dp" />
 
@@ -71,7 +71,7 @@
             android:scaleType="fitXY"
             android:textColor="@android:color/white"
             android:adjustViewBounds="true"
-            android:background="@color/colorPrimaryDark"
+            android:background="@color/colorBaseHeader"
             android:layout_gravity="center_horizontal"
             android:textSize="13dp" />
 
@@ -90,7 +90,7 @@
                 android:scaleType="fitXY"
                 android:textColor="@android:color/white"
                 android:adjustViewBounds="true"
-                android:background="@color/colorPrimaryDark"
+                android:background="@color/colorBaseHeader"
                 android:layout_gravity="center_horizontal"
                 android:textSize="13dp" />
 
@@ -98,7 +98,7 @@
     <View
         android:id="@+id/view"
         android:layout_below="@+id/radioGroup1"
-        android:background="@color/colorLightgray"
+        android:background="@color/colorBaseWrapper"
         android:layout_width="match_parent"
         android:layout_height="1dp"/>
     <RadioGroup
@@ -122,7 +122,7 @@
                 android:scaleType="fitXY"
                 android:textColor="@android:color/white"
                 android:adjustViewBounds="true"
-                android:background="@color/colorPrimaryDark"
+                android:background="@color/colorBaseHeader"
                 android:layout_gravity="center_horizontal"
                 android:textSize="13dp" />
             <com.algorepublic.zoho.utils.MyRadioButton
@@ -141,7 +141,7 @@
                 android:scaleType="fitXY"
                 android:textColor="@android:color/white"
                 android:adjustViewBounds="true"
-                android:background="@color/colorPrimaryDark"
+                android:background="@color/colorBaseHeader"
                 android:layout_gravity="center_horizontal"
                 android:textSize="13dp" />
 
@@ -160,7 +160,7 @@
                 android:scaleType="fitXY"
                 android:textColor="@android:color/white"
                 android:adjustViewBounds="true"
-                android:background="@color/colorPrimaryDark"
+                android:background="@color/colorBaseHeader"
                 android:layout_gravity="center_horizontal"
                 android:textSize="13dp" />
     </RadioGroup>

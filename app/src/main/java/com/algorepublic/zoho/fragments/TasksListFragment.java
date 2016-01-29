@@ -135,17 +135,17 @@ public class TasksListFragment extends BaseFragment {
                 Log.e("id","/"+radioGroup.indexOfChild(view.findViewById(checkedId)));
                 switch (radioGroup.indexOfChild(view.findViewById(checkedId))) {
                     case 1:
-                        aq.id(R.id.all).textColor(getResources().getColor(R.color.colorAccent));
+                        aq.id(R.id.all).textColor(getResources().getColor(R.color.colorBaseHeader));
                         aq.id(R.id.up_coming).textColor(getResources().getColor(android.R.color.white));
                         aq.id(R.id.over_due).textColor(getResources().getColor(android.R.color.white));
                         break;
                     case 3:
-                        aq.id(R.id.up_coming).textColor(getResources().getColor(R.color.colorAccent));
+                        aq.id(R.id.up_coming).textColor(getResources().getColor(R.color.colorBaseHeader));
                         aq.id(R.id.all).textColor(getResources().getColor(android.R.color.white));
                         aq.id(R.id.over_due).textColor(getResources().getColor(android.R.color.white));
                         break;
                     case 5:
-                        aq.id(R.id.over_due).textColor(getResources().getColor(R.color.colorAccent));
+                        aq.id(R.id.over_due).textColor(getResources().getColor(R.color.colorBaseHeader));
                         aq.id(R.id.all).textColor(getResources().getColor(android.R.color.white));
                         aq.id(R.id.up_coming).textColor(getResources().getColor(android.R.color.white));
                         break;

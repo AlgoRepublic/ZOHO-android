@@ -2,7 +2,7 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/single_image_row"
-    android:background="@color/colorLightgray"
+    android:background="@color/colorBaseWrapper"
     android:layout_width="match_parent"
     android:layout_height="wrap_content" >
 
@@ -34,7 +34,7 @@
             android:lines="2"
             android:gravity="left"
             android:text="name"
-            android:textColor="@color/colorAccent"
+            android:textColor="@color/colorBaseWrapper"
             android:textSize="14sp" />
         </RelativeLayout>
     <ImageView
@@ -48,7 +48,7 @@
          />
     <View
         android:layout_width="match_parent"
-        android:background="@color/colorPrimary"
+        android:background="@color/colorContentWrapper"
         android:layout_below="@+id/layout"
         android:layout_height="1dp"/>
     </RelativeLayout>

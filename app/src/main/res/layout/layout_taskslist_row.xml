@@ -53,7 +53,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="14sp"
                 android:textStyle="bold"
-                android:textColor="@color/colorPrimaryDark"
+                android:textColor="@color/colorBaseHeader"
                 />
             <TextView
                 android:id="@+id/task_date"
@@ -62,7 +62,7 @@
                 android:gravity="right|end"
                 android:layout_height="wrap_content"
                 android:textSize="12sp"
-                android:textColor="@color/colorDarkGray"
+                android:textColor="@color/colorBaseMenu"
                 />
         </LinearLayout>
         <LinearLayout
@@ -80,7 +80,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="14sp"
                 android:textStyle="bold"
-                android:textColor="@color/colorPrimaryDark"
+                android:textColor="@color/colorBaseHeader"
                 />
             <RelativeLayout
                 android:layout_height="wrap_content"
@@ -103,7 +103,7 @@
                     android:layout_width="1dp"
                     android:layout_margin="5dp"
                     android:layout_toLeftOf="@+id/task_users"
-                    android:background="@color/colorPrimary"
+                    android:background="@color/colorContentWrapper"
                     android:layout_height="match_parent">
                 </View>
                 <TextView

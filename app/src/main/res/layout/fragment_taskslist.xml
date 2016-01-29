@@ -30,13 +30,13 @@
         android:layout_alignParentBottom="true"
         android:weightSum="4"
         android:orientation="horizontal"
-        android:background="@color/colorPrimary">
+        android:background="@color/colorContentWrapper">
         <RadioGroup
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_below="@+id/view"
             android:weightSum="3"
-            android:layout_weight="3.4"
+            android:layout_weight="3.7"
             android:orientation="horizontal"
             android:id="@+id/radioGroup">
 
@@ -96,16 +96,21 @@
         <View android:layout_height="fill_parent"
             android:layout_width="2dp"
             android:background="@color/white"/>
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_weight=".6"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="40dp"
+            android:layout_gravity="center"
+            android:layout_height="match_parent">
         <Button
             android:id="@+id/sort"
-            android:layout_width="0dp"
-            android:layout_weight=".7"
-            android:layout_marginLeft="40dp"
-            android:layout_marginRight="40dp"
+            android:layout_width="40dp"
             android:layout_marginTop="12dp"
             android:layout_marginBottom="12dp"
             android:background="@mipmap/task_image"
             android:layout_gravity="center"
             android:layout_height="match_parent" />
+        </RelativeLayout>
     </LinearLayout>
 </RelativeLayout>

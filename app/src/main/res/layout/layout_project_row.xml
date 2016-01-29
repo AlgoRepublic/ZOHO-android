@@ -30,7 +30,7 @@
             android:id="@+id/project_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/colorPrimaryDark"
+            android:textColor="@color/colorBaseHeader"
             android:textSize="18sp"
             android:textStyle="bold" />
 
@@ -38,7 +38,7 @@
             android:id="@+id/project_desc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/colorPrimary"
+            android:textColor="@color/colorContentWrapper"
             android:textSize="14sp"
             android:layout_marginTop="5dp" />
     </LinearLayout>

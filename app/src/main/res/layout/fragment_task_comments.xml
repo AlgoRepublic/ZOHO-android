@@ -60,7 +60,7 @@
             android:textAllCaps="false"
             android:textSize="11sp"
             android:layout_weight=".5"
-            android:background="@color/colorPrimary"
+            android:background="@color/colorContentWrapper"
             android:layout_gravity="center_vertical"
             android:textColor="@android:color/white"
             android:textStyle="bold"/>

@@ -4,10 +4,8 @@
     android:enterFadeDuration="@android:integer/config_shortAnimTime">
 
     <item android:drawable="@mipmap/users_blue"
-        android:color="@color/colorAccent"
         android:state_checked="true"/>
     <item android:drawable="@mipmap/users_blue"
-        android:color="@color/colorAccent"
         android:state_pressed="true"/>
     <item android:drawable="@mipmap/users_white"
         android:color="@android:color/white"

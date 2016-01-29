@@ -32,7 +32,7 @@
             android:lines="2"
             android:gravity="left"
             android:text="name"
-            android:textColor="@color/colorAccent"
+            android:textColor="@color/colorBaseHeader"
             android:textSize="20sp" />
         </RelativeLayout>
     </RelativeLayout>

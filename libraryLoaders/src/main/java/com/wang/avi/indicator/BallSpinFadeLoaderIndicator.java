@@ -39,7 +39,7 @@ public class BallSpinFadeLoaderIndicator extends BaseIndicatorController {
 
     @Override
     public void draw(Canvas canvas, Paint paint) {
-        float radius=getWidth()/12;
+        float radius=getWidth()/16;
         for (int i = 0; i < 8; i++) {
             canvas.save();
             Point point=circleAt(getWidth(),getHeight(),getWidth()/2-radius,i*(Math.PI/4));

@@ -6,31 +6,23 @@ import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
-import android.view.Gravity;
 import android.view.View;
-import android.widget.AdapterView;
+import android.widget.GridView;
 import android.widget.ImageView;
-import android.widget.RadioGroup;
 
 import com.algorepublic.zoho.adapters.AdapterMenuItems;
-import com.algorepublic.zoho.fragments.CalendarFragment;
-import com.algorepublic.zoho.fragments.DocumentsListFragment;
 import com.algorepublic.zoho.fragments.FeedFragment;
-import com.algorepublic.zoho.fragments.ProjectsFragment;
-import com.algorepublic.zoho.fragments.TasksListFragment;
 import com.algorepublic.zoho.fragments.dummy.DummyContent;
 import com.algorepublic.zoho.utils.BaseClass;
 import com.androidquery.AQuery;
-
-import java.util.ArrayList;
 
 public class MainActivity extends BaseActivity
         implements FeedFragment.OnListFragmentInteractionListener {
 
     AQuery aq,aq_header;
     BaseClass baseClass;
+    public static GridView gridView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +34,8 @@ public class MainActivity extends BaseActivity
         baseClass = ((BaseClass) getApplicationContext());
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         View headerLayout =navigationView.getHeaderView(0);
-        aq_header = new AQuery(headerLayout);
+        gridView = (GridView) headerLayout.findViewById(R.id.gridview_menu);
+                aq_header = new AQuery(headerLayout);
 
         aq= new AQuery(this);
         if (android.os.Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
@@ -59,7 +52,7 @@ public class MainActivity extends BaseActivity
                 startActivity(new Intent(MainActivity.this, SettingsActivity.class));
             }
         });
-        aq_header.id(R.id.gridview).adapter(new AdapterMenuItems(this));
+        gridView.setAdapter(new AdapterMenuItems(this));
     }
 
     @Override
