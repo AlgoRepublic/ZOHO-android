@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.GridView;
 import android.widget.RadioGroup;
 
 import com.algorepublic.zoho.FragmentsTasks.TaskAssignFragment;
@@ -12,6 +13,7 @@ import com.algorepublic.zoho.FragmentsTasks.TaskAttachmentFragment;
 import com.algorepublic.zoho.FragmentsTasks.TaskEditTitleFragment;
 import com.algorepublic.zoho.FragmentsTasks.TaskPriorityFragment;
 import com.algorepublic.zoho.FragmentsTasks.TaskScheduleFragment;
+import com.algorepublic.zoho.adapters.AdapterTaskMenu;
 import com.algorepublic.zoho.adapters.TasksList;
 import com.algorepublic.zoho.fragments.TasksListFragment;
 import com.algorepublic.zoho.utils.BaseClass;
@@ -32,11 +34,10 @@ import cc.cloudist.acplibrary.ACProgressFlower;
 
 public class ActivityTask extends BaseActivity{
     AQuery aq;
-    RadioGroup radioGroup1,radioGroup2;
     int position;
     BaseClass baseClass;
+    public static GridView gridViewTaskMenu;
     public static ACProgressFlower dialog;
-    RadioGroup.OnCheckedChangeListener changeListener1,changeListener2;
     public  static TasksList tasksObj;
     public static ArrayList<File> filesList;
     public static ArrayList<Integer> assigneeList;
@@ -45,6 +46,7 @@ public class ActivityTask extends BaseActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_task);
+        gridViewTaskMenu = (GridView) findViewById(R.id.gridview_taskmenu);
         filesList = new ArrayList<>();
         assigneeList = new ArrayList<>();
         baseClass = ((BaseClass) getApplicationContext());
@@ -62,8 +64,6 @@ public class ActivityTask extends BaseActivity{
         }
 
         aq =new AQuery(this);
-        radioGroup1 = (RadioGroup) findViewById(R.id.radioGroup1);
-        radioGroup2 = (RadioGroup) findViewById(R.id.radioGroup2);
         aq.id(R.id.back_arrow).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -76,119 +76,12 @@ public class ActivityTask extends BaseActivity{
                 new AsyncTry().execute();
             }
         });
-       changeListener1 = new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                RadioGroup1(checkedId);
-                UpdateRadioGroup2();
-            }
-        };
-       changeListener2 = new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                UpdateRadioGroup1();
-                RadioGroup2(checkedId);
-            }
-        };
-        radioGroup1.setOnCheckedChangeListener(changeListener1);
-        radioGroup2.setOnCheckedChangeListener(changeListener2);
-        aq.id(R.id.edit_radioButton).clicked(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                callFragmentWithReplace(R.id.edittask_container, TaskEditTitleFragment.newInstance(position), "TaskTitle");
-            }
-        });
-        aq.id(R.id.category_radioButton).clicked(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                callFragmentWithReplace(R.id.edittask_container, TaskAttachmentFragment.newInstance(position), "TaskAttachment");
-            }
-        });
-        aq.id(R.id.image_radioButton).clicked(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                callFragmentWithReplace(R.id.edittask_container, TaskAttachmentFragment.newInstance(position), "TaskAttachment");
-            }
-        });
-        aq.id(R.id.schedule_radioButton).clicked(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                callFragmentWithReplace(R.id.edittask_container, TaskScheduleFragment.newInstance(position), "TaskSchedule");
-            }
-        });
-        aq.id(R.id.employees_radioButton).clicked(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                callFragmentWithReplace(R.id.edittask_container, TaskAssignFragment.newInstance(position), "TaskAssign");
-            }
-        });
-        aq.id(R.id.priority_radioButton).clicked(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                callFragmentWithReplace(R.id.edittask_container, TaskPriorityFragment.newInstance(position), "TasksPriority");
-            }
-        });
+        gridViewTaskMenu.setAdapter(new AdapterTaskMenu(this));
         if(savedInstanceState==null){
             callFragmentWithReplace(R.id.edittask_container, TaskEditTitleFragment.newInstance(position), "TaskTitle");
         }
     }
-    public void RadioGroup1(int checkedId) {
-        switch (radioGroup1.indexOfChild(findViewById(checkedId))) {
-            case 0:
-                aq.id(R.id.edit_radioButton).textColor(getResources().getColor(R.color.colorAccent));
-                aq.id(R.id.category_radioButton).textColor(getResources().getColor(android.R.color.white));
-                aq.id(R.id.image_radioButton).textColor(getResources().getColor(android.R.color.white));
-                break;
-            case 1:
-                aq.id(R.id.category_radioButton).textColor(getResources().getColor(R.color.colorAccent));
-                aq.id(R.id.edit_radioButton).textColor(getResources().getColor(android.R.color.white));
-                aq.id(R.id.image_radioButton).textColor(getResources().getColor(android.R.color.white));
-                break;
-            case 2:
-                aq.id(R.id.image_radioButton).textColor(getResources().getColor(R.color.colorAccent));
-                aq.id(R.id.edit_radioButton).textColor(getResources().getColor(android.R.color.white));
-                aq.id(R.id.category_radioButton).textColor(getResources().getColor(android.R.color.white));
-                break;
-        }
-    }
 
-    public void RadioGroup2(int checkedId) {
-        switch (radioGroup2.indexOfChild(findViewById(checkedId))) {
-            case 0:
-                aq.id(R.id.employees_radioButton).textColor(getResources().getColor(R.color.colorAccent));
-                aq.id(R.id.schedule_radioButton).textColor(getResources().getColor(android.R.color.white));
-                aq.id(R.id.priority_radioButton).textColor(getResources().getColor(android.R.color.white));
-                break;
-            case 1:
-                aq.id(R.id.schedule_radioButton).textColor(getResources().getColor(R.color.colorAccent));
-                aq.id(R.id.employees_radioButton).textColor(getResources().getColor(android.R.color.white));
-                aq.id(R.id.priority_radioButton).textColor(getResources().getColor(android.R.color.white));
-                break;
-            case 2:
-                aq.id(R.id.priority_radioButton).textColor(getResources().getColor(R.color.colorAccent));
-                aq.id(R.id.employees_radioButton).textColor(getResources().getColor(android.R.color.white));
-                aq.id(R.id.schedule_radioButton).textColor(getResources().getColor(android.R.color.white));
-                break;
-        }
-    }
-    public void UpdateRadioGroup1()
-    {
-        radioGroup1.setOnCheckedChangeListener(null);
-        radioGroup1.clearCheck();
-        radioGroup1.setOnCheckedChangeListener(changeListener1);
-        aq.id(R.id.edit_radioButton).textColor(getResources().getColor(android.R.color.white));
-        aq.id(R.id.category_radioButton).textColor(getResources().getColor(android.R.color.white));
-        aq.id(R.id.image_radioButton).textColor(getResources().getColor(android.R.color.white));
-    }
-    public void UpdateRadioGroup2()
-    {
-        radioGroup2.setOnCheckedChangeListener(null);
-        radioGroup2.clearCheck();
-        radioGroup2.setOnCheckedChangeListener(changeListener2);
-        aq.id(R.id.employees_radioButton).textColor(getResources().getColor(android.R.color.white));
-        aq.id(R.id.schedule_radioButton).textColor(getResources().getColor(android.R.color.white));
-        aq.id(R.id.priority_radioButton).textColor(getResources().getColor(android.R.color.white));
-    }
     public class AsyncTry extends AsyncTask<Void, Void, String> {
         GenericHttpClient httpClient;
         String response= null;

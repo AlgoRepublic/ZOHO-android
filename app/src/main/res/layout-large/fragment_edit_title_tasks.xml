@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_alignParentBottom="true"
-    android:background="@color/colorLightgray"
+    android:background="@color/colorBaseWrapper"
     android:orientation="vertical">
     <EditText
         android:id="@+id/first_name"
@@ -11,11 +11,11 @@
         android:layout_height="match_parent"
         android:hint="Task Title"
         android:textCursorDrawable="@null"
-        android:textColor="@color/colorPrimary"
+        android:textColor="@color/colorContentWrapper"
         android:padding="10dp"
         android:gravity="top"
         android:textSize="14sp"
         android:layout_margin="20dp"
-        android:textColorHint="@color/colorLightgray"
+        android:textColorHint="@color/colorBaseWrapper"
         android:background="@drawable/roundable_white"/>
 </LinearLayout>

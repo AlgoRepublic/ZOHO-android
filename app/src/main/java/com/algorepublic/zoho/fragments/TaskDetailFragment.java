@@ -117,7 +117,7 @@ public class TaskDetailFragment extends BaseFragment {
       seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
           @Override
           public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-              seekBarCompat.setProgress(progress);
+              seekBarCompat.setProgress(progress) ;
           }
 
           @Override
@@ -200,16 +200,16 @@ public class TaskDetailFragment extends BaseFragment {
     private void NormalDialogCustomAttr(String content) {
         final NormalDialog dialog = new NormalDialog(getActivity());
         dialog.isTitleShow(false)//
-                .bgColor(getResources().getColor(R.color.colorLightgray))//
+                .bgColor(getResources().getColor(R.color.colorBaseWrapper))//
                 .cornerRadius(5)//
                 .content(content)//
                 .contentGravity(Gravity.CENTER)//
-                .contentTextColor(getResources().getColor(R.color.colorPrimaryDark))//
-                .dividerColor(getResources().getColor(R.color.colorPrimary))//
+                .contentTextColor(getResources().getColor(R.color.colorBaseHeader))//
+                .dividerColor(getResources().getColor(R.color.colorContentWrapper))//
                 .btnTextSize(15.5f, 15.5f)//
-                .btnTextColor(getResources().getColor(R.color.colorPrimaryDark)
-                        , getResources().getColor(R.color.colorPrimaryDark))//
-                .btnPressColor(getResources().getColor(R.color.colorDarkGray))//
+                .btnTextColor(getResources().getColor(R.color.colorBaseHeader)
+                        , getResources().getColor(R.color.colorBaseHeader))//
+                .btnPressColor(getResources().getColor(R.color.colorBaseMenu))//
                 .widthScale(0.85f)//
                 .showAnim(new BounceLeftEnter())//
                 .dismissAnim(new SlideRightExit())//

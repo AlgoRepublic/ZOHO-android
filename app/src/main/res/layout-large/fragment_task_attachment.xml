@@ -11,7 +11,7 @@
         android:background="@drawable/underline_textview"
         android:paddingBottom="2dp"
         android:text="ATTACHMENTS"
-        android:textColor="@color/colorPrimary"
+        android:textColor="@color/colorContentWrapper"
         android:textSize="13.33sp"
         android:typeface="monospace" />
 

@@ -16,6 +16,6 @@
         app:shadow="true"
         app:shadow_radius="3"
         app:border_width="0dp"
-        app:shadow_color="@color/colorDarkGray"
+        app:shadow_color="@color/colorBaseMenu"
         />
 </RelativeLayout>

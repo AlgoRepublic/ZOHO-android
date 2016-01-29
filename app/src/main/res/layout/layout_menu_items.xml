@@ -8,13 +8,14 @@
     <CheckBox
         android:id="@+id/checkbox"
         android:button="@null"
-        android:background="@color/colorPrimaryDark"
+        android:background="@color/colorBaseHeader"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentLeft="true"/>
     <ImageView
         android:id="@+id/imageview"
         android:button="@null"
+        android:padding="10dp"
         android:layout_width="match_parent"
         android:layout_height="fill_parent"
         android:layout_above="@+id/textview"
@@ -22,7 +23,6 @@
     <TextView
         android:id="@+id/textview"
         android:layout_width="wrap_content"
-        android:text="skdwfb"
         android:gravity="bottom|center"
         android:textColor="@color/white"
         android:textSize="13sp"

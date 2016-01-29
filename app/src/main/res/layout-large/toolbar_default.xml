@@ -7,7 +7,7 @@
     android:paddingTop="5dp"
     android:paddingBottom="5dp"
     android:fitsSystemWindows="true"
-    android:background="@color/colorPrimaryDark"
+    android:background="@color/colorBaseHeader"
     android:minHeight="@dimen/abc_action_bar_default_height_material">
 
     <RelativeLayout

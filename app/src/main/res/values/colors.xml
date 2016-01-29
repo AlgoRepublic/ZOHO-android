@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3C3C3E</color>
-    <color name="colorPrimaryGray">#F2F3F6</color>
-    <color name="colorPrimaryDark">#2C2D2F</color>
-    <color name="colorAccent">#EC3523</color>
-    <color name="colorLightgray">#EDEDED</color>
-    <color name="colorDarkGray">#727272</color>
+
+    <color name="colorContentWrapper">#808285</color>
+    <color name="colorBaseWrapper">#E6E7E8</color>
+    <color name="colorBaseHeader">#414042</color>
+    <color name="colorBaseMenu">#B3B5B7</color>
+
+    <color name="colorPrimaryBlue">#1D87E7</color>
     <color name="calendar_future_days_bg">#FFFFFF</color>
     <color name="calendar_past_days_bg">#F5F5F5</color>
     <color name="calendar_text_current_day">#000000</color>
@@ -18,9 +19,10 @@
     <color name="theme_primary_dark">#1976D2</color>
     <color name="theme_primary">#2196F3</color>
     <color name="theme_light_primary">#BBDEFB</color>
-    <color name="theme_accent">#FFEB3B</color>
+    <color name="theme_accent">#FFC107</color>
     <color name="theme_text_icons">#FFFFFF</color>
     <color name="medium_priority">#FF7F06</color>
-    <color name="low_priority">#59BB03</color>
-    <color name="high_priority">#FC1006</color>
+    <color name="high_priority">#ef5350</color>
+    <color name="low_priority">#39B54B</color>
+    <color name="gunsmoke">#808286</color>
 </resources>

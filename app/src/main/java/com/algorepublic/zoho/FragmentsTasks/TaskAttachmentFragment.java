@@ -1,33 +1,17 @@
 package com.algorepublic.zoho.FragmentsTasks;
 
 import android.app.Activity;
-import android.content.ContentResolver;
-import android.content.ContentUris;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.Cursor;
-import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
-import android.os.Message;
-import android.os.SystemClock;
-import android.provider.ContactsContract;
-import android.provider.DocumentsContract;
-import android.provider.MediaStore;
-import android.support.v4.app.Fragment;
-import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.MimeTypeMap;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -35,31 +19,20 @@ import android.widget.Toast;
 import com.algorepublic.zoho.ActivityTask;
 import com.algorepublic.zoho.Models.TaskAttachmentsModel;
 import com.algorepublic.zoho.R;
-import com.algorepublic.zoho.adapters.TasksList;
 import com.algorepublic.zoho.fragments.BaseFragment;
-import com.algorepublic.zoho.utils.BaseClass;
 import com.algorepublic.zoho.utils.Constants;
 import com.androidquery.AQuery;
 import com.bumptech.glide.Glide;
 import com.flyco.animation.SlideEnter.SlideLeftEnter;
 import com.flyco.animation.SlideExit.SlideRightExit;
-import com.flyco.dialog.entity.DialogMenuItem;
 import com.flyco.dialog.listener.OnBtnClickL;
 import com.flyco.dialog.listener.OnOperItemClickL;
 import com.flyco.dialog.widget.ActionSheetDialog;
 import com.flyco.dialog.widget.MaterialDialog;
-import com.flyco.dialog.widget.internal.BaseAlertDialog;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.net.URL;
-import java.net.URLEncoder;
-import java.util.ArrayList;
 
 public class TaskAttachmentFragment extends BaseFragment {
 
@@ -230,11 +203,11 @@ public class TaskAttachmentFragment extends BaseFragment {
         dialog//
                 .btnNum(1)
                 .title("File size alert!")
-                .titleTextColor(getResources().getColor(R.color.colorPrimaryDark))
+                .titleTextColor(getResources().getColor(R.color.colorBaseHeader))
                 .content("File size should be less than (5) five MB")//
-                .contentTextColor(getResources().getColor(R.color.colorPrimary))
+                .contentTextColor(getResources().getColor(R.color.colorContentWrapper))
                 .btnText("OK")//
-                .btnTextColor(getResources().getColor(R.color.colorPrimary))
+                .btnTextColor(getResources().getColor(R.color.colorContentWrapper))
                 .showAnim(new SlideLeftEnter())//
                 .dismissAnim(new SlideRightExit())//
                 .show();

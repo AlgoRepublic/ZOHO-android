@@ -10,17 +10,11 @@
         android:orientation="horizontal">
 
         <include layout="@layout/view_day_cell" />
-
         <include layout="@layout/view_day_cell" />
-
         <include layout="@layout/view_day_cell" />
-
         <include layout="@layout/view_day_cell" />
-
         <include layout="@layout/view_day_cell" />
-
         <include layout="@layout/view_day_cell" />
-
         <include layout="@layout/view_day_cell" />
 
     </LinearLayout>

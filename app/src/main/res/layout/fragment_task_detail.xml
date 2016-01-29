@@ -5,12 +5,59 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     tools:context=".fragments.TaskDetailFragment"
-    android:background="@color/colorLightgray">
+    android:background="@color/colorBaseWrapper">
     <include android:id="@+id/include"
         layout="@layout/toolbar_taskdetail"/>
+    <RelativeLayout
+        android:layout_below="@+id/include"
+        android:layout_width="match_parent"
+        android:layout_height="33dp"
+        android:layout_marginTop="20dp"
+        android:background="@android:drawable/dialog_holo_light_frame"
+        />
+    <RelativeLayout
+        android:id="@+id/layout_tasktitle"
+        android:layout_below="@+id/include"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginTop="20dp"
+        android:background="@color/colorContentWrapper">
+        <View
+            android:id="@+id/priority_bar"
+            android:layout_width="4dp"
+            android:layout_marginRight="3dp"
+            android:layout_alignBottom="@+id/layout1"
+            android:layout_alignTop="@+id/layout1"
+            android:background="@drawable/roundable_prioritybar"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true">
+        </View>
+        <ImageView
+            android:id="@+id/icon"
+            android:layout_width="15dp"
+            android:layout_marginLeft="7dp"
+            android:layout_toRightOf="@+id/priority_bar"
+            android:src="@mipmap/taskdetail_icon"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:layout_height="20dp" />
+        <TextView
+            android:id="@+id/task_name"
+            android:layout_width="fill_parent"
+            android:text="@string/task_name"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:gravity="left"
+            android:layout_marginLeft="7dp"
+            android:layout_toRightOf="@+id/icon"
+            android:layout_centerVertical="true"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            />
+    </RelativeLayout>
     <ScrollView
         android:id="@+id/scrollView"
-        android:layout_below="@+id/include"
+        android:layout_below="@+id/layout_tasktitle"
         android:layout_above="@+id/parent2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -20,45 +67,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="5dp">
-        <RelativeLayout
-            android:id="@+id/layout_tasktitle"
-            android:layout_width="fill_parent"
-            android:layout_height="30dp"
-            android:layout_marginTop="20dp"
-            android:background="@color/colorPrimary"
-            android:layout_alignParentTop="true">
-            <View
-                android:id="@+id/priority_bar"
-                android:layout_width="4dp"
-                android:layout_marginRight="3dp"
-                android:layout_alignBottom="@+id/layout1"
-                android:layout_alignTop="@+id/layout1"
-                android:background="@drawable/roundable_prioritybar"
-                android:layout_height="match_parent"
-                android:layout_alignParentLeft="true">
-            </View>
 
-            <TextView
-                android:id="@+id/task_name"
-                android:layout_width="fill_parent"
-                android:text="@string/task_name"
-                android:layout_height="wrap_content"
-                android:textSize="14sp"
-                android:gravity="left"
-                android:layout_toRightOf="@+id/priority_bar"
-                android:layout_centerVertical="true"
-                android:textStyle="bold"
-                android:textColor="@color/white"
-                />
-            </RelativeLayout>
     <RelativeLayout
         android:id="@+id/layout_parent"
-        android:layout_below="@+id/layout_tasktitle"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <RelativeLayout
             android:id="@+id/layout3"
-            android:padding="10dp"
+            android:padding="15dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <RelativeLayout
@@ -74,7 +90,7 @@
                     android:textSize="12sp"
                     android:textStyle="bold"
                     android:layout_alignParentLeft="true"
-                    android:textColor="@color/colorPrimaryDark"
+                    android:textColor="@color/colorBaseHeader"
                     />
                 <TextView
                     android:id="@+id/start_date"
@@ -83,7 +99,7 @@
                     android:layout_height="wrap_content"
                     android:textSize="12sp"
                     android:layout_toRightOf="@+id/text2"
-                    android:textColor="@color/colorPrimaryDark"
+                    android:textColor="@color/colorBaseHeader"
                     />
 
                 <TextView
@@ -93,7 +109,7 @@
                     android:textSize="12sp"
                     android:textStyle="bold"
                     android:layout_toLeftOf="@+id/end_date"
-                    android:textColor="@color/colorPrimaryDark"
+                    android:textColor="@color/colorBaseHeader"
                     />
                 <TextView
                     android:id="@+id/end_date"
@@ -103,7 +119,7 @@
                     android:textSize="13sp"
                     android:layout_alignParentRight="true"
                     android:layout_toLeftOf="@+id/textView"
-                    android:textColor="@color/colorPrimaryDark"
+                    android:textColor="@color/colorBaseHeader"
                     />
 
             </RelativeLayout>
@@ -120,7 +136,7 @@
                     android:textSize="12sp"
                     android:textStyle="bold"
                     android:layout_toLeftOf="@+id/textView"
-                    android:textColor="@color/colorPrimaryDark"
+                    android:textColor="@color/colorBaseHeader"
                     />
                 <TextView
                     android:id="@+id/category"
@@ -129,7 +145,7 @@
                     android:layout_height="wrap_content"
                     android:textSize="12sp"
                     android:layout_toLeftOf="@+id/textView"
-                    android:textColor="@color/colorPrimaryDark"
+                    android:textColor="@color/colorBaseHeader"
                     />
             </LinearLayout>
             <LinearLayout
@@ -147,7 +163,7 @@
                     android:textSize="12sp"
                     android:textStyle="bold"
                     android:layout_toLeftOf="@+id/textView"
-                    android:textColor="@color/colorPrimaryDark"
+                    android:textColor="@color/colorBaseHeader"
                     />
             <TextView
                 android:id="@+id/task_desc"
@@ -157,7 +173,7 @@
                 android:textSize="12sp"
                 android:lines="4"
                 android:ellipsize="end"
-                android:textColor="@color/colorPrimaryDark"
+                android:textColor="@color/colorBaseHeader"
                 />
         </LinearLayout>
             <LinearLayout
@@ -176,7 +192,7 @@
                     android:textSize="12sp"
                     android:textStyle="bold"
                     android:layout_toLeftOf="@+id/textView"
-                    android:textColor="@color/colorPrimaryDark"
+                    android:textColor="@color/colorBaseHeader"
                     />
 
             </LinearLayout>
@@ -203,7 +219,7 @@
                 android:textSize="12sp"
                 android:textStyle="bold"
                 android:layout_toLeftOf="@+id/textView"
-                android:textColor="@color/colorPrimaryDark"
+                android:textColor="@color/colorBaseHeader"
                 />
 
             <RelativeLayout
@@ -219,9 +235,9 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:thumb="@drawable/thumb_image"
-                    android:thumbTint="@color/colorPrimary"
-                    android:progressTint="@color/colorPrimary"
-                    android:foreground="@color/colorPrimary"
+                    android:thumbTint="@color/colorBaseHeader"
+                    android:progressTint="@color/colorBaseHeader"
+                    android:foreground="@color/colorBaseHeader"
                     android:max="100" >
                 </SeekBar>
             </RelativeLayout>
@@ -235,13 +251,14 @@
                 android:layout_centerHorizontal="true"
                 android:layout_margin="5dp"
                 app:wheel_size="8"
+                app:donut_text_size="20dp"
                 android:layout_below="@+id/layout4"
                 android:layout_marginTop="10dp"
                 android:layout_centerInParent="true"
-                app:donut_text_color="@color/colorPrimary"
+                app:donut_text_color="@color/colorBaseHeader"
                 app:donut_finished_stroke_width="5dp"
                 app:donut_unfinished_stroke_width="5dp"
-                app:donut_finished_color="@color/colorPrimary"/>
+                app:donut_finished_color="@color/colorBaseHeader"/>
 
         </RelativeLayout>
 
@@ -265,7 +282,7 @@
     android:layout_height="match_parent">
     <RelativeLayout
         android:layout_width="60dp"
-        android:layout_gravity="center"
+        android:layout_centerHorizontal="true"
         android:layout_height="match_parent">
         <TextView
             android:id="@+id/notify_alert1"
@@ -278,17 +295,28 @@
             android:layout_alignParentRight="true"
             android:background="@mipmap/bubble_alert"
             android:layout_alignParentTop="true"
-            android:textColor="@color/colorPrimaryGray" />
+            android:textColor="@color/colorBaseWrapper" />
 
         <ImageView
             android:id="@+id/delete1"
             android:layout_width="25dp"
-            android:src="@drawable/ic_comment"
-            android:layout_marginBottom="14dp"
+            android:src="@mipmap/task_comment"
             android:layout_centerHorizontal="true"
-            android:layout_alignParentBottom="true"
+            android:layout_above="@+id/text1"
             android:layout_height="25dp" />
+
+        <TextView
+            android:id="@+id/text1"
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:text="Comments"
+            android:gravity="center"
+            android:layout_alignParentBottom="true"
+            android:textColor="@color/white"
+            android:textSize="10sp"
+            android:layout_marginBottom="5dp"/>
         </RelativeLayout>
+
         </RelativeLayout>
         <View android:layout_height="fill_parent"
             android:layout_width="0dp"
@@ -302,8 +330,8 @@
             android:layout_marginRight="2dp"
             android:layout_height="match_parent">
             <RelativeLayout
-                android:layout_width="60dp"
-                android:layout_gravity="center"
+                android:layout_width="53dp"
+                android:layout_centerHorizontal="true"
                 android:layout_height="match_parent">
                 <TextView
                     android:id="@+id/notify_alert2"
@@ -316,17 +344,28 @@
                     android:layout_alignParentRight="true"
                     android:background="@mipmap/bubble_alert"
                     android:layout_alignParentTop="true"
-                    android:textColor="@color/colorPrimaryGray" />
+                    android:textColor="@color/colorBaseWrapper" />
 
                 <ImageView
-                    android:id="@+id/comment"
+                    android:id="@+id/delete2"
                     android:layout_width="25dp"
-                    android:src="@drawable/ic_comment"
-                    android:layout_marginBottom="14dp"
-                    android:layout_alignParentBottom="true"
+                    android:src="@mipmap/task_undone"
                     android:layout_centerHorizontal="true"
+                    android:layout_above="@+id/text3"
                     android:layout_height="25dp" />
+
+                <TextView
+                    android:id="@+id/text3"
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp"
+                    android:text="Documents"
+                    android:gravity="center"
+                    android:layout_alignParentBottom="true"
+                    android:textColor="@color/white"
+                    android:textSize="10sp"
+                    android:layout_marginBottom="5dp"/>
             </RelativeLayout>
+
         </RelativeLayout>
         <View android:layout_height="fill_parent"
             android:layout_width="0dp"
@@ -340,11 +379,11 @@
             android:layout_marginRight="2dp"
             android:layout_height="match_parent">
             <RelativeLayout
-                android:layout_width="60dp"
-                android:layout_gravity="center"
+                android:layout_width="53dp"
+                android:layout_centerHorizontal="true"
                 android:layout_height="match_parent">
                 <TextView
-                    android:id="@+id/notify_alert"
+                    android:id="@+id/notify_alert3"
                     android:layout_width="25dp"
                     android:layout_height="25dp"
                     android:text="112"
@@ -354,30 +393,59 @@
                     android:layout_alignParentRight="true"
                     android:background="@mipmap/bubble_alert"
                     android:layout_alignParentTop="true"
-                    android:textColor="@color/colorPrimaryGray" />
+                    android:textColor="@color/colorBaseWrapper" />
 
                 <ImageView
-                    android:id="@+id/alarm"
+                    android:id="@+id/delete3"
                     android:layout_width="25dp"
-                    android:src="@drawable/ic_comment"
-                    android:layout_marginBottom="14dp"
-                    android:layout_alignParentBottom="true"
+                    android:src="@mipmap/sub_tasks"
                     android:layout_centerHorizontal="true"
+                    android:layout_above="@+id/text6"
                     android:layout_height="25dp" />
+
+                <TextView
+                    android:id="@+id/text6"
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp"
+                    android:text="Sub tasks"
+                    android:gravity="center"
+                    android:layout_alignParentBottom="true"
+                    android:textColor="@color/white"
+                    android:textSize="10sp"
+                    android:layout_marginBottom="5dp"/>
             </RelativeLayout>
+
         </RelativeLayout>
         <View android:layout_height="fill_parent"
             android:layout_width="0dp"
             android:layout_weight=".03"
             android:background="@color/white"/>
-        <ImageView
-            android:id="@+id/delete"
+        <RelativeLayout
             android:layout_width="0dp"
             android:layout_weight=".7"
-            android:padding="5dp"
-            android:src="@drawable/ic_delete"
             android:layout_gravity="center"
-            android:layout_height="match_parent" />
+            android:layout_marginLeft="2dp"
+            android:layout_marginRight="2dp"
+            android:layout_height="match_parent">
+        <ImageView
+            android:id="@+id/delete"
+            android:layout_width="25dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/trash"
+            android:layout_gravity="center"
+            android:layout_height="25dp" />
+            <TextView
+                android:id="@+id/text8"
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:text="Delete"
+                android:gravity="center"
+                android:layout_alignParentBottom="true"
+                android:textColor="@color/white"
+                android:textSize="10sp"
+                android:layout_marginBottom="5dp"/>
+        </RelativeLayout>
         <View android:layout_height="fill_parent"
             android:layout_width="0dp"
             android:layout_weight=".03"

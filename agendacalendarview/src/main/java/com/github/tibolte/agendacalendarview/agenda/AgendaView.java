@@ -20,7 +20,7 @@ import android.widget.FrameLayout;
 public class AgendaView extends FrameLayout {
 
     private AgendaListView mAgendaListView;
-    private View mShadowView;
+//    private View mShadowView;
 
     // region Constructors
 
@@ -45,7 +45,7 @@ public class AgendaView extends FrameLayout {
         super.onFinishInflate();
 
         mAgendaListView = (AgendaListView) findViewById(R.id.agenda_listview);
-        mShadowView = findViewById(R.id.view_shadow);
+//        mShadowView = findViewById(R.id.view_shadow);
 
         BusProvider.getInstance().toObserverable()
                 .subscribe(event -> {
@@ -115,7 +115,7 @@ public class AgendaView extends FrameLayout {
             mover.addListener(new Animator.AnimatorListener() {
                 @Override
                 public void onAnimationStart(Animator animation) {
-                    mShadowView.setVisibility(GONE);
+//                    mShadowView.setVisibility(GONE);
                 }
 
                 @Override
@@ -123,7 +123,7 @@ public class AgendaView extends FrameLayout {
                     if (targetY == 0) {
                         BusProvider.getInstance().send(new Events.AgendaListViewTouchedEvent());
                     }
-                    mShadowView.setVisibility(VISIBLE);
+//                    mShadowView.setVisibility(VISIBLE);
                 }
 
                 @Override

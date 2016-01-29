@@ -3,11 +3,13 @@ package com.algorepublic.zoho.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.algorepublic.zoho.MainActivity;
 import com.algorepublic.zoho.Models.TasksListModel;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.services.CallBack;
@@ -65,6 +67,8 @@ public class CalendarFragment extends BaseFragment implements CalendarPickerCont
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view  = inflater.inflate(R.layout.fragment_calendar, container, false);
+        MainActivity.toolbar = (Toolbar) view.findViewById(R.id.toolbar);
+        setToolbar();
         aq = new AQuery(getActivity(), view);
         return view;
     }

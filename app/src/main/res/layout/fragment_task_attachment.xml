@@ -16,7 +16,7 @@
         android:padding="10dp"
         android:text="Attachments"
         android:gravity="center_horizontal"
-        android:textColor="@color/colorPrimary"
+        android:textColor="@color/colorContentWrapper"
         android:textSize="14sp"
         android:typeface="monospace" />
     <Button
@@ -28,7 +28,7 @@
         android:textAllCaps="false"
         android:textSize="12sp"
         android:background="@drawable/roundable_gray"
-        android:textColor="@color/colorPrimaryGray"
+        android:textColor="@color/colorBaseWrapper"
         android:text="Add"/>
     <LinearLayout
         android:id="@+id/images_layout"

@@ -15,8 +15,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="fitXY"
-            android:adjustViewBounds="true"
-            android:src="@drawable/main_bg" />
+            android:adjustViewBounds="true" />
         <RelativeLayout
             android:id="@+id/language_selector"
             android:layout_width="match_parent"
@@ -170,7 +169,6 @@
                 android:layout_toLeftOf="@+id/lang_text"
                 android:layout_height="50dp"
                 android:visibility="gone"
-                android:src="@drawable/loader"
                 android:layout_gravity="center_horizontal"
                 android:scaleType="fitXY" />
             <LinearLayout
