@@ -8,11 +8,7 @@
         android:color="@color/colorContentWrapper" >
     </solid>
 
-    <!-- view border color and width -->
-    <!--<stroke
-        android:width="2dp"
-        android:color="@color/white" >
-    </stroke>-->
+
 
     <!-- If you want to add some padding -->
     <padding
@@ -24,7 +20,7 @@
 
     <!-- Here is the corner radius -->
     <corners
-        android:radius="5dp"   >
+        android:radius="0dp"   >
     </corners>
 
 </shape>

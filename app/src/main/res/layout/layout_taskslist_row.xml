@@ -2,7 +2,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:descendantFocusability="blocksDescendants"
-    android:layout_margin="5dp"
+    android:layout_margin="15dp"
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
@@ -10,7 +10,7 @@
         android:id="@+id/priority_bar"
         android:layout_width="8dp"
         android:layout_marginTop="4dp"
-        android:layout_marginBottom="6dp"
+        android:layout_marginBottom="8dp"
         android:background="@drawable/roundable_prioritybar"
         android:layout_height="match_parent">
     </View>
@@ -73,7 +73,7 @@
                         android:gravity="right|end"
                         android:layout_height="wrap_content"
                         android:textSize="12sp"
-                        android:textColor="@color/colorBaseWrapper"
+                        android:textColor="@color/colorBaseHeader"
                         />
                 </LinearLayout>
                 <LinearLayout
@@ -107,7 +107,7 @@
                             android:text="10 Comments"
                             android:layout_toLeftOf="@+id/bar"
                             android:layout_centerVertical="true"
-                            android:textColor="@android:color/holo_blue_dark"
+                            android:textColor="@color/colorBaseHeader"
                             />
                         <View
                             android:id="@+id/bar"
@@ -126,7 +126,7 @@
                             android:text="10 Users"
                             android:layout_alignParentRight="true"
                             android:layout_centerVertical="true"
-                            android:textColor="@android:color/holo_blue_dark"
+                            android:textColor="@color/colorBaseHeader"
                             />
                     </RelativeLayout>
                 </LinearLayout>

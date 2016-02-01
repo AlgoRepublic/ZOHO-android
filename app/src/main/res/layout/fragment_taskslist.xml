@@ -30,6 +30,7 @@
         android:layout_height="54dp"
         android:layout_alignParentBottom="true"
         android:weightSum="4"
+        android:background="@color/colorContentWrapper"
         android:orientation="horizontal">
         <RadioGroup
             android:layout_width="0dp"
@@ -98,14 +99,14 @@
             android:background="@color/white"/>
         <RelativeLayout
             android:layout_width="0dp"
-            android:layout_weight=".6"
+            android:layout_weight=".5"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="40dp"
             android:layout_gravity="center"
             android:layout_height="match_parent">
         <Button
             android:id="@+id/sort"
-            android:layout_width="40dp"
+            android:layout_width="45dp"
             android:layout_marginTop="12dp"
             android:layout_marginBottom="12dp"
             android:background="@mipmap/task_image"
