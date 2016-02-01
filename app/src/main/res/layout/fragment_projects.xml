@@ -5,8 +5,37 @@
     tools:context="com.algorepublic.zoho.fragments.ProjectsFragment">
     <include android:id="@+id/include"
         layout="@layout/toolbar_addproject"/>
-    <ListView
+    <RelativeLayout
+        android:id="@+id/layout_spinner"
         android:layout_below="@+id/include"
+        android:layout_width="match_parent"
+        android:layout_margin="10dp"
+        android:layout_height="30dp">
+        <Spinner
+            android:id="@+id/spinner_sort"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:textColor="@android:color/white"
+            android:layout_centerVertical="true"
+            android:background="@color/colorBaseHeader"
+            android:layout_toLeftOf="@+id/dropdown"
+            android:textStyle="bold"
+            android:imeOptions="actionNext"
+            android:gravity="left"
+            android:layout_gravity="left" />
+        <ImageView
+            android:id="@+id/dropdown"
+            android:layout_width="25dp"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:scaleType="fitXY"
+            android:background="@android:drawable/btn_dropdown"
+            android:adjustViewBounds="true"
+            android:layout_alignTop="@+id/title_name" />
+    </RelativeLayout>
+    <ListView
+        android:layout_below="@+id/layout_spinner"
         android:id="@+id/projects_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

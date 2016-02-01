@@ -50,7 +50,8 @@ public class BaseClass extends Application {
     private String UserLocation = "UserLocation";
     private String UserAboutMe = "UserAboutMe";
     private String UserImageUrl = "UserImageUrl";
-    private String SortType = "SortType";
+    private String TaskSortType = "TaskSortType";
+    private String DocsSortType = "DocsSortType";
 
 
     public static TinyDB db;
@@ -96,12 +97,20 @@ public class BaseClass extends Application {
         return appSharedPrefs.getString(UserLanguage, "en");
     }
 
-    public void setSortType(String sortType) {
-        prefsEditor.putString(SortType, sortType).commit();
+    public void setTaskSortType(String taskSortType) {
+        prefsEditor.putString(TaskSortType, taskSortType).commit();
     }
 
-    public String getSortType() {
-        return appSharedPrefs.getString(SortType, "DueDate");
+    public String getTaskSortType() {
+        return appSharedPrefs.getString(TaskSortType, "DueDate");
+    }
+
+    public void setDocsSortType(String docsSortType) {
+        prefsEditor.putString(DocsSortType, docsSortType).commit();
+    }
+
+    public String getDocsSortType() {
+        return appSharedPrefs.getString(DocsSortType, "AllFiles");
     }
 
 

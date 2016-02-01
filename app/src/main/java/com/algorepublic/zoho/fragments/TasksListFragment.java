@@ -162,32 +162,32 @@ public class TasksListFragment extends BaseFragment {
                 dialog.dismiss();
                 if (isLoaded())
                     if (position == 0) {
-                        baseClass.setSortType("DueDate");
+                        baseClass.setTaskSortType("DueDate");
                     }
                 if (position == 1) {
-                    baseClass.setSortType("Priority");
+                    baseClass.setTaskSortType("Priority");
                 }
                 if (position == 2) {
-                    baseClass.setSortType("Alphabetically");
+                    baseClass.setTaskSortType("Alphabetically");
                 }
                 if (position == 3) {
-                    baseClass.setSortType("TaskList");
+                    baseClass.setTaskSortType("TaskList");
                 }
                 SortList();
             }
         });
     }
     public void SortList(){
-        if(baseClass.getSortType().equalsIgnoreCase("DueDate")){
+        if(baseClass.getTaskSortType().equalsIgnoreCase("DueDate")){
             Collections.sort(generalList, Date);
         }
-        if(baseClass.getSortType().equalsIgnoreCase("Priority")){
+        if(baseClass.getTaskSortType().equalsIgnoreCase("Priority")){
             Collections.sort(generalList, byPriority);
         }
-        if(baseClass.getSortType().equalsIgnoreCase("Alphabetically")){
+        if(baseClass.getTaskSortType().equalsIgnoreCase("Alphabetically")){
             Collections.sort(generalList);
         }
-        if(baseClass.getSortType().equalsIgnoreCase("TaskList")){
+        if(baseClass.getTaskSortType().equalsIgnoreCase("TaskList")){
             Collections.sort(generalList, byTaskList);
         }
         SetAdapterList();

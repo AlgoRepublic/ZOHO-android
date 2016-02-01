@@ -3,25 +3,38 @@
     android:descendantFocusability="blocksDescendants"
     android:orientation="horizontal"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="5dp"
-    android:background="@drawable/list_background">
+    android:layout_height="wrap_content"
+    android:padding="5dp">
     <ImageView
         android:id="@+id/file_image"
         android:layout_width="45dp"
         android:scaleType="fitXY"
         android:adjustViewBounds="true"
-        android:layout_height="match_parent"
+        android:layout_height="50dp"
+        android:background="@mipmap/ic_listview_word"
         android:layout_margin="10dp" >
     </ImageView>
     <RelativeLayout
+        android:id="@+id/layout_2"
+        android:layout_toRightOf="@+id/file_image"
+        android:layout_alignParentTop="true"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent" >
+        <CheckBox
+            android:id="@+id/doc_checkbox"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:scaleType="fitXY"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            />
+        </RelativeLayout>
+    <RelativeLayout
         android:id="@+id/layout_tasktitle"
-        android:layout_toLeftOf="@+id/owner_image"
-        android:layout_alignTop="@+id/file_image"
-        android:layout_alignBottom="@+id/file_image"
-        android:layout_height="match_parent"
+        android:layout_below="@+id/layout_2"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
         android:layout_width="match_parent"
-        android:background="@color/colorBaseHeader"
         android:layout_toRightOf="@+id/file_image" >
         <TextView
             android:id="@+id/file_name"
@@ -29,8 +42,8 @@
             android:layout_height="wrap_content"
             android:textSize="14sp"
             android:text="File"
+            android:singleLine="true"
             android:layout_marginTop="3dp"
-            android:lines="2"
             android:ellipsize="end"
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
@@ -38,8 +51,8 @@
             />
     <RelativeLayout
         android:id="@+id/layout2"
-        android:layout_marginBottom="3dp"
-        android:layout_alignParentBottom="true"
+        android:layout_marginTop="3dp"
+        android:layout_below="@+id/file_name"
         android:layout_height="wrap_content"
         android:layout_width="match_parent" >
         <TextView
@@ -68,15 +81,5 @@
             android:textColor="@android:color/black"/>
         </RelativeLayout>
     </RelativeLayout>
-    <ImageView
-        android:id="@+id/owner_image"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_margin="3dp"
-        android:scaleType="fitXY"
-        android:background="@drawable/nav_user"
-        android:layout_centerVertical="true"
-        android:layout_alignParentRight="true"
-        android:textColor="@android:color/black"
-        />
+
 </RelativeLayout>
