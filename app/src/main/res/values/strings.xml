@@ -12,6 +12,7 @@
     <string name="enter_password">Please enter password</string>
     <string name="error_invalid_email">Invalid email</string>
     <string name="text_or">Sign In using</string>
+    <string name="developed_by">Developed By:</string>
     <string name="selected_language">العربية</string>
     <string name="invalid_credential">Invalid User Credential!</string>
     <string name="error_login_response">Please check your internet or server not responding</string>
@@ -56,6 +57,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="calendar">Calendar</string>
     <string name="add_task">Add Task</string>
+    <string name="edit">Edit</string>
     <string name="all">All</string>
     <string name="upcoming">Upcoming</string>
     <string name="overdue">Overdue</string>
