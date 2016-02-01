@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     tools:context="com.algorepublic.zoho.FragmentsTasks.TaskAssignFragment">
 
-    <!-- TODO: Update blank fragment layout -->
+    <!-- TODO: Update blank fragment_forums layout -->
     <include android:id="@+id/include"
         layout="@layout/toolbar_tasklist"/>
     <se.emilsjolander.stickylistheaders.StickyListHeadersListView

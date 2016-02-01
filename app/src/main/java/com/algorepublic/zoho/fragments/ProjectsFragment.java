@@ -25,7 +25,7 @@ import com.androidquery.AQuery;
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link ProjectsFragment#newInstance} factory method to
- * create an instance of this fragment.
+ * create an instance of this fragment_forums.
  */
 public class ProjectsFragment extends BaseFragment implements AdapterView.OnItemClickListener{
 
@@ -38,8 +38,8 @@ public class ProjectsFragment extends BaseFragment implements AdapterView.OnItem
 
     /**
      * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     * @return A new instance of fragment ProjectsFragment.
+     * this fragment_forums using the provided parameters.
+     * @return A new instance of fragment_forums ProjectsFragment.
      */
     public static ProjectsFragment newInstance() {
         ProjectsFragment fragment = new ProjectsFragment();
@@ -51,7 +51,7 @@ public class ProjectsFragment extends BaseFragment implements AdapterView.OnItem
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+        // Inflate the layout for this fragment_forums
         View view  = inflater.inflate(R.layout.fragment_projects, container, false);
         aq = new AQuery(getActivity(), view);
         MainActivity.toolbar = (Toolbar) view.findViewById(R.id.toolbar);
@@ -63,11 +63,11 @@ public class ProjectsFragment extends BaseFragment implements AdapterView.OnItem
      * Called immediately after {@link #onCreateView(LayoutInflater, ViewGroup, Bundle)}
      * has returned, but before any saved state has been restored in to the view.
      * This gives subclasses a chance to initialize themselves once
-     * they know their view hierarchy has been completely created.  The fragment's
+     * they know their view hierarchy has been completely created.  The fragment_forums's
      * view hierarchy is not however attached to its parent at this point.
      *
      * @param view               The View returned by {@link #onCreateView(LayoutInflater, ViewGroup, Bundle)}.
-     * @param savedInstanceState If non-null, this fragment is being re-constructed
+     * @param savedInstanceState If non-null, this fragment_forums is being re-constructed
      */
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {

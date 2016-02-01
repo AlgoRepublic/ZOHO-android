@@ -36,7 +36,7 @@ import org.lucasr.twowayview.widget.TwoWayView;
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link TaskDetailFragment#newInstance} factory method to
- * create an instance of this fragment.
+ * create an instance of this fragment_forums.
  */
 public class TaskDetailFragment extends BaseFragment {
 
@@ -71,7 +71,7 @@ public class TaskDetailFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+        // Inflate the layout for this fragment_forums
         final View view =  inflater.inflate(R.layout.fragment_task_detail, container, false);
         setHasOptionsMenu(true);
         seekBarCompat = (DonutProgress) view.findViewById(R.id.circularprogressBar);
