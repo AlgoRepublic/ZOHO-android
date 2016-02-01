@@ -50,7 +50,7 @@ public class AdapterProjectsList extends BaseAdapter{
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        convertView = l_Inflater.inflate(R.layout.layout_project_row, null);
+        convertView = l_Inflater.inflate(R.layout.layout_projectlist_row, null);
         aq = new AQuery(convertView);
         aq.id(R.id.project_title).text(getItem(position).name);
         aq.id(R.id.project_id).text(getItem(position).projectID);
@@ -61,10 +61,10 @@ public class AdapterProjectsList extends BaseAdapter{
         if(baseClass.getSelectedProject().equals(getItem(position).projectID))
             selectedIndex = position;
 
-        if(selectedIndex == position)
-            aq.id(R.id.selected_check).getCheckBox().setChecked(true);
-        else
-            aq.id(R.id.selected_check).getCheckBox().setChecked(false);
+//        if(selectedIndex == position)
+//            aq.id(R.id.selected_check).getCheckBox().setChecked(true);
+//        else
+//            aq.id(R.id.selected_check).getCheckBox().setChecked(false);
 
         Animation animation = AnimationUtils.loadAnimation(ctx, (position > lastPosition) ? R.anim.up_from_bottom : R.anim.down_from_top);
         convertView.startAnimation(animation);

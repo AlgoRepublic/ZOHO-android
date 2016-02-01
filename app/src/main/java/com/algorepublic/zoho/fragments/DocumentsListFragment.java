@@ -4,9 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -22,6 +19,8 @@ import com.algorepublic.zoho.services.CallBack;
 import com.algorepublic.zoho.services.DocumentsService;
 import com.algorepublic.zoho.utils.BaseClass;
 import com.androidquery.AQuery;
+import com.flyco.dialog.listener.OnOperItemClickL;
+import com.flyco.dialog.widget.ActionSheetDialog;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -70,6 +69,12 @@ public class DocumentsListFragment extends BaseFragment {
         MainActivity.toolbar = (Toolbar) view.findViewById(R.id.toolbar);
         setToolbar();
         aq = new AQuery(view);
+        aq.id(R.id.sort).clicked(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                callForDocsSorting();
+            }
+        });
         aq.id(R.id.upload_files).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -79,7 +84,7 @@ public class DocumentsListFragment extends BaseFragment {
         baseClass = ((BaseClass) getActivity().getApplicationContext());
         setHasOptionsMenu(true);
         service = new DocumentsService(getActivity());
-        service.getDocuments(4, true, new CallBack(DocumentsListFragment.this, "DocumentsList"));
+        service.getDocuments(1, true, new CallBack(DocumentsListFragment.this, "DocumentsList"));
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -88,7 +93,31 @@ public class DocumentsListFragment extends BaseFragment {
         });
         return view;
     }
-
+    public void callForDocsSorting(){
+        String[] menuItems = {"All Files","Pictures","Videos","Favorites"};
+        final ActionSheetDialog dialog = new ActionSheetDialog(getActivity(),menuItems, getView());
+        dialog.isTitleShow(false).show();
+        dialog.setOnOperItemClickL(new OnOperItemClickL() {
+            @Override
+            public void onOperItemClick(AdapterView<?> parent, View view, int position, long id) {
+                dialog.dismiss();
+              //  if (isLoaded())
+                    if (position == 0) {
+                        baseClass.setDocsSortType("AllFiles");
+                    }
+                if (position == 1) {
+                    baseClass.setDocsSortType("Pictures");
+                }
+                if (position == 2) {
+                    baseClass.setDocsSortType("Videos");
+                }
+                if (position == 3) {
+                    baseClass.setDocsSortType("Favorites");
+                }
+                //SortList();
+            }
+        });
+    }
     public void DocumentsList(Object caller, Object model) {
         DocumentsListModel.getInstance().setList((DocumentsListModel) model);
         if (DocumentsListModel.getInstance().responseCode == 100) {

@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -54,6 +55,12 @@ public class ProjectsFragment extends BaseFragment implements AdapterView.OnItem
         // Inflate the layout for this fragment_forums
         View view  = inflater.inflate(R.layout.fragment_projects, container, false);
         aq = new AQuery(getActivity(), view);
+        String [] types = {"All","By Client","By Department"};
+        aq.id(R.id.spinner_sort).getSpinner().setAdapter(new ArrayAdapter<String>(
+                getActivity(),
+                R.layout.layout_spinner,
+                types
+        ));
         MainActivity.toolbar = (Toolbar) view.findViewById(R.id.toolbar);
         setToolbar();
         return view;

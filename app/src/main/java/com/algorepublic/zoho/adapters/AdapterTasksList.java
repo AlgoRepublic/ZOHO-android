@@ -84,13 +84,13 @@ public class AdapterTasksList extends BaseAdapter implements StickyListHeadersAd
         convertView = l_Inflater.inflate(R.layout.layout_taskslist_header, parent , false);
         aq_header = new AQuery(convertView);
 
-        if(baseClass.getSortType().equalsIgnoreCase("DueDate")) {
+        if(baseClass.getTaskSortType().equalsIgnoreCase("DueDate")) {
             if (TasksListFragment.generalList.get(position).getHeader().equalsIgnoreCase("3/0/1"))
                 aq_header.id(R.id.header).text("No Due Date");
             else
                 aq_header.id(R.id.header).text(TasksListFragment.generalList.get(position).getHeader());
         }
-        if(baseClass.getSortType().equalsIgnoreCase("Priority"))
+        if(baseClass.getTaskSortType().equalsIgnoreCase("Priority"))
         {
             if(TasksListFragment.generalList.get(position).getPriority()==0)
             {
@@ -109,11 +109,11 @@ public class AdapterTasksList extends BaseAdapter implements StickyListHeadersAd
                 aq_header.id(R.id.header).text("High");
             }
         }
-        if(baseClass.getSortType().equalsIgnoreCase("Alphabetically"))
+        if(baseClass.getTaskSortType().equalsIgnoreCase("Alphabetically"))
         {
             aq_header.id(R.id.header).text(TasksListFragment.generalList.get(position).getTaskName().substring(0, 1));
         }
-        if(baseClass.getSortType().equalsIgnoreCase("TaskList"))
+        if(baseClass.getTaskSortType().equalsIgnoreCase("TaskList"))
         {
             if(TasksListFragment.generalList.get(position).getCharToAscii() == 0)
             aq_header.id(R.id.header).text("General");
@@ -127,13 +127,13 @@ public class AdapterTasksList extends BaseAdapter implements StickyListHeadersAd
     public long getHeaderId(int position) {
         long type = 0;
         //return the first character of the country as ID because this is what headers are based upon
-        if(baseClass.getSortType().equalsIgnoreCase("DueDate"))
+        if(baseClass.getTaskSortType().equalsIgnoreCase("DueDate"))
             type = Long.parseLong(TasksListFragment.generalList.get(position).getEndMilli());
-        if(baseClass.getSortType().equalsIgnoreCase("Priority"))
+        if(baseClass.getTaskSortType().equalsIgnoreCase("Priority"))
             type = TasksListFragment.generalList.get(position).getPriority();
-        if(baseClass.getSortType().equalsIgnoreCase("Alphabetically"))
+        if(baseClass.getTaskSortType().equalsIgnoreCase("Alphabetically"))
             type = TasksListFragment.generalList.get(position).getTaskName().charAt(0);
-        if(baseClass.getSortType().equalsIgnoreCase("TaskList"))
+        if(baseClass.getTaskSortType().equalsIgnoreCase("TaskList"))
             type = TasksListFragment.generalList.get(position).getCharToAscii();
 
         return type;
