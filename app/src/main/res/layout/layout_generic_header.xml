@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@color/white"
+    android:layout_width="match_parent"
+    android:layout_height="30dp">
+    <RelativeLayout
+        android:background="@color/white"
+        android:layout_width="300dp"
+        android:layout_height="30dp">
+    <RelativeLayout
+        android:background="@drawable/left_header"
+        android:layout_alignParentLeft="true"
+        android:layout_width="152dp"
+        android:layout_height="match_parent"/>
+        <View
+            android:background="@color/colorBaseHeader"
+            android:layout_width="match_parent"
+            android:layout_alignParentBottom="true"
+            android:layout_height="11dp">
+        </View>
+    <RelativeLayout
+        android:background="@drawable/right_header"
+        android:layout_alignParentRight="true"
+        android:layout_width="150dp"
+        android:layout_height="match_parent"/>
+
+    </RelativeLayout>
+</RelativeLayout>

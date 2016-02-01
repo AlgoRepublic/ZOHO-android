@@ -11,7 +11,9 @@
     android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-
+        <include android:layout_width="match_parent"
+            layout="@layout/layout_generic_header"
+            android:layout_height="wrap_content"/>
         <ImageView
             android:layout_width="130dp"
             android:layout_height="120dp"
