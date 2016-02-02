@@ -9,37 +9,42 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.BaseAdapter;
 
-import com.algorepublic.zoho.Models.ProjectsModel;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.utils.BaseClass;
 import com.androidquery.AQuery;
 
+import java.util.ArrayList;
+
+import se.emilsjolander.stickylistheaders.StickyListHeadersAdapter;
+
 /**
  * Created by android on 1/7/16.
  */
-public class AdapterProjectsList extends BaseAdapter{
+public class AdapterProjectsClientList extends BaseAdapter implements StickyListHeadersAdapter {
 
     private Context ctx;
     private BaseClass baseClass;
     private AQuery aq;
     private LayoutInflater l_Inflater;
-    private int selectedIndex = -1;
     private int lastPosition = -1;
 
-    public AdapterProjectsList(Context context) {
+    ArrayList<ProjectsList> arrayList= new ArrayList<>();
+
+    public AdapterProjectsClientList(Context context,ArrayList<ProjectsList> list) {
         l_Inflater = LayoutInflater.from(context);
         this.ctx = context;
+        arrayList.addAll(list);
         baseClass = ((BaseClass) ctx.getApplicationContext());
     }
 
     @Override
     public int getCount() {
-        return ProjectsModel.getInstance().responseData.size();
+        return arrayList.size();
     }
 
     @Override
-    public ProjectsModel.Response getItem(int pos) {
-        return ProjectsModel.getInstance().responseData.get(pos);
+    public Object getItem(int pos) {
+        return arrayList.get(pos);
     }
 
     @Override
@@ -50,21 +55,13 @@ public class AdapterProjectsList extends BaseAdapter{
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        convertView = l_Inflater.inflate(R.layout.layout_projectlist_row, null);
+        convertView = l_Inflater.inflate(R.layout.layout_projectclientlist_row, null);
         aq = new AQuery(convertView);
-        aq.id(R.id.project_title).text(getItem(position).name);
-        aq.id(R.id.project_id).text(getItem(position).projectID);
+        aq.id(R.id.project_title).text(arrayList.get(position).getProjectName());
+        //aq.id(R.id.project_id).text(arrayList.get(position).getProjectID());
 
-        if(getItem(position).desc != null)
-            aq.id(R.id.project_desc).text(Html.fromHtml(getItem(position).desc));
-
-        if(baseClass.getSelectedProject().equals(getItem(position).projectID))
-            selectedIndex = position;
-
-//        if(selectedIndex == position)
-//            aq.id(R.id.selected_check).getCheckBox().setChecked(true);
-//        else
-//            aq.id(R.id.selected_check).getCheckBox().setChecked(false);
+        if(arrayList.get(position).getProjectDesc() != null)
+            aq.id(R.id.project_desc).text(Html.fromHtml(arrayList.get(position).getProjectDesc()));
 
         Animation animation = AnimationUtils.loadAnimation(ctx, (position > lastPosition) ? R.anim.up_from_bottom : R.anim.down_from_top);
         convertView.startAnimation(animation);
@@ -72,14 +69,13 @@ public class AdapterProjectsList extends BaseAdapter{
         return convertView;
     }
 
-    public void setSelectedIndex(int index){
-        selectedIndex = index;
+    @Override
+    public View getHeaderView(int position, View convertView, ViewGroup parent) {
+        return null;
     }
 
     @Override
-    public void notifyDataSetChanged() {
-        super.notifyDataSetChanged();
-        lastPosition = -1;
+    public long getHeaderId(int position) {
+        return 0;
     }
-
 }

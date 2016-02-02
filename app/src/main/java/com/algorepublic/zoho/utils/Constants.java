@@ -14,7 +14,8 @@ public class Constants {
 	public static String UpdateTaskProgress_API = BASE_URL+ "/Task/UpdateProgress"; //taskID,progress
 	public static String TaskCompleted_API = BASE_URL+ "/Task/TaskCompleted"; //taskID,opt
 
-	public static String GetProjectsList_API = BASE_URL+ "/Project/GetList";
+	public static String GetProjectsByDepartment_API = BASE_URL+ "/Project/GetDepartmentProjects";
+	public static String GetProjectsByClient_API = BASE_URL+ "/Project/GetCompanyProjects";
 	public static String AddPeopleToTask_API = BASE_URL+ "/Task/AddPeopletoTask"; //PeopleInThisTask,projectID,taskID
 	public static String TaskAttachments_API = BASE_URL+ "/Task/AttachmentList"; //taskID
 	public static String GetForumsList_API = BASE_URL+ "/Forum/GetListByProjectID?";
