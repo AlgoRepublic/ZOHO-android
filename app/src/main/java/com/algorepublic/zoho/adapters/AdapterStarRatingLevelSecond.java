@@ -48,7 +48,6 @@ public class AdapterStarRatingLevelSecond extends BaseExpandableListAdapter {
         }
         TextView txtListChild = (TextView) convertView
                 .findViewById(R.id.lblListItem);
-        txtListChild.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 15);
         txtListChild.setText(childText);
         return convertView;
     }
@@ -89,7 +88,6 @@ public class AdapterStarRatingLevelSecond extends BaseExpandableListAdapter {
         TextView lblListHeader = (TextView) convertView
                 .findViewById(R.id.lblListHeader);
         lblListHeader.setText(headerTitle);
-        lblListHeader.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 18);
         return convertView;
     }
 
