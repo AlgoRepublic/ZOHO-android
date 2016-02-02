@@ -3,31 +3,62 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="New Text"
-        android:id="@+id/textView3"
+    <RelativeLayout
+        android:id="@+id/layout1"
         android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true" />
-
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:orientation="horizontal">
         <TextView
-        android:layout_width="wrap_content"
+            android:id="@+id/forum_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorBaseHeader"
+            android:textSize="14sp"
+            android:paddingLeft="5dp"
+            android:layout_toLeftOf="@+id/layout_comment"
+            android:layout_centerVertical="true"
+            android:text="@string/forums_title"
+            android:textStyle="bold" />
+
+        <RelativeLayout
+            android:id="@+id/layout_comment"
+            android:layout_width="35dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerHorizontal="true"
+            android:layout_height="35dp">
+            <TextView
+                android:id="@+id/notify_alert1"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:text="112"
+                android:gravity="center"
+                android:singleLine="true"
+                android:textSize="7dp"
+                android:layout_alignParentRight="true"
+                android:background="@mipmap/bubble_alert_black"
+                android:layout_alignParentTop="true"
+                android:textColor="@color/colorBaseHeader" />
+
+            <ImageView
+                android:id="@+id/delete1"
+                android:layout_width="20dp"
+                android:layout_alignParentBottom="true"
+                android:src="@mipmap/forums"
+                android:layout_height="20dp" />
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+    <TextView
+        android:id="@+id/forum_discription"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="New Text"
-        android:layout_marginTop="10dp"
-        android:id="@+id/textView4"
-        android:layout_below="@+id/textView3"
-       />
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/imageView6"
-        android:background="@mipmap/forums"
-        android:layout_below="@+id/textView3"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="45dp" />
-
-
+        android:textColor="@color/colorBaseMenu"
+        android:textSize="14sp"
+        android:layout_below="@+id/layout1"
+        android:paddingLeft="10dp"
+        android:text="@string/forums_description"
+        />
 </RelativeLayout>
