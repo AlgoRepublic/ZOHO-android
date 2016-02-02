@@ -34,12 +34,22 @@
             android:adjustViewBounds="true"
             android:layout_alignTop="@+id/title_name" />
     </RelativeLayout>
+    <se.emilsjolander.stickylistheaders.StickyListHeadersListView
+        android:layout_below="@+id/layout_spinner"
+        android:id="@+id/projects_liststicky"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="10dp"
+        android:scrollbars="none"
+        android:visibility="gone"
+        android:descendantFocusability="beforeDescendants"
+        android:choiceMode="singleChoice"
+        android:divider="@android:color/transparent" />
     <ListView
         android:layout_below="@+id/layout_spinner"
         android:id="@+id/projects_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:dividerHeight="5dp"
         android:layout_margin="10dp"
         android:scrollbars="none"
         android:descendantFocusability="beforeDescendants"

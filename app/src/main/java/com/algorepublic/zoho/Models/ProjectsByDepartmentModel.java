@@ -63,7 +63,7 @@ public class ProjectsByDepartmentModel {
         public Integer projectID;
     }
     @SerializedName("ResponseCode")
-    public String responseCode;
+    public Integer responseCode;
 
     @SerializedName("exceptionObject")
     public String exceptionObject;

@@ -19,7 +19,7 @@ import com.algorepublic.zoho.Models.ProjectsByClientModel;
 import com.algorepublic.zoho.Models.ProjectsByDepartmentModel;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.adapters.AdapterProjectsClientList;
-import com.algorepublic.zoho.adapters.AdapterProjectsdeptList;
+import com.algorepublic.zoho.adapters.AdapterProjectsDeptList;
 import com.algorepublic.zoho.adapters.ProjectsList;
 import com.algorepublic.zoho.services.CallBack;
 import com.algorepublic.zoho.services.ProjectsListService;
@@ -28,6 +28,9 @@ import com.androidquery.AQuery;
 
 import java.util.ArrayList;
 import java.util.Collections;
+
+import se.emilsjolander.stickylistheaders.StickyListHeadersAdapter;
+import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -39,9 +42,10 @@ public class ProjectsFragment extends BaseFragment implements AdapterView.OnItem
     private AQuery aq;
     private BaseClass baseClass;
     ProjectsListService service;
-    private AdapterProjectsClientList projectAdapter;
-    public static ArrayList<ProjectsList> allProjectsList = new ArrayList<>();
-    public static ArrayList<ProjectsList> ByClientList = new ArrayList<>();
+    StickyListHeadersListView listView;
+    StickyListHeadersAdapter projectAdapter;
+    ArrayList<ProjectsList> allProjectsList = new ArrayList<>();
+    ArrayList<ProjectsList> ByClientList = new ArrayList<>();
     public static ArrayList<ProjectsList> BydepartmentList = new ArrayList<>();
 
     public ProjectsFragment() {
@@ -65,6 +69,7 @@ public class ProjectsFragment extends BaseFragment implements AdapterView.OnItem
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment_forums
         View view  = inflater.inflate(R.layout.fragment_projects, container, false);
+        listView = (StickyListHeadersListView) view.findViewById(R.id.projects_liststicky);
         aq = new AQuery(getActivity(), view);
         String [] types = {"All","By Client","By Department"};
         aq.id(R.id.spinner_sort).getSpinner().setAdapter(new ArrayAdapter<String>(
@@ -72,15 +77,29 @@ public class ProjectsFragment extends BaseFragment implements AdapterView.OnItem
                 R.layout.layout_spinner,
                 types
         ));
-        aq.id(R.id.spinner_sort).getSpinner().setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        aq.id(R.id.spinner_sort).getSpinner().setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if(position==0)
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if(position==0) {
+                    aq.id(R.id.projects_list).visibility(View.VISIBLE);
+                    aq.id(R.id.projects_liststicky).visibility(View.GONE);
                     SetGeneralClientAdapter();
-                if(position==1)
+                }
+                if(position==1) {
+                    aq.id(R.id.projects_list).visibility(View.VISIBLE);
+                    aq.id(R.id.projects_liststicky).visibility(View.GONE);
                     SetClientProjectsAdapter();
-                if(position==2)
+                }
+                if(position==2) {
+                    aq.id(R.id.projects_list).visibility(View.GONE);
+                    aq.id(R.id.projects_liststicky).visibility(View.VISIBLE);
                     SetDepartmentProjectsAdapter();
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
             }
         });
         MainActivity.toolbar = (Toolbar) view.findViewById(R.id.toolbar);
@@ -103,79 +122,80 @@ public class ProjectsFragment extends BaseFragment implements AdapterView.OnItem
         super.onViewCreated(view, savedInstanceState);
         baseClass = ((BaseClass) getActivity().getApplicationContext());
         service = new ProjectsListService(getActivity());
-        service.getProjectsByClient_API("2", true, new CallBack(this, "ProjectsByClient"));
+        service.getProjectsByClient_API("1", true, new CallBack(this, "ProjectsByClient"));
     }
 
     public void ProjectsByClient(Object caller, Object model){
-        service.getProjectsByDepartment("2", true, new CallBack(this, "ProjectsByDepartment"));
+        service.getProjectsByDepartment("1", true, new CallBack(this, "ProjectsByDepartment"));
         ProjectsByClientModel.getInstance().setList((ProjectsByClientModel) model);
     }
     public void ProjectsByDepartment(Object caller, Object model){
         ProjectsByDepartmentModel.getInstance().setList((ProjectsByDepartmentModel) model);
-        if (ProjectsByClientModel.getInstance().responseCode.equalsIgnoreCase("100")
+        if (ProjectsByClientModel.getInstance().responseCode == 100
                 || ProjectsByClientModel.getInstance().responseData.size() != 0
-                || ProjectsByDepartmentModel.getInstance().responseCode.equalsIgnoreCase("100")
+                || ProjectsByDepartmentModel.getInstance().responseCode == 100
                 || ProjectsByDepartmentModel.getInstance().responseData.size() != 0) {
             AddClientProjects();
         } else {
             Toast.makeText(getActivity(), getString(R.string.projects_list_empty), Toast.LENGTH_SHORT).show();
         }
     }
-    public void AddDepartmentProjects(){
-        BydepartmentList.clear();
-        for (int loop = 0; loop < ProjectsByDepartmentModel.getInstance().responseData.size(); loop++) {
-            ProjectsList projectsList = new ProjectsList();
-            if(ProjectsByDepartmentModel.getInstance().responseData.get(loop).ID == 0){
-                projectsList.setCompOrDeptName("Unassigned Projects");
-                projectsList.setCharToAscii(CharToASCII(ProjectsByClientModel.getInstance().responseData.get(loop).companyName));
-            }else {
-                projectsList.setCharToAscii(CharToASCII("Unassigned Projects"));
-                projectsList.setCompOrDeptName(ProjectsByDepartmentModel.getInstance().responseData.get(loop).departmentName);
-            }
-            projectsList.setCompOrDeptID(ProjectsByDepartmentModel.getInstance().responseData.get(loop).ID);
-
-            for(int loop1=0;loop1<ProjectsByDepartmentModel.getInstance().responseData.get(loop).projects.size();loop1++){
-                projectsList.setProjectID(ProjectsByDepartmentModel.getInstance().responseData.get(loop).projects.get(loop1).projectID);
-                projectsList.setProjectName(ProjectsByDepartmentModel.getInstance().responseData.get(loop).projects.get(loop1).projectName);
-                projectsList.setProjectDesc(ProjectsByDepartmentModel.getInstance().responseData.get(loop).projects.get(loop1).description);
-            }
-            BydepartmentList.add(projectsList);
-        }
-        Collections.sort(BydepartmentList);
-        AddUpAllProjects();
-    }
-
     public void AddClientProjects(){
         ByClientList.clear();
         for (int loop = 0; loop < ProjectsByClientModel.getInstance().responseData.size(); loop++) {
+            for(int loop1=0;loop1<ProjectsByClientModel.getInstance().responseData.get(loop).projects.size();loop1++){
             ProjectsList projectsList = new ProjectsList();
             projectsList.setCompOrDeptName(ProjectsByClientModel.getInstance().responseData.get(loop).companyName);
             projectsList.setCompOrDeptID(ProjectsByClientModel.getInstance().responseData.get(loop).ID);
 
-            for(int loop1=0;loop1<ProjectsByClientModel.getInstance().responseData.get(loop).projects.size();loop1++){
-                projectsList.setProjectID(ProjectsByClientModel.getInstance().responseData.get(loop).projects.get(loop1).projectID);
-                projectsList.setProjectName(ProjectsByClientModel.getInstance().responseData.get(loop).projects.get(loop1).projectName);
-                projectsList.setProjectDesc(ProjectsByClientModel.getInstance().responseData.get(loop).projects.get(loop1).description);
-            }
+            projectsList.setProjectID(ProjectsByClientModel.getInstance().responseData.get(loop).projects.get(loop1).projectID);
+            projectsList.setProjectName(ProjectsByClientModel.getInstance().responseData.get(loop).projects.get(loop1).projectName);
+            projectsList.setProjectDesc(ProjectsByClientModel.getInstance().responseData.get(loop).projects.get(loop1).description);
             ByClientList.add(projectsList);
+            }
         }
         AddDepartmentProjects();
     }
+
+    public void AddDepartmentProjects(){
+        BydepartmentList.clear();
+        for (int loop = 0; loop < ProjectsByDepartmentModel.getInstance().responseData.size(); loop++) {
+            for(int loop1=0;loop1<ProjectsByDepartmentModel.getInstance().responseData.get(loop).projects.size();loop1++){
+            ProjectsList projectsList = new ProjectsList();
+            if(ProjectsByDepartmentModel.getInstance().responseData.get(loop).ID == 0){
+                projectsList.setCompOrDeptName("Unassigned Projects");
+            }else {
+                projectsList.setCompOrDeptName(ProjectsByDepartmentModel.getInstance().responseData.get(loop).departmentName);
+            }
+            projectsList.setCompOrDeptID(ProjectsByDepartmentModel.getInstance().responseData.get(loop).ID);
+
+            projectsList.setProjectID(ProjectsByDepartmentModel.getInstance().responseData.get(loop).projects.get(loop1).projectID);
+            projectsList.setProjectName(ProjectsByDepartmentModel.getInstance().responseData.get(loop).projects.get(loop1).projectName);
+            projectsList.setProjectDesc(ProjectsByDepartmentModel.getInstance().responseData.get(loop).projects.get(loop1).description);
+            BydepartmentList.add(projectsList);
+            }
+        }
+        AddUpAllProjects();
+    }
+
 
     public void AddUpAllProjects(){
         allProjectsList.clear();
         allProjectsList.addAll(ByClientList);
         allProjectsList.addAll(BydepartmentList);
-
+        SetGeneralClientAdapter();
     }
     public void SetGeneralClientAdapter(){
         aq.id(R.id.projects_list).adapter(new AdapterProjectsClientList(getActivity(), allProjectsList));
     }
     public void SetClientProjectsAdapter(){
-        aq.id(R.id.projects_list).adapter(new AdapterProjectsClientList(getActivity(),ByClientList));
+        aq.id(R.id.projects_list).adapter(new AdapterProjectsClientList(getActivity(), ByClientList));
     }
     public void SetDepartmentProjectsAdapter(){
-        aq.id(R.id.projects_list).adapter(new AdapterProjectsdeptList(getActivity()));
+
+        projectAdapter = new AdapterProjectsDeptList(getActivity());
+        listView.setAreHeadersSticky(false);
+        listView.setAdapter(projectAdapter);
     }
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {

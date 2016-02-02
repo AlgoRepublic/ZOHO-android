@@ -1,9 +1,8 @@
 package com.algorepublic.zoho.adapters;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.GradientDrawable;
 import android.text.Html;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +12,6 @@ import android.widget.BaseAdapter;
 
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.fragments.ProjectsFragment;
-import com.algorepublic.zoho.fragments.TasksListFragment;
 import com.algorepublic.zoho.utils.BaseClass;
 import com.androidquery.AQuery;
 
@@ -22,7 +20,7 @@ import se.emilsjolander.stickylistheaders.StickyListHeadersAdapter;
 /**
  * Created by android on 2/2/16.
  */
-public class AdapterProjectsdeptList extends BaseAdapter implements StickyListHeadersAdapter {
+public class AdapterProjectsDeptList extends BaseAdapter implements StickyListHeadersAdapter {
 
     Context ctx;
     AQuery aq,aq_header;
@@ -31,15 +29,16 @@ public class AdapterProjectsdeptList extends BaseAdapter implements StickyListHe
     private int lastPosition = -1;
 
 
-    public AdapterProjectsdeptList(Context context) {
+    public AdapterProjectsDeptList(Context context) {
         l_Inflater = LayoutInflater.from(context);
         this.ctx = context;
         baseClass = ((BaseClass) ctx.getApplicationContext());
+
     }
 
     @Override
     public int getCount() {
-        return TasksListFragment.generalList.size();
+        return ProjectsFragment.BydepartmentList.size();
     }
 
     @Override
@@ -60,11 +59,14 @@ public class AdapterProjectsdeptList extends BaseAdapter implements StickyListHe
 
         aq = new AQuery(convertView);
         aq.id(R.id.project_title).text(ProjectsFragment.BydepartmentList.get(position).getProjectName());
-        aq.id(R.id.project_id).text(ProjectsFragment.BydepartmentList.get(position).getProjectID());
+       // aq.id(R.id.project_id).text(ProjectsFragment.BydepartmentList.get(position).getProjectID());
 
         if(ProjectsFragment.BydepartmentList.get(position).getProjectDesc() != null)
             aq.id(R.id.project_desc).text(Html.fromHtml(ProjectsFragment.BydepartmentList.get(position).getProjectDesc()));
 
+        Animation animation = AnimationUtils.loadAnimation(ctx, (position > lastPosition) ? R.anim.up_from_bottom : R.anim.down_from_top);
+        convertView.startAnimation(animation);
+        lastPosition = position;
         return convertView;
     }
     @Override
@@ -78,7 +80,7 @@ public class AdapterProjectsdeptList extends BaseAdapter implements StickyListHe
 
     @Override
     public long getHeaderId(int position) {
-        return ProjectsFragment.BydepartmentList.get(position).getCharToAscii();
+        return ProjectsFragment.BydepartmentList.get(position).getCompOrDeptID();
     }
 
 
