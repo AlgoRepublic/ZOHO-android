@@ -5,7 +5,7 @@
     android:layout_margin="10dp"
     tools:context=".FragmentsTasks.TaskScheduleFragment">
 
-    <!-- TODO: Update blank fragment layout -->
+    <!-- TODO: Update blank fragment_forums layout -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

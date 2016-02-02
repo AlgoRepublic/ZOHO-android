@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     tools:context="com.algorepublic.zoho.FragmentsTasks.TaskPriorityFragment">
 
-    <!-- TODO: Update blank fragment layout -->
+    <!-- TODO: Update blank fragment_forums layout -->
     <ListView
         android:id="@+id/listview_priority"
         android:layout_width="match_parent"

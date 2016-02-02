@@ -13,7 +13,7 @@ import com.androidquery.AQuery;
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link MilestoneFragment#newInstance} factory method to
- * create an instance of this fragment.
+ * create an instance of this fragment_forums.
  */
 public class MilestoneFragment extends BaseFragment {
 
@@ -24,9 +24,9 @@ public class MilestoneFragment extends BaseFragment {
 
     /**
      * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
+     * this fragment_forums using the provided parameters.
      *
-     * @return A new instance of fragment MilestoneFragment.
+     * @return A new instance of fragment_forums MilestoneFragment.
      */
     public static MilestoneFragment newInstance(String param1, String param2) {
         MilestoneFragment fragment = new MilestoneFragment();
@@ -39,7 +39,7 @@ public class MilestoneFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+        // Inflate the layout for this fragment_forums
         View view = inflater.inflate(R.layout.fragment_milestone, container, false);
         aq = new AQuery(getActivity(), view);
         return view;

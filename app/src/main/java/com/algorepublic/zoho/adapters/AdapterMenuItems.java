@@ -1,6 +1,5 @@
 package com.algorepublic.zoho.adapters;
 
-import android.app.Activity;
 import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
@@ -19,6 +18,7 @@ import com.algorepublic.zoho.MainActivity;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.fragments.CalendarFragment;
 import com.algorepublic.zoho.fragments.DocumentsListFragment;
+import com.algorepublic.zoho.fragments.ForumsFragment;
 import com.algorepublic.zoho.fragments.ProjectsFragment;
 import com.algorepublic.zoho.fragments.StarRatingFragment;
 import com.algorepublic.zoho.fragments.TasksListFragment;
@@ -131,7 +131,7 @@ public class AdapterMenuItems extends BaseAdapter{
         }if(position==5){
 
         }if(position==6){
-
+            callFragmentWithReplace(R.id.container, ForumsFragment.newInstance(), "ForumsFragment");
         }if(position==7){
             callFragmentWithReplace(R.id.container, StarRatingFragment.newInstance(), "StarRatingFragment");
         }if(position==8){
