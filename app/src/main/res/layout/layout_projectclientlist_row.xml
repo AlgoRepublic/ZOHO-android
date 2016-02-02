@@ -44,7 +44,7 @@
                     android:singleLine="true"
                     android:textSize="7dp"
                     android:layout_alignParentRight="true"
-                    android:background="@mipmap/bubble_alert"
+                    android:background="@mipmap/bubble_alert_black"
                     android:layout_alignParentTop="true"
                     android:textColor="@color/colorBaseHeader" />
 
@@ -70,7 +70,7 @@
                     android:singleLine="true"
                     android:textSize="7dp"
                     android:layout_alignParentRight="true"
-                    android:background="@mipmap/bubble_alert"
+                    android:background="@mipmap/bubble_alert_black"
                     android:layout_alignParentTop="true"
                     android:textColor="@color/colorBaseHeader" />
 
@@ -96,7 +96,7 @@
                     android:singleLine="true"
                     android:textSize="7dp"
                     android:layout_alignParentRight="true"
-                    android:background="@mipmap/bubble_alert"
+                    android:background="@mipmap/bubble_alert_black"
                     android:layout_alignParentTop="true"
                     android:textColor="@color/colorBaseHeader" />
 
