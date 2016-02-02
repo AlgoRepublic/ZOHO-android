@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -65,19 +67,24 @@ public class TasksListFragment extends BaseFragment {
         super.onViewCreated(view, savedInstanceState);
     }
 
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_tasklist, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_taskslist, container, false);
         MainActivity.toolbar = (Toolbar) view.findViewById(R.id.toolbar);
+        setHasOptionsMenu(true);
         setToolbar();
         radioGroup = (RadioGroup) view.findViewById(R.id.radioGroup);
         listView = (StickyListHeadersListView) view.findViewById(R.id.list_taskslist);
         aq = new AQuery(view);
 
         baseClass = ((BaseClass) getActivity().getApplicationContext());
-        setHasOptionsMenu(true);
         taskListService = new TaskListService(getActivity());
         if(allTaskList.size()==0) {
             taskListService.getTasksList(true, new CallBack(TasksListFragment.this, "TasksList"));
