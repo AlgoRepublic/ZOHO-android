@@ -23,9 +23,9 @@ public class AdapterProjectsClientList extends BaseAdapter{
     private AQuery aq;
     private LayoutInflater l_Inflater;
 
-    ArrayList<ProjectsParentList> arrayList= new ArrayList<>();
+    ArrayList<ProjectsList> arrayList= new ArrayList<>();
 
-    public AdapterProjectsClientList(Context context,ArrayList<ProjectsParentList> list) {
+    public AdapterProjectsClientList(Context context,ArrayList<ProjectsList> list) {
         l_Inflater = LayoutInflater.from(context);
         this.ctx = context;
         arrayList.addAll(list);

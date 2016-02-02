@@ -8,7 +8,7 @@ import android.widget.ExpandableListView;
 import android.widget.ListView;
 
 import com.algorepublic.zoho.R;
-import com.algorepublic.zoho.adapters.StarRatingLevelOneAdapter;
+import com.algorepublic.zoho.adapters.AdapterStarRatingLevelOne;
 import com.algorepublic.zoho.adapters.TaskComments;
 
 import java.util.ArrayList;
@@ -47,7 +47,7 @@ public class StarRatingFragment extends BaseFragment {
         Collections.addAll(listDataHeader, mItemHeaders);
         ExpandableListView mExpandableListView = (ExpandableListView) view.findViewById(R.id.expandableListView);
         if (mExpandableListView != null) {
-            StarRatingLevelOneAdapter parentLevelAdapter = new StarRatingLevelOneAdapter(getActivity(), listDataHeader);
+            AdapterStarRatingLevelOne parentLevelAdapter = new AdapterStarRatingLevelOne(getActivity(), listDataHeader);
             mExpandableListView.setAdapter(parentLevelAdapter);
         }
         return view;

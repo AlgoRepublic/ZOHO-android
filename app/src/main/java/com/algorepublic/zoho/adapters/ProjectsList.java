@@ -5,7 +5,7 @@ import java.util.ArrayList;
 /**
  * Created by android on 2/2/16.
  */
-public class ProjectsParentList {
+public class ProjectsList implements Comparable<ProjectsList>{
 
 
     public void setCompOrDeptID(int compOrDeptID){
@@ -38,11 +38,22 @@ public class ProjectsParentList {
     public String getProjectDesc(){
         return projectDesc;
     }
+    public void setCharToAscii(long charToAscii){
+        this.charToAscii = charToAscii;
+    }
+    public long getCharToAscii(){
+        return charToAscii;
+    }
+    @Override
+    public int compareTo(ProjectsList object) {
+        return (this.getProjectName().compareTo(object.getProjectName()));
+    }
 
-
+    long charToAscii;
     String projectDesc;
     String projectName;
     int projectID;
     String compOrDeptName;
     int compOrDeptID;
+
 }
