@@ -55,7 +55,7 @@
         android:id="@+id/forum_discription"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/colorBaseMenu"
+        android:textColor="@color/colorContentWrapper"
         android:textSize="14sp"
         android:layout_below="@+id/layout1"
         android:paddingLeft="10dp"

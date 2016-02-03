@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/colorBaseWrapper"
     android:gravity="top"
     android:orientation="vertical">
@@ -23,6 +23,7 @@
         android:id="@+id/layout_menu1"
         android:layout_width="44dp"
         android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
         android:layout_height="match_parent">
         <TextView
             android:id="@+id/notify_alert"
@@ -31,8 +32,9 @@
             android:text="112"
             android:gravity="center"
             android:singleLine="true"
-            android:textSize="8dp"
+            android:textSize="8sp"
             android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
             android:background="@mipmap/bubble_alert_white"
             android:layout_alignParentTop="true"
             android:textColor="@color/colorBaseWrapper" />
@@ -41,6 +43,7 @@
             android:layout_width="28dp"
             android:layout_height="28dp"
             android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
             android:layout_centerVertical="true"
             android:src="@drawable/notification" />
         </RelativeLayout>
@@ -49,8 +52,10 @@
             android:layout_width="28dp"
             android:layout_height="28dp"
             android:layout_marginRight="10dp"
+            android:layout_marginEnd="10dp"
             android:layout_centerVertical="true"
             android:layout_toLeftOf="@+id/layout_menu1"
+            android:layout_toStartOf="@+id/layout_menu1"
             android:src="@drawable/settings" />
     </RelativeLayout>
     <ScrollView
@@ -59,7 +64,7 @@
         android:layout_height="match_parent">
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_gravity="top"
             android:orientation="vertical">
             <RelativeLayout
@@ -85,7 +90,8 @@
                         android:textSize="18dp"
                         android:layout_centerVertical="true"
                         android:textColor="@color/colorBaseHeader"
-                        android:layout_toLeftOf="@+id/profile" />
+                        android:layout_toLeftOf="@+id/profile"
+                        android:layout_toStartOf="@+id/profile" />
                     <com.mikhaellopez.circularimageview.CircularImageView
                         android:id="@+id/profile"
                         android:layout_width="70dp"
@@ -106,6 +112,7 @@
                         android:padding="5dp"
                         android:layout_centerVertical="true"
                         android:layout_toRightOf="@id/profile"
+                        android:layout_toEndOf="@id/profile"
                         android:textColor="@color/colorBaseHeader"
                         android:gravity="left"
                         android:layout_width="match_parent"
@@ -135,7 +142,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
                 android:numColumns="3"
-                android:paddingRight="5dp"
+                android:padding="10dp"
+                android:gravity="center"
+                android:stretchMode="columnWidth"
                 android:orientation="vertical">
             </GridView>
         </LinearLayout>

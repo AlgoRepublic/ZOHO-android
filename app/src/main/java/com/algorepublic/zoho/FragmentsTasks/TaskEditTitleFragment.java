@@ -7,10 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.algorepublic.zoho.ActivityTask;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.fragments.BaseFragment;
-import com.algorepublic.zoho.fragments.TasksListFragment;
 import com.algorepublic.zoho.utils.BaseClass;
 import com.androidquery.AQuery;
 

@@ -5,11 +5,12 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.algorepublic.zoho.BaseActivity;
 import com.algorepublic.zoho.MainActivity;
@@ -24,7 +25,7 @@ import com.androidquery.AQuery;
 /**
  * Created by waqas on 2/1/16.
  */
-public class ForumsFragment extends BaseFragment {
+public class ForumsFragment extends BaseFragment implements AdapterView.OnItemClickListener{
 
     private AQuery aq;
     private BaseClass baseClass;
@@ -47,7 +48,7 @@ public class ForumsFragment extends BaseFragment {
         forums_list=(ListView)view.findViewById(R.id.forums_list);
         forumAdapter=new AdapterForumsList(getActivity());
         MainActivity.toolbar = (Toolbar) view.findViewById(R.id.toolbar);
-
+        forums_list.setOnItemClickListener(this);
         return view;
     }
 
@@ -61,8 +62,11 @@ public class ForumsFragment extends BaseFragment {
     }
     public void ForumListCallback(Object caller, Object model){
         ForumsModel.getInstance().setList((ForumsModel) model);
-        Log.e("Log", "/" + ForumsModel.getInstance().responseObject.size());
-           forums_list.setAdapter(forumAdapter);
+        if (ForumsModel.getInstance().responseObject.size()!=0) {
+            forums_list.setAdapter(forumAdapter);
+        }else {
+            Toast.makeText(getActivity(), getString(R.string.forums_list_empty), Toast.LENGTH_SHORT).show();
+        }
 
     }
 
@@ -72,5 +76,10 @@ public class ForumsFragment extends BaseFragment {
                 getActivity(), BaseActivity.drawer, BaseActivity.toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         BaseActivity.drawer.setDrawerListener(toggle);
         toggle.syncState();
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        callFragmentWithReplace(R.id.container, ForumsDetailFragment.newInstance(position),"FroumsDetailFragment");
     }
 }

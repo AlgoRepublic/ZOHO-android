@@ -4,9 +4,11 @@ package com.algorepublic.zoho.fragments;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -14,7 +16,6 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.algorepublic.zoho.MainActivity;
 import com.algorepublic.zoho.Models.ProjectsByClientModel;
 import com.algorepublic.zoho.Models.ProjectsByDepartmentModel;
 import com.algorepublic.zoho.R;
@@ -27,8 +28,6 @@ import com.algorepublic.zoho.utils.BaseClass;
 import com.androidquery.AQuery;
 
 import java.util.ArrayList;
-import java.util.Collections;
-
 import se.emilsjolander.stickylistheaders.StickyListHeadersAdapter;
 import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
 
@@ -77,6 +76,8 @@ public class ProjectsFragment extends BaseFragment implements AdapterView.OnItem
                 R.layout.layout_spinner,
                 types
         ));
+        getToolbar().setTitle(getString(R.string.projects));
+        setHasOptionsMenu(true);
         aq.id(R.id.spinner_sort).getSpinner().setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -102,8 +103,6 @@ public class ProjectsFragment extends BaseFragment implements AdapterView.OnItem
 
             }
         });
-        MainActivity.toolbar = (Toolbar) view.findViewById(R.id.toolbar);
-        setToolbar();
         return view;
     }
 
@@ -203,4 +202,48 @@ public class ProjectsFragment extends BaseFragment implements AdapterView.OnItem
         baseClass.setSelectedProject(((TextView) view.findViewById(R.id.project_id)).getText().toString());
     }
 
+    /**
+     * Initialize the contents of the Activity's standard options menu.  You
+     * should place your menu items in to <var>menu</var>.  For this method
+     * to be called, you must have first called {@link #setHasOptionsMenu}.  See
+     * {@link (Menu) Activity.onCreateOptionsMenu}
+     * for more information.
+     *
+     * @param menu     The options menu in which you place your items.
+     * @param inflater
+     * @see #setHasOptionsMenu
+     * @see #onPrepareOptionsMenu
+     * @see #onOptionsItemSelected
+     */
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_tasklist, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    /**
+     * This hook is called whenever an item in your options menu is selected.
+     * The default implementation simply returns false to have the normal
+     * processing happen (calling the item's Runnable or sending a message to
+     * its Handler as appropriate).  You can use this method for any items
+     * for which you would like to do processing without those other
+     * facilities.
+     * <p>
+     * <p>Derived classes should call through to the base class for it to
+     * perform the default menu handling.
+     *
+     * @param item The menu item that was selected.
+     * @return boolean Return false to allow normal menu processing to
+     * proceed, true to consume it here.
+     * @see #onCreateOptionsMenu
+     */
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.add_project:
+                Toast.makeText(getActivity(),"Add Project",Toast.LENGTH_SHORT).show();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 }
