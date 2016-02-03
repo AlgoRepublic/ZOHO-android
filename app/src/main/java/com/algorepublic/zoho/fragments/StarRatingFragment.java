@@ -5,14 +5,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ExpandableListView;
-import android.widget.ListView;
 import android.widget.Toast;
 
-import com.algorepublic.zoho.Models.ProjectsByDepartmentModel;
 import com.algorepublic.zoho.Models.StarRatingModel;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.adapters.AdapterStarRatingLevelOne;
-import com.algorepublic.zoho.adapters.ProjectsList;
 import com.algorepublic.zoho.adapters.StarRatingHeadsLevelOne;
 import com.algorepublic.zoho.adapters.StarRatingHeadsLevelThree;
 import com.algorepublic.zoho.adapters.StarRatingHeadsLevelTwo;
@@ -20,8 +17,6 @@ import com.algorepublic.zoho.services.CallBack;
 import com.algorepublic.zoho.services.StarRatingService;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 /**
  * Created by android on 2/1/16.
@@ -52,6 +47,7 @@ public class StarRatingFragment extends BaseFragment {
         mExpandableListView = (ExpandableListView) view.findViewById(R.id.expandableListView);
         service = new StarRatingService(getActivity());
         service.getStarRatingHeads_API("en-Us",true,new CallBack(StarRatingFragment.this,"StarRatingHeads"));
+        getToolbar().setTitle(getString(R.string.start_rating));
         return view;
     }
 
