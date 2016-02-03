@@ -7,8 +7,8 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="7dp"
-        android:paddingBottom="7dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
         android:layout_marginLeft="3dp"
         android:layout_marginRight="3dp"
         android:background="@drawable/roundable_corner"
@@ -28,7 +28,7 @@
             android:textColor="@color/colorBaseHeader" />
 
         <ImageView
-            android:src="@drawable/group_statelist"
+            android:src="@drawable/drawer_level_two"
             android:id="@+id/explist_indicator"
             android:layout_centerVertical="true"
             android:layout_alignParentRight="true"

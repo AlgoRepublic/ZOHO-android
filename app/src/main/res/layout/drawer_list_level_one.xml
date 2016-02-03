@@ -22,7 +22,7 @@
         android:textColor="@color/colorBaseHeader" />
 
         <ImageView
-            android:src="@drawable/group_statelist"
+            android:src="@drawable/drawer_level_one"
             android:id="@+id/explist_indicator"
             android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
