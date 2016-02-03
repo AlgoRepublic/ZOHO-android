@@ -49,7 +49,9 @@ public class AdapterForumsList extends BaseAdapter {
         convertView = l_Inflater.inflate(R.layout.layouts_forum_row, null);
         aq = new AQuery(convertView);
         aq.id(R.id.forum_title).text(getItem(position).title);
-
+        aq.id(R.id.forum_discription).text("by "+ getItem(position).user.firstName +" , last responce on "+ baseClass.DateFormatter(getItem(position).updatedAt)+" "+ baseClass.GetTime(baseClass.DateMilli(getItem(position).updatedAt)));
         return convertView;
     }
+
+
 }

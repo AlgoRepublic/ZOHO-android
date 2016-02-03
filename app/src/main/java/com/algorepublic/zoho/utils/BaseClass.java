@@ -11,6 +11,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.text.format.DateFormat;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.webkit.MimeTypeMap;
@@ -26,6 +27,7 @@ import java.net.URLEncoder;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -301,5 +303,31 @@ public class BaseClass extends Application {
     }
     public String getSelectedProject() {
         return appSharedPrefs.getString(SELECTED_PROJECT, "");
+    }
+
+    public String GetTime(String milli){
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(Long.parseLong(milli));
+
+        String delegate = "hh:mm aaa";
+        String time  = (String) DateFormat.format(delegate, calendar.getTime());
+        return (time);
+    }
+    public String DateMilli(String date) {
+        String a = date.replaceAll("\\D+", "");
+        return a;
+    }
+    public String DateFormatter(String date){
+        String a = date.replaceAll("\\D+", "");
+        long timeInMillis = Long.parseLong(a);
+        if(timeInMillis < 0 )
+            return "";
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(timeInMillis);
+
+        int mYear = calendar.get(Calendar.YEAR);
+        int mMonth = calendar.get(Calendar.MONTH) + 1;
+        int mDay = calendar.get(Calendar.DAY_OF_MONTH);
+        return (mMonth+"/"+mDay+"/"+mYear);
     }
 }
