@@ -1,13 +1,12 @@
 package com.algorepublic.zoho;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
 /**
  * Created by ahmad on 6/22/15.
  */
-public class ActivitySplash extends Activity {
+public class ActivitySplash extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

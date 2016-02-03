@@ -45,7 +45,7 @@ public class TaskAssignFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+        // Inflate the layout for this fragment_forums
        View view =  inflater.inflate(R.layout.fragment_task_assign, container, false);
         aq = new AQuery(view);
         ActivityTask.assigneeList.clear();

@@ -14,9 +14,9 @@ import com.algorepublic.zoho.fragments.dummy.DummyContent;
 import com.algorepublic.zoho.fragments.dummy.DummyContent.DummyItem;
 
 /**
- * A fragment representing a list of Items.
+ * A fragment_forums representing a list of Items.
  * <p/>
- * Activities containing this fragment MUST implement the {@link OnListFragmentInteractionListener}
+ * Activities containing this fragment_forums MUST implement the {@link OnListFragmentInteractionListener}
  * interface.
  */
 public class FeedFragment extends BaseFragment {
@@ -28,8 +28,8 @@ public class FeedFragment extends BaseFragment {
     private OnListFragmentInteractionListener mListener;
 
     /**
-     * Mandatory empty constructor for the fragment manager to instantiate the
-     * fragment (e.g. upon screen orientation changes).
+     * Mandatory empty constructor for the fragment_forums manager to instantiate the
+     * fragment_forums (e.g. upon screen orientation changes).
      */
     public FeedFragment() {
     }
@@ -91,7 +91,7 @@ public class FeedFragment extends BaseFragment {
 
     /**
      * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
+     * fragment_forums to allow an interaction in this fragment_forums to be communicated
      * to the activity and potentially other fragments contained in that
      * activity.
      * <p/>

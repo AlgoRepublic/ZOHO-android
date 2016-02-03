@@ -5,8 +5,6 @@
     android:layout_height="match_parent"
     android:background="@color/colorBaseWrapper"
     tools:context="com.algorepublic.zoho.fragments.CalendarFragment">
-    <include android:id="@+id/include"
-        layout="@layout/toolbar_tasklist"/>
     <com.github.tibolte.agendacalendarview.AgendaCalendarView
         android:id="@+id/agenda_calendar_view"
         android:layout_width="match_parent"

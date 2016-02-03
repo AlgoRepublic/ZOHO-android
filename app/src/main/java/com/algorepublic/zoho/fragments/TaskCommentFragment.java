@@ -61,7 +61,7 @@ public class TaskCommentFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+        // Inflate the layout for this fragment_forums
         View view = inflater.inflate(R.layout.fragment_task_comments, container, false);
         listView = (ListView) view.findViewById(R.id.listView_comments);
         aq = new AQuery(view);

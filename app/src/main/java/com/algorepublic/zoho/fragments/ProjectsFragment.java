@@ -4,16 +4,18 @@ package com.algorepublic.zoho.fragments;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.algorepublic.zoho.MainActivity;
 import com.algorepublic.zoho.Models.ProjectsModel;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.adapters.AdapterProjectsList;
@@ -25,7 +27,7 @@ import com.androidquery.AQuery;
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link ProjectsFragment#newInstance} factory method to
- * create an instance of this fragment.
+ * create an instance of this fragment_forums.
  */
 public class ProjectsFragment extends BaseFragment implements AdapterView.OnItemClickListener{
 
@@ -38,8 +40,8 @@ public class ProjectsFragment extends BaseFragment implements AdapterView.OnItem
 
     /**
      * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     * @return A new instance of fragment ProjectsFragment.
+     * this fragment_forums using the provided parameters.
+     * @return A new instance of fragment_forums ProjectsFragment.
      */
     public static ProjectsFragment newInstance() {
         ProjectsFragment fragment = new ProjectsFragment();
@@ -51,11 +53,17 @@ public class ProjectsFragment extends BaseFragment implements AdapterView.OnItem
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+        // Inflate the layout for this fragment_forums
         View view  = inflater.inflate(R.layout.fragment_projects, container, false);
         aq = new AQuery(getActivity(), view);
-        MainActivity.toolbar = (Toolbar) view.findViewById(R.id.toolbar);
-        setToolbar();
+        String [] types = {"All","By Client","By Department"};
+        aq.id(R.id.spinner_sort).getSpinner().setAdapter(new ArrayAdapter<String>(
+                getActivity(),
+                R.layout.layout_spinner,
+                types
+        ));
+        getToolbar().setTitle(getString(R.string.projects));
+        setHasOptionsMenu(true);
         return view;
     }
 
@@ -63,11 +71,11 @@ public class ProjectsFragment extends BaseFragment implements AdapterView.OnItem
      * Called immediately after {@link #onCreateView(LayoutInflater, ViewGroup, Bundle)}
      * has returned, but before any saved state has been restored in to the view.
      * This gives subclasses a chance to initialize themselves once
-     * they know their view hierarchy has been completely created.  The fragment's
+     * they know their view hierarchy has been completely created.  The fragment_forums's
      * view hierarchy is not however attached to its parent at this point.
      *
      * @param view               The View returned by {@link #onCreateView(LayoutInflater, ViewGroup, Bundle)}.
-     * @param savedInstanceState If non-null, this fragment is being re-constructed
+     * @param savedInstanceState If non-null, this fragment_forums is being re-constructed
      */
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
@@ -94,5 +102,50 @@ public class ProjectsFragment extends BaseFragment implements AdapterView.OnItem
         projectAdapter.notifyDataSetChanged();
         Log.e("selected project", ((TextView) view.findViewById(R.id.project_id)).getText().toString());
         baseClass.setSelectedProject(((TextView) view.findViewById(R.id.project_id)).getText().toString());
+    }
+
+    /**
+     * Initialize the contents of the Activity's standard options menu.  You
+     * should place your menu items in to <var>menu</var>.  For this method
+     * to be called, you must have first called {@link #setHasOptionsMenu}.  See
+     * {@link Activity#onCreateOptionsMenu(Menu) Activity.onCreateOptionsMenu}
+     * for more information.
+     *
+     * @param menu     The options menu in which you place your items.
+     * @param inflater
+     * @see #setHasOptionsMenu
+     * @see #onPrepareOptionsMenu
+     * @see #onOptionsItemSelected
+     */
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_tasklist, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    /**
+     * This hook is called whenever an item in your options menu is selected.
+     * The default implementation simply returns false to have the normal
+     * processing happen (calling the item's Runnable or sending a message to
+     * its Handler as appropriate).  You can use this method for any items
+     * for which you would like to do processing without those other
+     * facilities.
+     * <p>
+     * <p>Derived classes should call through to the base class for it to
+     * perform the default menu handling.
+     *
+     * @param item The menu item that was selected.
+     * @return boolean Return false to allow normal menu processing to
+     * proceed, true to consume it here.
+     * @see #onCreateOptionsMenu
+     */
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.add_project:
+                Toast.makeText(getActivity(),"Add Project",Toast.LENGTH_SHORT).show();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

@@ -4,15 +4,11 @@ import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.GridView;
-import android.widget.RadioGroup;
 
-import com.algorepublic.zoho.FragmentsTasks.TaskAssignFragment;
-import com.algorepublic.zoho.FragmentsTasks.TaskAttachmentFragment;
 import com.algorepublic.zoho.FragmentsTasks.TaskEditTitleFragment;
-import com.algorepublic.zoho.FragmentsTasks.TaskPriorityFragment;
-import com.algorepublic.zoho.FragmentsTasks.TaskScheduleFragment;
 import com.algorepublic.zoho.adapters.AdapterTaskMenu;
 import com.algorepublic.zoho.adapters.TasksList;
 import com.algorepublic.zoho.fragments.TasksListFragment;
@@ -38,7 +34,7 @@ public class ActivityTask extends BaseActivity{
     BaseClass baseClass;
     public static GridView gridViewTaskMenu;
     public static ACProgressFlower dialog;
-    public  static TasksList tasksObj;
+    public static TasksList tasksObj;
     public static ArrayList<File> filesList;
     public static ArrayList<Integer> assigneeList;
 
@@ -80,6 +76,11 @@ public class ActivityTask extends BaseActivity{
         if(savedInstanceState==null){
             callFragmentWithReplace(R.id.edittask_container, TaskEditTitleFragment.newInstance(position), "TaskTitle");
         }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        return false;
     }
 
     public class AsyncTry extends AsyncTask<Void, Void, String> {
@@ -144,7 +145,7 @@ public class ActivityTask extends BaseActivity{
         return object.toString();
     }
     public void setTaskValuesTinyDB(){
-     //   baseClass.db.putString("TaskListName",TasksListFragment.generalList.get(position).getTaskListName());
+        //   baseClass.db.putString("TaskListName",TasksListFragment.generalList.get(position).getTaskListName());
         if(position!=-1) {
             baseClass.db.putString("TaskName", TasksListFragment.generalList.get(position).getTaskName());
             baseClass.db.putString("StartDate", TasksListFragment.generalList.get(position).getStartDate());

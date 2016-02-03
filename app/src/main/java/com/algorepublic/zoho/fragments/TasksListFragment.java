@@ -2,11 +2,11 @@ package com.algorepublic.zoho.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -14,7 +14,6 @@ import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.algorepublic.zoho.ActivityTask;
-import com.algorepublic.zoho.MainActivity;
 import com.algorepublic.zoho.Models.TasksListModel;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.adapters.AdapterTasksList;
@@ -64,6 +63,7 @@ public class TasksListFragment extends BaseFragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         setRetainInstance(true);
+        getToolbar().setTitle(getString(R.string.tasks));
         super.onViewCreated(view, savedInstanceState);
     }
 
@@ -73,13 +73,38 @@ public class TasksListFragment extends BaseFragment {
         super.onCreateOptionsMenu(menu, inflater);
     }
 
+    /**
+     * This hook is called whenever an item in your options menu is selected.
+     * The default implementation simply returns false to have the normal
+     * processing happen (calling the item's Runnable or sending a message to
+     * its Handler as appropriate).  You can use this method for any items
+     * for which you would like to do processing without those other
+     * facilities.
+     * <p>
+     * <p>Derived classes should call through to the base class for it to
+     * perform the default menu handling.
+     *
+     * @param item The menu item that was selected.
+     * @return boolean Return false to allow normal menu processing to
+     * proceed, true to consume it here.
+     * @see #onCreateOptionsMenu
+     */
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.add_project:
+                startActivity(new Intent(getActivity(), ActivityTask.class));
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_taskslist, container, false);
-        MainActivity.toolbar = (Toolbar) view.findViewById(R.id.toolbar);
         setHasOptionsMenu(true);
-        setToolbar();
         radioGroup = (RadioGroup) view.findViewById(R.id.radioGroup);
         listView = (StickyListHeadersListView) view.findViewById(R.id.list_taskslist);
         aq = new AQuery(view);
@@ -169,32 +194,32 @@ public class TasksListFragment extends BaseFragment {
                 dialog.dismiss();
                 if (isLoaded())
                     if (position == 0) {
-                        baseClass.setSortType("DueDate");
+                        baseClass.setTaskSortType("DueDate");
                     }
                 if (position == 1) {
-                    baseClass.setSortType("Priority");
+                    baseClass.setTaskSortType("Priority");
                 }
                 if (position == 2) {
-                    baseClass.setSortType("Alphabetically");
+                    baseClass.setTaskSortType("Alphabetically");
                 }
                 if (position == 3) {
-                    baseClass.setSortType("TaskList");
+                    baseClass.setTaskSortType("TaskList");
                 }
                 SortList();
             }
         });
     }
     public void SortList(){
-        if(baseClass.getSortType().equalsIgnoreCase("DueDate")){
+        if(baseClass.getTaskSortType().equalsIgnoreCase("DueDate")){
             Collections.sort(generalList, Date);
         }
-        if(baseClass.getSortType().equalsIgnoreCase("Priority")){
+        if(baseClass.getTaskSortType().equalsIgnoreCase("Priority")){
             Collections.sort(generalList, byPriority);
         }
-        if(baseClass.getSortType().equalsIgnoreCase("Alphabetically")){
+        if(baseClass.getTaskSortType().equalsIgnoreCase("Alphabetically")){
             Collections.sort(generalList);
         }
-        if(baseClass.getSortType().equalsIgnoreCase("TaskList")){
+        if(baseClass.getTaskSortType().equalsIgnoreCase("TaskList")){
             Collections.sort(generalList, byTaskList);
         }
         SetAdapterList();
