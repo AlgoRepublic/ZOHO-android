@@ -1,7 +1,6 @@
 package com.algorepublic.zoho.adapters;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,13 +21,13 @@ import java.util.Map;
 /**
  * Created by android on 2/1/16.
  */
-public class StarRatingLevelOneAdapter extends BaseExpandableListAdapter {
+public class AdapterStarRatingLevelOne extends BaseExpandableListAdapter {
     private final Context mContext;
     private final List<String> mListDataHeader;
     private final Map<String, List<String>> mListData_SecondLevel_Map;
     private final Map<String, List<String>> mListData_ThirdLevel_Map;
 
-    public StarRatingLevelOneAdapter(Context mContext, List<String> mListDataHeader) {
+    public AdapterStarRatingLevelOne(Context mContext, List<String> mListDataHeader) {
         this.mContext = mContext;
         this.mListDataHeader = new ArrayList<>();
         this.mListDataHeader.addAll(mListDataHeader);
@@ -84,7 +83,7 @@ public class StarRatingLevelOneAdapter extends BaseExpandableListAdapter {
                              boolean isLastChild, View convertView, ViewGroup parent) {
         final CustomExpListView secondLevelExpListView = new CustomExpListView(this.mContext);
         String parentNode = (String) getGroup(groupPosition);
-        secondLevelExpListView.setAdapter(new StarRatingLevelSecondAdapter(this.mContext, mListData_SecondLevel_Map.get(parentNode), mListData_ThirdLevel_Map));
+        secondLevelExpListView.setAdapter(new AdapterStarRatingLevelSecond(this.mContext, mListData_SecondLevel_Map.get(parentNode), mListData_ThirdLevel_Map));
         secondLevelExpListView.setGroupIndicator(null);
 
         return secondLevelExpListView;
@@ -121,7 +120,6 @@ public class StarRatingLevelOneAdapter extends BaseExpandableListAdapter {
         }
         TextView lblListHeader = (TextView) convertView
                 .findViewById(R.id.lblListHeader);
-        lblListHeader.setTypeface(null, Typeface.BOLD);
         lblListHeader.setText(headerTitle);
         return convertView;
     }

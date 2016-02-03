@@ -122,6 +122,8 @@
 
     <string name="pref_title_vibrate">Vibrate</string>
     <string name="projects">Projects</string>
+    <string name="forums_description">Forums Discription</string>
+    <string name="forums_title">Test Forum</string>
 
     <!-- Task Details Strings -->
     <string name="mark_as_done">Mark as done?</string>
@@ -136,5 +138,6 @@
     <string name="task_startdate">Start Date:</string>
     <string name="task_duedate">Due Date:</string>
     <string name="projects_list_empty">Project list is empty</string>
+    <string name="forums_list_empty">Project list is empty</string>
 
 </resources>

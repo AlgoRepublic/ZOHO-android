@@ -14,12 +14,12 @@ import com.algorepublic.zoho.R;
 import java.util.List;
 import java.util.Map;
 
-public class StarRatingLevelSecondAdapter extends BaseExpandableListAdapter {
+public class AdapterStarRatingLevelSecond extends BaseExpandableListAdapter {
     private final Context mContext;
     private final List<String> mListDataHeader;
     private final Map<String, List<String>> mListDataChild;
 
-    public StarRatingLevelSecondAdapter(Context mContext, List<String> mListDataHeader, Map<String, List<String>> mListDataChild) {
+    public AdapterStarRatingLevelSecond(Context mContext, List<String> mListDataHeader, Map<String, List<String>> mListDataChild) {
         this.mContext = mContext;
         this.mListDataHeader = mListDataHeader;
         this.mListDataChild = mListDataChild;
@@ -48,7 +48,6 @@ public class StarRatingLevelSecondAdapter extends BaseExpandableListAdapter {
         }
         TextView txtListChild = (TextView) convertView
                 .findViewById(R.id.lblListItem);
-        txtListChild.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 15);
         txtListChild.setText(childText);
         return convertView;
     }
@@ -89,7 +88,6 @@ public class StarRatingLevelSecondAdapter extends BaseExpandableListAdapter {
         TextView lblListHeader = (TextView) convertView
                 .findViewById(R.id.lblListHeader);
         lblListHeader.setText(headerTitle);
-        lblListHeader.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 18);
         return convertView;
     }
 

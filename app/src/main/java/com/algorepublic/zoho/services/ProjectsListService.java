@@ -3,7 +3,8 @@ package com.algorepublic.zoho.services;
 import android.app.Activity;
 import android.util.Log;
 
-import com.algorepublic.zoho.Models.ProjectsModel;
+import com.algorepublic.zoho.Models.ProjectsByClientModel;
+import com.algorepublic.zoho.Models.ProjectsByDepartmentModel;
 import com.algorepublic.zoho.utils.Constants;
 
 /**
@@ -15,10 +16,15 @@ public class ProjectsListService extends BaseService {
         super(act);
     }
 
-    public void getProjectsList(String ownerID, boolean message, CallBack obj){
-        String url = Constants.GetProjectsList_API+ "?OwnerID=" + ownerID;
-        this.get(url, obj, ProjectsModel.getInstance(), message);
-        Log.e("TaskListService", url);
+    public void getProjectsByClient_API(String ownerID, boolean message, CallBack obj){
+        String url = Constants.GetProjectsByClient_API + "?OwnerID=" + ownerID;
+        this.get(url, obj, ProjectsByClientModel.getInstance(), message);
+        Log.e("ProjectsClientService", url);
+    }
+    public void getProjectsByDepartment(String ownerID, boolean message, CallBack obj){
+        String url = Constants.GetProjectsByDepartment_API + "?OwnerID=" + ownerID;
+        this.get(url, obj, ProjectsByDepartmentModel.getInstance(), message);
+        Log.e("ProjectsDeptService", url);
     }
 
 }
