@@ -44,9 +44,9 @@
                     android:singleLine="true"
                     android:textSize="7dp"
                     android:layout_alignParentRight="true"
+
                     android:background="@mipmap/bubble_alert_white"
-                    android:layout_alignParentTop="true"
-                    android:textColor="@color/colorBaseHeader" />
+ />
 
                 <ImageView
                     android:id="@+id/delete1"
@@ -70,9 +70,9 @@
                     android:singleLine="true"
                     android:textSize="7dp"
                     android:layout_alignParentRight="true"
+
                     android:background="@mipmap/bubble_alert_white"
-                    android:layout_alignParentTop="true"
-                    android:textColor="@color/colorBaseHeader" />
+ />
 
                 <ImageView
                     android:id="@+id/delete2"
@@ -96,9 +96,9 @@
                     android:singleLine="true"
                     android:textSize="7dp"
                     android:layout_alignParentRight="true"
+
                     android:background="@mipmap/bubble_alert_white"
-                    android:layout_alignParentTop="true"
-                    android:textColor="@color/colorBaseHeader" />
+ />
 
                 <ImageView
                     android:id="@+id/delete3"

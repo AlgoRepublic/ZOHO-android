@@ -4,12 +4,8 @@
     android:layout_height="match_parent"
     tools:context="com.algorepublic.zoho.FragmentsTasks.TaskAssignFragment">
 
-    <!-- TODO: Update blank fragment_forums layout -->
-    <include android:id="@+id/include"
-        layout="@layout/toolbar_tasklist"/>
     <se.emilsjolander.stickylistheaders.StickyListHeadersListView
         android:id="@+id/list_taskslist"
-        android:layout_below="@+id/include"
         android:layout_width="match_parent"
         android:layout_above="@+id/layout_bottom"
         android:layout_height="match_parent"
@@ -17,7 +13,7 @@
         android:divider="@android:color/transparent"
         android:fadeScrollbars="false"
         android:scrollbarAlwaysDrawVerticalTrack="true"
-        android:scrollbarSize="5dp"
+        android:scrollbarSize="3dp"
         android:scrollbars="vertical"
         android:scrollbarStyle="insideOverlay"
         android:scrollbarThumbVertical="@drawable/scrollbar_size"

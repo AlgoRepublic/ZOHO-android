@@ -22,6 +22,7 @@
     android:drawableLeft="@drawable/butllet"
     android:drawablePadding="10dp"
     android:gravity="center_vertical"
+    android:background="@color/colorBaseWrapper"
     android:minHeight="?android:attr/listPreferredItemHeightSmall"
     android:paddingLeft="40dp"
     android:paddingRight="10dp"

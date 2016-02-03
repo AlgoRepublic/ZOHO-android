@@ -7,9 +7,12 @@
         layout="@layout/toolbar_docslist"/>
     <ExpandableListView
         android:layout_below="@+id/include"
+        android:layout_margin="5dp"
         android:id="@+id/expandableListView"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:background="@drawable/roundable_corner"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:nestedScrollingEnabled="true"
         android:groupIndicator="@null" />
 
 </RelativeLayout>

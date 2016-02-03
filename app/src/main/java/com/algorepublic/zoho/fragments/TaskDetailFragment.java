@@ -7,15 +7,16 @@ import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.SeekBar;
 
 import com.algorepublic.zoho.ActivityTask;
-import com.algorepublic.zoho.MainActivity;
 import com.algorepublic.zoho.Models.GeneralModel;
 import com.algorepublic.zoho.Models.TaskAttachmentsModel;
 import com.algorepublic.zoho.R;
@@ -77,7 +78,7 @@ public class TaskDetailFragment extends BaseFragment {
         seekBarCompat = (DonutProgress) view.findViewById(R.id.circularprogressBar);
         seekBar =(SeekBar) view.findViewById(R.id.seekBar);
         twoWayAssignee = (TwoWayView) view.findViewById(R.id.task_assignee);
-      //  twoWayAttachments = (TwoWayView) view.findViewById(R.id.taskdetail_attachments);
+        //  twoWayAttachments = (TwoWayView) view.findViewById(R.id.taskdetail_attachments);
         twoWayAssignee.setHasFixedSize(true); //twoWayAttachments.setHasFixedSize(true);
         views =(View) view.findViewById(R.id.priority_bar);
 //        twoWayAttachments = (TwoWayView) view.findViewById(R.id.taskdetail_attachments);
@@ -89,8 +90,7 @@ public class TaskDetailFragment extends BaseFragment {
                 TasksListFragment.generalList.get(position).getListAssignees()));
 
         aq = new AQuery(view);
-        MainActivity.toolbar = (Toolbar) view.findViewById(R.id.toolbar);
-        setToolbar();
+        getToolbar().setTitle(getString(R.string.task_details));
         service = new TaskListService(getActivity());
         service.getTaskAttachments(10, true, new CallBack(TaskDetailFragment.this, "TaskAttachments"));
         aq.id(R.id.start_date).text(TasksListFragment.generalList.get(position).getStartDate());
@@ -100,36 +100,27 @@ public class TaskDetailFragment extends BaseFragment {
         seekBar.setProgress(TasksListFragment.generalList.get(position).getProgress());
         seekBarCompat.setProgress(TasksListFragment.generalList.get(position).getProgress());
 
-        Drawable shapeDrawable = (Drawable) aq.id(R.id.priority_bar).getView().getBackground();
+        Drawable shapeDrawable = aq.id(R.id.priority_bar).getView().getBackground();
         GradientDrawable colorDrawable = (GradientDrawable) shapeDrawable;
         colorDrawable.setColor(getPriorityWiseColor(TasksListFragment.generalList.get(position).getPriority()));
         aq.id(R.id.priority_bar).getView().setBackground(shapeDrawable);
-        aq.id(R.id.edit_task).clicked(new View.OnClickListener() {
+        views.setBackgroundColor(getPriorityWiseColor(TasksListFragment.generalList.get(position).getPriority()));
+        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), ActivityTask.class);
-                intent.putExtra("pos",position);
-                startActivity(intent);
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                seekBarCompat.setProgress(progress) ;
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
             }
         });
-
-        views.setBackgroundColor(getPriorityWiseColor(TasksListFragment.generalList.get(position).getPriority()));
-      seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-          @Override
-          public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-              seekBarCompat.setProgress(progress) ;
-          }
-
-          @Override
-          public void onStartTrackingTouch(SeekBar seekBar) {
-
-          }
-
-          @Override
-          public void onStopTrackingTouch(SeekBar seekBar) {
-
-          }
-      });
 
 
         aq.id(R.id.comment).clicked(new View.OnClickListener() {
@@ -154,6 +145,56 @@ public class TaskDetailFragment extends BaseFragment {
         });
         return view;
     }
+
+    /**
+     * Initialize the contents of the Activity's standard options menu.  You
+     * should place your menu items in to <var>menu</var>.  For this method
+     * to be called, you must have first called {@link #setHasOptionsMenu}.  See
+     * {@link Activity#onCreateOptionsMenu(Menu) Activity.onCreateOptionsMenu}
+     * for more information.
+     *
+     * @param menu     The options menu in which you place your items.
+     * @param inflater
+     * @see #setHasOptionsMenu
+     * @see #onPrepareOptionsMenu
+     * @see #onOptionsItemSelected
+     */
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_task_details, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+
+    }
+
+    /**
+     * This hook is called whenever an item in your options menu is selected.
+     * The default implementation simply returns false to have the normal
+     * processing happen (calling the item's Runnable or sending a message to
+     * its Handler as appropriate).  You can use this method for any items
+     * for which you would like to do processing without those other
+     * facilities.
+     * <p>
+     * <p>Derived classes should call through to the base class for it to
+     * perform the default menu handling.
+     *
+     * @param item The menu item that was selected.
+     * @return boolean Return false to allow normal menu processing to
+     * proceed, true to consume it here.
+     * @see #onCreateOptionsMenu
+     */
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.edit_task:
+                Intent intent = new Intent(getActivity(), ActivityTask.class);
+                intent.putExtra("pos",position);
+                startActivity(intent);
+                break;
+
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
     public void TaskAttachments(Object caller, Object model) {
         TaskAttachmentsModel.getInstance().setList((TaskAttachmentsModel) model);
         if (TaskAttachmentsModel.getInstance().responseCode == 100) {

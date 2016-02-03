@@ -7,9 +7,6 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.format.DateFormat;
 import android.util.DisplayMetrics;
@@ -170,10 +167,14 @@ public class BaseFragment extends Fragment {
         return value;
     }
     public void setToolbar(){
-        ((AppCompatActivity)getActivity()).setSupportActionBar(BaseActivity.toolbar);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                getActivity(), BaseActivity.drawer, BaseActivity.toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        BaseActivity.drawer.setDrawerListener(toggle);
-        toggle.syncState();
+//        ((AppCompatActivity)getActivity()).setSupportActionBar(BaseActivity.toolbar);
+//        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+//                getActivity(), BaseActivity.drawer, BaseActivity.toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+//        BaseActivity.drawer.setDrawerListener(toggle);
+//        toggle.syncState();
+    }
+
+    protected Toolbar getToolbar(){
+        return BaseActivity.toolbar;
     }
 }

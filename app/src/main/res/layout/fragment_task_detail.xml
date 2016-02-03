@@ -6,8 +6,6 @@
     android:layout_height="wrap_content"
     tools:context=".fragments.TaskDetailFragment"
     android:background="@color/colorBaseWrapper">
-    <include android:id="@+id/include"
-        layout="@layout/toolbar_taskdetail"/>
     <RelativeLayout
         android:layout_below="@+id/include"
         android:layout_width="match_parent"
