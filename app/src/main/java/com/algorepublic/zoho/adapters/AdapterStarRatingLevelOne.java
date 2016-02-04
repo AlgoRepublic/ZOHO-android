@@ -1,7 +1,6 @@
 package com.algorepublic.zoho.adapters;
 
 import android.content.Context;
-import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,63 +8,18 @@ import android.widget.BaseExpandableListAdapter;
 import android.widget.TextView;
 
 import com.algorepublic.zoho.R;
+import com.algorepublic.zoho.fragments.StarRatingFragment;
 import com.algorepublic.zoho.utils.CustomExpListView;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 /**
  * Created by android on 2/1/16.
  */
 public class AdapterStarRatingLevelOne extends BaseExpandableListAdapter {
     private final Context mContext;
-    private final List<String> mListDataHeader;
-    private final Map<String, List<String>> mListData_SecondLevel_Map;
-    private final Map<String, List<String>> mListData_ThirdLevel_Map;
 
-    public AdapterStarRatingLevelOne(Context mContext, List<String> mListDataHeader) {
+    public AdapterStarRatingLevelOne(Context mContext) {
         this.mContext = mContext;
-        this.mListDataHeader = new ArrayList<>();
-        this.mListDataHeader.addAll(mListDataHeader);
-        // SECOND LEVEL
-        String[] mItemHeaders;
-        mListData_SecondLevel_Map = new HashMap<>();
-        int parentCount = mListDataHeader.size();
-        for (int i = 0; i < parentCount; i++) {
-            String content = mListDataHeader.get(i);
-            switch (content) {
-                case "Level 1.1":
-                    mItemHeaders = mContext.getResources().getStringArray(R.array.items_array_expandable_level_one_one_child);
-                    break;
-                case "Level 1.2":
-                    mItemHeaders = mContext.getResources().getStringArray(R.array.items_array_expandable_level_one_two_child);
-                    break;
-                default:
-                    mItemHeaders = mContext.getResources().getStringArray(R.array.items_array_expandable_level_two);
-            }
-            mListData_SecondLevel_Map.put(mListDataHeader.get(i), Arrays.asList(mItemHeaders));
-        }
-        // THIRD LEVEL
-        String[] mItemChildOfChild;
-        List<String> listChild;
-        mListData_ThirdLevel_Map = new HashMap<>();
-        for (Object o : mListData_SecondLevel_Map.entrySet()) {
-            Map.Entry entry = (Map.Entry) o;
-            Object object = entry.getValue();
-            if (object instanceof List) {
-                List<String> stringList = new ArrayList<>();
-                Collections.addAll(stringList, (String[]) ((List) object).toArray());
-                for (int i = 0; i < stringList.size(); i++) {
-                    mItemChildOfChild = mContext.getResources().getStringArray(R.array.items_array_expandable_level_three);
-                    listChild = Arrays.asList(mItemChildOfChild);
-                    mListData_ThirdLevel_Map.put(stringList.get(i), listChild);
-                }
-            }
-        }
     }
 
     @Override
@@ -82,8 +36,8 @@ public class AdapterStarRatingLevelOne extends BaseExpandableListAdapter {
     public View getChildView(int groupPosition, int childPosition,
                              boolean isLastChild, View convertView, ViewGroup parent) {
         final CustomExpListView secondLevelExpListView = new CustomExpListView(this.mContext);
-        String parentNode = (String) getGroup(groupPosition);
-        secondLevelExpListView.setAdapter(new AdapterStarRatingLevelSecond(this.mContext, mListData_SecondLevel_Map.get(parentNode), mListData_ThirdLevel_Map));
+        secondLevelExpListView.setAdapter(new AdapterStarRatingLevelTwo(this.mContext,
+                StarRatingFragment.levelOneHead.get(childPosition).getLevelTwos()));
         secondLevelExpListView.setGroupIndicator(null);
 
         return secondLevelExpListView;
@@ -96,12 +50,12 @@ public class AdapterStarRatingLevelOne extends BaseExpandableListAdapter {
 
     @Override
     public Object getGroup(int groupPosition) {
-        return this.mListDataHeader.get(groupPosition);
+        return StarRatingFragment.levelOneHead.get(groupPosition);
     }
 
     @Override
     public int getGroupCount() {
-        return this.mListDataHeader.size();
+        return StarRatingFragment.levelOneHead.size();
     }
 
     @Override
@@ -112,15 +66,14 @@ public class AdapterStarRatingLevelOne extends BaseExpandableListAdapter {
     @Override
     public View getGroupView(int groupPosition, boolean isExpanded,
                              View convertView, ViewGroup parent) {
-        String headerTitle = (String) getGroup(groupPosition);
         if (convertView == null) {
             LayoutInflater layoutInflater = (LayoutInflater) this.mContext
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = layoutInflater.inflate(R.layout.drawer_list_group, parent, false);
+            convertView = layoutInflater.inflate(R.layout.drawer_list_level_one, parent, false);
         }
         TextView lblListHeader = (TextView) convertView
                 .findViewById(R.id.lblListHeader);
-        lblListHeader.setText(headerTitle);
+        lblListHeader.setText(StarRatingFragment.levelOneHead.get(groupPosition).getTitle());
         return convertView;
     }
 

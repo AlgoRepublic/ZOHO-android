@@ -2,27 +2,32 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="10dp"
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp"
     android:background="@drawable/roundable_corner"
     android:orientation="horizontal">
 
     <TextView
         android:id="@+id/lblListHeader"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="18sp"
+        android:textStyle="bold"
+        android:padding="3dp"
+        android:layout_toLeftOf="@+id/explist_indicator"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
-        android:text="lksahdgiuas"
+        android:text="lksahdgiuasdsdsdsdsddsdsdsdsssdsdsddssds"
+        android:gravity="center"
         android:textColor="@color/colorBaseHeader" />
 
         <ImageView
-            android:src="@drawable/group_statelist"
+            android:src="@drawable/drawer_level_one"
             android:id="@+id/explist_indicator"
             android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
-            android:layout_width="40px"
-            android:layout_height="40px"/>
+            android:layout_width="20dp"
+            android:layout_height="20dp"/>
     </RelativeLayout>
 
 

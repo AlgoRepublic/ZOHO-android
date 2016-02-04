@@ -1,8 +1,7 @@
 package com.algorepublic.zoho.adapters;
 
 import android.content.Context;
-import android.graphics.Color;
-import android.util.TypedValue;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,25 +9,27 @@ import android.widget.BaseExpandableListAdapter;
 import android.widget.TextView;
 
 import com.algorepublic.zoho.R;
+import com.algorepublic.zoho.fragments.StarRatingFragment;
+import com.algorepublic.zoho.utils.CustomExpListView;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class AdapterStarRatingLevelSecond extends BaseExpandableListAdapter {
+public class AdapterStarRatingLevelTwo extends BaseExpandableListAdapter {
     private final Context mContext;
-    private final List<String> mListDataHeader;
-    private final Map<String, List<String>> mListDataChild;
+    ArrayList<StarRatingHeadsLevelTwo> levelTwos =  new ArrayList<>();
 
-    public AdapterStarRatingLevelSecond(Context mContext, List<String> mListDataHeader, Map<String, List<String>> mListDataChild) {
+    public AdapterStarRatingLevelTwo(Context mContext,ArrayList<StarRatingHeadsLevelTwo> twos) {
         this.mContext = mContext;
-        this.mListDataHeader = mListDataHeader;
-        this.mListDataChild = mListDataChild;
+        levelTwos.addAll(twos);
     }
-
     @Override
     public Object getChild(int groupPosition, int childPosition) {
-        return this.mListDataChild.get(this.mListDataHeader.get(groupPosition))
-                .get(childPosition);
+        return childPosition;
     }
 
     @Override
@@ -39,36 +40,26 @@ public class AdapterStarRatingLevelSecond extends BaseExpandableListAdapter {
     @Override
     public View getChildView(int groupPosition, int childPosition,
                              boolean isLastChild, View convertView, ViewGroup parent) {
-        final String childText = (String) getChild(groupPosition, childPosition);
+        final CustomExpListView secondLevelExpListView = new CustomExpListView(this.mContext);
+        secondLevelExpListView.setAdapter(new AdapterStarRatingLevelThree(this.mContext,levelTwos.get(childPosition).getLevelThrees()));
+        secondLevelExpListView.setGroupIndicator(null);
 
-        if (convertView == null) {
-            LayoutInflater layoutInflater = (LayoutInflater) this.mContext
-                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = layoutInflater.inflate(R.layout.drawer_list_item, parent, false);
-        }
-        TextView txtListChild = (TextView) convertView
-                .findViewById(R.id.lblListItem);
-        txtListChild.setText(childText);
-        return convertView;
+        return secondLevelExpListView;
     }
 
     @Override
     public int getChildrenCount(int groupPosition) {
-        try {
-            return this.mListDataChild.get(this.mListDataHeader.get(groupPosition)).size();
-        } catch (Exception e) {
-            return 0;
-        }
+        return 1;
     }
 
     @Override
     public Object getGroup(int groupPosition) {
-        return this.mListDataHeader.get(groupPosition);
+        return levelTwos.get(groupPosition);
     }
 
     @Override
     public int getGroupCount() {
-        return this.mListDataHeader.size();
+        return levelTwos.size();
     }
 
     @Override
@@ -79,15 +70,14 @@ public class AdapterStarRatingLevelSecond extends BaseExpandableListAdapter {
     @Override
     public View getGroupView(int groupPosition, boolean isExpanded,
                              View convertView, ViewGroup parent) {
-        String headerTitle = (String) getGroup(groupPosition);
         if (convertView == null) {
             LayoutInflater layoutInflater = (LayoutInflater) this.mContext
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = layoutInflater.inflate(R.layout.drawer_list_group_second, parent, false);
+            convertView = layoutInflater.inflate(R.layout.drawer_list_level_two, parent, false);
         }
         TextView lblListHeader = (TextView) convertView
                 .findViewById(R.id.lblListHeader);
-        lblListHeader.setText(headerTitle);
+        lblListHeader.setText(levelTwos.get(groupPosition).getTitle());
         return convertView;
     }
 
