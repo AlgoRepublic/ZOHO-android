@@ -7,9 +7,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.Toast;
 
+import com.algorepublic.zoho.Models.ForumsCommentModel;
 import com.algorepublic.zoho.Models.ForumsModel;
 import com.algorepublic.zoho.R;
+import com.algorepublic.zoho.adapters.AdapterForumComment;
+import com.algorepublic.zoho.adapters.AdapterForumsList;
+import com.algorepublic.zoho.services.CallBack;
+import com.algorepublic.zoho.services.ForumService;
 import com.algorepublic.zoho.utils.BaseClass;
 import com.androidquery.AQuery;
 
@@ -19,12 +25,12 @@ import com.androidquery.AQuery;
 public class ForumsDetailFragment extends BaseFragment {
     private AQuery aq;
     private BaseClass baseClass;
-    public static int Pos;
     static ForumsDetailFragment fragment;
+    static int Position;
     ListView forums_list;
 
     public static ForumsDetailFragment newInstance(int pos) {
-        Pos =pos;
+        Position =pos;
         if(fragment==null){
             fragment = new ForumsDetailFragment();
         }
@@ -37,15 +43,30 @@ public class ForumsDetailFragment extends BaseFragment {
         View view  = inflater.inflate(R.layout.layout_detailforum, container, false);
         aq = new AQuery(getActivity(), view);
         baseClass = ((BaseClass) getActivity().getApplicationContext());
-        forums_list=(ListView)view.findViewById(R.id.forums_list);
-        aq.id(R.id.forum_title).text(ForumsModel.getInstance().responseObject.get(Pos).title);
-        aq.id(R.id.forum_discription).text("by " + ForumsModel.getInstance().responseObject.get(Pos).user.firstName
-                + " , last responce on " +
-                baseClass.DateFormatter(ForumsModel.getInstance().responseObject.get(Pos).updatedAt) + " "
-                + baseClass.GetTime(baseClass.DateMilli(ForumsModel.getInstance().responseObject.get(Pos).updatedAt)));
-        if((ForumsModel.getInstance().responseObject.get(Pos).forumContent)!= null) {
-              aq.id(R.id.content_description).text(Html.fromHtml(ForumsModel.getInstance().responseObject.get(Pos).forumContent));
+
+        ForumService service = new ForumService(getActivity());
+        service.getForumsDetail(ForumsModel.getInstance().responseObject.get(Position).ID
+                ,true,new CallBack(ForumsDetailFragment.this,"ForumDetails"));
+
+        aq.id(R.id.forum_title).text(ForumsModel.getInstance().responseObject.get(Position).title);
+        aq.id(R.id.forum_description).text("by " + ForumsModel.getInstance().responseObject.get(Position).user.firstName
+                + " , last response on " +
+                baseClass.DateFormatter(ForumsModel.getInstance().responseObject.get(Position).updatedAt) + " "
+                + baseClass.GetTime(baseClass.DateMilli(ForumsModel.getInstance()
+                .responseObject.get(Position).updatedAt)));
+        if((ForumsModel.getInstance().responseObject.get(Position).forumContent)!= null) {
+              aq.id(R.id.content_description).text(Html.fromHtml(ForumsModel.getInstance()
+                      .responseObject.get(Position).forumContent));
         }
         return view;
+    }
+    public void ForumDetails(Object caller, Object model){
+        ForumsCommentModel.getInstance().setList((ForumsCommentModel) model);
+        if (ForumsCommentModel.getInstance().responseObject.forumComments.size()!=0) {
+            aq.id(R.id.forums_comment_list).adapter(new AdapterForumComment(getActivity()));
+        }else {
+            Toast.makeText(getActivity(), getString(R.string.forums_list_empty), Toast.LENGTH_SHORT).show();
+        }
+
     }
 }

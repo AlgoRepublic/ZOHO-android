@@ -8,22 +8,22 @@ import java.util.ArrayList;
 /**
  * Created by waqas on 2/3/16.
  */
-public class ForumCommentModel  {
+public class ForumsCommentModel {
 
-    private static ForumCommentModel _obj = null;
+    private static ForumsCommentModel _obj = null;
 
-    private ForumCommentModel() {
+    private ForumsCommentModel() {
 
     }
 
-    public static ForumCommentModel getInstance() {
+    public static ForumsCommentModel getInstance() {
         if (_obj == null) {
-            _obj = new ForumCommentModel();
+            _obj = new ForumsCommentModel();
         }
         return _obj;
     }
 
-    public void setList(ForumCommentModel obj) {
+    public void setList(ForumsCommentModel obj) {
         _obj = obj;
     }
 
@@ -31,9 +31,6 @@ public class ForumCommentModel  {
     public ResponseObject responseObject = new ResponseObject();
 
     public class ResponseObject{
-
-        @SerializedName("ForumID")
-        public String forumID;
 
         @SerializedName("Title")
         public String title;
@@ -44,16 +41,9 @@ public class ForumCommentModel  {
         @SerializedName("ProjectID")
         public String projectID;
 
-        @SerializedName("ForumAttachments")
-        @Expose
-        public ArrayList<ForumAttachments> forumAttachmentses = new ArrayList<ForumAttachments>();
-
         @SerializedName("ForumComments")
         @Expose
-        public ArrayList<ForumComments> forumCommentses = new ArrayList<ForumComments>();
-    }
-    public class ForumAttachments{
-
+        public ArrayList<ForumComments> forumComments = new ArrayList<ForumComments>();
     }
 
     public class ForumComments{
@@ -67,6 +57,15 @@ public class ForumCommentModel  {
     public class Users{
         @SerializedName("FirstName")
         public String firstName;
+
+        @SerializedName("LastName")
+        @Expose
+        public String lastName;
+
+
+        @SerializedName("ProfileImagePath")
+        @Expose
+        public String profileImagePath;
 
         @SerializedName("CreatedAt")
         public String createdAt;

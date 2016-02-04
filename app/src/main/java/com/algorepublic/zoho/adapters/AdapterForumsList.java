@@ -1,7 +1,6 @@
 package com.algorepublic.zoho.adapters;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,7 +29,6 @@ public class AdapterForumsList extends BaseAdapter {
 
     @Override
     public int getCount() {
-        Log.e("ForumsAdapter Count",ForumsModel.getInstance().responseObject.size()+"");
         return ForumsModel.getInstance().responseObject.size();
     }
 
@@ -46,12 +44,13 @@ public class AdapterForumsList extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        convertView = l_Inflater.inflate(R.layout.layouts_forum_row, null);
+        convertView = l_Inflater.inflate(R.layout.layout_forum_row, null);
         aq = new AQuery(convertView);
         aq.id(R.id.forum_title).text(getItem(position).title);
-        aq.id(R.id.forum_discription).text("by "+ getItem(position).user.firstName +" , last responce on "+ baseClass.DateFormatter(getItem(position).updatedAt)+" "+ baseClass.GetTime(baseClass.DateMilli(getItem(position).updatedAt)));
+        aq.id(R.id.forum_description).text("by "+ getItem(position).user.firstName
+                +" "+getItem(position).user.lastName
+                +" , last response on "+ baseClass.DateFormatter(getItem(position).updatedAt)
+                +" "+ baseClass.GetTime(baseClass.DateMilli(getItem(position).updatedAt)));
         return convertView;
     }
-
-
 }

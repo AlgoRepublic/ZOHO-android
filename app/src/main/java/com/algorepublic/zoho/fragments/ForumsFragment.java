@@ -18,14 +18,14 @@ import com.algorepublic.zoho.Models.ForumsModel;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.adapters.AdapterForumsList;
 import com.algorepublic.zoho.services.CallBack;
-import com.algorepublic.zoho.services.ForumListService;
+import com.algorepublic.zoho.services.ForumService;
 import com.algorepublic.zoho.utils.BaseClass;
 import com.androidquery.AQuery;
 
 /**
  * Created by waqas on 2/1/16.
  */
-public class ForumsFragment extends BaseFragment implements AdapterView.OnItemClickListener{
+public class ForumsFragment extends BaseFragment{
 
     private AQuery aq;
     private BaseClass baseClass;
@@ -60,12 +60,14 @@ public class ForumsFragment extends BaseFragment implements AdapterView.OnItemCl
         setHasOptionsMenu(true);
         aq = new AQuery(getActivity(), view);
         baseClass = ((BaseClass) getActivity().getApplicationContext());
-        forums_list=(ListView)view.findViewById(R.id.forums_list);
-        forumAdapter=new AdapterForumsList(getActivity());
-        forums_list.setOnItemClickListener(this);
-
-        ForumListService serviceForum = new ForumListService(getActivity());
-        serviceForum.getForumsList(4, true, new CallBack(ForumsFragment.this, "ForumListCallback"));
+        aq.id(R.id.forums_list).itemClicked(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                callFragmentWithBackStack(R.id.container, ForumsDetailFragment.newInstance(position),"ForumsDetailFragment");
+            }
+        });
+        ForumService service = new ForumService(getActivity());
+        service.getForumsList(4, true, new CallBack(ForumsFragment.this, "ForumListCallback"));
 
         setHasOptionsMenu(true);
         getToolbar().setTitle(getString(R.string.forums));
@@ -84,15 +86,10 @@ public class ForumsFragment extends BaseFragment implements AdapterView.OnItemCl
     public void ForumListCallback(Object caller, Object model){
         ForumsModel.getInstance().setList((ForumsModel) model);
         if (ForumsModel.getInstance().responseObject.size()!=0) {
-            forums_list.setAdapter(forumAdapter);
+            aq.id(R.id.forums_list).adapter(new AdapterForumsList(getActivity()));
         }else {
             Toast.makeText(getActivity(), getString(R.string.forums_list_empty), Toast.LENGTH_SHORT).show();
         }
 
-    }
-
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        callFragmentWithBackStack(R.id.container, ForumsDetailFragment.newInstance(position),"FroumsDetailFragment");
     }
 }

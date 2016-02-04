@@ -52,17 +52,6 @@ public class AdapterMenuItems extends BaseAdapter{
             R.mipmap.star_white,
             R.mipmap.departments_white
     };
-    int[] menu_icon_blue = {
-            R.mipmap.dashboard_blue,
-            R.mipmap.projects_blue,
-            R.mipmap.tasks_blue,
-            R.mipmap.calender_blue,
-            R.mipmap.document_blue,
-            R.mipmap.users_blue,
-            R.mipmap.forums_blue,
-            R.mipmap.star_blue,
-            R.mipmap.departments_blue
-    };
     public AdapterMenuItems(Context context) {
         this.ctx = context;
        inflater = LayoutInflater.from(context);

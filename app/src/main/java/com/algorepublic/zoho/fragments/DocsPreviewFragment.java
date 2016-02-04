@@ -55,15 +55,15 @@ public class DocsPreviewFragment extends BaseFragment {
         baseClass = ((BaseClass) getActivity().getApplicationContext());
         adapter = new AdapterDocsComments(getActivity());
         listView.setAdapter(adapter);
-        aq.id(R.id.user_name).text(DocumentsListFragment.docsList.get(position).getFileName());
-        aq.id(R.id.doc_title).text(DocumentsListFragment.docsList.get(position).getFileName());
-        aq.id(R.id.doc_size).text(DocumentsListFragment.docsList.get(position).getFileSizeInByte());
-        if(DocumentsListFragment.docsList.get(position).getFileTypeID()>=0 &&
-                DocumentsListFragment.docsList.get(position).getFileTypeID()<=4 ){
-            Glide.with(getActivity()).load(Constants.Image_URL + DocumentsListFragment.docsList.
+        aq.id(R.id.user_name).text(DocumentsListFragment.generalDocsList.get(position).getFileName());
+        aq.id(R.id.doc_title).text(DocumentsListFragment.generalDocsList.get(position).getFileName());
+        aq.id(R.id.doc_size).text(DocumentsListFragment.generalDocsList.get(position).getFileSizeInByte());
+        if(DocumentsListFragment.generalDocsList.get(position).getFileTypeID()>=0 &&
+                DocumentsListFragment.generalDocsList.get(position).getFileTypeID()<=4 ){
+            Glide.with(getActivity()).load(Constants.Image_URL + DocumentsListFragment.generalDocsList.
                     get(position).getFileDescription()).into(aq.id(R.id.doc_image).getImageView());
         }else {
-            Glide.with(getActivity()).load(BaseClass.getIcon(DocumentsListFragment.docsList.
+            Glide.with(getActivity()).load(BaseClass.getIcon(DocumentsListFragment.generalDocsList.
                     get(position).getFileTypeID())).into(aq.id(R.id.doc_image).getImageView());
         }
         aq.id(R.id.comment_user).getTextView().setOnEditorActionListener(new TextView.OnEditorActionListener() {
