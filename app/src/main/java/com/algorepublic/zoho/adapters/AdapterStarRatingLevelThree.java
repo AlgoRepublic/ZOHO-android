@@ -49,21 +49,25 @@ public class AdapterStarRatingLevelThree extends BaseExpandableListAdapter {
     @Override
     public View getChildView(int groupPosition, int childPosition,
                              boolean isLastChild, View convertView, ViewGroup parent) {
-        if (convertView == null) {
-            layoutInflater = (LayoutInflater) this.mContext
-                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = layoutInflater.inflate(R.layout.drawer_list_item, parent, false);
-            aq = new AQuery(convertView);
-          QuestLayout = (LinearLayout) aq
-                    .id(R.id.layout_questions).visible().getView();
-        }
-        service.getStarRatingQuestion_API(levelThrees.get(childPosition).getID(),"en-US",
-                true,new CallBack(AdapterStarRatingLevelThree.this,"StarRatingQuestion"));
+            if(convertView == null) {
+                layoutInflater = (LayoutInflater) this.mContext
+                        .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                convertView = layoutInflater.inflate(R.layout.drawer_list_item, parent, false);
+                aq = new AQuery(convertView);
+                QuestLayout = (LinearLayout) aq
+                        .id(R.id.layout_questions).visible().getView();
+            }
+        try {
+            StarRatingQuestionModel.getInstance().responseData.clear();
+        }catch (NullPointerException e){}
+        QuestLayout.removeAllViews();
+        QuestLayout.invalidate();
+        service.getStarRatingQuestion_API(levelThrees.get(groupPosition).getID(), "en-US",
+                true, new CallBack(AdapterStarRatingLevelThree.this, "StarRatingQuestion"));
         return convertView;
     }
     public void StarRatingQuestion(Object caller, Object model) {
         StarRatingQuestionModel.getInstance().setList((StarRatingQuestionModel) model);
-        Log.e("Size","/"+StarRatingQuestionModel.getInstance().responseData.size());
         if (StarRatingQuestionModel.getInstance().responseCode == 100) {
             View QuestionLayout;
             for(int loop=0;loop<StarRatingQuestionModel.getInstance().responseData.size();loop++) {
@@ -87,6 +91,14 @@ public class AdapterStarRatingLevelThree extends BaseExpandableListAdapter {
                 final RatingBar ratingBar  =(RatingBar) QuestionLayout.findViewById(R.id.star_rating);
                 ratingBar.setProgress(StarRatingQuestionModel.getInstance()
                         .responseData.get(loop).progress);
+                aq_quest.id(R.id.comment_edit).clicked(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        aq_quest.id(R.id.comment_edittext).enabled(true).clickable(true);
+                        aq_quest.id(R.id.comment_edittext).getEditText().requestFocus();
+                        aq_quest.id(R.id.comment_edittext).getEditText().setFocusable(true);
+                    }
+                });
                 aq_quest.id(R.id.seekBar).getSeekBar().setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
                     @Override
                     public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
