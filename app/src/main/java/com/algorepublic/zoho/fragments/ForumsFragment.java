@@ -1,19 +1,22 @@
 package com.algorepublic.zoho.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.algorepublic.zoho.ActivityTask;
 import com.algorepublic.zoho.BaseActivity;
-import com.algorepublic.zoho.MainActivity;
 import com.algorepublic.zoho.Models.ForumsModel;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.adapters.AdapterForumsList;
@@ -39,26 +42,41 @@ public class ForumsFragment extends BaseFragment implements AdapterView.OnItemCl
         fragment.setArguments(args);
         return fragment;
     }
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_forum, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.add_project:
+                startActivity(new Intent(getActivity(), ActivityTask.class));
+                break;
+        }
+        return super.onOptionsItemSelected(item);
 
+    }
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view  = inflater.inflate(R.layout.fragment_forums, container, false);
+        setHasOptionsMenu(true);
         aq = new AQuery(getActivity(), view);
+        baseClass = ((BaseClass) getActivity().getApplicationContext());
         forums_list=(ListView)view.findViewById(R.id.forums_list);
         forumAdapter=new AdapterForumsList(getActivity());
-        MainActivity.toolbar = (Toolbar) view.findViewById(R.id.toolbar);
         forums_list.setOnItemClickListener(this);
+
+        ForumListService serviceForum = new ForumListService(getActivity());
+        serviceForum.getForumsList(4, true, new CallBack(ForumsFragment.this, "ForumListCallback"));
         return view;
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        setRetainInstance(true);
+        getToolbar().setTitle(getString(R.string.forums));
         super.onViewCreated(view, savedInstanceState);
-        baseClass = ((BaseClass) getActivity().getApplicationContext());
-        ForumListService serviceForum = new ForumListService(getActivity());
-        serviceForum.getForumsList(4, true, new CallBack(ForumsFragment.this, "ForumListCallback"));
-
     }
     public void ForumListCallback(Object caller, Object model){
         ForumsModel.getInstance().setList((ForumsModel) model);
@@ -80,6 +98,6 @@ public class ForumsFragment extends BaseFragment implements AdapterView.OnItemCl
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        callFragmentWithReplace(R.id.container, ForumsDetailFragment.newInstance(position),"FroumsDetailFragment");
+        callFragmentWithBackStack(R.id.container, ForumsDetailFragment.newInstance(position),"FroumsDetailFragment");
     }
 }

@@ -6,6 +6,7 @@ import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 
 import com.algorepublic.zoho.Models.ForumsModel;
 import com.algorepublic.zoho.R;
@@ -20,6 +21,7 @@ public class ForumsDetailFragment extends BaseFragment {
     private BaseClass baseClass;
     public static int Pos;
     static ForumsDetailFragment fragment;
+    ListView forums_list;
 
     public static ForumsDetailFragment newInstance(int pos) {
         Pos =pos;
@@ -35,16 +37,15 @@ public class ForumsDetailFragment extends BaseFragment {
         View view  = inflater.inflate(R.layout.layout_detailforum, container, false);
         aq = new AQuery(getActivity(), view);
         baseClass = ((BaseClass) getActivity().getApplicationContext());
+        forums_list=(ListView)view.findViewById(R.id.forums_list);
         aq.id(R.id.forum_title).text(ForumsModel.getInstance().responseObject.get(Pos).title);
-        aq.id(R.id.forum_discription).text("by "+ ForumsModel.getInstance().responseObject.get(Pos).user.firstName
-                +" , last responce on " +
-                baseClass.DateFormatter(ForumsModel.getInstance().responseObject.get(Pos).updatedAt ) +" "
+        aq.id(R.id.forum_discription).text("by " + ForumsModel.getInstance().responseObject.get(Pos).user.firstName
+                + " , last responce on " +
+                baseClass.DateFormatter(ForumsModel.getInstance().responseObject.get(Pos).updatedAt) + " "
                 + baseClass.GetTime(baseClass.DateMilli(ForumsModel.getInstance().responseObject.get(Pos).updatedAt)));
-        aq.id(R.id.content_description).text(Html.fromHtml(ForumsModel.getInstance().responseObject.get(Pos).forumContent));
-
-
-
-
+        if((ForumsModel.getInstance().responseObject.get(Pos).forumContent)!= null) {
+              aq.id(R.id.content_description).text(Html.fromHtml(ForumsModel.getInstance().responseObject.get(Pos).forumContent));
+        }
         return view;
     }
 }
