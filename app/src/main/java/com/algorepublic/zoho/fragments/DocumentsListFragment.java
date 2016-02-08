@@ -14,8 +14,10 @@ import android.widget.Toast;
 
 import com.algorepublic.zoho.ActivityUploadDocs;
 import com.algorepublic.zoho.Models.DocumentsListModel;
+import com.algorepublic.zoho.Models.TasksListModel;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.adapters.AdapterDocumentsList;
+import com.algorepublic.zoho.adapters.AdapterTasksList;
 import com.algorepublic.zoho.adapters.DocumentsList;
 import com.algorepublic.zoho.services.CallBack;
 import com.algorepublic.zoho.services.DocumentsService;
@@ -40,9 +42,10 @@ public class DocumentsListFragment extends BaseFragment {
     AQuery aq;
     View view;
     DocumentsService service;
-    public static ArrayList<DocumentsList> docsList = new ArrayList<>();
+    public static ArrayList<DocumentsList> generalDocsList = new ArrayList<>();
+    public static ArrayList<DocumentsList> allDocsList = new ArrayList<>();
     BaseClass baseClass;
-    StickyListHeadersListView listView;
+    public static StickyListHeadersListView listView;
 
     public DocumentsListFragment() {
     }
@@ -79,11 +82,15 @@ public class DocumentsListFragment extends BaseFragment {
         setHasOptionsMenu(true);
         getToolbar().setTitle(getString(R.string.documents));
         service = new DocumentsService(getActivity());
-        service.getDocuments(1, true, new CallBack(DocumentsListFragment.this, "DocumentsList"));
+        if(isLoaded()) {
+            FilterList();
+        }else {
+            service.getDocuments(4, true, new CallBack(DocumentsListFragment.this, "DocumentsList"));
+        }
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                callFragmentWithBackStack(R.id.container,DocsPreviewFragment.newInstance(position),"DocsPreview");
+                callFragmentWithBackStack(R.id.container, DocsPreviewFragment.newInstance(position), "DocsPreview");
             }
         });
         return view;
@@ -142,10 +149,10 @@ public class DocumentsListFragment extends BaseFragment {
             @Override
             public void onOperItemClick(AdapterView<?> parent, View view, int position, long id) {
                 dialog.dismiss();
-              //  if (isLoaded())
-                    if (position == 0) {
-                        baseClass.setDocsSortType("AllFiles");
-                    }
+                if (isLoaded())
+                if (position == 0) {
+                    baseClass.setDocsSortType("AllFiles");
+                }
                 if (position == 1) {
                     baseClass.setDocsSortType("Pictures");
                 }
@@ -155,24 +162,41 @@ public class DocumentsListFragment extends BaseFragment {
                 if (position == 3) {
                     baseClass.setDocsSortType("Favorites");
                 }
-                //SortList();
+                FilterList();
             }
         });
+    }
+    public void FilterList(){
+        if(baseClass.getDocsSortType().equalsIgnoreCase("AllFiles"))
+            FilterByAllDocs();
+        if(baseClass.getDocsSortType().equalsIgnoreCase("Pictures"))
+            FilterByPicture();
+        if(baseClass.getDocsSortType().equalsIgnoreCase("Videos"))
+            FilterByVideo();
+        if(baseClass.getDocsSortType().equalsIgnoreCase("Favorites"))
+            FilterByFav();
+
+        SetAdapterList();
+    }
+    public void SetAdapterList(){
+        if (DocumentsListModel.getInstance().responseCode == 100) {
+            adapterDocsList = new AdapterDocumentsList(getActivity());
+            listView.setAreHeadersSticky(true);
+            listView.setAdapter(adapterDocsList);
+        }
     }
     public void DocumentsList(Object caller, Object model) {
         DocumentsListModel.getInstance().setList((DocumentsListModel) model);
         if (DocumentsListModel.getInstance().responseCode == 100) {
-            GetDocumentsList();
-            adapterDocsList = new AdapterDocumentsList(getActivity());
-            listView.setAreHeadersSticky(true);
-            listView.setAdapter(adapterDocsList);
+            GetAllDocumentsList();
+            FilterList();
         } else {
             Toast.makeText(getActivity(), getString(R.string.invalid_credential), Toast.LENGTH_SHORT).show();
         }
     }
 
-    public void GetDocumentsList() {
-       docsList.clear();
+    public void GetAllDocumentsList() {
+       allDocsList.clear();
         for (int loop = 0; loop < DocumentsListModel.getInstance().responseObject.size(); loop++) {
             for (int loop1 = 0; loop1 < DocumentsListModel.getInstance().responseObject.get(loop).files.size(); loop1++) {
                 DocumentsList documentsList = new DocumentsList();
@@ -182,9 +206,50 @@ public class DocumentsListFragment extends BaseFragment {
                 documentsList.setCreatedAt(DateFormatter(DocumentsListModel.getInstance().responseObject.get(loop).files.get(loop1).createdAt));
                 documentsList.setCreatedMilli(DateMilli(DocumentsListModel.getInstance().responseObject.get(loop).files.get(loop1).createdAt));
                 documentsList.setFileTypeID(DocumentsListModel.getInstance().responseObject.get(loop).files.get(loop1).fileTypeID);
-                docsList.add(documentsList);
+                documentsList.setIsFav(DocumentsListModel.getInstance().responseObject.get(loop).files.get(loop1).isFav);
+                allDocsList.add(documentsList);
             }
         }
-        Collections.sort(docsList);
+        Collections.sort(allDocsList);
+    }
+
+    public void FilterByAllDocs(){
+        generalDocsList.clear();
+       generalDocsList.addAll(allDocsList);
+    }
+    public void FilterByPicture(){
+        generalDocsList.clear();
+        for(int loop=0;loop<allDocsList.size();loop++){
+            if(BaseClass.getExtension(allDocsList.get(loop).getFileName())>=1&&
+                    BaseClass.getExtension(allDocsList.get(loop).getFileName()) <=4){
+                generalDocsList.add(allDocsList.get(loop));
+            }
+        }
+    }
+    public void FilterByVideo(){
+        generalDocsList.clear();
+        for(int loop=0;loop<allDocsList.size();loop++){
+            if(BaseClass.getExtension(allDocsList.get(loop).getFileName())>=9&&
+                    BaseClass.getExtension(allDocsList.get(loop).getFileName()) <=11){
+                generalDocsList.add(allDocsList.get(loop));
+            }
+        }
+    }
+    public void FilterByFav(){
+        generalDocsList.clear();
+        for(int loop=0;loop<allDocsList.size();loop++){
+            if(allDocsList.get(loop).getIsFav()== true){
+                generalDocsList.add(allDocsList.get(loop));
+            }
+        }
+    }
+    public boolean isLoaded(){
+        Boolean isloading=false;
+        if(allDocsList.size()==0)
+            isloading = false;
+        else
+            isloading= true;
+
+        return isloading;
     }
 }

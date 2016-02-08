@@ -46,12 +46,20 @@ public class DocumentsList  implements Comparable<DocumentsList>{
         this.fileTypeID = fileTypeID;
     }
 
+    public boolean getIsFav() {
+        return isFav;
+    }
+    public void setIsFav(boolean isFav) {
+        this.isFav = isFav;
+    }
+
     private String fileName ;
     private String fileDescription;
     private String fileSizeInByte;
     private String createdAt;
     private String createdMilli;
     private int fileTypeID;
+    private boolean isFav;
 
     @Override
     public int compareTo(DocumentsList another) {

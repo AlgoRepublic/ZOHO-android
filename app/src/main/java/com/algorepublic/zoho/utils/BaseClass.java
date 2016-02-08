@@ -280,7 +280,7 @@ public class BaseClass extends Application {
             type=7;
         if(extention.contains("mp3/mpeg"))
             type=8;
-        if(extention.contains("mp4"))
+        if(extention.contains("mp4a"))
             type=9;
         if(extention.contains("wav"))
             type=10;

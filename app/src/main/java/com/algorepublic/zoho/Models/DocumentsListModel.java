@@ -66,6 +66,11 @@ public class DocumentsListModel {
         @Expose
         public int fileTypeID;
 
+
+        @SerializedName("IsFav")
+        @Expose
+        public boolean isFav;
+
     }
 
 }

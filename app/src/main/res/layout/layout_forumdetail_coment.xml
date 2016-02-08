@@ -5,16 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <RelativeLayout
-        android:padding="15dp"
         android:layout_width="match_parent"
-        android:layout_height="100dp">
-
+        android:layout_height="wrap_content">
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:background="@mipmap/image_comment"
-            android:id="@+id/imageView6" />
+            android:id="@+id/comment_image" />
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -25,18 +23,18 @@
             android:textColor="@color/colorBaseHeader"
             android:textSize="14sp"
             android:id="@+id/forum_title"
-            android:layout_alignTop="@+id/imageView6"
-            android:layout_toEndOf="@+id/imageView6" />
+            android:layout_alignTop="@+id/comment_image"
+            android:layout_toEndOf="@+id/comment_image" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/forum_discription"
+            android:id="@+id/forum_description"
             android:textSize="14sp"
             android:lines="2"
             android:text="daadadad"
             android:textColor="@color/colorBaseHeader"
-            android:layout_below="@+id/imageView6"
+            android:layout_below="@+id/comment_image"
             android:layout_alignStart="@+id/forum_title" />
 </RelativeLayout>
     </RelativeLayout>

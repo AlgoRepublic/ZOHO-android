@@ -193,9 +193,9 @@ public class TasksListFragment extends BaseFragment {
             public void onOperItemClick(AdapterView<?> parent, View view, int position, long id) {
                 dialog.dismiss();
                 if (isLoaded())
-                    if (position == 0) {
-                        baseClass.setTaskSortType("DueDate");
-                    }
+                if (position == 0) {
+                    baseClass.setTaskSortType("DueDate");
+                }
                 if (position == 1) {
                     baseClass.setTaskSortType("Priority");
                 }

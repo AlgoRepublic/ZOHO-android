@@ -27,7 +27,7 @@ public class StarRatingQuestionModel {
 
 
     @SerializedName("responseObject")
-    public ArrayList<Response> responseData;
+    public ArrayList<Response> responseData =  new ArrayList<>();
 
     public class Response{
         @SerializedName("Statement")

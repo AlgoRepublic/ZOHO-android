@@ -1,12 +1,15 @@
 package com.algorepublic.zoho.adapters;
 
 import android.content.Context;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
-import com.algorepublic.zoho.Models.ForumCommentModel;
+import com.algorepublic.zoho.Models.ForumsCommentModel;
+import com.algorepublic.zoho.Models.ForumsModel;
+import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.utils.BaseClass;
 import com.androidquery.AQuery;
 
@@ -20,25 +23,20 @@ public class AdapterForumComment extends BaseAdapter {
     private AQuery aq;
     private LayoutInflater l_Inflater;
 
-
-    public AdapterForumComment (Context context) {
+    public AdapterForumComment(Context context) {
         l_Inflater = LayoutInflater.from(context);
         this.ctx = context;
         baseClass = ((BaseClass) ctx.getApplicationContext());
     }
 
-
-
-
-
     @Override
     public int getCount() {
-          return ForumCommentModel.getInstance().responseObject.forumCommentses.size();
+        return ForumsCommentModel.getInstance().responseObject.forumComments.size();
     }
 
     @Override
-    public ForumCommentModel.ResponseObject getItem(int position) {
-        return null;
+    public ForumsCommentModel.ForumComments getItem(int position) {
+        return ForumsCommentModel.getInstance().responseObject.forumComments.get(position);
     }
 
     @Override
@@ -48,6 +46,15 @@ public class AdapterForumComment extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        return null;
+        convertView = l_Inflater.inflate(R.layout.layout_forumdetail_coment, null);
+        aq = new AQuery(convertView);
+
+        aq.id(R.id.forum_title).text(getItem(position).user.firstName+" "+
+        getItem(position).user.lastName+", on "+baseClass.DateFormatter
+                (getItem(position).user.updatedAt)+" "+baseClass.GetTime(
+                baseClass.DateMilli(getItem(position).user.updatedAt)));
+        aq.id(R.id.forum_description).text(Html.fromHtml(getItem(position).message));
+        aq.id(R.id.comment_image).text(getItem(position).user.profileImagePath);
+        return convertView;
     }
 }
