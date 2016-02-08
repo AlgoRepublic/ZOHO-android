@@ -60,6 +60,7 @@ public class AdapterDocumentsList extends BaseAdapter implements StickyListHeade
             convertView = l_Inflater.inflate(R.layout.layout_docs_row, null);
         }
         aq = new AQuery(convertView);
+        aq.id(R.id.file_id).text(Integer.toString(DocumentsListFragment.generalDocsList.get(position).getID()));
         aq.id(R.id.file_name).text(DocumentsListFragment.generalDocsList.get(position).getFileName());
         aq.id(R.id.file_time).text(GetTime(DocumentsListFragment.generalDocsList.get(position).getCreatedMilli()));
         aq.id(R.id.file_image).image(BaseClass.getIcon(DocumentsListFragment.generalDocsList.
@@ -67,13 +68,15 @@ public class AdapterDocumentsList extends BaseAdapter implements StickyListHeade
         aq.id(R.id.doc_checkbox).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                DocumentsListFragment.selectedID = Integer.parseInt(aq.id(R.id.file_id).getText().toString());
                 for (int loop = 0; loop < DocumentsListFragment.generalDocsList.size(); loop++) {
-                    if(loop==position) {
+                    int id = DocumentsListFragment.generalDocsList.get(loop).getID();
+                    if(DocumentsListFragment.selectedID==id) {
                         aq.id(R.id.doc_checkbox).checked(true);
                     }else {
                         View view = getViewByPosition(loop, DocumentsListFragment.listView);
-                        CheckBox checkBox = (CheckBox) view.findViewById(R.id.doc_checkbox);
-                        checkBox.setChecked(false);
+                        AQuery aQuery = new AQuery(view);
+                        aQuery.id(R.id.doc_checkbox).checked(false);
                     }
                 }
             }

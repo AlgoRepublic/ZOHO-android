@@ -46,6 +46,10 @@ public class DocumentsListModel {
     }
     public class Files{
 
+        @SerializedName("ID")
+        @Expose
+        public int ID;
+
         @SerializedName("FileName")
         @Expose
         public String fileName;

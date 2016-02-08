@@ -139,7 +139,6 @@ public class AdapterMenuItems extends BaseAdapter{
     static class ViewHolder {
         TextView title;
         CheckBox checkBox;
-        ImageView imageView;
     }
     public View getViewByPosition(int pos, GridView listView) {
         final int firstListItemPosition = listView.getFirstVisiblePosition();

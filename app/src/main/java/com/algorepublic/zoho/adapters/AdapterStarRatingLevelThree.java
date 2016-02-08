@@ -89,8 +89,8 @@ public class AdapterStarRatingLevelThree extends BaseExpandableListAdapter {
                 aq_quest.id(R.id.percent_text).text(StarRatingQuestionModel.getInstance()
                         .responseData.get(loop).progress + "%");
                 final RatingBar ratingBar  =(RatingBar) QuestionLayout.findViewById(R.id.star_rating);
-                ratingBar.setProgress(StarRatingQuestionModel.getInstance()
-                        .responseData.get(loop).progress);
+                ratingBar.setProgress(GetStarValue(StarRatingQuestionModel.getInstance()
+                        .responseData.get(loop).progress));
                 aq_quest.id(R.id.comment_edit).clicked(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -103,7 +103,7 @@ public class AdapterStarRatingLevelThree extends BaseExpandableListAdapter {
                     @Override
                     public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                         aq_quest.id(R.id.percent_text).getTextView().setText(progress + "%");
-                        aq_quest.id(R.id.star_rating).progress(progress);
+                        aq_quest.id(R.id.star_rating).progress(GetStarValue(progress));
                         ratingBar.setProgress(progress);
                     }
 
@@ -124,6 +124,28 @@ public class AdapterStarRatingLevelThree extends BaseExpandableListAdapter {
         {
             Toast.makeText(((AppCompatActivity)mContext), mContext.getString(R.string.invalid_credential), Toast.LENGTH_SHORT).show();
         }
+    }
+    public int GetStarValue(int progress)
+    {
+        int starValue = 0;
+        if (progress >= 0 && progress <= 20)
+        {
+            starValue= 1;
+        }
+        else if (progress > 20 && progress <= 35)
+        {
+            starValue = 2;
+        }
+        else if (progress > 35 && progress <= 60) {
+            starValue =  3;
+        }
+        else if (progress > 60 && progress <= 80) {
+            starValue =  4;
+        }
+        else if (progress > 80 && progress <= 100) {
+            starValue = 5;
+        }
+        return starValue;
     }
     @Override
     public int getChildrenCount(int groupPosition) {

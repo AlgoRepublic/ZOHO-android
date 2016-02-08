@@ -5,6 +5,13 @@ package com.algorepublic.zoho.adapters;
  */
 public class DocumentsList  implements Comparable<DocumentsList>{
 
+    public int getID() {
+        return ID;
+    }
+    public void setID(int id) {
+        this.ID = id;
+    }
+
     public String getFileName() {
         return fileName;
     }
@@ -53,6 +60,7 @@ public class DocumentsList  implements Comparable<DocumentsList>{
         this.isFav = isFav;
     }
 
+    private int ID ;
     private String fileName ;
     private String fileDescription;
     private String fileSizeInByte;

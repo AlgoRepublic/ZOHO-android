@@ -40,4 +40,11 @@ public class DocumentsService extends BaseService {
         this.post_with_file(url, params, obj, GeneralModel.getInstance(), message);
         Log.e("uploadService", url);
     }
+    public void deleteDocument(int fileID, boolean message, CallBack obj){
+        String url = Constants.DeleteDocuments_API;
+        HashMap<String, String> params = new HashMap<String, String>();
+        params.put("fileID", String.valueOf(fileID));
+        this.post(url, params, obj, GeneralModel.getInstance(), message);
+        Log.e("DeleteDocumentsService", url);
+    }
 }

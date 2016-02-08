@@ -16,10 +16,10 @@
     </ImageView>
     <RelativeLayout
         android:id="@+id/layout_2"
-        android:layout_toRightOf="@+id/file_image"
         android:layout_alignParentTop="true"
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent" >
+        android:layout_alignParentRight="true"
+        android:layout_height="30dp"
+        android:layout_width="30dp" >
         <CheckBox
             android:id="@+id/doc_checkbox"
             android:layout_width="25dp"
@@ -81,5 +81,10 @@
             android:textColor="@android:color/black"/>
         </RelativeLayout>
     </RelativeLayout>
-
+    <TextView
+        android:id="@+id/file_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        />
 </RelativeLayout>

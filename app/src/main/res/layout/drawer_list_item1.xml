@@ -149,7 +149,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/star_rating"
                 android:numStars="5"
-                android:max="100"
+                android:max="5"
                 android:stepSize="0.1"
                 android:progressBackgroundTint="@color/colorContentWrapper"
                 android:progressTint="@color/colorBaseHeader"

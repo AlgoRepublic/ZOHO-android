@@ -82,14 +82,13 @@ public class GenericHttpClient {
         HttpClient hc = new DefaultHttpClient();
         String message =null;
         HttpPost p = new HttpPost(url);
-       // p.setHeaders(generateHttpRequestHeaders());
         MultipartEntity mpEntity = new MultipartEntity(HttpMultipartMode.BROWSER_COMPATIBLE);
         for(int i=0;i<files.size();i++) {
             Log.e("File", "/" + files.get(i).getName());
             mpEntity.addPart("files["+i+"]", new FileBody(files.get(i)));
         }
 
-        mpEntity.addPart("folderID", new StringBody(Integer.toString(7)));
+        mpEntity.addPart("folderID", new StringBody(Integer.toString(5)));
         mpEntity.addPart("ProjectId", new StringBody(Integer.toString(4)));
         mpEntity.addPart("CreateBy", new StringBody(Integer.toString(1)));
         mpEntity.addPart("UpdateBy", new StringBody(Integer.toString(1)));
