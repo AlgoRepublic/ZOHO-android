@@ -22,6 +22,7 @@ import com.algorepublic.zoho.fragments.ForumsFragment;
 import com.algorepublic.zoho.fragments.ProjectsFragment;
 import com.algorepublic.zoho.fragments.StarRatingFragment;
 import com.algorepublic.zoho.fragments.TasksListFragment;
+import com.algorepublic.zoho.fragments.UserFragment;
 import com.androidquery.AQuery;
 
 /**
@@ -118,7 +119,7 @@ public class AdapterMenuItems extends BaseAdapter{
         }if(position==4){
             callFragmentWithReplace(R.id.container, DocumentsListFragment.newInstance(), "DocumentsListFragment");
         }if(position==5){
-
+           callFragmentWithReplace(R.id.container, UserFragment.newInstance(),"UserFragment");
         }if(position==6){
             callFragmentWithReplace(R.id.container, ForumsFragment.newInstance(), "ForumsFragment");
         }if(position==7){
