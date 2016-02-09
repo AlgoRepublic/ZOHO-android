@@ -9,7 +9,6 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
-import android.widget.GridView;
 
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.fragments.DocumentsListFragment;
@@ -83,7 +82,7 @@ public class AdapterDocumentsList extends BaseAdapter implements StickyListHeade
     @Override
     public View getHeaderView(int position, View convertView, ViewGroup parent) {
 
-        convertView = l_Inflater.inflate(R.layout.layout_taskslist_header, parent , false);
+        convertView = l_Inflater.inflate(R.layout.layout_header, parent , false);
         aq_header = new AQuery(convertView);
 
         if (DocumentsListFragment.generalDocsList.get(position).getCreatedAt().equalsIgnoreCase("3/0/1"))

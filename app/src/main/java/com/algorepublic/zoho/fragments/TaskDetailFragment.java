@@ -2,6 +2,7 @@ package com.algorepublic.zoho.fragments;
 
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
@@ -34,6 +35,9 @@ import com.github.lzyzsd.circleprogress.DonutProgress;
 import org.lucasr.twowayview.TwoWayLayoutManager;
 import org.lucasr.twowayview.widget.TwoWayView;
 
+import cc.cloudist.acplibrary.ACProgressConstant;
+import cc.cloudist.acplibrary.ACProgressFlower;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link TaskDetailFragment#newInstance} factory method to
@@ -52,6 +56,8 @@ public class TaskDetailFragment extends BaseFragment {
     TwoWayView twoWayAttachments;
     SeekBar seekBar;
     View views;
+    int multiple=10;
+    public static ACProgressFlower dialog;
 
     public TaskDetailFragment() {
         // Required empty public constructor
@@ -75,6 +81,10 @@ public class TaskDetailFragment extends BaseFragment {
         // Inflate the layout for this fragment_forums
         final View view =  inflater.inflate(R.layout.fragment_task_detail, container, false);
         setHasOptionsMenu(true);
+        dialog = new ACProgressFlower.Builder(getActivity())
+                .direction(ACProgressConstant.DIRECT_CLOCKWISE)
+                .themeColor(Color.WHITE)
+                .fadeColor(Color.DKGRAY).build();
         seekBarCompat = (DonutProgress) view.findViewById(R.id.circularprogressBar);
         seekBar =(SeekBar) view.findViewById(R.id.seekBar);
         twoWayAssignee = (TwoWayView) view.findViewById(R.id.task_assignee);
@@ -108,7 +118,9 @@ public class TaskDetailFragment extends BaseFragment {
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                seekBarCompat.setProgress(progress) ;
+
+                progress = ((int) Math.round(progress / multiple)) * multiple;
+                seekBarCompat.setProgress(progress);
             }
 
             @Override
@@ -136,29 +148,27 @@ public class TaskDetailFragment extends BaseFragment {
                 NormalDialogCustomAttr(getString(R.string.delete_task));
             }
         });
-        aq.id(R.id.mark_as_done).clicked(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                click = 2;
-                NormalDialogCustomAttr(getString(R.string.mark_as_done));
-            }
-        });
+        if(TasksListFragment.generalList.get(position).getProgress()==100){
+            aq.id(R.id.mark_as_done).text("ReOpen Task");
+        }
+            aq.id(R.id.mark_as_done).clicked(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    click = 2;
+                    if(TasksListFragment.generalList.get(position).getProgress()==100){
+                        NormalDialogCustomAttr(getString(R.string.reopen_task));
+                    }else {
+                        NormalDialogCustomAttr(getString(R.string.mark_as_done));
+                    }
+
+                }
+            });
+
+
+
         return view;
     }
 
-    /**
-     * Initialize the contents of the Activity's standard options menu.  You
-     * should place your menu items in to <var>menu</var>.  For this method
-     * to be called, you must have first called {@link #setHasOptionsMenu}.  See
-     * {@link Activity#onCreateOptionsMenu(Menu) Activity.onCreateOptionsMenu}
-     * for more information.
-     *
-     * @param menu     The options menu in which you place your items.
-     * @param inflater
-     * @see #setHasOptionsMenu
-     * @see #onPrepareOptionsMenu
-     * @see #onOptionsItemSelected
-     */
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.menu_task_details, menu);
@@ -227,10 +237,30 @@ public class TaskDetailFragment extends BaseFragment {
     }
     public void CompleteTask(Object caller, Object model) {
         GeneralModel.getInstance().setList((GeneralModel) model);
+        dialog.dismiss();
         if (GeneralModel.getInstance().responseCode.equalsIgnoreCase("100")) {
             Snackbar.make(getView(), getString(R.string.task_done), Snackbar.LENGTH_SHORT).show();
-            service.updateTaskProgress(TasksListFragment.generalList.get(position).getTaskID()
-                    , Progress, true, new CallBack(TaskDetailFragment.this, "UpdateProgress"));
+            seekBar.setProgress(100);
+            seekBarCompat.setProgress(100);
+            aq.id(R.id.mark_as_done).text("ReOpen Task");
+            TasksListFragment.generalList.get(position).setProgress(100);
+
+        }
+        else
+        {
+            Snackbar.make(getView(), getString(R.string.invalid_credential), Snackbar.LENGTH_SHORT).show();
+        }
+    }
+    public void ReOpenTask(Object caller, Object model) {
+        GeneralModel.getInstance().setList((GeneralModel) model);
+        dialog.dismiss();
+        if (GeneralModel.getInstance().responseCode.equalsIgnoreCase("100")) {
+            Snackbar.make(getView(), getString(R.string.reopen_task), Snackbar.LENGTH_SHORT).show();
+            seekBar.setProgress(0);
+            seekBarCompat.setProgress(0);
+            aq.id(R.id.mark_as_done).text("Mark as done");
+            TasksListFragment.generalList.get(position).setProgress(0);
+
         }
         else
         {
@@ -274,8 +304,15 @@ public class TaskDetailFragment extends BaseFragment {
                         }
                         if (click==2)
                         {
-                            service.completeTask(TasksListFragment.generalList.get(position).getTaskID()
-                                    , opt, true, new CallBack(TaskDetailFragment.this, "CompleteTask"));
+                            dialog.show();
+                            if(aq.id(R.id.mark_as_done).getText().toString().equalsIgnoreCase("Mark as done")) {
+                                service.updateTaskProgress(TasksListFragment.generalList.get(position).getTaskID()
+                                        , 100, true, new CallBack(TaskDetailFragment.this, "CompleteTask"));
+                            }else{
+                                service.updateTaskProgress(TasksListFragment.generalList.get(position).getTaskID()
+                                        , 0, true, new CallBack(TaskDetailFragment.this, "ReOpenTask"));
+                            }
+
                         }
                     }
                 });

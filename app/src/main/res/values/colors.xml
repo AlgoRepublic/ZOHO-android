@@ -5,6 +5,7 @@
     <color name="colorBaseWrapper">#E6E7E8</color>
     <color name="colorBaseHeader">#414042</color>
     <color name="colorBaseMenu">#B3B5B7</color>
+    <color name="colorWhite">#FFFFFF</color>
 
     <color name="colorPrimaryBlue">#1D87E7</color>
     <color name="calendar_future_days_bg">#FFFFFF</color>

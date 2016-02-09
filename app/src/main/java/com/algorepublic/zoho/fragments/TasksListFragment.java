@@ -193,9 +193,9 @@ public class TasksListFragment extends BaseFragment {
             public void onOperItemClick(AdapterView<?> parent, View view, int position, long id) {
                 dialog.dismiss();
                 if (isLoaded())
-                if (position == 0) {
-                    baseClass.setTaskSortType("DueDate");
-                }
+                    if (position == 0) {
+                        baseClass.setTaskSortType("DueDate");
+                    }
                 if (position == 1) {
                     baseClass.setTaskSortType("Priority");
                 }
@@ -267,6 +267,7 @@ public class TasksListFragment extends BaseFragment {
             tasksList.setProgress(TasksListModel.getInstance().responseObject.get(loop).progress);
             tasksList.setTaskListName(TasksListModel.getInstance().responseObject.get(loop).taskListName);
             tasksList.setCharToAscii(CharToASCII(TasksListModel.getInstance().responseObject.get(loop).taskListName));
+
             //************** Assignee List ************//
             ArrayList<TaskListAssignee> listAssignees = new ArrayList<>();
             for(int loop1=0;loop1<TasksListModel.getInstance().responseObject.get(loop).userObject.size();loop1++){

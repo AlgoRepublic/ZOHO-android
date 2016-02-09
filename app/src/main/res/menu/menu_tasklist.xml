@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/add_project"
-        android:icon="@drawable/fab_add"
+        android:icon="@mipmap/add_task"
         app:showAsAction="always"
         android:orderInCategory="100"
         android:title="@string/add_task"

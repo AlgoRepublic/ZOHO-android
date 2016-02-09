@@ -55,7 +55,9 @@ public class AdapterTasksList extends BaseAdapter implements StickyListHeadersAd
 
         convertView = l_Inflater.inflate(R.layout.layout_taskslist_row, null);
         aq = new AQuery(convertView);
-
+        if (TasksListFragment.generalList.get(position).progress==100){
+            aq.id(R.id.task_image).image(R.drawable.ic_check_circle_black_24dp);
+        }
         Drawable shapeDrawable = aq.id(R.id.priority_bar).getView().getBackground();
         GradientDrawable colorDrawable = (GradientDrawable) shapeDrawable;
         colorDrawable.setColor(getPriorityWiseColor(TasksListFragment.generalList.get(position).getPriority()));
@@ -82,6 +84,7 @@ public class AdapterTasksList extends BaseAdapter implements StickyListHeadersAd
     public View getHeaderView(int position, View convertView, ViewGroup parent) {
 
         convertView = l_Inflater.inflate(R.layout.layout_taskslist_header, parent , false);
+
         aq_header = new AQuery(convertView);
 
         if(baseClass.getTaskSortType().equalsIgnoreCase("DueDate")) {
