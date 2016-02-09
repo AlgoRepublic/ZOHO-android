@@ -14,10 +14,11 @@ import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.algorepublic.zoho.ActivityTask;
-import com.algorepublic.zoho.Models.TasksListModel;
+import com.algorepublic.zoho.Models.TasksListByOwnerModel;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.adapters.AdapterTasksList;
 import com.algorepublic.zoho.adapters.TaskListAssignee;
+import com.algorepublic.zoho.adapters.TaskListName;
 import com.algorepublic.zoho.adapters.TasksList;
 import com.algorepublic.zoho.services.CallBack;
 import com.algorepublic.zoho.services.TaskListService;
@@ -43,6 +44,7 @@ public class TasksListFragment extends BaseFragment {
     StickyListHeadersAdapter adapterTasksList;
     AQuery aq;View view;
     RadioGroup radioGroup;
+    public static ArrayList<TaskListName> taskListName = new ArrayList<>();
     public static ArrayList<TasksList> allTaskList = new ArrayList<>();
     public static ArrayList<TasksList> generalList = new ArrayList<>();
     BaseClass baseClass;
@@ -112,7 +114,7 @@ public class TasksListFragment extends BaseFragment {
         baseClass = ((BaseClass) getActivity().getApplicationContext());
         taskListService = new TaskListService(getActivity());
         if(allTaskList.size()==0) {
-            taskListService.getTasksList(true, new CallBack(TasksListFragment.this, "TasksList"));
+            taskListService.getTasksListByOwner(1,true, new CallBack(TasksListFragment.this, "TasksList"));
         }else{
             GetGeneralList();
         }
@@ -225,15 +227,15 @@ public class TasksListFragment extends BaseFragment {
         SetAdapterList();
     }
     public void SetAdapterList(){
-        if (TasksListModel.getInstance().responseCode == 100) {
+        if (TasksListByOwnerModel.getInstance().responseCode == 100) {
             adapterTasksList = new AdapterTasksList(getActivity());
             listView.setAreHeadersSticky(true);
             listView.setAdapter(adapterTasksList);
         }
     }
     public void TasksList(Object caller, Object model) {
-        TasksListModel.getInstance().setList((TasksListModel) model);
-        if (TasksListModel.getInstance().responseCode == 100) {
+        TasksListByOwnerModel.getInstance().setList((TasksListByOwnerModel) model);
+        if (TasksListByOwnerModel.getInstance().responseCode == 100) {
             AddAllTasks();
             GetGeneralList();
         }
@@ -248,38 +250,46 @@ public class TasksListFragment extends BaseFragment {
         SortList();
     }
     public void AddAllTasks(){
-        allTaskList.clear();
-        for (int loop = 0; loop < TasksListModel.getInstance().responseObject.size(); loop++) {
-            TasksList tasksList = new TasksList();
-            if(TasksListModel.getInstance().responseObject.get(loop).title== null){
-                tasksList.setTaskName("-");
-            }else {
-                tasksList.setTaskName(TasksListModel.getInstance().responseObject.get(loop).title);
+        allTaskList.clear();taskListName.clear();
+        for (int loop = 0; loop < TasksListByOwnerModel.getInstance().responseObject.size(); loop++) {
+            TaskListName tasklistName = new TaskListName();
+            tasklistName.setTaskListID(TasksListByOwnerModel.getInstance().responseObject.get(loop).tasklistID);
+            tasklistName.setTaskListName(TasksListByOwnerModel.getInstance().responseObject.get(loop).taskListName);
+            taskListName.add(tasklistName);
+            for (int loop1 = 0; loop1 < TasksListByOwnerModel.getInstance().responseObject.get(loop).taskObject.size(); loop1++) {
+                TasksListByOwnerModel.Tasks taskModel = TasksListByOwnerModel.getInstance().responseObject.get(loop).taskObject.get(loop1);
+                TasksList tasksList = new TasksList();
+                if (taskModel.title == null) {
+                    tasksList.setTaskName("-");
+                } else {
+                    tasksList.setTaskName(taskModel.title);
+                }
+                tasksList.setTaskID(taskModel.taskID);
+                tasksList.setEndMilli(DateMilli(taskModel.endDate));
+                tasksList.setStartMilli(DateMilli(taskModel.startDate));
+                tasksList.setProjectName(taskModel.projectName);
+                tasksList.setStartDate(DateFormatter(taskModel.startDate));
+                tasksList.setEndDate(DateFormatter(taskModel.endDate));
+                tasksList.setHeader(DateFormatter(taskModel.endDate));
+                tasksList.setDescription(taskModel.description);
+                tasksList.setPriority(taskModel.priority);
+                tasksList.setProgress(taskModel.progress);
+                tasksList.setTaskListName(TasksListByOwnerModel.getInstance().responseObject.get(loop).taskListName);
+                tasksList.setCharToAscii(CharToASCII(TasksListByOwnerModel.getInstance().responseObject.get(loop).taskListName));
+                //************** Assignee List ************//
+                ArrayList<TaskListAssignee> listAssignees = new ArrayList<>();
+                for (int loop2 = 0; loop2 < TasksListByOwnerModel.getInstance().responseObject.get(loop).taskObject.get(loop1).userObject.size(); loop2++) {
+                    TasksListByOwnerModel.Users users = TasksListByOwnerModel.getInstance().responseObject.get(loop).taskObject.get(loop1).userObject.get(loop2);
+                    TaskListAssignee assignee = new TaskListAssignee();
+                    assignee.setUserID(users.responsibleID);
+                    assignee.setFirstName(users.firstName);
+                    assignee.setLastName(users.lastName);
+                    listAssignees.add(assignee);
+                }
+                tasksList.setListAssignees(listAssignees);
+                //************** ******* ************//
+                allTaskList.add(tasksList);
             }
-            tasksList.setTaskID(TasksListModel.getInstance().responseObject.get(loop).taskID);
-            tasksList.setEndMilli(DateMilli(TasksListModel.getInstance().responseObject.get(loop).endDate));
-            tasksList.setStartMilli(DateMilli(TasksListModel.getInstance().responseObject.get(loop).startDate));
-            tasksList.setProjectName(TasksListModel.getInstance().responseObject.get(loop).projectName);
-            tasksList.setStartDate(DateFormatter(TasksListModel.getInstance().responseObject.get(loop).startDate));
-            tasksList.setEndDate(DateFormatter(TasksListModel.getInstance().responseObject.get(loop).endDate));
-            tasksList.setHeader(DateFormatter(TasksListModel.getInstance().responseObject.get(loop).endDate));
-            tasksList.setPriority(TasksListModel.getInstance().responseObject.get(loop).priority);
-            tasksList.setProgress(TasksListModel.getInstance().responseObject.get(loop).progress);
-            tasksList.setTaskListName(TasksListModel.getInstance().responseObject.get(loop).taskListName);
-            tasksList.setCharToAscii(CharToASCII(TasksListModel.getInstance().responseObject.get(loop).taskListName));
-
-            //************** Assignee List ************//
-            ArrayList<TaskListAssignee> listAssignees = new ArrayList<>();
-            for(int loop1=0;loop1<TasksListModel.getInstance().responseObject.get(loop).userObject.size();loop1++){
-                TaskListAssignee assignee = new TaskListAssignee();
-                assignee.setUserID(TasksListModel.getInstance().responseObject.get(loop).userObject.get(loop1).responsibleID);
-                assignee.setFirstName(TasksListModel.getInstance().responseObject.get(loop).userObject.get(loop1).firstName);
-                assignee.setLastName(TasksListModel.getInstance().responseObject.get(loop).userObject.get(loop1).lastName);
-                listAssignees.add(assignee);
-            }
-            tasksList.setListAssignees(listAssignees);
-            //************** ******* ************//
-            allTaskList.add(tasksList);
         }
     }
     public void UpComing(){

@@ -115,7 +115,7 @@ public class LoginFragment extends BaseFragment {
         }
         if(!baseClass.isNetworkAvailble(getActivity()))
             return;
-        hideKeyPad(view);
+        baseClass.hideKeyPad(view);
         callFragmentWithReplace(R.id.logintoloading_container, LoginLoadingFragment.newInstance(aq), "LoginLoadingFragment");
     }
 

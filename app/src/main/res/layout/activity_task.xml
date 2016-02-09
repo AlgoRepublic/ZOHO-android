@@ -22,13 +22,17 @@
         android:paddingRight="5dp"
         android:paddingBottom="5dp"
         android:layout_height="wrap_content">
-        <TextView
+        <EditText
             android:id="@+id/title_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Task Title"
             android:textSize="22sp"
             android:padding="5dp"
+            android:enabled="false"
+            android:maxLength="24"
+            android:singleLine="true"
+            android:ellipsize="end"
             android:textColor="@color/white"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true" />

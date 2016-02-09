@@ -53,7 +53,6 @@ public class TaskDetailFragment extends BaseFragment {
     int click=0;
     DonutProgress seekBarCompat;
     TwoWayView twoWayAssignee;
-    TwoWayView twoWayAttachments;
     SeekBar seekBar;
     View views;
     int multiple=10;
@@ -88,12 +87,10 @@ public class TaskDetailFragment extends BaseFragment {
         seekBarCompat = (DonutProgress) view.findViewById(R.id.circularprogressBar);
         seekBar =(SeekBar) view.findViewById(R.id.seekBar);
         twoWayAssignee = (TwoWayView) view.findViewById(R.id.task_assignee);
-        //  twoWayAttachments = (TwoWayView) view.findViewById(R.id.taskdetail_attachments);
-        twoWayAssignee.setHasFixedSize(true); //twoWayAttachments.setHasFixedSize(true);
+        twoWayAssignee.setHasFixedSize(true);
         views =(View) view.findViewById(R.id.priority_bar);
-//        twoWayAttachments = (TwoWayView) view.findViewById(R.id.taskdetail_attachments);
-        twoWayAssignee.setHasFixedSize(true);// twoWayAttachments.setHasFixedSize(true);
-        twoWayAssignee.setLongClickable(true);//twoWayAttachments.setLongClickable(true);
+        twoWayAssignee.setHasFixedSize(true);
+        twoWayAssignee.setLongClickable(true);
         twoWayAssignee.setOrientation(TwoWayLayoutManager.Orientation.HORIZONTAL);
         //twoWayAttachments.setOrientation(TwoWayLayoutManager.Orientation.HORIZONTAL);
         twoWayAssignee.setAdapter(new AdapterTaskDetailAssignee(getActivity(),
@@ -106,7 +103,9 @@ public class TaskDetailFragment extends BaseFragment {
         aq.id(R.id.start_date).text(TasksListFragment.generalList.get(position).getStartDate());
         aq.id(R.id.end_date).text(TasksListFragment.generalList.get(position).getEndDate());
         aq.id(R.id.category).text(TasksListFragment.generalList.get(position).getTaskListName());
-        aq.id(R.id.task_desc).text(TasksListFragment.generalList.get(position).getTaskListName());
+        aq.id(R.id.task_name).text(TasksListFragment.generalList.get(position).getTaskName());
+        aq.id(R.id.task_desc).text(TasksListFragment.generalList.get(position).getDescription());
+        aq.id(R.id.category).text(TasksListFragment.generalList.get(position).getTaskListName());
         seekBar.setProgress(TasksListFragment.generalList.get(position).getProgress());
         seekBarCompat.setProgress(TasksListFragment.generalList.get(position).getProgress());
 
@@ -141,11 +140,22 @@ public class TaskDetailFragment extends BaseFragment {
                 callFragmentWithBackStack(R.id.container, TaskCommentFragment.newInstance(position), "TaskComment");
             }
         });
-        aq.id(R.id.delete).clicked(new View.OnClickListener() {
+        aq.id(R.id.comment).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                click = 1;
-                NormalDialogCustomAttr(getString(R.string.delete_task));
+                callFragmentWithBackStack(R.id.container, TaskCommentFragment.newInstance(position), "TaskComment");
+            }
+        });
+        aq.id(R.id.documents).clicked(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+        aq.id(R.id.subtask).clicked(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
             }
         });
         if(TasksListFragment.generalList.get(position).getProgress()==100){
@@ -205,16 +215,6 @@ public class TaskDetailFragment extends BaseFragment {
         return super.onOptionsItemSelected(item);
     }
 
-    public void TaskAttachments(Object caller, Object model) {
-        TaskAttachmentsModel.getInstance().setList((TaskAttachmentsModel) model);
-        if (TaskAttachmentsModel.getInstance().responseCode == 100) {
-            twoWayAttachments.setAdapter(new AdapterTaskDetailAttachments(getActivity()));
-        }
-        else
-        {
-            Snackbar.make(getView(), getString(R.string.invalid_credential), Snackbar.LENGTH_SHORT).show();
-        }
-    }
     public void UpdateProgress(Object caller, Object model) {
         GeneralModel.getInstance().setList((GeneralModel) model);
         if (GeneralModel.getInstance().responseCode.equalsIgnoreCase("100")) {

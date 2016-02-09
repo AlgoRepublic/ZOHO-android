@@ -54,11 +54,10 @@ public class ActivityTask extends BaseActivity{
         tasksObj= new TasksList();
         if (extras != null) {
             position = Integer.parseInt(extras.get("pos").toString());
-            setTaskValuesTinyDB();
         }else{
             position=-1;
         }
-
+        setTaskValuesTinyDB();
         aq =new AQuery(this);
         aq.id(R.id.back_arrow).clicked(new View.OnClickListener() {
             @Override
@@ -70,6 +69,20 @@ public class ActivityTask extends BaseActivity{
             @Override
             public void onClick(View v) {
                 new AsyncTry().execute();
+            }
+        });
+        aq.id(R.id.btn_title).clicked(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                aq.id(R.id.title_text).enabled(true);
+                aq.id(R.id.title_text).getEditText().requestFocus();
+                aq.id(R.id.title_text).setSelection(aq.id(R.id.title_text).getText().length());
+            }
+        });
+        aq.id(R.id.title_bar).clicked(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                aq.id(R.id.title_text).enabled(false);
             }
         });
         gridViewTaskMenu.setAdapter(new AdapterTaskMenu(this));
@@ -146,11 +159,17 @@ public class ActivityTask extends BaseActivity{
     }
     public void setTaskValuesTinyDB(){
         //   baseClass.db.putString("TaskListName",TasksListFragment.generalList.get(position).getTaskListName());
-        if(position!=-1) {
+        if(position > -1) {
             baseClass.db.putString("TaskName", TasksListFragment.generalList.get(position).getTaskName());
             baseClass.db.putString("StartDate", TasksListFragment.generalList.get(position).getStartDate());
             baseClass.db.putString("EndDate", TasksListFragment.generalList.get(position).getEndDate());
             baseClass.db.putInt("Priority", TasksListFragment.generalList.get(position).getPriority());
+        }else
+        {
+            baseClass.db.putString("TaskName", "");
+            baseClass.db.putString("StartDate", "");
+            baseClass.db.putString("EndDate", "");
+            baseClass.db.putInt("Priority", 0);
         }
     }
 }

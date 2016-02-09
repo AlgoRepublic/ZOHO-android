@@ -59,6 +59,7 @@ public class AdapterDocumentsList extends BaseAdapter implements StickyListHeade
             convertView = l_Inflater.inflate(R.layout.layout_docs_row, null);
         }
         aq = new AQuery(convertView);
+        aq.id(R.id.file_id).text(Integer.toString(DocumentsListFragment.generalDocsList.get(position).getID()));
         aq.id(R.id.file_name).text(DocumentsListFragment.generalDocsList.get(position).getFileName());
         aq.id(R.id.file_time).text(GetTime(DocumentsListFragment.generalDocsList.get(position).getCreatedMilli()));
         aq.id(R.id.file_image).image(BaseClass.getIcon(DocumentsListFragment.generalDocsList.
@@ -66,15 +67,8 @@ public class AdapterDocumentsList extends BaseAdapter implements StickyListHeade
         aq.id(R.id.doc_checkbox).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                for (int loop = 0; loop < DocumentsListFragment.generalDocsList.size(); loop++) {
-                    if(loop==position) {
-                        aq.id(R.id.doc_checkbox).checked(true);
-                    }else {
-                        View view = getViewByPosition(loop, DocumentsListFragment.listView);
-                        CheckBox checkBox = (CheckBox) view.findViewById(R.id.doc_checkbox);
-                        checkBox.setChecked(false);
-                    }
-                }
+                DocumentsListFragment.deleteDocsList.
+                        add(DocumentsListFragment.generalDocsList.get(position).getID());
             }
         });
         return convertView;
@@ -108,16 +102,5 @@ public class AdapterDocumentsList extends BaseAdapter implements StickyListHeade
         String delegate = "hh:mm aaa";
         String time  = (String) DateFormat.format(delegate, calendar.getTime());
         return (time);
-    }
-    public View getViewByPosition(int pos, StickyListHeadersListView listView) {
-        final int firstListItemPosition = listView.getFirstVisiblePosition();
-        final int lastListItemPosition = firstListItemPosition + listView.getChildCount() - 1;
-
-        if (pos < firstListItemPosition || pos > lastListItemPosition ) {
-            return listView.getAdapter().getView(pos, null, listView);
-        } else {
-            final int childIndex = pos - firstListItemPosition;
-            return listView.getChildAt(childIndex);
-        }
     }
 }

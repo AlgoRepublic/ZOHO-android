@@ -6,6 +6,7 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.fragments.BaseFragment;
@@ -43,6 +44,7 @@ public class TaskEditTitleFragment extends BaseFragment {
         baseClass = ((BaseClass) getActivity().getApplicationContext());
         aq= new AQuery(view);
         aq.id(R.id.title_name).text(BaseClass.db.getString("TaskName"));
+        aq.id(R.id.title_name).getEditText().requestFocus();
         aq.id(R.id.title_name).getEditText().addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -57,6 +59,15 @@ public class TaskEditTitleFragment extends BaseFragment {
             @Override
             public void afterTextChanged(Editable s) {
 
+            }
+        });
+        aq.id(R.id.title_name).getEditText().setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+                    baseClass.showKeyPad(v);
+                }else
+                    baseClass.hideKeyPad(v);
             }
         });
         return view;

@@ -7,15 +7,19 @@
     tools:context=".fragments.TaskDetailFragment"
     android:background="@color/colorBaseWrapper">
     <RelativeLayout
-        android:layout_below="@+id/include"
+        android:id="@+id/include"
         android:layout_width="match_parent"
-        android:layout_height="33dp"
-        android:layout_marginTop="20dp"
-        android:background="@android:drawable/dialog_holo_light_frame"
-        />
+        android:layout_height="wrap_content">
+    <com.h6ah4i.android.materialshadowninepatch.MaterialShadowContainerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:ms9_useAmbientShadow="true"
+        app:ms9_affectsDisplayedPosition="true"
+        app:ms9_shadowTranslationZ="1dp"
+        app:ms9_shadowElevation="2dp">
+        >
     <RelativeLayout
         android:id="@+id/layout_tasktitle"
-        android:layout_below="@+id/include"
         android:layout_width="match_parent"
         android:layout_height="30dp"
         android:layout_marginTop="20dp"
@@ -53,12 +57,14 @@
             android:textColor="@color/white"
             />
     </RelativeLayout>
-    <ScrollView
+    </com.h6ah4i.android.materialshadowninepatch.MaterialShadowContainerView>
+    </RelativeLayout>
+        <ScrollView
         android:id="@+id/scrollView"
-        android:layout_below="@+id/layout_tasktitle"
+        android:layout_below="@+id/include"
         android:layout_above="@+id/parent2"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
     <RelativeLayout
         android:id="@+id/parent1"
         android:layout_above="@+id/layout"
@@ -94,6 +100,7 @@
                     android:id="@+id/start_date"
                     android:layout_width="wrap_content"
                     android:text="dsds"
+                    android:paddingLeft="3dp"
                     android:layout_height="wrap_content"
                     android:textSize="12sp"
                     android:layout_toRightOf="@+id/text2"
@@ -113,6 +120,7 @@
                     android:id="@+id/end_date"
                     android:layout_width="wrap_content"
                     android:text="dsds"
+                    android:paddingLeft="3dp"
                     android:layout_height="wrap_content"
                     android:textSize="13sp"
                     android:layout_alignParentRight="true"
@@ -140,6 +148,7 @@
                     android:id="@+id/category"
                     android:layout_width="wrap_content"
                     android:text="dsds"
+                    android:paddingLeft="3dp"
                     android:layout_height="wrap_content"
                     android:textSize="12sp"
                     android:layout_toLeftOf="@+id/textView"
@@ -279,6 +288,7 @@
     android:layout_marginRight="2dp"
     android:layout_height="match_parent">
     <RelativeLayout
+        android:id="@+id/comment"
         android:layout_width="60dp"
         android:layout_centerHorizontal="true"
         android:layout_height="match_parent">
@@ -321,6 +331,7 @@
             android:layout_weight=".03"
             android:background="@color/white"/>
         <RelativeLayout
+            android:id="@+id/documents"
             android:layout_width="0dp"
             android:layout_weight=".9"
             android:layout_gravity="center"
@@ -370,6 +381,7 @@
             android:layout_weight=".03"
             android:background="@color/white"/>
         <RelativeLayout
+            android:id="@+id/subtask"
             android:layout_width="0dp"
             android:layout_weight=".9"
             android:layout_gravity="center"
@@ -419,6 +431,7 @@
             android:layout_weight=".03"
             android:background="@color/white"/>
         <RelativeLayout
+            android:id="@+id/delete"
             android:layout_width="0dp"
             android:layout_weight=".7"
             android:layout_gravity="center"
@@ -426,7 +439,6 @@
             android:layout_marginRight="2dp"
             android:layout_height="match_parent">
         <ImageView
-            android:id="@+id/delete"
             android:layout_width="25dp"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"

@@ -9,6 +9,7 @@ import com.algorepublic.zoho.Models.UserModel;
 import com.algorepublic.zoho.utils.Constants;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -39,5 +40,14 @@ public class DocumentsService extends BaseService {
         params.put("status[image]",file);
         this.post_with_file(url, params, obj, GeneralModel.getInstance(), message);
         Log.e("uploadService", url);
+    }
+    public void deleteDocument(ArrayList<Integer> fileIDs, boolean message, CallBack obj){
+        String url = Constants.DeleteDocuments_API;
+        HashMap<String, String> params = new HashMap<String, String>();
+        for(int loop=0;loop<fileIDs.size();loop++) {
+            params.put("fileID["+loop+"]", String.valueOf(fileIDs));
+        }
+        this.post(url, params, obj, GeneralModel.getInstance(), message);
+        Log.e("DeleteDocumentsService", url);
     }
 }

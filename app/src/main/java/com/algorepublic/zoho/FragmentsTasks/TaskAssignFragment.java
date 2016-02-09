@@ -57,8 +57,8 @@ public class TaskAssignFragment extends BaseFragment {
             }
         }catch (IndexOutOfBoundsException e){}
         aq.id(R.id.listview_employees).adapter(new AdapterTaskAssignee(getActivity()));
-//        service = new TaskListService(getActivity());
-//        service.getTaskAssignee(4, true, new CallBack(TaskAssignFragment.this, "TaskAssignee"));
+        service = new TaskListService(getActivity());
+        service.getTaskAssignee(4, true, new CallBack(TaskAssignFragment.this, "TaskAssignee"));
         return  view;
     }
     public void TaskAssignee(Object caller, Object model) {

@@ -21,6 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.algorepublic.zoho.Models.GeneralModel;
+import com.algorepublic.zoho.services.CallBack;
 import com.algorepublic.zoho.services.DocumentsService;
 import com.algorepublic.zoho.utils.BaseClass;
 import com.algorepublic.zoho.utils.Constants;
@@ -34,6 +35,7 @@ import com.flyco.dialog.listener.OnBtnClickL;
 import com.flyco.dialog.listener.OnOperItemClickL;
 import com.flyco.dialog.widget.ActionSheetDialog;
 import com.flyco.dialog.widget.MaterialDialog;
+import com.google.android.gms.auth.UserRecoverableAuthException;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -59,6 +61,7 @@ import org.json.JSONObject;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -88,6 +91,7 @@ public class ActivityUploadDocs extends BaseActivity implements GoogleApiClient.
     DriveId driveId;
     DriveFile selectedFile;
     BaseClass baseClass;
+    InputStream inputStream;
     DocumentsService service;
     private static final String PREF_ACCOUNT_NAME = "accountName";
     private static final String[] SCOPES = { DriveScopes.DRIVE_METADATA_READONLY };
@@ -132,8 +136,6 @@ public class ActivityUploadDocs extends BaseActivity implements GoogleApiClient.
             @Override
             public void onClick(View v) {
                 new AsyncTry().execute();
-                //service.uploadDocuments(filesList.get(0),true,new CallBack(this,"Upload"));
-//
             }
         });
         for (int loop = 0; loop < filesList.size(); loop++) {
@@ -206,7 +208,6 @@ public class ActivityUploadDocs extends BaseActivity implements GoogleApiClient.
             Toast.makeText(this, getString(R.string.invalid_credential), Toast.LENGTH_SHORT).show();
         }
     }
-    OutputStream outputStream;
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -268,10 +269,12 @@ public class ActivityUploadDocs extends BaseActivity implements GoogleApiClient.
                 break;
             case RESULT_GOOGLEDRIVE:
                 if (resultCode == RESULT_OK) {
-
-                driveId = data.getParcelableExtra(
-                        OpenFileActivityBuilder.EXTRA_RESPONSE_DRIVE_ID);//this extra contains the drive id of the selected file
-
+                try {
+                    driveId = data.getParcelableExtra(
+                            OpenFileActivityBuilder.EXTRA_RESPONSE_DRIVE_ID);//this extra contains the drive id of the selected file
+                }catch (NullPointerException e){
+                    buildGoogleApiClient();
+                }
                 HttpTransport transport = AndroidHttp.newCompatibleTransport();
                 JsonFactory jsonFactory = JacksonFactory.getDefaultInstance();
                 mService = new com.google.api.services.drive.Drive.Builder(
@@ -300,6 +303,7 @@ public class ActivityUploadDocs extends BaseActivity implements GoogleApiClient.
                     new DownloadFile().execute(passed);
                 }
             };
+
     public class DownloadFile extends AsyncTask<ArrayList<String>, Void, String> {
         File file = null;
         @Override
@@ -311,18 +315,25 @@ public class ActivityUploadDocs extends BaseActivity implements GoogleApiClient.
         @Override
         protected String doInBackground(ArrayList<String>... params) {
             ArrayList<String> passed = params[0];
-           file = new File(Environment.getExternalStorageDirectory(),passed.get(0));
-            Log.e("File",file.getPath()+"/"+file.getAbsolutePath());
-//            if(file.exists()){
-//                file.delete();
-//            }
+            File root = new File(Environment.getExternalStorageDirectory().getAbsolutePath()
+                    +File.separator, "ZOHO");
+            if (!root.exists()) {
+                root.mkdirs();
+            }
+           file = new File(root ,passed.get(0));
 
-            outputStream = new ByteArrayOutputStream();
             try {
-                mService.files().get(driveId.getResourceId())
-                        .executeMediaAndDownloadTo(outputStream);
+                inputStream = mService.files().get(driveId.getResourceId())
+                        .executeMediaAsInputStream();
             } catch (IOException e) {
                 e.printStackTrace();
+            }
+            if(inputStream !=null) {
+                try {
+                    FileUtils.copyInputStreamToFile(inputStream, file);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
             return null;
         }
@@ -330,16 +341,7 @@ public class ActivityUploadDocs extends BaseActivity implements GoogleApiClient.
         @Override
         protected void onPostExecute(String result) {
             dialog.dismiss();
-            if(outputStream !=null) {
-                try {
-                    FileUtils.copyFile(file, outputStream);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                checkFileLenght(file);
-            }else{
-                Log.e("no","no");
-            }
+            checkFileLenght(file);
         }
     }
 
@@ -376,6 +378,7 @@ public class ActivityUploadDocs extends BaseActivity implements GoogleApiClient.
             deleteFile.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    Log.e("Edit", v.getTag().toString());
                     RelativeLayout layout = (RelativeLayout) linearLayout.findViewById(Integer
                             .parseInt(v.getTag().toString()));
                     linearLayout.removeView(layout);

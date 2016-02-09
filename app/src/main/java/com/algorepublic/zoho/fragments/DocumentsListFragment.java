@@ -3,6 +3,8 @@ package com.algorepublic.zoho.fragments;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -14,17 +16,20 @@ import android.widget.Toast;
 
 import com.algorepublic.zoho.ActivityUploadDocs;
 import com.algorepublic.zoho.Models.DocumentsListModel;
-import com.algorepublic.zoho.Models.TasksListModel;
+import com.algorepublic.zoho.Models.GeneralModel;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.adapters.AdapterDocumentsList;
-import com.algorepublic.zoho.adapters.AdapterTasksList;
 import com.algorepublic.zoho.adapters.DocumentsList;
 import com.algorepublic.zoho.services.CallBack;
 import com.algorepublic.zoho.services.DocumentsService;
 import com.algorepublic.zoho.utils.BaseClass;
 import com.androidquery.AQuery;
+import com.flyco.animation.BounceEnter.BounceLeftEnter;
+import com.flyco.animation.SlideExit.SlideRightExit;
+import com.flyco.dialog.listener.OnBtnClickL;
 import com.flyco.dialog.listener.OnOperItemClickL;
 import com.flyco.dialog.widget.ActionSheetDialog;
+import com.flyco.dialog.widget.NormalDialog;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -44,6 +49,7 @@ public class DocumentsListFragment extends BaseFragment {
     DocumentsService service;
     public static ArrayList<DocumentsList> generalDocsList = new ArrayList<>();
     public static ArrayList<DocumentsList> allDocsList = new ArrayList<>();
+    public static ArrayList<Integer> deleteDocsList = new ArrayList<>();
     BaseClass baseClass;
     public static StickyListHeadersListView listView;
 
@@ -76,6 +82,12 @@ public class DocumentsListFragment extends BaseFragment {
             @Override
             public void onClick(View v) {
                 callForDocsSorting();
+            }
+        });
+        aq.id(R.id.delete).clicked(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                callForDocsDelete(getActivity().getResources().getString(R.string.delete_doc));
             }
         });
         baseClass = ((BaseClass) getActivity().getApplicationContext());
@@ -140,7 +152,51 @@ public class DocumentsListFragment extends BaseFragment {
         }
         return super.onOptionsItemSelected(item);
     }
+    private void callForDocsDelete(String content) {
+        final NormalDialog dialog = new NormalDialog(getActivity());
+        dialog.isTitleShow(false)//
+                .bgColor(getResources().getColor(R.color.colorBaseWrapper))//
+                .cornerRadius(5)//
+                .content(content)//
+                .contentGravity(Gravity.CENTER)//
+                .contentTextColor(getResources().getColor(R.color.colorBaseHeader))//
+                .dividerColor(getResources().getColor(R.color.colorContentWrapper))//
+                .btnTextSize(15.5f, 15.5f)//
+                .btnTextColor(getResources().getColor(R.color.colorBaseHeader)
+                        , getResources().getColor(R.color.colorBaseHeader))//
+                .btnPressColor(getResources().getColor(R.color.colorBaseMenu))//
+                .widthScale(0.85f)//
+                .showAnim(new BounceLeftEnter())//
+                .dismissAnim(new SlideRightExit())//
+                .show();
 
+        dialog.setOnBtnClickL(
+                new OnBtnClickL() {
+                    @Override
+                    public void onBtnClick() {
+                        dialog.dismiss();
+                    }
+                },
+                new OnBtnClickL() {
+                    @Override
+                    public void onBtnClick() {
+                    dialog.dismiss();
+                    service.deleteDocument(deleteDocsList
+                            , true, new CallBack(DocumentsListFragment.this, "DeleteDoc"));
+                        deleteDocsList.clear();
+                    }
+                });
+    }
+    public void DeleteDoc(Object caller, Object model) {
+        GeneralModel.getInstance().setList((GeneralModel) model);
+        if (GeneralModel.getInstance().responseCode.equalsIgnoreCase("100")) {
+            Snackbar.make(getView(), getString(R.string.doc_deleted), Snackbar.LENGTH_SHORT).show();
+        }
+        else
+        {
+            Snackbar.make(getView(), getString(R.string.invalid_credential), Snackbar.LENGTH_SHORT).show();
+        }
+    }
     public void callForDocsSorting(){
         String[] menuItems = {"All Files","Pictures","Videos","Favorites"};
         final ActionSheetDialog dialog = new ActionSheetDialog(getActivity(),menuItems, getView());
@@ -200,6 +256,7 @@ public class DocumentsListFragment extends BaseFragment {
         for (int loop = 0; loop < DocumentsListModel.getInstance().responseObject.size(); loop++) {
             for (int loop1 = 0; loop1 < DocumentsListModel.getInstance().responseObject.get(loop).files.size(); loop1++) {
                 DocumentsList documentsList = new DocumentsList();
+                documentsList.setID(DocumentsListModel.getInstance().responseObject.get(loop).files.get(loop1).ID);
                 documentsList.setFileName(DocumentsListModel.getInstance().responseObject.get(loop).files.get(loop1).fileDescription);
                 documentsList.setFileDescription(DocumentsListModel.getInstance().responseObject.get(loop).files.get(loop1).fileName);
                 documentsList.setFileSizeInByte(DocumentsListModel.getInstance().responseObject.get(loop).files.get(loop1).fileSizeInByte);
