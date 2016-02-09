@@ -28,11 +28,7 @@ public class BaseFragment extends Fragment {
     public BaseFragment() {
         // Required empty public constructor
     }
-    public void hideKeyPad(View view) {
-        InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.hideSoftInputFromWindow(view.getWindowToken(),
-                InputMethodManager.RESULT_UNCHANGED_SHOWN);
-    }
+
     public void changeLanguage(String local_language){
         Resources res = getResources();
         DisplayMetrics dm = res.getDisplayMetrics();
@@ -152,17 +148,17 @@ public class BaseFragment extends Fragment {
         String a = date.replaceAll("\\D+", "");
         return a;
     }
-    public long CharToASCII(String name){
-        long value;
+    public Double CharToASCII(String name){
+        Double value;
         if(name == null)
         {
-            value =0;
+            value = Double.valueOf(0);
         }else {
             StringBuilder ascii =  new StringBuilder();
             for (int i = 0; i < name.length(); i++) {
                 ascii.append(String.valueOf((int) name.charAt(i)));
             }
-            value =  Long.parseLong(ascii.toString());
+            value =  Double.parseDouble(ascii.toString());
         }
         return value;
     }

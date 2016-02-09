@@ -8,21 +8,21 @@ import java.util.ArrayList;
 /**
  * Created by android on 12/23/15.
  */
-public class TasksListModel {
-    private static TasksListModel _obj = null;
+public class TasksListByOwnerModel {
+    private static TasksListByOwnerModel _obj = null;
 
-    private TasksListModel() {
+    private TasksListByOwnerModel() {
 
     }
 
-    public static TasksListModel getInstance() {
+    public static TasksListByOwnerModel getInstance() {
         if (_obj == null) {
-            _obj = new TasksListModel();
+            _obj = new TasksListByOwnerModel();
         }
         return _obj;
     }
 
-    public void setList(TasksListModel obj) {
+    public void setList(TasksListByOwnerModel obj) {
         _obj = obj;
     }
 
@@ -36,8 +36,21 @@ public class TasksListModel {
     @SerializedName("responseObject")
     @Expose
     public ArrayList<ResponseObject> responseObject = new ArrayList<ResponseObject>();
-
     public class ResponseObject{
+
+        @SerializedName("ID")
+        @Expose
+        public Integer tasklistID;
+
+        @SerializedName("Name")
+        @Expose
+        public String taskListName;
+
+        @SerializedName("Tasks")
+        @Expose
+        public ArrayList<Tasks> taskObject = new ArrayList<Tasks>();
+    }
+    public class Tasks{
 
         @SerializedName("ID")
         @Expose
@@ -53,8 +66,6 @@ public class TasksListModel {
         @SerializedName("projectName")
         public String projectName;
 
-        @SerializedName("ResponsibelID")
-        public int responsibelID;
 
         @SerializedName("Priority")
         public int priority;
@@ -64,9 +75,6 @@ public class TasksListModel {
 
         @SerializedName("OwnerID")
         public int ownerID;
-
-        @SerializedName("CreateStatusId")
-        public int createStatusId;
 
         @SerializedName("StartDate")
         public String startDate;
@@ -86,18 +94,13 @@ public class TasksListModel {
         @SerializedName("ResponsibleName")
         public String responsibleName;
 
-        @SerializedName("OwnerName")
-        public String ownerName;
-
-        @SerializedName("IsAttach")
-        public int isAttach;
-
-        @SerializedName("TaskListName")
-        public String taskListName;
-
         @SerializedName("Users")
         @Expose
         public ArrayList<Users> userObject = new ArrayList<Users>();
+
+        @SerializedName("SubTask")
+        @Expose
+        public ArrayList<SubTask> subTask = new ArrayList<SubTask>();
     }
     public class Users {
 
@@ -112,5 +115,27 @@ public class TasksListModel {
         @SerializedName("LastName")
         @Expose
         public String lastName;
+
+        @SerializedName("ProfileImagePath")
+        @Expose
+        public String profileImagePath;
+    }
+    public class SubTask {
+
+        @SerializedName("ID")
+        @Expose
+        public Integer responsibleID;
+
+        @SerializedName("FirstName")
+        @Expose
+        public String firstName;
+
+        @SerializedName("LastName")
+        @Expose
+        public String lastName;
+
+        @SerializedName("ProfileImagePath")
+        @Expose
+        public String profileImagePath;
     }
 }

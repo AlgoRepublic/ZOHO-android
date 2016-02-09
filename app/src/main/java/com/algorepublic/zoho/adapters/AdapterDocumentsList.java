@@ -68,17 +68,8 @@ public class AdapterDocumentsList extends BaseAdapter implements StickyListHeade
         aq.id(R.id.doc_checkbox).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DocumentsListFragment.selectedID = Integer.parseInt(aq.id(R.id.file_id).getText().toString());
-                for (int loop = 0; loop < DocumentsListFragment.generalDocsList.size(); loop++) {
-                    int id = DocumentsListFragment.generalDocsList.get(loop).getID();
-                    if(DocumentsListFragment.selectedID==id) {
-                        aq.id(R.id.doc_checkbox).checked(true);
-                    }else {
-                        View view = getViewByPosition(loop, DocumentsListFragment.listView);
-                        AQuery aQuery = new AQuery(view);
-                        aQuery.id(R.id.doc_checkbox).checked(false);
-                    }
-                }
+                DocumentsListFragment.deleteDocsList.
+                        add(DocumentsListFragment.generalDocsList.get(position).getID());
             }
         });
         return convertView;
@@ -112,16 +103,5 @@ public class AdapterDocumentsList extends BaseAdapter implements StickyListHeade
         String delegate = "hh:mm aaa";
         String time  = (String) DateFormat.format(delegate, calendar.getTime());
         return (time);
-    }
-    public View getViewByPosition(int pos, StickyListHeadersListView listView) {
-        final int firstListItemPosition = listView.getFirstVisiblePosition();
-        final int lastListItemPosition = firstListItemPosition + listView.getChildCount() - 1;
-
-        if (pos < firstListItemPosition || pos > lastListItemPosition ) {
-            return listView.getAdapter().getView(pos, null, listView);
-        } else {
-            final int childIndex = pos - firstListItemPosition;
-            return listView.getChildAt(childIndex);
-        }
     }
 }

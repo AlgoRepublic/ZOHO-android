@@ -143,6 +143,7 @@
                 android:layout_height="300dp"
                 android:numColumns="3"
                 android:padding="10dp"
+                android:horizontalSpacing="5dp"
                 android:gravity="center"
                 android:stretchMode="columnWidth"
                 android:orientation="vertical">

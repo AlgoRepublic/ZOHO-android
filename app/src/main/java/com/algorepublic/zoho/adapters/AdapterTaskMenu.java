@@ -17,6 +17,7 @@ import com.algorepublic.zoho.BaseActivity;
 import com.algorepublic.zoho.FragmentsTasks.TaskAssignFragment;
 import com.algorepublic.zoho.FragmentsTasks.TaskAttachmentFragment;
 import com.algorepublic.zoho.FragmentsTasks.TaskEditTitleFragment;
+import com.algorepublic.zoho.FragmentsTasks.TaskListNameFragment;
 import com.algorepublic.zoho.FragmentsTasks.TaskPriorityFragment;
 import com.algorepublic.zoho.FragmentsTasks.TaskScheduleFragment;
 import com.algorepublic.zoho.R;
@@ -43,14 +44,6 @@ public class AdapterTaskMenu extends BaseAdapter {
             R.mipmap.employee,
             R.mipmap.schedule,
             R.mipmap.priority
-    };
-    int[] menu_icon_blue = {
-            R.mipmap.dashboard_blue,
-            R.mipmap.projects_blue,
-            R.mipmap.tasks_blue,
-            R.mipmap.calender_blue,
-            R.mipmap.document_blue,
-            R.mipmap.users_blue
     };
     public AdapterTaskMenu(Context context) {
         this.ctx = context;
@@ -84,6 +77,11 @@ public class AdapterTaskMenu extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
         final AQuery aq = new AQuery(convertView);
+        if (position==0) {
+            aq.id(R.id.checkbox).getCheckBox().setBackgroundColor(ctx.getResources().getColor(R.color.colorBaseMenu));
+        }else
+            aq.id(R.id.checkbox).getCheckBox().setBackgroundColor(ctx.getResources().getColor(R.color.colorBaseHeader));
+
         holder.title.setText(menu_names[position]);
         holder.title.setTextColor(ctx.getResources().getColor(R.color.white));
         aq.id(R.id.imageview).image(menu_icon_white[position]);
@@ -111,13 +109,13 @@ public class AdapterTaskMenu extends BaseAdapter {
         if(position==0){
             callFragmentWithReplace(R.id.edittask_container, TaskEditTitleFragment.newInstance(position), "TaskTitle");
         }if(position==1){
-            callFragmentWithReplace(R.id.edittask_container, TaskAttachmentFragment.newInstance(position), "TaskAttachment");
+            callFragmentWithReplace(R.id.edittask_container, TaskListNameFragment.newInstance(position), "TaskListNameAttachment");
         }if(position==2){
             callFragmentWithReplace(R.id.edittask_container, TaskAttachmentFragment.newInstance(position), "TaskAttachment");
         }if(position==3){
-            callFragmentWithReplace(R.id.edittask_container, TaskScheduleFragment.newInstance(position), "TaskSchedule");
-        }if(position==4){
             callFragmentWithReplace(R.id.edittask_container, TaskAssignFragment.newInstance(position), "TaskAssign");
+        }if(position==4){
+            callFragmentWithReplace(R.id.edittask_container, TaskScheduleFragment.newInstance(position), "TaskSchedule");
         }if(position==5){
             callFragmentWithReplace(R.id.edittask_container, TaskPriorityFragment.newInstance(position), "TasksPriority");
         }

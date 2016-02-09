@@ -11,7 +11,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.algorepublic.zoho.Models.CreateCommentModel;
-import com.algorepublic.zoho.Models.GeneralModel;
+import com.algorepublic.zoho.Models.TaskCommentsModel;
+import com.algorepublic.zoho.Models.TasksListByOwnerModel;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.adapters.AdapterTaskComments;
 import com.algorepublic.zoho.adapters.TaskComments;
@@ -21,8 +22,6 @@ import com.algorepublic.zoho.utils.BaseClass;
 import com.androidquery.AQuery;
 
 import java.util.ArrayList;
-
-import app.minimize.com.seek_bar_compat.SeekBarCompat;
 
 /**
  * Created by android on 1/1/16.
@@ -38,7 +37,6 @@ public class TaskCommentFragment extends BaseFragment {
     TaskListService service;
     public static ArrayList<TaskComments> arrayList = new ArrayList<>();
 
-    SeekBarCompat seekBarCompat;
 
     public TaskCommentFragment() {
         // Required empty public constructor
@@ -90,14 +88,14 @@ public class TaskCommentFragment extends BaseFragment {
         return view;
     }
     public void TaskComments(Object caller, Object model) {
-//        TaskCommentsModel.getInstance().setList((TaskCommentsModel) model);
-//        if (TasksListModel.getInstance().responseCode == 100) {
-//            GetGeneralList();
-//        }
-//        else
-//        {
-//            Toast.makeText(getActivity(), getString(R.string.invalid_credential), Toast.LENGTH_SHORT).show();
-//        }
+        TaskCommentsModel.getInstance().setList((TaskCommentsModel) model);
+        if (TasksListByOwnerModel.getInstance().responseCode == 100) {
+            //GetGeneralList();
+        }
+        else
+        {
+            Toast.makeText(getActivity(), getString(R.string.invalid_credential), Toast.LENGTH_SHORT).show();
+        }
     }
     public void CreateComment(Object caller, Object model) {
         CreateCommentModel.getInstance().setList((CreateCommentModel) model);

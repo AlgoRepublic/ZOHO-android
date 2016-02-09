@@ -4,7 +4,6 @@ package com.algorepublic.zoho.fragments;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -14,8 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.algorepublic.zoho.ActivityTask;
-import com.algorepublic.zoho.MainActivity;
-import com.algorepublic.zoho.Models.TasksListModel;
+import com.algorepublic.zoho.Models.TasksListByOwnerModel;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.services.CallBack;
 import com.algorepublic.zoho.services.TaskListService;
@@ -95,9 +93,9 @@ public class CalendarFragment extends BaseFragment implements CalendarPickerCont
         super.onViewCreated(view, savedInstanceState);
 
 //        initCalendarView();
-        if(TasksListModel.getInstance().responseObject.isEmpty()){
+        if(TasksListByOwnerModel.getInstance().responseObject.isEmpty()){
             TaskListService service = new TaskListService(getActivity());
-            service.getTasksList(true, new CallBack(CalendarFragment.this, "TasksList"));
+            service.getTasksListByOwner(1,true, new CallBack(CalendarFragment.this, "TasksList"));
         }else{
             initCalendarView();
         }
@@ -105,17 +103,19 @@ public class CalendarFragment extends BaseFragment implements CalendarPickerCont
 
     public List<CalendarEvent> getTasksList() {
         List<CalendarEvent> eventList = new ArrayList<>();
-        for(int i = 0; i < TasksListModel.getInstance().responseObject.size(); i++) {
-            TasksListModel.ResponseObject task = TasksListModel.getInstance().responseObject.get(i);
-            Calendar startTime = Calendar.getInstance();
-            long startInMillis = Long.parseLong(DateMilli(task.startDate));
-            startTime.setTimeInMillis(startInMillis);
+        for(int i = 0; i < TasksListByOwnerModel.getInstance().responseObject.size(); i++) {
+            for (int loop = 0; loop < TasksListByOwnerModel.getInstance().responseObject.get(i).taskObject.size(); loop++) {
+                TasksListByOwnerModel.Tasks task = TasksListByOwnerModel.getInstance().responseObject.get(i).taskObject.get(loop);
+                Calendar startTime = Calendar.getInstance();
+                long startInMillis = Long.parseLong(DateMilli(task.startDate));
+                startTime.setTimeInMillis(startInMillis);
 
-            Calendar endTime = Calendar.getInstance();
-            long endInMillis = Long.parseLong(DateMilli(task.endDate));
-            endTime.setTimeInMillis(endInMillis);
+                Calendar endTime = Calendar.getInstance();
+                long endInMillis = Long.parseLong(DateMilli(task.endDate));
+                endTime.setTimeInMillis(endInMillis);
 
-            eventList.add(new BaseCalendarEvent(task.title, task.projectName, "", getPriorityWiseColor(task.priority), startTime, endTime, true));
+                eventList.add(new BaseCalendarEvent(task.title, task.projectName, "", getPriorityWiseColor(task.priority), startTime, endTime, true));
+            }
         }
         return eventList;
     }
@@ -165,7 +165,7 @@ public class CalendarFragment extends BaseFragment implements CalendarPickerCont
     }
 
     public void TasksList(Object caller, Object model) {
-        TasksListModel.getInstance().setList((TasksListModel) model);
+        TasksListByOwnerModel.getInstance().setList((TasksListByOwnerModel) model);
         initCalendarView();
     }
 

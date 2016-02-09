@@ -3,20 +3,14 @@ package com.algorepublic.zoho.adapters;
 import java.util.ArrayList;
 
 /**
- * Created by android on 12/29/15.
+ * Created by android on 2/9/16.
  */
-public class TasksList implements Comparable<TasksList>{
+public class SubTasksList implements Comparable<TasksList>{
 
-    public void setDescription(String description){
-        this.description = description;
-    }
-    public String getDescription(){
-        return description;
-    }
 
-    public void setTaskID(int taskID){
-        this.taskID = taskID;
-    }
+        public void setTaskID(int taskID){
+            this.taskID = taskID;
+        }
     public int getTaskID(){
         return taskID;
     }
@@ -76,10 +70,10 @@ public class TasksList implements Comparable<TasksList>{
         return header;
     }
 
-    public void setCharToAscii(Double charToAscii){
+    public void setCharToAscii(long charToAscii){
         this.charToAscii = charToAscii;
     }
-    public Double getCharToAscii(){
+    public long getCharToAscii(){
         return charToAscii;
     }
 
@@ -101,7 +95,7 @@ public class TasksList implements Comparable<TasksList>{
     String header;
     int priority;
     int progress;
-    Double charToAscii;
+    long charToAscii;
     String startDate;
     String startMilli;
     String endMilli;
@@ -110,5 +104,4 @@ public class TasksList implements Comparable<TasksList>{
     int taskID;
     String taskListName;
     String projectName;
-    String description;
 }

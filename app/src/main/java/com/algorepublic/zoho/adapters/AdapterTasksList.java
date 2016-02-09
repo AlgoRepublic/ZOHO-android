@@ -62,6 +62,7 @@ public class AdapterTasksList extends BaseAdapter implements StickyListHeadersAd
         aq.id(R.id.priority_bar).getView().setBackground(shapeDrawable);
 
         aq.id(R.id.task_name).text(TasksListFragment.generalList.get(position).getTaskName());
+        aq.id(R.id.project_name).text(TasksListFragment.generalList.get(position).getProjectName());
         if(TasksListFragment.generalList.get(position).getStartDate().equalsIgnoreCase("3/0/1"))
             aq.id(R.id.task_date).text("No Due Date");
         else
@@ -134,7 +135,7 @@ public class AdapterTasksList extends BaseAdapter implements StickyListHeadersAd
         if(baseClass.getTaskSortType().equalsIgnoreCase("Alphabetically"))
             type = TasksListFragment.generalList.get(position).getTaskName().charAt(0);
         if(baseClass.getTaskSortType().equalsIgnoreCase("TaskList"))
-            type = TasksListFragment.generalList.get(position).getCharToAscii();
+            type = Long.parseLong(TasksListFragment.generalList.get(position).getCharToAscii().toString());
 
         return type;
     }

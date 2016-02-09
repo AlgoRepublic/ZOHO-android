@@ -17,10 +17,8 @@ import android.widget.Toast;
 import com.algorepublic.zoho.ActivityUploadDocs;
 import com.algorepublic.zoho.Models.DocumentsListModel;
 import com.algorepublic.zoho.Models.GeneralModel;
-import com.algorepublic.zoho.Models.TasksListModel;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.adapters.AdapterDocumentsList;
-import com.algorepublic.zoho.adapters.AdapterTasksList;
 import com.algorepublic.zoho.adapters.DocumentsList;
 import com.algorepublic.zoho.services.CallBack;
 import com.algorepublic.zoho.services.DocumentsService;
@@ -46,12 +44,12 @@ public class DocumentsListFragment extends BaseFragment {
 
     static DocumentsListFragment fragment;
     StickyListHeadersAdapter adapterDocsList;
-    public static int selectedID;
     AQuery aq;
     View view;
     DocumentsService service;
     public static ArrayList<DocumentsList> generalDocsList = new ArrayList<>();
     public static ArrayList<DocumentsList> allDocsList = new ArrayList<>();
+    public static ArrayList<Integer> deleteDocsList = new ArrayList<>();
     BaseClass baseClass;
     public static StickyListHeadersListView listView;
 
@@ -183,8 +181,9 @@ public class DocumentsListFragment extends BaseFragment {
                     @Override
                     public void onBtnClick() {
                     dialog.dismiss();
-                    service.deleteDocument(DocumentsListFragment.selectedID
+                    service.deleteDocument(deleteDocsList
                             , true, new CallBack(DocumentsListFragment.this, "DeleteDoc"));
+                        deleteDocsList.clear();
                     }
                 });
     }

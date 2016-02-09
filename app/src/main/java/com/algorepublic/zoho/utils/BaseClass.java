@@ -14,6 +14,8 @@ import android.net.NetworkInfo;
 import android.text.format.DateFormat;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.webkit.MimeTypeMap;
 
 import com.algorepublic.zoho.R;
@@ -255,7 +257,16 @@ public class BaseClass extends Application {
             R.mipmap.ic_listview_xml,
             R.mipmap.ic_listview_html,
     };
-
+    public void hideKeyPad(View view) {
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(view.getWindowToken(),
+                InputMethodManager.RESULT_UNCHANGED_SHOWN);
+    }
+    public void showKeyPad(View view) {
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(view.getWindowToken(),
+                InputMethodManager.RESULT_UNCHANGED_HIDDEN);
+    }
     public static int getIcon(int type){
         return icon[type];
     }

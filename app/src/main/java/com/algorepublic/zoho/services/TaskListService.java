@@ -5,17 +5,11 @@ import android.util.Log;
 
 import com.algorepublic.zoho.Models.CreateCommentModel;
 import com.algorepublic.zoho.Models.GeneralModel;
-import com.algorepublic.zoho.Models.GetUserModel;
 import com.algorepublic.zoho.Models.TaskAssigneeModel;
 import com.algorepublic.zoho.Models.TaskAttachmentsModel;
-import com.algorepublic.zoho.Models.TaskCommentsModel;
-import com.algorepublic.zoho.Models.TasksListModel;
-import com.algorepublic.zoho.Models.UserModel;
-import com.algorepublic.zoho.adapters.TasksList;
+import com.algorepublic.zoho.Models.TasksListByOwnerModel;
 import com.algorepublic.zoho.utils.Constants;
 
-import java.io.File;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -27,14 +21,14 @@ public class TaskListService extends BaseService {
         super(act);
     }
 
-    public void getTasksList(boolean message, CallBack obj){
-        String url = Constants.GetTaskList_API;
-        this.get(url, obj, TasksListModel.getInstance(), message);
-        Log.e("TaskListService", url);
+    public void getTasksListByOwner(int userID, boolean message, CallBack obj){
+        String url = Constants.GetTaskListByOwner_API+"userID="+userID;
+        this.get(url, obj, TasksListByOwnerModel.getInstance(), message);
+        Log.e("TaskListByOwnerService", url);
     }
     public void getCommentsByTask(int taskID, boolean message, CallBack obj){
         String url = Constants.GetCommentByTask_API+"task_id="+taskID;
-        this.get(url, obj, TasksListModel.getInstance(), message);
+        this.get(url, obj, TasksListByOwnerModel.getInstance(), message);
         Log.e("CommentByTaskService", url);
     }
     public void createComment(String comment, int taskID, int userID, boolean message, CallBack obj){
