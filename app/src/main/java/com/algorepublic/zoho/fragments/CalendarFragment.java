@@ -17,6 +17,7 @@ import com.algorepublic.zoho.Models.TasksListByOwnerModel;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.services.CallBack;
 import com.algorepublic.zoho.services.TaskListService;
+import com.algorepublic.zoho.utils.BaseClass;
 import com.androidquery.AQuery;
 import com.github.tibolte.agendacalendarview.AgendaCalendarView;
 import com.github.tibolte.agendacalendarview.CalendarPickerController;
@@ -38,6 +39,7 @@ public class CalendarFragment extends BaseFragment implements CalendarPickerCont
 
     AQuery aq;
     AgendaCalendarView calendarView;
+    BaseClass baseClass;
 
     public CalendarFragment() {
         // Required empty public constructor
@@ -75,6 +77,7 @@ public class CalendarFragment extends BaseFragment implements CalendarPickerCont
         aq = new AQuery(getActivity(), view);
         setHasOptionsMenu(true);
         getToolbar().setTitle(getString(R.string.calendar));
+        baseClass = ((BaseClass) getActivity().getApplicationContext());
         return view;
     }
 
@@ -95,7 +98,7 @@ public class CalendarFragment extends BaseFragment implements CalendarPickerCont
 //        initCalendarView();
         if(TasksListByOwnerModel.getInstance().responseObject.isEmpty()){
             TaskListService service = new TaskListService(getActivity());
-            service.getTasksListByOwner(1,true, new CallBack(CalendarFragment.this, "TasksList"));
+            service.getTasksListByOwner(baseClass.getUserId(),true, new CallBack(CalendarFragment.this, "TasksList"));
         }else{
             initCalendarView();
         }

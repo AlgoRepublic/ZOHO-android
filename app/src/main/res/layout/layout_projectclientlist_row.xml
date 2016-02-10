@@ -1,149 +1,166 @@
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:descendantFocusability="blocksDescendants"
     android:orientation="horizontal"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@color/colorBaseWrapper"
-    android:paddingTop="5dp"
-    android:paddingBottom="5dp">
-    <RelativeLayout
-        android:orientation="horizontal"
+    android:layout_height="wrap_content">
+    <com.h6ah4i.android.materialshadowninepatch.MaterialShadowContainerView
+        android:id="@+id/shadow_item_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/square_border">
-
+        app:ms9_useAmbientShadow="true"
+        app:ms9_affectsDisplayedPosition="true"
+        app:ms9_shadowTranslationZ="1dp"
+        app:ms9_shadowElevation="2dp">
         <RelativeLayout
-            android:id="@+id/layout1"
-            android:layout_alignParentTop="true"
+            android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
-                android:id="@+id/project_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/colorBaseHeader"
-                android:textSize="14sp"
-                android:paddingLeft="5dp"
-                android:layout_centerVertical="true"
-                android:text="@string/projects"
-                android:textStyle="bold" />
+            android:background="@color/colorBaseWrapper"
+            android:padding="8dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginRight="4dp"
+            android:layout_marginEnd="4dp"
+            android:layout_marginLeft="4dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginBottom="8dp">
+
             <RelativeLayout
-                android:id="@+id/layout_comment"
-                android:layout_width="35dp"
-                android:layout_alignParentRight="true"
-                android:layout_centerHorizontal="true"
-                android:layout_height="35dp">
-                <TextView
-                    android:id="@+id/notify_alert1"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:text="112"
-                    android:gravity="center"
-                    android:singleLine="true"
-                    android:textSize="7dp"
-                    android:layout_alignParentRight="true"
-
-                    android:background="@mipmap/bubble_alert_white"
- />
-
-                <ImageView
-                    android:id="@+id/delete1"
-                    android:layout_width="20dp"
-                    android:layout_alignParentBottom="true"
-                    android:src="@mipmap/task_comment"
-                    android:layout_height="20dp" />
-            </RelativeLayout>
-            <RelativeLayout
-                android:id="@+id/layout_users"
-                android:layout_width="35dp"
-                android:layout_toLeftOf="@+id/layout_comment"
-                android:layout_centerHorizontal="true"
-                android:layout_height="35dp">
-                <TextView
-                    android:id="@+id/notify_alert2"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:text="112"
-                    android:gravity="center"
-                    android:singleLine="true"
-                    android:textSize="7dp"
-                    android:layout_alignParentRight="true"
-
-                    android:background="@mipmap/bubble_alert_white"
- />
-
-                <ImageView
-                    android:id="@+id/delete2"
-                    android:layout_width="20dp"
-                    android:layout_alignParentBottom="true"
-                    android:src="@drawable/nav_user"
-                    android:layout_height="20dp" />
-            </RelativeLayout>
-            <RelativeLayout
-                android:id="@+id/layout_tasks"
-                android:layout_width="35dp"
-                android:layout_toLeftOf="@+id/layout_users"
-                android:layout_centerHorizontal="true"
-                android:layout_height="35dp">
-                <TextView
-                    android:id="@+id/notify_alert3"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:text="112"
-                    android:gravity="center"
-                    android:singleLine="true"
-                    android:textSize="7dp"
-                    android:layout_alignParentRight="true"
-
-                    android:background="@mipmap/bubble_alert_white"
- />
-
-                <ImageView
-                    android:id="@+id/delete3"
-                    android:layout_width="20dp"
-                    android:layout_alignParentBottom="true"
-                    android:src="@mipmap/task_desc_small"
-                    android:layout_height="20dp" />
-            </RelativeLayout>
-        </RelativeLayout>
-        <View
-            android:layout_below="@+id/layout1"
-            android:id="@+id/view"
-            android:layout_height="1dp"
-            android:layout_marginTop="3dp"
-            android:layout_width="match_parent"
-            android:background="@color/colorBaseHeader"/>
-        <RelativeLayout
-            android:layout_below="@+id/view"
-            android:layout_width="match_parent"
-            android:padding="3dp"
-            android:layout_height="wrap_content">
-            <TextView
-                android:id="@+id/project_desc"
+                android:id="@+id/layout1"
+                android:layout_alignParentTop="true"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/colorBaseHeader"
-                android:textSize="12sp"
-                android:lines="3"
-                android:layout_toLeftOf="@+id/project_edit"
-                />
-            <TextView
-                android:id="@+id/project_edit"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/project_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorBaseHeader"
+                    android:drawableLeft="@mipmap/folder_black"
+                    android:drawableStart="@mipmap/folder_black"
+                    android:drawablePadding="5dp"
+                    android:textSize="14sp"
+                    android:paddingLeft="5dp"
+                    android:paddingStart="5dp"
+                    android:layout_centerVertical="true"
+                    android:text="@string/projects"
+                    android:textStyle="bold" />
+                <RelativeLayout
+                    android:id="@+id/layout_comment"
+                    android:layout_width="35dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_height="35dp">
+                    <TextView
+                        android:id="@+id/milestone_alert"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:text="112"
+                        android:textColor="@color/blackBackground"
+                        android:gravity="center"
+                        android:singleLine="true"
+                        android:textSize="7sp"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentEnd="true"
+                        android:background="@mipmap/bubble_alert_black" />
+                    <ImageView
+                        android:id="@+id/delete1"
+                        android:layout_width="20dp"
+                        android:layout_alignParentBottom="true"
+                        android:src="@mipmap/forums"
+                        android:layout_height="20dp" />
+                </RelativeLayout>
+                <RelativeLayout
+                    android:id="@+id/layout_users"
+                    android:layout_width="35dp"
+                    android:layout_toLeftOf="@+id/layout_comment"
+                    android:layout_toStartOf="@id/layout_comment"
+                    android:layout_centerHorizontal="true"
+                    android:layout_height="35dp">
+                    <TextView
+                        android:id="@+id/users_alert"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:text="112"
+                        android:textColor="@color/blackBackground"
+                        android:gravity="center"
+                        android:singleLine="true"
+                        android:textSize="7sp"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentEnd="true"
+                        android:background="@mipmap/bubble_alert_black" />
+                    <ImageView
+                        android:id="@+id/delete2"
+                        android:layout_width="20dp"
+                        android:layout_alignParentBottom="true"
+                        android:src="@drawable/nav_user"
+                        android:layout_height="20dp" />
+                </RelativeLayout>
+                <RelativeLayout
+                    android:id="@+id/layout_tasks"
+                    android:layout_width="35dp"
+                    android:layout_toLeftOf="@+id/layout_users"
+                    android:layout_toStartOf="@+id/layout_users"
+                    android:layout_centerHorizontal="true"
+                    android:layout_height="35dp">
+                    <TextView
+                        android:id="@+id/task_alert"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:text="112"
+                        android:textColor="@color/blackBackground"
+                        android:gravity="center"
+                        android:singleLine="true"
+                        android:textSize="7sp"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentEnd="true"
+                        android:background="@mipmap/bubble_alert_black" />
+                    <ImageView
+                        android:id="@+id/delete3"
+                        android:layout_width="20dp"
+                        android:layout_alignParentBottom="true"
+                        android:src="@mipmap/task_desc_small"
+                        android:layout_height="20dp" />
+                </RelativeLayout>
+            </RelativeLayout>
+            <View
+                android:layout_below="@+id/layout1"
+                android:id="@+id/view"
+                android:layout_height="1dp"
+                android:layout_margin="3dp"
+                android:layout_width="match_parent"
+                android:background="@color/colorBaseHeader"/>
+            <RelativeLayout
+                android:layout_below="@+id/view"
+                android:layout_width="match_parent"
+                android:padding="3dp"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/project_desc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorBaseHeader"
+                    android:textSize="12sp"
+                    android:lines="3"
+                    android:layout_toLeftOf="@+id/project_edit"
+                    android:layout_toStartOf="@+id/project_edit" />
+                <TextView
+                    android:id="@+id/project_edit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorBaseHeader"
+                    android:textSize="14sp"
+                    android:layout_alignBottom="@+id/project_desc"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    android:text="@string/edit" />
+            </RelativeLayout>
+
+            <TextView android:id="@+id/project_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/colorBaseHeader"
-                android:textSize="14sp"
-                android:layout_alignBottom="@+id/project_desc"
-                android:layout_alignParentRight="true"
-                android:text="@string/edit" />
+                android:visibility="gone"/>
         </RelativeLayout>
-
-        <TextView android:id="@+id/project_id"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:visibility="gone"/>
-
-    </RelativeLayout>
+    </com.h6ah4i.android.materialshadowninepatch.MaterialShadowContainerView>
 </RelativeLayout>

@@ -21,7 +21,7 @@ public class TaskListService extends BaseService {
         super(act);
     }
 
-    public void getTasksListByOwner(int userID, boolean message, CallBack obj){
+    public void getTasksListByOwner(String userID, boolean message, CallBack obj){
         String url = Constants.GetTaskListByOwner_API+"userID="+userID;
         this.get(url, obj, TasksListByOwnerModel.getInstance(), message);
         Log.e("TaskListByOwnerService", url);

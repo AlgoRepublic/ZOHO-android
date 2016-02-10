@@ -114,7 +114,7 @@ public class TasksListFragment extends BaseFragment {
         baseClass = ((BaseClass) getActivity().getApplicationContext());
         taskListService = new TaskListService(getActivity());
         if(allTaskList.size()==0) {
-            taskListService.getTasksListByOwner(1,true, new CallBack(TasksListFragment.this, "TasksList"));
+            taskListService.getTasksListByOwner(baseClass.getUserId(),true, new CallBack(TasksListFragment.this, "TasksList"));
         }else{
             GetGeneralList();
         }
