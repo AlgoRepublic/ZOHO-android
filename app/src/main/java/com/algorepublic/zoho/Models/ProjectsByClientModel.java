@@ -40,7 +40,7 @@ public class ProjectsByClientModel {
         public String updatedAt;
 
         @SerializedName("ID")
-        public Integer ID;
+        public String ID;
 
         @SerializedName("Projects")
         public ArrayList<Projects> projects;
@@ -60,7 +60,13 @@ public class ProjectsByClientModel {
         public String updatedAt;
 
         @SerializedName("ID")
-        public Integer projectID;
+        public String projectID;
+
+        @SerializedName("TotlTasksNo")
+        public String totalTasks;
+
+        @SerializedName("TotalMilestonesNo")
+        public String toalMilestones;
     }
 
     @SerializedName("ResponseCode")

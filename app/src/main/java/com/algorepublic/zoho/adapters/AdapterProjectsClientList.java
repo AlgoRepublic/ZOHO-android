@@ -58,10 +58,18 @@ public class AdapterProjectsClientList extends BaseAdapter implements StickyList
         convertView = l_Inflater.inflate(R.layout.layout_projectclientlist_row, null);
         aq = new AQuery(convertView);
         aq.id(R.id.project_title).text(arrayList.get(position).getProjectName());
-        //aq.id(R.id.project_id).text(arrayList.get(position).getProjectID());
+        if(!arrayList.get(position).getTotalTasks().isEmpty())
+            aq.id(R.id.task_alert).text(arrayList.get(position).getTotalTasks());
+        if(!arrayList.get(position).getTotalMilestones().isEmpty())
+            aq.id(R.id.milestone_alert).text(arrayList.get(position).getTotalMilestones());
 
+        aq.id(R.id.project_id).text(arrayList.get(position).getProjectID());
         if(arrayList.get(position).getProjectDesc() != null)
             aq.id(R.id.project_desc).text(Html.fromHtml(arrayList.get(position).getProjectDesc()));
+
+        if(baseClass.getSelectedProject().equals(arrayList.get(position).getProjectID())){
+            convertView.setSelected(true);
+        }
 
         Animation animation = AnimationUtils.loadAnimation(ctx, (position > lastPosition) ? R.anim.up_from_bottom : R.anim.down_from_top);
         convertView.startAnimation(animation);

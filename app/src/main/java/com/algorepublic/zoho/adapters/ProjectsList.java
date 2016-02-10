@@ -1,17 +1,18 @@
 package com.algorepublic.zoho.adapters;
 
-import java.util.ArrayList;
-
 /**
  * Created by android on 2/2/16.
  */
 public class ProjectsList {
 
 
-    public void setCompOrDeptID(int compOrDeptID){
+    public ProjectsList() {
+    }
+
+    public void setCompOrDeptID(String compOrDeptID){
         this.compOrDeptID = compOrDeptID;
     }
-    public int getCompOrDeptID(){
+    public String getCompOrDeptID(){
         return compOrDeptID;
     }
     public void setCompOrDeptName(String compOrDeptName){
@@ -20,10 +21,10 @@ public class ProjectsList {
     public String getCompOrDeptName(){
         return compOrDeptName;
     }
-    public void setProjectID(int projectID){
+    public void setProjectID(String projectID){
         this.projectID = projectID;
     }
-    public int getProjectID(){
+    public String getProjectID(){
         return projectID;
     }
     public void setProjectName(String projectName){
@@ -40,10 +41,36 @@ public class ProjectsList {
     }
 
 
-    String projectDesc;
-    String projectName;
-    int projectID;
-    String compOrDeptName;
-    int compOrDeptID;
+    private String projectDesc;
+    private String projectName;
+    private String projectID;
+    private String compOrDeptName;
+    private String compOrDeptID;
+    private String totalTasks;
+    private String totalMilestones;
+    private String totalUsers;
 
+    public String getTotalTasks() {
+        return totalTasks;
+    }
+
+    public void setTotalTasks(String totalTasks) {
+        this.totalTasks = totalTasks;
+    }
+
+    public String getTotalMilestones() {
+        return totalMilestones;
+    }
+
+    public void setTotalMilestones(String totalMilestones) {
+        this.totalMilestones = totalMilestones;
+    }
+
+    public String getTotalUsers() {
+        return totalUsers;
+    }
+
+    public void setTotalUsers(String totalUsers) {
+        this.totalUsers = totalUsers;
+    }
 }

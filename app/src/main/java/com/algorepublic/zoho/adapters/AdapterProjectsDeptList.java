@@ -2,7 +2,6 @@ package com.algorepublic.zoho.adapters;
 
 import android.content.Context;
 import android.text.Html;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,12 +37,12 @@ public class AdapterProjectsDeptList extends BaseAdapter implements StickyListHe
 
     @Override
     public int getCount() {
-        return ProjectsFragment.BydepartmentList.size();
+        return ProjectsFragment.ByDepartmentList.size();
     }
 
     @Override
     public Object getItem(int pos) {
-        return ProjectsFragment.BydepartmentList.get(pos);
+        return ProjectsFragment.ByDepartmentList.get(pos);
     }
 
     @Override
@@ -56,13 +55,19 @@ public class AdapterProjectsDeptList extends BaseAdapter implements StickyListHe
 
         convertView = l_Inflater.inflate(R.layout.layout_projectdeptlist_row, null);
         aq = new AQuery(convertView);
+        aq.id(R.id.project_title).text(ProjectsFragment.ByDepartmentList.get(position).getProjectName());
+        if(!ProjectsFragment.ByDepartmentList.get(position).getTotalTasks().isEmpty())
+            aq.id(R.id.task_alert).text(ProjectsFragment.ByDepartmentList.get(position).getTotalTasks());
+        if(!ProjectsFragment.ByDepartmentList.get(position).getTotalMilestones().isEmpty())
+            aq.id(R.id.milestone_alert).text(ProjectsFragment.ByDepartmentList.get(position).getTotalMilestones());
 
-        aq = new AQuery(convertView);
-        aq.id(R.id.project_title).text(ProjectsFragment.BydepartmentList.get(position).getProjectName());
-       // aq.id(R.id.project_id).text(ProjectsFragment.BydepartmentList.get(position).getProjectID());
+        aq.id(R.id.project_id).text(ProjectsFragment.ByDepartmentList.get(position).getProjectID());
+        if(ProjectsFragment.ByDepartmentList.get(position).getProjectDesc() != null)
+            aq.id(R.id.project_desc).text(Html.fromHtml(ProjectsFragment.ByDepartmentList.get(position).getProjectDesc()));
 
-        if(ProjectsFragment.BydepartmentList.get(position).getProjectDesc() != null)
-            aq.id(R.id.project_desc).text(Html.fromHtml(ProjectsFragment.BydepartmentList.get(position).getProjectDesc()));
+        if(baseClass.getSelectedProject().equals(ProjectsFragment.ByDepartmentList.get(position).getProjectID())){
+            convertView.setSelected(true);
+        }
 
         Animation animation = AnimationUtils.loadAnimation(ctx, (position > lastPosition) ? R.anim.up_from_bottom : R.anim.down_from_top);
         convertView.startAnimation(animation);
@@ -74,13 +79,13 @@ public class AdapterProjectsDeptList extends BaseAdapter implements StickyListHe
 
         convertView = l_Inflater.inflate(R.layout.layout_generic_header, parent , false);
         aq_header = new AQuery(convertView);
-        aq_header.id(R.id.header).text(ProjectsFragment.BydepartmentList.get(position).getCompOrDeptName());
+        aq_header.id(R.id.header).text(ProjectsFragment.ByDepartmentList.get(position).getCompOrDeptName());
         return convertView;
     }
 
     @Override
     public long getHeaderId(int position) {
-        return ProjectsFragment.BydepartmentList.get(position).getCompOrDeptID();
+        return Long.valueOf(ProjectsFragment.ByDepartmentList.get(position).getCompOrDeptID());
     }
 
 

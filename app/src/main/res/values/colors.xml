@@ -26,4 +26,6 @@
     <color name="high_priority">#ef5350</color>
     <color name="low_priority">#39B54B</color>
     <color name="gunsmoke">#808286</color>
+    <color name="pressed_color">#4d90fe</color>
+    <color name="default_color">#ffffff</color>
 </resources>
