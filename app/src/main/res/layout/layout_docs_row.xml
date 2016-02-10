@@ -3,6 +3,7 @@
     android:descendantFocusability="blocksDescendants"
     android:orientation="horizontal"
     android:layout_width="match_parent"
+    android:background="@color/white"
     android:layout_height="wrap_content"
     android:padding="5dp">
     <ImageView
@@ -10,6 +11,7 @@
         android:layout_width="45dp"
         android:scaleType="fitXY"
         android:adjustViewBounds="true"
+        android:layout_toLeftOf="@+id/layout1"
         android:layout_height="50dp"
         android:background="@mipmap/ic_listview_word"
         android:layout_margin="10dp" >
@@ -18,24 +20,26 @@
         android:id="@+id/layout_2"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
-        android:layout_height="30dp"
-        android:layout_width="30dp" >
+        android:layout_height="25dp"
+        android:layout_width="25dp" >
         <CheckBox
             android:id="@+id/doc_checkbox"
             android:layout_width="25dp"
             android:layout_height="25dp"
-            android:scaleType="fitXY"
+            android:button="@null"
+            android:background="@drawable/checkbox"
             android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
             />
         </RelativeLayout>
     <RelativeLayout
         android:id="@+id/layout_tasktitle"
-        android:layout_below="@+id/layout_2"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
         android:layout_width="match_parent"
-        android:layout_toRightOf="@+id/file_image" >
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@+id/layout_2"
+        android:layout_toRightOf="@+id/file_image"
+       >
         <TextView
             android:id="@+id/file_name"
             android:layout_width="match_parent"

@@ -15,6 +15,8 @@ import com.algorepublic.zoho.fragments.TasksListFragment;
 import com.algorepublic.zoho.utils.BaseClass;
 import com.androidquery.AQuery;
 
+import java.util.ArrayList;
+
 import se.emilsjolander.stickylistheaders.StickyListHeadersAdapter;
 
 /**
@@ -27,9 +29,10 @@ public class AdapterTasksList extends BaseAdapter implements StickyListHeadersAd
     BaseClass baseClass;
     private LayoutInflater l_Inflater;
     private int lastPosition = -1;
+    ArrayList<TasksList> tasksLists = new ArrayList<>();
 
-
-    public AdapterTasksList(Context context) {
+    public AdapterTasksList(Context context, ArrayList<TasksList> arrayList) {
+        tasksLists.addAll(arrayList);
         l_Inflater = LayoutInflater.from(context);
         this.ctx = context;
         baseClass = ((BaseClass) ctx.getApplicationContext());
@@ -37,12 +40,12 @@ public class AdapterTasksList extends BaseAdapter implements StickyListHeadersAd
 
     @Override
     public int getCount() {
-        return TasksListFragment.generalList.size();
+        return tasksLists.size();
     }
 
     @Override
     public Object getItem(int pos) {
-        return TasksListFragment.generalList.get(pos);
+        return tasksLists.get(pos);
     }
 
     @Override
@@ -55,27 +58,27 @@ public class AdapterTasksList extends BaseAdapter implements StickyListHeadersAd
 
         convertView = l_Inflater.inflate(R.layout.layout_taskslist_row, null);
         aq = new AQuery(convertView);
-        if (TasksListFragment.generalList.get(position).progress==100){
+        if (tasksLists.get(position).progress==100){
             aq.id(R.id.task_image).image(R.drawable.ic_check_circle_black_24dp);
         }
         Drawable shapeDrawable = aq.id(R.id.priority_bar).getView().getBackground();
         GradientDrawable colorDrawable = (GradientDrawable) shapeDrawable;
-        colorDrawable.setColor(getPriorityWiseColor(TasksListFragment.generalList.get(position).getPriority()));
+        colorDrawable.setColor(getPriorityWiseColor(tasksLists.get(position).getPriority()));
         aq.id(R.id.priority_bar).getView().setBackground(shapeDrawable);
 
-        aq.id(R.id.task_comment).text(TasksListFragment.generalList.get(position).getCommentsCount()+" "+ctx.getString(R.string.task_comment));
-        aq.id(R.id.task_users).text(TasksListFragment.generalList.get(position).getListAssignees().size()+" "+ctx.getString(R.string.task_user));
-        aq.id(R.id.task_name).text(TasksListFragment.generalList.get(position).getTaskName());
-        aq.id(R.id.project_name).text(TasksListFragment.generalList.get(position).getProjectName());
-        if(TasksListFragment.generalList.get(position).getStartDate().equalsIgnoreCase("3/0/1"))
+        aq.id(R.id.task_comment).text(tasksLists.get(position).getCommentsCount() + " " + ctx.getString(R.string.task_comment));
+        aq.id(R.id.task_users).text(tasksLists.get(position).getListAssignees().size() + " " + ctx.getString(R.string.task_user));
+        aq.id(R.id.task_name).text(tasksLists.get(position).getTaskName());
+        aq.id(R.id.project_name).text(tasksLists.get(position).getProjectName());
+        if(tasksLists.get(position).getStartDate().equalsIgnoreCase("3/0/1"))
             aq.id(R.id.task_date).text("No Due Date");
         else
-            aq.id(R.id.task_date).text(TasksListFragment.generalList.get(position).getEndDate());
+            aq.id(R.id.task_date).text(tasksLists.get(position).getEndDate());
 
-        if(TasksListFragment.generalList.get(position).getProjectName().equalsIgnoreCase(""))
+        if(tasksLists.get(position).getProjectName().equalsIgnoreCase(""))
             aq.id(R.id.general).text("General");
         else
-            aq.id(R.id.general).text(TasksListFragment.generalList.get(position).getProjectName());
+            aq.id(R.id.general).text(tasksLists.get(position).getProjectName());
 
         Animation animation = AnimationUtils.loadAnimation(ctx, (position > lastPosition) ? R.anim.up_from_bottom : R.anim.down_from_top);
         convertView.startAnimation(animation);
@@ -91,40 +94,40 @@ public class AdapterTasksList extends BaseAdapter implements StickyListHeadersAd
         aq_header = new AQuery(convertView);
 
         if(baseClass.getTaskSortType().equalsIgnoreCase("DueDate")) {
-            if (TasksListFragment.generalList.get(position).getHeader().equalsIgnoreCase("3/0/1"))
+            if (tasksLists.get(position).getHeader().equalsIgnoreCase("3/0/1"))
                 aq_header.id(R.id.header).text("No Due Date");
             else
-                aq_header.id(R.id.header).text(TasksListFragment.generalList.get(position).getHeader());
+                aq_header.id(R.id.header).text(tasksLists.get(position).getHeader());
         }
         if(baseClass.getTaskSortType().equalsIgnoreCase("Priority"))
         {
-            if(TasksListFragment.generalList.get(position).getPriority()==0)
+            if(tasksLists.get(position).getPriority()==0)
             {
                 aq_header.id(R.id.header).text("None");
             }
-            if(TasksListFragment.generalList.get(position).getPriority()==1)
+            if(tasksLists.get(position).getPriority()==1)
             {
                 aq_header.id(R.id.header).text("Low");
             }
-            if(TasksListFragment.generalList.get(position).getPriority()==2)
+            if(tasksLists.get(position).getPriority()==2)
             {
                 aq_header.id(R.id.header).text("Medium");
             }
-            if(TasksListFragment.generalList.get(position).getPriority()==3)
+            if(tasksLists.get(position).getPriority()==3)
             {
                 aq_header.id(R.id.header).text("High");
             }
         }
         if(baseClass.getTaskSortType().equalsIgnoreCase("Alphabetically"))
         {
-            aq_header.id(R.id.header).text(TasksListFragment.generalList.get(position).getTaskName().substring(0, 1));
+            aq_header.id(R.id.header).text(tasksLists.get(position).getTaskName().substring(0, 1));
         }
         if(baseClass.getTaskSortType().equalsIgnoreCase("TaskList"))
         {
-            if(TasksListFragment.generalList.get(position).getTaskListNameID() == 0)
+            if(tasksLists.get(position).getTaskListNameID() == 0)
             aq_header.id(R.id.header).text("General");
             else
-            aq_header.id(R.id.header).text(TasksListFragment.generalList.get(position).getTaskListName());
+            aq_header.id(R.id.header).text(tasksLists.get(position).getTaskListName());
         }
         return convertView;
     }
@@ -134,13 +137,13 @@ public class AdapterTasksList extends BaseAdapter implements StickyListHeadersAd
         long type = 0;
         //return the first character of the country as ID because this is what headers are based upon
         if(baseClass.getTaskSortType().equalsIgnoreCase("DueDate"))
-            type = Long.parseLong(TasksListFragment.generalList.get(position).getEndMilli());
+            type = Long.parseLong(tasksLists.get(position).getEndMilli());
         if(baseClass.getTaskSortType().equalsIgnoreCase("Priority"))
-            type = TasksListFragment.generalList.get(position).getPriority();
+            type = tasksLists.get(position).getPriority();
         if(baseClass.getTaskSortType().equalsIgnoreCase("Alphabetically"))
-            type = TasksListFragment.generalList.get(position).getTaskName().charAt(0);
+            type = tasksLists.get(position).getTaskName().charAt(0);
         if(baseClass.getTaskSortType().equalsIgnoreCase("TaskList"))
-            type = TasksListFragment.generalList.get(position).getTaskListNameID();
+            type = tasksLists.get(position).getTaskListNameID();
 
         return type;
     }

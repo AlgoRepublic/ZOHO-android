@@ -38,11 +38,11 @@ import se.emilsjolander.stickylistheaders.StickyListHeadersAdapter;
 import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
 
 /**
- * Created by android on 1/7/16.
+ * Created by android on 2/11/16.
  */
-public class DocumentsListFragment extends BaseFragment {
+public class DocumentsListBySubTaskFragment extends BaseFragment {
 
-    static DocumentsListFragment fragment;
+    static DocumentsListBySubTaskFragment fragment;
     StickyListHeadersAdapter adapterDocsList;
     AQuery aq;
     View view;
@@ -51,15 +51,17 @@ public class DocumentsListFragment extends BaseFragment {
     public static ArrayList<DocumentsList> allDocsList = new ArrayList<>();
     public static ArrayList<Integer> deleteDocsList = new ArrayList<>();
     BaseClass baseClass;
+    static int ID;
     public static StickyListHeadersListView listView;
 
-    public DocumentsListFragment() {
+    public DocumentsListBySubTaskFragment() {
     }
 
     @SuppressWarnings("unused")
-    public static DocumentsListFragment newInstance() {
+    public static DocumentsListBySubTaskFragment newInstance(int Id) {
+        ID = Id;
         if (fragment == null) {
-            fragment = new DocumentsListFragment();
+            fragment = new DocumentsListBySubTaskFragment();
         }
         return fragment;
     }
@@ -68,7 +70,6 @@ public class DocumentsListFragment extends BaseFragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         setRetainInstance(true);
-        getToolbar().setTitle(getString(R.string.documents));
         super.onViewCreated(view, savedInstanceState);
     }
 
@@ -95,11 +96,9 @@ public class DocumentsListFragment extends BaseFragment {
         setHasOptionsMenu(true);
         getToolbar().setTitle(getString(R.string.documents));
         service = new DocumentsService(getActivity());
-        if(isLoaded()) {
-            FilterList();
-        }else {
-            service.getDocuments(4, true, new CallBack(DocumentsListFragment.this, "DocumentsList"));
-        }
+
+        service.getDocuments(ID, true, new CallBack(DocumentsListBySubTaskFragment.this, "DocumentsList"));
+
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -181,9 +180,9 @@ public class DocumentsListFragment extends BaseFragment {
                 new OnBtnClickL() {
                     @Override
                     public void onBtnClick() {
-                    dialog.dismiss();
-                    service.deleteDocument(deleteDocsList
-                            , true, new CallBack(DocumentsListFragment.this, "DeleteDoc"));
+                        dialog.dismiss();
+                        service.deleteDocument(deleteDocsList
+                                , true, new CallBack(DocumentsListBySubTaskFragment.this, "DeleteDoc"));
                         deleteDocsList.clear();
                     }
                 });
@@ -207,9 +206,9 @@ public class DocumentsListFragment extends BaseFragment {
             public void onOperItemClick(AdapterView<?> parent, View view, int position, long id) {
                 dialog.dismiss();
                 if (isLoaded())
-                if (position == 0) {
-                    baseClass.setDocsSortType("AllFiles");
-                }
+                    if (position == 0) {
+                        baseClass.setDocsSortType("AllFiles");
+                    }
                 if (position == 1) {
                     baseClass.setDocsSortType("Pictures");
                 }
@@ -253,7 +252,7 @@ public class DocumentsListFragment extends BaseFragment {
     }
 
     public void GetAllDocumentsList() {
-       allDocsList.clear();
+        allDocsList.clear();
         for (int loop = 0; loop < DocumentsListModel.getInstance().responseObject.size(); loop++) {
             for (int loop1 = 0; loop1 < DocumentsListModel.getInstance().responseObject.get(loop).files.size(); loop1++) {
                 DocumentsList documentsList = new DocumentsList();
@@ -273,7 +272,7 @@ public class DocumentsListFragment extends BaseFragment {
 
     public void FilterByAllDocs(){
         generalDocsList.clear();
-       generalDocsList.addAll(allDocsList);
+        generalDocsList.addAll(allDocsList);
     }
     public void FilterByPicture(){
         generalDocsList.clear();

@@ -22,8 +22,11 @@
                 android:id="@+id/layout_tasktitle"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
-                android:layout_marginTop="20dp"
+              android:layout_marginTop="20dp"
+                android:layout_marginBottom="5dp"
                 android:background="@color/colorContentWrapper">
+
+
                 <View
                     android:id="@+id/priority_bar"
                     android:layout_width="4dp"
@@ -55,7 +58,12 @@
                     android:textStyle="bold"
                     android:textColor="@color/white"
                     />
-            </RelativeLayout>
+
+                </RelativeLayout>
+            <View
+                android:layout_width="match_parent"
+                android:background="@android:drawable/dialog_holo_light_frame"
+                android:layout_height="1dp"></View>
         </com.h6ah4i.android.materialshadowninepatch.MaterialShadowContainerView>
     </RelativeLayout>
     <ScrollView
@@ -390,7 +398,6 @@
             android:layout_weight=".03"
             android:background="@color/white"/>
         <RelativeLayout
-            android:id="@+id/subtask"
             android:layout_width="0dp"
             android:layout_weight=".9"
             android:layout_gravity="center"
@@ -398,6 +405,7 @@
             android:layout_marginRight="2dp"
             android:layout_height="match_parent">
             <RelativeLayout
+                android:id="@+id/subtask"
                 android:layout_width="53dp"
                 android:layout_centerHorizontal="true"
                 android:layout_height="match_parent">

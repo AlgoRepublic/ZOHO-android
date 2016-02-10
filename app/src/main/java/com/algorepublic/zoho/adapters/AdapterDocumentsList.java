@@ -15,6 +15,7 @@ import com.algorepublic.zoho.fragments.DocumentsListFragment;
 import com.algorepublic.zoho.utils.BaseClass;
 import com.androidquery.AQuery;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 
 import se.emilsjolander.stickylistheaders.StickyListHeadersAdapter;
@@ -30,8 +31,10 @@ public class AdapterDocumentsList extends BaseAdapter implements StickyListHeade
     BaseClass baseClass;
     private LayoutInflater l_Inflater;
     private int lastPosition = -1;
+    ArrayList<DocumentsList> documentsLists = new ArrayList<>();
 
-    public AdapterDocumentsList(Context context) {
+    public AdapterDocumentsList(Context context,ArrayList<DocumentsList> arrayList ) {
+        documentsLists.addAll(arrayList);
         l_Inflater = LayoutInflater.from(context);
         this.ctx = context;
         baseClass = ((BaseClass) ctx.getApplicationContext());
@@ -39,12 +42,12 @@ public class AdapterDocumentsList extends BaseAdapter implements StickyListHeade
 
     @Override
     public int getCount() {
-        return DocumentsListFragment.generalDocsList.size();
+        return documentsLists.size();
     }
 
     @Override
     public Object getItem(int pos) {
-        return DocumentsListFragment.generalDocsList.get(pos);
+        return documentsLists.get(pos);
     }
 
     @Override
@@ -59,16 +62,16 @@ public class AdapterDocumentsList extends BaseAdapter implements StickyListHeade
             convertView = l_Inflater.inflate(R.layout.layout_docs_row, null);
         }
         aq = new AQuery(convertView);
-        aq.id(R.id.file_id).text(Integer.toString(DocumentsListFragment.generalDocsList.get(position).getID()));
-        aq.id(R.id.file_name).text(DocumentsListFragment.generalDocsList.get(position).getFileName());
-        aq.id(R.id.file_time).text(GetTime(DocumentsListFragment.generalDocsList.get(position).getCreatedMilli()));
-        aq.id(R.id.file_image).image(BaseClass.getIcon(DocumentsListFragment.generalDocsList.
+        aq.id(R.id.file_id).text(Integer.toString(documentsLists.get(position).getID()));
+        aq.id(R.id.file_name).text(documentsLists.get(position).getFileName());
+        aq.id(R.id.file_time).text(GetTime(documentsLists.get(position).getCreatedMilli()));
+        aq.id(R.id.file_image).image(BaseClass.getIcon(documentsLists.
                 get(position).getFileTypeID()));
         aq.id(R.id.doc_checkbox).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 DocumentsListFragment.deleteDocsList.
-                        add(DocumentsListFragment.generalDocsList.get(position).getID());
+                        add(documentsLists.get(position).getID());
             }
         });
         return convertView;
@@ -79,10 +82,10 @@ public class AdapterDocumentsList extends BaseAdapter implements StickyListHeade
         convertView = l_Inflater.inflate(R.layout.layout_header, parent , false);
         aq_header = new AQuery(convertView);
 
-        if (DocumentsListFragment.generalDocsList.get(position).getCreatedAt().equalsIgnoreCase("3/0/1"))
+        if (documentsLists.get(position).getCreatedAt().equalsIgnoreCase("3/0/1"))
             aq_header.id(R.id.header).text("No Date");
         else
-            aq_header.id(R.id.header).text(DocumentsListFragment.generalDocsList.get(position).getCreatedAt());
+            aq_header.id(R.id.header).text(documentsLists.get(position).getCreatedAt());
 
         Animation animation = AnimationUtils.loadAnimation(ctx, (position > lastPosition) ? R.anim.up_from_bottom : R.anim.down_from_top);
         convertView.startAnimation(animation);
@@ -93,7 +96,7 @@ public class AdapterDocumentsList extends BaseAdapter implements StickyListHeade
     @Override
     public long getHeaderId(int position) {
         //return the first character of the country as ID because this is what headers are based upon
-        return Long.parseLong(DocumentsListFragment.generalDocsList.get(position).getCreatedMilli().substring(0,5));
+        return Long.parseLong(documentsLists.get(position).getCreatedMilli().substring(0,5));
     }
     public String GetTime(String milli){
         Calendar calendar = Calendar.getInstance();

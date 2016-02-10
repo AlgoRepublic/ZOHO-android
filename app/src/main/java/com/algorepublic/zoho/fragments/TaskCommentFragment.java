@@ -89,8 +89,9 @@ public class TaskCommentFragment extends BaseFragment {
     }
     public void TaskComments(Object caller, Object model) {
         TaskCommentsModel.getInstance().setList((TaskCommentsModel) model);
-        if (TasksListByOwnerModel.getInstance().responseCode == 100) {
-            //GetGeneralList();
+        if (TaskCommentsModel.getInstance().responseCode.equalsIgnoreCase("100")
+                && TaskCommentsModel.getInstance().responseObject  != null) {
+           // GetGeneralList();
         }
         else
         {
