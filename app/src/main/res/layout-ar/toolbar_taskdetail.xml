@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.AppBarLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:theme="@style/AppTheme.AppBarOverlay"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <android.support.v7.widget.Toolbar
+        style="@style/ToolBarStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="5dp"
+        android:id="@+id/toolbar"
+        android:paddingBottom="5dp"
+        app:popupTheme="@style/AppTheme.PopupOverlay"
+        android:fitsSystemWindows="true"
+        android:background="@color/colorBaseHeader"
+        android:minHeight="@dimen/abc_action_bar_default_height_material">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:text="Project Name"
+                android:layout_centerHorizontal="true"
+                android:textStyle="bold"
+                android:textColor="@android:color/white"
+                android:id="@+id/textView2"
+                android:layout_centerVertical="true" />
+
+            <Button
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:id="@+id/edit_task"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:text="Edit"
+                android:layout_alignParentRight="true"
+                android:textAllCaps="false"
+                android:textColor="@android:color/white"
+                android:background="@android:color/transparent"/>
+
+
+        </RelativeLayout>
+    </android.support.v7.widget.Toolbar>
+</android.support.design.widget.AppBarLayout>

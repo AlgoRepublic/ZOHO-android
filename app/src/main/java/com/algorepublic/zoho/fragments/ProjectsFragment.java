@@ -1,6 +1,7 @@
 package com.algorepublic.zoho.fragments;
 
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -124,10 +125,10 @@ public class ProjectsFragment extends BaseFragment implements AdapterView.OnItem
         baseClass = ((BaseClass) getActivity().getApplicationContext());
         service = new ProjectsListService(getActivity());
         service.getProjectsByClient_API(baseClass.getUserId(), true, new CallBack(this, "ProjectsByClient"));
+        service.getProjectsByDepartment(baseClass.getUserId(), true, new CallBack(this, "ProjectsByDepartment"));
     }
 
     public void ProjectsByClient(Object caller, Object model){
-        service.getProjectsByDepartment(baseClass.getUserId(), true, new CallBack(this, "ProjectsByDepartment"));
         ProjectsByClientModel.getInstance().setList((ProjectsByClientModel) model);
     }
     public void ProjectsByDepartment(Object caller, Object model){
@@ -202,12 +203,37 @@ public class ProjectsFragment extends BaseFragment implements AdapterView.OnItem
         listView.setAreHeadersSticky(false);
         listView.setAdapter(projectAdapter);
         listView.setOnItemClickListener(this);
-//        listView.setItemChecked();
     }
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
         Log.e("selected project", ((TextView) view.findViewById(R.id.project_id)).getText().toString());
         baseClass.setSelectedProject(((TextView) view.findViewById(R.id.project_id)).getText().toString());
+
+        for (int i = 0; i < aq.id(R.id.projects_list).getListView().getChildCount(); i++) {
+            if(position == i ){
+                try {
+                    aq.id(R.id.projects_list).getListView().getChildAt(i).setBackgroundColor(Color.parseColor("#666666"));
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+                try {
+                    listView.getChildAt(i).setBackgroundColor(Color.parseColor("#666666"));
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+            }else{
+                try {
+                    aq.id(R.id.projects_list).getListView().getChildAt(i).setBackgroundColor(Color.TRANSPARENT);
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+                try {
+                    listView.getChildAt(i).setBackgroundColor(Color.TRANSPARENT);
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 
     /**
@@ -249,7 +275,7 @@ public class ProjectsFragment extends BaseFragment implements AdapterView.OnItem
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.add_project:
-                Toast.makeText(getActivity(),"Add Project",Toast.LENGTH_SHORT).show();
+                callFragmentWithBackStack(R.id.container, AddProject.newInstance(), "AddProject");
                 break;
         }
         return super.onOptionsItemSelected(item);
