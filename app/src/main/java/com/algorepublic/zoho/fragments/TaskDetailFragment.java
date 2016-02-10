@@ -19,10 +19,8 @@ import android.widget.SeekBar;
 
 import com.algorepublic.zoho.ActivityTask;
 import com.algorepublic.zoho.Models.GeneralModel;
-import com.algorepublic.zoho.Models.TaskAttachmentsModel;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.adapters.AdapterTaskDetailAssignee;
-import com.algorepublic.zoho.adapters.AdapterTaskDetailAttachments;
 import com.algorepublic.zoho.services.CallBack;
 import com.algorepublic.zoho.services.TaskListService;
 import com.androidquery.AQuery;
@@ -66,6 +64,7 @@ public class TaskDetailFragment extends BaseFragment {
     public static TaskDetailFragment newInstance(int pos) {
         position =pos;
         fragment = new TaskDetailFragment();
+
         return fragment;
     }
 
@@ -160,6 +159,7 @@ public class TaskDetailFragment extends BaseFragment {
         });
         if(TasksListFragment.generalList.get(position).getProgress()==100){
             aq.id(R.id.mark_as_done).text("ReOpen Task");
+
         }
             aq.id(R.id.mark_as_done).clicked(new View.OnClickListener() {
                 @Override

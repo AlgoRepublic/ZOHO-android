@@ -14,7 +14,7 @@ public class Constants {
 	public static String DeleteTask_API = BASE_URL+ "/Task/DeleteTask"; //taskID
 	public static String UpdateTaskProgress_API = BASE_URL+ "/Task/UpdateProgress"; //taskID,progress
 	public static String TaskCompleted_API = BASE_URL+ "/Task/TaskCompleted"; //taskID,opt
-
+	public static String GetSubTakById_API = BASE_URL+ "/Task/GetById?";
 	public static String StarRatingHeads_API = BASE_URL+ "/StarRating/GetListByLanguage"; //language
 	public static String StarRatingQuestion_API = BASE_URL+ "/StarRating/GetQuestionCategoriesByCategory"; //catID,language
 
