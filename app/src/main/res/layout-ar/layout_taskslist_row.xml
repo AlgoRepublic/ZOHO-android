@@ -15,6 +15,7 @@
         android:layout_width="8dp"
         android:layout_marginTop="4dp"
         android:layout_marginBottom="8dp"
+        android:scaleX="-1"
         android:background="@drawable/roundable_prioritybar"
         android:layout_height="match_parent">
     </View>
@@ -47,11 +48,13 @@
                 android:layout_gravity="center" />
             <LinearLayout
                 android:layout_toRightOf="@+id/task_image"
+                android:layout_toEndOf="@id/task_image"
                 android:layout_height="match_parent"
                 android:id="@+id/layout1"
                 android:paddingTop="10dp"
                 android:paddingBottom="10dp"
                 android:paddingRight="10dp"
+                android:paddingEnd="10dp"
                 android:orientation="vertical"
                 android:layout_width="match_parent" >
                 <LinearLayout
@@ -64,7 +67,7 @@
                         android:id="@+id/task_name"
                         android:layout_width="0dp"
                         android:layout_weight="1"
-                        android:gravity="left"
+                        android:gravity="start"
                         android:layout_height="wrap_content"
                         android:textSize="14sp"
                         android:textStyle="bold"
@@ -74,7 +77,7 @@
                         android:id="@+id/task_date"
                         android:layout_width="0dp"
                         android:layout_weight="1"
-                        android:gravity="right|end"
+                        android:gravity="end"
                         android:layout_height="wrap_content"
                         android:textSize="12sp"
                         android:textColor="@color/colorBaseHeader"
@@ -90,7 +93,7 @@
                         android:id="@+id/project_name"
                         android:layout_width="0dp"
                         android:layout_weight=".8"
-                        android:gravity="left"
+                        android:gravity="start"
                         android:layout_gravity="center_vertical"
                         android:layout_height="wrap_content"
                         android:textSize="14sp"
@@ -100,16 +103,16 @@
                     <RelativeLayout
                         android:layout_height="wrap_content"
                         android:layout_width="0dp"
-                        android:layout_weight="1.2"
-                        android:layout_below="@+id/general" >
+                        android:layout_weight="1.2">
                         <TextView
                             android:id="@+id/comment"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textSize="12sp"
-                            android:gravity="left"
+                            android:gravity="start"
                             android:text="10 Comments"
                             android:layout_toLeftOf="@+id/bar"
+                            android:layout_toStartOf="@+id/bar"
                             android:layout_centerVertical="true"
                             android:textColor="@color/colorBaseHeader"
                             />
@@ -118,6 +121,7 @@
                             android:layout_width="1dp"
                             android:layout_margin="5dp"
                             android:layout_toLeftOf="@+id/task_users"
+                            android:layout_toStartOf="@+id/task_users"
                             android:background="@color/colorBaseHeader"
                             android:layout_height="match_parent">
                         </View>
@@ -126,9 +130,10 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textSize="12sp"
-                            android:gravity="left"
+                            android:gravity="start"
                             android:text="10 Users"
                             android:layout_alignParentRight="true"
+                            android:layout_alignParentEnd="true"
                             android:layout_centerVertical="true"
                             android:textColor="@color/colorBaseHeader"
                             />

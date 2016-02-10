@@ -158,5 +158,7 @@
     <string name="project_description">Project Description</string>
     <string name="project_access">Project Access</string>
     <string name="remember_password">Remember Password?</string>
+    <string name="over_due">Over Due</string>
+    <string name="up_coming">Up Coming</string>
 
 </resources>
