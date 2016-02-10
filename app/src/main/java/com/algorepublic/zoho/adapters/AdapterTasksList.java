@@ -63,6 +63,8 @@ public class AdapterTasksList extends BaseAdapter implements StickyListHeadersAd
         colorDrawable.setColor(getPriorityWiseColor(TasksListFragment.generalList.get(position).getPriority()));
         aq.id(R.id.priority_bar).getView().setBackground(shapeDrawable);
 
+        aq.id(R.id.task_comment).text(TasksListFragment.generalList.get(position).getCommentsCount()+" "+ctx.getString(R.string.task_comment));
+        aq.id(R.id.task_users).text(TasksListFragment.generalList.get(position).getListAssignees().size()+" "+ctx.getString(R.string.task_user));
         aq.id(R.id.task_name).text(TasksListFragment.generalList.get(position).getTaskName());
         aq.id(R.id.project_name).text(TasksListFragment.generalList.get(position).getProjectName());
         if(TasksListFragment.generalList.get(position).getStartDate().equalsIgnoreCase("3/0/1"))
@@ -119,7 +121,7 @@ public class AdapterTasksList extends BaseAdapter implements StickyListHeadersAd
         }
         if(baseClass.getTaskSortType().equalsIgnoreCase("TaskList"))
         {
-            if(TasksListFragment.generalList.get(position).getCharToAscii() == 0)
+            if(TasksListFragment.generalList.get(position).getTaskListNameID() == 0)
             aq_header.id(R.id.header).text("General");
             else
             aq_header.id(R.id.header).text(TasksListFragment.generalList.get(position).getTaskListName());
@@ -138,7 +140,7 @@ public class AdapterTasksList extends BaseAdapter implements StickyListHeadersAd
         if(baseClass.getTaskSortType().equalsIgnoreCase("Alphabetically"))
             type = TasksListFragment.generalList.get(position).getTaskName().charAt(0);
         if(baseClass.getTaskSortType().equalsIgnoreCase("TaskList"))
-            type = Long.parseLong(TasksListFragment.generalList.get(position).getCharToAscii().toString());
+            type = TasksListFragment.generalList.get(position).getTaskListNameID();
 
         return type;
     }

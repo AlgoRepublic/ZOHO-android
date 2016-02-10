@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 
+import com.algorepublic.zoho.ActivityTask;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.adapters.AdapterTaskListName;
 import com.algorepublic.zoho.adapters.AdapterTaskPriority;
@@ -48,21 +49,20 @@ public class TaskListNameFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment_forums
-        View view =  inflater.inflate(R.layout.fragment_task_priority, container, false);
+        View view =  inflater.inflate(R.layout.fragment_tasklistame, container, false);
         aq = new AQuery(view);
         baseClass = ((BaseClass) getActivity().getApplicationContext());
-        ArrayList<TaskListName> arrayList = new ArrayList<>();
-        Log.e("Name","/"+TasksListFragment.taskListName.size());
-        arrayList.addAll(TasksListFragment.taskListName);
-        aq.id(R.id.listview_priority).itemClicked(new AdapterView.OnItemClickListener() {
+        aq.id(R.id.listview_tasklistname).itemClicked(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                baseClass.db.putInt("TaskListNameID", TasksListFragment.taskListName.get(position).getTaskListID());
                 adapter.setSelectedIndex(position);
                 adapter.notifyDataSetChanged();
             }
         });
-        adapter = new AdapterTaskListName(getActivity(), arrayList);
-        aq.id(R.id.listview_priority).adapter(adapter);
+        adapter = new AdapterTaskListName(getActivity());
+        adapter.setSelectedIndex(baseClass.db.getInt("TaskListNameID"));
+        aq.id(R.id.listview_tasklistname).adapter(adapter);
         return view;
     }
 }

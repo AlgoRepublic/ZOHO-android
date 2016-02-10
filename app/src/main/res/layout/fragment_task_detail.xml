@@ -289,30 +289,30 @@
         android:layout_alignParentBottom="true"
         android:background="@drawable/topborder"
         android:orientation="horizontal">
-        <RelativeLayout
-            android:layout_width="0dp"
-            android:layout_weight=".9"
-            android:layout_gravity="center"
-            android:layout_marginLeft="2dp"
-            android:layout_marginRight="2dp"
-            android:layout_height="match_parent">
-            <RelativeLayout
-                android:id="@+id/comment"
-                android:layout_width="60dp"
-                android:layout_centerHorizontal="true"
-                android:layout_height="match_parent">
-                <TextView
-                    android:id="@+id/notify_alert1"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:text="112"
-                    android:gravity="center"
-                    android:singleLine="true"
-                    android:textSize="8dp"
-                    android:layout_alignParentRight="true"
-                    android:background="@mipmap/bubble_alert_white"
-                    android:layout_alignParentTop="true"
-                    android:textColor="@color/colorBaseWrapper" />
+<RelativeLayout
+    android:layout_width="0dp"
+    android:layout_weight=".9"
+    android:layout_gravity="center"
+    android:layout_marginLeft="2dp"
+    android:layout_marginRight="2dp"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:id="@+id/comment"
+        android:layout_width="60dp"
+        android:layout_centerHorizontal="true"
+        android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/comment_count"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:text="112"
+            android:gravity="center"
+            android:singleLine="true"
+            android:textSize="8dp"
+            android:layout_alignParentRight="true"
+            android:background="@mipmap/bubble_alert_white"
+            android:layout_alignParentTop="true"
+            android:textColor="@color/colorBaseWrapper" />
 
                 <ImageView
                     android:id="@+id/delete1"
@@ -352,7 +352,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_height="match_parent">
                 <TextView
-                    android:id="@+id/notify_alert2"
+                    android:id="@+id/docs_count"
                     android:layout_width="25dp"
                     android:layout_height="25dp"
                     android:text="112"
@@ -402,7 +402,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_height="match_parent">
                 <TextView
-                    android:id="@+id/notify_alert3"
+                    android:id="@+id/subtask_count"
                     android:layout_width="25dp"
                     android:layout_height="25dp"
                     android:text="112"

@@ -148,20 +148,7 @@ public class BaseFragment extends Fragment {
         String a = date.replaceAll("\\D+", "");
         return a;
     }
-    public Double CharToASCII(String name){
-        Double value;
-        if(name == null)
-        {
-            value = Double.valueOf(0);
-        }else {
-            StringBuilder ascii =  new StringBuilder();
-            for (int i = 0; i < name.length(); i++) {
-                ascii.append(String.valueOf((int) name.charAt(i)));
-            }
-            value =  Double.parseDouble(ascii.toString());
-        }
-        return value;
-    }
+
     public void setToolbar(){
 //        ((AppCompatActivity)getActivity()).setSupportActionBar(BaseActivity.toolbar);
 //        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(

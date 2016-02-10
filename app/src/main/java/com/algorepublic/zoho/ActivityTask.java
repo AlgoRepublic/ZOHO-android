@@ -57,8 +57,8 @@ public class ActivityTask extends BaseActivity{
         }else{
             position=-1;
         }
-        setTaskValuesTinyDB();
         aq =new AQuery(this);
+        setTaskValuesTinyDB();
         aq.id(R.id.back_arrow).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -116,7 +116,7 @@ public class ActivityTask extends BaseActivity{
                 }
                 httpClient = new GenericHttpClient();
                 response = httpClient.postAddTask(Constants.CreateTask_API
-                        , assigneeList,filesList);
+                        , assigneeList,filesList,baseClass);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -158,18 +158,29 @@ public class ActivityTask extends BaseActivity{
         return object.toString();
     }
     public void setTaskValuesTinyDB(){
-        //   baseClass.db.putString("TaskListName",TasksListFragment.generalList.get(position).getTaskListName());
         if(position > -1) {
+            aq.id(R.id.title_text).text(TasksListFragment.generalList.get(position).getTaskName());
+            baseClass.db.putInt("TaskListNameID", TasksListFragment.generalList.get(position).getTaskListNameID());
+            baseClass.db.putInt("TaskID", TasksListFragment.generalList.get(position).getTaskID());
             baseClass.db.putString("TaskName", TasksListFragment.generalList.get(position).getTaskName());
+            baseClass.db.putString("ProjectName", TasksListFragment.generalList.get(position).getProjectName());
+            baseClass.db.putInt("ProjectID", TasksListFragment.generalList.get(position).getProjectID());
+            if(TasksListFragment.generalList.get(position).getDescription() != null) {
+                baseClass.db.putString("TaskDesc", TasksListFragment.generalList.get(position).getDescription());
+            }
             baseClass.db.putString("StartDate", TasksListFragment.generalList.get(position).getStartDate());
             baseClass.db.putString("EndDate", TasksListFragment.generalList.get(position).getEndDate());
             baseClass.db.putInt("Priority", TasksListFragment.generalList.get(position).getPriority());
         }else
         {
+            aq.id(R.id.project_title).text(getString(R.string.project_title));
+            aq.id(R.id.title_text).text(getString(R.string.Task_Title));
+            baseClass.db.putInt("TaskListNameID", 0);
             baseClass.db.putString("TaskName", "");
-            baseClass.db.putString("StartDate", "");
-            baseClass.db.putString("EndDate", "");
+            baseClass.db.putString("StartDate", "0001-01-01");
+            baseClass.db.putString("EndDate", "0001-01-01");
             baseClass.db.putInt("Priority", 0);
         }
+        aq.id(R.id.project_title).text(baseClass.db.getString("ProjectName"));
     }
 }

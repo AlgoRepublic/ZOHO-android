@@ -56,7 +56,6 @@ public class AdapterTaskPriority extends BaseAdapter {
         if(selectedIndex == position)
         {
             aq.id(R.id.priority_checkbox).checked(true);
-            baseClass.db.putInt("Priority",position);
         }
         else
         {

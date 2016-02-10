@@ -24,8 +24,16 @@ public class TaskListAssignee {
         return lastName;
     }
 
+    public void setProfileImage(String profileImage){
+        this.profileImage = profileImage;
+    }
+    public String getProfileImage(){
+        return profileImage;
+    }
+
 
     int userID;
     String firstName;
     String lastName;
+    String profileImage;
 }

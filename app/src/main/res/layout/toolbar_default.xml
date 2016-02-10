@@ -44,7 +44,7 @@
             android:layout_centerHorizontal="true"
             android:textStyle="bold"
             android:textColor="@android:color/white"
-            android:id="@+id/textView2"
+            android:id="@+id/project_title"
             android:layout_centerVertical="true" />
 
         <Button

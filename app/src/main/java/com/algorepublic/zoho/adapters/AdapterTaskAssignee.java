@@ -59,16 +59,21 @@ public class AdapterTaskAssignee extends BaseAdapter {
 
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
-        if (convertView == null) {
-                convertView = l_Inflater.inflate(R.layout.layout_assignee_row, null);
-        }
+
+         convertView = l_Inflater.inflate(R.layout.layout_assignee_row, null);
+
         aq = new AQuery(convertView);
+        if(ActivityTask.assigneeList.size()>0) {
+            if (ActivityTask.assigneeList.get(position) != -1) {
+                aq.id(R.id.assignee_checkbox).checked(true);
+            }
+        }
         aq.id(R.id.assignee_name).text(TaskAssigneeModel.getInstance().responseObject.get(position).firstName);
         aq.id(R.id.assignee_checkbox).getCheckBox().setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked)
-                    ActivityTask.assigneeList.add(TaskAssigneeModel.getInstance().responseObject.get(position).ID);
+                    ActivityTask.assigneeList.add(position,TaskAssigneeModel.getInstance().responseObject.get(position).ID);
                 else
                     ActivityTask.assigneeList.remove(position);
             }

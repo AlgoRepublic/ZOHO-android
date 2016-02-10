@@ -113,11 +113,8 @@ public class TasksListFragment extends BaseFragment {
 
         baseClass = ((BaseClass) getActivity().getApplicationContext());
         taskListService = new TaskListService(getActivity());
-        if(allTaskList.size()==0) {
-            taskListService.getTasksListByOwner(baseClass.getUserId(),true, new CallBack(TasksListFragment.this, "TasksList"));
-        }else{
-            GetGeneralList();
-        }
+        taskListService.getTasksListByOwner(baseClass.getUserId(),true, new CallBack(TasksListFragment.this, "OwnerTasksList"));
+
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -233,7 +230,7 @@ public class TasksListFragment extends BaseFragment {
             listView.setAdapter(adapterTasksList);
         }
     }
-    public void TasksList(Object caller, Object model) {
+    public void OwnerTasksList(Object caller, Object model) {
         TasksListByOwnerModel.getInstance().setList((TasksListByOwnerModel) model);
         if (TasksListByOwnerModel.getInstance().responseCode == 100) {
             AddAllTasks();
@@ -268,14 +265,18 @@ public class TasksListFragment extends BaseFragment {
                 tasksList.setEndMilli(DateMilli(taskModel.endDate));
                 tasksList.setStartMilli(DateMilli(taskModel.startDate));
                 tasksList.setProjectName(taskModel.projectName);
+                tasksList.setProjectID(taskModel.projectID);
                 tasksList.setStartDate(DateFormatter(taskModel.startDate));
                 tasksList.setEndDate(DateFormatter(taskModel.endDate));
                 tasksList.setHeader(DateFormatter(taskModel.endDate));
                 tasksList.setDescription(taskModel.description);
                 tasksList.setPriority(taskModel.priority);
                 tasksList.setProgress(taskModel.progress);
+                tasksList.setCommentsCount(taskModel.commentsCount);
+                tasksList.setDocumentsCount(taskModel.documentsCount);
+                tasksList.setSubTasksCount(taskModel.subTasksCount);
                 tasksList.setTaskListName(TasksListByOwnerModel.getInstance().responseObject.get(loop).taskListName);
-                tasksList.setCharToAscii(CharToASCII(TasksListByOwnerModel.getInstance().responseObject.get(loop).taskListName));
+                tasksList.setTaskListNameID(TasksListByOwnerModel.getInstance().responseObject.get(loop).tasklistID);
                 //************** Assignee List ************//
                 ArrayList<TaskListAssignee> listAssignees = new ArrayList<>();
                 for (int loop2 = 0; loop2 < TasksListByOwnerModel.getInstance().responseObject.get(loop).taskObject.get(loop1).userObject.size(); loop2++) {
@@ -284,6 +285,7 @@ public class TasksListFragment extends BaseFragment {
                     assignee.setUserID(users.responsibleID);
                     assignee.setFirstName(users.firstName);
                     assignee.setLastName(users.lastName);
+                    assignee.setProfileImage(users.profileImagePath);
                     listAssignees.add(assignee);
                 }
                 tasksList.setListAssignees(listAssignees);
@@ -319,7 +321,7 @@ public class TasksListFragment extends BaseFragment {
     };
     Comparator<TasksList> byTaskList = new Comparator<TasksList>() {
         public int compare(TasksList lhs, TasksList rhs) {
-            return (Double.valueOf(lhs.getCharToAscii()).compareTo(Double.valueOf(rhs.getCharToAscii())));
+            return (Double.valueOf(lhs.getTaskListNameID()).compareTo(Double.valueOf(rhs.getTaskListNameID())));
         }
     };
     Comparator<TasksList> Date = new Comparator<TasksList>() {

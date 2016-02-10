@@ -85,42 +85,20 @@ public class TasksListByOwnerModel {
         @SerializedName("ProjectID")
         public int projectID;
 
-        @SerializedName("MilestoneID")
-        public Integer milestoneID;
+        @SerializedName("DocumentsCount")
+        public Integer documentsCount;
 
-        @SerializedName("MilestoneName")
-        public String milestoneName;
+        @SerializedName("SubTasksCount")
+        public Integer subTasksCount;
 
-        @SerializedName("ResponsibleName")
-        public String responsibleName;
+        @SerializedName("CommentsCount")
+        public Integer commentsCount;
 
         @SerializedName("Users")
         @Expose
         public ArrayList<Users> userObject = new ArrayList<Users>();
-
-        @SerializedName("SubTask")
-        @Expose
-        public ArrayList<SubTask> subTask = new ArrayList<SubTask>();
     }
     public class Users {
-
-        @SerializedName("ID")
-        @Expose
-        public Integer responsibleID;
-
-        @SerializedName("FirstName")
-        @Expose
-        public String firstName;
-
-        @SerializedName("LastName")
-        @Expose
-        public String lastName;
-
-        @SerializedName("ProfileImagePath")
-        @Expose
-        public String profileImagePath;
-    }
-    public class SubTask {
 
         @SerializedName("ID")
         @Expose

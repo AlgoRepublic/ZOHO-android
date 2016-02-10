@@ -29,6 +29,7 @@ import com.androidquery.AQuery;
 public class AdapterTaskMenu extends BaseAdapter {
 
     Context ctx; private LayoutInflater inflater;
+    int lastPosition=0;
     int[] menu_names = {
             R.string.task_desc,
             R.string.category,
@@ -77,7 +78,7 @@ public class AdapterTaskMenu extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
         final AQuery aq = new AQuery(convertView);
-        if (position==0) {
+        if (lastPosition==position) {
             aq.id(R.id.checkbox).getCheckBox().setBackgroundColor(ctx.getResources().getColor(R.color.colorBaseMenu));
         }else
             aq.id(R.id.checkbox).getCheckBox().setBackgroundColor(ctx.getResources().getColor(R.color.colorBaseHeader));
@@ -92,6 +93,7 @@ public class AdapterTaskMenu extends BaseAdapter {
             public void onClick(View v) {
                 for (int loop = 0; loop < menu_names.length; loop++) {
                     if (loop==position) {
+                        lastPosition =position;
                         aq.id(R.id.checkbox).getCheckBox().setBackgroundColor(ctx.getResources().getColor(R.color.colorBaseMenu));
                     }else {
                         View  view = getViewByPosition(loop, ActivityTask.gridViewTaskMenu);
