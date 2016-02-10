@@ -293,7 +293,7 @@
         android:layout_centerHorizontal="true"
         android:layout_height="match_parent">
         <TextView
-            android:id="@+id/notify_alert1"
+            android:id="@+id/comment_count"
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:text="112"
@@ -343,7 +343,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_height="match_parent">
                 <TextView
-                    android:id="@+id/notify_alert2"
+                    android:id="@+id/docs_count"
                     android:layout_width="25dp"
                     android:layout_height="25dp"
                     android:text="112"
@@ -393,7 +393,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_height="match_parent">
                 <TextView
-                    android:id="@+id/notify_alert3"
+                    android:id="@+id/subtask_count"
                     android:layout_width="25dp"
                     android:layout_height="25dp"
                     android:text="112"

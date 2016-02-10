@@ -49,22 +49,23 @@ public class TaskAssignFragment extends BaseFragment {
        View view =  inflater.inflate(R.layout.fragment_task_assign, container, false);
         aq = new AQuery(view);
         ActivityTask.assigneeList.clear();
-        try {
-            for (int loop = 0;
-                 loop < TasksListFragment.generalList.get(position).getListAssignees().size(); loop++) {
+        for (int loop = 0;
+             loop < TasksListFragment.generalList.get(position).getListAssignees().size(); loop++) {
+            if (TasksListFragment.generalList.get(position).getListAssignees().get(loop).getUserID() != -1) {
                 ActivityTask.assigneeList.add(
                         TasksListFragment.generalList.get(position).getListAssignees().get(loop).getUserID());
-            }
-        }catch (IndexOutOfBoundsException e){}
-        aq.id(R.id.listview_employees).adapter(new AdapterTaskAssignee(getActivity()));
+            } else
+                ActivityTask.assigneeList.add(-1);
+        }
+
         service = new TaskListService(getActivity());
-        service.getTaskAssignee(4, true, new CallBack(TaskAssignFragment.this, "TaskAssignee"));
+        service.getTaskAssignee(TasksListFragment.generalList.get(position).getProjectID(), true, new CallBack(TaskAssignFragment.this, "TaskAssignee"));
         return  view;
     }
     public void TaskAssignee(Object caller, Object model) {
         TaskAssigneeModel.getInstance().setList((TaskAssigneeModel) model);
         if (TaskAssigneeModel.getInstance().responseCode == 100) {
-
+            aq.id(R.id.listview_employees).adapter(new AdapterTaskAssignee(getActivity()));
         }
         else
         {

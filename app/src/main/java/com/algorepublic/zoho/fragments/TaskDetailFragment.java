@@ -48,7 +48,6 @@ public class TaskDetailFragment extends BaseFragment {
     AQuery aq;
     static TaskDetailFragment fragment;
     static int position;
-    int Progress,opt;
     TaskListService service;
     int click=0;
     DonutProgress seekBarCompat;
@@ -106,6 +105,9 @@ public class TaskDetailFragment extends BaseFragment {
         aq.id(R.id.task_name).text(TasksListFragment.generalList.get(position).getTaskName());
         aq.id(R.id.task_desc).text(TasksListFragment.generalList.get(position).getDescription());
         aq.id(R.id.category).text(TasksListFragment.generalList.get(position).getTaskListName());
+        aq.id(R.id.comment_count).text(Integer.toString(TasksListFragment.generalList.get(position).getCommentsCount()));
+        aq.id(R.id.docs_count).text(Integer.toString(TasksListFragment.generalList.get(position).getDocumentsCount()));
+        aq.id(R.id.subtask_count).text(Integer.toString(TasksListFragment.generalList.get(position).getSubTasksCount()));
         seekBar.setProgress(TasksListFragment.generalList.get(position).getProgress());
         seekBarCompat.setProgress(TasksListFragment.generalList.get(position).getProgress());
 
@@ -164,7 +166,6 @@ public class TaskDetailFragment extends BaseFragment {
             aq.id(R.id.mark_as_done).clicked(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    click = 2;
                     if(TasksListFragment.generalList.get(position).getProgress()==100){
                         NormalDialogCustomAttr(getString(R.string.reopen_task));
                     }else {

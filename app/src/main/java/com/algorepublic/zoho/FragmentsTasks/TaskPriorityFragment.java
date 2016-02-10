@@ -55,6 +55,7 @@ public class TaskPriorityFragment extends BaseFragment {
         aq.id(R.id.listview_priority).itemClicked(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                baseClass.db.putInt("Priority",position);
                 adapter.setSelectedIndex(position);
                 adapter.notifyDataSetChanged();
             }

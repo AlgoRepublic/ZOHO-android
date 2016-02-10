@@ -35,28 +35,27 @@ import se.emilsjolander.stickylistheaders.StickyListHeadersAdapter;
 import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
 
 /**
- * Created by android on 12/15/15.
+ * Created by android on 2/10/16.
  */
-public class TasksListFragment extends BaseFragment {
+public class TaskListBySubTasksFragment extends BaseFragment {
 
-    static TasksListFragment fragment;
+    static TaskListBySubTasksFragment fragment;
     TaskListService taskListService;
     StickyListHeadersAdapter adapterTasksList;
     AQuery aq;View view;
     RadioGroup radioGroup;
-    public static ArrayList<TaskListName> taskListName = new ArrayList<>();
     public static ArrayList<TasksList> allTaskList = new ArrayList<>();
     public static ArrayList<TasksList> generalList = new ArrayList<>();
     BaseClass baseClass;
     StickyListHeadersListView listView;
 
-    public TasksListFragment() {
+    public TaskListBySubTasksFragment() {
     }
 
     @SuppressWarnings("unused")
-    public static TasksListFragment newInstance() {
+    public static TaskListBySubTasksFragment newInstance() {
         if (fragment==null) {
-            fragment = new TasksListFragment();
+            fragment = new TaskListBySubTasksFragment();
         }
         return fragment;
     }
@@ -113,7 +112,7 @@ public class TasksListFragment extends BaseFragment {
 
         baseClass = ((BaseClass) getActivity().getApplicationContext());
         taskListService = new TaskListService(getActivity());
-        taskListService.getTasksListByOwner(Integer.parseInt(baseClass.getUserId()),true, new CallBack(TasksListFragment.this, "OwnerTasksList"));
+        taskListService.getTasksListByOwner(1,true, new CallBack(TaskListBySubTasksFragment.this, "TaskListBySubTasks"));
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -138,7 +137,7 @@ public class TasksListFragment extends BaseFragment {
             public void onClick(View v) {
                 if(isLoaded()) {
                     if(allTaskList.size()>0) {
-                      GetGeneralList();
+                        GetGeneralList();
                     }
                 }
             }
@@ -147,20 +146,20 @@ public class TasksListFragment extends BaseFragment {
             @Override
             public void onClick(View v) {
                 if(isLoaded())
-                UpComing();
+                    UpComing();
             }
         });
         aq.id(R.id.over_due).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(isLoaded())
-                OverDueDate();
+                    OverDueDate();
             }
         });
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
-                Log.e("id","/"+radioGroup.indexOfChild(view.findViewById(checkedId)));
+                Log.e("id", "/" + radioGroup.indexOfChild(view.findViewById(checkedId)));
                 switch (radioGroup.indexOfChild(view.findViewById(checkedId))) {
                     case 1:
                         aq.id(R.id.all).textColor(getResources().getColor(R.color.colorBaseHeader));
@@ -230,7 +229,7 @@ public class TasksListFragment extends BaseFragment {
             listView.setAdapter(adapterTasksList);
         }
     }
-    public void OwnerTasksList(Object caller, Object model) {
+    public void TaskListBySubTasks(Object caller, Object model) {
         TasksListByOwnerModel.getInstance().setList((TasksListByOwnerModel) model);
         if (TasksListByOwnerModel.getInstance().responseCode == 100) {
             AddAllTasks();
@@ -247,51 +246,45 @@ public class TasksListFragment extends BaseFragment {
         SortList();
     }
     public void AddAllTasks(){
-        allTaskList.clear();taskListName.clear();
+        allTaskList.clear();
         for (int loop = 0; loop < TasksListByOwnerModel.getInstance().responseObject.size(); loop++) {
-            TaskListName tasklistName = new TaskListName();
-            tasklistName.setTaskListID(TasksListByOwnerModel.getInstance().responseObject.get(loop).tasklistID);
-            tasklistName.setTaskListName(TasksListByOwnerModel.getInstance().responseObject.get(loop).taskListName);
-            taskListName.add(tasklistName);
-            for (int loop1 = 0; loop1 < TasksListByOwnerModel.getInstance().responseObject.get(loop).taskObject.size(); loop1++) {
-                TasksListByOwnerModel.Tasks taskModel = TasksListByOwnerModel.getInstance().responseObject.get(loop).taskObject.get(loop1);
-                TasksList tasksList = new TasksList();
-                if (taskModel.title == null) {
-                    tasksList.setTaskName("-");
-                } else {
-                    tasksList.setTaskName(taskModel.title);
-                }
-                tasksList.setTaskID(taskModel.taskID);
-                tasksList.setEndMilli(DateMilli(taskModel.endDate));
-                tasksList.setStartMilli(DateMilli(taskModel.startDate));
-                tasksList.setProjectName(taskModel.projectName);
-                tasksList.setProjectID(taskModel.projectID);
-                tasksList.setStartDate(DateFormatter(taskModel.startDate));
-                tasksList.setEndDate(DateFormatter(taskModel.endDate));
-                tasksList.setHeader(DateFormatter(taskModel.endDate));
-                tasksList.setDescription(taskModel.description);
-                tasksList.setPriority(taskModel.priority);
-                tasksList.setProgress(taskModel.progress);
-                tasksList.setCommentsCount(taskModel.commentsCount);
-                tasksList.setDocumentsCount(taskModel.documentsCount);
-                tasksList.setSubTasksCount(taskModel.subTasksCount);
-                tasksList.setTaskListName(TasksListByOwnerModel.getInstance().responseObject.get(loop).taskListName);
-                tasksList.setTaskListNameID(TasksListByOwnerModel.getInstance().responseObject.get(loop).tasklistID);
-                tasksList.setCharToAscii(CharToASCII(TasksListByOwnerModel.getInstance().responseObject.get(loop).taskListName));
-                //************** Assignee List ************//
-                ArrayList<TaskListAssignee> listAssignees = new ArrayList<>();
-                for (int loop2 = 0; loop2 < TasksListByOwnerModel.getInstance().responseObject.get(loop).taskObject.get(loop1).userObject.size(); loop2++) {
-                    TasksListByOwnerModel.Users users = TasksListByOwnerModel.getInstance().responseObject.get(loop).taskObject.get(loop1).userObject.get(loop2);
-                    TaskListAssignee assignee = new TaskListAssignee();
-                    assignee.setUserID(users.responsibleID);
-                    assignee.setFirstName(users.firstName);
-                    assignee.setLastName(users.lastName);
-                    listAssignees.add(assignee);
-                }
-                tasksList.setListAssignees(listAssignees);
-                //************** ******* ************//
-                allTaskList.add(tasksList);
+            TasksListByOwnerModel.Tasks taskModel = TasksListByOwnerModel.getInstance().responseObject.get(loop).taskObject.get(loop1);
+            TasksList tasksList = new TasksList();
+            if (taskModel.title == null) {
+                tasksList.setTaskName("-");
+            } else {
+                tasksList.setTaskName(taskModel.title);
             }
+            tasksList.setTaskID(taskModel.taskID);
+            tasksList.setEndMilli(DateMilli(taskModel.endDate));
+            tasksList.setStartMilli(DateMilli(taskModel.startDate));
+            tasksList.setProjectName(taskModel.projectName);
+            tasksList.setProjectID(taskModel.projectID);
+            tasksList.setStartDate(DateFormatter(taskModel.startDate));
+            tasksList.setEndDate(DateFormatter(taskModel.endDate));
+            tasksList.setHeader(DateFormatter(taskModel.endDate));
+            tasksList.setDescription(taskModel.description);
+            tasksList.setPriority(taskModel.priority);
+            tasksList.setProgress(taskModel.progress);
+            tasksList.setCommentsCount(taskModel.commentsCount);
+            tasksList.setDocumentsCount(taskModel.documentsCount);
+            tasksList.setSubTasksCount(taskModel.subTasksCount);
+            tasksList.setTaskListName(TasksListByOwnerModel.getInstance().responseObject.get(loop).taskListName);
+            tasksList.setTaskListNameID(TasksListByOwnerModel.getInstance().responseObject.get(loop).tasklistID);
+            tasksList.setCharToAscii(CharToASCII(TasksListByOwnerModel.getInstance().responseObject.get(loop).taskListName));
+            //************** Assignee List ************//
+            ArrayList<TaskListAssignee> listAssignees = new ArrayList<>();
+            for (int loop1 = 0; loop1 < TasksListByOwnerModel.getInstance().responseObject.get(loop).taskObject.get(loop).userObject.size(); loop1++) {
+                TasksListByOwnerModel.Users users = TasksListByOwnerModel.getInstance().responseObject.get(loop).taskObject.get(loop).userObject.get(loop1);
+                TaskListAssignee assignee = new TaskListAssignee();
+                assignee.setUserID(users.responsibleID);
+                assignee.setFirstName(users.firstName);
+                assignee.setLastName(users.lastName);
+                listAssignees.add(assignee);
+            }
+            tasksList.setListAssignees(listAssignees);
+            //************** ******* ************//
+            allTaskList.add(tasksList);
         }
     }
     public void UpComing(){

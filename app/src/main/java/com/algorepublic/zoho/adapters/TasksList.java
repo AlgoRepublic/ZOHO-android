@@ -32,12 +32,47 @@ public class TasksList implements Comparable<TasksList>{
     public String getTaskListName(){
         return taskListName;
     }
+    public void setTaskListNameID(int taskListNameID){
+        this.taskListNameID = taskListNameID;
+    }
+    public int getTaskListNameID(){
+        return taskListNameID;
+    }
     public void setProjectName(String projectName){
         this.projectName = projectName;
     }
     public String getProjectName(){
         return projectName;
     }
+
+    public void setCommentsCount(int commentsCount){
+        this.commentsCount = commentsCount;
+    }
+    public int getCommentsCount(){
+        return commentsCount;
+    }
+
+    public void setDocumentsCount(int documentsCount){
+        this.documentsCount = documentsCount;
+    }
+    public int getDocumentsCount(){
+        return documentsCount;
+    }
+
+    public void setSubTasksCount(int subTasksCount){
+        this.subTasksCount = subTasksCount;
+    }
+    public int getSubTasksCount(){
+        return subTasksCount;
+    }
+
+    public void setProjectID(int projectID){
+        this.projectID = projectID;
+    }
+    public int getProjectID(){
+        return projectID;
+    }
+
     public void setStartDate(String startDate){
         this.startDate = startDate;
     }
@@ -101,6 +136,9 @@ public class TasksList implements Comparable<TasksList>{
     String header;
     int priority;
     int progress;
+    int documentsCount;
+    int subTasksCount;
+    int commentsCount;
     Double charToAscii;
     String startDate;
     String startMilli;
@@ -109,6 +147,8 @@ public class TasksList implements Comparable<TasksList>{
     String taskName;
     int taskID;
     String taskListName;
+    int taskListNameID;
     String projectName;
+    int projectID;
     String description;
 }

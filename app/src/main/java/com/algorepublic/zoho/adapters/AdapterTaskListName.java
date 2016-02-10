@@ -1,12 +1,17 @@
 package com.algorepublic.zoho.adapters;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.CompoundButton;
 
+import com.algorepublic.zoho.ActivityTask;
+import com.algorepublic.zoho.Models.TaskAssigneeModel;
 import com.algorepublic.zoho.R;
+import com.algorepublic.zoho.fragments.TasksListFragment;
 import com.algorepublic.zoho.utils.BaseClass;
 import com.androidquery.AQuery;
 
@@ -20,12 +25,10 @@ public class AdapterTaskListName extends BaseAdapter {
     Context ctx;
     AQuery aq;
     BaseClass baseClass;
-    int selectedIndex =-1;
     private LayoutInflater l_Inflater;
-    ArrayList<TaskListName> arraylist = new ArrayList<TaskListName>();
+    int selectedIndex =-1;
 
-    public AdapterTaskListName(Context context, ArrayList<TaskListName> results) {
-        arraylist.addAll(results);
+    public AdapterTaskListName(Context context){
         l_Inflater = LayoutInflater.from(context);
         this.ctx = context;
         baseClass = ((BaseClass) ctx.getApplicationContext());
@@ -33,12 +36,13 @@ public class AdapterTaskListName extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return arraylist.size();
+
+        return TasksListFragment.taskListName.size();
     }
 
     @Override
     public Object getItem(int pos) {
-        return arraylist.get(pos);
+        return TasksListFragment.taskListName.get(pos);
     }
 
     @Override
@@ -47,10 +51,10 @@ public class AdapterTaskListName extends BaseAdapter {
     }
 
     @Override
-    public View getView(final int position, View convertView, ViewGroup parent) {
-        if (convertView == null) {
-            convertView = l_Inflater.inflate(R.layout.layout_priorty_row, null);
-        }
+    public View getView(int position, View convertView, ViewGroup parent) {
+
+        convertView = l_Inflater.inflate(R.layout.layout_priorty_row, null);
+
         aq = new AQuery(convertView);
         if(selectedIndex == position)
         {
@@ -60,7 +64,7 @@ public class AdapterTaskListName extends BaseAdapter {
         {
             aq.id(R.id.priority_checkbox).checked(false);
         }
-        aq.id(R.id.priority).text(arraylist.get(position).getTaskListName());
+        aq.id(R.id.priority).text(TasksListFragment.taskListName.get(position).getTaskListName());
         return convertView;
     }
     public void setSelectedIndex(int index)
