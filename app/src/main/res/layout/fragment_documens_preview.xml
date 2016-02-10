@@ -54,7 +54,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="fitXY"
-            android:background="@color/colorBaseWrapper"
+            android:background="@color/colorBaseMenu"
             android:layout_margin="10dp"
             android:layout_below="@+id/view"
             android:layout_above="@+id/layout_tasktitle"
@@ -104,7 +104,7 @@
             android:transcriptMode="alwaysScroll"
             android:stackFromBottom="true"
             android:layout_margin="5dp"
-            android:background="@color/colorBaseWrapper"
+            android:background="@color/colorBaseMenu"
             android:layout_above="@+id/layout_comment"
             android:id="@+id/listView_comments" />
 
