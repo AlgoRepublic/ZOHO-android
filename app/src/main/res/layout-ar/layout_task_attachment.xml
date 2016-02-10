@@ -2,13 +2,16 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/single_image_row"
+    android:background="@color/colorBaseWrapper"
     android:layout_width="match_parent"
     android:layout_height="wrap_content" >
 
     <RelativeLayout
+        android:id="@+id/layout"
         android:layout_width="200dp"
         android:layout_height="200dp"
         android:padding="10dp"
+        android:layout_margin="5dp"
         android:layout_centerHorizontal="true"
         android:background="@drawable/rounded_edittext" >
 
@@ -19,7 +22,6 @@
             android:layout_gravity="center"
             android:scaleType="fitXY"
             android:layout_margin="10dp"
-            android:background="@android:drawable/ic_menu_report_image"
             android:layout_above="@+id/file_title"
             android:layout_alignParentTop="true" />
         <TextView
@@ -32,7 +34,21 @@
             android:lines="2"
             android:gravity="left"
             android:text="name"
-            android:textColor="@color/colorBaseHeader"
-            android:textSize="20sp" />
+            android:textColor="@color/colorBaseWrapper"
+            android:textSize="14sp" />
         </RelativeLayout>
+    <ImageView
+        android:id="@+id/file_delete"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:scaleType="fitXY"
+        android:layout_toRightOf="@+id/layout"
+        android:layout_alignBottom="@+id/layout"
+        android:background="@android:drawable/ic_menu_close_clear_cancel"
+         />
+    <View
+        android:layout_width="match_parent"
+        android:background="@color/colorContentWrapper"
+        android:layout_below="@+id/layout"
+        android:layout_height="1dp"/>
     </RelativeLayout>

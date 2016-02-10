@@ -3,7 +3,6 @@ package com.algorepublic.zoho.LoginToLoadingFragments;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
-import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,8 +28,6 @@ import com.linkedin.platform.utils.Scope;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.lang.reflect.Field;
-
 /**
  * Created by ahmad on 6/22/15.
  */
@@ -42,12 +39,8 @@ public class LoginFragment extends BaseFragment {
     public LoginFragment() {
     }
 
-    @SuppressWarnings("unused")
     public static LoginFragment newInstance() {
-        if (fragment == null) {
-            fragment = new LoginFragment();
-        }
-        return fragment;
+        return new LoginFragment();
     }
 
 
@@ -59,13 +52,7 @@ public class LoginFragment extends BaseFragment {
             startActivity(new Intent(getActivity(), MainActivity.class));
             getActivity().finish();
         }
-        if(baseClass.getUserLanguage().equals(getString(R.string.lang_arabic))) {
-            changeLanguage(getString(R.string.lang_arabic));
-            view  = inflater.inflate(R.layout.fragment_login, container, false);
-        }else {
-            changeLanguage(getString(R.string.lang_english));
-            view  = inflater.inflate(R.layout.fragment_login, container, false);
-        }
+        view  = inflater.inflate(R.layout.fragment_login, container, false);
         aq= new AQuery(getActivity(),view);
         aq.id(R.id.lang_text).clicked(new View.OnClickListener() {
             @Override

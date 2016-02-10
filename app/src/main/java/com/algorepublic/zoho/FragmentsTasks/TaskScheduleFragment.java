@@ -50,15 +50,20 @@ public class TaskScheduleFragment extends BaseFragment {
         View view =  inflater.inflate(R.layout.fragment_task_schedule, container, false);
         aq =  new AQuery(view);
         baseClass = ((BaseClass) getActivity().getApplicationContext());
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(System.currentTimeMillis());
+        int month = calendar.get(Calendar.MONTH)+1;
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+        int year = calendar.get(Calendar.YEAR);
         if(!BaseClass.db.getString("StartDate").equalsIgnoreCase("")) {
             aq.id(R.id.start_date).text(BaseClass.db.getString("StartDate"));
         }else{
-            aq.id(R.id.start_date).text(getString(R.string.start_date));
+            aq.id(R.id.start_date).text(day+"/"+month+"/"+year);
         }
         if(!BaseClass.db.getString("EndDate").equalsIgnoreCase("")) {
             aq.id(R.id.end_date).text(BaseClass.db.getString("EndDate"));
         }else{
-            aq.id(R.id.end_date).text(getString(R.string.end_date));
+            aq.id(R.id.end_date).text(day+"/"+month+"/"+year);
         }
         SplitStartDate(); SplitEndDate();
 

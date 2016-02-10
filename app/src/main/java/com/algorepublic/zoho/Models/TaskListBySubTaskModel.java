@@ -36,7 +36,7 @@ public class TaskListBySubTaskModel  {
 
     @SerializedName("responseObject")
     @Expose
-    public ResponseObject responseObject = new ResponseObject();
+    public ArrayList<ResponseObject> responseObject = new ArrayList<ResponseObject>();
 
     public class ResponseObject{
 

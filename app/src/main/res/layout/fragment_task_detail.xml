@@ -398,7 +398,6 @@
             android:layout_weight=".03"
             android:background="@color/white"/>
         <RelativeLayout
-            android:id="@+id/subtask"
             android:layout_width="0dp"
             android:layout_weight=".9"
             android:layout_gravity="center"
@@ -406,6 +405,7 @@
             android:layout_marginRight="2dp"
             android:layout_height="match_parent">
             <RelativeLayout
+                android:id="@+id/subtask"
                 android:layout_width="53dp"
                 android:layout_centerHorizontal="true"
                 android:layout_height="match_parent">

@@ -188,7 +188,11 @@ public class TaskAttachmentFragment extends BaseFragment {
                 public void onClick(View v) {
                     RelativeLayout layout = (RelativeLayout) linearLayout.findViewById(Integer
                             .parseInt(v.getTag().toString()));
-                    linearLayout.removeView(layout);  Tag--;
+                    View view1 = linearLayout.getChildAt(Integer
+                            .parseInt(v.getTag().toString()));
+                    linearLayout.removeViewAt(Integer
+                            .parseInt(v.getTag().toString()));
+                    Log.e("ID1",v.getId()+"/"+v.getTag().toString()+"/"+linearLayout.getChildCount());
                     for(int loop=Integer
                             .parseInt(v.getTag().toString());loop<linearLayout.getChildCount();loop++){
                         View view = linearLayout.getChildAt(loop);

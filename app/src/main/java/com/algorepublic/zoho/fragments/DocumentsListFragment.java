@@ -68,6 +68,7 @@ public class DocumentsListFragment extends BaseFragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         setRetainInstance(true);
+        getToolbar().setTitle(getString(R.string.documents));
         super.onViewCreated(view, savedInstanceState);
     }
 
@@ -236,7 +237,7 @@ public class DocumentsListFragment extends BaseFragment {
     }
     public void SetAdapterList(){
         if (DocumentsListModel.getInstance().responseCode == 100) {
-            adapterDocsList = new AdapterDocumentsList(getActivity());
+            adapterDocsList = new AdapterDocumentsList(getActivity(),generalDocsList);
             listView.setAreHeadersSticky(true);
             listView.setAdapter(adapterDocsList);
         }

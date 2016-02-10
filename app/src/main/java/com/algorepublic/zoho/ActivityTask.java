@@ -3,6 +3,8 @@ package com.algorepublic.zoho;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -59,6 +61,21 @@ public class ActivityTask extends BaseActivity{
         }
         aq =new AQuery(this);
         setTaskValuesTinyDB();
+        aq.id(R.id.title_text).getEditText().addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                baseClass.db.putString("TaskName", s.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
         aq.id(R.id.back_arrow).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -68,7 +85,11 @@ public class ActivityTask extends BaseActivity{
         aq.id(R.id.done).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new AsyncTry().execute();
+                if(position > -1) {
+                    new UpdateTask().execute();
+                }else{
+                    new NewTask().execute();
+                }
             }
         });
         aq.id(R.id.btn_title).clicked(new View.OnClickListener() {
@@ -96,7 +117,7 @@ public class ActivityTask extends BaseActivity{
         return false;
     }
 
-    public class AsyncTry extends AsyncTask<Void, Void, String> {
+    public class NewTask extends AsyncTask<Void, Void, String> {
         GenericHttpClient httpClient;
         String response= null;
 
@@ -109,14 +130,38 @@ public class ActivityTask extends BaseActivity{
         @Override
         protected String doInBackground(Void... voids) {
             try {
-                try {
-                    GetJsonObject();
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
+
                 httpClient = new GenericHttpClient();
                 response = httpClient.postAddTask(Constants.CreateTask_API
                         , assigneeList,filesList,baseClass);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return response;
+        }
+        @Override
+        protected void onPostExecute(String result){
+            dialog.dismiss();
+            PopulateModel(result);
+        }
+    }
+    public class UpdateTask extends AsyncTask<Void, Void, String> {
+        GenericHttpClient httpClient;
+        String response= null;
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            dialog.show();
+        }
+
+        @Override
+        protected String doInBackground(Void... voids) {
+            try {
+
+                httpClient = new GenericHttpClient();
+                response = httpClient.postUpdateTask(Constants.UpdateTask_API
+                        , assigneeList, filesList, filesList, baseClass);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -142,24 +187,8 @@ public class ActivityTask extends BaseActivity{
 
 //        }catch (Exception e){}
     }
-    public String  GetJsonObject() throws JSONException {
-
-        JSONObject object = new JSONObject();
-        if(getIntent().getExtras()!=null) {
-            object.put("ID", tasksObj.getTaskID());
-        }
-        BaseClass.db.putInt("CreateBy", 1);
-        BaseClass.db.putInt("UpdateBy", 1);
-        BaseClass.db.putInt("OwnerID", 1);
-        BaseClass.db.putInt("Priority", 1);
-        BaseClass.db.putString("Title", baseClass.db.getString("TaskName"));
-        BaseClass.db.putInt("ProjectID", 4);
-        Log.e("task",object.toString());
-        return object.toString();
-    }
     public void setTaskValuesTinyDB(){
         if(position > -1) {
-            aq.id(R.id.title_text).text(TasksListFragment.generalList.get(position).getTaskName());
             baseClass.db.putInt("TaskListNameID", TasksListFragment.generalList.get(position).getTaskListNameID());
             baseClass.db.putInt("TaskID", TasksListFragment.generalList.get(position).getTaskID());
             baseClass.db.putString("TaskName", TasksListFragment.generalList.get(position).getTaskName());
@@ -173,14 +202,14 @@ public class ActivityTask extends BaseActivity{
             baseClass.db.putInt("Priority", TasksListFragment.generalList.get(position).getPriority());
         }else
         {
-            aq.id(R.id.project_title).text(getString(R.string.project_title));
-            aq.id(R.id.title_text).text(getString(R.string.Task_Title));
+            baseClass.db.putString("ProjectName", getString(R.string.project_title));
+            baseClass.db.putString("TaskName", getString(R.string.Task_Title));
             baseClass.db.putInt("TaskListNameID", 0);
-            baseClass.db.putString("TaskName", "");
-            baseClass.db.putString("StartDate", "0001-01-01");
-            baseClass.db.putString("EndDate", "0001-01-01");
+            baseClass.db.putString("StartDate", "");
+            baseClass.db.putString("EndDate", "");
             baseClass.db.putInt("Priority", 0);
         }
+        aq.id(R.id.title_text).text(baseClass.db.getString("TaskName"));
         aq.id(R.id.project_title).text(baseClass.db.getString("ProjectName"));
     }
 }

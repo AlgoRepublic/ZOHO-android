@@ -25,6 +25,8 @@
     <string name="feeds">Feeds</string>
     <string name="activity">Activities</string>
     <string name="tasks">Tasks</string>
+    <string name="task_detail">Task Detail</string>
+    <string name="sub_tasks">Sub Tasks</string>
     <string name="Task_Title">Task Title</string>
     <string name="documents">Documents</string>
     <string name="settings">Settings</string>
@@ -153,5 +155,11 @@
     <!-- Task Details Strings -->
     <string name="delete_doc">Delete Document?</string>
     <string name="doc_deleted">Document Deleted</string>
+    <string name="_private">Private - Only project users can access</string>
+    <string name="_public">Public - Portal users can view/follow</string>
+    <string name="project_name">Project Name</string>
+    <string name="project_description">Project Description</string>
+    <string name="project_access">Project Access</string>
+    <string name="remember_password">Remember Password?</string>
 
 </resources>
