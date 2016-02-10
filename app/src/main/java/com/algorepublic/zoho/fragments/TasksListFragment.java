@@ -225,7 +225,7 @@ public class TasksListFragment extends BaseFragment {
     }
     public void SetAdapterList(){
         if (TasksListByOwnerModel.getInstance().responseCode == 100) {
-            adapterTasksList = new AdapterTasksList(getActivity());
+            adapterTasksList = new AdapterTasksList(getActivity(),generalList);
             listView.setAreHeadersSticky(true);
             listView.setAdapter(adapterTasksList);
         }

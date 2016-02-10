@@ -25,12 +25,12 @@ public class TaskCommentsModel {
 
 
     @SerializedName("responseObject")
-    public User user = new User();
+    public ResponseObject responseObject = new ResponseObject();
 
     @SerializedName("ResponseCode")
     public String responseCode;
 
-    public class User {
+    public class ResponseObject {
 
         @SerializedName("ID")
         public String Id;

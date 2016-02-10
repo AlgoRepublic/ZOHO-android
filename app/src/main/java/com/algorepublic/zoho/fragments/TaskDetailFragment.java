@@ -8,6 +8,7 @@ import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -66,7 +67,12 @@ public class TaskDetailFragment extends BaseFragment {
 
         return fragment;
     }
-
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        setRetainInstance(true);
+        getToolbar().setTitle(getString(R.string.task_detail));
+        super.onViewCreated(view, savedInstanceState);
+    }
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -137,25 +143,29 @@ public class TaskDetailFragment extends BaseFragment {
         aq.id(R.id.comment).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                callFragmentWithBackStack(R.id.container, TaskCommentFragment.newInstance(position), "TaskComment");
-            }
-        });
-        aq.id(R.id.comment).clicked(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                callFragmentWithBackStack(R.id.container, TaskCommentFragment.newInstance(position), "TaskComment");
+                if(Integer.parseInt(aq.id(R.id.comment_count).getText().toString()) > 0) {
+                    callFragmentWithBackStack(R.id.container, TaskCommentFragment.newInstance(TasksListFragment.
+                            generalList.get(position).getTaskID())
+                            , "TaskComment");
+                }
             }
         });
         aq.id(R.id.documents).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                if(Integer.parseInt(aq.id(R.id.docs_count).getText().toString()) > 0) {
+                    callFragmentWithBackStack(R.id.container, DocumentsListBySubTaskFragment.newInstance(TasksListFragment.
+                            generalList.get(position).getTaskID()), "DocumentsListBySubTaskFragment");
+                }
             }
         });
         aq.id(R.id.subtask).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                if(Integer.parseInt(aq.id(R.id.subtask_count).getText().toString()) > 0) {
+                    callFragmentWithBackStack(R.id.container, TaskListBySubTasksFragment.newInstance(TasksListFragment.
+                            generalList.get(position).getTaskID()), "TaskListBySubTasksFragment");
+                }
             }
         });
         if(TasksListFragment.generalList.get(position).getProgress()==100){

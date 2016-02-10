@@ -7,8 +7,11 @@ public class Constants {
 	public static String GetUser_API = BASE_URL+ "/User/GetById";
 	public static String GetAssigneeByTask_API = BASE_URL+ "/User/GetListByProject";//ProjectID
 	public static String GetTaskListByOwner_API = BASE_URL+ "/TaskList/GetListByOwnerID?"; //userID
+	public static String GetTaskListBySubTasks_API = BASE_URL+ "/Task/GetByParentId?"; //taskID
+	public static String GetAttachmentsBySubTasks_API = BASE_URL+ "/Task/AttachmentList?"; //taskID
 	public static String GetTaskListByProject_API = BASE_URL+ "/TaskList/GetListByProjectID?"; //projectID
 	public static String CreateTask_API = BASE_URL+ "/Task/CreateTask?"; //taskObject,assignee,files
+	public static String UpdateTask_API = BASE_URL+ "/Task/UpdateTask?"; //taskObject,assignee,files
 	public static String GetCommentByTask_API = BASE_URL+ "/Task/GetCommentsByTaskID?";
 	public static String CreateComment_API = BASE_URL+ "/Task/CreateComment";
 	public static String DeleteTask_API = BASE_URL+ "/Task/DeleteTask"; //taskID
