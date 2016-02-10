@@ -139,6 +139,7 @@
     <string name="task_done">Task done</string>
     <string name="delete_task">Delete Task?</string>
     <string name="task_deleted">Task Deleted</string>
+    <string name="update_progress">Progress Updated</string>
     <string name="task_name">Task Name</string>
     <string name="task_details">Task Details:</string>
     <string name="task_added">Added</string>
