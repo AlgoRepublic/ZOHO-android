@@ -1,6 +1,7 @@
 package com.algorepublic.zoho.adapters;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -66,7 +67,7 @@ public class AdapterProjectsDeptList extends BaseAdapter implements StickyListHe
             aq.id(R.id.project_desc).text(Html.fromHtml(ProjectsFragment.ByDepartmentList.get(position).getProjectDesc()));
 
         if(baseClass.getSelectedProject().equals(ProjectsFragment.ByDepartmentList.get(position).getProjectID())){
-            convertView.setSelected(true);
+            convertView.setBackgroundColor(Color.parseColor("#666666"));
         }
 
         Animation animation = AnimationUtils.loadAnimation(ctx, (position > lastPosition) ? R.anim.up_from_bottom : R.anim.down_from_top);

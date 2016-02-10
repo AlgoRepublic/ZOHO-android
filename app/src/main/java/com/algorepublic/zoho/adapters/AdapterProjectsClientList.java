@@ -1,6 +1,7 @@
 package com.algorepublic.zoho.adapters;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.BaseAdapter;
 
 import com.algorepublic.zoho.R;
+import com.algorepublic.zoho.fragments.ProjectsFragment;
 import com.algorepublic.zoho.utils.BaseClass;
 import com.androidquery.AQuery;
 
@@ -67,8 +69,8 @@ public class AdapterProjectsClientList extends BaseAdapter implements StickyList
         if(arrayList.get(position).getProjectDesc() != null)
             aq.id(R.id.project_desc).text(Html.fromHtml(arrayList.get(position).getProjectDesc()));
 
-        if(baseClass.getSelectedProject().equals(arrayList.get(position).getProjectID())){
-            convertView.setSelected(true);
+        if(baseClass.getSelectedProject().equals(ProjectsFragment.ByDepartmentList.get(position).getProjectID())){
+            convertView.setBackgroundColor(Color.parseColor("#666666"));
         }
 
         Animation animation = AnimationUtils.loadAnimation(ctx, (position > lastPosition) ? R.anim.up_from_bottom : R.anim.down_from_top);

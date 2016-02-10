@@ -12,10 +12,8 @@ public class ActivityLoginToLoading extends BaseActivity{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-       super.onCreate(savedInstanceState);
+        super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_to_loading);
-        if(savedInstanceState ==null){
-            callFragment(R.id.logintoloading_container, LoginFragment.newInstance(),"LoginFragment");
-        }
+        callFragment(R.id.logintoloading_container, LoginFragment.newInstance(),"LoginFragment");
     }
 }

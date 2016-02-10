@@ -1,20 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="20dp"
+    android:scrollbars="none"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBaseWrapper"
     android:orientation="vertical" >
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/underline_textview"
-        android:paddingBottom="2dp"
-        android:text="ATTACHMENTS"
+        android:padding="10dp"
+        android:text="Attachments"
+        android:gravity="center_horizontal"
         android:textColor="@color/colorContentWrapper"
-        android:textSize="13.33sp"
+        android:textSize="14sp"
         android:typeface="monospace" />
-
+    <Button
+        android:id="@+id/add_file"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_margin="10dp"
+        android:padding="5dp"
+        android:textAllCaps="false"
+        android:textSize="12sp"
+        android:background="@drawable/roundable_gray"
+        android:textColor="@color/colorBaseWrapper"
+        android:text="Add"/>
     <LinearLayout
         android:id="@+id/images_layout"
         android:layout_width="match_parent"
@@ -25,14 +41,6 @@
         android:visibility="visible" >
     </LinearLayout>
 
-    <ImageView
-        android:id="@+id/add_file"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:layout_marginTop="5dp"
-        android:background="@drawable/rounded_edittext"
-        android:padding="15dp"
-        android:src="@drawable/add_blue" />
 
 </LinearLayout>
+</ScrollView>

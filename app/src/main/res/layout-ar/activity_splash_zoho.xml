@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@color/colorBaseWrapper"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<RelativeLayout
+    android:background="@drawable/roundable_corner"
+    android:layout_width="match_parent"
+    android:layout_marginTop="20dp"
+    android:layout_marginBottom="20dp"
+    android:layout_marginRight="10dp"
+    android:layout_marginLeft="10dp"
+    android:layout_height="match_parent"
+   >
+        <ImageView
+            android:layout_width="130dp"
+            android:layout_height="120dp"
+            android:id="@+id/imageView2"
+            android:background="@mipmap/img_splash"
+            android:layout_marginTop="123dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true" />
+
+        <ImageView
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="13dp"
+            android:id="@+id/imageView3"
+            android:layout_marginRight="35dp"
+            android:layout_marginLeft="35dp"
+            android:layout_below="@+id/imageView2"
+            android:background="@mipmap/fastlink_white"
+            android:layout_centerHorizontal="true" />
+
+        <TextView
+            android:layout_above="@+id/imageView4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:id="@+id/textView"
+            android:singleLine="true"
+            android:textAllCaps="true"
+            android:text="@string/developed_by"
+            android:layout_centerVertical="true"
+            android:textColor="@color/colorContentWrapper"
+            android:textSize="16sp"
+            android:gravity="center|center_horizontal"
+            android:layout_gravity="center_horizontal" />
+    <ImageView
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:id="@+id/imageView4"
+        android:background="@mipmap/img_splashh"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+
+</RelativeLayout>
+</RelativeLayout>

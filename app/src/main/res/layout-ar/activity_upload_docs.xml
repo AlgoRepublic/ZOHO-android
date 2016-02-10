@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBaseWrapper"
+    tools:context="com.algorepublic.zoho.ActivityTask">
+    <include
+        android:id="@+id/toolbar_actionbar"
+        layout="@layout/toolbar_default"
+        android:layout_width="match_parent"
+        android:layout_height="50dp" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none"
+        android:padding="10dp"
+        android:layout_below="@+id/toolbar_actionbar"
+        xmlns:android="http://schemas.android.com/apk/res/android">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/underline_textview"
+                android:paddingBottom="2dp"
+                android:text="Files"
+                android:textColor="@color/colorContentWrapper"
+                android:textSize="13.33sp"
+                android:typeface="monospace" />
+
+            <Button
+                android:id="@+id/add_file"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_margin="10dp"
+                android:padding="5dp"
+                android:textAllCaps="false"
+                android:textSize="12sp"
+                android:background="@drawable/roundable_gray"
+                android:textColor="@color/colorBaseWrapper"
+                android:text="Add"/>
+
+            <LinearLayout
+                android:id="@+id/images_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="5dp"
+                android:orientation="vertical"
+                android:visibility="visible" >
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+
+</RelativeLayout>

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:padding="5dp"
+        android:layout_height="wrap_content">
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/user_image"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:scaleType="fitXY"
+            app:riv_corner_radius="5dip"
+            app:riv_border_color="#333333"
+            app:riv_mutate_background="true"
+            app:riv_tile_mode="clamp"
+            app:riv_oval="false"
+            android:src="@drawable/ic_menu_add_task" />
+        <RelativeLayout
+            android:orientation="horizontal"
+            android:padding="3dp"
+            android:layout_width="match_parent"
+            android:layout_height="40dp">
+            <TextView
+                android:id="@+id/user_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorBaseHeader"
+                android:maxLines="2"
+                android:layout_toLeftOf="@+id/days_ago"
+                android:ellipsize="end"
+                android:textSize="14sp"
+                android:text="sd"
+                android:layout_alignParentTop="true" />
+            <TextView
+                android:id="@+id/days_ago"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/blue"
+                android:maxLines="2"
+                android:ellipsize="end"
+                android:textSize="14sp"
+                android:text="sd"
+                android:layout_alignParentRight="true" />
+            <TextView
+                android:id="@+id/project_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/blue"
+                android:singleLine="true"
+                android:ellipsize="end"
+                android:textSize="12sp"
+                android:text="sd"
+                android:layout_alignParentBottom="true" />
+        </RelativeLayout>
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:background="@color/colorContentWrapper"
+        android:layout_height="1dp" />
+    <TextView
+        android:id="@+id/feed_status"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorBaseHeader"
+        android:singleLine="true"
+        android:ellipsize="end"
+        android:textSize="16sp"
+        android:padding="10dp"
+        android:text="sd"
+        android:layout_alignParentBottom="true" />
+    <TextView
+        android:id="@+id/comment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/holo_blue_bright"
+        android:singleLine="true"
+        android:ellipsize="end"
+        android:textSize="16sp"
+        android:padding="10dp"
+        android:text="Comment"
+        android:background="@color/colorBaseWrapper"
+        android:layout_alignParentBottom="true" />
+</LinearLayout>
