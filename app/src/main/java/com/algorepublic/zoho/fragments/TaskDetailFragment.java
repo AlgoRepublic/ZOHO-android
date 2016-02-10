@@ -90,7 +90,6 @@ public class TaskDetailFragment extends BaseFragment {
         twoWayAssignee.setHasFixedSize(true);
         twoWayAssignee.setLongClickable(true);
         twoWayAssignee.setOrientation(TwoWayLayoutManager.Orientation.HORIZONTAL);
-        //twoWayAttachments.setOrientation(TwoWayLayoutManager.Orientation.HORIZONTAL);
         twoWayAssignee.setAdapter(new AdapterTaskDetailAssignee(getActivity(),
                 TasksListFragment.generalList.get(position).getListAssignees()));
 

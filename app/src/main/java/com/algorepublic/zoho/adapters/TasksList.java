@@ -111,12 +111,6 @@ public class TasksList implements Comparable<TasksList>{
         return header;
     }
 
-    public void setCharToAscii(Double charToAscii){
-        this.charToAscii = charToAscii;
-    }
-    public Double getCharToAscii(){
-        return charToAscii;
-    }
 
     public void setListAssignees(ArrayList<TaskListAssignee> listAssignees){
         this.listAssignees.addAll(listAssignees);
@@ -139,7 +133,6 @@ public class TasksList implements Comparable<TasksList>{
     int documentsCount;
     int subTasksCount;
     int commentsCount;
-    Double charToAscii;
     String startDate;
     String startMilli;
     String endMilli;

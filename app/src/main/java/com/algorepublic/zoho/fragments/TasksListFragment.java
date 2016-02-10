@@ -277,7 +277,6 @@ public class TasksListFragment extends BaseFragment {
                 tasksList.setSubTasksCount(taskModel.subTasksCount);
                 tasksList.setTaskListName(TasksListByOwnerModel.getInstance().responseObject.get(loop).taskListName);
                 tasksList.setTaskListNameID(TasksListByOwnerModel.getInstance().responseObject.get(loop).tasklistID);
-                tasksList.setCharToAscii(CharToASCII(TasksListByOwnerModel.getInstance().responseObject.get(loop).taskListName));
                 //************** Assignee List ************//
                 ArrayList<TaskListAssignee> listAssignees = new ArrayList<>();
                 for (int loop2 = 0; loop2 < TasksListByOwnerModel.getInstance().responseObject.get(loop).taskObject.get(loop1).userObject.size(); loop2++) {
@@ -286,6 +285,7 @@ public class TasksListFragment extends BaseFragment {
                     assignee.setUserID(users.responsibleID);
                     assignee.setFirstName(users.firstName);
                     assignee.setLastName(users.lastName);
+                    assignee.setProfileImage(users.profileImagePath);
                     listAssignees.add(assignee);
                 }
                 tasksList.setListAssignees(listAssignees);
@@ -321,7 +321,7 @@ public class TasksListFragment extends BaseFragment {
     };
     Comparator<TasksList> byTaskList = new Comparator<TasksList>() {
         public int compare(TasksList lhs, TasksList rhs) {
-            return (Double.valueOf(lhs.getCharToAscii()).compareTo(Double.valueOf(rhs.getCharToAscii())));
+            return (Double.valueOf(lhs.getTaskListNameID()).compareTo(Double.valueOf(rhs.getTaskListNameID())));
         }
     };
     Comparator<TasksList> Date = new Comparator<TasksList>() {

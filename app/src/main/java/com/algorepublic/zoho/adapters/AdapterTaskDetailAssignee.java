@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.fragments.DocsPreviewFragment;
 import com.algorepublic.zoho.utils.BaseClass;
+import com.algorepublic.zoho.utils.Constants;
 import com.androidquery.AQuery;
 import com.bumptech.glide.Glide;
 
@@ -53,7 +54,7 @@ public class AdapterTaskDetailAssignee extends RecyclerView.Adapter<AdapterTaskD
 
     @Override
     public void onBindViewHolder(SimpleViewHolder holder, int position) {
-        Glide.with(ctx).load("http://www.planwallpaper.com/static/images/magic-of-blue-universe-images.jpg")
+        Glide.with(ctx).load(Constants.Image_URL+arraylist.get(position).profileImage)
                 .into(holder.imageView);
     }
 
