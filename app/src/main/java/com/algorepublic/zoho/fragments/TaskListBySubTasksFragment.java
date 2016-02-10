@@ -248,7 +248,7 @@ public class TaskListBySubTasksFragment extends BaseFragment {
     public void AddAllTasks(){
         allTaskList.clear();
         for (int loop = 0; loop < TasksListByOwnerModel.getInstance().responseObject.size(); loop++) {
-            TasksListByOwnerModel.Tasks taskModel = TasksListByOwnerModel.getInstance().responseObject.get(loop).taskObject.get(loop1);
+            TasksListByOwnerModel.Tasks taskModel = TasksListByOwnerModel.getInstance().responseObject.get(loop);
             TasksList tasksList = new TasksList();
             if (taskModel.title == null) {
                 tasksList.setTaskName("-");

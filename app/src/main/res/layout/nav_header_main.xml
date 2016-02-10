@@ -140,7 +140,7 @@
             <GridView
                 android:id="@+id/gridview_menu"
                 android:layout_width="match_parent"
-                android:layout_height="300dp"
+                android:layout_height="320dp"
                 android:numColumns="3"
                 android:padding="10dp"
                 android:horizontalSpacing="5dp"
