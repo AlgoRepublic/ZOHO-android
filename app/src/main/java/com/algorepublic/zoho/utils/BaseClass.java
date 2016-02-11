@@ -48,6 +48,8 @@ public class BaseClass extends Application {
     //Shared preferences tags
     private String UserId = "UserId";
     private String FirstName = "FirstName";
+    private String LastName = "LastName";
+    private String ProfileImage = "ProfileImage";
     private String Email = "Email";
     private String UserLanguage = "UserLanguage";
     private String SELECTED_PROJECT = "selected_project";
@@ -75,6 +77,22 @@ public class BaseClass extends Application {
 
     public String getEmail() {
         return appSharedPrefs.getString(Email, "");
+    }
+
+    public void setLastName(String lastName) {
+        prefsEditor.putString(LastName, lastName).commit();
+    }
+
+    public String getLastName() {
+        return appSharedPrefs.getString(LastName, "");
+    }
+
+    public void setProfileImage(String profileImage) {
+        prefsEditor.putString(ProfileImage, profileImage).commit();
+    }
+
+    public String getProfileImage() {
+        return appSharedPrefs.getString(ProfileImage, "");
     }
 
     public void setFirstName(String userName) {

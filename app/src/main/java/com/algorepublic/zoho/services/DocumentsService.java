@@ -5,6 +5,7 @@ import android.util.Log;
 
 import com.algorepublic.zoho.Models.DocumentsListModel;
 import com.algorepublic.zoho.Models.GeneralModel;
+import com.algorepublic.zoho.Models.SubTaskAttachmentsModel;
 import com.algorepublic.zoho.Models.UserModel;
 import com.algorepublic.zoho.utils.Constants;
 
@@ -34,6 +35,11 @@ public class DocumentsService extends BaseService {
         this.get(url, obj, DocumentsListModel.getInstance(), message);
         Log.e("DocService", url);
     }
+    public void getDocsBySubTasks(int taskID, boolean message, CallBack obj){
+        String url = Constants.GetAttachmentsBySubTasks_API+"taskID="+taskID;
+        this.get(url, obj, SubTaskAttachmentsModel.getInstance(), message);
+        Log.e("AttachBySubTaskService", url);
+    }
     public void uploadDocuments(File file,boolean message, CallBack obj){
         String url = "http://www.jitpac.com/FileUploadsManager/uploads/";
         HashMap<String,Object> params =  new HashMap<>();
@@ -45,7 +51,7 @@ public class DocumentsService extends BaseService {
         String url = Constants.DeleteDocuments_API;
         HashMap<String, String> params = new HashMap<String, String>();
         for(int loop=0;loop<fileIDs.size();loop++) {
-            params.put("fileID["+loop+"]", String.valueOf(fileIDs));
+            params.put("filesID["+loop+"]", String.valueOf(fileIDs.get(loop)));
         }
         this.post(url, params, obj, GeneralModel.getInstance(), message);
         Log.e("DeleteDocumentsService", url);

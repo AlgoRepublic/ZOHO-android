@@ -91,13 +91,26 @@ public class TaskCommentFragment extends BaseFragment {
         TaskCommentsModel.getInstance().setList((TaskCommentsModel) model);
         if (TaskCommentsModel.getInstance().responseCode.equalsIgnoreCase("100")
                 && TaskCommentsModel.getInstance().responseObject  != null) {
-           // GetGeneralList();
+            GetGeneralList();
         }
         else
         {
             Toast.makeText(getActivity(), getString(R.string.invalid_credential), Toast.LENGTH_SHORT).show();
         }
     }
+    public void GetGeneralList() {
+        arrayList.clear();
+        for (int loop = 0; loop < TaskCommentsModel.getInstance().responseObject.size(); loop++) {
+            TaskComments taskComments = new TaskComments();
+            taskComments.setComment(TaskCommentsModel.getInstance().responseObject.get(loop).message);
+            taskComments.setDateTime(GetDateTimeComment(TaskCommentsModel.getInstance().responseObject.get(loop).createdAt));
+            taskComments.setUserName(TaskCommentsModel.getInstance().responseObject.get(loop).userObject.firstName);
+            taskComments.setUserImage(TaskCommentsModel.getInstance().responseObject.get(loop).userObject.profileImagePath);
+            arrayList.add(taskComments);
+        }
+        adapter.notifyDataSetChanged();
+    }
+
     public void CreateComment(Object caller, Object model) {
         CreateCommentModel.getInstance().setList((CreateCommentModel) model);
         if (CreateCommentModel.getInstance().responseCode ==100){
@@ -121,7 +134,7 @@ public class TaskCommentFragment extends BaseFragment {
         TaskComments taskComments = new TaskComments();
         taskComments.setComment(comment);
         taskComments.setUserName(baseClass.getFirstName());
-        taskComments.setUserImage("http://www.planwallpaper.com/static/images/magic-of-blue-universe-images.jpg");
+        taskComments.setUserImage(baseClass.getProfileImage());
         taskComments.setDateTime(GetDateTime());
         arrayList.add(taskComments);
         adapter.notifyDataSetChanged();

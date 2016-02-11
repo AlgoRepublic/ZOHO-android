@@ -65,6 +65,9 @@ public class ProjectsByClientModel {
         @SerializedName("TotlTasksNo")
         public String totalTasks;
 
+        @SerializedName("UsersCount")
+        public String usersCount;
+
         @SerializedName("TotalMilestonesNo")
         public String toalMilestones;
     }

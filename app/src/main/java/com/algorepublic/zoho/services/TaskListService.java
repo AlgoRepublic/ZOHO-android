@@ -4,10 +4,10 @@ import android.app.Activity;
 import android.util.Log;
 
 import com.algorepublic.zoho.Models.CreateCommentModel;
-import com.algorepublic.zoho.Models.DocumentsListModel;
 import com.algorepublic.zoho.Models.GeneralModel;
 import com.algorepublic.zoho.Models.TaskAssigneeModel;
-import com.algorepublic.zoho.Models.TaskAttachmentsModel;
+import com.algorepublic.zoho.Models.SubTaskAttachmentsModel;
+import com.algorepublic.zoho.Models.TaskCommentsModel;
 import com.algorepublic.zoho.Models.TaskListBySubTaskModel;
 import com.algorepublic.zoho.Models.TasksListByOwnerModel;
 import com.algorepublic.zoho.utils.Constants;
@@ -33,15 +33,10 @@ public class TaskListService extends BaseService {
         this.get(url, obj, TaskListBySubTaskModel.getInstance(), message);
         Log.e("TaskBySubTaskService", url);
     }
-    public void getAttachmentsBySubTasks(int taskID, boolean message, CallBack obj){
-        String url = Constants.GetAttachmentsBySubTasks_API+"taskID="+taskID;
-        this.get(url, obj, DocumentsListModel.getInstance(), message);
-        Log.e("AttachBySubTaskService", url);
-    }
 
     public void getCommentsByTask(int taskID, boolean message, CallBack obj){
-        String url = Constants.GetCommentByTask_API+"task_id="+taskID;
-        this.get(url, obj, TasksListByOwnerModel.getInstance(), message);
+        String url = Constants.GetCommentByTask_API+"taskID="+taskID;
+        this.get(url, obj, TaskCommentsModel.getInstance(), message);
         Log.e("CommentByTaskService", url);
     }
     public void createComment(String comment, int taskID, int userID, boolean message, CallBack obj){
@@ -83,7 +78,7 @@ public class TaskListService extends BaseService {
     }
     public void getTaskAttachments(int taskID, boolean message, CallBack obj){
         String url = Constants.TaskAttachments_API+"?taskID="+taskID;
-        this.get(url, obj, TaskAttachmentsModel.getInstance(), message);
+        this.get(url, obj, SubTaskAttachmentsModel.getInstance(), message);
         Log.e("TaskAttachmentService", url);
     }
 

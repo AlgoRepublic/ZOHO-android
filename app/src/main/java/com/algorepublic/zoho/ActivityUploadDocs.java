@@ -93,6 +93,7 @@ public class ActivityUploadDocs extends BaseActivity implements GoogleApiClient.
     BaseClass baseClass;
     InputStream inputStream;
     DocumentsService service;
+    int ID;
     private static final String PREF_ACCOUNT_NAME = "accountName";
     private static final String[] SCOPES = { DriveScopes.DRIVE_METADATA_READONLY };
     com.google.api.client.googleapis.extensions.android.gms.auth.GoogleAccountCredential mCredential;
@@ -109,6 +110,7 @@ public class ActivityUploadDocs extends BaseActivity implements GoogleApiClient.
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_upload_docs);
+        ID = Integer.parseInt(getIntent().getStringExtra("ID"));
         aq = new AQuery(this);
         service = new DocumentsService(this);
         dialog = new ACProgressFlower.Builder(this)
@@ -462,7 +464,7 @@ public class ActivityUploadDocs extends BaseActivity implements GoogleApiClient.
         protected String doInBackground(Void... voids) {
             try {
                 httpClient = new GenericHttpClient();
-                response = httpClient.uploadDocuments(Constants.UploadDocuments_API, filesList, 4);
+                response = httpClient.uploadDocuments(Constants.UploadDocuments_API, filesList,ID);
             } catch (IOException e) {
                 e.printStackTrace();
             }

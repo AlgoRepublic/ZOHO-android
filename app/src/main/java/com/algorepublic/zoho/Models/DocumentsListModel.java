@@ -62,9 +62,9 @@ public class DocumentsListModel {
         @Expose
         public String fileSizeInByte;
 
-        @SerializedName("CreatedAt")
+        @SerializedName("UpdatedAt")
         @Expose
-        public String createdAt;
+        public String updatedAt;
 
         @SerializedName("FileTypeID")
         @Expose

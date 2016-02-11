@@ -143,6 +143,19 @@ public class BaseFragment extends Fragment {
 
         return (month_name+" "+mDay +", "+mYear+" "+time);
     }
+    public String GetDateTimeComment(String milli){
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(Long.parseLong(DateMilli(milli)));
+        int mYear = calendar.get(Calendar.YEAR);
+        int mDay = calendar.get(Calendar.DAY_OF_MONTH);
+
+        SimpleDateFormat month_date = new SimpleDateFormat("MMM");
+        String month_name = month_date.format(calendar.getTime());
+        String delegate = "hh:mm aaa";
+        String time  = (String) DateFormat.format(delegate, calendar.getTime());
+
+        return (month_name+" "+mDay +", "+mYear+" "+time);
+    }
 
     public String DateMilli(String date) {
         String a = date.replaceAll("\\D+", "");

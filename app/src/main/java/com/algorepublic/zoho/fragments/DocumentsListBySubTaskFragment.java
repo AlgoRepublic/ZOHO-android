@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.algorepublic.zoho.ActivityUploadDocs;
 import com.algorepublic.zoho.Models.DocumentsListModel;
 import com.algorepublic.zoho.Models.GeneralModel;
+import com.algorepublic.zoho.Models.SubTaskAttachmentsModel;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.adapters.AdapterDocumentsList;
 import com.algorepublic.zoho.adapters.DocumentsList;
@@ -96,13 +97,13 @@ public class DocumentsListBySubTaskFragment extends BaseFragment {
         setHasOptionsMenu(true);
         getToolbar().setTitle(getString(R.string.documents));
         service = new DocumentsService(getActivity());
-
-        service.getDocuments(ID, true, new CallBack(DocumentsListBySubTaskFragment.this, "DocumentsList"));
+        service.getDocsBySubTasks(ID, true, new CallBack(DocumentsListBySubTaskFragment.this, "DocumentsList"));
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                callFragmentWithBackStack(R.id.container, DocsPreviewFragment.newInstance(position), "DocsPreview");
+                callFragmentWithBackStack(R.id.container, DocsPreviewFragment.
+                        newInstance(generalDocsList.get(position)), "DocsPreview");
             }
         });
         return view;
@@ -147,7 +148,9 @@ public class DocumentsListBySubTaskFragment extends BaseFragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.add_document:
-                startActivity(new Intent(getActivity(), ActivityUploadDocs.class));
+                Intent intent = new Intent(getActivity(), ActivityUploadDocs.class);
+                intent.putExtra("ID", ID);
+                startActivity(intent);
                 break;
         }
         return super.onOptionsItemSelected(item);
@@ -235,15 +238,15 @@ public class DocumentsListBySubTaskFragment extends BaseFragment {
         SetAdapterList();
     }
     public void SetAdapterList(){
-        if (DocumentsListModel.getInstance().responseCode == 100) {
+        if (SubTaskAttachmentsModel.getInstance().responseCode == 100) {
             adapterDocsList = new AdapterDocumentsList(getActivity(),generalDocsList);
             listView.setAreHeadersSticky(true);
             listView.setAdapter(adapterDocsList);
         }
     }
     public void DocumentsList(Object caller, Object model) {
-        DocumentsListModel.getInstance().setList((DocumentsListModel) model);
-        if (DocumentsListModel.getInstance().responseCode == 100) {
+        SubTaskAttachmentsModel.getInstance().setList((SubTaskAttachmentsModel) model);
+        if (SubTaskAttachmentsModel.getInstance().responseCode == 100) {
             GetAllDocumentsList();
             FilterList();
         } else {
@@ -253,20 +256,18 @@ public class DocumentsListBySubTaskFragment extends BaseFragment {
 
     public void GetAllDocumentsList() {
         allDocsList.clear();
-        for (int loop = 0; loop < DocumentsListModel.getInstance().responseObject.size(); loop++) {
-            for (int loop1 = 0; loop1 < DocumentsListModel.getInstance().responseObject.get(loop).files.size(); loop1++) {
+        for (int loop = 0; loop < SubTaskAttachmentsModel.getInstance().responseObject.size(); loop++) {
                 DocumentsList documentsList = new DocumentsList();
-                documentsList.setID(DocumentsListModel.getInstance().responseObject.get(loop).files.get(loop1).ID);
-                documentsList.setFileName(DocumentsListModel.getInstance().responseObject.get(loop).files.get(loop1).fileDescription);
-                documentsList.setFileDescription(DocumentsListModel.getInstance().responseObject.get(loop).files.get(loop1).fileName);
-                documentsList.setFileSizeInByte(DocumentsListModel.getInstance().responseObject.get(loop).files.get(loop1).fileSizeInByte);
-                documentsList.setCreatedAt(DateFormatter(DocumentsListModel.getInstance().responseObject.get(loop).files.get(loop1).createdAt));
-                documentsList.setCreatedMilli(DateMilli(DocumentsListModel.getInstance().responseObject.get(loop).files.get(loop1).createdAt));
-                documentsList.setFileTypeID(DocumentsListModel.getInstance().responseObject.get(loop).files.get(loop1).fileTypeID);
-                documentsList.setIsFav(DocumentsListModel.getInstance().responseObject.get(loop).files.get(loop1).isFav);
+                documentsList.setID(SubTaskAttachmentsModel.getInstance().responseObject.get(loop).Id);
+                documentsList.setFileName(SubTaskAttachmentsModel.getInstance().responseObject.get(loop).fileDescription);
+                documentsList.setFileDescription(SubTaskAttachmentsModel.getInstance().responseObject.get(loop).fileName);
+                documentsList.setFileSizeInByte(SubTaskAttachmentsModel.getInstance().responseObject.get(loop).fileSizeInByte);
+                documentsList.setUpdatedAt(DateFormatter(SubTaskAttachmentsModel.getInstance().responseObject.get(loop).updatedAt));
+                documentsList.setUpdatedMilli(DateMilli(SubTaskAttachmentsModel.getInstance().responseObject.get(loop).updatedAt));
+                documentsList.setFileTypeID(SubTaskAttachmentsModel.getInstance().responseObject.get(loop).fileTypeID);
+                documentsList.setIsFav(SubTaskAttachmentsModel.getInstance().responseObject.get(loop).isFav);
                 allDocsList.add(documentsList);
             }
-        }
         Collections.sort(allDocsList);
     }
 

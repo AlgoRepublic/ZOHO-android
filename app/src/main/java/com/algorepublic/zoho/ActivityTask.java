@@ -174,6 +174,7 @@ public class ActivityTask extends BaseActivity{
     }
     private void PopulateModel (String json) {
         Log.e("Json","/"+json);
+        setTaskValuesTinyDB();
         JSONObject jsonObj;
 //        try {
 //            jsonObj = new JSONObject(json.toString());
@@ -207,6 +208,7 @@ public class ActivityTask extends BaseActivity{
             baseClass.db.putString("StartDate", "");
             baseClass.db.putString("EndDate", "");
             baseClass.db.putInt("Priority", 0);
+            baseClass.db.putString("TaskDesc","");
         }
         aq.id(R.id.title_text).text(baseClass.db.getString("TaskName"));
         aq.id(R.id.project_title).text(baseClass.db.getString("ProjectName"));

@@ -95,7 +95,11 @@ public class TasksListFragment extends BaseFragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.add_project:
-                startActivity(new Intent(getActivity(), ActivityTask.class));
+                if(baseClass.db.getInt("ProjectID") == 0){
+                    Toast.makeText(getActivity(), "Please Select Project", Toast.LENGTH_SHORT).show();
+                }else {
+                    startActivity(new Intent(getActivity(), ActivityTask.class));
+                }
                 break;
         }
         return super.onOptionsItemSelected(item);
