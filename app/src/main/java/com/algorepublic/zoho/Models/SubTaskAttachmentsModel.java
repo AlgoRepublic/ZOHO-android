@@ -7,21 +7,21 @@ import java.util.ArrayList;
 /**
  * Created by android on 1/19/16.
  */
-public class TaskAttachmentsModel {
-    private static TaskAttachmentsModel _obj = null;
+public class SubTaskAttachmentsModel {
+    private static SubTaskAttachmentsModel _obj = null;
 
-    private TaskAttachmentsModel() {
+    private SubTaskAttachmentsModel() {
 
     }
 
-    public static TaskAttachmentsModel getInstance() {
+    public static SubTaskAttachmentsModel getInstance() {
         if (_obj == null) {
-            _obj = new TaskAttachmentsModel();
+            _obj = new SubTaskAttachmentsModel();
         }
         return _obj;
     }
 
-    public void setList(TaskAttachmentsModel obj) {
+    public void setList(SubTaskAttachmentsModel obj) {
         _obj = obj;
     }
 
@@ -35,7 +35,7 @@ public class TaskAttachmentsModel {
     public class ResponseObject {
 
         @SerializedName("ID")
-        public String Id;
+        public Integer Id;
 
         @SerializedName("FileName")
         public String fileName;
@@ -48,6 +48,12 @@ public class TaskAttachmentsModel {
 
         @SerializedName("FileSizeInByte")
         public String fileSizeInByte;
+
+        @SerializedName("UpdatedAt")
+        public String updatedAt;
+
+        @SerializedName("IsFav")
+        public boolean isFav;
 
     }
 

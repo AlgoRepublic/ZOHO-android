@@ -1,5 +1,6 @@
 package com.algorepublic.zoho.Models;
 
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 /**
@@ -40,6 +41,14 @@ public class GetUserModel {
 
         @SerializedName("FirstName")
         public String firstName;
+
+        @SerializedName("LastName")
+        @Expose
+        public String lastName;
+
+        @SerializedName("ProfileImagePath")
+        @Expose
+        public String profileImagePath;
 
     }
 

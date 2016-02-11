@@ -68,9 +68,24 @@ public class GenericHttpClient {
             mpEntity.addPart("ProjectID", new StringBody(Integer.toString(BaseClass.db.getInt("ProjectID"))));
             mpEntity.addPart("Title", new StringBody(BaseClass.db.getString("TaskName")));
             mpEntity.addPart("Description", new StringBody(BaseClass.db.getString("TaskDesc")));
+            if(BaseClass.db.getString("StartDate").equalsIgnoreCase("")){
+                BaseClass.db.putString("StartDate","0001-01-01");
+            }
+            if(BaseClass.db.getString("EndDate").equalsIgnoreCase("")){
+                BaseClass.db.putString("EndDate","0001-01-01");
+            }
             mpEntity.addPart("StartDate", new StringBody(BaseClass.db.getString("StartDate")));
             mpEntity.addPart("EndDate", new StringBody(BaseClass.db.getString("EndDate")));
             p.setEntity(mpEntity);
+
+            Log.e("CreateBy", "/" + baseClass.getUserId());
+            Log.e("Title", "/"+BaseClass.db.getString("TaskName"));
+            Log.e("Description", "/"+BaseClass.db.getString("TaskDesc"));
+            Log.e("StartDate","/"+ BaseClass.db.getString("StartDate"));
+            Log.e("EndDate", "/"+BaseClass.db.getString("EndDate"));
+            Log.e("TaskListID","/"+ BaseClass.db.getInt("TaskListNameID"));
+            Log.e("Priority", "/"+BaseClass.db.getInt("Priority"));
+            Log.e("ProjectID", "/"+BaseClass.db.getInt("ProjectID"));
 
             HttpResponse resp = hc.execute(p);
             if (resp != null) {
@@ -112,7 +127,14 @@ public class GenericHttpClient {
             mpEntity.addPart("StartDate", new StringBody(BaseClass.db.getString("StartDate")));
             mpEntity.addPart("EndDate", new StringBody(BaseClass.db.getString("EndDate")));
             p.setEntity(mpEntity);
-
+            Log.e("CreateBy", "/" + baseClass.getUserId());
+            Log.e("Title", "/" + BaseClass.db.getString("TaskName"));
+            Log.e("Description", "/" + BaseClass.db.getString("TaskDesc"));
+            Log.e("StartDate", "/" + BaseClass.db.getString("StartDate"));
+            Log.e("EndDate", "/" + BaseClass.db.getString("EndDate"));
+            Log.e("TaskListID", "/" + BaseClass.db.getInt("TaskListNameID"));
+            Log.e("Priority", "/" + BaseClass.db.getInt("Priority"));
+            Log.e("ProjectID", "/" + BaseClass.db.getInt("ProjectID"));
             HttpResponse resp = hc.execute(p);
             if (resp != null) {
                 message = convertStreamToString(resp.getEntity().getContent());

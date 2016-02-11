@@ -17,7 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.algorepublic.zoho.ActivityTask;
-import com.algorepublic.zoho.Models.TaskAttachmentsModel;
+import com.algorepublic.zoho.Models.SubTaskAttachmentsModel;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.fragments.BaseFragment;
 import com.algorepublic.zoho.utils.Constants;
@@ -70,11 +70,11 @@ public class TaskAttachmentFragment extends BaseFragment {
             }
         });
 
-        for(int loop=0;loop<TaskAttachmentsModel.getInstance().responseObject.size();loop++)
+        for(int loop=0;loop< SubTaskAttachmentsModel.getInstance().responseObject.size();loop++)
         {
             File file = null;
             showFileInList(file ,Constants.Image_URL +
-                    TaskAttachmentsModel.getInstance().responseObject.get(loop).fileName);
+                    SubTaskAttachmentsModel.getInstance().responseObject.get(loop).fileName);
         }
 
         for (int loop=0;loop<ActivityTask.filesList.size();loop++)

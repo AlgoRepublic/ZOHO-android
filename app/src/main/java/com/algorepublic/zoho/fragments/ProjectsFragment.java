@@ -153,6 +153,7 @@ public class ProjectsFragment extends BaseFragment implements AdapterView.OnItem
                 projectsList.setProjectName(ProjectsByClientModel.getInstance().responseData.get(loop).projects.get(loop1).projectName);
                 projectsList.setProjectDesc(ProjectsByClientModel.getInstance().responseData.get(loop).projects.get(loop1).description);
                 projectsList.setTotalTasks(ProjectsByClientModel.getInstance().responseData.get(loop).projects.get(loop1).totalTasks);
+                projectsList.setTotalUsers(ProjectsByClientModel.getInstance().responseData.get(loop).projects.get(loop1).usersCount);
                 projectsList.setTotalMilestones(ProjectsByClientModel.getInstance().responseData.get(loop).projects.get(loop1).toalMilestones);
                 ByClientList.add(projectsList);
             }
@@ -175,6 +176,7 @@ public class ProjectsFragment extends BaseFragment implements AdapterView.OnItem
                 projectsList.setProjectName(ProjectsByDepartmentModel.getInstance().responseData.get(loop).projects.get(loop1).projectName);
                 projectsList.setProjectDesc(ProjectsByDepartmentModel.getInstance().responseData.get(loop).projects.get(loop1).description);
                 projectsList.setTotalTasks(ProjectsByDepartmentModel.getInstance().responseData.get(loop).projects.get(loop1).totalTasks);
+                projectsList.setTotalUsers(ProjectsByDepartmentModel.getInstance().responseData.get(loop).projects.get(loop1).usersCount);
                 projectsList.setTotalMilestones(ProjectsByDepartmentModel.getInstance().responseData.get(loop).projects.get(loop1).toalMilestones);
                 ByDepartmentList.add(projectsList);
             }
@@ -208,7 +210,7 @@ public class ProjectsFragment extends BaseFragment implements AdapterView.OnItem
     public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
         Log.e("selected project", ((TextView) view.findViewById(R.id.project_id)).getText().toString());
         baseClass.setSelectedProject(((TextView) view.findViewById(R.id.project_id)).getText().toString());
-
+        baseClass.db.putInt("ProjectID", Integer.parseInt(baseClass.getSelectedProject()));
         for (int i = 0; i < aq.id(R.id.projects_list).getListView().getChildCount(); i++) {
             if(position == i ){
                 try {

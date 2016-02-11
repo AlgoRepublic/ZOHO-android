@@ -2,6 +2,7 @@ package com.algorepublic.zoho.adapters;
 
 import android.content.Context;
 import android.text.format.DateFormat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -62,16 +63,34 @@ public class AdapterDocumentsList extends BaseAdapter implements StickyListHeade
             convertView = l_Inflater.inflate(R.layout.layout_docs_row, null);
         }
         aq = new AQuery(convertView);
+
         aq.id(R.id.file_id).text(Integer.toString(documentsLists.get(position).getID()));
         aq.id(R.id.file_name).text(documentsLists.get(position).getFileName());
-        aq.id(R.id.file_time).text(GetTime(documentsLists.get(position).getCreatedMilli()));
+        aq.id(R.id.file_time).text(GetTime(documentsLists.get(position).getUpdatedMilli()));
         aq.id(R.id.file_image).image(BaseClass.getIcon(documentsLists.
                 get(position).getFileTypeID()));
+        try{
+            for(int loop=0;loop<DocumentsListFragment.deleteDocsList.size();loop++) {
+
+                if (DocumentsListFragment.deleteDocsList.get(loop) ==
+                        Integer.parseInt(aq.id(R.id.file_id).getText().toString()) ) {
+                    aq.id(R.id.doc_checkbox).checked(true);
+                    break;
+                }else{
+                    aq.id(R.id.doc_checkbox).checked(false);
+                }
+            }
+        }catch (IndexOutOfBoundsException e){}
         aq.id(R.id.doc_checkbox).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DocumentsListFragment.deleteDocsList.
-                        add(documentsLists.get(position).getID());
+                if(!aq.id(R.id.doc_checkbox).isChecked()) {
+                    DocumentsListFragment.deleteDocsList.
+                            add(documentsLists.get(position).getID());
+                }else
+                {
+                    DocumentsListFragment.deleteDocsList.remove(position);
+                }
             }
         });
         return convertView;
@@ -82,10 +101,10 @@ public class AdapterDocumentsList extends BaseAdapter implements StickyListHeade
         convertView = l_Inflater.inflate(R.layout.layout_header, parent , false);
         aq_header = new AQuery(convertView);
 
-        if (documentsLists.get(position).getCreatedAt().equalsIgnoreCase("3/0/1"))
+        if (documentsLists.get(position).getUpdatedAt().equalsIgnoreCase("3/0/1"))
             aq_header.id(R.id.header).text("No Date");
         else
-            aq_header.id(R.id.header).text(documentsLists.get(position).getCreatedAt());
+            aq_header.id(R.id.header).text(documentsLists.get(position).getUpdatedAt());
 
         Animation animation = AnimationUtils.loadAnimation(ctx, (position > lastPosition) ? R.anim.up_from_bottom : R.anim.down_from_top);
         convertView.startAnimation(animation);
@@ -96,7 +115,7 @@ public class AdapterDocumentsList extends BaseAdapter implements StickyListHeade
     @Override
     public long getHeaderId(int position) {
         //return the first character of the country as ID because this is what headers are based upon
-        return Long.parseLong(documentsLists.get(position).getCreatedMilli().substring(0,5));
+        return Long.parseLong(documentsLists.get(position).getUpdatedMilli().substring(0, 5));
     }
     public String GetTime(String milli){
         Calendar calendar = Calendar.getInstance();

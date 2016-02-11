@@ -16,6 +16,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.SeekBar;
+import android.widget.Toast;
 
 import com.algorepublic.zoho.ActivityTask;
 import com.algorepublic.zoho.Models.GeneralModel;
@@ -23,6 +24,7 @@ import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.adapters.AdapterTaskDetailAssignee;
 import com.algorepublic.zoho.services.CallBack;
 import com.algorepublic.zoho.services.TaskListService;
+import com.algorepublic.zoho.utils.BaseClass;
 import com.androidquery.AQuery;
 import com.flyco.animation.BounceEnter.BounceLeftEnter;
 import com.flyco.animation.SlideExit.SlideRightExit;
@@ -54,6 +56,7 @@ public class TaskDetailFragment extends BaseFragment {
     View views;
     int multiple=5;
     int progress=0;
+    BaseClass baseClass;
     public static ACProgressFlower dialog;
 
     public TaskDetailFragment() {
@@ -83,6 +86,7 @@ public class TaskDetailFragment extends BaseFragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment_forums
         final View view =  inflater.inflate(R.layout.fragment_task_detail, container, false);
+        baseClass = ((BaseClass) getActivity().getApplicationContext());
         setHasOptionsMenu(true);
         dialog = new ACProgressFlower.Builder(getActivity())
                 .direction(ACProgressConstant.DIRECT_CLOCKWISE)
@@ -102,7 +106,6 @@ public class TaskDetailFragment extends BaseFragment {
         aq = new AQuery(view);
         getToolbar().setTitle(getString(R.string.task_details));
         service = new TaskListService(getActivity());
-//        service.getTaskAttachments(10, true, new CallBack(TaskDetailFragment.this, "TaskAttachments"));
         aq.id(R.id.start_date).text(TasksListFragment.generalList.get(position).getStartDate());
         aq.id(R.id.end_date).text(TasksListFragment.generalList.get(position).getEndDate());
         aq.id(R.id.category).text(TasksListFragment.generalList.get(position).getTaskListName());
@@ -224,9 +227,13 @@ public class TaskDetailFragment extends BaseFragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.edit_task:
-                Intent intent = new Intent(getActivity(), ActivityTask.class);
-                intent.putExtra("pos",position);
-                startActivity(intent);
+                if(baseClass.db.getInt("ProjectID") == 0){
+                    Toast.makeText(getActivity(), "Please Select Project", Toast.LENGTH_SHORT).show();
+                }else {
+                    Intent intent = new Intent(getActivity(), ActivityTask.class);
+                    intent.putExtra("pos", position);
+                    startActivity(intent);
+                }
                 break;
 
         }

@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.fragments.TaskCommentFragment;
+import com.algorepublic.zoho.utils.Constants;
 import com.bumptech.glide.Glide;
 import com.makeramen.roundedimageview.RoundedImageView;
 
@@ -53,7 +54,7 @@ public class AdapterTaskComments extends BaseAdapter {
 
         holder.taskComment.setText(TaskCommentFragment.arrayList.get(position).getComment());
         holder.userName.setText(TaskCommentFragment.arrayList.get(position).getUserName());
-        Glide.with(ctx).load(TaskCommentFragment.arrayList.get(position).getUserImage()).into(holder.userImage);
+        Glide.with(ctx).load(Constants.Image_URL+TaskCommentFragment.arrayList.get(position).getUserImage()).into(holder.userImage);
         holder.dateTime.setText(TaskCommentFragment.arrayList.get(position).getDateTime());
 
         return convertView;

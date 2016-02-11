@@ -62,6 +62,8 @@ public class AdapterProjectsClientList extends BaseAdapter implements StickyList
         aq.id(R.id.project_title).text(arrayList.get(position).getProjectName());
         if(!arrayList.get(position).getTotalTasks().isEmpty())
             aq.id(R.id.task_alert).text(arrayList.get(position).getTotalTasks());
+        if(!arrayList.get(position).getTotalUsers().isEmpty())
+            aq.id(R.id.users_alert).text(arrayList.get(position).getTotalUsers());
         if(!arrayList.get(position).getTotalMilestones().isEmpty())
             aq.id(R.id.milestone_alert).text(arrayList.get(position).getTotalMilestones());
 

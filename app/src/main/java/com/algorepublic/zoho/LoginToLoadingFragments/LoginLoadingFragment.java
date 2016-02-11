@@ -69,6 +69,8 @@ public class LoginLoadingFragment extends BaseFragment {
         if (GetUserModel.getInstance().responseCode.equalsIgnoreCase("100")
                 && GetUserModel.getInstance().user.toString() !="null") {
             baseClass.setFirstName(GetUserModel.getInstance().user.firstName);
+            baseClass.setLastName(GetUserModel.getInstance().user.lastName);
+            baseClass.setProfileImage(GetUserModel.getInstance().user.profileImagePath);
             baseClass.setEmail(GetUserModel.getInstance().user.eMail);
             startActivity(new Intent(getActivity(), MainActivity.class));
             getActivity().finish();

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -95,11 +96,13 @@ public class DocumentsListFragment extends BaseFragment {
         setHasOptionsMenu(true);
         getToolbar().setTitle(getString(R.string.documents));
         service = new DocumentsService(getActivity());
-        service.getDocuments(4, true, new CallBack(DocumentsListFragment.this, "DocumentsList"));
+        service.getDocuments(baseClass.db.getInt("ProjectID"),
+                true, new CallBack(DocumentsListFragment.this, "DocumentsList"));
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                callFragmentWithBackStack(R.id.container, DocsPreviewFragment.newInstance(position), "DocsPreview");
+                callFragmentWithBackStack(R.id.container, DocsPreviewFragment.
+                        newInstance(generalDocsList.get(position)), "DocsPreview");
             }
         });
         return view;
@@ -144,7 +147,13 @@ public class DocumentsListFragment extends BaseFragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.add_document:
-                startActivity(new Intent(getActivity(), ActivityUploadDocs.class));
+                if(baseClass.db.getInt("ProjectID") == -1){
+                    Toast.makeText(getActivity(), "Please Select Project", Toast.LENGTH_SHORT).show();
+                }else {
+                    Intent intent = new Intent(getActivity(), ActivityUploadDocs.class);
+                    intent.putExtra("ID",baseClass.db.getInt("ProjectID"));
+                    startActivity(intent);
+                }
                 break;
         }
         return super.onOptionsItemSelected(item);
@@ -177,16 +186,16 @@ public class DocumentsListFragment extends BaseFragment {
                 new OnBtnClickL() {
                     @Override
                     public void onBtnClick() {
-                    dialog.dismiss();
-                    service.deleteDocument(deleteDocsList
-                            , true, new CallBack(DocumentsListFragment.this, "DeleteDoc"));
-                        deleteDocsList.clear();
+                        dialog.dismiss();
+                        service.deleteDocument(deleteDocsList
+                                , true, new CallBack(DocumentsListFragment.this, "DeleteDoc"));
                     }
                 });
     }
     public void DeleteDoc(Object caller, Object model) {
         GeneralModel.getInstance().setList((GeneralModel) model);
-        if (GeneralModel.getInstance().responseCode.equalsIgnoreCase("100")) {
+        if (GeneralModel.getInstance().responseObject==true) {
+            UpdatedAfterDelete();
             Snackbar.make(getView(), getString(R.string.doc_deleted), Snackbar.LENGTH_SHORT).show();
         }
         else
@@ -203,9 +212,9 @@ public class DocumentsListFragment extends BaseFragment {
             public void onOperItemClick(AdapterView<?> parent, View view, int position, long id) {
                 dialog.dismiss();
                 if (isLoaded())
-                if (position == 0) {
-                    baseClass.setDocsSortType("AllFiles");
-                }
+                    if (position == 0) {
+                        baseClass.setDocsSortType("AllFiles");
+                    }
                 if (position == 1) {
                     baseClass.setDocsSortType("Pictures");
                 }
@@ -233,9 +242,8 @@ public class DocumentsListFragment extends BaseFragment {
     }
     public void SetAdapterList(){
         if (DocumentsListModel.getInstance().responseCode == 100) {
-            adapterDocsList = new AdapterDocumentsList(getActivity(),generalDocsList);
             listView.setAreHeadersSticky(true);
-            listView.setAdapter(adapterDocsList);
+            listView.setAdapter( new AdapterDocumentsList(getActivity(),generalDocsList));
         }
     }
     public void DocumentsList(Object caller, Object model) {
@@ -257,8 +265,8 @@ public class DocumentsListFragment extends BaseFragment {
                 documentsList.setFileName(DocumentsListModel.getInstance().responseObject.get(loop).files.get(loop1).fileDescription);
                 documentsList.setFileDescription(DocumentsListModel.getInstance().responseObject.get(loop).files.get(loop1).fileName);
                 documentsList.setFileSizeInByte(DocumentsListModel.getInstance().responseObject.get(loop).files.get(loop1).fileSizeInByte);
-                documentsList.setCreatedAt(DateFormatter(DocumentsListModel.getInstance().responseObject.get(loop).files.get(loop1).createdAt));
-                documentsList.setCreatedMilli(DateMilli(DocumentsListModel.getInstance().responseObject.get(loop).files.get(loop1).createdAt));
+                documentsList.setUpdatedAt(DateFormatter(DocumentsListModel.getInstance().responseObject.get(loop).files.get(loop1).updatedAt));
+                documentsList.setUpdatedMilli(DateMilli(DocumentsListModel.getInstance().responseObject.get(loop).files.get(loop1).updatedAt));
                 documentsList.setFileTypeID(DocumentsListModel.getInstance().responseObject.get(loop).files.get(loop1).fileTypeID);
                 documentsList.setIsFav(DocumentsListModel.getInstance().responseObject.get(loop).files.get(loop1).isFav);
                 allDocsList.add(documentsList);
@@ -296,6 +304,22 @@ public class DocumentsListFragment extends BaseFragment {
                 generalDocsList.add(allDocsList.get(loop));
             }
         }
+    }
+    public void UpdatedAfterDelete(){
+        ArrayList<DocumentsList> arrayList = new ArrayList<>();
+        arrayList.addAll(generalDocsList);
+        generalDocsList.clear();
+        for(int loop=0;loop<deleteDocsList.size();loop++)
+        {
+            for (int loop1 = 0; loop1 < arrayList.size(); loop1++) {
+                if (deleteDocsList.get(loop) != arrayList.get(loop1).getID())
+                {
+                    generalDocsList.add(arrayList.get(loop1));
+                }
+            }
+        }
+        deleteDocsList.clear();
+        SetAdapterList();
     }
     public boolean isLoaded(){
         Boolean isloading=false;

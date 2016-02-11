@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.adapters.AdapterDocsComments;
+import com.algorepublic.zoho.adapters.DocumentsList;
 import com.algorepublic.zoho.adapters.TaskComments;
 import com.algorepublic.zoho.utils.BaseClass;
 import com.algorepublic.zoho.utils.Constants;
@@ -26,7 +27,7 @@ public class DocsPreviewFragment extends BaseFragment {
 
     static DocsPreviewFragment fragment;
     AQuery aq;
-    static int position;
+    static DocumentsList docObject;
     BaseClass baseClass;
     AdapterDocsComments adapter;
     public static ListView listView;
@@ -35,8 +36,8 @@ public class DocsPreviewFragment extends BaseFragment {
     public DocsPreviewFragment() {
     }
     @SuppressWarnings("unused")
-    public static DocsPreviewFragment newInstance(int pos) {
-        position = pos;
+    public static DocsPreviewFragment newInstance(DocumentsList obj) {
+        docObject = obj;
         if (fragment==null) {
             fragment = new DocsPreviewFragment();
         }
@@ -55,16 +56,16 @@ public class DocsPreviewFragment extends BaseFragment {
         baseClass = ((BaseClass) getActivity().getApplicationContext());
         adapter = new AdapterDocsComments(getActivity());
         listView.setAdapter(adapter);
-        aq.id(R.id.user_name).text(DocumentsListFragment.generalDocsList.get(position).getFileName());
-        aq.id(R.id.doc_title).text(DocumentsListFragment.generalDocsList.get(position).getFileName());
-        aq.id(R.id.doc_size).text(DocumentsListFragment.generalDocsList.get(position).getFileSizeInByte());
-        if(DocumentsListFragment.generalDocsList.get(position).getFileTypeID()>=0 &&
-                DocumentsListFragment.generalDocsList.get(position).getFileTypeID()<=4 ){
-            Glide.with(getActivity()).load(Constants.Image_URL + DocumentsListFragment.generalDocsList.
-                    get(position).getFileDescription()).into(aq.id(R.id.doc_image).getImageView());
+        aq.id(R.id.user_name).text(docObject.getFileName());
+        aq.id(R.id.doc_title).text(docObject.getFileName());
+        aq.id(R.id.doc_size).text(docObject.getFileSizeInByte());
+        if(docObject.getFileTypeID()>=0 &&
+                docObject.getFileTypeID()<=4 ){
+            Glide.with(getActivity()).load(Constants.Image_URL +
+                    docObject.getFileDescription()).into(aq.id(R.id.doc_image).getImageView());
         }else {
-            Glide.with(getActivity()).load(BaseClass.getIcon(DocumentsListFragment.generalDocsList.
-                    get(position).getFileTypeID())).into(aq.id(R.id.doc_image).getImageView());
+            Glide.with(getActivity()).load(BaseClass.
+                    getIcon(docObject.getFileTypeID())).into(aq.id(R.id.doc_image).getImageView());
         }
         aq.id(R.id.comment_user).getTextView().setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override

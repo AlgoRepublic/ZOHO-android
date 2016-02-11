@@ -16,7 +16,7 @@ import android.widget.Toast;
 
 import com.algorepublic.zoho.ActivityUploadDocs;
 import com.algorepublic.zoho.Models.GeneralModel;
-import com.algorepublic.zoho.Models.TasksDocumentModel;
+import com.algorepublic.zoho.Models.SubTaskAttachmentsModel;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.adapters.AdapterDocumentsList;
 import com.algorepublic.zoho.adapters.DocumentsList;
@@ -96,13 +96,12 @@ public class DocumentsListBySubTaskFragment extends BaseFragment {
         setHasOptionsMenu(true);
         getToolbar().setTitle(getString(R.string.documents));
         service = new DocumentsService(getActivity());
-
-        service.getAttachmentsBySubTasks(ID, true, new CallBack(DocumentsListBySubTaskFragment.this, "DocumentsList"));
-
+        service.getDocsBySubTasks(ID, true, new CallBack(DocumentsListBySubTaskFragment.this, "DocumentsList"));
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                callFragmentWithBackStack(R.id.container, DocsPreviewFragment.newInstance(position), "DocsPreview");
+                callFragmentWithBackStack(R.id.container, DocsPreviewFragment.
+                        newInstance(generalDocsList.get(position)), "DocsPreview");
             }
         });
         return view;
@@ -147,7 +146,9 @@ public class DocumentsListBySubTaskFragment extends BaseFragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.add_document:
-                startActivity(new Intent(getActivity(), ActivityUploadDocs.class));
+                Intent intent = new Intent(getActivity(), ActivityUploadDocs.class);
+                intent.putExtra("ID", ID);
+                startActivity(intent);
                 break;
         }
         return super.onOptionsItemSelected(item);
@@ -235,15 +236,15 @@ public class DocumentsListBySubTaskFragment extends BaseFragment {
         SetAdapterList();
     }
     public void SetAdapterList(){
-        if (TasksDocumentModel.getInstance().responseCode == 100) {
+        if (SubTaskAttachmentsModel.getInstance().responseCode == 100) {
             adapterDocsList = new AdapterDocumentsList(getActivity(),generalDocsList);
             listView.setAreHeadersSticky(true);
             listView.setAdapter(adapterDocsList);
         }
     }
     public void DocumentsList(Object caller, Object model) {
-        TasksDocumentModel.getInstance().setList((TasksDocumentModel) model);
-        if (TasksDocumentModel.getInstance().responseCode == 100) {
+        SubTaskAttachmentsModel.getInstance().setList((SubTaskAttachmentsModel) model);
+        if (SubTaskAttachmentsModel.getInstance().responseCode == 100) {
             GetAllDocumentsList();
             FilterList();
         } else {
@@ -253,18 +254,18 @@ public class DocumentsListBySubTaskFragment extends BaseFragment {
 
     public void GetAllDocumentsList() {
         allDocsList.clear();
-        for (int loop = 0; loop < TasksDocumentModel.getInstance().responseObject.size(); loop++) {
+        for (int loop = 0; loop < SubTaskAttachmentsModel.getInstance().responseObject.size(); loop++) {
                 DocumentsList documentsList = new DocumentsList();
-                documentsList.setID(TasksDocumentModel.getInstance().responseObject.get(loop).ID);
-                documentsList.setFileName(TasksDocumentModel.getInstance().responseObject.get(loop).fileDescription);
-                documentsList.setFileDescription(TasksDocumentModel.getInstance().responseObject.get(loop).fileName);
-                documentsList.setFileSizeInByte(TasksDocumentModel.getInstance().responseObject.get(loop).fileSizeInByte);
-                documentsList.setCreatedAt(DateFormatter(TasksDocumentModel.getInstance().responseObject.get(loop).createdAt));
-                documentsList.setCreatedMilli(DateMilli(TasksDocumentModel.getInstance().responseObject.get(loop).createdAt));
-                documentsList.setFileTypeID(TasksDocumentModel.getInstance().responseObject.get(loop).fileTypeID);
-                documentsList.setIsFav(TasksDocumentModel.getInstance().responseObject.get(loop).isFav);
+                documentsList.setID(SubTaskAttachmentsModel.getInstance().responseObject.get(loop).Id);
+                documentsList.setFileName(SubTaskAttachmentsModel.getInstance().responseObject.get(loop).fileDescription);
+                documentsList.setFileDescription(SubTaskAttachmentsModel.getInstance().responseObject.get(loop).fileName);
+                documentsList.setFileSizeInByte(SubTaskAttachmentsModel.getInstance().responseObject.get(loop).fileSizeInByte);
+                documentsList.setUpdatedAt(DateFormatter(SubTaskAttachmentsModel.getInstance().responseObject.get(loop).updatedAt));
+                documentsList.setUpdatedMilli(DateMilli(SubTaskAttachmentsModel.getInstance().responseObject.get(loop).updatedAt));
+                documentsList.setFileTypeID(SubTaskAttachmentsModel.getInstance().responseObject.get(loop).fileTypeID);
+                documentsList.setIsFav(SubTaskAttachmentsModel.getInstance().responseObject.get(loop).isFav);
                 allDocsList.add(documentsList);
-        }
+            }
         Collections.sort(allDocsList);
     }
 
