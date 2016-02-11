@@ -53,7 +53,8 @@ public class TaskDetailFragment extends BaseFragment {
     TwoWayView twoWayAssignee;
     SeekBar seekBar;
     View views;
-    int multiple=10;
+    int multiple=5;
+    int progress=0;
     public static ACProgressFlower dialog;
 
     public TaskDetailFragment() {
@@ -122,10 +123,11 @@ public class TaskDetailFragment extends BaseFragment {
         views.setBackgroundColor(getPriorityWiseColor(TasksListFragment.generalList.get(position).getPriority()));
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+            public void onProgressChanged(SeekBar seekBar, int progres, boolean fromUser) {
 
-                progress = ((int) Math.round(progress / multiple)) * multiple;
-                seekBarCompat.setProgress(progress);
+                progres = ((int) Math.round(progres / multiple)) * multiple;
+                seekBarCompat.setProgress(progres);
+                progress=progres;
             }
 
             @Override
@@ -135,7 +137,14 @@ public class TaskDetailFragment extends BaseFragment {
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-
+                if(progress==100){
+                    aq.id(R.id.mark_as_done).text("ReOPen Task");
+                    service.updateTaskProgress(TasksListFragment.generalList.get(position).getTaskID()
+                            , progress, true, new CallBack(TaskDetailFragment.this, "UpdateProgress"));
+                }
+                aq.id(R.id.mark_as_done).text("Mark as done");
+                service.updateTaskProgress(TasksListFragment.generalList.get(position).getTaskID()
+                        , progress, true, new CallBack(TaskDetailFragment.this, "UpdateProgress"));
             }
         });
 
@@ -229,6 +238,8 @@ public class TaskDetailFragment extends BaseFragment {
         GeneralModel.getInstance().setList((GeneralModel) model);
         if (GeneralModel.getInstance().responseCode.equalsIgnoreCase("100")) {
             //seekBarCompat.setProgress(100);
+            TasksListFragment.generalList.get(position).setProgress(progress);
+            Snackbar.make(getView(), getString(R.string.update_progress), Snackbar.LENGTH_SHORT).show();
         }
         else
         {
@@ -261,6 +272,21 @@ public class TaskDetailFragment extends BaseFragment {
             Snackbar.make(getView(), getString(R.string.invalid_credential), Snackbar.LENGTH_SHORT).show();
         }
     }
+    public void UpdateTask(Object caller, Object model) {
+        GeneralModel.getInstance().setList((GeneralModel) model);
+        dialog.dismiss();
+        if (GeneralModel.getInstance().responseCode.equalsIgnoreCase("100")) {
+            Snackbar.make(getView(), getString(R.string.reopen_task), Snackbar.LENGTH_SHORT).show();
+            seekBar.setProgress(0);
+            seekBarCompat.setProgress(0);
+            aq.id(R.id.mark_as_done).text("Mark as done");
+            TasksListFragment.generalList.get(position).setProgress(0);
+
+        }}
+
+
+
+
     public void ReOpenTask(Object caller, Object model) {
         GeneralModel.getInstance().setList((GeneralModel) model);
         dialog.dismiss();
