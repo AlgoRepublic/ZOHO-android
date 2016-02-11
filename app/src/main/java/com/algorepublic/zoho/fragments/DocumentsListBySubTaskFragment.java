@@ -15,7 +15,6 @@ import android.widget.AdapterView;
 import android.widget.Toast;
 
 import com.algorepublic.zoho.ActivityUploadDocs;
-import com.algorepublic.zoho.Models.DocumentsListModel;
 import com.algorepublic.zoho.Models.GeneralModel;
 import com.algorepublic.zoho.Models.SubTaskAttachmentsModel;
 import com.algorepublic.zoho.R;
@@ -98,7 +97,6 @@ public class DocumentsListBySubTaskFragment extends BaseFragment {
         getToolbar().setTitle(getString(R.string.documents));
         service = new DocumentsService(getActivity());
         service.getDocsBySubTasks(ID, true, new CallBack(DocumentsListBySubTaskFragment.this, "DocumentsList"));
-
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
