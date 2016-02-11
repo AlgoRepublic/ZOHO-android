@@ -38,7 +38,7 @@ import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
  * Use the {@link ProjectsFragment#newInstance} factory method to
  * create an instance of this fragment_forums.
  */
-public class ProjectsFragment extends BaseFragment implements AdapterView.OnItemClickListener{
+public class ProjectsFragment extends BaseFragment{
 
     private AQuery aq;
     private BaseClass baseClass;
@@ -71,7 +71,6 @@ public class ProjectsFragment extends BaseFragment implements AdapterView.OnItem
         // Inflate the layout for this fragment_forums
         View view  = inflater.inflate(R.layout.fragment_projects, container, false);
         listView = (StickyListHeadersListView) view.findViewById(R.id.projects_liststicky);
-        listView.setOnItemClickListener(this);
         aq = new AQuery(getActivity(), view);
         String [] types = {"All","By Client","By Department"};
         aq.id(R.id.spinner_sort).getSpinner().setAdapter(new ArrayAdapter<String>(
@@ -84,17 +83,17 @@ public class ProjectsFragment extends BaseFragment implements AdapterView.OnItem
         aq.id(R.id.spinner_sort).getSpinner().setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if(position==0) {
+                if (position == 0) {
                     aq.id(R.id.projects_list).visibility(View.VISIBLE);
                     aq.id(R.id.projects_liststicky).visibility(View.GONE);
                     SetGeneralClientAdapter();
                 }
-                if(position==1) {
+                if (position == 1) {
                     aq.id(R.id.projects_list).visibility(View.VISIBLE);
                     aq.id(R.id.projects_liststicky).visibility(View.GONE);
                     SetClientProjectsAdapter();
                 }
-                if(position==2) {
+                if (position == 2) {
                     aq.id(R.id.projects_list).visibility(View.GONE);
                     aq.id(R.id.projects_liststicky).visibility(View.VISIBLE);
                     SetDepartmentProjectsAdapter();
@@ -193,50 +192,47 @@ public class ProjectsFragment extends BaseFragment implements AdapterView.OnItem
     }
     public void SetGeneralClientAdapter(){
         aq.id(R.id.projects_list).adapter(new AdapterProjectsClientList(getActivity(), allProjectsList));
-        aq.id(R.id.projects_list).itemClicked(this);
+        aq.id(R.id.projects_list).itemClicked(clientOnClick);
     }
     public void SetClientProjectsAdapter(){
         aq.id(R.id.projects_list).adapter(new AdapterProjectsClientList(getActivity(), ByClientList));
-        aq.id(R.id.projects_list).itemClicked(this);
+        aq.id(R.id.projects_list).itemClicked(clientOnClick);
     }
     public void SetDepartmentProjectsAdapter(){
 
         projectAdapter = new AdapterProjectsDeptList(getActivity());
         listView.setAreHeadersSticky(false);
         listView.setAdapter(projectAdapter);
-        listView.setOnItemClickListener(this);
+        listView.setOnItemClickListener(deptOnClick);
     }
-    @Override
-    public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-        Log.e("selected project", ((TextView) view.findViewById(R.id.project_id)).getText().toString());
-        baseClass.setSelectedProject(((TextView) view.findViewById(R.id.project_id)).getText().toString());
-        baseClass.db.putInt("ProjectID", Integer.parseInt(baseClass.getSelectedProject()));
-        for (int i = 0; i < aq.id(R.id.projects_list).getListView().getChildCount(); i++) {
-            if(position == i ){
-                try {
-                    aq.id(R.id.projects_list).getListView().getChildAt(i).setBackgroundColor(Color.parseColor("#666666"));
-                }catch (Exception e){
-                    e.printStackTrace();
-                }
-                try {
-                    listView.getChildAt(i).setBackgroundColor(Color.parseColor("#666666"));
-                }catch (Exception e){
-                    e.printStackTrace();
-                }
-            }else{
-                try {
-                    aq.id(R.id.projects_list).getListView().getChildAt(i).setBackgroundColor(Color.TRANSPARENT);
-                }catch (Exception e){
-                    e.printStackTrace();
-                }
-                try {
-                    listView.getChildAt(i).setBackgroundColor(Color.TRANSPARENT);
-                }catch (Exception e){
-                    e.printStackTrace();
-                }
+    AdapterView.OnItemClickListener clientOnClick = new AdapterView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            Log.e("selected project", ((TextView) view.findViewById(R.id.project_id)).getText().toString());
+            if(baseClass.getSelectedProject().equalsIgnoreCase("0")) {
+                baseClass.setSelectedProject(((TextView) view.findViewById(R.id.project_id)).getText().toString());
+                baseClass.db.putInt("ProjectID", Integer.parseInt(baseClass.getSelectedProject()));
+            }else {
+                baseClass.setSelectedProject("0");
+                baseClass.db.putInt("ProjectID", 0);
             }
+            SetGeneralClientAdapter();
         }
-    }
+    };
+    AdapterView.OnItemClickListener deptOnClick = new AdapterView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            Log.e("selected project", ((TextView) view.findViewById(R.id.project_id)).getText().toString());
+            if(baseClass.getSelectedProject().equalsIgnoreCase("0")) {
+                baseClass.setSelectedProject(((TextView) view.findViewById(R.id.project_id)).getText().toString());
+                baseClass.db.putInt("ProjectID", Integer.parseInt(baseClass.getSelectedProject()));
+            }else {
+                baseClass.setSelectedProject("0");
+                baseClass.db.putInt("ProjectID", 0);
+            }
+            SetDepartmentProjectsAdapter();
+        }
+    };
 
     /**
      * Initialize the contents of the Activity's standard options menu.  You

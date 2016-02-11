@@ -117,8 +117,12 @@ public class TasksListFragment extends BaseFragment {
 
         baseClass = ((BaseClass) getActivity().getApplicationContext());
         taskListService = new TaskListService(getActivity());
-        taskListService.getTasksListByOwner(baseClass.getUserId(),true, new CallBack(TasksListFragment.this, "OwnerTasksList"));
-
+        Log.e("O",baseClass.getSelectedProject());
+        if(baseClass.getSelectedProject().equalsIgnoreCase("0")) {
+            taskListService.getTasksListByOwner(baseClass.getUserId(), true, new CallBack(TasksListFragment.this, "OwnerTasksList"));
+        }else{
+            taskListService.getTasksListByProject(baseClass.getSelectedProject(), true, new CallBack(TasksListFragment.this, "OwnerTasksList"));
+        }
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

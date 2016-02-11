@@ -28,6 +28,11 @@ public class TaskListService extends BaseService {
         this.get(url, obj, TasksListByOwnerModel.getInstance(), message);
         Log.e("TaskListByOwnerService", url);
     }
+    public void getTasksListByProject(String projectID, boolean message, CallBack obj){
+        String url = Constants.GetTaskListByProject_API+"projectID="+projectID;
+        this.get(url, obj, TasksListByOwnerModel.getInstance(), message);
+        Log.e("TaskListByProjtService", url);
+    }
     public void getTasksListBySubTasks(int taskID, boolean message, CallBack obj){
         String url = Constants.GetTaskListBySubTasks_API+"taskID="+taskID;
         this.get(url, obj, TaskListBySubTaskModel.getInstance(), message);

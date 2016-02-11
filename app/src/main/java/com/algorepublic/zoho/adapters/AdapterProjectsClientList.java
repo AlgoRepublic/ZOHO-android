@@ -3,6 +3,7 @@ package com.algorepublic.zoho.adapters;
 import android.content.Context;
 import android.graphics.Color;
 import android.text.Html;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -73,8 +74,10 @@ public class AdapterProjectsClientList extends BaseAdapter implements StickyList
 
         if(baseClass.getSelectedProject().equals(ProjectsFragment.ByDepartmentList.get(position).getProjectID())){
             convertView.setBackgroundColor(Color.parseColor("#666666"));
+        }else{
+            convertView.setBackgroundResource(android.R.color.transparent);
         }
-
+        Log.e("OKay","Okay");
         Animation animation = AnimationUtils.loadAnimation(ctx, (position > lastPosition) ? R.anim.up_from_bottom : R.anim.down_from_top);
         convertView.startAnimation(animation);
         lastPosition = position;

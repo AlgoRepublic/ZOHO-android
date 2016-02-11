@@ -331,7 +331,7 @@ public class BaseClass extends Application {
         prefsEditor.putString(SELECTED_PROJECT, selectedProject).commit();
     }
     public String getSelectedProject() {
-        return appSharedPrefs.getString(SELECTED_PROJECT, "");
+        return appSharedPrefs.getString(SELECTED_PROJECT, "0");
     }
 
     public String GetTime(String milli){
