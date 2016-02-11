@@ -8,7 +8,6 @@ import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -103,7 +102,7 @@ public class TaskDetailFragment extends BaseFragment {
         aq = new AQuery(view);
         getToolbar().setTitle(getString(R.string.task_details));
         service = new TaskListService(getActivity());
-        service.getTaskAttachments(10, true, new CallBack(TaskDetailFragment.this, "TaskAttachments"));
+//        service.getTaskAttachments(10, true, new CallBack(TaskDetailFragment.this, "TaskAttachments"));
         aq.id(R.id.start_date).text(TasksListFragment.generalList.get(position).getStartDate());
         aq.id(R.id.end_date).text(TasksListFragment.generalList.get(position).getEndDate());
         aq.id(R.id.category).text(TasksListFragment.generalList.get(position).getTaskListName());

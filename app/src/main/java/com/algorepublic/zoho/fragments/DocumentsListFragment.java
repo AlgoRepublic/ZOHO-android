@@ -95,11 +95,7 @@ public class DocumentsListFragment extends BaseFragment {
         setHasOptionsMenu(true);
         getToolbar().setTitle(getString(R.string.documents));
         service = new DocumentsService(getActivity());
-        if(isLoaded()) {
-            FilterList();
-        }else {
-            service.getDocuments(4, true, new CallBack(DocumentsListFragment.this, "DocumentsList"));
-        }
+        service.getDocuments(4, true, new CallBack(DocumentsListFragment.this, "DocumentsList"));
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

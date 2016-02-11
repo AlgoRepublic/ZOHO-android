@@ -5,6 +5,7 @@ import android.util.Log;
 
 import com.algorepublic.zoho.Models.DocumentsListModel;
 import com.algorepublic.zoho.Models.GeneralModel;
+import com.algorepublic.zoho.Models.TasksDocumentModel;
 import com.algorepublic.zoho.Models.UserModel;
 import com.algorepublic.zoho.utils.Constants;
 
@@ -49,5 +50,10 @@ public class DocumentsService extends BaseService {
         }
         this.post(url, params, obj, GeneralModel.getInstance(), message);
         Log.e("DeleteDocumentsService", url);
+    }
+    public void getAttachmentsBySubTasks(int taskID, boolean message, CallBack obj){
+        String url = Constants.GetAttachmentsBySubTasks_API+"taskID="+taskID;
+        this.get(url, obj, TasksDocumentModel.getInstance(), message);
+        Log.e("AttachBySubTaskService", url);
     }
 }
