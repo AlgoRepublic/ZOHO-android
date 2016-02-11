@@ -130,7 +130,6 @@ public class ActivityTask extends BaseActivity{
         @Override
         protected String doInBackground(Void... voids) {
             try {
-
                 httpClient = new GenericHttpClient();
                 response = httpClient.postAddTask(Constants.CreateTask_API
                         , assigneeList,filesList,baseClass);
