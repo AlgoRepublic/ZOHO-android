@@ -93,11 +93,11 @@ public class AdapterMenuItems extends BaseAdapter{
             @Override
             public void onClick(View v) {
                 for (int loop = 0; loop < menu_names.length; loop++) {
-                    if (loop==position) {
+                    if (loop == position) {
                         aq.id(R.id.checkbox).getCheckBox().setBackgroundColor(ctx.getResources().getColor(R.color.colorBaseMenu));
-                    }else {
-                        View  view = getViewByPosition(loop,MainActivity.gridView);
-                        AQuery aQuery =  new AQuery(view);
+                    } else {
+                        View view = getViewByPosition(loop, MainActivity.gridView);
+                        AQuery aQuery = new AQuery(view);
                         aQuery.id(R.id.checkbox).checked(false);
                         aQuery.id(R.id.checkbox).getCheckBox().setBackgroundColor(ctx.getResources().getColor(R.color.colorBaseHeader));
                     }
@@ -108,6 +108,10 @@ public class AdapterMenuItems extends BaseAdapter{
         return convertView;
     }
     public void CallFragment(int position){
+        for(int loop=0;loop<((AppCompatActivity)ctx).getSupportFragmentManager().getBackStackEntryCount();loop++)
+        {
+            ((AppCompatActivity)ctx).getSupportFragmentManager().popBackStack();
+        }
         if(position==0){
 
         }if(position==1){

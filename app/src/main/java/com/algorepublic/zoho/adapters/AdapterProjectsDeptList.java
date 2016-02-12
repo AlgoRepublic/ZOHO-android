@@ -70,7 +70,7 @@ public class AdapterProjectsDeptList extends BaseAdapter implements StickyListHe
         if(baseClass.getSelectedProject().equals(ProjectsFragment.ByDepartmentList.get(position).getProjectID())){
             convertView.setBackgroundColor(Color.parseColor("#666666"));
         }else{
-            convertView.setBackgroundColor(Color.parseColor("#000000"));
+            convertView.setBackgroundResource(android.R.color.transparent);
         }
 
         Animation animation = AnimationUtils.loadAnimation(ctx, (position > lastPosition) ? R.anim.up_from_bottom : R.anim.down_from_top);

@@ -30,6 +30,7 @@ public class AdapterTaskMenu extends BaseAdapter {
 
     Context ctx; private LayoutInflater inflater;
     int lastPosition=0;
+    static int Pos;
     int[] menu_names = {
             R.string.task_desc,
             R.string.category,
@@ -46,7 +47,8 @@ public class AdapterTaskMenu extends BaseAdapter {
             R.mipmap.schedule,
             R.mipmap.priority
     };
-    public AdapterTaskMenu(Context context) {
+    public AdapterTaskMenu(Context context,int pos) {
+        Pos = pos;
         this.ctx = context;
         inflater = LayoutInflater.from(context);
     }
@@ -109,17 +111,17 @@ public class AdapterTaskMenu extends BaseAdapter {
     }
     public void CallFragment(int position){
         if(position==0){
-            callFragmentWithReplace(R.id.edittask_container, TaskEditTitleFragment.newInstance(position), "TaskTitle");
+            callFragmentWithReplace(R.id.edittask_container, TaskEditTitleFragment.newInstance(Pos), "TaskTitle");
         }if(position==1){
-            callFragmentWithReplace(R.id.edittask_container, TaskListNameFragment.newInstance(position), "TaskListNameAttachment");
+            callFragmentWithReplace(R.id.edittask_container, TaskListNameFragment.newInstance(Pos), "TaskListNameAttachment");
         }if(position==2){
-            callFragmentWithReplace(R.id.edittask_container, TaskAttachmentFragment.newInstance(position), "TaskAttachment");
+            callFragmentWithReplace(R.id.edittask_container, TaskAttachmentFragment.newInstance(Pos), "TaskAttachment");
         }if(position==3){
-            callFragmentWithReplace(R.id.edittask_container, TaskAssignFragment.newInstance(position), "TaskAssign");
+            callFragmentWithReplace(R.id.edittask_container, TaskAssignFragment.newInstance(Pos), "TaskAssign");
         }if(position==4){
-            callFragmentWithReplace(R.id.edittask_container, TaskScheduleFragment.newInstance(position), "TaskSchedule");
+            callFragmentWithReplace(R.id.edittask_container, TaskScheduleFragment.newInstance(Pos), "TaskSchedule");
         }if(position==5){
-            callFragmentWithReplace(R.id.edittask_container, TaskPriorityFragment.newInstance(position), "TasksPriority");
+            callFragmentWithReplace(R.id.edittask_container, TaskPriorityFragment.newInstance(Pos), "TasksPriority");
         }
         BaseActivity.drawer.closeDrawer(GravityCompat.START);
     }

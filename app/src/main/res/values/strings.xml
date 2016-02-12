@@ -66,6 +66,7 @@
     <string name="user">User</string>
     <string name="add_task">Add Task</string>
     <string name="edit">Edit</string>
+    <string name="save">Save</string>
     <string name="all">All</string>
     <string name="upcoming">Upcoming</string>
     <string name="overdue">Overdue</string>

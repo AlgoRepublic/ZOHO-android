@@ -227,15 +227,11 @@ public class TaskDetailFragment extends BaseFragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.edit_task:
-                if(baseClass.db.getInt("ProjectID") == 0){
-                    Toast.makeText(getActivity(), "Please Select Project", Toast.LENGTH_SHORT).show();
-                }else {
-                    Intent intent = new Intent(getActivity(), ActivityTask.class);
-                    intent.putExtra("pos", position);
-                    startActivity(intent);
-                }
-                break;
 
+                Intent intent = new Intent(getActivity(), ActivityTask.class);
+                intent.putExtra("pos", position);
+                startActivity(intent);
+                break;
         }
         return super.onOptionsItemSelected(item);
     }

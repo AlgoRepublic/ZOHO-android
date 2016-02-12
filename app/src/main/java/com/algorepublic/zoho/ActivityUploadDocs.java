@@ -110,7 +110,7 @@ public class ActivityUploadDocs extends BaseActivity implements GoogleApiClient.
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_upload_docs);
-        ID = Integer.parseInt(getIntent().getStringExtra("ID"));
+        ID = getIntent().getIntExtra("ID",0);
         aq = new AQuery(this);
         service = new DocumentsService(this);
         dialog = new ACProgressFlower.Builder(this)
@@ -384,6 +384,14 @@ public class ActivityUploadDocs extends BaseActivity implements GoogleApiClient.
                     RelativeLayout layout = (RelativeLayout) linearLayout.findViewById(Integer
                             .parseInt(v.getTag().toString()));
                     linearLayout.removeView(layout);
+                    Log.e("ID1", v.getId() + "/" + v.getTag().toString() + "/" + linearLayout.getChildCount());
+                    for(int loop=Integer
+                            .parseInt(v.getTag().toString());loop<linearLayout.getChildCount();loop++){
+                        View view = linearLayout.getChildAt(loop);
+                        view.setId(view.getId()-1);
+                        view.setTag(view.getId() - 1);
+                        Log.e("ID","/"+view.getId());
+                    }
                     filesList.remove(Integer
                             .parseInt(v.getTag().toString()));
                 }

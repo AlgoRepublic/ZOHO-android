@@ -1,7 +1,6 @@
 package com.algorepublic.zoho.fragments;
 
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -45,7 +44,7 @@ public class ProjectsFragment extends BaseFragment{
     ProjectsListService service;
     StickyListHeadersListView listView;
     StickyListHeadersAdapter projectAdapter;
-    ArrayList<ProjectsList> allProjectsList = new ArrayList<>();
+    static  ArrayList<ProjectsList> allProjectsList = new ArrayList<>();
     ArrayList<ProjectsList> ByClientList = new ArrayList<>();
     public static ArrayList<ProjectsList> ByDepartmentList = new ArrayList<>();
 
@@ -124,11 +123,12 @@ public class ProjectsFragment extends BaseFragment{
         baseClass = ((BaseClass) getActivity().getApplicationContext());
         service = new ProjectsListService(getActivity());
         service.getProjectsByClient_API(baseClass.getUserId(), true, new CallBack(this, "ProjectsByClient"));
-        service.getProjectsByDepartment(baseClass.getUserId(), true, new CallBack(this, "ProjectsByDepartment"));
     }
 
     public void ProjectsByClient(Object caller, Object model){
         ProjectsByClientModel.getInstance().setList((ProjectsByClientModel) model);
+        service.getProjectsByDepartment(baseClass.getUserId(),
+                true, new CallBack(this, "ProjectsByDepartment"));
     }
     public void ProjectsByDepartment(Object caller, Object model){
         ProjectsByDepartmentModel.getInstance().setList((ProjectsByDepartmentModel) model);
@@ -192,7 +192,7 @@ public class ProjectsFragment extends BaseFragment{
     }
     public void SetGeneralClientAdapter(){
         aq.id(R.id.projects_list).adapter(new AdapterProjectsClientList(getActivity(), allProjectsList));
-        aq.id(R.id.projects_list).itemClicked(clientOnClick);
+        aq.id(R.id.projects_list).itemClicked(allOnClick);
     }
     public void SetClientProjectsAdapter(){
         aq.id(R.id.projects_list).adapter(new AdapterProjectsClientList(getActivity(), ByClientList));
@@ -205,30 +205,44 @@ public class ProjectsFragment extends BaseFragment{
         listView.setAdapter(projectAdapter);
         listView.setOnItemClickListener(deptOnClick);
     }
+    AdapterView.OnItemClickListener allOnClick = new AdapterView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            Log.e("selected project", ((TextView) view.findViewById(R.id.project_id)).getText().toString());
+            if (baseClass.getSelectedProject().equalsIgnoreCase(((TextView) view.findViewById(R.id.project_id)).getText().toString())) {
+                baseClass.setSelectedProject("0");
+                baseClass.db.putInt("ProjectID", 0);
+            }else {
+                baseClass.setSelectedProject(((TextView) view.findViewById(R.id.project_id)).getText().toString());
+                baseClass.db.putInt("ProjectID", Integer.parseInt(baseClass.getSelectedProject()));
+            }
+            SetGeneralClientAdapter();
+        }
+    };
     AdapterView.OnItemClickListener clientOnClick = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             Log.e("selected project", ((TextView) view.findViewById(R.id.project_id)).getText().toString());
-            if(baseClass.getSelectedProject().equalsIgnoreCase("0")) {
-                baseClass.setSelectedProject(((TextView) view.findViewById(R.id.project_id)).getText().toString());
-                baseClass.db.putInt("ProjectID", Integer.parseInt(baseClass.getSelectedProject()));
-            }else {
+            if (baseClass.getSelectedProject().equalsIgnoreCase(((TextView) view.findViewById(R.id.project_id)).getText().toString())) {
                 baseClass.setSelectedProject("0");
                 baseClass.db.putInt("ProjectID", 0);
+            }else {
+                baseClass.setSelectedProject(((TextView) view.findViewById(R.id.project_id)).getText().toString());
+                baseClass.db.putInt("ProjectID", Integer.parseInt(baseClass.getSelectedProject()));
             }
-            SetGeneralClientAdapter();
+            SetClientProjectsAdapter();
         }
     };
     AdapterView.OnItemClickListener deptOnClick = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             Log.e("selected project", ((TextView) view.findViewById(R.id.project_id)).getText().toString());
-            if(baseClass.getSelectedProject().equalsIgnoreCase("0")) {
-                baseClass.setSelectedProject(((TextView) view.findViewById(R.id.project_id)).getText().toString());
-                baseClass.db.putInt("ProjectID", Integer.parseInt(baseClass.getSelectedProject()));
-            }else {
+            if (baseClass.getSelectedProject().equalsIgnoreCase(((TextView) view.findViewById(R.id.project_id)).getText().toString())) {
                 baseClass.setSelectedProject("0");
                 baseClass.db.putInt("ProjectID", 0);
+            }else {
+                baseClass.setSelectedProject(((TextView) view.findViewById(R.id.project_id)).getText().toString());
+                baseClass.db.putInt("ProjectID", Integer.parseInt(baseClass.getSelectedProject()));
             }
             SetDepartmentProjectsAdapter();
         }
@@ -273,13 +287,9 @@ public class ProjectsFragment extends BaseFragment{
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.add_project:
-                callFragmentWithBackStack(R.id.container, AddProject.newInstance(), "AddProject");
+                callFragmentWithBackStack(R.id.container, AddProjectFragment.newInstance(), "AddProjectFragment");
                 break;
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    private void getSelectedItemPosition(String projectId){
-
     }
 }

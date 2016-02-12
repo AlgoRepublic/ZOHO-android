@@ -98,7 +98,9 @@ public class TasksListFragment extends BaseFragment {
                 if(baseClass.db.getInt("ProjectID") == 0){
                     Toast.makeText(getActivity(), "Please Select Project", Toast.LENGTH_SHORT).show();
                 }else {
-                    startActivity(new Intent(getActivity(), ActivityTask.class));
+                    Intent intent = new Intent(getActivity(), ActivityTask.class);
+                    intent.putExtra("pos", -1);
+                    startActivity(intent);
                 }
                 break;
         }

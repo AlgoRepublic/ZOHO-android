@@ -84,7 +84,7 @@ public class AdapterDocumentsList extends BaseAdapter implements StickyListHeade
         aq.id(R.id.doc_checkbox).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!aq.id(R.id.doc_checkbox).isChecked()) {
+                if(aq.id(R.id.doc_checkbox).isChecked()) {
                     DocumentsListFragment.deleteDocsList.
                             add(documentsLists.get(position).getID());
                 }else

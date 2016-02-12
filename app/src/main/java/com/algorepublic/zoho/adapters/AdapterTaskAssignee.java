@@ -63,11 +63,8 @@ public class AdapterTaskAssignee extends BaseAdapter {
          convertView = l_Inflater.inflate(R.layout.layout_assignee_row, null);
 
         aq = new AQuery(convertView);
-        if(ActivityTask.assigneeList.size()>0) {
-            if (ActivityTask.assigneeList.get(position) != -1) {
-                aq.id(R.id.assignee_checkbox).checked(true);
-            }
-        }
+
+        aq.id(R.id.assignee_id).text(Integer.toString(TaskAssigneeModel.getInstance().responseObject.get(position).ID));
         aq.id(R.id.assignee_name).text(TaskAssigneeModel.getInstance().responseObject.get(position).firstName);
         aq.id(R.id.assignee_checkbox).getCheckBox().setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -78,6 +75,16 @@ public class AdapterTaskAssignee extends BaseAdapter {
                     ActivityTask.assigneeList.remove(position);
             }
         });
+        for(int loop=0;loop<ActivityTask.assigneeList.size();loop++) {
+            if (ActivityTask.assigneeList.get(loop) ==
+                    Integer.parseInt(aq.id(R.id.assignee_id).getText().toString())) {
+                aq.id(R.id.assignee_checkbox).checked(true);
+                break;
+            }else
+            {
+                aq.id(R.id.assignee_checkbox).checked(false);
+            }
+        }
         return convertView;
     }
 }

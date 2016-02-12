@@ -34,5 +34,16 @@
         android:layout_margin="5dp"
         android:textColor="@color/colorContentWrapper"
         />
-
+    <TextView
+        android:id="@+id/assignee_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:visibility="gone"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@+id/assignee_checkbox"
+        android:layout_alignParentLeft="true"
+        android:layout_margin="10dp"
+        android:textColor="@color/colorContentWrapper"
+        />
 </RelativeLayout>

@@ -3,6 +3,7 @@ package com.algorepublic.zoho.FragmentsTasks;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,7 @@ import com.algorepublic.zoho.fragments.BaseFragment;
 import com.algorepublic.zoho.fragments.TasksListFragment;
 import com.algorepublic.zoho.services.CallBack;
 import com.algorepublic.zoho.services.TaskListService;
+import com.algorepublic.zoho.utils.BaseClass;
 import com.androidquery.AQuery;
 
 /**
@@ -27,6 +29,7 @@ public class TaskAssignFragment extends BaseFragment {
     AQuery aq;
     TaskListService service;
     public static int position;
+    BaseClass baseClass;
     public TaskAssignFragment() {
     }
     @SuppressWarnings("unused")
@@ -48,19 +51,27 @@ public class TaskAssignFragment extends BaseFragment {
         // Inflate the layout for this fragment_forums
        View view =  inflater.inflate(R.layout.fragment_task_assign, container, false);
         aq = new AQuery(view);
-        ActivityTask.assigneeList.clear();
-        for (int loop = 0;
-             loop < TasksListFragment.generalList.get(position).getListAssignees().size(); loop++) {
-            if (TasksListFragment.generalList.get(position).getListAssignees().get(loop).getUserID() != -1) {
-                ActivityTask.assigneeList.add(
-                        TasksListFragment.generalList.get(position).getListAssignees().get(loop).getUserID());
-            } else
-                ActivityTask.assigneeList.add(-1);
+        baseClass = ((BaseClass) getActivity().getApplicationContext());
+     if(ActivityTask.assigneeList.size()==0){
+         try {
+             for (int loop = 0;
+                  loop < TasksListFragment.generalList.get(position).getListAssignees().size(); loop++) {
+                 if (TasksListFragment.generalList.get(position).getListAssignees().get(loop).getUserID() != -1) {
+                     ActivityTask.assigneeList.add(
+                             TasksListFragment.generalList.get(position).getListAssignees().get(loop).getUserID());
+                 } else
+                     ActivityTask.assigneeList.add(-1);
+             }
+         }catch (IndexOutOfBoundsException e){}
         }
 
         service = new TaskListService(getActivity());
-        service.getTaskAssignee(TasksListFragment.generalList.get(position).getProjectID(), true, new CallBack(TaskAssignFragment.this, "TaskAssignee"));
-        return  view;
+      if(position == -1) {
+          service.getTaskAssignee(Integer.parseInt(baseClass.getSelectedProject()), true, new CallBack(TaskAssignFragment.this, "TaskAssignee"));
+      }else{
+          service.getTaskAssignee(TasksListFragment.generalList.get(position).getProjectID(), true, new CallBack(TaskAssignFragment.this, "TaskAssignee"));
+      }
+            return  view;
     }
     public void TaskAssignee(Object caller, Object model) {
         TaskAssigneeModel.getInstance().setList((TaskAssigneeModel) model);

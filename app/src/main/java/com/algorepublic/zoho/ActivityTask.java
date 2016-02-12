@@ -47,6 +47,7 @@ public class ActivityTask extends BaseActivity{
         gridViewTaskMenu = (GridView) findViewById(R.id.gridview_taskmenu);
         filesList = new ArrayList<>();
         assigneeList = new ArrayList<>();
+        assigneeList.clear();
         baseClass = ((BaseClass) getApplicationContext());
         dialog = new ACProgressFlower.Builder(this)
                 .direction(ACProgressConstant.DIRECT_CLOCKWISE)
@@ -56,8 +57,6 @@ public class ActivityTask extends BaseActivity{
         tasksObj= new TasksList();
         if (extras != null) {
             position = Integer.parseInt(extras.get("pos").toString());
-        }else{
-            position=-1;
         }
         aq =new AQuery(this);
         setTaskValuesTinyDB();
@@ -79,6 +78,7 @@ public class ActivityTask extends BaseActivity{
         aq.id(R.id.back_arrow).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                setTaskValuesTinyDB();
                 ActivityTask.this.finish();
             }
         });
@@ -106,7 +106,7 @@ public class ActivityTask extends BaseActivity{
                 aq.id(R.id.title_text).enabled(false);
             }
         });
-        gridViewTaskMenu.setAdapter(new AdapterTaskMenu(this));
+        gridViewTaskMenu.setAdapter(new AdapterTaskMenu(this,position));
         if(savedInstanceState==null){
             callFragmentWithReplace(R.id.edittask_container, TaskEditTitleFragment.newInstance(position), "TaskTitle");
         }
