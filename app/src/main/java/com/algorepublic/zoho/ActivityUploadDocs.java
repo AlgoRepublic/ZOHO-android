@@ -380,21 +380,30 @@ public class ActivityUploadDocs extends BaseActivity implements GoogleApiClient.
             deleteFile.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Log.e("Edit", v.getTag().toString());
-                    RelativeLayout layout = (RelativeLayout) linearLayout.findViewById(Integer
-                            .parseInt(v.getTag().toString()));
-                    linearLayout.removeView(layout);
                     Log.e("ID1", v.getId() + "/" + v.getTag().toString() + "/" + linearLayout.getChildCount());
-                    for(int loop=Integer
-                            .parseInt(v.getTag().toString());loop<linearLayout.getChildCount();loop++){
-                        View view = linearLayout.getChildAt(loop);
-                        view.setId(view.getId()-1);
-                        view.setTag(view.getId() - 1);
-                        Log.e("ID","/"+view.getId());
-                    }
-                    filesList.remove(Integer
-                            .parseInt(v.getTag().toString()));
-                }
+                   for (int loop = Integer
+                           .parseInt(v.getTag().toString()) ; loop < linearLayout.getChildCount(); loop++) {
+                       View view = linearLayout.getChildAt(loop);
+                      // Log.e("D11", Integer.parseInt(view.getTag().toString()) + "/" + loop);
+
+                       if(view.getTag().toString() == null) {
+                           Log.e("D11", linearLayout.getChildCount() + "/" + loop);
+                       }else{
+                           Log.e("D12","12");
+                           Log.e("D11", Integer.parseInt(view.getTag().toString()) + "/" + loop);
+                       }
+//                       view.setId(Integer.parseInt(view.getTag().toString()) - 1);
+//                       view.setTag(Integer.parseInt(view.getTag().toString()) - 1);
+//                       Log.e("ID", "/" + view.getTag().toString());
+                       linearLayout.addView(view,Integer
+                               .parseInt(v.getTag().toString()));
+                   }
+//                    linearLayout.removeViewAt(linearLayout.getChildCount()-1);
+//                    Tag--;
+//                    filesList.remove(Integer
+//                            .parseInt(v.getTag().toString()));
+                    Log.e("ID2","/" + linearLayout.getChildCount());
+               }
             });
         } catch (Exception e) {
             Toast.makeText(this, "Failed to load",
