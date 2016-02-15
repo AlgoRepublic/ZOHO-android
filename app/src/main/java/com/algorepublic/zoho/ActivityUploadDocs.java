@@ -11,8 +11,10 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.design.widget.Snackbar;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -133,6 +135,15 @@ public class ActivityUploadDocs extends BaseActivity implements GoogleApiClient.
         aq.id(R.id.done).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // get all the documents
+                View imagesLayout = aq.id(R.id.images_layout).getView();
+                int size = ((ViewGroup)imagesLayout).getChildCount();
+                for(int i = 0; i < size; i++){
+                    View view  = imagesLayout.findViewWithTag("image_"+i);
+                    if(view.getVisibility() == View.GONE){
+                        filesList.remove(i);
+                    }
+                }
                 if(baseClass.getSelectedProject().equalsIgnoreCase("0")){
                     new UploadDocsBYTask().execute();
                 }else {
@@ -143,7 +154,9 @@ public class ActivityUploadDocs extends BaseActivity implements GoogleApiClient.
         for (int loop = 0; loop < filesList.size(); loop++) {
             showFileInList(filesList.get(loop));
         }
+
     }
+
 
     private void buildGoogleApiClient() {
         mGoogleApiClient = new GoogleApiClient.Builder(this)
@@ -375,34 +388,13 @@ public class ActivityUploadDocs extends BaseActivity implements GoogleApiClient.
             text.setText(file.getName());
             deleteFile.setTag(Tag);
             child.setId(Tag);
+            child.setTag("image_"+Tag);
             Tag++;
             linearLayout.addView(child);
             deleteFile.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Log.e("ID1", v.getId() + "/" + v.getTag().toString() + "/" + linearLayout.getChildCount());
-                   for (int loop = Integer
-                           .parseInt(v.getTag().toString())+1 ; loop < linearLayout.getChildCount(); loop++) {
-                       View view = linearLayout.getChildAt(loop);
-                       Log.e("D11", Integer.parseInt(view.getTag().toString()) + "/" + loop);
-
-                       if(view.getTag().toString() == null) {
-                           Log.e("D11", linearLayout.getChildCount() + "/" + loop);
-                       }else{
-                           Log.e("D12","12");
-                           Log.e("D11", Integer.parseInt(view.getTag().toString()) + "/" + loop);
-                       }
-//                       view.setId(Integer.parseInt(view.getTag().toString()) - 1);
-//                       view.setTag(Integer.parseInt(view.getTag().toString()) - 1);
-//                       Log.e("ID", "/" + view.getTag().toString());
-                       int pos = loop -1;
-                       linearLayout.addView(view,pos);
-                   }
-//                    linearLayout.removeViewAt(linearLayout.getChildCount()-1);
-//                    Tag--;
-//                    filesList.remove(Integer
-//                            .parseInt(v.getTag().toString()));
-                    Log.e("ID2","/" + linearLayout.getChildCount());
+                    ((View) v.getParent()).setVisibility(View.GONE);
                }
             });
         } catch (Exception e) {
@@ -491,6 +483,11 @@ public class ActivityUploadDocs extends BaseActivity implements GoogleApiClient.
         @Override
         protected void onPostExecute(String result) {
             dialog.dismiss();
+            filesList.clear();
+            View parentLayout = findViewById(R.id.upload_container);
+            ViewGroup imagesLayout = (ViewGroup) findViewById(R.id.images_layout);
+            imagesLayout.removeAllViews();
+            Snackbar.make(parentLayout,"File(s) uploaded successfully.", Snackbar.LENGTH_SHORT).show();
             PopulateModel(result);
         }
     }
