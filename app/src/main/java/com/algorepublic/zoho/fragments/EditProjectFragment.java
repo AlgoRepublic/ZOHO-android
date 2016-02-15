@@ -1,9 +1,6 @@
 package com.algorepublic.zoho.fragments;
 
-
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -11,9 +8,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Toast;
 
-import com.algorepublic.zoho.ActivityTask;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.utils.BaseClass;
 import com.androidquery.AQuery;
@@ -21,24 +16,23 @@ import com.androidquery.AQuery;
 import java.util.ArrayList;
 
 /**
- * A simple {@link Fragment} subclass.
- * Use the {@link AddProjectFragment#newInstance} factory method to
- * create an instance of this fragment.
+ * Created by android on 2/15/16.
  */
-public class AddProjectFragment extends BaseFragment {
+public class EditProjectFragment extends BaseFragment {
 
     AQuery aq;
     BaseClass baseClass;
+    static EditProjectFragment fragment;
 
-    public AddProjectFragment() {
+    public EditProjectFragment() {
         // Required empty public constructor
     }
 
     // TODO: Rename and change types and number of parameters
-    public static AddProjectFragment newInstance() {
-        AddProjectFragment fragment = new AddProjectFragment();
-        Bundle args = new Bundle();
-        fragment.setArguments(args);
+    public static EditProjectFragment newInstance() {
+        if(fragment ==null) {
+            fragment = new EditProjectFragment();
+        }
         return fragment;
     }
     @Override

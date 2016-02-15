@@ -16,12 +16,10 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.algorepublic.zoho.Models.GeneralModel;
-import com.algorepublic.zoho.services.CallBack;
 import com.algorepublic.zoho.services.DocumentsService;
 import com.algorepublic.zoho.utils.BaseClass;
 import com.algorepublic.zoho.utils.Constants;
@@ -35,7 +33,6 @@ import com.flyco.dialog.listener.OnBtnClickL;
 import com.flyco.dialog.listener.OnOperItemClickL;
 import com.flyco.dialog.widget.ActionSheetDialog;
 import com.flyco.dialog.widget.MaterialDialog;
-import com.google.android.gms.auth.UserRecoverableAuthException;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -58,11 +55,9 @@ import com.google.api.services.drive.DriveScopes;
 import org.apache.commons.io.FileUtils;
 import org.json.JSONObject;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
@@ -112,6 +107,7 @@ public class ActivityUploadDocs extends BaseActivity implements GoogleApiClient.
         setContentView(R.layout.activity_upload_docs);
         ID = getIntent().getIntExtra("ID",0);
         aq = new AQuery(this);
+        baseClass =  ((BaseClass) getApplicationContext());
         service = new DocumentsService(this);
         dialog = new ACProgressFlower.Builder(this)
                 .direction(ACProgressConstant.DIRECT_CLOCKWISE)
@@ -137,7 +133,11 @@ public class ActivityUploadDocs extends BaseActivity implements GoogleApiClient.
         aq.id(R.id.done).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new AsyncTry().execute();
+                if(baseClass.getSelectedProject().equalsIgnoreCase("0")){
+                    new UploadDocsBYTask().execute();
+                }else {
+                    new UploadDocsBYProject().execute();
+                }
             }
         });
         for (int loop = 0; loop < filesList.size(); loop++) {
@@ -382,9 +382,9 @@ public class ActivityUploadDocs extends BaseActivity implements GoogleApiClient.
                 public void onClick(View v) {
                     Log.e("ID1", v.getId() + "/" + v.getTag().toString() + "/" + linearLayout.getChildCount());
                    for (int loop = Integer
-                           .parseInt(v.getTag().toString()) ; loop < linearLayout.getChildCount(); loop++) {
+                           .parseInt(v.getTag().toString())+1 ; loop < linearLayout.getChildCount(); loop++) {
                        View view = linearLayout.getChildAt(loop);
-                      // Log.e("D11", Integer.parseInt(view.getTag().toString()) + "/" + loop);
+                       Log.e("D11", Integer.parseInt(view.getTag().toString()) + "/" + loop);
 
                        if(view.getTag().toString() == null) {
                            Log.e("D11", linearLayout.getChildCount() + "/" + loop);
@@ -395,8 +395,8 @@ public class ActivityUploadDocs extends BaseActivity implements GoogleApiClient.
 //                       view.setId(Integer.parseInt(view.getTag().toString()) - 1);
 //                       view.setTag(Integer.parseInt(view.getTag().toString()) - 1);
 //                       Log.e("ID", "/" + view.getTag().toString());
-                       linearLayout.addView(view,Integer
-                               .parseInt(v.getTag().toString()));
+                       int pos = loop -1;
+                       linearLayout.addView(view,pos);
                    }
 //                    linearLayout.removeViewAt(linearLayout.getChildCount()-1);
 //                    Tag--;
@@ -467,7 +467,7 @@ public class ActivityUploadDocs extends BaseActivity implements GoogleApiClient.
     }
 
 
-    public class AsyncTry extends AsyncTask<Void, Void, String> {
+    public class UploadDocsBYProject extends AsyncTask<Void, Void, String> {
         GenericHttpClient httpClient;
         String response = null;
 
@@ -481,7 +481,7 @@ public class ActivityUploadDocs extends BaseActivity implements GoogleApiClient.
         protected String doInBackground(Void... voids) {
             try {
                 httpClient = new GenericHttpClient();
-                response = httpClient.uploadDocuments(Constants.UploadDocuments_API, filesList,ID);
+                response = httpClient.uploadDocumentsByProject(Constants.UploadDocumentsByProject_API,ID, filesList);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -494,7 +494,33 @@ public class ActivityUploadDocs extends BaseActivity implements GoogleApiClient.
             PopulateModel(result);
         }
     }
+    public class UploadDocsBYTask extends AsyncTask<Void, Void, String> {
+        GenericHttpClient httpClient;
+        String response = null;
 
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            dialog.show();
+        }
+
+        @Override
+        protected String doInBackground(Void... voids) {
+            try {
+                httpClient = new GenericHttpClient();
+                response = httpClient.uploadDocumentsByTask(Constants.UploadDocumentsByTasks_API,ID, filesList);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return response;
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            dialog.dismiss();
+            PopulateModel(result);
+        }
+    }
     private void PopulateModel(String json) {
         Log.e("Json", "/" + json);
         JSONObject jsonObj;

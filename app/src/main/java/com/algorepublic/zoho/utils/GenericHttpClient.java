@@ -144,7 +144,7 @@ public class GenericHttpClient {
         }
         return message;
     }
-    public String uploadDocuments(String url,ArrayList<File> files,int folderID ) throws IOException {
+    public String uploadDocumentsByProject(String url,int ProjectID, ArrayList<File> files) throws IOException {
 
         HttpClient hc = new DefaultHttpClient();
         String message =null;
@@ -155,10 +155,28 @@ public class GenericHttpClient {
             mpEntity.addPart("files["+i+"]", new FileBody(files.get(i)));
         }
 
-        mpEntity.addPart("folderID", new StringBody(Integer.toString(5)));
-        mpEntity.addPart("ProjectId", new StringBody(Integer.toString(4)));
+        mpEntity.addPart("ProjectId", new StringBody(Integer.toString(ProjectID)));
         mpEntity.addPart("CreateBy", new StringBody(Integer.toString(1)));
         mpEntity.addPart("UpdateBy", new StringBody(Integer.toString(1)));
+        p.setEntity(mpEntity);
+        HttpResponse resp = hc.execute(p);
+        if (resp != null) {
+            message = convertStreamToString(resp.getEntity().getContent());
+        }
+        return message;
+    }
+    public String uploadDocumentsByTask(String url, int taskID, ArrayList<File> files) throws IOException {
+
+        HttpClient hc = new DefaultHttpClient();
+        String message =null;
+        HttpPost p = new HttpPost(url);
+        MultipartEntity mpEntity = new MultipartEntity(HttpMultipartMode.BROWSER_COMPATIBLE);
+        for(int i=0;i<files.size();i++) {
+            Log.e("File", "/" + files.get(i).getName());
+            mpEntity.addPart("files["+i+"]", new FileBody(files.get(i)));
+        }
+
+        mpEntity.addPart("taskID", new StringBody(Integer.toString(taskID)));
         p.setEntity(mpEntity);
         HttpResponse resp = hc.execute(p);
         if (resp != null) {
