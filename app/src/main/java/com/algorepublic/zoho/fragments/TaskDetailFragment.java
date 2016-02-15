@@ -18,7 +18,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.SeekBar;
-import android.widget.Toast;
 
 import com.algorepublic.zoho.ActivityTask;
 import com.algorepublic.zoho.Models.GeneralModel;
@@ -192,16 +191,23 @@ public class TaskDetailFragment extends BaseFragment {
             aq.id(R.id.mark_as_done).clicked(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    click= 2;
                     if(tasksList.getProgress()==100){
+                        click= 3;
                         NormalDialogCustomAttr(getString(R.string.reopen_task));
                     }else {
+                        click=2;
                         NormalDialogCustomAttr(getString(R.string.mark_as_done));
                     }
-
                 }
             });
+        aq.id(R.id.delete).clicked(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                click=1;
+                NormalDialogCustomAttr(getString(R.string.delete_task));
 
+            }
+        });
 
 
         return view;
@@ -347,17 +353,13 @@ public class TaskDetailFragment extends BaseFragment {
                             service.deleteTask(tasksList.getTaskID()
                                     , true, new CallBack(TaskDetailFragment.this, "DeleteTask"));
                         }
-                        if (click==2)
-                        {
-                            dialog.show();
-                            if(aq.id(R.id.mark_as_done).getText().toString().equalsIgnoreCase("Mark as done")) {
-                                service.updateTaskProgress(tasksList.getTaskID()
-                                        , 100, true, new CallBack(TaskDetailFragment.this, "CompleteTask"));
-                            }else{
-                                service.updateTaskProgress(tasksList.getTaskID()
-                                        , 0, true, new CallBack(TaskDetailFragment.this, "ReOpenTask"));
-                            }
-
+                        if (click==2) {
+                            service.updateTaskProgress(TasksListFragment.generalList.get(position).getTaskID()
+                                    , 100, true, new CallBack(TaskDetailFragment.this, "CompleteTask"));
+                        }
+                        if(click==3){
+                            service.updateTaskProgress(TasksListFragment.generalList.get(position).getTaskID()
+                                    , 0, true, new CallBack(TaskDetailFragment.this, "ReOpenTask"));
                         }
                     }
                 });

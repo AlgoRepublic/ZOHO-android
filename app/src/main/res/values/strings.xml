@@ -64,6 +64,8 @@
     <string name="task_comment">Comment(s)</string>
     <string name="task_user">User(s)</string>
     <string name="user">User</string>
+
+    <string name="add_user">Add User</string>
     <string name="add_task">Add Task</string>
     <string name="edit">Edit</string>
     <string name="save">Save</string>
@@ -164,5 +166,9 @@
     <string name="remember_password">Remember Password?</string>
     <string name="over_due">Over Due</string>
     <string name="up_coming">Up Coming</string>
-
+    <string name="full_name">Full Name</string>
+    <string name="nickname">Nickname</string>
+    <string name="email">Email</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="user_role">User Role</string>
 </resources>
