@@ -1,5 +1,6 @@
 package com.algorepublic.zoho.fragments;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -19,7 +20,6 @@ import com.algorepublic.zoho.Models.TasksListByOwnerModel;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.adapters.AdapterTasksList;
 import com.algorepublic.zoho.adapters.TaskListAssignee;
-import com.algorepublic.zoho.adapters.TaskListName;
 import com.algorepublic.zoho.adapters.TasksList;
 import com.algorepublic.zoho.services.CallBack;
 import com.algorepublic.zoho.services.TaskListService;
@@ -38,6 +38,7 @@ import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
 /**
  * Created by android on 2/10/16.
  */
+@SuppressLint("ValidFragment")
 public class TaskListBySubTasksFragment extends BaseFragment {
 
     static TaskListBySubTasksFragment fragment;
@@ -49,18 +50,17 @@ public class TaskListBySubTasksFragment extends BaseFragment {
     public static ArrayList<TasksList> generalList = new ArrayList<>();
     BaseClass baseClass;
     StickyListHeadersListView listView;
-    static int ID;
-    public TaskListBySubTasksFragment() {
-    }
-
-    @SuppressWarnings("unused")
-    public static TaskListBySubTasksFragment newInstance(int Id) {
+    int ID;
+    @SuppressLint("ValidFragment")
+    public TaskListBySubTasksFragment (int Id) {
         ID = Id;
-        if (fragment==null) {
-            fragment = new TaskListBySubTasksFragment();
-        }
-        return fragment;
     }
+//    @SuppressWarnings("unused")
+//    public static TaskListBySubTasksFragment newInstance(int Id) {
+//        ID = Id;
+//        fragment = new TaskListBySubTasksFragment();
+//        return fragment;
+//    }
 
 
     @Override
@@ -119,7 +119,7 @@ public class TaskListBySubTasksFragment extends BaseFragment {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                callFragmentWithBackStack(R.id.container, TaskDetailFragment.newInstance(position),"TaskDetail");
+                callFragmentWithBackStack(R.id.container,new TaskDetailFragment(generalList.get(position),position),"TaskDetail");
             }
         });
         aq.id(R.id.add_task).clicked(new View.OnClickListener() {

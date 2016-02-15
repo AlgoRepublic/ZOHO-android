@@ -128,7 +128,7 @@ public class TasksListFragment extends BaseFragment {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                callFragmentWithBackStack(R.id.container, TaskDetailFragment.newInstance(position),"TaskDetail");
+                callFragmentWithBackStack(R.id.container,new TaskDetailFragment(generalList.get(position),position),"TaskDetail");
             }
         });
         aq.id(R.id.add_task).clicked(new View.OnClickListener() {

@@ -83,6 +83,11 @@ public class TaskListService extends BaseService {
         this.get(url, obj, TaskAssigneeModel.getInstance(), message);
         Log.e("TaskAssigneeService", url);
     }
+    public void getAllUsers( boolean message, CallBack obj){
+        String url = Constants.GetAllUser_API;
+        this.get(url, obj, TaskAssigneeModel.getInstance(), message);
+        Log.e("GetAllService", url);
+    }
     public void getTaskAttachments(int taskID, boolean message, CallBack obj){
         String url = Constants.TaskAttachments_API+"?taskID="+taskID;
         this.get(url, obj, SubTaskAttachmentsModel.getInstance(), message);

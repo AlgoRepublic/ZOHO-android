@@ -2,14 +2,16 @@ package com.algorepublic.zoho.utils;
 
 public class Constants {
 	public static String BASE_URL = "http://api.jitpac.com";
-	public static String Image_URL = "http://jitpac.com";
+	public static String Image_URL = "http://jitpac.com/FileUploadsManager/uploads/";
 	public static String Login_API = BASE_URL + "/User/Login";
 	public static String GetUser_API = BASE_URL+ "/User/GetById";
+	public static String GetAllUser_API = BASE_URL+ "/User/GetList";
 	public static String GetAssigneeByTask_API = BASE_URL+ "/User/GetListByProject";//ProjectID
 	public static String GetTaskListByOwner_API = BASE_URL+ "/TaskList/GetListByOwnerID?"; //userID
 	public static String GetTaskListBySubTasks_API = BASE_URL+ "/Task/GetByParentId?"; //taskID
 	public static String GetAttachmentsBySubTasks_API = BASE_URL+ "/Task/AttachmentList?"; //taskID
 	public static String UploadDocumentsByTasks_API = BASE_URL+ "/Task/AddAttachment?"; //taskID,files
+	public static String DeleteDocumentsByTasks_API = BASE_URL+ "/Task/DeleteAttachment?"; //taskID,filesToDelete
 	public static String GetTaskListByProject_API = BASE_URL+ "/TaskList/GetListByProjectIDForDropDown?"; //projectID
 	public static String CreateTask_API = BASE_URL+ "/Task/CreateTask?"; //taskObject,assignee,files
 	public static String UpdateTask_API = BASE_URL+ "/Task/UpdateTask?"; //taskObject,assignee,files

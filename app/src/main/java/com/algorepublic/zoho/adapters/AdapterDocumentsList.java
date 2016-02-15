@@ -10,6 +10,9 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.GridView;
+import android.widget.ListView;
 
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.fragments.DocumentsListFragment;
@@ -59,9 +62,8 @@ public class AdapterDocumentsList extends BaseAdapter implements StickyListHeade
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
 
-        if (convertView == null) {
-            convertView = l_Inflater.inflate(R.layout.layout_docs_row, null);
-        }
+       convertView = l_Inflater.inflate(R.layout.layout_docs_row, null);
+
         aq = new AQuery(convertView);
 
         aq.id(R.id.file_id).text(Integer.toString(documentsLists.get(position).getID()));
@@ -71,29 +73,47 @@ public class AdapterDocumentsList extends BaseAdapter implements StickyListHeade
                 get(position).getFileTypeID()));
         try{
             for(int loop=0;loop<DocumentsListFragment.deleteDocsList.size();loop++) {
-
                 if (DocumentsListFragment.deleteDocsList.get(loop) ==
                         Integer.parseInt(aq.id(R.id.file_id).getText().toString()) ) {
+                    Log.e("ID",DocumentsListFragment.deleteDocsList.get(loop)+"/"+
+                            Integer.parseInt(aq.id(R.id.file_id).getText().toString()));
                     aq.id(R.id.doc_checkbox).checked(true);
-                    break;
-                }else{
-                    aq.id(R.id.doc_checkbox).checked(false);
                 }
             }
-        }catch (IndexOutOfBoundsException e){}
-        aq.id(R.id.doc_checkbox).clicked(new View.OnClickListener() {
+        }catch (IndexOutOfBoundsException e){
+            aq.id(R.id.doc_checkbox).checked(false);
+        }
+        aq.id(R.id.doc_checkbox).getCheckBox().setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
-            public void onClick(View v) {
-                if(aq.id(R.id.doc_checkbox).isChecked()) {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked) {
                     DocumentsListFragment.deleteDocsList.
                             add(documentsLists.get(position).getID());
                 }else
                 {
-                    DocumentsListFragment.deleteDocsList.remove(position);
+                    View view = getViewByPosition(position,DocumentsListFragment.listView);
+                    AQuery aQuery= new AQuery(view);
+                    for(int loop=0;loop<DocumentsListFragment.deleteDocsList.size();loop++) {
+                        if (DocumentsListFragment.deleteDocsList.get(loop) ==
+                                Integer.parseInt(aQuery.id(R.id.file_id).getText().toString())) {
+                            DocumentsListFragment.deleteDocsList.remove(loop);
+                        }
+                    }
                 }
             }
         });
         return convertView;
+    }
+    public View getViewByPosition(int pos, StickyListHeadersListView listView) {
+        final int firstListItemPosition = listView.getFirstVisiblePosition();
+        final int lastListItemPosition = firstListItemPosition + listView.getChildCount() - 1;
+
+        if (pos < firstListItemPosition || pos > lastListItemPosition ) {
+            return listView.getAdapter().getView(pos, null, listView);
+        } else {
+            final int childIndex = pos - firstListItemPosition;
+            return listView.getChildAt(childIndex);
+        }
     }
     @Override
     public View getHeaderView(int position, View convertView, ViewGroup parent) {

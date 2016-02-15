@@ -30,9 +30,6 @@ public class ProjectsByClientModel {
         @SerializedName("CompanyName")
         public String companyName;
 
-        @SerializedName("OwnerID")
-        public String ownerID;
-
         @SerializedName("CreatedAt")
         public String createdAt;
 
@@ -52,6 +49,12 @@ public class ProjectsByClientModel {
 
         @SerializedName("Description")
         public String description;
+
+        @SerializedName("OwnerID")
+        public String ownerID;
+
+        @SerializedName("OwnerN")
+        public String ownerName;
 
         @SerializedName("CreatedAt")
         public String createdAt;

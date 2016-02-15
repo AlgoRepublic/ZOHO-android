@@ -92,6 +92,7 @@ public class DocumentsListBySubTaskFragment extends BaseFragment {
                 callForDocsDelete(getActivity().getResources().getString(R.string.delete_doc));
             }
         });
+        deleteDocsList.clear();
         baseClass = ((BaseClass) getActivity().getApplicationContext());
         setHasOptionsMenu(true);
         getToolbar().setTitle(getString(R.string.documents));
@@ -182,7 +183,7 @@ public class DocumentsListBySubTaskFragment extends BaseFragment {
                     @Override
                     public void onBtnClick() {
                         dialog.dismiss();
-                        service.deleteDocument(deleteDocsList
+                        service.deleteDocumentByTask(ID, deleteDocsList
                                 , true, new CallBack(DocumentsListBySubTaskFragment.this, "DeleteDoc"));
                         deleteDocsList.clear();
                     }

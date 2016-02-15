@@ -27,6 +27,7 @@
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:button="@null"
+            android:checked="false"
             android:background="@drawable/checkbox"
             android:layout_centerVertical="true"
             android:layout_alignParentRight="true"

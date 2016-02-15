@@ -6,9 +6,6 @@ package com.algorepublic.zoho.adapters;
 public class ProjectsList {
 
 
-    public ProjectsList() {
-    }
-
     public void setCompOrDeptID(String compOrDeptID){
         this.compOrDeptID = compOrDeptID;
     }
@@ -21,6 +18,7 @@ public class ProjectsList {
     public String getCompOrDeptName(){
         return compOrDeptName;
     }
+
     public void setProjectID(String projectID){
         this.projectID = projectID;
     }
@@ -40,9 +38,25 @@ public class ProjectsList {
         return projectDesc;
     }
 
+    public void setOwnerID(String ownerID){
+        this.ownerID = ownerID;
+    }
+    public String getOwnerID(){
+        return ownerID;
+    }
+    public void setOwnerName(String ownerName){
+        this.ownerName = ownerName;
+    }
+    public String getOwnerName(){
+        return ownerName;
+    }
+
+
 
     private String projectDesc;
     private String projectName;
+    private String ownerID;
+    private String ownerName;
     private String projectID;
     private String compOrDeptName;
     private String compOrDeptID;
