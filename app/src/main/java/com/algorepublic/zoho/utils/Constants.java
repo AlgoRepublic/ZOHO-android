@@ -9,6 +9,7 @@ public class Constants {
 	public static String GetTaskListByOwner_API = BASE_URL+ "/TaskList/GetListByOwnerID?"; //userID
 	public static String GetTaskListBySubTasks_API = BASE_URL+ "/Task/GetByParentId?"; //taskID
 	public static String GetAttachmentsBySubTasks_API = BASE_URL+ "/Task/AttachmentList?"; //taskID
+	public static String UploadDocumentsByTasks_API = BASE_URL+ "/Task/AddAttachment?"; //taskID,files
 	public static String GetTaskListByProject_API = BASE_URL+ "/TaskList/GetListByProjectIDForDropDown?"; //projectID
 	public static String CreateTask_API = BASE_URL+ "/Task/CreateTask?"; //taskObject,assignee,files
 	public static String UpdateTask_API = BASE_URL+ "/Task/UpdateTask?"; //taskObject,assignee,files
@@ -29,6 +30,6 @@ public class Constants {
 	public static String GetForumDetail_API = BASE_URL+ "/Forum/GetById?";
 	public static String GetDocuments_API = BASE_URL+ "/Document/GetListByProjectID?"; //projectID
 	public static String DeleteDocuments_API = BASE_URL+ "/Document/DeleteFile?"; //fileID
-	public static String UploadDocuments_API = BASE_URL+ "/Document/FileUpload?"; //fileObj,files,folderID
+	public static String UploadDocumentsByProject_API = BASE_URL+ "/Document/FileUpload?"; //fileObj,files,folderID
 	public static String LinkedIn_API = "https://api.linkedin.com/v1/people/~:(id,first-name,last-name,headline,pictureUrl)";
 }

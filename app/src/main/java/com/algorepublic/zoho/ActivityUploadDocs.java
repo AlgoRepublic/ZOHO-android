@@ -109,6 +109,7 @@ public class ActivityUploadDocs extends BaseActivity implements GoogleApiClient.
         setContentView(R.layout.activity_upload_docs);
         ID = getIntent().getIntExtra("ID",0);
         aq = new AQuery(this);
+        baseClass =  ((BaseClass) getApplicationContext());
         service = new DocumentsService(this);
         dialog = new ACProgressFlower.Builder(this)
                 .direction(ACProgressConstant.DIRECT_CLOCKWISE)
@@ -143,7 +144,11 @@ public class ActivityUploadDocs extends BaseActivity implements GoogleApiClient.
                         filesList.remove(i);
                     }
                 }
-                new AsyncTry().execute();
+                if(baseClass.getSelectedProject().equalsIgnoreCase("0")){
+                    new UploadDocsBYTask().execute();
+                }else {
+                    new UploadDocsBYProject().execute();
+                }
             }
         });
         for (int loop = 0; loop < filesList.size(); loop++) {
@@ -454,7 +459,7 @@ public class ActivityUploadDocs extends BaseActivity implements GoogleApiClient.
     }
 
 
-    public class AsyncTry extends AsyncTask<Void, Void, String> {
+    public class UploadDocsBYProject extends AsyncTask<Void, Void, String> {
         GenericHttpClient httpClient;
         String response = null;
 
@@ -468,7 +473,7 @@ public class ActivityUploadDocs extends BaseActivity implements GoogleApiClient.
         protected String doInBackground(Void... voids) {
             try {
                 httpClient = new GenericHttpClient();
-                response = httpClient.uploadDocuments(Constants.UploadDocuments_API, filesList, ID);
+                response = httpClient.uploadDocumentsByProject(Constants.UploadDocumentsByProject_API,ID, filesList);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -486,7 +491,33 @@ public class ActivityUploadDocs extends BaseActivity implements GoogleApiClient.
             PopulateModel(result);
         }
     }
+    public class UploadDocsBYTask extends AsyncTask<Void, Void, String> {
+        GenericHttpClient httpClient;
+        String response = null;
 
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            dialog.show();
+        }
+
+        @Override
+        protected String doInBackground(Void... voids) {
+            try {
+                httpClient = new GenericHttpClient();
+                response = httpClient.uploadDocumentsByTask(Constants.UploadDocumentsByTasks_API,ID, filesList);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return response;
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            dialog.dismiss();
+            PopulateModel(result);
+        }
+    }
     private void PopulateModel(String json) {
         Log.e("Json", "/" + json);
         JSONObject jsonObj;

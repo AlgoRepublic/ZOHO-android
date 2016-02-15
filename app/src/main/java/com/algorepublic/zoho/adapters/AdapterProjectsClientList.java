@@ -2,6 +2,8 @@ package com.algorepublic.zoho.adapters;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,7 +14,9 @@ import android.view.animation.AnimationUtils;
 import android.widget.BaseAdapter;
 
 import com.algorepublic.zoho.R;
+import com.algorepublic.zoho.fragments.EditProjectFragment;
 import com.algorepublic.zoho.fragments.ProjectsFragment;
+import com.algorepublic.zoho.fragments.StarRatingFragment;
 import com.algorepublic.zoho.utils.BaseClass;
 import com.androidquery.AQuery;
 
@@ -77,13 +81,27 @@ public class AdapterProjectsClientList extends BaseAdapter implements StickyList
         }else{
             convertView.setBackgroundResource(android.R.color.transparent);
         }
+        aq.id(R.id.project_edit).clicked(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                callFragmentWithBackStack(R.id.container, EditProjectFragment.newInstance(), "EditProjectFragment");
+            }
+        });
         Log.e("OKay","Okay");
         Animation animation = AnimationUtils.loadAnimation(ctx, (position > lastPosition) ? R.anim.up_from_bottom : R.anim.down_from_top);
         convertView.startAnimation(animation);
         lastPosition = position;
         return convertView;
     }
+    public void callFragmentWithBackStack(int containerId, Fragment fragment, String tag){
 
+        ((AppCompatActivity) ctx).getSupportFragmentManager()
+                .beginTransaction()
+                .replace(containerId, fragment, tag)
+                .addToBackStack(null)
+                .commit();
+
+    }
     @Override
     public View getHeaderView(int position, View convertView, ViewGroup parent) {
         return null;
