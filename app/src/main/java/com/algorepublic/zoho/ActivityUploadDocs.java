@@ -11,17 +11,17 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.design.widget.Snackbar;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.algorepublic.zoho.Models.GeneralModel;
-import com.algorepublic.zoho.services.CallBack;
 import com.algorepublic.zoho.services.DocumentsService;
 import com.algorepublic.zoho.utils.BaseClass;
 import com.algorepublic.zoho.utils.Constants;
@@ -35,7 +35,6 @@ import com.flyco.dialog.listener.OnBtnClickL;
 import com.flyco.dialog.listener.OnOperItemClickL;
 import com.flyco.dialog.widget.ActionSheetDialog;
 import com.flyco.dialog.widget.MaterialDialog;
-import com.google.android.gms.auth.UserRecoverableAuthException;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -58,11 +57,9 @@ import com.google.api.services.drive.DriveScopes;
 import org.apache.commons.io.FileUtils;
 import org.json.JSONObject;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
@@ -137,13 +134,24 @@ public class ActivityUploadDocs extends BaseActivity implements GoogleApiClient.
         aq.id(R.id.done).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // get all the documents
+                View imagesLayout = aq.id(R.id.images_layout).getView();
+                int size = ((ViewGroup)imagesLayout).getChildCount();
+                for(int i = 0; i < size; i++){
+                    View view  = imagesLayout.findViewWithTag("image_"+i);
+                    if(view.getVisibility() == View.GONE){
+                        filesList.remove(i);
+                    }
+                }
                 new AsyncTry().execute();
             }
         });
         for (int loop = 0; loop < filesList.size(); loop++) {
             showFileInList(filesList.get(loop));
         }
+
     }
+
 
     private void buildGoogleApiClient() {
         mGoogleApiClient = new GoogleApiClient.Builder(this)
@@ -375,34 +383,13 @@ public class ActivityUploadDocs extends BaseActivity implements GoogleApiClient.
             text.setText(file.getName());
             deleteFile.setTag(Tag);
             child.setId(Tag);
+            child.setTag("image_"+Tag);
             Tag++;
             linearLayout.addView(child);
             deleteFile.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Log.e("ID1", v.getId() + "/" + v.getTag().toString() + "/" + linearLayout.getChildCount());
-                   for (int loop = Integer
-                           .parseInt(v.getTag().toString()) ; loop < linearLayout.getChildCount(); loop++) {
-                       View view = linearLayout.getChildAt(loop);
-                      // Log.e("D11", Integer.parseInt(view.getTag().toString()) + "/" + loop);
-
-                       if(view.getTag().toString() == null) {
-                           Log.e("D11", linearLayout.getChildCount() + "/" + loop);
-                       }else{
-                           Log.e("D12","12");
-                           Log.e("D11", Integer.parseInt(view.getTag().toString()) + "/" + loop);
-                       }
-//                       view.setId(Integer.parseInt(view.getTag().toString()) - 1);
-//                       view.setTag(Integer.parseInt(view.getTag().toString()) - 1);
-//                       Log.e("ID", "/" + view.getTag().toString());
-                       linearLayout.addView(view,Integer
-                               .parseInt(v.getTag().toString()));
-                   }
-//                    linearLayout.removeViewAt(linearLayout.getChildCount()-1);
-//                    Tag--;
-//                    filesList.remove(Integer
-//                            .parseInt(v.getTag().toString()));
-                    Log.e("ID2","/" + linearLayout.getChildCount());
+                    ((View) v.getParent()).setVisibility(View.GONE);
                }
             });
         } catch (Exception e) {
@@ -481,7 +468,7 @@ public class ActivityUploadDocs extends BaseActivity implements GoogleApiClient.
         protected String doInBackground(Void... voids) {
             try {
                 httpClient = new GenericHttpClient();
-                response = httpClient.uploadDocuments(Constants.UploadDocuments_API, filesList,ID);
+                response = httpClient.uploadDocuments(Constants.UploadDocuments_API, filesList, ID);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -491,6 +478,11 @@ public class ActivityUploadDocs extends BaseActivity implements GoogleApiClient.
         @Override
         protected void onPostExecute(String result) {
             dialog.dismiss();
+            filesList.clear();
+            View parentLayout = findViewById(R.id.upload_container);
+            ViewGroup imagesLayout = (ViewGroup) findViewById(R.id.images_layout);
+            imagesLayout.removeAllViews();
+            Snackbar.make(parentLayout,"File(s) uploaded successfully.", Snackbar.LENGTH_SHORT).show();
             PopulateModel(result);
         }
     }
