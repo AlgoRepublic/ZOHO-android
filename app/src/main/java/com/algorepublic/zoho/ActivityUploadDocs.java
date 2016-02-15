@@ -483,11 +483,7 @@ public class ActivityUploadDocs extends BaseActivity implements GoogleApiClient.
         @Override
         protected void onPostExecute(String result) {
             dialog.dismiss();
-            filesList.clear();
-            View parentLayout = findViewById(R.id.upload_container);
-            ViewGroup imagesLayout = (ViewGroup) findViewById(R.id.images_layout);
-            imagesLayout.removeAllViews();
-            Snackbar.make(parentLayout,"File(s) uploaded successfully.", Snackbar.LENGTH_SHORT).show();
+            onFinish();
             PopulateModel(result);
         }
     }
@@ -516,6 +512,7 @@ public class ActivityUploadDocs extends BaseActivity implements GoogleApiClient.
         protected void onPostExecute(String result) {
             dialog.dismiss();
             PopulateModel(result);
+            onFinish();
         }
     }
     private void PopulateModel(String json) {
@@ -531,5 +528,13 @@ public class ActivityUploadDocs extends BaseActivity implements GoogleApiClient.
 //            Log.e("status","/"+RegisterUserModel.getInstance().status+RegisterUserModel.getInstance().message);
 
 //        }catch (Exception e){}
+    }
+
+    private void onFinish(){
+
+        View mainView  = findViewById(R.id.upload_container);
+        Snackbar.make(mainView, "File (s) have been uploaded successfully.", Snackbar.LENGTH_LONG).show();
+        ((ViewGroup) findViewById(R.id.images_layout)).removeAllViews();
+        filesList.clear();
     }
 }

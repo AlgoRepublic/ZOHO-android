@@ -11,7 +11,6 @@ import android.view.animation.AnimationUtils;
 import android.widget.BaseAdapter;
 
 import com.algorepublic.zoho.R;
-import com.algorepublic.zoho.fragments.TasksListFragment;
 import com.algorepublic.zoho.utils.BaseClass;
 import com.androidquery.AQuery;
 
@@ -75,10 +74,14 @@ public class AdapterTasksList extends BaseAdapter implements StickyListHeadersAd
         else
             aq.id(R.id.task_date).text(tasksLists.get(position).getEndDate());
 
-        if(tasksLists.get(position).getProjectName().equalsIgnoreCase(""))
-            aq.id(R.id.general).text("General");
-        else
-            aq.id(R.id.general).text(tasksLists.get(position).getProjectName());
+        try {
+            if (tasksLists.get(position).getProjectName().equalsIgnoreCase(""))
+                aq.id(R.id.general).text("General");
+            else
+                aq.id(R.id.general).text(tasksLists.get(position).getProjectName());
+        }catch (Exception e){
+            e.printStackTrace();
+        }
 
         Animation animation = AnimationUtils.loadAnimation(ctx, (position > lastPosition) ? R.anim.up_from_bottom : R.anim.down_from_top);
         convertView.startAnimation(animation);
