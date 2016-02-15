@@ -1,11 +1,13 @@
 package com.algorepublic.zoho.adapters;
 
+import android.os.Parcelable;
+
 import java.util.ArrayList;
 
 /**
  * Created by android on 12/29/15.
  */
-public class TasksList implements Comparable<TasksList>{
+public class TasksList extends ArrayList<Parcelable> implements Comparable<TasksList>{
 
     public void setDescription(String description){
         this.description = description;

@@ -13,7 +13,6 @@ import android.widget.AdapterView;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
-import com.algorepublic.zoho.ActivityTask;
 import com.algorepublic.zoho.Models.TasksListByOwnerModel;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.adapters.AdapterTasksList;
@@ -98,7 +97,7 @@ public class TasksListFragment extends BaseFragment {
                 if(baseClass.db.getInt("ProjectID") == 0){
                     Toast.makeText(getActivity(), "Please Select Project", Toast.LENGTH_SHORT).show();
                 }else {
-                    Intent intent = new Intent(getActivity(), ActivityTask.class);
+                    Intent intent = new Intent(getActivity(), TaskAddUpdateFragment.class);
                     intent.putExtra("pos", -1);
                     startActivity(intent);
                 }
@@ -134,7 +133,7 @@ public class TasksListFragment extends BaseFragment {
         aq.id(R.id.add_task).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getActivity(), ActivityTask.class));
+                startActivity(new Intent(getActivity(), TaskAddUpdateFragment.class));
             }
         });
         aq.id(R.id.sort).clicked(new View.OnClickListener() {
@@ -275,7 +274,7 @@ public class TasksListFragment extends BaseFragment {
                 tasksList.setEndMilli(DateMilli(taskModel.endDate));
                 tasksList.setStartMilli(DateMilli(taskModel.startDate));
                 tasksList.setProjectName(taskModel.projectName);
-                tasksList.setProjectID(taskModel.projectID);
+                tasksList.setProjectID(TasksListByOwnerModel.getInstance().responseObject.get(loop).projectID);
                 tasksList.setStartDate(DateFormatter(taskModel.startDate));
                 tasksList.setEndDate(DateFormatter(taskModel.endDate));
                 tasksList.setHeader(DateFormatter(taskModel.endDate));

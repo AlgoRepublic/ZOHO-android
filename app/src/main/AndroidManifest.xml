@@ -63,7 +63,7 @@
                 android:value="com.algorepublic.zoho.BaseActivity" />
         </activity>
         <activity
-            android:name=".ActivityTask"
+            android:name=".fragments.TaskAddUpdateFragment"
             android:parentActivityName=".BaseActivity"
             android:screenOrientation="portrait">
 

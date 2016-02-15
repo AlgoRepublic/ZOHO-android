@@ -12,7 +12,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.algorepublic.zoho.ActivityTask;
 import com.algorepublic.zoho.Models.TasksListByOwnerModel;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.services.CallBack;
@@ -162,7 +161,7 @@ public class CalendarFragment extends BaseFragment implements CalendarPickerCont
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.add_project:
-                startActivity(new Intent(getActivity(), ActivityTask.class));
+                startActivity(new Intent(getActivity(), TaskAddUpdateFragment.class));
         }
         return super.onOptionsItemSelected(item);
     }

@@ -1,29 +1,17 @@
 package com.algorepublic.zoho.adapters;
 
-import android.app.Activity;
-import android.app.Dialog;
 import android.content.Context;
-import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.CompoundButton;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.PopupWindow;
-import android.widget.TextView;
 
-import com.algorepublic.zoho.ActivityTask;
-import com.algorepublic.zoho.FragmentsTasks.TaskAssignFragment;
+import com.algorepublic.zoho.fragments.TaskAddUpdateFragment;
 import com.algorepublic.zoho.Models.TaskAssigneeModel;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.utils.BaseClass;
 import com.androidquery.AQuery;
-
-import java.util.ArrayList;
 
 /**
  * Created by android on 7/2/15.
@@ -70,13 +58,13 @@ public class AdapterTaskAssignee extends BaseAdapter {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked)
-                    ActivityTask.assigneeList.add(position,TaskAssigneeModel.getInstance().responseObject.get(position).ID);
+                    TaskAddUpdateFragment.assigneeList.add(position,TaskAssigneeModel.getInstance().responseObject.get(position).ID);
                 else
-                    ActivityTask.assigneeList.remove(position);
+                    TaskAddUpdateFragment.assigneeList.remove(position);
             }
         });
-        for(int loop=0;loop<ActivityTask.assigneeList.size();loop++) {
-            if (ActivityTask.assigneeList.get(loop) ==
+        for(int loop=0;loop< TaskAddUpdateFragment.assigneeList.size();loop++) {
+            if (TaskAddUpdateFragment.assigneeList.get(loop) ==
                     Integer.parseInt(aq.id(R.id.assignee_id).getText().toString())) {
                 aq.id(R.id.assignee_checkbox).checked(true);
                 break;

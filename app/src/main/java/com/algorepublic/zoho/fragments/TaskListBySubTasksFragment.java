@@ -14,7 +14,6 @@ import android.widget.AdapterView;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
-import com.algorepublic.zoho.ActivityTask;
 import com.algorepublic.zoho.Models.TaskListBySubTaskModel;
 import com.algorepublic.zoho.Models.TasksListByOwnerModel;
 import com.algorepublic.zoho.R;
@@ -96,7 +95,7 @@ public class TaskListBySubTasksFragment extends BaseFragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.add_project:
-                startActivity(new Intent(getActivity(), ActivityTask.class));
+                startActivity(new Intent(getActivity(), TaskAddUpdateFragment.class));
                 break;
         }
         return super.onOptionsItemSelected(item);
@@ -125,7 +124,7 @@ public class TaskListBySubTasksFragment extends BaseFragment {
         aq.id(R.id.add_task).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getActivity(), ActivityTask.class));
+                startActivity(new Intent(getActivity(), TaskAddUpdateFragment.class));
             }
         });
         aq.id(R.id.sort).clicked(new View.OnClickListener() {

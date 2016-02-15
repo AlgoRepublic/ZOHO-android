@@ -5,12 +5,8 @@
     android:layout_height="match_parent"
     android:background="@color/colorBaseWrapper"
     android:orientation="vertical"
-    tools:context="com.algorepublic.zoho.ActivityTask">
-    <include
-        android:id="@+id/toolbar_actionbar"
-        layout="@layout/toolbar_default"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize" />
+    tools:context=".fragments.TaskAddUpdateFragment">
+
     <RelativeLayout
         android:id="@+id/title_bar"
         android:layout_width="match_parent"

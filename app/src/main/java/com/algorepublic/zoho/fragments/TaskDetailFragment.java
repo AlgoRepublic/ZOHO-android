@@ -18,8 +18,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.SeekBar;
+import android.widget.Toast;
 
-import com.algorepublic.zoho.ActivityTask;
 import com.algorepublic.zoho.Models.GeneralModel;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.adapters.AdapterTaskDetailAssignee;
@@ -240,11 +240,12 @@ public class TaskDetailFragment extends BaseFragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.edit_task:
-
-                Intent intent = new Intent(getActivity(), ActivityTask.class);
-                intent.putExtra("pos", position);
-                startActivity(intent);
-                break;
+                Log.e("TaskID","/"+tasksList.getProjectID());
+                if (tasksList.getProjectID() >0) {
+                    baseClass.setSelectedProject(Integer.toString(tasksList.getProjectID()));
+                    callFragmentWithBackStack(R.id.container, TaskAddUpdateFragment.newInstance(tasksList, position), "TaskAddUpdateFragment");
+                }
+                    break;
         }
         return super.onOptionsItemSelected(item);
     }
