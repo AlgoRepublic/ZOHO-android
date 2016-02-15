@@ -16,7 +16,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.SeekBar;
-import android.widget.Toast;
 
 import com.algorepublic.zoho.ActivityTask;
 import com.algorepublic.zoho.Models.GeneralModel;
@@ -129,7 +128,7 @@ public class TaskDetailFragment extends BaseFragment {
 
                 progres = ((int) Math.round(progres / multiple)) * multiple;
                 seekBarCompat.setProgress(progres);
-                progress=progres;
+                progress = progres;
             }
 
             @Override
@@ -139,7 +138,7 @@ public class TaskDetailFragment extends BaseFragment {
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-                if(progress==100){
+                if (progress == 100) {
                     aq.id(R.id.mark_as_done).text("ReOPen Task");
                     service.updateTaskProgress(TasksListFragment.generalList.get(position).getTaskID()
                             , progress, true, new CallBack(TaskDetailFragment.this, "UpdateProgress"));
@@ -186,15 +185,25 @@ public class TaskDetailFragment extends BaseFragment {
             aq.id(R.id.mark_as_done).clicked(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+
                     if(TasksListFragment.generalList.get(position).getProgress()==100){
+                        click=3;
                         NormalDialogCustomAttr(getString(R.string.reopen_task));
                     }else {
+                        click=2;
                         NormalDialogCustomAttr(getString(R.string.mark_as_done));
                     }
 
                 }
             });
+        aq.id(R.id.delete).clicked(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                click=1;
+                NormalDialogCustomAttr(getString(R.string.delete_task));
 
+            }
+        });
 
 
         return view;
@@ -340,17 +349,13 @@ public class TaskDetailFragment extends BaseFragment {
                             service.deleteTask(TasksListFragment.generalList.get(position).getTaskID()
                                     , true, new CallBack(TaskDetailFragment.this, "DeleteTask"));
                         }
-                        if (click==2)
-                        {
-                            dialog.show();
-                            if(aq.id(R.id.mark_as_done).getText().toString().equalsIgnoreCase("Mark as done")) {
-                                service.updateTaskProgress(TasksListFragment.generalList.get(position).getTaskID()
-                                        , 100, true, new CallBack(TaskDetailFragment.this, "CompleteTask"));
-                            }else{
-                                service.updateTaskProgress(TasksListFragment.generalList.get(position).getTaskID()
-                                        , 0, true, new CallBack(TaskDetailFragment.this, "ReOpenTask"));
-                            }
-
+                        if (click==2) {
+                            service.updateTaskProgress(TasksListFragment.generalList.get(position).getTaskID()
+                                    , 100, true, new CallBack(TaskDetailFragment.this, "CompleteTask"));
+                        }
+                        if(click==3){
+                            service.updateTaskProgress(TasksListFragment.generalList.get(position).getTaskID()
+                                    , 0, true, new CallBack(TaskDetailFragment.this, "ReOpenTask"));
                         }
                     }
                 });

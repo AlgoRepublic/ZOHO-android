@@ -27,4 +27,6 @@ public class UserModel {
     @SerializedName("ResponseCode")
     public String responseCode;
 
+
+
 }
