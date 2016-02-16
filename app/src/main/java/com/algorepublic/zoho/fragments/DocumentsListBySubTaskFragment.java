@@ -14,7 +14,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Toast;
 
-import com.algorepublic.zoho.ActivityUploadDocs;
+import com.algorepublic.zoho.UploadDocsFragment;
 import com.algorepublic.zoho.Models.GeneralModel;
 import com.algorepublic.zoho.Models.SubTaskAttachmentsModel;
 import com.algorepublic.zoho.R;
@@ -101,8 +101,7 @@ public class DocumentsListBySubTaskFragment extends BaseFragment {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                callFragmentWithBackStack(R.id.container, DocsPreviewFragment.
-                        newInstance(generalDocsList.get(position)), "DocsPreview");
+                callFragmentWithBackStack(R.id.container, DocsPreviewFragment.newInstance(generalDocsList.get(position)), "DocsPreview");
             }
         });
         return view;
@@ -147,9 +146,8 @@ public class DocumentsListBySubTaskFragment extends BaseFragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.add_document:
-                Intent intent = new Intent(getActivity(), ActivityUploadDocs.class);
-                intent.putExtra("ID", ID);
-                startActivity(intent);
+                callFragmentWithBackStack(R.id.container, UploadDocsFragment.
+                        newInstance(ID), "UploadDocsFragment");
                 break;
         }
         return super.onOptionsItemSelected(item);

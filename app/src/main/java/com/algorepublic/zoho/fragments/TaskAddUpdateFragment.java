@@ -17,6 +17,7 @@ import android.widget.GridView;
 import com.algorepublic.zoho.FragmentsTasks.TaskEditTitleFragment;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.adapters.AdapterTaskMenu;
+import com.algorepublic.zoho.adapters.AttachmentList;
 import com.algorepublic.zoho.adapters.DocumentsList;
 import com.algorepublic.zoho.adapters.TasksList;
 import com.algorepublic.zoho.utils.BaseClass;
@@ -42,8 +43,8 @@ public class TaskAddUpdateFragment extends BaseFragment {
     public static GridView gridViewTaskMenu;
     public static ACProgressFlower dialog;
     public static TasksList tasksObj;
-    public static ArrayList<DocumentsList> allDocsList = new ArrayList<>();
-    public static ArrayList<File> filesList;
+    public static ArrayList<DocumentsList> apiDocsList = new ArrayList<>();
+    public static ArrayList<AttachmentList> filesList;
     public static ArrayList<Integer> filesToDelete;
     public static ArrayList<Integer> assigneeList;
 
@@ -82,22 +83,6 @@ public class TaskAddUpdateFragment extends BaseFragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.save_project:
-                View imagesLayout = aq.id(R.id.images_layout).getView();
-                int size = ((ViewGroup)imagesLayout).getChildCount();
-                for(int i = 0; i < size; i++){
-                    View view  = imagesLayout.findViewWithTag("image_"+i);
-                    if(view != null) {
-                        if (view.getVisibility() == View.GONE) {
-                            filesList.remove(i);
-                        }
-                    }
-                        View viewUrl = imagesLayout.findViewWithTag("imageUrl_" + i);
-                    if(viewUrl != null){
-                        if (viewUrl.getVisibility() == View.GONE) {
-                            filesToDelete.add(allDocsList.get(i).getID());
-                        }
-                    }
-                }
 
                 if(position > -1) {
                     new UpdateTask().execute();
@@ -224,7 +209,7 @@ public class TaskAddUpdateFragment extends BaseFragment {
 
                 httpClient = new GenericHttpClient();
                 response = httpClient.postUpdateTask(Constants.UpdateTask_API
-                        , assigneeList, filesList, filesList, baseClass);
+                        , assigneeList, filesList, filesToDelete, baseClass);
             } catch (IOException e) {
                 e.printStackTrace();
             }

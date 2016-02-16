@@ -27,6 +27,7 @@
     <string name="tasks">Tasks</string>
     <string name="task_detail">Task Detail</string>
     <string name="sub_tasks">Sub Tasks</string>
+    <string name="task_attachments">Task Attachments</string>
     <string name="Task_Title">Task Title</string>
     <string name="documents">Documents</string>
     <string name="settings">Settings</string>

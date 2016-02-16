@@ -117,7 +117,8 @@ public class AdapterTaskMenu extends BaseAdapter {
         }if(position==2){
             callFragmentWithReplace(R.id.edittask_container, TaskAttachmentFragment.newInstance(TaskAddUpdateFragment.tasksObj,Pos), "TaskAttachment");
         }if(position==3){
-            callFragmentWithReplace(R.id.edittask_container, TaskAssignFragment.newInstance(Pos), "TaskAssign");
+            callFragmentWithReplace(R.id.edittask_container, TaskAssignFragment.newInstance(
+                    TaskAddUpdateFragment.tasksObj,Pos), "TaskAssign");
         }if(position==4){
             callFragmentWithReplace(R.id.edittask_container, TaskScheduleFragment.newInstance(Pos), "TaskSchedule");
         }if(position==5){

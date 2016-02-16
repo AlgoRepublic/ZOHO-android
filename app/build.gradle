@@ -75,6 +75,7 @@ dependencies {
     compile 'com.mikhaellopez:circularimageview:2.1.1'
     compile 'com.h6ah4i.android.materialshadowninepatch:materialshadowninepatch:0.6.5'
     compile 'com.rengwuxian.materialedittext:library:2.1.4'
+    compile project(':parallax-listview')
 }
 
 

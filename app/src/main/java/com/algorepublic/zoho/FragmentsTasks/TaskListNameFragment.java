@@ -8,6 +8,7 @@ import android.widget.AdapterView;
 
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.adapters.AdapterTaskListName;
+import com.algorepublic.zoho.adapters.TasksList;
 import com.algorepublic.zoho.fragments.BaseFragment;
 import com.algorepublic.zoho.fragments.TasksListFragment;
 import com.algorepublic.zoho.utils.BaseClass;
@@ -23,7 +24,6 @@ public class TaskListNameFragment extends BaseFragment {
     AQuery aq;
     BaseClass baseClass;
     public static int position;
-
     public TaskListNameFragment() {
     }
     @SuppressWarnings("unused")
