@@ -118,8 +118,9 @@ public class TaskAttachmentFragment extends BaseFragment {
                     SubTaskAttachmentsModel.getInstance().responseObject.get(loop).fileName);
             String name  = SubTaskAttachmentsModel.getInstance().responseObject.get(loop).fileName;
             Integer ID = SubTaskAttachmentsModel.getInstance().responseObject.get(loop).Id;
+            boolean isDeleted = SubTaskAttachmentsModel.getInstance().responseObject.get(loop).isDeleted;
             File file = null;
-            showFileInList(file, link,ID,name);
+            showFileInList(file, link,ID,name,isDeleted);
         }
     }
     private void CallForAttachments() {
@@ -196,20 +197,22 @@ public class TaskAttachmentFragment extends BaseFragment {
         if(file.length() > 1048576 * 5) {
             MaterialAlertDialog();
         }else {
-            showFileInList(file,"",-1,"");
+            showFileInList(file,"",-1,"",false);
         }
     }
 
-    private void showFileInList(File file,String ApiUrl,Integer ID,String name) {
-
-        AttachmentList attachmentList = new AttachmentList();
-        attachmentList.setFileID(ID);
-        attachmentList.setFileName(name);
-        attachmentList.setFileUrl(ApiUrl);
-        attachmentList.setFile(file);
-        TaskAddUpdateFragment.filesList.add(attachmentList);
-        adapter.notifyDataSetChanged();
+    private void showFileInList(File file,String ApiUrl,Integer ID,String name,boolean IsDeleted) {
+        if (IsDeleted == false) {
+            AttachmentList attachmentList = new AttachmentList();
+            attachmentList.setFileID(ID);
+            attachmentList.setFileName(name);
+            attachmentList.setFileUrl(ApiUrl);
+            attachmentList.setFile(file);
+            attachmentList.setIsDeleted(IsDeleted);
+            TaskAddUpdateFragment.filesList.add(attachmentList);
+            adapter.notifyDataSetChanged();
         }
+    }
     public void MaterialAlertDialog(){
         final MaterialDialog dialog = new MaterialDialog(getActivity());
         dialog//

@@ -382,18 +382,21 @@ public class UploadDocsFragment extends BaseFragment implements GoogleApiClient.
         if (file.length() > 1048576 * 5) {
             MaterialAlertDialog();
         } else {
-            showFileInList(file,"",-1,"");
+            showFileInList(file, "", -1, "", false);
         }
     }
 
-    private void showFileInList(File file,String ApiUrl,Integer ID,String name) {
-        AttachmentList attachmentList = new AttachmentList();
-        attachmentList.setFileID(ID);
-        attachmentList.setFileName(name);
-        attachmentList.setFileUrl(ApiUrl);
-        attachmentList.setFile(file);
-        filesList.add(attachmentList);
-        adapter.notifyDataSetChanged();
+    private void showFileInList(File file,String ApiUrl,Integer ID,String name,boolean IsDeleted) {
+        if(IsDeleted== false) {
+            AttachmentList attachmentList = new AttachmentList();
+            attachmentList.setFileID(ID);
+            attachmentList.setFileName(name);
+            attachmentList.setFileUrl(ApiUrl);
+            attachmentList.setFile(file);
+            attachmentList.setIsDeleted(IsDeleted);
+            filesList.add(attachmentList);
+            adapter.notifyDataSetChanged();
+        }
     }
 
     public void MaterialAlertDialog() {

@@ -40,13 +40,13 @@ public class AdapterUploadAttachment extends BaseAdapter {
 
         convertView = inflater.inflate(R.layout.layout_task_attachment, parent, false);
         AQuery aq = new AQuery(convertView);
-        if(UploadDocsFragment.filesList.get(position).getFile() !=null) {
-            Glide.with(ctx).load(UploadDocsFragment.filesList.get(position).getFile())
-                    .into(aq.id(R.id.file_added).getImageView());
-        }else{
-            Glide.with(ctx).load(UploadDocsFragment.filesList.get(position).getFileUrl())
-                    .into(aq.id(R.id.file_added).getImageView());
-        }
+            if (UploadDocsFragment.filesList.get(position).getFile() != null) {
+                Glide.with(ctx).load(UploadDocsFragment.filesList.get(position).getFile())
+                        .into(aq.id(R.id.file_added).getImageView());
+            } else {
+                Glide.with(ctx).load(UploadDocsFragment.filesList.get(position).getFileUrl())
+                        .into(aq.id(R.id.file_added).getImageView());
+            }
         aq.id(R.id.title_text).text(UploadDocsFragment.filesList.get(position).getFileName());
         aq.id(R.id.file_delete).clicked(new View.OnClickListener() {
             @Override
