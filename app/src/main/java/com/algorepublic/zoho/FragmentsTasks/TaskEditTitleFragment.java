@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 
 import com.algorepublic.zoho.R;
+import com.algorepublic.zoho.adapters.TasksList;
 import com.algorepublic.zoho.fragments.BaseFragment;
 import com.algorepublic.zoho.utils.BaseClass;
 import com.androidquery.AQuery;

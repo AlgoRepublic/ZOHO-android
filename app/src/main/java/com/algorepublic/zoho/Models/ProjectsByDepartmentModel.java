@@ -77,6 +77,12 @@ public class ProjectsByDepartmentModel {
 
         @SerializedName("TotalMilestonesNo")
         public String toalMilestones;
+
+        @SerializedName("IsDeleted")
+        public boolean IsDeleted;
+
+        @SerializedName("Isprivate")
+        public boolean Isprivate;
     }
     @SerializedName("ResponseCode")
     public Integer responseCode;

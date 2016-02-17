@@ -44,6 +44,26 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp" />
 
+    <RadioGroup android:id="@+id/project_status"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_marginTop="10dp">
+
+        <RadioButton
+            android:id="@+id/active_radio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/_active"
+            android:textColor="@color/colorBaseHeader"/>
+        <RadioButton
+            android:id="@+id/archive_radio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/_archive"
+            android:textColor="@color/colorBaseHeader"/>
+    </RadioGroup>
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -15,7 +14,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Toast;
 
-import com.algorepublic.zoho.ActivityUploadDocs;
+import com.algorepublic.zoho.UploadDocsFragment;
 import com.algorepublic.zoho.Models.DocumentsListModel;
 import com.algorepublic.zoho.Models.GeneralModel;
 import com.algorepublic.zoho.R;
@@ -102,8 +101,7 @@ public class DocumentsListFragment extends BaseFragment {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                callFragmentWithBackStack(R.id.container, DocsPreviewFragment.
-                        newInstance(generalDocsList.get(position)), "DocsPreview");
+                callFragmentWithBackStack(R.id.container,  DocsPreviewFragment.newInstance(generalDocsList.get(position)), "DocsPreview");
             }
         });
         return view;
@@ -151,9 +149,8 @@ public class DocumentsListFragment extends BaseFragment {
                 if(baseClass.db.getInt("ProjectID") == -1){
                     Toast.makeText(getActivity(), "Please Select Project", Toast.LENGTH_SHORT).show();
                 }else {
-                    Intent intent = new Intent(getActivity(), ActivityUploadDocs.class);
-                    intent.putExtra("ID",baseClass.db.getInt("ProjectID"));
-                    startActivity(intent);
+                    callFragmentWithBackStack(R.id.container,UploadDocsFragment.
+                            newInstance(baseClass.db.getInt("ProjectID")), "UploadDocsFragment");
                 }
                 break;
         }

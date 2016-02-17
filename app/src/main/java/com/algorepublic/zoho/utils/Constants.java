@@ -5,6 +5,7 @@ public class Constants {
 	public static String Image_URL = "http://jitpac.com/FileUploadsManager/uploads/";
 	public static String Login_API = BASE_URL + "/User/Login";
 	public static String GetUser_API = BASE_URL+ "/User/GetById";
+	public static String GetUserRole_API = BASE_URL+ "/User/GetUserRolesList";
 	public static String GetAllUser_API = BASE_URL+ "/User/GetList";
 	public static String GetAssigneeByTask_API = BASE_URL+ "/User/GetListByProject";//ProjectID
 	public static String GetTaskListByOwner_API = BASE_URL+ "/TaskList/GetListByOwnerID?"; //userID
@@ -26,7 +27,9 @@ public class Constants {
 
 	public static String GetProjectsByDepartment_API = BASE_URL+ "/Project/GetDepartmentProjects";
 	public static String GetProjectsByClient_API = BASE_URL+ "/Project/GetCompanyProjects";
-	public static String AddPeopleToTask_API = BASE_URL+ "/Task/AddPeopletoTask"; //PeopleInThisTask,projectID,taskID
+	public static String CreateProject_API = BASE_URL+ "/Project/CreateProject?";
+	public static String UpdateProject_API = BASE_URL+ "/Project/UpdateProject?";
+	public static String DeleteProject_API = BASE_URL+ "/Project/DeleteProject?";
 	public static String TaskAttachments_API = BASE_URL+ "/Task/AttachmentList"; //taskID
 	public static String GetForumsList_API = BASE_URL+ "/Forum/GetListByProjectID?";
 	public static String GetForumDetail_API = BASE_URL+ "/Forum/GetById?";

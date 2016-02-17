@@ -3,6 +3,7 @@ package com.algorepublic.zoho.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -27,6 +28,8 @@ import com.algorepublic.zoho.services.CallBack;
 import com.algorepublic.zoho.services.ProjectsListService;
 import com.algorepublic.zoho.utils.BaseClass;
 import com.androidquery.AQuery;
+import com.flyco.dialog.listener.OnOperItemClickL;
+import com.flyco.dialog.widget.ActionSheetDialog;
 
 import java.util.ArrayList;
 
@@ -49,7 +52,7 @@ public class ProjectsFragment extends BaseFragment{
     static  ArrayList<ProjectsList> allProjectsList = new ArrayList<>();
     ArrayList<ProjectsList> ByClientList = new ArrayList<>();
     public static ArrayList<ProjectsList> ByDepartmentList = new ArrayList<>();
-
+    static int lastposition=0;
     public ProjectsFragment() {
         // Required empty public constructor
     }
@@ -73,52 +76,57 @@ public class ProjectsFragment extends BaseFragment{
         View view  = inflater.inflate(R.layout.fragment_projects, container, false);
         listView = (StickyListHeadersListView) view.findViewById(R.id.projects_liststicky);
         aq = new AQuery(getActivity(), view);
-        String [] types = {"All","By Client","By Department"};
-        aq.id(R.id.spinner_sort).getSpinner().setAdapter(new ArrayAdapter<String>(
-                getActivity(),
-                R.layout.layout_spinner,
-                types
-        ));
+
         getToolbar().setTitle(getString(R.string.projects));
         setHasOptionsMenu(true);
-        aq.id(R.id.spinner_sort).getSpinner().setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        aq.id(R.id.sort).clicked(new View.OnClickListener() {
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if (position == 0) {
-                    aq.id(R.id.projects_list).visibility(View.VISIBLE);
-                    aq.id(R.id.projects_liststicky).visibility(View.GONE);
-                    SetGeneralClientAdapter();
-                }
-                if (position == 1) {
-                    aq.id(R.id.projects_list).visibility(View.VISIBLE);
-                    aq.id(R.id.projects_liststicky).visibility(View.GONE);
-                    SetClientProjectsAdapter();
-                }
-                if (position == 2) {
-                    aq.id(R.id.projects_list).visibility(View.GONE);
-                    aq.id(R.id.projects_liststicky).visibility(View.VISIBLE);
-                    SetDepartmentProjectsAdapter();
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
+            public void onClick(View v) {
+                CallForFilter();
             }
         });
         return view;
     }
+    public void CallForFilter(){
+        String[] menuItems = {"All Projects","By Client","By Department"};
+        final ActionSheetDialog dialog = new ActionSheetDialog(getActivity(),menuItems, getView());
+        dialog.isTitleShow(false).show();
+        dialog.setOnOperItemClickL(new OnOperItemClickL() {
+            @Override
+            public void onOperItemClick(AdapterView<?> parent, View view, int position, long id) {
+                dialog.dismiss();
+                if (isLoaded())
+                    lastposition = position;
+                Filter(lastposition);
+            }
+        });
+    }
+    public void Filter(int position){
+        if (position == 0) {
+            aq.id(R.id.projects_list).visibility(View.VISIBLE);
+            aq.id(R.id.projects_liststicky).visibility(View.GONE);
+            SetGeneralClientAdapter();
+        }
+        if (position == 1) {
+            aq.id(R.id.projects_list).visibility(View.VISIBLE);
+            aq.id(R.id.projects_liststicky).visibility(View.GONE);
+            SetClientProjectsAdapter();
+        }
+        if (position == 2) {
+            aq.id(R.id.projects_list).visibility(View.GONE);
+            aq.id(R.id.projects_liststicky).visibility(View.VISIBLE);
+            SetDepartmentProjectsAdapter();
+        }
+    }
+    public boolean isLoaded(){
+        Boolean isloading=false;
+        if(allProjectsList.size()==0)
+            isloading = false;
+        else
+            isloading= true;
 
-    /**
-     * Called immediately after {@link #onCreateView(LayoutInflater, ViewGroup, Bundle)}
-     * has returned, but before any saved state has been restored in to the view.
-     * This gives subclasses a chance to initialize themselves once
-     * they know their view hierarchy has been completely created.  The fragment_forums's
-     * view hierarchy is not however attached to its parent at this point.
-     *
-     * @param view               The View returned by {@link #onCreateView(LayoutInflater, ViewGroup, Bundle)}.
-     * @param savedInstanceState If non-null, this fragment_forums is being re-constructed
-     */
+        return isloading;
+    }
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -158,6 +166,8 @@ public class ProjectsFragment extends BaseFragment{
                 projectsList.setTotalTasks(ProjectsByClientModel.getInstance().responseData.get(loop).projects.get(loop1).totalTasks);
                 projectsList.setTotalUsers(ProjectsByClientModel.getInstance().responseData.get(loop).projects.get(loop1).usersCount);
                 projectsList.setTotalMilestones(ProjectsByClientModel.getInstance().responseData.get(loop).projects.get(loop1).toalMilestones);
+                projectsList.setDeleted(ProjectsByClientModel.getInstance().responseData.get(loop).projects.get(loop1).IsDeleted);
+                projectsList.setPrivate(ProjectsByClientModel.getInstance().responseData.get(loop).projects.get(loop1).Isprivate);
                 ByClientList.add(projectsList);
             }
         }
@@ -187,6 +197,8 @@ public class ProjectsFragment extends BaseFragment{
                 projectsList.setTotalTasks(ProjectsByDepartmentModel.getInstance().responseData.get(loop).projects.get(loop1).totalTasks);
                 projectsList.setTotalUsers(ProjectsByDepartmentModel.getInstance().responseData.get(loop).projects.get(loop1).usersCount);
                 projectsList.setTotalMilestones(ProjectsByDepartmentModel.getInstance().responseData.get(loop).projects.get(loop1).toalMilestones);
+                projectsList.setDeleted(ProjectsByDepartmentModel.getInstance().responseData.get(loop).projects.get(loop1).IsDeleted);
+                projectsList.setPrivate(ProjectsByDepartmentModel.getInstance().responseData.get(loop).projects.get(loop1).Isprivate);
                 ByDepartmentList.add(projectsList);
             }
         }
@@ -198,7 +210,7 @@ public class ProjectsFragment extends BaseFragment{
         allProjectsList.clear();
         allProjectsList.addAll(ByClientList);
         allProjectsList.addAll(ByDepartmentList);
-        SetGeneralClientAdapter();
+        Filter(lastposition);
     }
     public void SetGeneralClientAdapter(){
         aq.id(R.id.projects_list).adapter(new AdapterProjectsClientList(getActivity(), allProjectsList));
@@ -297,9 +309,14 @@ public class ProjectsFragment extends BaseFragment{
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.add_project:
-                callFragmentWithBackStack(R.id.container, AddProjectFragment.newInstance(-1), "AddProjectFragment");
+                if(allProjectsList.size()==0){
+                    Snackbar.make(getView(),"Please wait for the loading",Snackbar.LENGTH_SHORT).show();
+                }else {
+                    callFragmentWithBackStack(R.id.container, AddProjectFragment.newInstance(), "AddProjectFragment");
+                }
                 break;
         }
         return super.onOptionsItemSelected(item);
     }
+
 }

@@ -288,6 +288,15 @@ public class BaseClass extends Application {
     public static int getIcon(int type){
         return icon[type];
     }
+    public static String getExtensionType(String fileName) {
+        String encoded;
+        try {
+            encoded = URLEncoder.encode(fileName, "UTF-8").replace("+", "%20");
+        } catch (UnsupportedEncodingException e) {
+            encoded = fileName;
+        }
+        return MimeTypeMap.getFileExtensionFromUrl(encoded).toLowerCase();
+    }
     public static int getExtension(String fileName) {
         String encoded;int type=0;
         try { encoded = URLEncoder.encode(fileName, "UTF-8").replace("+", "%20"); }

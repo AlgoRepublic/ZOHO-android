@@ -4,6 +4,8 @@ package com.algorepublic.zoho.utils;
 import android.util.Log;
 import android.webkit.MimeTypeMap;
 
+import com.algorepublic.zoho.adapters.AttachmentList;
+
 import org.apache.http.Header;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -45,7 +47,7 @@ public class GenericHttpClient {
         return result.toArray(new Header[]{});
     }
 
-    public String postAddTask(String url,ArrayList<Integer> assignee,ArrayList<File> files ,BaseClass baseClass) throws IOException {
+    public String postAddTask(String url,ArrayList<Integer> assignee,ArrayList<AttachmentList> files ,BaseClass baseClass) throws IOException {
 
         HttpClient hc = new DefaultHttpClient();
         String message =null;
@@ -53,8 +55,8 @@ public class GenericHttpClient {
         MultipartEntity mpEntity = new MultipartEntity(HttpMultipartMode.BROWSER_COMPATIBLE);
         try {
             for(int i=0;i<files.size();i++) {
-                Log.e("File","/"+files.get(i).getName());
-                mpEntity.addPart("files["+i+"]",new FileBody(files.get(i)));
+                Log.e("File","/"+files.get(i).getFile().getName());
+                mpEntity.addPart("files["+i+"]",new FileBody(files.get(i).getFile()));
             }
             for(int i=0;i<assignee.size();i++) {
                 Log.e("Assignee", "/" + assignee.get(i));
@@ -96,7 +98,7 @@ public class GenericHttpClient {
         }
         return message;
     }
-    public String postUpdateTask(String url,ArrayList<Integer> assignee,ArrayList<File> files, ArrayList<File> filesToDelete,BaseClass baseClass) throws IOException {
+    public String postUpdateTask(String url,ArrayList<Integer> assignee,ArrayList<AttachmentList> files, ArrayList<Integer> filesToDelete,BaseClass baseClass) throws IOException {
 
         HttpClient hc = new DefaultHttpClient();
         String message =null;
@@ -104,12 +106,14 @@ public class GenericHttpClient {
         MultipartEntity mpEntity = new MultipartEntity(HttpMultipartMode.BROWSER_COMPATIBLE);
         try {
             for(int i=0;i<files.size();i++) {
-                Log.e("File","/"+files.get(i).getName());
-                mpEntity.addPart("files["+i+"]",new FileBody(files.get(i)));
+                if(files.get(i).getFile() != null) {
+                    Log.e("File", "/" + files.get(i).getFile().getName());
+                    mpEntity.addPart("files[" + i + "]", new FileBody(files.get(i).getFile()));
+                }
             }
             for(int i=0;i<filesToDelete.size();i++) {
-                Log.e("File","/"+filesToDelete.get(i).getName());
-                mpEntity.addPart("filesToDelete["+i+"]",new FileBody(filesToDelete.get(i)));
+                Log.e("DFile","/"+filesToDelete.get(i));
+                mpEntity.addPart("filesToDelete["+i+"]",new StringBody(Integer.toString(filesToDelete.get(i))));
             }
             for(int i=0;i<assignee.size();i++) {
                 Log.e("Assignee", "/" + assignee.get(i));
@@ -129,6 +133,7 @@ public class GenericHttpClient {
             p.setEntity(mpEntity);
             Log.e("CreateBy", "/" + baseClass.getUserId());
             Log.e("Title", "/" + BaseClass.db.getString("TaskName"));
+            Log.e("ID", "/" + BaseClass.db.getInt("TaskID"));
             Log.e("Description", "/" + BaseClass.db.getString("TaskDesc"));
             Log.e("StartDate", "/" + BaseClass.db.getString("StartDate"));
             Log.e("EndDate", "/" + BaseClass.db.getString("EndDate"));
@@ -144,15 +149,15 @@ public class GenericHttpClient {
         }
         return message;
     }
-    public String uploadDocumentsByProject(String url,int ProjectID, ArrayList<File> files) throws IOException {
+    public String uploadDocumentsByProject(String url,int ProjectID, ArrayList<AttachmentList> files) throws IOException {
 
         HttpClient hc = new DefaultHttpClient();
         String message =null;
         HttpPost p = new HttpPost(url);
         MultipartEntity mpEntity = new MultipartEntity(HttpMultipartMode.BROWSER_COMPATIBLE);
         for(int i=0;i<files.size();i++) {
-            Log.e("File", "/" + files.get(i).getName());
-            mpEntity.addPart("files["+i+"]", new FileBody(files.get(i)));
+            Log.e("File", "/" + files.get(i).getFile().getName());
+            mpEntity.addPart("files["+i+"]", new FileBody(files.get(i).getFile()));
         }
 
         mpEntity.addPart("ProjectId", new StringBody(Integer.toString(ProjectID)));
@@ -165,15 +170,15 @@ public class GenericHttpClient {
         }
         return message;
     }
-    public String uploadDocumentsByTask(String url, int taskID, ArrayList<File> files) throws IOException {
+    public String uploadDocumentsByTask(String url, int taskID, ArrayList<AttachmentList> files) throws IOException {
 
         HttpClient hc = new DefaultHttpClient();
         String message =null;
         HttpPost p = new HttpPost(url);
         MultipartEntity mpEntity = new MultipartEntity(HttpMultipartMode.BROWSER_COMPATIBLE);
         for(int i=0;i<files.size();i++) {
-            Log.e("File", "/" + files.get(i).getName());
-            mpEntity.addPart("files["+i+"]", new FileBody(files.get(i)));
+            Log.e("File", "/" + files.get(i).getFile().getName());
+            mpEntity.addPart("files["+i+"]", new FileBody(files.get(i).getFile()));
         }
 
         mpEntity.addPart("taskID", new StringBody(Integer.toString(taskID)));

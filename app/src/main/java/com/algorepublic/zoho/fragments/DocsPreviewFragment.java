@@ -1,5 +1,6 @@
 package com.algorepublic.zoho.fragments;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -14,6 +15,7 @@ import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.adapters.AdapterDocsComments;
 import com.algorepublic.zoho.adapters.DocumentsList;
 import com.algorepublic.zoho.adapters.TaskComments;
+import com.algorepublic.zoho.adapters.TasksList;
 import com.algorepublic.zoho.utils.BaseClass;
 import com.algorepublic.zoho.utils.Constants;
 import com.androidquery.AQuery;
@@ -24,6 +26,7 @@ import java.util.ArrayList;
 /**
  * Created by android on 1/13/16.
  */
+@SuppressLint("ValidFragment")
 public class DocsPreviewFragment extends BaseFragment {
 
     static DocsPreviewFragment fragment;
@@ -34,7 +37,9 @@ public class DocsPreviewFragment extends BaseFragment {
     public static ListView listView;
     public static ArrayList<TaskComments> arrayList = new ArrayList<>();
 
+    @SuppressLint("ValidFragment")
     public DocsPreviewFragment() {
+
     }
     @SuppressWarnings("unused")
     public static DocsPreviewFragment newInstance(DocumentsList obj) {
@@ -63,7 +68,7 @@ public class DocsPreviewFragment extends BaseFragment {
         if(docObject.getFileTypeID()>=0 &&
                 docObject.getFileTypeID()<=4 ){
             Glide.with(getActivity()).load(Constants.Image_URL +
-                    docObject.getFileDescription()).into(aq.id(R.id.doc_image).getImageView());
+                    docObject.getID()+"."+ BaseClass.getExtensionType(docObject.getFileDescription())).into(aq.id(R.id.doc_image).getImageView());
         }else {
             Glide.with(getActivity()).load(BaseClass.
                     getIcon(docObject.getFileTypeID())).into(aq.id(R.id.doc_image).getImageView());

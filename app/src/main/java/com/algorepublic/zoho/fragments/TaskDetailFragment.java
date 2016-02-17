@@ -40,11 +40,8 @@ import org.lucasr.twowayview.widget.TwoWayView;
 import cc.cloudist.acplibrary.ACProgressConstant;
 import cc.cloudist.acplibrary.ACProgressFlower;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link TaskDetailFragment#newInstance} factory method to
- * create an instance of this fragment_forums.
- */
+
+
 @SuppressLint("ValidFragment")
 public class TaskDetailFragment extends BaseFragment {
 
@@ -163,26 +160,20 @@ public class TaskDetailFragment extends BaseFragment {
         aq.id(R.id.comment).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(Integer.parseInt(aq.id(R.id.comment_count).getText().toString()) > 0) {
-                    callFragmentWithBackStack(R.id.container, TaskCommentFragment.newInstance(tasksList.getTaskID())
-                            , "TaskComment");
-                }
+            callFragmentWithBackStack(R.id.container, TaskCommentFragment.newInstance(tasksList.getTaskID())
+                    , "TaskComment");
             }
         });
         aq.id(R.id.documents).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(Integer.parseInt(aq.id(R.id.docs_count).getText().toString()) > 0) {
-                    callFragmentWithBackStack(R.id.container, DocumentsListBySubTaskFragment.newInstance(tasksList.getTaskID()), "DocumentsListBySubTaskFragment");
-                }
+            callFragmentWithBackStack(R.id.container, DocumentsListBySubTaskFragment.newInstance(tasksList.getTaskID()), "DocumentsListBySubTaskFragment");
             }
         });
         aq.id(R.id.subtask).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(Integer.parseInt(aq.id(R.id.subtask_count).getText().toString()) > 0) {
-                    callFragmentWithBackStack(R.id.container, new TaskListBySubTasksFragment(tasksList.getTaskID()), "TaskListBySubTasksFragment");
-                }
+            callFragmentWithBackStack(R.id.container, new TaskListBySubTasksFragment(tasksList.getTaskID()), "TaskListBySubTasksFragment");
             }
         });
         if(tasksList.getProgress()==100){

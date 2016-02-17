@@ -55,6 +55,9 @@ public class SubTaskAttachmentsModel {
         @SerializedName("IsFav")
         public boolean isFav;
 
+        @SerializedName("IsDeleted")
+        public boolean isDeleted;
+
     }
 
 }

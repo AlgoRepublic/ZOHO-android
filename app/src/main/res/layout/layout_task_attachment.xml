@@ -26,13 +26,13 @@
             android:layout_alignParentTop="true" />
         <TextView
             android:id="@+id/file_title"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:ellipsize="end"
             android:lines="2"
-            android:gravity="left"
+            android:gravity="center"
             android:text="name"
             android:textColor="@color/colorBaseWrapper"
             android:textSize="14sp" />

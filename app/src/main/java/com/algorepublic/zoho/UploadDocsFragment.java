@@ -13,21 +13,25 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.design.widget.Snackbar;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.algorepublic.zoho.Models.GeneralModel;
+import com.algorepublic.zoho.adapters.AdapterTaskAttachment;
+import com.algorepublic.zoho.adapters.AdapterUploadAttachment;
+import com.algorepublic.zoho.adapters.AttachmentList;
+import com.algorepublic.zoho.fragments.BaseFragment;
 import com.algorepublic.zoho.services.DocumentsService;
 import com.algorepublic.zoho.utils.BaseClass;
 import com.algorepublic.zoho.utils.Constants;
 import com.algorepublic.zoho.utils.GenericHttpClient;
 import com.androidquery.AQuery;
-import com.bumptech.glide.Glide;
 import com.dropbox.chooser.android.DbxChooser;
 import com.flyco.animation.SlideEnter.SlideLeftEnter;
 import com.flyco.animation.SlideExit.SlideRightExit;
@@ -53,9 +57,9 @@ import com.google.api.client.json.JsonFactory;
 import com.google.api.client.json.jackson2.JacksonFactory;
 import com.google.api.client.util.ExponentialBackOff;
 import com.google.api.services.drive.DriveScopes;
+import com.poliveira.apps.parallaxlistview.ParallaxListView;
 
 import org.apache.commons.io.FileUtils;
-import org.json.JSONObject;
 
 import java.io.File;
 import java.io.IOException;
@@ -71,17 +75,19 @@ import cc.cloudist.acplibrary.ACProgressFlower;
 /**
  * Created by android on 1/7/16.
  */
-public class ActivityUploadDocs extends BaseActivity implements GoogleApiClient.ConnectionCallbacks, ResultCallback
+public class UploadDocsFragment extends BaseFragment implements GoogleApiClient.ConnectionCallbacks, ResultCallback
         , GoogleApiClient.OnConnectionFailedListener {
 
     AQuery aq;
+    static UploadDocsFragment fragment;
     private static final int TAKE_PICTURE = 1;
     public static final int RESULT_GALLERY = 2;
     public static final int PICK_File = 3;
     static final int RESULT_GOOGLEDRIVE = 4;
     static final int DBX_CHOOSER_REQUEST = 5;
     static final int REQUEST_ACCOUNT_PICKER = 6;
-    int Tag = 0;
+    AdapterUploadAttachment adapter;
+    public static ParallaxListView listView;
     private DbxChooser mChooser;
     GoogleApiClient mGoogleApiClient;
     com.google.api.services.drive.Drive mService = null;
@@ -90,33 +96,71 @@ public class ActivityUploadDocs extends BaseActivity implements GoogleApiClient.
     BaseClass baseClass;
     InputStream inputStream;
     DocumentsService service;
-    int ID;
+    static int ID;View view;
     private static final String PREF_ACCOUNT_NAME = "accountName";
     private static final String[] SCOPES = { DriveScopes.DRIVE_METADATA_READONLY };
     com.google.api.client.googleapis.extensions.android.gms.auth.GoogleAccountCredential mCredential;
     public static ACProgressFlower dialog;
-    public static ArrayList<File> filesList = new ArrayList<>();
+    public static ArrayList<AttachmentList> filesList = new ArrayList<>();
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
      */
-    private GoogleApiClient client;
+    public static UploadDocsFragment newInstance(int Id) {
+        ID = Id;
+        if (fragment==null) {
+            fragment = new UploadDocsFragment();
+        }
+        return fragment;
+    }
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_save_project, menu);
+        super.onCreateOptionsMenu(menu, inflater);
 
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.save_project:
+                if(baseClass.getSelectedProject().equalsIgnoreCase("0")){
+                    new UploadDocsBYTask().execute();
+                }else {
+                    new UploadDocsBYProject().execute();
+                }
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        setRetainInstance(true);
+        getToolbar().setTitle(getString(R.string.documents));
+        super.onViewCreated(view, savedInstanceState);
+    }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_upload_docs);
-        ID = getIntent().getIntExtra("ID",0);
-        aq = new AQuery(this);
-        baseClass =  ((BaseClass) getApplicationContext());
-        service = new DocumentsService(this);
-        dialog = new ACProgressFlower.Builder(this)
+    }
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        setHasOptionsMenu(true);
+        view = inflater.inflate(R.layout.activity_upload_docs, container, false);
+        listView = (ParallaxListView) view.findViewById(R.id.images_layout);
+        listView.setParallaxView(getActivity().getLayoutInflater().inflate(R.layout.view_header, listView, false));
+        adapter = new AdapterUploadAttachment(getActivity());
+        listView.setAdapter(adapter);
+        aq = new AQuery(view);
+        baseClass =  ((BaseClass) getActivity().getApplicationContext());
+        service = new DocumentsService(getActivity());
+        dialog = new ACProgressFlower.Builder(getActivity())
                 .direction(ACProgressConstant.DIRECT_CLOCKWISE)
                 .themeColor(Color.WHITE)
                 .fadeColor(Color.DKGRAY).build();
         mCredential = GoogleAccountCredential.usingOAuth2(
-                getApplicationContext(), Arrays.asList(SCOPES))
+                getActivity().getApplicationContext(), Arrays.asList(SCOPES))
                 .setBackOff(new ExponentialBackOff())
                 .setSelectedAccountName(PREF_ACCOUNT_NAME);
 
@@ -126,40 +170,13 @@ public class ActivityUploadDocs extends BaseActivity implements GoogleApiClient.
                 CallForAttachments();
             }
         });
-        aq.id(R.id.back_arrow).clicked(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
-        aq.id(R.id.done).clicked(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // get all the documents
-                View imagesLayout = aq.id(R.id.images_layout).getView();
-                int size = ((ViewGroup)imagesLayout).getChildCount();
-                for(int i = 0; i < size; i++){
-                    View view  = imagesLayout.findViewWithTag("image_"+i);
-                    if(view.getVisibility() == View.GONE){
-                        filesList.remove(i);
-                    }
-                }
-                if(baseClass.getSelectedProject().equalsIgnoreCase("0")){
-                    new UploadDocsBYTask().execute();
-                }else {
-                    new UploadDocsBYProject().execute();
-                }
-            }
-        });
-        for (int loop = 0; loop < filesList.size(); loop++) {
-            showFileInList(filesList.get(loop));
-        }
 
+        return view;
     }
 
 
     private void buildGoogleApiClient() {
-        mGoogleApiClient = new GoogleApiClient.Builder(this)
+        mGoogleApiClient = new GoogleApiClient.Builder(getActivity())
                 .addApi(Drive.API)
                 .addScope(Drive.SCOPE_FILE)
                 .addConnectionCallbacks(this)
@@ -170,7 +187,7 @@ public class ActivityUploadDocs extends BaseActivity implements GoogleApiClient.
 
     private void CallForAttachments() {
         String[] menuItems = {"Camera", "Gallery", "Others", "Google Drive", "Drop Box"};
-        final ActionSheetDialog dialog = new ActionSheetDialog(this, menuItems, findViewById(android.R.id.content).getRootView());
+        final ActionSheetDialog dialog = new ActionSheetDialog(getActivity(), menuItems, getView());
         dialog.isTitleShow(false).show();
         dialog.setOnOperItemClickL(new OnOperItemClickL() {
             @Override
@@ -206,7 +223,7 @@ public class ActivityUploadDocs extends BaseActivity implements GoogleApiClient.
                 if (position == 4) {
                     mChooser = new DbxChooser("kl26qefbf8cmwm9");
                     mChooser.forResultType(DbxChooser.ResultType.FILE_CONTENT)
-                            .launch(ActivityUploadDocs.this, DBX_CHOOSER_REQUEST);
+                            .launch(UploadDocsFragment.this, DBX_CHOOSER_REQUEST);
                 }
             }
         });
@@ -220,7 +237,7 @@ public class ActivityUploadDocs extends BaseActivity implements GoogleApiClient.
         if (GeneralModel.getInstance().responseCode.equalsIgnoreCase("100")) {
 
         } else {
-            Toast.makeText(this, getString(R.string.invalid_credential), Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), getString(R.string.invalid_credential), Toast.LENGTH_SHORT).show();
         }
     }
     @Override
@@ -229,7 +246,7 @@ public class ActivityUploadDocs extends BaseActivity implements GoogleApiClient.
         Log.e("code", requestCode + "/" + resultCode + "/");
         switch (requestCode) {
             case TAKE_PICTURE:
-                if (resultCode == RESULT_OK) {
+                if (resultCode == getActivity().RESULT_OK) {
                     Uri selectedImageUri = data.getData();
                     File destination = new File(getRealPathFromURI(selectedImageUri));
                     checkFileLenght(destination);
@@ -237,7 +254,7 @@ public class ActivityUploadDocs extends BaseActivity implements GoogleApiClient.
                 break;
             case RESULT_GALLERY:
                 if (null != data) {
-                    File newFile = new File(URI.create("file://" + getDataColumn(this, data.getData(), null, null)));
+                    File newFile = new File(URI.create("file://" + getDataColumn(getActivity(), data.getData(), null, null)));
                     checkFileLenght(newFile);
                 }
                 break;
@@ -246,7 +263,7 @@ public class ActivityUploadDocs extends BaseActivity implements GoogleApiClient.
                     Uri contactData = data.getData();
                     File newFile = null;
                     try {
-                        newFile = new File(new URI("file://" + getDataColumn(this, contactData, null, null)));
+                        newFile = new File(new URI("file://" + getDataColumn(getActivity(), contactData, null, null)));
                         checkFileLenght(newFile);
                     } catch (URISyntaxException e) {
                         e.printStackTrace();
@@ -254,7 +271,7 @@ public class ActivityUploadDocs extends BaseActivity implements GoogleApiClient.
                 }
                 break;
             case DBX_CHOOSER_REQUEST:
-                if (resultCode == RESULT_OK) {
+                if (resultCode == getActivity().RESULT_OK) {
                     DbxChooser.Result result = new DbxChooser.Result(data);
                     String path = result.getLink().toString();
                     path.replace("file://", "");
@@ -272,7 +289,7 @@ public class ActivityUploadDocs extends BaseActivity implements GoogleApiClient.
                 }
                 break;
             case REQUEST_ACCOUNT_PICKER:
-                if (resultCode == RESULT_OK && data != null &&
+                if (resultCode == getActivity().RESULT_OK && data != null &&
                         data.getExtras() != null) {
                     String accountName =
                             data.getStringExtra(AccountManager.KEY_ACCOUNT_NAME);
@@ -283,7 +300,7 @@ public class ActivityUploadDocs extends BaseActivity implements GoogleApiClient.
                 }
                 break;
             case RESULT_GOOGLEDRIVE:
-                if (resultCode == RESULT_OK) {
+                if (resultCode == getActivity().RESULT_OK) {
                 try {
                     driveId = data.getParcelableExtra(
                             OpenFileActivityBuilder.EXTRA_RESPONSE_DRIVE_ID);//this extra contains the drive id of the selected file
@@ -365,46 +382,25 @@ public class ActivityUploadDocs extends BaseActivity implements GoogleApiClient.
         if (file.length() > 1048576 * 5) {
             MaterialAlertDialog();
         } else {
-            filesList.add(file);
-            showFileInList(file);
+            showFileInList(file, "", -1, "", false);
         }
     }
 
-    private void showFileInList(File file) {
-        try {
-            final LinearLayout linearLayout = (LinearLayout) aq
-                    .id(R.id.images_layout).visible().getView();
-            final View child = getLayoutInflater().inflate(
-                    R.layout.layout_task_attachment, null);
-            ImageView addFile = (ImageView) child.findViewById(R.id.file_added);
-            ImageView deleteFile = (ImageView) child.findViewById(R.id.file_delete);
-            TextView text = (TextView) child.findViewById(R.id.file_title);
-            if (BaseClass.getExtension(file.getName()) >= 0 &&
-                    BaseClass.getExtension(file.getName()) <= 4) {
-                Glide.with(this).load(file).into(addFile);
-            } else {
-                Glide.with(this).load(BaseClass.getIcon(BaseClass.getExtension(file.getName()))).into(addFile);
-            }
-            text.setText(file.getName());
-            deleteFile.setTag(Tag);
-            child.setId(Tag);
-            child.setTag("image_"+Tag);
-            Tag++;
-            linearLayout.addView(child);
-            deleteFile.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    ((View) v.getParent()).setVisibility(View.GONE);
-               }
-            });
-        } catch (Exception e) {
-            Toast.makeText(this, "Failed to load",
-                    Toast.LENGTH_SHORT).show();
+    private void showFileInList(File file,String ApiUrl,Integer ID,String name,boolean IsDeleted) {
+        if(IsDeleted== false) {
+            AttachmentList attachmentList = new AttachmentList();
+            attachmentList.setFileID(ID);
+            attachmentList.setFileName(name);
+            attachmentList.setFileUrl(ApiUrl);
+            attachmentList.setFile(file);
+            attachmentList.setIsDeleted(IsDeleted);
+            filesList.add(attachmentList);
+            adapter.notifyDataSetChanged();
         }
     }
 
     public void MaterialAlertDialog() {
-        final MaterialDialog dialog = new MaterialDialog(this);
+        final MaterialDialog dialog = new MaterialDialog(getActivity());
         dialog//
                 .btnNum(1)
                 .title("File size alert!")
@@ -430,7 +426,7 @@ public class ActivityUploadDocs extends BaseActivity implements GoogleApiClient.
         IntentSender intentSender = Drive.DriveApi.newOpenFileActivityBuilder()
                 .build(mGoogleApiClient);
         try {
-            startIntentSenderForResult(
+            getActivity().startIntentSenderForResult(
                     intentSender, RESULT_GOOGLEDRIVE, null, 0, 0, 0);
         } catch (IntentSender.SendIntentException e) {
         }
@@ -445,11 +441,11 @@ public class ActivityUploadDocs extends BaseActivity implements GoogleApiClient.
     public void onConnectionFailed(ConnectionResult connectionResult) {
         if (connectionResult.hasResolution()) {
             try {
-                connectionResult.startResolutionForResult(this, RESULT_GOOGLEDRIVE);
+                connectionResult.startResolutionForResult(getActivity(), RESULT_GOOGLEDRIVE);
             } catch (IntentSender.SendIntentException e) {
             }
         } else {
-            GooglePlayServicesUtil.getErrorDialog(connectionResult.getErrorCode(), this, 0).show();
+            GooglePlayServicesUtil.getErrorDialog(connectionResult.getErrorCode(), getActivity(), 0).show();
         }
     }
 
@@ -517,24 +513,15 @@ public class ActivityUploadDocs extends BaseActivity implements GoogleApiClient.
     }
     private void PopulateModel(String json) {
         Log.e("Json", "/" + json);
-        JSONObject jsonObj;
-//        try {
-//            jsonObj = new JSONObject(json.toString());
-//            Gson gson = new Gson();
-//            RegisterUserModel obj ;
-//            obj = gson.fromJson(jsonObj.toString(),
-//                    RegisterUserModel.class);
-//            RegisterUserModel.getInstance().setList(obj);
-//            Log.e("status","/"+RegisterUserModel.getInstance().status+RegisterUserModel.getInstance().message);
-
-//        }catch (Exception e){}
+        filesList.clear();
+        Snackbar.make(getView(),"File(s) uploaded successfully.", Snackbar.LENGTH_SHORT).show();
     }
 
     private void onFinish(){
 
-        View mainView  = findViewById(R.id.upload_container);
+        View mainView  = aq.id(R.id.upload_container).getView();
         Snackbar.make(mainView, "File (s) have been uploaded successfully.", Snackbar.LENGTH_LONG).show();
-        ((ViewGroup) findViewById(R.id.images_layout)).removeAllViews();
+        ((ViewGroup) aq.id(R.id.images_layout).getView()).removeAllViews();
         filesList.clear();
     }
 }
