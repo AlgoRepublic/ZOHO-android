@@ -51,6 +51,18 @@ public class ProjectsList {
         return ownerName;
     }
 
+    public void setPrivate(boolean isPrivate){
+        this.isPrivate = isPrivate;
+    }
+    public boolean getPrivate(){
+        return isPrivate;
+    }
+    public void setDeleted(boolean isDeleted){
+        this.isDeleted = isDeleted;
+    }
+    public boolean getDeleted(){
+        return isDeleted;
+    }
 
 
     private String projectDesc;
@@ -63,6 +75,8 @@ public class ProjectsList {
     private String totalTasks;
     private String totalMilestones;
     private String totalUsers;
+    private boolean isPrivate;
+    private boolean isDeleted;
 
     public String getTotalTasks() {
         return totalTasks;

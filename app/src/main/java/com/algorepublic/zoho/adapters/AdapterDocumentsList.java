@@ -118,7 +118,7 @@ public class AdapterDocumentsList extends BaseAdapter implements StickyListHeade
     @Override
     public View getHeaderView(int position, View convertView, ViewGroup parent) {
 
-        convertView = l_Inflater.inflate(R.layout.layout_header, parent , false);
+        convertView = l_Inflater.inflate(R.layout.layout_taskslist_header, parent , false);
         aq_header = new AQuery(convertView);
 
         if (documentsLists.get(position).getUpdatedAt().equalsIgnoreCase("3/0/1"))

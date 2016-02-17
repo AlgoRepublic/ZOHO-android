@@ -30,5 +30,4 @@ public class GeneralModel {
     @SerializedName("responseObject")
     public boolean responseObject;
 
-
 }

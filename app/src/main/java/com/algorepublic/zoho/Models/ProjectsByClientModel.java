@@ -73,6 +73,12 @@ public class ProjectsByClientModel {
 
         @SerializedName("TotalMilestonesNo")
         public String toalMilestones;
+
+        @SerializedName("IsDeleted")
+        public boolean IsDeleted;
+
+        @SerializedName("Isprivate")
+        public boolean Isprivate;
     }
 
     @SerializedName("ResponseCode")
