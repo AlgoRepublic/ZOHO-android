@@ -1,4 +1,4 @@
-package com.algorepublic.zoho;
+package com.algorepublic.zoho.fragments;
 
 import android.graphics.Color;
 import android.os.AsyncTask;
@@ -6,20 +6,24 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.GridView;
 
 import com.algorepublic.zoho.FragmentsTasks.TaskEditTitleFragment;
+import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.adapters.AdapterTaskMenu;
+import com.algorepublic.zoho.adapters.DocumentsList;
 import com.algorepublic.zoho.adapters.TasksList;
-import com.algorepublic.zoho.fragments.TasksListFragment;
 import com.algorepublic.zoho.utils.BaseClass;
 import com.algorepublic.zoho.utils.Constants;
 import com.algorepublic.zoho.utils.GenericHttpClient;
 import com.androidquery.AQuery;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
@@ -30,35 +34,114 @@ import cc.cloudist.acplibrary.ACProgressConstant;
 import cc.cloudist.acplibrary.ACProgressFlower;
 
 
-public class ActivityTask extends BaseActivity{
+public class TaskAddUpdateFragment extends BaseFragment {
     AQuery aq;
-    int position;
-    BaseClass baseClass;
+    static int position;
+    static BaseClass baseClass;
+    static TaskAddUpdateFragment fragment;
     public static GridView gridViewTaskMenu;
     public static ACProgressFlower dialog;
     public static TasksList tasksObj;
+    public static ArrayList<DocumentsList> allDocsList = new ArrayList<>();
     public static ArrayList<File> filesList;
+    public static ArrayList<Integer> filesToDelete;
     public static ArrayList<Integer> assigneeList;
 
+    public static TaskAddUpdateFragment newInstance(TasksList tasksList,int pos) {
+        position = pos;
+        tasksObj = tasksList;
+        if (fragment==null) {
+            fragment = new TaskAddUpdateFragment();
+        }
+        return fragment;
+    }
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_save_project, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+
+    }
+
+    /**
+     * This hook is called whenever an item in your options menu is selected.
+     * The default implementation simply returns false to have the normal
+     * processing happen (calling the item's Runnable or sending a message to
+     * its Handler as appropriate).  You can use this method for any items
+     * for which you would like to do processing without those other
+     * facilities.
+     * <p>
+     * <p>Derived classes should call through to the base class for it to
+     * perform the default menu handling.
+     *
+     * @param item The menu item that was selected.
+     * @return boolean Return false to allow normal menu processing to
+     * proceed, true to consume it here.
+     * @see #onCreateOptionsMenu
+     */
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.save_project:
+                View imagesLayout = aq.id(R.id.images_layout).getView();
+                int size = ((ViewGroup)imagesLayout).getChildCount();
+                for(int i = 0; i < size; i++){
+                    View view  = imagesLayout.findViewWithTag("image_"+i);
+                    if(view != null) {
+                        if (view.getVisibility() == View.GONE) {
+                            filesList.remove(i);
+                        }
+                    }
+                        View viewUrl = imagesLayout.findViewWithTag("imageUrl_" + i);
+                    if(viewUrl != null){
+                        if (viewUrl.getVisibility() == View.GONE) {
+                            filesToDelete.add(allDocsList.get(i).getID());
+                        }
+                    }
+                }
+
+                if(position > -1) {
+                    new UpdateTask().execute();
+                }else{
+                    new NewTask().execute();
+                }
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        setRetainInstance(true);
+        getToolbar().setTitle(tasksObj.getProjectName());
+        super.onViewCreated(view, savedInstanceState);
+    }
+
+    @Override
+    public void onDestroyView() {
+        baseClass.setSelectedProject("0");
+        super.onDestroyView();
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_task);
-        gridViewTaskMenu = (GridView) findViewById(R.id.gridview_taskmenu);
+    }
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        setHasOptionsMenu(true);
+        View view = inflater.inflate(R.layout.activity_task, container, false);
+        gridViewTaskMenu = (GridView) view.findViewById(R.id.gridview_taskmenu);
         filesList = new ArrayList<>();
+        filesToDelete = new ArrayList<>();
         assigneeList = new ArrayList<>();
         assigneeList.clear();
-        baseClass = ((BaseClass) getApplicationContext());
-        dialog = new ACProgressFlower.Builder(this)
+        baseClass = ((BaseClass) getActivity().getApplicationContext());
+        dialog = new ACProgressFlower.Builder(getActivity())
                 .direction(ACProgressConstant.DIRECT_CLOCKWISE)
                 .themeColor(Color.WHITE)
                 .fadeColor(Color.DKGRAY).build();
-        Bundle extras = getIntent().getExtras();
-        tasksObj= new TasksList();
-        if (extras != null) {
-            position = Integer.parseInt(extras.get("pos").toString());
-        }
-        aq =new AQuery(this);
+
+        aq =new AQuery(view);
         setTaskValuesTinyDB();
         aq.id(R.id.title_text).getEditText().addTextChangedListener(new TextWatcher() {
             @Override
@@ -75,23 +158,7 @@ public class ActivityTask extends BaseActivity{
             public void afterTextChanged(Editable s) {
             }
         });
-        aq.id(R.id.back_arrow).clicked(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                setTaskValuesTinyDB();
-                ActivityTask.this.finish();
-            }
-        });
-        aq.id(R.id.done).clicked(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(position > -1) {
-                    new UpdateTask().execute();
-                }else{
-                    new NewTask().execute();
-                }
-            }
-        });
+
         aq.id(R.id.btn_title).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -106,16 +173,13 @@ public class ActivityTask extends BaseActivity{
                 aq.id(R.id.title_text).enabled(false);
             }
         });
-        gridViewTaskMenu.setAdapter(new AdapterTaskMenu(this,position));
+        gridViewTaskMenu.setAdapter(new AdapterTaskMenu(getActivity(),position));
         if(savedInstanceState==null){
             callFragmentWithReplace(R.id.edittask_container, TaskEditTitleFragment.newInstance(position), "TaskTitle");
         }
+        return  view;
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        return false;
-    }
 
     public class NewTask extends AsyncTask<Void, Void, String> {
         GenericHttpClient httpClient;
@@ -189,17 +253,17 @@ public class ActivityTask extends BaseActivity{
     }
     public void setTaskValuesTinyDB(){
         if(position > -1) {
-            baseClass.db.putInt("TaskListNameID", TasksListFragment.generalList.get(position).getTaskListNameID());
-            baseClass.db.putInt("TaskID", TasksListFragment.generalList.get(position).getTaskID());
-            baseClass.db.putString("TaskName", TasksListFragment.generalList.get(position).getTaskName());
-            baseClass.db.putString("ProjectName", TasksListFragment.generalList.get(position).getProjectName());
-            baseClass.db.putInt("ProjectID", TasksListFragment.generalList.get(position).getProjectID());
-            if(TasksListFragment.generalList.get(position).getDescription() != null) {
-                baseClass.db.putString("TaskDesc", TasksListFragment.generalList.get(position).getDescription());
+            baseClass.db.putInt("TaskListNameID",tasksObj.getTaskListNameID());
+            baseClass.db.putInt("TaskID", tasksObj.getTaskID());
+            baseClass.db.putString("TaskName", tasksObj.getTaskName());
+            baseClass.db.putString("ProjectName", tasksObj.getProjectName());
+            baseClass.db.putInt("ProjectID", tasksObj.getProjectID());
+            if(tasksObj.getDescription() != null) {
+                baseClass.db.putString("TaskDesc", tasksObj.getDescription());
             }
-            baseClass.db.putString("StartDate", TasksListFragment.generalList.get(position).getStartDate());
-            baseClass.db.putString("EndDate", TasksListFragment.generalList.get(position).getEndDate());
-            baseClass.db.putInt("Priority", TasksListFragment.generalList.get(position).getPriority());
+            baseClass.db.putString("StartDate", tasksObj.getStartDate());
+            baseClass.db.putString("EndDate", tasksObj.getEndDate());
+            baseClass.db.putInt("Priority", tasksObj.getPriority());
         }else
         {
             baseClass.db.putString("ProjectName", getString(R.string.project_title));

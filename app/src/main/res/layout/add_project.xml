@@ -43,18 +43,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp" />
-    <CheckBox
-        android:id="@+id/overview_checkbox"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        android:textSize="16sp"
-        android:button="@null"
-        android:background="@drawable/checkbox"
-        android:layout_centerVertical="true"
-        android:layout_alignParentRight="true"
-        android:layout_margin="5dp"
-        android:textColor="@color/colorContentWrapper"
-        />
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

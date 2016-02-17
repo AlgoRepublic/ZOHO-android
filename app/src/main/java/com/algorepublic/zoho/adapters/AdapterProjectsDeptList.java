@@ -2,6 +2,8 @@ package com.algorepublic.zoho.adapters;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,6 +14,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.BaseAdapter;
 
 import com.algorepublic.zoho.R;
+import com.algorepublic.zoho.fragments.EditProjectFragment;
 import com.algorepublic.zoho.fragments.ProjectsFragment;
 import com.algorepublic.zoho.utils.BaseClass;
 import com.androidquery.AQuery;
@@ -53,7 +56,7 @@ public class AdapterProjectsDeptList extends BaseAdapter implements StickyListHe
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
 
         convertView = l_Inflater.inflate(R.layout.layout_projectdeptlist_row, null);
         aq = new AQuery(convertView);
@@ -68,15 +71,29 @@ public class AdapterProjectsDeptList extends BaseAdapter implements StickyListHe
             aq.id(R.id.project_desc).text(Html.fromHtml(ProjectsFragment.ByDepartmentList.get(position).getProjectDesc()));
 
         if(baseClass.getSelectedProject().equals(ProjectsFragment.ByDepartmentList.get(position).getProjectID())){
-            convertView.setBackgroundColor(Color.parseColor("#666666"));
+            convertView.setBackgroundColor(Color.parseColor("#ff99cc00"));
         }else{
             convertView.setBackgroundResource(android.R.color.transparent);
         }
-
-        Animation animation = AnimationUtils.loadAnimation(ctx, (position > lastPosition) ? R.anim.up_from_bottom : R.anim.down_from_top);
-        convertView.startAnimation(animation);
+        aq.id(R.id.project_edit).clicked(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                callFragmentWithBackStack(R.id.container, EditProjectFragment.newInstance(position), "EditProjectFragment");
+            }
+        });
+//        Animation animation = AnimationUtils.loadAnimation(ctx, (position > lastPosition) ? R.anim.up_from_bottom : R.anim.down_from_top);
+//        convertView.startAnimation(animation);
         lastPosition = position;
         return convertView;
+    }
+    public void callFragmentWithBackStack(int containerId, Fragment fragment, String tag){
+
+        ((AppCompatActivity) ctx).getSupportFragmentManager()
+                .beginTransaction()
+                .replace(containerId, fragment, tag)
+                .addToBackStack(null)
+                .commit();
+
     }
     @Override
     public View getHeaderView(int position, View convertView, ViewGroup parent) {

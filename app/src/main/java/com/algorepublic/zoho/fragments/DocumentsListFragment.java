@@ -92,6 +92,7 @@ public class DocumentsListFragment extends BaseFragment {
                 callForDocsDelete(getActivity().getResources().getString(R.string.delete_doc));
             }
         });
+        deleteDocsList.clear();
         baseClass = ((BaseClass) getActivity().getApplicationContext());
         setHasOptionsMenu(true);
         getToolbar().setTitle(getString(R.string.documents));

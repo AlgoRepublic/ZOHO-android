@@ -13,7 +13,6 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.algorepublic.zoho.ActivityTask;
 import com.algorepublic.zoho.Models.ForumsModel;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.adapters.AdapterForumsList;
@@ -47,7 +46,7 @@ public class ForumsFragment extends BaseFragment{
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.add_project:
-                startActivity(new Intent(getActivity(), ActivityTask.class));
+                startActivity(new Intent(getActivity(), TaskAddUpdateFragment.class));
                 break;
         }
         return super.onOptionsItemSelected(item);

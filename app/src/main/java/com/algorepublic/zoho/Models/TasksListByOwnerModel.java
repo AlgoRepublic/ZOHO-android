@@ -42,6 +42,9 @@ public class TasksListByOwnerModel {
         @Expose
         public Integer tasklistID;
 
+        @SerializedName("ProjectID")
+        public int projectID;
+
         @SerializedName("Name")
         @Expose
         public String taskListName;

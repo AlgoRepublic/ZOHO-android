@@ -1,24 +1,17 @@
 package com.algorepublic.zoho.FragmentsTasks;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 
-import com.algorepublic.zoho.ActivityTask;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.adapters.AdapterTaskListName;
-import com.algorepublic.zoho.adapters.AdapterTaskPriority;
-import com.algorepublic.zoho.adapters.AdapterTasksList;
-import com.algorepublic.zoho.adapters.TaskListName;
 import com.algorepublic.zoho.fragments.BaseFragment;
 import com.algorepublic.zoho.fragments.TasksListFragment;
 import com.algorepublic.zoho.utils.BaseClass;
 import com.androidquery.AQuery;
-
-import java.util.ArrayList;
 
 /**
  * Created by android on 2/9/16.

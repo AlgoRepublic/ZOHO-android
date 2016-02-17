@@ -53,6 +53,13 @@ public class ProjectsByDepartmentModel {
         @SerializedName("Description")
         public String description;
 
+        @SerializedName("OwnerID")
+        public String ownerID;
+
+        @SerializedName("OwnerN")
+        public String ownerName;
+
+
         @SerializedName("CreatedAt")
         public String createdAt;
 

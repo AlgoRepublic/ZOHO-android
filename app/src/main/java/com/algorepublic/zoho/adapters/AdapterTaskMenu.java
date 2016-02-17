@@ -12,7 +12,7 @@ import android.widget.CheckBox;
 import android.widget.GridView;
 import android.widget.TextView;
 
-import com.algorepublic.zoho.ActivityTask;
+import com.algorepublic.zoho.fragments.TaskAddUpdateFragment;
 import com.algorepublic.zoho.BaseActivity;
 import com.algorepublic.zoho.FragmentsTasks.TaskAssignFragment;
 import com.algorepublic.zoho.FragmentsTasks.TaskAttachmentFragment;
@@ -98,7 +98,7 @@ public class AdapterTaskMenu extends BaseAdapter {
                         lastPosition =position;
                         aq.id(R.id.checkbox).getCheckBox().setBackgroundColor(ctx.getResources().getColor(R.color.colorBaseMenu));
                     }else {
-                        View  view = getViewByPosition(loop, ActivityTask.gridViewTaskMenu);
+                        View  view = getViewByPosition(loop, TaskAddUpdateFragment.gridViewTaskMenu);
                         AQuery aQuery =  new AQuery(view);
                         aQuery.id(R.id.checkbox).checked(false);
                         aQuery.id(R.id.checkbox).getCheckBox().setBackgroundColor(ctx.getResources().getColor(R.color.colorBaseHeader));
@@ -115,7 +115,7 @@ public class AdapterTaskMenu extends BaseAdapter {
         }if(position==1){
             callFragmentWithReplace(R.id.edittask_container, TaskListNameFragment.newInstance(Pos), "TaskListNameAttachment");
         }if(position==2){
-            callFragmentWithReplace(R.id.edittask_container, TaskAttachmentFragment.newInstance(Pos), "TaskAttachment");
+            callFragmentWithReplace(R.id.edittask_container, TaskAttachmentFragment.newInstance(TaskAddUpdateFragment.tasksObj,Pos), "TaskAttachment");
         }if(position==3){
             callFragmentWithReplace(R.id.edittask_container, TaskAssignFragment.newInstance(Pos), "TaskAssign");
         }if(position==4){

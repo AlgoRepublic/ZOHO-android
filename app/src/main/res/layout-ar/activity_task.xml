@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@color/colorBaseWrapper"
     android:orientation="vertical"
-    tools:context="com.algorepublic.zoho.ActivityTask">
+    tools:context=".fragments.TaskAddUpdateFragment">
     <include
         android:id="@+id/toolbar_actionbar"
         layout="@layout/toolbar_default"

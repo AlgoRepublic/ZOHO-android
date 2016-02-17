@@ -1,21 +1,15 @@
 package com.algorepublic.zoho.adapters;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.CompoundButton;
 
-import com.algorepublic.zoho.ActivityTask;
-import com.algorepublic.zoho.Models.TaskAssigneeModel;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.fragments.TasksListFragment;
 import com.algorepublic.zoho.utils.BaseClass;
 import com.androidquery.AQuery;
-
-import java.util.ArrayList;
 
 /**
  * Created by android on 2/9/16.

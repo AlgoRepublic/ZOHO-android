@@ -3,13 +3,12 @@ package com.algorepublic.zoho.FragmentsTasks;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.algorepublic.zoho.ActivityTask;
+import com.algorepublic.zoho.fragments.TaskAddUpdateFragment;
 import com.algorepublic.zoho.Models.TaskAssigneeModel;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.adapters.AdapterTaskAssignee;
@@ -52,15 +51,15 @@ public class TaskAssignFragment extends BaseFragment {
        View view =  inflater.inflate(R.layout.fragment_task_assign, container, false);
         aq = new AQuery(view);
         baseClass = ((BaseClass) getActivity().getApplicationContext());
-     if(ActivityTask.assigneeList.size()==0){
+     if(TaskAddUpdateFragment.assigneeList.size()==0){
          try {
              for (int loop = 0;
                   loop < TasksListFragment.generalList.get(position).getListAssignees().size(); loop++) {
                  if (TasksListFragment.generalList.get(position).getListAssignees().get(loop).getUserID() != -1) {
-                     ActivityTask.assigneeList.add(
+                     TaskAddUpdateFragment.assigneeList.add(
                              TasksListFragment.generalList.get(position).getListAssignees().get(loop).getUserID());
                  } else
-                     ActivityTask.assigneeList.add(-1);
+                     TaskAddUpdateFragment.assigneeList.add(-1);
              }
          }catch (IndexOutOfBoundsException e){}
         }

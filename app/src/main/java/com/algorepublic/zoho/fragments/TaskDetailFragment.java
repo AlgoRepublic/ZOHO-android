@@ -1,6 +1,7 @@
 package com.algorepublic.zoho.fragments;
 
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
@@ -8,6 +9,7 @@ import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -16,11 +18,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.SeekBar;
+import android.widget.Toast;
 
-import com.algorepublic.zoho.ActivityTask;
 import com.algorepublic.zoho.Models.GeneralModel;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.adapters.AdapterTaskDetailAssignee;
+import com.algorepublic.zoho.adapters.TasksList;
 import com.algorepublic.zoho.services.CallBack;
 import com.algorepublic.zoho.services.TaskListService;
 import com.algorepublic.zoho.utils.BaseClass;
@@ -42,11 +45,13 @@ import cc.cloudist.acplibrary.ACProgressFlower;
  * Use the {@link TaskDetailFragment#newInstance} factory method to
  * create an instance of this fragment_forums.
  */
+@SuppressLint("ValidFragment")
 public class TaskDetailFragment extends BaseFragment {
 
     AQuery aq;
     static TaskDetailFragment fragment;
-    static int position;
+    TasksList tasksList;
+    int position;
     TaskListService service;
     int click=0;
     DonutProgress seekBarCompat;
@@ -58,17 +63,21 @@ public class TaskDetailFragment extends BaseFragment {
     BaseClass baseClass;
     public static ACProgressFlower dialog;
 
-    public TaskDetailFragment() {
+    @SuppressLint("ValidFragment")
+    public TaskDetailFragment(TasksList tasksList1,int pos) {
         // Required empty public constructor
+        tasksList = tasksList1;
+        position =pos;
     }
 
     // TODO: Rename and change types and number of parameters
-    public static TaskDetailFragment newInstance(int pos) {
-        position =pos;
-        fragment = new TaskDetailFragment();
-
-        return fragment;
-    }
+//    public static TaskDetailFragment newInstance(TasksList tasksList1,int pos) {
+//        tasksList = tasksList1;
+//        position =pos;
+//        fragment = new TaskDetailFragment();
+//
+//        return fragment;
+//    }
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         setRetainInstance(true);
@@ -100,28 +109,29 @@ public class TaskDetailFragment extends BaseFragment {
         twoWayAssignee.setLongClickable(true);
         twoWayAssignee.setOrientation(TwoWayLayoutManager.Orientation.HORIZONTAL);
         twoWayAssignee.setAdapter(new AdapterTaskDetailAssignee(getActivity(),
-                TasksListFragment.generalList.get(position).getListAssignees()));
+                tasksList.getListAssignees()));
 
         aq = new AQuery(view);
         getToolbar().setTitle(getString(R.string.task_details));
+        getToolbar().setSubtitle("comments");
         service = new TaskListService(getActivity());
-        aq.id(R.id.start_date).text(TasksListFragment.generalList.get(position).getStartDate());
-        aq.id(R.id.end_date).text(TasksListFragment.generalList.get(position).getEndDate());
-        aq.id(R.id.category).text(TasksListFragment.generalList.get(position).getTaskListName());
-        aq.id(R.id.task_name).text(TasksListFragment.generalList.get(position).getTaskName());
-        aq.id(R.id.task_desc).text(TasksListFragment.generalList.get(position).getDescription());
-        aq.id(R.id.category).text(TasksListFragment.generalList.get(position).getTaskListName());
-        aq.id(R.id.comment_count).text(Integer.toString(TasksListFragment.generalList.get(position).getCommentsCount()));
-        aq.id(R.id.docs_count).text(Integer.toString(TasksListFragment.generalList.get(position).getDocumentsCount()));
-        aq.id(R.id.subtask_count).text(Integer.toString(TasksListFragment.generalList.get(position).getSubTasksCount()));
-        seekBar.setProgress(TasksListFragment.generalList.get(position).getProgress());
-        seekBarCompat.setProgress(TasksListFragment.generalList.get(position).getProgress());
+        aq.id(R.id.start_date).text(tasksList.getStartDate());
+        aq.id(R.id.end_date).text(tasksList.getEndDate());
+        aq.id(R.id.category).text(tasksList.getTaskListName());
+        aq.id(R.id.task_name).text(tasksList.getTaskName());
+        aq.id(R.id.task_desc).text(tasksList.getDescription());
+        aq.id(R.id.category).text(tasksList.getTaskListName());
+        aq.id(R.id.comment_count).text(Integer.toString(tasksList.getCommentsCount()));
+        aq.id(R.id.docs_count).text(Integer.toString(tasksList.getDocumentsCount()));
+        aq.id(R.id.subtask_count).text(Integer.toString(tasksList.getSubTasksCount()));
+        seekBar.setProgress(tasksList.getProgress());
+        seekBarCompat.setProgress(tasksList.getProgress());
 
         Drawable shapeDrawable = aq.id(R.id.priority_bar).getView().getBackground();
         GradientDrawable colorDrawable = (GradientDrawable) shapeDrawable;
-        colorDrawable.setColor(getPriorityWiseColor(TasksListFragment.generalList.get(position).getPriority()));
+        colorDrawable.setColor(getPriorityWiseColor(tasksList.getPriority()));
         aq.id(R.id.priority_bar).getView().setBackground(shapeDrawable);
-        views.setBackgroundColor(getPriorityWiseColor(TasksListFragment.generalList.get(position).getPriority()));
+        views.setBackgroundColor(getPriorityWiseColor(tasksList.getPriority()));
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progres, boolean fromUser) {
@@ -140,11 +150,11 @@ public class TaskDetailFragment extends BaseFragment {
             public void onStopTrackingTouch(SeekBar seekBar) {
                 if (progress == 100) {
                     aq.id(R.id.mark_as_done).text("ReOPen Task");
-                    service.updateTaskProgress(TasksListFragment.generalList.get(position).getTaskID()
+                    service.updateTaskProgress(tasksList.getTaskID()
                             , progress, true, new CallBack(TaskDetailFragment.this, "UpdateProgress"));
                 }
                 aq.id(R.id.mark_as_done).text("Mark as done");
-                service.updateTaskProgress(TasksListFragment.generalList.get(position).getTaskID()
+                service.updateTaskProgress(tasksList.getTaskID()
                         , progress, true, new CallBack(TaskDetailFragment.this, "UpdateProgress"));
             }
         });
@@ -154,8 +164,7 @@ public class TaskDetailFragment extends BaseFragment {
             @Override
             public void onClick(View v) {
                 if(Integer.parseInt(aq.id(R.id.comment_count).getText().toString()) > 0) {
-                    callFragmentWithBackStack(R.id.container, TaskCommentFragment.newInstance(TasksListFragment.
-                            generalList.get(position).getTaskID())
+                    callFragmentWithBackStack(R.id.container, TaskCommentFragment.newInstance(tasksList.getTaskID())
                             , "TaskComment");
                 }
             }
@@ -164,8 +173,7 @@ public class TaskDetailFragment extends BaseFragment {
             @Override
             public void onClick(View v) {
                 if(Integer.parseInt(aq.id(R.id.docs_count).getText().toString()) > 0) {
-                    callFragmentWithBackStack(R.id.container, DocumentsListBySubTaskFragment.newInstance(TasksListFragment.
-                            generalList.get(position).getTaskID()), "DocumentsListBySubTaskFragment");
+                    callFragmentWithBackStack(R.id.container, DocumentsListBySubTaskFragment.newInstance(tasksList.getTaskID()), "DocumentsListBySubTaskFragment");
                 }
             }
         });
@@ -173,27 +181,24 @@ public class TaskDetailFragment extends BaseFragment {
             @Override
             public void onClick(View v) {
                 if(Integer.parseInt(aq.id(R.id.subtask_count).getText().toString()) > 0) {
-                    callFragmentWithBackStack(R.id.container, TaskListBySubTasksFragment.newInstance(TasksListFragment.
-                            generalList.get(position).getTaskID()), "TaskListBySubTasksFragment");
+                    callFragmentWithBackStack(R.id.container, new TaskListBySubTasksFragment(tasksList.getTaskID()), "TaskListBySubTasksFragment");
                 }
             }
         });
-        if(TasksListFragment.generalList.get(position).getProgress()==100){
+        if(tasksList.getProgress()==100){
             aq.id(R.id.mark_as_done).text("ReOpen Task");
 
         }
             aq.id(R.id.mark_as_done).clicked(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
-                    if(TasksListFragment.generalList.get(position).getProgress()==100){
-                        click=3;
+                    if(tasksList.getProgress()==100){
+                        click= 3;
                         NormalDialogCustomAttr(getString(R.string.reopen_task));
                     }else {
                         click=2;
                         NormalDialogCustomAttr(getString(R.string.mark_as_done));
                     }
-
                 }
             });
         aq.id(R.id.delete).clicked(new View.OnClickListener() {
@@ -236,11 +241,12 @@ public class TaskDetailFragment extends BaseFragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.edit_task:
-
-                Intent intent = new Intent(getActivity(), ActivityTask.class);
-                intent.putExtra("pos", position);
-                startActivity(intent);
-                break;
+                Log.e("TaskID","/"+tasksList.getProjectID());
+                if (tasksList.getProjectID() >0) {
+                    baseClass.setSelectedProject(Integer.toString(tasksList.getProjectID()));
+                    callFragmentWithBackStack(R.id.container, TaskAddUpdateFragment.newInstance(tasksList, position), "TaskAddUpdateFragment");
+                }
+                    break;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -249,7 +255,7 @@ public class TaskDetailFragment extends BaseFragment {
         GeneralModel.getInstance().setList((GeneralModel) model);
         if (GeneralModel.getInstance().responseCode.equalsIgnoreCase("100")) {
             //seekBarCompat.setProgress(100);
-            TasksListFragment.generalList.get(position).setProgress(progress);
+            tasksList.setProgress(progress);
             Snackbar.make(getView(), getString(R.string.update_progress), Snackbar.LENGTH_SHORT).show();
         }
         else
@@ -275,7 +281,7 @@ public class TaskDetailFragment extends BaseFragment {
             seekBar.setProgress(100);
             seekBarCompat.setProgress(100);
             aq.id(R.id.mark_as_done).text("ReOpen Task");
-            TasksListFragment.generalList.get(position).setProgress(100);
+            tasksList.setProgress(100);
 
         }
         else
@@ -291,7 +297,7 @@ public class TaskDetailFragment extends BaseFragment {
             seekBar.setProgress(0);
             seekBarCompat.setProgress(0);
             aq.id(R.id.mark_as_done).text("Mark as done");
-            TasksListFragment.generalList.get(position).setProgress(0);
+            tasksList.setProgress(0);
 
         }}
 
@@ -306,7 +312,7 @@ public class TaskDetailFragment extends BaseFragment {
             seekBar.setProgress(0);
             seekBarCompat.setProgress(0);
             aq.id(R.id.mark_as_done).text("Mark as done");
-            TasksListFragment.generalList.get(position).setProgress(0);
+            tasksList.setProgress(0);
 
         }
         else
@@ -346,7 +352,7 @@ public class TaskDetailFragment extends BaseFragment {
                         dialog.dismiss();
                         if(click==1)
                         {
-                            service.deleteTask(TasksListFragment.generalList.get(position).getTaskID()
+                            service.deleteTask(tasksList.getTaskID()
                                     , true, new CallBack(TaskDetailFragment.this, "DeleteTask"));
                         }
                         if (click==2) {

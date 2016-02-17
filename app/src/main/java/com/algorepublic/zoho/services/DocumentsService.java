@@ -57,6 +57,16 @@ public class DocumentsService extends BaseService {
         this.post(url, params, obj, GeneralModel.getInstance(), message);
         Log.e("DeleteDocumentsService", url);
     }
+    public void deleteDocumentByTask(int taskID, ArrayList<Integer> fileIDs, boolean message, CallBack obj){
+        String url = Constants.DeleteDocumentsByTasks_API;
+        HashMap<String, String> params = new HashMap<String, String>();
+        for(int loop=0;loop<fileIDs.size();loop++) {
+            params.put("filesToDelete["+loop+"]", String.valueOf(fileIDs.get(loop)));
+        }
+        params.put("taskID",Integer.toString(taskID));
+        this.post(url, params, obj, GeneralModel.getInstance(), message);
+        Log.e("DeleteDocumentsService", url);
+    }
     public void getAttachmentsBySubTasks(int taskID, boolean message, CallBack obj){
         String url = Constants.GetAttachmentsBySubTasks_API+"taskID="+taskID;
         this.get(url, obj, TasksDocumentModel.getInstance(), message);

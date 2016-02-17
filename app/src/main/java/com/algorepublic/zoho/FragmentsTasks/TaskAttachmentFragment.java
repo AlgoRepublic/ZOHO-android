@@ -12,14 +12,17 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.algorepublic.zoho.ActivityTask;
+import com.algorepublic.zoho.adapters.DocumentsList;
+import com.algorepublic.zoho.adapters.TasksList;
+import com.algorepublic.zoho.fragments.TaskAddUpdateFragment;
 import com.algorepublic.zoho.Models.SubTaskAttachmentsModel;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.fragments.BaseFragment;
+import com.algorepublic.zoho.services.CallBack;
+import com.algorepublic.zoho.services.DocumentsService;
 import com.algorepublic.zoho.utils.Constants;
 import com.androidquery.AQuery;
 import com.bumptech.glide.Glide;
@@ -33,6 +36,8 @@ import com.flyco.dialog.widget.MaterialDialog;
 import java.io.File;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
+import java.util.Collections;
 
 public class TaskAttachmentFragment extends BaseFragment {
 
@@ -43,12 +48,15 @@ public class TaskAttachmentFragment extends BaseFragment {
     public static final int RESULT_GALLERY = 2;
     public static final int PICK_File = 3;
     int Tag = 0;
+    static TasksList taskObj;
+    DocumentsService service;
     public static int position;
     public TaskAttachmentFragment() {
     }
     @SuppressWarnings("unused")
-    public static TaskAttachmentFragment newInstance(int pos) {
+    public static TaskAttachmentFragment newInstance(TasksList tasksList,int pos) {
         position = pos;
+        taskObj = tasksList;
         if (fragment==null) {
             fragment = new TaskAttachmentFragment();
         }
@@ -69,19 +77,42 @@ public class TaskAttachmentFragment extends BaseFragment {
                 CallForAttachments();
             }
         });
-
-        for(int loop=0;loop< SubTaskAttachmentsModel.getInstance().responseObject.size();loop++)
-        {
-            File file = null;
-            showFileInList(file ,Constants.Image_URL +
-                    SubTaskAttachmentsModel.getInstance().responseObject.get(loop).fileName);
-        }
-
-        for (int loop=0;loop<ActivityTask.filesList.size();loop++)
-        {
-            showFileInList(ActivityTask.filesList.get(loop),"");
+            service = new DocumentsService(getActivity());
+        if(TaskAddUpdateFragment.filesList.size()==0){
+            service.getDocsBySubTasks(taskObj.getTaskID(), true, new CallBack(TaskAttachmentFragment.this, "DocumentsList"));
         }
         return view;
+    }
+    public void DocumentsList(Object caller, Object model) {
+        SubTaskAttachmentsModel.getInstance().setList((SubTaskAttachmentsModel) model);
+        if (SubTaskAttachmentsModel.getInstance().responseCode == 100) {
+            GetAllDocumentsList();
+        } else {
+            Toast.makeText(getActivity(), getString(R.string.invalid_credential), Toast.LENGTH_SHORT).show();
+        }
+    }
+    public void GetAllDocumentsList() {
+        TaskAddUpdateFragment.allDocsList.clear();
+        for (int loop = 0; loop < SubTaskAttachmentsModel.getInstance().responseObject.size(); loop++) {
+            DocumentsList documentsList = new DocumentsList();
+            documentsList.setID(SubTaskAttachmentsModel.getInstance().responseObject.get(loop).Id);
+            documentsList.setFileName(SubTaskAttachmentsModel.getInstance().responseObject.get(loop).fileDescription);
+            documentsList.setFileDescription(SubTaskAttachmentsModel.getInstance().responseObject.get(loop).fileName);
+            documentsList.setFileSizeInByte(SubTaskAttachmentsModel.getInstance().responseObject.get(loop).fileSizeInByte);
+            documentsList.setUpdatedAt(DateFormatter(SubTaskAttachmentsModel.getInstance().responseObject.get(loop).updatedAt));
+            documentsList.setUpdatedMilli(DateMilli(SubTaskAttachmentsModel.getInstance().responseObject.get(loop).updatedAt));
+            documentsList.setFileTypeID(SubTaskAttachmentsModel.getInstance().responseObject.get(loop).fileTypeID);
+            documentsList.setIsFav(SubTaskAttachmentsModel.getInstance().responseObject.get(loop).isFav);
+            TaskAddUpdateFragment.allDocsList.add(documentsList);
+
+            File file = null;
+            showFileInList(file, Constants.Image_URL +
+                    SubTaskAttachmentsModel.getInstance().responseObject.get(loop).fileName);
+        }
+        for (int loop=0;loop< TaskAddUpdateFragment.filesList.size();loop++)
+        {
+            showFileInList(TaskAddUpdateFragment.filesList.get(loop),"");
+        }
     }
     private void CallForAttachments() {
         String[] menuItems = {"Camera","Gallery","Others"};
@@ -157,7 +188,7 @@ public class TaskAttachmentFragment extends BaseFragment {
         if(file.length() > 1048576 * 5) {
             MaterialAlertDialog();
         }else {
-            ActivityTask.filesList.add(file);
+            TaskAddUpdateFragment.filesList.add(file);
             showFileInList(file,"");
         }
     }
@@ -173,11 +204,13 @@ public class TaskAttachmentFragment extends BaseFragment {
             if(file !=null) {
                 Glide.with(this).load(file).into(addFile);
                 text.setText(file.getName());
+                child.setTag("image_" + Tag);
             }else{
                 Glide.with(this).load(ApiUrl).into(addFile);
                 String fullname = new File(
                         new URI(ApiUrl).getPath()).getName();
                 text.setText(fullname);
+                child.setTag("imageUrl_" + Tag);
             }
             deleteFile.setTag(Tag);
             child.setId(Tag);
@@ -186,22 +219,7 @@ public class TaskAttachmentFragment extends BaseFragment {
             deleteFile.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    RelativeLayout layout = (RelativeLayout) linearLayout.findViewById(Integer
-                            .parseInt(v.getTag().toString()));
-                    View view1 = linearLayout.getChildAt(Integer
-                            .parseInt(v.getTag().toString()));
-                    linearLayout.removeViewAt(Integer
-                            .parseInt(v.getTag().toString()));
-                    Log.e("ID1",v.getId()+"/"+v.getTag().toString()+"/"+linearLayout.getChildCount());
-                    for(int loop=Integer
-                            .parseInt(v.getTag().toString());loop<linearLayout.getChildCount();loop++){
-                        View view = linearLayout.getChildAt(loop);
-                        view.setId(view.getId()-1);
-                        view.setTag(view.getId() - 1);
-                        Log.e("ID","/"+view.getId());
-                    }
-                    ActivityTask.filesList.remove(Integer
-                            .parseInt(v.getTag().toString()));
+                    ((View) v.getParent()).setVisibility(View.GONE);
                 }
             });
             } catch (Exception e) {

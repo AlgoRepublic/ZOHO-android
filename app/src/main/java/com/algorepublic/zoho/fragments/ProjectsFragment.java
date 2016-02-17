@@ -21,6 +21,7 @@ import com.algorepublic.zoho.Models.ProjectsByDepartmentModel;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.adapters.AdapterProjectsClientList;
 import com.algorepublic.zoho.adapters.AdapterProjectsDeptList;
+import com.algorepublic.zoho.adapters.DeptList;
 import com.algorepublic.zoho.adapters.ProjectsList;
 import com.algorepublic.zoho.services.CallBack;
 import com.algorepublic.zoho.services.ProjectsListService;
@@ -44,6 +45,7 @@ public class ProjectsFragment extends BaseFragment{
     ProjectsListService service;
     StickyListHeadersListView listView;
     StickyListHeadersAdapter projectAdapter;
+    static  ArrayList<DeptList> allDeptList = new ArrayList<>();
     static  ArrayList<ProjectsList> allProjectsList = new ArrayList<>();
     ArrayList<ProjectsList> ByClientList = new ArrayList<>();
     public static ArrayList<ProjectsList> ByDepartmentList = new ArrayList<>();
@@ -150,6 +152,8 @@ public class ProjectsFragment extends BaseFragment{
                 projectsList.setCompOrDeptID(ProjectsByClientModel.getInstance().responseData.get(loop).ID);
                 projectsList.setProjectID(ProjectsByClientModel.getInstance().responseData.get(loop).projects.get(loop1).projectID);
                 projectsList.setProjectName(ProjectsByClientModel.getInstance().responseData.get(loop).projects.get(loop1).projectName);
+                projectsList.setOwnerID(ProjectsByClientModel.getInstance().responseData.get(loop).projects.get(loop1).ownerID);
+                projectsList.setOwnerName(ProjectsByClientModel.getInstance().responseData.get(loop).projects.get(loop1).ownerName);
                 projectsList.setProjectDesc(ProjectsByClientModel.getInstance().responseData.get(loop).projects.get(loop1).description);
                 projectsList.setTotalTasks(ProjectsByClientModel.getInstance().responseData.get(loop).projects.get(loop1).totalTasks);
                 projectsList.setTotalUsers(ProjectsByClientModel.getInstance().responseData.get(loop).projects.get(loop1).usersCount);
@@ -161,8 +165,12 @@ public class ProjectsFragment extends BaseFragment{
     }
 
     public void AddDepartmentProjects(){
-        ByDepartmentList.clear();
+        ByDepartmentList.clear();allDeptList.clear();
         for (int loop = 0; loop < ProjectsByDepartmentModel.getInstance().responseData.size(); loop++) {
+            DeptList deptList = new DeptList();
+            deptList.setDeptID(ProjectsByDepartmentModel.getInstance().responseData.get(loop).ID);
+            deptList.setDeptName(ProjectsByDepartmentModel.getInstance().responseData.get(loop).departmentName);
+            allDeptList.add(deptList);
             for(int loop1=0;loop1<ProjectsByDepartmentModel.getInstance().responseData.get(loop).projects.size();loop1++){
                 ProjectsList projectsList = new ProjectsList();
                 if(ProjectsByDepartmentModel.getInstance().responseData.get(loop).ID.equals("0")){
@@ -173,6 +181,8 @@ public class ProjectsFragment extends BaseFragment{
                 projectsList.setCompOrDeptID(ProjectsByDepartmentModel.getInstance().responseData.get(loop).ID);
                 projectsList.setProjectID(ProjectsByDepartmentModel.getInstance().responseData.get(loop).projects.get(loop1).projectID);
                 projectsList.setProjectName(ProjectsByDepartmentModel.getInstance().responseData.get(loop).projects.get(loop1).projectName);
+                projectsList.setOwnerID(ProjectsByDepartmentModel.getInstance().responseData.get(loop).projects.get(loop1).ownerID);
+                projectsList.setOwnerName(ProjectsByDepartmentModel.getInstance().responseData.get(loop).projects.get(loop1).ownerName);
                 projectsList.setProjectDesc(ProjectsByDepartmentModel.getInstance().responseData.get(loop).projects.get(loop1).description);
                 projectsList.setTotalTasks(ProjectsByDepartmentModel.getInstance().responseData.get(loop).projects.get(loop1).totalTasks);
                 projectsList.setTotalUsers(ProjectsByDepartmentModel.getInstance().responseData.get(loop).projects.get(loop1).usersCount);
@@ -287,7 +297,7 @@ public class ProjectsFragment extends BaseFragment{
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.add_project:
-                callFragmentWithBackStack(R.id.container, AddProjectFragment.newInstance(), "AddProjectFragment");
+                callFragmentWithBackStack(R.id.container, AddProjectFragment.newInstance(-1), "AddProjectFragment");
                 break;
         }
         return super.onOptionsItemSelected(item);

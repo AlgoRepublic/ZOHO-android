@@ -60,7 +60,7 @@ public class AdapterProjectsClientList extends BaseAdapter implements StickyList
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
 
         convertView = l_Inflater.inflate(R.layout.layout_projectclientlist_row, null);
         aq = new AQuery(convertView);
@@ -77,19 +77,18 @@ public class AdapterProjectsClientList extends BaseAdapter implements StickyList
             aq.id(R.id.project_desc).text(Html.fromHtml(arrayList.get(position).getProjectDesc()));
 
         if(baseClass.getSelectedProject().equals(ProjectsFragment.ByDepartmentList.get(position).getProjectID())){
-            convertView.setBackgroundColor(Color.parseColor("#666666"));
+            convertView.setBackgroundColor(Color.parseColor("#ff99cc00"));
         }else{
             convertView.setBackgroundResource(android.R.color.transparent);
         }
         aq.id(R.id.project_edit).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                callFragmentWithBackStack(R.id.container, EditProjectFragment.newInstance(), "EditProjectFragment");
+                callFragmentWithBackStack(R.id.container, EditProjectFragment.newInstance(position), "EditProjectFragment");
             }
         });
-        Log.e("OKay","Okay");
-        Animation animation = AnimationUtils.loadAnimation(ctx, (position > lastPosition) ? R.anim.up_from_bottom : R.anim.down_from_top);
-        convertView.startAnimation(animation);
+//        Animation animation = AnimationUtils.loadAnimation(ctx, (position > lastPosition) ? R.anim.up_from_bottom : R.anim.down_from_top);
+//        convertView.startAnimation(animation);
         lastPosition = position;
         return convertView;
     }
