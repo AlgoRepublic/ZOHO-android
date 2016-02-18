@@ -22,7 +22,7 @@
                 android:id="@+id/layout_tasktitle"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
-              android:layout_marginTop="20dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginBottom="5dp"
                 android:background="@color/colorContentWrapper">
 
@@ -59,7 +59,7 @@
                     android:textColor="@color/white"
                     />
 
-                </RelativeLayout>
+            </RelativeLayout>
             <View
                 android:layout_width="match_parent"
                 android:background="@android:drawable/dialog_holo_light_frame"
@@ -262,7 +262,7 @@
                             android:progressTint="@color/colorBaseHeader"
                             android:foreground="@color/colorBaseHeader"
                             android:max="100"
-                         >
+                            >
                         </SeekBar>
                     </RelativeLayout>
 
@@ -295,32 +295,32 @@
         android:layout_height="60dp"
         android:weightSum="4.72"
         android:layout_alignParentBottom="true"
-        android:background="@drawable/topborder"
+        android:background="@color/colorContentWrapper"
         android:orientation="horizontal">
-<RelativeLayout
-    android:layout_width="0dp"
-    android:layout_weight=".9"
-    android:layout_gravity="center"
-    android:layout_marginLeft="2dp"
-    android:layout_marginRight="2dp"
-    android:layout_height="match_parent">
-    <RelativeLayout
-        android:id="@+id/comment"
-        android:layout_width="60dp"
-        android:layout_centerHorizontal="true"
-        android:layout_height="match_parent">
-        <TextView
-            android:id="@+id/comment_count"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:text="112"
-            android:gravity="center"
-            android:singleLine="true"
-            android:textSize="8dp"
-            android:layout_alignParentRight="true"
-            android:background="@mipmap/bubble_alert_white"
-            android:layout_alignParentTop="true"
-            android:textColor="@color/colorBaseWrapper" />
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_weight=".9"
+            android:layout_gravity="center"
+            android:layout_marginLeft="2dp"
+            android:layout_marginRight="2dp"
+            android:layout_height="match_parent">
+            <RelativeLayout
+                android:id="@+id/comment"
+                android:layout_width="60dp"
+                android:layout_centerHorizontal="true"
+                android:layout_height="match_parent">
+                <TextView
+                    android:id="@+id/comment_count"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:text="112"
+                    android:gravity="center"
+                    android:singleLine="true"
+                    android:textSize="8dp"
+                    android:layout_alignParentRight="true"
+                    android:background="@mipmap/bubble_alert_white"
+                    android:layout_alignParentTop="true"
+                    android:textColor="@color/colorBaseWrapper" />
 
                 <ImageView
                     android:id="@+id/delete1"

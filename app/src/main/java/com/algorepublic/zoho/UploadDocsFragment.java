@@ -479,6 +479,7 @@ public class UploadDocsFragment extends BaseFragment implements GoogleApiClient.
         @Override
         protected void onPostExecute(String result) {
             dialog.dismiss();
+            onFinish();
             PopulateModel(result);
         }
     }
@@ -507,11 +508,20 @@ public class UploadDocsFragment extends BaseFragment implements GoogleApiClient.
         protected void onPostExecute(String result) {
             dialog.dismiss();
             PopulateModel(result);
+            onFinish();
         }
     }
     private void PopulateModel(String json) {
         Log.e("Json", "/" + json);
         filesList.clear();
         Snackbar.make(getView(),"File(s) uploaded successfully.", Snackbar.LENGTH_SHORT).show();
+    }
+
+    private void onFinish(){
+
+        View mainView  = aq.id(R.id.upload_container).getView();
+        Snackbar.make(mainView, "File (s) have been uploaded successfully.", Snackbar.LENGTH_LONG).show();
+        ((ViewGroup) aq.id(R.id.images_layout).getView()).removeAllViews();
+        filesList.clear();
     }
 }

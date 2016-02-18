@@ -110,6 +110,7 @@ public class TaskDetailFragment extends BaseFragment {
 
         aq = new AQuery(view);
         getToolbar().setTitle(getString(R.string.task_details));
+        getToolbar().setSubtitle("comments");
         service = new TaskListService(getActivity());
         aq.id(R.id.start_date).text(tasksList.getStartDate());
         aq.id(R.id.end_date).text(tasksList.getEndDate());
