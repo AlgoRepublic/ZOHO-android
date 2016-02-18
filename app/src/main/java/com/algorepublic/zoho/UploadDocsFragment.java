@@ -23,7 +23,6 @@ import android.widget.AdapterView;
 import android.widget.Toast;
 
 import com.algorepublic.zoho.Models.GeneralModel;
-import com.algorepublic.zoho.adapters.AdapterTaskAttachment;
 import com.algorepublic.zoho.adapters.AdapterUploadAttachment;
 import com.algorepublic.zoho.adapters.AttachmentList;
 import com.algorepublic.zoho.fragments.BaseFragment;
@@ -519,9 +518,8 @@ public class UploadDocsFragment extends BaseFragment implements GoogleApiClient.
 
     private void onFinish(){
 
-        View mainView  = aq.id(R.id.upload_container).getView();
+        View mainView  = aq.id(R.id.container).getView();
         Snackbar.make(mainView, "File (s) have been uploaded successfully.", Snackbar.LENGTH_LONG).show();
-        ((ViewGroup) aq.id(R.id.images_layout).getView()).removeAllViews();
         filesList.clear();
     }
 }

@@ -2,13 +2,11 @@ package com.algorepublic.zoho.fragments;
 
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
-import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -18,7 +16,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.SeekBar;
-import android.widget.Toast;
 
 import com.algorepublic.zoho.Models.GeneralModel;
 import com.algorepublic.zoho.R;
@@ -110,7 +107,6 @@ public class TaskDetailFragment extends BaseFragment {
 
         aq = new AQuery(view);
         getToolbar().setTitle(getString(R.string.task_details));
-        getToolbar().setSubtitle("comments");
         service = new TaskListService(getActivity());
         aq.id(R.id.start_date).text(tasksList.getStartDate());
         aq.id(R.id.end_date).text(tasksList.getEndDate());

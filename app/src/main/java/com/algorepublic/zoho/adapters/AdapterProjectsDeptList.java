@@ -37,7 +37,6 @@ public class AdapterProjectsDeptList extends BaseAdapter implements StickyListHe
     AQuery aq,aq_header;
     BaseClass baseClass;
     private LayoutInflater l_Inflater;
-    private int lastPosition = -1;
     ProjectsListService service;
 
 
@@ -67,7 +66,7 @@ public class AdapterProjectsDeptList extends BaseAdapter implements StickyListHe
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
 
-        convertView = l_Inflater.inflate(R.layout.layout_projectdeptlist_row, null);
+        convertView = l_Inflater.inflate(R.layout.layout_project_list_row, null);
         aq = new AQuery(convertView);
         aq.id(R.id.project_title).text(ProjectsFragment.ByDepartmentList.get(position).getProjectName());
         if(!ProjectsFragment.ByDepartmentList.get(position).getTotalTasks().isEmpty())
@@ -80,9 +79,9 @@ public class AdapterProjectsDeptList extends BaseAdapter implements StickyListHe
             aq.id(R.id.project_desc).text(Html.fromHtml(ProjectsFragment.ByDepartmentList.get(position).getProjectDesc()));
 
         if(baseClass.getSelectedProject().equals(ProjectsFragment.ByDepartmentList.get(position).getProjectID())){
-            convertView.setBackgroundColor(Color.parseColor("#ff99cc00"));
+            aq.id(R.id.selected_project).getView().setBackgroundColor(Color.parseColor("#99cc00"));
         }else{
-            convertView.setBackgroundResource(android.R.color.transparent);
+            aq.id(R.id.selected_project).getView().setBackgroundColor(Color.parseColor("#00000000"));
         }
         aq.id(R.id.project_edit).clicked(new View.OnClickListener() {
             @Override
@@ -101,7 +100,6 @@ public class AdapterProjectsDeptList extends BaseAdapter implements StickyListHe
         });
 //        Animation animation = AnimationUtils.loadAnimation(ctx, (position > lastPosition) ? R.anim.up_from_bottom : R.anim.down_from_top);
 //        convertView.startAnimation(animation);
-        lastPosition = position;
         return convertView;
     }
     public void DeleteProject(Object caller, Object model) {

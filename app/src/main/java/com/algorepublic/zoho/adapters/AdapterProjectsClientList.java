@@ -13,11 +13,9 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Toast;
 
-import com.algorepublic.zoho.Models.DocumentsListModel;
 import com.algorepublic.zoho.Models.GeneralModel;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.fragments.EditProjectFragment;
-import com.algorepublic.zoho.fragments.TasksListFragment;
 import com.algorepublic.zoho.services.CallBack;
 import com.algorepublic.zoho.services.ProjectsListService;
 import com.algorepublic.zoho.utils.BaseClass;
@@ -40,7 +38,6 @@ public class AdapterProjectsClientList extends BaseAdapter implements StickyList
     private BaseClass baseClass;
     private AQuery aq;
     private LayoutInflater l_Inflater;
-    private int lastPosition = -1;
     ProjectsListService service;
 
     ArrayList<ProjectsList> arrayList= new ArrayList<>();
@@ -71,7 +68,7 @@ public class AdapterProjectsClientList extends BaseAdapter implements StickyList
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
 
-        convertView = l_Inflater.inflate(R.layout.layout_projectclientlist_row, null);
+        convertView = l_Inflater.inflate(R.layout.layout_project_list_row, null);
         aq = new AQuery(convertView);
         aq.id(R.id.project_title).text(arrayList.get(position).getProjectName());
         if(!arrayList.get(position).getTotalTasks().isEmpty())
@@ -86,9 +83,9 @@ public class AdapterProjectsClientList extends BaseAdapter implements StickyList
             aq.id(R.id.project_desc).text(Html.fromHtml(arrayList.get(position).getProjectDesc()));
 
         if(baseClass.getSelectedProject().equals(arrayList.get(position).getProjectID())){
-            convertView.setBackgroundColor(Color.parseColor("#ff99cc00"));
+            aq.id(R.id.selected_project).getView().setBackgroundColor(Color.parseColor("#99cc00"));
         }else{
-            convertView.setBackgroundResource(android.R.color.transparent);
+            aq.id(R.id.selected_project).getView().setBackgroundColor(Color.parseColor("#00000000"));
         }
         aq.id(R.id.project_edit).clicked(new View.OnClickListener() {
             @Override
@@ -107,7 +104,6 @@ public class AdapterProjectsClientList extends BaseAdapter implements StickyList
         });
 //        Animation animation = AnimationUtils.loadAnimation(ctx, (position > lastPosition) ? R.anim.up_from_bottom : R.anim.down_from_top);
 //        convertView.startAnimation(animation);
-        lastPosition = position;
         return convertView;
     }
     public void DeleteProject(Object caller, Object model) {

@@ -1,13 +1,23 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:descendantFocusability="blocksDescendants"
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
+    <View
+        android:id="@+id/selected_project"
+        android:layout_width="4dp"
+        android:layout_height="match_parent"
+        android:background="@android:color/transparent"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
+        android:layout_alignParentStart="true"/>
+
     <com.h6ah4i.android.materialshadowninepatch.MaterialShadowContainerView
         android:id="@+id/shadow_item_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/selected_project"
+        android:layout_toEndOf="@id/selected_project"
         app:ms9_useAmbientShadow="true"
         app:ms9_affectsDisplayedPosition="true"
         app:ms9_shadowTranslationZ="1dp"
@@ -60,10 +70,10 @@
                         android:textColor="@color/blackBackground"
                         android:gravity="center"
                         android:singleLine="true"
+                        android:scaleX="-1"
                         android:textSize="7sp"
                         android:layout_alignParentRight="true"
                         android:layout_alignParentEnd="true"
-                        android:scaleX="-1"
                         android:background="@mipmap/bubble_alert_black" />
                     <ImageView
                         android:id="@+id/delete1"
@@ -87,8 +97,8 @@
                         android:textColor="@color/blackBackground"
                         android:gravity="center"
                         android:singleLine="true"
-                        android:scaleX="-1"
                         android:textSize="7sp"
+                        android:scaleX="-1"
                         android:layout_alignParentRight="true"
                         android:layout_alignParentEnd="true"
                         android:background="@mipmap/bubble_alert_black" />
