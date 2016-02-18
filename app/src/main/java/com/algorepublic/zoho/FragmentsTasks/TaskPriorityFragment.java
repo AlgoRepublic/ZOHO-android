@@ -29,8 +29,7 @@ public class TaskPriorityFragment extends BaseFragment {
     public TaskPriorityFragment() {
     }
     @SuppressWarnings("unused")
-    public static TaskPriorityFragment newInstance(int pos) {
-        position = pos;
+    public static TaskPriorityFragment newInstance() {
         if (fragment==null) {
             fragment = new TaskPriorityFragment();
         }

@@ -1,4 +1,4 @@
-package com.algorepublic.zoho;
+package com.algorepublic.zoho.fragments;
 
 import android.accounts.AccountManager;
 import android.app.Activity;
@@ -23,9 +23,9 @@ import android.widget.AdapterView;
 import android.widget.Toast;
 
 import com.algorepublic.zoho.Models.GeneralModel;
+import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.adapters.AdapterUploadAttachment;
 import com.algorepublic.zoho.adapters.AttachmentList;
-import com.algorepublic.zoho.fragments.BaseFragment;
 import com.algorepublic.zoho.services.DocumentsService;
 import com.algorepublic.zoho.utils.BaseClass;
 import com.algorepublic.zoho.utils.Constants;

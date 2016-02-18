@@ -1,7 +1,6 @@
 package com.algorepublic.zoho.fragments;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.view.Gravity;
@@ -14,7 +13,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Toast;
 
-import com.algorepublic.zoho.UploadDocsFragment;
 import com.algorepublic.zoho.Models.GeneralModel;
 import com.algorepublic.zoho.Models.SubTaskAttachmentsModel;
 import com.algorepublic.zoho.R;

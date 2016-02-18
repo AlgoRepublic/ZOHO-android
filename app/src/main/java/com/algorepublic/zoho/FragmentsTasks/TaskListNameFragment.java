@@ -23,12 +23,10 @@ public class TaskListNameFragment extends BaseFragment {
     AdapterTaskListName adapter;
     AQuery aq;
     BaseClass baseClass;
-    public static int position;
     public TaskListNameFragment() {
     }
     @SuppressWarnings("unused")
-    public static TaskListNameFragment newInstance(int pos) {
-        position = pos;
+    public static TaskListNameFragment newInstance() {
         if (fragment==null) {
             fragment = new TaskListNameFragment();
         }

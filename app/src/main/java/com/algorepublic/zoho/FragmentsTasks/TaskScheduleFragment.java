@@ -26,13 +26,11 @@ public class TaskScheduleFragment extends BaseFragment {
     AQuery aq;
     BaseClass baseClass;
     String start_date,end_date;
-    public static int position;
     int start_day,start_month,start_year,end_day,end_month,end_year;
     public TaskScheduleFragment() {
     }
     @SuppressWarnings("unused")
-    public static TaskScheduleFragment newInstance(int pos) {
-        position = pos;
+    public static TaskScheduleFragment newInstance() {
         if (fragment==null) {
             fragment = new TaskScheduleFragment();
         }

@@ -20,17 +20,13 @@ import com.androidquery.AQuery;
 public class TaskEditTitleFragment extends BaseFragment {
 
     static TaskEditTitleFragment fragment;
-    public static int position;
     AQuery aq;
     BaseClass baseClass;
     public TaskEditTitleFragment() {
     }
     @SuppressWarnings("unused")
-    public static TaskEditTitleFragment newInstance(int pos) {
-        position = pos;
-        if (fragment==null) {
-            fragment = new TaskEditTitleFragment();
-        }
+    public static TaskEditTitleFragment newInstance() {
+        fragment = new TaskEditTitleFragment();
         return fragment;
     }
     @Override

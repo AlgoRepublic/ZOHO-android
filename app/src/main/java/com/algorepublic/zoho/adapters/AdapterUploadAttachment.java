@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
 import com.algorepublic.zoho.R;
-import com.algorepublic.zoho.UploadDocsFragment;
+import com.algorepublic.zoho.fragments.UploadDocsFragment;
 import com.androidquery.AQuery;
 import com.bumptech.glide.Glide;
 

@@ -20,7 +20,8 @@
     </View>
     <com.h6ah4i.android.materialshadowninepatch.MaterialShadowContainerView
         android:id="@+id/shadow_item_container"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
+        style="@style/ms9_DefaultShadowStyle"
         android:layout_height="wrap_content"
         app:ms9_useAmbientShadow="true"
         app:ms9_affectsDisplayedPosition="true"

@@ -49,10 +49,10 @@ public class TaskListBySubTasksFragment extends BaseFragment {
     public static ArrayList<TasksList> generalList = new ArrayList<>();
     BaseClass baseClass;
     StickyListHeadersListView listView;
-    int ID;
+    static TasksList tasksList;
     @SuppressLint("ValidFragment")
-    public TaskListBySubTasksFragment (int Id) {
-        ID = Id;
+    public TaskListBySubTasksFragment (TasksList list) {
+        tasksList = list;
     }
 //    @SuppressWarnings("unused")
 //    public static TaskListBySubTasksFragment newInstance(int Id) {
@@ -95,7 +95,11 @@ public class TaskListBySubTasksFragment extends BaseFragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.add_project:
-                startActivity(new Intent(getActivity(), TaskAddUpdateFragment.class));
+                if(baseClass.db.getInt("ProjectID") == 0){
+                    Toast.makeText(getActivity(), "Please Select Project", Toast.LENGTH_SHORT).show();
+                }else {
+                    callFragmentWithBackStack(R.id.container, TaskAddUpdateFragment.newInstance(tasksList.getTaskID()),"TaskAddUpdateFragment");
+                }
                 break;
         }
         return super.onOptionsItemSelected(item);
@@ -113,7 +117,7 @@ public class TaskListBySubTasksFragment extends BaseFragment {
 
         baseClass = ((BaseClass) getActivity().getApplicationContext());
         taskListService = new TaskListService(getActivity());
-        taskListService.getTasksListBySubTasks(ID, true, new CallBack(TaskListBySubTasksFragment.this, "TaskListBySubTasks"));
+        taskListService.getTasksListBySubTasks(tasksList.getTaskID(), true, new CallBack(TaskListBySubTasksFragment.this, "TaskListBySubTasks"));
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -248,6 +252,7 @@ public class TaskListBySubTasksFragment extends BaseFragment {
     }
     public void AddAllTasks(){
         allTaskList.clear();
+        Log.e("E","/"+TaskListBySubTaskModel.getInstance().responseObject.size());
         for (int loop = 0; loop < TaskListBySubTaskModel.getInstance().responseObject.size(); loop++) {
             TaskListBySubTaskModel.ResponseObject taskModel = TaskListBySubTaskModel.getInstance().responseObject.get(loop);
             TasksList tasksList = new TasksList();
@@ -270,12 +275,12 @@ public class TaskListBySubTasksFragment extends BaseFragment {
             tasksList.setCommentsCount(taskModel.commentsCount);
             tasksList.setDocumentsCount(taskModel.documentsCount);
             tasksList.setSubTasksCount(taskModel.subTasksCount);
-            tasksList.setTaskListName(TasksListByOwnerModel.getInstance().responseObject.get(loop).taskListName);
-            tasksList.setTaskListNameID(TasksListByOwnerModel.getInstance().responseObject.get(loop).tasklistID);
+            tasksList.setTaskListName(taskModel.taskListName);
+            tasksList.setTaskListNameID(taskModel.tasklistID);
             //************** Assignee List ************//
             ArrayList<TaskListAssignee> listAssignees = new ArrayList<>();
-            for (int loop1 = 0; loop1 < TasksListByOwnerModel.getInstance().responseObject.get(loop).taskObject.get(loop).userObject.size(); loop1++) {
-                TasksListByOwnerModel.Users users = TasksListByOwnerModel.getInstance().responseObject.get(loop).taskObject.get(loop).userObject.get(loop1);
+            for (int loop1 = 0; loop1 < taskModel.userObject.size(); loop1++) {
+                TaskListBySubTaskModel.Users users = taskModel.userObject.get(loop1);
                 TaskListAssignee assignee = new TaskListAssignee();
                 assignee.setUserID(users.responsibleID);
                 assignee.setFirstName(users.firstName);

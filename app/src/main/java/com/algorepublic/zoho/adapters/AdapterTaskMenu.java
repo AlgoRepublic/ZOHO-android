@@ -30,7 +30,6 @@ public class AdapterTaskMenu extends BaseAdapter {
 
     Context ctx; private LayoutInflater inflater;
     int lastPosition=0;
-    static int Pos;
     int[] menu_names = {
             R.string.task_desc,
             R.string.category,
@@ -47,8 +46,7 @@ public class AdapterTaskMenu extends BaseAdapter {
             R.mipmap.schedule,
             R.mipmap.priority
     };
-    public AdapterTaskMenu(Context context,int pos) {
-        Pos = pos;
+    public AdapterTaskMenu(Context context) {
         this.ctx = context;
         inflater = LayoutInflater.from(context);
     }
@@ -94,12 +92,12 @@ public class AdapterTaskMenu extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 for (int loop = 0; loop < menu_names.length; loop++) {
-                    if (loop==position) {
-                        lastPosition =position;
+                    if (loop == position) {
+                        lastPosition = position;
                         aq.id(R.id.checkbox).getCheckBox().setBackgroundColor(ctx.getResources().getColor(R.color.colorBaseMenu));
-                    }else {
-                        View  view = getViewByPosition(loop, TaskAddUpdateFragment.gridViewTaskMenu);
-                        AQuery aQuery =  new AQuery(view);
+                    } else {
+                        View view = getViewByPosition(loop, TaskAddUpdateFragment.gridViewTaskMenu);
+                        AQuery aQuery = new AQuery(view);
                         aQuery.id(R.id.checkbox).checked(false);
                         aQuery.id(R.id.checkbox).getCheckBox().setBackgroundColor(ctx.getResources().getColor(R.color.colorBaseHeader));
                     }
@@ -111,18 +109,27 @@ public class AdapterTaskMenu extends BaseAdapter {
     }
     public void CallFragment(int position){
         if(position==0){
-            callFragmentWithReplace(R.id.edittask_container, TaskEditTitleFragment.newInstance(Pos), "TaskTitle");
+            callFragmentWithReplace(R.id.edittask_container, TaskEditTitleFragment.newInstance(), "TaskTitle");
         }if(position==1){
-            callFragmentWithReplace(R.id.edittask_container, TaskListNameFragment.newInstance(Pos), "TaskListNameAttachment");
+            callFragmentWithReplace(R.id.edittask_container, TaskListNameFragment.newInstance(), "TaskListNameAttachment");
         }if(position==2){
-            callFragmentWithReplace(R.id.edittask_container, TaskAttachmentFragment.newInstance(TaskAddUpdateFragment.tasksObj,Pos), "TaskAttachment");
+            if (TaskAddUpdateFragment.tasksObj !=null) {
+                callFragmentWithReplace(R.id.edittask_container, TaskAttachmentFragment.newInstance(TaskAddUpdateFragment.tasksObj), "TaskAttachment");
+            }else{
+                callFragmentWithReplace(R.id.edittask_container, TaskAttachmentFragment.newInstance(), "TaskAttachment");
+            }
         }if(position==3){
-            callFragmentWithReplace(R.id.edittask_container, TaskAssignFragment.newInstance(
-                    TaskAddUpdateFragment.tasksObj,Pos), "TaskAssign");
+            if (TaskAddUpdateFragment.tasksObj !=null) {
+                callFragmentWithReplace(R.id.edittask_container, TaskAssignFragment.newInstance(
+                        TaskAddUpdateFragment.tasksObj), "TaskAssign");
+            }else{
+                callFragmentWithReplace(R.id.edittask_container,
+                        TaskAssignFragment.newInstance(), "TaskAssign");
+            }
         }if(position==4){
-            callFragmentWithReplace(R.id.edittask_container, TaskScheduleFragment.newInstance(Pos), "TaskSchedule");
+            callFragmentWithReplace(R.id.edittask_container, TaskScheduleFragment.newInstance(), "TaskSchedule");
         }if(position==5){
-            callFragmentWithReplace(R.id.edittask_container, TaskPriorityFragment.newInstance(Pos), "TasksPriority");
+            callFragmentWithReplace(R.id.edittask_container, TaskPriorityFragment.newInstance(), "TasksPriority");
         }
         BaseActivity.drawer.closeDrawer(GravityCompat.START);
     }

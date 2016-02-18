@@ -94,12 +94,10 @@ public class TasksListFragment extends BaseFragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.add_project:
-                if(baseClass.db.getInt("ProjectID") == 0){
+                if(baseClass.getSelectedProject().equalsIgnoreCase("0")){
                     Toast.makeText(getActivity(), "Please Select Project", Toast.LENGTH_SHORT).show();
                 }else {
-                    Intent intent = new Intent(getActivity(), TaskAddUpdateFragment.class);
-                    intent.putExtra("pos", -1);
-                    startActivity(intent);
+                    callFragmentWithBackStack(R.id.container, TaskAddUpdateFragment.newInstance(), "TaskAddUpdateFragment");
                 }
                 break;
         }
@@ -201,9 +199,9 @@ public class TasksListFragment extends BaseFragment {
             public void onOperItemClick(AdapterView<?> parent, View view, int position, long id) {
                 dialog.dismiss();
                 if (isLoaded())
-                    if (position == 0) {
-                        baseClass.setTaskSortType("DueDate");
-                    }
+                if (position == 0) {
+                    baseClass.setTaskSortType("DueDate");
+                }
                 if (position == 1) {
                     baseClass.setTaskSortType("Priority");
                 }
@@ -220,6 +218,13 @@ public class TasksListFragment extends BaseFragment {
     public void SortList(){
         if(baseClass.getTaskSortType().equalsIgnoreCase("DueDate")){
             Collections.sort(generalList, Date);
+            ArrayList<TasksList> lists = new ArrayList<>();
+            lists.addAll(generalList);generalList.clear();
+            for(int loop=0;loop<lists.size();loop++){
+                if(lists.get(loop).getProgress()<100){
+                    generalList.add(lists.get(loop));
+                }
+            }
         }
         if(baseClass.getTaskSortType().equalsIgnoreCase("Priority")){
             Collections.sort(generalList, byPriority);

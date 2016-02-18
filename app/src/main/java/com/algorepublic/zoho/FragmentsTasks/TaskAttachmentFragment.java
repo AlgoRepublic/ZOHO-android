@@ -48,14 +48,18 @@ public class TaskAttachmentFragment extends BaseFragment {
     public static ParallaxListView listView;
     static TasksList taskObj;
     DocumentsService service;
-    public static int position;
     public TaskAttachmentFragment() {
 
     }
     @SuppressWarnings("unused")
-    public static TaskAttachmentFragment newInstance(TasksList tasksList,int pos) {
-        position = pos;
+    public static TaskAttachmentFragment newInstance(TasksList tasksList) {
         taskObj = tasksList;
+        if (fragment==null) {
+            fragment = new TaskAttachmentFragment();
+        }
+        return fragment;
+    }
+    public static TaskAttachmentFragment newInstance() {
         if (fragment==null) {
             fragment = new TaskAttachmentFragment();
         }
@@ -85,8 +89,10 @@ public class TaskAttachmentFragment extends BaseFragment {
             }
         });
         service = new DocumentsService(getActivity());
-        if(TaskAddUpdateFragment.filesList.size()==0){
-            service.getDocsBySubTasks(taskObj.getTaskID(), true, new CallBack(TaskAttachmentFragment.this, "DocumentsList"));
+        if(TaskAddUpdateFragment.filesList.size()==0) {
+            if (TaskAddUpdateFragment.callPosition == 2) {
+                service.getDocsBySubTasks(taskObj.getTaskID(), true, new CallBack(TaskAttachmentFragment.this, "DocumentsList"));
+            }
         }
         adapter = new AdapterTaskAttachment(getActivity());
         listView.setAdapter(adapter);

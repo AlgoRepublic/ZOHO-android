@@ -6,19 +6,20 @@
     android:paddingEnd="10dp"
     android:paddingLeft="10dp"
     android:paddingStart="10dp"
-    android:layout_marginBottom="5dp"
+    android:layout_marginBottom="10dp"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <com.h6ah4i.android.materialshadowninepatch.MaterialShadowContainerView
         android:id="@+id/shadow_item_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        style="@style/ms9_CompositeShadowStyle"
         app:ms9_useAmbientShadow="true"
         app:ms9_affectsDisplayedPosition="true"
         app:ms9_shadowTranslationZ="1dp"
         app:ms9_shadowElevation="2dp">
     <RelativeLayout
-        android:background="@color/colorBaseWrapper"
+        android:background="@drawable/comment_bg"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
         android:layout_width="match_parent">

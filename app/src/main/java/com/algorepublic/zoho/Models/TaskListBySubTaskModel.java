@@ -83,6 +83,14 @@ public class TaskListBySubTaskModel  {
         @SerializedName("CommentsCount")
         public Integer commentsCount;
 
+        @SerializedName("TaskListID")
+        @Expose
+        public Integer tasklistID;
+
+        @SerializedName("TaskListName")
+        @Expose
+        public String taskListName;
+
         @SerializedName("Users")
         @Expose
         public ArrayList<Users> userObject = new ArrayList<Users>();

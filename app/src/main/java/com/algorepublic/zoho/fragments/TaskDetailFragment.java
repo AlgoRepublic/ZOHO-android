@@ -169,7 +169,7 @@ public class TaskDetailFragment extends BaseFragment {
         aq.id(R.id.subtask).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            callFragmentWithBackStack(R.id.container, new TaskListBySubTasksFragment(tasksList.getTaskID()), "TaskListBySubTasksFragment");
+            callFragmentWithBackStack(R.id.container, new TaskListBySubTasksFragment(tasksList), "TaskListBySubTasksFragment");
             }
         });
         if(tasksList.getProgress()==100){
@@ -228,10 +228,12 @@ public class TaskDetailFragment extends BaseFragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.edit_task:
-                Log.e("TaskID","/"+tasksList.getProjectID());
+                Log.e("TaskName","/"+tasksList.getProjectName());
+                baseClass.setSelectedProject(Integer.toString(tasksList.getProjectID()));
                 if (tasksList.getProjectID() >0) {
+                    baseClass.db.putString("ProjectName",tasksList.getProjectName());
                     baseClass.setSelectedProject(Integer.toString(tasksList.getProjectID()));
-                    callFragmentWithBackStack(R.id.container, TaskAddUpdateFragment.newInstance(tasksList, position), "TaskAddUpdateFragment");
+                    callFragmentWithBackStack(R.id.container, TaskAddUpdateFragment.newInstance(tasksList), "TaskAddUpdateFragment");
                 }
                     break;
         }
@@ -285,7 +287,6 @@ public class TaskDetailFragment extends BaseFragment {
             seekBarCompat.setProgress(0);
             aq.id(R.id.mark_as_done).text("Mark as done");
             tasksList.setProgress(0);
-
         }}
 
 
@@ -300,7 +301,6 @@ public class TaskDetailFragment extends BaseFragment {
             seekBarCompat.setProgress(0);
             aq.id(R.id.mark_as_done).text("Mark as done");
             tasksList.setProgress(0);
-
         }
         else
         {

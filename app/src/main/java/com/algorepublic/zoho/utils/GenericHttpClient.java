@@ -98,6 +98,60 @@ public class GenericHttpClient {
         }
         return message;
     }
+    public String postAddTaskByParent(String url,ArrayList<Integer> assignee,String parentID,
+                                      ArrayList<AttachmentList> files ,BaseClass baseClass) throws IOException {
+
+        HttpClient hc = new DefaultHttpClient();
+        String message =null;
+        HttpPost p = new HttpPost(url);
+        MultipartEntity mpEntity = new MultipartEntity(HttpMultipartMode.BROWSER_COMPATIBLE);
+        try {
+            for(int i=0;i<files.size();i++) {
+                Log.e("File","/"+files.get(i).getFile().getName());
+                mpEntity.addPart("files["+i+"]",new FileBody(files.get(i).getFile()));
+            }
+            for(int i=0;i<assignee.size();i++) {
+                Log.e("Assignee", "/" + assignee.get(i));
+                mpEntity.addPart("taskResponsible["+i+"]", new StringBody(Integer.toString(assignee.get(i))));
+            }
+            mpEntity.addPart("CreateBy",new StringBody(baseClass.getUserId()));
+            mpEntity.addPart("UpdateBy",new StringBody(baseClass.getUserId()));
+            mpEntity.addPart("OwnerID", new StringBody(baseClass.getUserId()));
+            mpEntity.addPart("TaskListID",new StringBody(Integer.toString(BaseClass.db.getInt("TaskListNameID"))));
+            mpEntity.addPart("ParentTaskID",new StringBody(parentID));
+            mpEntity.addPart("Priority", new StringBody(Integer.toString(BaseClass.db.getInt("Priority"))));
+            mpEntity.addPart("ProjectID", new StringBody(Integer.toString(BaseClass.db.getInt("ProjectID"))));
+            mpEntity.addPart("Title", new StringBody(BaseClass.db.getString("TaskName")));
+            mpEntity.addPart("Description", new StringBody(BaseClass.db.getString("TaskDesc")));
+            if(BaseClass.db.getString("StartDate").equalsIgnoreCase("")){
+                BaseClass.db.putString("StartDate","0001-01-01");
+            }
+            if(BaseClass.db.getString("EndDate").equalsIgnoreCase("")){
+                BaseClass.db.putString("EndDate","0001-01-01");
+            }
+            mpEntity.addPart("StartDate", new StringBody(BaseClass.db.getString("StartDate")));
+            mpEntity.addPart("EndDate", new StringBody(BaseClass.db.getString("EndDate")));
+            p.setEntity(mpEntity);
+
+            Log.e("CreateBy", "/" + baseClass.getUserId());
+            Log.e("Title", "/"+BaseClass.db.getString("TaskName"));
+            Log.e("Description", "/"+BaseClass.db.getString("TaskDesc"));
+            Log.e("StartDate","/"+ BaseClass.db.getString("StartDate"));
+            Log.e("EndDate", "/"+BaseClass.db.getString("EndDate"));
+            Log.e("TaskListID","/"+ BaseClass.db.getInt("TaskListNameID"));
+            Log.e("ParentTaskID","/"+ parentID);
+            Log.e("Priority", "/"+BaseClass.db.getInt("Priority"));
+            Log.e("ProjectID", "/"+BaseClass.db.getInt("ProjectID"));
+
+            HttpResponse resp = hc.execute(p);
+            if (resp != null) {
+                message = convertStreamToString(resp.getEntity().getContent());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return message;
+    }
     public String postUpdateTask(String url,ArrayList<Integer> assignee,ArrayList<AttachmentList> files, ArrayList<Integer> filesToDelete,BaseClass baseClass) throws IOException {
 
         HttpClient hc = new DefaultHttpClient();

@@ -237,6 +237,7 @@ public class ProjectsFragment extends BaseFragment{
             }else {
                 baseClass.setSelectedProject(((TextView) view.findViewById(R.id.project_id)).getText().toString());
                 baseClass.db.putInt("ProjectID", Integer.parseInt(baseClass.getSelectedProject()));
+                baseClass.db.putString("ProjectName", ((TextView) view.findViewById(R.id.project_title)).getText().toString());
             }
             SetGeneralClientAdapter();
         }
@@ -251,6 +252,7 @@ public class ProjectsFragment extends BaseFragment{
             }else {
                 baseClass.setSelectedProject(((TextView) view.findViewById(R.id.project_id)).getText().toString());
                 baseClass.db.putInt("ProjectID", Integer.parseInt(baseClass.getSelectedProject()));
+                baseClass.db.putString("ProjectName", ((TextView) view.findViewById(R.id.project_title)).getText().toString());
             }
             SetClientProjectsAdapter();
         }
@@ -265,6 +267,7 @@ public class ProjectsFragment extends BaseFragment{
             }else {
                 baseClass.setSelectedProject(((TextView) view.findViewById(R.id.project_id)).getText().toString());
                 baseClass.db.putInt("ProjectID", Integer.parseInt(baseClass.getSelectedProject()));
+                baseClass.db.putString("ProjectName", ((TextView) view.findViewById(R.id.project_title)).getText().toString());
             }
             SetDepartmentProjectsAdapter();
         }
