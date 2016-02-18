@@ -56,6 +56,7 @@ public class BaseClass extends Application {
     private String UserLocation = "UserLocation";
     private String UserAboutMe = "UserAboutMe";
     private String UserImageUrl = "UserImageUrl";
+    private String TaskFilterType = "TaskFilterType";
     private String TaskSortType = "TaskSortType";
     private String DocsSortType = "DocsSortType";
 
@@ -119,12 +120,19 @@ public class BaseClass extends Application {
         return appSharedPrefs.getString(UserLanguage, "en");
     }
 
+    public void setTaskFilterType(String taskFilterType) {
+        prefsEditor.putString(TaskFilterType, taskFilterType).commit();
+    }
+
+    public String getTaskFilterType() {
+        return appSharedPrefs.getString(TaskFilterType, "DueDate");
+    }
     public void setTaskSortType(String taskSortType) {
         prefsEditor.putString(TaskSortType, taskSortType).commit();
     }
 
     public String getTaskSortType() {
-        return appSharedPrefs.getString(TaskSortType, "DueDate");
+        return appSharedPrefs.getString(TaskSortType, "All");
     }
 
     public void setDocsSortType(String docsSortType) {

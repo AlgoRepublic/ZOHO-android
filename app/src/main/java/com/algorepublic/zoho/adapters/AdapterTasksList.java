@@ -96,13 +96,13 @@ public class AdapterTasksList extends BaseAdapter implements StickyListHeadersAd
 
         aq_header = new AQuery(convertView);
 
-        if(baseClass.getTaskSortType().equalsIgnoreCase("DueDate")) {
+        if(baseClass.getTaskFilterType().equalsIgnoreCase("DueDate")) {
             if (tasksLists.get(position).getHeader().equalsIgnoreCase("3/0/1"))
                 aq_header.id(R.id.header).text("No Due Date");
             else
                 aq_header.id(R.id.header).text(tasksLists.get(position).getHeader());
         }
-        if(baseClass.getTaskSortType().equalsIgnoreCase("Priority"))
+        if(baseClass.getTaskFilterType().equalsIgnoreCase("Priority"))
         {
             if(tasksLists.get(position).getPriority()==0)
             {
@@ -121,11 +121,11 @@ public class AdapterTasksList extends BaseAdapter implements StickyListHeadersAd
                 aq_header.id(R.id.header).text("High");
             }
         }
-        if(baseClass.getTaskSortType().equalsIgnoreCase("Alphabetically"))
+        if(baseClass.getTaskFilterType().equalsIgnoreCase("Alphabetically"))
         {
             aq_header.id(R.id.header).text(tasksLists.get(position).getTaskName().substring(0, 1));
         }
-        if(baseClass.getTaskSortType().equalsIgnoreCase("TaskList"))
+        if(baseClass.getTaskFilterType().equalsIgnoreCase("TaskList"))
         {
             if(tasksLists.get(position).getTaskListNameID() == 0)
             aq_header.id(R.id.header).text("General");
@@ -139,13 +139,13 @@ public class AdapterTasksList extends BaseAdapter implements StickyListHeadersAd
     public long getHeaderId(int position) {
         long type = 0;
         //return the first character of the country as ID because this is what headers are based upon
-        if(baseClass.getTaskSortType().equalsIgnoreCase("DueDate"))
+        if(baseClass.getTaskFilterType().equalsIgnoreCase("DueDate"))
             type = Long.parseLong(tasksLists.get(position).getEndMilli());
-        if(baseClass.getTaskSortType().equalsIgnoreCase("Priority"))
+        if(baseClass.getTaskFilterType().equalsIgnoreCase("Priority"))
             type = tasksLists.get(position).getPriority();
-        if(baseClass.getTaskSortType().equalsIgnoreCase("Alphabetically"))
+        if(baseClass.getTaskFilterType().equalsIgnoreCase("Alphabetically"))
             type = tasksLists.get(position).getTaskName().charAt(0);
-        if(baseClass.getTaskSortType().equalsIgnoreCase("TaskList"))
+        if(baseClass.getTaskFilterType().equalsIgnoreCase("TaskList"))
             type = tasksLists.get(position).getTaskListNameID();
 
         return type;

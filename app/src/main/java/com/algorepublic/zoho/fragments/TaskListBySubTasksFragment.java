@@ -197,32 +197,32 @@ public class TaskListBySubTasksFragment extends BaseFragment {
                 dialog.dismiss();
                 if (isLoaded())
                     if (position == 0) {
-                        baseClass.setTaskSortType("DueDate");
+                        baseClass.setTaskFilterType("DueDate");
                     }
                 if (position == 1) {
-                    baseClass.setTaskSortType("Priority");
+                    baseClass.setTaskFilterType("Priority");
                 }
                 if (position == 2) {
-                    baseClass.setTaskSortType("Alphabetically");
+                    baseClass.setTaskFilterType("Alphabetically");
                 }
                 if (position == 3) {
-                    baseClass.setTaskSortType("TaskList");
+                    baseClass.setTaskFilterType("TaskList");
                 }
                 SortList();
             }
         });
     }
     public void SortList(){
-        if(baseClass.getTaskSortType().equalsIgnoreCase("DueDate")){
+        if(baseClass.getTaskFilterType().equalsIgnoreCase("DueDate")){
             Collections.sort(generalList, Date);
         }
-        if(baseClass.getTaskSortType().equalsIgnoreCase("Priority")){
+        if(baseClass.getTaskFilterType().equalsIgnoreCase("Priority")){
             Collections.sort(generalList, byPriority);
         }
-        if(baseClass.getTaskSortType().equalsIgnoreCase("Alphabetically")){
+        if(baseClass.getTaskFilterType().equalsIgnoreCase("Alphabetically")){
             Collections.sort(generalList);
         }
-        if(baseClass.getTaskSortType().equalsIgnoreCase("TaskList")){
+        if(baseClass.getTaskFilterType().equalsIgnoreCase("TaskList")){
             Collections.sort(generalList, byTaskList);
         }
         SetAdapterList();
