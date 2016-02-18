@@ -74,7 +74,7 @@ public class AddProjectFragment extends BaseFragment {
                     Snackbar.make(getView(),"Please Add Project Description",Snackbar.LENGTH_SHORT).show();
                     return false;
                 }
-                if(!aq.id(R.id.private_radio).isChecked() || !aq.id(R.id.public_radio).isChecked()){
+                if(!aq.id(R.id.private_radio).isChecked() && !aq.id(R.id.public_radio).isChecked()){
                     Snackbar.make(getView(),"Please Select The Access Option",Snackbar.LENGTH_SHORT).show();
                     return false;
                 }

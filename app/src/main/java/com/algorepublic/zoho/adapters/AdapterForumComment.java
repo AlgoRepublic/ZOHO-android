@@ -46,7 +46,7 @@ public class AdapterForumComment extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        convertView = l_Inflater.inflate(R.layout.layout_forumdetail_coment, null);
+        convertView = l_Inflater.inflate(R.layout.layout_comments_maker, null);
         aq = new AQuery(convertView);
 
         aq.id(R.id.forum_title).text(getItem(position).user.firstName+" "+

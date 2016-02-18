@@ -102,7 +102,8 @@ public class DocsPreviewFragment extends BaseFragment {
         TaskComments taskComments = new TaskComments();
         taskComments.setComment(comment);
         taskComments.setUserName(baseClass.getFirstName());
-        taskComments.setUserImage("http://www.planwallpaper.com/static/images/magic-of-blue-universe-images.jpg");
+        taskComments.setUserImage(Constants.UserImage_URL + baseClass.getProfileImage());
+        Log.e("Image",Constants.UserImage_URL+baseClass.getProfileImage());
         taskComments.setDateTime(GetDateTime());
         arrayList.add(taskComments);
         adapter.notifyDataSetChanged();

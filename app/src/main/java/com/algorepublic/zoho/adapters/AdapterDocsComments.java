@@ -43,19 +43,18 @@ public class AdapterDocsComments extends BaseAdapter {
         if (convertView == null) {
             convertView = l_Inflater.inflate(R.layout.layout_comments_maker, null);
             holder = new ViewHolder();
-            holder.taskComment = (TextView) convertView.findViewById(R.id.comment_text);
-            holder.userName = (TextView) convertView.findViewById(R.id.user_name);
-            holder.userImage = (RoundedImageView) convertView.findViewById(R.id.user_image);
-            holder.dateTime = (TextView) convertView.findViewById(R.id.comment_datetime);
+            holder.taskComment = (TextView) convertView.findViewById(R.id.forum_description);
+            holder.userName = (TextView) convertView.findViewById(R.id.forum_title);
+            holder.userImage = (RoundedImageView) convertView.findViewById(R.id.comment_image);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
 
         holder.taskComment.setText(DocsPreviewFragment.arrayList.get(position).getComment());
-        holder.userName.setText(DocsPreviewFragment.arrayList.get(position).getUserName());
+        holder.userName.setText(DocsPreviewFragment.arrayList.get(position).getUserName()
+                + " , " + DocsPreviewFragment.arrayList.get(position).getDateTime());
         Glide.with(ctx).load(DocsPreviewFragment.arrayList.get(position).getUserImage()).into(holder.userImage);
-        holder.dateTime.setText(DocsPreviewFragment.arrayList.get(position).getDateTime());
 
         return convertView;
     }
@@ -63,6 +62,5 @@ public class AdapterDocsComments extends BaseAdapter {
         TextView taskComment;
         TextView userName;
         RoundedImageView userImage;
-        TextView dateTime;
     }
 }

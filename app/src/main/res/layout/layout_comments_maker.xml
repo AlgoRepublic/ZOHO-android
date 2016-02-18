@@ -1,69 +1,46 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+    android:background="@drawable/comment_bg"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-    <LinearLayout
-        android:orientation="horizontal"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:padding="5dp"
         android:layout_width="match_parent"
-        android:padding="10dp"
         android:layout_height="wrap_content">
-    <com.makeramen.roundedimageview.RoundedImageView
-        android:id="@+id/user_image"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:scaleType="fitXY"
-        app:riv_corner_radius="5dip"
-        app:riv_border_color="#333333"
-        app:riv_mutate_background="true"
-        app:riv_tile_mode="clamp"
-        app:riv_oval="false"
-        android:src="@drawable/nav_user" />
-        <RelativeLayout
-            android:orientation="horizontal"
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:scaleType="fitXY"
+            app:riv_corner_radius="5dip"
+            app:riv_border_color="#333333"
+            app:riv_mutate_background="true"
+            app:riv_tile_mode="clamp"
+            app:riv_oval="false"
+            android:src="@drawable/nav_user"
+            android:id="@+id/comment_image" />
+        <TextView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <TextView
-                android:id="@+id/user_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/blue"
-                android:maxLines="2"
-                android:ellipsize="end"
-                android:textSize="14sp"
-                android:text="sd"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="10dp" />
-            <TextView
-                android:id="@+id/comment_datetime"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/blue"
-                android:maxLines="2"
-                android:layout_below="@+id/user_name"
-                android:ellipsize="end"
-                android:textSize="12sp"
-                android:text="sd"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="10dp" />
-            <TextView
-                android:id="@+id/comment_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/blue"
-                android:maxLines="2"
-                android:layout_below="@+id/comment_datetime"
-                android:ellipsize="end"
-                android:textSize="14sp"
-                android:text="sd"
-                android:layout_marginTop="10dp"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="10dp" />
-            </RelativeLayout>
-</LinearLayout>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="2dp" />
-</LinearLayout>
+            android:layout_height="wrap_content"
+            android:text="Test Forum 1"
+            android:textStyle="bold"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="5dp"
+            android:textColor="@color/colorBaseHeader"
+            android:textSize="14sp"
+            android:id="@+id/forum_title"
+            android:layout_alignTop="@+id/comment_image"
+            android:layout_toEndOf="@+id/comment_image" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/forum_description"
+            android:textSize="14sp"
+            android:lines="2"
+            android:text="daadadad"
+            android:textColor="@color/colorBaseHeader"
+            android:layout_below="@+id/comment_image"
+            android:layout_alignStart="@+id/forum_title" />
+    </RelativeLayout>
+</RelativeLayout>

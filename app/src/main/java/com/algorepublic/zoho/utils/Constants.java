@@ -3,6 +3,7 @@ package com.algorepublic.zoho.utils;
 public class Constants {
 	public static String BASE_URL = "http://api.jitpac.com";
 	public static String Image_URL = "http://jitpac.com/FileUploadsManager/uploads/";
+	public static String UserImage_URL = "http://jitpac.com";
 	public static String Login_API = BASE_URL + "/User/Login";
 	public static String GetUser_API = BASE_URL+ "/User/GetById";
 	public static String GetUserRole_API = BASE_URL+ "/User/GetUserRolesList";
@@ -39,5 +40,8 @@ public class Constants {
 	public static String LinkedIn_API = "https://api.linkedin.com/v1/people/~:(id,first-name,last-name,headline,pictureUrl)";
 	public static String GetListByProject_User = BASE_URL+ "/User/GetListByProject?";
 
-
+	public static String GetDepartment_API = BASE_URL+ "/Department/GetList";
+	public static String CreateDepartment_API = BASE_URL+ "/Department/CreateDepartment?"; //Name, CreateBy
+	public static String UpdateDepartment_API = BASE_URL+ "/Department/UpdateDepartment?";
+	public static String DeleteDepartment_API = BASE_URL+ "/Department/DeleteDepartment?";
 }

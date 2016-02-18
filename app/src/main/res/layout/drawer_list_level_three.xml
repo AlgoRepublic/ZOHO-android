@@ -6,11 +6,11 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="7dp"
-        android:paddingBottom="7dp"
+        android:paddingTop="1dp"
+        android:paddingBottom="1dp"
         android:layout_marginLeft="6dp"
         android:layout_marginRight="6dp"
-        android:background="@drawable/rounded_edittext"
+        android:background="@drawable/roundable_corner"
         android:orientation="horizontal">
 
         <TextView
@@ -24,14 +24,14 @@
             android:layout_centerHorizontal="true"
             android:text="lksahdgiuas"
             android:gravity="center"
-            android:textColor="@color/colorBaseWrapper" />
+            android:textColor="@color/colorBaseHeader" />
 
         <ImageView
-            android:src="@drawable/drawer_level_three"
+            android:src="@drawable/drawer_level_two"
             android:id="@+id/explist_indicator"
             android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
-            android:layout_width="20dp"
-            android:layout_height="20dp"/>
+            android:layout_width="12dp"
+            android:layout_height="12dp"/>
     </RelativeLayout>
 </RelativeLayout>
