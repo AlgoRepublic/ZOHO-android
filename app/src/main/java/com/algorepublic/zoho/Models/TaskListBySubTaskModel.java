@@ -91,6 +91,9 @@ public class TaskListBySubTaskModel  {
         @Expose
         public String taskListName;
 
+        @SerializedName("ParentTaskID")
+        public Integer parentTaskID;
+
         @SerializedName("Users")
         @Expose
         public ArrayList<Users> userObject = new ArrayList<Users>();

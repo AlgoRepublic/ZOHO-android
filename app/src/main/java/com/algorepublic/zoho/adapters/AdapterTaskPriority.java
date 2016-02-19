@@ -49,9 +49,7 @@ public class AdapterTaskPriority extends BaseAdapter {
 
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
-        if (convertView == null) {
-                convertView = l_Inflater.inflate(R.layout.layout_priorty_row, null);
-        }
+        convertView = l_Inflater.inflate(R.layout.layout_priorty_row, null);
         aq = new AQuery(convertView);
         if(selectedIndex == position)
         {

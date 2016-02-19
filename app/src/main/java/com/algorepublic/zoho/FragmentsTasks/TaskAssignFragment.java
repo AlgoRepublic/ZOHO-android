@@ -3,9 +3,11 @@ package com.algorepublic.zoho.FragmentsTasks;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import com.algorepublic.zoho.adapters.TasksList;
@@ -28,6 +30,7 @@ public class TaskAssignFragment extends BaseFragment {
     AQuery aq;
     TaskListService service;
     BaseClass baseClass;
+    public static ListView listView;
     static TasksList tasksList;
     public TaskAssignFragment() {
     }
@@ -54,23 +57,10 @@ public class TaskAssignFragment extends BaseFragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment_forums
        View view =  inflater.inflate(R.layout.fragment_task_assign, container, false);
+        listView = (ListView) view.findViewById(R.id.listview_employees);
         aq = new AQuery(view);
         baseClass = ((BaseClass) getActivity().getApplicationContext());
-        if(tasksList !=null) {
-            if (tasksList.getListAssignees().size() == 0) {
-                try {
-                    for (int loop = 0;
-                         loop < tasksList.getListAssignees().size(); loop++) {
-                        if (tasksList.getListAssignees().get(loop).getUserID() != -1) {
-                            TaskAddUpdateFragment.assigneeList.add(
-                                    tasksList.getListAssignees().get(loop).getUserID());
-                        } else
-                            TaskAddUpdateFragment.assigneeList.add(-1);
-                    }
-                } catch (IndexOutOfBoundsException e) {
-                }
-            }
-        }
+
         service = new TaskListService(getActivity());
       if(tasksList == null) {
           service.getTaskAssignee(Integer.parseInt(baseClass.getSelectedProject()), true, new CallBack(TaskAssignFragment.this, "TaskAssignee"));
@@ -82,7 +72,7 @@ public class TaskAssignFragment extends BaseFragment {
     public void TaskAssignee(Object caller, Object model) {
         TaskAssigneeModel.getInstance().setList((TaskAssigneeModel) model);
         if (TaskAssigneeModel.getInstance().responseCode == 100) {
-            aq.id(R.id.listview_employees).adapter(new AdapterTaskAssignee(getActivity()));
+            listView.setAdapter(new AdapterTaskAssignee(getActivity()));
         }
         else
         {

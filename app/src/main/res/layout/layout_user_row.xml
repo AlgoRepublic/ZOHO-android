@@ -9,13 +9,8 @@
         android:layout_height="wrap_content"
         android:id="@+id/relativeLayout">
 
-        <com.makeramen.roundedimageview.RoundedImageView
+        <com.mikhaellopez.circularimageview.CircularImageView
             android:scaleType="fitXY"
-            app:riv_corner_radius="5dip"
-            app:riv_border_color="#333333"
-            app:riv_mutate_background="true"
-            app:riv_tile_mode="clamp"
-            app:riv_oval="false"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:background="@mipmap/image_comment"
@@ -45,7 +40,7 @@
         <TextView
             android:layout_width="70dp"
             android:layout_height="wrap_content"
-            android:id="@+id/forum_descriptionq"
+            android:id="@+id/forum_description"
             android:textSize="14sp"
             android:text="daadadad"
             android:textColor="@color/colorBaseHeader"

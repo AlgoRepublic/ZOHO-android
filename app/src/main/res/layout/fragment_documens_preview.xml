@@ -20,17 +20,14 @@
             android:layout_width="match_parent"
             android:id="@+id/layout1"
             android:layout_height="wrap_content">
-            <com.makeramen.roundedimageview.RoundedImageView
+            <com.mikhaellopez.circularimageview.CircularImageView
                 android:id="@+id/user_image"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:scaleType="fitXY"
+                app:border_width="1dp"
+                app:border_color="@color/colorBaseHeader"
                 android:layout_centerVertical="true"
-                app:riv_corner_radius="5dip"
-                app:riv_border_color="#333333"
-                app:riv_mutate_background="true"
-                app:riv_tile_mode="clamp"
-                app:riv_oval="false"
                 android:src="@drawable/nav_user" />
             <TextView
                 android:id="@+id/user_name"

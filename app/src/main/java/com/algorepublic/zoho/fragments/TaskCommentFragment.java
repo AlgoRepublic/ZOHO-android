@@ -19,6 +19,7 @@ import com.algorepublic.zoho.adapters.TaskComments;
 import com.algorepublic.zoho.services.CallBack;
 import com.algorepublic.zoho.services.TaskListService;
 import com.algorepublic.zoho.utils.BaseClass;
+import com.algorepublic.zoho.utils.Constants;
 import com.androidquery.AQuery;
 
 import java.util.ArrayList;
@@ -67,7 +68,7 @@ public class TaskCommentFragment extends BaseFragment {
         adapter = new AdapterTaskComments(getActivity());
         listView.setAdapter(adapter);
         baseClass = ((BaseClass) getActivity().getApplicationContext());
-       service.getCommentsByTask(4,
+       service.getCommentsByTask(position,
                true,new CallBack(TaskCommentFragment.this,"TaskComments"));
         aq.id(R.id.comment_user).getTextView().setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
@@ -124,7 +125,7 @@ public class TaskCommentFragment extends BaseFragment {
     public void PerformAction()
     {
         String comment = aq.id(R.id.comment_user).getText().toString();
-        service.createComment(comment,4,Integer.parseInt(baseClass.getUserId()),false,
+        service.createComment(comment,position,Integer.parseInt(baseClass.getUserId()),false,
                 new CallBack(TaskCommentFragment.this,"CreateComment"));
         if(aq.id(R.id.comment_user).getText().toString().equalsIgnoreCase("")) {
             Toast.makeText(getActivity(), "Enter Your Comment!", Toast.LENGTH_SHORT).show();

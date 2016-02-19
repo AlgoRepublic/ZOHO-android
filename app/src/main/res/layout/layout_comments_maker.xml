@@ -1,22 +1,29 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@drawable/comment_bg"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+    <com.h6ah4i.android.materialshadowninepatch.MaterialShadowContainerView
+        android:id="@+id/shadow_item_container"
+        android:layout_width="wrap_content"
+        style="@style/ms9_DefaultShadowStyle"
+        android:layout_height="wrap_content"
+        app:ms9_useAmbientShadow="true"
+        app:ms9_affectsDisplayedPosition="true"
+        app:ms9_shadowTranslationZ="1dp"
+        app:ms9_shadowElevation="2dp">
     <RelativeLayout
         android:padding="5dp"
+        android:background="@color/white"
+        android:layout_marginBottom="4dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <com.makeramen.roundedimageview.RoundedImageView
+        <com.mikhaellopez.circularimageview.CircularImageView
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:scaleType="fitXY"
-            app:riv_corner_radius="5dip"
-            app:riv_border_color="#333333"
-            app:riv_mutate_background="true"
-            app:riv_tile_mode="clamp"
-            app:riv_oval="false"
+            app:border_width="1dp"
+            app:border_color="@color/colorBaseHeader"
             android:src="@drawable/nav_user"
             android:id="@+id/comment_image" />
         <TextView
@@ -43,4 +50,5 @@
             android:layout_below="@+id/comment_image"
             android:layout_alignStart="@+id/forum_title" />
     </RelativeLayout>
+</com.h6ah4i.android.materialshadowninepatch.MaterialShadowContainerView>
 </RelativeLayout>

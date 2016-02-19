@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ListView;
 
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.adapters.AdapterTaskPriority;
@@ -25,7 +26,7 @@ public class TaskPriorityFragment extends BaseFragment {
     AQuery aq;
     BaseClass baseClass;
     public static int position;
-
+    ListView listView;
     public TaskPriorityFragment() {
     }
     @SuppressWarnings("unused")
@@ -44,6 +45,7 @@ public class TaskPriorityFragment extends BaseFragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment_forums
         View view =  inflater.inflate(R.layout.fragment_task_priority, container, false);
+        listView = (ListView) view.findViewById(R.id.listview_priority);
         aq = new AQuery(view);
         baseClass = ((BaseClass) getActivity().getApplicationContext());
         ArrayList<String> arrayList = new ArrayList<>();
@@ -51,17 +53,17 @@ public class TaskPriorityFragment extends BaseFragment {
         arrayList.add("Low");
         arrayList.add("Medium");
         arrayList.add("High");
-        aq.id(R.id.listview_priority).itemClicked(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                baseClass.db.putInt("Priority",position);
-                adapter.setSelectedIndex(position);
-                adapter.notifyDataSetChanged();
-            }
-        });
         adapter = new AdapterTaskPriority(getActivity(), arrayList);
         adapter.setSelectedIndex(baseClass.db.getInt("Priority"));
-        aq.id(R.id.listview_priority).adapter(adapter);
+        listView.setAdapter(adapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                baseClass.db.putInt("Priority", position);
+                adapter.setSelectedIndex(position);
+                listView.setAdapter(adapter);
+            }
+        });
         return view;
     }
 }

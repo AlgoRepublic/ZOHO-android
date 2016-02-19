@@ -48,25 +48,19 @@ public class TaskAddUpdateFragment extends BaseFragment {
 
     public static TaskAddUpdateFragment newInstance() {
         callPosition = 0;
-        if (fragment==null) {
-            fragment = new TaskAddUpdateFragment();
-        }
+        fragment = new TaskAddUpdateFragment();
         return fragment;
     }
     public static TaskAddUpdateFragment newInstance(int taskId) {
         tasID = taskId;
         callPosition = 1;
-        if (fragment==null) {
-            fragment = new TaskAddUpdateFragment();
-        }
+        fragment = new TaskAddUpdateFragment();
         return fragment;
     }
     public static TaskAddUpdateFragment newInstance(TasksList tasksList) {
         tasksObj = tasksList;
         callPosition= 2;
-        if (fragment==null) {
-            fragment = new TaskAddUpdateFragment();
-        }
+        fragment = new TaskAddUpdateFragment();
         return fragment;
     }
     @Override
@@ -104,7 +98,11 @@ public class TaskAddUpdateFragment extends BaseFragment {
                     new NewTaskByParent().execute();
                 }
                 if(callPosition == 2){
-                    new UpdateTask().execute();
+                    if(tasksObj.getParentTaskID() == 0) {
+                        new UpdateTask().execute();
+                    }else{
+                        new UpdateTaskByParent().execute();
+                    }
                 }
                 break;
         }
@@ -121,6 +119,7 @@ public class TaskAddUpdateFragment extends BaseFragment {
         //baseClass.setSelectedProject("0");
         tasksObj=null;
         tasID =0;
+        assigneeList.clear();
         super.onDestroyView();
     }
 
@@ -137,17 +136,27 @@ public class TaskAddUpdateFragment extends BaseFragment {
         filesList = new ArrayList<>();
         filesToDelete = new ArrayList<>();
         assigneeList = new ArrayList<>();
-        assigneeList.clear();
         baseClass = ((BaseClass) getActivity().getApplicationContext());
         dialog = new ACProgressFlower.Builder(getActivity())
                 .direction(ACProgressConstant.DIRECT_CLOCKWISE)
                 .themeColor(Color.WHITE)
                 .fadeColor(Color.DKGRAY).build();
-
+        if(tasksObj !=null) {
+            if (tasksObj.getListAssignees().size() > 0) {
+                try {
+                    for (int loop = 0;
+                         loop < tasksObj.getListAssignees().size(); loop++) {
+                        TaskAddUpdateFragment.assigneeList.add(
+                                tasksObj.getListAssignees().get(loop).getUserID());
+                    }
+                } catch (IndexOutOfBoundsException e) {
+                }
+            }
+        }
         aq =new AQuery(view);
         SetValues();
         if( baseClass.db.getString("ProjectName") != null) {
-            aq.id(R.id.project_title).text(baseClass.db.getString("ProjectName"));
+           getToolbar().setTitle(baseClass.db.getString("ProjectName"));
         }
         aq.id(R.id.title_text).getEditText().addTextChangedListener(new TextWatcher() {
             @Override
@@ -170,7 +179,6 @@ public class TaskAddUpdateFragment extends BaseFragment {
             public void onClick(View v) {
                 aq.id(R.id.title_text).enabled(true);
                 aq.id(R.id.title_text).getEditText().requestFocus();
-                aq.id(R.id.title_text).setSelection(aq.id(R.id.title_text).getText().length());
             }
         });
         aq.id(R.id.title_bar).clicked(new View.OnClickListener() {
@@ -187,10 +195,6 @@ public class TaskAddUpdateFragment extends BaseFragment {
     public void SetValues(){
         if(callPosition ==0) {
             setTaskValuesTinyDB(-1);
-        }
-        if(callPosition == 1){
-            setTaskValuesTinyDB(-1);
-            getToolbar().setTitle(baseClass.db.getString("ProjectName"));
         }
         if(callPosition == 2){
             setTaskValuesTinyDB(1);
@@ -263,10 +267,37 @@ public class TaskAddUpdateFragment extends BaseFragment {
         @Override
         protected String doInBackground(Void... voids) {
             try {
-
                 httpClient = new GenericHttpClient();
                 response = httpClient.postUpdateTask(Constants.UpdateTask_API
                         , assigneeList, filesList, filesToDelete, baseClass);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return response;
+        }
+        @Override
+        protected void onPostExecute(String result){
+            dialog.dismiss();
+            PopulateModel(result);
+        }
+    }
+    public class UpdateTaskByParent extends AsyncTask<Void, Void, String> {
+        GenericHttpClient httpClient;
+        String response= null;
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            dialog.show();
+        }
+
+        @Override
+        protected String doInBackground(Void... voids) {
+            try {
+
+                httpClient = new GenericHttpClient();
+                response = httpClient.postUpdateTaskByParent(Constants.UpdateTask_API
+                        , assigneeList, Integer.toString(tasksObj.getParentTaskID()), filesList, filesToDelete, baseClass);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -298,8 +329,6 @@ public class TaskAddUpdateFragment extends BaseFragment {
             baseClass.db.putInt("Priority", tasksObj.getPriority());
         }else
         {
-            baseClass.db.putString("ProjectName", getString(R.string.project_title));
-            getToolbar().setTitle(baseClass.db.getString("ProjectName"));
             baseClass.db.putString("TaskName", getString(R.string.Task_Title));
             baseClass.db.putInt("TaskListNameID", 0);
             baseClass.db.putString("StartDate", "");

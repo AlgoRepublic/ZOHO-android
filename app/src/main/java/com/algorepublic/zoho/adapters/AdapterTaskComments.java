@@ -11,7 +11,7 @@ import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.fragments.TaskCommentFragment;
 import com.algorepublic.zoho.utils.Constants;
 import com.bumptech.glide.Glide;
-import com.makeramen.roundedimageview.RoundedImageView;
+import com.mikhaellopez.circularimageview.CircularImageView;
 
 /**
  * Created by android on 1/1/16.
@@ -43,26 +43,24 @@ public class AdapterTaskComments extends BaseAdapter {
         if (convertView == null) {
             convertView = l_Inflater.inflate(R.layout.layout_comments_maker, null);
             holder = new ViewHolder();
-            holder.taskComment = (TextView) convertView.findViewById(R.id.comment_text);
-            holder.userName = (TextView) convertView.findViewById(R.id.user_name);
-            holder.userImage = (RoundedImageView) convertView.findViewById(R.id.user_image);
-            holder.dateTime = (TextView) convertView.findViewById(R.id.comment_datetime);
+            holder.taskComment = (TextView) convertView.findViewById(R.id.forum_description);
+            holder.userName = (TextView) convertView.findViewById(R.id.forum_title);
+            holder.userImage = (CircularImageView) convertView.findViewById(R.id.comment_image);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
 
         holder.taskComment.setText(TaskCommentFragment.arrayList.get(position).getComment());
-        holder.userName.setText(TaskCommentFragment.arrayList.get(position).getUserName());
-        Glide.with(ctx).load(Constants.Image_URL+TaskCommentFragment.arrayList.get(position).getUserImage()).into(holder.userImage);
-        holder.dateTime.setText(TaskCommentFragment.arrayList.get(position).getDateTime());
+        holder.userName.setText(TaskCommentFragment.arrayList.get(position).getUserName()
+        +" , "+TaskCommentFragment.arrayList.get(position).getDateTime());
+        Glide.with(ctx).load(Constants.UserImage_URL+TaskCommentFragment.arrayList.get(position).getUserImage()).into(holder.userImage);
 
         return convertView;
     }
     static class ViewHolder {
         TextView taskComment;
         TextView userName;
-        RoundedImageView userImage;
-        TextView dateTime;
+        CircularImageView userImage;
     }
 }

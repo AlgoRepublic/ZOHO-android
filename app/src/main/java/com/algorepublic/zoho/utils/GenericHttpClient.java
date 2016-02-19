@@ -203,6 +203,59 @@ public class GenericHttpClient {
         }
         return message;
     }
+    public String postUpdateTaskByParent(String url,ArrayList<Integer> assignee,String parentID,ArrayList<AttachmentList> files, ArrayList<Integer> filesToDelete,BaseClass baseClass) throws IOException {
+
+        HttpClient hc = new DefaultHttpClient();
+        String message =null;
+        HttpPost p = new HttpPost(url);
+        MultipartEntity mpEntity = new MultipartEntity(HttpMultipartMode.BROWSER_COMPATIBLE);
+        try {
+            for(int i=0;i<files.size();i++) {
+                if(files.get(i).getFile() != null) {
+                    Log.e("File", "/" + files.get(i).getFile().getName());
+                    mpEntity.addPart("files[" + i + "]", new FileBody(files.get(i).getFile()));
+                }
+            }
+            for(int i=0;i<filesToDelete.size();i++) {
+                Log.e("DFile","/"+filesToDelete.get(i));
+                mpEntity.addPart("filesToDelete["+i+"]",new StringBody(Integer.toString(filesToDelete.get(i))));
+            }
+            for(int i=0;i<assignee.size();i++) {
+                Log.e("Assignee", "/" + assignee.get(i));
+                mpEntity.addPart("taskResponsible["+i+"]", new StringBody(Integer.toString(assignee.get(i))));
+            }
+            mpEntity.addPart("CreateBy",new StringBody(baseClass.getUserId()));
+            mpEntity.addPart("UpdateBy",new StringBody(baseClass.getUserId()));
+            mpEntity.addPart("OwnerID", new StringBody(baseClass.getUserId()));
+            mpEntity.addPart("ParentTaskID",new StringBody(parentID));
+            mpEntity.addPart("TaskListID",new StringBody(Integer.toString(BaseClass.db.getInt("TaskListNameID"))));
+            mpEntity.addPart("Priority", new StringBody(Integer.toString(BaseClass.db.getInt("Priority"))));
+            mpEntity.addPart("ProjectID", new StringBody(Integer.toString(BaseClass.db.getInt("ProjectID"))));
+            mpEntity.addPart("ID", new StringBody(Integer.toString(BaseClass.db.getInt("TaskID"))));
+            mpEntity.addPart("Title", new StringBody(BaseClass.db.getString("TaskName")));
+            mpEntity.addPart("Description", new StringBody(BaseClass.db.getString("TaskDesc")));
+            mpEntity.addPart("StartDate", new StringBody(BaseClass.db.getString("StartDate")));
+            mpEntity.addPart("EndDate", new StringBody(BaseClass.db.getString("EndDate")));
+            p.setEntity(mpEntity);
+            Log.e("CreateBy", "/" + baseClass.getUserId());
+            Log.e("Title", "/" + BaseClass.db.getString("TaskName"));
+            Log.e("ID", "/" + BaseClass.db.getInt("TaskID"));
+            Log.e("Description", "/" + BaseClass.db.getString("TaskDesc"));
+            Log.e("StartDate", "/" + BaseClass.db.getString("StartDate"));
+            Log.e("EndDate", "/" + BaseClass.db.getString("EndDate"));
+            Log.e("ParentTaskID","/"+ parentID);
+            Log.e("TaskListID", "/" + BaseClass.db.getInt("TaskListNameID"));
+            Log.e("Priority", "/" + BaseClass.db.getInt("Priority"));
+            Log.e("ProjectID", "/" + BaseClass.db.getInt("ProjectID"));
+            HttpResponse resp = hc.execute(p);
+            if (resp != null) {
+                message = convertStreamToString(resp.getEntity().getContent());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return message;
+    }
     public String uploadDocumentsByProject(String url,int ProjectID, ArrayList<AttachmentList> files) throws IOException {
 
         HttpClient hc = new DefaultHttpClient();
@@ -214,6 +267,7 @@ public class GenericHttpClient {
             mpEntity.addPart("files["+i+"]", new FileBody(files.get(i).getFile()));
         }
 
+        mpEntity.addPart("FolderID", new StringBody("0"));
         mpEntity.addPart("ProjectId", new StringBody(Integer.toString(ProjectID)));
         mpEntity.addPart("CreateBy", new StringBody(Integer.toString(1)));
         mpEntity.addPart("UpdateBy", new StringBody(Integer.toString(1)));

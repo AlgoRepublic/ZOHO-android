@@ -54,6 +54,7 @@
             android:layout_width="2dp"
             android:background="@color/white"/>
         <RelativeLayout
+            android:id="@+id/sort"
             android:layout_width="0dp"
             android:layout_weight=".5"
             android:layout_marginLeft="20dp"
@@ -61,7 +62,6 @@
             android:layout_gravity="center"
             android:layout_height="match_parent">
             <Button
-                android:id="@+id/sort"
                 android:layout_width="45dp"
                 android:layout_marginTop="12dp"
                 android:layout_marginBottom="12dp"

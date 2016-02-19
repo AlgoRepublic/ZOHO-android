@@ -13,6 +13,7 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.design.widget.Snackbar;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -20,10 +21,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.BaseAdapter;
 import android.widget.Toast;
 
 import com.algorepublic.zoho.Models.GeneralModel;
 import com.algorepublic.zoho.R;
+import com.algorepublic.zoho.adapters.AdapterForumsList;
+import com.algorepublic.zoho.adapters.AdapterTaskPriority;
 import com.algorepublic.zoho.adapters.AdapterUploadAttachment;
 import com.algorepublic.zoho.adapters.AttachmentList;
 import com.algorepublic.zoho.services.DocumentsService;
@@ -32,12 +36,14 @@ import com.algorepublic.zoho.utils.Constants;
 import com.algorepublic.zoho.utils.GenericHttpClient;
 import com.androidquery.AQuery;
 import com.dropbox.chooser.android.DbxChooser;
+import com.flyco.animation.BounceEnter.BounceLeftEnter;
 import com.flyco.animation.SlideEnter.SlideLeftEnter;
 import com.flyco.animation.SlideExit.SlideRightExit;
 import com.flyco.dialog.listener.OnBtnClickL;
 import com.flyco.dialog.listener.OnOperItemClickL;
 import com.flyco.dialog.widget.ActionSheetDialog;
 import com.flyco.dialog.widget.MaterialDialog;
+import com.flyco.dialog.widget.NormalListDialog;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -478,7 +484,6 @@ public class UploadDocsFragment extends BaseFragment implements GoogleApiClient.
         @Override
         protected void onPostExecute(String result) {
             dialog.dismiss();
-            onFinish();
             PopulateModel(result);
         }
     }
@@ -507,19 +512,30 @@ public class UploadDocsFragment extends BaseFragment implements GoogleApiClient.
         protected void onPostExecute(String result) {
             dialog.dismiss();
             PopulateModel(result);
-            onFinish();
         }
     }
     private void PopulateModel(String json) {
         Log.e("Json", "/" + json);
-        filesList.clear();
-        Snackbar.make(getView(),"File(s) uploaded successfully.", Snackbar.LENGTH_SHORT).show();
+        //if(json.contains("true")) {
+            filesList.clear();
+            Snackbar.make(getView(), "File(s) uploaded successfully.", Snackbar.LENGTH_SHORT).show();
+//        }else{
+//            Snackbar.make(getView(), "Server not responding", Snackbar.LENGTH_SHORT).show();
+//        }
     }
+    public void CallForSelectFolder(){
+        String[] items = {"dsd","sdsd","dsds"};
+        NormalListDialog normalListDialog = new NormalListDialog(getActivity(),items);
+        normalListDialog.title("Select Folder")
+            .cornerRadius(5)//
+            .dividerColor(getResources().getColor(R.color.colorContentWrapper))//
+            .itemTextSize(12)
+            .titleTextSize_SP(14)
+            .itemTextColor(getResources().getColor(R.color.colorBaseHeader))
+                .itemPressColor(getResources().getColor(R.color.colorBaseMenu))
+                .lvBgColor(getResources().getColor(R.color.colorWhite))
+                .titleBgColor(getResources().getColor(R.color.colorBaseHeader))
+                .titleTextColor(getResources().getColor(R.color.colorWhite));
 
-    private void onFinish(){
-
-        View mainView  = aq.id(R.id.container).getView();
-        Snackbar.make(mainView, "File (s) have been uploaded successfully.", Snackbar.LENGTH_LONG).show();
-        filesList.clear();
     }
 }
