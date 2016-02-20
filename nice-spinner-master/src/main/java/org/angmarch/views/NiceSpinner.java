@@ -156,7 +156,7 @@ public class NiceSpinner extends TextView {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             mPopup.setElevation(DEFAULT_ELEVATION);
-            mPopup.setBackgroundDrawable(ContextCompat.getDrawable(context, R.drawable.spinner_drawable));
+            mPopup.setBackgroundDrawable(ContextCompat.getDrawable(context, R.drawable.underline_textview));
         } else {
             mPopup.setBackgroundDrawable(ContextCompat.getDrawable(context, R.drawable.drop_down_shadow));
         }

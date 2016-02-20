@@ -27,7 +27,6 @@
         android:layout_height="wrap_content"
         android:textColor="@color/colorBaseHeader"
         android:textSize="18sp"
-        android:background="@color/colorBaseWrapper"
         android:layout_marginTop="10dp" />
 
     <com.rengwuxian.materialedittext.MaterialEditText
@@ -47,7 +46,6 @@
         android:layout_height="wrap_content"
         android:textColor="@color/colorBaseHeader"
         android:textSize="18sp"
-        android:background="@color/colorBaseWrapper"
         android:layout_marginTop="10dp" />
 
     <RadioGroup android:id="@+id/project_status"
