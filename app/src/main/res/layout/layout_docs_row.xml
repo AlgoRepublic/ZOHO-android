@@ -1,4 +1,9 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <RelativeLayout
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:descendantFocusability="blocksDescendants"
     android:orientation="horizontal"
@@ -6,9 +11,10 @@
     android:paddingEnd="10dp"
     android:paddingLeft="10dp"
     android:paddingStart="10dp"
+    android:id="@+id/layout_click"
     android:layout_marginBottom="10dp"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
     <com.h6ah4i.android.materialshadowninepatch.MaterialShadowContainerView
         android:id="@+id/shadow_item_container"
         android:layout_width="match_parent"
@@ -18,45 +24,41 @@
         app:ms9_affectsDisplayedPosition="true"
         app:ms9_shadowTranslationZ="1dp"
         app:ms9_shadowElevation="2dp">
+
     <RelativeLayout
         android:background="@drawable/comment_bg"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
         android:layout_width="match_parent">
-    <ImageView
-        android:id="@+id/file_image"
+    <CheckBox
+        android:id="@+id/doc_checkbox"
         android:layout_width="45dp"
         android:scaleType="fitXY"
         android:adjustViewBounds="true"
-        android:layout_toLeftOf="@+id/layout1"
         android:layout_height="50dp"
-        android:background="@mipmap/ic_listview_word"
-        android:layout_margin="10dp" >
-    </ImageView>
-    <RelativeLayout
-        android:id="@+id/layout_2"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_height="25dp"
-        android:layout_width="25dp" >
-        <CheckBox
-            android:id="@+id/doc_checkbox"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:button="@null"
-            android:checked="false"
-            android:background="@drawable/checkbox"
-            android:layout_centerVertical="true"
-            android:layout_alignParentRight="true"
-            />
-        </RelativeLayout>
+        android:button="@null"
+        android:layout_margin="10dp"
+        android:checked="false"
+        android:visibility="visible"
+        android:layout_centerVertical="true"
+        />
+    <!--<ImageView-->
+        <!--android:id="@+id/file_image"-->
+        <!--android:layout_width="45dp"-->
+        <!--android:scaleType="fitXY"-->
+        <!--android:adjustViewBounds="true"-->
+        <!--android:layout_height="50dp"-->
+        <!--android:background="@mipmap/ic_listview_word"-->
+        <!--android:layout_margin="10dp" >-->
+    <!--</ImageView>-->
+
     <RelativeLayout
         android:id="@+id/layout_tasktitle"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         android:layout_centerVertical="true"
         android:layout_toLeftOf="@+id/layout_2"
-        android:layout_toRightOf="@+id/file_image"
+        android:layout_toRightOf="@+id/doc_checkbox"
        >
         <TextView
             android:id="@+id/file_name"
@@ -111,4 +113,13 @@
         />
     </RelativeLayout>
     </com.h6ah4i.android.materialshadowninepatch.MaterialShadowContainerView>
-</RelativeLayout>
+    </RelativeLayout>
+    <CheckBox
+        android:id="@+id/selected_doc"
+        android:visibility="gone"
+        android:background="@color/colorSelectedFade"
+        android:layout_alignTop="@+id/layout_click"
+        android:layout_alignBottom="@+id/layout_click"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"/>
+    </RelativeLayout>

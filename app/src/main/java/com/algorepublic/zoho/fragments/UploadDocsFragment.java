@@ -39,6 +39,7 @@ import com.dropbox.chooser.android.DbxChooser;
 import com.flyco.animation.BounceEnter.BounceLeftEnter;
 import com.flyco.animation.SlideEnter.SlideLeftEnter;
 import com.flyco.animation.SlideExit.SlideRightExit;
+import com.flyco.dialog.entity.DialogMenuItem;
 import com.flyco.dialog.listener.OnBtnClickL;
 import com.flyco.dialog.listener.OnOperItemClickL;
 import com.flyco.dialog.widget.ActionSheetDialog;
@@ -175,7 +176,7 @@ public class UploadDocsFragment extends BaseFragment implements GoogleApiClient.
                 CallForAttachments();
             }
         });
-
+        //CallForSelectFolder();
         return view;
     }
 
@@ -524,18 +525,33 @@ public class UploadDocsFragment extends BaseFragment implements GoogleApiClient.
 //        }
     }
     public void CallForSelectFolder(){
-        String[] items = {"dsd","sdsd","dsds"};
-        NormalListDialog normalListDialog = new NormalListDialog(getActivity(),items);
+        ArrayList<DialogMenuItem> menuItems = new ArrayList<>();
+        DialogMenuItem menuItem;
+        for(int loop=0;loop<5;loop++) {
+            menuItem = new DialogMenuItem("dsd", android.R.drawable.checkbox_off_background);
+            menuItems.add(menuItem);
+        }
+
+        NormalListDialog normalListDialog = new NormalListDialog(getActivity(),menuItems);
         normalListDialog.title("Select Folder")
             .cornerRadius(5)//
             .dividerColor(getResources().getColor(R.color.colorContentWrapper))//
             .itemTextSize(12)
             .titleTextSize_SP(14)
             .itemTextColor(getResources().getColor(R.color.colorBaseHeader))
-                .itemPressColor(getResources().getColor(R.color.colorBaseMenu))
-                .lvBgColor(getResources().getColor(R.color.colorWhite))
-                .titleBgColor(getResources().getColor(R.color.colorBaseHeader))
-                .titleTextColor(getResources().getColor(R.color.colorWhite));
+            .itemPressColor(getResources().getColor(R.color.colorBaseMenu))
+            .lvBgColor(getResources().getColor(R.color.colorWhite))
+            .titleBgColor(getResources().getColor(R.color.colorBaseHeader))
+            .titleTextColor(getResources().getColor(R.color.colorWhite));
+        normalListDialog.heightScale(2f).widthScale(2f);
+        normalListDialog.show();
+
+        normalListDialog.setOnOperItemClickL(new OnOperItemClickL() {
+            @Override
+            public void onOperItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+            }
+        });
 
     }
 }

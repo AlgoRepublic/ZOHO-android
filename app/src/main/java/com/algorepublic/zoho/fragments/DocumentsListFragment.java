@@ -41,7 +41,6 @@ import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
 public class DocumentsListFragment extends BaseFragment {
 
     static DocumentsListFragment fragment;
-    StickyListHeadersAdapter adapterDocsList;
     AQuery aq;
     View view;
     DocumentsService service;
