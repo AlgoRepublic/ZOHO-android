@@ -10,25 +10,22 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.RadioButton;
 import android.widget.Toast;
 
 import com.algorepublic.zoho.Models.CreateProjectModel;
-import com.algorepublic.zoho.Models.ForumsModel;
-import com.algorepublic.zoho.Models.GeneralModel;
 import com.algorepublic.zoho.Models.TaskAssigneeModel;
 import com.algorepublic.zoho.R;
-import com.algorepublic.zoho.adapters.AdapterForumsList;
-import com.algorepublic.zoho.adapters.AdapterTaskAssignee;
-import com.algorepublic.zoho.adapters.ProjectsList;
 import com.algorepublic.zoho.services.CallBack;
 import com.algorepublic.zoho.services.ProjectsListService;
 import com.algorepublic.zoho.services.TaskListService;
 import com.algorepublic.zoho.utils.BaseClass;
 import com.androidquery.AQuery;
+import org.angmarch.views.NiceSpinner;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -40,9 +37,10 @@ public class AddProjectFragment extends BaseFragment {
     AQuery aq;
     BaseClass baseClass;
     TaskListService service;
-    ArrayList<String> userList;
-    ArrayList<String> deptList;
+    LinkedList<String> userList;
+    LinkedList<String> deptList;
     View view;
+    NiceSpinner owner_list,departments_list;
     static AddProjectFragment fragment;
 
     public AddProjectFragment() {
@@ -92,9 +90,9 @@ public class AddProjectFragment extends BaseFragment {
         service.createProject(aq.id(R.id.project_name).getText().toString(),baseClass.getUserId()
                 ,aq.id(R.id.project_desc).getText().toString()
                 ,TaskAssigneeModel.getInstance().responseObject.
-                get(aq.id(R.id.owner_list).getSelectedItemPosition()).ID
+                get(owner_list.getSelectedIndex()).ID
                 ,ProjectsFragment.allDeptList.get(
-                aq.id(R.id.departments_list).getSelectedItemPosition()).getDeptID(),isprivate
+                departments_list.getSelectedIndex()).getDeptID(),isprivate
                 ,true,new CallBack(AddProjectFragment.this,"CreateProject"));
     }
 
@@ -119,34 +117,26 @@ public class AddProjectFragment extends BaseFragment {
         view  = inflater.inflate(R.layout.add_project, container, false);
         aq = new AQuery(view);
         setHasOptionsMenu(true);
-
+        owner_list = (NiceSpinner) view.findViewById(R.id.owner_list);
+        departments_list= (NiceSpinner) view.findViewById(R.id.departments_list);
         service = new TaskListService(getActivity());
         baseClass = ((BaseClass) getActivity().getApplicationContext());
-        deptList = new ArrayList<>();
+        deptList = new LinkedList<>();
         for(int loop=0;loop<ProjectsFragment.allDeptList.size();loop++){
             deptList.add(ProjectsFragment.allDeptList.get(loop).getDeptName());
         }
-
-        aq.id(R.id.departments_list).getSpinner().setAdapter(new ArrayAdapter<String>(
-                getActivity(),
-                R.layout.layout_spinner_project,
-                deptList
-        ));
+        departments_list.attachDataSource(deptList);
         service.getAllUsers(true, new CallBack(AddProjectFragment.this, "GetAllUsers"));
         return view;
     }
     public void GetAllUsers(Object caller, Object model) {
         TaskAssigneeModel.getInstance().setList((TaskAssigneeModel) model);
         if (TaskAssigneeModel.getInstance().responseCode == 100) {
-            userList= new ArrayList();
+            userList= new LinkedList<>();
             for(int loop=0;loop<TaskAssigneeModel.getInstance().responseObject.size();loop++) {
                 userList.add(TaskAssigneeModel.getInstance().responseObject.get(loop).firstName);
             }
-            aq.id(R.id.owner_list).getSpinner().setAdapter(new ArrayAdapter<String>(
-                    getActivity(),
-                    R.layout.layout_spinner_project,
-                    userList
-            ));
+            owner_list.attachDataSource(userList);
         }
         else
         {

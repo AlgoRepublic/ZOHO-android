@@ -21,10 +21,13 @@
         app:met_primaryColor="@color/colorBaseHeader"
         app:met_singleLineEllipsis="true" />
 
-    <Spinner
+    <org.angmarch.views.NiceSpinner
         android:id="@+id/owner_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textColor="@color/colorBaseHeader"
+        android:textSize="18sp"
+        android:background="@color/colorBaseWrapper"
         android:layout_marginTop="10dp" />
 
     <com.rengwuxian.materialedittext.MaterialEditText
@@ -38,10 +41,13 @@
         app:met_floatingLabel="normal"
         app:met_primaryColor="@color/colorBaseHeader"/>
 
-    <Spinner
+    <org.angmarch.views.NiceSpinner
         android:id="@+id/departments_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textColor="@color/colorBaseHeader"
+        android:textSize="18sp"
+        android:background="@color/colorBaseWrapper"
         android:layout_marginTop="10dp" />
 
     <RadioGroup android:id="@+id/project_status"
