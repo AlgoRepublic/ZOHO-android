@@ -88,7 +88,7 @@
                 android:id="@+id/text2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/start_date"
+                android:text="@string/end_date"
                 android:gravity="center"
                 android:layout_toLeftOf="@+id/end_date"
                 android:layout_centerVertical="true"
