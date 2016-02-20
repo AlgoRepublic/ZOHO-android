@@ -13,7 +13,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -49,7 +48,6 @@ public class ProjectsFragment extends BaseFragment{
     StickyListHeadersListView listView;
     StickyListHeadersAdapter projectAdapter;
     static  ArrayList<DeptList> allDeptList = new ArrayList<>();
-    static  ArrayList<ProjectsList> allProjectsList = new ArrayList<>();
     ArrayList<ProjectsList> ByClientList = new ArrayList<>();
     public static ArrayList<ProjectsList> ByDepartmentList = new ArrayList<>();
     static int lastposition=0;
@@ -85,10 +83,16 @@ public class ProjectsFragment extends BaseFragment{
                 CallForFilter();
             }
         });
+        aq.id(R.id.sort_button).clicked(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CallForFilter();
+            }
+        });
         return view;
     }
     public void CallForFilter(){
-        String[] menuItems = {"All Projects","By Client","By Department"};
+        String[] menuItems = {"By Client","By Department"};
         final ActionSheetDialog dialog = new ActionSheetDialog(getActivity(),menuItems, getView());
         dialog.isTitleShow(false).show();
         dialog.setOnOperItemClickL(new OnOperItemClickL() {
@@ -102,17 +106,13 @@ public class ProjectsFragment extends BaseFragment{
         });
     }
     public void Filter(int position){
+
         if (position == 0) {
-            aq.id(R.id.projects_list).visibility(View.VISIBLE);
-            aq.id(R.id.projects_liststicky).visibility(View.GONE);
-            SetGeneralClientAdapter();
-        }
-        if (position == 1) {
             aq.id(R.id.projects_list).visibility(View.VISIBLE);
             aq.id(R.id.projects_liststicky).visibility(View.GONE);
             SetClientProjectsAdapter();
         }
-        if (position == 2) {
+        if (position == 1) {
             aq.id(R.id.projects_list).visibility(View.GONE);
             aq.id(R.id.projects_liststicky).visibility(View.VISIBLE);
             SetDepartmentProjectsAdapter();
@@ -120,7 +120,7 @@ public class ProjectsFragment extends BaseFragment{
     }
     public boolean isLoaded(){
         Boolean isloading=false;
-        if(allProjectsList.size()==0)
+        if(allDeptList.size()==0)
             isloading = false;
         else
             isloading= true;
@@ -202,20 +202,9 @@ public class ProjectsFragment extends BaseFragment{
                 ByDepartmentList.add(projectsList);
             }
         }
-        AddUpAllProjects();
+        SetDepartmentProjectsAdapter();
     }
 
-
-    public void AddUpAllProjects(){
-        allProjectsList.clear();
-        allProjectsList.addAll(ByClientList);
-        allProjectsList.addAll(ByDepartmentList);
-        Filter(lastposition);
-    }
-    public void SetGeneralClientAdapter(){
-        aq.id(R.id.projects_list).adapter(new AdapterProjectsClientList(getActivity(), allProjectsList));
-        aq.id(R.id.projects_list).itemClicked(allOnClick);
-    }
     public void SetClientProjectsAdapter(){
         aq.id(R.id.projects_list).adapter(new AdapterProjectsClientList(getActivity(), ByClientList));
         aq.id(R.id.projects_list).itemClicked(clientOnClick);
@@ -227,21 +216,6 @@ public class ProjectsFragment extends BaseFragment{
         listView.setAdapter(projectAdapter);
         listView.setOnItemClickListener(deptOnClick);
     }
-    AdapterView.OnItemClickListener allOnClick = new AdapterView.OnItemClickListener() {
-        @Override
-        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            Log.e("selected project", ((TextView) view.findViewById(R.id.project_id)).getText().toString());
-            if (baseClass.getSelectedProject().equalsIgnoreCase(((TextView) view.findViewById(R.id.project_id)).getText().toString())) {
-                baseClass.setSelectedProject("0");
-                baseClass.db.putInt("ProjectID", 0);
-            }else {
-                baseClass.setSelectedProject(((TextView) view.findViewById(R.id.project_id)).getText().toString());
-                baseClass.db.putInt("ProjectID", Integer.parseInt(baseClass.getSelectedProject()));
-                baseClass.db.putString("ProjectName", ((TextView) view.findViewById(R.id.project_title)).getText().toString());
-            }
-            SetGeneralClientAdapter();
-        }
-    };
     AdapterView.OnItemClickListener clientOnClick = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -312,7 +286,7 @@ public class ProjectsFragment extends BaseFragment{
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.add_project:
-                if(allProjectsList.size()==0){
+                if(allDeptList.size()==0){
                     Snackbar.make(getView(),"Please wait for the loading",Snackbar.LENGTH_SHORT).show();
                 }else {
                     callFragmentWithBackStack(R.id.container, AddProjectFragment.newInstance(), "AddProjectFragment");
