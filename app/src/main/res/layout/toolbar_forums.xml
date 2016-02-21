@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.AppBarLayout
+<android.support.design.widget.AppBarLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:theme="@style/AppTheme.AppBarOverlay"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    android:theme="@style/AppTheme.AppBarOverlay">
+
     <android.support.v7.widget.Toolbar
-        style="@style/ToolBarStyle"
         android:id="@+id/toolbar"
+        style="@style/ToolBarStyle"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:paddingTop="5dp"
-        android:paddingBottom="5dp"
-        app:popupTheme="@style/AppTheme.PopupOverlay"
-        android:fitsSystemWindows="true"
         android:background="@color/colorBaseHeader"
-        android:minHeight="@dimen/abc_action_bar_default_height_material">
+        android:fitsSystemWindows="true"
+        android:minHeight="@dimen/abc_action_bar_default_height_material"
+        android:paddingBottom="5dp"
+        android:paddingTop="5dp"
+        app:popupTheme="@style/AppTheme.PopupOverlay">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -23,26 +23,28 @@
             android:layout_marginRight="15dp"
             android:gravity="center_vertical"
             android:orientation="horizontal">
+
             <TextView
+                android:id="@+id/textView2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="20sp"
-                android:text="Forums"
                 android:layout_centerHorizontal="true"
-                android:textStyle="bold"
+                android:layout_centerVertical="true"
+                android:text="Forums"
                 android:textColor="@android:color/white"
-                android:id="@+id/textView2"
-                android:layout_centerVertical="true" />
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
             <ImageView
+                android:id="@+id/add_project"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:layout_centerVertical="true"
-                android:id="@+id/add_project"
-                android:textSize="18sp"
-                android:textStyle="bold"
                 android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:background="@mipmap/add_forum"
                 android:textAllCaps="false"
-                android:background="@mipmap/add_forum"/>
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
         </RelativeLayout>
     </android.support.v7.widget.Toolbar>

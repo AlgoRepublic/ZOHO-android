@@ -9,108 +9,109 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:weightSum="2"
         android:layout_marginTop="40dp"
-        android:orientation="horizontal" >
+        android:orientation="horizontal"
+        android:weightSum="2">
+
         <RelativeLayout
+            android:id="@+id/btn_start_date"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
             android:layout_weight="1"
-            android:layout_gravity="center_vertical"
-            android:id="@+id/btn_start_date"
-            android:orientation="horizontal"
-            >
+            android:orientation="horizontal">
 
-        <ImageView
-            android:id="@+id/start_date_image"
-            android:layout_width="15dp"
-            android:text="@string/start_date"
-            android:textAllCaps="false"
-            android:background="@mipmap/calendar"
-            android:layout_alignParentLeft="true"
-            android:layout_gravity="center_vertical"
-            android:layout_height="15dp"
+            <ImageView
+                android:id="@+id/start_date_image"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_alignParentLeft="true"
+                android:layout_gravity="center_vertical"
+                android:background="@mipmap/calendar"
+                android:text="@string/start_date"
+                android:textAllCaps="false"
 
-            />
+                />
+
             <TextView
                 android:id="@+id/text1"
-                android:layout_toRightOf="@+id/start_date_image"
                 android:layout_width="wrap_content"
-                android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:text="@string/start_date"
                 android:layout_centerVertical="true"
-                android:singleLine="true"
                 android:layout_marginLeft="2dp"
+                android:layout_toRightOf="@+id/start_date_image"
+                android:layout_weight="1"
+                android:singleLine="true"
+                android:text="@string/start_date"
                 android:textColor="@color/colorBaseHeader"
                 android:textSize="10sp"
                 android:typeface="monospace" />
+
             <TextView
                 android:id="@+id/start_date"
-                android:layout_toRightOf="@+id/text1"
                 android:layout_width="wrap_content"
-                android:text="@string/start_date"
-                android:textSize="10sp"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
                 android:layout_marginLeft="2dp"
+                android:layout_toRightOf="@+id/text1"
+                android:background="@drawable/round_border"
                 android:paddingLeft="2dp"
                 android:paddingRight="2dp"
+                android:text="@string/start_date"
                 android:textColor="@color/colorBaseHeader"
-                android:layout_centerVertical="true"
-                android:background="@drawable/round_border"
-                android:layout_height="wrap_content"
-                />
+                android:textSize="10sp" />
 
         </RelativeLayout>
 
         <RelativeLayout
+            android:id="@+id/btn_end_date"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:layout_gravity="center_vertical"
-            android:id="@+id/btn_end_date"
-            android:orientation="horizontal"
-            >
+            android:layout_weight="1"
+            android:orientation="horizontal">
 
             <ImageView
-                android:layout_toLeftOf="@+id/text2"
                 android:id="@+id/end_date_image"
                 android:layout_width="15dp"
-                android:text="@string/start_date"
-                android:layout_centerVertical="true"
-                android:textAllCaps="false"
-                android:layout_marginRight="2dp"
-                android:background="@mipmap/calendar"
-                android:layout_gravity="center_vertical"
                 android:layout_height="15dp"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="2dp"
+                android:layout_toLeftOf="@+id/text2"
+                android:background="@mipmap/calendar"
+                android:text="@string/start_date"
+                android:textAllCaps="false"
 
                 />
+
             <TextView
                 android:id="@+id/text2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/start_date"
-                android:gravity="center"
-                android:layout_toLeftOf="@+id/end_date"
                 android:layout_centerVertical="true"
-                android:singleLine="true"
                 android:layout_marginRight="2dp"
+                android:layout_toLeftOf="@+id/end_date"
+                android:gravity="center"
+                android:singleLine="true"
+                android:text="@string/start_date"
                 android:textColor="@color/colorBaseHeader"
                 android:textSize="10dp"
                 android:typeface="monospace" />
+
             <TextView
-                android:layout_alignParentRight="true"
                 android:id="@+id/end_date"
                 android:layout_width="wrap_content"
-                android:text="@string/end_date"
-                android:textSize="10sp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:paddingLeft="2dp"
-                android:paddingRight="2dp"
-                android:textColor="@color/colorBaseHeader"
                 android:layout_gravity="center_vertical"
                 android:background="@drawable/round_border"
-                android:layout_height="wrap_content"
-                />
+                android:paddingLeft="2dp"
+                android:paddingRight="2dp"
+                android:text="@string/end_date"
+                android:textColor="@color/colorBaseHeader"
+                android:textSize="10sp" />
 
         </RelativeLayout>
     </LinearLayout>

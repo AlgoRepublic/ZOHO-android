@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/colorBaseWrapper"
-    android:orientation="vertical"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    android:orientation="vertical">
+
     <view
         android:id="@+id/images_layout"
+        class="com.poliveira.apps.parallaxlistview.ParallaxListView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="5dp"
         android:layout_marginTop="5dp"
-        app:scrollMultiplier="0.5"
-        class="com.poliveira.apps.parallaxlistview.ParallaxListView"
-        android:visibility="visible" >
-    </view>
+        android:visibility="visible"
+        app:scrollMultiplier="0.5"></view>
 </LinearLayout>

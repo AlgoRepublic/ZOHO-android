@@ -1,89 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
     <LinearLayout
-        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:padding="5dp"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="5dp">
+
         <com.makeramen.roundedimageview.RoundedImageView
             android:id="@+id/user_image"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:scaleType="fitXY"
-            app:riv_corner_radius="5dip"
+            android:src="@drawable/ic_menu_add_task"
             app:riv_border_color="#333333"
+            app:riv_corner_radius="5dip"
             app:riv_mutate_background="true"
-            app:riv_tile_mode="clamp"
             app:riv_oval="false"
-            android:src="@drawable/ic_menu_add_task" />
+            app:riv_tile_mode="clamp" />
+
         <RelativeLayout
-            android:orientation="horizontal"
-            android:padding="3dp"
             android:layout_width="match_parent"
-            android:layout_height="40dp">
+            android:layout_height="40dp"
+            android:orientation="horizontal"
+            android:padding="3dp">
+
             <TextView
                 android:id="@+id/user_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/colorBaseHeader"
-                android:maxLines="2"
+                android:layout_alignParentTop="true"
                 android:layout_toLeftOf="@+id/days_ago"
                 android:ellipsize="end"
-                android:textSize="14sp"
+                android:maxLines="2"
                 android:text="sd"
-                android:layout_alignParentTop="true" />
+                android:textColor="@color/colorBaseHeader"
+                android:textSize="14sp" />
+
             <TextView
                 android:id="@+id/days_ago"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/blue"
-                android:maxLines="2"
+                android:layout_alignParentRight="true"
                 android:ellipsize="end"
-                android:textSize="14sp"
+                android:maxLines="2"
                 android:text="sd"
-                android:layout_alignParentRight="true" />
+                android:textColor="@color/blue"
+                android:textSize="14sp" />
+
             <TextView
                 android:id="@+id/project_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/blue"
-                android:singleLine="true"
+                android:layout_alignParentBottom="true"
                 android:ellipsize="end"
-                android:textSize="12sp"
+                android:singleLine="true"
                 android:text="sd"
-                android:layout_alignParentBottom="true" />
+                android:textColor="@color/blue"
+                android:textSize="12sp" />
         </RelativeLayout>
     </LinearLayout>
+
     <View
         android:layout_width="match_parent"
-        android:background="@color/colorContentWrapper"
-        android:layout_height="1dp" />
+        android:layout_height="1dp"
+        android:background="@color/colorContentWrapper" />
+
     <TextView
         android:id="@+id/feed_status"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/colorBaseHeader"
-        android:singleLine="true"
+        android:layout_alignParentBottom="true"
         android:ellipsize="end"
-        android:textSize="16sp"
         android:padding="10dp"
+        android:singleLine="true"
         android:text="sd"
-        android:layout_alignParentBottom="true" />
+        android:textColor="@color/colorBaseHeader"
+        android:textSize="16sp" />
+
     <TextView
         android:id="@+id/comment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@android:color/holo_blue_bright"
-        android:singleLine="true"
-        android:ellipsize="end"
-        android:textSize="16sp"
-        android:padding="10dp"
-        android:text="Comment"
+        android:layout_alignParentBottom="true"
         android:background="@color/colorBaseWrapper"
-        android:layout_alignParentBottom="true" />
+        android:ellipsize="end"
+        android:padding="10dp"
+        android:singleLine="true"
+        android:text="Comment"
+        android:textColor="@android:color/holo_blue_bright"
+        android:textSize="16sp" />
 </LinearLayout>

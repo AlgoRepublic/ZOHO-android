@@ -1,39 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_centerHorizontal="true">
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="3dp"
-        android:paddingBottom="3dp"
         android:layout_marginLeft="3dp"
         android:layout_marginRight="3dp"
         android:background="@drawable/roundable_corner"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:paddingBottom="3dp"
+        android:paddingTop="3dp">
 
         <TextView
             android:id="@+id/lblListHeader"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:padding="3dp"
-            android:layout_toLeftOf="@+id/explist_indicator"
-            android:layout_centerVertical="true"
             android:layout_centerHorizontal="true"
-            android:text="lksahdgiuas"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/explist_indicator"
             android:gravity="center"
-            android:textColor="@color/colorBaseHeader" />
+            android:padding="3dp"
+            android:text="lksahdgiuas"
+            android:textColor="@color/colorBaseHeader"
+            android:textSize="16sp" />
 
         <ImageView
-            android:src="@drawable/drawer_level_two"
             android:id="@+id/explist_indicator"
-            android:layout_centerVertical="true"
-            android:layout_alignParentRight="true"
             android:layout_width="15dp"
-            android:layout_height="15dp"/>
+            android:layout_height="15dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/drawer_level_two" />
     </RelativeLayout>
 </RelativeLayout>
 

@@ -1,510 +1,539 @@
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:context=".fragments.TaskDetailFragment"
-    android:background="@color/colorBaseWrapper">
+    android:background="@color/colorBaseWrapper"
+    tools:context=".fragments.TaskDetailFragment">
+
     <RelativeLayout
         android:id="@+id/include"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         <com.h6ah4i.android.materialshadowninepatch.MaterialShadowContainerView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:ms9_useAmbientShadow="true"
             app:ms9_affectsDisplayedPosition="true"
+            app:ms9_shadowElevation="2dp"
             app:ms9_shadowTranslationZ="1dp"
-            app:ms9_shadowElevation="2dp">
+            app:ms9_useAmbientShadow="true">
             >
+
             <RelativeLayout
                 android:id="@+id/layout_tasktitle"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
                 android:layout_marginTop="20dp"
                 android:background="@color/colorContentWrapper">
+
                 <View
                     android:id="@+id/priority_bar"
                     android:layout_width="4dp"
-                    android:layout_marginRight="3dp"
-                    android:layout_marginEnd="3dp"
-                    android:layout_alignBottom="@+id/layout1"
-                    android:layout_alignTop="@+id/layout1"
-                    android:background="@drawable/roundable_prioritybar"
                     android:layout_height="match_parent"
+                    android:layout_alignBottom="@+id/layout1"
+                    android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"
-                    android:layout_alignParentLeft="true">
-                </View>
+                    android:layout_alignTop="@+id/layout1"
+                    android:layout_marginEnd="3dp"
+                    android:layout_marginRight="3dp"
+                    android:background="@drawable/roundable_prioritybar"></View>
+
                 <ImageView
                     android:id="@+id/icon"
                     android:layout_width="15dp"
+                    android:layout_height="20dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
                     android:layout_marginLeft="15dp"
                     android:layout_marginStart="15dp"
-                    android:layout_toRightOf="@+id/priority_bar"
                     android:layout_toEndOf="@id/priority_bar"
-                    android:src="@mipmap/taskdetail_icon"
-                    android:layout_centerVertical="true"
-                    android:layout_centerHorizontal="true"
-                    android:layout_height="20dp" />
+                    android:layout_toRightOf="@+id/priority_bar"
+                    android:src="@mipmap/taskdetail_icon" />
+
                 <TextView
                     android:id="@+id/task_name"
                     android:layout_width="fill_parent"
-                    android:text="@string/task_name"
                     android:layout_height="wrap_content"
-                    android:textSize="14sp"
-                    android:gravity="start"
+                    android:layout_centerVertical="true"
                     android:layout_marginLeft="50dp"
                     android:layout_marginStart="50dp"
-                    android:layout_centerVertical="true"
-                    android:textStyle="bold"
+                    android:gravity="start"
+                    android:text="@string/task_name"
                     android:textColor="@color/white"
-                    />
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
             </RelativeLayout>
         </com.h6ah4i.android.materialshadowninepatch.MaterialShadowContainerView>
     </RelativeLayout>
+
     <ScrollView
         android:id="@+id/scrollView"
-        android:layout_below="@+id/include"
-        android:layout_above="@+id/parent2"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_above="@+id/parent2"
+        android:layout_below="@+id/include">
+
         <RelativeLayout
             android:id="@+id/parent1"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
-            android:layout_above="@+id/layout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_above="@+id/layout"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp">
 
             <RelativeLayout
                 android:id="@+id/layout_parent"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
+
                 <RelativeLayout
                     android:id="@+id/layout3"
-                    android:paddingTop="15dp"
-                    android:paddingBottom="15dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:paddingBottom="15dp"
+                    android:paddingTop="15dp">
+
                     <RelativeLayout
                         android:id="@+id/header_layout1"
                         android:layout_width="match_parent"
-                        android:layout_marginRight="25dp"
-                        android:layout_marginEnd="25dp"
+                        android:layout_height="wrap_content"
                         android:layout_alignParentTop="true"
-                        android:layout_height="wrap_content">
+                        android:layout_marginEnd="25dp"
+                        android:layout_marginRight="25dp">
+
                         <TextView
                             android:id="@+id/text2"
                             android:layout_width="wrap_content"
-                            android:text="@string/task_startdate"
                             android:layout_height="wrap_content"
-                            android:textSize="12sp"
-                            android:textStyle="bold"
                             android:layout_alignParentLeft="true"
                             android:layout_alignParentStart="true"
+                            android:text="@string/task_startdate"
                             android:textColor="@color/colorBaseHeader"
-                            />
+                            android:textSize="12sp"
+                            android:textStyle="bold" />
+
                         <TextView
                             android:id="@+id/start_date"
                             android:layout_width="wrap_content"
-                            android:text="dsds"
+                            android:layout_height="wrap_content"
+                            android:layout_toEndOf="@+id/text2"
+                            android:layout_toRightOf="@+id/text2"
                             android:paddingLeft="3dp"
                             android:paddingStart="3dp"
-                            android:layout_height="wrap_content"
-                            android:textSize="12sp"
-                            android:layout_toRightOf="@+id/text2"
-                            android:layout_toEndOf="@+id/text2"
+                            android:text="dsds"
                             android:textColor="@color/colorBaseHeader"
-                            />
+                            android:textSize="12sp" />
 
                         <TextView
                             android:layout_width="wrap_content"
-                            android:text="@string/task_duedate"
                             android:layout_height="wrap_content"
-                            android:textSize="12sp"
-                            android:textStyle="bold"
                             android:layout_toLeftOf="@+id/end_date"
                             android:layout_toStartOf="@+id/end_date"
+                            android:text="@string/task_duedate"
                             android:textColor="@color/colorBaseHeader"
-                            />
+                            android:textSize="12sp"
+                            android:textStyle="bold" />
+
                         <TextView
                             android:id="@+id/end_date"
                             android:layout_width="wrap_content"
-                            android:text="dsds"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_alignParentRight="true"
+                            android:layout_toLeftOf="@+id/textView"
                             android:paddingLeft="3dp"
                             android:paddingStart="3dp"
-                            android:layout_height="wrap_content"
-                            android:textSize="13sp"
-                            android:layout_alignParentRight="true"
-                            android:layout_alignParentEnd="true"
-                            android:layout_toLeftOf="@+id/textView"
+                            android:text="dsds"
                             android:textColor="@color/colorBaseHeader"
-                            />
+                            android:textSize="13sp" />
 
                     </RelativeLayout>
+
                     <LinearLayout
                         android:id="@+id/header_layout2"
-                        android:layout_below="@+id/header_layout1"
                         android:layout_width="match_parent"
-                        android:layout_marginRight="25dp"
-                        android:layout_marginEnd="25dp"
                         android:layout_height="wrap_content"
+                        android:layout_below="@+id/header_layout1"
+                        android:layout_marginEnd="25dp"
+                        android:layout_marginRight="25dp"
                         android:layout_marginTop="10dp">
+
                         <TextView
                             android:layout_width="wrap_content"
-                            android:text="@string/category"
                             android:layout_height="wrap_content"
-                            android:textSize="12sp"
-                            android:textStyle="bold"
                             android:layout_toLeftOf="@+id/textView"
                             android:layout_toStartOf="@+id/textView"
+                            android:text="@string/category"
                             android:textColor="@color/colorBaseHeader"
-                            />
+                            android:textSize="12sp"
+                            android:textStyle="bold" />
+
                         <TextView
                             android:id="@+id/category"
                             android:layout_width="wrap_content"
-                            android:text="dsds"
+                            android:layout_height="wrap_content"
+                            android:layout_toLeftOf="@+id/textView"
+                            android:layout_toStartOf="@+id/textView"
                             android:paddingLeft="3dp"
                             android:paddingStart="3dp"
-                            android:layout_height="wrap_content"
-                            android:textSize="12sp"
-                            android:layout_toLeftOf="@+id/textView"
-                            android:layout_toStartOf="@+id/textView"
+                            android:text="dsds"
                             android:textColor="@color/colorBaseHeader"
-                            />
+                            android:textSize="12sp" />
                     </LinearLayout>
+
                     <LinearLayout
                         android:id="@+id/header_layout3"
-                        android:layout_below="@+id/header_layout2"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_below="@+id/header_layout2"
                         android:layout_marginTop="10dp"
                         android:orientation="vertical">
+
                         <TextView
                             android:layout_width="wrap_content"
-                            android:layout_weight="1"
-                            android:text="@string/task_details"
                             android:layout_height="wrap_content"
-                            android:textSize="12sp"
-                            android:textStyle="bold"
                             android:layout_toLeftOf="@+id/textView"
                             android:layout_toStartOf="@+id/textView"
+                            android:layout_weight="1"
+                            android:text="@string/task_details"
                             android:textColor="@color/colorBaseHeader"
-                            />
+                            android:textSize="12sp"
+                            android:textStyle="bold" />
+
                         <TextView
                             android:id="@+id/task_desc"
                             android:layout_width="match_parent"
-                            android:layout_below="@+id/task_name"
                             android:layout_height="wrap_content"
-                            android:textSize="12sp"
-                            android:lines="4"
+                            android:layout_below="@+id/task_name"
                             android:ellipsize="end"
+                            android:lines="4"
                             android:textColor="@color/colorBaseHeader"
-                            />
+                            android:textSize="12sp" />
                     </LinearLayout>
+
                     <LinearLayout
                         android:id="@+id/header_layout4"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:weightSum="3"
-                        android:layout_marginTop="10dp"
                         android:layout_below="@+id/header_layout3"
-                        android:orientation="horizontal">
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal"
+                        android:weightSum="3">
+
                         <TextView
                             android:layout_width="0dp"
-                            android:layout_weight="1"
-                            android:text="@string/task_users"
                             android:layout_height="wrap_content"
-                            android:textSize="12sp"
-                            android:textStyle="bold"
                             android:layout_toLeftOf="@+id/textView"
                             android:layout_toStartOf="@+id/textView"
+                            android:layout_weight="1"
+                            android:text="@string/task_users"
                             android:textColor="@color/colorBaseHeader"
-                            />
+                            android:textSize="12sp"
+                            android:textStyle="bold" />
 
                     </LinearLayout>
+
                     <org.lucasr.twowayview.widget.TwoWayView
                         android:id="@+id/task_assignee"
-                        android:layout_below="@+id/header_layout4"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
-                        app:twowayview_layoutManager="ListLayoutManager"
-                        android:orientation="horizontal">
-                    </org.lucasr.twowayview.widget.TwoWayView>
+                        android:layout_below="@+id/header_layout4"
+                        android:orientation="horizontal"
+                        app:twowayview_layoutManager="ListLayoutManager"></org.lucasr.twowayview.widget.TwoWayView>
                 </RelativeLayout>
+
                 <RelativeLayout
-                    android:layout_below="@+id/layout3"
                     android:id="@+id/layout_assignee"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/layout3">
+
                     <TextView
                         android:id="@+id/project_status"
                         android:layout_width="wrap_content"
-                        android:text="@string/project_status"
                         android:layout_height="wrap_content"
-                        android:textSize="12sp"
-                        android:textStyle="bold"
                         android:layout_marginLeft="20dp"
                         android:layout_marginRight="20dp"
                         android:layout_toLeftOf="@+id/textView"
                         android:layout_toStartOf="@+id/textView"
+                        android:text="@string/project_status"
                         android:textColor="@color/colorBaseHeader"
-                        />
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
 
                     <RelativeLayout
-                        android:layout_below="@+id/project_status"
                         android:id="@+id/layout4"
                         android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/project_status"
                         android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
-                        android:layout_height="wrap_content">
+                        android:layout_marginRight="10dp">
 
                         <SeekBar
-                            style="@style/tallerBarStyle"
                             android:id="@+id/seekBar"
+                            style="@style/tallerBarStyle"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
-                            android:thumb="@drawable/thumb_image"
-                            android:thumbTint="@color/colorBaseHeader"
-                            android:progressTint="@color/colorBaseHeader"
                             android:foreground="@color/colorBaseHeader"
                             android:max="100"
-                         >
-                        </SeekBar>
+                            android:progressTint="@color/colorBaseHeader"
+                            android:thumb="@drawable/thumb_image"
+                            android:thumbTint="@color/colorBaseHeader"></SeekBar>
                     </RelativeLayout>
 
                     <com.github.lzyzsd.circleprogress.DonutProgress
-                        android:layout_marginLeft="50dp"
                         android:id="@+id/circularprogressBar"
                         android:layout_width="120dp"
                         android:layout_height="120dp"
-                        app:max="100"
-                        android:layout_centerHorizontal="true"
-                        android:layout_margin="5dp"
-                        app:wheel_size="8"
-                        app:donut_text_size="20dp"
                         android:layout_below="@+id/layout4"
-                        android:layout_marginTop="10dp"
+                        android:layout_centerHorizontal="true"
                         android:layout_centerInParent="true"
-                        app:donut_text_color="@color/colorBaseHeader"
+                        android:layout_margin="5dp"
+                        android:layout_marginLeft="50dp"
+                        android:layout_marginTop="10dp"
+                        app:donut_finished_color="@color/colorBaseHeader"
                         app:donut_finished_stroke_width="5dp"
+                        app:donut_text_color="@color/colorBaseHeader"
+                        app:donut_text_size="20dp"
                         app:donut_unfinished_stroke_width="5dp"
-                        app:donut_finished_color="@color/colorBaseHeader"/>
+                        app:max="100"
+                        app:wheel_size="8" />
 
                 </RelativeLayout>
 
             </RelativeLayout>
         </RelativeLayout>
     </ScrollView>
+
     <LinearLayout
         android:id="@+id/parent2"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:weightSum="4.72"
         android:layout_alignParentBottom="true"
         android:background="@drawable/topborder"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:weightSum="4.72">
+
         <RelativeLayout
             android:layout_width="0dp"
-            android:layout_weight=".9"
+            android:layout_height="match_parent"
             android:layout_gravity="center"
             android:layout_marginLeft="2dp"
             android:layout_marginRight="2dp"
-            android:layout_height="match_parent">
+            android:layout_weight=".9">
+
             <RelativeLayout
                 android:id="@+id/comment"
                 android:layout_width="60dp"
-                android:layout_centerHorizontal="true"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:layout_centerHorizontal="true">
+
                 <TextView
                     android:id="@+id/notify_alert1"
                     android:layout_width="25dp"
                     android:layout_height="25dp"
-                    android:text="112"
-                    android:gravity="center"
-                    android:singleLine="true"
-                    android:scaleX="-1"
-                    android:textSize="8dp"
-                    android:layout_alignParentRight="true"
                     android:layout_alignParentEnd="true"
-                    android:background="@mipmap/bubble_alert_white"
+                    android:layout_alignParentRight="true"
                     android:layout_alignParentTop="true"
-                    android:textColor="@color/colorBaseWrapper" />
+                    android:background="@mipmap/bubble_alert_white"
+                    android:gravity="center"
+                    android:scaleX="-1"
+                    android:singleLine="true"
+                    android:text="112"
+                    android:textColor="@color/colorBaseWrapper"
+                    android:textSize="8dp" />
 
                 <ImageView
                     android:id="@+id/delete1"
                     android:layout_width="25dp"
-                    android:src="@mipmap/task_comment"
-                    android:layout_centerHorizontal="true"
+                    android:layout_height="25dp"
                     android:layout_above="@+id/text1"
-                    android:layout_height="25dp" />
+                    android:layout_centerHorizontal="true"
+                    android:src="@mipmap/task_comment" />
 
                 <TextView
                     android:id="@+id/text1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Comments"
-                    android:gravity="center"
                     android:layout_alignParentBottom="true"
+                    android:layout_marginBottom="3dp"
+                    android:gravity="center"
+                    android:text="Comments"
                     android:textColor="@color/white"
-                    android:textSize="10sp"
-                    android:layout_marginBottom="3dp"/>
+                    android:textSize="10sp" />
             </RelativeLayout>
 
         </RelativeLayout>
-        <View android:layout_height="fill_parent"
+
+        <View
             android:layout_width="0dp"
+            android:layout_height="fill_parent"
             android:layout_weight=".03"
-            android:background="@color/white"/>
+            android:background="@color/white" />
+
         <RelativeLayout
             android:id="@+id/documents"
             android:layout_width="0dp"
-            android:layout_weight=".9"
+            android:layout_height="match_parent"
             android:layout_gravity="center"
             android:layout_marginLeft="2dp"
             android:layout_marginRight="2dp"
-            android:layout_height="match_parent">
+            android:layout_weight=".9">
+
             <RelativeLayout
                 android:layout_width="53dp"
-                android:layout_centerHorizontal="true"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:layout_centerHorizontal="true">
+
                 <TextView
                     android:id="@+id/notify_alert2"
                     android:layout_width="25dp"
                     android:layout_height="25dp"
-                    android:text="112"
-                    android:gravity="center"
-                    android:singleLine="true"
-                    android:scaleX="-1"
-                    android:textSize="8dp"
-                    android:layout_alignParentRight="true"
                     android:layout_alignParentEnd="true"
-                    android:background="@mipmap/bubble_alert_white"
+                    android:layout_alignParentRight="true"
                     android:layout_alignParentTop="true"
-                    android:textColor="@color/colorBaseWrapper" />
+                    android:background="@mipmap/bubble_alert_white"
+                    android:gravity="center"
+                    android:scaleX="-1"
+                    android:singleLine="true"
+                    android:text="112"
+                    android:textColor="@color/colorBaseWrapper"
+                    android:textSize="8dp" />
 
                 <ImageView
                     android:id="@+id/delete2"
                     android:layout_width="25dp"
-                    android:src="@mipmap/task_undone"
-                    android:layout_centerHorizontal="true"
+                    android:layout_height="25dp"
                     android:layout_above="@+id/text3"
-                    android:layout_height="25dp" />
+                    android:layout_centerHorizontal="true"
+                    android:src="@mipmap/task_undone" />
 
                 <TextView
                     android:id="@+id/text3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Documents"
-                    android:gravity="center"
                     android:layout_alignParentBottom="true"
+                    android:layout_marginBottom="3dp"
+                    android:gravity="center"
+                    android:text="Documents"
                     android:textColor="@color/white"
-                    android:textSize="10sp"
-                    android:layout_marginBottom="3dp"/>
+                    android:textSize="10sp" />
             </RelativeLayout>
 
         </RelativeLayout>
-        <View android:layout_height="fill_parent"
+
+        <View
             android:layout_width="0dp"
+            android:layout_height="fill_parent"
             android:layout_weight=".03"
-            android:background="@color/white"/>
+            android:background="@color/white" />
+
         <RelativeLayout
             android:id="@+id/subtask"
             android:layout_width="0dp"
-            android:layout_weight=".9"
+            android:layout_height="match_parent"
             android:layout_gravity="center"
             android:layout_marginLeft="2dp"
             android:layout_marginRight="2dp"
-            android:layout_height="match_parent">
+            android:layout_weight=".9">
+
             <RelativeLayout
                 android:layout_width="53dp"
-                android:layout_centerHorizontal="true"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:layout_centerHorizontal="true">
+
                 <TextView
                     android:id="@+id/notify_alert3"
                     android:layout_width="25dp"
                     android:layout_height="25dp"
-                    android:text="112"
-                    android:gravity="center"
-                    android:singleLine="true"
-                    android:scaleX="-1"
-                    android:textSize="8dp"
-                    android:layout_alignParentRight="true"
                     android:layout_alignParentEnd="true"
-                    android:background="@mipmap/bubble_alert_white"
+                    android:layout_alignParentRight="true"
                     android:layout_alignParentTop="true"
-                    android:textColor="@color/colorBaseWrapper" />
+                    android:background="@mipmap/bubble_alert_white"
+                    android:gravity="center"
+                    android:scaleX="-1"
+                    android:singleLine="true"
+                    android:text="112"
+                    android:textColor="@color/colorBaseWrapper"
+                    android:textSize="8dp" />
 
                 <ImageView
                     android:id="@+id/delete3"
                     android:layout_width="25dp"
-                    android:src="@mipmap/sub_tasks"
-                    android:layout_centerHorizontal="true"
+                    android:layout_height="25dp"
                     android:layout_above="@+id/text6"
-                    android:layout_height="25dp" />
+                    android:layout_centerHorizontal="true"
+                    android:src="@mipmap/sub_tasks" />
 
                 <TextView
                     android:id="@+id/text6"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Sub tasks"
-                    android:gravity="center"
                     android:layout_alignParentBottom="true"
+                    android:layout_marginBottom="3dp"
+                    android:gravity="center"
+                    android:text="Sub tasks"
                     android:textColor="@color/white"
-                    android:textSize="10sp"
-                    android:layout_marginBottom="3dp"/>
+                    android:textSize="10sp" />
             </RelativeLayout>
 
         </RelativeLayout>
-        <View android:layout_height="fill_parent"
+
+        <View
             android:layout_width="0dp"
+            android:layout_height="fill_parent"
             android:layout_weight=".03"
-            android:background="@color/white"/>
+            android:background="@color/white" />
+
         <RelativeLayout
             android:id="@+id/delete"
             android:layout_width="0dp"
-            android:layout_weight=".7"
+            android:layout_height="match_parent"
             android:layout_gravity="center"
             android:layout_marginLeft="2dp"
             android:layout_marginRight="2dp"
-            android:layout_height="match_parent">
+            android:layout_weight=".7">
+
             <ImageView
                 android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
-                android:src="@mipmap/trash"
                 android:layout_gravity="center"
-                android:layout_height="25dp" />
+                android:src="@mipmap/trash" />
+
             <TextView
                 android:id="@+id/text8"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Delete"
-                android:gravity="center"
                 android:layout_alignParentBottom="true"
+                android:layout_marginBottom="3dp"
+                android:gravity="center"
+                android:text="Delete"
                 android:textColor="@color/white"
-                android:textSize="10sp"
-                android:layout_marginBottom="3dp"/>
+                android:textSize="10sp" />
         </RelativeLayout>
-        <View android:layout_height="fill_parent"
+
+        <View
             android:layout_width="0dp"
+            android:layout_height="fill_parent"
             android:layout_weight=".03"
-            android:background="@color/white"/>
+            android:background="@color/white" />
+
         <TextView
             android:id="@+id/mark_as_done"
             android:layout_width="0dp"
-            android:text="Mark as done"
-            android:padding="2dp"
-            android:gravity="center"
-            android:layout_weight="1.2"
-            android:layout_gravity="center"
             android:layout_height="match_parent"
-            android:textSize="12sp"
+            android:layout_gravity="center"
+            android:layout_weight="1.2"
+            android:gravity="center"
+            android:padding="2dp"
+            android:text="Mark as done"
             android:textColor="@android:color/white"
-            />
+            android:textSize="12sp" />
     </LinearLayout>
 </RelativeLayout>

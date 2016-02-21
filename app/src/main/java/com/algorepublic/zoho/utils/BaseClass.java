@@ -62,6 +62,7 @@ public class BaseClass extends Application {
 
 
     public static TinyDB db;
+    private String themePreference = "themePreference";
 
     @Override
     public void onCreate() {
@@ -78,6 +79,14 @@ public class BaseClass extends Application {
 
     public String getEmail() {
         return appSharedPrefs.getString(Email, "");
+    }
+
+    public void setThemePreference(int theme) {
+        prefsEditor.putInt(themePreference, theme).commit();
+    }
+
+    public int getThemePreference() {
+        return appSharedPrefs.getInt(themePreference, 0);
     }
 
     public void setLastName(String lastName) {
@@ -376,4 +385,5 @@ public class BaseClass extends Application {
         int mDay = calendar.get(Calendar.DAY_OF_MONTH);
         return (mMonth+"/"+mDay+"/"+mYear);
     }
+
 }

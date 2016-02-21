@@ -1,47 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:background="@color/colorBaseWrapper"
-    android:layout_height="match_parent">
+    android:orientation="vertical">
 
     <com.wang.avi.AVLoadingIndicatorView
         android:id="@+id/avloadingIndicatorView"
         android:layout_width="140dp"
         android:layout_height="140dp"
-        app:indicator="BallSpinFadeLoader"
-        app:indicator_color="@color/colorContentWrapper"
+        android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        app:indicator="BallSpinFadeLoader"
+        app:indicator_color="@color/colorContentWrapper" />
 
     <TextView
+        android:id="@+id/editText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/editText"
-        android:textSize="16sp"
+        android:layout_below="@+id/avloadingIndicatorView"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="15dp"
         android:text="Connecting to User"
         android:textColor="@color/colorContentWrapper"
-        android:layout_below="@+id/avloadingIndicatorView"
-        android:layout_centerHorizontal="true" />
+        android:textSize="16sp" />
 
     <ImageView
+        android:id="@+id/imageView5"
         android:layout_width="200dp"
         android:layout_height="50dp"
-        android:id="@+id/imageView5"
-        android:background="@mipmap/fastlink_white"
         android:layout_below="@+id/editText"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="15dp"
-        android:layout_centerHorizontal="true" />
+        android:background="@mipmap/fastlink_white" />
 
     <TextView
+        android:id="@+id/editText2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/editText2"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
         android:text="Loading"
         android:textAllCaps="true"
-        android:textColor="@color/colorContentWrapper"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:textColor="@color/colorContentWrapper" />
 </RelativeLayout>
