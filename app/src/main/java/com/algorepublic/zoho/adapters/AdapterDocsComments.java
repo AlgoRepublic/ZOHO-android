@@ -11,7 +11,7 @@ import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.fragments.DocsPreviewFragment;
 import com.algorepublic.zoho.fragments.TaskCommentFragment;
 import com.bumptech.glide.Glide;
-import com.makeramen.roundedimageview.RoundedImageView;
+import com.mikhaellopez.circularimageview.CircularImageView;
 
 /**
  * Created by android on 1/13/16.
@@ -45,7 +45,7 @@ public class AdapterDocsComments extends BaseAdapter {
             holder = new ViewHolder();
             holder.taskComment = (TextView) convertView.findViewById(R.id.forum_description);
             holder.userName = (TextView) convertView.findViewById(R.id.forum_title);
-            holder.userImage = (RoundedImageView) convertView.findViewById(R.id.comment_image);
+            holder.userImage = (CircularImageView) convertView.findViewById(R.id.comment_image);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
@@ -61,6 +61,6 @@ public class AdapterDocsComments extends BaseAdapter {
     static class ViewHolder {
         TextView taskComment;
         TextView userName;
-        RoundedImageView userImage;
+        CircularImageView userImage;
     }
 }

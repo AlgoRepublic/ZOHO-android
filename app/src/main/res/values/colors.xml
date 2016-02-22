@@ -5,9 +5,10 @@
     <color name="colorBaseWrapper">#e6e7e8</color>
     <color name="colorBaseHeader">#414042</color>
     <color name="colorBaseMenu">#B3B5B7</color>
-    <color name="colorWhite">#ffffff</color>
     <color name="colorBaseDark">#ff303030</color>
-    <color name="colorPrimaryBlue">#1d87e7</color>
+    <color name="colorWhite">#FFFFFF</color>
+    <color name="colorSelectedFade">#AAE6E7E8</color>
+    <color name="colorPrimaryBlue">#1D87E7</color>
     <color name="calendar_future_days_bg">#FFFFFF</color>
     <color name="calendar_past_days_bg">#F5F5F5</color>
     <color name="calendar_text_current_day">#000000</color>

@@ -1,171 +1,156 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
-    android:weightSum="2">
-
+    android:weightSum="2"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
     <RelativeLayout
-        android:id="@+id/layout_preview"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
         android:orientation="vertical"
-        android:paddingLeft="10dp"
+        android:layout_width="match_parent"
+        android:id="@+id/layout_preview"
+        android:layout_weight="1"
+        android:paddingTop="10dp"
         android:paddingRight="10dp"
-        android:paddingTop="10dp">
-
+        android:paddingLeft="10dp"
+        android:layout_height="0dp">
         <RelativeLayout
-            android:id="@+id/layout1"
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/layout1"
+            android:layout_height="wrap_content">
+            <com.mikhaellopez.circularimageview.CircularImageView
                 android:id="@+id/user_image"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:layout_centerVertical="true"
                 android:scaleType="fitXY"
-                android:src="@drawable/nav_user"
-                app:riv_border_color="#333333"
-                app:riv_corner_radius="5dip"
-                app:riv_mutate_background="true"
-                app:riv_oval="false"
-                app:riv_tile_mode="clamp" />
-
+                app:border_width="1dp"
+                app:border_color="@color/colorBaseHeader"
+                android:layout_centerVertical="true"
+                android:src="@drawable/nav_user" />
             <TextView
                 android:id="@+id/user_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="10dp"
-                android:layout_toRightOf="@+id/user_image"
-                android:ellipsize="end"
-                android:maxLines="2"
-                android:text="sd"
                 android:textColor="@color/colorBaseHeader"
-                android:textSize="16sp" />
+                android:maxLines="2"
+                android:ellipsize="end"
+                android:textSize="16sp"
+                android:text="sd"
+                android:layout_toRightOf="@+id/user_image"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp" />
         </RelativeLayout>
-
         <View
             android:id="@+id/view"
+            android:layout_below="@+id/layout1"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_below="@+id/layout1"
-            android:layout_marginBottom="5dp"
             android:layout_marginTop="5dp"
-            android:background="@color/colorBaseMenu" />
-
+            android:layout_marginBottom="5dp"
+            android:background="@color/colorBaseMenu"/>
         <ImageView
             android:id="@+id/doc_image"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_above="@+id/layout_tasktitle"
-            android:layout_below="@+id/view"
-            android:layout_centerVertical="true"
+            android:scaleType="fitXY"
             android:background="@drawable/square_border"
-            android:scaleType="fitXY" />
-
+            android:layout_below="@+id/view"
+            android:layout_above="@+id/layout_tasktitle"
+            android:layout_centerVertical="true"/>
         <RelativeLayout
             android:id="@+id/layout_tasktitle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:orientation="horizontal"
             android:layout_alignParentBottom="true"
-            android:orientation="horizontal">
-
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
             <TextView
                 android:id="@+id/doc_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:ellipsize="end"
-                android:singleLine="true"
-                android:text="sd"
                 android:textColor="@color/colorBaseHeader"
-                android:textSize="18sp" />
-
+                android:singleLine="true"
+                android:ellipsize="end"
+                android:textSize="18sp"
+                android:text="sd"
+                android:layout_gravity="center_vertical" />
             <TextView
                 android:id="@+id/doc_size"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/doc_title"
-                android:layout_gravity="center_vertical"
-                android:ellipsize="end"
-                android:singleLine="true"
-                android:text="sd"
                 android:textColor="@color/colorBaseHeader"
-                android:textSize="14sp" />
+                android:singleLine="true"
+                android:layout_below="@+id/doc_title"
+                android:ellipsize="end"
+                android:textSize="14sp"
+                android:text="sd"
+                android:layout_gravity="center_vertical" />
 
         </RelativeLayout>
     </RelativeLayout>
-
     <RelativeLayout
-        android:id="@+id/layout_comments"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
         android:orientation="vertical"
-        android:paddingBottom="10dp"
+        android:layout_width="match_parent"
+        android:id="@+id/layout_comments"
+        android:layout_weight="1"
         android:paddingLeft="10dp"
-        android:paddingRight="10dp">
-
+        android:paddingRight="10dp"
+        android:paddingBottom="10dp"
+        android:layout_height="0dp">
         <ListView
-            android:id="@+id/listView_comments"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_above="@+id/layout_comment"
             android:layout_alignParentTop="true"
-            android:layout_marginBottom="5dp"
-            android:dividerHeight="5dp"
+            android:transcriptMode="alwaysScroll"
             android:stackFromBottom="true"
-            android:transcriptMode="alwaysScroll" />
+            android:dividerHeight="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_above="@+id/layout_comment"
+            android:id="@+id/listView_comments" />
 
 
         <LinearLayout
+            android:orientation="horizontal"
+            android:weightSum="2"
+            android:layout_alignParentBottom="true"
             android:id="@+id/layout_comment"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_alignParentBottom="true"
-            android:orientation="horizontal"
-            android:weightSum="2">
-
+            android:layout_height="40dp">
             <EditText
                 android:id="@+id/comment_user"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_gravity="center_vertical"
+                android:maxLines="1"
                 android:layout_weight="1.5"
                 android:background="@android:color/white"
-                android:ellipsize="end"
+                android:textColor="@android:color/black"
+                android:textCursorDrawable="@null"
                 android:hint="Send a comment"
+                android:singleLine="true"
+                android:ellipsize="end"
                 android:imeActionId="@integer/add_comment"
-                android:imeActionLabel="Add"
                 android:imeOptions="actionSend"
-                android:maxLines="1"
+                android:imeActionLabel="Add"
                 android:paddingLeft="5dp"
                 android:paddingRight="5dp"
                 android:scrollHorizontally="true"
-                android:singleLine="true"
-                android:textColor="@android:color/black"
-                android:textCursorDrawable="@null"
-                android:textSize="13sp" />
-
-            <requestFocus />
+                android:textSize="13sp"
+                android:layout_gravity="center_vertical" />
+            <requestFocus/>
 
             <Button
                 android:id="@+id/send"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_gravity="center_vertical"
-                android:layout_weight=".5"
-                android:background="@color/colorContentWrapper"
                 android:text="Add"
                 android:textAllCaps="false"
-                android:textColor="@android:color/white"
                 android:textSize="11sp"
-                android:textStyle="bold" />
+                android:layout_weight=".5"
+                android:background="@color/colorContentWrapper"
+                android:layout_gravity="center_vertical"
+                android:textColor="@android:color/white"
+                android:textStyle="bold"/>
         </LinearLayout>
     </RelativeLayout>
 </LinearLayout>

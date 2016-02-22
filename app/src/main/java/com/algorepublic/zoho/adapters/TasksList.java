@@ -16,6 +16,13 @@ public class TasksList extends ArrayList<Parcelable> implements Comparable<Tasks
         return description;
     }
 
+    public void setParentTaskID(Integer parentTaskID){
+        this.parentTaskID = parentTaskID;
+    }
+    public Integer getParentTaskID(){
+        return parentTaskID;
+    }
+
     public void setTaskID(int taskID){
         this.taskID = taskID;
     }
@@ -146,4 +153,5 @@ public class TasksList extends ArrayList<Parcelable> implements Comparable<Tasks
     String projectName;
     int projectID;
     String description;
+    Integer parentTaskID;
 }

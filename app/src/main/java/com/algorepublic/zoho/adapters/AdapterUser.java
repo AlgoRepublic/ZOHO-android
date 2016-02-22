@@ -13,7 +13,7 @@ import com.algorepublic.zoho.utils.BaseClass;
 import com.algorepublic.zoho.utils.Constants;
 import com.androidquery.AQuery;
 import com.bumptech.glide.Glide;
-import com.makeramen.roundedimageview.RoundedImageView;
+import com.mikhaellopez.circularimageview.CircularImageView;
 
 /**
  * Created by waqas on 2/15/16.
@@ -53,7 +53,7 @@ public class AdapterUser extends BaseAdapter {
             convertView = l_Inflater.inflate(R.layout.layout_user_row, null);
             holder = new ViewHolder();
 
-            holder.userImage = (RoundedImageView) convertView.findViewById(R.id.user_image);
+            holder.userImage = (CircularImageView) convertView.findViewById(R.id.user_image);
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
@@ -67,7 +67,7 @@ public class AdapterUser extends BaseAdapter {
     static class ViewHolder {
         TextView taskComment;
         TextView userName;
-        RoundedImageView userImage;
+        CircularImageView userImage;
         TextView dateTime;
     }
 }

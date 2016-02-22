@@ -23,7 +23,10 @@ import com.algorepublic.zoho.services.TaskListService;
 import com.algorepublic.zoho.utils.BaseClass;
 import com.androidquery.AQuery;
 
+import org.angmarch.views.NiceSpinner;
+
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 /**
  * Created by android on 2/15/16.
@@ -34,10 +37,12 @@ public class EditProjectFragment extends BaseFragment {
     BaseClass baseClass;
     static EditProjectFragment fragment;
     static int position;
-    ArrayList<String> userList;
     ArrayAdapter<String> ownerListAdapter;
     ArrayAdapter<String> deptListAdapter;
     TaskListService service;
+    LinkedList<String> userList;
+    LinkedList<String> deptList;
+    NiceSpinner owner_list,departments_list;
     static ArrayList<ProjectsList> projectsLists= new ArrayList<>();
 
     public EditProjectFragment() {
@@ -100,9 +105,9 @@ public class EditProjectFragment extends BaseFragment {
                 , aq.id(R.id.project_name).getText().toString(), baseClass.getUserId()
                 , aq.id(R.id.project_desc).getText().toString()
                 , TaskAssigneeModel.getInstance().responseObject.
-                get(aq.id(R.id.owner_list).getSelectedItemPosition()).ID, isstatus
+                get(owner_list.getSelectedIndex()).ID, isstatus
                 , projectsLists.get(
-                aq.id(R.id.departments_list).getSelectedItemPosition()).getCompOrDeptID(), isprivate
+               departments_list.getSelectedIndex()).getCompOrDeptID(), isprivate
                 , true, new CallBack(EditProjectFragment.this, "UpdateProject"));
     }
     public void UpdateProject(Object caller, Object model){
@@ -124,19 +129,17 @@ public class EditProjectFragment extends BaseFragment {
                              Bundle savedInstanceState) {
         View view  = inflater.inflate(R.layout.add_project, container, false);
         aq = new AQuery(getActivity(), view);
+        owner_list = (NiceSpinner) view.findViewById(R.id.owner_list);
+        departments_list= (NiceSpinner) view.findViewById(R.id.departments_list);
         service = new TaskListService(getActivity());
         setHasOptionsMenu(true);
         aq.id(R.id.project_status).visible();
         baseClass = ((BaseClass) getActivity().getApplicationContext());
-        ArrayList<String> DeptList = new ArrayList<>();
+        deptList = new LinkedList<>();
         for(int loop=0;loop<ProjectsFragment.allDeptList.size();loop++){
-            DeptList.add(ProjectsFragment.allDeptList.get(loop).getDeptName());
+            deptList.add(ProjectsFragment.allDeptList.get(loop).getDeptName());
         }
-        deptListAdapter = new ArrayAdapter<String>(
-                getActivity(),
-                R.layout.layout_spinner_project,
-                DeptList);
-                aq.id(R.id.departments_list).getSpinner().setAdapter(deptListAdapter);
+        departments_list.attachDataSource(deptList);
         service.getAllUsers(true, new CallBack(EditProjectFragment.this, "GetAllUsers"));
         return view;
     }
@@ -148,11 +151,11 @@ public class EditProjectFragment extends BaseFragment {
         String ownername = projectsLists.get(position).getOwnerName();
         if (!deptname.equals(null)) {
             int spinnerPosition = deptListAdapter.getPosition(deptname);
-            aq.id(R.id.departments_list).getSpinner().setSelection(spinnerPosition);
+           departments_list.setSelectedIndex(spinnerPosition);
         }
         if (!ownername.equals(null)) {
             int spinnerPosition = ownerListAdapter.getPosition(ownername);
-            aq.id(R.id.owner_list).getSpinner().setSelection(spinnerPosition);
+            owner_list.setSelectedIndex(spinnerPosition);
         }
         if(projectsLists.get(position).getDeleted()== true){
             aq.id(R.id.archive_radio).checked(true);
@@ -173,16 +176,11 @@ public class EditProjectFragment extends BaseFragment {
     public void GetAllUsers(Object caller, Object model) {
         TaskAssigneeModel.getInstance().setList((TaskAssigneeModel) model);
         if (TaskAssigneeModel.getInstance().responseCode == 100) {
-            userList= new ArrayList();
+            userList= new LinkedList<>();
             for(int loop=0;loop<TaskAssigneeModel.getInstance().responseObject.size();loop++) {
                 userList.add(TaskAssigneeModel.getInstance().responseObject.get(loop).firstName);
             }
-            ownerListAdapter = new ArrayAdapter<String>(
-                    getActivity(),
-                    R.layout.layout_spinner_project,
-                    userList
-            );
-            aq.id(R.id.owner_list).getSpinner().setAdapter(ownerListAdapter);
+            owner_list.attachDataSource(userList);
             UpdateValues();
         }
         else

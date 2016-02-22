@@ -52,7 +52,7 @@ public class DocumentsService extends BaseService {
         String url = Constants.DeleteDocuments_API;
         HashMap<String, String> params = new HashMap<String, String>();
         for(int loop=0;loop<fileIDs.size();loop++) {
-            params.put("filesID["+loop+"]", String.valueOf(fileIDs.get(loop)));
+            params.put("filesID[" + loop + "]", String.valueOf(fileIDs.get(loop)));
         }
         this.post(url, params, obj, GeneralModel.getInstance(), message);
         Log.e("DeleteDocumentsService", url);

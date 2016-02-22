@@ -1,70 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
     <RelativeLayout
-        android:id="@+id/layout_comments"
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
         android:layout_margin="5dp"
-        android:orientation="vertical">
-
+        android:id="@+id/layout_comments"
+        android:layout_height="match_parent">
         <ListView
-            android:id="@+id/listView_comments"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_above="@+id/layout_comment"
             android:layout_alignParentTop="true"
+            android:transcriptMode="alwaysScroll"
             android:stackFromBottom="true"
-            android:transcriptMode="alwaysScroll" />
+            android:dividerHeight="5dp"
+            android:layout_above="@+id/layout_comment"
+            android:id="@+id/listView_comments" />
 
 
         <LinearLayout
+            android:orientation="horizontal"
+            android:weightSum="2"
+            android:layout_alignParentBottom="true"
             android:id="@+id/layout_comment"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_alignParentBottom="true"
-            android:orientation="horizontal"
-            android:weightSum="2">
-
+            android:layout_height="40dp">
             <EditText
                 android:id="@+id/comment_user"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="3dp"
+                android:maxLines="1"
                 android:layout_weight="1.5"
                 android:background="@android:color/white"
-                android:ellipsize="end"
+                android:textColor="@android:color/black"
+                android:textCursorDrawable="@null"
                 android:hint="Send a comment"
+                android:singleLine="true"
+                android:ellipsize="end"
                 android:imeActionId="@integer/add_comment"
-                android:imeActionLabel="Add"
                 android:imeOptions="actionSend"
-                android:maxLines="1"
+                android:imeActionLabel="Add"
                 android:paddingLeft="5dp"
                 android:paddingRight="5dp"
                 android:scrollHorizontally="true"
-                android:singleLine="true"
-                android:textColor="@android:color/black"
-                android:textCursorDrawable="@null"
-                android:textSize="13sp" />
-
-            <requestFocus />
+                android:textSize="13sp"
+                android:layout_gravity="center_vertical" />
+            <requestFocus/>
 
             <Button
                 android:id="@+id/send"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_gravity="center_vertical"
-                android:layout_weight=".5"
-                android:background="@color/colorContentWrapper"
                 android:text="Add"
                 android:textAllCaps="false"
-                android:textColor="@android:color/white"
                 android:textSize="11sp"
-                android:textStyle="bold" />
+                android:layout_weight=".5"
+                android:background="@color/colorContentWrapper"
+                android:layout_gravity="center_vertical"
+                android:textColor="@android:color/white"
+                android:textStyle="bold"/>
         </LinearLayout>
     </RelativeLayout>
 </LinearLayout>

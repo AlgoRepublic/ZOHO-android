@@ -302,6 +302,7 @@ public class TasksListFragment extends BaseFragment {
                 tasksList.setDescription(taskModel.description);
                 tasksList.setPriority(taskModel.priority);
                 tasksList.setProgress(taskModel.progress);
+                tasksList.setParentTaskID(taskModel.parentTaskID);
                 tasksList.setCommentsCount(taskModel.commentsCount);
                 tasksList.setDocumentsCount(taskModel.documentsCount);
                 tasksList.setSubTasksCount(taskModel.subTasksCount);

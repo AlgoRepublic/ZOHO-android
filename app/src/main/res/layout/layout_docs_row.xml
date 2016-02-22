@@ -1,120 +1,125 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout
+    android:layout_height="wrap_content"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_marginBottom="10dp"
-    android:descendantFocusability="blocksDescendants"
-    android:orientation="horizontal"
-    android:paddingEnd="10dp"
-    android:paddingLeft="10dp"
-    android:paddingRight="10dp"
-    android:paddingStart="10dp">
+    xmlns:android="http://schemas.android.com/apk/res/android" >
 
-    <com.h6ah4i.android.materialshadowninepatch.MaterialShadowContainerView
-        android:id="@+id/shadow_item_container"
-        style="@style/ms9_CompositeShadowStyle"
+    <RelativeLayout
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:descendantFocusability="blocksDescendants"
+        android:orientation="horizontal"
+        android:paddingRight="10dp"
+        android:paddingEnd="10dp"
+        android:paddingLeft="10dp"
+        android:paddingStart="10dp"
+        android:id="@+id/layout_click"
+        android:layout_marginBottom="10dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:ms9_affectsDisplayedPosition="true"
-        app:ms9_shadowElevation="2dp"
-        app:ms9_shadowTranslationZ="1dp"
-        app:ms9_useAmbientShadow="true">
-
-        <RelativeLayout
+        android:layout_height="wrap_content">
+        <com.h6ah4i.android.materialshadowninepatch.MaterialShadowContainerView
+            android:id="@+id/shadow_item_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:background="@drawable/comment_bg">
-
-            <ImageView
-                android:id="@+id/file_image"
-                android:layout_width="45dp"
-                android:layout_height="50dp"
-                android:layout_margin="10dp"
-                android:layout_toLeftOf="@+id/layout1"
-                android:adjustViewBounds="true"
-                android:background="@mipmap/ic_listview_word"
-                android:scaleType="fitXY"></ImageView>
+            style="@style/ms9_CompositeShadowStyle"
+            app:ms9_useAmbientShadow="true"
+            app:ms9_affectsDisplayedPosition="true"
+            app:ms9_shadowTranslationZ="1dp"
+            app:ms9_shadowElevation="2dp">
 
             <RelativeLayout
-                android:id="@+id/layout_2"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentTop="true">
-
+                android:background="@drawable/comment_bg"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:layout_width="match_parent">
                 <CheckBox
                     android:id="@+id/doc_checkbox"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:background="@drawable/checkbox"
+                    android:layout_width="45dp"
+                    android:scaleType="fitXY"
+                    android:adjustViewBounds="true"
+                    android:layout_height="50dp"
                     android:button="@null"
-                    android:checked="false" />
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/layout_tasktitle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_toLeftOf="@+id/layout_2"
-                android:layout_toRightOf="@+id/file_image">
-
-                <TextView
-                    android:id="@+id/file_name"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentTop="true"
-                    android:layout_marginTop="3dp"
-                    android:ellipsize="end"
-                    android:singleLine="true"
-                    android:text="File"
-                    android:textColor="@android:color/black"
-                    android:textSize="14sp" />
+                    android:layout_margin="10dp"
+                    android:checked="false"
+                    android:visibility="visible"
+                    android:layout_centerVertical="true"
+                    />
+                <!--<ImageView-->
+                <!--android:id="@+id/file_image"-->
+                <!--android:layout_width="45dp"-->
+                <!--android:scaleType="fitXY"-->
+                <!--android:adjustViewBounds="true"-->
+                <!--android:layout_height="50dp"-->
+                <!--android:background="@mipmap/ic_listview_word"-->
+                <!--android:layout_margin="10dp" >-->
+                <!--</ImageView>-->
 
                 <RelativeLayout
-                    android:id="@+id/layout2"
+                    android:id="@+id/layout_tasktitle"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_centerVertical="true"
+                    android:layout_toLeftOf="@+id/layout_2"
+                    android:layout_toRightOf="@+id/doc_checkbox"
+                    >
+                    <TextView
+                        android:id="@+id/file_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="14sp"
+                        android:text="File"
+                        android:singleLine="true"
+                        android:layout_marginTop="3dp"
+                        android:ellipsize="end"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentLeft="true"
+                        android:textColor="@android:color/black"
+                        />
+                    <RelativeLayout
+                        android:id="@+id/layout2"
+                        android:layout_marginTop="3dp"
+                        android:layout_below="@+id/file_name"
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent" >
+                        <TextView
+                            android:id="@+id/file_time"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="14sp"
+                            android:text="4:00 PM"
+                            android:textColor="@android:color/black"
+                            />
+                        <TextView
+                            android:id="@+id/file_tag"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="14sp"
+                            android:text=" - "
+                            android:layout_toRightOf="@+id/file_time"
+                            android:textColor="@android:color/black"/>
+                        <TextView
+                            android:id="@+id/file_size"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="14sp"
+                            android:text="18K"
+                            android:layout_toRightOf="@+id/file_tag"
+                            android:textColor="@android:color/black"/>
+                    </RelativeLayout>
+                </RelativeLayout>
+                <TextView
+                    android:id="@+id/file_id"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/file_name"
-                    android:layout_marginTop="3dp">
-
-                    <TextView
-                        android:id="@+id/file_time"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="4:00 PM"
-                        android:textColor="@android:color/black"
-                        android:textSize="14sp" />
-
-                    <TextView
-                        android:id="@+id/file_tag"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_toRightOf="@+id/file_time"
-                        android:text=" - "
-                        android:textColor="@android:color/black"
-                        android:textSize="14sp" />
-
-                    <TextView
-                        android:id="@+id/file_size"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_toRightOf="@+id/file_tag"
-                        android:text="18K"
-                        android:textColor="@android:color/black"
-                        android:textSize="14sp" />
-                </RelativeLayout>
+                    android:visibility="gone"
+                    />
             </RelativeLayout>
-
-            <TextView
-                android:id="@+id/file_id"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:visibility="gone" />
-        </RelativeLayout>
-    </com.h6ah4i.android.materialshadowninepatch.MaterialShadowContainerView>
+        </com.h6ah4i.android.materialshadowninepatch.MaterialShadowContainerView>
+    </RelativeLayout>
+    <CheckBox
+        android:id="@+id/selected_doc"
+        android:visibility="gone"
+        android:background="@color/colorSelectedFade"
+        android:layout_alignTop="@+id/layout_click"
+        android:layout_alignBottom="@+id/layout_click"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"/>
 </RelativeLayout>

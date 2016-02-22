@@ -99,7 +99,7 @@ public class DocumentsListBySubTaskFragment extends BaseFragment {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                callFragmentWithBackStack(R.id.container, DocsPreviewFragment.newInstance(generalDocsList.get(position)), "DocsPreview");
+                callFragmentWithBackStack(R.id.container, DocsPreviewBySubTask.newInstance(generalDocsList.get(position)), "DocsPreview");
             }
         });
         return view;

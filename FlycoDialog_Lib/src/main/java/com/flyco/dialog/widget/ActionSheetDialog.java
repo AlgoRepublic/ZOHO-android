@@ -11,6 +11,7 @@ import android.view.animation.Animation;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.LayoutAnimationController;
 import android.view.animation.TranslateAnimation;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
@@ -180,6 +181,7 @@ public class ActionSheetDialog extends BottomBaseDialog {
         lv.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT, 1));
         lv.setCacheColorHint(Color.TRANSPARENT);
         lv.setFadingEdgeLength(0);
+        lv.setChoiceMode(AbsListView.CHOICE_MODE_SINGLE);
         lv.setVerticalScrollBarEnabled(false);
         lv.setSelector(new ColorDrawable(Color.TRANSPARENT));
 

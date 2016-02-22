@@ -142,6 +142,7 @@ public class TaskListBySubTasksFragment extends BaseFragment {
             public void onClick(View v) {
                 if(isLoaded()) {
                     if(allTaskList.size()>0) {
+                        baseClass.setTaskSortType("All");
                         GetGeneralList();
                     }
                 }
@@ -150,15 +151,19 @@ public class TaskListBySubTasksFragment extends BaseFragment {
         aq.id(R.id.up_coming).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(isLoaded())
-                    UpComing();
+                if(isLoaded()) {
+                    baseClass.setTaskSortType("UpComing");
+                    SortList();
+                }
             }
         });
         aq.id(R.id.over_due).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(isLoaded())
-                    OverDueDate();
+                if(isLoaded()) {
+                    baseClass.setTaskSortType("OverDue");
+                    SortList();
+                }
             }
         });
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -186,7 +191,18 @@ public class TaskListBySubTasksFragment extends BaseFragment {
         });
         return view;
     }
-
+    public void SortList(){
+        if(baseClass.getTaskSortType().equalsIgnoreCase("All")){
+            GetGeneralList();
+        }
+        if(baseClass.getTaskSortType().equalsIgnoreCase("UpComing")){
+            UpComing();
+        }
+        if(baseClass.getTaskSortType().equalsIgnoreCase("OverDue")){
+            OverDueDate();
+        }
+        FilterList();
+    }
     public void callForTaskSorting(){
         String[] menuItems = {"Due Date","Priority","Alphabetically","Task List"};
         final ActionSheetDialog dialog = new ActionSheetDialog(getActivity(),menuItems, getView());
@@ -212,9 +228,16 @@ public class TaskListBySubTasksFragment extends BaseFragment {
             }
         });
     }
-    public void SortList(){
+    public void FilterList(){
         if(baseClass.getTaskFilterType().equalsIgnoreCase("DueDate")){
             Collections.sort(generalList, Date);
+            ArrayList<TasksList> lists = new ArrayList<>();
+            lists.addAll(generalList);generalList.clear();
+            for(int loop=0;loop<lists.size();loop++){
+                if(lists.get(loop).getProgress()<100){
+                    generalList.add(lists.get(loop));
+                }
+            }
         }
         if(baseClass.getTaskFilterType().equalsIgnoreCase("Priority")){
             Collections.sort(generalList, byPriority);
@@ -248,7 +271,7 @@ public class TaskListBySubTasksFragment extends BaseFragment {
     public void GetGeneralList(){
         generalList.clear();
         generalList.addAll(allTaskList);
-        SortList();
+        FilterList();
     }
     public void AddAllTasks(){
         allTaskList.clear();
@@ -276,6 +299,7 @@ public class TaskListBySubTasksFragment extends BaseFragment {
             tasksList.setDocumentsCount(taskModel.documentsCount);
             tasksList.setSubTasksCount(taskModel.subTasksCount);
             tasksList.setTaskListName(taskModel.taskListName);
+            tasksList.setParentTaskID(taskModel.parentTaskID);
             tasksList.setTaskListNameID(taskModel.tasklistID);
             //************** Assignee List ************//
             ArrayList<TaskListAssignee> listAssignees = new ArrayList<>();

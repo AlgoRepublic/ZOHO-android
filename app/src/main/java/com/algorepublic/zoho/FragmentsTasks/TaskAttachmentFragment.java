@@ -68,7 +68,7 @@ public class TaskAttachmentFragment extends BaseFragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
 
-        getToolbar().setTitle(getString(R.string.task_attachments));
+//        getToolbar().setTitle(getString(R.string.task_attachments));
         super.onViewCreated(view, savedInstanceState);
     }
     @Override

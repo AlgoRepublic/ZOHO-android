@@ -1,65 +1,60 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/colorBaseWrapper"
     android:layout_width="match_parent"
-    android:layout_height="90dp"
-    android:background="@color/colorBaseWrapper">
-
+    android:layout_height="90dp">
     <RelativeLayout
-        android:id="@+id/relativeLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:id="@+id/relativeLayout">
 
-        <com.makeramen.roundedimageview.RoundedImageView
-            android:id="@+id/user_image"
+        <com.mikhaellopez.circularimageview.CircularImageView
+            android:scaleType="fitXY"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:background="@mipmap/image_comment"
-            android:scaleType="fitXY"
-            app:riv_border_color="#333333"
-            app:riv_corner_radius="5dip"
-            app:riv_mutate_background="true"
-            app:riv_oval="false"
-            app:riv_tile_mode="clamp" />
-
+            android:id="@+id/user_image" />
         <TextView
-            android:id="@+id/user_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:layout_marginTop="5dp"
-            android:layout_toEndOf="@+id/user_image"
             android:text="Test Forum 1"
+            android:textStyle="bold"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="5dp"
             android:textColor="@color/colorBaseHeader"
             android:textSize="14sp"
-            android:textStyle="bold" />
+            android:id="@+id/user_title"
+            android:layout_toEndOf="@+id/user_image" />
 
         <TextView
-            android:id="@+id/user_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/user_title"
-            android:layout_below="@+id/user_image"
+            android:id="@+id/user_email"
+            android:textSize="14sp"
             android:text="daadadad"
             android:textColor="@color/colorBaseHeader"
-            android:textSize="14sp" />
+            android:layout_below="@+id/user_image"
+            android:layout_alignStart="@+id/user_title" />
 
         <TextView
-            android:id="@+id/forum_descriptionq"
             android:layout_width="70dp"
             android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/user_title"
-            android:layout_below="@+id/user_email"
+            android:id="@+id/forum_description"
+            android:textSize="14sp"
             android:text="daadadad"
             android:textColor="@color/colorBaseHeader"
-            android:textSize="14sp" />
+            android:layout_below="@+id/user_email"
+            android:layout_alignStart="@+id/user_title" />
 
         <ImageView
-            android:id="@+id/imageView6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
+            android:id="@+id/imageView6"
             android:layout_alignParentEnd="true"
-            android:background="@mipmap/edit_black" />
+            android:layout_alignParentBottom="true"
+            android:background="@mipmap/edit_black"
+            />
     </RelativeLayout>
 
 

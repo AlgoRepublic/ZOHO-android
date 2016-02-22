@@ -62,6 +62,7 @@ public class DocsPreviewFragment extends BaseFragment {
         baseClass = ((BaseClass) getActivity().getApplicationContext());
         adapter = new AdapterDocsComments(getActivity());
         listView.setAdapter(adapter);
+        aq.id(R.id.user_image).image(Constants.UserImage_URL+baseClass.getProfileImage());
         aq.id(R.id.user_name).text(docObject.getFileName());
         aq.id(R.id.doc_title).text(docObject.getFileName());
         aq.id(R.id.doc_size).text(docObject.getFileSizeInByte());

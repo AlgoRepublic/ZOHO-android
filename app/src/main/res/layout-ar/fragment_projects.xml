@@ -1,92 +1,51 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
     tools:context="com.algorepublic.zoho.fragments.ProjectsFragment">
 
-    <RelativeLayout
-        android:id="@+id/layout_spinner"
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:layout_margin="10dp">
-
-        <RelativeLayout
-            android:layout_width="120dp"
-            android:layout_height="30dp"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_marginBottom="1dp"
-            android:layout_marginTop="1dp"
-            android:background="@color/colorBaseHeader">
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_centerVertical="true"
-                android:layout_toLeftOf="@+id/dropdown"
-                android:layout_toStartOf="@id/dropdown"
-                android:adjustViewBounds="true"
-                android:background="@color/colorBaseWrapper"
-                android:scaleType="fitXY" />
-
-            <ImageView
-                android:id="@+id/dropdown"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
-                android:adjustViewBounds="true"
-                android:background="@mipmap/circle_down"
-                android:scaleType="fitXY" />
-        </RelativeLayout>
-
-        <Spinner
-            android:id="@+id/spinner_sort"
-            android:layout_width="90dp"
-            android:layout_height="match_parent"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_gravity="start"
-            android:layout_marginEnd="30dp"
-            android:layout_marginRight="30dp"
-            android:background="@null"
-            android:gravity="start"
-            android:spinnerMode="dropdown"
-            android:textColor="@android:color/white"
-            android:textStyle="bold"
-            android:visibility="visible" />
-    </RelativeLayout>
-
     <se.emilsjolander.stickylistheaders.StickyListHeadersListView
+        android:layout_above="@+id/sort"
         android:id="@+id/projects_liststicky"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/layout_spinner"
         android:layout_margin="10dp"
-        android:background="@drawable/list_selected_bg"
-        android:choiceMode="singleChoice"
-        android:descendantFocusability="beforeDescendants"
-        android:divider="@android:color/transparent"
-        android:dividerHeight="5dp"
-        android:listSelector="#666666"
         android:scrollbars="none"
-        android:visibility="gone" />
-
+        android:visibility="visible"
+        android:dividerHeight="5dp"
+        android:descendantFocusability="beforeDescendants"
+        android:choiceMode="singleChoice"
+        android:divider="@android:color/transparent" />
     <ListView
+        android:layout_above="@+id/sort"
         android:id="@+id/projects_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/layout_spinner"
         android:layout_margin="10dp"
-        android:choiceMode="singleChoice"
+        android:scrollbars="none"
+        android:visibility="gone"
         android:descendantFocusability="beforeDescendants"
-        android:divider="@android:color/transparent"
+        android:choiceMode="singleChoice"
         android:dividerHeight="5dp"
-        android:listSelector="#666666"
-        android:scrollbars="none" />
+        android:divider="@android:color/transparent" />
+    <RelativeLayout
+        android:id="@+id/sort"
+        android:layout_width="match_parent"
+        android:layout_height="54dp"
+        android:layout_alignParentBottom="true"
+
+        android:background="@color/colorContentWrapper"
+        >
+        <Button
+            android:id="@+id/sort_button"
+            android:layout_width="45dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="12dp"
+            android:gravity="center"
+            android:layout_centerInParent="true"
+            android:background="@mipmap/task_image"
+            android:layout_height="match_parent" />
+    </RelativeLayout>
 </RelativeLayout>
