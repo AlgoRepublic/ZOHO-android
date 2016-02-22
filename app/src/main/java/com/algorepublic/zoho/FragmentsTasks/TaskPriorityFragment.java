@@ -26,7 +26,7 @@ public class TaskPriorityFragment extends BaseFragment {
     AQuery aq;
     BaseClass baseClass;
     public static int position;
-    ListView listView;
+    public static ListView listView;
     public TaskPriorityFragment() {
     }
     @SuppressWarnings("unused")
@@ -56,14 +56,6 @@ public class TaskPriorityFragment extends BaseFragment {
         adapter = new AdapterTaskPriority(getActivity(), arrayList);
         adapter.setSelectedIndex(baseClass.db.getInt("Priority"));
         listView.setAdapter(adapter);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                baseClass.db.putInt("Priority", position);
-                adapter.setSelectedIndex(position);
-                listView.setAdapter(adapter);
-            }
-        });
         return view;
     }
 }

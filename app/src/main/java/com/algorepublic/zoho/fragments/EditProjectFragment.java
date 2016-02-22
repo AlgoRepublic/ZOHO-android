@@ -3,14 +3,13 @@ package com.algorepublic.zoho.fragments;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.text.Html;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.algorepublic.zoho.Models.CreateProjectModel;
@@ -37,11 +36,12 @@ public class EditProjectFragment extends BaseFragment {
     BaseClass baseClass;
     static EditProjectFragment fragment;
     static int position;
-    ArrayAdapter<String> ownerListAdapter;
-    ArrayAdapter<String> deptListAdapter;
     TaskListService service;
+    RadioGroup radioGroup1,radioGroup2;
     LinkedList<String> userList;
     LinkedList<String> deptList;
+    boolean isprivate= false;
+    boolean isactive = false;
     NiceSpinner owner_list,departments_list;
     static ArrayList<ProjectsList> projectsLists= new ArrayList<>();
 
@@ -92,22 +92,14 @@ public class EditProjectFragment extends BaseFragment {
         return super.onOptionsItemSelected(item);
     }
     public void UpdateProject(){
-        boolean isprivate= false;
-        boolean isstatus= false;
-        if(aq.id(R.id.private_radio).isChecked()== true){
-            isprivate=true;
-        }
-        if (aq.id(R.id.active_radio).isChecked() == true) {
-            isstatus = true;
-        }
         ProjectsListService service = new ProjectsListService(getActivity());
         service.updateProject(projectsLists.get(position).getProjectID()
                 , aq.id(R.id.project_name).getText().toString(), baseClass.getUserId()
                 , aq.id(R.id.project_desc).getText().toString()
                 , TaskAssigneeModel.getInstance().responseObject.
-                get(owner_list.getSelectedIndex()).ID, isstatus
+                get(owner_list.getSelectedIndex()).ID, isactive
                 , projectsLists.get(
-               departments_list.getSelectedIndex()).getCompOrDeptID(), isprivate
+                departments_list.getSelectedIndex()).getCompOrDeptID(), isprivate
                 , true, new CallBack(EditProjectFragment.this, "UpdateProject"));
     }
     public void UpdateProject(Object caller, Object model){
@@ -128,12 +120,40 @@ public class EditProjectFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view  = inflater.inflate(R.layout.add_project, container, false);
+        radioGroup1 = (RadioGroup) view.findViewById(R.id.private_public_group);
+        radioGroup2 = (RadioGroup) view.findViewById(R.id.active_archive_status);
+        radioGroup1.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                switch(checkedId) {
+                    case R.id.public_radio:
+                        isprivate = false;
+                        break;
+                    case R.id.private_radio:
+                        isprivate = true;
+                        break;
+                }
+            }
+        });
+        radioGroup2.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                switch(checkedId) {
+                    case R.id.active_radio:
+                        isactive = true;
+                        break;
+                    case R.id.archive_radio:
+                        isactive = false;
+                        break;
+                }
+            }
+        });
         aq = new AQuery(getActivity(), view);
         owner_list = (NiceSpinner) view.findViewById(R.id.owner_list);
         departments_list= (NiceSpinner) view.findViewById(R.id.departments_list);
         service = new TaskListService(getActivity());
         setHasOptionsMenu(true);
-        aq.id(R.id.project_status).visible();
+        aq.id(R.id.active_archive_status).visible();
         baseClass = ((BaseClass) getActivity().getApplicationContext());
         deptList = new LinkedList<>();
         for(int loop=0;loop<ProjectsFragment.allDeptList.size();loop++){
@@ -150,12 +170,22 @@ public class EditProjectFragment extends BaseFragment {
         String deptname = projectsLists.get(position).getCompOrDeptName();
         String ownername = projectsLists.get(position).getOwnerName();
         if (!deptname.equals(null)) {
-            int spinnerPosition = deptListAdapter.getPosition(deptname);
-           departments_list.setSelectedIndex(spinnerPosition);
+            for(int loop=0;loop<deptList.size();loop++)
+            {
+                if(deptList.get(loop).equalsIgnoreCase(deptname))
+                {
+                    departments_list.setSelectedIndex(loop);
+                }
+            }
         }
         if (!ownername.equals(null)) {
-            int spinnerPosition = ownerListAdapter.getPosition(ownername);
-            owner_list.setSelectedIndex(spinnerPosition);
+            for(int loop=0;loop<userList.size();loop++)
+            {
+                if(userList.get(loop).equalsIgnoreCase(ownername))
+                {
+                    owner_list.setSelectedIndex(loop);
+                }
+            }
         }
         if(projectsLists.get(position).getDeleted()== true){
             aq.id(R.id.archive_radio).checked(true);

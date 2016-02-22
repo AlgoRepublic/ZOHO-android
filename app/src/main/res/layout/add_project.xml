@@ -27,7 +27,7 @@
         android:layout_height="wrap_content"
         android:textColor="@color/colorBaseHeader"
         android:textSize="18sp"
-        android:layout_marginTop="10dp" />
+        android:layout_marginTop="20dp" />
 
     <com.rengwuxian.materialedittext.MaterialEditText
         android:id="@+id/project_desc"
@@ -48,11 +48,11 @@
         android:textSize="18sp"
         android:layout_marginTop="10dp" />
 
-    <RadioGroup android:id="@+id/project_status"
+    <RadioGroup android:id="@+id/active_archive_status"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:visibility="gone"
-        android:layout_marginTop="10dp">
+        android:layout_marginTop="20dp">
 
         <RadioButton
             android:id="@+id/active_radio"
@@ -90,7 +90,7 @@
         <RadioButton
             android:id="@+id/private_radio"
             android:layout_width="match_parent"
-            android:layout_height="30dp"
+            android:layout_height="wrap_content"
             android:text="@string/_private"
             android:button="@null"
             android:drawableLeft="@drawable/radiobutton"
@@ -99,9 +99,8 @@
         <RadioButton
             android:id="@+id/public_radio"
             android:layout_width="match_parent"
-            android:layout_height="30dp"
+            android:layout_height="wrap_content"
             android:text="@string/_public"
-
             android:button="@null"
             android:drawablePadding="5dp"
             android:drawableLeft="@drawable/radiobutton"

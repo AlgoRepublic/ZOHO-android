@@ -113,10 +113,10 @@ public class NiceSpinner extends TextView {
         int defaultPadding = resources.getDimensionPixelSize(R.dimen.one_and_a_half_grid_unit);
 
         setGravity(Gravity.CENTER_VERTICAL | Gravity.LEFT);
-        setPadding(resources.getDimensionPixelSize(R.dimen.three_grid_unit), defaultPadding, defaultPadding,
+        setPadding(resources.getDimensionPixelSize(R.dimen.three_grid_unit), defaultPadding,0,
             defaultPadding);
         setClickable(true);
-        setBackgroundResource(R.drawable.selector);
+        setBackgroundResource(R.drawable.underline_textview);
 
         mListView = new ListView(context);
         // Set the spinner's id into the listview to make it pretend to be the right parent in
