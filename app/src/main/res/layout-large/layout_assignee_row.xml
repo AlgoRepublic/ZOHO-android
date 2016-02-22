@@ -1,23 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/layout_booklist"
-    android:descendantFocusability="blocksDescendants"
-    android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@android:color/white"
-    android:weightSum="5"
+    android:descendantFocusability="blocksDescendants"
+    android:orientation="horizontal"
     android:padding="5dp"
-    >
+    android:weightSum="5">
 
     <TextView
         android:id="@+id/assignee_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="16sp"
         android:layout_margin="10dp"
         android:textColor="@color/colorContentWrapper"
-        />
+        android:textSize="16sp" />
 
 </LinearLayout>

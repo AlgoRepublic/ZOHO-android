@@ -21,12 +21,10 @@ import com.algorepublic.zoho.services.ProjectsListService;
 import com.algorepublic.zoho.services.TaskListService;
 import com.algorepublic.zoho.utils.BaseClass;
 import com.androidquery.AQuery;
+
 import org.angmarch.views.NiceSpinner;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.LinkedList;
-import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.

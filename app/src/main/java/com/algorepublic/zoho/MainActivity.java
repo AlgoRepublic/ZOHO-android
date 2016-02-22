@@ -27,15 +27,20 @@ public class MainActivity extends BaseActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        baseClass = ((BaseClass) getApplicationContext());
+        if(baseClass.getThemePreference() == R.style.AppThemeBlue)
+            setTheme(R.style.AppThemeBlue);
+        else
+            setTheme(R.style.AppTheme);
         setContentView(R.layout.activity_main);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+
         setToolbar();
-        baseClass = ((BaseClass) getApplicationContext());
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         View headerLayout =navigationView.getHeaderView(0);
         gridView = (GridView) headerLayout.findViewById(R.id.gridview_menu);
-                aq_header = new AQuery(headerLayout);
+        aq_header = new AQuery(headerLayout);
 
         aq= new AQuery(this);
         if (android.os.Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
@@ -43,6 +48,11 @@ public class MainActivity extends BaseActivity
         }
         aq_header.id(R.id.user_name).text(baseClass.getFirstName());
         aq_header.id(R.id.email).text(baseClass.getEmail());
+
+        if(baseClass.getThemePreference() == R.style.AppThemeBlue)
+            aq_header.id(R.id.layout_menu).background(R.color.colorPrimaryBlue);
+        else
+            aq_header.id(R.id.layout_menu).background(R.color.colorBaseHeader);
 
         ImageView settings = (ImageView) headerLayout.findViewById(R.id.settings);
 

@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="20dp"
-    android:orientation="vertical" >
+    android:orientation="vertical">
 
     <TextView
         android:layout_width="match_parent"
@@ -22,8 +22,7 @@
         android:layout_marginBottom="5dp"
         android:layout_marginTop="5dp"
         android:orientation="vertical"
-        android:visibility="visible" >
-    </LinearLayout>
+        android:visibility="visible"></LinearLayout>
 
     <ImageView
         android:id="@+id/add_file"

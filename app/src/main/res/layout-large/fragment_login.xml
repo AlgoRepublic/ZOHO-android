@@ -1,5 +1,4 @@
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -10,163 +9,177 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".ActivityLoginToLoading">
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:orientation="horizontal">
+
         <ImageView
             android:id="@+id/lang_selector"
             android:layout_width="40dp"
-            android:layout_toLeftOf="@+id/lang_text"
             android:layout_height="40dp"
             android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/lang_text"
             android:scaleType="center"
             android:src="@drawable/ic_menu_add_task" />
+
         <TextView
+            android:id="@+id/lang_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/lang_text"
-            android:singleLine="true"
-            android:text="@string/selected_language"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:textColor="@android:color/white"
             android:ellipsize="end"
-            android:textStyle="bold"
-            android:textSize="30sp" />
+            android:singleLine="true"
+            android:text="@string/selected_language"
+            android:textColor="@android:color/white"
+            android:textSize="30sp"
+            android:textStyle="bold" />
     </RelativeLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="140dp"
-        android:orientation="vertical">
-        </LinearLayout>
+        android:orientation="vertical"></LinearLayout>
 
-    <ScrollView android:id="@+id/login_form"
+    <ScrollView
+        android:id="@+id/login_form"
         android:layout_width="match_parent"
-        android:scrollbars="none"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:scrollbars="none">
 
-        <LinearLayout android:id="@+id/email_login_form"
+        <LinearLayout
+            android:id="@+id/email_login_form"
             android:layout_width="match_parent"
-            android:layout_margin="20dp"
             android:layout_height="wrap_content"
+            android:layout_margin="20dp"
             android:orientation="vertical">
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_marginTop="15dp"
-            android:background="@drawable/edittext_bg"
-            android:layout_height="80dp"
-            android:paddingLeft="10dp"
-            android:orientation="vertical">
-            <AutoCompleteTextView
-                android:id="@+id/email"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:inputType="textEmailAddress"
-                android:maxLines="1"
-                android:textSize="25sp"
-                android:imeOptions="actionNext"
-                android:textCursorDrawable="@null"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:layout_toRightOf="@+id/logo"
-                android:textColorHint="@android:color/white"
-                android:textColor="@android:color/white"
-                android:background="@android:color/transparent"
-                android:completionHint="@string/prompt_email"
-                android:hint="@string/prompt_email"
-                android:singleLine="true" />
-            <ImageView
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:id="@+id/logo"
-                android:layout_centerVertical="true"
-                android:background="@drawable/email_icon"
-                android:layout_alignParentStart="true" />
 
-        </RelativeLayout>
             <RelativeLayout
                 android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/edittext_bg"
+                android:orientation="vertical"
+                android:paddingLeft="10dp">
+
+                <AutoCompleteTextView
+                    android:id="@+id/email"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_toRightOf="@+id/logo"
+                    android:background="@android:color/transparent"
+                    android:completionHint="@string/prompt_email"
+                    android:hint="@string/prompt_email"
+                    android:imeOptions="actionNext"
+                    android:inputType="textEmailAddress"
+                    android:maxLines="1"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:singleLine="true"
+                    android:textColor="@android:color/white"
+                    android:textColorHint="@android:color/white"
+                    android:textCursorDrawable="@null"
+                    android:textSize="25sp" />
+
+                <ImageView
+                    android:id="@+id/logo"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/email_icon" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_marginBottom="10dp"
                 android:layout_marginTop="25dp"
                 android:background="@drawable/edittext_bg"
-                android:layout_height="80dp"
-                android:paddingLeft="10dp"
-                android:layout_marginBottom="10dp"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:paddingLeft="10dp">
+
                 <AutoCompleteTextView
                     android:id="@+id/password"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:inputType="textEmailAddress"
-                    android:maxLines="1"
-                    android:textSize="25sp"
-                    android:imeOptions="actionDone"
-                    android:textCursorDrawable="@null"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="10dp"
                     android:layout_toRightOf="@+id/logo1"
-                    android:textColor="@android:color/white"
                     android:background="@android:color/transparent"
-                    android:textColorHint="@android:color/white"
                     android:completionHint="@string/prompt_password"
                     android:hint="@string/prompt_password"
-                    android:singleLine="true" />
+                    android:imeOptions="actionDone"
+                    android:inputType="textEmailAddress"
+                    android:maxLines="1"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:singleLine="true"
+                    android:textColor="@android:color/white"
+                    android:textColorHint="@android:color/white"
+                    android:textCursorDrawable="@null"
+                    android:textSize="25sp" />
+
                 <ImageView
+                    android:id="@+id/logo1"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
-                    android:id="@+id/logo1"
+                    android:layout_alignParentStart="true"
                     android:layout_centerVertical="true"
-                    android:background="@drawable/lock_icon"
-                    android:layout_alignParentStart="true" />
+                    android:background="@drawable/lock_icon" />
 
             </RelativeLayout>
 
-            <Button android:id="@+id/email_sign_in_button"
+            <Button
+                android:id="@+id/email_sign_in_button"
                 android:layout_width="200dp"
                 android:layout_height="80dp"
-                android:layout_margin="20dp"
                 android:layout_gravity="center"
-                android:onClick="LoginClick"
-                android:background="@drawable/sign_in_button"/>
+                android:layout_margin="20dp"
+                android:background="@drawable/sign_in_button"
+                android:onClick="LoginClick" />
+
             <TextView
+                android:id="@+id/textView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:id="@+id/textView"
-                android:singleLine="true"
+                android:layout_gravity="center_horizontal"
                 android:layout_margin="10dp"
-                android:text="@string/text_or"
-                android:textColor="@android:color/white"
                 android:ellipsize="end"
-                android:textStyle="bold"
-                android:textSize="30sp"
                 android:gravity="center|center_horizontal"
-                android:layout_gravity="center_horizontal" />
-            <Button android:id="@+id/linkedin_here"
+                android:singleLine="true"
+                android:text="@string/text_or"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@android:color/white"
+                android:textSize="30sp"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/linkedin_here"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
-                android:onClick="LinkedInClick"
                 android:layout_marginTop="20dp"
-                android:background="@drawable/sign_in_withlinkedin"/>
+                android:background="@drawable/sign_in_withlinkedin"
+                android:onClick="LinkedInClick" />
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="30dp">
-            </LinearLayout>
+                android:layout_height="30dp"></LinearLayout>
 
             <ImageView
                 android:id="@+id/loader"
                 android:layout_width="70dp"
-                android:layout_toLeftOf="@+id/lang_text"
                 android:layout_height="70dp"
-                android:onClick="LanguageClick"
-                android:visibility="gone"
                 android:layout_gravity="center_horizontal"
-                android:scaleType="fitXY"/>
+                android:layout_toLeftOf="@+id/lang_text"
+                android:onClick="LanguageClick"
+                android:scaleType="fitXY"
+                android:visibility="gone" />
+
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="30dp">
-            </LinearLayout>
+                android:layout_height="30dp"></LinearLayout>
         </LinearLayout>
     </ScrollView>
 

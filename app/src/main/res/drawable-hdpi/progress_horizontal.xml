@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2008 The Android Open Source Project
+<?xml version="1.0" encoding="utf-8"?><!-- Copyright (C) 2008 The Android Open Source Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -20,12 +19,11 @@
         <shape>
             <corners android:radius="5dip" />
             <gradient
-                android:startColor="#D3D3D3"
+                android:angle="270"
                 android:centerColor="#D3D3D3"
                 android:centerY="0.75"
                 android:endColor="#D3D3D3"
-                android:angle="270"
-                />
+                android:startColor="#D3D3D3" />
         </shape>
     </item>
 
@@ -34,12 +32,11 @@
             <shape>
                 <corners android:radius="5dip" />
                 <gradient
-                    android:startColor="@color/colorBaseHeader"
+                    android:angle="270"
                     android:centerColor="@color/colorBaseHeader"
                     android:centerY="0.75"
                     android:endColor="@color/colorBaseHeader"
-                    android:angle="270"
-                    />
+                    android:startColor="@color/colorBaseHeader" />
             </shape>
         </clip>
     </item>
@@ -49,12 +46,11 @@
             <shape>
                 <corners android:radius="5dip" />
                 <gradient
-                    android:startColor="@color/colorBaseHeader"
+                    android:angle="270"
                     android:centerColor="@color/colorBaseHeader"
                     android:centerY="0.75"
                     android:endColor="@color/colorBaseHeader"
-                    android:angle="270"
-                    />
+                    android:startColor="@color/colorBaseHeader" />
             </shape>
         </clip>
     </item>
