@@ -20,6 +20,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.algorepublic.zoho.Models.AllProjectsModel;
 import com.algorepublic.zoho.Models.ProjectsByClientModel;
 import com.algorepublic.zoho.Models.ProjectsByDepartmentModel;
 import com.algorepublic.zoho.R;
@@ -146,24 +147,59 @@ public class ProjectsFragment extends BaseFragment{
         super.onViewCreated(view, savedInstanceState);
         baseClass = ((BaseClass) getActivity().getApplicationContext());
         service = new ProjectsListService(getActivity());
+        service.getAllProjects_API(baseClass.getUserId(), true, new CallBack(this, "AllProjects"));
         service.getProjectsByClient_API(baseClass.getUserId(), true, new CallBack(this, "ProjectsByClient"));
-    }
-
-    public void ProjectsByClient(Object caller, Object model){
-        ProjectsByClientModel.getInstance().setList((ProjectsByClientModel) model);
         service.getProjectsByDepartment(baseClass.getUserId(),
                 true, new CallBack(this, "ProjectsByDepartment"));
     }
-    public void ProjectsByDepartment(Object caller, Object model){
-        ProjectsByDepartmentModel.getInstance().setList((ProjectsByDepartmentModel) model);
-        if (ProjectsByClientModel.getInstance().responseCode == 100
-                || ProjectsByClientModel.getInstance().responseData.size() != 0
-                || ProjectsByDepartmentModel.getInstance().responseCode == 100
-                || ProjectsByDepartmentModel.getInstance().responseData.size() != 0) {
-            AddClientProjects();
+    public void AllProjects(Object caller, Object model) {
+        AllProjectsModel.getInstance().setList((AllProjectsModel) model);
+        if (AllProjectsModel.getInstance().responseCode == 100
+                || AllProjectsModel.getInstance().responseData.size() != 0) {
+            AddAllProjects();
         } else {
             Toast.makeText(getActivity(), getString(R.string.projects_list_empty), Toast.LENGTH_SHORT).show();
         }
+    }
+    public void ProjectsByClient(Object caller, Object model){
+        ProjectsByClientModel.getInstance().setList((ProjectsByClientModel) model);
+        if (ProjectsByClientModel.getInstance().responseCode == 100
+                || ProjectsByClientModel.getInstance().responseData.size() != 0){
+            AddClientProjects();
+        }else {
+            Toast.makeText(getActivity(), getString(R.string.projects_list_empty), Toast.LENGTH_SHORT).show();
+        }
+    }
+    public void ProjectsByDepartment(Object caller, Object model){
+        ProjectsByDepartmentModel.getInstance().setList((ProjectsByDepartmentModel) model);
+        if (ProjectsByDepartmentModel.getInstance().responseCode == 100
+                || ProjectsByDepartmentModel.getInstance().responseData.size() != 0) {
+            AddDepartmentProjects();
+        } else {
+            Toast.makeText(getActivity(), getString(R.string.projects_list_empty), Toast.LENGTH_SHORT).show();
+        }
+    }
+    public void AddAllProjects(){
+        allProjectsList.clear();
+        for (int loop = 0; loop < AllProjectsModel.getInstance().responseData.size(); loop++) {
+            for(int loop1=0;loop1<AllProjectsModel.getInstance().responseData.size();loop1++){
+                ProjectsList projectsList = new ProjectsList();
+                projectsList.setCompOrDeptName("");
+                projectsList.setCompOrDeptID("1");
+                projectsList.setProjectID(AllProjectsModel.getInstance().responseData.get(loop).projectID);
+                projectsList.setProjectName(AllProjectsModel.getInstance().responseData.get(loop).projectName);
+                projectsList.setOwnerID(AllProjectsModel.getInstance().responseData.get(loop).ownerID);
+                projectsList.setOwnerName(AllProjectsModel.getInstance().responseData.get(loop).ownerName);
+                projectsList.setProjectDesc(AllProjectsModel.getInstance().responseData.get(loop).description);
+                projectsList.setTotalTasks(AllProjectsModel.getInstance().responseData.get(loop).totalTasks);
+                projectsList.setTotalUsers(AllProjectsModel.getInstance().responseData.get(loop).usersCount);
+                projectsList.setTotalMilestones(AllProjectsModel.getInstance().responseData.get(loop).toalMilestones);
+                projectsList.setDeleted(AllProjectsModel.getInstance().responseData.get(loop).IsDeleted);
+                projectsList.setPrivate(AllProjectsModel.getInstance().responseData.get(loop).Isprivate);
+                allProjectsList.add(projectsList);
+            }
+        }
+        SetGeneralClientAdapter();
     }
     public void AddClientProjects(){
         ByClientList.clear();
@@ -185,11 +221,10 @@ public class ProjectsFragment extends BaseFragment{
                 ByClientList.add(projectsList);
             }
         }
-        AddDepartmentProjects();
     }
 
     public void AddDepartmentProjects(){
-        ByDepartmentList.clear();allDeptList.clear();
+        ByDepartmentList.clear();
         for (int loop = 0; loop < ProjectsByDepartmentModel.getInstance().responseData.size(); loop++) {
             DeptList deptList = new DeptList();
             deptList.setDeptID(ProjectsByDepartmentModel.getInstance().responseData.get(loop).ID);
@@ -216,79 +251,22 @@ public class ProjectsFragment extends BaseFragment{
                 ByDepartmentList.add(projectsList);
             }
         }
-        AddUpAllProjects();
     }
-    public void AddUpAllProjects(){
-        allProjectsList.clear();
-        allProjectsList.addAll(ByClientList);
-        allProjectsList.addAll(ByDepartmentList);
-        Filter(lastposition);
-       }
+
     public void SetGeneralClientAdapter() {
         clientAdapter = new AdapterProjectsClientList(getActivity(), allProjectsList);
         listViewClient.setAdapter(clientAdapter);
-        listViewClient.setOnItemClickListener(allOnClick);
     }
     public void SetClientProjectsAdapter(){
         clientAdapter = new AdapterProjectsClientList(getActivity(), ByClientList);
         listViewClient.setAdapter(clientAdapter);
-        listViewClient.setOnItemClickListener(clientOnClick);
     }
     public void SetDepartmentProjectsAdapter(){
 
         projectAdapter = new AdapterProjectsDeptList(getActivity());
         listViewDept.setAreHeadersSticky(false);
         listViewDept.setAdapter(projectAdapter);
-        listViewDept.setOnItemClickListener(deptOnClick);
     }
-    AdapterView.OnItemClickListener allOnClick = new AdapterView.OnItemClickListener() {
-        @Override
-        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            Log.e("selected project", ((TextView) view.findViewById(R.id.project_id)).getText().toString());
-            if (baseClass.getSelectedProject().equalsIgnoreCase(((TextView) view.findViewById(R.id.project_id)).getText().toString())) {
-                baseClass.setSelectedProject("0");
-                baseClass.db.putInt("ProjectID", 0);
-            }else {
-                baseClass.setSelectedProject(((TextView) view.findViewById(R.id.project_id)).getText().toString());
-                baseClass.db.putInt("ProjectID", Integer.parseInt(baseClass.getSelectedProject()));
-                baseClass.db.putString("ProjectName", ((TextView) view.findViewById(R.id.project_title)).getText().toString());
-            }
-            clientAdapter.notifyDataSetInvalidated();
-        }
-    };
-    AdapterView.OnItemClickListener clientOnClick = new AdapterView.OnItemClickListener() {
-        @Override
-        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            Log.e("selected project", ((TextView) view.findViewById(R.id.project_id)).getText().toString());
-            if (baseClass.getSelectedProject().equalsIgnoreCase(((TextView) view.findViewById(R.id.project_id)).getText().toString())) {
-                baseClass.setSelectedProject("0");
-                baseClass.db.putInt("ProjectID", 0);
-            }else {
-                baseClass.setSelectedProject(((TextView) view.findViewById(R.id.project_id)).getText().toString());
-                baseClass.db.putInt("ProjectID", Integer.parseInt(baseClass.getSelectedProject()));
-                baseClass.db.putString("ProjectName", ((TextView) view.findViewById(R.id.project_title)).getText().toString());
-            }
-            clientAdapter.notifyDataSetInvalidated();
-        }
-    };
-    AdapterView.OnItemClickListener deptOnClick = new AdapterView.OnItemClickListener() {
-        @Override
-        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            Log.e("selected project", ((TextView) view.findViewById(R.id.project_id)).getText().toString());
-
-            TextView textView = (TextView) view.findViewById(R.id.project_id);
-
-            if (baseClass.getSelectedProject().equalsIgnoreCase(textView.getText().toString())) {
-                baseClass.setSelectedProject("0");
-                baseClass.db.putInt("ProjectID", 0);
-            }else {
-                baseClass.setSelectedProject(textView.getText().toString());
-                baseClass.db.putInt("ProjectID", Integer.parseInt(baseClass.getSelectedProject()));
-                baseClass.db.putString("ProjectName", (textView.getText().toString()));
-            }
-            ((BaseAdapter)projectAdapter).notifyDataSetInvalidated();
-        }
-    };
     /**
      * Initialize the contents of the Activity's standard options menu.  You
      * should place your menu items in to <var>menu</var>.  For this method

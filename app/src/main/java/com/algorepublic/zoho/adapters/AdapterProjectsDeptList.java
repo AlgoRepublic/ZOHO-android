@@ -87,7 +87,22 @@ public class AdapterProjectsDeptList extends BaseAdapter implements StickyListHe
         }else{
             aq.id(R.id.selected_project).getView().setBackgroundColor(Color.parseColor("#00000000"));
         }
-
+        aq.id(R.id.parent1).clicked(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                View view = v;
+                if (baseClass.getSelectedProject().equalsIgnoreCase(((TextView) view.findViewById(R.id.project_id)).getText().toString())) {
+                    baseClass.setSelectedProject("0");
+                    baseClass.db.putInt("ProjectID", 0);
+                } else {
+                    baseClass.setSelectedProject(((TextView)view.findViewById(R.id.project_id)).getText().toString());
+                    baseClass.db.putInt("ProjectID", Integer.parseInt(baseClass.getSelectedProject()));
+                    baseClass.db.putString("ProjectName", (((TextView)view.findViewById(R.id.project_id)).getText().toString()));
+                }
+                notifyDataSetInvalidated();
+                ProjectsFragment.listViewDept.setSelection(position);
+            }
+        });
         aq.id(R.id.project_edit).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -97,12 +112,13 @@ public class AdapterProjectsDeptList extends BaseAdapter implements StickyListHe
                 }
             }
         });
-        aq.id(R.id.project_delete).clicked(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                NormalDialogCustomAttr("Delete Project?", position);
-            }
-        });
+
+//        aq.id(R.id.project_delete).clicked(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                NormalDialogCustomAttr("Delete Project?", position);
+//            }
+//        });
 //        Animation animation = AnimationUtils.loadAnimation(ctx, (position > lastPosition) ? R.anim.up_from_bottom : R.anim.down_from_top);
 //        convertView.startAnimation(animation);
         return convertView;

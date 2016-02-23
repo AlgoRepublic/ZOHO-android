@@ -6,6 +6,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -69,7 +71,7 @@ public class AdapterProjectsClientList extends BaseAdapter {
     }
 
     @Override
-    public View getView(final int position,View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
 
         convertView = l_Inflater.inflate(R.layout.layout_project_list_row, null);
         aq = new AQuery(convertView);
@@ -91,21 +93,37 @@ public class AdapterProjectsClientList extends BaseAdapter {
             aq.id(R.id.selected_project).getView().setBackgroundColor(Color.parseColor("#00000000"));
         }
 
-        aq.id(R.id.project_edit).clicked(new View.OnClickListener() {
+        aq.id(R.id.parent1).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!baseClass.getSelectedProject().equalsIgnoreCase("0")) {
-                    callFragmentWithBackStack(R.id.container, EditProjectFragment.
-                            newInstance(arrayList,position), "EditProjectFragment");
+                View view = v;
+                if (baseClass.getSelectedProject().equalsIgnoreCase(((TextView) view.findViewById(R.id.project_id)).getText().toString())) {
+                    baseClass.setSelectedProject("0");
+                    baseClass.db.putInt("ProjectID", 0);
+                } else {
+                    baseClass.setSelectedProject(((TextView)view.findViewById(R.id.project_id)).getText().toString());
+                    baseClass.db.putInt("ProjectID", Integer.parseInt(baseClass.getSelectedProject()));
+                    baseClass.db.putString("ProjectName", (((TextView)view.findViewById(R.id.project_id)).getText().toString()));
                 }
+                notifyDataSetInvalidated();
+                ProjectsFragment.listViewClient.setSelection(position);
             }
         });
-        aq.id(R.id.project_delete).clicked(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                NormalDialogCustomAttr("Delete Project?",position);
-            }
-        });
+//        aq.id(R.id.project_edit).clicked(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if(!baseClass.getSelectedProject().equalsIgnoreCase("0")) {
+//                    callFragmentWithBackStack(R.id.container, EditProjectFragment.
+//                            newInstance(arrayList,position), "EditProjectFragment");
+//                }
+//            }
+//        });
+//        aq.id(R.id.project_delete).clicked(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                NormalDialogCustomAttr("Delete Project?",position);
+//            }
+//        });
 //        Animation animation = AnimationUtils.loadAnimation(ctx, (position > lastPosition) ? R.anim.up_from_bottom : R.anim.down_from_top);
 //        convertView.startAnimation(animation);
         return convertView;

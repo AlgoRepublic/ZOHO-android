@@ -3,16 +3,29 @@
     android:layout_width="match_parent"
     android:layout_height="120dp"
     android:orientation="horizontal">
-    <com.daimajia.swipe.SwipeLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+    <ImageView
+        android:id="@+id/selected_project"
+        android:layout_width="5dp"
+        android:layout_alignParentLeft="true"
+        android:layout_height="106dp"
+        android:layout_alignParentStart="true"
+        android:background="@color/white" />
+    <RelativeLayout
+        android:id="@+id/top_parent"
+        android:layout_toRightOf="@+id/selected_project"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+    <com.daimajia.swipe.SwipeLayout
+        android:id="@+id/swipe"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         app:clickToClose="true">
-        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="150dp"
             android:layout_height="match_parent"
             android:weightSum="2"
+            android:layout_marginBottom="7dp"
             android:orientation="horizontal"
             >
             <TextView
@@ -42,21 +55,17 @@
                 android:text="Delete"
                 />
         </LinearLayout>
-        <ImageView
-            android:id="@+id/selected_project"
-            android:layout_width="5dp"
-            android:layout_height="111dp"
-            android:layout_alignParentStart="true"
-            android:layout_marginBottom="8dp"
-            android:background="@color/white" />
+        <RelativeLayout
+            android:id="@+id/layout123"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
 
         <com.h6ah4i.android.materialshadowninepatch.MaterialShadowContainerView
             android:id="@+id/shadow_item_container"
             android:layout_width="match_parent"
             style="@style/ms9_DefaultShadowStyle"
-            android:layout_height="wrap_content"
-            android:layout_toEndOf="@id/selected_project"
-            android:layout_toRightOf="@id/selected_project"
+            android:layout_height="match_parent"
             app:ms9_affectsDisplayedPosition="true"
             app:ms9_shadowElevation="2dp"
             app:ms9_shadowTranslationZ="1dp"
@@ -65,15 +74,19 @@
             <RelativeLayout
                 android:id="@+id/parent"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_marginBottom="8dp"
-                android:layout_marginEnd="4dp"
-                android:layout_marginRight="4dp"
                 android:background="@color/colorBaseWrapper"
+                android:orientation="horizontal">
+            <RelativeLayout
+                android:layout_toLeftOf="@+id/rightarrow_layout"
+                android:id="@+id/parent1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:orientation="horizontal"
-                android:padding="8dp">
-
+                android:padding="5dp">
                 <RelativeLayout
+                    android:paddingTop="8dp"
                     android:id="@+id/layout1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -196,41 +209,17 @@
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_below="@+id/view"
                     android:padding="3dp">
 
                     <TextView
                         android:id="@+id/project_desc"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_toLeftOf="@+id/project_delete"
-                        android:layout_toStartOf="@+id/project_delete"
+                        android:layout_height="match_parent"
                         android:lines="3"
                         android:textColor="@color/colorBaseHeader"
                         android:textSize="12sp" />
-
-                    <TextView
-                        android:id="@+id/project_edit"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignBottom="@+id/project_desc"
-                        android:layout_alignParentEnd="true"
-                        android:layout_alignParentRight="true"
-                        android:text="@string/edit"
-                        android:textColor="@color/colorBaseHeader"
-                        android:textSize="14sp" />
-
-                    <TextView
-                        android:id="@+id/project_delete"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:layout_alignParentRight="true"
-                        android:layout_alignTop="@+id/project_desc"
-                        android:text="@string/delete"
-                        android:textColor="@color/colorBaseHeader"
-                        android:textSize="14sp" />
                 </RelativeLayout>
 
                 <TextView
@@ -238,7 +227,27 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:visibility="gone" />
+
+                </RelativeLayout>
+                <LinearLayout
+                    android:id="@+id/rightarrow_layout"
+                    android:layout_width="20dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:background="#E2DBDB">
+
+                <ImageView
+                    android:id="@+id/right_arrow_image"
+                    android:layout_width="15dp"
+                    android:layout_height="20dp"
+                    android:layout_margin="10dp"
+                    android:background="@mipmap/level_one_up_black"/>
+                </LinearLayout>
+
             </RelativeLayout>
         </com.h6ah4i.android.materialshadowninepatch.MaterialShadowContainerView>
-</com.daimajia.swipe.SwipeLayout>
+</RelativeLayout>
+    </com.daimajia.swipe.SwipeLayout>
+</RelativeLayout>
 </RelativeLayout>

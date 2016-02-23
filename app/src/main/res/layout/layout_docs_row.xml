@@ -1,16 +1,61 @@
 <RelativeLayout
     android:layout_height="wrap_content"
     android:layout_width="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android" >
-
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+    android:paddingStart="10dp"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <RelativeLayout
+        android:id="@+id/top_parent"
+        android:layout_toRightOf="@+id/selected_project"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <com.daimajia.swipe.SwipeLayout
+            android:id="@+id/swipe"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:clickToClose="true">
+        <LinearLayout
+            android:layout_width="140dp"
+            android:layout_height="match_parent"
+            android:weightSum="2"
+            android:paddingTop="5dp"
+            android:paddingBottom="14dp"
+            android:orientation="horizontal"
+            >
+            <TextView
+                android:id="@+id/btOpen"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:textSize="16sp"
+                android:textColor="@color/white"
+                android:background="@color/colorContentWrapper"
+                android:text="Edit"
+                />
+            <TextView
+                android:id="@+id/btDelete"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:textSize="16sp"
+                android:textColor="@color/white"
+                android:background="@color/red"
+                android:text="Delete"
+                />
+        </LinearLayout>
     <RelativeLayout
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:descendantFocusability="blocksDescendants"
         android:orientation="horizontal"
-        android:paddingRight="10dp"
-        android:paddingEnd="10dp"
-        android:paddingLeft="10dp"
-        android:paddingStart="10dp"
         android:id="@+id/layout_click"
         android:layout_marginBottom="10dp"
         android:layout_width="match_parent"
@@ -23,14 +68,16 @@
             app:ms9_useAmbientShadow="true"
             app:ms9_affectsDisplayedPosition="true"
             app:ms9_shadowTranslationZ="1dp"
-            app:ms9_shadowElevation="2dp">
+            app:ms9_shadowElevation="3dp">
 
             <RelativeLayout
-                android:background="@drawable/comment_bg"
+                android:background="@drawable/bg_documents"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="5dp"
                 android:layout_width="match_parent">
-                <CheckBox
+                <ImageView
                     android:id="@+id/doc_checkbox"
                     android:layout_width="45dp"
                     android:scaleType="fitXY"
@@ -114,12 +161,6 @@
             </RelativeLayout>
         </com.h6ah4i.android.materialshadowninepatch.MaterialShadowContainerView>
     </RelativeLayout>
-    <CheckBox
-        android:id="@+id/selected_doc"
-        android:visibility="gone"
-        android:background="@color/colorSelectedFade"
-        android:layout_alignTop="@+id/layout_click"
-        android:layout_alignBottom="@+id/layout_click"
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent"/>
+        </com.daimajia.swipe.SwipeLayout>
+        </RelativeLayout>
 </RelativeLayout>

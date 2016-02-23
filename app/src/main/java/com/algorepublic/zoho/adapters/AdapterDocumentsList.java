@@ -72,7 +72,7 @@ public class AdapterDocumentsList extends BaseAdapter implements StickyListHeade
         aq.id(R.id.file_id).text(Integer.toString(documentsLists.get(position).getID()));
         aq.id(R.id.file_name).text(documentsLists.get(position).getFileName());
         aq.id(R.id.file_time).text(GetTime(documentsLists.get(position).getUpdatedMilli()));
-        aq.id(R.id.doc_checkbox).background(BaseClass.getIcon(documentsLists.
+        aq.id(R.id.doc_checkbox).image(BaseClass.getIcon(documentsLists.
                 get(position).getFileTypeID()));
         try{
             for(int loop=0;loop<DocumentsListFragment.deleteDocsList.size();loop++) {
@@ -86,38 +86,38 @@ public class AdapterDocumentsList extends BaseAdapter implements StickyListHeade
         }catch (IndexOutOfBoundsException e){
             aq.id(R.id.doc_checkbox).checked(false);
         }
-        aq.id(R.id.doc_checkbox).clicked(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Log.e("pos",DocumentsListFragment.listView.getListChildCount()+"/"+position);
-                View view = getViewByPosition(position, DocumentsListFragment.listView);
-                AQuery aQuery = new AQuery(view);
-                if (DocumentsListFragment.deleteDocsList.size() > 0) {
-                    for (int loop = 0; loop < DocumentsListFragment.deleteDocsList.size(); loop++) {
-                        view = getViewByPosition(position, DocumentsListFragment.listView);
-                        aQuery = new AQuery(view);
-                        if (aQuery.id(R.id.doc_checkbox).isChecked()) {
-                            DocumentsListFragment.deleteDocsList.
-                                    add(documentsLists.get(position).getID());
-                            aQuery.id(R.id.selected_doc).visibility(View.VISIBLE);
-                            aQuery.id(R.id.selected_doc).background(R.mipmap.doc_cancel);
-                            break;
-                        } else if (DocumentsListFragment.deleteDocsList.get(loop) ==
-                                Integer.parseInt(aQuery.id(R.id.file_id).getText().toString())) {
-                            DocumentsListFragment.deleteDocsList.remove(loop);
-                            aQuery.id(R.id.selected_doc).visibility(View.GONE);
-                            aQuery.id(R.id.doc_checkbox).image(BaseClass.getIcon(documentsLists.
-                                    get(position).getFileTypeID()));
-                        }
-                    }
-                } else {
-                    DocumentsListFragment.deleteDocsList.
-                            add(documentsLists.get(position).getID());
-                    aQuery.id(R.id.selected_doc).visibility(View.VISIBLE);
-                    aQuery.id(R.id.selected_doc).background(R.mipmap.doc_cancel);
-                }
-            }
-        });
+//        aq.id(R.id.doc_checkbox).clicked(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                // Log.e("pos",DocumentsListFragment.listView.getListChildCount()+"/"+position);
+//                View view = getViewByPosition(position, DocumentsListFragment.listView);
+//                AQuery aQuery = new AQuery(view);
+//                if (DocumentsListFragment.deleteDocsList.size() > 0) {
+//                    for (int loop = 0; loop < DocumentsListFragment.deleteDocsList.size(); loop++) {
+//                        view = getViewByPosition(position, DocumentsListFragment.listView);
+//                        aQuery = new AQuery(view);
+//                        if (aQuery.id(R.id.doc_checkbox).isChecked()) {
+//                            DocumentsListFragment.deleteDocsList.
+//                                    add(documentsLists.get(position).getID());
+//                            aQuery.id(R.id.selected_doc).visibility(View.VISIBLE);
+//                            aQuery.id(R.id.selected_doc).background(R.mipmap.doc_cancel);
+//                            break;
+//                        } else if (DocumentsListFragment.deleteDocsList.get(loop) ==
+//                                Integer.parseInt(aQuery.id(R.id.file_id).getText().toString())) {
+//                            DocumentsListFragment.deleteDocsList.remove(loop);
+//                            aQuery.id(R.id.selected_doc).visibility(View.GONE);
+//                            aQuery.id(R.id.doc_checkbox).image(BaseClass.getIcon(documentsLists.
+//                                    get(position).getFileTypeID()));
+//                        }
+//                    }
+//                } else {
+//                    DocumentsListFragment.deleteDocsList.
+//                            add(documentsLists.get(position).getID());
+//                    aQuery.id(R.id.selected_doc).visibility(View.VISIBLE);
+//                    aQuery.id(R.id.selected_doc).background(R.mipmap.doc_cancel);
+//                }
+//            }
+//        });
         return convertView;
     }
     public View getViewByPosition(int pos, StickyListHeadersListView listView) {
