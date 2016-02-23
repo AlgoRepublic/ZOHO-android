@@ -161,8 +161,8 @@ public class GenericHttpClient {
         try {
             for(int i=0;i<files.size();i++) {
                 if(files.get(i).getFile() != null) {
-                    Log.e("File", "/" + files.get(i).getFile().getName());
-                    mpEntity.addPart("files[" + i + "]", new FileBody(files.get(i).getFile()));
+                    Log.e("files", "/" + files.get(i).getFile());
+                    mpEntity.addPart("files["+i+"]", new FileBody(files.get(i).getFile()));
                 }
             }
             for(int i=0;i<filesToDelete.size();i++) {
@@ -213,7 +213,7 @@ public class GenericHttpClient {
             for(int i=0;i<files.size();i++) {
                 if(files.get(i).getFile() != null) {
                     Log.e("File", "/" + files.get(i).getFile().getName());
-                    mpEntity.addPart("files[" + i + "]", new FileBody(files.get(i).getFile()));
+                    mpEntity.addPart("files["+i+"]", new FileBody(files.get(i).getFile()));
                 }
             }
             for(int i=0;i<filesToDelete.size();i++) {
@@ -267,11 +267,12 @@ public class GenericHttpClient {
             mpEntity.addPart("files["+i+"]", new FileBody(files.get(i).getFile()));
         }
 
-        mpEntity.addPart("FolderID", new StringBody("0"));
+        mpEntity.addPart("ID", new StringBody(Integer.toString(BaseClass.db.getInt("RootID"))));
         mpEntity.addPart("ProjectId", new StringBody(Integer.toString(ProjectID)));
         mpEntity.addPart("CreateBy", new StringBody(Integer.toString(1)));
         mpEntity.addPart("UpdateBy", new StringBody(Integer.toString(1)));
         p.setEntity(mpEntity);
+        Log.e("ID/PID",BaseClass.db.getInt("RootID")+"/"+ProjectID);
         HttpResponse resp = hc.execute(p);
         if (resp != null) {
             message = convertStreamToString(resp.getEntity().getContent());

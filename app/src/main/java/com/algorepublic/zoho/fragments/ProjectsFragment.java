@@ -1,6 +1,7 @@
 package com.algorepublic.zoho.fragments;
 
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
@@ -13,6 +14,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.BaseAdapter;
+import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -45,8 +49,10 @@ public class ProjectsFragment extends BaseFragment{
     private AQuery aq;
     private BaseClass baseClass;
     ProjectsListService service;
-    StickyListHeadersListView listView;
+    public static StickyListHeadersListView listViewDept;
+    public static ListView listViewClient;
     StickyListHeadersAdapter projectAdapter;
+    AdapterProjectsClientList clientAdapter;
 
     static  ArrayList<ProjectsList> allProjectsList = new ArrayList<>();
     static  ArrayList<DeptList> allDeptList = new ArrayList<>();
@@ -74,7 +80,8 @@ public class ProjectsFragment extends BaseFragment{
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment_forums
         View view  = inflater.inflate(R.layout.fragment_projects, container, false);
-        listView = (StickyListHeadersListView) view.findViewById(R.id.projects_liststicky);
+        listViewDept = (StickyListHeadersListView) view.findViewById(R.id.projects_liststicky);
+        listViewClient = (ListView) view.findViewById(R.id.projects_list);
         aq = new AQuery(getActivity(), view);
 
         getToolbar().setTitle(getString(R.string.projects));
@@ -218,35 +225,37 @@ public class ProjectsFragment extends BaseFragment{
         Filter(lastposition);
        }
     public void SetGeneralClientAdapter() {
-        aq.id(R.id.projects_list).adapter(new AdapterProjectsClientList(getActivity(), allProjectsList));
-        aq.id(R.id.projects_list).itemClicked(allOnClick);
+        clientAdapter = new AdapterProjectsClientList(getActivity(), allProjectsList);
+        listViewClient.setAdapter(clientAdapter);
+        listViewClient.setOnItemClickListener(allOnClick);
     }
     public void SetClientProjectsAdapter(){
-        aq.id(R.id.projects_list).adapter(new AdapterProjectsClientList(getActivity(), ByClientList));
-        aq.id(R.id.projects_list).itemClicked(clientOnClick);
+        clientAdapter = new AdapterProjectsClientList(getActivity(), ByClientList);
+        listViewClient.setAdapter(clientAdapter);
+        listViewClient.setOnItemClickListener(clientOnClick);
     }
     public void SetDepartmentProjectsAdapter(){
 
         projectAdapter = new AdapterProjectsDeptList(getActivity());
-        listView.setAreHeadersSticky(false);
-        listView.setAdapter(projectAdapter);
-        listView.setOnItemClickListener(deptOnClick);
+        listViewDept.setAreHeadersSticky(false);
+        listViewDept.setAdapter(projectAdapter);
+        listViewDept.setOnItemClickListener(deptOnClick);
     }
     AdapterView.OnItemClickListener allOnClick = new AdapterView.OnItemClickListener() {
-      @Override
-         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                 Log.e("selected project", ((TextView) view.findViewById(R.id.project_id)).getText().toString());
-                if (baseClass.getSelectedProject().equalsIgnoreCase(((TextView) view.findViewById(R.id.project_id)).getText().toString())) {
-                         baseClass.setSelectedProject("0");
-                        baseClass.db.putInt("ProjectID", 0);
-                      }else {
-                         baseClass.setSelectedProject(((TextView) view.findViewById(R.id.project_id)).getText().toString());
-                         baseClass.db.putInt("ProjectID", Integer.parseInt(baseClass.getSelectedProject()));
-                        baseClass.db.putString("ProjectName", ((TextView) view.findViewById(R.id.project_title)).getText().toString());
-                    }
-                    SetGeneralClientAdapter();
-                  }
-          };
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            Log.e("selected project", ((TextView) view.findViewById(R.id.project_id)).getText().toString());
+            if (baseClass.getSelectedProject().equalsIgnoreCase(((TextView) view.findViewById(R.id.project_id)).getText().toString())) {
+                baseClass.setSelectedProject("0");
+                baseClass.db.putInt("ProjectID", 0);
+            }else {
+                baseClass.setSelectedProject(((TextView) view.findViewById(R.id.project_id)).getText().toString());
+                baseClass.db.putInt("ProjectID", Integer.parseInt(baseClass.getSelectedProject()));
+                baseClass.db.putString("ProjectName", ((TextView) view.findViewById(R.id.project_title)).getText().toString());
+            }
+            clientAdapter.notifyDataSetInvalidated();
+        }
+    };
     AdapterView.OnItemClickListener clientOnClick = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -259,25 +268,27 @@ public class ProjectsFragment extends BaseFragment{
                 baseClass.db.putInt("ProjectID", Integer.parseInt(baseClass.getSelectedProject()));
                 baseClass.db.putString("ProjectName", ((TextView) view.findViewById(R.id.project_title)).getText().toString());
             }
-            SetClientProjectsAdapter();
+            clientAdapter.notifyDataSetInvalidated();
         }
     };
     AdapterView.OnItemClickListener deptOnClick = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             Log.e("selected project", ((TextView) view.findViewById(R.id.project_id)).getText().toString());
-            if (baseClass.getSelectedProject().equalsIgnoreCase(((TextView) view.findViewById(R.id.project_id)).getText().toString())) {
+
+            TextView textView = (TextView) view.findViewById(R.id.project_id);
+
+            if (baseClass.getSelectedProject().equalsIgnoreCase(textView.getText().toString())) {
                 baseClass.setSelectedProject("0");
                 baseClass.db.putInt("ProjectID", 0);
             }else {
-                baseClass.setSelectedProject(((TextView) view.findViewById(R.id.project_id)).getText().toString());
+                baseClass.setSelectedProject(textView.getText().toString());
                 baseClass.db.putInt("ProjectID", Integer.parseInt(baseClass.getSelectedProject()));
-                baseClass.db.putString("ProjectName", ((TextView) view.findViewById(R.id.project_title)).getText().toString());
+                baseClass.db.putString("ProjectName", (textView.getText().toString()));
             }
-            SetDepartmentProjectsAdapter();
+            ((BaseAdapter)projectAdapter).notifyDataSetInvalidated();
         }
     };
-
     /**
      * Initialize the contents of the Activity's standard options menu.  You
      * should place your menu items in to <var>menu</var>.  For this method

@@ -70,6 +70,9 @@ dependencies {
     compile project(':parallax-listview')
     compile 'com.google.android.gms:play-services-appindexing:8.4.0'
     compile project(':nice-spinner-master')
+    compile 'com.daimajia.swipelayout:library:1.2.0@aar'
+    compile 'com.daimajia.androidanimations:library:1.1.2@aar'
+    compile 'com.daimajia.easing:library:1.0.1@aar'
 }
 
 

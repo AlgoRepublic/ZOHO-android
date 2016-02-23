@@ -60,7 +60,7 @@
             <RadioButton
                 android:id="@+id/active_radio"
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
+                android:layout_height="wrap_content"
                 android:text="@string/_active"
                 android:button="@null"
                 android:drawableLeft="@drawable/radiobutton"
@@ -69,7 +69,7 @@
             <RadioButton
                 android:id="@+id/archive_radio"
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
+                android:layout_height="wrap_content"
                 android:text="@string/_archive"
                 android:button="@null"
                 android:drawableLeft="@drawable/radiobutton"
@@ -85,7 +85,7 @@
             <RadioButton
                 android:id="@+id/private_radio"
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
+                android:layout_height="wrap_content"
                 android:text="@string/_private"
                 android:button="@null"
                 android:drawableLeft="@drawable/radiobutton"
@@ -94,9 +94,8 @@
             <RadioButton
                 android:id="@+id/public_radio"
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
+                android:layout_height="wrap_content"
                 android:text="@string/_public"
-
                 android:button="@null"
                 android:drawablePadding="5dp"
                 android:drawableLeft="@drawable/radiobutton"

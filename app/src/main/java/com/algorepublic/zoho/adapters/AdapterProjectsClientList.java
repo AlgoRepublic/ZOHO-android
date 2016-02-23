@@ -11,11 +11,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.algorepublic.zoho.Models.GeneralModel;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.fragments.EditProjectFragment;
+import com.algorepublic.zoho.fragments.ProjectsFragment;
 import com.algorepublic.zoho.services.CallBack;
 import com.algorepublic.zoho.services.ProjectsListService;
 import com.algorepublic.zoho.utils.BaseClass;
@@ -27,18 +31,17 @@ import com.flyco.dialog.widget.NormalDialog;
 
 import java.util.ArrayList;
 
-import se.emilsjolander.stickylistheaders.StickyListHeadersAdapter;
-
 /**
  * Created by android on 1/7/16.
  */
-public class AdapterProjectsClientList extends BaseAdapter implements StickyListHeadersAdapter {
+public class AdapterProjectsClientList extends BaseAdapter {
 
     private Context ctx;
     private BaseClass baseClass;
     private AQuery aq;
     private LayoutInflater l_Inflater;
     ProjectsListService service;
+
 
     ArrayList<ProjectsList> arrayList= new ArrayList<>();
 
@@ -66,7 +69,7 @@ public class AdapterProjectsClientList extends BaseAdapter implements StickyList
     }
 
     @Override
-    public View getView(final int position, View convertView, ViewGroup parent) {
+    public View getView(final int position,View convertView, ViewGroup parent) {
 
         convertView = l_Inflater.inflate(R.layout.layout_project_list_row, null);
         aq = new AQuery(convertView);
@@ -87,6 +90,7 @@ public class AdapterProjectsClientList extends BaseAdapter implements StickyList
         }else{
             aq.id(R.id.selected_project).getView().setBackgroundColor(Color.parseColor("#00000000"));
         }
+
         aq.id(R.id.project_edit).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -123,15 +127,6 @@ public class AdapterProjectsClientList extends BaseAdapter implements StickyList
                 .addToBackStack(null)
                 .commit();
 
-    }
-    @Override
-    public View getHeaderView(int position, View convertView, ViewGroup parent) {
-        return null;
-    }
-
-    @Override
-    public long getHeaderId(int position) {
-        return 0;
     }
 
     private void NormalDialogCustomAttr(String content,final int position) {

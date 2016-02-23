@@ -11,6 +11,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
         app:scrollMultiplier="0.5"
         android:layout_above="@+id/layout_bottom"
         class="com.poliveira.apps.parallaxlistview.ParallaxListView"
@@ -22,10 +25,6 @@
         android:layout_height="60dp"
         android:layout_alignParentBottom="true"
         android:background="@color/colorContentWrapper">
-        <View android:layout_height="fill_parent"
-            android:layout_width="2dp"
-            android:layout_toLeftOf="@+id/layout1"
-            android:background="@color/white"/>
         <View android:layout_height="fill_parent"
             android:layout_width="2dp"
             android:id="@+id/view2"
