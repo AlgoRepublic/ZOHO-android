@@ -6,16 +6,22 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.algorepublic.zoho.Models.GeneralModel;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.fragments.EditProjectFragment;
+import com.algorepublic.zoho.fragments.ProjectsFragment;
 import com.algorepublic.zoho.services.CallBack;
 import com.algorepublic.zoho.services.ProjectsListService;
 import com.algorepublic.zoho.utils.BaseClass;
@@ -27,18 +33,17 @@ import com.flyco.dialog.widget.NormalDialog;
 
 import java.util.ArrayList;
 
-import se.emilsjolander.stickylistheaders.StickyListHeadersAdapter;
-
 /**
  * Created by android on 1/7/16.
  */
-public class AdapterProjectsClientList extends BaseAdapter implements StickyListHeadersAdapter {
+public class AdapterProjectsClientList extends BaseAdapter {
 
     private Context ctx;
     private BaseClass baseClass;
     private AQuery aq;
     private LayoutInflater l_Inflater;
     ProjectsListService service;
+
 
     ArrayList<ProjectsList> arrayList= new ArrayList<>();
 
@@ -87,21 +92,38 @@ public class AdapterProjectsClientList extends BaseAdapter implements StickyList
         }else{
             aq.id(R.id.selected_project).getView().setBackgroundColor(Color.parseColor("#00000000"));
         }
-        aq.id(R.id.project_edit).clicked(new View.OnClickListener() {
+
+        aq.id(R.id.parent1).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!baseClass.getSelectedProject().equalsIgnoreCase("0")) {
-                    callFragmentWithBackStack(R.id.container, EditProjectFragment.
-                            newInstance(arrayList,position), "EditProjectFragment");
+                View view = v;
+                if (baseClass.getSelectedProject().equalsIgnoreCase(((TextView) view.findViewById(R.id.project_id)).getText().toString())) {
+                    baseClass.setSelectedProject("0");
+                    baseClass.db.putInt("ProjectID", 0);
+                } else {
+                    baseClass.setSelectedProject(((TextView)view.findViewById(R.id.project_id)).getText().toString());
+                    baseClass.db.putInt("ProjectID", Integer.parseInt(baseClass.getSelectedProject()));
+                    baseClass.db.putString("ProjectName", (((TextView)view.findViewById(R.id.project_id)).getText().toString()));
                 }
+                notifyDataSetInvalidated();
+                ProjectsFragment.listViewClient.setSelection(position);
             }
         });
-        aq.id(R.id.project_delete).clicked(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                NormalDialogCustomAttr("Delete Project?",position);
-            }
-        });
+//        aq.id(R.id.project_edit).clicked(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if(!baseClass.getSelectedProject().equalsIgnoreCase("0")) {
+//                    callFragmentWithBackStack(R.id.container, EditProjectFragment.
+//                            newInstance(arrayList,position), "EditProjectFragment");
+//                }
+//            }
+//        });
+//        aq.id(R.id.project_delete).clicked(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                NormalDialogCustomAttr("Delete Project?",position);
+//            }
+//        });
 //        Animation animation = AnimationUtils.loadAnimation(ctx, (position > lastPosition) ? R.anim.up_from_bottom : R.anim.down_from_top);
 //        convertView.startAnimation(animation);
         return convertView;
@@ -123,15 +145,6 @@ public class AdapterProjectsClientList extends BaseAdapter implements StickyList
                 .addToBackStack(null)
                 .commit();
 
-    }
-    @Override
-    public View getHeaderView(int position, View convertView, ViewGroup parent) {
-        return null;
-    }
-
-    @Override
-    public long getHeaderId(int position) {
-        return 0;
     }
 
     private void NormalDialogCustomAttr(String content,final int position) {

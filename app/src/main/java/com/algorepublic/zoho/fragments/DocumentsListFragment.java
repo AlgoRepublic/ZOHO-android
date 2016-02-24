@@ -238,7 +238,7 @@ public class DocumentsListFragment extends BaseFragment {
     public void SetAdapterList(){
         if (DocumentsListModel.getInstance().responseCode == 100) {
             listView.setAreHeadersSticky(true);
-            listView.setAdapter( new AdapterDocumentsList(getActivity(),generalDocsList));
+            listView.setAdapter(new AdapterDocumentsList(getActivity(), generalDocsList));
         }
     }
     public void DocumentsList(Object caller, Object model) {
@@ -254,6 +254,9 @@ public class DocumentsListFragment extends BaseFragment {
     public void GetAllDocumentsList() {
        allDocsList.clear();
         for (int loop = 0; loop < DocumentsListModel.getInstance().responseObject.size(); loop++) {
+            if(DocumentsListModel.getInstance().responseObject.get(loop).folderName.equalsIgnoreCase("Root")){
+                BaseClass.db.putInt("RootID", DocumentsListModel.getInstance().responseObject.get(loop).ID);
+            }
             for (int loop1 = 0; loop1 < DocumentsListModel.getInstance().responseObject.get(loop).files.size(); loop1++) {
                 DocumentsList documentsList = new DocumentsList();
                 documentsList.setID(DocumentsListModel.getInstance().responseObject.get(loop).files.get(loop1).ID);

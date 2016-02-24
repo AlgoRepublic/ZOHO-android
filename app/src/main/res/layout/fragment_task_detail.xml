@@ -95,7 +95,6 @@
                     <RelativeLayout
                         android:id="@+id/header_layout1"
                         android:layout_width="match_parent"
-                        android:layout_marginRight="25dp"
                         android:layout_alignParentTop="true"
                         android:layout_height="wrap_content">
                         <TextView
@@ -106,7 +105,6 @@
                             android:textSize="12sp"
                             android:textStyle="bold"
                             android:layout_alignParentLeft="true"
-                            android:textColor="@color/colorBaseHeader"
                             />
                         <TextView
                             android:id="@+id/start_date"
@@ -116,7 +114,7 @@
                             android:layout_height="wrap_content"
                             android:textSize="12sp"
                             android:layout_toRightOf="@+id/text2"
-                            android:textColor="@color/colorBaseHeader"
+                            
                             />
 
                         <TextView
@@ -126,7 +124,7 @@
                             android:textSize="12sp"
                             android:textStyle="bold"
                             android:layout_toLeftOf="@+id/end_date"
-                            android:textColor="@color/colorBaseHeader"
+                            
                             />
                         <TextView
                             android:id="@+id/end_date"
@@ -137,7 +135,7 @@
                             android:textSize="13sp"
                             android:layout_alignParentRight="true"
                             android:layout_toLeftOf="@+id/textView"
-                            android:textColor="@color/colorBaseHeader"
+                            
                             />
 
                     </RelativeLayout>
@@ -155,7 +153,7 @@
                             android:textSize="12sp"
                             android:textStyle="bold"
                             android:layout_toLeftOf="@+id/textView"
-                            android:textColor="@color/colorBaseHeader"
+                            
                             />
                         <TextView
                             android:id="@+id/category"
@@ -165,7 +163,7 @@
                             android:layout_height="wrap_content"
                             android:textSize="12sp"
                             android:layout_toLeftOf="@+id/textView"
-                            android:textColor="@color/colorBaseHeader"
+                            
                             />
                     </LinearLayout>
                     <LinearLayout
@@ -183,7 +181,7 @@
                             android:textSize="12sp"
                             android:textStyle="bold"
                             android:layout_toLeftOf="@+id/textView"
-                            android:textColor="@color/colorBaseHeader"
+                            
                             />
                         <TextView
                             android:id="@+id/task_desc"
@@ -193,7 +191,7 @@
                             android:textSize="12sp"
                             android:lines="4"
                             android:ellipsize="end"
-                            android:textColor="@color/colorBaseHeader"
+                            
                             />
                     </LinearLayout>
                     <LinearLayout
@@ -212,7 +210,7 @@
                             android:textSize="12sp"
                             android:textStyle="bold"
                             android:layout_toLeftOf="@+id/textView"
-                            android:textColor="@color/colorBaseHeader"
+                            
                             />
 
                     </LinearLayout>
@@ -231,7 +229,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                     <TextView
-                        android:id="@+id/project_status"
+                        android:id="@+id/active_archive_status"
                         android:layout_width="wrap_content"
                         android:text="@string/project_status"
                         android:layout_height="wrap_content"
@@ -240,11 +238,11 @@
                         android:layout_marginLeft="20dp"
                         android:layout_marginRight="20dp"
                         android:layout_toLeftOf="@+id/textView"
-                        android:textColor="@color/colorBaseHeader"
+                        
                         />
 
                     <RelativeLayout
-                        android:layout_below="@+id/project_status"
+                        android:layout_below="@+id/active_archive_status"
                         android:id="@+id/layout4"
                         android:layout_width="match_parent"
                         android:layout_marginLeft="10dp"

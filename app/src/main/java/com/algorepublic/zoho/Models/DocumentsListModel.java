@@ -40,6 +40,14 @@ public class DocumentsListModel {
 
 
     public class ResponseObject{
+        @SerializedName("ID")
+        @Expose
+        public int ID;
+
+        @SerializedName("FolderName")
+        @Expose
+        public String folderName;
+
         @SerializedName("Files")
         @Expose
         public ArrayList<Files> files = new ArrayList<>();

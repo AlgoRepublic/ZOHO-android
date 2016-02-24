@@ -2,7 +2,6 @@ package com.algorepublic.zoho.adapters;
 
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,14 +48,12 @@ public class AdapterStarRatingLevelThree extends BaseExpandableListAdapter {
     @Override
     public View getChildView(int groupPosition, int childPosition,
                              boolean isLastChild, View convertView, ViewGroup parent) {
-            if(convertView == null) {
-                layoutInflater = (LayoutInflater) this.mContext
-                        .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                convertView = layoutInflater.inflate(R.layout.drawer_list_item, parent, false);
-                aq = new AQuery(convertView);
-                QuestLayout = (LinearLayout) aq
-                        .id(R.id.layout_questions).visible().getView();
-            }
+        layoutInflater = (LayoutInflater) this.mContext
+                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        convertView = layoutInflater.inflate(R.layout.drawer_list_item, parent, false);
+        aq = new AQuery(convertView);
+        QuestLayout = (LinearLayout) aq
+                .id(R.id.layout_questions).visible().getView();
         try {
             StarRatingQuestionModel.getInstance().responseData.clear();
         }catch (NullPointerException e){}

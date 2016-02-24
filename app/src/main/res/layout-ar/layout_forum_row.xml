@@ -5,59 +5,61 @@
 
     <RelativeLayout
         android:id="@+id/layout1"
-        android:layout_alignParentTop="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="5dp"
-        android:orientation="horizontal">
+        android:layout_alignParentTop="true"
+        android:orientation="horizontal"
+        android:padding="5dp">
+
         <TextView
             android:id="@+id/forum_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/layout_comment"
+            android:text="@string/forums_title"
             android:textColor="@color/colorBaseHeader"
             android:textSize="14sp"
-            android:layout_toLeftOf="@+id/layout_comment"
-            android:layout_centerVertical="true"
-            android:text="@string/forums_title"
             android:textStyle="bold" />
 
         <RelativeLayout
             android:id="@+id/layout_comment"
             android:layout_width="35dp"
+            android:layout_height="35dp"
             android:layout_alignParentRight="true"
-            android:layout_centerHorizontal="true"
-            android:layout_height="35dp">
+            android:layout_centerHorizontal="true">
+
             <TextView
                 android:id="@+id/notify_alert1"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
-                android:text="112"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:background="@mipmap/bubble_alert_black"
                 android:gravity="center"
                 android:singleLine="true"
-                android:textSize="7dp"
-                android:layout_alignParentRight="true"
-                android:background="@mipmap/bubble_alert_black"
-                android:layout_alignParentTop="true"
-                android:textColor="@color/colorBaseHeader" />
+                android:text="112"
+                android:textColor="@color/colorBaseHeader"
+                android:textSize="7dp" />
 
             <ImageView
                 android:id="@+id/delete1"
                 android:layout_width="20dp"
+                android:layout_height="20dp"
                 android:layout_alignParentBottom="true"
-                android:src="@mipmap/forums"
-                android:layout_height="20dp" />
+                android:src="@mipmap/forums" />
         </RelativeLayout>
 
 
     </RelativeLayout>
+
     <TextView
         android:id="@+id/forum_description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/colorContentWrapper"
-        android:textSize="12sp"
         android:layout_below="@+id/layout1"
         android:padding="5dp"
         android:text="@string/forums_description"
-        />
+        android:textColor="@color/colorContentWrapper"
+        android:textSize="12sp" />
 </RelativeLayout>

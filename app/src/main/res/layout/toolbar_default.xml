@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.AppBarLayout
+<android.support.design.widget.AppBarLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:theme="@style/AppTheme.AppBarOverlay"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    android:theme="@style/AppTheme.AppBarOverlay">
+
     <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
         style="@style/ToolBarStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="5dp"
-        android:paddingBottom="5dp"
-        android:id="@+id/toolbar"
-        app:popupTheme="@style/AppTheme.PopupOverlay"
-        android:fitsSystemWindows="true"
         android:background="@color/colorBaseHeader"
-        android:minHeight="@dimen/abc_action_bar_default_height_material">
+        android:fitsSystemWindows="true"
+        android:minHeight="@dimen/abc_action_bar_default_height_material"
+        android:paddingBottom="5dp"
+        android:paddingTop="5dp"
+        app:popupTheme="@style/AppTheme.PopupOverlay">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -25,10 +25,11 @@
 
             <RelativeLayout
                 android:id="@+id/menu"
-                android:layout_centerVertical="true"
-                android:layout_alignParentLeft="true"
                 android:layout_width="80dp"
-                android:layout_height="40dp">
+                android:layout_height="40dp"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true">
+
                 <Button
                     android:id="@+id/back_arrow"
                     android:layout_width="25dp"
@@ -36,29 +37,30 @@
                     android:layout_centerVertical="true"
                     android:background="@drawable/back_arrow" />
             </RelativeLayout>
+
             <TextView
+                android:id="@+id/project_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="20sp"
-                android:text="Project Name"
                 android:layout_centerHorizontal="true"
-                android:textStyle="bold"
+                android:layout_centerVertical="true"
+                android:text="Project Name"
                 android:textColor="@android:color/white"
-                android:id="@+id/project_title"
-                android:layout_centerVertical="true" />
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
             <Button
+                android:id="@+id/done"
                 android:layout_width="70dp"
                 android:layout_height="35dp"
-                android:layout_centerVertical="true"
-                android:id="@+id/done"
-                android:text="@string/save"
-                android:textSize="18sp"
-                android:textStyle="bold"
                 android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:background="@android:color/transparent"
+                android:text="@string/save"
                 android:textAllCaps="false"
                 android:textColor="@android:color/white"
-                android:background="@android:color/transparent"/>
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
 
         </RelativeLayout>

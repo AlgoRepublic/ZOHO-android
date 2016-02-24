@@ -48,13 +48,13 @@
             android:layout_alignStart="@+id/user_title" />
 
         <ImageView
-           android:layout_width="wrap_content"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-                 android:id="@+id/imageView6"
+            android:id="@+id/imageView6"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
             android:background="@mipmap/edit_black"
-        />
+            />
     </RelativeLayout>
 
 

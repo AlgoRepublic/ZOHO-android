@@ -56,4 +56,6 @@
     <string name="remember_password">Remember Password?</string>
     <string name="over_due">Over Due</string>
     <string name="up_coming">Up Coming</string>
+    <string name="logout">Logout</string>
+    <string name="change_theme">Change Theme</string>
 </resources>

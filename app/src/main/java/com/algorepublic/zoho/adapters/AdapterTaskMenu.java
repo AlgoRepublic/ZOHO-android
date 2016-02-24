@@ -12,7 +12,6 @@ import android.widget.CheckBox;
 import android.widget.GridView;
 import android.widget.TextView;
 
-import com.algorepublic.zoho.fragments.TaskAddUpdateFragment;
 import com.algorepublic.zoho.BaseActivity;
 import com.algorepublic.zoho.FragmentsTasks.TaskAssignFragment;
 import com.algorepublic.zoho.FragmentsTasks.TaskAttachmentFragment;
@@ -21,6 +20,7 @@ import com.algorepublic.zoho.FragmentsTasks.TaskListNameFragment;
 import com.algorepublic.zoho.FragmentsTasks.TaskPriorityFragment;
 import com.algorepublic.zoho.FragmentsTasks.TaskScheduleFragment;
 import com.algorepublic.zoho.R;
+import com.algorepublic.zoho.fragments.TaskAddUpdateFragment;
 import com.androidquery.AQuery;
 
 /**
@@ -78,10 +78,6 @@ public class AdapterTaskMenu extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
         final AQuery aq = new AQuery(convertView);
-        if (lastPosition==position) {
-            aq.id(R.id.checkbox).getCheckBox().setBackgroundColor(ctx.getResources().getColor(R.color.colorBaseMenu));
-        }else
-            aq.id(R.id.checkbox).getCheckBox().setBackgroundColor(ctx.getResources().getColor(R.color.colorBaseHeader));
 
         holder.title.setText(menu_names[position]);
         holder.title.setTextColor(ctx.getResources().getColor(R.color.white));
@@ -93,13 +89,12 @@ public class AdapterTaskMenu extends BaseAdapter {
             public void onClick(View v) {
                 for (int loop = 0; loop < menu_names.length; loop++) {
                     if (loop == position) {
-                        lastPosition = position;
-                        aq.id(R.id.checkbox).getCheckBox().setBackgroundColor(ctx.getResources().getColor(R.color.colorBaseMenu));
+                        aq.id(R.id.checkbox).getCheckBox().setAlpha(0.7f);
                     } else {
                         View view = getViewByPosition(loop, TaskAddUpdateFragment.gridViewTaskMenu);
                         AQuery aQuery = new AQuery(view);
                         aQuery.id(R.id.checkbox).checked(false);
-                        aQuery.id(R.id.checkbox).getCheckBox().setBackgroundColor(ctx.getResources().getColor(R.color.colorBaseHeader));
+                        aQuery.id(R.id.checkbox).getCheckBox().setAlpha(1.0f);
                     }
                 }
                 CallFragment(position);

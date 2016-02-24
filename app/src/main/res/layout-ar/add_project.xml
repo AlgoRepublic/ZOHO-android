@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginTop="40dp"
     android:background="@color/colorBaseWrapper"
+    android:orientation="vertical"
     android:padding="20dp">
 
     <com.rengwuxian.materialedittext.MaterialEditText
@@ -25,14 +25,14 @@
 
     <com.rengwuxian.materialedittext.MaterialEditText
         android:id="@+id/project_desc"
-        android:textSize="22sp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:hint="@string/project_description"
         android:inputType="textMultiLine"
-        android:layout_marginTop="10dp"
+        android:textSize="22sp"
         app:met_floatingLabel="normal"
-        app:met_primaryColor="@color/colorBaseHeader"/>
+        app:met_primaryColor="@color/colorBaseHeader" />
 
     <Spinner
         android:id="@+id/departments_list"
@@ -43,12 +43,13 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/colorBaseHeader"
-        android:textSize="22sp"
         android:layout_marginTop="10dp"
-        android:text="@string/project_access" />
+        android:text="@string/project_access"
+        android:textColor="@color/colorBaseHeader"
+        android:textSize="22sp" />
 
-    <RadioGroup android:id="@+id/private_public_group"
+    <RadioGroup
+        android:id="@+id/private_public_group"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp">
@@ -58,13 +59,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/_private"
-            android:textColor="@color/colorBaseHeader"/>
+            android:textColor="@color/colorBaseHeader" />
+
         <RadioButton
             android:id="@+id/public_radio"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/_public"
-            android:textColor="@color/colorBaseHeader"/>
+            android:textColor="@color/colorBaseHeader" />
     </RadioGroup>
 
 </LinearLayout>

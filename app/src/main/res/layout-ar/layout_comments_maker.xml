@@ -1,64 +1,54 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:padding="10dp"
-        android:layout_height="wrap_content">
-        <com.mikhaellopez.circularimageview.CircularImageView
-        android:id="@+id/user_image"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:scaleType="fitXY"
-        android:src="@drawable/nav_user" />
+    android:layout_height="match_parent">
+    <com.h6ah4i.android.materialshadowninepatch.MaterialShadowContainerView
+        android:id="@+id/shadow_item_container"
+        android:layout_width="wrap_content"
+        style="@style/ms9_DefaultShadowStyle"
+        android:layout_height="wrap_content"
+        app:ms9_useAmbientShadow="true"
+        app:ms9_affectsDisplayedPosition="true"
+        app:ms9_shadowTranslationZ="1dp"
+        app:ms9_shadowElevation="2dp">
         <RelativeLayout
-            android:orientation="horizontal"
+            android:padding="5dp"
+            android:background="@color/white"
+            android:layout_marginBottom="4dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
+            <com.mikhaellopez.circularimageview.CircularImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:scaleType="fitXY"
+                app:border_width="1dp"
+                app:border_color="@color/colorBaseHeader"
+                android:src="@drawable/nav_user"
+                android:id="@+id/comment_image" />
             <TextView
-                android:id="@+id/user_name"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/blue"
-                android:maxLines="2"
-                android:ellipsize="end"
+                android:text="Test Forum 1"
+                android:textStyle="bold"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="5dp"
+                android:textColor="@color/colorBaseHeader"
                 android:textSize="14sp"
-                android:text="sd"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="10dp" />
+                android:id="@+id/forum_title"
+                android:layout_alignTop="@+id/comment_image"
+                android:layout_toEndOf="@+id/comment_image" />
+
             <TextView
-                android:id="@+id/comment_datetime"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/blue"
-                android:maxLines="2"
-                android:layout_below="@+id/user_name"
-                android:ellipsize="end"
-                android:textSize="12sp"
-                android:text="sd"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="10dp" />
-            <TextView
-                android:id="@+id/comment_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/blue"
-                android:maxLines="2"
-                android:layout_below="@+id/comment_datetime"
-                android:ellipsize="end"
+                android:id="@+id/forum_description"
                 android:textSize="14sp"
-                android:text="sd"
-                android:layout_marginTop="10dp"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="10dp" />
-            </RelativeLayout>
-</LinearLayout>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="2dp" />
-</LinearLayout>
+                android:lines="2"
+                android:text="daadadad"
+                android:textColor="@color/colorBaseHeader"
+                android:layout_below="@+id/comment_image"
+                android:layout_alignStart="@+id/forum_title" />
+        </RelativeLayout>
+    </com.h6ah4i.android.materialshadowninepatch.MaterialShadowContainerView>
+</RelativeLayout>

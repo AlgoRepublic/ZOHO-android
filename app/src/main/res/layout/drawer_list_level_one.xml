@@ -22,12 +22,14 @@
         android:id="@+id/lblListHeader"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+
         android:textSize="18sp"
         android:textStyle="bold"
         android:text="lksahdgiuasdsdsdsdsddsdsdsdsssdsdsddssds"
         android:textColor="@color/colorBaseHeader" />
         </RelativeLayout>
     </com.h6ah4i.android.materialshadowninepatch.MaterialShadowContainerView>
-    </RelativeLayout>
+
+</RelativeLayout>
 
 

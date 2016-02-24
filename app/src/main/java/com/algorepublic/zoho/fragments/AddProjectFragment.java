@@ -10,6 +10,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.algorepublic.zoho.Models.CreateProjectModel;
@@ -20,12 +21,10 @@ import com.algorepublic.zoho.services.ProjectsListService;
 import com.algorepublic.zoho.services.TaskListService;
 import com.algorepublic.zoho.utils.BaseClass;
 import com.androidquery.AQuery;
+
 import org.angmarch.views.NiceSpinner;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.LinkedList;
-import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -40,7 +39,9 @@ public class AddProjectFragment extends BaseFragment {
     LinkedList<String> userList;
     LinkedList<String> deptList;
     View view;
+    boolean isprivate= false;
     NiceSpinner owner_list,departments_list;
+    RadioGroup radioGroup;
     static AddProjectFragment fragment;
 
     public AddProjectFragment() {
@@ -82,10 +83,6 @@ public class AddProjectFragment extends BaseFragment {
         return super.onOptionsItemSelected(item);
     }
     public void CreateProject(){
-        boolean isprivate= false;
-        if(aq.id(R.id.private_radio).isChecked()== true){
-            isprivate=true;
-        }
         ProjectsListService service = new ProjectsListService(getActivity());
         service.createProject(aq.id(R.id.project_name).getText().toString(),baseClass.getUserId()
                 ,aq.id(R.id.project_desc).getText().toString()
@@ -115,7 +112,22 @@ public class AddProjectFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view  = inflater.inflate(R.layout.add_project, container, false);
+        radioGroup = (RadioGroup) view.findViewById(R.id.private_public_group);
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                switch(checkedId) {
+                    case R.id.public_radio:
+                        isprivate = false;
+                        break;
+                    case R.id.private_radio:
+                        isprivate = true;
+                        break;
+                }
+            }
+        });
         aq = new AQuery(view);
+        aq.id(R.id.public_radio).checked(true);
         setHasOptionsMenu(true);
         owner_list = (NiceSpinner) view.findViewById(R.id.owner_list);
         departments_list= (NiceSpinner) view.findViewById(R.id.departments_list);

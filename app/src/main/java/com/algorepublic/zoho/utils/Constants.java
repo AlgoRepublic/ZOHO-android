@@ -26,6 +26,7 @@ public class Constants {
 	public static String StarRatingHeads_API = BASE_URL+ "/StarRating/GetListByLanguage"; //language
 	public static String StarRatingQuestion_API = BASE_URL+ "/StarRating/GetQuestionCategoriesByCategory"; //catID,language
 
+	public static String GetAllProjects_API = BASE_URL+ "/Project/GetListByUserID?";
 	public static String GetProjectsByDepartment_API = BASE_URL+ "/Project/GetDepartmentProjects";
 	public static String GetProjectsByClient_API = BASE_URL+ "/Project/GetCompanyProjects";
 	public static String CreateProject_API = BASE_URL+ "/Project/CreateProject?";

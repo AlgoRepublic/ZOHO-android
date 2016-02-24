@@ -7,14 +7,15 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.Toolbar;
 import android.text.format.DateFormat;
 import android.util.DisplayMetrics;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 
 import com.algorepublic.zoho.BaseActivity;
 import com.algorepublic.zoho.R;
+import com.algorepublic.zoho.utils.BaseClass;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -25,6 +26,7 @@ import java.util.concurrent.TimeUnit;
  * A simple {@link Fragment} subclass.
  */
 public class BaseFragment extends Fragment {
+
     public BaseFragment() {
         // Required empty public constructor
     }
@@ -172,5 +174,19 @@ public class BaseFragment extends Fragment {
 
     protected Toolbar getToolbar(){
         return BaseActivity.toolbar;
+    }
+
+    protected void applyDarkBackground(View view, BaseClass baseClass){
+        if(baseClass.getThemePreference() == R.style.AppThemeBlue)
+            view.setBackgroundColor(ContextCompat.getColor(getActivity(),R.color.colorPrimaryBlue));
+        else
+            view.setBackgroundColor(ContextCompat.getColor(getActivity(),R.color.colorBaseHeader));
+    }
+
+    protected void applyLightBackground(View view, BaseClass baseClass){
+        if(baseClass.getThemePreference() == R.style.AppThemeBlue)
+            view.setBackgroundColor(ContextCompat.getColor(getActivity(),R.color.colorSecondaryBlue));
+        else
+            view.setBackgroundColor(ContextCompat.getColor(getActivity(),R.color.colorContentWrapper));
     }
 }

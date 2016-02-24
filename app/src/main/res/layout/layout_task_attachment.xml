@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/single_image_row"
-    android:background="@color/colorBaseWrapper"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content" >
+    android:layout_height="wrap_content"
+    android:background="@color/colorBaseWrapper">
 
     <RelativeLayout
         android:id="@+id/layout"
         android:layout_width="200dp"
         android:layout_height="200dp"
-        android:padding="10dp"
-        android:layout_margin="5dp"
         android:layout_centerHorizontal="true"
-        android:background="@drawable/rounded_edittext" >
+        android:layout_margin="5dp"
+        android:background="@drawable/rounded_edittext"
+        android:padding="10dp">
 
         <ImageView
             android:id="@+id/file_added"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:scaleType="fitXY"
-            android:layout_margin="10dp"
             android:layout_above="@+id/file_title"
-            android:layout_alignParentTop="true" />
+            android:layout_alignParentTop="true"
+            android:layout_gravity="center"
+            android:layout_margin="10dp"
+            android:scaleType="fitXY" />
+
         <TextView
             android:id="@+id/file_title"
             android:layout_width="match_parent"
@@ -31,24 +31,25 @@
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:ellipsize="end"
-            android:lines="2"
             android:gravity="center"
+            android:lines="2"
             android:text="name"
             android:textColor="@color/colorBaseWrapper"
             android:textSize="14sp" />
-        </RelativeLayout>
+    </RelativeLayout>
+
     <ImageView
         android:id="@+id/file_delete"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:scaleType="fitXY"
-        android:layout_toRightOf="@+id/layout"
         android:layout_alignBottom="@+id/layout"
+        android:layout_toRightOf="@+id/layout"
         android:background="@android:drawable/ic_menu_close_clear_cancel"
-         />
+        android:scaleType="fitXY" />
+
     <View
         android:layout_width="match_parent"
-        android:background="@color/colorContentWrapper"
+        android:layout_height="1dp"
         android:layout_below="@+id/layout"
-        android:layout_height="1dp"/>
-    </RelativeLayout>
+        android:background="@color/colorContentWrapper" />
+</RelativeLayout>

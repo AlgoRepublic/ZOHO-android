@@ -44,34 +44,33 @@ public class TaskDetailFragment extends BaseFragment {
 
     AQuery aq;
     static TaskDetailFragment fragment;
-    TasksList tasksList;
-    int position;
+    static TasksList tasksList;
+    static int position;
     TaskListService service;
     int click=0;
     DonutProgress seekBarCompat;
     TwoWayView twoWayAssignee;
     SeekBar seekBar;
     View views;
-    int multiple=5;
+    int multiple=10;
     int progress=0;
     BaseClass baseClass;
     public static ACProgressFlower dialog;
 
     @SuppressLint("ValidFragment")
-    public TaskDetailFragment(TasksList tasksList1,int pos) {
+    public TaskDetailFragment() {
         // Required empty public constructor
-        tasksList = tasksList1;
-        position =pos;
+//        tasksList = tasksList1;
+//        position =pos;
     }
 
     // TODO: Rename and change types and number of parameters
-//    public static TaskDetailFragment newInstance(TasksList tasksList1,int pos) {
-//        tasksList = tasksList1;
-//        position =pos;
-//        fragment = new TaskDetailFragment();
-//
-//        return fragment;
-//    }
+    public static TaskDetailFragment newInstance(TasksList tasksList1,int pos) {
+        tasksList = tasksList1;
+        position =pos;
+        fragment = new TaskDetailFragment();
+        return fragment;
+    }
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         setRetainInstance(true);
@@ -117,6 +116,7 @@ public class TaskDetailFragment extends BaseFragment {
         aq.id(R.id.comment_count).text(Integer.toString(tasksList.getCommentsCount()));
         aq.id(R.id.docs_count).text(Integer.toString(tasksList.getDocumentsCount()));
         aq.id(R.id.subtask_count).text(Integer.toString(tasksList.getSubTasksCount()));
+        applyLightBackground(aq.id(R.id.parent2).getView(), baseClass);
         seekBar.setProgress(tasksList.getProgress());
         seekBarCompat.setProgress(tasksList.getProgress());
 

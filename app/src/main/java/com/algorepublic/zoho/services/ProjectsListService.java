@@ -3,6 +3,7 @@ package com.algorepublic.zoho.services;
 import android.app.Activity;
 import android.util.Log;
 
+import com.algorepublic.zoho.Models.AllProjectsModel;
 import com.algorepublic.zoho.Models.CreateCommentModel;
 import com.algorepublic.zoho.Models.CreateProjectModel;
 import com.algorepublic.zoho.Models.GeneralModel;
@@ -21,6 +22,11 @@ public class ProjectsListService extends BaseService {
         super(act);
     }
 
+    public void getAllProjects_API(String UserID, boolean message, CallBack obj){
+        String url = Constants.GetAllProjects_API+"UserID="+UserID ;
+        this.get(url, obj, AllProjectsModel.getInstance(), message);
+        Log.e("AllProjectsService", url);
+    }
     public void getProjectsByClient_API(String ownerID, boolean message, CallBack obj){
         String url = Constants.GetProjectsByClient_API + "?OwnerID=" + ownerID;
         this.get(url, obj, ProjectsByClientModel.getInstance(), message);

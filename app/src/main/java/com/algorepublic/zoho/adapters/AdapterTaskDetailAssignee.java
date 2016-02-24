@@ -54,7 +54,7 @@ public class AdapterTaskDetailAssignee extends RecyclerView.Adapter<AdapterTaskD
 
     @Override
     public void onBindViewHolder(SimpleViewHolder holder, int position) {
-        Glide.with(ctx).load(Constants.Image_URL+arraylist.get(position).profileImage)
+        Glide.with(ctx).load(Constants.UserImage_URL+arraylist.get(position).profileImage)
                 .into(holder.imageView);
     }
 

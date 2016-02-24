@@ -125,6 +125,13 @@ public class UploadDocsFragment extends BaseFragment implements GoogleApiClient.
         super.onCreateOptionsMenu(menu, inflater);
 
     }
+
+    @Override
+    public void onDestroy() {
+        filesList.clear();
+        super.onDestroy();
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
