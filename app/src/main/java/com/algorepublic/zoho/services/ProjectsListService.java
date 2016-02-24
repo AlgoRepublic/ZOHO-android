@@ -23,7 +23,7 @@ public class ProjectsListService extends BaseService {
     }
 
     public void getAllProjects_API(String UserID, boolean message, CallBack obj){
-        String url = Constants.GetAllProjects_API+"UserID="+UserID ;
+        String url = Constants.GetAllProjects_API+"userID="+UserID ;
         this.get(url, obj, AllProjectsModel.getInstance(), message);
         Log.e("AllProjectsService", url);
     }

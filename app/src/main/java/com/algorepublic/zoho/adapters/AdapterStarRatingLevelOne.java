@@ -1,89 +1,74 @@
 package com.algorepublic.zoho.adapters;
 
 import android.content.Context;
+import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseExpandableListAdapter;
-import android.widget.TextView;
+import android.widget.BaseAdapter;
 
 import com.algorepublic.zoho.R;
-import com.algorepublic.zoho.fragments.StarRatingFragment;
-import com.algorepublic.zoho.utils.CustomExpListView;
+import com.algorepublic.zoho.StarRatingFragments.StarRatingBaseFragment;
+import com.algorepublic.zoho.StarRatingFragments.StarRatingLevelOneFragment;
+import com.algorepublic.zoho.StarRatingFragments.StarRatingLevelTwoFragment;
+import com.algorepublic.zoho.utils.BaseClass;
+import com.androidquery.AQuery;
+
+import java.util.ArrayList;
 
 
 /**
  * Created by android on 2/1/16.
  */
-public class AdapterStarRatingLevelOne extends BaseExpandableListAdapter {
-    private final Context mContext;
+public class AdapterStarRatingLevelOne extends BaseAdapter {
+    LayoutInflater l_Inflater;
+    Context ctx;
+    BaseClass baseClass;
+    AQuery aq;
+    static ArrayList<StarRatingHeadsLevelOne> levelOnes =new ArrayList<>();
 
-    public AdapterStarRatingLevelOne(Context mContext) {
-        this.mContext = mContext;
+    public AdapterStarRatingLevelOne(Context context, ArrayList<StarRatingHeadsLevelOne> ones) {
+        levelOnes.addAll(ones);
+        l_Inflater = LayoutInflater.from(context);
+        this.ctx = context;
+        baseClass = ((BaseClass) ctx.getApplicationContext());
+    }
+    @Override
+    public int getCount() {
+        return levelOnes.size();
     }
 
     @Override
-    public Object getChild(int groupPosition, int childPosition) {
-        return childPosition;
+    public Object getItem(int position) {
+        return levelOnes.get(position);
     }
 
     @Override
-    public long getChildId(int groupPosition, int childPosition) {
-        return childPosition;
+    public long getItemId(int position) {
+        return position;
     }
 
     @Override
-    public View getChildView(int groupPosition, int childPosition,
-                             boolean isLastChild, View convertView, ViewGroup parent) {
-        final CustomExpListView secondLevelExpListView = new CustomExpListView(this.mContext);
-        secondLevelExpListView.setAdapter(new AdapterStarRatingLevelTwo(this.mContext,
-                StarRatingFragment.levelOneHead.get(childPosition).getLevelTwos()));
-        secondLevelExpListView.setGroupIndicator(null);
-
-        return secondLevelExpListView;
-    }
-
-    @Override
-    public int getChildrenCount(int groupPosition) {
-        return 1;
-    }
-
-    @Override
-    public Object getGroup(int groupPosition) {
-        return StarRatingFragment.levelOneHead.get(groupPosition);
-    }
-
-    @Override
-    public int getGroupCount() {
-        return StarRatingFragment.levelOneHead.size();
-    }
-
-    @Override
-    public long getGroupId(int groupPosition) {
-        return groupPosition;
-    }
-
-    @Override
-    public View getGroupView(int groupPosition, boolean isExpanded,
-                             View convertView, ViewGroup parent) {
-        if (convertView == null) {
-            LayoutInflater layoutInflater = (LayoutInflater) this.mContext
-                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = layoutInflater.inflate(R.layout.drawer_list_level_one, parent, false);
-        }
-        TextView lblListHeader = (TextView) convertView
-                .findViewById(R.id.lblListHeader);
-        lblListHeader.setText(StarRatingFragment.levelOneHead.get(groupPosition).getTitle());
+    public View getView(final int position, View convertView, ViewGroup parent) {
+        convertView = l_Inflater.inflate(R.layout.drawer_list_level_one, null);
+        aq = new AQuery(convertView);
+        aq.id(R.id.lblListHeader).text(levelOnes.get(position).getTitle());
+        aq.id(R.id.listClick).clicked(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                callFragmentWithBackStack(R.id.starContainer, StarRatingLevelTwoFragment.
+                        newInstance(levelOnes.get(position).getLevelTwos()),"StarRatingLevelTwoFragment");
+            }
+        });
         return convertView;
     }
-
-    @Override
-    public boolean hasStableIds() {
-        return true;
-    }
-
-    @Override
-    public boolean isChildSelectable(int groupPosition, int childPosition) {
-        return true;
+    public void callFragmentWithBackStack(int containerId, Fragment fragment, String tag){
+        ((AppCompatActivity)ctx).getSupportFragmentManager()
+                .beginTransaction()
+                .replace(containerId, fragment, tag)
+                .addToBackStack(null)
+                .commit();
     }
 }

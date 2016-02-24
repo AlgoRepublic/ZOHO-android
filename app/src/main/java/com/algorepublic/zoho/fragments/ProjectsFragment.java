@@ -178,7 +178,6 @@ public class ProjectsFragment extends BaseFragment{
     public void AddAllProjects(){
         allProjectsList.clear();
         for (int loop = 0; loop < AllProjectsModel.getInstance().responseData.size(); loop++) {
-            for(int loop1=0;loop1<AllProjectsModel.getInstance().responseData.size();loop1++){
                 ProjectsList projectsList = new ProjectsList();
                 projectsList.setCompOrDeptName("");
                 projectsList.setCompOrDeptID("1");
@@ -193,7 +192,6 @@ public class ProjectsFragment extends BaseFragment{
                 projectsList.setDeleted(AllProjectsModel.getInstance().responseData.get(loop).IsDeleted);
                 projectsList.setPrivate(AllProjectsModel.getInstance().responseData.get(loop).Isprivate);
                 allProjectsList.add(projectsList);
-            }
         }
         SetGeneralClientAdapter();
     }

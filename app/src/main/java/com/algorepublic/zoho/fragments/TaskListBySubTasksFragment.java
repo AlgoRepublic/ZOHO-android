@@ -119,12 +119,6 @@ public class TaskListBySubTasksFragment extends BaseFragment {
         taskListService = new TaskListService(getActivity());
         taskListService.getTasksListBySubTasks(tasksList.getTaskID(), true, new CallBack(TaskListBySubTasksFragment.this, "TaskListBySubTasks"));
 
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                callFragmentWithBackStack(R.id.container,TaskDetailFragment.newInstance(generalList.get(position),position),"TaskDetail");
-            }
-        });
         aq.id(R.id.add_task).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

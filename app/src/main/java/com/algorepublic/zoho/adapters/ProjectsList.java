@@ -93,7 +93,6 @@ public class ProjectsList {
     public void setTotalMilestones(String totalMilestones) {
         this.totalMilestones = totalMilestones;
     }
-
     public String getTotalUsers() {
         return totalUsers;
     }

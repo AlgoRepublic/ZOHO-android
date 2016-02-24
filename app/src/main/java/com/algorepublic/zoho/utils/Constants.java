@@ -25,6 +25,9 @@ public class Constants {
 	public static String GetSubTakById_API = BASE_URL+ "/Task/GetById?";
 	public static String StarRatingHeads_API = BASE_URL+ "/StarRating/GetListByLanguage"; //language
 	public static String StarRatingQuestion_API = BASE_URL+ "/StarRating/GetQuestionCategoriesByCategory"; //catID,language
+	public static String StarUpdateProgress_API = BASE_URL+ "/StarRating/UpdateProgressOfQuestion?"; // questionId, progress
+	public static String StarEditComment_API = BASE_URL+ "/StarRating/EditCommentOfQuestion?"; // questionId, comment)
+
 
 	public static String GetAllProjects_API = BASE_URL+ "/Project/GetListByUserID?";
 	public static String GetProjectsByDepartment_API = BASE_URL+ "/Project/GetDepartmentProjects";

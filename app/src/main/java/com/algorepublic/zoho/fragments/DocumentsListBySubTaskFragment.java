@@ -84,12 +84,6 @@ public class DocumentsListBySubTaskFragment extends BaseFragment {
                 callForDocsSorting();
             }
         });
-        aq.id(R.id.delete).clicked(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                callForDocsDelete(getActivity().getResources().getString(R.string.delete_doc));
-            }
-        });
         deleteDocsList.clear();
         baseClass = ((BaseClass) getActivity().getApplicationContext());
         setHasOptionsMenu(true);
@@ -152,51 +146,7 @@ public class DocumentsListBySubTaskFragment extends BaseFragment {
         }
         return super.onOptionsItemSelected(item);
     }
-    private void callForDocsDelete(String content) {
-        final NormalDialog dialog = new NormalDialog(getActivity());
-        dialog.isTitleShow(false)//
-                .bgColor(getResources().getColor(R.color.colorBaseWrapper))//
-                .cornerRadius(5)//
-                .content(content)//
-                .contentGravity(Gravity.CENTER)//
-                .contentTextColor(getResources().getColor(R.color.colorBaseHeader))//
-                .dividerColor(getResources().getColor(R.color.colorContentWrapper))//
-                .btnTextSize(15.5f, 15.5f)//
-                .btnTextColor(getResources().getColor(R.color.colorBaseHeader)
-                        , getResources().getColor(R.color.colorBaseHeader))//
-                .btnPressColor(getResources().getColor(R.color.colorBaseMenu))//
-                .widthScale(0.85f)//
-                .showAnim(new BounceLeftEnter())//
-                .dismissAnim(new SlideRightExit())//
-                .show();
 
-        dialog.setOnBtnClickL(
-                new OnBtnClickL() {
-                    @Override
-                    public void onBtnClick() {
-                        dialog.dismiss();
-                    }
-                },
-                new OnBtnClickL() {
-                    @Override
-                    public void onBtnClick() {
-                        dialog.dismiss();
-                        service.deleteDocumentByTask(ID, deleteDocsList
-                                , true, new CallBack(DocumentsListBySubTaskFragment.this, "DeleteDoc"));
-                        deleteDocsList.clear();
-                    }
-                });
-    }
-    public void DeleteDoc(Object caller, Object model) {
-        GeneralModel.getInstance().setList((GeneralModel) model);
-        if (GeneralModel.getInstance().responseCode.equalsIgnoreCase("100")) {
-            Snackbar.make(getView(), getString(R.string.doc_deleted), Snackbar.LENGTH_SHORT).show();
-        }
-        else
-        {
-            Snackbar.make(getView(), getString(R.string.invalid_credential), Snackbar.LENGTH_SHORT).show();
-        }
-    }
     public void callForDocsSorting(){
         String[] menuItems = {"All Files","Pictures","Videos","Favorites"};
         final ActionSheetDialog dialog = new ActionSheetDialog(getActivity(),menuItems, getView());
@@ -236,7 +186,7 @@ public class DocumentsListBySubTaskFragment extends BaseFragment {
     }
     public void SetAdapterList(){
         if (SubTaskAttachmentsModel.getInstance().responseCode == 100) {
-            adapterDocsList = new AdapterDocumentsList(getActivity(),generalDocsList);
+            adapterDocsList = new AdapterDocumentsList(getActivity(),ID,generalDocsList);
             listView.setAreHeadersSticky(true);
             listView.setAdapter(adapterDocsList);
         }

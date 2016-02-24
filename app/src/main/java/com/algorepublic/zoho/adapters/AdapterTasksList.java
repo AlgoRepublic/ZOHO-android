@@ -3,6 +3,9 @@ package com.algorepublic.zoho.adapters;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
+import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,8 +14,16 @@ import android.view.animation.AnimationUtils;
 import android.widget.BaseAdapter;
 
 import com.algorepublic.zoho.R;
+import com.algorepublic.zoho.fragments.TaskDetailFragment;
+import com.algorepublic.zoho.fragments.TasksListFragment;
+import com.algorepublic.zoho.services.CallBack;
+import com.algorepublic.zoho.services.TaskListService;
 import com.algorepublic.zoho.utils.BaseClass;
 import com.androidquery.AQuery;
+import com.flyco.animation.BounceEnter.BounceLeftEnter;
+import com.flyco.animation.SlideExit.SlideRightExit;
+import com.flyco.dialog.listener.OnBtnClickL;
+import com.flyco.dialog.widget.NormalDialog;
 
 import java.util.ArrayList;
 
@@ -26,6 +37,7 @@ public class AdapterTasksList extends BaseAdapter implements StickyListHeadersAd
     Context ctx;
     AQuery aq,aq_header;
     BaseClass baseClass;
+    TaskListService service;
     private LayoutInflater l_Inflater;
     private int lastPosition = -1;
     ArrayList<TasksList> tasksLists = new ArrayList<>();
@@ -34,6 +46,7 @@ public class AdapterTasksList extends BaseAdapter implements StickyListHeadersAd
         tasksLists.addAll(arrayList);
         l_Inflater = LayoutInflater.from(context);
         this.ctx = context;
+        service = new TaskListService((AppCompatActivity)ctx);
         baseClass = ((BaseClass) ctx.getApplicationContext());
     }
 
@@ -53,7 +66,7 @@ public class AdapterTasksList extends BaseAdapter implements StickyListHeadersAd
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
 
         convertView = l_Inflater.inflate(R.layout.layout_taskslist_row, null);
         aq = new AQuery(convertView);
@@ -82,12 +95,30 @@ public class AdapterTasksList extends BaseAdapter implements StickyListHeadersAd
         }catch (Exception e){
             e.printStackTrace();
         }
-
+        aq.id(R.id.parent1).clicked(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                callFragmentWithBackStack(R.id.container, TaskDetailFragment.newInstance(tasksLists.get(position), position),"TaskDetail");
+            }
+        });
+        aq.id(R.id.btDelete).clicked(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+            NormalDialogCustomAttr(ctx.getString(R.string.delete_task),tasksLists.get(position));
+            }
+        });
         Animation animation = AnimationUtils.loadAnimation(ctx, (position > lastPosition) ? R.anim.up_from_bottom : R.anim.down_from_top);
         convertView.startAnimation(animation);
         lastPosition = position;
 
         return convertView;
+    }
+    public void callFragmentWithBackStack(int containerId, Fragment fragment, String tag){
+        ((AppCompatActivity)ctx).getSupportFragmentManager()
+                .beginTransaction()
+                .replace(containerId, fragment, tag)
+                .addToBackStack(null)
+                .commit();
     }
     @Override
     public View getHeaderView(int position, View convertView, ViewGroup parent) {
@@ -165,5 +196,38 @@ public class AdapterTasksList extends BaseAdapter implements StickyListHeadersAd
                 return ctx.getResources().getColor(android.R.color.darker_gray);
         }
     }
+    private void NormalDialogCustomAttr(String content, final TasksList tasksList) {
+        final NormalDialog dialog = new NormalDialog(((AppCompatActivity) ctx));
+        dialog.isTitleShow(false)//
+                .bgColor(ctx.getResources().getColor(R.color.colorBaseWrapper))//
+                .cornerRadius(5)//
+                .content(content)//
+                .contentGravity(Gravity.CENTER)//
+                .contentTextColor(ctx.getResources().getColor(R.color.colorBaseHeader))//
+                .dividerColor(ctx.getResources().getColor(R.color.colorContentWrapper))//
+                .btnTextSize(15.5f, 15.5f)//
+                .btnTextColor(ctx.getResources().getColor(R.color.colorBaseHeader)
+                        , ctx.getResources().getColor(R.color.colorBaseHeader))//
+                .btnPressColor(ctx.getResources().getColor(R.color.colorBaseMenu))//
+                .widthScale(0.85f)//
+                .showAnim(new BounceLeftEnter())//
+                .dismissAnim(new SlideRightExit())//
+                .show();
 
+        dialog.setOnBtnClickL(
+                new OnBtnClickL() {
+                    @Override
+                    public void onBtnClick() {
+                        dialog.dismiss();
+                    }
+                },
+                new OnBtnClickL() {
+                    @Override
+                    public void onBtnClick() {
+                        dialog.dismiss();
+                        service.deleteTask(tasksList.getTaskID()
+                                , true, new CallBack(AdapterTasksList.this, "DeleteTask"));
+                    }
+                });
+    }
 }
