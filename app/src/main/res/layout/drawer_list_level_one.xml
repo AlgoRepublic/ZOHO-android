@@ -1,7 +1,6 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingTop="5dp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <com.h6ah4i.android.materialshadowninepatch.MaterialShadowContainerView
         android:id="@+id/shadow_item_container"
@@ -13,6 +12,7 @@
         app:ms9_shadowTranslationZ="1dp"
         app:ms9_shadowElevation="3dp">
     <RelativeLayout
+        android:id="@+id/listClick"
         android:layout_height="wrap_content"
         android:padding="5dp"
         android:layout_margin="6dp"
@@ -22,7 +22,6 @@
         android:id="@+id/lblListHeader"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
         android:textSize="18sp"
         android:textStyle="bold"
         android:text="lksahdgiuasdsdsdsdsddsdsdsdsssdsdsddssds"

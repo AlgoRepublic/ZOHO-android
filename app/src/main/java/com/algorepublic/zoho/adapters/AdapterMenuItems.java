@@ -16,10 +16,11 @@ import com.algorepublic.zoho.BaseActivity;
 import com.algorepublic.zoho.MainActivity;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.fragments.CalendarFragment;
+import com.algorepublic.zoho.fragments.DepartmentFragment;
 import com.algorepublic.zoho.fragments.DocumentsListFragment;
 import com.algorepublic.zoho.fragments.ForumsFragment;
 import com.algorepublic.zoho.fragments.ProjectsFragment;
-import com.algorepublic.zoho.fragments.Star;
+import com.algorepublic.zoho.StarRatingFragments.StarRatingBaseFragment;
 import com.algorepublic.zoho.fragments.TasksListFragment;
 import com.algorepublic.zoho.fragments.UserFragment;
 import com.androidquery.AQuery;
@@ -126,9 +127,9 @@ public class AdapterMenuItems extends BaseAdapter{
         }if(position==6){
             callFragmentWithReplace(R.id.container, ForumsFragment.newInstance(), "ForumsFragment");
         }if(position==7){
-            callFragmentWithReplace(R.id.container, Star.newInstance(), "StarRatingFragment");
+            callFragmentWithReplace(R.id.container, StarRatingBaseFragment.newInstance(), "StarRatingLevelOneFragment");
         }if(position==8){
-
+            callFragmentWithReplace(R.id.container, DepartmentFragment.newInstance(), "DepartmentFragment");
         }
         BaseActivity.drawer.closeDrawer(GravityCompat.START);
     }

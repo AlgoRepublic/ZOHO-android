@@ -1,6 +1,7 @@
-package com.algorepublic.zoho.fragments;
+package com.algorepublic.zoho.StarRatingFragments;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,23 +15,24 @@ import com.algorepublic.zoho.adapters.AdapterStarRatingLevelOne;
 import com.algorepublic.zoho.adapters.StarRatingHeadsLevelOne;
 import com.algorepublic.zoho.adapters.StarRatingHeadsLevelThree;
 import com.algorepublic.zoho.adapters.StarRatingHeadsLevelTwo;
+import com.algorepublic.zoho.fragments.BaseFragment;
 import com.algorepublic.zoho.services.CallBack;
 import com.algorepublic.zoho.services.StarRatingService;
 
 import java.util.ArrayList;
 
 /**
- * Created by waqas on 2/23/16.
+ * Created by android on 2/1/16.
  */
-public class Star extends BaseFragment {
-    static Star fragment;
+public class StarRatingLevelOneFragment extends BaseFragment {
+    static StarRatingLevelOneFragment fragment;
     public static ArrayList<StarRatingHeadsLevelOne> levelOneHead = new ArrayList<>();
     ListView mListView;
     StarRatingService service;
 
-    public static Star newInstance() {
+    public static StarRatingLevelOneFragment newInstance() {
         if (fragment==null) {
-            fragment = new Star();
+            fragment = new StarRatingLevelOneFragment();
         }
         return fragment;
     }
@@ -43,17 +45,11 @@ public class Star extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.star, container, false);
+        View view = inflater.inflate(R.layout.fragment_star_rating, container, false);
         mListView = (ListView) view.findViewById(R.id.starListView);
         service = new StarRatingService(getActivity());
-        service.getStarRatingHeads_API("en-Us", true, new CallBack(Star.this, "StarRatingHeads"));
-        getToolbar().setTitle(getString(R.string.start_rating));
-        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        service.getStarRatingHeads_API("en-Us", true, new CallBack(StarRatingLevelOneFragment.this, "StarRatingHeads"));
 
-            }
-        });
         return view;
     }
 
@@ -61,7 +57,7 @@ public class Star extends BaseFragment {
         StarRatingModel.getInstance().setList((StarRatingModel) model);
         if (StarRatingModel.getInstance().responseCode == 100) {
             GetListHeads();
-            mListView.setAdapter( new AdapterStarRatingLevelOne(getActivity()));
+            mListView.setAdapter(new AdapterStarRatingLevelOne(getActivity(),levelOneHead));
         }
         else
         {
