@@ -107,7 +107,7 @@
                         android:paddingLeft="5dp"
                         android:paddingStart="5dp"
                         android:text="@string/projects"
-                        android:textColor="@color/colorBaseHeader"
+                        
                         android:textSize="14sp"
                         android:textStyle="bold" />
 

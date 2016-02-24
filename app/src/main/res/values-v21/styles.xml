@@ -5,18 +5,27 @@
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
         <item name="colorPrimary">@color/colorPrimaryBlue</item>
-        <item name="colorPrimaryDark">@color/blueBackground</item>
-        <item name="android:colorBackground">@color/colorBaseWrapper</item>
-        <item name="android:textColorPrimary">@color/colorWhite</item>
+        <item name="colorPrimaryDark">@color/blue</item>
+        <item name="android:colorBackground">@color/colorBaseWrapperBlue</item>
         <item name="android:colorForeground">@color/colorPrimaryBlue</item>
         <item name="colorAccent">@color/colorPrimaryBlue</item>
-        <item name="android:checkboxStyle">@style/blueCheckBoxStyle</item>
+        <item name="checkboxStyle">@style/blueCheckBoxStyle</item>
+        <item name="android:textViewStyle">@style/blueTextView</item>
+        <item name="android:radioButtonStyle">@style/blueRadioButton</item>
+    </style>
+
+    <style name="blueRadioButton" parent="@android:style/Widget.CompoundButton.RadioButton">
+        <item name="android:background">@drawable/blue_radiobutton</item>
     </style>
 
     <style name="blueCheckBoxStyle" parent="@android:style/Widget.CompoundButton.CheckBox">
         <item name="android:textColor">@android:color/white</item>
         <item name="android:background">@color/colorPrimaryBlue</item>
     </style>
+    <style name="blueTextView" parent="@android:style/Widget.TextView">
+        <item name="android:textColor">@color/colorPrimaryBlue</item>
+    </style>
+
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.NoActionBar">
@@ -24,12 +33,13 @@
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
         <item name="colorPrimary">@color/colorBaseHeader</item>
-        <item name="colorPrimaryDark">@color/colorBaseHeader</item>
+        <item name="colorPrimaryDark">@color/colorBaseDark</item>
         <item name="android:colorBackground">@color/colorBaseWrapper</item>
         <item name="android:textColorPrimary">@color/colorWhite</item>
         <item name="android:colorForeground">@color/colorBaseHeader</item>
         <item name="colorAccent">@color/colorBaseHeader</item>
-        <item name="android:checkboxStyle">@style/blackCheckBoxStyle</item>
+        <item name="checkboxStyle">@style/blackCheckBoxStyle</item>
+        <item name="android:textViewStyle">@style/blackTextView</item>
     </style>
 
     <style name="blackCheckBoxStyle" parent="@android:style/Widget.CompoundButton.CheckBox">
@@ -37,7 +47,25 @@
         <item name="android:background">@color/colorBaseHeader</item>
     </style>
 
+    <style name="blackTextView" parent="@android:style/Widget.TextView">
+        <item name="android:textColor">@color/colorBaseHeader</item>
+    </style>
 
+    <style name="blackRadioButton" parent="@android:style/Widget.CompoundButton.RadioButton">
+        <item name="android:background">@drawable/black_radiobutton</item>
+    </style>
+
+
+    <style name="tallerBarStyle" parent="@android:style/Widget.SeekBar">
+        <item name="android:indeterminateOnly">false</item>
+        <item name="android:progressDrawable">@drawable/progress_horizontal</item>
+        <item name="android:indeterminateDrawable">@drawable/progress_horizontal</item>
+        <item name="android:minHeight">6dip</item>
+        <item name="android:maxHeight">6dip</item>
+    </style>
+
+
+     <!--not sure yet-->
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>

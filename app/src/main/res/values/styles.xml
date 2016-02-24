@@ -11,7 +11,7 @@
         <item name="android:textColorPrimary">@color/colorWhite</item>
         <item name="android:colorForeground">@color/colorBaseHeader</item>
         <item name="colorAccent">@color/colorBaseHeader</item>
-        <item name="android:checkboxStyle">@style/blackCheckBoxStyle</item>
+        <item name="checkboxStyle">@style/blackCheckBoxStyle</item>
     </style>
 
     <style name="blackCheckBoxStyle" parent="@android:style/Widget.CompoundButton.CheckBox">
@@ -42,12 +42,12 @@
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
         <item name="colorPrimary">@color/colorPrimaryBlue</item>
-        <item name="colorPrimaryDark">@color/blue_selected</item>
+        <item name="colorPrimaryDark">@color/colorBaseDark</item>
         <item name="android:colorBackground">@color/colorBaseWrapper</item>
         <item name="android:textColorPrimary">@color/colorWhite</item>
         <item name="android:colorForeground">@color/colorPrimaryBlue</item>
         <item name="colorAccent">@color/colorPrimaryBlue</item>
-        <item name="android:checkboxStyle">@style/blueCheckBoxStyle</item>
+        <item name="checkboxStyle">@style/blueCheckBoxStyle</item>
     </style>
 
     <style name="blueCheckBoxStyle" parent="@android:style/Widget.CompoundButton.CheckBox">

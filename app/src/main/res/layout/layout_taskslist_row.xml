@@ -72,7 +72,6 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="left"
-                        android:textColor="@color/colorBaseHeader"
                         android:textSize="14sp"
                         android:textStyle="bold" />
 
@@ -82,7 +81,6 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="right|end"
-                        android:textColor="@color/colorBaseHeader"
                         android:textSize="12sp" />
                 </LinearLayout>
 
@@ -100,7 +98,6 @@
                         android:layout_gravity="center_vertical"
                         android:layout_weight=".8"
                         android:gravity="left"
-                        android:textColor="@color/colorBaseHeader"
                         android:textSize="14sp"
                         android:textStyle="bold" />
 
@@ -118,7 +115,6 @@
                             android:layout_toLeftOf="@+id/bar"
                             android:gravity="left"
                             android:text="10 Comments"
-                            android:textColor="@color/colorBaseHeader"
                             android:textSize="12sp" />
 
                         <View
@@ -137,7 +133,6 @@
                             android:layout_centerVertical="true"
                             android:gravity="left"
                             android:text="10 Users"
-                            android:textColor="@color/colorBaseHeader"
                             android:textSize="12sp" />
                     </RelativeLayout>
                 </LinearLayout>

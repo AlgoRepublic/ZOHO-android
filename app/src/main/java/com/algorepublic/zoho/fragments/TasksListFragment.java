@@ -115,6 +115,7 @@ public class TasksListFragment extends BaseFragment {
         aq = new AQuery(view);
 
         baseClass = ((BaseClass) getActivity().getApplicationContext());
+        applyLightBackground(aq.id(R.id.layout_bottom).getView(), baseClass);
         taskListService = new TaskListService(getActivity());
         if(baseClass.getSelectedProject().equalsIgnoreCase("0")) {
             taskListService.getTasksListByOwner(baseClass.getUserId(), true, new CallBack(TasksListFragment.this, "OwnerTasksList"));

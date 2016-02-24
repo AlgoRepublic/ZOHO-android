@@ -154,6 +154,9 @@ public class TaskAddUpdateFragment extends BaseFragment {
             }
         }
         aq =new AQuery(view);
+
+        applyLightBackground(aq.id(R.id.gridview_taskmenu).getView(), baseClass);
+        applyLightBackground(aq.id(R.id.title_bar).getView(), baseClass);
         SetValues();
         if( baseClass.db.getString("ProjectName") != null) {
            getToolbar().setTitle(baseClass.db.getString("ProjectName"));

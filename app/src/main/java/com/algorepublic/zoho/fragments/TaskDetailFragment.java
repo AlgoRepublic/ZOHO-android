@@ -116,6 +116,7 @@ public class TaskDetailFragment extends BaseFragment {
         aq.id(R.id.comment_count).text(Integer.toString(tasksList.getCommentsCount()));
         aq.id(R.id.docs_count).text(Integer.toString(tasksList.getDocumentsCount()));
         aq.id(R.id.subtask_count).text(Integer.toString(tasksList.getSubTasksCount()));
+        applyLightBackground(aq.id(R.id.parent2).getView(), baseClass);
         seekBar.setProgress(tasksList.getProgress());
         seekBarCompat.setProgress(tasksList.getProgress());
 
