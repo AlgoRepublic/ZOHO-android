@@ -13,7 +13,6 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.design.widget.Snackbar;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -21,13 +20,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.BaseAdapter;
 import android.widget.Toast;
 
 import com.algorepublic.zoho.Models.GeneralModel;
 import com.algorepublic.zoho.R;
-import com.algorepublic.zoho.adapters.AdapterForumsList;
-import com.algorepublic.zoho.adapters.AdapterTaskPriority;
 import com.algorepublic.zoho.adapters.AdapterUploadAttachment;
 import com.algorepublic.zoho.adapters.AttachmentList;
 import com.algorepublic.zoho.services.DocumentsService;
@@ -36,7 +32,6 @@ import com.algorepublic.zoho.utils.Constants;
 import com.algorepublic.zoho.utils.GenericHttpClient;
 import com.androidquery.AQuery;
 import com.dropbox.chooser.android.DbxChooser;
-import com.flyco.animation.BounceEnter.BounceLeftEnter;
 import com.flyco.animation.SlideEnter.SlideLeftEnter;
 import com.flyco.animation.SlideExit.SlideRightExit;
 import com.flyco.dialog.entity.DialogMenuItem;
@@ -183,6 +178,7 @@ public class UploadDocsFragment extends BaseFragment implements GoogleApiClient.
                 CallForAttachments();
             }
         });
+        applyLightBackground(aq.id(R.id.layout_bottom).getView(), baseClass);
         //CallForSelectFolder();
         return view;
     }

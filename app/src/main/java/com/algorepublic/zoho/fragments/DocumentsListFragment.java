@@ -32,7 +32,6 @@ import com.flyco.dialog.widget.NormalDialog;
 import java.util.ArrayList;
 import java.util.Collections;
 
-import se.emilsjolander.stickylistheaders.StickyListHeadersAdapter;
 import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
 
 /**
@@ -101,6 +100,7 @@ public class DocumentsListFragment extends BaseFragment {
                 callFragmentWithBackStack(R.id.container,  DocsPreviewFragment.newInstance(generalDocsList.get(position)), "DocsPreview");
             }
         });
+        applyLightBackground(aq.id(R.id.layout_bottom).getView(), baseClass);
         return view;
     }
 

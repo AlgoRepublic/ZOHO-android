@@ -102,6 +102,8 @@ public class DocumentsListBySubTaskFragment extends BaseFragment {
                 callFragmentWithBackStack(R.id.container, DocsPreviewBySubTask.newInstance(generalDocsList.get(position)), "DocsPreview");
             }
         });
+
+        applyLightBackground(aq.id(R.id.layout_bottom).getView(), baseClass);
         return view;
     }
 

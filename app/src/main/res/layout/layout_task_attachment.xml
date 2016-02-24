@@ -22,7 +22,7 @@
             android:layout_alignParentTop="true"
             android:layout_gravity="center"
             android:layout_margin="10dp"
-            android:scaleType="fitXY" />
+            android:scaleType="fitCenter" />
 
         <TextView
             android:id="@+id/file_title"
