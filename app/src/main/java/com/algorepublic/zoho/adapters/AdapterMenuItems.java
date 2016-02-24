@@ -19,7 +19,7 @@ import com.algorepublic.zoho.fragments.CalendarFragment;
 import com.algorepublic.zoho.fragments.DocumentsListFragment;
 import com.algorepublic.zoho.fragments.ForumsFragment;
 import com.algorepublic.zoho.fragments.ProjectsFragment;
-import com.algorepublic.zoho.fragments.StarRatingFragment;
+import com.algorepublic.zoho.fragments.Star;
 import com.algorepublic.zoho.fragments.TasksListFragment;
 import com.algorepublic.zoho.fragments.UserFragment;
 import com.androidquery.AQuery;
@@ -126,7 +126,7 @@ public class AdapterMenuItems extends BaseAdapter{
         }if(position==6){
             callFragmentWithReplace(R.id.container, ForumsFragment.newInstance(), "ForumsFragment");
         }if(position==7){
-            callFragmentWithReplace(R.id.container, StarRatingFragment.newInstance(), "StarRatingFragment");
+            callFragmentWithReplace(R.id.container, Star.newInstance(), "StarRatingFragment");
         }if(position==8){
 
         }

@@ -35,17 +35,20 @@
         android:layout_width="match_parent"
         android:layout_height="54dp"
         android:layout_alignParentBottom="true"
-
         android:background="@color/colorContentWrapper"
-        >
-        <Button
-            android:id="@+id/sort_button"
-            android:layout_width="45dp"
-            android:layout_marginTop="12dp"
-            android:layout_marginBottom="12dp"
-            android:gravity="center"
-            android:layout_centerInParent="true"
-            android:background="@mipmap/task_image"
-            android:layout_height="match_parent" />
+
+      >
+            <Button
+                android:id="@+id/sort_button"
+                android:layout_width="45dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="12dp"
+                android:gravity="center"
+                android:layout_margin="10dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerInParent="true"
+                android:background="@mipmap/task_image"
+                android:layout_height="50dp" />
+
     </RelativeLayout>
 </RelativeLayout>
