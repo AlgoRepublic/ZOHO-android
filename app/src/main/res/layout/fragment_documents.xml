@@ -23,37 +23,7 @@
         android:layout_height="60dp"
         android:layout_alignParentBottom="true"
         android:background="@color/colorContentWrapper">
-        <View android:layout_height="fill_parent"
-            android:layout_width="2dp"
-            android:layout_toLeftOf="@+id/layout1"
-            android:background="@color/white"/>
-        <RelativeLayout
-            android:id="@+id/layout1"
-            android:layout_width="50dp"
-            android:layout_gravity="center"
-            android:layout_marginLeft="2dp"
-            android:layout_toLeftOf="@+id/view2"
-            android:layout_marginRight="2dp"
-            android:layout_height="match_parent">
-            <ImageView
-                android:id="@+id/delete"
-                android:layout_width="30dp"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"
-                android:src="@mipmap/trash"
-                android:layout_gravity="center"
-                android:layout_height="30dp" />
-            <TextView
-                android:id="@+id/text8"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Delete"
-                android:gravity="center"
-                android:layout_alignParentBottom="true"
-                android:textColor="@color/white"
-                android:textSize="10sp"
-                android:layout_marginBottom="2dp"/>
-        </RelativeLayout>
+
         <View android:layout_height="fill_parent"
             android:layout_width="2dp"
             android:id="@+id/view2"

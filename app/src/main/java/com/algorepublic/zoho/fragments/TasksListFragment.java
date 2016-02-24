@@ -122,12 +122,7 @@ public class TasksListFragment extends BaseFragment {
         }else{
             taskListService.getTasksListByProject(baseClass.getSelectedProject(), true, new CallBack(TasksListFragment.this, "OwnerTasksList"));
         }
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                callFragmentWithBackStack(R.id.container,TaskDetailFragment.newInstance(generalList.get(position),position),"TaskDetail");
-            }
-        });
+
         aq.id(R.id.add_task).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
