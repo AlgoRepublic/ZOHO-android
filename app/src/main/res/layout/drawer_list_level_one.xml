@@ -1,33 +1,33 @@
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:paddingTop="5dp"
-    android:paddingBottom="5dp"
-    android:background="@drawable/roundable_corner"
-    android:orientation="horizontal">
-
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <com.h6ah4i.android.materialshadowninepatch.MaterialShadowContainerView
+        android:id="@+id/shadow_item_container"
+        android:layout_width="match_parent"
+        style="@style/ms9_DefaultShadowStyle"
+        android:layout_height="wrap_content"
+        app:ms9_useAmbientShadow="true"
+        app:ms9_affectsDisplayedPosition="true"
+        app:ms9_shadowTranslationZ="1dp"
+        app:ms9_shadowElevation="3dp">
+    <RelativeLayout
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:layout_margin="6dp"
+        android:background="@drawable/roundable_corner"
+        android:layout_width="match_parent">
     <TextView
         android:id="@+id/lblListHeader"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="18sp"
         android:textStyle="bold"
-        android:padding="3dp"
-        android:layout_toLeftOf="@+id/explist_indicator"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"
         android:text="lksahdgiuasdsdsdsdsddsdsdsdsssdsdsddssds"
-        android:gravity="center"
         android:textColor="@color/colorBaseHeader" />
-
-        <ImageView
-            android:src="@drawable/drawer_level_one"
-            android:id="@+id/explist_indicator"
-            android:layout_centerVertical="true"
-            android:layout_alignParentRight="true"
-            android:layout_width="20dp"
-            android:layout_height="20dp"/>
+        </RelativeLayout>
+    </com.h6ah4i.android.materialshadowninepatch.MaterialShadowContainerView>
     </RelativeLayout>
 
 
