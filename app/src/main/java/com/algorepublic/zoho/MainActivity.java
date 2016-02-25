@@ -12,13 +12,10 @@ import android.widget.GridView;
 import android.widget.ImageView;
 
 import com.algorepublic.zoho.adapters.AdapterMenuItems;
-import com.algorepublic.zoho.fragments.FeedFragment;
-import com.algorepublic.zoho.fragments.dummy.DummyContent;
 import com.algorepublic.zoho.utils.BaseClass;
 import com.androidquery.AQuery;
 
-public class MainActivity extends BaseActivity
-        implements FeedFragment.OnListFragmentInteractionListener {
+public class MainActivity extends BaseActivity {
 
     AQuery aq,aq_header;
     BaseClass baseClass;
@@ -75,8 +72,4 @@ public class MainActivity extends BaseActivity
         }
     }
 
-    @Override
-    public void onListFragmentInteraction(DummyContent.DummyItem item) {
-
-    }
 }

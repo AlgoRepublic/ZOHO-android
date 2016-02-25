@@ -63,7 +63,7 @@
             <View
                 android:layout_width="match_parent"
                 android:background="@android:drawable/dialog_holo_light_frame"
-                android:layout_height="1dp"></View>
+                android:layout_height="1dp"/>
         </com.h6ah4i.android.materialshadowninepatch.MaterialShadowContainerView>
     </RelativeLayout>
     <ScrollView
@@ -114,7 +114,7 @@
                             android:layout_height="wrap_content"
                             android:textSize="12sp"
                             android:layout_toRightOf="@+id/text2"
-                            
+
                             />
 
                         <TextView
@@ -124,7 +124,7 @@
                             android:textSize="12sp"
                             android:textStyle="bold"
                             android:layout_toLeftOf="@+id/end_date"
-                            
+
                             />
                         <TextView
                             android:id="@+id/end_date"
@@ -135,7 +135,7 @@
                             android:textSize="13sp"
                             android:layout_alignParentRight="true"
                             android:layout_toLeftOf="@+id/textView"
-                            
+
                             />
 
                     </RelativeLayout>
@@ -153,7 +153,7 @@
                             android:textSize="12sp"
                             android:textStyle="bold"
                             android:layout_toLeftOf="@+id/textView"
-                            
+
                             />
                         <TextView
                             android:id="@+id/category"
@@ -163,7 +163,7 @@
                             android:layout_height="wrap_content"
                             android:textSize="12sp"
                             android:layout_toLeftOf="@+id/textView"
-                            
+
                             />
                     </LinearLayout>
                     <LinearLayout
@@ -181,7 +181,7 @@
                             android:textSize="12sp"
                             android:textStyle="bold"
                             android:layout_toLeftOf="@+id/textView"
-                            
+
                             />
                         <TextView
                             android:id="@+id/task_desc"
@@ -191,7 +191,7 @@
                             android:textSize="12sp"
                             android:lines="4"
                             android:ellipsize="end"
-                            
+
                             />
                     </LinearLayout>
                     <LinearLayout
@@ -210,7 +210,7 @@
                             android:textSize="12sp"
                             android:textStyle="bold"
                             android:layout_toLeftOf="@+id/textView"
-                            
+
                             />
 
                     </LinearLayout>
@@ -238,7 +238,7 @@
                         android:layout_marginLeft="20dp"
                         android:layout_marginRight="20dp"
                         android:layout_toLeftOf="@+id/textView"
-                        
+
                         />
 
                     <RelativeLayout
@@ -250,17 +250,11 @@
                         android:layout_height="wrap_content">
 
                         <SeekBar
-                            style="@style/tallerBarStyle"
                             android:id="@+id/seekBar"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
-                            android:thumb="@drawable/thumb_image"
-                            android:thumbTint="@color/colorBaseHeader"
-                            android:progressTint="@color/colorBaseHeader"
-                            android:foreground="@color/colorBaseHeader"
-                            android:max="100"
-                            >
+                            android:max="100">
                         </SeekBar>
                     </RelativeLayout>
 

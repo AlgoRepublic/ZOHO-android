@@ -90,6 +90,14 @@ public class DocumentsListBySubTaskFragment extends BaseFragment {
         getToolbar().setTitle(getString(R.string.documents));
         service = new DocumentsService(getActivity());
         service.getDocsBySubTasks(ID, true, new CallBack(DocumentsListBySubTaskFragment.this, "DocumentsList"));
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                callFragmentWithBackStack(R.id.container, DocsPreviewBySubTask.newInstance(generalDocsList.get(position)), "DocsPreview");
+            }
+        });
+
+        applyLightBackground(aq.id(R.id.layout_bottom).getView(), baseClass);
         return view;
     }
 

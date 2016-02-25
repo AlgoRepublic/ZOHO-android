@@ -7,6 +7,7 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -94,6 +95,14 @@ public class TaskDetailFragment extends BaseFragment {
                 .themeColor(Color.WHITE)
                 .fadeColor(Color.DKGRAY).build();
         seekBarCompat = (DonutProgress) view.findViewById(R.id.circularprogressBar);
+        if(baseClass.getThemePreference() == R.style.AppThemeBlue) {
+            seekBarCompat.setFinishedStrokeColor(ContextCompat.getColor(getActivity(), R.color.colorPrimaryBlue));
+            seekBarCompat.setTextColor(ContextCompat.getColor(getActivity(), R.color.colorPrimaryBlue));
+        }
+        else{
+            seekBarCompat.setFinishedStrokeColor(ContextCompat.getColor(getActivity(), R.color.colorBaseHeader));
+            seekBarCompat.setTextColor(ContextCompat.getColor(getActivity(), R.color.colorBaseHeader));
+        }
         seekBar =(SeekBar) view.findViewById(R.id.seekBar);
         twoWayAssignee = (TwoWayView) view.findViewById(R.id.task_assignee);
         twoWayAssignee.setHasFixedSize(true);
@@ -196,6 +205,8 @@ public class TaskDetailFragment extends BaseFragment {
 
             }
         });
+
+
 
 
         return view;
