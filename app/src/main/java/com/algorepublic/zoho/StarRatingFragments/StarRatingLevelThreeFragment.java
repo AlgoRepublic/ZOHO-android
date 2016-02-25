@@ -40,8 +40,25 @@ public class StarRatingLevelThreeFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_star_rating, container, false);
+        StarRatingBaseFragment.textView2.setVisibility(View.VISIBLE);
+        StarRatingBaseFragment.textView2.setText(GetTitle());
         mListView = (ListView) view.findViewById(R.id.starListView);
-        mListView.setAdapter(new AdapterStarRatingLevelThree(getActivity(),levelThrees));
+        mListView.setAdapter(new AdapterStarRatingLevelThree(getActivity(), levelThrees));
         return view;
+    }
+    public String GetTitle(){
+        String value = "";
+        if(StarRatingBaseFragment.textLevel2 != ""){
+            value = " "+StarRatingBaseFragment.arrow+
+                    StarRatingBaseFragment.textLevel2;
+        }
+        return value;
+    }
+
+    @Override
+    public void onDestroy() {
+        StarRatingBaseFragment.textView2.setVisibility(View.GONE);
+        StarRatingBaseFragment.textLevel2="";
+        super.onDestroy();
     }
 }

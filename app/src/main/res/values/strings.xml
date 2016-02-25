@@ -146,6 +146,7 @@
     <string name="delete_task">Delete Task?</string>
     <string name="task_deleted">Task Deleted</string>
     <string name="update_progress">Progress Updated</string>
+    <string name="update_comment">Comment Updated</string>
     <string name="task_name">Task Name</string>
     <string name="task_details">Task Details:</string>
     <string name="task_added">Added</string>
@@ -177,4 +178,10 @@
     <string name="user_role">User Role</string>
     <string name="logout">Logout</string>
     <string name="change_theme">Change Theme</string>
+
+    <!-- Star Rating Strings -->
+    <string name="ratingPrimaryStage">RatingPrimaryStage</string>
+    <string name="ratingDevelopmentStage">RatingDevelopmentStage</string>
+    <string name="ratingMaturityStage">RatingMaturityStage</string>
+    <string name="ratingLeadingStage">RatingLeadingStage</string>
 </resources>

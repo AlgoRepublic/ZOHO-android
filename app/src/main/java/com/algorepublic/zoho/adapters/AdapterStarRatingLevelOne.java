@@ -58,8 +58,9 @@ public class AdapterStarRatingLevelOne extends BaseAdapter {
         aq.id(R.id.listClick).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                StarRatingBaseFragment.textLevel1= levelOnes.get(position).getTitle();
                 callFragmentWithBackStack(R.id.starContainer, StarRatingLevelTwoFragment.
-                        newInstance(levelOnes.get(position).getLevelTwos()),"StarRatingLevelTwoFragment");
+                        newInstance(levelOnes.get(position).getLevelTwos()), "StarRatingLevelTwoFragment");
             }
         });
         return convertView;

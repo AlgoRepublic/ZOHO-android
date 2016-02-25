@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
 import com.algorepublic.zoho.R;
+import com.algorepublic.zoho.StarRatingFragments.StarRatingBaseFragment;
 import com.algorepublic.zoho.StarRatingFragments.StarRatingLevelThreeFragment;
 import com.algorepublic.zoho.StarRatingFragments.StarRatingLevelTwoFragment;
 import com.algorepublic.zoho.utils.BaseClass;
@@ -56,6 +57,7 @@ public class AdapterStarRatingLevelTwo extends BaseAdapter {
         aq.id(R.id.listClick).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                StarRatingBaseFragment.textLevel2= levelTwos.get(position).getTitle();
                 callFragmentWithBackStack(R.id.starContainer, StarRatingLevelThreeFragment.
                         newInstance(levelTwos.get(position).getLevelThrees()), "StarRatingLevelThreeFragment");
             }

@@ -1,5 +1,10 @@
 package com.algorepublic.zoho.adapters;
 
+import android.support.v4.util.Pair;
+
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by android on 2/15/16.
  */
@@ -20,6 +25,15 @@ public class DeptList {
         return DeptName;
     }
 
+
+    public void setProjectsLists(ArrayList<ProjectsList> projectsLists){
+        this.projectsLists.addAll(projectsLists);
+    }
+    public List<ProjectsList> getProjectList(){
+        return projectsLists;
+    }
+
     private String DeptName;
     private String DeptID;
+    private List<ProjectsList> projectsLists = new ArrayList<>();
 }

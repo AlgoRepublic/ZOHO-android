@@ -5,6 +5,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,6 +33,7 @@ public class AdapterStarRatingQuestions extends BaseAdapter {
     StarRatingService service;
     private LayoutInflater l_Inflater;
     AQuery aq;
+    int multiple=5;
 
     public AdapterStarRatingQuestions(Context mContext) {
         this.mContext = mContext;
@@ -68,17 +70,11 @@ public class AdapterStarRatingQuestions extends BaseAdapter {
         aq.id(R.id.percent_text).text(StarRatingLevelQuestionsFragment.Questions
                 .get(position).getProgress() + "%");
         RatingBar ratingBar  =(RatingBar) convertView.findViewById(R.id.star_rating);
-        ratingBar.setProgress(GetStarValue(StarRatingLevelQuestionsFragment.Questions
-        .get(position).getProgress()));
-        aq.id(R.id.comment_edit).clicked(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                View view = StarRatingLevelQuestionsFragment.listView.getChildAt(position);
-                EditText editText = (EditText) view.findViewById(R.id.comment_edittext);
-                editText.setEnabled(true);
-                editText.requestFocus();
-            }
-        });
+        ratingBar.setRating(GetStarValue(StarRatingLevelQuestionsFragment.Questions
+                .get(position).getProgress()));
+        aq.id(R.id.devstage_text).text(GetStageValue(GetStarValue(StarRatingLevelQuestionsFragment.Questions
+                .get(position).getProgress())));
+
         aq.id(R.id.comment_edittext).getEditText().addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -100,14 +96,17 @@ public class AdapterStarRatingQuestions extends BaseAdapter {
         aq.id(R.id.seekBar).getSeekBar().setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                progress = ((int) Math.round(progress / multiple)) * multiple;
                 View view = StarRatingLevelQuestionsFragment.listView.getChildAt(position);
                 AQuery aq= new AQuery(view);
+                aq.id(R.id.seekBar).progress(progress);
                 aq.id(R.id.percent_text).getTextView().setText(progress + "%");
                 RatingBar ratingBar  =(RatingBar) view.findViewById(R.id.star_rating);
-                ratingBar.setProgress(progress);
+                ratingBar.setRating(GetStarValue(progress));
+                aq.id(R.id.devstage_text).text(GetStageValue(progress));
                 service.StarUpdateProgress(StarRatingLevelQuestionsFragment.Questions
                         .get(position).getID(), StarRatingLevelQuestionsFragment.Questions
-                        .get(position).getProgress(), true, new CallBack(AdapterStarRatingQuestions.this, "UpdateComment"));
+                        .get(position).getProgress(), true, new CallBack(AdapterStarRatingQuestions.this, "UpdateProgress"));
             }
 
             @Override
@@ -124,7 +123,17 @@ public class AdapterStarRatingQuestions extends BaseAdapter {
     }
     public void UpdateComment(Object caller, Object model) {
         GeneralModel.getInstance().setList((GeneralModel) model);
-        if (GeneralModel.getInstance().responseCode.equalsIgnoreCase("100")) {
+        if (GeneralModel.getInstance().responseObject == true) {
+            Snackbar.make(((AppCompatActivity) mContext).findViewById(android.R.id.content),
+                    mContext.getString(R.string.update_comment), Snackbar.LENGTH_SHORT).show();
+        } else {
+            Snackbar.make(((AppCompatActivity) mContext).findViewById(android.R.id.content),
+                    mContext.getString(R.string.projects_list_empty), Snackbar.LENGTH_SHORT).show();
+        }
+    }
+    public void UpdateProgress(Object caller, Object model) {
+        GeneralModel.getInstance().setList((GeneralModel) model);
+        if (GeneralModel.getInstance().responseObject == true) {
             Snackbar.make(((AppCompatActivity) mContext).findViewById(android.R.id.content),
                     mContext.getString(R.string.update_progress), Snackbar.LENGTH_SHORT).show();
         } else {
@@ -152,6 +161,20 @@ public class AdapterStarRatingQuestions extends BaseAdapter {
         else if (progress > 80 && progress <= 100) {
             starValue = 5;
         }
+        return starValue;
+    }
+    public String GetStageValue(int progress)
+    {
+        String starValue = "";
+        if (progress >= 0 && progress <= 25)
+            starValue =  mContext.getString(R.string.ratingPrimaryStage);
+        else if (progress > 25 && progress <= 50)
+            starValue =  mContext.getString(R.string.ratingDevelopmentStage);
+        else if (progress > 50 && progress <= 75)
+            starValue =  mContext.getString(R.string.ratingMaturityStage);
+        else
+            starValue =  mContext.getString(R.string.ratingLeadingStage);
+
         return starValue;
     }
 }

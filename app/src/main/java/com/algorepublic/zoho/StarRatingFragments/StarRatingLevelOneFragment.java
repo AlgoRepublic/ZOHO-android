@@ -48,8 +48,11 @@ public class StarRatingLevelOneFragment extends BaseFragment {
         View view = inflater.inflate(R.layout.fragment_star_rating, container, false);
         mListView = (ListView) view.findViewById(R.id.starListView);
         service = new StarRatingService(getActivity());
-        service.getStarRatingHeads_API("en-Us", true, new CallBack(StarRatingLevelOneFragment.this, "StarRatingHeads"));
-
+        if(levelOneHead.size()==0) {
+            service.getStarRatingHeads_API("en-Us", true, new CallBack(StarRatingLevelOneFragment.this, "StarRatingHeads"));
+        }else{
+            mListView.setAdapter(new AdapterStarRatingLevelOne(getActivity(),levelOneHead));
+        }
         return view;
     }
 
@@ -57,7 +60,7 @@ public class StarRatingLevelOneFragment extends BaseFragment {
         StarRatingModel.getInstance().setList((StarRatingModel) model);
         if (StarRatingModel.getInstance().responseCode == 100) {
             GetListHeads();
-            mListView.setAdapter(new AdapterStarRatingLevelOne(getActivity(),levelOneHead));
+            mListView.setAdapter(new AdapterStarRatingLevelOne(getActivity(), levelOneHead));
         }
         else
         {

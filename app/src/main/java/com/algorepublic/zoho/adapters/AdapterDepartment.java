@@ -27,13 +27,14 @@ import com.algorepublic.zoho.R;
 import com.woxthebox.draglistview.DragItemAdapter;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class AdapterDepartment extends DragItemAdapter<Pair<Long, String>, AdapterDepartment.ViewHolder> {
+public class AdapterDepartment extends DragItemAdapter<Pair<Long, ProjectsList>, AdapterDepartment.ViewHolder> {
 
     private int mLayoutId;
     private int mGrabHandleId;
 
-    public AdapterDepartment(ArrayList<Pair<Long, String>> list, int layoutId, int grabHandleId, boolean dragOnLongPress) {
+    public AdapterDepartment(List<Pair<Long, ProjectsList>> list, int layoutId, int grabHandleId, boolean dragOnLongPress) {
         super(dragOnLongPress);
         mLayoutId = layoutId;
         mGrabHandleId = grabHandleId;
@@ -50,22 +51,22 @@ public class AdapterDepartment extends DragItemAdapter<Pair<Long, String>, Adapt
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         super.onBindViewHolder(holder, position);
-        String text = mItemList.get(position).second;
+        String text = "item";
         holder.mText.setText(text);
         holder.itemView.setTag(text);
     }
 
     @Override
     public long getItemId(int position) {
-        return mItemList.get(position).first;
+        return position;
     }
 
-    public class ViewHolder extends DragItemAdapter<Pair<Long, String>, ViewHolder>.ViewHolder {
+    public class ViewHolder extends DragItemAdapter<Pair<Long, ProjectsList>, ViewHolder>.ViewHolder {
         public TextView mText;
 
         public ViewHolder(final View itemView) {
             super(itemView, mGrabHandleId);
-            mText = (TextView) itemView.findViewById(R.id.text);
+            mText = (TextView) itemView.findViewById(R.id.project_title);
         }
 
         @Override
