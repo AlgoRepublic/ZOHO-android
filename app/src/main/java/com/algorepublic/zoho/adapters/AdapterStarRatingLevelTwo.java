@@ -1,93 +1,74 @@
 package com.algorepublic.zoho.adapters;
 
 import android.content.Context;
+import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseExpandableListAdapter;
-import android.widget.TextView;
+import android.widget.BaseAdapter;
 
 import com.algorepublic.zoho.R;
-import com.algorepublic.zoho.fragments.StarRatingFragment;
-import com.algorepublic.zoho.utils.CustomExpListView;
+import com.algorepublic.zoho.StarRatingFragments.StarRatingBaseFragment;
+import com.algorepublic.zoho.StarRatingFragments.StarRatingLevelThreeFragment;
+import com.algorepublic.zoho.StarRatingFragments.StarRatingLevelTwoFragment;
+import com.algorepublic.zoho.utils.BaseClass;
+import com.androidquery.AQuery;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
-public class AdapterStarRatingLevelTwo extends BaseExpandableListAdapter {
-    private final Context mContext;
-    ArrayList<StarRatingHeadsLevelTwo> levelTwos =  new ArrayList<>();
+/**
+ * Created by android on 2/24/16.
+ */
+public class AdapterStarRatingLevelTwo extends BaseAdapter {
+    LayoutInflater l_Inflater;
+    Context ctx;
+    BaseClass baseClass;
+    AQuery aq;
+    static ArrayList<StarRatingHeadsLevelTwo> levelTwos =new ArrayList<>();
 
-    public AdapterStarRatingLevelTwo(Context mContext,ArrayList<StarRatingHeadsLevelTwo> twos) {
-        this.mContext = mContext;
+    public AdapterStarRatingLevelTwo(Context context, ArrayList<StarRatingHeadsLevelTwo> twos) {
         levelTwos.addAll(twos);
+        l_Inflater = LayoutInflater.from(context);
+        this.ctx = context;
+        baseClass = ((BaseClass) ctx.getApplicationContext());
     }
     @Override
-    public Object getChild(int groupPosition, int childPosition) {
-        return childPosition;
-    }
-
-    @Override
-    public long getChildId(int groupPosition, int childPosition) {
-        return childPosition;
-    }
-
-    @Override
-    public View getChildView(int groupPosition, int childPosition,
-                             boolean isLastChild, View convertView, ViewGroup parent) {
-        final CustomExpListView secondLevelExpListView = new CustomExpListView(this.mContext);
-        secondLevelExpListView.setAdapter(new AdapterStarRatingLevelThree(this.mContext,levelTwos.get(childPosition).getLevelThrees()));
-        secondLevelExpListView.setGroupIndicator(null);
-
-        return secondLevelExpListView;
-    }
-
-    @Override
-    public int getChildrenCount(int groupPosition) {
-        return 1;
-    }
-
-    @Override
-    public Object getGroup(int groupPosition) {
-        return levelTwos.get(groupPosition);
-    }
-
-    @Override
-    public int getGroupCount() {
+    public int getCount() {
         return levelTwos.size();
     }
 
     @Override
-    public long getGroupId(int groupPosition) {
-        return groupPosition;
+    public Object getItem(int position) {
+        return levelTwos.get(position);
     }
 
     @Override
-    public View getGroupView(int groupPosition, boolean isExpanded,
-                             View convertView, ViewGroup parent) {
-        if (convertView == null) {
-            LayoutInflater layoutInflater = (LayoutInflater) this.mContext
-                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = layoutInflater.inflate(R.layout.drawer_list_level_two, parent, false);
-        }
-        TextView lblListHeader = (TextView) convertView
-                .findViewById(R.id.lblListHeader);
-        lblListHeader.setText(levelTwos.get(groupPosition).getTitle());
+    public long getItemId(int position) {
+        return position;
+    }
+
+    @Override
+    public View getView(final int position, View convertView, ViewGroup parent) {
+        convertView = l_Inflater.inflate(R.layout.drawer_list_level_one, null);
+        aq = new AQuery(convertView);
+        aq.id(R.id.lblListHeader).text(levelTwos.get(position).getTitle());
+        aq.id(R.id.listClick).clicked(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                StarRatingBaseFragment.textLevel2= levelTwos.get(position).getTitle();
+                callFragmentWithBackStack(R.id.starContainer, StarRatingLevelThreeFragment.
+                        newInstance(levelTwos.get(position).getLevelThrees()), "StarRatingLevelThreeFragment");
+            }
+        });
         return convertView;
     }
-
-    @Override
-    public boolean hasStableIds() {
-        return true;
-    }
-
-    @Override
-    public boolean isChildSelectable(int groupPosition, int childPosition) {
-        return true;
+    public void callFragmentWithBackStack(int containerId, Fragment fragment, String tag){
+        ((AppCompatActivity)ctx).getSupportFragmentManager()
+                .beginTransaction()
+                .replace(containerId, fragment, tag)
+                .addToBackStack(null)
+                .commit();
     }
 }

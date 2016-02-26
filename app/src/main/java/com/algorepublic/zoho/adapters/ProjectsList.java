@@ -1,9 +1,11 @@
 package com.algorepublic.zoho.adapters;
 
+import android.support.v4.util.Pair;
+
 /**
  * Created by android on 2/2/16.
  */
-public class ProjectsList {
+public class ProjectsList  {
 
 
     public void setCompOrDeptID(String compOrDeptID){
@@ -93,7 +95,6 @@ public class ProjectsList {
     public void setTotalMilestones(String totalMilestones) {
         this.totalMilestones = totalMilestones;
     }
-
     public String getTotalUsers() {
         return totalUsers;
     }

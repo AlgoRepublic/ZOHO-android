@@ -32,7 +32,6 @@ import com.flyco.dialog.widget.NormalDialog;
 import java.util.ArrayList;
 import java.util.Collections;
 
-import se.emilsjolander.stickylistheaders.StickyListHeadersAdapter;
 import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
 
 /**
@@ -82,12 +81,7 @@ public class DocumentsListFragment extends BaseFragment {
                 callForDocsSorting();
             }
         });
-        aq.id(R.id.delete).clicked(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                callForDocsDelete(getActivity().getResources().getString(R.string.delete_doc));
-            }
-        });
+
         deleteDocsList.clear();
         baseClass = ((BaseClass) getActivity().getApplicationContext());
         setHasOptionsMenu(true);
@@ -101,6 +95,7 @@ public class DocumentsListFragment extends BaseFragment {
                 callFragmentWithBackStack(R.id.container,  DocsPreviewFragment.newInstance(generalDocsList.get(position)), "DocsPreview");
             }
         });
+        applyLightBackground(aq.id(R.id.layout_bottom).getView(), baseClass);
         return view;
     }
 
@@ -153,51 +148,7 @@ public class DocumentsListFragment extends BaseFragment {
         }
         return super.onOptionsItemSelected(item);
     }
-    private void callForDocsDelete(String content) {
-        final NormalDialog dialog = new NormalDialog(getActivity());
-        dialog.isTitleShow(false)//
-                .bgColor(getResources().getColor(R.color.colorBaseWrapper))//
-                .cornerRadius(5)//
-                .content(content)//
-                .contentGravity(Gravity.CENTER)//
-                .contentTextColor(getResources().getColor(R.color.colorBaseHeader))//
-                .dividerColor(getResources().getColor(R.color.colorContentWrapper))//
-                .btnTextSize(15.5f, 15.5f)//
-                .btnTextColor(getResources().getColor(R.color.colorBaseHeader)
-                        , getResources().getColor(R.color.colorBaseHeader))//
-                .btnPressColor(getResources().getColor(R.color.colorBaseMenu))//
-                .widthScale(0.85f)//
-                .showAnim(new BounceLeftEnter())//
-                .dismissAnim(new SlideRightExit())//
-                .show();
 
-        dialog.setOnBtnClickL(
-                new OnBtnClickL() {
-                    @Override
-                    public void onBtnClick() {
-                        dialog.dismiss();
-                    }
-                },
-                new OnBtnClickL() {
-                    @Override
-                    public void onBtnClick() {
-                        dialog.dismiss();
-                        service.deleteDocument(deleteDocsList
-                                , true, new CallBack(DocumentsListFragment.this, "DeleteDoc"));
-                    }
-                });
-    }
-    public void DeleteDoc(Object caller, Object model) {
-        GeneralModel.getInstance().setList((GeneralModel) model);
-        if (GeneralModel.getInstance().responseObject==true) {
-            UpdatedAfterDelete();
-            Snackbar.make(getView(), getString(R.string.doc_deleted), Snackbar.LENGTH_SHORT).show();
-        }
-        else
-        {
-            Snackbar.make(getView(), getString(R.string.invalid_credential), Snackbar.LENGTH_SHORT).show();
-        }
-    }
     public void callForDocsSorting(){
         String[] menuItems = {"All Files","Pictures","Videos","Favorites"};
         final ActionSheetDialog dialog = new ActionSheetDialog(getActivity(),menuItems, getView());
@@ -238,7 +189,7 @@ public class DocumentsListFragment extends BaseFragment {
     public void SetAdapterList(){
         if (DocumentsListModel.getInstance().responseCode == 100) {
             listView.setAreHeadersSticky(true);
-            listView.setAdapter(new AdapterDocumentsList(getActivity(), generalDocsList));
+            listView.setAdapter(new AdapterDocumentsList(getActivity(),-1, generalDocsList));
         }
     }
     public void DocumentsList(Object caller, Object model) {
@@ -303,22 +254,7 @@ public class DocumentsListFragment extends BaseFragment {
             }
         }
     }
-    public void UpdatedAfterDelete(){
-        ArrayList<DocumentsList> arrayList = new ArrayList<>();
-        arrayList.addAll(generalDocsList);
-        generalDocsList.clear();
-        for(int loop=0;loop<deleteDocsList.size();loop++)
-        {
-            for (int loop1 = 0; loop1 < arrayList.size(); loop1++) {
-                if (deleteDocsList.get(loop) != arrayList.get(loop1).getID())
-                {
-                    generalDocsList.add(arrayList.get(loop1));
-                }
-            }
-        }
-        deleteDocsList.clear();
-        SetAdapterList();
-    }
+
     public boolean isLoaded(){
         Boolean isloading=false;
         if(allDocsList.size()==0)

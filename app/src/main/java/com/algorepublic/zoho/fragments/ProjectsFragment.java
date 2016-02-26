@@ -1,12 +1,10 @@
 package com.algorepublic.zoho.fragments;
 
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -14,10 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.algorepublic.zoho.Models.AllProjectsModel;
@@ -151,6 +146,7 @@ public class ProjectsFragment extends BaseFragment{
         service.getProjectsByClient_API(baseClass.getUserId(), true, new CallBack(this, "ProjectsByClient"));
         service.getProjectsByDepartment(baseClass.getUserId(),
                 true, new CallBack(this, "ProjectsByDepartment"));
+        applyLightBackground(aq.id(R.id.sort).getView(), baseClass);
     }
     public void AllProjects(Object caller, Object model) {
         AllProjectsModel.getInstance().setList((AllProjectsModel) model);
@@ -182,7 +178,6 @@ public class ProjectsFragment extends BaseFragment{
     public void AddAllProjects(){
         allProjectsList.clear();
         for (int loop = 0; loop < AllProjectsModel.getInstance().responseData.size(); loop++) {
-            for(int loop1=0;loop1<AllProjectsModel.getInstance().responseData.size();loop1++){
                 ProjectsList projectsList = new ProjectsList();
                 projectsList.setCompOrDeptName("");
                 projectsList.setCompOrDeptID("1");
@@ -197,7 +192,6 @@ public class ProjectsFragment extends BaseFragment{
                 projectsList.setDeleted(AllProjectsModel.getInstance().responseData.get(loop).IsDeleted);
                 projectsList.setPrivate(AllProjectsModel.getInstance().responseData.get(loop).Isprivate);
                 allProjectsList.add(projectsList);
-            }
         }
         SetGeneralClientAdapter();
     }

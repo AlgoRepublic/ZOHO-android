@@ -5,13 +5,19 @@
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
         <item name="colorPrimary">@color/colorPrimaryBlue</item>
-        <item name="colorPrimaryDark">@color/blue</item>
+        <item name="android:colorPrimaryDark">@color/blue</item>
         <item name="android:colorBackground">@color/colorBaseWrapperBlue</item>
         <item name="android:colorForeground">@color/colorPrimaryBlue</item>
         <item name="colorAccent">@color/colorPrimaryBlue</item>
         <item name="checkboxStyle">@style/blueCheckBoxStyle</item>
         <item name="android:textViewStyle">@style/blueTextView</item>
-        <item name="android:radioButtonStyle">@style/blueRadioButton</item>
+        <item name="radioButtonStyle">@style/blueRadioButton</item>
+        <item name="seekBarStyle">@style/blueSeekBar</item>
+        <item name="android:buttonStyle">@style/blueButton</item>
+    </style>
+
+    <style name="blueButton" parent="@android:style/Widget.Button">
+        <item name="android:background">@color/colorSecondaryBlue</item>
     </style>
 
     <style name="blueRadioButton" parent="@android:style/Widget.CompoundButton.RadioButton">
@@ -24,6 +30,18 @@
     </style>
     <style name="blueTextView" parent="@android:style/Widget.TextView">
         <item name="android:textColor">@color/colorPrimaryBlue</item>
+    </style>
+
+    <style name="blueSeekBar" parent="@android:style/Widget.SeekBar">
+        <item name="android:indeterminateOnly">false</item>
+        <item name="android:progressDrawable">@drawable/progress_horizontal</item>
+        <item name="android:indeterminateDrawable">@drawable/progress_horizontal</item>
+        <item name="android:thumb">@drawable/thumb_image</item>
+        <item name="android:thumbTint">@color/colorPrimaryBlue</item>
+        <item name="android:progressTint">@color/colorPrimaryBlue</item>
+        <item name="android:foreground">@color/colorPrimaryBlue</item>
+        <item name="android:minHeight">6dip</item>
+        <item name="android:maxHeight">6dip</item>
     </style>
 
 
@@ -40,6 +58,12 @@
         <item name="colorAccent">@color/colorBaseHeader</item>
         <item name="checkboxStyle">@style/blackCheckBoxStyle</item>
         <item name="android:textViewStyle">@style/blackTextView</item>
+        <item name="seekBarStyle">@style/blackSeekBar</item>
+        <item name="android:buttonStyle">@style/blackButton</item>
+    </style>
+
+    <style name="blackButton" parent="@android:style/Widget.Button">
+        <item name="android:background">@color/colorContentWrapper</item>
     </style>
 
     <style name="blackCheckBoxStyle" parent="@android:style/Widget.CompoundButton.CheckBox">
@@ -56,16 +80,20 @@
     </style>
 
 
-    <style name="tallerBarStyle" parent="@android:style/Widget.SeekBar">
+    <style name="blackSeekBar" parent="@android:style/Widget.SeekBar">
         <item name="android:indeterminateOnly">false</item>
         <item name="android:progressDrawable">@drawable/progress_horizontal</item>
         <item name="android:indeterminateDrawable">@drawable/progress_horizontal</item>
+        <item name="android:thumb">@drawable/thumb_image</item>
+        <item name="android:thumbTint">@color/colorBaseHeader</item>
+        <item name="android:progressTint">@color/colorBaseHeader</item>
+        <item name="android:foreground">@color/colorBaseHeader</item>
         <item name="android:minHeight">6dip</item>
         <item name="android:maxHeight">6dip</item>
     </style>
 
 
-     <!--not sure yet-->
+    <!--not sure yet-->
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>

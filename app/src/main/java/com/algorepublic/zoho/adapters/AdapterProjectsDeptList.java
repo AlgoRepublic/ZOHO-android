@@ -103,7 +103,7 @@ public class AdapterProjectsDeptList extends BaseAdapter implements StickyListHe
                 ProjectsFragment.listViewDept.setSelection(position);
             }
         });
-        aq.id(R.id.project_edit).clicked(new View.OnClickListener() {
+        aq.id(R.id.btEdit).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (!baseClass.getSelectedProject().equalsIgnoreCase("0")) {
@@ -113,12 +113,12 @@ public class AdapterProjectsDeptList extends BaseAdapter implements StickyListHe
             }
         });
 
-//        aq.id(R.id.project_delete).clicked(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                NormalDialogCustomAttr("Delete Project?", position);
-//            }
-//        });
+        aq.id(R.id.btDelete).clicked(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NormalDialogCustomAttr("Delete Project?", position);
+            }
+        });
 //        Animation animation = AnimationUtils.loadAnimation(ctx, (position > lastPosition) ? R.anim.up_from_bottom : R.anim.down_from_top);
 //        convertView.startAnimation(animation);
         return convertView;
