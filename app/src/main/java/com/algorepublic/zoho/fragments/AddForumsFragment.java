@@ -15,8 +15,8 @@ import android.widget.Toast;
 import com.algorepublic.zoho.Models.AddforumModel;
 import com.algorepublic.zoho.Models.CreateForumModel;
 import com.algorepublic.zoho.R;
-import com.algorepublic.zoho.services.AddForumService;
 import com.algorepublic.zoho.services.CallBack;
+import com.algorepublic.zoho.services.ForumService;
 import com.algorepublic.zoho.utils.BaseClass;
 import com.androidquery.AQuery;
 
@@ -32,7 +32,7 @@ public class AddForumsFragment extends BaseFragment{
     AQuery aq;
     BaseClass baseClass;
     NiceSpinner owner_list;
-    AddForumService service;
+    ForumService service;
     LinkedList<String> userList;
 
     public static AddForumsFragment newInstance() {
@@ -50,7 +50,7 @@ public class AddForumsFragment extends BaseFragment{
         setHasOptionsMenu(true);
         baseClass = ((BaseClass) getActivity().getApplicationContext());
         owner_list = (NiceSpinner) view.findViewById(R.id.forum_list);
-        service = new AddForumService(getActivity());
+        service = new ForumService(getActivity());
         service.getCategoryList("4", true, new CallBack(AddForumsFragment.this, "GetAllUsers"));
 
         return view;
@@ -72,8 +72,7 @@ public class AddForumsFragment extends BaseFragment{
         }
     }
 
-    public void CreateProject(){
-        AddForumService service = new AddForumService(getActivity());
+    public void CreateForum(){
 
         Log.e("ProjectId",baseClass.getSelectedProject());
         if (baseClass.getSelectedProject()!="0") {
@@ -117,7 +116,7 @@ public class AddForumsFragment extends BaseFragment{
                     Snackbar.make(getView(),"Please Add Forum Description",Snackbar.LENGTH_SHORT).show();
                     return false;
                 }
-                CreateProject();
+                CreateForum();
                 break;
         }
         return super.onOptionsItemSelected(item);

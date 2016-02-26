@@ -38,6 +38,7 @@ public class Constants {
 	public static String TaskAttachments_API = BASE_URL+ "/Task/AttachmentList"; //taskID
 	public static String GetForumsList_API = BASE_URL+ "/Forum/GetListByProjectID?";
 	public static String GetForumDetail_API = BASE_URL+ "/Forum/GetById?";
+	public static String DeleteForum_API = BASE_URL+ "/Forum/Delete?"; //id
 	public static String GetDocuments_API = BASE_URL+ "/Document/GetListByProjectID?"; //projectID
 	public static String DeleteDocuments_API = BASE_URL+ "/Document/DeleteFile?"; //fileID
 	public static String UploadDocumentsByProject_API = BASE_URL+ "/Document/FileUpload?"; //fileObj,files,folderID

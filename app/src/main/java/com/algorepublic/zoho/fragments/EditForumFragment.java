@@ -2,16 +2,22 @@ package com.algorepublic.zoho.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.algorepublic.zoho.Models.AddforumModel;
+import com.algorepublic.zoho.Models.CreateForumModel;
+import com.algorepublic.zoho.Models.ForumsModel;
 import com.algorepublic.zoho.R;
-import com.algorepublic.zoho.services.AddForumService;
 import com.algorepublic.zoho.services.CallBack;
+import com.algorepublic.zoho.services.ForumService;
 import com.algorepublic.zoho.utils.BaseClass;
 import com.androidquery.AQuery;
 
@@ -28,25 +34,78 @@ public class EditForumFragment extends BaseFragment  {
     AQuery aq;
     BaseClass baseClass;
     NiceSpinner owner_list;
-    AddForumService service;
-    LinkedList userList;
+    ForumService service;
+    LinkedList<String> userList;
+    static int Pos;
 
-    public static EditForumFragment newInstance() {
+    public static EditForumFragment newInstance(int pos) {
+        Pos = pos;
         EditForumFragment fragment = new EditForumFragment();
 
         return fragment;
     }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_save_project, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.save_project:
+                if(aq.id(R.id.forum_title).getText().toString().isEmpty()){
+                    Snackbar.make(getView(), "Please Add Forum Name", Snackbar.LENGTH_SHORT).show();
+                    return false;
+                }
+                if(aq.id(R.id.forum_description).getText().toString().isEmpty()){
+                    Snackbar.make(getView(),"Please Add Forum Description",Snackbar.LENGTH_SHORT).show();
+                    return false;
+                }
+                UpdateForum();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+    public void UpdateForum(){
+
+        Log.e("ProjectId", baseClass.getSelectedProject());
+        if (!baseClass.getSelectedProject().equalsIgnoreCase("0")) {
+            service.updateForum(Integer.toString(ForumsModel.getInstance().responseObject.get(Pos).ID),
+                    aq.id(R.id.forum_title).getText().toString(),
+                    aq.id(R.id.forum_description).getText().toString(),
+                    baseClass.getSelectedProject(),
+                    true,
+                    true
+                    , AddforumModel.getInstance().responseObject.
+                            get(owner_list.getSelectedIndex()).ID,
+                    baseClass.getUserId(),
+                    true, new CallBack(EditForumFragment.this, "UpdateForum"));
+        }else{
+            Snackbar.make(getView(),"Please Select Project ",Snackbar.LENGTH_SHORT).show();
+        }
+    }
+
+    public void UpdateForum(Object caller, Object model){
+        CreateForumModel.getInstance().setList((CreateForumModel) model);
+        if (CreateForumModel.getInstance().responseObject != null ) {
+            Snackbar.make(getView(),"Forum Updated Successfully!",Snackbar.LENGTH_SHORT).show();
+        }else {
+            Toast.makeText(getActivity(), getString(R.string.forums_list_empty), Toast.LENGTH_SHORT).show();
+        }
+
+    }
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view  = inflater.inflate(R.layout.layout_editforums, container, false);
+        View view  = inflater.inflate(R.layout.layout_addforums, container, false);
 
         aq = new AQuery(getActivity(), view);
         setHasOptionsMenu(true);
         baseClass = ((BaseClass) getActivity().getApplicationContext());
         owner_list = (NiceSpinner) view.findViewById(R.id.forum_list);
-        service = new AddForumService(getActivity());
-        service.getCategoryList("4", true, new CallBack(EditForumFragment.this, "GetAllUsers"));
+        service = new ForumService(getActivity());
+        service.getCategoryList(baseClass.getSelectedProject(), true, new CallBack(EditForumFragment.this, "GetAllUsers"));
 
         return view;
     }
@@ -56,16 +115,31 @@ public class EditForumFragment extends BaseFragment  {
             userList= new LinkedList<>();
             for(int loop=0;loop<AddforumModel.getInstance().responseObject.size();loop++) {
                 userList.add(AddforumModel.getInstance().responseObject.get(loop).Title);
-                Log.e("S", "/" + AddforumModel.getInstance().responseObject.get(loop).Title);
             }
             owner_list.attachDataSource(userList);
+            UpdateValues();
         }
         else
         {
             Toast.makeText(getActivity(), getString(R.string.invalid_credential), Toast.LENGTH_SHORT).show();
         }
     }
+    public void UpdateValues(){
+        aq.id(R.id.lblListHeader).text("Edit Forum");
+        aq.id(R.id.forum_title).text(ForumsModel.getInstance().responseObject.get(Pos).title);
+        aq.id(R.id.content_description).text(ForumsModel.getInstance().responseObject.get(Pos).forumContent);
+        String ownername = ForumsModel.getInstance().responseObject.get(Pos).categoryName;
+        if (!ownername.equals(null)) {
+            for(int loop=0;loop<userList.size();loop++)
+            {
+                if(userList.get(loop).equalsIgnoreCase(ownername))
+                {
+                    owner_list.setSelectedIndex(loop);
+                }
+            }
+        }
 
+    }
 
 
 

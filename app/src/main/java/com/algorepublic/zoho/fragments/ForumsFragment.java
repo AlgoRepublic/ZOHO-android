@@ -8,7 +8,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -58,14 +57,9 @@ public class ForumsFragment extends BaseFragment{
         setHasOptionsMenu(true);
         aq = new AQuery(getActivity(), view);
         baseClass = ((BaseClass) getActivity().getApplicationContext());
-        aq.id(R.id.forums_list).itemClicked(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                callFragmentWithBackStack(R.id.container, ForumsDetailFragment.newInstance(position),"ForumsDetailFragment");
-            }
-        });
+
         ForumService service = new ForumService(getActivity());
-        service.getForumsList(4, true, new CallBack(ForumsFragment.this, "ForumListCallback"));
+        service.getForumsList(baseClass.getSelectedProject(), true, new CallBack(ForumsFragment.this, "ForumListCallback"));
 
         setHasOptionsMenu(true);
         getToolbar().setTitle(getString(R.string.forums));
