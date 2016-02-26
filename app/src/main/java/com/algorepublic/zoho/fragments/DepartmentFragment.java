@@ -40,6 +40,7 @@ public class DepartmentFragment extends BaseFragment{
     private BoardView mBoardView;
     ProjectsListService service;
     BaseClass baseClass;
+    private static int sCreatedItems = 0;
     static  ArrayList<DeptList> allDeptList = new ArrayList<>();
     static DepartmentFragment fragment;
 
@@ -51,7 +52,7 @@ public class DepartmentFragment extends BaseFragment{
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
     }
@@ -161,14 +162,15 @@ public class DepartmentFragment extends BaseFragment{
         for (int i = 0; i < mItemArrayParent.size(); i++) {
             mItemArray = new ArrayList<>();
             for (int loop=0;loop<mItemArrayParent.get(i).getProjectList().size();loop++) {
+                long id = sCreatedItems++;
                 ProjectsList  projectsList = mItemArrayParent.get(i).getProjectList().get(loop);
-                mItemArray.add(new Pair<>(Long.parseLong(Integer.toString(loop)),  projectsList));
+                mItemArray.add(new Pair<>(id,  projectsList));
             }
-            int addItems = mItemArray.size();
+
             AdapterDepartment listAdapter = new AdapterDepartment(mItemArray, R.layout.column_item, R.id.item_layout, true);
             View header = View.inflate(getActivity(), R.layout.column_header, null);
             ((TextView) header.findViewById(R.id.header)).setText(mItemArrayParent.get(i).getDeptName());
-            ((TextView) header.findViewById(R.id.header_count)).setText(Integer.toString(addItems));
+            ((TextView) header.findViewById(R.id.header_count)).setText(Integer.toString(mItemArray.size()));
             mBoardView.addColumnList(listAdapter, header, false);
         }
     }
