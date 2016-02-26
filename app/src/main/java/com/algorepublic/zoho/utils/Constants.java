@@ -45,4 +45,6 @@ public class Constants {
 	public static String CreateDepartment_API = BASE_URL+ "/Department/CreateDepartment?"; //Name, CreateBy
 	public static String UpdateDepartment_API = BASE_URL+ "/Department/UpdateDepartment?";
 	public static String DeleteDepartment_API = BASE_URL+ "/Department/DeleteDepartment?";
+    public static String AddNewForumPost_API=BASE_URL+"/Forum/AddNewForumPost?";
+
 }

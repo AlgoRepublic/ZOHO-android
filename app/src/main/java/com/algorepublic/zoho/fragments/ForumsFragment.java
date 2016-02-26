@@ -1,6 +1,5 @@
 package com.algorepublic.zoho.fragments;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -46,7 +45,7 @@ public class ForumsFragment extends BaseFragment{
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.add_project:
-                startActivity(new Intent(getActivity(), TaskAddUpdateFragment.class));
+                callFragmentWithBackStack(R.id.container, AddForumsFragment.newInstance(), "AddForumsFragment");
                 break;
         }
         return super.onOptionsItemSelected(item);
