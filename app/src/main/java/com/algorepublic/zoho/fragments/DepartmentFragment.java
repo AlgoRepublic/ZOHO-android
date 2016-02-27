@@ -17,8 +17,14 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.algorepublic.zoho.Models.ProjectsByDepartmentModel;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.adapters.AdapterDepartment;
+import com.algorepublic.zoho.adapters.DeptList;
+import com.algorepublic.zoho.adapters.ProjectsList;
+import com.algorepublic.zoho.services.CallBack;
+import com.algorepublic.zoho.services.ProjectsListService;
+import com.algorepublic.zoho.utils.BaseClass;
 import com.nineoldandroids.animation.ObjectAnimator;
 import com.woxthebox.draglistview.BoardView;
 import com.woxthebox.draglistview.DragItem;
@@ -29,10 +35,13 @@ import java.util.ArrayList;
  * Created by android on 2/24/16.
  */
 public class DepartmentFragment extends BaseFragment{
-    private static int sCreatedItems = 0;
     private BoardView mBoardView;
-    private int mColumns;
     static DepartmentFragment fragment;
+    private ArrayList<DeptList> allDeptList = new ArrayList<>();
+    private ArrayList<ProjectsList> projectsLists = new ArrayList<>();
+
+    private ProjectsListService service;
+    private BaseClass baseClass;
 
     public static DepartmentFragment newInstance() {
         fragment = new DepartmentFragment();
@@ -42,12 +51,16 @@ public class DepartmentFragment extends BaseFragment{
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setHasOptionsMenu(true);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.board_layout, container, false);
+
+        baseClass = ((BaseClass) getActivity().getApplicationContext());
+        service = new ProjectsListService(getActivity());
+        service.getProjectsByDepartment(baseClass.getUserId(),
+                true, new CallBack(this, "ProjectsByDepartment"));
 
         mBoardView = (BoardView) view.findViewById(R.id.board_view);
         mBoardView.setSnapToColumnsWhenScrolling(true);
@@ -62,9 +75,9 @@ public class DepartmentFragment extends BaseFragment{
 
             @Override
             public void onItemChangedColumn(int oldColumn, int newColumn) {
-                TextView itemCount1 = (TextView) mBoardView.getHeaderView(oldColumn).findViewById(R.id.item_count);
+                TextView itemCount1 = (TextView) mBoardView.getHeaderView(oldColumn).findViewById(R.id.header_count);
                 itemCount1.setText(Integer.toString(mBoardView.getAdapter(oldColumn).getItemCount()));
-                TextView itemCount2 = (TextView) mBoardView.getHeaderView(newColumn).findViewById(R.id.item_count);
+                TextView itemCount2 = (TextView) mBoardView.getHeaderView(newColumn).findViewById(R.id.header_count);
                 itemCount2.setText(Integer.toString(mBoardView.getAdapter(newColumn).getItemCount()));
             }
 
@@ -78,84 +91,83 @@ public class DepartmentFragment extends BaseFragment{
         return view;
     }
 
+    public void ProjectsByDepartment(Object caller, Object model){
+        ProjectsByDepartmentModel.getInstance().setList((ProjectsByDepartmentModel) model);
+        if (ProjectsByDepartmentModel.getInstance().responseCode == 100
+                || ProjectsByDepartmentModel.getInstance().responseData.size() != 0) {
+            addColumnList();
+        } else {
+            Toast.makeText(getActivity(), getString(R.string.projects_list_empty), Toast.LENGTH_SHORT).show();
+        }
+    }
+    public void AddDepartmentProjects(){
+        allDeptList.clear();
+        for (int loop = 0; loop < ProjectsByDepartmentModel.getInstance().responseData.size(); loop++) {
+            DeptList deptList = new DeptList();
+            deptList.setDeptID(ProjectsByDepartmentModel.getInstance().responseData.get(loop).ID);
+            deptList.setDeptName(ProjectsByDepartmentModel.getInstance().responseData.get(loop).departmentName);
+
+            for(int loop1 = 0; loop1 < ProjectsByDepartmentModel.getInstance().responseData.get(loop).projects.size(); loop1++){
+                ProjectsList projectsList = new ProjectsList();
+                projectsList.setCompOrDeptID(ProjectsByDepartmentModel.getInstance().responseData.get(loop).ID);
+                projectsList.setProjectID(ProjectsByDepartmentModel.getInstance().responseData.get(loop).projects.get(loop1).projectID);
+                projectsList.setProjectName(ProjectsByDepartmentModel.getInstance().responseData.get(loop).projects.get(loop1).projectName);
+                projectsList.setOwnerID(ProjectsByDepartmentModel.getInstance().responseData.get(loop).projects.get(loop1).ownerID);
+                projectsList.setOwnerName(ProjectsByDepartmentModel.getInstance().responseData.get(loop).projects.get(loop1).ownerName);
+                projectsList.setProjectDesc(ProjectsByDepartmentModel.getInstance().responseData.get(loop).projects.get(loop1).description);
+                projectsList.setTotalTasks(ProjectsByDepartmentModel.getInstance().responseData.get(loop).projects.get(loop1).totalTasks);
+                projectsList.setTotalUsers(ProjectsByDepartmentModel.getInstance().responseData.get(loop).projects.get(loop1).usersCount);
+                projectsList.setTotalMilestones(ProjectsByDepartmentModel.getInstance().responseData.get(loop).projects.get(loop1).toalMilestones);
+                projectsList.setDeleted(ProjectsByDepartmentModel.getInstance().responseData.get(loop).projects.get(loop1).IsDeleted);
+                projectsList.setPrivate(ProjectsByDepartmentModel.getInstance().responseData.get(loop).projects.get(loop1).Isprivate);
+                projectsLists.add(projectsList);
+            }
+            allDeptList.add(deptList);
+        }
+        addColumnList();
+    }
+
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Board");
-
-        addColumnList();
-        addColumnList();
-        addColumnList();
-        addColumnList();
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(getString(R.string.departments));
     }
+
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.menu_board, menu);
+        inflater.inflate(R.menu.menu_tasklist, menu);
     }
 
-    @Override
-    public void onPrepareOptionsMenu(Menu menu) {
-        super.onPrepareOptionsMenu(menu);
-        menu.findItem(R.id.action_disable_drag).setVisible(mBoardView.isDragEnabled());
-        menu.findItem(R.id.action_enable_drag).setVisible(!mBoardView.isDragEnabled());
-    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.action_disable_drag:
-                mBoardView.setDragEnabled(false);
-                getActivity().invalidateOptionsMenu();
-                return true;
-            case R.id.action_enable_drag:
-                mBoardView.setDragEnabled(true);
-                getActivity().invalidateOptionsMenu();
-                return true;
-            case R.id.action_add_column:
-                addColumnList();
-                return true;
-            case R.id.action_remove_column:
-                mBoardView.removeColumn(0);
-                return true;
-            case R.id.action_clear_board:
-                mBoardView.clearBoard();
+            case R.id.add_project:
                 return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
+
     private void addColumnList() {
-        final ArrayList<Pair<Long, String>> mItemArray = new ArrayList<>();
-        int addItems = 15;
-        for (int i = 0; i < addItems; i++) {
-            long id = sCreatedItems++;
-            mItemArray.add(new Pair<>(id, "Item " + id));
-        }
-
-        final int column = mColumns;
-        final AdapterDepartment listAdapter = new AdapterDepartment(mItemArray, R.layout.column_item, R.id.item_layout, true);
-        final View header = View.inflate(getActivity(), R.layout.column_header, null);
-        ((TextView) header.findViewById(R.id.text)).setText("Column " + (mColumns + 1));
-        ((TextView) header.findViewById(R.id.item_count)).setText("" + addItems);
-        header.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                long id = sCreatedItems++;
-                Pair item = new Pair<>(id, "Test " + id);
-                mBoardView.addItem(column, 0, item, true);
-                //mBoardView.moveItem(4, 0, 0, true);
-                //mBoardView.removeItem(column, 0);
-                //mBoardView.moveItem(0, 0, 1, 3, false);
-                //mBoardView.replaceItem(0, 0, item1, true);
-                ((TextView) header.findViewById(R.id.item_count)).setText("" + mItemArray.size());
+        ArrayList<Pair<Long, String>> mItemArray;
+        int size = ProjectsByDepartmentModel.getInstance().responseData.size();
+        for (int i = 0; i < size; i++) {
+            mItemArray = new ArrayList<>();
+            int projectSize = ProjectsByDepartmentModel.getInstance().responseData.get(i).projects.size();
+            for (int loop = 0; loop < projectSize; loop++) {
+                mItemArray.add(new Pair<>(Long.valueOf(ProjectsByDepartmentModel.getInstance().responseData.get(i).projects.get(loop).projectID), ProjectsByDepartmentModel.getInstance().responseData.get(i).projects.get(loop).projectName));
             }
-        });
 
-        mBoardView.addColumnList(listAdapter, header, false);
-        mColumns++;
+            AdapterDepartment listAdapter = new AdapterDepartment(mItemArray, R.layout.column_item, R.id.item_layout, true);
+            View header = View.inflate(getActivity(), R.layout.column_header, null);
+            ((TextView) header.findViewById(R.id.header)).setText(ProjectsByDepartmentModel.getInstance().responseData.get(i).departmentName);
+            ((TextView) header.findViewById(R.id.header_count)).setText(ProjectsByDepartmentModel.getInstance().responseData.get(i).projects.size()+"");
+            mBoardView.addColumnList(listAdapter, header, false);
+        }
     }
 
     private static class MyDragItem extends DragItem {
@@ -166,8 +178,8 @@ public class DepartmentFragment extends BaseFragment{
 
         @Override
         public void onBindDragView(View clickedView, View dragView) {
-            CharSequence text = ((TextView) clickedView.findViewById(R.id.text)).getText();
-            ((TextView) dragView.findViewById(R.id.text)).setText(text);
+            CharSequence text = ((TextView) clickedView.findViewById(R.id.project_title)).getText();
+            ((TextView) dragView.findViewById(R.id.project_title)).setText(text);
             CardView dragCard = ((CardView) dragView.findViewById(R.id.card));
             CardView clickedCard = ((CardView) clickedView.findViewById(R.id.card));
 

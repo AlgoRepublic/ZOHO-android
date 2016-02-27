@@ -11,10 +11,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/include"
-        agendaCalendar:agendaCurrentDayTextColor="@color/colorContentWrapper"
-        agendaCalendar:calendarColor="@color/colorContentWrapper"
-        agendaCalendar:calendarCurrentDayTextColor="@color/colorBaseHeader"
         agendaCalendar:calendarDayTextColor="@color/theme_text_icons"
-        agendaCalendar:calendarHeaderColor="@color/colorBaseHeader"
         agendaCalendar:fabColor="@color/colorBaseHeader" />
 </RelativeLayout>

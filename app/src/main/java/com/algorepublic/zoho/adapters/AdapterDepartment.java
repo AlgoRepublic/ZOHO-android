@@ -53,6 +53,12 @@ public class AdapterDepartment extends DragItemAdapter<Pair<Long, String>, Adapt
         String text = mItemList.get(position).second;
         holder.mText.setText(text);
         holder.itemView.setTag(text);
+//        try{
+//            holder.mDesc.setText(Html.fromHtml(projects.get(position).description));
+//        }catch (NullPointerException npe){}
+//        holder.mTasks.setText(projects.get(position).totalTasks);
+//        holder.mUsers.setText(projects.get(position).usersCount);
+//        holder.mMilestones.setText(projects.get(position).toalMilestones);
     }
 
     @Override
@@ -62,10 +68,18 @@ public class AdapterDepartment extends DragItemAdapter<Pair<Long, String>, Adapt
 
     public class ViewHolder extends DragItemAdapter<Pair<Long, String>, ViewHolder>.ViewHolder {
         public TextView mText;
+//        public TextView mDesc;
+//        public TextView mTasks;
+//        public TextView mUsers;
+//        public TextView mMilestones;
 
         public ViewHolder(final View itemView) {
             super(itemView, mGrabHandleId);
-            mText = (TextView) itemView.findViewById(R.id.text);
+            mText = (TextView) itemView.findViewById(R.id.project_title);
+//            mDesc = (TextView) itemView.findViewById(R.id.project_desc);
+//            mUsers = (TextView) itemView.findViewById(R.id.task_alert);
+//            mTasks = (TextView) itemView.findViewById(R.id.users_alert);
+//            mMilestones = (TextView) itemView.findViewById(R.id.milestone_alert);
         }
 
         @Override

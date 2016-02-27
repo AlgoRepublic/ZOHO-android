@@ -1,17 +1,5 @@
 package com.github.tibolte.agendacalendarview.calendar;
 
-import com.github.tibolte.agendacalendarview.CalendarManager;
-import com.github.tibolte.agendacalendarview.R;
-import com.github.tibolte.agendacalendarview.calendar.weekslist.WeekListView;
-import com.github.tibolte.agendacalendarview.calendar.weekslist.WeeksAdapter;
-import com.github.tibolte.agendacalendarview.models.BaseCalendarEvent;
-import com.github.tibolte.agendacalendarview.models.CalendarEvent;
-import com.github.tibolte.agendacalendarview.models.DayItem;
-import com.github.tibolte.agendacalendarview.models.WeekItem;
-import com.github.tibolte.agendacalendarview.utils.BusProvider;
-import com.github.tibolte.agendacalendarview.utils.DateHelper;
-import com.github.tibolte.agendacalendarview.utils.Events;
-
 import android.content.Context;
 import android.support.v7.widget.LinearLayoutManager;
 import android.util.AttributeSet;
@@ -21,6 +9,17 @@ import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.github.tibolte.agendacalendarview.CalendarManager;
+import com.github.tibolte.agendacalendarview.R;
+import com.github.tibolte.agendacalendarview.calendar.weekslist.WeekListView;
+import com.github.tibolte.agendacalendarview.calendar.weekslist.WeeksAdapter;
+import com.github.tibolte.agendacalendarview.models.CalendarEvent;
+import com.github.tibolte.agendacalendarview.models.DayItem;
+import com.github.tibolte.agendacalendarview.models.WeekItem;
+import com.github.tibolte.agendacalendarview.utils.BusProvider;
+import com.github.tibolte.agendacalendarview.utils.DateHelper;
+import com.github.tibolte.agendacalendarview.utils.Events;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -55,6 +54,10 @@ public class CalendarView extends LinearLayout {
      * The current row displayed at top of the list
      */
     private int mCurrentListPosition;
+
+    public static String month;
+
+    public static TextView mTxtMonth;
 
     // region Constructors
 
@@ -94,6 +97,7 @@ public class CalendarView extends LinearLayout {
 
         mDayNamesHeader = (LinearLayout) findViewById(R.id.cal_day_names);
         mListViewWeeks = (WeekListView) findViewById(R.id.list_week);
+        mTxtMonth = (TextView) findViewById(R.id.month_label);
         mListViewWeeks.setLayoutManager(new LinearLayoutManager(getContext()));
         mListViewWeeks.setHasFixedSize(true);
         mListViewWeeks.setItemAnimator(null);
@@ -199,6 +203,7 @@ public class CalendarView extends LinearLayout {
             mListViewWeeks.setAdapter(mWeeksAdapter);
         }
         mWeeksAdapter.updateWeeksItems(weeks);
+        mTxtMonth.setText(month);
     }
 
     private void setUpHeader(Calendar today, SimpleDateFormat weekDayFormatter, Locale locale) {
