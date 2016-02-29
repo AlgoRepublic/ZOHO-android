@@ -128,6 +128,7 @@ public class AddProjectFragment extends BaseFragment {
         });
         aq = new AQuery(view);
         aq.id(R.id.public_radio).checked(true);
+        aq.id(R.id.lblListHeader).text(getString(R.string.new_project));
         setHasOptionsMenu(true);
         owner_list = (NiceSpinner) view.findViewById(R.id.owner_list);
         departments_list= (NiceSpinner) view.findViewById(R.id.departments_list);

@@ -149,6 +149,7 @@ public class EditProjectFragment extends BaseFragment {
             }
         });
         aq = new AQuery(getActivity(), view);
+        aq.id(R.id.lblListHeader).text(getString(R.string.edit_project));
         owner_list = (NiceSpinner) view.findViewById(R.id.owner_list);
         departments_list= (NiceSpinner) view.findViewById(R.id.departments_list);
         service = new TaskListService(getActivity());

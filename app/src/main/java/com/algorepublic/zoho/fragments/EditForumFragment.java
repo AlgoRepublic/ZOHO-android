@@ -101,6 +101,7 @@ public class EditForumFragment extends BaseFragment  {
         View view  = inflater.inflate(R.layout.layout_addforums, container, false);
 
         aq = new AQuery(getActivity(), view);
+        aq.id(R.id.lblListHeader).text(getString(R.string.edit_forum_post));
         setHasOptionsMenu(true);
         baseClass = ((BaseClass) getActivity().getApplicationContext());
         owner_list = (NiceSpinner) view.findViewById(R.id.forum_list);

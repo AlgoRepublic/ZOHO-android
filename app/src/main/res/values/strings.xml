@@ -76,6 +76,9 @@
     <string name="title_activity_milestone">MilestoneActivity</string>
     <string name="title_activity_settings">Settings</string>
     <string name="new_forum_post">New Forum Post</string>
+    <string name="edit_forum_post">Edit Forum Post</string>
+    <string name="new_project">New Project</string>
+    <string name="edit_project">Edit Project</string>
     <!-- Strings related to Settings -->
 
     <!-- Example General settings -->
