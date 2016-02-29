@@ -46,6 +46,9 @@ public class ForumsModel {
         @SerializedName("ForumComments")
         public String forumComments;
 
+        @SerializedName("CategoryName")
+        public String categoryName;
+
         @SerializedName("UpdatedAt")
         public String updatedAt;
 
@@ -54,6 +57,9 @@ public class ForumsModel {
 
         @SerializedName("UpdateBy")
         public String updateBy;
+
+        @SerializedName("CategoryID")
+        public Integer categoryID;
 
         @SerializedName("ID")
         public Integer ID;

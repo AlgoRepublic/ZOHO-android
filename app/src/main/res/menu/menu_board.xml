@@ -19,11 +19,11 @@
       tools:context=".MainActivity">
     <item
         android:id="@+id/action_disable_drag"
-        android:title="@string/task_title1"
+        android:title="action_disable_drag"
         app:showAsAction="never"/>
     <item
         android:id="@+id/action_enable_drag"
-        android:title="@string/task_title1"
+        android:title="action_enable_drag"
         app:showAsAction="never"/>
     <item
         android:id="@+id/action_add_column"

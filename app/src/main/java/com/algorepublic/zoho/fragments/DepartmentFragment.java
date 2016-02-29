@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.util.Pair;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -30,6 +31,7 @@ import com.woxthebox.draglistview.BoardView;
 import com.woxthebox.draglistview.DragItem;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by android on 2/24/16.
@@ -37,35 +39,34 @@ import java.util.ArrayList;
 public class DepartmentFragment extends BaseFragment{
     private BoardView mBoardView;
     static DepartmentFragment fragment;
-    private ArrayList<DeptList> allDeptList = new ArrayList<>();
-    private ArrayList<ProjectsList> projectsLists = new ArrayList<>();
 
     private ProjectsListService service;
     private BaseClass baseClass;
 
     public static DepartmentFragment newInstance() {
-        fragment = new DepartmentFragment();
+        if(fragment == null) {
+            fragment = new DepartmentFragment();
+        }
         return fragment;
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.board_layout, container, false);
-
         baseClass = ((BaseClass) getActivity().getApplicationContext());
         service = new ProjectsListService(getActivity());
         service.getProjectsByDepartment(baseClass.getUserId(),
                 true, new CallBack(this, "ProjectsByDepartment"));
-
         mBoardView = (BoardView) view.findViewById(R.id.board_view);
         mBoardView.setSnapToColumnsWhenScrolling(true);
         mBoardView.setSnapToColumnWhenDragging(true);
         mBoardView.setSnapDragItemToTouch(true);
+        mBoardView.setDragEnabled(true);
         mBoardView.setCustomDragItem(new MyDragItem(getActivity(), R.layout.column_item));
         mBoardView.setBoardListener(new BoardView.BoardListener() {
             @Override
@@ -90,7 +91,6 @@ public class DepartmentFragment extends BaseFragment{
         });
         return view;
     }
-
     public void ProjectsByDepartment(Object caller, Object model){
         ProjectsByDepartmentModel.getInstance().setList((ProjectsByDepartmentModel) model);
         if (ProjectsByDepartmentModel.getInstance().responseCode == 100
@@ -100,32 +100,32 @@ public class DepartmentFragment extends BaseFragment{
             Toast.makeText(getActivity(), getString(R.string.projects_list_empty), Toast.LENGTH_SHORT).show();
         }
     }
-    public void AddDepartmentProjects(){
-        allDeptList.clear();
-        for (int loop = 0; loop < ProjectsByDepartmentModel.getInstance().responseData.size(); loop++) {
-            DeptList deptList = new DeptList();
-            deptList.setDeptID(ProjectsByDepartmentModel.getInstance().responseData.get(loop).ID);
-            deptList.setDeptName(ProjectsByDepartmentModel.getInstance().responseData.get(loop).departmentName);
-
-            for(int loop1 = 0; loop1 < ProjectsByDepartmentModel.getInstance().responseData.get(loop).projects.size(); loop1++){
-                ProjectsList projectsList = new ProjectsList();
-                projectsList.setCompOrDeptID(ProjectsByDepartmentModel.getInstance().responseData.get(loop).ID);
-                projectsList.setProjectID(ProjectsByDepartmentModel.getInstance().responseData.get(loop).projects.get(loop1).projectID);
-                projectsList.setProjectName(ProjectsByDepartmentModel.getInstance().responseData.get(loop).projects.get(loop1).projectName);
-                projectsList.setOwnerID(ProjectsByDepartmentModel.getInstance().responseData.get(loop).projects.get(loop1).ownerID);
-                projectsList.setOwnerName(ProjectsByDepartmentModel.getInstance().responseData.get(loop).projects.get(loop1).ownerName);
-                projectsList.setProjectDesc(ProjectsByDepartmentModel.getInstance().responseData.get(loop).projects.get(loop1).description);
-                projectsList.setTotalTasks(ProjectsByDepartmentModel.getInstance().responseData.get(loop).projects.get(loop1).totalTasks);
-                projectsList.setTotalUsers(ProjectsByDepartmentModel.getInstance().responseData.get(loop).projects.get(loop1).usersCount);
-                projectsList.setTotalMilestones(ProjectsByDepartmentModel.getInstance().responseData.get(loop).projects.get(loop1).toalMilestones);
-                projectsList.setDeleted(ProjectsByDepartmentModel.getInstance().responseData.get(loop).projects.get(loop1).IsDeleted);
-                projectsList.setPrivate(ProjectsByDepartmentModel.getInstance().responseData.get(loop).projects.get(loop1).Isprivate);
-                projectsLists.add(projectsList);
-            }
-            allDeptList.add(deptList);
-        }
-        addColumnList();
-    }
+//    public void AddDepartmentProjects(){
+//        allDeptList.clear();
+//        for (int loop = 0; loop < ProjectsByDepartmentModel.getInstance().responseData.size(); loop++) {
+//            DeptList deptList = new DeptList();
+//            deptList.setDeptID(ProjectsByDepartmentModel.getInstance().responseData.get(loop).ID);
+//            deptList.setDeptName(ProjectsByDepartmentModel.getInstance().responseData.get(loop).departmentName);
+//
+//            for(int loop1 = 0; loop1 < ProjectsByDepartmentModel.getInstance().responseData.get(loop).projects.size(); loop1++){
+//                ProjectsList projectsList = new ProjectsList();
+//                projectsList.setCompOrDeptID(ProjectsByDepartmentModel.getInstance().responseData.get(loop).ID);
+//                projectsList.setProjectID(ProjectsByDepartmentModel.getInstance().responseData.get(loop).projects.get(loop1).projectID);
+//                projectsList.setProjectName(ProjectsByDepartmentModel.getInstance().responseData.get(loop).projects.get(loop1).projectName);
+//                projectsList.setOwnerID(ProjectsByDepartmentModel.getInstance().responseData.get(loop).projects.get(loop1).ownerID);
+//                projectsList.setOwnerName(ProjectsByDepartmentModel.getInstance().responseData.get(loop).projects.get(loop1).ownerName);
+//                projectsList.setProjectDesc(ProjectsByDepartmentModel.getInstance().responseData.get(loop).projects.get(loop1).description);
+//                projectsList.setTotalTasks(ProjectsByDepartmentModel.getInstance().responseData.get(loop).projects.get(loop1).totalTasks);
+//                projectsList.setTotalUsers(ProjectsByDepartmentModel.getInstance().responseData.get(loop).projects.get(loop1).usersCount);
+//                projectsList.setTotalMilestones(ProjectsByDepartmentModel.getInstance().responseData.get(loop).projects.get(loop1).toalMilestones);
+//                projectsList.setDeleted(ProjectsByDepartmentModel.getInstance().responseData.get(loop).projects.get(loop1).IsDeleted);
+//                projectsList.setPrivate(ProjectsByDepartmentModel.getInstance().responseData.get(loop).projects.get(loop1).Isprivate);
+//                projectsLists.add(projectsList);
+//            }
+//            allDeptList.add(deptList);
+//        }
+//        addColumnList();
+//    }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -170,7 +170,7 @@ public class DepartmentFragment extends BaseFragment{
         }
     }
 
-    private static class MyDragItem extends DragItem {
+    public static class MyDragItem extends DragItem {
 
         public MyDragItem(Context context, int layoutId) {
             super(context, layoutId);

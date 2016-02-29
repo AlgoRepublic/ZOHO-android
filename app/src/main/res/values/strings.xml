@@ -75,7 +75,7 @@
     <string name="overdue">Overdue</string>
     <string name="title_activity_milestone">MilestoneActivity</string>
     <string name="title_activity_settings">Settings</string>
-
+    <string name="new_forum_post">New Forum Post</string>
     <!-- Strings related to Settings -->
 
     <!-- Example General settings -->
@@ -137,7 +137,8 @@
     <string name="project_title">Project Title</string>
     <string name="forums_description">Forums Discription</string>
     <string name="forums_title">Test Forum</string>
-
+    <string name="title">Title</string>
+    <string name="content">Content</string>
     <!-- Task Details Strings -->
     <string name="reopen">Reopen Task?</string>
     <string name="reopen_task">Reopen Task</string>
@@ -146,6 +147,7 @@
     <string name="delete_task">Delete Task?</string>
     <string name="task_deleted">Task Deleted</string>
     <string name="update_progress">Progress Updated</string>
+    <string name="update_comment">Comment Updated</string>
     <string name="task_name">Task Name</string>
     <string name="task_details">Task Details:</string>
     <string name="task_added">Added</string>
@@ -177,4 +179,10 @@
     <string name="user_role">User Role</string>
     <string name="logout">Logout</string>
     <string name="change_theme">Change Theme</string>
+
+    <!-- Star Rating Strings -->
+    <string name="ratingPrimaryStage">RatingPrimaryStage</string>
+    <string name="ratingDevelopmentStage">RatingDevelopmentStage</string>
+    <string name="ratingMaturityStage">RatingMaturityStage</string>
+    <string name="ratingLeadingStage">RatingLeadingStage</string>
 </resources>
