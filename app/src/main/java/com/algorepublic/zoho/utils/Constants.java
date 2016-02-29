@@ -43,7 +43,9 @@ public class Constants {
 	public static String DeleteDocuments_API = BASE_URL+ "/Document/DeleteFile?"; //fileID
 	public static String UploadDocumentsByProject_API = BASE_URL+ "/Document/FileUpload?"; //fileObj,files,folderID
 	public static String LinkedIn_API = "https://api.linkedin.com/v1/people/~:(id,first-name,last-name,headline,pictureUrl)";
-	public static String GetListByProject_User = BASE_URL+ "/User/GetListByProject?";
+	public static String GetUserListByProject_API = BASE_URL+ "/User/GetListByProject?";
+	public static String CreateUser_API = BASE_URL+ "/User/CreateUser?";
+	public static String UpdateUser_API = BASE_URL+ "/User/UpdateUserProfile?";
 
 	public static String GetDepartment_API = BASE_URL+ "/Department/GetList";
 	public static String CreateDepartment_API = BASE_URL+ "/Department/CreateDepartment?"; //Name, CreateBy

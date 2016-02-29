@@ -54,12 +54,13 @@ public class EditForumFragment extends BaseFragment  {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.save_project:
+                baseClass.hideKeyPad(getView());
                 if(aq.id(R.id.forum_title).getText().toString().isEmpty()){
-                    Snackbar.make(getView(), "Please Add Forum Name", Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(getView(),getString(R.string.forum_addname), Snackbar.LENGTH_SHORT).show();
                     return false;
                 }
                 if(aq.id(R.id.forum_description).getText().toString().isEmpty()){
-                    Snackbar.make(getView(),"Please Add Forum Description",Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(getView(),getString(R.string.forum_add_description),Snackbar.LENGTH_SHORT).show();
                     return false;
                 }
                 UpdateForum();
@@ -82,16 +83,16 @@ public class EditForumFragment extends BaseFragment  {
                     baseClass.getUserId(),
                     true, new CallBack(EditForumFragment.this, "UpdateForum"));
         }else{
-            Snackbar.make(getView(),"Please Select Project ",Snackbar.LENGTH_SHORT).show();
+            Snackbar.make(getView(),getString(R.string.select_project),Snackbar.LENGTH_SHORT).show();
         }
     }
 
     public void UpdateForum(Object caller, Object model){
         CreateForumModel.getInstance().setList((CreateForumModel) model);
         if (CreateForumModel.getInstance().responseObject != null ) {
-            Snackbar.make(getView(),"Forum Updated Successfully!",Snackbar.LENGTH_SHORT).show();
+            Snackbar.make(getView(),getString(R.string.forum_updated),Snackbar.LENGTH_SHORT).show();
         }else {
-            Toast.makeText(getActivity(), getString(R.string.forums_list_empty), Toast.LENGTH_SHORT).show();
+            Snackbar.make(getView(), getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
         }
 
     }
@@ -122,11 +123,11 @@ public class EditForumFragment extends BaseFragment  {
         }
         else
         {
-            Toast.makeText(getActivity(), getString(R.string.invalid_credential), Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), getString(R.string.response_error), Toast.LENGTH_SHORT).show();
         }
     }
     public void UpdateValues(){
-        aq.id(R.id.lblListHeader).text("Edit Forum");
+        aq.id(R.id.lblListHeader).text(getString(R.string.edit_forum_post));
         aq.id(R.id.forum_title).text(ForumsModel.getInstance().responseObject.get(Pos).title);
         aq.id(R.id.content_description).text(ForumsModel.getInstance().responseObject.get(Pos).forumContent);
         String ownername = ForumsModel.getInstance().responseObject.get(Pos).categoryName;

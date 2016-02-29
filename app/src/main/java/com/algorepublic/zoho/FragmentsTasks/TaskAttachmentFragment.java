@@ -67,8 +67,6 @@ public class TaskAttachmentFragment extends BaseFragment {
     }
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
-
-//        getToolbar().setTitle(getString(R.string.task_attachments));
         super.onViewCreated(view, savedInstanceState);
     }
     @Override
@@ -103,7 +101,7 @@ public class TaskAttachmentFragment extends BaseFragment {
         if (SubTaskAttachmentsModel.getInstance().responseCode == 100) {
             GetAllDocumentsList();
         } else {
-            Toast.makeText(getActivity(), getString(R.string.invalid_credential), Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), getString(R.string.response_error), Toast.LENGTH_SHORT).show();
         }
     }
     public void GetAllDocumentsList() {
@@ -130,7 +128,8 @@ public class TaskAttachmentFragment extends BaseFragment {
         }
     }
     private void CallForAttachments() {
-        String[] menuItems = {"Camera","Gallery","Others"};
+        String[] menuItems = {getString(R.string.camera),getString(R.string.gallery)
+                ,getString(R.string.others)};
         final ActionSheetDialog dialog = new ActionSheetDialog(getActivity(),menuItems, getView());
         dialog.isTitleShow(false).show();
         dialog.setOnOperItemClickL(new OnOperItemClickL() {
@@ -223,11 +222,11 @@ public class TaskAttachmentFragment extends BaseFragment {
         final MaterialDialog dialog = new MaterialDialog(getActivity());
         dialog//
                 .btnNum(1)
-                .title("File size alert!")
+                .title(getString(R.string.file_size))
                 .titleTextColor(getResources().getColor(R.color.colorBaseHeader))
-                .content("File size should be less than (5) five MB")//
+                .content(getString(R.string.file_size_content))//
                 .contentTextColor(getResources().getColor(R.color.colorContentWrapper))
-                .btnText("OK")//
+                .btnText(getString(R.string.OK))//
                 .btnTextColor(getResources().getColor(R.color.colorContentWrapper))
                 .showAnim(new SlideLeftEnter())//
                 .dismissAnim(new SlideRightExit())//

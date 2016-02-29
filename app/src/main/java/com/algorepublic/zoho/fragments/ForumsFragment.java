@@ -44,6 +44,7 @@ public class ForumsFragment extends BaseFragment{
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.add_project:
+                baseClass.hideKeyPad(getView());
                 callFragmentWithBackStack(R.id.container, AddForumsFragment.newInstance(), "AddForumsFragment");
                 break;
         }

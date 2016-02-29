@@ -52,6 +52,7 @@ public class DepartmentFragment extends BaseFragment{
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
+        setHasOptionsMenu(true);
         super.onCreate(savedInstanceState);
     }
 
@@ -137,18 +138,17 @@ public class DepartmentFragment extends BaseFragment{
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_forum, menu);
         super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.menu_tasklist, menu);
     }
-
-
-    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
+        switch (item.getItemId()){
             case R.id.add_project:
-                return true;
+                callFragmentWithBackStack(R.id.container, AddDepartmentFragment.newInstance(), "AddDepartmentFragment");
+                break;
         }
         return super.onOptionsItemSelected(item);
+
     }
 
 

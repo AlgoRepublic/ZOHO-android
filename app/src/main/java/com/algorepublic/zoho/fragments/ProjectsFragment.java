@@ -97,7 +97,7 @@ public class ProjectsFragment extends BaseFragment{
         return view;
     }
     public void CallForFilter(){
-        String[] menuItems = {"All Projects","By Client","By Department"};
+        String[] menuItems = {getString(R.string.all_projects),getString(R.string.by_client),getString(R.string.by_dept)};
         final ActionSheetDialog dialog = new ActionSheetDialog(getActivity(),menuItems, getView());
         dialog.isTitleShow(false).show();
         dialog.setOnOperItemClickL(new OnOperItemClickL() {
@@ -154,7 +154,7 @@ public class ProjectsFragment extends BaseFragment{
                 || AllProjectsModel.getInstance().responseData.size() != 0) {
             AddAllProjects();
         } else {
-            Toast.makeText(getActivity(), getString(R.string.projects_list_empty), Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), getString(R.string.response_error), Toast.LENGTH_SHORT).show();
         }
     }
     public void ProjectsByClient(Object caller, Object model){
@@ -163,7 +163,7 @@ public class ProjectsFragment extends BaseFragment{
                 || ProjectsByClientModel.getInstance().responseData.size() != 0){
             AddClientProjects();
         }else {
-            Toast.makeText(getActivity(), getString(R.string.projects_list_empty), Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), getString(R.string.response_error), Toast.LENGTH_SHORT).show();
         }
     }
     public void ProjectsByDepartment(Object caller, Object model){
@@ -172,7 +172,7 @@ public class ProjectsFragment extends BaseFragment{
                 || ProjectsByDepartmentModel.getInstance().responseData.size() != 0) {
             AddDepartmentProjects();
         } else {
-            Toast.makeText(getActivity(), getString(R.string.projects_list_empty), Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), getString(R.string.response_error), Toast.LENGTH_SHORT).show();
         }
     }
     public void AddAllProjects(){
@@ -227,7 +227,7 @@ public class ProjectsFragment extends BaseFragment{
             for(int loop1=0;loop1<ProjectsByDepartmentModel.getInstance().responseData.get(loop).projects.size();loop1++){
                 ProjectsList projectsList = new ProjectsList();
                 if(ProjectsByDepartmentModel.getInstance().responseData.get(loop).ID.equals("0")){
-                    projectsList.setCompOrDeptName("Unassigned Projects");
+                    projectsList.setCompOrDeptName(getString(R.string.un_assigned));
                 }else {
                     projectsList.setCompOrDeptName(ProjectsByDepartmentModel.getInstance().responseData.get(loop).departmentName);
                 }
@@ -300,8 +300,9 @@ public class ProjectsFragment extends BaseFragment{
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.add_project:
+                baseClass.hideKeyPad(getView());
                 if(allDeptList.size()==0){
-                    Snackbar.make(getView(),"Please wait for the loading",Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(getView(),getString(R.string.project_loading),Snackbar.LENGTH_SHORT).show();
                 }else {
                     callFragmentWithBackStack(R.id.container, AddProjectFragment.newInstance(), "AddProjectFragment");
                 }

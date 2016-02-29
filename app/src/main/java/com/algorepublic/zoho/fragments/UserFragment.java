@@ -61,9 +61,9 @@ public class UserFragment extends BaseFragment {
     public void UserListCallback(Object caller, Object model){
         UserListModel.getInstance().setList((UserListModel) model);
         if (UserListModel.getInstance().responseObject.size()!=0) {
-            aq.id(R.id.user_list).adapter(new AdapterUser (getActivity()));
+            aq.id(R.id.user_list).adapter(new AdapterUser(getActivity()));
         }else {
-            Toast.makeText(getActivity(), getString(R.string.forums_list_empty), Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), getString(R.string.response_error), Toast.LENGTH_SHORT).show();
         }
 
     }

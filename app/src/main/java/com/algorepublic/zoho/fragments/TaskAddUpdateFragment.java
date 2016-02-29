@@ -90,7 +90,7 @@ public class TaskAddUpdateFragment extends BaseFragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.save_project:
-
+                baseClass.hideKeyPad(getView());
                 if(callPosition ==0) {
                     new NewTask().execute();
                 }

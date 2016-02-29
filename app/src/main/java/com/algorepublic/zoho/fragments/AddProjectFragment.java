@@ -65,16 +65,17 @@ public class AddProjectFragment extends BaseFragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.save_project:
+                baseClass.hideKeyPad(getView());
                 if(aq.id(R.id.project_name).getText().toString().isEmpty()){
-                    Snackbar.make(getView(),"Please Add Project Name",Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(getView(),getString(R.string.project_addname),Snackbar.LENGTH_SHORT).show();
                     return false;
                 }
                 if(aq.id(R.id.project_desc).getText().toString().isEmpty()){
-                    Snackbar.make(getView(),"Please Add Project Description",Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(getView(),getString(R.string.project_add_description),Snackbar.LENGTH_SHORT).show();
                     return false;
                 }
                 if(!aq.id(R.id.private_radio).isChecked() && !aq.id(R.id.public_radio).isChecked()){
-                    Snackbar.make(getView(),"Please Select The Access Option",Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(getView(),getString(R.string.project_access_option),Snackbar.LENGTH_SHORT).show();
                     return false;
                 }
                 CreateProject();
@@ -96,9 +97,9 @@ public class AddProjectFragment extends BaseFragment {
     public void CreateProject(Object caller, Object model){
         CreateProjectModel.getInstance().setList((CreateProjectModel) model);
         if (CreateProjectModel.getInstance().responseObject !=null ) {
-            Snackbar.make(getView(),"Project Created Successfully!",Snackbar.LENGTH_SHORT).show();
+            Snackbar.make(getView(),getString(R.string.project_created),Snackbar.LENGTH_SHORT).show();
         }else {
-            Toast.makeText(getActivity(), getString(R.string.forums_list_empty), Toast.LENGTH_SHORT).show();
+            Snackbar.make(getView() , getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
         }
 
     }
@@ -153,7 +154,7 @@ public class AddProjectFragment extends BaseFragment {
         }
         else
         {
-            Toast.makeText(getActivity(), getString(R.string.invalid_credential), Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), getString(R.string.response_error), Toast.LENGTH_SHORT).show();
         }
     }
 
