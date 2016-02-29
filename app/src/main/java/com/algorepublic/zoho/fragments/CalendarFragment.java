@@ -126,7 +126,6 @@ public class CalendarFragment extends BaseFragment implements CalendarPickerCont
      * Initialize the contents of the Activity's standard options menu.  You
      * should place your menu items in to <var>menu</var>.  For this method
      * to be called, you must have first called {@link #setHasOptionsMenu}.  See
-     * {@link Activity#onCreateOptionsMenu(Menu) Activity.onCreateOptionsMenu}
      * for more information.
      *
      * @param menu     The options menu in which you place your items.
@@ -174,6 +173,10 @@ public class CalendarFragment extends BaseFragment implements CalendarPickerCont
     private void initCalendarView(){
         // Get a reference for the week view in the layout.
         calendarView = (AgendaCalendarView) aq.id(R.id.agenda_calendar_view).getView();
+
+//        if(baseClass.getThemePreference() == R.style.AppThemeBlue){
+//            calendarView.
+//        }
 
         Calendar minDate = Calendar.getInstance();
         Calendar maxDate = Calendar.getInstance();

@@ -38,11 +38,10 @@ import java.util.List;
  */
 public class DepartmentFragment extends BaseFragment{
     private BoardView mBoardView;
-    ProjectsListService service;
-    BaseClass baseClass;
-    private static int sCreatedItems = 0;
-    static  ArrayList<DeptList> allDeptList = new ArrayList<>();
     static DepartmentFragment fragment;
+
+    private ProjectsListService service;
+    private BaseClass baseClass;
 
     public static DepartmentFragment newInstance() {
         if(fragment == null) {
@@ -54,7 +53,6 @@ public class DepartmentFragment extends BaseFragment{
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setHasOptionsMenu(true);
     }
 
     @Override
@@ -97,49 +95,45 @@ public class DepartmentFragment extends BaseFragment{
         ProjectsByDepartmentModel.getInstance().setList((ProjectsByDepartmentModel) model);
         if (ProjectsByDepartmentModel.getInstance().responseCode == 100
                 || ProjectsByDepartmentModel.getInstance().responseData.size() != 0) {
-            AddDepartmentProjects();
+            addColumnList();
         } else {
             Toast.makeText(getActivity(), getString(R.string.projects_list_empty), Toast.LENGTH_SHORT).show();
         }
     }
-    public void AddDepartmentProjects(){
-        allDeptList.clear();
-        for (int loop = 0; loop < ProjectsByDepartmentModel.getInstance().responseData.size(); loop++) {
-            DeptList deptList = new DeptList();
-            deptList.setDeptID(ProjectsByDepartmentModel.getInstance().responseData.get(loop).ID);
-            deptList.setDeptName(ProjectsByDepartmentModel.getInstance().responseData.get(loop).departmentName);
+//    public void AddDepartmentProjects(){
+//        allDeptList.clear();
+//        for (int loop = 0; loop < ProjectsByDepartmentModel.getInstance().responseData.size(); loop++) {
+//            DeptList deptList = new DeptList();
+//            deptList.setDeptID(ProjectsByDepartmentModel.getInstance().responseData.get(loop).ID);
+//            deptList.setDeptName(ProjectsByDepartmentModel.getInstance().responseData.get(loop).departmentName);
+//
+//            for(int loop1 = 0; loop1 < ProjectsByDepartmentModel.getInstance().responseData.get(loop).projects.size(); loop1++){
+//                ProjectsList projectsList = new ProjectsList();
+//                projectsList.setCompOrDeptID(ProjectsByDepartmentModel.getInstance().responseData.get(loop).ID);
+//                projectsList.setProjectID(ProjectsByDepartmentModel.getInstance().responseData.get(loop).projects.get(loop1).projectID);
+//                projectsList.setProjectName(ProjectsByDepartmentModel.getInstance().responseData.get(loop).projects.get(loop1).projectName);
+//                projectsList.setOwnerID(ProjectsByDepartmentModel.getInstance().responseData.get(loop).projects.get(loop1).ownerID);
+//                projectsList.setOwnerName(ProjectsByDepartmentModel.getInstance().responseData.get(loop).projects.get(loop1).ownerName);
+//                projectsList.setProjectDesc(ProjectsByDepartmentModel.getInstance().responseData.get(loop).projects.get(loop1).description);
+//                projectsList.setTotalTasks(ProjectsByDepartmentModel.getInstance().responseData.get(loop).projects.get(loop1).totalTasks);
+//                projectsList.setTotalUsers(ProjectsByDepartmentModel.getInstance().responseData.get(loop).projects.get(loop1).usersCount);
+//                projectsList.setTotalMilestones(ProjectsByDepartmentModel.getInstance().responseData.get(loop).projects.get(loop1).toalMilestones);
+//                projectsList.setDeleted(ProjectsByDepartmentModel.getInstance().responseData.get(loop).projects.get(loop1).IsDeleted);
+//                projectsList.setPrivate(ProjectsByDepartmentModel.getInstance().responseData.get(loop).projects.get(loop1).Isprivate);
+//                projectsLists.add(projectsList);
+//            }
+//            allDeptList.add(deptList);
+//        }
+//        addColumnList();
+//    }
 
-            ArrayList<ProjectsList> projectsLists = new ArrayList<>();
-            for(int loop1=0;loop1<ProjectsByDepartmentModel.getInstance().responseData.get(loop).projects.size();loop1++){
-                ProjectsList projectsList = new ProjectsList();
-                if(ProjectsByDepartmentModel.getInstance().responseData.get(loop).ID.equals("0")){
-                    projectsList.setCompOrDeptName("Unassigned Projects");
-                }else {
-                    projectsList.setCompOrDeptName(ProjectsByDepartmentModel.getInstance().responseData.get(loop).departmentName);
-                }
-                projectsList.setCompOrDeptID(ProjectsByDepartmentModel.getInstance().responseData.get(loop).ID);
-                projectsList.setProjectID(ProjectsByDepartmentModel.getInstance().responseData.get(loop).projects.get(loop1).projectID);
-                projectsList.setProjectName(ProjectsByDepartmentModel.getInstance().responseData.get(loop).projects.get(loop1).projectName);
-                projectsList.setOwnerID(ProjectsByDepartmentModel.getInstance().responseData.get(loop).projects.get(loop1).ownerID);
-                projectsList.setOwnerName(ProjectsByDepartmentModel.getInstance().responseData.get(loop).projects.get(loop1).ownerName);
-                projectsList.setProjectDesc(ProjectsByDepartmentModel.getInstance().responseData.get(loop).projects.get(loop1).description);
-                projectsList.setTotalTasks(ProjectsByDepartmentModel.getInstance().responseData.get(loop).projects.get(loop1).totalTasks);
-                projectsList.setTotalUsers(ProjectsByDepartmentModel.getInstance().responseData.get(loop).projects.get(loop1).usersCount);
-                projectsList.setTotalMilestones(ProjectsByDepartmentModel.getInstance().responseData.get(loop).projects.get(loop1).toalMilestones);
-                projectsList.setDeleted(ProjectsByDepartmentModel.getInstance().responseData.get(loop).projects.get(loop1).IsDeleted);
-                projectsList.setPrivate(ProjectsByDepartmentModel.getInstance().responseData.get(loop).projects.get(loop1).Isprivate);
-                projectsLists.add(projectsList);
-            }
-            deptList.setProjectsLists(projectsLists);
-            allDeptList.add(deptList);
-        }
-        addColumnList(allDeptList);
-    }
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Department");
+
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(getString(R.string.departments));
     }
+
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
@@ -157,20 +151,21 @@ public class DepartmentFragment extends BaseFragment{
         return super.onOptionsItemSelected(item);
     }
 
-    private void addColumnList(List<DeptList> mItemArrayParent) {
-        ArrayList<Pair<Long, ProjectsList>> mItemArray;
-        for (int i = 0; i < mItemArrayParent.size(); i++) {
+
+    private void addColumnList() {
+        ArrayList<Pair<Long, String>> mItemArray;
+        int size = ProjectsByDepartmentModel.getInstance().responseData.size();
+        for (int i = 0; i < size; i++) {
             mItemArray = new ArrayList<>();
-            for (int loop=0;loop<mItemArrayParent.get(i).getProjectList().size();loop++) {
-                long id = sCreatedItems++;
-                ProjectsList  projectsList = mItemArrayParent.get(i).getProjectList().get(loop);
-                mItemArray.add(new Pair<>(id,  projectsList));
+            int projectSize = ProjectsByDepartmentModel.getInstance().responseData.get(i).projects.size();
+            for (int loop = 0; loop < projectSize; loop++) {
+                mItemArray.add(new Pair<>(Long.valueOf(ProjectsByDepartmentModel.getInstance().responseData.get(i).projects.get(loop).projectID), ProjectsByDepartmentModel.getInstance().responseData.get(i).projects.get(loop).projectName));
             }
 
             AdapterDepartment listAdapter = new AdapterDepartment(mItemArray, R.layout.column_item, R.id.item_layout, true);
             View header = View.inflate(getActivity(), R.layout.column_header, null);
-            ((TextView) header.findViewById(R.id.header)).setText(mItemArrayParent.get(i).getDeptName());
-            ((TextView) header.findViewById(R.id.header_count)).setText(Integer.toString(mItemArray.size()));
+            ((TextView) header.findViewById(R.id.header)).setText(ProjectsByDepartmentModel.getInstance().responseData.get(i).departmentName);
+            ((TextView) header.findViewById(R.id.header_count)).setText(ProjectsByDepartmentModel.getInstance().responseData.get(i).projects.size()+"");
             mBoardView.addColumnList(listAdapter, header, false);
         }
     }

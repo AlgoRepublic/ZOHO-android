@@ -29,12 +29,12 @@ import com.woxthebox.draglistview.DragItemAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AdapterDepartment extends DragItemAdapter<Pair<Long, ProjectsList>, AdapterDepartment.ViewHolder> {
+public class AdapterDepartment extends DragItemAdapter<Pair<Long, String>, AdapterDepartment.ViewHolder> {
 
     private int mLayoutId;
     private int mGrabHandleId;
 
-    public AdapterDepartment(List<Pair<Long, ProjectsList>> list, int layoutId, int grabHandleId, boolean dragOnLongPress) {
+    public AdapterDepartment(ArrayList<Pair<Long, String>> list, int layoutId, int grabHandleId, boolean dragOnLongPress) {
         super(dragOnLongPress);
         mLayoutId = layoutId;
         mGrabHandleId = grabHandleId;
@@ -51,9 +51,15 @@ public class AdapterDepartment extends DragItemAdapter<Pair<Long, ProjectsList>,
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         super.onBindViewHolder(holder, position);
-        String text = "item";
+        String text = mItemList.get(position).second;
         holder.mText.setText(text);
         holder.itemView.setTag(text);
+//        try{
+//            holder.mDesc.setText(Html.fromHtml(projects.get(position).description));
+//        }catch (NullPointerException npe){}
+//        holder.mTasks.setText(projects.get(position).totalTasks);
+//        holder.mUsers.setText(projects.get(position).usersCount);
+//        holder.mMilestones.setText(projects.get(position).toalMilestones);
     }
 
     @Override
@@ -63,6 +69,10 @@ public class AdapterDepartment extends DragItemAdapter<Pair<Long, ProjectsList>,
 
     public class ViewHolder extends DragItemAdapter<Pair<Long, ProjectsList>, ViewHolder>.ViewHolder {
         public TextView mText;
+//        public TextView mDesc;
+//        public TextView mTasks;
+//        public TextView mUsers;
+//        public TextView mMilestones;
 
         public ViewHolder(final View itemView) {
             super(itemView, mGrabHandleId);

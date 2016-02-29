@@ -50,7 +50,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="11dp"
                     android:layout_alignParentBottom="true"
-                    android:background="@color/colorBaseHeader"></View>
+                    android:background="@color/colorBaseHeader"/>
 
                 <RelativeLayout
                     android:layout_width="152dp"
@@ -88,6 +88,7 @@
                 android:paddingRight="10dp"
                 android:layout_alignParentRight="true"
                 android:text="12"
+                android:textStyle="bold"
                 android:textColor="@color/colorBaseHeader"
                 android:textSize="16sp"
                 android:typeface="monospace" />
