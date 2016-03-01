@@ -13,8 +13,14 @@
  See the License for the specific language governing permissions and
  limitations under the License.
 -->
-<com.woxthebox.draglistview.BoardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/board_view"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"/>
+    android:layout_height="match_parent">
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/list_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        style="@style/myRecyclerViewStyle"/>
+
+</RelativeLayout>
