@@ -205,19 +205,23 @@
     <string name="department_created">Department Created</string>
     <string name="department_updated">Department Updated</string>
     <string name="department_deleted">Department Deleted</string>
+    <string name="deleted_dept">Delete Department?</string>
     <string name="department_name">Please Add Department Name</string>
 
     <!-- Star Forum Strings -->
     <string name="forum_created">Forum Created</string>
     <string name="forum_updated">Forum Updated</string>
     <string name="forum_deleted">Forum Deleted</string>
+    <string name="deleted_forum">Delete Forum?</string>
     <string name="forum_addname">Please Add Forum Name</string>
     <string name="forum_add_description">Please Add Forum Description</string>
 
     <!-- Star Projects Strings -->
     <string name="project_created">Project Created</string>
+    <string name="project_moved">Project Moved Successfully</string>
     <string name="project_updated">Project Updated</string>
     <string name="project_deleted">Project Deleted</string>
+    <string name="deleted_project">Delete Project?</string>
     <string name="project_loading">Please wait for the loading</string>
     <string name="all_projects">All Projects</string>
     <string name="by_client">By Client</string>
@@ -229,9 +233,10 @@
     <string name="project_status_option">Please Select The Project Status</string>
 
     <!-- Star User Strings -->
-    <string name="user_created">Forum Created</string>
-    <string name="user_updated">Forum Updated</string>
-    <string name="user_deleted">Forum Deleted</string>
+    <string name="user_created">User Created</string>
+    <string name="user_updated">User Updated</string>
+    <string name="user_deleted">User Deleted</string>
+    <string name="deleted_user">Delete User?</string>
     <string name="user_first_name">Please Add First Name</string>
     <string name="user_last_name">Please Add Last Name</string>
     <string name="add_email">Please Add Email</string>

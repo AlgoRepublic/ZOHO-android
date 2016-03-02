@@ -25,7 +25,7 @@
         android:layout_height="wrap_content"
         app:clickToClose="true">
         <LinearLayout
-            android:layout_width="160dp"
+            android:layout_width="150dp"
             android:layout_height="match_parent"
             android:weightSum="2"
             android:layout_marginBottom="7dp"
@@ -73,9 +73,8 @@
             app:ms9_shadowElevation="2dp"
             app:ms9_shadowTranslationZ="1dp"
             app:ms9_useAmbientShadow="true">
-
             <RelativeLayout
-                android:id="@+id/parent"
+                android:id="@+id/container"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginBottom="8dp"

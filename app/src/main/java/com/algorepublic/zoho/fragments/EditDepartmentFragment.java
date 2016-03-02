@@ -27,6 +27,7 @@ public class EditDepartmentFragment extends BaseFragment {
     BaseClass baseClass;
     TaskListService service;
     View view;
+    static int Pos;
     static EditDepartmentFragment fragment;
 
     public EditDepartmentFragment() {
@@ -34,7 +35,8 @@ public class EditDepartmentFragment extends BaseFragment {
     }
 
     // TODO: Rename and change types and number of parameters
-    public static EditDepartmentFragment newInstance() {
+    public static EditDepartmentFragment newInstance(int pos) {
+        Pos = pos;
         if (fragment == null) {
             fragment = new EditDepartmentFragment();
         }
@@ -69,12 +71,11 @@ public class EditDepartmentFragment extends BaseFragment {
 
     public void UpdateDept(Object caller, Object model){
         CreateProjectModel.getInstance().setList((CreateProjectModel) model);
-        if (CreateProjectModel.getInstance().responseObject !=null ) {
+        if (CreateProjectModel.getInstance().responseObject ==null ) {
             Snackbar.make(getView(),getString(R.string.department_updated),Snackbar.LENGTH_SHORT).show();
         }else {
             Snackbar.make(getView(), getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
         }
-
     }
 
     @Override
@@ -88,6 +89,8 @@ public class EditDepartmentFragment extends BaseFragment {
         view  = inflater.inflate(R.layout.fragment_add_department, container, false);
 
         aq = new AQuery(view);
+        aq.id(R.id.dept_title).text(DepartmentFragment.allProjects.get(Pos).getCompOrDeptName());
+        aq.id(R.id.lblListHeader).text(getString(R.string.edit_dept));
         setHasOptionsMenu(true);
         baseClass = ((BaseClass) getActivity().getApplicationContext());
         return view;

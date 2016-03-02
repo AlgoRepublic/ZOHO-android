@@ -43,6 +43,7 @@ public class AdapterProjectsClientList extends BaseAdapter {
     private AQuery aq;
     private LayoutInflater l_Inflater;
     ProjectsListService service;
+    private int lastPosition;
     ArrayList<ProjectsList> arrayList= new ArrayList<>();
 
     public AdapterProjectsClientList(Context context,ArrayList<ProjectsList> list) {
@@ -117,7 +118,7 @@ public class AdapterProjectsClientList extends BaseAdapter {
         aq.id(R.id.btDelete).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                NormalDialogCustomAttr("Delete Project?",position);
+                NormalDialogCustomAttr(ctx.getString(R.string.deleted_project),position);
             }
         });
 //        Animation animation = AnimationUtils.loadAnimation(ctx, (position > lastPosition) ? R.anim.up_from_bottom : R.anim.down_from_top);
@@ -127,6 +128,8 @@ public class AdapterProjectsClientList extends BaseAdapter {
     public void DeleteProject(Object caller, Object model) {
         GeneralModel.getInstance().setList((GeneralModel) model);
         if (GeneralModel.getInstance().responseCode.equalsIgnoreCase("100")) {
+            arrayList.remove(lastPosition);
+            notifyDataSetChanged();
             Snackbar.make(aq.id(R.id.shadow_item_container).getView(),"Project Deleted",Snackbar.LENGTH_SHORT).show();
         } else {
             Toast.makeText(((AppCompatActivity)ctx), ctx.getString(R.string.invalid_credential), Toast.LENGTH_SHORT).show();
@@ -172,6 +175,7 @@ public class AdapterProjectsClientList extends BaseAdapter {
                     @Override
                     public void onBtnClick() {
                         dialog.dismiss();
+                        lastPosition =position;
                         service.DeleteProject(arrayList.get(position).getProjectID(), true
                                 , new CallBack(AdapterProjectsClientList.this, "DeleteProject"));
                     }

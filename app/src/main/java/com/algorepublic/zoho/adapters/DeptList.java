@@ -25,6 +25,13 @@ public class DeptList {
         return DeptName;
     }
 
+    public void setType(int type){
+        this.Type = type;
+    }
+    public int getType(){
+        return Type;
+    }
+
 
     public void setProjectsLists(ArrayList<ProjectsList> projectsLists){
         this.projectsLists.addAll(projectsLists);
@@ -35,5 +42,6 @@ public class DeptList {
 
     private String DeptName;
     private String DeptID;
+    private int Type;
     private List<ProjectsList> projectsLists = new ArrayList<>();
 }

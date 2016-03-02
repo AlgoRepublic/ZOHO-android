@@ -21,10 +21,14 @@ public class DepartmentService extends BaseService {
         super(act);
     }
 
-    public void getDepartmentList_API( boolean message, CallBack obj){
-        String url = Constants.GetDepartment_API;
-        this.get(url, obj, DepartmentsModel.getInstance(), message);
-        Log.e("DepartmentsService", url);
+    public void addProjectIntoDepartment(String did,String pid, String userID, boolean message, CallBack obj){
+        String url = Constants.AddProjectIntoDepartment;
+        HashMap<String, String> params = new HashMap<String, String>();
+        params.put("pid", pid);
+        params.put("did", did);
+        params.put("userID", userID);
+        this.post(url, params, obj, CreateForumModel.getInstance(), message);
+        Log.e("AddToDeptService", url);
     }
     public void createDepartment(String name,String createBy, boolean message, CallBack obj){
         String url = Constants.CreateDepartment_API;
@@ -43,7 +47,7 @@ public class DepartmentService extends BaseService {
         this.post(url, params, obj, CreateForumModel.getInstance(), message);
         Log.e("UpdateDepartmentService", url);
     }
-    public void DeleteProject(String ID, boolean message, CallBack obj){
+    public void DeleteDepartment(String ID, boolean message, CallBack obj){
         String url = Constants.DeleteDepartment_API;
         HashMap<String, String> params = new HashMap<String, String>();
         params.put("ID", ID);

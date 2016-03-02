@@ -39,6 +39,8 @@ public class Constants {
 	public static String GetForumsList_API = BASE_URL+ "/Forum/GetListByProjectID?";
 	public static String GetForumDetail_API = BASE_URL+ "/Forum/GetById?";
 	public static String DeleteForum_API = BASE_URL+ "/Forum/Delete?"; //id
+	public static String AddNewForumPost_API=BASE_URL+"/Forum/AddNewForumPost?";
+
 	public static String GetDocuments_API = BASE_URL+ "/Document/GetListByProjectID?"; //projectID
 	public static String DeleteDocuments_API = BASE_URL+ "/Document/DeleteFile?"; //fileID
 	public static String UploadDocumentsByProject_API = BASE_URL+ "/Document/FileUpload?"; //fileObj,files,folderID
@@ -51,6 +53,7 @@ public class Constants {
 	public static String CreateDepartment_API = BASE_URL+ "/Department/CreateDepartment?"; //Name, CreateBy
 	public static String UpdateDepartment_API = BASE_URL+ "/Department/UpdateDepartment?";
 	public static String DeleteDepartment_API = BASE_URL+ "/Department/DeleteDepartment?";
-    public static String AddNewForumPost_API=BASE_URL+"/Forum/AddNewForumPost?";
+	public static String AddProjectIntoDepartment = BASE_URL+ "/Department/AddProjectIntoDepartment?";
+
 
 }

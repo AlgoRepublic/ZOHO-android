@@ -32,9 +32,4 @@
     <color name="pressed_color">#4d90fe</color>
     <color name="default_color">#ffffff</color>
 
-
-    <color name="bg_group_item_dragging_active_state">#ffee99ff</color>
-    <color name="bg_group_item_dragging_state">#ffeeccff</color>
-    <color name="bg_group_item_expanded_state">#ff88dd88</color>
-    <color name="bg_group_item_expanded_pressed_state">#ff99cc99</color>
 </resources>
