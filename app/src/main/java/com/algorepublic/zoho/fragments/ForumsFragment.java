@@ -81,7 +81,7 @@ public class ForumsFragment extends BaseFragment{
         if (ForumsModel.getInstance().responseObject.size()!=0) {
             aq.id(R.id.forums_list).adapter(new AdapterForumsList(getActivity()));
         }else {
-            Toast.makeText(getActivity(), getString(R.string.forums_list_empty), Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), getString(R.string.response_error), Toast.LENGTH_SHORT).show();
         }
 
     }

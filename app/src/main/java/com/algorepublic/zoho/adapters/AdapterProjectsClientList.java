@@ -104,8 +104,8 @@ public class AdapterProjectsClientList extends BaseAdapter {
                     baseClass.db.putInt("ProjectID", Integer.parseInt(baseClass.getSelectedProject()));
                     baseClass.db.putString("ProjectName", (((TextView)view.findViewById(R.id.project_id)).getText().toString()));
                 }
-                notifyDataSetInvalidated();
                 ProjectsFragment.listViewClient.setSelection(position);
+                notifyDataSetInvalidated();
             }
         });
         aq.id(R.id.btEdit).clicked(new View.OnClickListener() {

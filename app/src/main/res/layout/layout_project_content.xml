@@ -105,6 +105,7 @@
                         android:drawablePadding="5dp"
                         android:singleLine="true"
                         android:ellipsize="end"
+                        android:textColor="@color/colorBaseHeader"
                         android:drawableStart="@mipmap/folder_black"
                         android:paddingLeft="5dp"
                         android:paddingStart="5dp"

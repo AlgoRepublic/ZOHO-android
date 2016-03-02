@@ -23,6 +23,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -76,18 +77,22 @@ public class AdapterDepartment
 
     public static class MyViewHolder extends AbstractDraggableItemViewHolder {
         public RelativeLayout mContainer;
-        public TextView mTextView;
-        public TextView title;
+        public TextView project_title;
+        public TextView header,task_alert,users_alert,milestone_alert,project_desc;
         public TextView btEdit;
         public TextView btDelete;
 
         public MyViewHolder(View v) {
             super(v);
             mContainer = (RelativeLayout) v.findViewById(R.id.container);
-            mTextView = (TextView) v.findViewById(R.id.project_title);
-            title = (TextView) v.findViewById(R.id.header);
+            project_title = (TextView) v.findViewById(R.id.project_title);
+            header = (TextView) v.findViewById(R.id.header);
             btEdit = (TextView) v.findViewById(R.id.btEdit);
             btDelete = (TextView) v.findViewById(R.id.btDelete);
+            task_alert = (TextView) v.findViewById(R.id.task_alert);
+            users_alert = (TextView) v.findViewById(R.id.users_alert);
+            milestone_alert = (TextView) v.findViewById(R.id.milestone_alert);
+            project_desc = (TextView) v.findViewById(R.id.project_desc);
         }
     }
 
@@ -147,7 +152,7 @@ public class AdapterDepartment
     private void onBindSectionHeaderViewHolder(MyViewHolder holder, final int position) {
 
         // set text
-        holder.title.setText(DepartmentFragment.allProjects.get(position).getCompOrDeptName());
+        holder.header.setText(DepartmentFragment.allProjects.get(position).getCompOrDeptName());
         holder.btDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -175,7 +180,15 @@ public class AdapterDepartment
     private void onBindSectionItemViewHolder(MyViewHolder holder,final int position) {
 
         // set text
-        holder.mTextView.setText(DepartmentFragment.allProjects.get(position).getProjectName());
+        holder.project_title.setText(DepartmentFragment.allProjects.get(position).getProjectName());
+        try {
+            holder.project_desc.setText(Html.fromHtml(DepartmentFragment.allProjects.get(position)
+                    .getProjectDesc()));
+        }catch (NullPointerException e){}
+        holder.task_alert.setText(DepartmentFragment.allProjects.get(position).getTotalTasks());
+        holder.users_alert.setText(DepartmentFragment.allProjects.get(position).getTotalUsers());
+        holder.milestone_alert.setText(DepartmentFragment.allProjects.get(position).getTotalMilestones());
+
         holder.btDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

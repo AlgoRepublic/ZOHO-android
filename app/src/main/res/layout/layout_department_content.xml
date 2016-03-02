@@ -93,6 +93,7 @@
                                     android:drawableStart="@mipmap/folder_black"
                                     android:paddingLeft="5dp"
                                     android:paddingStart="5dp"
+                                    android:textColor="@color/colorBaseHeader"
                                     android:text="@string/projects"
                                     android:textSize="14sp"
                                     android:textStyle="bold" />

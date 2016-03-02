@@ -103,6 +103,7 @@
                             android:text="@string/task_startdate"
                             android:layout_height="wrap_content"
                             android:textSize="12sp"
+                            android:textColor="@color/colorBaseHeader"
                             android:textStyle="bold"
                             android:layout_alignParentLeft="true"
                             />
@@ -113,6 +114,7 @@
                             android:paddingLeft="3dp"
                             android:layout_height="wrap_content"
                             android:textSize="12sp"
+                            android:textColor="@color/colorBaseHeader"
                             android:layout_toRightOf="@+id/text2"
 
                             />
@@ -122,6 +124,7 @@
                             android:text="@string/task_duedate"
                             android:layout_height="wrap_content"
                             android:textSize="12sp"
+                            android:textColor="@color/colorBaseHeader"
                             android:textStyle="bold"
                             android:layout_toLeftOf="@+id/end_date"
 
@@ -130,6 +133,7 @@
                             android:id="@+id/end_date"
                             android:layout_width="wrap_content"
                             android:text="dsds"
+                            android:textColor="@color/colorBaseHeader"
                             android:paddingLeft="3dp"
                             android:layout_height="wrap_content"
                             android:textSize="13sp"
@@ -152,6 +156,7 @@
                             android:layout_height="wrap_content"
                             android:textSize="12sp"
                             android:textStyle="bold"
+                            android:textColor="@color/colorBaseHeader"
                             android:layout_toLeftOf="@+id/textView"
 
                             />
@@ -162,6 +167,7 @@
                             android:paddingLeft="3dp"
                             android:layout_height="wrap_content"
                             android:textSize="12sp"
+                            android:textColor="@color/colorBaseHeader"
                             android:layout_toLeftOf="@+id/textView"
 
                             />
@@ -180,6 +186,7 @@
                             android:layout_height="wrap_content"
                             android:textSize="12sp"
                             android:textStyle="bold"
+                            android:textColor="@color/colorBaseHeader"
                             android:layout_toLeftOf="@+id/textView"
 
                             />
@@ -189,6 +196,7 @@
                             android:layout_below="@+id/task_name"
                             android:layout_height="wrap_content"
                             android:textSize="12sp"
+                            android:textColor="@color/colorBaseHeader"
                             android:lines="4"
                             android:ellipsize="end"
 
@@ -208,6 +216,7 @@
                             android:text="@string/task_users"
                             android:layout_height="wrap_content"
                             android:textSize="12sp"
+                            android:textColor="@color/colorBaseHeader"
                             android:textStyle="bold"
                             android:layout_toLeftOf="@+id/textView"
 
@@ -234,6 +243,7 @@
                         android:text="@string/project_status"
                         android:layout_height="wrap_content"
                         android:textSize="12sp"
+                        android:textColor="@color/colorBaseHeader"
                         android:textStyle="bold"
                         android:layout_marginLeft="20dp"
                         android:layout_marginRight="20dp"
