@@ -22,14 +22,10 @@ public class UserService extends BaseService {
         this.get(url, obj, UserListModel.getInstance(), message);
         Log.e("UserService", url);
     }
-    public void createUser(String firstname,String lastname, String email,int mobileNo, String deptID
-            ,boolean isPrivate, boolean message, CallBack obj){
+    public void deleteUser(String ID,boolean message, CallBack obj){
         String url = Constants.CreateUser_API;
         HashMap<String, String> params = new HashMap<String, String>();
-        params.put("FirstName", firstname);
-        params.put("LastName", lastname);
-        params.put("Email", email);
-        params.put("Mobile", String.valueOf(mobileNo));
+        params.put("ID", ID);
         this.post(url, params, obj, CreateProjectModel.getInstance(), message);
         Log.e("CreateUserService", url);
     }

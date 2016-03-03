@@ -13,15 +13,13 @@
         android:layout_height="match_parent"
         android:layout_margin="10dp"
         android:scrollbars="none"
-        android:visibility="gone"
-        android:dividerHeight="5dp" />
+        android:visibility="gone" />
     <ListView
         android:layout_above="@+id/sort"
         android:id="@+id/projects_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="10dp"
-        android:dividerHeight="5dp"
         android:scrollbars="none"
         android:visibility="visible" />
     <RelativeLayout

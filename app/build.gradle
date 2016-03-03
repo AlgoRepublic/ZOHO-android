@@ -12,7 +12,6 @@ android {
         versionCode 1
         versionName "1.0"
 
-        multiDexEnabled false
     }
     buildTypes {
         release {
@@ -64,7 +63,7 @@ dependencies {
     compile 'com.google.android.gms:play-services-identity:8.4.0'
     compile 'commons-io:commons-io:2.4'
     compile 'com.github.lzyzsd:circleprogress:1.1.0@aar'
-    compile 'com.mikhaellopez:circularimageview:2.1.1'
+    compile 'com.mikhaellopez:circularimageview:3.0.2'
     compile 'com.h6ah4i.android.materialshadowninepatch:materialshadowninepatch:0.6.5'
     compile 'com.rengwuxian.materialedittext:library:2.1.4'
     compile project(':parallax-listview')

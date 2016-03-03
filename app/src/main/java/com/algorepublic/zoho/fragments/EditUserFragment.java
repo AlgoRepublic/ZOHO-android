@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 
+import com.algorepublic.zoho.Models.UserListModel;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.utils.BaseClass;
 import com.algorepublic.zoho.utils.Constants;
@@ -34,9 +35,9 @@ import cc.cloudist.acplibrary.ACProgressConstant;
 import cc.cloudist.acplibrary.ACProgressFlower;
 
 /**
- * Created by waqas on 2/15/16.
+ * Created by android on 3/3/16.
  */
-public class AddUserFragment extends BaseFragment{
+public class EditUserFragment extends BaseFragment{
 
     private static final int TAKE_PICTURE = 1;
     public static final int RESULT_GALLERY = 2;
@@ -45,14 +46,16 @@ public class AddUserFragment extends BaseFragment{
     AQuery aq;
     ACProgressFlower dialog;
     BaseClass baseClass;
+    static int Pos;
 
-    public AddUserFragment() {
+    public EditUserFragment() {
         // Required empty public constructor
     }
 
 
-    public static AddUserFragment newInstance() {
-        AddUserFragment fragment = new AddUserFragment();
+    public static EditUserFragment newInstance(int pos) {
+        Pos = pos;
+        EditUserFragment fragment = new EditUserFragment();
         Bundle args = new Bundle();
         fragment.setArguments(args);
         return fragment;
@@ -76,9 +79,21 @@ public class AddUserFragment extends BaseFragment{
                 CallForAttachments();
             }
         });
+        UpdateValues();
         return view;
     }
-
+    public void UpdateValues(){
+        aq.id(R.id.first_name).text(UserListModel.getInstance().responseObject.get(Pos).firstName);
+        aq.id(R.id.last_name).text(UserListModel.getInstance().responseObject.get(Pos).lastName);
+        aq.id(R.id.user_email).text(UserListModel.getInstance().responseObject.get(Pos).email);
+        String imagePath =UserListModel
+                .getInstance().responseObject.get(Pos).profileImagePath;
+        if(imagePath != null) {
+            aq.id(R.id.profile).image(Constants.UserImage_URL + UserListModel
+                    .getInstance().responseObject.get(Pos).profileImagePath);
+        }
+        aq.id(R.id.user_phoneno).text(UserListModel.getInstance().responseObject.get(Pos).mobile);
+    }
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.menu_save_project, menu);
@@ -90,7 +105,7 @@ public class AddUserFragment extends BaseFragment{
             case R.id.save_project:
                 baseClass.hideKeyPad(getView());
                 if(aq.id(R.id.first_name).getText().toString().isEmpty()){
-                    Snackbar.make(getView(),getString(R.string.user_first_name),Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(getView(), getString(R.string.user_first_name), Snackbar.LENGTH_SHORT).show();
                     return false;
                 }
                 if(aq.id(R.id.last_name).getText().toString().isEmpty()){
@@ -105,7 +120,7 @@ public class AddUserFragment extends BaseFragment{
                     Snackbar.make(getView(),getString(R.string.add_phoneno),Snackbar.LENGTH_SHORT).show();
                     return false;
                 }
-                new AddUser().execute();
+                new EditUser().execute();
         }
         return super.onOptionsItemSelected(item);
     }
@@ -159,7 +174,7 @@ public class AddUserFragment extends BaseFragment{
                 break;
             case RESULT_GALLERY:
                 if (null != data) {
-                     newFile = new File(URI.create("file://" + getDataColumn(getActivity(), data.getData(), null, null)));
+                    newFile = new File(URI.create("file://" + getDataColumn(getActivity(), data.getData(), null, null)));
                 }
                 break;
             case PICK_File:
@@ -177,7 +192,7 @@ public class AddUserFragment extends BaseFragment{
         }
         aq.id(R.id.profile).image(newFile,200);
     }
-    public class AddUser extends AsyncTask<Void, Void, String> {
+    public class EditUser extends AsyncTask<Void, Void, String> {
         GenericHttpClient httpClient;
         String response = null;
 
@@ -191,7 +206,8 @@ public class AddUserFragment extends BaseFragment{
         protected String doInBackground(Void... voids) {
             try {
                 httpClient = new GenericHttpClient();
-                response = httpClient.createUser(Constants.CreateUser_API,
+                response = httpClient.updateUser(Constants.UpdateUser_API,
+                        Integer.toString(UserListModel.getInstance().responseObject.get(Pos).ID),
                         aq.id(R.id.first_name).getText().toString(),
                         aq.id(R.id.last_name).getText().toString(),
                         aq.id(R.id.user_email).getText().toString(),
@@ -206,7 +222,7 @@ public class AddUserFragment extends BaseFragment{
         protected void onPostExecute(String result) {
             dialog.dismiss();
             if(result.contains("100")){
-                Snackbar.make(getView(),getString(R.string.user_created),Snackbar.LENGTH_SHORT).show();
+                Snackbar.make(getView(),getString(R.string.user_updated),Snackbar.LENGTH_SHORT).show();
             }else{
                 Snackbar.make(getView(),getString(R.string.response_error),Snackbar.LENGTH_SHORT).show();
             }

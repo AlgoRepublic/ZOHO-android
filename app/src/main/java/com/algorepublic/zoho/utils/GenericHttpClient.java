@@ -321,7 +321,7 @@ public class GenericHttpClient {
         return message;
     }
     public String updateUser(String url,String ID,String firstname,String lastname,
-                             String email,int mobileNo, File files) throws IOException {
+                             String email,String mobileNo, File files) throws IOException {
 
         HttpClient hc = new DefaultHttpClient();
         String message =null;
@@ -337,7 +337,7 @@ public class GenericHttpClient {
         mpEntity.addPart("FirstName", new StringBody(firstname));
         mpEntity.addPart("LastName", new StringBody(lastname));
         mpEntity.addPart("Email", new StringBody(email));
-        mpEntity.addPart("Mobile", new StringBody(Integer.toString(mobileNo)));
+        mpEntity.addPart("Mobile", new StringBody(mobileNo));
         p.setEntity(mpEntity);
         HttpResponse resp = hc.execute(p);
         if (resp != null) {

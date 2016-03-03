@@ -37,8 +37,15 @@ public class UserListModel  {
             @SerializedName("Email")
             public String email;
 
+            @SerializedName("Mobile")
+            public String mobile;
+
             @SerializedName("FirstName")
             public String firstName;
+
+            @SerializedName("LastName")
+            public String lastName;
+
 
             @SerializedName("ResponseCode")
             public String responseCode;
@@ -49,6 +56,9 @@ public class UserListModel  {
 
             @SerializedName("ProfileImagePath")
             public String profileImagePath;
+
+            @SerializedName("ID")
+            public Integer ID;
 
         }
 

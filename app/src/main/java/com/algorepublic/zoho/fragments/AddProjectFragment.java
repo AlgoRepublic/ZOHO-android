@@ -112,7 +112,7 @@ public class AddProjectFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        view  = inflater.inflate(R.layout.add_project, container, false);
+        view  = inflater.inflate(R.layout.fragment_add_project, container, false);
         radioGroup = (RadioGroup) view.findViewById(R.id.private_public_group);
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
