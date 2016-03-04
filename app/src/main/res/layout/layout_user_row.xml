@@ -1,7 +1,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="100dp">
+    android:layout_height="95dp">
     <RelativeLayout
         android:id="@+id/top_parent"
         android:layout_toRightOf="@+id/selected_project"
@@ -112,10 +112,9 @@
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:id="@+id/forum_description"
+                                android:id="@+id/user_role"
                                 android:textSize="14sp"
                                 android:text="daadadad"
-                                android:lines="2"
                                 android:textColor="@color/colorBaseHeader"
                                 android:layout_below="@+id/user_email"
                                 android:layout_alignStart="@+id/user_title" />

@@ -16,27 +16,30 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ListView;
 
-import com.algorepublic.zoho.Models.AllProjectsModel;
-import com.algorepublic.zoho.Models.CreateProjectModel;
+import com.algorepublic.zoho.Models.AllProjectsByUserModel;
+import com.algorepublic.zoho.Models.UserRoleModel;
 import com.algorepublic.zoho.R;
-import com.algorepublic.zoho.adapters.AdapterAddUserList;
-import com.algorepublic.zoho.adapters.ProjectsList;
 import com.algorepublic.zoho.services.CallBack;
 import com.algorepublic.zoho.services.ProjectsListService;
+import com.algorepublic.zoho.services.UserService;
 import com.algorepublic.zoho.utils.BaseClass;
 import com.algorepublic.zoho.utils.Constants;
 import com.algorepublic.zoho.utils.GenericHttpClient;
 import com.androidquery.AQuery;
 import com.flyco.dialog.listener.OnOperItemClickL;
 import com.flyco.dialog.widget.ActionSheetDialog;
+import com.guna.libmultispinner.MultiSelectionSpinner;
+
+import org.angmarch.views.NiceSpinner;
 
 import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 
 import cc.cloudist.acplibrary.ACProgressConstant;
 import cc.cloudist.acplibrary.ACProgressFlower;
@@ -44,15 +47,19 @@ import cc.cloudist.acplibrary.ACProgressFlower;
 /**
  * Created by waqas on 2/15/16.
  */
-public class AddUserFragment extends BaseFragment{
+public class AddUserFragment extends BaseFragment implements MultiSelectionSpinner.OnMultipleItemsSelectedListener{
 
     private static final int TAKE_PICTURE = 1;
     public static final int RESULT_GALLERY = 2;
     public static final int PICK_File = 3;
     File newFile;
     AQuery aq;
-    public static ListView listView;
+    ArrayList<String> roleList;
+    String [] projectList;
+    NiceSpinner role_list;
     ProjectsListService service ;
+    UserService service1;
+    MultiSelectionSpinner projectsList;
     ACProgressFlower dialog;
     BaseClass baseClass;
 
@@ -72,16 +79,19 @@ public class AddUserFragment extends BaseFragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view  = inflater.inflate(R.layout.fragment_add_user, container, false);
-        listView = (ListView) view.findViewById(R.id.listview_adduser);
+        role_list = (NiceSpinner) view.findViewById(R.id.role_list);
+        projectsList = (MultiSelectionSpinner) view.findViewById(R.id.projects_list);
+        projectsList.setListener(this);
         baseClass = ((BaseClass) getActivity().getApplicationContext());
         aq = new AQuery(getActivity(), view);
         setHasOptionsMenu(true);
         service = new ProjectsListService(getActivity());
+        service1 = new UserService(getActivity());
         dialog = new ACProgressFlower.Builder(getActivity())
                 .direction(ACProgressConstant.DIRECT_CLOCKWISE)
                 .themeColor(Color.WHITE)
                 .fadeColor(Color.DKGRAY).build();
-        getToolbar().setTitle(getString(R.string.save));
+        getToolbar().setTitle(getString(R.string.add_user));
         aq.id(R.id.profile).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -98,13 +108,39 @@ public class AddUserFragment extends BaseFragment{
 //            } catch (IndexOutOfBoundsException e) {
 //            }
 //        }
-        service.getAllProjects_API(true, new CallBack(AddUserFragment.this, "AllProjects"));
+        if(baseClass.getSelectedProject().equalsIgnoreCase("0")){
+            aq.id(R.id.layout).visibility(View.VISIBLE);
+            service.getAllProjectsByUser_API(baseClass.getUserId(), true, new CallBack(AddUserFragment.this, "AllProjects"));
+        }else {
+            aq.id(R.id.layout).visibility(View.GONE);
+        }
+        service1.getUserRole(true,new CallBack(AddUserFragment.this,"UserRole"));
         return view;
     }
+
     public void AllProjects(Object caller, Object model){
-        AllProjectsModel.getInstance().setList((AllProjectsModel) model);
-        if (AllProjectsModel.getInstance().responseData !=null ) {
-            listView.setAdapter(new AdapterAddUserList(getActivity()));
+        AllProjectsByUserModel.getInstance().setList((AllProjectsByUserModel) model);
+        if (AllProjectsByUserModel.getInstance().responseCode == 100
+                || AllProjectsByUserModel.getInstance().responseData.size() != 0) {
+            for(int loop=0;loop< AllProjectsByUserModel.getInstance().responseData.size();loop++) {
+                projectList[loop] = AllProjectsByUserModel.getInstance().responseData.get(loop).projectName;
+            }
+            Log.e("S","/"+projectList);
+            projectsList.setItems(projectList);
+            projectsList.setSelection(0);
+        }else {
+            Snackbar.make(getView(), getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
+        }
+
+    }
+    public void UserRole(Object caller, Object model){
+        UserRoleModel.getInstance().setList((UserRoleModel) model);
+        if (UserRoleModel.getInstance().responseObject.size() !=0 ) {
+            roleList= new ArrayList<>();
+            for(int loop=0;loop< UserRoleModel.getInstance().responseObject.size();loop++) {
+                roleList.add(UserRoleModel.getInstance().responseObject.get(loop).role);
+            }
+            role_list.attachDataSource(roleList);
         }else {
             Snackbar.make(getView() , getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
         }
@@ -208,6 +244,17 @@ public class AddUserFragment extends BaseFragment{
         }
         aq.id(R.id.profile).image(newFile,200);
     }
+
+    @Override
+    public void selectedIndices(List<Integer> indices) {
+
+    }
+
+    @Override
+    public void selectedStrings(List<String> strings) {
+
+    }
+
     public class AddUser extends AsyncTask<Void, Void, String> {
         GenericHttpClient httpClient;
         String response = null;

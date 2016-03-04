@@ -50,7 +50,7 @@ public class AllProjectsByUserModel {
         public String updatedAt;
 
         @SerializedName("ID")
-        public String projectID;
+        public Integer projectID;
 
         @SerializedName("TotlTasksNo")
         public String totalTasks;

@@ -13,7 +13,7 @@ import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.algorepublic.zoho.Models.CreateProjectModel;
-import com.algorepublic.zoho.Models.TaskAssigneeModel;
+import com.algorepublic.zoho.Models.TaskUserModel;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.adapters.ProjectsList;
 import com.algorepublic.zoho.services.CallBack;
@@ -97,7 +97,7 @@ public class EditProjectFragment extends BaseFragment {
         service.updateProject(projectsLists.get(position).getProjectID()
                 , aq.id(R.id.project_name).getText().toString(), baseClass.getUserId()
                 , aq.id(R.id.project_desc).getText().toString()
-                , TaskAssigneeModel.getInstance().responseObject.
+                , TaskUserModel.getInstance().responseObject.
                 get(owner_list.getSelectedIndex()).ID, isactive
                 , projectsLists.get(
                 departments_list.getSelectedIndex()).getCompOrDeptID(), isprivate
@@ -162,7 +162,7 @@ public class EditProjectFragment extends BaseFragment {
             deptList.add(ProjectsFragment.allDeptList.get(loop).getDeptName());
         }
         departments_list.attachDataSource(deptList);
-        service.getAllUsers(true, new CallBack(EditProjectFragment.this, "GetAllUsers"));
+        service.getTaskAssignee(Integer.parseInt(baseClass.getSelectedProject()), true, new CallBack(EditProjectFragment.this, "GetAllUsers"));
         return view;
     }
     public void UpdateValues()
@@ -206,11 +206,11 @@ public class EditProjectFragment extends BaseFragment {
         }
     }
     public void GetAllUsers(Object caller, Object model) {
-        TaskAssigneeModel.getInstance().setList((TaskAssigneeModel) model);
-        if (TaskAssigneeModel.getInstance().responseCode == 100) {
+        TaskUserModel.getInstance().setList((TaskUserModel) model);
+        if (TaskUserModel.getInstance().responseCode == 100) {
             userList= new LinkedList<>();
-            for(int loop=0;loop<TaskAssigneeModel.getInstance().responseObject.size();loop++) {
-                userList.add(TaskAssigneeModel.getInstance().responseObject.get(loop).firstName);
+            for(int loop=0;loop< TaskUserModel.getInstance().responseObject.size();loop++) {
+                userList.add(TaskUserModel.getInstance().responseObject.get(loop).firstName);
             }
             owner_list.attachDataSource(userList);
             UpdateValues();

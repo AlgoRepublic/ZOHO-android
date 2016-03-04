@@ -58,6 +58,7 @@
     <string name="task_desc">Task Description</string>
     <string name="category">Category</string>
     <string name="employees">Employees</string>
+    <string name="assigned_projects">Assigned Projects</string>
     <string name="TaskListName">TaskList Name</string>
     <string name="users">Users</string>
     <string name="schedule">Schedule</string>

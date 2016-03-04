@@ -48,12 +48,12 @@ public class AdapterUser extends BaseAdapter {
 
     @Override
     public long getItemId(int position) {
-        return 0;
+        return position;
     }
 
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
-        final ViewHolder holder;
+        ViewHolder holder;
         if (convertView == null) {
             convertView = l_Inflater.inflate(R.layout.layout_user_row, null);
             holder = new ViewHolder();
@@ -66,22 +66,21 @@ public class AdapterUser extends BaseAdapter {
         aq = new AQuery(convertView);
         aq.id(R.id.user_title).text(getItem(position).firstName);
         aq.id(R.id.user_email).text(getItem(position).email);
+        aq.id(R.id.user_role).text("Role: "+getItem(position).userRole.role);
         if(getItem(position).profileImagePath !=null) {
             Glide.with(ctx).load(Constants.Image_URL +
                     getItem(position).profileImagePath).into(holder.userImage);
         }
-            holder.btEdit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                callFragmentWithBackStack(R.id.container, EditUserFragment.newInstance(position), "EditUserFragment");
-            }
+        holder.btEdit.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            callFragmentWithBackStack(R.id.container, EditUserFragment.newInstance(position), "EditUserFragment");
+        }
         });
         return convertView;
     }
 
     static class ViewHolder {
-        TextView taskComment;
-        TextView userName;
         CircularImageView userImage;
         TextView btEdit;
     }

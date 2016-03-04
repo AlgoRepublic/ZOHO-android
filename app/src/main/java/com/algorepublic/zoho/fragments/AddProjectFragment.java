@@ -14,7 +14,7 @@ import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.algorepublic.zoho.Models.CreateProjectModel;
-import com.algorepublic.zoho.Models.TaskAssigneeModel;
+import com.algorepublic.zoho.Models.TaskUserModel;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.services.CallBack;
 import com.algorepublic.zoho.services.ProjectsListService;
@@ -87,7 +87,7 @@ public class AddProjectFragment extends BaseFragment {
         ProjectsListService service = new ProjectsListService(getActivity());
         service.createProject(aq.id(R.id.project_name).getText().toString(),baseClass.getUserId()
                 ,aq.id(R.id.project_desc).getText().toString()
-                ,TaskAssigneeModel.getInstance().responseObject.
+                , TaskUserModel.getInstance().responseObject.
                 get(owner_list.getSelectedIndex()).ID
                 ,ProjectsFragment.allDeptList.get(
                 departments_list.getSelectedIndex()).getDeptID(),isprivate
@@ -140,15 +140,15 @@ public class AddProjectFragment extends BaseFragment {
             deptList.add(ProjectsFragment.allDeptList.get(loop).getDeptName());
         }
         departments_list.attachDataSource(deptList);
-        service.getAllUsers(true, new CallBack(AddProjectFragment.this, "GetAllUsers"));
+        service.getTaskAssignee(Integer.parseInt(baseClass.getSelectedProject()),true, new CallBack(AddProjectFragment.this, "GetAllUsers"));
         return view;
     }
     public void GetAllUsers(Object caller, Object model) {
-        TaskAssigneeModel.getInstance().setList((TaskAssigneeModel) model);
-        if (TaskAssigneeModel.getInstance().responseCode == 100) {
+        TaskUserModel.getInstance().setList((TaskUserModel) model);
+        if (TaskUserModel.getInstance().responseCode == 100) {
             userList= new LinkedList<>();
-            for(int loop=0;loop<TaskAssigneeModel.getInstance().responseObject.size();loop++) {
-                userList.add(TaskAssigneeModel.getInstance().responseObject.get(loop).firstName);
+            for(int loop=0;loop< TaskUserModel.getInstance().responseObject.size();loop++) {
+                userList.add(TaskUserModel.getInstance().responseObject.get(loop).firstName);
             }
             owner_list.attachDataSource(userList);
         }

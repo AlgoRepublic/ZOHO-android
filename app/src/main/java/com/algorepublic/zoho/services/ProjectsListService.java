@@ -22,11 +22,6 @@ public class ProjectsListService extends BaseService {
         super(act);
     }
 
-    public void getAllProjects_API( boolean message, CallBack obj){
-        String url = Constants.GetAllProjects_API  ;
-        this.get(url, obj, AllProjectsModel.getInstance(), message);
-        Log.e("AllProjectsService", url);
-    }
     public void getAllProjectsByUser_API(String UserID, boolean message, CallBack obj){
         String url = Constants.GetAllProjectsByUser_API +"userID="+UserID ;
         this.get(url, obj, AllProjectsByUserModel.getInstance(), message);

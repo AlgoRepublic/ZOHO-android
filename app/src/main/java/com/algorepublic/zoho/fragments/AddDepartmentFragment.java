@@ -8,23 +8,14 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RadioGroup;
-import android.widget.Toast;
 
 import com.algorepublic.zoho.Models.CreateForumModel;
-import com.algorepublic.zoho.Models.CreateProjectModel;
-import com.algorepublic.zoho.Models.TaskAssigneeModel;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.services.CallBack;
 import com.algorepublic.zoho.services.DepartmentService;
-import com.algorepublic.zoho.services.ProjectsListService;
 import com.algorepublic.zoho.services.TaskListService;
 import com.algorepublic.zoho.utils.BaseClass;
 import com.androidquery.AQuery;
-
-import org.angmarch.views.NiceSpinner;
-
-import java.util.LinkedList;
 
 /**
  * Created by android on 2/25/16.

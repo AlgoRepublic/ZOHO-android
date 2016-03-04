@@ -181,7 +181,7 @@ public class ProjectsFragment extends BaseFragment{
                 ProjectsList projectsList = new ProjectsList();
                 projectsList.setCompOrDeptName("");
                 projectsList.setCompOrDeptID("1");
-                projectsList.setProjectID(AllProjectsByUserModel.getInstance().responseData.get(loop).projectID);
+                projectsList.setProjectID(Integer.toString(AllProjectsByUserModel.getInstance().responseData.get(loop).projectID));
                 projectsList.setProjectName(AllProjectsByUserModel.getInstance().responseData.get(loop).projectName);
                 projectsList.setOwnerID(AllProjectsByUserModel.getInstance().responseData.get(loop).ownerID);
                 projectsList.setOwnerName(AllProjectsByUserModel.getInstance().responseData.get(loop).ownerName);

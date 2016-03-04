@@ -3,7 +3,6 @@ package com.algorepublic.zoho.FragmentsTasks;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,8 +10,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.algorepublic.zoho.adapters.TasksList;
-import com.algorepublic.zoho.fragments.TaskAddUpdateFragment;
-import com.algorepublic.zoho.Models.TaskAssigneeModel;
+import com.algorepublic.zoho.Models.TaskUserModel;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.adapters.AdapterTaskAssignee;
 import com.algorepublic.zoho.fragments.BaseFragment;
@@ -70,8 +68,8 @@ public class TaskAssignFragment extends BaseFragment {
             return  view;
     }
     public void TaskAssignee(Object caller, Object model) {
-        TaskAssigneeModel.getInstance().setList((TaskAssigneeModel) model);
-        if (TaskAssigneeModel.getInstance().responseCode == 100) {
+        TaskUserModel.getInstance().setList((TaskUserModel) model);
+        if (TaskUserModel.getInstance().responseCode == 100) {
             listView.setAdapter(new AdapterTaskAssignee(getActivity()));
         }
         else

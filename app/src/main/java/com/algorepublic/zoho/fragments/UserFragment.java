@@ -52,8 +52,12 @@ public class UserFragment extends BaseFragment {
         getToolbar().setTitle(getString(R.string.user));
 
         UserService service = new UserService(getActivity());
-        service.getListByProject(Integer.parseInt(baseClass.getUserId()), true, new CallBack(UserFragment.this, "UserListCallback"));
-        return view;
+        if(baseClass.getSelectedProject().equalsIgnoreCase("0")){
+            service.getAllUsers(true, new CallBack(UserFragment.this, "UserList"));
+        }else {
+            service.getUserListByProject(Integer.parseInt(baseClass.getSelectedProject()), true, new CallBack(UserFragment.this, "UserList"));
+        }
+            return view;
     }
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
@@ -62,7 +66,7 @@ public class UserFragment extends BaseFragment {
     }
 
 
-    public void UserListCallback(Object caller, Object model){
+    public void UserList(Object caller, Object model){
         UserListModel.getInstance().setList((UserListModel) model);
         if (UserListModel.getInstance().responseObject.size()!=0) {
             aq.id(R.id.user_list).adapter(new AdapterUser(getActivity()));

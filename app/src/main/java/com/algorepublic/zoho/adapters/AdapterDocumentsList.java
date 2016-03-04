@@ -13,18 +13,11 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.BaseAdapter;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.GridView;
-import android.widget.ListView;
 
-import com.algorepublic.zoho.FragmentsTasks.TaskAssignFragment;
 import com.algorepublic.zoho.Models.GeneralModel;
-import com.algorepublic.zoho.Models.TaskAssigneeModel;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.fragments.DocsPreviewFragment;
 import com.algorepublic.zoho.fragments.DocumentsListFragment;
-import com.algorepublic.zoho.fragments.TaskAddUpdateFragment;
 import com.algorepublic.zoho.services.CallBack;
 import com.algorepublic.zoho.services.DocumentsService;
 import com.algorepublic.zoho.utils.BaseClass;
@@ -38,7 +31,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 import se.emilsjolander.stickylistheaders.StickyListHeadersAdapter;
-import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
 
 /**
  * Created by android on 1/7/16.

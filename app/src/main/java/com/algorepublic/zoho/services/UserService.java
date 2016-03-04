@@ -4,8 +4,8 @@ import android.app.Activity;
 import android.util.Log;
 
 import com.algorepublic.zoho.Models.CreateProjectModel;
-import com.algorepublic.zoho.Models.TaskAssigneeModel;
 import com.algorepublic.zoho.Models.UserListModel;
+import com.algorepublic.zoho.Models.UserRoleModel;
 import com.algorepublic.zoho.utils.Constants;
 
 import java.util.HashMap;
@@ -18,19 +18,19 @@ public class UserService extends BaseService {
         super(act);
     }
 
-    public void getListByProject(int projectID, boolean message, CallBack obj){
+    public void getUserListByProject(int projectID, boolean message, CallBack obj){
         String url = Constants.GetUserListByProject_API + "projectID=" + projectID;
         this.get(url, obj, UserListModel.getInstance(), message);
         Log.e("UserService", url);
     }
-    public void getAllUserList( boolean message, CallBack obj){
+    public void getAllUsers( boolean message, CallBack obj){
         String url = Constants.GetAllUserList_API;
-        this.get(url, obj, TaskAssigneeModel.getInstance(), message);
-        Log.e("GetAllService", url);
+        this.get(url, obj, UserListModel.getInstance(), message);
+        Log.e("GetAllUserService", url);
     }
     public void getUserRole( boolean message, CallBack obj){
         String url = Constants.GetUserRole_API;
-        this.get(url, obj, TaskAssigneeModel.getInstance(), message);
+        this.get(url, obj, UserRoleModel.getInstance(), message);
         Log.e("GetUserRoleService", url);
     }
     public void deleteUser(String ID,boolean message, CallBack obj){
