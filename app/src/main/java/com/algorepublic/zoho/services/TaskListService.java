@@ -12,8 +12,6 @@ import com.algorepublic.zoho.Models.TaskListBySubTaskModel;
 import com.algorepublic.zoho.Models.TasksListByOwnerModel;
 import com.algorepublic.zoho.utils.Constants;
 
-import java.io.File;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -84,7 +82,7 @@ public class TaskListService extends BaseService {
         Log.e("TaskAssigneeService", url);
     }
     public void getAllUsers( boolean message, CallBack obj){
-        String url = Constants.GetAllUser_API;
+        String url = Constants.GetAllUserList_API;
         this.get(url, obj, TaskAssigneeModel.getInstance(), message);
         Log.e("GetAllService", url);
     }

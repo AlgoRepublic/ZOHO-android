@@ -16,8 +16,15 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ListView;
 
+import com.algorepublic.zoho.Models.AllProjectsModel;
+import com.algorepublic.zoho.Models.CreateProjectModel;
 import com.algorepublic.zoho.R;
+import com.algorepublic.zoho.adapters.AdapterAddUserList;
+import com.algorepublic.zoho.adapters.ProjectsList;
+import com.algorepublic.zoho.services.CallBack;
+import com.algorepublic.zoho.services.ProjectsListService;
 import com.algorepublic.zoho.utils.BaseClass;
 import com.algorepublic.zoho.utils.Constants;
 import com.algorepublic.zoho.utils.GenericHttpClient;
@@ -29,6 +36,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
 
 import cc.cloudist.acplibrary.ACProgressConstant;
 import cc.cloudist.acplibrary.ACProgressFlower;
@@ -43,6 +51,8 @@ public class AddUserFragment extends BaseFragment{
     public static final int PICK_File = 3;
     File newFile;
     AQuery aq;
+    public static ListView listView;
+    ProjectsListService service ;
     ACProgressFlower dialog;
     BaseClass baseClass;
 
@@ -62,9 +72,11 @@ public class AddUserFragment extends BaseFragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view  = inflater.inflate(R.layout.fragment_add_user, container, false);
+        listView = (ListView) view.findViewById(R.id.listview_adduser);
         baseClass = ((BaseClass) getActivity().getApplicationContext());
         aq = new AQuery(getActivity(), view);
         setHasOptionsMenu(true);
+        service = new ProjectsListService(getActivity());
         dialog = new ACProgressFlower.Builder(getActivity())
                 .direction(ACProgressConstant.DIRECT_CLOCKWISE)
                 .themeColor(Color.WHITE)
@@ -76,9 +88,28 @@ public class AddUserFragment extends BaseFragment{
                 CallForAttachments();
             }
         });
+//        if (tasksObj.getListAssignees().size() > 0) {
+//            try {
+//                for (int loop = 0;
+//                     loop < tasksObj.getListAssignees().size(); loop++) {
+//                    TaskAddUpdateFragment.assigneeList.add(
+//                            tasksObj.getListAssignees().get(loop).getUserID());
+//                }
+//            } catch (IndexOutOfBoundsException e) {
+//            }
+//        }
+        service.getAllProjects_API(true, new CallBack(AddUserFragment.this, "AllProjects"));
         return view;
     }
+    public void AllProjects(Object caller, Object model){
+        AllProjectsModel.getInstance().setList((AllProjectsModel) model);
+        if (AllProjectsModel.getInstance().responseData !=null ) {
+            listView.setAdapter(new AdapterAddUserList(getActivity()));
+        }else {
+            Snackbar.make(getView() , getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
+        }
 
+    }
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.menu_save_project, menu);
@@ -211,5 +242,10 @@ public class AddUserFragment extends BaseFragment{
                 Snackbar.make(getView(),getString(R.string.response_error),Snackbar.LENGTH_SHORT).show();
             }
         }
+    }
+    @Override
+    public void onDestroyView() {
+        UserFragment.assigneeList.clear();
+        super.onDestroyView();
     }
 }

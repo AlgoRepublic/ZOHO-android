@@ -17,6 +17,8 @@ import com.algorepublic.zoho.services.UserService;
 import com.algorepublic.zoho.utils.BaseClass;
 import com.androidquery.AQuery;
 
+import java.util.ArrayList;
+
 /**
  * Created by waqas on 2/8/16.
  */
@@ -24,6 +26,8 @@ public class UserFragment extends BaseFragment {
 
 
     AQuery aq;
+
+    public static ArrayList<Integer> assigneeList = new ArrayList<>();
     BaseClass baseClass;
 
 

@@ -3,8 +3,8 @@ package com.algorepublic.zoho.services;
 import android.app.Activity;
 import android.util.Log;
 
+import com.algorepublic.zoho.Models.AllProjectsByUserModel;
 import com.algorepublic.zoho.Models.AllProjectsModel;
-import com.algorepublic.zoho.Models.CreateCommentModel;
 import com.algorepublic.zoho.Models.CreateProjectModel;
 import com.algorepublic.zoho.Models.GeneralModel;
 import com.algorepublic.zoho.Models.ProjectsByClientModel;
@@ -22,10 +22,15 @@ public class ProjectsListService extends BaseService {
         super(act);
     }
 
-    public void getAllProjects_API(String UserID, boolean message, CallBack obj){
-        String url = Constants.GetAllProjects_API+"userID="+UserID ;
+    public void getAllProjects_API( boolean message, CallBack obj){
+        String url = Constants.GetAllProjects_API  ;
         this.get(url, obj, AllProjectsModel.getInstance(), message);
         Log.e("AllProjectsService", url);
+    }
+    public void getAllProjectsByUser_API(String UserID, boolean message, CallBack obj){
+        String url = Constants.GetAllProjectsByUser_API +"userID="+UserID ;
+        this.get(url, obj, AllProjectsByUserModel.getInstance(), message);
+        Log.e("AllProjByUserService", url);
     }
     public void getProjectsByClient_API(String ownerID, boolean message, CallBack obj){
         String url = Constants.GetProjectsByClient_API + "?OwnerID=" + ownerID;
@@ -68,8 +73,10 @@ public class ProjectsListService extends BaseService {
         Log.e("UpdateProjectService", url);
     }
     public void DeleteProject(String ID, boolean message, CallBack obj){
-        String url = Constants.DeleteProject_API+"projectID="+ID;
-        this.get(url, obj, GeneralModel.getInstance(), message);
+        String url = Constants.DeleteProject_API;
+        HashMap<String, String> params = new HashMap<String, String>();
+        params.put("projectID", ID);
+        this.post(url, params, obj, GeneralModel.getInstance(), message);
         Log.e("DeleteService", url);
     }
 }

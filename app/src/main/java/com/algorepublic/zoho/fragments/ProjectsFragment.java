@@ -15,7 +15,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.algorepublic.zoho.Models.AllProjectsModel;
+import com.algorepublic.zoho.Models.AllProjectsByUserModel;
 import com.algorepublic.zoho.Models.ProjectsByClientModel;
 import com.algorepublic.zoho.Models.ProjectsByDepartmentModel;
 import com.algorepublic.zoho.R;
@@ -142,16 +142,16 @@ public class ProjectsFragment extends BaseFragment{
         super.onViewCreated(view, savedInstanceState);
         baseClass = ((BaseClass) getActivity().getApplicationContext());
         service = new ProjectsListService(getActivity());
-        service.getAllProjects_API(baseClass.getUserId(), true, new CallBack(this, "AllProjects"));
+        service.getAllProjectsByUser_API(baseClass.getUserId(), true, new CallBack(this, "AllProjects"));
         service.getProjectsByClient_API(baseClass.getUserId(), true, new CallBack(this, "ProjectsByClient"));
         service.getProjectsByDepartment(baseClass.getUserId(),
                 true, new CallBack(this, "ProjectsByDepartment"));
         applyLightBackground(aq.id(R.id.sort).getView(), baseClass);
     }
     public void AllProjects(Object caller, Object model) {
-        AllProjectsModel.getInstance().setList((AllProjectsModel) model);
-        if (AllProjectsModel.getInstance().responseCode == 100
-                || AllProjectsModel.getInstance().responseData.size() != 0) {
+        AllProjectsByUserModel.getInstance().setList((AllProjectsByUserModel) model);
+        if (AllProjectsByUserModel.getInstance().responseCode == 100
+                || AllProjectsByUserModel.getInstance().responseData.size() != 0) {
             AddAllProjects();
         } else {
             Toast.makeText(getActivity(), getString(R.string.response_error), Toast.LENGTH_SHORT).show();
@@ -177,20 +177,20 @@ public class ProjectsFragment extends BaseFragment{
     }
     public void AddAllProjects(){
         allProjectsList.clear();
-        for (int loop = 0; loop < AllProjectsModel.getInstance().responseData.size(); loop++) {
+        for (int loop = 0; loop < AllProjectsByUserModel.getInstance().responseData.size(); loop++) {
                 ProjectsList projectsList = new ProjectsList();
                 projectsList.setCompOrDeptName("");
                 projectsList.setCompOrDeptID("1");
-                projectsList.setProjectID(AllProjectsModel.getInstance().responseData.get(loop).projectID);
-                projectsList.setProjectName(AllProjectsModel.getInstance().responseData.get(loop).projectName);
-                projectsList.setOwnerID(AllProjectsModel.getInstance().responseData.get(loop).ownerID);
-                projectsList.setOwnerName(AllProjectsModel.getInstance().responseData.get(loop).ownerName);
-                projectsList.setProjectDesc(AllProjectsModel.getInstance().responseData.get(loop).description);
-                projectsList.setTotalTasks(AllProjectsModel.getInstance().responseData.get(loop).totalTasks);
-                projectsList.setTotalUsers(AllProjectsModel.getInstance().responseData.get(loop).usersCount);
-                projectsList.setTotalMilestones(AllProjectsModel.getInstance().responseData.get(loop).toalMilestones);
-                projectsList.setDeleted(AllProjectsModel.getInstance().responseData.get(loop).IsDeleted);
-                projectsList.setPrivate(AllProjectsModel.getInstance().responseData.get(loop).Isprivate);
+                projectsList.setProjectID(AllProjectsByUserModel.getInstance().responseData.get(loop).projectID);
+                projectsList.setProjectName(AllProjectsByUserModel.getInstance().responseData.get(loop).projectName);
+                projectsList.setOwnerID(AllProjectsByUserModel.getInstance().responseData.get(loop).ownerID);
+                projectsList.setOwnerName(AllProjectsByUserModel.getInstance().responseData.get(loop).ownerName);
+                projectsList.setProjectDesc(AllProjectsByUserModel.getInstance().responseData.get(loop).description);
+                projectsList.setTotalTasks(AllProjectsByUserModel.getInstance().responseData.get(loop).totalTasks);
+                projectsList.setTotalUsers(AllProjectsByUserModel.getInstance().responseData.get(loop).usersCount);
+                projectsList.setTotalMilestones(AllProjectsByUserModel.getInstance().responseData.get(loop).toalMilestones);
+                projectsList.setDeleted(AllProjectsByUserModel.getInstance().responseData.get(loop).IsDeleted);
+                projectsList.setPrivate(AllProjectsByUserModel.getInstance().responseData.get(loop).Isprivate);
                 allProjectsList.add(projectsList);
         }
         SetGeneralClientAdapter();

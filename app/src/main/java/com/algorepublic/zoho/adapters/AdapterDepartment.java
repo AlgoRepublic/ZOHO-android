@@ -248,7 +248,6 @@ public class AdapterDepartment
     public boolean onCheckCanStartDrag(MyViewHolder holder, int position, int x, int y) {
         // x, y --- relative from the itemView's top-left
 
-
         final View containerView = holder.mContainer;
         if(containerView == null)
             return false;

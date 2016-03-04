@@ -8,9 +8,12 @@ import android.widget.BaseAdapter;
 import android.widget.ListView;
 
 import com.algorepublic.zoho.FragmentsTasks.TaskAssignFragment;
+import com.algorepublic.zoho.Models.AllProjectsModel;
 import com.algorepublic.zoho.Models.TaskAssigneeModel;
 import com.algorepublic.zoho.R;
+import com.algorepublic.zoho.fragments.AddUserFragment;
 import com.algorepublic.zoho.fragments.TaskAddUpdateFragment;
+import com.algorepublic.zoho.fragments.UserFragment;
 import com.algorepublic.zoho.utils.BaseClass;
 import com.androidquery.AQuery;
 
@@ -33,12 +36,12 @@ public class AdapterAddUserList extends BaseAdapter {
     @Override
     public int getCount() {
 
-        return TaskAssigneeModel.getInstance().responseObject.size();
+        return AllProjectsModel.getInstance().responseData.size();
     }
 
     @Override
     public Object getItem(int pos) {
-        return TaskAssigneeModel.getInstance().responseObject.get(pos);
+        return AllProjectsModel.getInstance().responseData.get(pos);
     }
 
     @Override
@@ -53,34 +56,31 @@ public class AdapterAddUserList extends BaseAdapter {
 
         aq = new AQuery(convertView);
 
-        aq.id(R.id.assignee_id).text(Integer.toString(TaskAssigneeModel.getInstance().responseObject.get(position).ID));
-        if(TaskAssigneeModel.getInstance().responseObject.get(position).ID==Integer.parseInt(baseClass.getUserId())) {
-            aq.id(R.id.assignee_name).text("Me");
-        }else{
-            aq.id(R.id.assignee_name).text(TaskAssigneeModel.getInstance().responseObject.get(position).firstName);
-        }
+        aq.id(R.id.assignee_id).text(Integer.toString(AllProjectsModel.getInstance().responseData.get(position).projectID));
+        aq.id(R.id.assignee_name).text(AllProjectsModel.getInstance().responseData.get(position).projectName);
+
         aq.id(R.id.assignee_checkbox).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(TaskAddUpdateFragment.assigneeList.size()>0) {
-                    for (int loop = 0; loop < TaskAddUpdateFragment.assigneeList.size(); loop++) {
-                        View view = getViewByPosition(position, TaskAssignFragment.listView);
+                if(UserFragment.assigneeList.size()>0) {
+                    for (int loop = 0; loop < UserFragment.assigneeList.size(); loop++) {
+                        View view = getViewByPosition(position, AddUserFragment.listView);
                         AQuery aQuery = new AQuery(view);
                         if (aQuery.id(R.id.assignee_checkbox).isChecked()) {
-                            TaskAddUpdateFragment.assigneeList.add(TaskAssigneeModel.getInstance().responseObject.get(position).ID);
+                            UserFragment.assigneeList.add(AllProjectsModel.getInstance().responseData.get(position).projectID);
                             break;
-                        } else if (TaskAddUpdateFragment.assigneeList.get(loop) ==
-                                TaskAssigneeModel.getInstance().responseObject.get(position).ID) {
-                            TaskAddUpdateFragment.assigneeList.remove(loop);
+                        } else if (UserFragment.assigneeList.get(loop) ==
+                                AllProjectsModel.getInstance().responseData.get(position).projectID) {
+                            UserFragment.assigneeList.remove(loop);
                         }
                     }
                 }else {
-                    TaskAddUpdateFragment.assigneeList.add(TaskAssigneeModel.getInstance().responseObject.get(position).ID);
+                    UserFragment.assigneeList.add(AllProjectsModel.getInstance().responseData.get(position).projectID);
                 }
             }
         });
-        for(int loop=0;loop< TaskAddUpdateFragment.assigneeList.size();loop++) {
-            if (TaskAddUpdateFragment.assigneeList.get(loop) ==
+        for(int loop=0;loop< UserFragment.assigneeList.size();loop++) {
+            if (UserFragment.assigneeList.get(loop) ==
                     Integer.parseInt(aq.id(R.id.assignee_id).getText().toString())) {
                 aq.id(R.id.assignee_checkbox).checked(true);
                 break;
