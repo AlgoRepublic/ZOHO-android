@@ -79,7 +79,7 @@ public class UserFragment extends BaseFragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.add_project:
-                callFragmentWithBackStack(R.id.container,AddUserFragment.newInstance(), "AddUserFragment");
+                callFragmentWithBackStack(R.id.container,AddUserFragment.newInstance(-1), "AddUserFragment");
         }
         return super.onOptionsItemSelected(item);
     }
