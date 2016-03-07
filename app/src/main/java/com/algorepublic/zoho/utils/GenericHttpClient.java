@@ -299,16 +299,16 @@ public class GenericHttpClient {
         return message;
     }
     public String createUser(String url,String firstname,String lastname,
-                             String email,String mobileNo,int userRole ,Integer[] Ids) throws IOException {
+                             String email,String mobileNo,int userRole ,ArrayList<Integer> Ids) throws IOException {
 
         HttpClient hc = new DefaultHttpClient();
         String message =null;
         HttpPost p = new HttpPost(url);
         MultipartEntity mpEntity = new MultipartEntity(HttpMultipartMode.BROWSER_COMPATIBLE);
 
-        for(int loop=0;loop<Ids.length;loop++) {
+        for(int loop=0;loop<Ids.size();loop++) {
             Log.e("File", "/" + Ids);
-            mpEntity.addPart("ProjectIDs["+loop+"]", new StringBody(Integer.toString(Ids[loop])));
+            mpEntity.addPart("ProjectIDs["+loop+"]", new StringBody(Integer.toString(Ids.get(loop))));
         }
         mpEntity.addPart("FirstName", new StringBody(firstname));
         mpEntity.addPart("LastName", new StringBody(lastname));
@@ -323,16 +323,16 @@ public class GenericHttpClient {
         return message;
     }
     public String updateUserWithoutProjects(String url,String ID,String firstname,String lastname,
-                             String email,String mobileNo,int userRole, Integer[] Ids) throws IOException {
+                             String email,String mobileNo,int userRole,ArrayList<Integer> Ids) throws IOException {
 
         HttpClient hc = new DefaultHttpClient();
         String message =null;
         HttpPost p = new HttpPost(url);
         MultipartEntity mpEntity = new MultipartEntity(HttpMultipartMode.BROWSER_COMPATIBLE);
 
-        for(int loop=0;loop<Ids.length;loop++) {
+        for(int loop=0;loop<Ids.size();loop++) {
             Log.e("IDs", "/" + Ids);
-            mpEntity.addPart("ProjectIDs["+loop+"]", new StringBody(Integer.toString(Ids[loop])));
+            mpEntity.addPart("ProjectIDs["+loop+"]", new StringBody(Integer.toString(Ids.get(loop))));
         }
 
         mpEntity.addPart("ID", new StringBody(ID));

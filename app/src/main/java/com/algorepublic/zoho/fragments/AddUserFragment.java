@@ -56,6 +56,7 @@ public class AddUserFragment extends BaseFragment implements MultiSelectionSpinn
     File newFile;
     AQuery aq;
     int[] Ids;
+    ArrayList<Integer> selectedIds = new ArrayList<>();
     ArrayList<String> roleList;
     ArrayList<String> projectList;
     NiceSpinner role_list;
@@ -137,6 +138,8 @@ public class AddUserFragment extends BaseFragment implements MultiSelectionSpinn
                                     .responseObject.get(position).projectIDs.get(loop) == AllProjectsByUserModel
                                     .getInstance().responseData.get(loop1).projectID)
                                 Ids[loop] = loop1;
+                            selectedIds.add(AllProjectsByUserModel
+                                    .getInstance().responseData.get(loop1).projectID);
                         }
                         projectsList.setSelection(Ids);
                     }
@@ -261,7 +264,11 @@ public class AddUserFragment extends BaseFragment implements MultiSelectionSpinn
 
     @Override
     public void selectedIndices(List<Integer> indices) {
-
+        selectedIds.clear();
+        for(int loop=0;loop<indices.size();loop++) {
+            selectedIds.add(AllProjectsByUserModel
+                    .getInstance().responseData.get(loop).projectID);
+        }
     }
 
     @Override
@@ -287,7 +294,9 @@ public class AddUserFragment extends BaseFragment implements MultiSelectionSpinn
                         aq.id(R.id.first_name).getText().toString(),
                         aq.id(R.id.last_name).getText().toString(),
                         aq.id(R.id.user_email).getText().toString(),
-                        aq.id(R.id.user_phoneno).getText().toString(), );
+                        aq.id(R.id.user_phoneno).getText().toString(),
+                        UserRoleModel.getInstance().responseObject.get
+                                (role_list.getSelectedIndex()).ID,selectedIds);
             } catch (IOException e) {
                 e.printStackTrace();
             }
