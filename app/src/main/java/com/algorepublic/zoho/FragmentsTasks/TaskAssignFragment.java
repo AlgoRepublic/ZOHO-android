@@ -2,6 +2,7 @@ package com.algorepublic.zoho.FragmentsTasks;
 
 
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -65,7 +66,7 @@ public class TaskAssignFragment extends BaseFragment {
       }else{
           service.getTaskAssignee(tasksList.getProjectID(), true, new CallBack(TaskAssignFragment.this, "TaskAssignee"));
       }
-            return  view;
+            return view;
     }
     public void TaskAssignee(Object caller, Object model) {
         TaskUserModel.getInstance().setList((TaskUserModel) model);
@@ -74,7 +75,7 @@ public class TaskAssignFragment extends BaseFragment {
         }
         else
         {
-            Toast.makeText(getActivity(), getString(R.string.response_error), Toast.LENGTH_SHORT).show();
+            Snackbar.make(getView(), getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
         }
     }
 }

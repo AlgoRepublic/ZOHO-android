@@ -7,9 +7,11 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.RadioButton;
+import android.widget.TextView;
 
 import com.algorepublic.zoho.FragmentsTasks.TaskPriorityFragment;
 import com.algorepublic.zoho.R;
+import com.algorepublic.zoho.fragments.TaskAddUpdateFragment;
 import com.algorepublic.zoho.fragments.TasksListFragment;
 import com.algorepublic.zoho.utils.BaseClass;
 import com.androidquery.AQuery;
@@ -67,7 +69,8 @@ public class AdapterTaskListName extends BaseAdapter {
             public void onClick(View v) {
                 selectedIndex = position;
                 baseClass.db.putInt("TaskListNameID", TasksListFragment.taskListName.get(selectedIndex).getTaskListID());
-                View  view = getViewByPosition(selectedIndex, TaskPriorityFragment.listView);
+                baseClass.db.putString("TaskListName", TasksListFragment.taskListName.get(selectedIndex).getTaskListName());
+                        View view = getViewByPosition(selectedIndex, TaskPriorityFragment.listView);
                 RadioButton radioButton = (RadioButton) view.findViewById(R.id.priority_checkbox);
                 for(int loop=0;loop<TasksListFragment.taskListName.size();loop++)
                 {
@@ -83,14 +86,16 @@ public class AdapterTaskListName extends BaseAdapter {
             public void onClick(View v) {
                 selectedIndex = position;
                 baseClass.db.putInt("TaskListNameID", TasksListFragment.taskListName.get(selectedIndex).getTaskListID());
-                View view = getViewByPosition(selectedIndex, TaskPriorityFragment.listView);
-                RadioButton radioButton = (RadioButton) view.findViewById(R.id.priority_checkbox);
+                baseClass.db.putString("TaskListName", TasksListFragment.taskListName.get(selectedIndex).getTaskListName());
+                RadioButton radioButton = (RadioButton) v.findViewById(R.id.priority_checkbox);
+                TextView textView = (TextView)v.findViewById(R.id.priority);
                 for (int loop = 0; loop < TasksListFragment.taskListName.size(); loop++) {
                     View view1 = getViewByPosition(loop, TaskPriorityFragment.listView);
                     RadioButton radioButton1 = (RadioButton) view1.findViewById(R.id.priority_checkbox);
                     radioButton1.setChecked(false);
                 }
                 radioButton.setChecked(true);
+                TaskAddUpdateFragment.tasksObj.setTaskListName(textView.getText().toString());
             }
         });
         return convertView;

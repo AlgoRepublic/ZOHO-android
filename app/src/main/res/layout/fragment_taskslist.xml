@@ -4,9 +4,16 @@
     android:layout_height="match_parent"
     tools:context="com.algorepublic.zoho.FragmentsTasks.TaskAssignFragment">
 
+    <SearchView
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:id="@+id/searchView"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
     <se.emilsjolander.stickylistheaders.StickyListHeadersListView
         android:id="@+id/list_taskslist"
         android:layout_width="match_parent"
+        android:layout_below="@+id/searchView"
         android:layout_height="match_parent"
         android:layout_above="@+id/layout_bottom"
         android:background="@color/colorWhite"
@@ -114,4 +121,5 @@
                 android:background="@mipmap/task_image" />
         </RelativeLayout>
     </LinearLayout>
+
 </RelativeLayout>

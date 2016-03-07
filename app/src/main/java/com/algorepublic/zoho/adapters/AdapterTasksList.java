@@ -3,6 +3,7 @@ package com.algorepublic.zoho.adapters;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
@@ -12,7 +13,9 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.BaseAdapter;
+import android.widget.SearchView;
 
+import com.algorepublic.zoho.Models.GeneralModel;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.fragments.TaskDetailFragment;
 import com.algorepublic.zoho.fragments.TasksListFragment;
@@ -40,10 +43,13 @@ public class AdapterTasksList extends BaseAdapter implements StickyListHeadersAd
     TaskListService service;
     private LayoutInflater l_Inflater;
     private int lastPosition = -1;
+    int clickedPosition;
+    ArrayList<TasksList> lists = new ArrayList<>();
     ArrayList<TasksList> tasksLists = new ArrayList<>();
 
     public AdapterTasksList(Context context, ArrayList<TasksList> arrayList) {
         tasksLists.addAll(arrayList);
+        lists.addAll(arrayList);
         l_Inflater = LayoutInflater.from(context);
         this.ctx = context;
         service = new TaskListService((AppCompatActivity)ctx);
@@ -82,10 +88,13 @@ public class AdapterTasksList extends BaseAdapter implements StickyListHeadersAd
         aq.id(R.id.task_users).text(tasksLists.get(position).getListAssignees().size() + " " + ctx.getString(R.string.task_user));
         aq.id(R.id.task_name).text(tasksLists.get(position).getTaskName());
         aq.id(R.id.project_name).text(tasksLists.get(position).getProjectName());
-        if(tasksLists.get(position).getStartDate().equalsIgnoreCase("3/0/1"))
-            aq.id(R.id.task_date).text("No Due Date");
-        else
+        if(tasksLists.get(position).getStartDate().equalsIgnoreCase("3/0/1")) {
+            aq.id(R.id.task_date).text("No Date");
+        }else if(tasksLists.get(position).getStartDate().equalsIgnoreCase("12/31/3938")) {
+            aq.id(R.id.task_date).text("No Date");
+        }else
             aq.id(R.id.task_date).text(tasksLists.get(position).getEndDate());
+
 
         try {
             if (tasksLists.get(position).getProjectName().equalsIgnoreCase(""))
@@ -104,14 +113,39 @@ public class AdapterTasksList extends BaseAdapter implements StickyListHeadersAd
         aq.id(R.id.btDelete).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                clickedPosition = position;
             NormalDialogCustomAttr(ctx.getString(R.string.delete_task),tasksLists.get(position));
             }
         });
         Animation animation = AnimationUtils.loadAnimation(ctx, (position > lastPosition) ? R.anim.up_from_bottom : R.anim.down_from_top);
         convertView.startAnimation(animation);
         lastPosition = position;
+        TasksListFragment.searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                Filter(newText);
+                return false;
+            }
+        });
 
         return convertView;
+    }
+    public void Filter(String text){
+        ArrayList<TasksList> arrayList = new ArrayList<>();
+        arrayList.addAll(lists);
+        tasksLists.clear();
+        for (int loop=0;loop<arrayList.size();loop++){
+            if(arrayList.get(loop).getTaskName().contains(text))
+            {
+                tasksLists.add(arrayList.get(loop));
+            }
+        }
+        notifyDataSetChanged();
     }
     public void callFragmentWithBackStack(int containerId, Fragment fragment, String tag){
         ((AppCompatActivity)ctx).getSupportFragmentManager()
@@ -129,7 +163,7 @@ public class AdapterTasksList extends BaseAdapter implements StickyListHeadersAd
 
         if(baseClass.getTaskFilterType().equalsIgnoreCase("DueDate")) {
             if (tasksLists.get(position).getHeader().equalsIgnoreCase("3/0/1"))
-                aq_header.id(R.id.header).text("No Due Date");
+                aq_header.id(R.id.header).text("No Date");
             else
                 aq_header.id(R.id.header).text(tasksLists.get(position).getHeader());
         }
@@ -229,5 +263,16 @@ public class AdapterTasksList extends BaseAdapter implements StickyListHeadersAd
                                 , true, new CallBack(AdapterTasksList.this, "DeleteTask"));
                     }
                 });
+    }
+    public void DeleteTask(Object caller, Object model) {
+        GeneralModel.getInstance().setList((GeneralModel) model);
+        if (GeneralModel.getInstance().responseCode.equalsIgnoreCase("100")) {
+            tasksLists.remove(clickedPosition);notifyDataSetChanged();
+            Snackbar.make(((AppCompatActivity)ctx).findViewById(android.R.id.content), ctx.getString(R.string.task_deleted), Snackbar.LENGTH_SHORT).show();
+        }
+        else
+        {
+            Snackbar.make(((AppCompatActivity)ctx).findViewById(android.R.id.content), ctx.getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
+        }
     }
 }

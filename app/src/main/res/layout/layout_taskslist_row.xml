@@ -139,6 +139,8 @@
                         android:layout_gravity="center_vertical"
                         android:layout_weight=".8"
                         android:gravity="left"
+                        android:singleLine="true"
+                        android:ellipsize="end"
                         android:textColor="@color/colorBaseHeader"
                         android:textSize="14sp"
                         android:textStyle="bold" />

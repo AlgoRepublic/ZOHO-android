@@ -299,13 +299,16 @@ public class GenericHttpClient {
         return message;
     }
     public String createUser(String url,String firstname,String lastname,
-                             String email,String mobileNo,int userRole ,ArrayList<Integer> Ids) throws IOException {
+                             String email,String mobileNo,int userRole ,ArrayList<Integer> Ids, File file) throws IOException {
 
         HttpClient hc = new DefaultHttpClient();
         String message =null;
         HttpPost p = new HttpPost(url);
         MultipartEntity mpEntity = new MultipartEntity(HttpMultipartMode.BROWSER_COMPATIBLE);
-
+       if(file !=file){
+            Log.e("File", "/" + file.getName());
+            mpEntity.addPart("file", new FileBody(file));
+        }
         for(int loop=0;loop<Ids.size();loop++) {
             Log.e("File", "/" + Ids);
             mpEntity.addPart("ProjectIDs["+loop+"]", new StringBody(Integer.toString(Ids.get(loop))));
@@ -315,6 +318,7 @@ public class GenericHttpClient {
         mpEntity.addPart("Email", new StringBody(email));
         mpEntity.addPart("Mobile", new StringBody(mobileNo));
         mpEntity.addPart("RoleID", new StringBody(Integer.toString(userRole)));
+        Log.e("File", "/" + userRole);
         p.setEntity(mpEntity);
         HttpResponse resp = hc.execute(p);
         if (resp != null) {
@@ -322,25 +326,18 @@ public class GenericHttpClient {
         }
         return message;
     }
-    public String updateUserWithoutProjects(String url,String ID,String firstname,String lastname,
-                             String email,String mobileNo,int userRole,ArrayList<Integer> Ids) throws IOException {
+    public String uploadImage(String url,String userId, File file) throws IOException {
 
         HttpClient hc = new DefaultHttpClient();
         String message =null;
         HttpPost p = new HttpPost(url);
         MultipartEntity mpEntity = new MultipartEntity(HttpMultipartMode.BROWSER_COMPATIBLE);
-
-        for(int loop=0;loop<Ids.size();loop++) {
-            Log.e("IDs", "/" + Ids);
-            mpEntity.addPart("ProjectIDs["+loop+"]", new StringBody(Integer.toString(Ids.get(loop))));
+        if(file !=file){
+            Log.e("File", "/" + file.getName());
+            mpEntity.addPart("file", new FileBody(file));
         }
-
-        mpEntity.addPart("ID", new StringBody(ID));
-        mpEntity.addPart("FirstName", new StringBody(firstname));
-        mpEntity.addPart("LastName", new StringBody(lastname));
-        mpEntity.addPart("Email", new StringBody(email));
-        mpEntity.addPart("Mobile", new StringBody(mobileNo));
-        mpEntity.addPart("RoleID", new StringBody(Integer.toString(userRole)));
+        mpEntity.addPart("userID", new StringBody(userId));
+        mpEntity.addPart("createdBy", new StringBody(userId));
         p.setEntity(mpEntity);
         HttpResponse resp = hc.execute(p);
         if (resp != null) {
@@ -348,27 +345,7 @@ public class GenericHttpClient {
         }
         return message;
     }
-    public String updateUserWithProjects(String url,String ID,String firstname,String lastname,
-                             String email,String mobileNo,int userRole) throws IOException {
 
-        HttpClient hc = new DefaultHttpClient();
-        String message =null;
-        HttpPost p = new HttpPost(url);
-        MultipartEntity mpEntity = new MultipartEntity(HttpMultipartMode.BROWSER_COMPATIBLE);
-
-        mpEntity.addPart("ID", new StringBody(ID));
-        mpEntity.addPart("FirstName", new StringBody(firstname));
-        mpEntity.addPart("LastName", new StringBody(lastname));
-        mpEntity.addPart("Email", new StringBody(email));
-        mpEntity.addPart("Mobile", new StringBody(mobileNo));
-        mpEntity.addPart("RoleID", new StringBody(Integer.toString(userRole)));
-        p.setEntity(mpEntity);
-        HttpResponse resp = hc.execute(p);
-        if (resp != null) {
-            message = convertStreamToString(resp.getEntity().getContent());
-        }
-        return message;
-    }
     public String get(String url) throws IOException {
 
         HttpClient hc = new DefaultHttpClient();
