@@ -112,7 +112,18 @@ public class EditUserFragment extends BaseFragment implements MultiSelectionSpin
         service1.getUserRole(true, new CallBack(EditUserFragment.this, "UserRole"));
         return view;
     }
-
+    public void UpdateValues(){
+        aq.id(R.id.first_name).text(UserListModel.getInstance().responseObject.get(position).firstName);
+        aq.id(R.id.last_name).text(UserListModel.getInstance().responseObject.get(position).lastName);
+        aq.id(R.id.user_email).text(UserListModel.getInstance().responseObject.get(position).email);
+        String imagePath =UserListModel
+                .getInstance().responseObject.get(position).profileImagePath;
+        if(imagePath != null) {
+            aq.id(R.id.profile).image(Constants.UserImage_URL + UserListModel
+                    .getInstance().responseObject.get(position).profileImagePath);
+        }
+        aq.id(R.id.user_phoneno).text(UserListModel.getInstance().responseObject.get(position).mobile);
+    }
     public void AllProjects(Object caller, Object model){
         AllProjectsByUserModel.getInstance().setList((AllProjectsByUserModel) model);
         if (AllProjectsByUserModel.getInstance().responseCode == 100
@@ -157,6 +168,12 @@ public class EditUserFragment extends BaseFragment implements MultiSelectionSpin
                 roleList.add(UserRoleModel.getInstance().responseObject.get(loop).role);
             }
             role_list.attachDataSource(roleList);
+            for(int loop=0;loop<roleList.size();loop++){
+                if(roleList.get(loop).equalsIgnoreCase(UserListModel.getInstance().responseObject
+                .get(position).userRole.role)){
+                    role_list.setSelectedIndex(loop);
+                }
+            }
         }else {
             Snackbar.make(getView() , getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
         }
@@ -188,7 +205,11 @@ public class EditUserFragment extends BaseFragment implements MultiSelectionSpin
                     Snackbar.make(getView(),getString(R.string.add_phoneno),Snackbar.LENGTH_SHORT).show();
                     return false;
                 }
-                new AddUser().execute();
+                if(baseClass.getSelectedProject().equalsIgnoreCase("0")) {
+                    new EditUserWithoutProjects().execute();
+                }else {
+                    new EditUserWithProjects().execute();
+                }
         }
         return super.onOptionsItemSelected(item);
     }
@@ -289,13 +310,14 @@ public class EditUserFragment extends BaseFragment implements MultiSelectionSpin
         protected String doInBackground(Void... voids) {
             try {
                 httpClient = new GenericHttpClient();
-                response = httpClient.createUser(Constants.CreateUser_API,
+                response = httpClient.updateUserWithProjects(Constants.CreateUser_API,
+                        Integer.toString(UserListModel.getInstance().responseObject.get(position).ID),
                         aq.id(R.id.first_name).getText().toString(),
                         aq.id(R.id.last_name).getText().toString(),
                         aq.id(R.id.user_email).getText().toString(),
                         aq.id(R.id.user_phoneno).getText().toString(),
                         UserRoleModel.getInstance().responseObject.get
-                                (role_list.getSelectedIndex()).ID, selectedIds);
+                                (role_list.getSelectedIndex()).ID);
             } catch (IOException e) {
                 e.printStackTrace();
             }

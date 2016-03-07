@@ -48,9 +48,7 @@ dependencies {
     }
     compile project(':libraryLoaders')
     compile project(':parallax-listview')
-    compile project(':parallax-listview')
     compile project(':nice-spinner-master')
-    compile project(':DragAndDropView')
     compile('com.h6ah4i.android.widget.advrecyclerview:advrecyclerview:0.8.6@aar') {
         transitive = true
     }
