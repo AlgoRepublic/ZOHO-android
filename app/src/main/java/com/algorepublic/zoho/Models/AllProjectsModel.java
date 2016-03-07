@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 import java.util.ArrayList;
 
 /**
- * Created by android on 2/23/16.
+ * Created by android on 3/4/16.
  */
 public class AllProjectsModel {
     private static AllProjectsModel _obj = null;
@@ -34,38 +34,8 @@ public class AllProjectsModel {
         @SerializedName("Name")
         public String projectName;
 
-        @SerializedName("Description")
-        public String description;
-
-        @SerializedName("OwnerID")
-        public String ownerID;
-
-        @SerializedName("OwnerN")
-        public String ownerName;
-
-        @SerializedName("CreatedAt")
-        public String createdAt;
-
-        @SerializedName("UpdatedAt")
-        public String updatedAt;
-
         @SerializedName("ID")
-        public String projectID;
-
-        @SerializedName("TotlTasksNo")
-        public String totalTasks;
-
-        @SerializedName("UsersCount")
-        public String usersCount;
-
-        @SerializedName("TotalMilestonesNo")
-        public String toalMilestones;
-
-        @SerializedName("IsDeleted")
-        public boolean IsDeleted;
-
-        @SerializedName("Isprivate")
-        public boolean Isprivate;
+        public Integer projectID;
     }
 
     @SerializedName("ResponseCode")

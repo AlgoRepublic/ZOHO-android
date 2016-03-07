@@ -140,6 +140,7 @@ public class DocumentsListBySubTaskFragment extends BaseFragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.add_document:
+                baseClass.hideKeyPad(getView());
                 callFragmentWithBackStack(R.id.container, UploadDocsFragment.
                         newInstance(ID), "UploadDocsFragment");
                 break;

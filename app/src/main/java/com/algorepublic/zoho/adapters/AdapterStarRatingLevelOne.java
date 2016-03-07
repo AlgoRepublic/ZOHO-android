@@ -3,7 +3,6 @@ package com.algorepublic.zoho.adapters;
 import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +10,6 @@ import android.widget.BaseAdapter;
 
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.StarRatingFragments.StarRatingBaseFragment;
-import com.algorepublic.zoho.StarRatingFragments.StarRatingLevelOneFragment;
 import com.algorepublic.zoho.StarRatingFragments.StarRatingLevelTwoFragment;
 import com.algorepublic.zoho.utils.BaseClass;
 import com.androidquery.AQuery;

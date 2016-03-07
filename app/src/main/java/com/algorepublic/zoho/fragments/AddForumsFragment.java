@@ -47,11 +47,12 @@ public class AddForumsFragment extends BaseFragment{
         View view  = inflater.inflate(R.layout.layout_addforums, container, false);
 
         aq = new AQuery(getActivity(), view);
+        aq.id(R.id.lblListHeader).text(getString(R.string.new_forum_post));
         setHasOptionsMenu(true);
         baseClass = ((BaseClass) getActivity().getApplicationContext());
         owner_list = (NiceSpinner) view.findViewById(R.id.forum_list);
         service = new ForumService(getActivity());
-        service.getCategoryList("4", true, new CallBack(AddForumsFragment.this, "GetAllUsers"));
+        service.getCategoryList(baseClass.getUserId(), true, new CallBack(AddForumsFragment.this, "GetAllUsers"));
 
         return view;
     }
@@ -62,13 +63,12 @@ public class AddForumsFragment extends BaseFragment{
             userList= new LinkedList<>();
             for(int loop=0;loop<AddforumModel.getInstance().responseObject.size();loop++) {
                 userList.add(AddforumModel.getInstance().responseObject.get(loop).Title);
-                Log.e("S", "/" + AddforumModel.getInstance().responseObject.get(loop).Title);
             }
            owner_list.attachDataSource(userList);
         }
         else
         {
-            Toast.makeText(getActivity(), getString(R.string.invalid_credential), Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), getString(R.string.response_error), Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -86,16 +86,16 @@ public class AddForumsFragment extends BaseFragment{
                     baseClass.getUserId(),
                     true, new CallBack(AddForumsFragment.this, "CreateForum"));
         }else{
-            Snackbar.make(getView(),"Please Select Project ",Snackbar.LENGTH_SHORT).show();
+            Snackbar.make(getView(),getString(R.string.select_project),Snackbar.LENGTH_SHORT).show();
         }
     }
 
     public void CreateForum(Object caller, Object model){
         CreateForumModel.getInstance().setList((CreateForumModel) model);
         if (CreateForumModel.getInstance().responseObject != null ) {
-            Snackbar.make(getView(),"Forum Created Successfully!",Snackbar.LENGTH_SHORT).show();
+            Snackbar.make(getView(),getString(R.string.forum_created),Snackbar.LENGTH_SHORT).show();
         }else {
-            Toast.makeText(getActivity(), getString(R.string.forums_list_empty), Toast.LENGTH_SHORT).show();
+            Snackbar.make(getView(), getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
         }
 
     }
@@ -108,12 +108,13 @@ public class AddForumsFragment extends BaseFragment{
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.save_project:
+                baseClass.hideKeyPad(getView());
                 if(aq.id(R.id.forum_title).getText().toString().isEmpty()){
-                    Snackbar.make(getView(),"Please Add Forum Name",Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(getView(),getString(R.string.forum_addname),Snackbar.LENGTH_SHORT).show();
                     return false;
                 }
                 if(aq.id(R.id.forum_description).getText().toString().isEmpty()){
-                    Snackbar.make(getView(),"Please Add Forum Description",Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(getView(),getString(R.string.forum_add_description),Snackbar.LENGTH_SHORT).show();
                     return false;
                 }
                 CreateForum();

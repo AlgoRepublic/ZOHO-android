@@ -1,16 +1,5 @@
 package com.github.tibolte.agendacalendarview.calendar.weekslist;
 
-import com.github.tibolte.agendacalendarview.CalendarManager;
-import com.github.tibolte.agendacalendarview.R;
-import com.github.tibolte.agendacalendarview.models.DayItem;
-import com.github.tibolte.agendacalendarview.models.WeekItem;
-import com.github.tibolte.agendacalendarview.utils.BusProvider;
-import com.github.tibolte.agendacalendarview.utils.DateHelper;
-import com.github.tibolte.agendacalendarview.utils.Events;
-
-import android.animation.Animator;
-import android.animation.AnimatorSet;
-import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Typeface;
@@ -22,6 +11,15 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.github.tibolte.agendacalendarview.CalendarManager;
+import com.github.tibolte.agendacalendarview.R;
+import com.github.tibolte.agendacalendarview.calendar.CalendarView;
+import com.github.tibolte.agendacalendarview.models.DayItem;
+import com.github.tibolte.agendacalendarview.models.WeekItem;
+import com.github.tibolte.agendacalendarview.utils.BusProvider;
+import com.github.tibolte.agendacalendarview.utils.DateHelper;
+import com.github.tibolte.agendacalendarview.utils.Events;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -113,19 +111,17 @@ public class WeeksAdapter extends RecyclerView.Adapter<WeeksAdapter.WeekViewHold
          * List of layout containers for each day
          */
         private List<LinearLayout> mCells;
-        private TextView mTxtMonth;
         private FrameLayout mMonthBackground;
 
         public WeekViewHolder(View itemView) {
             super(itemView);
-            mTxtMonth = (TextView) itemView.findViewById(R.id.month_label);
             mMonthBackground = (FrameLayout) itemView.findViewById(R.id.month_background);
             LinearLayout daysContainer = (LinearLayout) itemView.findViewById(R.id.week_days_container);
             setUpChildren(daysContainer);
         }
 
         public void bindWeek(WeekItem weekItem, Calendar today) {
-            setUpMonthOverlay();
+//            setUpMonthOverlay();
 
             List<DayItem> dayItems = weekItem.getDayItems();
 
@@ -176,15 +172,16 @@ public class WeeksAdapter extends RecyclerView.Adapter<WeeksAdapter.WeekViewHold
                 }
 
                 // Check if the month label has to be displayed
-                if (dayItem.getValue() == 15) {
-                    mTxtMonth.setVisibility(View.VISIBLE);
+//                if (dayItem.getValue() == 1) {
+//                    mTxtMonth.setVisibility(View.VISIBLE);
                     SimpleDateFormat monthDateFormat = new SimpleDateFormat(mContext.getResources().getString(R.string.month_name_format), CalendarManager.getInstance().getLocale());
-                    String month = monthDateFormat.format(weekItem.getDate()).toUpperCase();
-                    if (today.get(Calendar.YEAR) != weekItem.getYear()) {
-                        month = month + String.format(" %d", weekItem.getYear());
-                    }
-                    mTxtMonth.setText(month);
-                }
+                    CalendarView.month = monthDateFormat.format(weekItem.getDate()).toUpperCase();
+//                    if (today.get(Calendar.YEAR) != weekItem.getYear()) {
+                    CalendarView.month = CalendarView.month + String.format(" %d", weekItem.getYear());
+
+                    CalendarView.mTxtMonth.setText(CalendarView.month);
+//                    }
+//                }
             }
         }
 
@@ -195,81 +192,81 @@ public class WeeksAdapter extends RecyclerView.Adapter<WeeksAdapter.WeekViewHold
             }
         }
 
-        private void setUpMonthOverlay() {
-            mTxtMonth.setVisibility(View.GONE);
-
-            if (isDragging()) {
-                AnimatorSet animatorSetFadeIn = new AnimatorSet();
-                animatorSetFadeIn.setDuration(FADE_DURATION);
-                ObjectAnimator animatorTxtAlphaIn = ObjectAnimator.ofFloat(mTxtMonth, "alpha", mTxtMonth.getAlpha(), 1f);
-                ObjectAnimator animatorBackgroundAlphaIn = ObjectAnimator.ofFloat(mMonthBackground, "alpha", mMonthBackground.getAlpha(), 1f);
-                animatorSetFadeIn.playTogether(
-                        animatorTxtAlphaIn
-                        //animatorBackgroundAlphaIn
-                );
-                animatorSetFadeIn.addListener(new Animator.AnimatorListener() {
-                    @Override
-                    public void onAnimationStart(Animator animation) {
-
-                    }
-
-                    @Override
-                    public void onAnimationEnd(Animator animation) {
-                        setAlphaSet(true);
-                    }
-
-                    @Override
-                    public void onAnimationCancel(Animator animation) {
-
-                    }
-
-                    @Override
-                    public void onAnimationRepeat(Animator animation) {
-
-                    }
-                });
-                animatorSetFadeIn.start();
-            } else {
-                AnimatorSet animatorSetFadeOut = new AnimatorSet();
-                animatorSetFadeOut.setDuration(FADE_DURATION);
-                ObjectAnimator animatorTxtAlphaOut = ObjectAnimator.ofFloat(mTxtMonth, "alpha", mTxtMonth.getAlpha(), 0f);
-                ObjectAnimator animatorBackgroundAlphaOut = ObjectAnimator.ofFloat(mMonthBackground, "alpha", mMonthBackground.getAlpha(), 0f);
-                animatorSetFadeOut.playTogether(
-                        animatorTxtAlphaOut
-                        //animatorBackgroundAlphaOut
-                );
-                animatorSetFadeOut.addListener(new Animator.AnimatorListener() {
-                    @Override
-                    public void onAnimationStart(Animator animation) {
-
-                    }
-
-                    @Override
-                    public void onAnimationEnd(Animator animation) {
-                        setAlphaSet(false);
-                    }
-
-                    @Override
-                    public void onAnimationCancel(Animator animation) {
-
-                    }
-
-                    @Override
-                    public void onAnimationRepeat(Animator animation) {
-
-                    }
-                });
-                animatorSetFadeOut.start();
-            }
-
-            if (isAlphaSet()) {
-                //mMonthBackground.setAlpha(1f);
-                mTxtMonth.setAlpha(1f);
-            } else {
-                //mMonthBackground.setAlpha(0f);
-                mTxtMonth.setAlpha(0f);
-            }
-        }
+//        private void setUpMonthOverlay() {
+//            mTxtMonth.setVisibility(View.GONE);
+//
+//            if (isDragging()) {
+//                AnimatorSet animatorSetFadeIn = new AnimatorSet();
+//                animatorSetFadeIn.setDuration(FADE_DURATION);
+//                ObjectAnimator animatorTxtAlphaIn = ObjectAnimator.ofFloat(mTxtMonth, "alpha", mTxtMonth.getAlpha(), 1f);
+//                ObjectAnimator animatorBackgroundAlphaIn = ObjectAnimator.ofFloat(mMonthBackground, "alpha", mMonthBackground.getAlpha(), 1f);
+//                animatorSetFadeIn.playTogether(
+//                        animatorTxtAlphaIn
+//                        //animatorBackgroundAlphaIn
+//                );
+//                animatorSetFadeIn.addListener(new Animator.AnimatorListener() {
+//                    @Override
+//                    public void onAnimationStart(Animator animation) {
+//
+//                    }
+//
+//                    @Override
+//                    public void onAnimationEnd(Animator animation) {
+//                        setAlphaSet(true);
+//                    }
+//
+//                    @Override
+//                    public void onAnimationCancel(Animator animation) {
+//
+//                    }
+//
+//                    @Override
+//                    public void onAnimationRepeat(Animator animation) {
+//
+//                    }
+//                });
+//                animatorSetFadeIn.start();
+//            } else {
+//                AnimatorSet animatorSetFadeOut = new AnimatorSet();
+//                animatorSetFadeOut.setDuration(FADE_DURATION);
+//                ObjectAnimator animatorTxtAlphaOut = ObjectAnimator.ofFloat(mTxtMonth, "alpha", mTxtMonth.getAlpha(), 0f);
+//                ObjectAnimator animatorBackgroundAlphaOut = ObjectAnimator.ofFloat(mMonthBackground, "alpha", mMonthBackground.getAlpha(), 0f);
+//                animatorSetFadeOut.playTogether(
+//                        animatorTxtAlphaOut
+//                        //animatorBackgroundAlphaOut
+//                );
+//                animatorSetFadeOut.addListener(new Animator.AnimatorListener() {
+//                    @Override
+//                    public void onAnimationStart(Animator animation) {
+//
+//                    }
+//
+//                    @Override
+//                    public void onAnimationEnd(Animator animation) {
+//                        setAlphaSet(false);
+//                    }
+//
+//                    @Override
+//                    public void onAnimationCancel(Animator animation) {
+//
+//                    }
+//
+//                    @Override
+//                    public void onAnimationRepeat(Animator animation) {
+//
+//                    }
+//                });
+//                animatorSetFadeOut.start();
+//            }
+//
+//            if (isAlphaSet()) {
+//                //mMonthBackground.setAlpha(1f);
+//                mTxtMonth.setAlpha(1f);
+//            } else {
+//                //mMonthBackground.setAlpha(0f);
+//                mTxtMonth.setAlpha(0f);
+//            }
+//        }
     }
 
     // endregion

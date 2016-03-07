@@ -65,8 +65,14 @@ public class ProjectsList  {
     public boolean getDeleted(){
         return isDeleted;
     }
+    public void setType(int type){
+        this.Type = type;
+    }
+    public int getType(){
+        return Type;
+    }
 
-
+    private int Type;
     private String projectDesc;
     private String projectName;
     private String ownerID;

@@ -5,15 +5,13 @@ import android.util.Log;
 
 import com.algorepublic.zoho.Models.CreateCommentModel;
 import com.algorepublic.zoho.Models.GeneralModel;
-import com.algorepublic.zoho.Models.TaskAssigneeModel;
+import com.algorepublic.zoho.Models.TaskUserModel;
 import com.algorepublic.zoho.Models.SubTaskAttachmentsModel;
 import com.algorepublic.zoho.Models.TaskCommentsModel;
 import com.algorepublic.zoho.Models.TaskListBySubTaskModel;
 import com.algorepublic.zoho.Models.TasksListByOwnerModel;
 import com.algorepublic.zoho.utils.Constants;
 
-import java.io.File;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -80,14 +78,10 @@ public class TaskListService extends BaseService {
     }
     public void getTaskAssignee(int projectID, boolean message, CallBack obj){
         String url = Constants.GetAssigneeByTask_API+"?ProjectID="+projectID;
-        this.get(url, obj, TaskAssigneeModel.getInstance(), message);
+        this.get(url, obj, TaskUserModel.getInstance(), message);
         Log.e("TaskAssigneeService", url);
     }
-    public void getAllUsers( boolean message, CallBack obj){
-        String url = Constants.GetAllUser_API;
-        this.get(url, obj, TaskAssigneeModel.getInstance(), message);
-        Log.e("GetAllService", url);
-    }
+
     public void getTaskAttachments(int taskID, boolean message, CallBack obj){
         String url = Constants.TaskAttachments_API+"?taskID="+taskID;
         this.get(url, obj, SubTaskAttachmentsModel.getInstance(), message);

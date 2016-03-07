@@ -51,4 +51,5 @@
             android:layout_alignParentRight="true"
             android:background="@drawable/right_header" />
     </RelativeLayout>
+
 </RelativeLayout>

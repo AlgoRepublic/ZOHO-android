@@ -17,6 +17,8 @@ import com.algorepublic.zoho.services.UserService;
 import com.algorepublic.zoho.utils.BaseClass;
 import com.androidquery.AQuery;
 
+import java.util.ArrayList;
+
 /**
  * Created by waqas on 2/8/16.
  */
@@ -24,6 +26,8 @@ public class UserFragment extends BaseFragment {
 
 
     AQuery aq;
+
+    public static ArrayList<Integer> assigneeList = new ArrayList<>();
     BaseClass baseClass;
 
 
@@ -48,8 +52,12 @@ public class UserFragment extends BaseFragment {
         getToolbar().setTitle(getString(R.string.user));
 
         UserService service = new UserService(getActivity());
-        service.getListByProject(Integer.parseInt(baseClass.getUserId()), true, new CallBack(UserFragment.this, "UserListCallback"));
-        return view;
+        if(baseClass.getSelectedProject().equalsIgnoreCase("0")){
+            service.getAllUsers(true, new CallBack(UserFragment.this, "UserList"));
+        }else {
+            service.getUserListByProject(Integer.parseInt(baseClass.getSelectedProject()), true, new CallBack(UserFragment.this, "UserList"));
+        }
+            return view;
     }
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
@@ -58,12 +66,12 @@ public class UserFragment extends BaseFragment {
     }
 
 
-    public void UserListCallback(Object caller, Object model){
+    public void UserList(Object caller, Object model){
         UserListModel.getInstance().setList((UserListModel) model);
         if (UserListModel.getInstance().responseObject.size()!=0) {
-            aq.id(R.id.user_list).adapter(new AdapterUser (getActivity()));
+            aq.id(R.id.user_list).adapter(new AdapterUser(getActivity()));
         }else {
-            Toast.makeText(getActivity(), getString(R.string.forums_list_empty), Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), getString(R.string.response_error), Toast.LENGTH_SHORT).show();
         }
 
     }
@@ -71,7 +79,7 @@ public class UserFragment extends BaseFragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.add_project:
-                callFragmentWithBackStack(R.id.container,AddUserFragment.newInstance(), "AddUserFragment");
+                callFragmentWithBackStack(R.id.container,AddUserFragment.newInstance(-1), "AddUserFragment");
         }
         return super.onOptionsItemSelected(item);
     }

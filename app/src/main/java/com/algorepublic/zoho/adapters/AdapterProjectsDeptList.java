@@ -11,6 +11,8 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -43,6 +45,7 @@ public class AdapterProjectsDeptList extends BaseAdapter implements StickyListHe
     BaseClass baseClass;
     private LayoutInflater l_Inflater;
     ProjectsListService service;
+    private int lastPosition;
 
 
     public AdapterProjectsDeptList(Context context) {
@@ -126,6 +129,8 @@ public class AdapterProjectsDeptList extends BaseAdapter implements StickyListHe
     public void DeleteProject(Object caller, Object model) {
         GeneralModel.getInstance().setList((GeneralModel) model);
         if (GeneralModel.getInstance().responseCode.equalsIgnoreCase("100")) {
+            ProjectsFragment.ByDepartmentList.remove(lastPosition);
+            notifyDataSetChanged();
             Snackbar.make(aq.id(R.id.shadow_item_container).getView(), "Project Deleted", Snackbar.LENGTH_SHORT).show();
         } else {
             Toast.makeText(((AppCompatActivity) ctx), ctx.getString(R.string.invalid_credential), Toast.LENGTH_SHORT).show();
@@ -182,6 +187,7 @@ public class AdapterProjectsDeptList extends BaseAdapter implements StickyListHe
                     @Override
                     public void onBtnClick() {
                         dialog.dismiss();
+                        lastPosition = position;
                         service.DeleteProject(ProjectsFragment.ByDepartmentList.get(position).getProjectID(), true
                                 , new CallBack(AdapterProjectsDeptList.this, "DeleteProject"));
                     }

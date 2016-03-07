@@ -111,12 +111,14 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="left"
+                        android:textColor="@color/colorBaseHeader"
                         android:textSize="14sp"
                         android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/task_date"
                         android:layout_width="0dp"
+                        android:textColor="@color/colorBaseHeader"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="right|end"
@@ -137,6 +139,7 @@
                         android:layout_gravity="center_vertical"
                         android:layout_weight=".8"
                         android:gravity="left"
+                        android:textColor="@color/colorBaseHeader"
                         android:textSize="14sp"
                         android:textStyle="bold" />
 
@@ -153,6 +156,7 @@
                             android:layout_centerVertical="true"
                             android:layout_toLeftOf="@+id/bar"
                             android:gravity="left"
+                            android:textColor="@color/colorBaseHeader"
                             android:text="10 Comments"
                             android:textSize="12sp" />
 
@@ -172,6 +176,7 @@
                             android:layout_centerVertical="true"
                             android:gravity="left"
                             android:text="10 Users"
+                            android:textColor="@color/colorBaseHeader"
                             android:textSize="12sp" />
                     </RelativeLayout>
                 </LinearLayout>

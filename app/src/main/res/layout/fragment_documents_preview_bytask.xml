@@ -21,12 +21,16 @@
             android:id="@+id/layout1"
             android:layout_height="wrap_content">
             <com.mikhaellopez.circularimageview.CircularImageView
+                app:civ_border="true"
+                app:civ_shadow="true"
+                app:civ_shadow_color="@color/colorBaseMenu"
+                app:civ_shadow_radius="3"
                 android:id="@+id/user_image"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:scaleType="fitXY"
-                app:border_width="1dp"
-                app:border_color="@color/colorBaseHeader"
+                app:civ_border_width="1dp"
+                app:civ_border_color="@color/colorBaseHeader"
                 android:layout_centerVertical="true"
                 android:src="@drawable/nav_user" />
             <TextView

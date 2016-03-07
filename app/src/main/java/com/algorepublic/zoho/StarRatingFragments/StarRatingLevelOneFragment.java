@@ -1,6 +1,7 @@
 package com.algorepublic.zoho.StarRatingFragments;
 
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -64,7 +65,7 @@ public class StarRatingLevelOneFragment extends BaseFragment {
         }
         else
         {
-            Toast.makeText(getActivity(), getString(R.string.invalid_credential), Toast.LENGTH_SHORT).show();
+            Snackbar.make(getView(), getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
         }
 
     }
