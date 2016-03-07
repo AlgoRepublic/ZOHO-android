@@ -95,6 +95,7 @@ public class TaskListBySubTasksFragment extends BaseFragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.add_project:
+                baseClass.hideKeyPad(getView());
                 if(baseClass.db.getInt("ProjectID") == 0){
                     Toast.makeText(getActivity(), "Please Select Project", Toast.LENGTH_SHORT).show();
                 }else {

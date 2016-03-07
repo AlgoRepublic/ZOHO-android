@@ -44,6 +44,7 @@ public class ForumsFragment extends BaseFragment{
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.add_project:
+                baseClass.hideKeyPad(getView());
                 callFragmentWithBackStack(R.id.container, AddForumsFragment.newInstance(), "AddForumsFragment");
                 break;
         }
@@ -80,7 +81,7 @@ public class ForumsFragment extends BaseFragment{
         if (ForumsModel.getInstance().responseObject.size()!=0) {
             aq.id(R.id.forums_list).adapter(new AdapterForumsList(getActivity()));
         }else {
-            Toast.makeText(getActivity(), getString(R.string.forums_list_empty), Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), getString(R.string.response_error), Toast.LENGTH_SHORT).show();
         }
 
     }

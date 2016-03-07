@@ -298,6 +298,53 @@ public class GenericHttpClient {
         }
         return message;
     }
+    public String createUser(String url,String firstname,String lastname,
+                             String email,String mobileNo, File files) throws IOException {
+
+        HttpClient hc = new DefaultHttpClient();
+        String message =null;
+        HttpPost p = new HttpPost(url);
+        MultipartEntity mpEntity = new MultipartEntity(HttpMultipartMode.BROWSER_COMPATIBLE);
+
+        Log.e("File", "/" + files.getName());
+        mpEntity.addPart("files", new FileBody(files));
+
+        mpEntity.addPart("FirstName", new StringBody(firstname));
+        mpEntity.addPart("LastName", new StringBody(lastname));
+        mpEntity.addPart("Email", new StringBody(email));
+        mpEntity.addPart("Mobile", new StringBody(mobileNo));
+        p.setEntity(mpEntity);
+        HttpResponse resp = hc.execute(p);
+        if (resp != null) {
+            message = convertStreamToString(resp.getEntity().getContent());
+        }
+        return message;
+    }
+    public String updateUser(String url,String ID,String firstname,String lastname,
+                             String email,String mobileNo, File files) throws IOException {
+
+        HttpClient hc = new DefaultHttpClient();
+        String message =null;
+        HttpPost p = new HttpPost(url);
+        MultipartEntity mpEntity = new MultipartEntity(HttpMultipartMode.BROWSER_COMPATIBLE);
+
+        Log.e("File", "/" + files.getName());
+        if(files !=null)
+        mpEntity.addPart("files", new FileBody(files));
+
+
+        mpEntity.addPart("ID", new StringBody(ID));
+        mpEntity.addPart("FirstName", new StringBody(firstname));
+        mpEntity.addPart("LastName", new StringBody(lastname));
+        mpEntity.addPart("Email", new StringBody(email));
+        mpEntity.addPart("Mobile", new StringBody(mobileNo));
+        p.setEntity(mpEntity);
+        HttpResponse resp = hc.execute(p);
+        if (resp != null) {
+            message = convertStreamToString(resp.getEntity().getContent());
+        }
+        return message;
+    }
     public String get(String url) throws IOException {
 
         HttpClient hc = new DefaultHttpClient();

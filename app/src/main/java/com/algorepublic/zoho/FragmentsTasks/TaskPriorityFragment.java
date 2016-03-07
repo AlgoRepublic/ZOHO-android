@@ -49,10 +49,10 @@ public class TaskPriorityFragment extends BaseFragment {
         aq = new AQuery(view);
         baseClass = ((BaseClass) getActivity().getApplicationContext());
         ArrayList<String> arrayList = new ArrayList<>();
-        arrayList.add("None");
-        arrayList.add("Low");
-        arrayList.add("Medium");
-        arrayList.add("High");
+        arrayList.add(getString(R.string.none));
+        arrayList.add(getString(R.string.low));
+        arrayList.add(getString(R.string.medium));
+        arrayList.add(getString(R.string.high));
         adapter = new AdapterTaskPriority(getActivity(), arrayList);
         adapter.setSelectedIndex(baseClass.db.getInt("Priority"));
         listView.setAdapter(adapter);

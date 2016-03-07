@@ -138,6 +138,7 @@ public class DocumentsListFragment extends BaseFragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.add_document:
+                baseClass.hideKeyPad(getView());
                 if(baseClass.db.getInt("ProjectID") == -1){
                     Toast.makeText(getActivity(), "Please Select Project", Toast.LENGTH_SHORT).show();
                 }else {

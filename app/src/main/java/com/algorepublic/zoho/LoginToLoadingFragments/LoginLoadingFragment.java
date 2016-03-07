@@ -60,7 +60,7 @@ public class LoginLoadingFragment extends BaseFragment {
         }
         else
         {
-            Toast.makeText(getActivity(), getString(R.string.invalid_credential), Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), getString(R.string.response_error), Toast.LENGTH_SHORT).show();
             callFragmentWithReplace(R.id.logintoloading_container, LoginFragment.newInstance(), "LoginFragment");
         }
     }
@@ -75,7 +75,7 @@ public class LoginLoadingFragment extends BaseFragment {
             startActivity(new Intent(getActivity(), MainActivity.class));
             getActivity().finish();
         }else {
-            Toast.makeText(getActivity(), getString(R.string.error_login_response), Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), getString(R.string.response_error), Toast.LENGTH_SHORT).show();
             callFragmentWithReplace(R.id.logintoloading_container, LoginFragment.newInstance(), "LoginFragment");
         }
     }

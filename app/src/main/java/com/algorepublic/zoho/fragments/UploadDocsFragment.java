@@ -101,7 +101,7 @@ public class UploadDocsFragment extends BaseFragment implements GoogleApiClient.
     private static final String PREF_ACCOUNT_NAME = "accountName";
     private static final String[] SCOPES = { DriveScopes.DRIVE_METADATA_READONLY };
     com.google.api.client.googleapis.extensions.android.gms.auth.GoogleAccountCredential mCredential;
-    public static ACProgressFlower dialog;
+    ACProgressFlower dialog;
     public static ArrayList<AttachmentList> filesList = new ArrayList<>();
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.

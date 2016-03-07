@@ -88,9 +88,9 @@ public class AdapterForumsList extends BaseAdapter {
         GeneralModel.getInstance().setList((GeneralModel) model);
         if (GeneralModel.getInstance().responseObject == true) {
             UpdatedAfterDelete(Clicked);
-            Snackbar.make(((AppCompatActivity) ctx).findViewById(android.R.id.content), ctx.getString(R.string.doc_deleted), Snackbar.LENGTH_SHORT).show();
+            Snackbar.make(((AppCompatActivity) ctx).findViewById(android.R.id.content), ctx.getString(R.string.forum_deleted), Snackbar.LENGTH_SHORT).show();
         }else {
-            Snackbar.make(((AppCompatActivity) ctx).findViewById(android.R.id.content), ctx.getString(R.string.projects_list_empty), Snackbar.LENGTH_SHORT).show();
+            Snackbar.make(((AppCompatActivity) ctx).findViewById(android.R.id.content), ctx.getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
         }
 
     }

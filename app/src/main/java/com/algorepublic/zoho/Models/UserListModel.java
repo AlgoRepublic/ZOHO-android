@@ -37,8 +37,15 @@ public class UserListModel  {
             @SerializedName("Email")
             public String email;
 
+            @SerializedName("Mobile")
+            public String mobile;
+
             @SerializedName("FirstName")
             public String firstName;
+
+            @SerializedName("LastName")
+            public String lastName;
+
 
             @SerializedName("ResponseCode")
             public String responseCode;
@@ -50,7 +57,30 @@ public class UserListModel  {
             @SerializedName("ProfileImagePath")
             public String profileImagePath;
 
+            @SerializedName("ID")
+            public Integer ID;
+
+            @SerializedName("UserRole")
+            public UserRole userRole = new UserRole();
+
+            @SerializedName("ProjectIDs")
+            public ArrayList<Integer> projectIDs = new ArrayList<>();
+
         }
+    public class UserRole {
+
+        @SerializedName("ID")
+        @Expose
+        public Integer ID;
+
+        @SerializedName("Role")
+        @Expose
+        public String role;
+
+        @SerializedName("Role_AR")
+        public String role_AR;
+
+    }
 
 
 }

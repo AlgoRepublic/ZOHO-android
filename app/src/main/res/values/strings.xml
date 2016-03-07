@@ -15,8 +15,7 @@
     <string name="developed_by">Developed By:</string>
     <string name="selected_language">العربية</string>
     <string name="invalid_credential">Invalid User Credential!</string>
-    <string name="task_incomplete">PLease set progrees 100% to mark as done </string>
-    <string name="error_login_response">Please check your internet or server not responding</string>
+    <string name="task_incomplete">Please set progress 100% to mark as done </string>
     //...............................................//
     <!-- <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
@@ -46,9 +45,20 @@
 
     <string name="priority">Priority</string>
     <string name="image">Image</string>
+    <string name="camera">Camera</string>
+    <string name="gallery">Gallery</string>
+    <string name="others">Others</string>
+    <string name="OK">OK</string>
+    <string name="none">None</string>
+    <string name="low">Low</string>
+    <string name="medium">Medium</string>
+    <string name="high">High</string>
+    <string name="file_size">File Size Alert!</string>
+    <string name="file_size_content">File size should be less than five(5) MB</string>
     <string name="task_desc">Task Description</string>
     <string name="category">Category</string>
     <string name="employees">Employees</string>
+    <string name="assigned_projects">Assigned Projects</string>
     <string name="TaskListName">TaskList Name</string>
     <string name="users">Users</string>
     <string name="schedule">Schedule</string>
@@ -76,6 +86,11 @@
     <string name="title_activity_milestone">MilestoneActivity</string>
     <string name="title_activity_settings">Settings</string>
     <string name="new_forum_post">New Forum Post</string>
+    <string name="new_dept">New Department</string>
+    <string name="edit_forum_post">Edit Forum Post</string>
+    <string name="new_project">New Project</string>
+    <string name="edit_project">Edit Project</string>
+    <string name="edit_dept">Edit Department</string>
     <!-- Strings related to Settings -->
 
     <!-- Example General settings -->
@@ -135,7 +150,7 @@
     <string name="pref_title_vibrate">Vibrate</string>
     <string name="projects">Projects</string>
     <string name="project_title">Project Title</string>
-    <string name="forums_description">Forums Discription</string>
+    <string name="forums_description">Forums Description</string>
     <string name="forums_title">Test Forum</string>
     <string name="title">Title</string>
     <string name="content">Content</string>
@@ -172,8 +187,8 @@
     <string name="remember_password">Remember Password?</string>
     <string name="over_due">Over Due</string>
     <string name="up_coming">Up Coming</string>
-    <string name="full_name">Full Name</string>
-    <string name="nickname">Nickname</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
     <string name="email">Email</string>
     <string name="phone_number">Phone Number</string>
     <string name="user_role">User Role</string>
@@ -181,8 +196,54 @@
     <string name="change_theme">Change Theme</string>
 
     <!-- Star Rating Strings -->
-    <string name="ratingPrimaryStage">RatingPrimaryStage</string>
-    <string name="ratingDevelopmentStage">RatingDevelopmentStage</string>
-    <string name="ratingMaturityStage">RatingMaturityStage</string>
-    <string name="ratingLeadingStage">RatingLeadingStage</string>
+    <string name="ratingPrimaryStage">PrimaryStage</string>
+    <string name="ratingDevelopmentStage">DevelopmentStage</string>
+    <string name="ratingMaturityStage">MaturityStage</string>
+    <string name="ratingLeadingStage">LeadingStage</string>
+    <string name="Q">Q</string>
+
+    <!-- Star Department Strings -->
+    <string name="department_created">Department Created</string>
+    <string name="department_updated">Department Updated</string>
+    <string name="department_deleted">Department Deleted</string>
+    <string name="deleted_dept">Delete Department?</string>
+    <string name="department_name">Please Add Department Name</string>
+
+    <!-- Star Forum Strings -->
+    <string name="forum_created">Forum Created</string>
+    <string name="forum_updated">Forum Updated</string>
+    <string name="forum_deleted">Forum Deleted</string>
+    <string name="deleted_forum">Delete Forum?</string>
+    <string name="forum_addname">Please Add Forum Name</string>
+    <string name="forum_add_description">Please Add Forum Description</string>
+
+    <!-- Star Projects Strings -->
+    <string name="project_created">Project Created</string>
+    <string name="project_moved">Project Moved Successfully</string>
+    <string name="project_updated">Project Updated</string>
+    <string name="project_deleted">Project Deleted</string>
+    <string name="deleted_project">Delete Project?</string>
+    <string name="project_loading">Please wait for the loading</string>
+    <string name="all_projects">All Projects</string>
+    <string name="by_client">By Client</string>
+    <string name="by_dept">By Department</string>
+    <string name="un_assigned">By Department</string>
+    <string name="project_addname">Please Add Project Name</string>
+    <string name="project_add_description">Please Add Project Description</string>
+    <string name="project_access_option">Please Select The Project Access</string>
+    <string name="project_status_option">Please Select The Project Status</string>
+
+    <!-- Star User Strings -->
+    <string name="user_created">User Created</string>
+    <string name="user_updated">User Updated</string>
+    <string name="user_deleted">User Deleted</string>
+    <string name="deleted_user">Delete User?</string>
+    <string name="user_first_name">Please Add First Name</string>
+    <string name="user_last_name">Please Add Last Name</string>
+    <string name="add_email">Please Add Email</string>
+    <string name="add_phoneno">Please Add Phone Number</string>
+
+
+    <string name="response_error">Error! Please Try Later</string>
+    <string name="select_project">Please! Select Project</string>
 </resources>

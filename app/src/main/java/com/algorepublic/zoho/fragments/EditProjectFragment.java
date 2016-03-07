@@ -13,7 +13,7 @@ import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.algorepublic.zoho.Models.CreateProjectModel;
-import com.algorepublic.zoho.Models.TaskAssigneeModel;
+import com.algorepublic.zoho.Models.TaskUserModel;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.adapters.ProjectsList;
 import com.algorepublic.zoho.services.CallBack;
@@ -69,20 +69,21 @@ public class EditProjectFragment extends BaseFragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.save_project:
+                baseClass.hideKeyPad(getView());
                 if(aq.id(R.id.project_name).getText().toString().isEmpty()){
-                    Snackbar.make(getView(),"Please Add Project Name",Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(getView(),getString(R.string.project_addname),Snackbar.LENGTH_SHORT).show();
                     return false;
                 }
                 if(aq.id(R.id.project_desc).getText().toString().isEmpty()){
-                    Snackbar.make(getView(),"Please Add Project Description",Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(getView(),getString(R.string.project_add_description),Snackbar.LENGTH_SHORT).show();
                     return false;
                 }
                 if(!aq.id(R.id.private_radio).isChecked() && !aq.id(R.id.public_radio).isChecked()){
-                    Snackbar.make(getView(),"Please Select The Access Option",Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(getView(),getString(R.string.project_access_option),Snackbar.LENGTH_SHORT).show();
                     return false;
                 }
                 if (!aq.id(R.id.active_radio).isChecked() && !aq.id(R.id.archive_radio).isChecked()) {
-                    Snackbar.make(getView(), "Please Select The Project Status", Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(getView(), getString(R.string.project_status_option), Snackbar.LENGTH_SHORT).show();
                     return false;
                 }
                 UpdateProject();
@@ -96,7 +97,7 @@ public class EditProjectFragment extends BaseFragment {
         service.updateProject(projectsLists.get(position).getProjectID()
                 , aq.id(R.id.project_name).getText().toString(), baseClass.getUserId()
                 , aq.id(R.id.project_desc).getText().toString()
-                , TaskAssigneeModel.getInstance().responseObject.
+                , TaskUserModel.getInstance().responseObject.
                 get(owner_list.getSelectedIndex()).ID, isactive
                 , projectsLists.get(
                 departments_list.getSelectedIndex()).getCompOrDeptID(), isprivate
@@ -105,9 +106,9 @@ public class EditProjectFragment extends BaseFragment {
     public void UpdateProject(Object caller, Object model){
         CreateProjectModel.getInstance().setList((CreateProjectModel) model);
         if (CreateProjectModel.getInstance().responseObject !=null ) {
-            Snackbar.make(getView(),"Project Updated Successfully!",Snackbar.LENGTH_SHORT).show();
+            Snackbar.make(getView(),getString(R.string.project_updated),Snackbar.LENGTH_SHORT).show();
         }else {
-            Toast.makeText(getActivity(), getString(R.string.forums_list_empty), Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), getString(R.string.response_error), Toast.LENGTH_SHORT).show();
         }
 
     }
@@ -119,7 +120,7 @@ public class EditProjectFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view  = inflater.inflate(R.layout.add_project, container, false);
+        View view  = inflater.inflate(R.layout.fragment_add_project, container, false);
         radioGroup1 = (RadioGroup) view.findViewById(R.id.private_public_group);
         radioGroup2 = (RadioGroup) view.findViewById(R.id.active_archive_status);
         radioGroup1.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -149,6 +150,7 @@ public class EditProjectFragment extends BaseFragment {
             }
         });
         aq = new AQuery(getActivity(), view);
+        aq.id(R.id.lblListHeader).text(getString(R.string.edit_project));
         owner_list = (NiceSpinner) view.findViewById(R.id.owner_list);
         departments_list= (NiceSpinner) view.findViewById(R.id.departments_list);
         service = new TaskListService(getActivity());
@@ -160,7 +162,7 @@ public class EditProjectFragment extends BaseFragment {
             deptList.add(ProjectsFragment.allDeptList.get(loop).getDeptName());
         }
         departments_list.attachDataSource(deptList);
-        service.getAllUsers(true, new CallBack(EditProjectFragment.this, "GetAllUsers"));
+        service.getTaskAssignee(Integer.parseInt(baseClass.getSelectedProject()), true, new CallBack(EditProjectFragment.this, "GetAllUsers"));
         return view;
     }
     public void UpdateValues()
@@ -204,18 +206,18 @@ public class EditProjectFragment extends BaseFragment {
         }
     }
     public void GetAllUsers(Object caller, Object model) {
-        TaskAssigneeModel.getInstance().setList((TaskAssigneeModel) model);
-        if (TaskAssigneeModel.getInstance().responseCode == 100) {
+        TaskUserModel.getInstance().setList((TaskUserModel) model);
+        if (TaskUserModel.getInstance().responseCode == 100) {
             userList= new LinkedList<>();
-            for(int loop=0;loop<TaskAssigneeModel.getInstance().responseObject.size();loop++) {
-                userList.add(TaskAssigneeModel.getInstance().responseObject.get(loop).firstName);
+            for(int loop=0;loop< TaskUserModel.getInstance().responseObject.size();loop++) {
+                userList.add(TaskUserModel.getInstance().responseObject.get(loop).firstName);
             }
             owner_list.attachDataSource(userList);
             UpdateValues();
         }
         else
         {
-            Toast.makeText(getActivity(), getString(R.string.invalid_credential), Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), getString(R.string.response_error), Toast.LENGTH_SHORT).show();
         }
     }
 }

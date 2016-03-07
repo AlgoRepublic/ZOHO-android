@@ -110,7 +110,7 @@ public class TaskScheduleFragment extends BaseFragment {
     };
     public void SplitStartDate(){
         String start_date = aq.id(R.id.start_date).getText().toString();
-        if(start_date.equalsIgnoreCase("Start Date")) {
+        if(start_date.equalsIgnoreCase(getString(R.string.start_date))) {
             Calendar calendar = Calendar.getInstance();
             start_year = calendar.get(Calendar.YEAR);
             start_month = calendar.get(Calendar.MONTH);
@@ -124,7 +124,7 @@ public class TaskScheduleFragment extends BaseFragment {
     }
     public void SplitEndDate(){
         String end_date = aq.id(R.id.end_date).getText().toString();
-        if(end_date.equalsIgnoreCase("End Date")) {
+        if(end_date.equalsIgnoreCase(getString(R.string.end_date))) {
             Calendar calendar = Calendar.getInstance();
             end_year = calendar.get(Calendar.YEAR);
             end_month = calendar.get(Calendar.MONTH);

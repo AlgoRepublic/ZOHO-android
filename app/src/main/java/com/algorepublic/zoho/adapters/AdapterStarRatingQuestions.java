@@ -5,20 +5,14 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.SeekBar;
-import android.widget.Toast;
 
-import com.algorepublic.zoho.Models.AllProjectsModel;
 import com.algorepublic.zoho.Models.GeneralModel;
-import com.algorepublic.zoho.Models.StarRatingQuestionModel;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.StarRatingFragments.StarRatingLevelQuestionsFragment;
 import com.algorepublic.zoho.services.CallBack;
@@ -61,7 +55,7 @@ public class AdapterStarRatingQuestions extends BaseAdapter {
 
         convertView = l_Inflater.inflate(R.layout.drawer_list_item, parent, false);
         aq = new AQuery(convertView);
-        aq.id(R.id.quest_text).text("Q: " + StarRatingLevelQuestionsFragment.Questions
+        aq.id(R.id.quest_text).text(mContext.getString(R.string.Q)+": " + StarRatingLevelQuestionsFragment.Questions
                 .get(position).getQuestion());
         aq.id(R.id.comment_edittext).text(StarRatingLevelQuestionsFragment.Questions
                 .get(position).getComment());
@@ -128,7 +122,7 @@ public class AdapterStarRatingQuestions extends BaseAdapter {
                     mContext.getString(R.string.update_comment), Snackbar.LENGTH_SHORT).show();
         } else {
             Snackbar.make(((AppCompatActivity) mContext).findViewById(android.R.id.content),
-                    mContext.getString(R.string.projects_list_empty), Snackbar.LENGTH_SHORT).show();
+                    mContext.getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
         }
     }
     public void UpdateProgress(Object caller, Object model) {
@@ -138,7 +132,7 @@ public class AdapterStarRatingQuestions extends BaseAdapter {
                     mContext.getString(R.string.update_progress), Snackbar.LENGTH_SHORT).show();
         } else {
             Snackbar.make(((AppCompatActivity) mContext).findViewById(android.R.id.content),
-                    mContext.getString(R.string.projects_list_empty), Snackbar.LENGTH_SHORT).show();
+                    mContext.getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
         }
     }
     public int GetStarValue(int progress)
