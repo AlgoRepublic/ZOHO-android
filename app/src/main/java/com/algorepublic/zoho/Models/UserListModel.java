@@ -81,6 +81,4 @@ public class UserListModel  {
         public String role_AR;
 
     }
-
-
 }

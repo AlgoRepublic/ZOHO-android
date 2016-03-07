@@ -272,7 +272,7 @@ public class GenericHttpClient {
         mpEntity.addPart("CreateBy", new StringBody(Integer.toString(1)));
         mpEntity.addPart("UpdateBy", new StringBody(Integer.toString(1)));
         p.setEntity(mpEntity);
-        Log.e("ID/PID",BaseClass.db.getInt("RootID")+"/"+ProjectID);
+        Log.e("ID/PID", BaseClass.db.getInt("RootID") + "/" + ProjectID);
         HttpResponse resp = hc.execute(p);
         if (resp != null) {
             message = convertStreamToString(resp.getEntity().getContent());
@@ -299,20 +299,22 @@ public class GenericHttpClient {
         return message;
     }
     public String createUser(String url,String firstname,String lastname,
-                             String email,String mobileNo, File files) throws IOException {
+                             String email,String mobileNo,int userRole ,Integer[] Ids) throws IOException {
 
         HttpClient hc = new DefaultHttpClient();
         String message =null;
         HttpPost p = new HttpPost(url);
         MultipartEntity mpEntity = new MultipartEntity(HttpMultipartMode.BROWSER_COMPATIBLE);
 
-        Log.e("File", "/" + files.getName());
-        mpEntity.addPart("files", new FileBody(files));
-
+        for(int loop=0;loop<Ids.length;loop++) {
+            Log.e("File", "/" + Ids);
+            mpEntity.addPart("ProjectIDs["+loop+"]", new StringBody(Integer.toString(Ids[loop])));
+        }
         mpEntity.addPart("FirstName", new StringBody(firstname));
         mpEntity.addPart("LastName", new StringBody(lastname));
         mpEntity.addPart("Email", new StringBody(email));
         mpEntity.addPart("Mobile", new StringBody(mobileNo));
+        mpEntity.addPart("RoleID", new StringBody(Integer.toString(userRole)));
         p.setEntity(mpEntity);
         HttpResponse resp = hc.execute(p);
         if (resp != null) {
@@ -320,24 +322,46 @@ public class GenericHttpClient {
         }
         return message;
     }
-    public String updateUser(String url,String ID,String firstname,String lastname,
-                             String email,String mobileNo, File files) throws IOException {
+    public String updateUserWithoutProjects(String url,String ID,String firstname,String lastname,
+                             String email,String mobileNo,int userRole, Integer[] Ids) throws IOException {
 
         HttpClient hc = new DefaultHttpClient();
         String message =null;
         HttpPost p = new HttpPost(url);
         MultipartEntity mpEntity = new MultipartEntity(HttpMultipartMode.BROWSER_COMPATIBLE);
 
-        Log.e("File", "/" + files.getName());
-        if(files !=null)
-        mpEntity.addPart("files", new FileBody(files));
-
+        for(int loop=0;loop<Ids.length;loop++) {
+            Log.e("IDs", "/" + Ids);
+            mpEntity.addPart("ProjectIDs["+loop+"]", new StringBody(Integer.toString(Ids[loop])));
+        }
 
         mpEntity.addPart("ID", new StringBody(ID));
         mpEntity.addPart("FirstName", new StringBody(firstname));
         mpEntity.addPart("LastName", new StringBody(lastname));
         mpEntity.addPart("Email", new StringBody(email));
         mpEntity.addPart("Mobile", new StringBody(mobileNo));
+        mpEntity.addPart("RoleID", new StringBody(Integer.toString(userRole)));
+        p.setEntity(mpEntity);
+        HttpResponse resp = hc.execute(p);
+        if (resp != null) {
+            message = convertStreamToString(resp.getEntity().getContent());
+        }
+        return message;
+    }
+    public String updateUserWithProjects(String url,String ID,String firstname,String lastname,
+                             String email,String mobileNo,int userRole) throws IOException {
+
+        HttpClient hc = new DefaultHttpClient();
+        String message =null;
+        HttpPost p = new HttpPost(url);
+        MultipartEntity mpEntity = new MultipartEntity(HttpMultipartMode.BROWSER_COMPATIBLE);
+
+        mpEntity.addPart("ID", new StringBody(ID));
+        mpEntity.addPart("FirstName", new StringBody(firstname));
+        mpEntity.addPart("LastName", new StringBody(lastname));
+        mpEntity.addPart("Email", new StringBody(email));
+        mpEntity.addPart("Mobile", new StringBody(mobileNo));
+        mpEntity.addPart("RoleID", new StringBody(Integer.toString(userRole)));
         p.setEntity(mpEntity);
         HttpResponse resp = hc.execute(p);
         if (resp != null) {

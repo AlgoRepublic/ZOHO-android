@@ -18,6 +18,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 
 import com.algorepublic.zoho.Models.AllProjectsByUserModel;
+import com.algorepublic.zoho.Models.UserListModel;
 import com.algorepublic.zoho.Models.UserRoleModel;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.services.CallBack;
@@ -54,21 +55,24 @@ public class AddUserFragment extends BaseFragment implements MultiSelectionSpinn
     public static final int PICK_File = 3;
     File newFile;
     AQuery aq;
+    int[] Ids;
     ArrayList<String> roleList;
-    String [] projectList;
+    ArrayList<String> projectList;
     NiceSpinner role_list;
     ProjectsListService service ;
     UserService service1;
     MultiSelectionSpinner projectsList;
     ACProgressFlower dialog;
     BaseClass baseClass;
+    static int position;
 
     public AddUserFragment() {
         // Required empty public constructor
     }
 
 
-    public static AddUserFragment newInstance() {
+    public static AddUserFragment newInstance(int pos) {
+        position = pos;
         AddUserFragment fragment = new AddUserFragment();
         Bundle args = new Bundle();
         fragment.setArguments(args);
@@ -98,16 +102,7 @@ public class AddUserFragment extends BaseFragment implements MultiSelectionSpinn
                 CallForAttachments();
             }
         });
-//        if (tasksObj.getListAssignees().size() > 0) {
-//            try {
-//                for (int loop = 0;
-//                     loop < tasksObj.getListAssignees().size(); loop++) {
-//                    TaskAddUpdateFragment.assigneeList.add(
-//                            tasksObj.getListAssignees().get(loop).getUserID());
-//                }
-//            } catch (IndexOutOfBoundsException e) {
-//            }
-//        }
+
         if(baseClass.getSelectedProject().equalsIgnoreCase("0")){
             aq.id(R.id.layout).visibility(View.VISIBLE);
             service.getAllProjectsByUser_API(baseClass.getUserId(), true, new CallBack(AddUserFragment.this, "AllProjects"));
@@ -122,12 +117,31 @@ public class AddUserFragment extends BaseFragment implements MultiSelectionSpinn
         AllProjectsByUserModel.getInstance().setList((AllProjectsByUserModel) model);
         if (AllProjectsByUserModel.getInstance().responseCode == 100
                 || AllProjectsByUserModel.getInstance().responseData.size() != 0) {
+            projectList = new ArrayList<>();
             for(int loop=0;loop< AllProjectsByUserModel.getInstance().responseData.size();loop++) {
-                projectList[loop] = AllProjectsByUserModel.getInstance().responseData.get(loop).projectName;
+                try {
+                    if(AllProjectsByUserModel.getInstance().responseData.get(loop).projectName ==null){
+                        projectList.add("No Data");
+                    }else
+                    projectList.add(AllProjectsByUserModel.getInstance().responseData.get(loop).projectName);
+                }catch (NullPointerException e){}
             }
-            Log.e("S","/"+projectList);
             projectsList.setItems(projectList);
-            projectsList.setSelection(0);
+            if(position > -1) {
+                if (UserListModel.getInstance().responseObject.get(position).projectIDs != null) {
+                    for (int loop = 0; loop < UserListModel.getInstance()
+                            .responseObject.get(position).projectIDs.size(); loop++) {
+                        for (int loop1 = 0; loop1 < AllProjectsByUserModel.getInstance()
+                                .responseData.size(); loop1++) {
+                            if (UserListModel.getInstance()
+                                    .responseObject.get(position).projectIDs.get(loop) == AllProjectsByUserModel
+                                    .getInstance().responseData.get(loop1).projectID)
+                                Ids[loop] = loop1;
+                        }
+                        projectsList.setSelection(Ids);
+                    }
+                }
+            }
         }else {
             Snackbar.make(getView(), getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
         }
@@ -252,7 +266,7 @@ public class AddUserFragment extends BaseFragment implements MultiSelectionSpinn
 
     @Override
     public void selectedStrings(List<String> strings) {
-
+        projectsList.setSelection(strings);
     }
 
     public class AddUser extends AsyncTask<Void, Void, String> {
@@ -273,7 +287,7 @@ public class AddUserFragment extends BaseFragment implements MultiSelectionSpinn
                         aq.id(R.id.first_name).getText().toString(),
                         aq.id(R.id.last_name).getText().toString(),
                         aq.id(R.id.user_email).getText().toString(),
-                        aq.id(R.id.user_phoneno).getText().toString(), newFile);
+                        aq.id(R.id.user_phoneno).getText().toString(), );
             } catch (IOException e) {
                 e.printStackTrace();
             }
