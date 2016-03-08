@@ -160,9 +160,9 @@ public class GenericHttpClient {
         MultipartEntity mpEntity = new MultipartEntity(HttpMultipartMode.BROWSER_COMPATIBLE);
         try {
             for(int i=0;i<files.size();i++) {
-                if(files.get(i).getFile() != null) {
-                    Log.e("files", "/" + files.get(i).getFile());
-                    mpEntity.addPart("files["+i+"]", new FileBody(files.get(i).getFile()));
+                if(files.get(i).getFileID()== -1) {
+                    Log.e("files", i+"/" + files.get(i).getFile());
+                    mpEntity.addPart("files[" + i + "]", new FileBody(files.get(i).getFile()));
                 }
             }
             for(int i=0;i<filesToDelete.size();i++) {
@@ -211,8 +211,8 @@ public class GenericHttpClient {
         MultipartEntity mpEntity = new MultipartEntity(HttpMultipartMode.BROWSER_COMPATIBLE);
         try {
             for(int i=0;i<files.size();i++) {
-                if(files.get(i).getFile() != null) {
-                    Log.e("File", "/" + files.get(i).getFile().getName());
+                if(files.get(i).getFileID()== -1) {
+                    Log.e("File", i+"/" + files.get(i).getFile().getName());
                     mpEntity.addPart("files["+i+"]", new FileBody(files.get(i).getFile()));
                 }
             }

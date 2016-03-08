@@ -272,6 +272,7 @@ public class TaskAddUpdateFragment extends BaseFragment {
         @Override
         protected String doInBackground(Void... voids) {
             try {
+                Log.e("Size","/"+filesList.size());
                 httpClient = new GenericHttpClient();
                 response = httpClient.postUpdateTask(Constants.UpdateTask_API
                         , assigneeList, filesList, filesToDelete, baseClass);

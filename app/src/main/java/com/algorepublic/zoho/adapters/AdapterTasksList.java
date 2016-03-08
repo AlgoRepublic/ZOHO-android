@@ -88,12 +88,13 @@ public class AdapterTasksList extends BaseAdapter implements StickyListHeadersAd
         aq.id(R.id.task_users).text(tasksLists.get(position).getListAssignees().size() + " " + ctx.getString(R.string.task_user));
         aq.id(R.id.task_name).text(tasksLists.get(position).getTaskName());
         aq.id(R.id.project_name).text(tasksLists.get(position).getProjectName());
-        if(tasksLists.get(position).getStartDate().equalsIgnoreCase("3/0/1")) {
+        if(tasksLists.get(position).getEndDate().equalsIgnoreCase("3/0/1")) {
             aq.id(R.id.task_date).text("No Date");
-        }else if(tasksLists.get(position).getStartDate().equalsIgnoreCase("12/31/3938")) {
+        }else if(tasksLists.get(position).getEndDate().equalsIgnoreCase("12/31/3938")) {
             aq.id(R.id.task_date).text("No Date");
-        }else
+        }else {
             aq.id(R.id.task_date).text(tasksLists.get(position).getEndDate());
+        }
 
 
         try {
@@ -164,7 +165,9 @@ public class AdapterTasksList extends BaseAdapter implements StickyListHeadersAd
         if(baseClass.getTaskFilterType().equalsIgnoreCase("DueDate")) {
             if (tasksLists.get(position).getHeader().equalsIgnoreCase("3/0/1"))
                 aq_header.id(R.id.header).text("No Date");
-            else
+            else if(tasksLists.get(position).getHeader().equalsIgnoreCase("12/31/3938")) {
+                aq_header.id(R.id.header).text("No Date");
+            }else
                 aq_header.id(R.id.header).text(tasksLists.get(position).getHeader());
         }
         if(baseClass.getTaskFilterType().equalsIgnoreCase("Priority"))
