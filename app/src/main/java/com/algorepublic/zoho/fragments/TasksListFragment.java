@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.RadioGroup;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.algorepublic.zoho.Models.TasksListByOwnerModel;
@@ -44,6 +45,7 @@ public class TasksListFragment extends BaseFragment {
     StickyListHeadersAdapter adapterTasksList;
     AQuery aq;View view;
     RadioGroup radioGroup;
+    public  static SearchView searchView;
     public static ArrayList<TaskListName> taskListName = new ArrayList<>();
     public static ArrayList<TasksList> allTaskList = new ArrayList<>();
     public static ArrayList<TasksList> generalList = new ArrayList<>();
@@ -113,6 +115,7 @@ public class TasksListFragment extends BaseFragment {
         view = inflater.inflate(R.layout.fragment_taskslist, container, false);
         setHasOptionsMenu(true);
         radioGroup = (RadioGroup) view.findViewById(R.id.radioGroup);
+        searchView = (SearchView) view.findViewById(R.id.searchView);
         listView = (StickyListHeadersListView) view.findViewById(R.id.list_taskslist);
         aq = new AQuery(view);
 
@@ -129,6 +132,15 @@ public class TasksListFragment extends BaseFragment {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getActivity(), TaskAddUpdateFragment.class));
+            }
+        });
+       searchView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                searchView.setIconifiedByDefault(true);
+                searchView.setFocusable(true);
+                searchView.setIconified(false);
+                searchView.requestFocusFromTouch();
             }
         });
         aq.id(R.id.sort).clicked(new View.OnClickListener() {

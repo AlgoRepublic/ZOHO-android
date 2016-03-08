@@ -47,7 +47,8 @@ public class AdapterTaskAttachment extends BaseAdapter {
             Glide.with(ctx).load(TaskAddUpdateFragment.filesList.get(position).getFileUrl())
                     .into(aq.id(R.id.file_added).getImageView());
         }
-        aq.id(R.id.title_text).text(TaskAddUpdateFragment.filesList.get(position).getFileName());
+
+        aq.id(R.id.file_title).text(TaskAddUpdateFragment.filesList.get(position).getFileName());
 
         aq.id(R.id.file_delete).clicked(new View.OnClickListener() {
             @Override

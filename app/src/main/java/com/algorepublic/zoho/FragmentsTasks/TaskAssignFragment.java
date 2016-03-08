@@ -65,7 +65,7 @@ public class TaskAssignFragment extends BaseFragment {
       }else{
           service.getTaskAssignee(tasksList.getProjectID(), true, new CallBack(TaskAssignFragment.this, "TaskAssignee"));
       }
-            return  view;
+            return view;
     }
     public void TaskAssignee(Object caller, Object model) {
         TaskUserModel.getInstance().setList((TaskUserModel) model);

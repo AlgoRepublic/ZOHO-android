@@ -5,6 +5,7 @@ public class Constants {
 	public static String BASE_URL = "http://api.jitpac.com";
 	public static String Image_URL = "http://jitpac.com/FileUploadsManager/uploads/";
 	public static String UserImage_URL = "http://jitpac.com";
+	public static String UploadImage_URL = BASE_URL +"/User/UploadPicture";// userID, file,  createdBy
 	// Login API
 	public static String Login_API = BASE_URL + "/User/Login";
 	public static String GetUser_API = BASE_URL+ "/User/GetById";
@@ -13,8 +14,8 @@ public class Constants {
 	public static String GetAllUserList_API = BASE_URL+ "/User/GetList";
 	public static String GetUserListByProject_API = BASE_URL+ "/User/GetListByProject?";
 	public static String GetAssigneeByTask_API = BASE_URL+ "/User/GetListByProject";//ProjectID
-	public static String CreateUser_API = BASE_URL+ "/User/CreateUser?";
-	public static String UpdateUser_API = BASE_URL+ "/User/UpdateUserProfile?";
+	public static String CreateUser_API = BASE_URL+ "/User/CreateUser";
+	public static String UpdateUser_API = BASE_URL+ "/User/UpdateUserProfile";
 	// Tasks API
 	public static String GetTaskListByOwner_API = BASE_URL+ "/TaskList/GetListByOwnerID?"; //userID
 	public static String GetTaskListBySubTasks_API = BASE_URL+ "/Task/GetByParentId?"; //taskID
@@ -31,6 +32,7 @@ public class Constants {
 	public static String TaskCompleted_API = BASE_URL+ "/Task/TaskCompleted"; //taskID,opt
 	public static String GetSubTakById_API = BASE_URL+ "/Task/GetById?";
 	public static String TaskAttachments_API = BASE_URL+ "/Task/AttachmentList"; //taskID
+	public static String TaskById_API = BASE_URL+ "/Task/GetById?"; //taskID
 	// StarRating API
 	public static String StarRatingHeads_API = BASE_URL+ "/StarRating/GetListByLanguage"; //language
 	public static String StarRatingQuestion_API = BASE_URL+ "/StarRating/GetQuestionCategoriesByCategory"; //catID,language

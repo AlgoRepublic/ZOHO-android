@@ -53,21 +53,18 @@ public class AdapterUser extends BaseAdapter {
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
         ViewHolder holder;
-        if (convertView == null) {
-            convertView = l_Inflater.inflate(R.layout.layout_user_row, null);
-            holder = new ViewHolder();
+        convertView = l_Inflater.inflate(R.layout.layout_user_row, null);
+        holder = new ViewHolder();
 
-            holder.userImage = (CircularImageView) convertView.findViewById(R.id.user_image);
-            holder.btEdit = (TextView) convertView.findViewById(R.id.btEdit);
-        } else {
-            holder = (ViewHolder) convertView.getTag();
-        }
+        holder.userImage = (CircularImageView) convertView.findViewById(R.id.user_image);
+        holder.btEdit = (TextView) convertView.findViewById(R.id.btEdit);
+
         aq = new AQuery(convertView);
         aq.id(R.id.user_title).text(getItem(position).firstName);
         aq.id(R.id.user_email).text(getItem(position).email);
         aq.id(R.id.user_role).text(ctx.getString(R.string.role)+getItem(position).userRole.role);
         if(getItem(position).profileImagePath !=null) {
-            Glide.with(ctx).load(Constants.Image_URL +
+            Glide.with(ctx).load(Constants.UserImage_URL +
                     getItem(position).profileImagePath).into(holder.userImage);
         }
         holder.btEdit.setOnClickListener(new View.OnClickListener() {

@@ -5,6 +5,7 @@ import android.util.Log;
 
 import com.algorepublic.zoho.Models.CreateCommentModel;
 import com.algorepublic.zoho.Models.GeneralModel;
+import com.algorepublic.zoho.Models.TaskByIdModel;
 import com.algorepublic.zoho.Models.TaskUserModel;
 import com.algorepublic.zoho.Models.SubTaskAttachmentsModel;
 import com.algorepublic.zoho.Models.TaskCommentsModel;
@@ -28,10 +29,15 @@ public class TaskListService extends BaseService {
         this.get(url, obj, TasksListByOwnerModel.getInstance(), message);
         Log.e("TaskListByOwnerService", url);
     }
+    public void getTasksById(int ID, boolean message, CallBack obj){
+        String url = Constants.TaskById_API+"id="+ID;
+        this.get(url, obj, TaskByIdModel.getInstance(), message);
+        Log.e("TaskListByOwnerService", url);
+    }
     public void getTasksListByProject(String projectID, boolean message, CallBack obj){
         String url = Constants.GetTaskListByProject_API+"projectID="+projectID;
         this.get(url, obj, TasksListByOwnerModel.getInstance(), message);
-        Log.e("TaskListByProjtService", url);
+        Log.e("TaskListByProjService", url);
     }
     public void getTasksListBySubTasks(int taskID, boolean message, CallBack obj){
         String url = Constants.GetTaskListBySubTasks_API+"taskID="+taskID;

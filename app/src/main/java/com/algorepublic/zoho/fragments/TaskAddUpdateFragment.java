@@ -3,6 +3,7 @@ package com.algorepublic.zoho.fragments;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -24,6 +25,7 @@ import com.algorepublic.zoho.utils.BaseClass;
 import com.algorepublic.zoho.utils.Constants;
 import com.algorepublic.zoho.utils.GenericHttpClient;
 import com.androidquery.AQuery;
+
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -270,6 +272,7 @@ public class TaskAddUpdateFragment extends BaseFragment {
         @Override
         protected String doInBackground(Void... voids) {
             try {
+                Log.e("Size","/"+filesList.size());
                 httpClient = new GenericHttpClient();
                 response = httpClient.postUpdateTask(Constants.UpdateTask_API
                         , assigneeList, filesList, filesToDelete, baseClass);
@@ -314,11 +317,14 @@ public class TaskAddUpdateFragment extends BaseFragment {
     }
     private void PopulateModel (String json) {
         Log.e("Json", "/" + json);
-        SetValues();
+        if(json.contains("100")) {
+            Snackbar.make(getView(),getString(R.string.task_created),Snackbar.LENGTH_SHORT).show();
+        }
     }
     public void setTaskValuesTinyDB(int position){
         if(position > -1) {
-            baseClass.db.putInt("TaskListNameID",tasksObj.getTaskListNameID());
+            baseClass.db.putInt("TaskListNameID", tasksObj.getTaskListNameID());
+            baseClass.db.putString("TaskListName", tasksObj.getTaskListName());
             baseClass.db.putInt("TaskID", tasksObj.getTaskID());
             baseClass.db.putString("TaskName", tasksObj.getTaskName());
             baseClass.db.putString("ProjectName", tasksObj.getProjectName());
@@ -330,6 +336,7 @@ public class TaskAddUpdateFragment extends BaseFragment {
             baseClass.db.putString("StartDate", tasksObj.getStartDate());
             baseClass.db.putString("EndDate", tasksObj.getEndDate());
             baseClass.db.putInt("Priority", tasksObj.getPriority());
+
         }else
         {
             baseClass.db.putString("TaskName", getString(R.string.Task_Title));

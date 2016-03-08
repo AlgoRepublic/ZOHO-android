@@ -19,6 +19,7 @@ import android.view.ViewGroup;
 import android.widget.SeekBar;
 
 import com.algorepublic.zoho.Models.GeneralModel;
+import com.algorepublic.zoho.Models.TaskByIdModel;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.adapters.AdapterTaskDetailAssignee;
 import com.algorepublic.zoho.adapters.TasksList;
@@ -116,24 +117,8 @@ public class TaskDetailFragment extends BaseFragment {
         aq = new AQuery(view);
         getToolbar().setTitle(getString(R.string.task_details));
         service = new TaskListService(getActivity());
-        aq.id(R.id.start_date).text(tasksList.getStartDate());
-        aq.id(R.id.end_date).text(tasksList.getEndDate());
-        aq.id(R.id.category).text(tasksList.getTaskListName());
-        aq.id(R.id.task_name).text(tasksList.getTaskName());
-        aq.id(R.id.task_desc).text(tasksList.getDescription());
-        aq.id(R.id.category).text(tasksList.getTaskListName());
-        aq.id(R.id.comment_count).text(Integer.toString(tasksList.getCommentsCount()));
-        aq.id(R.id.docs_count).text(Integer.toString(tasksList.getDocumentsCount()));
-        aq.id(R.id.subtask_count).text(Integer.toString(tasksList.getSubTasksCount()));
-        applyLightBackground(aq.id(R.id.parent2).getView(), baseClass);
-        seekBar.setProgress(tasksList.getProgress());
-        seekBarCompat.setProgress(tasksList.getProgress());
+        service.getTasksById(tasksList.getTaskID(),true,new CallBack(TaskDetailFragment.this,"TaskDetails"));
 
-        Drawable shapeDrawable = aq.id(R.id.priority_bar).getView().getBackground();
-        GradientDrawable colorDrawable = (GradientDrawable) shapeDrawable;
-        colorDrawable.setColor(getPriorityWiseColor(tasksList.getPriority()));
-        aq.id(R.id.priority_bar).getView().setBackground(shapeDrawable);
-        views.setBackgroundColor(getPriorityWiseColor(tasksList.getPriority()));
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progres, boolean fromUser) {
@@ -160,7 +145,6 @@ public class TaskDetailFragment extends BaseFragment {
                         , progress, true, new CallBack(TaskDetailFragment.this, "UpdateProgress"));
             }
         });
-
 
         aq.id(R.id.comment).clicked(new View.OnClickListener() {
             @Override
@@ -205,13 +189,48 @@ public class TaskDetailFragment extends BaseFragment {
 
             }
         });
-
-
-
-
         return view;
     }
+    public void TaskDetails(Object caller, Object model) {
+        TaskByIdModel.getInstance().setList((TaskByIdModel) model);
+        if (TaskByIdModel.getInstance().responseCode == 100) {
+            UpdateValue();
+        } else {
+            Snackbar.make(getView(), getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
+        }
+    }
 
+    public void UpdateValue(){
+        if(DateFormatter(TaskByIdModel.getInstance().responseObject.startDate).equalsIgnoreCase("12/31/3938")){
+            aq.id(R.id.start_date).text("No Date");
+        }else if(DateFormatter(TaskByIdModel.getInstance().responseObject.startDate).equalsIgnoreCase("3/0/1")){
+            aq.id(R.id.start_date).text("No Date");
+        }else
+            aq.id(R.id.start_date).text(DateFormatter(TaskByIdModel.getInstance().responseObject.startDate));
+
+        if(DateFormatter(TaskByIdModel.getInstance().responseObject.endDate).equalsIgnoreCase("12/31/3938")){
+            aq.id(R.id.end_date).text("No Date");
+        }else if(DateFormatter(TaskByIdModel.getInstance().responseObject.endDate).equalsIgnoreCase("3/0/1")){
+            aq.id(R.id.end_date).text("No Date");
+        }else
+        aq.id(R.id.end_date).text(DateFormatter(TaskByIdModel.getInstance().responseObject.endDate));
+
+        aq.id(R.id.category).text(baseClass.db.getString("TaskListName"));
+        aq.id(R.id.task_name).text(TaskByIdModel.getInstance().responseObject.title);
+        aq.id(R.id.task_desc).text(TaskByIdModel.getInstance().responseObject.description);
+        aq.id(R.id.comment_count).text(Integer.toString(TaskByIdModel.getInstance().responseObject.commentsCount));
+        aq.id(R.id.docs_count).text(Integer.toString(TaskByIdModel.getInstance().responseObject.documentsCount));
+        aq.id(R.id.subtask_count).text(Integer.toString(TaskByIdModel.getInstance().responseObject.subTasksCount));
+        applyLightBackground(aq.id(R.id.parent2).getView(), baseClass);
+        seekBar.setProgress(TaskByIdModel.getInstance().responseObject.progress);
+        seekBarCompat.setProgress(TaskByIdModel.getInstance().responseObject.progress);
+
+        Drawable shapeDrawable = aq.id(R.id.priority_bar).getView().getBackground();
+        GradientDrawable colorDrawable = (GradientDrawable) shapeDrawable;
+        colorDrawable.setColor(getPriorityWiseColor(TaskByIdModel.getInstance().responseObject.priority));
+        aq.id(R.id.priority_bar).getView().setBackground(shapeDrawable);
+        views.setBackgroundColor(getPriorityWiseColor(TaskByIdModel.getInstance().responseObject.priority));
+    }
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.menu_task_details, menu);
@@ -365,4 +384,10 @@ public class TaskDetailFragment extends BaseFragment {
                     }
                 });
     }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+    }
+
 }
