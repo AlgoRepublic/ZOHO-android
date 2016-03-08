@@ -31,6 +31,7 @@ import com.algorepublic.zoho.utils.BaseClass;
 import com.algorepublic.zoho.utils.Constants;
 import com.algorepublic.zoho.utils.GenericHttpClient;
 import com.androidquery.AQuery;
+import com.bumptech.glide.Glide;
 import com.flyco.dialog.listener.OnOperItemClickL;
 import com.flyco.dialog.widget.ActionSheetDialog;
 import com.guna.libmultispinner.MultiSelectionSpinner;
@@ -124,7 +125,11 @@ public class EditUserFragment extends BaseFragment implements MultiSelectionSpin
         Log.e("Image",Constants.UserImage_URL + UserListModel
                 .getInstance().responseObject.get(position).profileImagePath);
         if(imagePath != null) {
-            aq.id(R.id.profile).image(Constants.UserImage_URL + imagePath);
+        Glide.with(getActivity()).load(Constants.Image_URL + UserListModel.getInstance()
+                .responseObject.get(position).profilePictureID
+                + "." + BaseClass.getExtensionType(
+                UserListModel.getInstance().responseObject.get(position).profileImagePath))
+                .into(aq.id(R.id.profile).getImageView());
         }
         aq.id(R.id.user_phoneno).text(UserListModel.getInstance().responseObject.get(position).mobile);
     }
@@ -326,7 +331,8 @@ public class EditUserFragment extends BaseFragment implements MultiSelectionSpin
             try {
                 httpClient = new GenericHttpClient();
                 response = httpClient.uploadImage(Constants.UploadImage_URL,
-                        baseClass.getUserId(), newFile);
+                        Integer.toString(UserListModel.getInstance().responseObject
+                                .get(position).ID),baseClass.getUserId(), newFile);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -336,10 +342,9 @@ public class EditUserFragment extends BaseFragment implements MultiSelectionSpin
         @Override
         protected void onPostExecute(String result) {
             dialog.dismiss();
-            Log.e("Rsult",result);
             if(result != null) {
                 if (result.contains("100")) {
-                    Snackbar.make(getView(), getString(R.string.user_created), Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(getView(), getString(R.string.user_updated), Snackbar.LENGTH_SHORT).show();
                 } else {
                     Snackbar.make(getView(), getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
                 }

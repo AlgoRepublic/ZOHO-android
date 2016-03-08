@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.algorepublic.zoho.Models.ForumsModel;
 import com.algorepublic.zoho.R;
@@ -45,6 +46,10 @@ public class ForumsFragment extends BaseFragment{
         switch (item.getItemId()){
             case R.id.add_project:
                 baseClass.hideKeyPad(getView());
+                if (baseClass.getSelectedProject().equalsIgnoreCase("0")) {
+                    Toast.makeText(getActivity(),"Please Select Project", Toast.LENGTH_SHORT).show();
+                    return false;
+                }
                 callFragmentWithBackStack(R.id.container, AddForumsFragment.newInstance(), "AddForumsFragment");
                 break;
         }

@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Toast;
 
 import com.algorepublic.zoho.Models.ForumsModel;
 import com.algorepublic.zoho.Models.GeneralModel;
@@ -71,6 +72,10 @@ public class AdapterForumsList extends BaseAdapter {
         aq.id(R.id.btEdit).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (baseClass.getSelectedProject().equalsIgnoreCase("0")) {
+                    Toast.makeText((AppCompatActivity)ctx,"Please Select Project",Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 callFragmentWithBackStack(R.id.container, EditForumFragment.newInstance(position), "EditForumFragment");
             }
         });
