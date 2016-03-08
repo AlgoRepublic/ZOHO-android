@@ -159,10 +159,12 @@ public class GenericHttpClient {
         HttpPost p = new HttpPost(url);
         MultipartEntity mpEntity = new MultipartEntity(HttpMultipartMode.BROWSER_COMPATIBLE);
         try {
+            int loop=0;
             for(int i=0;i<files.size();i++) {
                 if(files.get(i).getFileID()== -1) {
                     Log.e("files", i+"/" + files.get(i).getFile());
-                    mpEntity.addPart("files[" + i + "]", new FileBody(files.get(i).getFile()));
+                    mpEntity.addPart("files[" + loop + "]", new FileBody(files.get(i).getFile()));
+                    loop++;
                 }
             }
             for(int i=0;i<filesToDelete.size();i++) {
@@ -210,10 +212,12 @@ public class GenericHttpClient {
         HttpPost p = new HttpPost(url);
         MultipartEntity mpEntity = new MultipartEntity(HttpMultipartMode.BROWSER_COMPATIBLE);
         try {
+            int loop =0;
             for(int i=0;i<files.size();i++) {
                 if(files.get(i).getFileID()== -1) {
-                    Log.e("File", i+"/" + files.get(i).getFile().getName());
-                    mpEntity.addPart("files["+i+"]", new FileBody(files.get(i).getFile()));
+                    Log.e("File", i+"/"+loop+"/" + files.get(i).getFile().getName());
+                    mpEntity.addPart("files["+loop+"]", new FileBody(files.get(i).getFile()));
+                    loop++;
                 }
             }
             for(int i=0;i<filesToDelete.size();i++) {
@@ -305,7 +309,7 @@ public class GenericHttpClient {
         String message =null;
         HttpPost p = new HttpPost(url);
         MultipartEntity mpEntity = new MultipartEntity(HttpMultipartMode.BROWSER_COMPATIBLE);
-       if(file !=file){
+       if(file !=null){
             Log.e("File", "/" + file.getName());
             mpEntity.addPart("file", new FileBody(file));
         }
@@ -332,7 +336,7 @@ public class GenericHttpClient {
         String message =null;
         HttpPost p = new HttpPost(url);
         MultipartEntity mpEntity = new MultipartEntity(HttpMultipartMode.BROWSER_COMPATIBLE);
-        if(file !=file){
+        if(file !=null){
             Log.e("File", "/" + file.getName());
             mpEntity.addPart("file", new FileBody(file));
         }
