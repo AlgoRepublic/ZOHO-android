@@ -3,6 +3,7 @@ package com.algorepublic.zoho.fragments;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -98,7 +99,7 @@ public class TaskListBySubTasksFragment extends BaseFragment {
             case R.id.add_project:
                 baseClass.hideKeyPad(getView());
                 if(baseClass.db.getInt("ProjectID") == 0){
-                    Toast.makeText(getActivity(), "Please Select Project", Toast.LENGTH_SHORT).show();
+                    Snackbar.make(getView(),getString(R.string.select_project),Snackbar.LENGTH_SHORT).show();
                 }else {
                     callFragmentWithBackStack(R.id.container, TaskAddUpdateFragment.newInstance(tasksList.getTaskID()),"TaskAddUpdateFragment");
                 }

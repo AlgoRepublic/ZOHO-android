@@ -122,7 +122,7 @@ public class AddUserFragment extends BaseFragment implements MultiSelectionSpinn
             for(int loop=0;loop< AllProjectsByUserModel.getInstance().responseData.size();loop++) {
                 try {
                     if(AllProjectsByUserModel.getInstance().responseData.get(loop).projectName ==null){
-                        projectList.add("No Data");
+                        projectList.add(getString(R.string.no_data));
                     }else
                     projectList.add(AllProjectsByUserModel.getInstance().responseData.get(loop).projectName);
                 }catch (NullPointerException e){}

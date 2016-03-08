@@ -10,7 +10,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RadioGroup;
-import android.widget.Toast;
 
 import com.algorepublic.zoho.Models.CreateProjectModel;
 import com.algorepublic.zoho.Models.TaskUserModel;
@@ -108,7 +107,7 @@ public class EditProjectFragment extends BaseFragment {
         if (CreateProjectModel.getInstance().responseObject !=null ) {
             Snackbar.make(getView(),getString(R.string.project_updated),Snackbar.LENGTH_SHORT).show();
         }else {
-            Toast.makeText(getActivity(), getString(R.string.response_error), Toast.LENGTH_SHORT).show();
+            Snackbar.make(getView(), getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
         }
 
     }
@@ -217,7 +216,7 @@ public class EditProjectFragment extends BaseFragment {
         }
         else
         {
-            Toast.makeText(getActivity(), getString(R.string.response_error), Toast.LENGTH_SHORT).show();
+            Snackbar.make(getView(), getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
         }
     }
 }

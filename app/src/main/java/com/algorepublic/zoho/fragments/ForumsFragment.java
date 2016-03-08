@@ -2,7 +2,7 @@ package com.algorepublic.zoho.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
+import android.support.design.widget.Snackbar;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -47,7 +47,7 @@ public class ForumsFragment extends BaseFragment{
             case R.id.add_project:
                 baseClass.hideKeyPad(getView());
                 if (baseClass.getSelectedProject().equalsIgnoreCase("0")) {
-                    Toast.makeText(getActivity(),"Please Select Project",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(),"Please Select Project", Toast.LENGTH_SHORT).show();
                     return false;
                 }
                 callFragmentWithBackStack(R.id.container, AddForumsFragment.newInstance(), "AddForumsFragment");
@@ -86,7 +86,7 @@ public class ForumsFragment extends BaseFragment{
         if (ForumsModel.getInstance().responseObject.size()!=0) {
             aq.id(R.id.forums_list).adapter(new AdapterForumsList(getActivity()));
         }else {
-            Toast.makeText(getActivity(), getString(R.string.response_error), Toast.LENGTH_SHORT).show();
+            Snackbar.make(getView(), getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
         }
 
     }

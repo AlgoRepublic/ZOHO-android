@@ -6,15 +6,11 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -130,7 +126,7 @@ public class AdapterProjectsClientList extends BaseAdapter {
         if (GeneralModel.getInstance().responseCode.equalsIgnoreCase("100")) {
             arrayList.remove(lastPosition);
             notifyDataSetChanged();
-            Snackbar.make(aq.id(R.id.shadow_item_container).getView(),"Project Deleted",Snackbar.LENGTH_SHORT).show();
+            Snackbar.make(aq.id(R.id.shadow_item_container).getView(),ctx.getString(R.string.project_deleted),Snackbar.LENGTH_SHORT).show();
         } else {
             Toast.makeText(((AppCompatActivity)ctx), ctx.getString(R.string.invalid_credential), Toast.LENGTH_SHORT).show();
         }

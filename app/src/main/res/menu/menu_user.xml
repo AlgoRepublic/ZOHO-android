@@ -7,7 +7,7 @@
         android:icon="@mipmap/user_add"
         android:orderInCategory="100"
         app:showAsAction="always"
-
+        android:title=""
         tools:ignore="AppCompatResource" />
 
 </menu>

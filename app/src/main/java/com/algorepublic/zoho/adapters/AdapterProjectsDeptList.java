@@ -6,18 +6,12 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.algorepublic.zoho.Models.GeneralModel;
 import com.algorepublic.zoho.R;
@@ -33,7 +27,6 @@ import com.flyco.dialog.listener.OnBtnClickL;
 import com.flyco.dialog.widget.NormalDialog;
 
 import se.emilsjolander.stickylistheaders.StickyListHeadersAdapter;
-import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
 
 /**
  * Created by android on 2/2/16.
@@ -131,10 +124,10 @@ public class AdapterProjectsDeptList extends BaseAdapter implements StickyListHe
         if (GeneralModel.getInstance().responseCode.equalsIgnoreCase("100")) {
             ProjectsFragment.ByDepartmentList.remove(lastPosition);
             notifyDataSetChanged();
-            Snackbar.make(aq.id(R.id.shadow_item_container).getView(), "Project Deleted", Snackbar.LENGTH_SHORT).show();
+            Snackbar.make(aq.id(R.id.shadow_item_container).getView(), ctx.getString(R.string.project_deleted), Snackbar.LENGTH_SHORT).show();
         } else {
-            Toast.makeText(((AppCompatActivity) ctx), ctx.getString(R.string.invalid_credential), Toast.LENGTH_SHORT).show();
-        }
+            Snackbar.make(aq.id(R.id.shadow_item_container).getView(), ctx.getString(R.string.invalid_credential), Snackbar.LENGTH_SHORT).show();
+           }
     }
     public void callFragmentWithBackStack(int containerId, Fragment fragment, String tag){
 

@@ -1,6 +1,7 @@
 package com.algorepublic.zoho.fragments;
 
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -22,13 +23,14 @@ import java.util.ArrayList;
 /**
  * Created by waqas on 2/8/16.
  */
-public class UserFragment extends BaseFragment {
+public class UserFragment extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener{
 
 
     AQuery aq;
-
+    private SwipeRefreshLayout swipeRefreshLayout;
     public static ArrayList<Integer> assigneeList = new ArrayList<>();
     BaseClass baseClass;
+    UserService service;
 
 
     public UserFragment() {
@@ -50,13 +52,23 @@ public class UserFragment extends BaseFragment {
         aq = new AQuery(getActivity(), view);
         setHasOptionsMenu(true);
         getToolbar().setTitle(getString(R.string.user));
-
-        UserService service = new UserService(getActivity());
+        swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe_refresh_layout);
+        swipeRefreshLayout.setOnRefreshListener(this);
+        swipeRefreshLayout.setProgressViewOffset(false, 0, 200);
+            service = new UserService(getActivity());
         if(baseClass.getSelectedProject().equalsIgnoreCase("0")){
             service.getAllUsers(true, new CallBack(UserFragment.this, "UserList"));
         }else {
             service.getUserListByProject(Integer.parseInt(baseClass.getSelectedProject()), true, new CallBack(UserFragment.this, "UserList"));
         }
+        swipeRefreshLayout.post(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        swipeRefreshLayout.setRefreshing(true);
+                                        service.getAllUsers(true, new CallBack(UserFragment.this, "UserList"));
+                                    }
+                                }
+        );
             return view;
     }
     @Override
@@ -68,8 +80,10 @@ public class UserFragment extends BaseFragment {
 
     public void UserList(Object caller, Object model){
         UserListModel.getInstance().setList((UserListModel) model);
+        swipeRefreshLayout.setRefreshing(true);
         if (UserListModel.getInstance().responseObject.size()!=0) {
             aq.id(R.id.user_list).adapter(new AdapterUser(getActivity()));
+            swipeRefreshLayout.setRefreshing(false);
         }else {
             Toast.makeText(getActivity(), getString(R.string.response_error), Toast.LENGTH_SHORT).show();
         }
@@ -82,5 +96,11 @@ public class UserFragment extends BaseFragment {
                 callFragmentWithBackStack(R.id.container,AddUserFragment.newInstance(-1), "AddUserFragment");
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onRefresh() {
+        service.getAllUsers(true, new CallBack(UserFragment.this, "UserList"));
+
     }
 }

@@ -91,9 +91,10 @@ public class AdapterTasksList extends BaseAdapter implements StickyListHeadersAd
         aq.id(R.id.task_users).text(tasksLists.get(position).getListAssignees().size() + " " + ctx.getString(R.string.task_user));
         aq.id(R.id.task_name).text(tasksLists.get(position).getTaskName());
         aq.id(R.id.project_name).text(tasksLists.get(position).getProjectName());
+
         if(tasksLists.get(position).getEndDate().equalsIgnoreCase("3/0/1")
                 || tasksLists.get(position).getEndDate().equalsIgnoreCase("12/31/3938")) {
-            aq.id(R.id.task_date).text("No Date");
+            aq.id(R.id.task_date).text(ctx.getString(R.string.no_date));
         }else {
             aq.id(R.id.task_date).text(tasksLists.get(position).getEndDate());
         }
@@ -101,7 +102,7 @@ public class AdapterTasksList extends BaseAdapter implements StickyListHeadersAd
 
         try {
             if (tasksLists.get(position).getProjectName().equalsIgnoreCase(""))
-                aq.id(R.id.general).text("General");
+                aq.id(R.id.general).text(ctx.getString(R.string.pref_header_general));
             else
                 aq.id(R.id.general).text(tasksLists.get(position).getProjectName());
         }catch (Exception e){
@@ -183,19 +184,19 @@ public class AdapterTasksList extends BaseAdapter implements StickyListHeadersAd
         {
             if(tasksLists.get(position).getPriority()==0)
             {
-                aq_header.id(R.id.header).text("None");
+                aq_header.id(R.id.header).text(ctx.getString(R.string.none));
             }
             if(tasksLists.get(position).getPriority()==1)
             {
-                aq_header.id(R.id.header).text("Low");
+                aq_header.id(R.id.header).text(ctx.getString(R.string.low));
             }
             if(tasksLists.get(position).getPriority()==2)
             {
-                aq_header.id(R.id.header).text("Medium");
+                aq_header.id(R.id.header).text(ctx.getString(R.string.medium));
             }
             if(tasksLists.get(position).getPriority()==3)
             {
-                aq_header.id(R.id.header).text("High");
+                aq_header.id(R.id.header).text(ctx.getString(R.string.high));
             }
         }
         if(baseClass.getTaskFilterType().equalsIgnoreCase("Alphabetically"))
@@ -205,7 +206,7 @@ public class AdapterTasksList extends BaseAdapter implements StickyListHeadersAd
         if(baseClass.getTaskFilterType().equalsIgnoreCase("TaskList"))
         {
             if(tasksLists.get(position).getTaskListNameID() == 0)
-            aq_header.id(R.id.header).text("General");
+            aq_header.id(R.id.header).text(ctx.getString(R.string.pref_header_general));
             else
             aq_header.id(R.id.header).text(tasksLists.get(position).getTaskListName());
         }

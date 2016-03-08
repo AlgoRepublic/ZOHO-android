@@ -55,7 +55,7 @@ public class AdapterTaskAssignee extends BaseAdapter {
 
         aq.id(R.id.assignee_id).text(Integer.toString(TaskUserModel.getInstance().responseObject.get(position).ID));
         if(TaskUserModel.getInstance().responseObject.get(position).ID==Integer.parseInt(baseClass.getUserId())) {
-            aq.id(R.id.assignee_name).text("Me");
+            aq.id(R.id.assignee_name).text(ctx.getString(R.string.me));
         }else{
             aq.id(R.id.assignee_name).text(TaskUserModel.getInstance().responseObject.get(position).firstName);
         }

@@ -107,11 +107,11 @@ public class BaseFragment extends Fragment {
         int millis;String days;
         if (System.currentTimeMillis()> Long.parseLong(milli)) {
             millis = (int)TimeUnit.MILLISECONDS.toDays(System.currentTimeMillis() - Long.parseLong(milli));
-            days = "Late by "+millis+" day(s)";
+            days = getString(R.string.late_by)+millis+getString(R.string.days);
         }
         else{
             millis = (int)TimeUnit.MILLISECONDS.toDays(Long.parseLong(milli) - System.currentTimeMillis());
-            days = +millis+" day(s) Left";
+            days = +millis+getString(R.string.days_left);
         }
         return days;
     }

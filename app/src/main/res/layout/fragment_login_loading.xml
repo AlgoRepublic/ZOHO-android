@@ -22,7 +22,7 @@
         android:layout_below="@+id/avloadingIndicatorView"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="15dp"
-        android:text="Connecting to User"
+        android:text="@string/connecting_to_user"
         android:textColor="@color/colorContentWrapper"
         android:textSize="16sp" />
 
@@ -41,7 +41,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:text="Loading"
+        android:text="@string/loading"
         android:textAllCaps="true"
         android:textColor="@color/colorContentWrapper" />
 </RelativeLayout>
