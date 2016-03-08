@@ -65,8 +65,9 @@ public class AdapterUser extends BaseAdapter {
         aq.id(R.id.user_email).text(getItem(position).email);
         aq.id(R.id.user_role).text("Role: "+getItem(position).userRole.role);
         if(getItem(position).profileImagePath !=null) {
-            Glide.with(ctx).load(Constants.UserImage_URL +
-                    getItem(position).profileImagePath).into(holder.userImage);
+            Glide.with(ctx).load(Constants.Image_URL + getItem(position).profilePictureID
+                    +"."+BaseClass.getExtensionType(getItem(position).profileImagePath))
+                    .into(holder.userImage);
         }
         holder.btEdit.setOnClickListener(new View.OnClickListener() {
         @Override

@@ -216,7 +216,7 @@ public class GenericHttpClient {
             for(int i=0;i<files.size();i++) {
                 if(files.get(i).getFileID()== -1) {
                     Log.e("File", i+"/"+loop+"/" + files.get(i).getFile().getName());
-                    mpEntity.addPart("files["+loop+"]", new FileBody(files.get(i).getFile()));
+                    mpEntity.addPart("files[" + loop + "]", new FileBody(files.get(i).getFile()));
                     loop++;
                 }
             }
@@ -260,7 +260,7 @@ public class GenericHttpClient {
         }
         return message;
     }
-    public String uploadDocumentsByProject(String url,int ProjectID, ArrayList<AttachmentList> files) throws IOException {
+    public String uploadDocumentsByProject(String url,int ProjectID,int folderID, ArrayList<AttachmentList> files) throws IOException {
 
         HttpClient hc = new DefaultHttpClient();
         String message =null;
@@ -271,8 +271,9 @@ public class GenericHttpClient {
             mpEntity.addPart("files["+i+"]", new FileBody(files.get(i).getFile()));
         }
 
-        mpEntity.addPart("ID", new StringBody(Integer.toString(BaseClass.db.getInt("RootID"))));
+       // mpEntity.addPart("ID", new StringBody(Integer.toString(BaseClass.db.getInt("RootID"))));
         mpEntity.addPart("ProjectId", new StringBody(Integer.toString(ProjectID)));
+        mpEntity.addPart("folderID", new StringBody(Integer.toString(folderID)));
         mpEntity.addPart("CreateBy", new StringBody(Integer.toString(1)));
         mpEntity.addPart("UpdateBy", new StringBody(Integer.toString(1)));
         p.setEntity(mpEntity);
@@ -330,7 +331,7 @@ public class GenericHttpClient {
         }
         return message;
     }
-    public String uploadImage(String url,String userId, File file) throws IOException {
+    public String uploadImage(String url,String userId,String createdBy, File file) throws IOException {
 
         HttpClient hc = new DefaultHttpClient();
         String message =null;
@@ -341,7 +342,7 @@ public class GenericHttpClient {
             mpEntity.addPart("file", new FileBody(file));
         }
         mpEntity.addPart("userID", new StringBody(userId));
-        mpEntity.addPart("createdBy", new StringBody(userId));
+        mpEntity.addPart("createdBy", new StringBody(createdBy));
         p.setEntity(mpEntity);
         HttpResponse resp = hc.execute(p);
         if (resp != null) {

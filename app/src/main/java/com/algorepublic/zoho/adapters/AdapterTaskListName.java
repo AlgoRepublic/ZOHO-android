@@ -9,6 +9,7 @@ import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
+import com.algorepublic.zoho.FragmentsTasks.TaskListNameFragment;
 import com.algorepublic.zoho.FragmentsTasks.TaskPriorityFragment;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.fragments.TaskAddUpdateFragment;
@@ -88,14 +89,12 @@ public class AdapterTaskListName extends BaseAdapter {
                 baseClass.db.putInt("TaskListNameID", TasksListFragment.taskListName.get(selectedIndex).getTaskListID());
                 baseClass.db.putString("TaskListName", TasksListFragment.taskListName.get(selectedIndex).getTaskListName());
                 RadioButton radioButton = (RadioButton) v.findViewById(R.id.priority_checkbox);
-                TextView textView = (TextView)v.findViewById(R.id.priority);
                 for (int loop = 0; loop < TasksListFragment.taskListName.size(); loop++) {
-                    View view1 = getViewByPosition(loop, TaskPriorityFragment.listView);
+                    View view1 = getViewByPosition(loop, TaskListNameFragment.listView);
                     RadioButton radioButton1 = (RadioButton) view1.findViewById(R.id.priority_checkbox);
                     radioButton1.setChecked(false);
                 }
                 radioButton.setChecked(true);
-                TaskAddUpdateFragment.tasksObj.setTaskListName(textView.getText().toString());
             }
         });
         return convertView;

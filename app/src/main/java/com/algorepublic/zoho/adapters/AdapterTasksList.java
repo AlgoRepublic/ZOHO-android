@@ -3,9 +3,11 @@ package com.algorepublic.zoho.adapters;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
+import android.os.SystemClock;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +19,7 @@ import android.widget.SearchView;
 
 import com.algorepublic.zoho.Models.GeneralModel;
 import com.algorepublic.zoho.R;
+import com.algorepublic.zoho.fragments.BaseFragment;
 import com.algorepublic.zoho.fragments.TaskDetailFragment;
 import com.algorepublic.zoho.fragments.TasksListFragment;
 import com.algorepublic.zoho.services.CallBack;
@@ -88,9 +91,8 @@ public class AdapterTasksList extends BaseAdapter implements StickyListHeadersAd
         aq.id(R.id.task_users).text(tasksLists.get(position).getListAssignees().size() + " " + ctx.getString(R.string.task_user));
         aq.id(R.id.task_name).text(tasksLists.get(position).getTaskName());
         aq.id(R.id.project_name).text(tasksLists.get(position).getProjectName());
-        if(tasksLists.get(position).getEndDate().equalsIgnoreCase("3/0/1")) {
-            aq.id(R.id.task_date).text("No Date");
-        }else if(tasksLists.get(position).getEndDate().equalsIgnoreCase("12/31/3938")) {
+        if(tasksLists.get(position).getEndDate().equalsIgnoreCase("3/0/1")
+                || tasksLists.get(position).getEndDate().equalsIgnoreCase("12/31/3938")) {
             aq.id(R.id.task_date).text("No Date");
         }else {
             aq.id(R.id.task_date).text(tasksLists.get(position).getEndDate());
@@ -121,7 +123,7 @@ public class AdapterTasksList extends BaseAdapter implements StickyListHeadersAd
         Animation animation = AnimationUtils.loadAnimation(ctx, (position > lastPosition) ? R.anim.up_from_bottom : R.anim.down_from_top);
         convertView.startAnimation(animation);
         lastPosition = position;
-        TasksListFragment.searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+        BaseFragment.searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 return false;
@@ -163,12 +165,19 @@ public class AdapterTasksList extends BaseAdapter implements StickyListHeadersAd
         aq_header = new AQuery(convertView);
 
         if(baseClass.getTaskFilterType().equalsIgnoreCase("DueDate")) {
-            if (tasksLists.get(position).getHeader().equalsIgnoreCase("3/0/1"))
-                aq_header.id(R.id.header).text("No Date");
-            else if(tasksLists.get(position).getHeader().equalsIgnoreCase("12/31/3938")) {
-                aq_header.id(R.id.header).text("No Date");
-            }else
-                aq_header.id(R.id.header).text(tasksLists.get(position).getHeader());
+            if (Long.parseLong(tasksLists.get(position).getHeader()) < System.currentTimeMillis()) {
+                if(baseClass.DateFormatter(tasksLists.get(position).getHeader())
+                        .equalsIgnoreCase(baseClass.DateFormatter(String.valueOf(System.currentTimeMillis()))))
+                aq_header.id(R.id.header).text("Up Coming");
+                else
+                    aq_header.id(R.id.header).text("Over Due");
+            }else if (tasksLists.get(position).getHeader().equalsIgnoreCase("62135535600000")
+                    || tasksLists.get(position).getHeader().equalsIgnoreCase("-62135571600000")
+                    || tasksLists.get(position).getHeader().equalsIgnoreCase("62135571600000"))
+                aq_header.id(R.id.header).text("No Due Date");
+            else {
+                aq_header.id(R.id.header).text("Up Coming");
+            }
         }
         if(baseClass.getTaskFilterType().equalsIgnoreCase("Priority"))
         {
@@ -191,7 +200,7 @@ public class AdapterTasksList extends BaseAdapter implements StickyListHeadersAd
         }
         if(baseClass.getTaskFilterType().equalsIgnoreCase("Alphabetically"))
         {
-            aq_header.id(R.id.header).text(tasksLists.get(position).getTaskName().substring(0, 1));
+            aq_header.id(R.id.header).text(tasksLists.get(position).getTaskName().substring(0, 1).toUpperCase());
         }
         if(baseClass.getTaskFilterType().equalsIgnoreCase("TaskList"))
         {
@@ -207,12 +216,25 @@ public class AdapterTasksList extends BaseAdapter implements StickyListHeadersAd
     public long getHeaderId(int position) {
         long type = 0;
         //return the first character of the country as ID because this is what headers are based upon
-        if(baseClass.getTaskFilterType().equalsIgnoreCase("DueDate"))
-            type = Long.parseLong(tasksLists.get(position).getEndMilli());
+        if(baseClass.getTaskFilterType().equalsIgnoreCase("DueDate")) {
+            if (Long.parseLong(tasksLists.get(position).getHeader()) < System.currentTimeMillis()) {
+                if(baseClass.DateFormatter(tasksLists.get(position).getHeader())
+                        .equalsIgnoreCase(baseClass.DateFormatter(String.valueOf(System.currentTimeMillis()))))
+                    type = 3;
+                else
+                    type=1;
+            }
+            else if (tasksLists.get(position).getHeader().equalsIgnoreCase("62135535600000")
+                || tasksLists.get(position).getHeader().equalsIgnoreCase("-62135571600000")
+                || tasksLists.get(position).getHeader().equalsIgnoreCase("62135571600000"))
+                type = 2;
+            else
+                type=3;
+        }
         if(baseClass.getTaskFilterType().equalsIgnoreCase("Priority"))
             type = tasksLists.get(position).getPriority();
         if(baseClass.getTaskFilterType().equalsIgnoreCase("Alphabetically"))
-            type = tasksLists.get(position).getTaskName().charAt(0);
+            type = tasksLists.get(position).getTaskName().substring(0, 1).charAt(0);
         if(baseClass.getTaskFilterType().equalsIgnoreCase("TaskList"))
             type = tasksLists.get(position).getTaskListNameID();
 

@@ -44,7 +44,6 @@ public class TasksListFragment extends BaseFragment {
     StickyListHeadersAdapter adapterTasksList;
     AQuery aq;View view;
     RadioGroup radioGroup;
-    public  static SearchView searchView;
     public static ArrayList<TaskListName> taskListName = new ArrayList<>();
     public static ArrayList<TasksList> allTaskList = new ArrayList<>();
     public static ArrayList<TasksList> generalList = new ArrayList<>();
@@ -222,9 +221,9 @@ public class TasksListFragment extends BaseFragment {
             public void onOperItemClick(AdapterView<?> parent, View view, int position, long id) {
                 dialog.dismiss();
                 if (isLoaded())
-                if (position == 0) {
-                    baseClass.setTaskFilterType("DueDate");
-                }
+                    if (position == 0) {
+                        baseClass.setTaskFilterType("DueDate");
+                    }
                 if (position == 1) {
                     baseClass.setTaskFilterType("Priority");
                 }
@@ -239,15 +238,15 @@ public class TasksListFragment extends BaseFragment {
         });
     }
     public void FilterList(){
+        ArrayList<TasksList> lists = new ArrayList<>();
+        lists.addAll(generalList);generalList.clear();
+        for(int loop=0;loop<lists.size();loop++){
+            if(lists.get(loop).getProgress()<100){
+                generalList.add(lists.get(loop));
+            }
+        }
         if(baseClass.getTaskFilterType().equalsIgnoreCase("DueDate")){
             Collections.sort(generalList, Date);
-            ArrayList<TasksList> lists = new ArrayList<>();
-            lists.addAll(generalList);generalList.clear();
-            for(int loop=0;loop<lists.size();loop++){
-                if(lists.get(loop).getProgress()<100){
-                    generalList.add(lists.get(loop));
-                }
-            }
         }
         if(baseClass.getTaskFilterType().equalsIgnoreCase("Priority")){
             Collections.sort(generalList, byPriority);
@@ -296,7 +295,7 @@ public class TasksListFragment extends BaseFragment {
                 if (taskModel.title == null) {
                     tasksList.setTaskName("-");
                 } else {
-                    tasksList.setTaskName(taskModel.title);
+                    tasksList.setTaskName(taskModel.title.substring(0, 1).toUpperCase() + taskModel.title.substring(1));
                 }
                 tasksList.setTaskID(taskModel.taskID);
                 tasksList.setEndMilli(DateMilli(taskModel.endDate));
@@ -305,7 +304,7 @@ public class TasksListFragment extends BaseFragment {
                 tasksList.setProjectID(TasksListByOwnerModel.getInstance().responseObject.get(loop).projectID);
                 tasksList.setStartDate(DateFormatter(taskModel.startDate));
                 tasksList.setEndDate(DateFormatter(taskModel.endDate));
-                tasksList.setHeader(DateFormatter(taskModel.endDate));
+                tasksList.setHeader(DateMilli(taskModel.endDate));
                 tasksList.setDescription(taskModel.description);
                 tasksList.setPriority(taskModel.priority);
                 tasksList.setProgress(taskModel.progress);
@@ -335,8 +334,15 @@ public class TasksListFragment extends BaseFragment {
     public void UpComing(){
         generalList.clear();
         for (int loop = 0; loop < allTaskList.size(); loop++) {
-            if(Long.parseLong(allTaskList.get(loop).getStartMilli()) > System.currentTimeMillis()) {
-                generalList.add(allTaskList.get(loop));
+            if(Long.parseLong(allTaskList.get(loop).getStartMilli()) > System.currentTimeMillis()
+                    || baseClass.DateFormatter(allTaskList.get(loop).getStartMilli())
+                    .equalsIgnoreCase(baseClass.DateFormatter(String.valueOf(System.currentTimeMillis())))) {
+                if (!(allTaskList.get(loop).getStartMilli().equalsIgnoreCase("62135535600000")
+                        || allTaskList.get(loop).getStartMilli().equalsIgnoreCase("-62135571600000")
+                        || allTaskList.get(loop).getStartMilli().equalsIgnoreCase("62135571600000"))) {
+                    allTaskList.get(loop).setHeader(allTaskList.get(loop).getStartMilli());
+                    generalList.add(allTaskList.get(loop));
+                }
             }
         }
         Collections.sort(generalList,byUpComingDate);
@@ -344,7 +350,10 @@ public class TasksListFragment extends BaseFragment {
     public void OverDueDate(){
         generalList.clear();
         for (int loop = 0; loop < allTaskList.size(); loop++) {
-            if(Long.parseLong(allTaskList.get(loop).getEndMilli()) < System.currentTimeMillis()) {
+            if(Long.parseLong(allTaskList.get(loop).getEndMilli()) < System.currentTimeMillis()
+                    && !baseClass.DateFormatter(allTaskList.get(loop).getStartMilli())
+                    .equalsIgnoreCase(baseClass.DateFormatter(String.valueOf(System.currentTimeMillis())))) {
+                allTaskList.get(loop).setHeader(allTaskList.get(loop).getEndMilli());
                 generalList.add(allTaskList.get(loop));
             }
         }

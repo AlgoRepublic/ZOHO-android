@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.util.Log;
 
 import com.algorepublic.zoho.Models.DocumentsListModel;
+import com.algorepublic.zoho.Models.FolderListModel;
 import com.algorepublic.zoho.Models.GeneralModel;
 import com.algorepublic.zoho.Models.SubTaskAttachmentsModel;
 import com.algorepublic.zoho.Models.TasksDocumentModel;
@@ -36,18 +37,17 @@ public class DocumentsService extends BaseService {
         this.get(url, obj, DocumentsListModel.getInstance(), message);
         Log.e("DocService", url);
     }
+    public void getFolderList(String projectID,boolean message, CallBack obj){
+        String url = Constants.GetFolderList_API+"projectID="+projectID;
+        this.get(url, obj, FolderListModel.getInstance(), message);
+        Log.e("DocService", url);
+    }
     public void getDocsBySubTasks(int taskID, boolean message, CallBack obj){
         String url = Constants.GetAttachmentsBySubTasks_API+"taskID="+taskID;
         this.get(url, obj, SubTaskAttachmentsModel.getInstance(), message);
         Log.e("AttachBySubTaskService", url);
     }
-    public void uploadDocuments(File file,boolean message, CallBack obj){
-        String url = "http://www.jitpac.com/FileUploadsManager/uploads/";
-        HashMap<String,Object> params =  new HashMap<>();
-        params.put("status[image]",file);
-        this.post_with_file(url, params, obj, GeneralModel.getInstance(), message);
-        Log.e("uploadService", url);
-    }
+
     public void deleteDocument(ArrayList<Integer> fileIDs, boolean message, CallBack obj){
         String url = Constants.DeleteDocuments_API;
         HashMap<String, String> params = new HashMap<String, String>();

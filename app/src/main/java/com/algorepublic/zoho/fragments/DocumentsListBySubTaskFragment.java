@@ -142,7 +142,7 @@ public class DocumentsListBySubTaskFragment extends BaseFragment {
             case R.id.add_document:
                 baseClass.hideKeyPad(getView());
                 callFragmentWithBackStack(R.id.container, UploadDocsFragment.
-                        newInstance(ID), "UploadDocsFragment");
+                        newInstance(0,ID), "UploadDocsFragment");
                 break;
         }
         return super.onOptionsItemSelected(item);

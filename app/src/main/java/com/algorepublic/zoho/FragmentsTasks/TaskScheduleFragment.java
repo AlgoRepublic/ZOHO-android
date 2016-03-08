@@ -66,7 +66,7 @@ public class TaskScheduleFragment extends BaseFragment {
             else
                 aq.id(R.id.start_date).text(BaseClass.db.getString("StartDate"));
         }else{
-            aq.id(R.id.start_date).text(day+"/"+month+"/"+year);
+            aq.id(R.id.start_date).text(month+"/"+day+"/"+year);
         }
 
         if(!BaseClass.db.getString("EndDate").equalsIgnoreCase("")) {
@@ -78,7 +78,7 @@ public class TaskScheduleFragment extends BaseFragment {
             else
                 aq.id(R.id.end_date).text(BaseClass.db.getString("EndDate"));
         }else{
-            aq.id(R.id.end_date).text(day+"/"+month+"/"+year);
+            aq.id(R.id.end_date).text(month+"/"+day+"/"+year);
         }
         SplitStartDate(); SplitEndDate();
 

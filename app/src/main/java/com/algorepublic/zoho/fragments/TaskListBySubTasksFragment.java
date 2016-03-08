@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.RadioGroup;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.algorepublic.zoho.Models.TaskListBySubTaskModel;
@@ -115,7 +116,16 @@ public class TaskListBySubTasksFragment extends BaseFragment {
         radioGroup = (RadioGroup) view.findViewById(R.id.radioGroup);
         listView = (StickyListHeadersListView) view.findViewById(R.id.list_taskslist);
         aq = new AQuery(view);
-
+        searchView = (SearchView) view.findViewById(R.id.searchView);
+        searchView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                searchView.setIconifiedByDefault(true);
+                searchView.setFocusable(true);
+                searchView.setIconified(false);
+                searchView.requestFocusFromTouch();
+            }
+        });
         baseClass = ((BaseClass) getActivity().getApplicationContext());
         taskListService = new TaskListService(getActivity());
         taskListService.getTasksListBySubTasks(tasksList.getTaskID(), true, new CallBack(TaskListBySubTasksFragment.this, "TaskListBySubTasks"));
@@ -246,7 +256,7 @@ public class TaskListBySubTasksFragment extends BaseFragment {
         SetAdapterList();
     }
     public void SetAdapterList(){
-        if (TasksListByOwnerModel.getInstance().responseCode == 100) {
+        if (TaskListBySubTaskModel.getInstance().responseCode == 100) {
             adapterTasksList = new AdapterTasksList(getActivity(),generalList);
             listView.setAreHeadersSticky(true);
             listView.setAdapter(adapterTasksList);
@@ -260,7 +270,7 @@ public class TaskListBySubTasksFragment extends BaseFragment {
         }
         else
         {
-            Toast.makeText(getActivity(), getString(R.string.invalid_credential), Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), getString(R.string.response_error), Toast.LENGTH_SHORT).show();
         }
     }
     public void GetGeneralList(){
@@ -277,7 +287,7 @@ public class TaskListBySubTasksFragment extends BaseFragment {
             if (taskModel.title == null) {
                 tasksList.setTaskName("-");
             } else {
-                tasksList.setTaskName(taskModel.title);
+                tasksList.setTaskName(taskModel.title.substring(0, 1).toUpperCase() + taskModel.title.substring(1));
             }
             tasksList.setTaskID(taskModel.taskID);
             tasksList.setEndMilli(DateMilli(taskModel.endDate));
@@ -286,7 +296,7 @@ public class TaskListBySubTasksFragment extends BaseFragment {
             tasksList.setProjectID(taskModel.projectID);
             tasksList.setStartDate(DateFormatter(taskModel.startDate));
             tasksList.setEndDate(DateFormatter(taskModel.endDate));
-            tasksList.setHeader(DateFormatter(taskModel.endDate));
+            tasksList.setHeader(DateMilli(taskModel.endDate));
             tasksList.setDescription(taskModel.description);
             tasksList.setPriority(taskModel.priority);
             tasksList.setProgress(taskModel.progress);
@@ -314,22 +324,30 @@ public class TaskListBySubTasksFragment extends BaseFragment {
     public void UpComing(){
         generalList.clear();
         for (int loop = 0; loop < allTaskList.size(); loop++) {
-            if(Long.parseLong(allTaskList.get(loop).getStartMilli()) > System.currentTimeMillis()) {
-                generalList.add(allTaskList.get(loop));
+            if(Long.parseLong(allTaskList.get(loop).getStartMilli()) > System.currentTimeMillis()
+                    || baseClass.DateFormatter(allTaskList.get(loop).getStartMilli())
+                    .equalsIgnoreCase(baseClass.DateFormatter(String.valueOf(System.currentTimeMillis())))) {
+                if (!(allTaskList.get(loop).getStartMilli().equalsIgnoreCase("62135535600000")
+                        || allTaskList.get(loop).getStartMilli().equalsIgnoreCase("-62135571600000")
+                        || allTaskList.get(loop).getStartMilli().equalsIgnoreCase("62135571600000"))) {
+                    allTaskList.get(loop).setHeader(allTaskList.get(loop).getStartMilli());
+                    generalList.add(allTaskList.get(loop));
+                }
             }
         }
-        Collections.sort(generalList,byUpComingDate);
-        SortList();
+        Collections.sort(generalList, byUpComingDate);
     }
     public void OverDueDate(){
         generalList.clear();
         for (int loop = 0; loop < allTaskList.size(); loop++) {
-            if(Long.parseLong(allTaskList.get(loop).getEndMilli()) < System.currentTimeMillis()) {
+            if(Long.parseLong(allTaskList.get(loop).getEndMilli()) < System.currentTimeMillis()
+                    && !baseClass.DateFormatter(allTaskList.get(loop).getStartMilli())
+                    .equalsIgnoreCase(baseClass.DateFormatter(String.valueOf(System.currentTimeMillis())))) {
+                allTaskList.get(loop).setHeader(allTaskList.get(loop).getEndMilli());
                 generalList.add(allTaskList.get(loop));
             }
         }
-        Collections.sort(generalList,byOverDate);
-        SortList();
+        Collections.sort(generalList, byOverDate);
     }
     Comparator<TasksList> byPriority = new Comparator<TasksList>() {
         public int compare(TasksList lhs, TasksList rhs) {
