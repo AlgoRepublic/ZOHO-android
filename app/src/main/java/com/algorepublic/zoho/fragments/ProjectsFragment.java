@@ -216,7 +216,6 @@ public class ProjectsFragment extends BaseFragment{
             }
         }
     }
-
     public void AddDepartmentProjects(){
         ByDepartmentList.clear();
         for (int loop = 0; loop < ProjectsByDepartmentModel.getInstance().responseData.size(); loop++) {
@@ -256,7 +255,6 @@ public class ProjectsFragment extends BaseFragment{
         listViewClient.setAdapter(clientAdapter);
     }
     public void SetDepartmentProjectsAdapter(){
-
         projectAdapter = new AdapterProjectsDeptList(getActivity());
         listViewDept.setAreHeadersSticky(false);
         listViewDept.setAdapter(projectAdapter);

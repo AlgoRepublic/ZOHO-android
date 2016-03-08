@@ -108,8 +108,7 @@ public class AdapterMenuItems extends BaseAdapter{
         return convertView;
     }
     public void CallFragment(int position){
-        for(int loop=0;loop<((AppCompatActivity)ctx).getSupportFragmentManager().getBackStackEntryCount();loop++)
-        {
+        for(int loop = 0;loop < ((AppCompatActivity)ctx).getSupportFragmentManager().getBackStackEntryCount();loop++) {
             ((AppCompatActivity)ctx).getSupportFragmentManager().popBackStack();
         }
         if(position==0){

@@ -50,10 +50,7 @@ public class AddProjectFragment extends BaseFragment {
 
     // TODO: Rename and change types and number of parameters
     public static AddProjectFragment newInstance() {
-        if (fragment == null) {
-            fragment = new AddProjectFragment();
-        }
-        return fragment;
+        return new AddProjectFragment();
     }
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
@@ -98,15 +95,11 @@ public class AddProjectFragment extends BaseFragment {
         CreateProjectModel.getInstance().setList((CreateProjectModel) model);
         if (CreateProjectModel.getInstance().responseObject !=null ) {
             Snackbar.make(getView(),getString(R.string.project_created),Snackbar.LENGTH_SHORT).show();
+            getActivity().getSupportFragmentManager().popBackStack();
         }else {
             Snackbar.make(getView() , getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
         }
 
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
     }
 
     @Override
@@ -127,6 +120,7 @@ public class AddProjectFragment extends BaseFragment {
                 }
             }
         });
+        getToolbar().setTitle(getString(R.string.add_project));
         aq = new AQuery(view);
         aq.id(R.id.public_radio).checked(true);
         aq.id(R.id.lblListHeader).text(getString(R.string.new_project));

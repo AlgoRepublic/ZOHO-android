@@ -188,7 +188,7 @@ public class EditUserFragment extends BaseFragment implements MultiSelectionSpin
                     Snackbar.make(getView(),getString(R.string.add_phoneno),Snackbar.LENGTH_SHORT).show();
                     return false;
                 }
-                new AddUser().execute();
+//                new AddUser().execute();
         }
         return super.onOptionsItemSelected(item);
     }
