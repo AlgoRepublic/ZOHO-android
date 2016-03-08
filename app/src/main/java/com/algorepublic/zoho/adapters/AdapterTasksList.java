@@ -15,7 +15,6 @@ import android.widget.BaseAdapter;
 
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.fragments.TaskDetailFragment;
-import com.algorepublic.zoho.fragments.TasksListFragment;
 import com.algorepublic.zoho.services.CallBack;
 import com.algorepublic.zoho.services.TaskListService;
 import com.algorepublic.zoho.utils.BaseClass;
@@ -83,13 +82,13 @@ public class AdapterTasksList extends BaseAdapter implements StickyListHeadersAd
         aq.id(R.id.task_name).text(tasksLists.get(position).getTaskName());
         aq.id(R.id.project_name).text(tasksLists.get(position).getProjectName());
         if(tasksLists.get(position).getStartDate().equalsIgnoreCase("3/0/1"))
-            aq.id(R.id.task_date).text("No Due Date");
+            aq.id(R.id.task_date).text(ctx.getString(R.string.no_due_date));
         else
             aq.id(R.id.task_date).text(tasksLists.get(position).getEndDate());
 
         try {
             if (tasksLists.get(position).getProjectName().equalsIgnoreCase(""))
-                aq.id(R.id.general).text("General");
+                aq.id(R.id.general).text(ctx.getString(R.string.pref_header_general));
             else
                 aq.id(R.id.general).text(tasksLists.get(position).getProjectName());
         }catch (Exception e){
@@ -129,7 +128,7 @@ public class AdapterTasksList extends BaseAdapter implements StickyListHeadersAd
 
         if(baseClass.getTaskFilterType().equalsIgnoreCase("DueDate")) {
             if (tasksLists.get(position).getHeader().equalsIgnoreCase("3/0/1"))
-                aq_header.id(R.id.header).text("No Due Date");
+                aq_header.id(R.id.header).text(ctx.getString(R.string.no_due_date));
             else
                 aq_header.id(R.id.header).text(tasksLists.get(position).getHeader());
         }
@@ -137,19 +136,19 @@ public class AdapterTasksList extends BaseAdapter implements StickyListHeadersAd
         {
             if(tasksLists.get(position).getPriority()==0)
             {
-                aq_header.id(R.id.header).text("None");
+                aq_header.id(R.id.header).text(ctx.getString(R.string.none));
             }
             if(tasksLists.get(position).getPriority()==1)
             {
-                aq_header.id(R.id.header).text("Low");
+                aq_header.id(R.id.header).text(ctx.getString(R.string.low));
             }
             if(tasksLists.get(position).getPriority()==2)
             {
-                aq_header.id(R.id.header).text("Medium");
+                aq_header.id(R.id.header).text(ctx.getString(R.string.medium));
             }
             if(tasksLists.get(position).getPriority()==3)
             {
-                aq_header.id(R.id.header).text("High");
+                aq_header.id(R.id.header).text(ctx.getString(R.string.high));
             }
         }
         if(baseClass.getTaskFilterType().equalsIgnoreCase("Alphabetically"))
@@ -159,7 +158,7 @@ public class AdapterTasksList extends BaseAdapter implements StickyListHeadersAd
         if(baseClass.getTaskFilterType().equalsIgnoreCase("TaskList"))
         {
             if(tasksLists.get(position).getTaskListNameID() == 0)
-            aq_header.id(R.id.header).text("General");
+            aq_header.id(R.id.header).text(ctx.getString(R.string.pref_header_general));
             else
             aq_header.id(R.id.header).text(tasksLists.get(position).getTaskListName());
         }

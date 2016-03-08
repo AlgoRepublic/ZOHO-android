@@ -14,7 +14,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:text="Test Forum 1"
+            android:text="@string/test_forum"
             android:textColor="@color/colorBaseHeader"
             android:textSize="14sp"
             android:textStyle="bold" />
@@ -35,7 +35,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/forum_description"
             android:layout_marginTop="10dp"
-            android:text="Contents"
+            android:text="@string/content"
             android:textColor="@color/colorBaseHeader"
             android:textSize="14sp"
             android:textStyle="bold" />
@@ -55,7 +55,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/content_description"
             android:layout_marginTop="10dp"
-            android:text="Comments"
+            android:text="@string/comment"
             android:textColor="@color/colorBaseHeader"
             android:textStyle="bold" />
 

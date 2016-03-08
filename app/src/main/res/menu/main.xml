@@ -4,5 +4,5 @@
     <item
         android:id="@+id/lang_arabic"
         android:orderInCategory="100"
-        android:title="Arabic" />
+        android:title="@string/arabic" />
 </menu>

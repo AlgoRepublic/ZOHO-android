@@ -5,7 +5,15 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     tools:context="com.algorepublic.zoho.fragments.ProjectsFragment">
-
+    <android.support.v4.widget.SwipeRefreshLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/swipe_refresh_layout"
+        android:layout_width="match_parent"
+        android:background="#C3C3C3"
+        android:layout_height="match_parent">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
     <se.emilsjolander.stickylistheaders.StickyListHeadersListView
         android:layout_above="@+id/sort"
         android:id="@+id/projects_liststicky"
@@ -48,4 +56,6 @@
             android:layout_marginBottom="5dp"
             android:layout_marginRight="10dp" />
     </RelativeLayout>
+        </RelativeLayout>
+    </android.support.v4.widget.SwipeRefreshLayout>
 </RelativeLayout>

@@ -151,11 +151,11 @@ public class TaskDetailFragment extends BaseFragment {
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
                 if (progress == 100) {
-                    aq.id(R.id.mark_as_done).text("ReOPen Task");
+                    aq.id(R.id.mark_as_done).text(getString(R.string.reopen_task));
                     service.updateTaskProgress(tasksList.getTaskID()
                             , progress, true, new CallBack(TaskDetailFragment.this, "UpdateProgress"));
                 }
-                aq.id(R.id.mark_as_done).text("Mark as done");
+                aq.id(R.id.mark_as_done).text(getString(R.string.mark_as_done));
                 service.updateTaskProgress(tasksList.getTaskID()
                         , progress, true, new CallBack(TaskDetailFragment.this, "UpdateProgress"));
             }
@@ -182,7 +182,7 @@ public class TaskDetailFragment extends BaseFragment {
             }
         });
         if(tasksList.getProgress()==100){
-            aq.id(R.id.mark_as_done).text("ReOpen Task");
+            aq.id(R.id.mark_as_done).text(getString(R.string.reopen_task));
 
         }
             aq.id(R.id.mark_as_done).clicked(new View.OnClickListener() {
@@ -281,7 +281,7 @@ public class TaskDetailFragment extends BaseFragment {
             Snackbar.make(getView(), getString(R.string.task_done), Snackbar.LENGTH_SHORT).show();
             seekBar.setProgress(100);
             seekBarCompat.setProgress(100);
-            aq.id(R.id.mark_as_done).text("ReOpen Task");
+            aq.id(R.id.mark_as_done).text(getString(R.string.reopen_task));
             tasksList.setProgress(100);
 
         }
@@ -297,7 +297,7 @@ public class TaskDetailFragment extends BaseFragment {
             Snackbar.make(getView(), getString(R.string.reopen_task), Snackbar.LENGTH_SHORT).show();
             seekBar.setProgress(0);
             seekBarCompat.setProgress(0);
-            aq.id(R.id.mark_as_done).text("Mark as done");
+            aq.id(R.id.mark_as_done).text(getString(R.string.mark_as_done));
             tasksList.setProgress(0);
         }}
 
@@ -311,7 +311,7 @@ public class TaskDetailFragment extends BaseFragment {
             Snackbar.make(getView(), getString(R.string.reopen_task), Snackbar.LENGTH_SHORT).show();
             seekBar.setProgress(0);
             seekBarCompat.setProgress(0);
-            aq.id(R.id.mark_as_done).text("Mark as done");
+            aq.id(R.id.mark_as_done).text(getString(R.string.mark_as_done));
             tasksList.setProgress(0);
         }
         else

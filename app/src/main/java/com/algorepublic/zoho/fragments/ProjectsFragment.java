@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -40,7 +41,7 @@ import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
  * Use the {@link ProjectsFragment#newInstance} factory method to
  * create an instance of this fragment_forums.
  */
-public class ProjectsFragment extends BaseFragment{
+public class ProjectsFragment extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener{
 
     private AQuery aq;
     private BaseClass baseClass;
@@ -49,6 +50,7 @@ public class ProjectsFragment extends BaseFragment{
     public static ListView listViewClient;
     StickyListHeadersAdapter projectAdapter;
     AdapterProjectsClientList clientAdapter;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     static  ArrayList<ProjectsList> allProjectsList = new ArrayList<>();
     static  ArrayList<DeptList> allDeptList = new ArrayList<>();
@@ -79,7 +81,9 @@ public class ProjectsFragment extends BaseFragment{
         listViewDept = (StickyListHeadersListView) view.findViewById(R.id.projects_liststicky);
         listViewClient = (ListView) view.findViewById(R.id.projects_list);
         aq = new AQuery(getActivity(), view);
-
+        swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe_refresh_layout);
+        swipeRefreshLayout.setOnRefreshListener(this);
+        swipeRefreshLayout.setProgressViewOffset(false, 0, 200);
         getToolbar().setTitle(getString(R.string.projects));
         setHasOptionsMenu(true);
         aq.id(R.id.sort).clicked(new View.OnClickListener() {
@@ -94,6 +98,9 @@ public class ProjectsFragment extends BaseFragment{
                 CallForFilter();
             }
         });
+
+
+
         return view;
     }
     public void CallForFilter(){
@@ -147,14 +154,25 @@ public class ProjectsFragment extends BaseFragment{
         service.getProjectsByDepartment(baseClass.getUserId(),
                 true, new CallBack(this, "ProjectsByDepartment"));
         applyLightBackground(aq.id(R.id.sort).getView(), baseClass);
+        swipeRefreshLayout.post(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        swipeRefreshLayout.setRefreshing(true);
+                                        service.getAllProjectsByUser_API(baseClass.getUserId(), true, new CallBack(this, "AllProjects"));
+
+                                    }
+                                }
+        );
     }
     public void AllProjects(Object caller, Object model) {
+        swipeRefreshLayout.setRefreshing(true);
         AllProjectsByUserModel.getInstance().setList((AllProjectsByUserModel) model);
         if (AllProjectsByUserModel.getInstance().responseCode == 100
                 || AllProjectsByUserModel.getInstance().responseData.size() != 0) {
             AddAllProjects();
+
         } else {
-            Toast.makeText(getActivity(), getString(R.string.response_error), Toast.LENGTH_SHORT).show();
+            Snackbar.make(getView(), getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
         }
     }
     public void ProjectsByClient(Object caller, Object model){
@@ -193,6 +211,7 @@ public class ProjectsFragment extends BaseFragment{
                 projectsList.setPrivate(AllProjectsByUserModel.getInstance().responseData.get(loop).Isprivate);
                 allProjectsList.add(projectsList);
         }
+        swipeRefreshLayout.setRefreshing(false);
         SetGeneralClientAdapter();
     }
     public void AddClientProjects(){
@@ -311,4 +330,13 @@ public class ProjectsFragment extends BaseFragment{
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onRefresh() {
+        service = new ProjectsListService(getActivity());
+        service.getAllProjectsByUser_API(baseClass.getUserId(), true, new CallBack(this, "AllProjects"));
+        service.getProjectsByClient_API(baseClass.getUserId(), true, new CallBack(this, "ProjectsByClient"));
+        service.getProjectsByDepartment(baseClass.getUserId(),
+                true, new CallBack(this, "ProjectsByDepartment"));
+        applyLightBackground(aq.id(R.id.sort).getView(), baseClass);
+    }
 }

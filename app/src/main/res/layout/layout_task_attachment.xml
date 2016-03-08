@@ -33,7 +33,7 @@
             android:ellipsize="end"
             android:gravity="center"
             android:lines="2"
-            android:text="name"
+            android:text="@string/name"
             android:textColor="@color/colorBaseWrapper"
             android:textSize="14sp" />
     </RelativeLayout>

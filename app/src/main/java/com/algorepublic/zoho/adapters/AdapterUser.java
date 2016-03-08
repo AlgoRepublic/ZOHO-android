@@ -11,7 +11,6 @@ import android.widget.TextView;
 
 import com.algorepublic.zoho.Models.UserListModel;
 import com.algorepublic.zoho.R;
-import com.algorepublic.zoho.fragments.AddUserFragment;
 import com.algorepublic.zoho.fragments.EditUserFragment;
 import com.algorepublic.zoho.utils.BaseClass;
 import com.algorepublic.zoho.utils.Constants;
@@ -66,7 +65,7 @@ public class AdapterUser extends BaseAdapter {
         aq = new AQuery(convertView);
         aq.id(R.id.user_title).text(getItem(position).firstName);
         aq.id(R.id.user_email).text(getItem(position).email);
-        aq.id(R.id.user_role).text("Role: "+getItem(position).userRole.role);
+        aq.id(R.id.user_role).text(ctx.getString(R.string.role)+getItem(position).userRole.role);
         if(getItem(position).profileImagePath !=null) {
             Glide.with(ctx).load(Constants.Image_URL +
                     getItem(position).profileImagePath).into(holder.userImage);

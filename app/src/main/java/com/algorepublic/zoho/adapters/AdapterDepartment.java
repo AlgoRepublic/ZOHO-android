@@ -31,7 +31,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.algorepublic.zoho.Models.GeneralModel;
 import com.algorepublic.zoho.Models.ProjectsByDepartmentModel;
@@ -47,13 +46,10 @@ import com.flyco.animation.BounceEnter.BounceLeftEnter;
 import com.flyco.animation.SlideExit.SlideRightExit;
 import com.flyco.dialog.listener.OnBtnClickL;
 import com.flyco.dialog.widget.NormalDialog;
-import com.flyco.dialog.widget.NormalListDialog;
 import com.h6ah4i.android.widget.advrecyclerview.draggable.DraggableItemAdapter;
 import com.h6ah4i.android.widget.advrecyclerview.draggable.DraggableItemConstants;
 import com.h6ah4i.android.widget.advrecyclerview.draggable.ItemDraggableRange;
 import com.h6ah4i.android.widget.advrecyclerview.utils.AbstractDraggableItemViewHolder;
-
-import java.util.ArrayList;
 
 import cc.cloudist.acplibrary.ACProgressConstant;
 import cc.cloudist.acplibrary.ACProgressFlower;
@@ -241,7 +237,9 @@ public class AdapterDepartment
             Snackbar.make(((AppCompatActivity)ctx).findViewById(android.R.id.content)
                     , ctx.getString(R.string.project_moved), Snackbar.LENGTH_SHORT).show();
         } else {
-            Toast.makeText(((AppCompatActivity) ctx), ctx.getString(R.string.response_error), Toast.LENGTH_SHORT).show();
+
+            Snackbar.make(((AppCompatActivity) ctx).findViewById(android.R.id.content),ctx. getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
+
         }
     }
     @Override

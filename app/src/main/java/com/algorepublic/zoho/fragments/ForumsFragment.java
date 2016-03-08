@@ -2,6 +2,7 @@ package com.algorepublic.zoho.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -9,7 +10,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.algorepublic.zoho.Models.ForumsModel;
 import com.algorepublic.zoho.R;
@@ -81,7 +81,7 @@ public class ForumsFragment extends BaseFragment{
         if (ForumsModel.getInstance().responseObject.size()!=0) {
             aq.id(R.id.forums_list).adapter(new AdapterForumsList(getActivity()));
         }else {
-            Toast.makeText(getActivity(), getString(R.string.response_error), Toast.LENGTH_SHORT).show();
+            Snackbar.make(getView(), getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
         }
 
     }

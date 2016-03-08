@@ -2,6 +2,7 @@ package com.algorepublic.zoho.fragments;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -9,13 +10,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.adapters.AdapterDocsComments;
 import com.algorepublic.zoho.adapters.DocumentsList;
 import com.algorepublic.zoho.adapters.TaskComments;
-import com.algorepublic.zoho.adapters.TasksList;
 import com.algorepublic.zoho.utils.BaseClass;
 import com.algorepublic.zoho.utils.Constants;
 import com.androidquery.AQuery;
@@ -96,7 +95,8 @@ public class DocsPreviewFragment extends BaseFragment {
     {
         String comment = aq.id(R.id.comment_user).getText().toString();
         if(aq.id(R.id.comment_user).getText().toString().equalsIgnoreCase("")) {
-            Toast.makeText(getActivity(), "Enter Your Comment!", Toast.LENGTH_SHORT).show();
+            Snackbar.make(getView(), getString(R.string.enter_comment), Snackbar.LENGTH_SHORT).show();
+
             return;
         }
         aq.id(R.id.comment_user).text("");

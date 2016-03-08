@@ -45,7 +45,7 @@
                 android:button="@null"
                 android:gravity="center"
                 android:scaleType="fitXY"
-                android:text="All"
+                android:text="@string/all"
                 android:textAlignment="gravity"
                 android:textColor="@android:color/white"
                 android:textSize="14sp" />
@@ -65,7 +65,7 @@
                 android:button="@null"
                 android:gravity="center"
                 android:scaleType="fitXY"
-                android:text="Up Coming"
+                android:text="@string/up_coming"
                 android:textAlignment="gravity"
                 android:textColor="@android:color/white"
                 android:textSize="14sp" />
@@ -85,7 +85,7 @@
                 android:button="@null"
                 android:gravity="center"
                 android:scaleType="fitXY"
-                android:text="Over Due"
+                android:text="@string/over_due"
                 android:textAlignment="gravity"
                 android:textColor="@android:color/white"
                 android:textSize="14sp" />

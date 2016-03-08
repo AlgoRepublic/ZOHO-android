@@ -29,7 +29,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Test Forum 1"
+                android:text="@string/test_forum"
                 android:textStyle="bold"
                 android:layout_marginTop="5dp"
                 android:layout_marginLeft="5dp"
@@ -45,7 +45,7 @@
                 android:id="@+id/forum_description"
                 android:textSize="14sp"
                 android:lines="2"
-                android:text="daadadad"
+                android:text="@string/test_forum"
                 android:textColor="@color/colorBaseHeader"
                 android:layout_below="@+id/comment_image"
                 android:layout_alignStart="@+id/forum_title" />

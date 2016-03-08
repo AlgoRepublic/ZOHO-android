@@ -8,18 +8,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.algorepublic.zoho.Models.CreateCommentModel;
 import com.algorepublic.zoho.Models.TaskCommentsModel;
-import com.algorepublic.zoho.Models.TasksListByOwnerModel;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.adapters.AdapterTaskComments;
 import com.algorepublic.zoho.adapters.TaskComments;
 import com.algorepublic.zoho.services.CallBack;
 import com.algorepublic.zoho.services.TaskListService;
 import com.algorepublic.zoho.utils.BaseClass;
-import com.algorepublic.zoho.utils.Constants;
 import com.androidquery.AQuery;
 
 import java.util.ArrayList;
@@ -96,7 +93,7 @@ public class TaskCommentFragment extends BaseFragment {
         }
         else
         {
-            Toast.makeText(getActivity(), getString(R.string.invalid_credential), Toast.LENGTH_SHORT).show();
+            Snackbar.make(getView(), getString(R.string.invalid_credential), Snackbar.LENGTH_SHORT).show();
         }
     }
     public void GetGeneralList() {
@@ -119,7 +116,7 @@ public class TaskCommentFragment extends BaseFragment {
         }
         else
         {
-            Toast.makeText(getActivity(), getString(R.string.invalid_credential), Toast.LENGTH_SHORT).show();
+            Snackbar.make(getView(), getString(R.string.invalid_credential), Snackbar.LENGTH_SHORT).show();
         }
     }
     public void PerformAction()
@@ -128,7 +125,7 @@ public class TaskCommentFragment extends BaseFragment {
         service.createComment(comment,position,Integer.parseInt(baseClass.getUserId()),false,
                 new CallBack(TaskCommentFragment.this,"CreateComment"));
         if(aq.id(R.id.comment_user).getText().toString().equalsIgnoreCase("")) {
-            Toast.makeText(getActivity(), "Enter Your Comment!", Toast.LENGTH_SHORT).show();
+            Snackbar.make(getView(),getString(R.string.enter_comment),Snackbar.LENGTH_SHORT).show();
             return;
         }
         aq.id(R.id.comment_user).text("");

@@ -110,7 +110,7 @@ public class LoginFragment extends BaseFragment {
         LISessionManager.getInstance(getActivity()).init(getActivity(), buildScope(), new AuthListener() {
             @Override
             public void onAuthSuccess() {
-                Snackbar.make(view, "Login !", Snackbar.LENGTH_LONG).show();
+                Snackbar.make(getView(), getString(R.string.login), Snackbar.LENGTH_LONG).show();
                 setUpdateState();
                 // startActivity(new Intent(ActivityLogin.this, MainActivity.class));
             }
@@ -159,7 +159,6 @@ public class LoginFragment extends BaseFragment {
                 }
                 @Override
                 public void onApiError(LIApiError apiError) {
-                    Log.e("accessTokenValid",  "/"+apiError.toString() );
                 }
             });
         }

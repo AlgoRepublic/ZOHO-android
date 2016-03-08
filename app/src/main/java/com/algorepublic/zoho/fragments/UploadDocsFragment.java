@@ -412,11 +412,11 @@ public class UploadDocsFragment extends BaseFragment implements GoogleApiClient.
         final MaterialDialog dialog = new MaterialDialog(getActivity());
         dialog//
                 .btnNum(1)
-                .title("File size alert!")
+                .title(getString(R.string.file_size_alert))
                 .titleTextColor(getResources().getColor(R.color.colorBaseHeader))
-                .content("File size should be less than (5) five MB")//
+                .content(getString(R.string.file_size_lessthan5mb))//
                 .contentTextColor(getResources().getColor(R.color.colorContentWrapper))
-                .btnText("OK")//
+                .btnText(getString(R.string.OK))//
                 .btnTextColor(getResources().getColor(R.color.colorContentWrapper))
                 .showAnim(new SlideLeftEnter())//
                 .dismissAnim(new SlideRightExit())//
