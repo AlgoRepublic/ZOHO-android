@@ -61,14 +61,14 @@ public class UserFragment extends BaseFragment implements SwipeRefreshLayout.OnR
         }else {
             service.getUserListByProject(Integer.parseInt(baseClass.getSelectedProject()), true, new CallBack(UserFragment.this, "UserList"));
         }
-        swipeRefreshLayout.post(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        swipeRefreshLayout.setRefreshing(true);
-                                        service.getAllUsers(true, new CallBack(UserFragment.this, "UserList"));
-                                    }
-                                }
-        );
+//        swipeRefreshLayout.post(new Runnable() {
+//                                    @Override
+//                                    public void run() {
+//                                        swipeRefreshLayout.setRefreshing(true);
+//                                        service.getAllUsers(true, new CallBack(UserFragment.this, "UserList"));
+//                                    }
+//                                }
+//        );
             return view;
     }
     @Override

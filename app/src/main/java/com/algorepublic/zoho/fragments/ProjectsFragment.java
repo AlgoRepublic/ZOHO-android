@@ -50,7 +50,7 @@ public class ProjectsFragment extends BaseFragment implements SwipeRefreshLayout
     public static ListView listViewClient;
     StickyListHeadersAdapter projectAdapter;
     AdapterProjectsClientList clientAdapter;
-    private SwipeRefreshLayout swipeRefreshLayout;
+    private SwipeRefreshLayout swipeStickView,swipeListView;
 
     static  ArrayList<ProjectsList> allProjectsList = new ArrayList<>();
     static  ArrayList<DeptList> allDeptList = new ArrayList<>();
@@ -81,9 +81,12 @@ public class ProjectsFragment extends BaseFragment implements SwipeRefreshLayout
         listViewDept = (StickyListHeadersListView) view.findViewById(R.id.projects_liststicky);
         listViewClient = (ListView) view.findViewById(R.id.projects_list);
         aq = new AQuery(getActivity(), view);
-        swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe_refresh_layout);
-        swipeRefreshLayout.setOnRefreshListener(this);
-        swipeRefreshLayout.setProgressViewOffset(false, 0, 200);
+        swipeStickView = (SwipeRefreshLayout) view.findViewById(R.id.swipe_stickyView);
+        swipeListView = (SwipeRefreshLayout) view.findViewById(R.id.swipe_listView);
+        swipeStickView.setOnRefreshListener(this);
+        swipeListView.setOnRefreshListener(this);
+        swipeStickView.setProgressViewOffset(false, 0, 200);
+        swipeListView.setProgressViewOffset(false, 0, 200);
         getToolbar().setTitle(getString(R.string.projects));
         setHasOptionsMenu(true);
         aq.id(R.id.sort).clicked(new View.OnClickListener() {
@@ -120,18 +123,18 @@ public class ProjectsFragment extends BaseFragment implements SwipeRefreshLayout
     public void Filter(int position) {
 
         if (position == 0) {
-            aq.id(R.id.projects_list).visibility(View.VISIBLE);
-            aq.id(R.id.projects_liststicky).visibility(View.GONE);
+            swipeListView.setVisibility(View.VISIBLE);
+            swipeStickView.setVisibility(View.GONE);
             SetGeneralClientAdapter();
         }
         if (position == 1) {
-            aq.id(R.id.projects_list).visibility(View.VISIBLE);
-            aq.id(R.id.projects_liststicky).visibility(View.GONE);
+            swipeListView.setVisibility(View.VISIBLE);
+            swipeStickView.setVisibility(View.GONE);
             SetClientProjectsAdapter();
         }
         if (position == 2) {
-            aq.id(R.id.projects_list).visibility(View.GONE);
-            aq.id(R.id.projects_liststicky).visibility(View.VISIBLE);
+            swipeListView.setVisibility(View.GONE);
+            swipeStickView.setVisibility(View.VISIBLE);
             SetDepartmentProjectsAdapter();
         }
     }
@@ -154,18 +157,10 @@ public class ProjectsFragment extends BaseFragment implements SwipeRefreshLayout
         service.getProjectsByDepartment(baseClass.getUserId(),
                 true, new CallBack(this, "ProjectsByDepartment"));
         applyLightBackground(aq.id(R.id.sort).getView(), baseClass);
-        swipeRefreshLayout.post(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        swipeRefreshLayout.setRefreshing(true);
-                                        service.getAllProjectsByUser_API(baseClass.getUserId(), true, new CallBack(this, "AllProjects"));
 
-                                    }
-                                }
-        );
     }
     public void AllProjects(Object caller, Object model) {
-        swipeRefreshLayout.setRefreshing(true);
+        swipeListView.setRefreshing(false);
         AllProjectsByUserModel.getInstance().setList((AllProjectsByUserModel) model);
         if (AllProjectsByUserModel.getInstance().responseCode == 100
                 || AllProjectsByUserModel.getInstance().responseData.size() != 0) {
@@ -176,6 +171,7 @@ public class ProjectsFragment extends BaseFragment implements SwipeRefreshLayout
         }
     }
     public void ProjectsByClient(Object caller, Object model){
+        swipeListView.setRefreshing(false);
         ProjectsByClientModel.getInstance().setList((ProjectsByClientModel) model);
         if (ProjectsByClientModel.getInstance().responseCode == 100
                 || ProjectsByClientModel.getInstance().responseData.size() != 0){
@@ -185,6 +181,7 @@ public class ProjectsFragment extends BaseFragment implements SwipeRefreshLayout
         }
     }
     public void ProjectsByDepartment(Object caller, Object model){
+        swipeStickView.setRefreshing(false);
         ProjectsByDepartmentModel.getInstance().setList((ProjectsByDepartmentModel) model);
         if (ProjectsByDepartmentModel.getInstance().responseCode == 100
                 || ProjectsByDepartmentModel.getInstance().responseData.size() != 0) {
@@ -211,7 +208,6 @@ public class ProjectsFragment extends BaseFragment implements SwipeRefreshLayout
                 projectsList.setPrivate(AllProjectsByUserModel.getInstance().responseData.get(loop).Isprivate);
                 allProjectsList.add(projectsList);
         }
-        swipeRefreshLayout.setRefreshing(false);
         SetGeneralClientAdapter();
     }
     public void AddClientProjects(){
@@ -332,11 +328,9 @@ public class ProjectsFragment extends BaseFragment implements SwipeRefreshLayout
 
     @Override
     public void onRefresh() {
-        service = new ProjectsListService(getActivity());
         service.getAllProjectsByUser_API(baseClass.getUserId(), true, new CallBack(this, "AllProjects"));
         service.getProjectsByClient_API(baseClass.getUserId(), true, new CallBack(this, "ProjectsByClient"));
         service.getProjectsByDepartment(baseClass.getUserId(),
                 true, new CallBack(this, "ProjectsByDepartment"));
-        applyLightBackground(aq.id(R.id.sort).getView(), baseClass);
     }
 }
