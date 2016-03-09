@@ -91,6 +91,7 @@ public class EditUserFragment extends BaseFragment implements MultiSelectionSpin
         projectsList.setListener(this);
         baseClass = ((BaseClass) getActivity().getApplicationContext());
         aq = new AQuery(getActivity(), view);
+        aq.id(R.id.lblListHeader).text(getString(R.string.edit_user));
         setHasOptionsMenu(true);
         service = new ProjectsListService(getActivity());
         service1 = new UserService(getActivity());

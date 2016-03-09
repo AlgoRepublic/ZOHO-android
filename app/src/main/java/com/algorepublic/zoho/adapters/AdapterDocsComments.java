@@ -55,7 +55,7 @@ public class AdapterDocsComments extends BaseAdapter {
         holder.taskComment.setText(DocsPreviewFragment.arrayList.get(position).getComment());
         holder.userName.setText(DocsPreviewFragment.arrayList.get(position).getUserName()
                 + " , " + DocsPreviewFragment.arrayList.get(position).getDateTime());
-        Glide.with(ctx).load(DocsPreviewFragment.arrayList.get(position).getUserImage()).into(holder.userImage);
+        Glide.with(ctx).load(DocsPreviewFragment.arrayList.get(position).getUserImagePath()).into(holder.userImage);
 
         return convertView;
     }

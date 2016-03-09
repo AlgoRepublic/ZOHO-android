@@ -11,12 +11,19 @@ public class TaskComments {
     public void setComment(String title) {
         this.comment = title;
     }
-    public String getUserImage() {
-        return userImage;
+    public String getUserImagePath() {
+        return userImagePath;
     }
 
-    public void setUserImage(String userImage) {
-        this.userImage = userImage;
+    public void setUserImagePath(String userImage) {
+        this.userImagePath = userImage;
+    }
+    public Integer getUserImageID() {
+        return userImageID;
+    }
+
+    public void setUserImageID(Integer userImage) {
+        this.userImageID = userImage;
     }
     public String getUserName() {
         return userName;
@@ -34,6 +41,7 @@ public class TaskComments {
 
     private String comment ;
     private String userName;
-    private String userImage;
+    private String userImagePath;
+    private Integer userImageID;
     private String dateTime;
 }

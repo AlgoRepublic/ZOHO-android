@@ -42,7 +42,7 @@ public class ForumService extends BaseService {
         String url = Constants.AddNewForumPost_API;
         HashMap<String, String> params = new HashMap<String, String>();
         params.put("Title", title);
-        params.put("Content", content);
+        params.put("ForumContent", content);
         params.put("ProjectID", projectId);
         params.put("MakeSticky", String.valueOf(makeSticky));
         params.put("MakeAnnouncement", String.valueOf(makeAnnouncement));
