@@ -32,9 +32,9 @@ public class EditForumFragment extends BaseFragment  {
 
     AQuery aq;
     BaseClass baseClass;
-    NiceSpinner owner_list;
+    NiceSpinner category_list;
     ForumService service;
-    LinkedList<String> userList;
+    LinkedList<String> categoryList;
     static int Pos;
 
     public static EditForumFragment newInstance(int pos) {
@@ -68,7 +68,15 @@ public class EditForumFragment extends BaseFragment  {
         return super.onOptionsItemSelected(item);
     }
     public void UpdateForum(){
-
+        int categoryID;
+        Log.e("ProjectId",baseClass.getSelectedProject());
+        if(categoryList.get(0).equalsIgnoreCase("None")){
+            categoryID = 0;
+        }else
+        {
+            categoryID = AddforumModel.getInstance().responseObject.
+                    get(category_list.getSelectedIndex()).ID;
+        }
         Log.e("ProjectId", baseClass.getSelectedProject());
         if (!baseClass.getSelectedProject().equalsIgnoreCase("0")) {
             service.updateForum(Integer.toString(ForumsModel.getInstance().responseObject.get(Pos).ID),
@@ -76,10 +84,8 @@ public class EditForumFragment extends BaseFragment  {
                     aq.id(R.id.forum_description).getText().toString(),
                     baseClass.getSelectedProject(),
                     true,
-                    true
-                    , AddforumModel.getInstance().responseObject.
-                            get(owner_list.getSelectedIndex()).ID,
-                    baseClass.getUserId(),
+                    true,
+                    categoryID,baseClass.getUserId(),
                     true, new CallBack(EditForumFragment.this, "UpdateForum"));
         }else{
             Snackbar.make(getView(),getString(R.string.select_project),Snackbar.LENGTH_SHORT).show();
@@ -98,26 +104,27 @@ public class EditForumFragment extends BaseFragment  {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view  = inflater.inflate(R.layout.layout_addforums, container, false);
+        View view  = inflater.inflate(R.layout.fragment_add_forums, container, false);
 
         aq = new AQuery(getActivity(), view);
         aq.id(R.id.lblListHeader).text(getString(R.string.edit_forum_post));
         setHasOptionsMenu(true);
         baseClass = ((BaseClass) getActivity().getApplicationContext());
-        owner_list = (NiceSpinner) view.findViewById(R.id.forum_list);
+        category_list = (NiceSpinner) view.findViewById(R.id.forum_list);
         service = new ForumService(getActivity());
-        service.getCategoryList(baseClass.getSelectedProject(), true, new CallBack(EditForumFragment.this, "GetAllUsers"));
+        service.getCategoryList(baseClass.getSelectedProject(), true, new CallBack(EditForumFragment.this, "GetAllCategory"));
 
         return view;
     }
-    public void GetAllUsers(Object caller, Object model) {
+    public void GetAllCategory(Object caller, Object model) {
         AddforumModel.getInstance().setList((AddforumModel) model);
         if (AddforumModel.getInstance().responseCode == 100) {
-            userList= new LinkedList<>();
+            categoryList= new LinkedList<>();
+            categoryList.add("None");
             for(int loop=0;loop<AddforumModel.getInstance().responseObject.size();loop++) {
-                userList.add(AddforumModel.getInstance().responseObject.get(loop).Title);
+                categoryList.add(AddforumModel.getInstance().responseObject.get(loop).Title);
             }
-            owner_list.attachDataSource(userList);
+            category_list.attachDataSource(categoryList);
             UpdateValues();
         }
         else
@@ -129,19 +136,17 @@ public class EditForumFragment extends BaseFragment  {
         aq.id(R.id.lblListHeader).text(getString(R.string.edit_forum_post));
         aq.id(R.id.forum_title).text(ForumsModel.getInstance().responseObject.get(Pos).title);
         aq.id(R.id.content_description).text(ForumsModel.getInstance().responseObject.get(Pos).forumContent);
-        String ownername = ForumsModel.getInstance().responseObject.get(Pos).categoryName;
-        if (!ownername.equals(null)) {
-            for(int loop=0;loop<userList.size();loop++)
-            {
-                if(userList.get(loop).equalsIgnoreCase(ownername))
-                {
-                    owner_list.setSelectedIndex(loop);
+        if(ForumsModel.getInstance().responseObject.get(Pos).categoryID==0){
+            category_list.setSelectedIndex(0);
+        }else {
+            String categoryName = ForumsModel.getInstance().responseObject.get(Pos).categoryName;
+            if (!categoryName.equals(null)) {
+                for (int loop = 0; loop < categoryList.size(); loop++) {
+                    if (categoryList.get(loop).equalsIgnoreCase(categoryName)) {
+                        category_list.setSelectedIndex(loop);
+                    }
                 }
             }
         }
-
     }
-
-
-
 }

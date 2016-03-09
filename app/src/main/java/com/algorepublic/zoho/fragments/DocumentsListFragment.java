@@ -31,7 +31,7 @@ import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
 /**
  * Created by android on 1/7/16.
  */
-public class DocumentsListFragment extends BaseFragment {
+public class DocumentsListFragment extends BaseFragment{
 
     static DocumentsListFragment fragment;
     AQuery aq;

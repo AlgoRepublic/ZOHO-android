@@ -65,6 +65,10 @@ public class TaskCommentsModel {
         @SerializedName("ProfileImagePath")
         @Expose
         public String profileImagePath;
+
+        @SerializedName("ProfilePictureID")
+        @Expose
+        public Integer profilePictureID;
     }
 
 }

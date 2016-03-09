@@ -32,9 +32,7 @@ public class StarRatingLevelOneFragment extends BaseFragment {
     StarRatingService service;
 
     public static StarRatingLevelOneFragment newInstance() {
-        if (fragment==null) {
-            fragment = new StarRatingLevelOneFragment();
-        }
+        fragment = new StarRatingLevelOneFragment();
         return fragment;
     }
 

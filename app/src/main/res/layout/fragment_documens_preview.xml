@@ -4,6 +4,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:weightSum="2"
+    android:background="@color/white"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <RelativeLayout
@@ -111,45 +112,53 @@
 
 
         <LinearLayout
-            android:orientation="horizontal"
             android:weightSum="2"
             android:layout_alignParentBottom="true"
             android:id="@+id/layout_comment"
+            android:background="@color/colorBaseWrapper"
+            android:padding="5dp"
             android:layout_width="match_parent"
-            android:layout_height="40dp">
-            <EditText
-                android:id="@+id/comment_user"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:maxLines="1"
-                android:layout_weight="1.5"
-                android:background="@android:color/white"
-                android:textColor="@android:color/black"
-                android:textCursorDrawable="@null"
-                android:hint="Send a comment"
-                android:singleLine="true"
-                android:ellipsize="end"
-                android:imeActionId="@integer/add_comment"
-                android:imeOptions="actionSend"
-                android:imeActionLabel="Add"
-                android:paddingLeft="5dp"
-                android:paddingRight="5dp"
-                android:scrollHorizontally="true"
-                android:textSize="13sp"
-                android:layout_gravity="center_vertical" />
-            <requestFocus/>
+            android:layout_height="50dp">
+            <LinearLayout
+                android:orientation="horizontal"
+                android:weightSum="2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <EditText
+                    android:id="@+id/comment_user"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:maxLines="1"
+                    android:layout_weight="1.5"
+                    android:background="@android:color/white"
+                    android:textColor="@android:color/black"
+                    android:textCursorDrawable="@null"
+                    android:hint="Send a comment"
+                    android:singleLine="true"
+                    android:ellipsize="end"
+                    android:imeActionId="@integer/add_comment"
+                    android:imeOptions="actionSend"
+                    android:imeActionLabel="Add"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:scrollHorizontally="true"
+                    android:textSize="16sp"
+                    android:layout_gravity="center_vertical" />
+                <requestFocus/>
 
-            <Button
-                android:id="@+id/send"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:text="Add"
-                android:textAllCaps="false"
-                android:textSize="12sp"
-                android:layout_weight=".5"
-                android:layout_gravity="center_vertical"
-                android:textColor="@android:color/white"
-                android:textStyle="bold"/>
+                <Button
+                    android:id="@+id/send"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:text="@string/add"
+                    android:textAllCaps="false"
+                    android:textSize="11sp"
+                    android:layout_weight=".5"
+                    android:background="@color/colorContentWrapper"
+                    android:layout_gravity="center_vertical"
+                    android:textColor="@android:color/white"
+                    android:textStyle="bold"/>
+            </LinearLayout>
         </LinearLayout>
     </RelativeLayout>
 </LinearLayout>

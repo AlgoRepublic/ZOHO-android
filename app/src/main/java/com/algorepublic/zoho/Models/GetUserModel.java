@@ -50,6 +50,9 @@ public class GetUserModel {
         @Expose
         public String profileImagePath;
 
+        @SerializedName("ProfilePictureID")
+        @Expose
+        public Integer profilePictureID;
     }
 
 }

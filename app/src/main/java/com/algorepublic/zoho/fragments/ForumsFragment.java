@@ -65,6 +65,9 @@ public class ForumsFragment extends BaseFragment{
         baseClass = ((BaseClass) getActivity().getApplicationContext());
 
         ForumService service = new ForumService(getActivity());
+        if (baseClass.getSelectedProject().equalsIgnoreCase("0")) {
+            Toast.makeText(getActivity(),"Please Select Project", Toast.LENGTH_SHORT).show();
+        }else
         service.getForumsList(baseClass.getSelectedProject(), true, new CallBack(ForumsFragment.this, "ForumListCallback"));
 
         setHasOptionsMenu(true);

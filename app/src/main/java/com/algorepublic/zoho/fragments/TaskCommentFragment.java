@@ -63,6 +63,7 @@ public class TaskCommentFragment extends BaseFragment {
         aq = new AQuery(view);
         service = new TaskListService(getActivity());
         adapter = new AdapterTaskComments(getActivity());
+        aq.id(R.id.forums_comment_list).adapter(adapter);
         listView.setAdapter(adapter);
         baseClass = ((BaseClass) getActivity().getApplicationContext());
        service.getCommentsByTask(position,
@@ -103,7 +104,8 @@ public class TaskCommentFragment extends BaseFragment {
             taskComments.setComment(TaskCommentsModel.getInstance().responseObject.get(loop).message);
             taskComments.setDateTime(GetDateTimeComment(TaskCommentsModel.getInstance().responseObject.get(loop).createdAt));
             taskComments.setUserName(TaskCommentsModel.getInstance().responseObject.get(loop).userObject.firstName);
-            taskComments.setUserImage(TaskCommentsModel.getInstance().responseObject.get(loop).userObject.profileImagePath);
+            taskComments.setUserImagePath(TaskCommentsModel.getInstance().responseObject.get(loop).userObject.profileImagePath);
+            taskComments.setUserImageID(TaskCommentsModel.getInstance().responseObject.get(loop).userObject.profilePictureID);
             arrayList.add(taskComments);
         }
         adapter.notifyDataSetChanged();
@@ -132,7 +134,8 @@ public class TaskCommentFragment extends BaseFragment {
         TaskComments taskComments = new TaskComments();
         taskComments.setComment(comment);
         taskComments.setUserName(baseClass.getFirstName());
-        taskComments.setUserImage(baseClass.getProfileImage());
+        taskComments.setUserImagePath(baseClass.getProfileImage());
+        taskComments.setUserImageID(baseClass.getProfileImageID());
         taskComments.setDateTime(GetDateTime());
         arrayList.add(taskComments);
         adapter.notifyDataSetChanged();

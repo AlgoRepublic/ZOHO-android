@@ -5,6 +5,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -72,16 +73,16 @@ public class AdapterStarRatingQuestions extends BaseAdapter {
         aq.id(R.id.comment_edittext).getEditText().addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
             }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-
             }
 
             @Override
             public void afterTextChanged(Editable s) {
+                Log.e("ID","/"+StarRatingLevelQuestionsFragment.Questions
+                        .get(position).getID());
                 service.StarEditComment(StarRatingLevelQuestionsFragment.Questions
                         .get(position).getID(),StarRatingLevelQuestionsFragment.Questions
                         .get(position).getComment(),true,new CallBack(AdapterStarRatingQuestions.this,"UpdateComment"));
@@ -98,6 +99,8 @@ public class AdapterStarRatingQuestions extends BaseAdapter {
                 RatingBar ratingBar  =(RatingBar) view.findViewById(R.id.star_rating);
                 ratingBar.setRating(GetStarValue(progress));
                 aq.id(R.id.devstage_text).text(GetStageValue(progress));
+                Log.e("ID", "/" + StarRatingLevelQuestionsFragment.Questions
+                        .get(position).getID());
                 service.StarUpdateProgress(StarRatingLevelQuestionsFragment.Questions
                         .get(position).getID(), StarRatingLevelQuestionsFragment.Questions
                         .get(position).getProgress(), true, new CallBack(AdapterStarRatingQuestions.this, "UpdateProgress"));

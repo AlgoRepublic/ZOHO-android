@@ -18,7 +18,7 @@
             android:layout_width="160dp"
             android:layout_height="match_parent"
             android:weightSum="2"
-            android:layout_marginBottom="4dp"
+            android:layout_marginBottom="6dp"
             android:orientation="horizontal"
             >
             <TextView
@@ -59,6 +59,8 @@
         app:ms9_shadowElevation="2dp">
         <RelativeLayout
             android:id="@+id/parent2"
+            android:layout_marginBottom="5dp"
+            android:background="@color/colorBaseWrapper"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
         <RelativeLayout
@@ -68,8 +70,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:padding="5dp"
-            android:background="@color/white"
-            android:layout_marginBottom="4dp"
             android:orientation="horizontal">
             <RelativeLayout
                 android:id="@+id/layout1"
@@ -133,7 +133,6 @@
             android:layout_alignParentRight="true"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:layout_marginBottom="4dp"
             android:background="#E2DBDB">
 
             <ImageView

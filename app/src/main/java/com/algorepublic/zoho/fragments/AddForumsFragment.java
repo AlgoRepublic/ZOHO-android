@@ -30,9 +30,9 @@ public class AddForumsFragment extends BaseFragment{
 
     AQuery aq;
     BaseClass baseClass;
-    NiceSpinner owner_list;
+    NiceSpinner category_list;
     ForumService service;
-    LinkedList<String> userList;
+    LinkedList<String> categoryList;
 
     public static AddForumsFragment newInstance() {
         AddForumsFragment fragment = new AddForumsFragment();
@@ -43,27 +43,28 @@ public class AddForumsFragment extends BaseFragment{
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view  = inflater.inflate(R.layout.layout_addforums, container, false);
+        View view  = inflater.inflate(R.layout.fragment_add_forums, container, false);
 
         aq = new AQuery(getActivity(), view);
         aq.id(R.id.lblListHeader).text(getString(R.string.new_forum_post));
         setHasOptionsMenu(true);
         baseClass = ((BaseClass) getActivity().getApplicationContext());
-        owner_list = (NiceSpinner) view.findViewById(R.id.forum_list);
+        category_list = (NiceSpinner) view.findViewById(R.id.forum_list);
         service = new ForumService(getActivity());
-        service.getCategoryList(baseClass.getUserId(), true, new CallBack(AddForumsFragment.this, "GetAllUsers"));
+        service.getCategoryList(baseClass.getUserId(), true, new CallBack(AddForumsFragment.this, "GetAllCategory"));
 
         return view;
     }
 
-    public void GetAllUsers(Object caller, Object model) {
+    public void GetAllCategory(Object caller, Object model) {
         AddforumModel.getInstance().setList((AddforumModel) model);
         if (AddforumModel.getInstance().responseCode == 100) {
-            userList= new LinkedList<>();
+            categoryList = new LinkedList<>();
+            categoryList.add("None");
             for(int loop=0;loop<AddforumModel.getInstance().responseObject.size();loop++) {
-                userList.add(AddforumModel.getInstance().responseObject.get(loop).Title);
+                categoryList.add(AddforumModel.getInstance().responseObject.get(loop).Title);
             }
-           owner_list.attachDataSource(userList);
+           category_list.attachDataSource(categoryList);
         }
         else
         {
@@ -73,17 +74,22 @@ public class AddForumsFragment extends BaseFragment{
     }
 
     public void CreateForum(){
-
+        int categoryID;
         Log.e("ProjectId",baseClass.getSelectedProject());
+        if(categoryList.get(0).equalsIgnoreCase("None")){
+            categoryID = 0;
+        }else
+        {
+            categoryID = AddforumModel.getInstance().responseObject.
+                    get(category_list.getSelectedIndex()).ID;
+        }
         if (baseClass.getSelectedProject()!="0") {
             service.createForum(aq.id(R.id.forum_title).getText().toString(),
                     aq.id(R.id.forum_description).getText().toString(),
                     baseClass.getSelectedProject(),
                     true,
                     true
-                    , AddforumModel.getInstance().responseObject.
-                            get(owner_list.getSelectedIndex()).ID,
-                    baseClass.getUserId(),
+                    ,categoryID,baseClass.getUserId(),
                     true, new CallBack(AddForumsFragment.this, "CreateForum"));
         }else{
             Snackbar.make(getView(),getString(R.string.select_project),Snackbar.LENGTH_SHORT).show();

@@ -19,6 +19,7 @@
         android:id="@+id/projects_liststicky"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:divider="@null"
         android:scrollbars="none" />
     </android.support.v4.widget.SwipeRefreshLayout>
     <android.support.v4.widget.SwipeRefreshLayout
@@ -33,6 +34,7 @@
         <ListView
             android:layout_above="@+id/sort"
             android:id="@+id/projects_list"
+            android:divider="@null"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scrollbars="none"/>

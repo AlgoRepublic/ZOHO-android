@@ -103,7 +103,8 @@ public class DocsPreviewFragment extends BaseFragment {
         TaskComments taskComments = new TaskComments();
         taskComments.setComment(comment);
         taskComments.setUserName(baseClass.getFirstName());
-        taskComments.setUserImage(Constants.UserImage_URL + baseClass.getProfileImage());
+        taskComments.setUserImagePath(baseClass.getProfileImage());
+        taskComments.setUserImageID(baseClass.getProfileImageID());
         Log.e("Image",Constants.UserImage_URL+baseClass.getProfileImage());
         taskComments.setDateTime(GetDateTime());
         arrayList.add(taskComments);

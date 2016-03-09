@@ -178,6 +178,13 @@ public class BaseFragment extends Fragment {
         return BaseActivity.toolbar;
     }
 
+    public void ClearAllFragments(){
+        for(int loop=0;loop<getActivity().getSupportFragmentManager().getBackStackEntryCount();loop++)
+        {
+            getActivity().getSupportFragmentManager().popBackStack();
+        }
+    }
+
     protected void applyDarkBackground(View view, BaseClass baseClass){
         if(baseClass.getThemePreference() == R.style.AppThemeBlue)
             view.setBackgroundColor(ContextCompat.getColor(getActivity(),R.color.colorPrimaryBlue));
