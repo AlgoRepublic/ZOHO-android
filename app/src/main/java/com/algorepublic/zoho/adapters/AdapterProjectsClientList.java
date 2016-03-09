@@ -139,7 +139,7 @@ public class AdapterProjectsClientList extends BaseAdapter {
         if (GeneralModel.getInstance().responseCode.equalsIgnoreCase("100")) {
             arrayList.remove(lastPosition);
             notifyDataSetChanged();
-            Snackbar.make(aq.id(R.id.shadow_item_container).getView(),"Project Deleted",Snackbar.LENGTH_SHORT).show();
+            Snackbar.make(aq.id(R.id.shadow_item_container).getView(),ctx.getString(R.string.project_deleted),Snackbar.LENGTH_SHORT).show();
         } else {
             Toast.makeText(ctx, ctx.getString(R.string.invalid_credential), Toast.LENGTH_SHORT).show();
         }

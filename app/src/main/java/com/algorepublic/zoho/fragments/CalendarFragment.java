@@ -4,13 +4,13 @@ package com.algorepublic.zoho.fragments;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.algorepublic.zoho.Models.TasksListByOwnerModel;
 import com.algorepublic.zoho.R;
@@ -193,7 +193,8 @@ public class CalendarFragment extends BaseFragment implements CalendarPickerCont
             }
         }
         else
-            Toast.makeText(getActivity(), "No tasks found", Toast.LENGTH_SHORT).show();
+            Snackbar.make(getView(),getString(R.string.no_task_found),Snackbar.LENGTH_SHORT).show();
+
     }
 
     @Override

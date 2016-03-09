@@ -16,8 +16,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Toast;
 
 import com.algorepublic.zoho.Models.AllProjectsByUserModel;
+import com.algorepublic.zoho.Models.ForumsCommentModel;
+import com.algorepublic.zoho.Models.GeneralModel;
 import com.algorepublic.zoho.Models.UserListModel;
 import com.algorepublic.zoho.Models.UserRoleModel;
 import com.algorepublic.zoho.R;
@@ -28,6 +31,7 @@ import com.algorepublic.zoho.utils.BaseClass;
 import com.algorepublic.zoho.utils.Constants;
 import com.algorepublic.zoho.utils.GenericHttpClient;
 import com.androidquery.AQuery;
+import com.bumptech.glide.Glide;
 import com.flyco.dialog.listener.OnOperItemClickL;
 import com.flyco.dialog.widget.ActionSheetDialog;
 import com.guna.libmultispinner.MultiSelectionSpinner;
@@ -54,7 +58,6 @@ public class EditUserFragment extends BaseFragment implements MultiSelectionSpin
     public static final int PICK_File = 3;
     File newFile;
     AQuery aq;
-    int[] Ids;
     ArrayList<Integer> selectedIds = new ArrayList<>();
     ArrayList<String> roleList;
     ArrayList<String> projectList;
@@ -71,9 +74,9 @@ public class EditUserFragment extends BaseFragment implements MultiSelectionSpin
     }
 
 
-    public static AddUserFragment newInstance(int pos) {
+    public static EditUserFragment newInstance(int pos) {
         position = pos;
-        AddUserFragment fragment = new AddUserFragment();
+        EditUserFragment fragment = new EditUserFragment();
         Bundle args = new Bundle();
         fragment.setArguments(args);
         return fragment;
@@ -95,7 +98,7 @@ public class EditUserFragment extends BaseFragment implements MultiSelectionSpin
                 .direction(ACProgressConstant.DIRECT_CLOCKWISE)
                 .themeColor(Color.WHITE)
                 .fadeColor(Color.DKGRAY).build();
-        getToolbar().setTitle(getString(R.string.add_user));
+        getToolbar().setTitle(getString(R.string.edit_user));
         aq.id(R.id.profile).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -110,9 +113,26 @@ public class EditUserFragment extends BaseFragment implements MultiSelectionSpin
             aq.id(R.id.layout).visibility(View.GONE);
         }
         service1.getUserRole(true, new CallBack(EditUserFragment.this, "UserRole"));
+        UpdateValues();
         return view;
     }
-
+    public void UpdateValues(){
+        aq.id(R.id.first_name).text(UserListModel.getInstance().responseObject.get(position).firstName);
+        aq.id(R.id.last_name).text(UserListModel.getInstance().responseObject.get(position).lastName);
+        aq.id(R.id.user_email).text(UserListModel.getInstance().responseObject.get(position).email);
+        String imagePath =UserListModel
+                .getInstance().responseObject.get(position).profileImagePath;
+        Log.e("Image",Constants.UserImage_URL + UserListModel
+                .getInstance().responseObject.get(position).profileImagePath);
+        if(imagePath != null) {
+        Glide.with(getActivity()).load(Constants.Image_URL + UserListModel.getInstance()
+                .responseObject.get(position).profilePictureID
+                + "." + BaseClass.getExtensionType(
+                UserListModel.getInstance().responseObject.get(position).profileImagePath))
+                .into(aq.id(R.id.profile).getImageView());
+        }
+        aq.id(R.id.user_phoneno).text(UserListModel.getInstance().responseObject.get(position).mobile);
+    }
     public void AllProjects(Object caller, Object model){
         AllProjectsByUserModel.getInstance().setList((AllProjectsByUserModel) model);
         if (AllProjectsByUserModel.getInstance().responseCode == 100
@@ -129,6 +149,8 @@ public class EditUserFragment extends BaseFragment implements MultiSelectionSpin
             projectsList.setItems(projectList);
             if(position > -1) {
                 if (UserListModel.getInstance().responseObject.get(position).projectIDs != null) {
+
+                    int[] Ids = new int[UserListModel.getInstance().responseObject.get(position).projectIDs.size()];
                     for (int loop = 0; loop < UserListModel.getInstance()
                             .responseObject.get(position).projectIDs.size(); loop++) {
                         for (int loop1 = 0; loop1 < AllProjectsByUserModel.getInstance()
@@ -137,10 +159,10 @@ public class EditUserFragment extends BaseFragment implements MultiSelectionSpin
                                     .responseObject.get(position).projectIDs.get(loop) == AllProjectsByUserModel
                                     .getInstance().responseData.get(loop1).projectID)
                                 Ids[loop] = loop1;
-                            selectedIds.add(AllProjectsByUserModel
-                                    .getInstance().responseData.get(loop1).projectID);
                         }
                         projectsList.setSelection(Ids);
+                        selectedIds.add(AllProjectsByUserModel
+                                .getInstance().responseData.get(loop).projectID);
                     }
                 }
             }
@@ -157,6 +179,12 @@ public class EditUserFragment extends BaseFragment implements MultiSelectionSpin
                 roleList.add(UserRoleModel.getInstance().responseObject.get(loop).role);
             }
             role_list.attachDataSource(roleList);
+            for(int loop=0;loop<roleList.size();loop++){
+                if(roleList.get(loop).equalsIgnoreCase(UserListModel.getInstance().responseObject
+                .get(position).userRole.role)){
+                    role_list.setSelectedIndex(loop);
+                }
+            }
         }else {
             Snackbar.make(getView() , getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
         }
@@ -188,9 +216,36 @@ public class EditUserFragment extends BaseFragment implements MultiSelectionSpin
                     Snackbar.make(getView(),getString(R.string.add_phoneno),Snackbar.LENGTH_SHORT).show();
                     return false;
                 }
-//                new AddUser().execute();
+                if(baseClass.getSelectedProject().equalsIgnoreCase("0")) {
+                    service1.updateUserWithoutProjectSelected(Integer.toString(UserListModel.getInstance().responseObject.get(position).ID),
+                            aq.id(R.id.first_name).getText().toString(),
+                            aq.id(R.id.last_name).getText().toString(),
+                            aq.id(R.id.user_email).getText().toString(),
+                            aq.id(R.id.user_phoneno).getText().toString(),
+                            UserRoleModel.getInstance().responseObject.get
+                                    (role_list.getSelectedIndex()).ID, selectedIds
+                            , true, new CallBack(EditUserFragment.this, "UpdateUser"));
+                }else {
+                    service1.updateUserWithProjectSelected(Integer.toString(UserListModel.getInstance().responseObject.get(position).ID),
+                            aq.id(R.id.first_name).getText().toString(),
+                            aq.id(R.id.last_name).getText().toString(),
+                            aq.id(R.id.user_email).getText().toString(),
+                            aq.id(R.id.user_phoneno).getText().toString(),
+                            UserRoleModel.getInstance().responseObject.get
+                                    (role_list.getSelectedIndex()).ID
+                            , true, new CallBack(EditUserFragment.this, "UpdateUser"));
+                }
         }
         return super.onOptionsItemSelected(item);
+    }
+    public void UpdateUser(Object caller, Object model){
+        GeneralModel.getInstance().setList((GeneralModel) model);
+        if (GeneralModel.getInstance().responseObject ==true) {
+            Snackbar.make(getView(),getString(R.string.user_updated),Snackbar.LENGTH_SHORT).show();
+        }else {
+            Toast.makeText(getActivity(), getString(R.string.response_error), Toast.LENGTH_SHORT).show();
+        }
+
     }
     private void CallForAttachments() {
         String[] menuItems = {getString(R.string.camera),getString(R.string.gallery)
@@ -258,9 +313,44 @@ public class EditUserFragment extends BaseFragment implements MultiSelectionSpin
             default:
                 break;
         }
-        aq.id(R.id.profile).image(newFile,200);
+        aq.id(R.id.profile).image(newFile, 200);
+        new UploadPicture().execute();
     }
+    public class UploadPicture extends AsyncTask<Void, Void, String> {
+        GenericHttpClient httpClient;
+        String response = null;
 
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            dialog.show();
+        }
+
+        @Override
+        protected String doInBackground(Void... voids) {
+            try {
+                httpClient = new GenericHttpClient();
+                response = httpClient.uploadImage(Constants.UploadImage_URL,
+                        Integer.toString(UserListModel.getInstance().responseObject
+                                .get(position).ID),baseClass.getUserId(), newFile);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return response;
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            dialog.dismiss();
+            if(result != null) {
+                if (result.contains("100")) {
+                    Snackbar.make(getView(), getString(R.string.user_updated), Snackbar.LENGTH_SHORT).show();
+                } else {
+                    Snackbar.make(getView(), getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
+                }
+            }
+        }
+    }
     @Override
     public void selectedIndices(List<Integer> indices) {
         selectedIds.clear();
@@ -275,81 +365,6 @@ public class EditUserFragment extends BaseFragment implements MultiSelectionSpin
         projectsList.setSelection(strings);
     }
 
-    public class EditUserWithProjects extends AsyncTask<Void, Void, String> {
-        GenericHttpClient httpClient;
-        String response = null;
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            dialog.show();
-        }
-
-        @Override
-        protected String doInBackground(Void... voids) {
-            try {
-                httpClient = new GenericHttpClient();
-                response = httpClient.createUser(Constants.CreateUser_API,
-                        aq.id(R.id.first_name).getText().toString(),
-                        aq.id(R.id.last_name).getText().toString(),
-                        aq.id(R.id.user_email).getText().toString(),
-                        aq.id(R.id.user_phoneno).getText().toString(),
-                        UserRoleModel.getInstance().responseObject.get
-                                (role_list.getSelectedIndex()).ID, selectedIds);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            return response;
-        }
-
-        @Override
-        protected void onPostExecute(String result) {
-            dialog.dismiss();
-            if(result.contains("100")){
-                Snackbar.make(getView(),getString(R.string.user_created),Snackbar.LENGTH_SHORT).show();
-            }else{
-                Snackbar.make(getView(),getString(R.string.response_error),Snackbar.LENGTH_SHORT).show();
-            }
-        }
-    }
-    public class EditUserWithoutProjects extends AsyncTask<Void, Void, String> {
-        GenericHttpClient httpClient;
-        String response = null;
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            dialog.show();
-        }
-
-        @Override
-        protected String doInBackground(Void... voids) {
-            try {
-                httpClient = new GenericHttpClient();
-                response = httpClient.updateUserWithoutProjects(Constants.CreateUser_API,
-                        Integer.toString(UserListModel.getInstance().responseObject.get(position).ID),
-                        aq.id(R.id.first_name).getText().toString(),
-                        aq.id(R.id.last_name).getText().toString(),
-                        aq.id(R.id.user_email).getText().toString(),
-                        aq.id(R.id.user_phoneno).getText().toString(),
-                        UserRoleModel.getInstance().responseObject.get
-                                (role_list.getSelectedIndex()).ID, selectedIds);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            return response;
-        }
-
-        @Override
-        protected void onPostExecute(String result) {
-            dialog.dismiss();
-            if(result.contains("100")){
-                Snackbar.make(getView(),getString(R.string.user_created),Snackbar.LENGTH_SHORT).show();
-            }else{
-                Snackbar.make(getView(),getString(R.string.response_error),Snackbar.LENGTH_SHORT).show();
-            }
-        }
-    }
     @Override
     public void onDestroyView() {
         UserFragment.assigneeList.clear();

@@ -3,7 +3,6 @@ package com.algorepublic.zoho.fragments;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -11,9 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.Toast;
 
-import com.algorepublic.zoho.Models.GeneralModel;
 import com.algorepublic.zoho.Models.SubTaskAttachmentsModel;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.adapters.AdapterDocumentsList;
@@ -22,12 +19,8 @@ import com.algorepublic.zoho.services.CallBack;
 import com.algorepublic.zoho.services.DocumentsService;
 import com.algorepublic.zoho.utils.BaseClass;
 import com.androidquery.AQuery;
-import com.flyco.animation.BounceEnter.BounceLeftEnter;
-import com.flyco.animation.SlideExit.SlideRightExit;
-import com.flyco.dialog.listener.OnBtnClickL;
 import com.flyco.dialog.listener.OnOperItemClickL;
 import com.flyco.dialog.widget.ActionSheetDialog;
-import com.flyco.dialog.widget.NormalDialog;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -142,7 +135,7 @@ public class DocumentsListBySubTaskFragment extends BaseFragment {
             case R.id.add_document:
                 baseClass.hideKeyPad(getView());
                 callFragmentWithBackStack(R.id.container, UploadDocsFragment.
-                        newInstance(ID), "UploadDocsFragment");
+                        newInstance(0,ID), "UploadDocsFragment");
                 break;
         }
         return super.onOptionsItemSelected(item);
@@ -158,29 +151,29 @@ public class DocumentsListBySubTaskFragment extends BaseFragment {
                 dialog.dismiss();
                 if (isLoaded())
                     if (position == 0) {
-                        baseClass.setDocsSortType("AllFiles");
+                        baseClass.setDocsSortType(getString(R.string.all_files));
                     }
                 if (position == 1) {
-                    baseClass.setDocsSortType("Pictures");
+                    baseClass.setDocsSortType(getString(R.string.picture));
                 }
                 if (position == 2) {
-                    baseClass.setDocsSortType("Videos");
+                    baseClass.setDocsSortType(getString(R.string.videos));
                 }
                 if (position == 3) {
-                    baseClass.setDocsSortType("Favorites");
+                    baseClass.setDocsSortType(getString(R.string.favorites));
                 }
                 FilterList();
             }
         });
     }
     public void FilterList(){
-        if(baseClass.getDocsSortType().equalsIgnoreCase("AllFiles"))
+        if(baseClass.getDocsSortType().equalsIgnoreCase(getString(R.string.all_files)))
             FilterByAllDocs();
-        if(baseClass.getDocsSortType().equalsIgnoreCase("Pictures"))
+        if(baseClass.getDocsSortType().equalsIgnoreCase(getString(R.string.picture)))
             FilterByPicture();
-        if(baseClass.getDocsSortType().equalsIgnoreCase("Videos"))
+        if(baseClass.getDocsSortType().equalsIgnoreCase(getString(R.string.videos)))
             FilterByVideo();
-        if(baseClass.getDocsSortType().equalsIgnoreCase("Favorites"))
+        if(baseClass.getDocsSortType().equalsIgnoreCase(getString(R.string.favorites)))
             FilterByFav();
 
         SetAdapterList();
@@ -198,7 +191,7 @@ public class DocumentsListBySubTaskFragment extends BaseFragment {
             GetAllDocumentsList();
             FilterList();
         } else {
-            Toast.makeText(getActivity(), getString(R.string.invalid_credential), Toast.LENGTH_SHORT).show();
+            Snackbar.make(getView(),getString(R.string.invalid_credential),Snackbar.LENGTH_SHORT).show();
         }
     }
 

@@ -22,10 +22,12 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Toast;
 
+import com.algorepublic.zoho.Models.FolderListModel;
 import com.algorepublic.zoho.Models.GeneralModel;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.adapters.AdapterUploadAttachment;
 import com.algorepublic.zoho.adapters.AttachmentList;
+import com.algorepublic.zoho.services.CallBack;
 import com.algorepublic.zoho.services.DocumentsService;
 import com.algorepublic.zoho.utils.BaseClass;
 import com.algorepublic.zoho.utils.Constants;
@@ -34,12 +36,10 @@ import com.androidquery.AQuery;
 import com.dropbox.chooser.android.DbxChooser;
 import com.flyco.animation.SlideEnter.SlideLeftEnter;
 import com.flyco.animation.SlideExit.SlideRightExit;
-import com.flyco.dialog.entity.DialogMenuItem;
 import com.flyco.dialog.listener.OnBtnClickL;
 import com.flyco.dialog.listener.OnOperItemClickL;
 import com.flyco.dialog.widget.ActionSheetDialog;
 import com.flyco.dialog.widget.MaterialDialog;
-import com.flyco.dialog.widget.NormalListDialog;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -60,6 +60,7 @@ import com.google.api.client.util.ExponentialBackOff;
 import com.google.api.services.drive.DriveScopes;
 import com.poliveira.apps.parallaxlistview.ParallaxListView;
 
+import org.angmarch.views.NiceSpinner;
 import org.apache.commons.io.FileUtils;
 
 import java.io.File;
@@ -97,7 +98,9 @@ public class UploadDocsFragment extends BaseFragment implements GoogleApiClient.
     BaseClass baseClass;
     InputStream inputStream;
     DocumentsService service;
-    static int ID;View view;
+    static int ProjectID,TaskID;View view;
+    NiceSpinner folder_list;
+    ArrayList<String> folderList;
     private static final String PREF_ACCOUNT_NAME = "accountName";
     private static final String[] SCOPES = { DriveScopes.DRIVE_METADATA_READONLY };
     com.google.api.client.googleapis.extensions.android.gms.auth.GoogleAccountCredential mCredential;
@@ -107,8 +110,8 @@ public class UploadDocsFragment extends BaseFragment implements GoogleApiClient.
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
      */
-    public static UploadDocsFragment newInstance(int Id) {
-        ID = Id;
+    public static UploadDocsFragment newInstance(int projectId,int taskId) {
+        ProjectID = projectId;TaskID = taskId;
         if (fragment==null) {
             fragment = new UploadDocsFragment();
         }
@@ -152,18 +155,32 @@ public class UploadDocsFragment extends BaseFragment implements GoogleApiClient.
         super.onCreate(savedInstanceState);
     }
     @Override
+
+
+
+
+
+
+
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         setHasOptionsMenu(true);
         view = inflater.inflate(R.layout.activity_upload_docs, container, false);
         listView = (ParallaxListView) view.findViewById(R.id.images_layout);
-        listView.setParallaxView(getActivity().getLayoutInflater().inflate(R.layout.view_header, listView, false));
+        listView.setParallaxView(getActivity().getLayoutInflater().inflate(R.layout.view_header_upload_doc, listView, false));
         adapter = new AdapterUploadAttachment(getActivity());
         listView.setAdapter(adapter);
+        folder_list = (NiceSpinner) view.findViewById(R.id.folder_list);
         aq = new AQuery(view);
         baseClass =  ((BaseClass) getActivity().getApplicationContext());
         service = new DocumentsService(getActivity());
-        dialog = new ACProgressFlower.Builder(getActivity())
+        if(ProjectID==0){
+            folder_list.setVisibility(View.GONE);
+        }else {
+            folder_list.setVisibility(View.VISIBLE);
+            service.getFolderList(baseClass.getSelectedProject(), true, new CallBack(UploadDocsFragment.this, "FolderList"));
+        }
+            dialog = new ACProgressFlower.Builder(getActivity())
                 .direction(ACProgressConstant.DIRECT_CLOCKWISE)
                 .themeColor(Color.WHITE)
                 .fadeColor(Color.DKGRAY).build();
@@ -241,10 +258,15 @@ public class UploadDocsFragment extends BaseFragment implements GoogleApiClient.
         startActivityForResult(
                 mCredential.newChooseAccountIntent(), REQUEST_ACCOUNT_PICKER);
     }
-    public void DocumentsList(Object caller, Object model) {
-        GeneralModel.getInstance().setList((GeneralModel) model);
-        if (GeneralModel.getInstance().responseCode.equalsIgnoreCase("100")) {
 
+    public void FolderList(Object caller, Object model) {
+        FolderListModel.getInstance().setList((FolderListModel) model);
+        if (FolderListModel.getInstance().responseCode.equalsIgnoreCase("100")) {
+            folderList = new ArrayList<>();
+            for(int loop=0;loop<FolderListModel.getInstance().responseObject.size();loop++){
+                folderList.add(FolderListModel.getInstance().responseObject.get(loop).folderName);
+            }
+            folder_list.attachDataSource(folderList);
         } else {
             Toast.makeText(getActivity(), getString(R.string.invalid_credential), Toast.LENGTH_SHORT).show();
         }
@@ -391,7 +413,7 @@ public class UploadDocsFragment extends BaseFragment implements GoogleApiClient.
         if (file.length() > 1048576 * 5) {
             MaterialAlertDialog();
         } else {
-            showFileInList(file, "", -1, "", false);
+            showFileInList(file, "", -1, file.getName(), false);
         }
     }
 
@@ -412,11 +434,11 @@ public class UploadDocsFragment extends BaseFragment implements GoogleApiClient.
         final MaterialDialog dialog = new MaterialDialog(getActivity());
         dialog//
                 .btnNum(1)
-                .title("File size alert!")
+                .title(getString(R.string.file_size_alert))
                 .titleTextColor(getResources().getColor(R.color.colorBaseHeader))
-                .content("File size should be less than (5) five MB")//
+                .content(getString(R.string.file_size_lessthan5mb))//
                 .contentTextColor(getResources().getColor(R.color.colorContentWrapper))
-                .btnText("OK")//
+                .btnText(getString(R.string.OK))//
                 .btnTextColor(getResources().getColor(R.color.colorContentWrapper))
                 .showAnim(new SlideLeftEnter())//
                 .dismissAnim(new SlideRightExit())//
@@ -478,7 +500,9 @@ public class UploadDocsFragment extends BaseFragment implements GoogleApiClient.
         protected String doInBackground(Void... voids) {
             try {
                 httpClient = new GenericHttpClient();
-                response = httpClient.uploadDocumentsByProject(Constants.UploadDocumentsByProject_API,ID, filesList);
+                response = httpClient.uploadDocumentsByProject(Constants.UploadDocumentsByProject_API,
+                        ProjectID,FolderListModel.getInstance().responseObject
+                                .get(folder_list.getSelectedIndex()).Id, filesList);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -505,7 +529,8 @@ public class UploadDocsFragment extends BaseFragment implements GoogleApiClient.
         protected String doInBackground(Void... voids) {
             try {
                 httpClient = new GenericHttpClient();
-                response = httpClient.uploadDocumentsByTask(Constants.UploadDocumentsByTasks_API,ID, filesList);
+                response = httpClient.uploadDocumentsByTask(Constants.UploadDocumentsByTasks_API,
+                        TaskID, filesList);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -527,34 +552,5 @@ public class UploadDocsFragment extends BaseFragment implements GoogleApiClient.
 //            Snackbar.make(getView(), "Server not responding", Snackbar.LENGTH_SHORT).show();
 //        }
     }
-    public void CallForSelectFolder(){
-        ArrayList<DialogMenuItem> menuItems = new ArrayList<>();
-        DialogMenuItem menuItem;
-        for(int loop=0;loop<5;loop++) {
-            menuItem = new DialogMenuItem("dsd", android.R.drawable.checkbox_off_background);
-            menuItems.add(menuItem);
-        }
 
-        NormalListDialog normalListDialog = new NormalListDialog(getActivity(),menuItems);
-        normalListDialog.title("Select Folder")
-            .cornerRadius(5)//
-            .dividerColor(getResources().getColor(R.color.colorContentWrapper))//
-            .itemTextSize(12)
-            .titleTextSize_SP(14)
-            .itemTextColor(getResources().getColor(R.color.colorBaseHeader))
-            .itemPressColor(getResources().getColor(R.color.colorBaseMenu))
-            .lvBgColor(getResources().getColor(R.color.colorWhite))
-            .titleBgColor(getResources().getColor(R.color.colorBaseHeader))
-            .titleTextColor(getResources().getColor(R.color.colorWhite));
-        normalListDialog.heightScale(2f).widthScale(2f);
-        normalListDialog.show();
-
-        normalListDialog.setOnOperItemClickL(new OnOperItemClickL() {
-            @Override
-            public void onOperItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-            }
-        });
-
-    }
 }

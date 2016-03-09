@@ -13,7 +13,6 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.algorepublic.zoho.Models.GeneralModel;
 import com.algorepublic.zoho.R;
@@ -140,10 +139,10 @@ public class AdapterProjectsDeptList extends BaseAdapter implements StickyListHe
         if (GeneralModel.getInstance().responseCode.equalsIgnoreCase("100")) {
             ProjectsFragment.ByDepartmentList.remove(lastPosition);
             notifyDataSetChanged();
-            Snackbar.make(aq.id(R.id.shadow_item_container).getView(), "Project deleted successfully.", Snackbar.LENGTH_SHORT).show();
+            Snackbar.make(aq.id(R.id.shadow_item_container).getView(), ctx.getString(R.string.project_deleted), Snackbar.LENGTH_SHORT).show();
         } else {
-            Toast.makeText(ctx, ctx.getString(R.string.invalid_credential), Toast.LENGTH_SHORT).show();
-        }
+            Snackbar.make(aq.id(R.id.shadow_item_container).getView(), ctx.getString(R.string.invalid_credential), Snackbar.LENGTH_SHORT).show();
+           }
     }
     public void callFragmentWithBackStack(int containerId, Fragment fragment, String tag){
 

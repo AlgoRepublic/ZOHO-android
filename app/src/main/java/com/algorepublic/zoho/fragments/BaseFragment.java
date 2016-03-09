@@ -12,6 +12,7 @@ import android.support.v7.widget.Toolbar;
 import android.text.format.DateFormat;
 import android.util.DisplayMetrics;
 import android.view.View;
+import android.widget.SearchView;
 
 import com.algorepublic.zoho.BaseActivity;
 import com.algorepublic.zoho.R;
@@ -26,6 +27,7 @@ import java.util.concurrent.TimeUnit;
  * A simple {@link Fragment} subclass.
  */
 public class BaseFragment extends Fragment {
+    public static SearchView searchView;
 
     public BaseFragment() {
         // Required empty public constructor
@@ -105,11 +107,11 @@ public class BaseFragment extends Fragment {
         int millis;String days;
         if (System.currentTimeMillis()> Long.parseLong(milli)) {
             millis = (int)TimeUnit.MILLISECONDS.toDays(System.currentTimeMillis() - Long.parseLong(milli));
-            days = "Late by "+millis+" day(s)";
+            days = getString(R.string.late_by)+millis+getString(R.string.days);
         }
         else{
             millis = (int)TimeUnit.MILLISECONDS.toDays(Long.parseLong(milli) - System.currentTimeMillis());
-            days = +millis+" day(s) Left";
+            days = +millis+getString(R.string.days_left);
         }
         return days;
     }

@@ -139,6 +139,8 @@
                         android:layout_gravity="center_vertical"
                         android:layout_weight=".8"
                         android:gravity="left"
+                        android:singleLine="true"
+                        android:ellipsize="end"
                         android:textColor="@color/colorBaseHeader"
                         android:textSize="14sp"
                         android:textStyle="bold" />
@@ -157,7 +159,7 @@
                             android:layout_toLeftOf="@+id/bar"
                             android:gravity="left"
                             android:textColor="@color/colorBaseHeader"
-                            android:text="10 Comments"
+                            android:text="@string/comment"
                             android:textSize="12sp" />
 
                         <View
@@ -175,7 +177,7 @@
                             android:layout_alignParentRight="true"
                             android:layout_centerVertical="true"
                             android:gravity="left"
-                            android:text="10 Users"
+                            android:text="@string/user"
                             android:textColor="@color/colorBaseHeader"
                             android:textSize="12sp" />
                     </RelativeLayout>

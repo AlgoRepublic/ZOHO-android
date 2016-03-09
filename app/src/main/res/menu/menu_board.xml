@@ -19,15 +19,15 @@
       tools:context=".MainActivity">
     <item
         android:id="@+id/action_disable_drag"
-        android:title="action_disable_drag"
+        android:title="@string/action_disable_drag"
         app:showAsAction="never"/>
     <item
         android:id="@+id/action_enable_drag"
-        android:title="action_enable_drag"
+        android:title="@string/action_enable_drag"
         app:showAsAction="never"/>
     <item
         android:id="@+id/action_add_column"
-        android:title="Add column"
+        android:title="@string/add_column"
         app:showAsAction="never"/>
     <item
         android:id="@+id/action_remove_column"
@@ -35,6 +35,6 @@
         app:showAsAction="never"/>
     <item
         android:id="@+id/action_clear_board"
-        android:title="Clear board"
+        android:title="@string/clear_board"
         app:showAsAction="never"/>
 </menu>

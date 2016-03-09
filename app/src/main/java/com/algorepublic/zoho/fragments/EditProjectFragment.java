@@ -106,7 +106,7 @@ public class EditProjectFragment extends BaseFragment {
             Snackbar.make(getView(),getString(R.string.project_updated),Snackbar.LENGTH_SHORT).show();
             getActivity().getSupportFragmentManager().popBackStack();
         }else {
-            Toast.makeText(getActivity(), getString(R.string.response_error), Toast.LENGTH_SHORT).show();
+            Snackbar.make(getView(), getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
         }
 
     }

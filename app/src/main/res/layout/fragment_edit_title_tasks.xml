@@ -27,7 +27,7 @@
         android:layout_toRightOf="@+id/task_image"
         android:background="@drawable/round_border"
         android:gravity="top"
-        android:hint="Task Description"
+        android:hint="@string/task_desc"
         android:padding="5dp"
         android:textColor="@color/colorBaseHeader"
         android:textColorHint="@color/colorBaseWrapper"

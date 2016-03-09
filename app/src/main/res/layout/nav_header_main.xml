@@ -94,7 +94,7 @@
                     android:gravity="right"
                     android:lines="2"
                     android:padding="5dp"
-                    android:text="John Doe"
+                    android:text="@string/first_name"
                     android:textSize="18dp" />
 
                 <com.mikhaellopez.circularimageview.CircularImageView
@@ -120,7 +120,7 @@
                     android:gravity="left"
                     android:lines="2"
                     android:padding="5dp"
-                    android:text="admin"
+                    android:text="@string/last_name"
                     android:textSize="18sp" />
             </RelativeLayout>
 
@@ -138,7 +138,7 @@
                     android:layout_centerHorizontal="true"
                     android:gravity="center"
                     android:singleLine="true"
-                    android:text="admin@admin.com"
+                    android:text="@string/sample_email"
                     android:textSize="16sp" />
             </RelativeLayout>
         </RelativeLayout>

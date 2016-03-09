@@ -219,7 +219,7 @@ public class AdapterDocumentsList extends BaseAdapter implements StickyListHeade
         aq_header = new AQuery(convertView);
 
         if (documentsLists.get(position).getUpdatedAt().equalsIgnoreCase("3/0/1"))
-            aq_header.id(R.id.header).text("No Date");
+            aq_header.id(R.id.header).text(ctx.getString(R.string.no_date));
         else
             aq_header.id(R.id.header).text(documentsLists.get(position).getUpdatedAt());
 

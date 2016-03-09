@@ -47,7 +47,12 @@ public class TaskListNameFragment extends BaseFragment {
         aq = new AQuery(view);
         baseClass = ((BaseClass) getActivity().getApplicationContext());
         adapter = new AdapterTaskListName(getActivity());
-        adapter.setSelectedIndex(baseClass.db.getInt("TaskListNameID"));
+        for(int loop=0;loop<TasksListFragment.taskListName.size();loop++) {
+            if (baseClass.db.getInt("TaskListNameID") ==
+                    TasksListFragment.taskListName.get(loop).getTaskListID()) {
+                adapter.setSelectedIndex(loop);
+            }
+        }
        listView.setAdapter(adapter);
         return view;
     }

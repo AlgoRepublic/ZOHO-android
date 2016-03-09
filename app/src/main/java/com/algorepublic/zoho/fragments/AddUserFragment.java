@@ -122,7 +122,7 @@ public class AddUserFragment extends BaseFragment implements MultiSelectionSpinn
             for(int loop=0;loop< AllProjectsByUserModel.getInstance().responseData.size();loop++) {
                 try {
                     if(AllProjectsByUserModel.getInstance().responseData.get(loop).projectName ==null){
-                        projectList.add("No Data");
+                        projectList.add(getString(R.string.no_data));
                     }else
                     projectList.add(AllProjectsByUserModel.getInstance().responseData.get(loop).projectName);
                 }catch (NullPointerException e){}
@@ -296,7 +296,7 @@ public class AddUserFragment extends BaseFragment implements MultiSelectionSpinn
                         aq.id(R.id.user_email).getText().toString(),
                         aq.id(R.id.user_phoneno).getText().toString(),
                         UserRoleModel.getInstance().responseObject.get
-                                (role_list.getSelectedIndex()).ID,selectedIds);
+                                (role_list.getSelectedIndex()).ID,selectedIds,newFile);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -306,11 +306,13 @@ public class AddUserFragment extends BaseFragment implements MultiSelectionSpinn
         @Override
         protected void onPostExecute(String result) {
             dialog.dismiss();
+            Log.e("Res", result);
             if(result.contains("100")){
                 Snackbar.make(getView(),getString(R.string.user_created),Snackbar.LENGTH_SHORT).show();
-            }else{
+            }else if(result.contains("101")) {
+                Snackbar.make(getView(),getString(R.string.email_already),Snackbar.LENGTH_SHORT).show();
+            }else
                 Snackbar.make(getView(),getString(R.string.response_error),Snackbar.LENGTH_SHORT).show();
-            }
         }
     }
     @Override

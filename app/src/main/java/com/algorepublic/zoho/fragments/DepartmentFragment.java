@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -36,7 +37,7 @@ import java.util.ArrayList;
 /**
  * Created by android on 2/24/16.
  */
-public class DepartmentFragment extends BaseFragment{
+public class DepartmentFragment extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener {
     private static final String SAVED_STATE_EXPANDABLE_ITEM_MANAGER = "RecyclerViewExpandableItemManager";
     static DepartmentFragment fragment;
     public static ArrayList<ProjectsList> allProjects = new ArrayList<>();
@@ -47,6 +48,7 @@ public class DepartmentFragment extends BaseFragment{
     private RecyclerView.LayoutManager mLayoutManager;
     private RecyclerView.Adapter mWrappedAdapter;
     private RecyclerViewDragDropManager mRecyclerViewDragDropManager;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     public static DepartmentFragment newInstance() {
         if(fragment == null) {
@@ -65,6 +67,9 @@ public class DepartmentFragment extends BaseFragment{
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_department, container, false);
         baseClass = ((BaseClass) getActivity().getApplicationContext());
+        swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe_refresh_layout);
+        swipeRefreshLayout.setOnRefreshListener(this);
+        swipeRefreshLayout.setProgressViewOffset(false, 0, 200);
         mRecyclerView = (RecyclerView) view.findViewById(R.id.list_view);
         mLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);
@@ -81,10 +86,20 @@ public class DepartmentFragment extends BaseFragment{
         service = new ProjectsListService(getActivity());
         service.getProjectsByDepartment(baseClass.getUserId(),
                 true, new CallBack(this, "ProjectsByDepartment"));
+//        swipeRefreshLayout.post(new Runnable() {
+//                                    @Override
+//                                    public void run() {
+//                                        swipeRefreshLayout.setRefreshing(true);
+//                                        service.getProjectsByDepartment(baseClass.getUserId(),
+//                                                true, new CallBack(this, "ProjectsByDepartment"));
+//                                    }
+//                                }
+//        );
         return view;
     }
     public void ProjectsByDepartment(Object caller, Object model){
         ProjectsByDepartmentModel.getInstance().setList((ProjectsByDepartmentModel) model);
+        swipeRefreshLayout.setRefreshing(true);
         if (ProjectsByDepartmentModel.getInstance().responseCode == 100
                 || ProjectsByDepartmentModel.getInstance().responseData.size() != 0) {
             AddDepartmentProjects();
@@ -118,7 +133,9 @@ public class DepartmentFragment extends BaseFragment{
                 allProjects.add(projectsList);
             }
         }
+        swipeRefreshLayout.setRefreshing(false);
         addColumnList();
+
     }
 
     @Override
@@ -204,4 +221,9 @@ public class DepartmentFragment extends BaseFragment{
     }
 
 
+    @Override
+    public void onRefresh() {
+        service.getProjectsByDepartment(baseClass.getUserId(),
+                true, new CallBack(this, "ProjectsByDepartment"));
+    }
 }

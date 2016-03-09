@@ -2,18 +2,17 @@ package com.algorepublic.zoho.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.algorepublic.zoho.Models.ForumsCommentModel;
 import com.algorepublic.zoho.Models.ForumsModel;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.adapters.AdapterForumComment;
-import com.algorepublic.zoho.adapters.AdapterForumsList;
 import com.algorepublic.zoho.services.CallBack;
 import com.algorepublic.zoho.services.ForumService;
 import com.algorepublic.zoho.utils.BaseClass;
@@ -49,8 +48,8 @@ public class ForumsDetailFragment extends BaseFragment {
                 ,true,new CallBack(ForumsDetailFragment.this,"ForumDetails"));
 
         aq.id(R.id.forum_title).text(ForumsModel.getInstance().responseObject.get(Position).title);
-        aq.id(R.id.forum_description).text("by " + ForumsModel.getInstance().responseObject.get(Position).user.firstName
-                + " , last response on " +
+        aq.id(R.id.forum_description).text(getString(R.string.by) + ForumsModel.getInstance().responseObject.get(Position).user.firstName
+                + ","+getString(R.string.last_responce_on) +
                 baseClass.DateFormatter(ForumsModel.getInstance().responseObject.get(Position).updatedAt) + " "
                 + baseClass.GetTime(baseClass.DateMilli(ForumsModel.getInstance()
                 .responseObject.get(Position).updatedAt)));
@@ -65,7 +64,7 @@ public class ForumsDetailFragment extends BaseFragment {
         if (ForumsCommentModel.getInstance().responseObject.forumComments.size()!=0) {
             aq.id(R.id.forums_comment_list).adapter(new AdapterForumComment(getActivity()));
         }else {
-            Toast.makeText(getActivity(), getString(R.string.response_error), Toast.LENGTH_SHORT).show();
+            Snackbar.make(getView(),getString(R.string.response_error),Snackbar.LENGTH_SHORT).show();
         }
 
     }

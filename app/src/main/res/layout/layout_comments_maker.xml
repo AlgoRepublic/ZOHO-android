@@ -21,15 +21,17 @@
             <com.mikhaellopez.circularimageview.CircularImageView
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:scaleType="fitXY"
+                app:civ_border="true"
+                app:civ_shadow="true"
                 app:civ_border_width="1dp"
+                app:civ_shadow_color="@color/colorBaseMenu"
                 app:civ_border_color="@color/colorBaseHeader"
                 android:src="@drawable/nav_user"
                 android:id="@+id/comment_image" />
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Test Forum 1"
+                android:text="@string/test_forum"
                 android:textStyle="bold"
                 android:layout_marginTop="5dp"
                 android:layout_marginLeft="5dp"
@@ -45,7 +47,7 @@
                 android:id="@+id/forum_description"
                 android:textSize="14sp"
                 android:lines="2"
-                android:text="daadadad"
+                android:text="@string/test_forum"
                 android:textColor="@color/colorBaseHeader"
                 android:layout_below="@+id/comment_image"
                 android:layout_alignStart="@+id/forum_title" />

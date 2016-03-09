@@ -3,8 +3,11 @@ package com.algorepublic.zoho.adapters;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
+import android.os.SystemClock;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,8 +15,11 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.BaseAdapter;
+import android.widget.SearchView;
 
+import com.algorepublic.zoho.Models.GeneralModel;
 import com.algorepublic.zoho.R;
+import com.algorepublic.zoho.fragments.BaseFragment;
 import com.algorepublic.zoho.fragments.TaskDetailFragment;
 import com.algorepublic.zoho.fragments.TasksListFragment;
 import com.algorepublic.zoho.services.CallBack;
@@ -40,10 +46,13 @@ public class AdapterTasksList extends BaseAdapter implements StickyListHeadersAd
     TaskListService service;
     private LayoutInflater l_Inflater;
     private int lastPosition = -1;
+    int clickedPosition;
+    ArrayList<TasksList> lists = new ArrayList<>();
     ArrayList<TasksList> tasksLists = new ArrayList<>();
 
     public AdapterTasksList(Context context, ArrayList<TasksList> arrayList) {
         tasksLists.addAll(arrayList);
+        lists.addAll(arrayList);
         l_Inflater = LayoutInflater.from(context);
         this.ctx = context;
         service = new TaskListService((AppCompatActivity)ctx);
@@ -82,14 +91,18 @@ public class AdapterTasksList extends BaseAdapter implements StickyListHeadersAd
         aq.id(R.id.task_users).text(tasksLists.get(position).getListAssignees().size() + " " + ctx.getString(R.string.task_user));
         aq.id(R.id.task_name).text(tasksLists.get(position).getTaskName());
         aq.id(R.id.project_name).text(tasksLists.get(position).getProjectName());
-        if(tasksLists.get(position).getStartDate().equalsIgnoreCase("3/0/1"))
-            aq.id(R.id.task_date).text("No Due Date");
-        else
+
+        if(tasksLists.get(position).getEndDate().equalsIgnoreCase("3/0/1")
+                || tasksLists.get(position).getEndDate().equalsIgnoreCase("12/31/3938")) {
+            aq.id(R.id.task_date).text(ctx.getString(R.string.no_date));
+        }else {
             aq.id(R.id.task_date).text(tasksLists.get(position).getEndDate());
+        }
+
 
         try {
             if (tasksLists.get(position).getProjectName().equalsIgnoreCase(""))
-                aq.id(R.id.general).text("General");
+                aq.id(R.id.general).text(ctx.getString(R.string.pref_header_general));
             else
                 aq.id(R.id.general).text(tasksLists.get(position).getProjectName());
         }catch (Exception e){
@@ -104,14 +117,39 @@ public class AdapterTasksList extends BaseAdapter implements StickyListHeadersAd
         aq.id(R.id.btDelete).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                clickedPosition = position;
             NormalDialogCustomAttr(ctx.getString(R.string.delete_task),tasksLists.get(position));
             }
         });
         Animation animation = AnimationUtils.loadAnimation(ctx, (position > lastPosition) ? R.anim.up_from_bottom : R.anim.down_from_top);
         convertView.startAnimation(animation);
         lastPosition = position;
+        BaseFragment.searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                Filter(newText);
+                return false;
+            }
+        });
 
         return convertView;
+    }
+    public void Filter(String text){
+        ArrayList<TasksList> arrayList = new ArrayList<>();
+        arrayList.addAll(lists);
+        tasksLists.clear();
+        for (int loop=0;loop<arrayList.size();loop++){
+            if(arrayList.get(loop).getTaskName().contains(text))
+            {
+                tasksLists.add(arrayList.get(loop));
+            }
+        }
+        notifyDataSetChanged();
     }
     public void callFragmentWithBackStack(int containerId, Fragment fragment, String tag){
         ((AppCompatActivity)ctx).getSupportFragmentManager()
@@ -128,38 +166,47 @@ public class AdapterTasksList extends BaseAdapter implements StickyListHeadersAd
         aq_header = new AQuery(convertView);
 
         if(baseClass.getTaskFilterType().equalsIgnoreCase("DueDate")) {
-            if (tasksLists.get(position).getHeader().equalsIgnoreCase("3/0/1"))
+            if (Long.parseLong(tasksLists.get(position).getHeader()) < System.currentTimeMillis()) {
+                if(baseClass.DateFormatter(tasksLists.get(position).getHeader())
+                        .equalsIgnoreCase(baseClass.DateFormatter(String.valueOf(System.currentTimeMillis()))))
+                aq_header.id(R.id.header).text("Up Coming");
+                else
+                    aq_header.id(R.id.header).text("Over Due");
+            }else if (tasksLists.get(position).getHeader().equalsIgnoreCase("62135535600000")
+                    || tasksLists.get(position).getHeader().equalsIgnoreCase("-62135571600000")
+                    || tasksLists.get(position).getHeader().equalsIgnoreCase("62135571600000"))
                 aq_header.id(R.id.header).text("No Due Date");
-            else
-                aq_header.id(R.id.header).text(tasksLists.get(position).getHeader());
+            else {
+                aq_header.id(R.id.header).text("Up Coming");
+            }
         }
         if(baseClass.getTaskFilterType().equalsIgnoreCase("Priority"))
         {
             if(tasksLists.get(position).getPriority()==0)
             {
-                aq_header.id(R.id.header).text("None");
+                aq_header.id(R.id.header).text(ctx.getString(R.string.none));
             }
             if(tasksLists.get(position).getPriority()==1)
             {
-                aq_header.id(R.id.header).text("Low");
+                aq_header.id(R.id.header).text(ctx.getString(R.string.low));
             }
             if(tasksLists.get(position).getPriority()==2)
             {
-                aq_header.id(R.id.header).text("Medium");
+                aq_header.id(R.id.header).text(ctx.getString(R.string.medium));
             }
             if(tasksLists.get(position).getPriority()==3)
             {
-                aq_header.id(R.id.header).text("High");
+                aq_header.id(R.id.header).text(ctx.getString(R.string.high));
             }
         }
         if(baseClass.getTaskFilterType().equalsIgnoreCase("Alphabetically"))
         {
-            aq_header.id(R.id.header).text(tasksLists.get(position).getTaskName().substring(0, 1));
+            aq_header.id(R.id.header).text(tasksLists.get(position).getTaskName().substring(0, 1).toUpperCase());
         }
         if(baseClass.getTaskFilterType().equalsIgnoreCase("TaskList"))
         {
             if(tasksLists.get(position).getTaskListNameID() == 0)
-            aq_header.id(R.id.header).text("General");
+            aq_header.id(R.id.header).text(ctx.getString(R.string.pref_header_general));
             else
             aq_header.id(R.id.header).text(tasksLists.get(position).getTaskListName());
         }
@@ -170,12 +217,25 @@ public class AdapterTasksList extends BaseAdapter implements StickyListHeadersAd
     public long getHeaderId(int position) {
         long type = 0;
         //return the first character of the country as ID because this is what headers are based upon
-        if(baseClass.getTaskFilterType().equalsIgnoreCase("DueDate"))
-            type = Long.parseLong(tasksLists.get(position).getEndMilli());
+        if(baseClass.getTaskFilterType().equalsIgnoreCase("DueDate")) {
+            if (Long.parseLong(tasksLists.get(position).getHeader()) < System.currentTimeMillis()) {
+                if(baseClass.DateFormatter(tasksLists.get(position).getHeader())
+                        .equalsIgnoreCase(baseClass.DateFormatter(String.valueOf(System.currentTimeMillis()))))
+                    type = 3;
+                else
+                    type=1;
+            }
+            else if (tasksLists.get(position).getHeader().equalsIgnoreCase("62135535600000")
+                || tasksLists.get(position).getHeader().equalsIgnoreCase("-62135571600000")
+                || tasksLists.get(position).getHeader().equalsIgnoreCase("62135571600000"))
+                type = 2;
+            else
+                type=3;
+        }
         if(baseClass.getTaskFilterType().equalsIgnoreCase("Priority"))
             type = tasksLists.get(position).getPriority();
         if(baseClass.getTaskFilterType().equalsIgnoreCase("Alphabetically"))
-            type = tasksLists.get(position).getTaskName().charAt(0);
+            type = tasksLists.get(position).getTaskName().substring(0, 1).charAt(0);
         if(baseClass.getTaskFilterType().equalsIgnoreCase("TaskList"))
             type = tasksLists.get(position).getTaskListNameID();
 
@@ -229,5 +289,16 @@ public class AdapterTasksList extends BaseAdapter implements StickyListHeadersAd
                                 , true, new CallBack(AdapterTasksList.this, "DeleteTask"));
                     }
                 });
+    }
+    public void DeleteTask(Object caller, Object model) {
+        GeneralModel.getInstance().setList((GeneralModel) model);
+        if (GeneralModel.getInstance().responseCode.equalsIgnoreCase("100")) {
+            tasksLists.remove(clickedPosition);notifyDataSetChanged();
+            Snackbar.make(((AppCompatActivity)ctx).findViewById(android.R.id.content), ctx.getString(R.string.task_deleted), Snackbar.LENGTH_SHORT).show();
+        }
+        else
+        {
+            Snackbar.make(((AppCompatActivity)ctx).findViewById(android.R.id.content), ctx.getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
+        }
     }
 }

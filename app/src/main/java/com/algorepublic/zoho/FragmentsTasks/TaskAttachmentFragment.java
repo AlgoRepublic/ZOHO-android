@@ -120,11 +120,10 @@ public class TaskAttachmentFragment extends BaseFragment {
             String link = Constants.Image_URL + SubTaskAttachmentsModel.getInstance()
                     .responseObject.get(loop).Id+"."+ BaseClass.getExtensionType(
                     SubTaskAttachmentsModel.getInstance().responseObject.get(loop).fileName);
-            String name  = SubTaskAttachmentsModel.getInstance().responseObject.get(loop).fileName;
+            String name  = SubTaskAttachmentsModel.getInstance().responseObject.get(loop).fileDescription;
             Integer ID = SubTaskAttachmentsModel.getInstance().responseObject.get(loop).Id;
-            boolean isDeleted = SubTaskAttachmentsModel.getInstance().responseObject.get(loop).isDeleted;
             File file = null;
-            showFileInList(file, link,ID,name,isDeleted);
+            showFileInList(file, link,ID,name);
         }
     }
     private void CallForAttachments() {
@@ -202,21 +201,18 @@ public class TaskAttachmentFragment extends BaseFragment {
         if(file.length() > 1048576 * 5) {
             MaterialAlertDialog();
         }else {
-            showFileInList(file,"",-1,"",false);
+            showFileInList(file,"",-1,file.getName());
         }
     }
 
-    private void showFileInList(File file,String ApiUrl,Integer ID,String name,boolean IsDeleted) {
-        if (IsDeleted == false) {
+    private void showFileInList(File file,String ApiUrl,Integer ID,String name) {
             AttachmentList attachmentList = new AttachmentList();
             attachmentList.setFileID(ID);
             attachmentList.setFileName(name);
             attachmentList.setFileUrl(ApiUrl);
             attachmentList.setFile(file);
-            attachmentList.setIsDeleted(IsDeleted);
             TaskAddUpdateFragment.filesList.add(attachmentList);
             adapter.notifyDataSetChanged();
-        }
     }
     public void MaterialAlertDialog(){
         final MaterialDialog dialog = new MaterialDialog(getActivity());

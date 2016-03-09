@@ -57,6 +57,9 @@ public class UserListModel  {
             @SerializedName("ProfileImagePath")
             public String profileImagePath;
 
+            @SerializedName("ProfilePictureID")
+            public String profilePictureID;
+
             @SerializedName("ID")
             public Integer ID;
 

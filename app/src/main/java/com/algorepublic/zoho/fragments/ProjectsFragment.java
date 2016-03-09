@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -40,7 +41,7 @@ import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
  * Use the {@link ProjectsFragment#newInstance} factory method to
  * create an instance of this fragment_forums.
  */
-public class ProjectsFragment extends BaseFragment{
+public class ProjectsFragment extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener{
 
     private AQuery aq;
     private BaseClass baseClass;
@@ -49,6 +50,7 @@ public class ProjectsFragment extends BaseFragment{
     public static ListView listViewClient;
     StickyListHeadersAdapter projectAdapter;
     AdapterProjectsClientList clientAdapter;
+    private SwipeRefreshLayout swipeStickView,swipeListView;
 
     static  ArrayList<ProjectsList> allProjectsList = new ArrayList<>();
     static  ArrayList<DeptList> allDeptList = new ArrayList<>();
@@ -79,7 +81,12 @@ public class ProjectsFragment extends BaseFragment{
         listViewDept = (StickyListHeadersListView) view.findViewById(R.id.projects_liststicky);
         listViewClient = (ListView) view.findViewById(R.id.projects_list);
         aq = new AQuery(getActivity(), view);
-
+        swipeStickView = (SwipeRefreshLayout) view.findViewById(R.id.swipe_stickyView);
+        swipeListView = (SwipeRefreshLayout) view.findViewById(R.id.swipe_listView);
+        swipeStickView.setOnRefreshListener(this);
+        swipeListView.setOnRefreshListener(this);
+        swipeStickView.setProgressViewOffset(false, 0, 200);
+        swipeListView.setProgressViewOffset(false, 0, 200);
         getToolbar().setTitle(getString(R.string.projects));
         setHasOptionsMenu(true);
         aq.id(R.id.sort).clicked(new View.OnClickListener() {
@@ -94,6 +101,9 @@ public class ProjectsFragment extends BaseFragment{
                 CallForFilter();
             }
         });
+
+
+
         return view;
     }
     public void CallForFilter(){
@@ -113,18 +123,18 @@ public class ProjectsFragment extends BaseFragment{
     public void Filter(int position) {
 
         if (position == 0) {
-            aq.id(R.id.projects_list).visibility(View.VISIBLE);
-            aq.id(R.id.projects_liststicky).visibility(View.GONE);
+            swipeListView.setVisibility(View.VISIBLE);
+            swipeStickView.setVisibility(View.GONE);
             SetGeneralClientAdapter();
         }
         if (position == 1) {
-            aq.id(R.id.projects_list).visibility(View.VISIBLE);
-            aq.id(R.id.projects_liststicky).visibility(View.GONE);
+            swipeListView.setVisibility(View.VISIBLE);
+            swipeStickView.setVisibility(View.GONE);
             SetClientProjectsAdapter();
         }
         if (position == 2) {
-            aq.id(R.id.projects_list).visibility(View.GONE);
-            aq.id(R.id.projects_liststicky).visibility(View.VISIBLE);
+            swipeListView.setVisibility(View.GONE);
+            swipeStickView.setVisibility(View.VISIBLE);
             SetDepartmentProjectsAdapter();
         }
     }
@@ -147,17 +157,21 @@ public class ProjectsFragment extends BaseFragment{
         service.getProjectsByDepartment(baseClass.getUserId(),
                 true, new CallBack(this, "ProjectsByDepartment"));
         applyLightBackground(aq.id(R.id.sort).getView(), baseClass);
+
     }
     public void AllProjects(Object caller, Object model) {
+        swipeListView.setRefreshing(false);
         AllProjectsByUserModel.getInstance().setList((AllProjectsByUserModel) model);
         if (AllProjectsByUserModel.getInstance().responseCode == 100
                 || AllProjectsByUserModel.getInstance().responseData.size() != 0) {
             AddAllProjects();
+
         } else {
-            Toast.makeText(getActivity(), getString(R.string.response_error), Toast.LENGTH_SHORT).show();
+            Snackbar.make(getView(), getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
         }
     }
     public void ProjectsByClient(Object caller, Object model){
+        swipeListView.setRefreshing(false);
         ProjectsByClientModel.getInstance().setList((ProjectsByClientModel) model);
         if (ProjectsByClientModel.getInstance().responseCode == 100
                 || ProjectsByClientModel.getInstance().responseData.size() != 0){
@@ -167,6 +181,7 @@ public class ProjectsFragment extends BaseFragment{
         }
     }
     public void ProjectsByDepartment(Object caller, Object model){
+        swipeStickView.setRefreshing(false);
         ProjectsByDepartmentModel.getInstance().setList((ProjectsByDepartmentModel) model);
         if (ProjectsByDepartmentModel.getInstance().responseCode == 100
                 || ProjectsByDepartmentModel.getInstance().responseData.size() != 0) {
@@ -309,4 +324,11 @@ public class ProjectsFragment extends BaseFragment{
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onRefresh() {
+        service.getAllProjectsByUser_API(baseClass.getUserId(), true, new CallBack(this, "AllProjects"));
+        service.getProjectsByClient_API(baseClass.getUserId(), true, new CallBack(this, "ProjectsByClient"));
+        service.getProjectsByDepartment(baseClass.getUserId(),
+                true, new CallBack(this, "ProjectsByDepartment"));
+    }
 }
