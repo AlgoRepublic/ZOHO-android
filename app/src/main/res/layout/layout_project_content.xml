@@ -117,7 +117,6 @@
                                     android:drawableStart="@mipmap/folder_black"
                                     android:paddingLeft="5dp"
                                     android:paddingStart="5dp"
-                                    android:textColor="@color/colorBaseHeader"
                                     android:text="@string/projects"
                                     android:textSize="14sp"
                                     android:textStyle="bold" />
@@ -140,7 +139,6 @@
                                         android:gravity="center"
                                         android:singleLine="true"
                                         android:text="112"
-                                        android:textColor="@color/blackBackground"
                                         android:textSize="7sp" />
 
                                     <ImageView
@@ -169,7 +167,6 @@
                                         android:gravity="center"
                                         android:singleLine="true"
                                         android:text="1"
-                                        android:textColor="@color/blackBackground"
                                         android:textSize="7sp" />
 
                                     <ImageView
@@ -198,7 +195,6 @@
                                         android:gravity="center"
                                         android:singleLine="true"
                                         android:text="112"
-                                        android:textColor="@color/blackBackground"
                                         android:textSize="7sp" />
 
                                     <ImageView
@@ -229,7 +225,6 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
                                     android:lines="3"
-                                    android:textColor="@color/colorBaseHeader"
                                     android:textSize="12sp" />
                             </RelativeLayout>
 
