@@ -250,6 +250,7 @@
 
     <string name="response_error">Error! Please Try Later</string>
     <string name="select_project">Please! Select Project</string>
+    <string name="add_project">Add Project</string>
     <string name="enter_comment">Enter Your Comment!</string>
     <string name="no_date">No Date</string>
     <string name="by">By</string>
@@ -287,5 +288,4 @@
     <string name="remove_column">Remove column</string>
     <string name="clear_board">Clear Board</string>
     <!-- Documents Strings -->
-
 </resources>

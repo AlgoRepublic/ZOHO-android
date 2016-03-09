@@ -11,13 +11,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.algorepublic.zoho.Models.GeneralModel;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.fragments.EditProjectFragment;
-import com.algorepublic.zoho.fragments.ProjectsFragment;
 import com.algorepublic.zoho.services.CallBack;
 import com.algorepublic.zoho.services.ProjectsListService;
 import com.algorepublic.zoho.utils.BaseClass;
@@ -40,6 +40,7 @@ public class AdapterProjectsClientList extends BaseAdapter {
     private LayoutInflater l_Inflater;
     ProjectsListService service;
     private int lastPosition;
+    private int selectedPosition;
     ArrayList<ProjectsList> arrayList= new ArrayList<>();
 
     public AdapterProjectsClientList(Context context,ArrayList<ProjectsList> list) {
@@ -67,58 +68,70 @@ public class AdapterProjectsClientList extends BaseAdapter {
 
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
-
-        convertView = l_Inflater.inflate(R.layout.layout_project_list_row, null);
+        ViewHolder holder;
+        if(convertView == null){
+            convertView = l_Inflater.inflate(R.layout.layout_project_list_row, null);
+            holder = new ViewHolder();
+            holder.projectTitle = (TextView) convertView.findViewById(R.id.project_title);
+            holder.taskAlert = (TextView) convertView.findViewById(R.id.task_alert);
+            holder.userAlert = (TextView) convertView.findViewById(R.id.users_alert);
+            holder.milestoneAlert = (TextView) convertView.findViewById(R.id.milestone_alert);
+            holder.projectId = (TextView) convertView.findViewById(R.id.project_id);
+            holder.parent = (RelativeLayout) convertView.findViewById(R.id.parent1);
+            holder.editText = (TextView) convertView.findViewById(R.id.btEdit);
+            holder.delText = (TextView) convertView.findViewById(R.id.btDelete);
+            holder.projectDesc = (TextView) convertView.findViewById(R.id.project_desc);
+            convertView.setTag(holder);
+        }else{
+            holder = (ViewHolder) convertView.getTag();
+        }
         aq = new AQuery(convertView);
-        aq.id(R.id.project_title).text(arrayList.get(position).getProjectName());
+        holder.projectTitle.setText(arrayList.get(position).getProjectName());
         if(!arrayList.get(position).getTotalTasks().isEmpty())
-            aq.id(R.id.task_alert).text(arrayList.get(position).getTotalTasks());
+            holder.taskAlert.setText(arrayList.get(position).getTotalTasks());
         if(!arrayList.get(position).getTotalUsers().isEmpty())
-            aq.id(R.id.users_alert).text(arrayList.get(position).getTotalUsers());
+            holder.userAlert.setText(arrayList.get(position).getTotalUsers());
         if(!arrayList.get(position).getTotalMilestones().isEmpty())
-            aq.id(R.id.milestone_alert).text(arrayList.get(position).getTotalMilestones());
+            holder.milestoneAlert.setText(arrayList.get(position).getTotalMilestones());
 
-        aq.id(R.id.project_id).text(arrayList.get(position).getProjectID());
+        holder.projectId.setText(arrayList.get(position).getProjectID());
         if(arrayList.get(position).getProjectDesc() != null)
-            aq.id(R.id.project_desc).text(Html.fromHtml(arrayList.get(position).getProjectDesc()));
+            holder.projectDesc.setText(Html.fromHtml(arrayList.get(position).getProjectDesc()));
 
         if(baseClass.getSelectedProject().equals(arrayList.get(position).getProjectID())){
             aq.id(R.id.selected_project).getView().setBackgroundColor(Color.parseColor("#99cc00"));
         }else{
-            aq.id(R.id.selected_project).getView().setBackgroundColor(Color.parseColor("#00000000"));
+            aq.id(R.id.selected_project).getView().setBackgroundColor(Color.parseColor("#FFFFFF"));
         }
 
-        aq.id(R.id.parent1).clicked(new View.OnClickListener() {
+        holder.parent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 View view = v;
                 if (baseClass.getSelectedProject().equalsIgnoreCase(((TextView) view.findViewById(R.id.project_id)).getText().toString())) {
                     baseClass.setSelectedProject("0");
-                    baseClass.db.putInt("ProjectID", 0);
+                    BaseClass.db.putInt("ProjectID", 0);
                 } else {
                     baseClass.setSelectedProject(((TextView)view.findViewById(R.id.project_id)).getText().toString());
-                    baseClass.db.putInt("ProjectID", Integer.parseInt(baseClass.getSelectedProject()));
-                    baseClass.db.putString("ProjectName", (((TextView)view.findViewById(R.id.project_id)).getText().toString()));
+                    BaseClass.db.putInt("ProjectID", Integer.parseInt(baseClass.getSelectedProject()));
+                    BaseClass.db.putString("ProjectName", (((TextView)view.findViewById(R.id.project_id)).getText().toString()));
                 }
-                ProjectsFragment.listViewClient.setSelection(position);
-                notifyDataSetInvalidated();
+                notifyDataSetChanged();
             }
         });
-        aq.id(R.id.btEdit).clicked(new View.OnClickListener() {
+        holder.editText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 callFragmentWithBackStack(R.id.container, EditProjectFragment.
                         newInstance(arrayList,position), "EditProjectFragment");
             }
         });
-        aq.id(R.id.btDelete).clicked(new View.OnClickListener() {
+        holder.delText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 NormalDialogCustomAttr(ctx.getString(R.string.deleted_project),position);
             }
         });
-//        Animation animation = AnimationUtils.loadAnimation(ctx, (position > lastPosition) ? R.anim.up_from_bottom : R.anim.down_from_top);
-//        convertView.startAnimation(animation);
         return convertView;
     }
     public void DeleteProject(Object caller, Object model) {
@@ -128,7 +141,7 @@ public class AdapterProjectsClientList extends BaseAdapter {
             notifyDataSetChanged();
             Snackbar.make(aq.id(R.id.shadow_item_container).getView(),ctx.getString(R.string.project_deleted),Snackbar.LENGTH_SHORT).show();
         } else {
-            Toast.makeText(((AppCompatActivity)ctx), ctx.getString(R.string.invalid_credential), Toast.LENGTH_SHORT).show();
+            Toast.makeText(ctx, ctx.getString(R.string.invalid_credential), Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -176,5 +189,17 @@ public class AdapterProjectsClientList extends BaseAdapter {
                                 , new CallBack(AdapterProjectsClientList.this, "DeleteProject"));
                     }
                 });
+    }
+
+    static class ViewHolder {
+        private TextView projectTitle;
+        private TextView taskAlert;
+        private TextView userAlert;
+        private TextView milestoneAlert;
+        private TextView projectId;
+        private TextView projectDesc;
+        private TextView editText;
+        private TextView delText;
+        private RelativeLayout parent;
     }
 }

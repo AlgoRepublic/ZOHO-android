@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import com.algorepublic.zoho.Models.CreateProjectModel;
 import com.algorepublic.zoho.Models.TaskUserModel;
@@ -52,10 +53,7 @@ public class EditProjectFragment extends BaseFragment {
     public static EditProjectFragment newInstance(ArrayList<ProjectsList> lists,int Pos) {
         position = Pos;
         projectsLists = lists;
-        if(fragment ==null) {
-            fragment = new EditProjectFragment();
-        }
-        return fragment;
+        return new EditProjectFragment();
     }
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
@@ -97,15 +95,16 @@ public class EditProjectFragment extends BaseFragment {
                 , aq.id(R.id.project_name).getText().toString(), baseClass.getUserId()
                 , aq.id(R.id.project_desc).getText().toString()
                 , TaskUserModel.getInstance().responseObject.
-                get(owner_list.getSelectedIndex()).ID, isactive
+                        get(owner_list.getSelectedIndex()).ID, isactive
                 , projectsLists.get(
-                departments_list.getSelectedIndex()).getCompOrDeptID(), isprivate
+                        departments_list.getSelectedIndex()).getCompOrDeptID(), isprivate
                 , true, new CallBack(EditProjectFragment.this, "UpdateProject"));
     }
     public void UpdateProject(Object caller, Object model){
         CreateProjectModel.getInstance().setList((CreateProjectModel) model);
-        if (CreateProjectModel.getInstance().responseObject !=null ) {
+        if (CreateProjectModel.getInstance().responseObject != null ) {
             Snackbar.make(getView(),getString(R.string.project_updated),Snackbar.LENGTH_SHORT).show();
+            getActivity().getSupportFragmentManager().popBackStack();
         }else {
             Snackbar.make(getView(), getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
         }
@@ -120,6 +119,7 @@ public class EditProjectFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view  = inflater.inflate(R.layout.fragment_add_project, container, false);
+        getToolbar().setTitle(getString(R.string.edit_project));
         radioGroup1 = (RadioGroup) view.findViewById(R.id.private_public_group);
         radioGroup2 = (RadioGroup) view.findViewById(R.id.active_archive_status);
         radioGroup1.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -164,31 +164,22 @@ public class EditProjectFragment extends BaseFragment {
         service.getTaskAssignee(Integer.parseInt(baseClass.getSelectedProject()), true, new CallBack(EditProjectFragment.this, "GetAllUsers"));
         return view;
     }
-    public void UpdateValues()
-    {
-        aq.id(R.id.project_name).text(projectsLists.get(position).getProjectName());
+    public void UpdateValues() {
+        aq.id(R.id.project_name).text(Html.fromHtml(projectsLists.get(position).getProjectName()));
         aq.id(R.id.project_desc).text(Html.fromHtml(projectsLists.get(position).getProjectDesc()));
-        String deptname = projectsLists.get(position).getCompOrDeptName();
-        String ownername = projectsLists.get(position).getOwnerName();
-        if (!deptname.equals(null)) {
+        String deptName = projectsLists.get(position).getCompOrDeptName();
+        String ownerName = projectsLists.get(position).getOwnerName();
+        if (deptName != null) {
             for(int loop=0;loop<deptList.size();loop++)
-            {
-                if(deptList.get(loop).equalsIgnoreCase(deptname))
-                {
+                if(deptList.get(loop).equalsIgnoreCase(deptName))
                     departments_list.setSelectedIndex(loop);
-                }
-            }
         }
-        if (!ownername.equals(null)) {
+        if (ownerName != null) {
             for(int loop=0;loop<userList.size();loop++)
-            {
-                if(userList.get(loop).equalsIgnoreCase(ownername))
-                {
+                if(userList.get(loop).equalsIgnoreCase(ownerName))
                     owner_list.setSelectedIndex(loop);
-                }
-            }
         }
-        if(projectsLists.get(position).getDeleted()== true){
+        if(projectsLists.get(position).getDeleted()){
             aq.id(R.id.archive_radio).checked(true);
             aq.id(R.id.active_radio).checked(false);
         }else {
@@ -196,7 +187,7 @@ public class EditProjectFragment extends BaseFragment {
             aq.id(R.id.archive_radio).checked(false);
         }
 
-        if(projectsLists.get(position).getPrivate()== true){
+        if(projectsLists.get(position).getPrivate()){
             aq.id(R.id.private_radio).checked(true);
             aq.id(R.id.public_radio).checked(false);
         }else {
@@ -214,9 +205,8 @@ public class EditProjectFragment extends BaseFragment {
             owner_list.attachDataSource(userList);
             UpdateValues();
         }
-        else
-        {
-            Snackbar.make(getView(), getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
+        else {
+            Toast.makeText(getActivity(), getString(R.string.response_error), Toast.LENGTH_SHORT).show();
         }
     }
 }

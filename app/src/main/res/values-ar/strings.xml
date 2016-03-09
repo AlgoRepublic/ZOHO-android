@@ -58,4 +58,5 @@
     <string name="up_coming">Up Coming</string>
     <string name="logout">Logout</string>
     <string name="change_theme">Change Theme</string>
+    <string name="add_project">Add Project</string>
 </resources>
