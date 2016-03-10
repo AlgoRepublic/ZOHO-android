@@ -2,8 +2,6 @@ package com.algorepublic.zoho.fragments;
 
 import android.accounts.AccountManager;
 import android.app.Activity;
-import android.content.ClipData;
-import android.content.Context;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.graphics.Color;
@@ -32,7 +30,6 @@ import com.algorepublic.zoho.services.CallBack;
 import com.algorepublic.zoho.services.DocumentsService;
 import com.algorepublic.zoho.utils.BaseClass;
 import com.algorepublic.zoho.utils.Constants;
-import com.algorepublic.zoho.utils.ContentUriUtils;
 import com.algorepublic.zoho.utils.GenericHttpClient;
 import com.androidquery.AQuery;
 import com.dropbox.chooser.android.DbxChooser;
@@ -90,7 +87,6 @@ public class UploadDocsFragment extends BaseFragment implements GoogleApiClient.
     static final int RESULT_GOOGLEDRIVE = 4;
     static final int DBX_CHOOSER_REQUEST = 5;
     static final int REQUEST_ACCOUNT_PICKER = 6;
-    public static final String IMAGE_FILE_PATH = "images";
     AdapterUploadAttachment adapter;
     public static ParallaxListView listView;
     private DbxChooser mChooser;
@@ -100,7 +96,7 @@ public class UploadDocsFragment extends BaseFragment implements GoogleApiClient.
     DriveFile selectedFile;
     BaseClass baseClass;
     InputStream inputStream;
-    DocumentsService service;
+    DocumentsService service;File newFile;
     static int ProjectID,TaskID;View view;
     NiceSpinner folder_list;
     ArrayList<String> folderList;
@@ -217,76 +213,6 @@ public class UploadDocsFragment extends BaseFragment implements GoogleApiClient.
                 .build();
         mGoogleApiClient.connect();
     }
-
-    Uri mCameraOutputUri;Intent intent;
-    public void OpenCamera() {
-        intent = new Intent(
-                "android.media.action.IMAGE_CAPTURE");
-        intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION
-                | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
-        try {
-            mCameraOutputUri = ContentUriUtils.getContentUriFromFile(
-                    getActivity(), getFileForImageCapture(getActivity()));
-            if (Build.VERSION.SDK_INT >=
-                    Build.VERSION_CODES.JELLY_BEAN_MR2) {
-                mCameraOutputUri = ContentUriUtils.getContentUriFromFile(
-                        getActivity(), getFileForImageCapture(getActivity()));
-            } else {
-                mCameraOutputUri =
-                        Uri.fromFile(getFileForImageCapture(getActivity()));
-            }
-        } catch (IOException e) {
-            Log.e("TAG", "Cannot retrieve content uri from file", e);
-        }
-        intent.putExtra(MediaStore.EXTRA_OUTPUT, mCameraOutputUri);
-        intent.setClipData(
-                ClipData.newUri(getActivity().getContentResolver(),
-                        IMAGE_FILE_PATH, mCameraOutputUri));
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
-            intent.setClipData(
-                    ClipData.newUri(getActivity().getContentResolver(),
-                            IMAGE_FILE_PATH, mCameraOutputUri));
-        }
-    }
-        /**
-         -     * Get a file for the image capture in the IMAGE_FILE_PATH directory.
-         +     * Get a file for the image capture operation. For devices with JB MR2
-         or
-         +     * latter android versions, the file is put under IMAGE_FILE_PATH
-         directory.
-         +     * For ICS devices, the file is put under CAPTURE_IMAGE_DIRECTORY.
-         +     *
-         * @param context The application context.
-        +     * @return file path for the captured image to be stored.
-         */
-    private File getFileForImageCapture(Context context) throws
-            IOException {
-        File photoFile = null;
-        final File path = new File(context.getFilesDir(), IMAGE_FILE_PATH);
-        if (!path.exists() && !path.mkdir()) {
-            throw new IOException("Folder cannot be created.");
-        }
-            File path1;
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
-                path1 = new File(context.getFilesDir(), IMAGE_FILE_PATH);
-                if (!path.exists() && !path.mkdir()) {
-                    throw new IOException("Folder cannot be created.");
-                }
-            } else {
-                File externalDataDir =
-                        Environment.getExternalStoragePublicDirectory(
-                                Environment.DIRECTORY_DCIM);
-                path1 = new File(externalDataDir.getAbsolutePath() +
-                        File.separator + "Zoho");
-                if (!path.exists() && !path.mkdirs()) {
-                    path1 = externalDataDir;
-                }
-            }
-            photoFile = File.createTempFile(
-                    String.valueOf(System.currentTimeMillis()), ".jpg", path);
-            startActivityForResult(intent, TAKE_PICTURE);
-        return photoFile;
-    }
     private void CallForAttachments() {
         String[] menuItems = {"Camera", "Gallery", "Others", "Google Drive", "Drop Box"};
         final ActionSheetDialog dialog = new ActionSheetDialog(getActivity(), menuItems, getView());
@@ -297,7 +223,11 @@ public class UploadDocsFragment extends BaseFragment implements GoogleApiClient.
                 Log.e("pos", "/" + position);
                 dialog.dismiss();
                 if (position == 0) {
-                  OpenCamera();
+                    Intent intent = new Intent(
+                            android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+                    newFile = getOutputMediaFile();
+                    intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(newFile));
+                    startActivityForResult(intent, TAKE_PICTURE);
                 }
                 if (position == 1) {
                     Intent galleryIntent = new Intent(
@@ -349,17 +279,21 @@ public class UploadDocsFragment extends BaseFragment implements GoogleApiClient.
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         Log.e("code", requestCode + "/" + resultCode + "/");
+        if (resultCode == Activity.RESULT_CANCELED) {
+            Toast.makeText(getActivity(), "Cancelled",
+                    Toast.LENGTH_SHORT).show();
+        }
         switch (requestCode) {
             case TAKE_PICTURE:
                 if (resultCode == getActivity().RESULT_OK) {
-                    Uri selectedImageUri = data.getData();
-                    File destination = new File(getRealPathFromURI(selectedImageUri));
-                    checkFileLenght(destination);
+                    checkFileLenght(newFile);
                 }
                 break;
             case RESULT_GALLERY:
                 if (null != data) {
-                    File newFile = new File(URI.create("file://" + getDataColumn(getActivity(), data.getData(), null, null)));
+                    String thePath = getUriFromUrl("file://"+
+                            getDataColumn(getActivity(), data.getData(),null,null)).toString();
+                    File  newFile = new File(URI.create(thePath));
                     checkFileLenght(newFile);
                 }
                 break;
@@ -367,8 +301,10 @@ public class UploadDocsFragment extends BaseFragment implements GoogleApiClient.
                 if (resultCode == Activity.RESULT_OK) {
                     Uri contactData = data.getData();
                     File newFile = null;
+                    String thePath = getUriFromUrl("file://"+
+                            getDataColumn(getActivity(), contactData,null,null)).toString();
                     try {
-                        newFile = new File(new URI("file://" + getDataColumn(getActivity(), contactData, null, null)));
+                        newFile = new File(new URI(thePath));
                         checkFileLenght(newFile);
                     } catch (URISyntaxException e) {
                         e.printStackTrace();

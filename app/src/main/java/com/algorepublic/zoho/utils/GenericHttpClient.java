@@ -303,7 +303,7 @@ public class GenericHttpClient {
         }
         return message;
     }
-    public String createUser(String url,String firstname,String lastname,
+    public String createUser(String url,String firstname,String lastname,String nickName,
                              String email,String mobileNo,int userRole ,ArrayList<Integer> Ids, File file) throws IOException {
 
         HttpClient hc = new DefaultHttpClient();
@@ -320,6 +320,7 @@ public class GenericHttpClient {
         }
         mpEntity.addPart("FirstName", new StringBody(firstname));
         mpEntity.addPart("LastName", new StringBody(lastname));
+        mpEntity.addPart("NickName", new StringBody(nickName));
         mpEntity.addPart("Email", new StringBody(email));
         mpEntity.addPart("Mobile", new StringBody(mobileNo));
         mpEntity.addPart("RoleID", new StringBody(Integer.toString(userRole)));

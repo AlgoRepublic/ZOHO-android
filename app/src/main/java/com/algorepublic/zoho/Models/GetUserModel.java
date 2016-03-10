@@ -3,6 +3,8 @@ package com.algorepublic.zoho.Models;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
+
 /**
  * Created by android on 12/11/15.
  */
@@ -46,6 +48,14 @@ public class GetUserModel {
         @Expose
         public String lastName;
 
+        @SerializedName("NickName")
+        @Expose
+        public String nickName;
+
+        @SerializedName("Mobile")
+        @Expose
+        public String mobile;
+
         @SerializedName("ProfileImagePath")
         @Expose
         public String profileImagePath;
@@ -53,6 +63,27 @@ public class GetUserModel {
         @SerializedName("ProfilePictureID")
         @Expose
         public Integer profilePictureID;
+
+        @SerializedName("UserRole")
+        public UserRole userRole = new UserRole();
+
+        @SerializedName("ProjectIDs")
+        public ArrayList<Integer> projectIDs = new ArrayList<>();
+    }
+
+    public class UserRole {
+
+        @SerializedName("ID")
+        @Expose
+        public Integer ID;
+
+        @SerializedName("Role")
+        @Expose
+        public String role;
+
+        @SerializedName("Role_AR")
+        public String role_AR;
+
     }
 
 }

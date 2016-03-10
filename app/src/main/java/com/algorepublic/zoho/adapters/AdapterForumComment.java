@@ -56,9 +56,10 @@ public class AdapterForumComment extends BaseAdapter {
         aq.id(R.id.forum_description).text(ForumsDetailFragment.arrayList.get(position).getComment());
         aq.id(R.id.forum_title).text(ForumsDetailFragment.arrayList.get(position).getUserName()
                 + " , " + ForumsDetailFragment.arrayList.get(position).getDateTime());
-        Glide.with(ctx).load(Constants.Image_URL + baseClass.getProfileImageID()
-                +"."+BaseClass.getExtensionType(TaskCommentFragment.arrayList
-                .get(position).getUserImagePath())).into(aq.id(R.id.comment_image).getImageView());
+        Glide.with(ctx).load(Constants.Image_URL + ForumsDetailFragment
+                .arrayList.get(position).getUserImageID()
+                +"."+BaseClass.getExtensionType(ForumsDetailFragment.arrayList
+                .get(position).getUserImagePath())).into(aq.id(R.id.comment_user).getImageView());
         return convertView;
     }
 }

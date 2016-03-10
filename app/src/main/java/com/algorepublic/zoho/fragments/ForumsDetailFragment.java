@@ -35,6 +35,7 @@ public class ForumsDetailFragment extends BaseFragment {
     private BaseClass baseClass;
     static ForumsDetailFragment fragment;
     static int Position;
+    ForumService service;
     AdapterForumComment adapter;
     public static ArrayList<TaskComments> arrayList = new ArrayList<>();
 
@@ -54,7 +55,7 @@ public class ForumsDetailFragment extends BaseFragment {
         baseClass = ((BaseClass) getActivity().getApplicationContext());
         adapter = new AdapterForumComment(getActivity());
         aq.id(R.id.forums_comment_list).adapter(adapter);
-        ForumService service = new ForumService(getActivity());
+        service = new ForumService(getActivity());
         service.getForumsDetail(ForumsModel.getInstance().responseObject.get(Position).ID
                 ,true,new CallBack(ForumsDetailFragment.this,"ForumDetails"));
 
@@ -90,12 +91,12 @@ public class ForumsDetailFragment extends BaseFragment {
     public void PerformAction()
     {
         String comment = aq.id(R.id.comment_user).getText().toString();
-//        service.createComment(comment,position,Integer.parseInt(baseClass.getUserId()),false,
-//                new CallBack(TaskCommentFragment.this,"CreateComment"));
         if(aq.id(R.id.comment_user).getText().toString().equalsIgnoreCase("")) {
             Snackbar.make(getView(),getString(R.string.enter_comment),Snackbar.LENGTH_SHORT).show();
             return;
         }
+        service.createforumComments(comment, comment, baseClass.getUserId(), false,
+                new CallBack(ForumsDetailFragment.this, "CreateComment"));
         aq.id(R.id.comment_user).text("");
         TaskComments taskComments = new TaskComments();
         taskComments.setComment(comment);
@@ -112,13 +113,13 @@ public class ForumsDetailFragment extends BaseFragment {
         }
         else
         {
-            Snackbar.make(getView(), getString(R.string.invalid_credential), Snackbar.LENGTH_SHORT).show();
+            Snackbar.make(getView(), getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
         }
     }
     public void ForumDetails(Object caller, Object model){
         ForumsCommentModel.getInstance().setList((ForumsCommentModel) model);
         if (ForumsCommentModel.getInstance().responseObject.forumComments.size()!=0) {
-           // GetGeneralList();
+            GetGeneralList();
         }else {
             Snackbar.make(getView(),getString(R.string.response_error),Snackbar.LENGTH_SHORT).show();
         }

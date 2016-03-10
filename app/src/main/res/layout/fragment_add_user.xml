@@ -90,8 +90,21 @@
                 app:met_primaryColor="@color/colorBaseHeader" />
 
             <com.rengwuxian.materialedittext.MaterialEditText
-                android:id="@+id/user_email"
+                android:id="@+id/nick_name"
                 android:layout_below="@+id/last_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:hint="@string/last_name"
+                android:inputType="textMultiLine"
+                android:textSize="18sp"
+                app:met_singleLineEllipsis="true"
+                app:met_floatingLabel="normal"
+                app:met_primaryColor="@color/colorBaseHeader" />
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/user_email"
+                android:layout_below="@+id/nick_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"

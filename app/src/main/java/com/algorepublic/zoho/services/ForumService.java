@@ -4,10 +4,12 @@ import android.app.Activity;
 import android.util.Log;
 
 import com.algorepublic.zoho.Models.AddforumModel;
+import com.algorepublic.zoho.Models.CreateCommentModel;
 import com.algorepublic.zoho.Models.CreateForumModel;
 import com.algorepublic.zoho.Models.ForumsCommentModel;
 import com.algorepublic.zoho.Models.ForumsModel;
 import com.algorepublic.zoho.Models.GeneralModel;
+import com.algorepublic.zoho.Models.UserModel;
 import com.algorepublic.zoho.utils.Constants;
 
 import java.util.HashMap;
@@ -72,5 +74,14 @@ public class ForumService extends BaseService {
         params.put("id", ID);
         this.post(url, params, obj, GeneralModel.getInstance(), message);
         Log.e("DeleteForumService", url);
+    }
+    public void createforumComments(String forumID, String comment, String userID,boolean message, CallBack obj){
+        String url = Constants.CreateForumComment_API;
+        HashMap<String, String> params = new HashMap<String, String>();
+        params.put("ForumCommentID", forumID);
+        params.put("Message", comment);
+        params.put("CreatedBy", userID);
+        this.post(url, params, obj, CreateCommentModel.getInstance(), message);
+        Log.e("LoginService", url);
     }
 }

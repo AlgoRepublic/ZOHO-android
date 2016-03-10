@@ -46,6 +46,9 @@ public class UserListModel  {
             @SerializedName("LastName")
             public String lastName;
 
+            @SerializedName("NickName")
+            public String nickName;
+
 
             @SerializedName("ResponseCode")
             public String responseCode;

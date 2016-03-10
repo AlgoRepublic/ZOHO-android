@@ -58,7 +58,8 @@ public class AdapterTaskComments extends BaseAdapter {
         holder.taskComment.setText(TaskCommentFragment.arrayList.get(position).getComment());
         holder.userName.setText(TaskCommentFragment.arrayList.get(position).getUserName()
         +" , "+TaskCommentFragment.arrayList.get(position).getDateTime());
-        Glide.with(ctx).load(Constants.Image_URL + baseClass.getProfileImageID()
+        Glide.with(ctx).load(Constants.Image_URL + TaskCommentFragment
+                .arrayList.get(position).getUserImageID()
                 +"."+BaseClass.getExtensionType(TaskCommentFragment.arrayList
                 .get(position).getUserImagePath())).into(holder.userImage);
 

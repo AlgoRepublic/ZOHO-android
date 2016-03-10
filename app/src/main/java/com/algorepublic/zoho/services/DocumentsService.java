@@ -3,10 +3,12 @@ package com.algorepublic.zoho.services;
 import android.app.Activity;
 import android.util.Log;
 
+import com.algorepublic.zoho.Models.CreateCommentModel;
 import com.algorepublic.zoho.Models.DocumentsListModel;
 import com.algorepublic.zoho.Models.FolderListModel;
 import com.algorepublic.zoho.Models.GeneralModel;
 import com.algorepublic.zoho.Models.SubTaskAttachmentsModel;
+import com.algorepublic.zoho.Models.TaskCommentsModel;
 import com.algorepublic.zoho.Models.TasksDocumentModel;
 import com.algorepublic.zoho.Models.UserModel;
 import com.algorepublic.zoho.utils.Constants;
@@ -24,14 +26,6 @@ public class DocumentsService extends BaseService {
             super(act);
         }
 
-    public void login(String mEmail, String mPassword,boolean message, CallBack obj){
-        String url = Constants.Login_API;
-        HashMap<String, String> params = new HashMap<String, String>();
-        params.put("username", mEmail);
-        params.put("password", mPassword);
-        this.post(url, params, obj, UserModel.getInstance(), message);
-        Log.e("LoginService", url);
-    }
     public void getDocuments(int projectID,boolean message, CallBack obj){
         String url = Constants.GetDocuments_API+"projectID="+projectID;
         this.get(url, obj, DocumentsListModel.getInstance(), message);
@@ -43,7 +37,7 @@ public class DocumentsService extends BaseService {
         Log.e("DocService", url);
     }
     public void getDocsBySubTasks(int taskID, boolean message, CallBack obj){
-        String url = Constants.GetAttachmentsBySubTasks_API+"taskID="+taskID;
+        String url = Constants.TaskAttachments_API+"taskID="+taskID;
         this.get(url, obj, SubTaskAttachmentsModel.getInstance(), message);
         Log.e("AttachBySubTaskService", url);
     }
@@ -67,9 +61,18 @@ public class DocumentsService extends BaseService {
         this.post(url, params, obj, GeneralModel.getInstance(), message);
         Log.e("DeleteDocumentsService", url);
     }
-    public void getAttachmentsBySubTasks(int taskID, boolean message, CallBack obj){
-        String url = Constants.GetAttachmentsBySubTasks_API+"taskID="+taskID;
-        this.get(url, obj, TasksDocumentModel.getInstance(), message);
+    public void getDocumentComments(int fileID, boolean message, CallBack obj){
+        String url = Constants.GetDocumentComments_API+"fileID="+fileID;
+        this.get(url, obj, TaskCommentsModel.getInstance(), message);
         Log.e("AttachBySubTaskService", url);
+    }
+    public void createDocComments(String fileID, String comment, String userID,boolean message, CallBack obj){
+        String url = Constants.CreateDocComments_API;
+        HashMap<String, String> params = new HashMap<String, String>();
+        params.put("fileID", fileID);
+        params.put("comment", comment);
+        params.put("userID", userID);
+        this.post(url, params, obj, CreateCommentModel.getInstance(), message);
+        Log.e("LoginService", url);
     }
 }

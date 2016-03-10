@@ -37,12 +37,13 @@ public class UserService extends BaseService {
     }
  
     public void updateUserWithoutProjectSelected(String ID,String firstname,String lastname,
-                           String email,String mobileNo,int userRole ,ArrayList<Integer> Ids,boolean message, CallBack obj){
+                  String nickName, String email,String mobileNo,int userRole ,ArrayList<Integer> Ids,boolean message, CallBack obj){
         String url = Constants.UpdateUser_API;
         HashMap<String, String> params = new HashMap<String, String>();
         params.put("ID", ID);
         params.put("FirstName", firstname);
         params.put("LastName", lastname);
+        params.put("NickName", nickName);
         params.put("Email", email);
         params.put("Mobile", mobileNo);
         params.put("RoleID", Integer.toString(userRole));
@@ -53,13 +54,14 @@ public class UserService extends BaseService {
         this.post(url, params, obj, GeneralModel.getInstance(), message);
         Log.e("UpdateUserWOPService", url);
     }
-    public void updateUserWithProjectSelected(String ID,String firstname,String lastname,
+    public void updateUserWithProjectSelected(String ID,String firstname,String lastname,String nickName,
                                                  String email,String mobileNo,int userRole ,boolean message, CallBack obj){
         String url = Constants.UpdateUser_API;
         HashMap<String, String> params = new HashMap<String, String>();
         params.put("ID", ID);
         params.put("FirstName", firstname);
         params.put("LastName", lastname);
+        params.put("NickName", nickName);
         params.put("Email", email);
         params.put("Mobile", mobileNo);
         params.put("RoleID", Integer.toString(userRole));

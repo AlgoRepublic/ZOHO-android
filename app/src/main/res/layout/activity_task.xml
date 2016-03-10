@@ -21,16 +21,20 @@
 
         <EditText
             android:id="@+id/title_text"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:ellipsize="end"
+            android:gravity="center"
+            android:layout_marginLeft="10dp"
+            android:scrollHorizontally="true"
+            android:scrollbarAlwaysDrawHorizontalTrack="true"
             android:enabled="false"
-            android:maxLength="24"
             android:padding="5dp"
             android:singleLine="true"
             android:text="@string/Task_Title"
+            android:layout_toLeftOf="@+id/btn_title"
             android:textColor="@color/white"
             android:textSize="22sp" />
 
@@ -38,9 +42,10 @@
             android:id="@+id/btn_title"
             android:layout_width="20dp"
             android:layout_height="20dp"
+            android:layout_marginRight="10dp"
+            android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginBottom="10dp"
-            android:layout_toRightOf="@+id/title_text"
             android:background="@mipmap/edit_white" />
 
         <View

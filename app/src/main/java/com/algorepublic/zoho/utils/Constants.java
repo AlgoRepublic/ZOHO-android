@@ -16,10 +16,10 @@ public class Constants {
 	public static String GetAssigneeByTask_API = BASE_URL+ "/User/GetListByProject";//ProjectID
 	public static String CreateUser_API = BASE_URL+ "/User/CreateUser";
 	public static String UpdateUser_API = BASE_URL+ "/User/UpdateUserProfile";
+	public static String DeleteUser_API = BASE_URL+ "/User/DeleteUser"; // userID, projectID
 	// Tasks API
 	public static String GetTaskListByOwner_API = BASE_URL+ "/TaskList/GetListByOwnerID?"; //userID
 	public static String GetTaskListBySubTasks_API = BASE_URL+ "/Task/GetByParentId?"; //taskID
-	public static String GetAttachmentsBySubTasks_API = BASE_URL+ "/Task/AttachmentList?"; //taskID
 	public static String UploadDocumentsByTasks_API = BASE_URL+ "/Task/AddAttachment?"; //taskID,files
 	public static String GetTaskListByProject_API = BASE_URL+ "/TaskList/GetListByProjectID?"; //projectID
 	public static String DeleteDocumentsByTasks_API = BASE_URL+ "/Task/DeleteAttachment?"; //taskID,filesToDelete
@@ -51,7 +51,10 @@ public class Constants {
 	public static String GetForumDetail_API = BASE_URL+ "/Forum/GetById?";
 	public static String DeleteForum_API = BASE_URL+ "/Forum/Delete?"; //id
 	public static String AddNewForumPost_API=BASE_URL+"/Forum/AddNewForumPost?";
+	public static String CreateForumComment_API=BASE_URL+"/Forum/NewForumComment?"; //Forum item
 	// Document API
+	public static String CreateDocComments_API = BASE_URL+ "/Document/fileComment?"; //fileID, comment, userID
+	public static String GetDocumentComments_API = BASE_URL+ "/Document/GetfileComment?"; //fileID
 	public static String GetDocuments_API = BASE_URL+ "/Document/GetListByProjectID?"; //projectID
 	public static String GetFolderList_API = BASE_URL+ "/Document/GetListByProjectIDForDropDown?"; //projectID
 	public static String DeleteDocuments_API = BASE_URL+ "/Document/DeleteFile?"; //fileID

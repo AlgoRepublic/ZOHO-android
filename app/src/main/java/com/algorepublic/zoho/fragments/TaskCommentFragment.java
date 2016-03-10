@@ -63,7 +63,6 @@ public class TaskCommentFragment extends BaseFragment {
         aq = new AQuery(view);
         service = new TaskListService(getActivity());
         adapter = new AdapterTaskComments(getActivity());
-        aq.id(R.id.forums_comment_list).adapter(adapter);
         listView.setAdapter(adapter);
         baseClass = ((BaseClass) getActivity().getApplicationContext());
        service.getCommentsByTask(position,
@@ -124,12 +123,12 @@ public class TaskCommentFragment extends BaseFragment {
     public void PerformAction()
     {
         String comment = aq.id(R.id.comment_user).getText().toString();
-        service.createComment(comment,position,Integer.parseInt(baseClass.getUserId()),false,
-                new CallBack(TaskCommentFragment.this,"CreateComment"));
         if(aq.id(R.id.comment_user).getText().toString().equalsIgnoreCase("")) {
             Snackbar.make(getView(),getString(R.string.enter_comment),Snackbar.LENGTH_SHORT).show();
             return;
         }
+        service.createComment(comment,position,Integer.parseInt(baseClass.getUserId()),false,
+                new CallBack(TaskCommentFragment.this,"CreateComment"));
         aq.id(R.id.comment_user).text("");
         TaskComments taskComments = new TaskComments();
         taskComments.setComment(comment);

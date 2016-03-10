@@ -52,6 +52,8 @@
                     android:text="@string/task_name"
                     android:layout_height="wrap_content"
                     android:textSize="14sp"
+                    android:singleLine="true"
+                    android:ellipsize="end"
                     android:gravity="left"
                     android:layout_marginLeft="50dp"
                     android:layout_centerVertical="true"
