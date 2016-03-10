@@ -17,7 +17,6 @@
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
         android:text="@string/questions"
-        android:textColor="@color/colorBaseHeader"
         android:textSize="16sp"
         android:textStyle="bold" />
     </RelativeLayout>

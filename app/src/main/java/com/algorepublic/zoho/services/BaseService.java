@@ -75,7 +75,6 @@ public class BaseService{
                                 progressBar.setVisibility(View.GONE);
                             }
                             showServerError(status);
-                            return;
                         }
 
                     }
