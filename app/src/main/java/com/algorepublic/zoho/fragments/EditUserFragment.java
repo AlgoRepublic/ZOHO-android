@@ -19,7 +19,6 @@ import android.widget.AdapterView;
 import android.widget.Toast;
 
 import com.algorepublic.zoho.Models.AllProjectsByUserModel;
-import com.algorepublic.zoho.Models.ForumsCommentModel;
 import com.algorepublic.zoho.Models.GeneralModel;
 import com.algorepublic.zoho.Models.UserListModel;
 import com.algorepublic.zoho.Models.UserRoleModel;
@@ -125,11 +124,11 @@ public class EditUserFragment extends BaseFragment implements MultiSelectionSpin
         Log.e("Image",Constants.UserImage_URL + UserListModel
                 .getInstance().responseObject.get(position).profileImagePath);
         if(imagePath != null) {
-        Glide.with(getActivity()).load(Constants.Image_URL + UserListModel.getInstance()
-                .responseObject.get(position).profilePictureID
-                + "." + BaseClass.getExtensionType(
-                UserListModel.getInstance().responseObject.get(position).profileImagePath))
-                .into(aq.id(R.id.profile).getImageView());
+            Glide.with(getActivity()).load(Constants.Image_URL + UserListModel.getInstance()
+                    .responseObject.get(position).profilePictureID
+                    + "." + BaseClass.getExtensionType(
+                    UserListModel.getInstance().responseObject.get(position).profileImagePath))
+                    .into(aq.id(R.id.profile).getImageView());
         }
         aq.id(R.id.user_phoneno).text(UserListModel.getInstance().responseObject.get(position).mobile);
     }
@@ -181,7 +180,7 @@ public class EditUserFragment extends BaseFragment implements MultiSelectionSpin
             role_list.attachDataSource(roleList);
             for(int loop=0;loop<roleList.size();loop++){
                 if(roleList.get(loop).equalsIgnoreCase(UserListModel.getInstance().responseObject
-                .get(position).userRole.role)){
+                        .get(position).userRole.role)){
                     role_list.setSelectedIndex(loop);
                 }
             }
@@ -190,6 +189,14 @@ public class EditUserFragment extends BaseFragment implements MultiSelectionSpin
         }
 
     }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+
+        dialog = null;
+    }
+
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.menu_save_project, menu);
@@ -313,7 +320,7 @@ public class EditUserFragment extends BaseFragment implements MultiSelectionSpin
             default:
                 break;
         }
-        aq.id(R.id.profile).image(newFile, 200);
+        aq.id(R.id.profile).image(newFile, 100);
         new UploadPicture().execute();
     }
     public class UploadPicture extends AsyncTask<Void, Void, String> {
@@ -341,11 +348,15 @@ public class EditUserFragment extends BaseFragment implements MultiSelectionSpin
 
         @Override
         protected void onPostExecute(String result) {
-            dialog.dismiss();
+
+            if ((dialog != null) && dialog.isShowing()) {
+                dialog.dismiss();
+            }
             if(result != null) {
                 if (result.contains("100")) {
                     Snackbar.make(getView(), getString(R.string.user_updated), Snackbar.LENGTH_SHORT).show();
                 } else {
+
                     Snackbar.make(getView(), getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
                 }
             }

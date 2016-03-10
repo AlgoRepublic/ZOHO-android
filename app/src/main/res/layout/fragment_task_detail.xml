@@ -206,22 +206,31 @@
                         android:id="@+id/header_layout4"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:weightSum="3"
                         android:layout_marginTop="10dp"
                         android:layout_below="@+id/header_layout3"
                         android:orientation="horizontal">
                         <TextView
-                            android:layout_width="0dp"
-                            android:layout_weight="1"
+                            android:layout_width="wrap_content"
                             android:text="@string/task_users"
                             android:layout_height="wrap_content"
                             android:textSize="12sp"
                             android:textColor="@color/colorBaseHeader"
                             android:textStyle="bold"
                             android:layout_toLeftOf="@+id/textView"
+                            android:id="@+id/users"
 
                             />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="12sp"
+                            android:layout_marginLeft="5dp"
+                            android:layout_toRightOf="@+id/users"
+                            android:textColor="@color/colorBaseHeader"
+                            android:textStyle="bold"
+                            android:id="@+id/user_counter"
 
+                            />
                     </LinearLayout>
                     <org.lucasr.twowayview.widget.TwoWayView
                         android:id="@+id/task_assignee"
