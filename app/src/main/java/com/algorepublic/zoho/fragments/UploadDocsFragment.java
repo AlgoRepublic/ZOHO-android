@@ -23,7 +23,6 @@ import android.widget.AdapterView;
 import android.widget.Toast;
 
 import com.algorepublic.zoho.Models.FolderListModel;
-import com.algorepublic.zoho.Models.GeneralModel;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.adapters.AdapterUploadAttachment;
 import com.algorepublic.zoho.adapters.AttachmentList;
@@ -97,7 +96,7 @@ public class UploadDocsFragment extends BaseFragment implements GoogleApiClient.
     DriveFile selectedFile;
     BaseClass baseClass;
     InputStream inputStream;
-    DocumentsService service;
+    DocumentsService service;File newFile;
     static int ProjectID,TaskID;View view;
     NiceSpinner folder_list;
     ArrayList<String> folderList;
@@ -134,9 +133,14 @@ public class UploadDocsFragment extends BaseFragment implements GoogleApiClient.
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.save_project:
-                if(baseClass.getSelectedProject().equalsIgnoreCase("0")){
+                if(ProjectID==0){
                     new UploadDocsBYTask().execute();
                 }else {
+                    if(folderList.size()==0)
+                    {
+                        Toast.makeText(getActivity(),"Please select folder", Toast.LENGTH_SHORT).show();
+                        return false;
+                    }
                     new UploadDocsBYProject().execute();
                 }
                 break;
@@ -195,8 +199,7 @@ public class UploadDocsFragment extends BaseFragment implements GoogleApiClient.
                 CallForAttachments();
             }
         });
-        applyLightBackground(aq.id(R.id.layout_bottom).getView(), baseClass);
-        //CallForSelectFolder();
+
         return view;
     }
 
@@ -210,7 +213,6 @@ public class UploadDocsFragment extends BaseFragment implements GoogleApiClient.
                 .build();
         mGoogleApiClient.connect();
     }
-
     private void CallForAttachments() {
         String[] menuItems = {"Camera", "Gallery", "Others", "Google Drive", "Drop Box"};
         final ActionSheetDialog dialog = new ActionSheetDialog(getActivity(), menuItems, getView());
@@ -222,7 +224,9 @@ public class UploadDocsFragment extends BaseFragment implements GoogleApiClient.
                 dialog.dismiss();
                 if (position == 0) {
                     Intent intent = new Intent(
-                            "android.media.action.IMAGE_CAPTURE");
+                            android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+                    newFile = getOutputMediaFile();
+                    intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(newFile));
                     startActivityForResult(intent, TAKE_PICTURE);
                 }
                 if (position == 1) {
@@ -268,24 +272,28 @@ public class UploadDocsFragment extends BaseFragment implements GoogleApiClient.
             }
             folder_list.attachDataSource(folderList);
         } else {
-            Toast.makeText(getActivity(), getString(R.string.invalid_credential), Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), getString(R.string.response_error), Toast.LENGTH_SHORT).show();
         }
     }
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         Log.e("code", requestCode + "/" + resultCode + "/");
+        if (resultCode == Activity.RESULT_CANCELED) {
+            Toast.makeText(getActivity(), "Cancelled",
+                    Toast.LENGTH_SHORT).show();
+        }
         switch (requestCode) {
             case TAKE_PICTURE:
                 if (resultCode == getActivity().RESULT_OK) {
-                    Uri selectedImageUri = data.getData();
-                    File destination = new File(getRealPathFromURI(selectedImageUri));
-                    checkFileLenght(destination);
+                    checkFileLenght(newFile);
                 }
                 break;
             case RESULT_GALLERY:
                 if (null != data) {
-                    File newFile = new File(URI.create("file://" + getDataColumn(getActivity(), data.getData(), null, null)));
+                    String thePath = getUriFromUrl("file://"+
+                            getDataColumn(getActivity(), data.getData(),null,null)).toString();
+                    File  newFile = new File(URI.create(thePath));
                     checkFileLenght(newFile);
                 }
                 break;
@@ -293,8 +301,10 @@ public class UploadDocsFragment extends BaseFragment implements GoogleApiClient.
                 if (resultCode == Activity.RESULT_OK) {
                     Uri contactData = data.getData();
                     File newFile = null;
+                    String thePath = getUriFromUrl("file://"+
+                            getDataColumn(getActivity(), contactData,null,null)).toString();
                     try {
-                        newFile = new File(new URI("file://" + getDataColumn(getActivity(), contactData, null, null)));
+                        newFile = new File(new URI(thePath));
                         checkFileLenght(newFile);
                     } catch (URISyntaxException e) {
                         e.printStackTrace();

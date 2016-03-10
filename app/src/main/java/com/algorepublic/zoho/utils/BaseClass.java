@@ -49,13 +49,11 @@ public class BaseClass extends Application {
     private String UserId = "UserId";
     private String FirstName = "FirstName";
     private String LastName = "LastName";
-    private String ProfileImage = "ProfileImage";
+    private String ProfileImagePath = "ProfileImagePath";
+    private String ProfileImageID = "ProfileImageID";
     private String Email = "Email";
     private String UserLanguage = "UserLanguage";
     private String SELECTED_PROJECT = "selected_project";
-    private String UserLocation = "UserLocation";
-    private String UserAboutMe = "UserAboutMe";
-    private String UserImageUrl = "UserImageUrl";
     private String TaskFilterType = "TaskFilterType";
     private String TaskSortType = "TaskSortType";
     private String DocsSortType = "DocsSortType";
@@ -98,11 +96,19 @@ public class BaseClass extends Application {
     }
 
     public void setProfileImage(String profileImage) {
-        prefsEditor.putString(ProfileImage, profileImage).commit();
+        prefsEditor.putString(ProfileImagePath, profileImage).commit();
     }
 
     public String getProfileImage() {
-        return appSharedPrefs.getString(ProfileImage, "");
+        return appSharedPrefs.getString(ProfileImagePath, "");
+    }
+
+    public void setProfileImageID(Integer profileImage) {
+        prefsEditor.putInt(ProfileImageID, profileImage).commit();
+    }
+
+    public Integer getProfileImageID() {
+        return appSharedPrefs.getInt(ProfileImageID, 0);
     }
 
     public void setFirstName(String userName) {

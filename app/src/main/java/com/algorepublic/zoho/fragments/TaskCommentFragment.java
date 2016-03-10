@@ -103,7 +103,8 @@ public class TaskCommentFragment extends BaseFragment {
             taskComments.setComment(TaskCommentsModel.getInstance().responseObject.get(loop).message);
             taskComments.setDateTime(GetDateTimeComment(TaskCommentsModel.getInstance().responseObject.get(loop).createdAt));
             taskComments.setUserName(TaskCommentsModel.getInstance().responseObject.get(loop).userObject.firstName);
-            taskComments.setUserImage(TaskCommentsModel.getInstance().responseObject.get(loop).userObject.profileImagePath);
+            taskComments.setUserImagePath(TaskCommentsModel.getInstance().responseObject.get(loop).userObject.profileImagePath);
+            taskComments.setUserImageID(TaskCommentsModel.getInstance().responseObject.get(loop).userObject.profilePictureID);
             arrayList.add(taskComments);
         }
         adapter.notifyDataSetChanged();
@@ -122,17 +123,18 @@ public class TaskCommentFragment extends BaseFragment {
     public void PerformAction()
     {
         String comment = aq.id(R.id.comment_user).getText().toString();
-        service.createComment(comment,position,Integer.parseInt(baseClass.getUserId()),false,
-                new CallBack(TaskCommentFragment.this,"CreateComment"));
         if(aq.id(R.id.comment_user).getText().toString().equalsIgnoreCase("")) {
             Snackbar.make(getView(),getString(R.string.enter_comment),Snackbar.LENGTH_SHORT).show();
             return;
         }
+        service.createComment(comment,position,Integer.parseInt(baseClass.getUserId()),false,
+                new CallBack(TaskCommentFragment.this,"CreateComment"));
         aq.id(R.id.comment_user).text("");
         TaskComments taskComments = new TaskComments();
         taskComments.setComment(comment);
         taskComments.setUserName(baseClass.getFirstName());
-        taskComments.setUserImage(baseClass.getProfileImage());
+        taskComments.setUserImagePath(baseClass.getProfileImage());
+        taskComments.setUserImageID(baseClass.getProfileImageID());
         taskComments.setDateTime(GetDateTime());
         arrayList.add(taskComments);
         adapter.notifyDataSetChanged();

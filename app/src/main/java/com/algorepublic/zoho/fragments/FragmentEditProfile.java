@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.design.widget.Snackbar;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,18 +17,22 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Toast;
 
 import com.algorepublic.zoho.Models.AllProjectsByUserModel;
-import com.algorepublic.zoho.Models.UserListModel;
+import com.algorepublic.zoho.Models.GeneralModel;
+import com.algorepublic.zoho.Models.GetUserModel;
 import com.algorepublic.zoho.Models.UserRoleModel;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.services.CallBack;
+import com.algorepublic.zoho.services.LoginService;
 import com.algorepublic.zoho.services.ProjectsListService;
 import com.algorepublic.zoho.services.UserService;
 import com.algorepublic.zoho.utils.BaseClass;
 import com.algorepublic.zoho.utils.Constants;
 import com.algorepublic.zoho.utils.GenericHttpClient;
 import com.androidquery.AQuery;
+import com.bumptech.glide.Glide;
 import com.flyco.dialog.listener.OnOperItemClickL;
 import com.flyco.dialog.widget.ActionSheetDialog;
 import com.guna.libmultispinner.MultiSelectionSpinner;
@@ -39,42 +44,37 @@ import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 import cc.cloudist.acplibrary.ACProgressConstant;
 import cc.cloudist.acplibrary.ACProgressFlower;
 
 /**
- * Created by waqas on 2/15/16.
+ * Created by android on 3/10/16.
  */
-public class AddUserFragment extends BaseFragment implements MultiSelectionSpinner.OnMultipleItemsSelectedListener{
+public class FragmentEditProfile extends BaseFragment implements MultiSelectionSpinner.OnMultipleItemsSelectedListener{
 
     private static final int TAKE_PICTURE = 1;
     public static final int RESULT_GALLERY = 2;
     public static final int PICK_File = 3;
     File newFile;
     AQuery aq;
-    int[] Ids;
     ArrayList<Integer> selectedIds = new ArrayList<>();
-    ArrayList<String> roleList;
     ArrayList<String> projectList;
-    NiceSpinner role_list;
     ProjectsListService service ;
     UserService service1;
+    LoginService loginService;
     MultiSelectionSpinner projectsList;
     ACProgressFlower dialog;
     BaseClass baseClass;
-    static int position;
 
-    public AddUserFragment() {
+    public FragmentEditProfile() {
         // Required empty public constructor
     }
 
 
-    public static AddUserFragment newInstance(int pos) {
-        position = pos;
-        AddUserFragment fragment = new AddUserFragment();
+    public static FragmentEditProfile newInstance() {
+        FragmentEditProfile fragment = new FragmentEditProfile();
         Bundle args = new Bundle();
         fragment.setArguments(args);
         return fragment;
@@ -83,37 +83,61 @@ public class AddUserFragment extends BaseFragment implements MultiSelectionSpinn
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view  = inflater.inflate(R.layout.fragment_add_user, container, false);
-        role_list = (NiceSpinner) view.findViewById(R.id.role_list);
+        setHasOptionsMenu(true);
+        View view  = inflater.inflate(R.layout.fragment_edit_user_profile, container, false);
         projectsList = (MultiSelectionSpinner) view.findViewById(R.id.projects_list);
         projectsList.setListener(this);
         baseClass = ((BaseClass) getActivity().getApplicationContext());
         aq = new AQuery(getActivity(), view);
-        setHasOptionsMenu(true);
+        aq.id(R.id.lblListHeader).text(getString(R.string.edit_user));
         service = new ProjectsListService(getActivity());
         service1 = new UserService(getActivity());
+        loginService = new LoginService(getActivity());
         dialog = new ACProgressFlower.Builder(getActivity())
                 .direction(ACProgressConstant.DIRECT_CLOCKWISE)
                 .themeColor(Color.WHITE)
                 .fadeColor(Color.DKGRAY).build();
-        getToolbar().setTitle(getString(R.string.add_user));
+        getToolbar().setTitle(getString(R.string.edit_user));
         aq.id(R.id.profile).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 CallForAttachments();
             }
         });
-
+        loginService.GetById(baseClass.getUserId(), true, new CallBack(FragmentEditProfile.this, "GetById"));
         if(baseClass.getSelectedProject().equalsIgnoreCase("0")){
             aq.id(R.id.layout).visibility(View.VISIBLE);
-            service.getAllProjectsByUser_API(baseClass.getUserId(), true, new CallBack(AddUserFragment.this, "AllProjects"));
+            service.getAllProjectsByUser_API(baseClass.getUserId(), true, new CallBack(FragmentEditProfile.this, "AllProjects"));
         }else {
             aq.id(R.id.layout).visibility(View.GONE);
         }
-        service1.getUserRole(true,new CallBack(AddUserFragment.this,"UserRole"));
+        UpdateValues();
         return view;
     }
-
+    public void GetById(Object caller,Object model) {
+        GetUserModel.getInstance().setList((GetUserModel) model);
+        if (GetUserModel.getInstance().responseCode.equalsIgnoreCase("100")
+                && GetUserModel.getInstance().user.toString() !="null") {
+           UpdateValues();
+        }else {
+            Snackbar.make(getView(), getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
+        }
+    }
+    public void UpdateValues(){
+        aq.id(R.id.first_name).text(GetUserModel.getInstance().user.firstName);
+        aq.id(R.id.last_name).text(GetUserModel.getInstance().user.lastName);
+        aq.id(R.id.nick_name).text(GetUserModel.getInstance().user.nickName);
+        aq.id(R.id.user_email).text(GetUserModel.getInstance().user.eMail);
+        String imagePath =GetUserModel.getInstance().user.profileImagePath;
+        if(imagePath != null) {
+            Glide.with(getActivity()).load(Constants.Image_URL +
+                    GetUserModel.getInstance().user.profilePictureID
+                    + "." + BaseClass.getExtensionType(
+                    GetUserModel.getInstance().user.profileImagePath))
+                    .into(aq.id(R.id.profile).getImageView());
+        }
+        aq.id(R.id.user_phoneno).text(GetUserModel.getInstance().user.mobile);
+    }
     public void AllProjects(Object caller, Object model){
         AllProjectsByUserModel.getInstance().setList((AllProjectsByUserModel) model);
         if (AllProjectsByUserModel.getInstance().responseCode == 100
@@ -122,47 +146,34 @@ public class AddUserFragment extends BaseFragment implements MultiSelectionSpinn
             for(int loop=0;loop< AllProjectsByUserModel.getInstance().responseData.size();loop++) {
                 try {
                     if(AllProjectsByUserModel.getInstance().responseData.get(loop).projectName ==null){
-                        projectList.add(getString(R.string.no_data));
+                        projectList.add("No Data");
                     }else
-                    projectList.add(AllProjectsByUserModel.getInstance().responseData.get(loop).projectName);
+                        projectList.add(AllProjectsByUserModel.getInstance().responseData.get(loop).projectName);
                 }catch (NullPointerException e){}
             }
             projectsList.setItems(projectList);
-            if(position > -1) {
-                if (UserListModel.getInstance().responseObject.get(position).projectIDs != null) {
-                    for (int loop = 0; loop < UserListModel.getInstance()
-                            .responseObject.get(position).projectIDs.size(); loop++) {
+                if (GetUserModel.getInstance().user.projectIDs != null) {
+
+                    int[] Ids = new int[GetUserModel.getInstance().user.projectIDs.size()];
+                    for (int loop = 0; loop < GetUserModel.getInstance().user.projectIDs.size(); loop++) {
                         for (int loop1 = 0; loop1 < AllProjectsByUserModel.getInstance()
                                 .responseData.size(); loop1++) {
-                            if (UserListModel.getInstance()
-                                    .responseObject.get(position).projectIDs.get(loop) == AllProjectsByUserModel
+                            if (GetUserModel.getInstance().user.projectIDs.get(loop)
+                                    == AllProjectsByUserModel
                                     .getInstance().responseData.get(loop1).projectID)
                                 Ids[loop] = loop1;
-                            selectedIds.add(AllProjectsByUserModel
-                                    .getInstance().responseData.get(loop1).projectID);
                         }
                         projectsList.setSelection(Ids);
+                        selectedIds.add(AllProjectsByUserModel
+                                .getInstance().responseData.get(loop).projectID);
                     }
                 }
-            }
         }else {
             Snackbar.make(getView(), getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
         }
 
     }
-    public void UserRole(Object caller, Object model){
-        UserRoleModel.getInstance().setList((UserRoleModel) model);
-        if (UserRoleModel.getInstance().responseObject.size() !=0 ) {
-            roleList= new ArrayList<>();
-            for(int loop=0;loop< UserRoleModel.getInstance().responseObject.size();loop++) {
-                roleList.add(UserRoleModel.getInstance().responseObject.get(loop).role);
-            }
-            role_list.attachDataSource(roleList);
-        }else {
-            Snackbar.make(getView() , getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
-        }
 
-    }
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.menu_save_project, menu);
@@ -189,9 +200,26 @@ public class AddUserFragment extends BaseFragment implements MultiSelectionSpinn
                     Snackbar.make(getView(),getString(R.string.add_phoneno),Snackbar.LENGTH_SHORT).show();
                     return false;
                 }
-                new AddUser().execute();
+                service1.updateUserWithoutProjectSelected(GetUserModel.getInstance().user.Id,
+                        aq.id(R.id.first_name).getText().toString(),
+                        aq.id(R.id.last_name).getText().toString(),
+                        aq.id(R.id.nick_name).getText().toString(),
+                        aq.id(R.id.user_email).getText().toString(),
+                        aq.id(R.id.user_phoneno).getText().toString(),
+                        GetUserModel.getInstance().user.userRole.ID, selectedIds
+                        , true, new CallBack(FragmentEditProfile.this, "UpdateUser"));
+
         }
         return super.onOptionsItemSelected(item);
+    }
+    public void UpdateUser(Object caller, Object model){
+        GeneralModel.getInstance().setList((GeneralModel) model);
+        if (GeneralModel.getInstance().responseObject ==true) {
+            Snackbar.make(getView(),getString(R.string.user_updated),Snackbar.LENGTH_SHORT).show();
+        }else {
+            Toast.makeText(getActivity(), getString(R.string.response_error), Toast.LENGTH_SHORT).show();
+        }
+
     }
     private void CallForAttachments() {
         String[] menuItems = {getString(R.string.camera),getString(R.string.gallery)
@@ -205,7 +233,9 @@ public class AddUserFragment extends BaseFragment implements MultiSelectionSpinn
                 dialog.dismiss();
                 if (position == 0) {
                     Intent intent = new Intent(
-                            "android.media.action.IMAGE_CAPTURE");
+                            android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+                    newFile = getOutputMediaFile();
+                    intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(newFile));
                     startActivityForResult(intent, TAKE_PICTURE);
                 }
                 if (position == 1) {
@@ -233,24 +263,31 @@ public class AddUserFragment extends BaseFragment implements MultiSelectionSpinn
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        Log.e("code", requestCode + "/" + resultCode + "/");
+        Log.e("code", requestCode + "/" + resultCode );
+        if (resultCode == Activity.RESULT_CANCELED) {
+            Toast.makeText(getActivity(), "Cancelled",
+                    Toast.LENGTH_SHORT).show();
+        }
         switch (requestCode) {
             case TAKE_PICTURE:
                 if (resultCode == getActivity().RESULT_OK) {
-                    Uri selectedImageUri = data.getData();
-                    newFile = new File(getRealPathFromURI(selectedImageUri));
+                    // Already Captured Image
                 }
                 break;
             case RESULT_GALLERY:
                 if (null != data) {
-                     newFile = new File(URI.create("file://" + getDataColumn(getActivity(), data.getData(), null, null)));
+                    String thePath = getUriFromUrl("file://"+
+                            getDataColumn(getActivity(), data.getData(),null,null)).toString();
+                    newFile = new File(URI.create(thePath));
                 }
                 break;
             case PICK_File:
                 if (resultCode == Activity.RESULT_OK) {
                     Uri contactData = data.getData();
+                    String thePath = getUriFromUrl("file://"+
+                            getDataColumn(getActivity(), contactData,null,null)).toString();
                     try {
-                        newFile = new File(new URI("file://"+getDataColumn(getActivity(), contactData,null,null)));
+                        newFile = new File(new URI(thePath));
                     } catch (URISyntaxException e) {
                         e.printStackTrace();
                     }
@@ -259,9 +296,47 @@ public class AddUserFragment extends BaseFragment implements MultiSelectionSpinn
             default:
                 break;
         }
-        aq.id(R.id.profile).image(newFile,200);
+        if(newFile== null){
+            aq.id(R.id.profile).image(R.drawable.nav_user);
+        }else {
+            aq.id(R.id.profile).image(newFile, 200);
+            new UploadPicture().execute();
+        }
     }
+    public class UploadPicture extends AsyncTask<Void, Void, String> {
+        GenericHttpClient httpClient;
+        String response = null;
 
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            dialog.show();
+        }
+
+        @Override
+        protected String doInBackground(Void... voids) {
+            try {
+                httpClient = new GenericHttpClient();
+                response = httpClient.uploadImage(Constants.UploadImage_URL,
+                        GetUserModel.getInstance().user.Id,baseClass.getUserId(), newFile);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return response;
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            dialog.dismiss();
+            if(result != null) {
+                if (result.contains("100")) {
+                    Snackbar.make(getView(), getString(R.string.user_updated), Snackbar.LENGTH_SHORT).show();
+                } else {
+                    Snackbar.make(getView(), getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
+                }
+            }
+        }
+    }
     @Override
     public void selectedIndices(List<Integer> indices) {
         selectedIds.clear();
@@ -276,49 +351,8 @@ public class AddUserFragment extends BaseFragment implements MultiSelectionSpinn
         projectsList.setSelection(strings);
     }
 
-    public class AddUser extends AsyncTask<Void, Void, String> {
-        GenericHttpClient httpClient;
-        String response = null;
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            dialog.show();
-        }
-
-        @Override
-        protected String doInBackground(Void... voids) {
-            try {
-                httpClient = new GenericHttpClient();
-                response = httpClient.createUser(Constants.CreateUser_API,
-                        aq.id(R.id.first_name).getText().toString(),
-                        aq.id(R.id.last_name).getText().toString(),
-                        aq.id(R.id.nick_name).getText().toString(),
-                        aq.id(R.id.user_email).getText().toString(),
-                        aq.id(R.id.user_phoneno).getText().toString(),
-                        UserRoleModel.getInstance().responseObject.get
-                                (role_list.getSelectedIndex()).ID,selectedIds,newFile);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            return response;
-        }
-
-        @Override
-        protected void onPostExecute(String result) {
-            dialog.dismiss();
-            Log.e("Res", result);
-            if(result.contains("100")){
-                Snackbar.make(getView(),getString(R.string.user_created),Snackbar.LENGTH_SHORT).show();
-            }else if(result.contains("101")) {
-                Snackbar.make(getView(),getString(R.string.email_already),Snackbar.LENGTH_SHORT).show();
-            }else
-                Snackbar.make(getView(),getString(R.string.response_error),Snackbar.LENGTH_SHORT).show();
-        }
-    }
     @Override
     public void onDestroyView() {
-        UserFragment.assigneeList.clear();
         super.onDestroyView();
     }
 }

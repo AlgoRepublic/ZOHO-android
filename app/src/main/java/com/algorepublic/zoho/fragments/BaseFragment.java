@@ -5,21 +5,28 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.Toolbar;
 import android.text.format.DateFormat;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.View;
 import android.widget.SearchView;
+import android.widget.Toast;
 
 import com.algorepublic.zoho.BaseActivity;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.utils.BaseClass;
 
+import java.io.File;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
@@ -60,14 +67,38 @@ public class BaseFragment extends Fragment {
         }
         return null;
     }
-
+    public File getOutputMediaFile() {
+        File mediaStorageDir = new File(
+                Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES),
+                "Zoho");
+        if (!mediaStorageDir.exists()) {
+            if (!mediaStorageDir.mkdirs()) {
+                return null;
+            }
+        }
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        File mediaFile = new File(mediaStorageDir.getPath() + File.separator + "IMG_" + timeStamp
+                + ".jpg");
+        return mediaFile;
+    }
     public String getRealPathFromURI(Uri contentUri)
     {
-        String[] projection = { MediaStore.Images.Media.DATA };
-        Cursor cursor = getActivity().getContentResolver().query(contentUri, projection, null, null, null);
-        int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+        String path = null;
+        String[] projection = new String[]{
+                MediaStore.Images.Media.DATA,
+                MediaStore.Images.Media.DATE_ADDED,
+                MediaStore.Images.ImageColumns.ORIENTATION};
+        Cursor cursor = getActivity().getContentResolver().
+                query(contentUri,
+                        projection, MediaStore.Images.Media.DATE_ADDED, null, "date_added ASC");
         cursor.moveToFirst();
-        return cursor.getString(column_index);
+        if (cursor != null && cursor.moveToFirst()) {
+                Uri uri = Uri.parse(cursor.getString(cursor
+                        .getColumnIndex(MediaStore.Images.Media.DATA)));
+                path = uri.toString();
+            cursor.close();
+    }
+        return path.toString();
     }
 
     protected int getPriorityWiseColor(int priority){
@@ -131,6 +162,20 @@ public class BaseFragment extends Fragment {
         int mDay = calendar.get(Calendar.DAY_OF_MONTH);
         return (mMonth+"/"+mDay+"/"+mYear);
     }
+    public Uri getUriFromUrl(String thisUrl) {
+        Uri.Builder builder;
+        URL url = null;
+        try {
+            url = new URL(thisUrl);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        builder =  new Uri.Builder()
+                .scheme(url.getProtocol())
+                .authority(url.getAuthority())
+                .appendPath(url.getPath());
+        return builder.build();
+    }
     public long DateHeader(String date){
         String a = date.replaceAll("\\D+", "");
         Calendar calendar = Calendar.getInstance();
@@ -179,6 +224,13 @@ public class BaseFragment extends Fragment {
 
     protected Toolbar getToolbar(){
         return BaseActivity.toolbar;
+    }
+
+    public void ClearAllFragments(){
+        for(int loop=0;loop<getActivity().getSupportFragmentManager().getBackStackEntryCount();loop++)
+        {
+            getActivity().getSupportFragmentManager().popBackStack();
+        }
     }
 
     protected void applyDarkBackground(View view, BaseClass baseClass){

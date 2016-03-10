@@ -238,9 +238,7 @@ public class AdapterDepartment
             Snackbar.make(((AppCompatActivity)ctx).findViewById(android.R.id.content)
                     , ctx.getString(R.string.project_moved), Snackbar.LENGTH_SHORT).show();
         } else {
-
             Snackbar.make(((AppCompatActivity) ctx).findViewById(android.R.id.content),ctx. getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
-
         }
     }
     @Override

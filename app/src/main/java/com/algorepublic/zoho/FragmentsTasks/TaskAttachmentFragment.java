@@ -34,8 +34,12 @@ import com.flyco.dialog.widget.MaterialDialog;
 import com.poliveira.apps.parallaxlistview.ParallaxListView;
 
 import java.io.File;
+import java.io.UnsupportedEncodingException;
+import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.net.URL;
+import java.net.URLEncoder;
 
 public class TaskAttachmentFragment extends BaseFragment {
 
@@ -177,7 +181,9 @@ public class TaskAttachmentFragment extends BaseFragment {
                 break;
             case RESULT_GALLERY:
                 if (null != data) {
-                    File  newFile = new File(URI.create("file://"+getDataColumn(getActivity(), data.getData(),null,null)));
+                    String thePath = getUriFromUrl("file://"+
+                            getDataColumn(getActivity(), data.getData(),null,null)).toString();
+                    File  newFile = new File(URI.create(thePath));
                     checkFileLenght(newFile);
                 }
                 break;
@@ -185,8 +191,10 @@ public class TaskAttachmentFragment extends BaseFragment {
                 if (resultCode == Activity.RESULT_OK) {
                     Uri contactData = data.getData();
                     File  newFile = null;
+                    String thePath = getUriFromUrl("file://"+
+                            getDataColumn(getActivity(), contactData,null,null)).toString();
                     try {
-                        newFile = new File(new URI("file://"+getDataColumn(getActivity(), contactData,null,null)));
+                        newFile = new File(new URI(thePath));
                         checkFileLenght(newFile);
                     } catch (URISyntaxException e) {
                         e.printStackTrace();

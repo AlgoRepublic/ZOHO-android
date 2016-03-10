@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.algorepublic.zoho.Models.GeneralModel;
@@ -65,25 +66,42 @@ public class AdapterProjectsDeptList extends BaseAdapter implements StickyListHe
 
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
-
-        convertView = l_Inflater.inflate(R.layout.layout_project_list_row, null);
+        ViewHolder holder;
+        if(convertView == null){
+            convertView = l_Inflater.inflate(R.layout.layout_project_list_row, null);
+            holder = new ViewHolder();
+            holder.projectTitle = (TextView) convertView.findViewById(R.id.project_title);
+            holder.taskAlert = (TextView) convertView.findViewById(R.id.task_alert);
+            holder.userAlert = (TextView) convertView.findViewById(R.id.users_alert);
+            holder.milestoneAlert = (TextView) convertView.findViewById(R.id.milestone_alert);
+            holder.projectId = (TextView) convertView.findViewById(R.id.project_id);
+            holder.parent = (RelativeLayout) convertView.findViewById(R.id.parent1);
+            holder.editText = (TextView) convertView.findViewById(R.id.btEdit);
+            holder.delText = (TextView) convertView.findViewById(R.id.btDelete);
+            holder.projectDesc = (TextView) convertView.findViewById(R.id.project_desc);
+            convertView.setTag(holder);
+        }else{
+            holder = (ViewHolder) convertView.getTag();
+        }
         aq = new AQuery(convertView);
-        aq.id(R.id.project_title).text(ProjectsFragment.ByDepartmentList.get(position).getProjectName());
+        holder.projectTitle.setText(ProjectsFragment.ByDepartmentList.get(position).getProjectName());
         if(!ProjectsFragment.ByDepartmentList.get(position).getTotalTasks().isEmpty())
-            aq.id(R.id.task_alert).text(ProjectsFragment.ByDepartmentList.get(position).getTotalTasks());
+            holder.taskAlert.setText(ProjectsFragment.ByDepartmentList.get(position).getTotalTasks());
         if(!ProjectsFragment.ByDepartmentList.get(position).getTotalMilestones().isEmpty())
-            aq.id(R.id.milestone_alert).text(ProjectsFragment.ByDepartmentList.get(position).getTotalMilestones());
+            holder.milestoneAlert.setText(ProjectsFragment.ByDepartmentList.get(position).getTotalMilestones());
+        if(!ProjectsFragment.ByDepartmentList.get(position).getTotalUsers().isEmpty())
+            holder.userAlert.setText(ProjectsFragment.ByDepartmentList.get(position).getTotalUsers());
 
-        aq.id(R.id.project_id).text(ProjectsFragment.ByDepartmentList.get(position).getProjectID());
+        holder.projectId.setText(ProjectsFragment.ByDepartmentList.get(position).getProjectID());
         if(ProjectsFragment.ByDepartmentList.get(position).getProjectDesc() != null)
-            aq.id(R.id.project_desc).text(Html.fromHtml(ProjectsFragment.ByDepartmentList.get(position).getProjectDesc()));
+            holder.projectDesc.setText(Html.fromHtml(ProjectsFragment.ByDepartmentList.get(position).getProjectDesc()));
 
         if(baseClass.getSelectedProject().equals(ProjectsFragment.ByDepartmentList.get(position).getProjectID())){
             aq.id(R.id.selected_project).getView().setBackgroundColor(Color.parseColor("#99cc00"));
         }else{
-            aq.id(R.id.selected_project).getView().setBackgroundColor(Color.parseColor("#00000000"));
+            aq.id(R.id.selected_project).getView().setBackgroundColor(Color.parseColor("#FFFFFF"));
         }
-        aq.id(R.id.parent1).clicked(new View.OnClickListener() {
+        holder.parent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 View view = v;
@@ -95,28 +113,25 @@ public class AdapterProjectsDeptList extends BaseAdapter implements StickyListHe
                     baseClass.db.putInt("ProjectID", Integer.parseInt(baseClass.getSelectedProject()));
                     baseClass.db.putString("ProjectName", (((TextView)view.findViewById(R.id.project_id)).getText().toString()));
                 }
-                notifyDataSetInvalidated();
-                ProjectsFragment.listViewDept.setSelection(position);
+                notifyDataSetChanged();
             }
         });
-        aq.id(R.id.btEdit).clicked(new View.OnClickListener() {
+        holder.editText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (!baseClass.getSelectedProject().equalsIgnoreCase("0")) {
                     callFragmentWithBackStack(R.id.container, EditProjectFragment.
-                            newInstance(ProjectsFragment.ByDepartmentList,position), "EditProjectFragment");
+                            newInstance(ProjectsFragment.ByDepartmentList, position), "EditProjectFragment");
                 }
             }
         });
 
-        aq.id(R.id.btDelete).clicked(new View.OnClickListener() {
+        holder.delText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                NormalDialogCustomAttr("Delete Project?", position);
+                NormalDialogCustomAttr("Delete project?", position);
             }
         });
-//        Animation animation = AnimationUtils.loadAnimation(ctx, (position > lastPosition) ? R.anim.up_from_bottom : R.anim.down_from_top);
-//        convertView.startAnimation(animation);
         return convertView;
     }
     public void DeleteProject(Object caller, Object model) {
@@ -185,6 +200,18 @@ public class AdapterProjectsDeptList extends BaseAdapter implements StickyListHe
                                 , new CallBack(AdapterProjectsDeptList.this, "DeleteProject"));
                     }
                 });
+    }
+
+    static class ViewHolder {
+        private TextView projectTitle;
+        private TextView taskAlert;
+        private TextView userAlert;
+        private TextView milestoneAlert;
+        private TextView projectId;
+        private TextView projectDesc;
+        private TextView editText;
+        private TextView delText;
+        private RelativeLayout parent;
     }
 
 }

@@ -7,6 +7,8 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.support.design.widget.Snackbar;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -41,7 +43,9 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import cc.cloudist.acplibrary.ACProgressConstant;
@@ -90,6 +94,7 @@ public class EditUserFragment extends BaseFragment implements MultiSelectionSpin
         projectsList.setListener(this);
         baseClass = ((BaseClass) getActivity().getApplicationContext());
         aq = new AQuery(getActivity(), view);
+        aq.id(R.id.lblListHeader).text(getString(R.string.edit_user));
         setHasOptionsMenu(true);
         service = new ProjectsListService(getActivity());
         service1 = new UserService(getActivity());
@@ -118,10 +123,11 @@ public class EditUserFragment extends BaseFragment implements MultiSelectionSpin
     public void UpdateValues(){
         aq.id(R.id.first_name).text(UserListModel.getInstance().responseObject.get(position).firstName);
         aq.id(R.id.last_name).text(UserListModel.getInstance().responseObject.get(position).lastName);
+        aq.id(R.id.nick_name).text(UserListModel.getInstance().responseObject.get(position).nickName);
         aq.id(R.id.user_email).text(UserListModel.getInstance().responseObject.get(position).email);
         String imagePath =UserListModel
                 .getInstance().responseObject.get(position).profileImagePath;
-        Log.e("Image",Constants.UserImage_URL + UserListModel
+        Log.e("Image", Constants.UserImage_URL + UserListModel
                 .getInstance().responseObject.get(position).profileImagePath);
         if(imagePath != null) {
             Glide.with(getActivity()).load(Constants.Image_URL + UserListModel.getInstance()
@@ -227,6 +233,7 @@ public class EditUserFragment extends BaseFragment implements MultiSelectionSpin
                     service1.updateUserWithoutProjectSelected(Integer.toString(UserListModel.getInstance().responseObject.get(position).ID),
                             aq.id(R.id.first_name).getText().toString(),
                             aq.id(R.id.last_name).getText().toString(),
+                            aq.id(R.id.nick_name).getText().toString(),
                             aq.id(R.id.user_email).getText().toString(),
                             aq.id(R.id.user_phoneno).getText().toString(),
                             UserRoleModel.getInstance().responseObject.get
@@ -236,6 +243,7 @@ public class EditUserFragment extends BaseFragment implements MultiSelectionSpin
                     service1.updateUserWithProjectSelected(Integer.toString(UserListModel.getInstance().responseObject.get(position).ID),
                             aq.id(R.id.first_name).getText().toString(),
                             aq.id(R.id.last_name).getText().toString(),
+                            aq.id(R.id.nick_name).getText().toString(),
                             aq.id(R.id.user_email).getText().toString(),
                             aq.id(R.id.user_phoneno).getText().toString(),
                             UserRoleModel.getInstance().responseObject.get
@@ -266,7 +274,9 @@ public class EditUserFragment extends BaseFragment implements MultiSelectionSpin
                 dialog.dismiss();
                 if (position == 0) {
                     Intent intent = new Intent(
-                            "android.media.action.IMAGE_CAPTURE");
+                            android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+                    newFile = getOutputMediaFile();
+                    intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(newFile));
                     startActivityForResult(intent, TAKE_PICTURE);
                 }
                 if (position == 1) {
@@ -294,24 +304,31 @@ public class EditUserFragment extends BaseFragment implements MultiSelectionSpin
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        Log.e("code", requestCode + "/" + resultCode + "/");
+        Log.e("code", requestCode + "/" + resultCode );
+        if (resultCode == Activity.RESULT_CANCELED) {
+            Toast.makeText(getActivity(), "Cancelled",
+                    Toast.LENGTH_SHORT).show();
+        }
         switch (requestCode) {
             case TAKE_PICTURE:
                 if (resultCode == getActivity().RESULT_OK) {
-                    Uri selectedImageUri = data.getData();
-                    newFile = new File(getRealPathFromURI(selectedImageUri));
+                    // Already Captured Image
                 }
                 break;
             case RESULT_GALLERY:
                 if (null != data) {
-                    newFile = new File(URI.create("file://" + getDataColumn(getActivity(), data.getData(), null, null)));
+                    String thePath = getUriFromUrl("file://"+
+                            getDataColumn(getActivity(), data.getData(),null,null)).toString();
+                    newFile = new File(URI.create(thePath));
                 }
                 break;
             case PICK_File:
                 if (resultCode == Activity.RESULT_OK) {
                     Uri contactData = data.getData();
+                    String thePath = getUriFromUrl("file://"+
+                            getDataColumn(getActivity(), contactData,null,null)).toString();
                     try {
-                        newFile = new File(new URI("file://"+getDataColumn(getActivity(), contactData,null,null)));
+                        newFile = new File(new URI(thePath));
                     } catch (URISyntaxException e) {
                         e.printStackTrace();
                     }
@@ -320,8 +337,13 @@ public class EditUserFragment extends BaseFragment implements MultiSelectionSpin
             default:
                 break;
         }
-        aq.id(R.id.profile).image(newFile, 100);
-        new UploadPicture().execute();
+
+        if(newFile== null){
+            aq.id(R.id.profile).image(R.drawable.nav_user);
+        }else {
+            aq.id(R.id.profile).image(newFile, 200);
+            new UploadPicture().execute();
+        }
     }
     public class UploadPicture extends AsyncTask<Void, Void, String> {
         GenericHttpClient httpClient;

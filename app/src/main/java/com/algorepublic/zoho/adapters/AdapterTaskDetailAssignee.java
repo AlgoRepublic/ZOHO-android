@@ -11,6 +11,7 @@ import android.widget.ImageView;
 
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.fragments.DocsPreviewFragment;
+import com.algorepublic.zoho.fragments.ForumsDetailFragment;
 import com.algorepublic.zoho.utils.BaseClass;
 import com.algorepublic.zoho.utils.Constants;
 import com.androidquery.AQuery;
@@ -54,8 +55,10 @@ public class AdapterTaskDetailAssignee extends RecyclerView.Adapter<AdapterTaskD
 
     @Override
     public void onBindViewHolder(SimpleViewHolder holder, int position) {
-        Glide.with(ctx).load(Constants.UserImage_URL+arraylist.get(position).profileImage)
-                .into(holder.imageView);
+        if(baseClass.getProfileImage() != null) {
+            Glide.with(ctx).load(Constants.Image_URL + baseClass.getProfileImageID()
+                    + "." + BaseClass.getExtensionType(baseClass.getProfileImage())).into(holder.imageView);
+        }
     }
 
     @Override

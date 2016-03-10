@@ -12,8 +12,11 @@ import android.widget.GridView;
 import android.widget.ImageView;
 
 import com.algorepublic.zoho.adapters.AdapterMenuItems;
+import com.algorepublic.zoho.fragments.DocsPreviewFragment;
 import com.algorepublic.zoho.utils.BaseClass;
+import com.algorepublic.zoho.utils.Constants;
 import com.androidquery.AQuery;
+import com.bumptech.glide.Glide;
 
 public class MainActivity extends BaseActivity {
 
@@ -43,9 +46,14 @@ public class MainActivity extends BaseActivity {
         if (android.os.Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
             aq_header.id(R.id.view).visibility(View.GONE);
         }
-        aq_header.id(R.id.user_name).text(baseClass.getFirstName());
+        aq_header.id(R.id.first_name).text(baseClass.getFirstName());
+        aq_header.id(R.id.last_name).text(baseClass.getLastName());
         aq_header.id(R.id.email).text(baseClass.getEmail());
-
+        if(baseClass.getProfileImage() != null) {
+            Glide.with(this).load(Constants.Image_URL + baseClass.getProfileImageID()
+                    + "." + BaseClass.getExtensionType
+                    (baseClass.getProfileImage())).into(aq_header.id(R.id.profile).getImageView());
+        }
         if(baseClass.getThemePreference() == R.style.AppThemeBlue)
             aq_header.id(R.id.layout_menu).background(R.color.colorPrimaryBlue);
         else

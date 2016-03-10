@@ -28,7 +28,7 @@ public class CreateCommentModel {
     public Integer responseCode;
 
     @SerializedName("responseObject")
-    public Integer responseObject;
+    public boolean responseObject;
 
 
 }

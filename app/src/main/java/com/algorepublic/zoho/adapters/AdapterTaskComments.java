@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.fragments.TaskCommentFragment;
+import com.algorepublic.zoho.utils.BaseClass;
 import com.algorepublic.zoho.utils.Constants;
 import com.bumptech.glide.Glide;
 import com.mikhaellopez.circularimageview.CircularImageView;
@@ -21,9 +22,11 @@ public class AdapterTaskComments extends BaseAdapter {
 
     Context ctx;
     private LayoutInflater l_Inflater;
+    BaseClass baseClass;
 
     public AdapterTaskComments(Context context) {
         l_Inflater = LayoutInflater.from(context);
+        baseClass = ((BaseClass) context.getApplicationContext());
         this.ctx = context;
     }
 
@@ -55,7 +58,10 @@ public class AdapterTaskComments extends BaseAdapter {
         holder.taskComment.setText(TaskCommentFragment.arrayList.get(position).getComment());
         holder.userName.setText(TaskCommentFragment.arrayList.get(position).getUserName()
         +" , "+TaskCommentFragment.arrayList.get(position).getDateTime());
-        Glide.with(ctx).load(Constants.UserImage_URL+TaskCommentFragment.arrayList.get(position).getUserImage()).into(holder.userImage);
+        Glide.with(ctx).load(Constants.Image_URL + TaskCommentFragment
+                .arrayList.get(position).getUserImageID()
+                +"."+BaseClass.getExtensionType(TaskCommentFragment.arrayList
+                .get(position).getUserImagePath())).into(holder.userImage);
 
         return convertView;
     }

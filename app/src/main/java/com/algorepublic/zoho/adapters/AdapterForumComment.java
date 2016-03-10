@@ -10,8 +10,12 @@ import android.widget.BaseAdapter;
 import com.algorepublic.zoho.Models.ForumsCommentModel;
 import com.algorepublic.zoho.Models.ForumsModel;
 import com.algorepublic.zoho.R;
+import com.algorepublic.zoho.fragments.ForumsDetailFragment;
+import com.algorepublic.zoho.fragments.TaskCommentFragment;
 import com.algorepublic.zoho.utils.BaseClass;
+import com.algorepublic.zoho.utils.Constants;
 import com.androidquery.AQuery;
+import com.bumptech.glide.Glide;
 
 /**
  * Created by waqas on 2/3/16.
@@ -31,12 +35,12 @@ public class AdapterForumComment extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return ForumsCommentModel.getInstance().responseObject.forumComments.size();
+        return ForumsDetailFragment.arrayList.size();
     }
 
     @Override
-    public ForumsCommentModel.ForumComments getItem(int position) {
-        return ForumsCommentModel.getInstance().responseObject.forumComments.get(position);
+    public Object getItem(int position) {
+        return ForumsDetailFragment.arrayList.get(position);
     }
 
     @Override
@@ -49,12 +53,13 @@ public class AdapterForumComment extends BaseAdapter {
         convertView = l_Inflater.inflate(R.layout.layout_comments_maker, null);
         aq = new AQuery(convertView);
 
-        aq.id(R.id.forum_title).text(getItem(position).user.firstName+" "+
-        getItem(position).user.lastName+", on "+baseClass.DateFormatter
-                (getItem(position).user.updatedAt)+" "+baseClass.GetTime(
-                baseClass.DateMilli(getItem(position).user.updatedAt)));
-        aq.id(R.id.forum_description).text(Html.fromHtml(getItem(position).message));
-        aq.id(R.id.comment_image).text(getItem(position).user.profileImagePath);
+        aq.id(R.id.forum_description).text(ForumsDetailFragment.arrayList.get(position).getComment());
+        aq.id(R.id.forum_title).text(ForumsDetailFragment.arrayList.get(position).getUserName()
+                + " , " + ForumsDetailFragment.arrayList.get(position).getDateTime());
+        Glide.with(ctx).load(Constants.Image_URL + ForumsDetailFragment
+                .arrayList.get(position).getUserImageID()
+                +"."+BaseClass.getExtensionType(ForumsDetailFragment.arrayList
+                .get(position).getUserImagePath())).into(aq.id(R.id.comment_user).getImageView());
         return convertView;
     }
 }

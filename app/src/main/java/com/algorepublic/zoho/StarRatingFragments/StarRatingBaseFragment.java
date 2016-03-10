@@ -1,6 +1,7 @@
 package com.algorepublic.zoho.StarRatingFragments;
 
 import android.os.Bundle;
+import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,9 +41,8 @@ public class StarRatingBaseFragment extends BaseFragment {
         textView3 = (TextView) view.findViewById(R.id.textLevel3);
         aq = new AQuery(view);
         getToolbar().setTitle(getString(R.string.start_rating));
-        if(savedInstanceState == null) {
-            callFragment(R.id.starContainer, StarRatingLevelOneFragment.newInstance(), "StarRatingLevelOneFragment");
-        }
-        return view;
+ 
+       callFragmentWithReplace(R.id.starContainer, StarRatingLevelOneFragment.newInstance(), "StarRatingLevelOneFragment");
+       return view;
     }
 }

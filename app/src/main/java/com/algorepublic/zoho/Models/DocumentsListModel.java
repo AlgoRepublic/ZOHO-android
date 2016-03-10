@@ -52,7 +52,7 @@ public class DocumentsListModel {
         @Expose
         public ArrayList<Files> files = new ArrayList<>();
     }
-    public class Files{
+    public class Files {
 
         @SerializedName("ID")
         @Expose
@@ -83,6 +83,33 @@ public class DocumentsListModel {
         @Expose
         public boolean isFav;
 
+        @SerializedName("responseObject")
+        public User user = new User();
+
+    }
+
+    public class User {
+
+        @SerializedName("ID")
+        public String Id;
+
+        @SerializedName("Email")
+        public String eMail;
+
+        @SerializedName("FirstName")
+        public String firstName;
+
+        @SerializedName("LastName")
+        @Expose
+        public String lastName;
+
+        @SerializedName("ProfileImagePath")
+        @Expose
+        public String profileImagePath;
+
+        @SerializedName("ProfilePictureID")
+        @Expose
+        public Integer profilePictureID;
     }
 
 }

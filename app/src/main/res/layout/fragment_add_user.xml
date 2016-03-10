@@ -5,10 +5,39 @@
     android:layout_height="match_parent"
     android:background="@color/colorBaseWrapper"
     android:orientation="vertical">
-
+    <RelativeLayout
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent">
+    <com.h6ah4i.android.materialshadowninepatch.MaterialShadowContainerView
+        android:id="@+id/shadow_item_container"
+        android:layout_width="match_parent"
+        style="@style/ms9_DefaultShadowStyle"
+        android:layout_height="wrap_content"
+        app:ms9_useAmbientShadow="true"
+        app:ms9_affectsDisplayedPosition="true"
+        app:ms9_shadowTranslationZ="1dp"
+        app:ms9_shadowElevation="3dp">
+        <RelativeLayout
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:layout_marginBottom="6dp"
+            android:layout_marginTop="2dp"
+            android:background="@color/colorContentWrapper"
+            android:layout_width="match_parent">
+            <TextView
+                android:id="@+id/lblListHeader"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:text="@string/add_user"
+                android:gravity="center"
+                android:textColor="@color/white" />
+        </RelativeLayout>
+    </com.h6ah4i.android.materialshadowninepatch.MaterialShadowContainerView>
     <android.support.v7.widget.CardView
         android:id="@+id/card_view"
         android:layout_margin="10dp"
+        android:layout_below="@+id/shadow_item_container"
         android:layout_gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -61,8 +90,21 @@
                 app:met_primaryColor="@color/colorBaseHeader" />
 
             <com.rengwuxian.materialedittext.MaterialEditText
-                android:id="@+id/user_email"
+                android:id="@+id/nick_name"
                 android:layout_below="@+id/last_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:hint="@string/last_name"
+                android:inputType="textMultiLine"
+                android:textSize="18sp"
+                app:met_singleLineEllipsis="true"
+                app:met_floatingLabel="normal"
+                app:met_primaryColor="@color/colorBaseHeader" />
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/user_email"
+                android:layout_below="@+id/nick_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -122,4 +164,5 @@
             </LinearLayout>
         </RelativeLayout>
     </android.support.v7.widget.CardView>
+    </RelativeLayout>
 </ScrollView>
