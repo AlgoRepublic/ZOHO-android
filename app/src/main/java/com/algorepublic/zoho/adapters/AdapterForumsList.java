@@ -58,8 +58,8 @@ public class AdapterForumsList extends BaseAdapter {
     public View getView(final int position, View convertView, ViewGroup parent) {
         convertView = l_Inflater.inflate(R.layout.layout_forum_row, null);
         aq = new AQuery(convertView);
-        aq.id(R.id.forum_title).text(getItem(position).title);
-        aq.id(R.id.forum_description).text(ctx.getString(R.string.by)+ getItem(position).user.firstName
+        aq.id(R.id.comment_title).text(getItem(position).title);
+        aq.id(R.id.comment_description).text(ctx.getString(R.string.by)+ getItem(position).user.firstName
                 +" "+getItem(position).user.lastName
                 +","+ctx.getString(R.string.last_responce_on)+ baseClass.DateFormatter(getItem(position).updatedAt)
                 +" "+ baseClass.GetTime(baseClass.DateMilli(getItem(position).updatedAt)));

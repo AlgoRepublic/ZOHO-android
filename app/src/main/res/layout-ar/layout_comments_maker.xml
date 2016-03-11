@@ -35,20 +35,20 @@
                 android:layout_marginLeft="5dp"
                 android:textColor="@color/colorBaseHeader"
                 android:textSize="14sp"
-                android:id="@+id/forum_title"
+                android:id="@+id/comment_title"
                 android:layout_alignTop="@+id/comment_image"
                 android:layout_toEndOf="@+id/comment_image" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/forum_description"
+                android:id="@+id/comment_description"
                 android:textSize="14sp"
                 android:lines="2"
                 android:text="daadadad"
                 android:textColor="@color/colorBaseHeader"
                 android:layout_below="@+id/comment_image"
-                android:layout_alignStart="@+id/forum_title" />
+                android:layout_alignStart="@+id/comment_title" />
         </RelativeLayout>
     </com.h6ah4i.android.materialshadowninepatch.MaterialShadowContainerView>
 </RelativeLayout>

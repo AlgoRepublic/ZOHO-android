@@ -8,7 +8,7 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.algorepublic.zoho.Models.CreateCommentModel;
@@ -17,7 +17,6 @@ import com.algorepublic.zoho.Models.ForumsModel;
 import com.algorepublic.zoho.Models.TaskCommentsModel;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.adapters.AdapterForumComment;
-import com.algorepublic.zoho.adapters.AdapterTaskComments;
 import com.algorepublic.zoho.adapters.TaskComments;
 import com.algorepublic.zoho.services.CallBack;
 import com.algorepublic.zoho.services.ForumService;
@@ -36,6 +35,7 @@ public class ForumsDetailFragment extends BaseFragment {
     static ForumsDetailFragment fragment;
     static int Position;
     ForumService service;
+    public static Button btSend;
     AdapterForumComment adapter;
     public static ArrayList<TaskComments> arrayList = new ArrayList<>();
 
@@ -51,6 +51,7 @@ public class ForumsDetailFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view  = inflater.inflate(R.layout.fragment_forum_detail, container, false);
+        btSend = (Button) view.findViewById(R.id.send);
         aq = new AQuery(getActivity(), view);
         baseClass = ((BaseClass) getActivity().getApplicationContext());
         adapter = new AdapterForumComment(getActivity());
@@ -59,8 +60,8 @@ public class ForumsDetailFragment extends BaseFragment {
         service.getForumsDetail(ForumsModel.getInstance().responseObject.get(Position).ID
                 ,true,new CallBack(ForumsDetailFragment.this,"ForumDetails"));
 
-        aq.id(R.id.forum_title).text(ForumsModel.getInstance().responseObject.get(Position).title);
-        aq.id(R.id.forum_description).text(getString(R.string.by)+" " + ForumsModel.getInstance().responseObject.get(Position).user.firstName
+        aq.id(R.id.comment_title).text(ForumsModel.getInstance().responseObject.get(Position).title);
+        aq.id(R.id.comment_description).text(getString(R.string.by)+" " + ForumsModel.getInstance().responseObject.get(Position).user.firstName
                 + "," + getString(R.string.last_responce_on) +
                 baseClass.DateFormatter(ForumsModel.getInstance().responseObject.get(Position).updatedAt) + " "
                 + baseClass.GetTime(baseClass.DateMilli(ForumsModel.getInstance()

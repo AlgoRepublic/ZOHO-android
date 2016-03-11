@@ -80,8 +80,9 @@ public class AgendaCalendarView extends FrameLayout implements StickyListHeaders
 
     // region Constructors
 
-    public AgendaCalendarView(Context context) {
+    public AgendaCalendarView(Context context ,int n) {
         super(context);
+        int l = n;
     }
 
     public AgendaCalendarView(Context context, AttributeSet attrs) {

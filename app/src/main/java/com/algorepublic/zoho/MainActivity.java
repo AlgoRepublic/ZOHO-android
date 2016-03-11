@@ -12,11 +12,11 @@ import android.widget.GridView;
 import android.widget.ImageView;
 
 import com.algorepublic.zoho.adapters.AdapterMenuItems;
-import com.algorepublic.zoho.fragments.DocsPreviewFragment;
 import com.algorepublic.zoho.utils.BaseClass;
 import com.algorepublic.zoho.utils.Constants;
 import com.androidquery.AQuery;
 import com.bumptech.glide.Glide;
+import com.github.tibolte.agendacalendarview.AgendaCalendarView;
 
 public class MainActivity extends BaseActivity {
 
@@ -32,6 +32,7 @@ public class MainActivity extends BaseActivity {
             setTheme(R.style.AppThemeBlue);
         else
             setTheme(R.style.AppTheme);
+        AgendaCalendarView calendarView = new AgendaCalendarView(this,0);
         setContentView(R.layout.activity_main);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -46,14 +47,7 @@ public class MainActivity extends BaseActivity {
         if (android.os.Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
             aq_header.id(R.id.view).visibility(View.GONE);
         }
-        aq_header.id(R.id.first_name).text(baseClass.getFirstName());
-        aq_header.id(R.id.last_name).text(baseClass.getLastName());
-        aq_header.id(R.id.email).text(baseClass.getEmail());
-        if(baseClass.getProfileImage() != null) {
-            Glide.with(this).load(Constants.Image_URL + baseClass.getProfileImageID()
-                    + "." + BaseClass.getExtensionType
-                    (baseClass.getProfileImage())).into(aq_header.id(R.id.profile).getImageView());
-        }
+        UpdateValues();
         if(baseClass.getThemePreference() == R.style.AppThemeBlue)
             aq_header.id(R.id.layout_menu).background(R.color.colorPrimaryBlue);
         else
@@ -70,6 +64,21 @@ public class MainActivity extends BaseActivity {
         gridView.setAdapter(new AdapterMenuItems(this));
     }
 
+    @Override
+    protected void onResume() {
+        UpdateValues();
+        super.onResume();
+    }
+    public void UpdateValues(){
+        aq_header.id(R.id.first_name).text(baseClass.getFirstName());
+        aq_header.id(R.id.last_name).text(baseClass.getLastName());
+        aq_header.id(R.id.email).text(baseClass.getEmail());
+        if(baseClass.getProfileImage() != null) {
+            Glide.with(this).load(Constants.Image_URL + baseClass.getProfileImageID()
+                    + "." + BaseClass.getExtensionType
+                    (baseClass.getProfileImage())).into(aq_header.id(R.id.profile).getImageView());
+        }
+    }
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

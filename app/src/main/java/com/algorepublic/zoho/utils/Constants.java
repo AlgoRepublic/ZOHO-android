@@ -16,6 +16,7 @@ public class Constants {
 	public static String GetAssigneeByTask_API = BASE_URL+ "/User/GetListByProject";//ProjectID
 	public static String CreateUser_API = BASE_URL+ "/User/CreateUser";
 	public static String UpdateUser_API = BASE_URL+ "/User/UpdateUserProfile";
+	public static String UpdateUserPassword_API = BASE_URL+ "/User/UpdateUserPassword";
 	public static String DeleteUser_API = BASE_URL+ "/User/DeleteUser"; // userID, projectID
 	// Tasks API
 	public static String GetTaskListByOwner_API = BASE_URL+ "/TaskList/GetListByOwnerID?"; //userID
@@ -39,7 +40,6 @@ public class Constants {
 	public static String StarUpdateProgress_API = BASE_URL+ "/StarRating/UpdateProgressOfQuestion?"; // questionId, progress
 	public static String StarEditComment_API = BASE_URL+ "/StarRating/EditCommentOfQuestion?"; // questionId, comment)
 	// Project API
-	public static String GetAllProjects_API = BASE_URL+ "/Project/GetList";
 	public static String GetAllProjectsByUser_API = BASE_URL+ "/Project/GetListByUserID?";
 	public static String GetProjectsByDepartment_API = BASE_URL+ "/Project/GetDepartmentProjects";
 	public static String GetProjectsByClient_API = BASE_URL+ "/Project/GetCompanyProjects";
@@ -50,6 +50,8 @@ public class Constants {
 	public static String GetForumsList_API = BASE_URL+ "/Forum/GetListByProjectID?";
 	public static String GetForumDetail_API = BASE_URL+ "/Forum/GetById?";
 	public static String DeleteForum_API = BASE_URL+ "/Forum/Delete?"; //id
+	public static String DeleteForumComment_API = BASE_URL+ "/Forum/RemoveComment?"; //id,ForumId)
+	public static String UpdateForumComment_API = BASE_URL+ "/Forum/UpdateComment?"; //comment
 	public static String AddNewForumPost_API=BASE_URL+"/Forum/AddNewForumPost?";
 	public static String CreateForumComment_API=BASE_URL+"/Forum/NewForumComment?"; //Forum item
 	// Document API

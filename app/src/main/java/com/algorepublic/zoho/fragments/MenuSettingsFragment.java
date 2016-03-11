@@ -23,10 +23,10 @@ import com.google.android.gms.common.api.GoogleApiClient;
 /**
  * Created by android on 3/10/16.
  */
-public class FragmentMenuSettings extends BaseFragment {
+public class MenuSettingsFragment extends BaseFragment {
 
     BaseClass baseClass;
-    static FragmentMenuSettings fragment;
+    static MenuSettingsFragment fragment;
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -34,8 +34,8 @@ public class FragmentMenuSettings extends BaseFragment {
     private GoogleApiClient client;
     AQuery aq;
 
-    public static FragmentMenuSettings newInstance() {
-        fragment = new FragmentMenuSettings();
+    public static MenuSettingsFragment newInstance() {
+        fragment = new MenuSettingsFragment();
         return fragment;
     }
     @Override
@@ -43,7 +43,6 @@ public class FragmentMenuSettings extends BaseFragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_menu_settings, container, false);
         baseClass = ((BaseClass) getActivity().getApplicationContext());
-
         getToolbar().setTitle(getString(R.string.settings));
         final ToggleExpandLayout layout = (ToggleExpandLayout) view.findViewById(R.id.toogleLayout);
         ((Switch) view.findViewById(R.id.switch_theme)).setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -95,7 +94,13 @@ public class FragmentMenuSettings extends BaseFragment {
         aq.id(R.id.edit_profile).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                callFragmentWithBackStack(R.id.settings_container, FragmentEditProfile.newInstance(), "FragmentEditProfile");
+                callFragmentWithBackStack(R.id.container, EditProfileFragment.newInstance(), "FragmentEditProfile");
+            }
+        });
+        aq.id(R.id.rest_password).clicked(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                callFragmentWithBackStack(R.id.container, RestPasswordFragment.newInstance(), "RestPasswordFragment");
             }
         });
         // ATTENTION: This was auto-generated to implement the App Indexing API.

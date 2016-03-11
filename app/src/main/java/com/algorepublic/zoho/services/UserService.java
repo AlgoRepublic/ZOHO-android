@@ -68,11 +68,20 @@ public class UserService extends BaseService {
         this.post(url, params, obj, GeneralModel.getInstance(), message);
         Log.e("UpdateUserWPService", url);
     }
-    public void deleteUser(String ID,boolean message, CallBack obj){
-        String url = Constants.CreateUser_API;
+    public void deleteUser(String ID,String projectID,boolean message, CallBack obj){
+        String url = Constants.DeleteUser_API;
+        HashMap<String, String> params = new HashMap<String, String>();
+        params.put("userID", ID);
+        params.put("projectID", projectID);
+        this.post(url, params, obj, GeneralModel.getInstance(), message);
+        Log.e("DeleteUserService", url);
+    }
+    public void restSetPassword(String ID,String Password,boolean message, CallBack obj){
+        String url = Constants.UpdateUserPassword_API;
         HashMap<String, String> params = new HashMap<String, String>();
         params.put("ID", ID);
-        this.post(url, params, obj, CreateProjectModel.getInstance(), message);
-        Log.e("DeleteUserService", url);
+        params.put("Password", Password);
+        this.post(url, params, obj, GeneralModel.getInstance(), message);
+        Log.e("PasswordService", url);
     }
 }

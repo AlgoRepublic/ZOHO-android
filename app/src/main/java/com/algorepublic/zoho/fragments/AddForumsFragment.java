@@ -84,8 +84,8 @@ public class AddForumsFragment extends BaseFragment{
                     get(category_list.getSelectedIndex()).ID;
         }
         if (baseClass.getSelectedProject()!="0") {
-            service.createForum(aq.id(R.id.forum_title).getText().toString(),
-                    aq.id(R.id.forum_description).getText().toString(),
+            service.createForum(aq.id(R.id.comment_title).getText().toString(),
+                    aq.id(R.id.comment_description).getText().toString(),
                     baseClass.getSelectedProject(),
                     true,
                     true
@@ -115,11 +115,11 @@ public class AddForumsFragment extends BaseFragment{
         switch (item.getItemId()){
             case R.id.save_project:
                 baseClass.hideKeyPad(getView());
-                if(aq.id(R.id.forum_title).getText().toString().isEmpty()){
+                if(aq.id(R.id.comment_title).getText().toString().isEmpty()){
                     Snackbar.make(getView(),getString(R.string.forum_addname),Snackbar.LENGTH_SHORT).show();
                     return false;
                 }
-                if(aq.id(R.id.forum_description).getText().toString().isEmpty()){
+                if(aq.id(R.id.comment_description).getText().toString().isEmpty()){
                     Snackbar.make(getView(),getString(R.string.forum_add_description),Snackbar.LENGTH_SHORT).show();
                     return false;
                 }

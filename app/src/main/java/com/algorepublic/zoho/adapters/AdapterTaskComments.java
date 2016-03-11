@@ -47,8 +47,8 @@ public class AdapterTaskComments extends BaseAdapter {
         if (convertView == null) {
             convertView = l_Inflater.inflate(R.layout.layout_comments_maker, null);
             holder = new ViewHolder();
-            holder.taskComment = (TextView) convertView.findViewById(R.id.forum_description);
-            holder.userName = (TextView) convertView.findViewById(R.id.forum_title);
+            holder.taskComment = (TextView) convertView.findViewById(R.id.comment_description);
+            holder.userName = (TextView) convertView.findViewById(R.id.comment_title);
             holder.userImage = (CircularImageView) convertView.findViewById(R.id.comment_image);
             convertView.setTag(holder);
         } else {

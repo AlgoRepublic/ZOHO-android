@@ -48,7 +48,7 @@
         android:id="@+id/layout2">
 
         <com.rengwuxian.materialedittext.MaterialEditText
-            android:id="@+id/forum_title"
+            android:id="@+id/comment_title"
             android:textSize="18sp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -90,7 +90,7 @@
         android:layout_below="@+id/layout3"
         >
         <com.rengwuxian.materialedittext.MaterialEditText
-            android:id="@+id/forum_description"
+            android:id="@+id/comment_description"
             android:textSize="18sp"
             android:layout_width="match_parent"
             android:layout_height="150dp"
