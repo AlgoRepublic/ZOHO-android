@@ -3,7 +3,6 @@ package com.algorepublic.zoho.adapters;
 import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +11,6 @@ import android.widget.BaseAdapter;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.StarRatingFragments.StarRatingBaseFragment;
 import com.algorepublic.zoho.StarRatingFragments.StarRatingLevelThreeFragment;
-import com.algorepublic.zoho.StarRatingFragments.StarRatingLevelTwoFragment;
 import com.algorepublic.zoho.utils.BaseClass;
 import com.androidquery.AQuery;
 
@@ -66,7 +64,7 @@ public class AdapterStarRatingLevelTwo extends BaseAdapter {
     }
     public void callFragmentWithBackStack(int containerId, Fragment fragment, String tag){
         ((AppCompatActivity)ctx).getSupportFragmentManager()
-                .beginTransaction()
+                .beginTransaction().setCustomAnimations(R.anim.slide_in_enter, R.anim.slide_in_exit, R.anim.slide_pop_enter, R.anim.slide_pop_exit)
                 .replace(containerId, fragment, tag)
                 .addToBackStack(null)
                 .commit();

@@ -59,17 +59,17 @@ public class ForumsFragment extends BaseFragment{
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view  = inflater.inflate(R.layout.fragment_forums, container, false);
+        View view = inflater.inflate(R.layout.fragment_forums, container, false);
         setHasOptionsMenu(true);
         aq = new AQuery(getActivity(), view);
         baseClass = ((BaseClass) getActivity().getApplicationContext());
 
         ForumService service = new ForumService(getActivity());
         if (baseClass.getSelectedProject().equalsIgnoreCase("0")) {
-            Toast.makeText(getActivity(),"Please Select Project", Toast.LENGTH_SHORT).show();
-        }else
-        service.getForumsList(baseClass.getSelectedProject(), true, new CallBack(ForumsFragment.this, "ForumListCallback"));
-
+            Toast.makeText(getActivity(), "Please Select Project", Toast.LENGTH_SHORT).show();
+        }else {
+            service.getForumsList(baseClass.getSelectedProject(), true, new CallBack(ForumsFragment.this, "ForumListCallback"));
+        }
         setHasOptionsMenu(true);
         getToolbar().setTitle(getString(R.string.forums));
         return view;

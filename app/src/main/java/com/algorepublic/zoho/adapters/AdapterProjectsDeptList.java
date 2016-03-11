@@ -147,7 +147,7 @@ public class AdapterProjectsDeptList extends BaseAdapter implements StickyListHe
     public void callFragmentWithBackStack(int containerId, Fragment fragment, String tag){
 
         ((AppCompatActivity) ctx).getSupportFragmentManager()
-                .beginTransaction()
+                .beginTransaction().setCustomAnimations(R.anim.slide_in_enter, R.anim.slide_in_exit, R.anim.slide_pop_enter, R.anim.slide_pop_exit)
                 .replace(containerId, fragment, tag)
                 .addToBackStack(null)
                 .commit();

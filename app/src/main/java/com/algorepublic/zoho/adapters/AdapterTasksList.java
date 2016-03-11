@@ -3,11 +3,9 @@ package com.algorepublic.zoho.adapters;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
-import android.os.SystemClock;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,7 +19,6 @@ import com.algorepublic.zoho.Models.GeneralModel;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.fragments.BaseFragment;
 import com.algorepublic.zoho.fragments.TaskDetailFragment;
-import com.algorepublic.zoho.fragments.TasksListFragment;
 import com.algorepublic.zoho.services.CallBack;
 import com.algorepublic.zoho.services.TaskListService;
 import com.algorepublic.zoho.utils.BaseClass;
@@ -153,7 +150,7 @@ public class AdapterTasksList extends BaseAdapter implements StickyListHeadersAd
     }
     public void callFragmentWithBackStack(int containerId, Fragment fragment, String tag){
         ((AppCompatActivity)ctx).getSupportFragmentManager()
-                .beginTransaction()
+                .beginTransaction().setCustomAnimations( R.anim.slide_in_enter, R.anim.slide_in_exit, R.anim.slide_pop_enter, R.anim.slide_pop_exit)
                 .replace(containerId, fragment, tag)
                 .addToBackStack(null)
                 .commit();

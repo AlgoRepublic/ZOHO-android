@@ -16,6 +16,7 @@ import com.algorepublic.zoho.BaseActivity;
 import com.algorepublic.zoho.MainActivity;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.fragments.CalendarFragment;
+import com.algorepublic.zoho.fragments.DashboardFragment;
 import com.algorepublic.zoho.fragments.DepartmentFragment;
 import com.algorepublic.zoho.fragments.DocumentsListFragment;
 import com.algorepublic.zoho.fragments.ForumsFragment;
@@ -112,7 +113,7 @@ public class AdapterMenuItems extends BaseAdapter{
             ((AppCompatActivity)ctx).getSupportFragmentManager().popBackStack();
         }
         if(position==0){
-
+            callFragmentWithReplace(R.id.container, DashboardFragment.newInstance(), "DashboardFragment");
         }if(position==1){
             callFragmentWithReplace(R.id.container, ProjectsFragment.newInstance(), "ProjectsFragment");
         }if(position==2){
@@ -136,9 +137,9 @@ public class AdapterMenuItems extends BaseAdapter{
 
         ((AppCompatActivity) ctx).getSupportFragmentManager()
                 .beginTransaction()
+                .setCustomAnimations(R.anim.slide_in_enter, R.anim.slide_in_exit, R.anim.slide_pop_enter, R.anim.slide_pop_exit)
                 .replace(containerId, fragment, tag)
                 .commit();
-
     }
     static class ViewHolder {
         TextView title;

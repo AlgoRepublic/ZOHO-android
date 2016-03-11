@@ -189,6 +189,7 @@ public class TaskDetailFragment extends BaseFragment {
 
             }
         });
+
         return view;
     }
     public void TaskDetails(Object caller, Object model) {
@@ -214,7 +215,7 @@ public class TaskDetailFragment extends BaseFragment {
             aq.id(R.id.end_date).text("No Date");
         }else
         aq.id(R.id.end_date).text(DateFormatter(TaskByIdModel.getInstance().responseObject.endDate));
-
+        aq.id(R.id.user_counter).text(String.valueOf(TaskByIdModel.getInstance().responseObject.userObject.size()));
         aq.id(R.id.category).text(baseClass.db.getString("TaskListName"));
         aq.id(R.id.task_name).text(TaskByIdModel.getInstance().responseObject.title);
         aq.id(R.id.task_desc).text(TaskByIdModel.getInstance().responseObject.description);
