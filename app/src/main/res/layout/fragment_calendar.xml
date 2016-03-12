@@ -9,22 +9,5 @@
     <com.github.tibolte.agendacalendarview.AgendaCalendarView
         android:id="@+id/agenda_calendar_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="gone"
-        agendaCalendar:calendarHeaderColor="@color/colorBaseHeader"
-        agendaCalendar:calendarColor="@color/white"
-        agendaCalendar:calendarDayTextColor="@color/white"
-        agendaCalendar:agendaCurrentDayTextColor="@color/colorBaseHeader"
-        agendaCalendar:fabColor="@color/colorBaseWrapper" />
-
-    <com.github.tibolte.agendacalendarview.AgendaCalendarView
-        android:id="@+id/agenda_calendar_blue"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="gone"
-        agendaCalendar:calendarHeaderColor="@color/colorPrimaryBlue"
-        agendaCalendar:calendarColor="@color/colorSecondaryBlue"
-        agendaCalendar:calendarDayTextColor="@color/white"
-        agendaCalendar:agendaCurrentDayTextColor="@color/colorPrimaryBlue"
-        agendaCalendar:fabColor="@color/colorSecondaryBlue" />
+        android:layout_height="match_parent"/>
 </RelativeLayout>

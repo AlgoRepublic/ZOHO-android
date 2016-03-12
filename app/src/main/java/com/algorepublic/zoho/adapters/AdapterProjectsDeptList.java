@@ -111,7 +111,7 @@ public class AdapterProjectsDeptList extends BaseAdapter implements StickyListHe
                 } else {
                     baseClass.setSelectedProject(((TextView)view.findViewById(R.id.project_id)).getText().toString());
                     baseClass.db.putInt("ProjectID", Integer.parseInt(baseClass.getSelectedProject()));
-                    baseClass.db.putString("ProjectName", (((TextView)view.findViewById(R.id.project_id)).getText().toString()));
+                    baseClass.db.putString("ProjectName", (((TextView)view.findViewById(R.id.project_title)).getText().toString()));
                 }
                 notifyDataSetChanged();
             }

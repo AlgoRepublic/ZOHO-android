@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
 import com.algorepublic.zoho.Models.ForumsCommentModel;
+import com.algorepublic.zoho.Models.GeneralModel;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.fragments.ForumsDetailFragment;
 import com.algorepublic.zoho.services.CallBack;
@@ -28,13 +29,13 @@ public class AdapterForumComment extends BaseAdapter {
     private BaseClass baseClass;
     private AQuery aq;
     ForumService service;
-    boolean flag= false;
+
     private LayoutInflater l_Inflater;
 
     public AdapterForumComment(Context context) {
         l_Inflater = LayoutInflater.from(context);
         this.ctx = context;
-        service =  new ForumService((AppCompatActivity)ctx.getApplicationContext());
+        service =  new ForumService((AppCompatActivity)ctx);
         baseClass = ((BaseClass) ctx.getApplicationContext());
     }
 
@@ -61,44 +62,42 @@ public class AdapterForumComment extends BaseAdapter {
         aq.id(R.id.comment_description).text(ForumsDetailFragment.arrayList.get(position).getComment());
         aq.id(R.id.comment_title).text(ForumsDetailFragment.arrayList.get(position).getUserName()
                 + " , " + ForumsDetailFragment.arrayList.get(position).getDateTime());
-        Glide.with(ctx).load(Constants.Image_URL + ForumsDetailFragment
-                .arrayList.get(position).getUserImageID()
-                + "." + BaseClass.getExtensionType(ForumsDetailFragment.arrayList
-                .get(position).getUserImagePath())).into(aq.id(R.id.comment_image).getImageView());
+        if(ForumsDetailFragment.arrayList
+                .get(position).getUserImagePath() != null) {
+            Glide.with(ctx).load(Constants.Image_URL + ForumsDetailFragment
+                    .arrayList.get(position).getUserImageID()
+                    + "." + BaseClass.getExtensionType(ForumsDetailFragment.arrayList
+                    .get(position).getUserImagePath())).into(aq.id(R.id.comment_image).getImageView());
+        }
         aq.id(R.id.btEdit).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                flag = true;
-                ForumsDetailFragment.btSend.setText(ForumsDetailFragment
+                ForumsDetailFragment.flag = true;ForumsDetailFragment.ClickedPosition = position;
+                ForumsDetailFragment.comment_user.setText(ForumsDetailFragment
                         .arrayList.get(position).getComment());
             }
         });
         aq.id(R.id.btDelete).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ForumsDetailFragment.ClickedPosition = position;
+                service.deleteForumComment(ForumsDetailFragment
+                        .arrayList.get(position).getCommentID(),true,
+                        new CallBack(AdapterForumComment.this,"DeleteComment"));
+            }
+        });
 
-            }
-        });
-        ForumsDetailFragment.btSend.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (flag == true) {
-                    service.updateforumComments(ForumsDetailFragment
-                            .arrayList.get(position).getCommentID(),ForumsDetailFragment
-                            .arrayList.get(position).getComment(),true,new
-                            CallBack(AdapterForumComment.this,"UpdateComment"));
-                }
-            }
-        });
         return convertView;
     }
-//    public void UpdateComment(Object caller, Object model){
-//        ForumsCommentModel.getInstance().setList((ForumsCommentModel) model);
-//        if (ForumsCommentModel.getInstance().responseObject.forumComments.size()!=0) {
-//            GetGeneralList();
-//        }else {
-//            Snackbar.make(getView(), getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
-//        }
-//    }
+    public void DeleteComment(Object caller, Object model){
+        GeneralModel.getInstance().setList((GeneralModel) model);
+        if (GeneralModel.getInstance().responseObject ==true) {
+            ForumsDetailFragment.arrayList.remove(ForumsDetailFragment.ClickedPosition);
+            notifyDataSetChanged();
+        }else {
+            Snackbar.make(((AppCompatActivity)ctx).findViewById(android.R.id.content),
+                    ctx.getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
+        }
+    }
 
 }

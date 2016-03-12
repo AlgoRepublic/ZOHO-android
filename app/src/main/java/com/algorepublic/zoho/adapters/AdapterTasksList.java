@@ -29,6 +29,7 @@ import com.flyco.dialog.listener.OnBtnClickL;
 import com.flyco.dialog.widget.NormalDialog;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 import se.emilsjolander.stickylistheaders.StickyListHeadersAdapter;
 
@@ -137,11 +138,12 @@ public class AdapterTasksList extends BaseAdapter implements StickyListHeadersAd
         return convertView;
     }
     public void Filter(String text){
+        text = text.toLowerCase(Locale.getDefault());
         ArrayList<TasksList> arrayList = new ArrayList<>();
         arrayList.addAll(lists);
         tasksLists.clear();
         for (int loop=0;loop<arrayList.size();loop++){
-            if(arrayList.get(loop).getTaskName().contains(text))
+            if(arrayList.get(loop).getTaskName().toLowerCase().contains(text))
             {
                 tasksLists.add(arrayList.get(loop));
             }

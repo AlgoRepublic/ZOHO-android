@@ -8,12 +8,15 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.algorepublic.zoho.Models.CreateCommentModel;
 import com.algorepublic.zoho.Models.DocumentsListModel;
+import com.algorepublic.zoho.Models.GeneralModel;
 import com.algorepublic.zoho.Models.TaskCommentsModel;
 import com.algorepublic.zoho.Models.UserListModel;
 import com.algorepublic.zoho.R;
@@ -22,6 +25,7 @@ import com.algorepublic.zoho.adapters.DocumentsList;
 import com.algorepublic.zoho.adapters.TaskComments;
 import com.algorepublic.zoho.services.CallBack;
 import com.algorepublic.zoho.services.DocumentsService;
+import com.algorepublic.zoho.services.ForumService;
 import com.algorepublic.zoho.utils.BaseClass;
 import com.algorepublic.zoho.utils.Constants;
 import com.androidquery.AQuery;
@@ -38,8 +42,13 @@ public class DocsPreviewFragment extends BaseFragment {
     static DocsPreviewFragment fragment;
     AQuery aq;
     DocumentsService service;
+    ForumService forumService;
     static DocumentsList docObject;
     BaseClass baseClass;
+    public static Button btSend;
+    public static EditText comment_user;
+    public static boolean flag= false;
+    public static int ClickedPosition;
     AdapterDocsComments adapter;
     public static ListView listView;
     public static ArrayList<TaskComments> arrayList = new ArrayList<>();
@@ -65,8 +74,11 @@ public class DocsPreviewFragment extends BaseFragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_documens_preview, container, false);
         listView = (ListView) view.findViewById(R.id.listView_comments);
+        btSend = (Button) view.findViewById(R.id.send);
+        comment_user = (EditText) view.findViewById(R.id.comment_user);
         aq = new AQuery(view);
         service = new DocumentsService(getActivity());
+        forumService = new ForumService(getActivity());
         baseClass = ((BaseClass) getActivity().getApplicationContext());
         adapter = new AdapterDocsComments(getActivity());
         listView.setAdapter(adapter);
@@ -92,7 +104,14 @@ public class DocsPreviewFragment extends BaseFragment {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if (actionId == getResources().getInteger(R.integer.add_comment)) {
-                    PerformAction();
+                    if (flag == true) {
+                        forumService.updateforumComments(DocsPreviewFragment
+                                .arrayList.get(ClickedPosition).getCommentID(), DocsPreviewFragment
+                                .comment_user.getText().toString(), true, new
+                                CallBack(DocsPreviewFragment.this, "UpdateComment"));
+                    }else{
+                        PerformAction();
+                    }
                     return true;
                 }
                 return false;
@@ -101,11 +120,35 @@ public class DocsPreviewFragment extends BaseFragment {
         aq.id(R.id.send).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                PerformAction();
+                if (flag == true) {
+                    forumService.updateforumComments(DocsPreviewFragment
+                            .arrayList.get(ClickedPosition).getCommentID(), DocsPreviewFragment
+                            .comment_user.getText().toString(), true, new
+                            CallBack(DocsPreviewFragment.this, "UpdateComment"));
+                }else{
+                    PerformAction();
+                }
             }
         });
         service.getDocumentComments(docObject.getID(),true,new CallBack(DocsPreviewFragment.this,"AllDocComments"));
         return view;
+    }
+    public void UpdateComment(Object caller, Object model){
+        GeneralModel.getInstance().setList((GeneralModel) model);
+        if (GeneralModel.getInstance().responseObject ==true) {
+            flag = false;
+            DocsPreviewFragment
+                    .arrayList.get(ClickedPosition).setComment(DocsPreviewFragment
+                    .comment_user.getText().toString());
+            DocsPreviewFragment
+                    .arrayList.get(ClickedPosition).setDateTime(baseClass.GetDateTime());
+            adapter.notifyDataSetChanged();
+            DocsPreviewFragment
+                    .comment_user.setText("");
+        }else {
+            Snackbar.make(getView(),
+                    getActivity().getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
+        }
     }
     public void AllDocComments(Object caller, Object model) {
         TaskCommentsModel.getInstance().setList((TaskCommentsModel) model);
@@ -119,6 +162,7 @@ public class DocsPreviewFragment extends BaseFragment {
         arrayList.clear();
         for (int loop = 0; loop < TaskCommentsModel.getInstance().responseObject.size(); loop++) {
             TaskComments taskComments = new TaskComments();
+            taskComments.setCommentID(TaskCommentsModel.getInstance().responseObject.get(loop).Id);
             taskComments.setComment(TaskCommentsModel.getInstance().responseObject.get(loop).message);
             taskComments.setDateTime(GetDateTimeComment(TaskCommentsModel.getInstance().responseObject.get(loop).createdAt));
             taskComments.setUserName(TaskCommentsModel.getInstance().responseObject.get(loop).userObject.firstName);
@@ -131,7 +175,17 @@ public class DocsPreviewFragment extends BaseFragment {
     public void CreateComment(Object caller, Object model) {
         CreateCommentModel.getInstance().setList((CreateCommentModel) model);
         if (CreateCommentModel.getInstance().responseCode ==100){
-            Snackbar.make(getView(),"Comment Added",Snackbar.LENGTH_SHORT).show();
+            Snackbar.make(getView(), "Comment Added", Snackbar.LENGTH_SHORT).show();
+            aq.id(R.id.comment_user).text("");
+            TaskComments taskComments = new TaskComments();
+            taskComments.setCommentID(CreateCommentModel.getInstance().responseObject.Id);
+            taskComments.setComment(CreateCommentModel.getInstance().responseObject.message);
+            taskComments.setDateTime(GetDateTimeComment(DateMilli(CreateCommentModel.getInstance().responseObject.updatedAt)));
+            taskComments.setUserName(CreateCommentModel.getInstance().responseObject.userObject.firstName);
+            taskComments.setUserImagePath(CreateCommentModel.getInstance().responseObject.userObject.profileImagePath);
+            taskComments.setUserImageID(CreateCommentModel.getInstance().responseObject.userObject.profilePictureID);
+            arrayList.add(taskComments);
+            adapter.notifyDataSetChanged();
         }
         else
         {
@@ -145,17 +199,7 @@ public class DocsPreviewFragment extends BaseFragment {
             Snackbar.make(getView(), getString(R.string.enter_comment), Snackbar.LENGTH_SHORT).show();
             return;
         }
-        service.createDocComments(Integer.toString(docObject.getID()),comment,baseClass.getUserId(),false,
-                new CallBack(DocsPreviewFragment.this,"CreateComment"));
-        aq.id(R.id.comment_user).text("");
-        TaskComments taskComments = new TaskComments();
-        taskComments.setComment(comment);
-        taskComments.setUserName(baseClass.getFirstName());
-        taskComments.setUserImagePath(baseClass.getProfileImage());
-        taskComments.setUserImageID(baseClass.getProfileImageID());
-        Log.e("Image",Constants.UserImage_URL+baseClass.getProfileImage());
-        taskComments.setDateTime(GetDateTime());
-        arrayList.add(taskComments);
-        adapter.notifyDataSetChanged();
+        service.createDocComments(Integer.toString(docObject.getID()), comment, baseClass.getUserId(), false,
+                new CallBack(DocsPreviewFragment.this, "CreateComment"));
     }
 }

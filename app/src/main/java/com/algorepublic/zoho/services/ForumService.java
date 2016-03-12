@@ -5,6 +5,7 @@ import android.util.Log;
 
 import com.algorepublic.zoho.Models.AddforumModel;
 import com.algorepublic.zoho.Models.CreateCommentModel;
+import com.algorepublic.zoho.Models.CreateForumCommentModel;
 import com.algorepublic.zoho.Models.CreateForumModel;
 import com.algorepublic.zoho.Models.ForumsCommentModel;
 import com.algorepublic.zoho.Models.ForumsModel;
@@ -55,7 +56,7 @@ public class ForumService extends BaseService {
     }
     public void updateForum(String ID,String title,String content, String projectId,boolean makeSticky, boolean makeAnnouncement
             ,int categoryID  ,String createdBy, boolean message, CallBack obj){
-        String url = Constants.AddNewForumPost_API;
+        String url = Constants.UpdateForumPost_API;
         HashMap<String, String> params = new HashMap<String, String>();
         params.put("Title", title);
         params.put("ID", ID);
@@ -75,20 +76,13 @@ public class ForumService extends BaseService {
         this.post(url, params, obj, GeneralModel.getInstance(), message);
         Log.e("DeleteForumService", url);
     }
-    public void deleteForumComment(String ID, boolean message, CallBack obj){
-        String url = Constants.DeleteForumComment_API;
-        HashMap<String, String> params = new HashMap<String, String>();
-        params.put("id", ID);
-        this.post(url, params, obj, GeneralModel.getInstance(), message);
-        Log.e("DeleteForumComService", url);
-    }
     public void createforumComments(String forumID, String comment, String userID,boolean message, CallBack obj){
         String url = Constants.CreateForumComment_API;
         HashMap<String, String> params = new HashMap<String, String>();
         params.put("ForumCommentID", forumID);
         params.put("Message", comment);
         params.put("CreatedBy", userID);
-        this.post(url, params, obj, CreateCommentModel.getInstance(), message);
+        this.post(url, params, obj, CreateForumCommentModel.getInstance(), message);
         Log.e("CreateCommentService", url);
     }
     public void updateforumComments(String ID, String comment,boolean message, CallBack obj){
@@ -96,7 +90,15 @@ public class ForumService extends BaseService {
         HashMap<String, String> params = new HashMap<String, String>();
         params.put("CommentID", ID);
         params.put("Message", comment);
-        this.post(url, params, obj, CreateCommentModel.getInstance(), message);
+        this.post(url, params, obj, GeneralModel.getInstance(), message);
         Log.e("UpdateCommentService", url);
+    }
+    public void deleteForumComment(String ID, boolean message, CallBack obj){
+        String url = Constants.DeleteForumComment_API;
+        HashMap<String, String> params = new HashMap<String, String>();
+        params.put("id", ID);
+        Log.e("S","S"+ID);
+        this.post(url, params, obj, GeneralModel.getInstance(), message);
+        Log.e("DeleteForumComService", url);
     }
 }

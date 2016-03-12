@@ -493,7 +493,7 @@
         <TextView
             android:id="@+id/mark_as_done"
             android:layout_width="0dp"
-            android:text="@string/mark_as_done"
+            android:text="@string/task_as_done"
             android:padding="2dp"
             android:gravity="center"
             android:layout_weight="1.2"

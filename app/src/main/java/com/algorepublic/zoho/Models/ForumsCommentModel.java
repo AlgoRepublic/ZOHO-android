@@ -48,8 +48,14 @@ public class ForumsCommentModel {
 
     public class ForumComments{
 
+        @SerializedName("CommentID")
+        public String commentID;
+
         @SerializedName("Message")
         public String message;
+
+        @SerializedName("CreatedAt")
+        public String createdAt;
 
         @SerializedName("User")
         public Users user = new Users();

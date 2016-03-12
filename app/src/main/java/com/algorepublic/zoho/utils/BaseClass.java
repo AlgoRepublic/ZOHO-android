@@ -391,5 +391,17 @@ public class BaseClass extends Application {
         int mDay = calendar.get(Calendar.DAY_OF_MONTH);
         return (mMonth+"/"+mDay+"/"+mYear);
     }
+    public String GetDateTime(){
+        Calendar calendar = Calendar.getInstance();
+        int mYear = calendar.get(Calendar.YEAR);
+        int mMonth = calendar.get(Calendar.MONTH);
+        int mDay = calendar.get(Calendar.DAY_OF_MONTH);
 
+        SimpleDateFormat month_date = new SimpleDateFormat("MMM");
+        String month_name = month_date.format(calendar.getTime());
+        String delegate = "hh:mm aaa";
+        String time  = (String) DateFormat.format(delegate, Calendar.getInstance().getTime());
+
+        return (month_name+" "+mDay +", "+mYear+" "+time);
+    }
 }
