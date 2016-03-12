@@ -83,10 +83,9 @@ public class UploadDocsFragment extends BaseFragment implements GoogleApiClient.
     static UploadDocsFragment fragment;
     private static final int TAKE_PICTURE = 1;
     public static final int RESULT_GALLERY = 2;
-    public static final int PICK_File = 3;
-    static final int RESULT_GOOGLEDRIVE = 4;
-    static final int DBX_CHOOSER_REQUEST = 5;
-    static final int REQUEST_ACCOUNT_PICKER = 6;
+    static final int RESULT_GOOGLEDRIVE = 3;
+    static final int DBX_CHOOSER_REQUEST = 4;
+    static final int REQUEST_ACCOUNT_PICKER = 5;
     AdapterUploadAttachment adapter;
     public static ParallaxListView listView;
     private DbxChooser mChooser;
@@ -214,7 +213,7 @@ public class UploadDocsFragment extends BaseFragment implements GoogleApiClient.
         mGoogleApiClient.connect();
     }
     private void CallForAttachments() {
-        String[] menuItems = {"Camera", "Gallery", "Others", "Google Drive", "Drop Box"};
+        String[] menuItems = {"Camera", "Gallery",  "Google Drive", "Drop Box"};
         final ActionSheetDialog dialog = new ActionSheetDialog(getActivity(), menuItems, getView());
         dialog.isTitleShow(false).show();
         dialog.setOnOperItemClickL(new OnOperItemClickL() {
@@ -235,22 +234,11 @@ public class UploadDocsFragment extends BaseFragment implements GoogleApiClient.
                             MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                     startActivityForResult(galleryIntent, RESULT_GALLERY);
                 }
+
                 if (position == 2) {
-                    if (Build.VERSION.SDK_INT > 19) {
-                        Intent mediaIntent = new Intent(Intent.ACTION_GET_CONTENT);
-                        mediaIntent.setType("*/file"); //set mime type as per requirement
-                        startActivityForResult(mediaIntent, PICK_File);
-                    } else {
-                        Intent galleryIntent = new Intent(
-                                Intent.ACTION_PICK,
-                                MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                        startActivityForResult(galleryIntent, RESULT_GALLERY);
-                    }
-                }
-                if (position == 3) {
                     chooseAccount();
                 }
-                if (position == 4) {
+                if (position == 3) {
                     mChooser = new DbxChooser("kl26qefbf8cmwm9");
                     mChooser.forResultType(DbxChooser.ResultType.FILE_CONTENT)
                             .launch(UploadDocsFragment.this, DBX_CHOOSER_REQUEST);
@@ -297,28 +285,13 @@ public class UploadDocsFragment extends BaseFragment implements GoogleApiClient.
                     checkFileLenght(newFile);
                 }
                 break;
-            case PICK_File:
-                if (resultCode == Activity.RESULT_OK) {
-                    Uri contactData = data.getData();
-                    File newFile = null;
-                    String thePath = getUriFromUrl("file://"+
-                            getDataColumn(getActivity(), contactData,null,null)).toString();
-                    try {
-                        newFile = new File(new URI(thePath));
-                        checkFileLenght(newFile);
-                    } catch (URISyntaxException e) {
-                        e.printStackTrace();
-                    }
-                }
-                break;
+
             case DBX_CHOOSER_REQUEST:
                 if (resultCode == getActivity().RESULT_OK) {
                     DbxChooser.Result result = new DbxChooser.Result(data);
                     String path = result.getLink().toString();
                     path.replace("file://", "");
                     Log.e("Path", path.toString());
-                    Uri u = result.getLink();
-                    String name = u.getLastPathSegment();
                     Log.e("Call", result.getLink().toString());
                     File file = null;
                     try {
