@@ -16,7 +16,9 @@ import android.animation.Animator;
 import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.res.ColorStateList;
+import android.content.res.Resources;
 import android.content.res.TypedArray;
+import android.graphics.Color;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.util.AttributeSet;
@@ -40,14 +42,14 @@ import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
 public class AgendaCalendarView extends FrameLayout implements StickyListHeadersListView.OnStickyHeaderChangedListener {
 
     private static final String LOG_TAG = AgendaCalendarView.class.getSimpleName();
-
+    public static TinyDB db;
     private CalendarView mCalendarView;
     private AgendaView mAgendaView;
     private FloatingActionButton mFloatingActionButton;
 
     private int mAgendaCurrentDayTextColor, mCalendarHeaderColor, mCalendarBackgroundColor, mCalendarDayTextColor, mCalendarPastDayTextColor, mCalendarCurrentDayColor, mFabColor;
     private CalendarPickerController mCalendarPickerController;
-
+    private int ThemeType;
     private ListViewScrollTracker mAgendaListViewScrollTracker;
     private AbsListView.OnScrollListener mAgendaScrollListener = new AbsListView.OnScrollListener() {
         int mCurrentAngle;
@@ -80,25 +82,34 @@ public class AgendaCalendarView extends FrameLayout implements StickyListHeaders
 
     // region Constructors
 
-    public AgendaCalendarView(Context context ,int n) {
+    public AgendaCalendarView(Context context ,int themeType) {
         super(context);
-        int l = n;
+        db = new TinyDB(context);
+        db.putInt("ThemeType", themeType);
     }
 
     public AgendaCalendarView(Context context, AttributeSet attrs) {
         super(context, attrs);
-
-        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.ColorOptionsView, 0, 0);
-        mAgendaCurrentDayTextColor = a.getColor(R.styleable.ColorOptionsView_agendaCurrentDayTextColor, getResources().getColor(R.color.theme_primary));
-        mCalendarHeaderColor = a.getColor(R.styleable.ColorOptionsView_calendarHeaderColor, getResources().getColor(R.color.theme_primary_dark));
-        mCalendarBackgroundColor = a.getColor(R.styleable.ColorOptionsView_calendarColor, getResources().getColor(R.color.theme_primary));
-        mCalendarDayTextColor = a.getColor(R.styleable.ColorOptionsView_calendarDayTextColor, getResources().getColor(R.color.theme_text_icons));
-        mCalendarCurrentDayColor = a.getColor(R.styleable.ColorOptionsView_calendarCurrentDayTextColor, getResources().getColor(R.color.calendar_text_current_day));
-        mCalendarPastDayTextColor = a.getColor(R.styleable.ColorOptionsView_calendarPastDayTextColor, getResources().getColor(R.color.theme_light_primary));
-        mFabColor = a.getColor(R.styleable.ColorOptionsView_fabColor, getResources().getColor(R.color.theme_accent));
-
+        ThemeType =db.getInt("ThemeType");
+        if(ThemeType == 0) {
+            mAgendaCurrentDayTextColor = R.color.calendar_text_current_day;
+            mCalendarHeaderColor = R.color.colorBaseHeader;
+            mCalendarBackgroundColor = R.color.colorWhite;
+            mCalendarDayTextColor = R.color.calendar_text_first_day_of_month;
+            mCalendarCurrentDayColor = R.color.calendar_text_current_day;
+            mCalendarPastDayTextColor = R.color.calendar_past_days_bg;
+            mFabColor = R.color.colorBaseHeader;
+        }else if(ThemeType == 1) {
+            mAgendaCurrentDayTextColor = R.color.theme_primary;
+            mCalendarHeaderColor = R.color.theme_primary_dark;
+            mCalendarBackgroundColor = R.color.theme_primary;
+            mCalendarDayTextColor = R.color.theme_text_icons;
+            mCalendarCurrentDayColor = R.color.calendar_text_current_day;
+            mCalendarPastDayTextColor = R.color.theme_light_primary;
+            mFabColor = R.color.theme_accent;
+        }
         LayoutInflater inflater = (LayoutInflater) context
-                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                        .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         inflater.inflate(R.layout.view_agendacalendar, this, true);
 
         setAlpha(0f);
@@ -192,7 +203,6 @@ public class AgendaCalendarView extends FrameLayout implements StickyListHeaders
         mCalendarPickerController = calendarPickerController;
 
         CalendarManager.getInstance(getContext()).buildCal(minDate, maxDate, locale);
-
         // Feed our views with weeks list and events
         mCalendarView.init(CalendarManager.getInstance(getContext()), mCalendarDayTextColor, mCalendarCurrentDayColor, mCalendarPastDayTextColor);
 

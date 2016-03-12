@@ -21,15 +21,6 @@
 
 package com.github.tibolte.agendacalendarview;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Map;
-
-//import com.google.gson.Gson;
-
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
@@ -39,6 +30,15 @@ import android.os.Environment;
 import android.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.util.Log;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Map;
+
+//import com.google.gson.Gson;
 
 
 public class TinyDB {
@@ -186,12 +186,6 @@ public class TinyDB {
 
     // Getters
 
-    /**
-     * Get int value from SharedPreferences at 'key'. If key not found, return 'defaultValue'
-     * @param key SharedPreferences key
-     * @param defaultValue int value returned if key was not found
-     * @return int value at 'key' or 'defaultValue' if key not found
-     */
     public int getInt(String key) {
         return preferences.getInt(key, 0);
     }
@@ -222,12 +216,7 @@ public class TinyDB {
         return preferences.getLong(key, defaultValue);
     }
 
-    /**
-     * Get float value from SharedPreferences at 'key'. If key not found, return 'defaultValue'
-     * @param key SharedPreferences key
-     * @param defaultValue float value returned if key was not found
-     * @return float value at 'key' or 'defaultValue' if key not found
-     */
+
     public float getFloat(String key) {
         return preferences.getFloat(key, 0);
     }
@@ -283,12 +272,7 @@ public class TinyDB {
         return new ArrayList<String>(Arrays.asList(TextUtils.split(preferences.getString(key, ""), "‚‗‚")));
     }
 
-    /**
-     * Get boolean value from SharedPreferences at 'key'. If key not found, return 'defaultValue'
-     * @param key SharedPreferences key
-     * @param defaultValue boolean value returned if key was not found
-     * @return boolean value at 'key' or 'defaultValue' if key not found
-     */
+
     public boolean getBoolean(String key) {
         return preferences.getBoolean(key, false);
     }
