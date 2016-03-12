@@ -9,7 +9,6 @@ import android.widget.TextView;
 
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.fragments.DocsPreviewFragment;
-import com.algorepublic.zoho.fragments.TaskCommentFragment;
 import com.algorepublic.zoho.utils.BaseClass;
 import com.algorepublic.zoho.utils.Constants;
 import com.bumptech.glide.Glide;
@@ -48,8 +47,8 @@ public class AdapterDocsComments extends BaseAdapter {
         if (convertView == null) {
             convertView = l_Inflater.inflate(R.layout.layout_comments_maker, null);
             holder = new ViewHolder();
-            holder.taskComment = (TextView) convertView.findViewById(R.id.forum_description);
-            holder.userName = (TextView) convertView.findViewById(R.id.forum_title);
+            holder.taskComment = (TextView) convertView.findViewById(R.id.comment_description);
+            holder.userName = (TextView) convertView.findViewById(R.id.comment_title);
             holder.userImage = (CircularImageView) convertView.findViewById(R.id.comment_image);
             convertView.setTag(holder);
         } else {

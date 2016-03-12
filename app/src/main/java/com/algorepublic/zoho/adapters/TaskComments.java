@@ -5,6 +5,13 @@ package com.algorepublic.zoho.adapters;
  */
 public class TaskComments {
 
+    public String getCommentID() {
+        return commentID;
+    }
+    public void setCommentID(String title) {
+        this.commentID = title;
+    }
+
     public String getComment() {
         return comment;
     }
@@ -39,6 +46,7 @@ public class TaskComments {
         this.dateTime = dateTime;
     }
 
+    private String commentID ;
     private String comment ;
     private String userName;
     private String userImagePath;

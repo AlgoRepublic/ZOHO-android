@@ -54,11 +54,11 @@ public class EditForumFragment extends BaseFragment  {
         switch (item.getItemId()){
             case R.id.save_project:
                 baseClass.hideKeyPad(getView());
-                if(aq.id(R.id.forum_title).getText().toString().isEmpty()){
+                if(aq.id(R.id.comment_title).getText().toString().isEmpty()){
                     Snackbar.make(getView(),getString(R.string.forum_addname), Snackbar.LENGTH_SHORT).show();
                     return false;
                 }
-                if(aq.id(R.id.forum_description).getText().toString().isEmpty()){
+                if(aq.id(R.id.comment_description).getText().toString().isEmpty()){
                     Snackbar.make(getView(),getString(R.string.forum_add_description),Snackbar.LENGTH_SHORT).show();
                     return false;
                 }
@@ -80,8 +80,8 @@ public class EditForumFragment extends BaseFragment  {
         Log.e("ProjectId", baseClass.getSelectedProject());
         if (!baseClass.getSelectedProject().equalsIgnoreCase("0")) {
             service.updateForum(Integer.toString(ForumsModel.getInstance().responseObject.get(Pos).ID),
-                    aq.id(R.id.forum_title).getText().toString(),
-                    aq.id(R.id.forum_description).getText().toString(),
+                    aq.id(R.id.comment_title).getText().toString(),
+                    aq.id(R.id.comment_description).getText().toString(),
                     baseClass.getSelectedProject(),
                     true,
                     true,
@@ -134,7 +134,7 @@ public class EditForumFragment extends BaseFragment  {
     }
     public void UpdateValues(){
         aq.id(R.id.lblListHeader).text(getString(R.string.edit_forum_post));
-        aq.id(R.id.forum_title).text(ForumsModel.getInstance().responseObject.get(Pos).title);
+        aq.id(R.id.comment_title).text(ForumsModel.getInstance().responseObject.get(Pos).title);
         aq.id(R.id.content_description).text(ForumsModel.getInstance().responseObject.get(Pos).forumContent);
         if(ForumsModel.getInstance().responseObject.get(Pos).categoryID==0){
             category_list.setSelectedIndex(0);

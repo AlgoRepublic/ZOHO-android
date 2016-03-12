@@ -78,6 +78,7 @@
 
     <string name="add_user">Add New User</string>
     <string name="edit_profile">Edit Profile</string>
+    <string name="rest_password">Rest Password</string>
     <string name="edit_user">Edit User</string>
     <string name="add_task">Add Task</string>
     <string name="edit">Edit</string>
@@ -192,12 +193,16 @@
     <string name="up_coming">Up Coming</string>
     <string name="first_name">First Name</string>
     <string name="last_name">Last Name</string>
+    <string name="nick_name">Nick Name</string>
     <string name="email">Email</string>
     <string name="phone_number">Phone Number</string>
     <string name="user_role">User Role</string>
     <string name="select_folder">Select Folder</string>
     <string name="logout">Logout</string>
     <string name="change_theme">Change Theme</string>
+    <string name="old_password">Old Password</string>
+    <string name="new_password">New Password</string>
+    <string name="confirm_password">Confirm Password</string>
 
     <!-- Star Rating Strings -->
     <string name="ratingPrimaryStage">PrimaryStage</string>
@@ -245,6 +250,11 @@
     <string name="user_first_name">Please Add First Name</string>
     <string name="user_last_name">Please Add Last Name</string>
     <string name="add_email">Please Add Email</string>
+    <string name="alert_old_password">Please Add Old Password</string>
+    <string name="alert_new_password">Please Add New Password</string>
+    <string name="alert_confirm_password">Please Add Confirm Password</string>
+    <string name="alert_match_password">Please Match Your Password</string>
+    <string name="update_password">Password Updated</string>
     <string name="add_phoneno">Please Add Phone Number</string>
     <string name="email_already">Email already exists</string>
 

@@ -34,7 +34,6 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:screenOrientation="portrait"
-        android:configChanges="orientation|keyboardHidden"
         android:hardwareAccelerated="true"
         android:theme="@style/AppThemeBlue">
 
@@ -43,7 +42,6 @@
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
-
         <activity android:name=".BaseActivity" />
         <activity
             android:name=".MainActivity"
@@ -81,7 +79,12 @@
         </activity>
         <activity
             android:name=".SettingsActivity"
+            android:parentActivityName=".BaseActivity"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_settings" />
+        <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value="com.algorepublic.zoho.BaseActivity" />
     </application>
 
 </manifest>

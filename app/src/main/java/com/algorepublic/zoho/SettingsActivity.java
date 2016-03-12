@@ -3,7 +3,7 @@ package com.algorepublic.zoho;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 
-import com.algorepublic.zoho.fragments.FragmentMenuSettings;
+import com.algorepublic.zoho.fragments.MenuSettingsFragment;
 import com.algorepublic.zoho.utils.BaseClass;
 
 
@@ -22,7 +22,8 @@ public class SettingsActivity extends BaseActivity {
 
         setContentView(R.layout.activity_settings);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
         toolbar.setTitle(getResources().getString(R.string.settings));
-        callFragment(R.id.settings_container, FragmentMenuSettings.newInstance(), "FragmentMenuSettings");
+        callFragment(R.id.container, MenuSettingsFragment.newInstance(), "FragmentMenuSettings");
     }
 }

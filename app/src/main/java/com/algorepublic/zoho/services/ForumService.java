@@ -75,6 +75,13 @@ public class ForumService extends BaseService {
         this.post(url, params, obj, GeneralModel.getInstance(), message);
         Log.e("DeleteForumService", url);
     }
+    public void deleteForumComment(String ID, boolean message, CallBack obj){
+        String url = Constants.DeleteForumComment_API;
+        HashMap<String, String> params = new HashMap<String, String>();
+        params.put("id", ID);
+        this.post(url, params, obj, GeneralModel.getInstance(), message);
+        Log.e("DeleteForumComService", url);
+    }
     public void createforumComments(String forumID, String comment, String userID,boolean message, CallBack obj){
         String url = Constants.CreateForumComment_API;
         HashMap<String, String> params = new HashMap<String, String>();
@@ -82,6 +89,14 @@ public class ForumService extends BaseService {
         params.put("Message", comment);
         params.put("CreatedBy", userID);
         this.post(url, params, obj, CreateCommentModel.getInstance(), message);
-        Log.e("LoginService", url);
+        Log.e("CreateCommentService", url);
+    }
+    public void updateforumComments(String ID, String comment,boolean message, CallBack obj){
+        String url = Constants.UpdateForumComment_API;
+        HashMap<String, String> params = new HashMap<String, String>();
+        params.put("CommentID", ID);
+        params.put("Message", comment);
+        this.post(url, params, obj, CreateCommentModel.getInstance(), message);
+        Log.e("UpdateCommentService", url);
     }
 }
