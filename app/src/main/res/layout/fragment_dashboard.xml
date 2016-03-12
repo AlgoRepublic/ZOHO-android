@@ -8,18 +8,39 @@
     <android.support.v7.widget.CardView
         android:id="@+id/card_view"
         android:layout_margin="10dp"
+        android:background="@color/colorBaseWrapper"
         android:layout_gravity="center"
         android:layout_width="match_parent"
-        android:layout_height="400dp"
+        android:layout_height="match_parent"
         app:cardElevation="4dp"
         app:cardCornerRadius="4dp">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:weightSum="2"
+            android:orientation="vertical">
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
             <com.echo.holographlibrary.BarGraph
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:layout_margin="10dp"
+                android:layout_height="match_parent"
                 android:id="@+id/graph"/>
 
+            </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+        <com.echo.holographlibrary.PieGraph
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:id="@+id/graphy"/>
+            </LinearLayout>
+        </LinearLayout>
     </android.support.v7.widget.CardView>
 </LinearLayout>
