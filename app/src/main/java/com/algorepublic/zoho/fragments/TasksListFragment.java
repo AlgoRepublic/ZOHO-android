@@ -240,13 +240,13 @@ public class TasksListFragment extends BaseFragment {
         });
     }
     public void FilterList(){
-        ArrayList<TasksList> lists = new ArrayList<>();
-        lists.addAll(generalList);generalList.clear();
-        for(int loop=0;loop<lists.size();loop++){
-            if(lists.get(loop).getProgress()<100){
-                generalList.add(lists.get(loop));
-            }
-        }
+//        ArrayList<TasksList> lists = new ArrayList<>();
+//        lists.addAll(generalList);generalList.clear();
+//        for(int loop=0;loop<lists.size();loop++){
+//            if(lists.get(loop).getProgress()<100){
+//                generalList.add(lists.get(loop));
+//            }
+//        }
         if(baseClass.getTaskFilterType().equalsIgnoreCase("DueDate")){
             Collections.sort(generalList, Date);
         }

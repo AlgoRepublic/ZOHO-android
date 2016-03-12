@@ -161,6 +161,7 @@
     <string name="reopen">Reopen Task?</string>
     <string name="reopen_task">Reopen Task</string>
     <string name="mark_as_done">Mark as done?</string>
+    <string name="task_as_done">Mark as done</string>
     <string name="task_done">Task done</string>
     <string name="task_created">Task Created/Updated Successfully</string>
     <string name="delete_task">Delete Task?</string>

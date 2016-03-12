@@ -17,22 +17,27 @@ import com.algorepublic.zoho.utils.Constants;
 import com.androidquery.AQuery;
 import com.bumptech.glide.Glide;
 import com.github.tibolte.agendacalendarview.AgendaCalendarView;
+import com.github.tibolte.agendacalendarview.calendar.CalendarView;
 
 public class MainActivity extends BaseActivity {
 
     AQuery aq,aq_header;
     BaseClass baseClass;
+    int themeType;
     public static GridView gridView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         baseClass = ((BaseClass) getApplicationContext());
-        if(baseClass.getThemePreference() == R.style.AppThemeBlue)
+        if(baseClass.getThemePreference() == R.style.AppThemeBlue) {
             setTheme(R.style.AppThemeBlue);
-        else
+            themeType =1;
+        }else {
             setTheme(R.style.AppTheme);
-        AgendaCalendarView calendarView = new AgendaCalendarView(this,0);
+            themeType =0;
+        }
+        new AgendaCalendarView(this,themeType);
         setContentView(R.layout.activity_main);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

@@ -3,17 +3,26 @@ package com.algorepublic.zoho.fragments;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.algorepublic.zoho.Models.CreateCommentModel;
+import com.algorepublic.zoho.Models.CreateForumCommentModel;
 import com.algorepublic.zoho.Models.ForumsCommentModel;
 import com.algorepublic.zoho.Models.ForumsModel;
+import com.algorepublic.zoho.Models.GeneralModel;
 import com.algorepublic.zoho.Models.TaskCommentsModel;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.adapters.AdapterForumComment;
@@ -30,12 +39,14 @@ import java.util.ArrayList;
  */
 public class ForumsDetailFragment extends BaseFragment {
 
-    private AQuery aq;
+    AQuery aq;
     private BaseClass baseClass;
     static ForumsDetailFragment fragment;
     static int Position;
+    public static int ClickedPosition;
+    public static boolean flag= false;
     ForumService service;
-    public static Button btSend;
+    public static EditText comment_user;
     AdapterForumComment adapter;
     public static ArrayList<TaskComments> arrayList = new ArrayList<>();
 
@@ -46,35 +57,75 @@ public class ForumsDetailFragment extends BaseFragment {
         }
         return fragment;
     }
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_task_details, menu);
+        super.onCreateOptionsMenu(menu, inflater);
 
+    }
+
+    /**
+     * This hook is called whenever an item in your options menu is selected.
+     * The default implementation simply returns false to have the normal
+     * processing happen (calling the item's Runnable or sending a message to
+     * its Handler as appropriate).  You can use this method for any items
+     * for which you would like to do processing without those other
+     * facilities.
+     * <p>
+     * <p>Derived classes should call through to the base class for it to
+     * perform the default menu handling.
+     *
+     * @param item The menu item that was selected.
+     * @return boolean Return false to allow normal menu processing to
+     * proceed, true to consume it here.
+     * @see #onCreateOptionsMenu
+     */
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.edit_task:
+                baseClass.hideKeyPad(getView());
+                if (baseClass.getSelectedProject().equalsIgnoreCase("0")) {
+                    Toast.makeText(getActivity(),"Please Select Project",Toast.LENGTH_SHORT).show();
+                }else {
+                    callFragmentWithBackStack(R.id.container, EditForumFragment.newInstance(Position), "EditForumFragment");
+                }
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view  = inflater.inflate(R.layout.fragment_forum_detail, container, false);
-        btSend = (Button) view.findViewById(R.id.send);
-        aq = new AQuery(getActivity(), view);
+        comment_user = (EditText) view.findViewById(R.id.comment_user);
+        aq = new AQuery(view);
+        setHasOptionsMenu(true);
         baseClass = ((BaseClass) getActivity().getApplicationContext());
         adapter = new AdapterForumComment(getActivity());
         aq.id(R.id.forums_comment_list).adapter(adapter);
         service = new ForumService(getActivity());
         service.getForumsDetail(ForumsModel.getInstance().responseObject.get(Position).ID
-                ,true,new CallBack(ForumsDetailFragment.this,"ForumDetails"));
+                , true, new CallBack(ForumsDetailFragment.this, "ForumDetails"));
 
-        aq.id(R.id.comment_title).text(ForumsModel.getInstance().responseObject.get(Position).title);
-        aq.id(R.id.comment_description).text(getString(R.string.by)+" " + ForumsModel.getInstance().responseObject.get(Position).user.firstName
+        aq.id(R.id.comment_description).text(getString(R.string.by) + " " + ForumsModel.getInstance().responseObject.get(Position).user.firstName
                 + "," + getString(R.string.last_responce_on) +
                 baseClass.DateFormatter(ForumsModel.getInstance().responseObject.get(Position).updatedAt) + " "
                 + baseClass.GetTime(baseClass.DateMilli(ForumsModel.getInstance()
                 .responseObject.get(Position).updatedAt)));
-        if((ForumsModel.getInstance().responseObject.get(Position).forumContent)!= null) {
-              aq.id(R.id.content_description).text(Html.fromHtml(ForumsModel.getInstance()
-                      .responseObject.get(Position).forumContent));
-        }
+
         aq.id(R.id.comment_user).getTextView().setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if (actionId == getResources().getInteger(R.integer.add_comment)) {
-                    PerformAction();
+                    if (flag == true) {
+                        service.updateforumComments(ForumsDetailFragment
+                                .arrayList.get(ClickedPosition).getCommentID(), ForumsDetailFragment
+                                .comment_user.getText().toString(), true, new
+                                CallBack(ForumsDetailFragment.this, "UpdateComment"));
+                    }else{
+                        PerformAction();
+                    }
                     return true;
                 }
                 return false;
@@ -83,7 +134,14 @@ public class ForumsDetailFragment extends BaseFragment {
         aq.id(R.id.send).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                PerformAction();
+                if (flag == true) {
+                    service.updateforumComments(ForumsDetailFragment
+                            .arrayList.get(ClickedPosition).getCommentID(), ForumsDetailFragment
+                            .comment_user.getText().toString(), true, new
+                            CallBack(ForumsDetailFragment.this, "UpdateComment"));
+                } else {
+                    PerformAction();
+                }
             }
         });
         return view;
@@ -96,21 +154,41 @@ public class ForumsDetailFragment extends BaseFragment {
             Snackbar.make(getView(),getString(R.string.enter_comment),Snackbar.LENGTH_SHORT).show();
             return;
         }
-        service.createforumComments(comment, comment, baseClass.getUserId(), false,
+        service.createforumComments(Integer.toString(ForumsModel.getInstance().responseObject.get(Position).ID)
+                , comment, baseClass.getUserId(), false,
                 new CallBack(ForumsDetailFragment.this, "CreateComment"));
-        aq.id(R.id.comment_user).text("");
-        TaskComments taskComments = new TaskComments();
-        taskComments.setComment(comment);
-        taskComments.setUserName(baseClass.getFirstName());
-        taskComments.setUserImagePath(baseClass.getProfileImage());
-        taskComments.setDateTime(GetDateTime());
-        arrayList.add(taskComments);
-        adapter.notifyDataSetChanged();
+    }
+    public void UpdateComment(Object caller, Object model){
+        GeneralModel.getInstance().setList((GeneralModel) model);
+        if (GeneralModel.getInstance().responseObject ==true) {
+            flag = false;
+            ForumsDetailFragment
+                    .arrayList.get(ClickedPosition).setComment(ForumsDetailFragment
+                    .comment_user.getText().toString());
+            ForumsDetailFragment
+                    .arrayList.get(ClickedPosition).setDateTime(baseClass.GetDateTime());
+            adapter.notifyDataSetChanged();
+            ForumsDetailFragment
+                    .comment_user.setText("");
+        }else {
+            Snackbar.make(getView(),
+                    getActivity().getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
+        }
     }
     public void CreateComment(Object caller, Object model) {
-        CreateCommentModel.getInstance().setList((CreateCommentModel) model);
-        if (CreateCommentModel.getInstance().responseCode ==100){
+        CreateForumCommentModel.getInstance().setList((CreateForumCommentModel) model);
+        if (CreateForumCommentModel.getInstance().responseCode ==100){
             Snackbar.make(getView(),"Comment Added",Snackbar.LENGTH_SHORT).show();
+            aq.id(R.id.comment_user).text("");
+            TaskComments taskComments = new TaskComments();
+            taskComments.setCommentID(CreateForumCommentModel.getInstance().responseObject.Id);
+            taskComments.setComment(CreateForumCommentModel.getInstance().responseObject.message);
+            taskComments.setDateTime(GetDateTimeComment(DateMilli(CreateForumCommentModel.getInstance().responseObject.updatedAt)));
+            taskComments.setUserName(baseClass.getFirstName());
+            taskComments.setUserImagePath(baseClass.getProfileImage());
+            taskComments.setUserImageID(baseClass.getProfileImageID());
+            arrayList.add(taskComments);
+            adapter.notifyDataSetChanged();
         }
         else
         {
@@ -124,15 +202,30 @@ public class ForumsDetailFragment extends BaseFragment {
         }else {
             Snackbar.make(getView(),getString(R.string.response_error),Snackbar.LENGTH_SHORT).show();
         }
+        UpdateValues();
+    }
+    public void UpdateValues() {
+        aq.id(R.id.comment_title).text(ForumsCommentModel.getInstance().responseObject.title);
+        aq.id(R.id.comment_description).text(getString(R.string.by)+" " + ForumsModel.getInstance().responseObject.get(Position).user.firstName
+                + "," + getString(R.string.last_responce_on) +
+                baseClass.DateFormatter(ForumsModel.getInstance().responseObject.get(Position).updatedAt) + " "
+                + baseClass.GetTime(baseClass.DateMilli(ForumsModel.getInstance()
+                .responseObject.get(Position).updatedAt)));
+        if((ForumsCommentModel.getInstance().responseObject.forumContent)!= null) {
+            aq.id(R.id.content_description).text(Html.
+                    fromHtml(ForumsCommentModel.getInstance().responseObject.forumContent));
+        }
     }
     public void GetGeneralList() {
         arrayList.clear();
-        for (int loop = 0; loop < TaskCommentsModel.getInstance().responseObject.size(); loop++) {
+        for (int loop = 0; loop < ForumsCommentModel.getInstance().responseObject.forumComments.size(); loop++) {
+            ForumsCommentModel.ForumComments forumComments =ForumsCommentModel.getInstance().responseObject.forumComments.get(loop);
             TaskComments taskComments = new TaskComments();
-            taskComments.setComment(TaskCommentsModel.getInstance().responseObject.get(loop).message);
-            taskComments.setDateTime(GetDateTimeComment(TaskCommentsModel.getInstance().responseObject.get(loop).createdAt));
-            taskComments.setUserName(TaskCommentsModel.getInstance().responseObject.get(loop).userObject.firstName);
-            taskComments.setUserImagePath(TaskCommentsModel.getInstance().responseObject.get(loop).userObject.profileImagePath);
+            taskComments.setCommentID(forumComments.commentID);
+            taskComments.setComment(forumComments.message);
+            taskComments.setDateTime(GetDateTimeComment(DateMilli(forumComments.createdAt)));
+            taskComments.setUserName(forumComments.user.firstName);
+            taskComments.setUserImagePath(forumComments.user.profileImagePath);
             arrayList.add(taskComments);
         }
         adapter.notifyDataSetChanged();

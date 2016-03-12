@@ -139,10 +139,11 @@ public class TaskDetailFragment extends BaseFragment {
                     aq.id(R.id.mark_as_done).text(getString(R.string.reopen_task));
                     service.updateTaskProgress(tasksList.getTaskID()
                             , progress, true, new CallBack(TaskDetailFragment.this, "UpdateProgress"));
+                }else {
+                    aq.id(R.id.mark_as_done).text(getString(R.string.task_as_done));
+                    service.updateTaskProgress(tasksList.getTaskID()
+                            , progress, true, new CallBack(TaskDetailFragment.this, "UpdateProgress"));
                 }
-                aq.id(R.id.mark_as_done).text(getString(R.string.mark_as_done));
-                service.updateTaskProgress(tasksList.getTaskID()
-                        , progress, true, new CallBack(TaskDetailFragment.this, "UpdateProgress"));
             }
         });
 
@@ -288,6 +289,7 @@ public class TaskDetailFragment extends BaseFragment {
         GeneralModel.getInstance().setList((GeneralModel) model);
         if (GeneralModel.getInstance().responseCode.equalsIgnoreCase("100")) {
             Snackbar.make(getView(), getString(R.string.task_deleted), Snackbar.LENGTH_SHORT).show();
+            getActivity().getSupportFragmentManager().popBackStack();
         }
         else
         {

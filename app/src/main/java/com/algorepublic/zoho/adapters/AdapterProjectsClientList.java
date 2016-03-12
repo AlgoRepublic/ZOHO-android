@@ -114,7 +114,7 @@ public class AdapterProjectsClientList extends BaseAdapter {
                 } else {
                     baseClass.setSelectedProject(((TextView)view.findViewById(R.id.project_id)).getText().toString());
                     BaseClass.db.putInt("ProjectID", Integer.parseInt(baseClass.getSelectedProject()));
-                    BaseClass.db.putString("ProjectName", (((TextView)view.findViewById(R.id.project_id)).getText().toString()));
+                    BaseClass.db.putString("ProjectName", (((TextView)view.findViewById(R.id.project_title)).getText().toString()));
                 }
                 notifyDataSetChanged();
             }

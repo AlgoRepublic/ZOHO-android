@@ -125,14 +125,8 @@ public class CalendarFragment extends BaseFragment implements CalendarPickerCont
 
     private void initCalendarView(){
         // Get a reference for the week view in the layout.
-        if(baseClass.getThemePreference() == R.style.AppTheme) {
-            calendarView = (AgendaCalendarView) aq.id(R.id.agenda_calendar_view).getView();
-            aq.id(R.id.agenda_calendar_view).visible();
-        }
-        else {
-            calendarView = (AgendaCalendarView) aq.id(R.id.agenda_calendar_blue).getView();
-            aq.id(R.id.agenda_calendar_blue).visible();
-        }
+        calendarView = (AgendaCalendarView) aq.id(R.id.agenda_calendar_view).getView();
+
         Calendar minDate = Calendar.getInstance();
         Calendar maxDate = Calendar.getInstance();
 

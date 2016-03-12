@@ -339,7 +339,7 @@ public class TaskAddUpdateFragment extends BaseFragment {
 
         }else
         {
-            baseClass.db.putString("TaskName", getString(R.string.Task_Title));
+            baseClass.db.putString("TaskName", "");
             baseClass.db.putInt("TaskListNameID", 0);
             baseClass.db.putString("StartDate", "");
             baseClass.db.putString("EndDate", "");
