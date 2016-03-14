@@ -224,6 +224,6 @@ public class DepartmentFragment extends BaseFragment implements SwipeRefreshLayo
     @Override
     public void onRefresh() {
         service.getProjectsByDepartment(baseClass.getUserId(),
-                true, new CallBack(this, "ProjectsByDepartment"));
+                false, new CallBack(this, "ProjectsByDepartment"));
     }
 }

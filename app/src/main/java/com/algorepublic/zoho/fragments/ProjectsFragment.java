@@ -84,9 +84,7 @@ public class ProjectsFragment extends BaseFragment implements SwipeRefreshLayout
         swipeStickView = (SwipeRefreshLayout) view.findViewById(R.id.swipe_stickyView);
         swipeListView = (SwipeRefreshLayout) view.findViewById(R.id.swipe_listView);
         swipeStickView.setOnRefreshListener(this);
-        swipeListView.setOnRefreshListener(this);
         swipeStickView.setProgressViewOffset(false, 0, 200);
-        swipeListView.setProgressViewOffset(false, 0, 200);
         getToolbar().setTitle(getString(R.string.projects));
         setHasOptionsMenu(true);
         aq.id(R.id.sort).clicked(new View.OnClickListener() {
@@ -101,9 +99,6 @@ public class ProjectsFragment extends BaseFragment implements SwipeRefreshLayout
                 CallForFilter();
             }
         });
-
-
-
         return view;
     }
     public void CallForFilter(){
@@ -326,9 +321,9 @@ public class ProjectsFragment extends BaseFragment implements SwipeRefreshLayout
 
     @Override
     public void onRefresh() {
-        service.getAllProjectsByUser_API(baseClass.getUserId(), true, new CallBack(this, "AllProjects"));
-        service.getProjectsByClient_API(baseClass.getUserId(), true, new CallBack(this, "ProjectsByClient"));
+        service.getAllProjectsByUser_API(baseClass.getUserId(), false, new CallBack(this, "AllProjects"));
+        service.getProjectsByClient_API(baseClass.getUserId(), false, new CallBack(this, "ProjectsByClient"));
         service.getProjectsByDepartment(baseClass.getUserId(),
-                true, new CallBack(this, "ProjectsByDepartment"));
+                false, new CallBack(this, "ProjectsByDepartment"));
     }
 }

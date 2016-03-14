@@ -84,7 +84,7 @@
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
                 android:gravity="center_vertical"
-                android:text="@string/comments"
+                android:text="@string/rating"
                 android:textSize="14sp"
                 android:textStyle="bold" />
 
@@ -93,7 +93,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="5dp"
+                android:layout_marginLeft="22dp"
                 android:layout_marginRight="5dp"
                 android:layout_toLeftOf="@+id/percent_text"
                 android:layout_toRightOf="@+id/rating_text"
@@ -123,7 +123,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:gravity="center_vertical"
-                android:text="@string/comments"
+                android:text="@string/stage"
                 android:textSize="14sp"
                 android:textStyle="bold" />
 
@@ -133,10 +133,8 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_toRightOf="@+id/stage_text"
-                android:gravity="center_vertical"
                 android:padding="3dp"
-                android:layout_marginLeft="5dp"
-                android:layout_marginStart="5dp"
+                android:layout_marginStart="30dp"
                 android:text="Development Stage"
                 android:textSize="10sp" />
 

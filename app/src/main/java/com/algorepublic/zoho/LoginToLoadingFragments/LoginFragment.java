@@ -3,6 +3,8 @@ package com.algorepublic.zoho.LoginToLoadingFragments;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -80,7 +82,31 @@ public class LoginFragment extends BaseFragment {
                LinkedInClick(v);
             }
         });
+        aq.id(R.id.password).getEditText().addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                BaseClass.db.putString("TaskDesc", s.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+        aq.id(R.id.password).getEditText().setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+                    baseClass.showKeyPad(v);
+                } else
+                    baseClass.hideKeyPad(v);
+            }
+        });
         return view;
     }
 
