@@ -4,7 +4,9 @@ package com.algorepublic.zoho.fragments;
 import android.content.Context;
 import android.content.res.Resources;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.net.Uri;
+import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
@@ -30,6 +32,9 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
+import cc.cloudist.acplibrary.ACProgressConstant;
+import cc.cloudist.acplibrary.ACProgressFlower;
+
 /**
  * A simple {@link Fragment} subclass.
  */
@@ -38,6 +43,11 @@ public class BaseFragment extends Fragment {
 
     public BaseFragment() {
         // Required empty public constructor
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
     }
 
     public void changeLanguage(String local_language){
@@ -66,6 +76,13 @@ public class BaseFragment extends Fragment {
                 cursor.close();
         }
         return null;
+    }
+    public void InitializeDialog(Context context){
+        BaseActivity.dialogAC = new ACProgressFlower.Builder(context)
+                .direction(ACProgressConstant.DIRECT_CLOCKWISE)
+                .themeColor(Color.WHITE)
+                .fadeColor(Color.DKGRAY).build();
+        BaseActivity.dialogAC.setCancelable(true);
     }
     public File getOutputMediaFile() {
         File mediaStorageDir = new File(

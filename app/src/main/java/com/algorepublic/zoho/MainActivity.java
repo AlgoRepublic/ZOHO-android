@@ -1,6 +1,7 @@
 package com.algorepublic.zoho;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -12,12 +13,17 @@ import android.widget.GridView;
 import android.widget.ImageView;
 
 import com.algorepublic.zoho.adapters.AdapterMenuItems;
+import com.algorepublic.zoho.fragments.DashboardFragment;
+import com.algorepublic.zoho.fragments.HomeFragment;
 import com.algorepublic.zoho.utils.BaseClass;
 import com.algorepublic.zoho.utils.Constants;
 import com.androidquery.AQuery;
 import com.bumptech.glide.Glide;
 import com.github.tibolte.agendacalendarview.AgendaCalendarView;
 import com.github.tibolte.agendacalendarview.calendar.CalendarView;
+
+import cc.cloudist.acplibrary.ACProgressConstant;
+import cc.cloudist.acplibrary.ACProgressFlower;
 
 public class MainActivity extends BaseActivity {
 
@@ -30,6 +36,7 @@ public class MainActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         baseClass = ((BaseClass) getApplicationContext());
+
         if(baseClass.getThemePreference() == R.style.AppThemeBlue) {
             setTheme(R.style.AppThemeBlue);
             themeType =1;
@@ -66,6 +73,7 @@ public class MainActivity extends BaseActivity {
                 startActivity(new Intent(MainActivity.this, SettingsActivity.class));
             }
         });
+        callFragment(R.id.container, HomeFragment.newInstance(), "HomeFragment");
         gridView.setAdapter(new AdapterMenuItems(this));
     }
 

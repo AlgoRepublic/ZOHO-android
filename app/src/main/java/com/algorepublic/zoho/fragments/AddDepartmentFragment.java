@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.algorepublic.zoho.BaseActivity;
 import com.algorepublic.zoho.Models.CreateForumModel;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.services.CallBack;
@@ -63,7 +64,8 @@ public class AddDepartmentFragment extends BaseFragment {
     public void CreateProject(){
         DepartmentService service = new DepartmentService(getActivity());
         service.createDepartment(aq.id(R.id.dept_title).getText().toString(), baseClass.getUserId()
-                , true, new CallBack(AddDepartmentFragment.this, "CreateDept"));
+                , false, new CallBack(AddDepartmentFragment.this, "CreateDept"));
+        BaseActivity.dialogAC.show();
     }
 
     public void CreateDept(Object caller, Object model){
@@ -73,7 +75,7 @@ public class AddDepartmentFragment extends BaseFragment {
         }else {
             Snackbar.make(getView(), getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
         }
-
+        BaseActivity.dialogAC.dismiss();
     }
 
     @Override
@@ -85,7 +87,7 @@ public class AddDepartmentFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view  = inflater.inflate(R.layout.fragment_add_department, container, false);
-
+        InitializeDialog(getActivity());
         aq = new AQuery(view);
         setHasOptionsMenu(true);
         baseClass = ((BaseClass) getActivity().getApplicationContext());

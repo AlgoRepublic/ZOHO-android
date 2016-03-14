@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">ZOHO</string>
-    <string name="title_activity_main">Feeds</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="action_settings">Settings</string>
@@ -55,9 +54,9 @@
     <string name="high">High</string>
     <string name="file_size">File Size Alert!</string>
     <string name="file_size_content">File size should be less than five(5) MB</string>
-    <string name="task_desc">Task Description</string>
+    <string name="task_desc">Description</string>
     <string name="category">Category</string>
-    <string name="employees">Employees</string>
+    <string name="employees">Users</string>
     <string name="assigned_projects">Assigned Projects</string>
     <string name="TaskListName">TaskList Name</string>
     <string name="users">Users</string>

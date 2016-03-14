@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
+import com.algorepublic.zoho.BaseActivity;
 import com.algorepublic.zoho.Models.StarRatingModel;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.adapters.AdapterStarRatingLevelOne;
@@ -45,7 +46,9 @@ public class StarRatingLevelOneFragment extends BaseFragment {
         mListView = (ListView) view.findViewById(R.id.starListView);
         service = new StarRatingService(getActivity());
         if(levelOneHead.size()==0) {
-            service.getStarRatingHeads_API("en-Us", true, new CallBack(StarRatingLevelOneFragment.this, "StarRatingHeads"));
+            service.getStarRatingHeads_API("en-Us", false,
+                    new CallBack(StarRatingLevelOneFragment.this, "StarRatingHeads"));
+            BaseActivity.dialogAC.show();
         }else{
             mListView.setAdapter(new AdapterStarRatingLevelOne(getActivity(),levelOneHead));
         }
@@ -62,7 +65,7 @@ public class StarRatingLevelOneFragment extends BaseFragment {
         {
             Snackbar.make(getView(), getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
         }
-
+        BaseActivity.dialogAC.dismiss();
     }
 
     public void GetListHeads() {

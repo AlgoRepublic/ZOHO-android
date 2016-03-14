@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.algorepublic.zoho.BaseActivity;
 import com.algorepublic.zoho.Models.AddforumModel;
 import com.algorepublic.zoho.Models.CreateForumModel;
 import com.algorepublic.zoho.R;
@@ -48,11 +49,13 @@ public class AddForumsFragment extends BaseFragment{
         aq = new AQuery(getActivity(), view);
         aq.id(R.id.lblListHeader).text(getString(R.string.new_forum_post));
         setHasOptionsMenu(true);
+        InitializeDialog(getActivity());
         baseClass = ((BaseClass) getActivity().getApplicationContext());
         category_list = (NiceSpinner) view.findViewById(R.id.forum_list);
         service = new ForumService(getActivity());
-        service.getCategoryList(baseClass.getUserId(), true, new CallBack(AddForumsFragment.this, "GetAllCategory"));
-
+        service.getCategoryList(baseClass.getUserId(), false,
+                new CallBack(AddForumsFragment.this, "GetAllCategory"));
+        BaseActivity.dialogAC.show();
         return view;
     }
 
@@ -69,8 +72,8 @@ public class AddForumsFragment extends BaseFragment{
         else
         {
             Snackbar.make(getView(), getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
-
         }
+        BaseActivity.dialogAC.dismiss();
     }
 
     public void CreateForum(){
@@ -90,7 +93,8 @@ public class AddForumsFragment extends BaseFragment{
                     true,
                     true
                     ,categoryID,baseClass.getUserId(),
-                    true, new CallBack(AddForumsFragment.this, "CreateForum"));
+                    false, new CallBack(AddForumsFragment.this, "CreateForum"));
+            BaseActivity.dialogAC.show();
         }else{
             Snackbar.make(getView(),getString(R.string.select_project),Snackbar.LENGTH_SHORT).show();
         }
@@ -103,7 +107,7 @@ public class AddForumsFragment extends BaseFragment{
         }else {
             Snackbar.make(getView(), getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
         }
-
+        BaseActivity.dialogAC.dismiss();
     }
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {

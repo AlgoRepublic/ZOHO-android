@@ -15,6 +15,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.algorepublic.zoho.BaseActivity;
 import com.algorepublic.zoho.Models.GeneralModel;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.fragments.EditProjectFragment;
@@ -143,6 +144,7 @@ public class AdapterProjectsClientList extends BaseAdapter {
         } else {
             Toast.makeText(ctx, ctx.getString(R.string.invalid_credential), Toast.LENGTH_SHORT).show();
         }
+        BaseActivity.dialogAC.dismiss();
     }
 
     public void callFragmentWithBackStack(int containerId, Fragment fragment, String tag){
@@ -185,8 +187,9 @@ public class AdapterProjectsClientList extends BaseAdapter {
                     public void onBtnClick() {
                         dialog.dismiss();
                         lastPosition =position;
-                        service.DeleteProject(arrayList.get(position).getProjectID(), true
+                        service.DeleteProject(arrayList.get(position).getProjectID(), false
                                 , new CallBack(AdapterProjectsClientList.this, "DeleteProject"));
+                        BaseActivity.dialogAC.show();
                     }
                 });
     }

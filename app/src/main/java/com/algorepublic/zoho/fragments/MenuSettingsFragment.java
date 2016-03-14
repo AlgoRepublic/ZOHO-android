@@ -81,7 +81,7 @@ public class MenuSettingsFragment extends BaseFragment {
         aq.id(R.id.logout).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                baseClass.clearSharedPrefs();
+                baseClass.setUserId("");
                 getActivity().finish();
                 Intent intent = new Intent(getActivity(), ActivitySplash.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

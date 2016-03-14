@@ -42,6 +42,7 @@ public class DocsPreviewBySubTask extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_documents_preview_bytask, container, false);
+        InitializeDialog(getActivity());
         aq = new AQuery(view);
         baseClass = ((BaseClass) getActivity().getApplicationContext());
         aq.id(R.id.user_image).image(Constants.UserImage_URL+baseClass.getProfileImage());

@@ -52,7 +52,7 @@ public class StarRatingLevelTwoFragment extends BaseFragment {
     public String GetTitle(){
         String value = "";
         if(StarRatingBaseFragment.textLevel1 != ""){
-            value = StarRatingBaseFragment.arrow+
+            value = StarRatingBaseFragment.arrow+" "+
                     StarRatingBaseFragment.textLevel1;
         }
         return value;
@@ -60,7 +60,7 @@ public class StarRatingLevelTwoFragment extends BaseFragment {
 
     @Override
     public void onDestroy() {
-        StarRatingBaseFragment.textView1.setText("➪");
+        StarRatingBaseFragment.textView1.setText("➪ ");
         StarRatingBaseFragment.textLevel1="";
         super.onDestroy();
     }

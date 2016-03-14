@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
+import com.algorepublic.zoho.BaseActivity;
 import com.algorepublic.zoho.Models.TaskUserModel;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.adapters.AdapterTaskAssignee;
@@ -61,10 +62,13 @@ public class TaskAssignFragment extends BaseFragment {
 
         service = new TaskListService(getActivity());
       if(tasksList == null) {
-          service.getTaskAssignee(Integer.parseInt(baseClass.getSelectedProject()), true, new CallBack(TaskAssignFragment.this, "TaskAssignee"));
+          service.getTaskAssignee(Integer.parseInt(baseClass.getSelectedProject()), false,
+                  new CallBack(TaskAssignFragment.this, "TaskAssignee"));
       }else{
-          service.getTaskAssignee(tasksList.getProjectID(), true, new CallBack(TaskAssignFragment.this, "TaskAssignee"));
+          service.getTaskAssignee(tasksList.getProjectID(), false,
+                  new CallBack(TaskAssignFragment.this, "TaskAssignee"));
       }
+        BaseActivity.dialogAC.show();
             return view;
     }
     public void TaskAssignee(Object caller, Object model) {
@@ -76,5 +80,6 @@ public class TaskAssignFragment extends BaseFragment {
         {
             Snackbar.make(getView(),getString(R.string.response_error),Snackbar.LENGTH_SHORT).show();
         }
+        BaseActivity.dialogAC.dismiss();
     }
 }

@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.algorepublic.zoho.BaseActivity;
 import com.algorepublic.zoho.Models.AddforumModel;
 import com.algorepublic.zoho.Models.CreateForumModel;
 import com.algorepublic.zoho.Models.ForumsModel;
@@ -85,7 +86,8 @@ public class EditForumFragment extends BaseFragment  {
                     true,
                     true,
                     categoryID,baseClass.getUserId(),
-                    true, new CallBack(EditForumFragment.this, "UpdateForum"));
+                    false, new CallBack(EditForumFragment.this, "UpdateForum"));
+            BaseActivity.dialogAC.show();
         }else{
             Snackbar.make(getView(),getString(R.string.select_project),Snackbar.LENGTH_SHORT).show();
         }
@@ -98,20 +100,22 @@ public class EditForumFragment extends BaseFragment  {
         }else {
             Snackbar.make(getView(), getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
         }
-
+        BaseActivity.dialogAC.dismiss();
     }
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view  = inflater.inflate(R.layout.fragment_add_forums, container, false);
+        InitializeDialog(getActivity());
         aq = new AQuery(getActivity(), view);
         aq.id(R.id.lblListHeader).text(getString(R.string.edit_forum_post));
         setHasOptionsMenu(true);
         baseClass = ((BaseClass) getActivity().getApplicationContext());
         category_list = (NiceSpinner) view.findViewById(R.id.forum_list);
         service = new ForumService(getActivity());
-        service.getCategoryList(baseClass.getSelectedProject(), true, new CallBack(EditForumFragment.this, "GetAllCategory"));
-
+        service.getCategoryList(baseClass.getSelectedProject(), false,
+                new CallBack(EditForumFragment.this, "GetAllCategory"));
+        BaseActivity.dialogAC.show();
         return view;
     }
     public void GetAllCategory(Object caller, Object model) {
@@ -129,6 +133,7 @@ public class EditForumFragment extends BaseFragment  {
         {
             Snackbar.make(getView(), getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
         }
+        BaseActivity.dialogAC.dismiss();
     }
     public void UpdateValues(){
         aq.id(R.id.lblListHeader).text(getString(R.string.edit_forum_post));

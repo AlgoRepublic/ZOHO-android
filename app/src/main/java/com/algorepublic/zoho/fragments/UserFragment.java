@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.algorepublic.zoho.BaseActivity;
 import com.algorepublic.zoho.Models.UserListModel;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.adapters.AdapterUser;
@@ -48,6 +49,7 @@ public class UserFragment extends BaseFragment implements SwipeRefreshLayout.OnR
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view  = inflater.inflate(R.layout.fragment_user, container, false);
+        InitializeDialog(getActivity());
         baseClass = ((BaseClass) getActivity().getApplicationContext());
         aq = new AQuery(getActivity(), view);
         setHasOptionsMenu(true);
@@ -57,10 +59,12 @@ public class UserFragment extends BaseFragment implements SwipeRefreshLayout.OnR
         swipeRefreshLayout.setProgressViewOffset(false, 0, 200);
             service = new UserService(getActivity());
         if(baseClass.getSelectedProject().equalsIgnoreCase("0")){
-            service.getAllUsers(true, new CallBack(UserFragment.this, "UserList"));
+            service.getAllUsers(false, new CallBack(UserFragment.this, "UserList"));
         }else {
-            service.getUserListByProject(Integer.parseInt(baseClass.getSelectedProject()), true, new CallBack(UserFragment.this, "UserList"));
+            service.getUserListByProject(Integer.parseInt(baseClass.getSelectedProject()), false,
+                    new CallBack(UserFragment.this, "UserList"));
         }
+        BaseActivity.dialogAC.show();
 //        swipeRefreshLayout.post(new Runnable() {
 //                                    @Override
 //                                    public void run() {
@@ -80,14 +84,13 @@ public class UserFragment extends BaseFragment implements SwipeRefreshLayout.OnR
 
     public void UserList(Object caller, Object model){
         UserListModel.getInstance().setList((UserListModel) model);
-        swipeRefreshLayout.setRefreshing(true);
         if (UserListModel.getInstance().responseObject.size()!=0) {
             aq.id(R.id.user_list).adapter(new AdapterUser(getActivity()));
             swipeRefreshLayout.setRefreshing(false);
         }else {
             Toast.makeText(getActivity(), getString(R.string.response_error), Toast.LENGTH_SHORT).show();
         }
-
+        BaseActivity.dialogAC.dismiss();
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -101,6 +104,5 @@ public class UserFragment extends BaseFragment implements SwipeRefreshLayout.OnR
     @Override
     public void onRefresh() {
         service.getAllUsers(true, new CallBack(UserFragment.this, "UserList"));
-
     }
 }

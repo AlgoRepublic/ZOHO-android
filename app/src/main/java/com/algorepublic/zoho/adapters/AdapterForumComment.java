@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
+import com.algorepublic.zoho.BaseActivity;
 import com.algorepublic.zoho.Models.ForumsCommentModel;
 import com.algorepublic.zoho.Models.GeneralModel;
 import com.algorepublic.zoho.R;
@@ -69,21 +70,22 @@ public class AdapterForumComment extends BaseAdapter {
                     + "." + BaseClass.getExtensionType(ForumsDetailFragment.arrayList
                     .get(position).getUserImagePath())).into(aq.id(R.id.comment_image).getImageView());
         }
-        aq.id(R.id.btEdit).clicked(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ForumsDetailFragment.flag = true;ForumsDetailFragment.ClickedPosition = position;
-                ForumsDetailFragment.comment_user.setText(ForumsDetailFragment
-                        .arrayList.get(position).getComment());
-            }
-        });
+//        aq.id(R.id.btEdit).clicked(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                ForumsDetailFragment.flag = true;ForumsDetailFragment.ClickedPosition = position;
+//                ForumsDetailFragment.comment_user.setText(ForumsDetailFragment
+//                        .arrayList.get(position).getComment());
+//            }
+//        });
         aq.id(R.id.btDelete).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ForumsDetailFragment.ClickedPosition = position;
                 service.deleteForumComment(ForumsDetailFragment
-                        .arrayList.get(position).getCommentID(),true,
+                        .arrayList.get(position).getCommentID(),false,
                         new CallBack(AdapterForumComment.this,"DeleteComment"));
+                BaseActivity.dialogAC.show();
             }
         });
 
@@ -98,6 +100,7 @@ public class AdapterForumComment extends BaseAdapter {
             Snackbar.make(((AppCompatActivity)ctx).findViewById(android.R.id.content),
                     ctx.getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
         }
+        BaseActivity.dialogAC.dismiss();
     }
 
 }

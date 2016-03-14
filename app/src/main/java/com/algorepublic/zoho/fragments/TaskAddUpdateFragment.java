@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
 
+import com.algorepublic.zoho.BaseActivity;
 import com.algorepublic.zoho.FragmentsTasks.TaskEditTitleFragment;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.adapters.AdapterTaskMenu;
@@ -40,7 +41,6 @@ public class TaskAddUpdateFragment extends BaseFragment {
     static BaseClass baseClass;
     static TaskAddUpdateFragment fragment;
     public static GridView gridViewTaskMenu;
-    public static ACProgressFlower dialog;
     public static TasksList tasksObj;
     public static ArrayList<DocumentsList> apiDocsList = new ArrayList<>();
     public static ArrayList<AttachmentList> filesList;
@@ -134,15 +134,13 @@ public class TaskAddUpdateFragment extends BaseFragment {
                              Bundle savedInstanceState) {
         setHasOptionsMenu(true);
         View view = inflater.inflate(R.layout.activity_task, container, false);
+        InitializeDialog(getActivity());
         gridViewTaskMenu = (GridView) view.findViewById(R.id.gridview_taskmenu);
         filesList = new ArrayList<>();
         filesToDelete = new ArrayList<>();
         assigneeList = new ArrayList<>();
         baseClass = ((BaseClass) getActivity().getApplicationContext());
-        dialog = new ACProgressFlower.Builder(getActivity())
-                .direction(ACProgressConstant.DIRECT_CLOCKWISE)
-                .themeColor(Color.WHITE)
-                .fadeColor(Color.DKGRAY).build();
+
         if(tasksObj !=null) {
             if (tasksObj.getListAssignees().size() > 0) {
                 try {
@@ -184,6 +182,9 @@ public class TaskAddUpdateFragment extends BaseFragment {
             public void onClick(View v) {
                 aq.id(R.id.title_text).enabled(true);
                 aq.id(R.id.title_text).getEditText().requestFocus();
+                aq.id(R.id.title_text).getEditText().
+                        setSelection(aq.id(R.id.title_text).getText().length());
+                baseClass.showKeyPad(v);
             }
         });
         aq.id(R.id.title_bar).clicked(new View.OnClickListener() {
@@ -212,7 +213,7 @@ public class TaskAddUpdateFragment extends BaseFragment {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            dialog.show();
+            BaseActivity.dialogAC.show();
         }
 
         @Override
@@ -228,7 +229,7 @@ public class TaskAddUpdateFragment extends BaseFragment {
         }
         @Override
         protected void onPostExecute(String result){
-            dialog.dismiss();
+            BaseActivity.dialogAC.dismiss();
             PopulateModel(result);
         }
     }
@@ -239,7 +240,7 @@ public class TaskAddUpdateFragment extends BaseFragment {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            dialog.show();
+            BaseActivity.dialogAC.show();
         }
 
         @Override
@@ -255,7 +256,7 @@ public class TaskAddUpdateFragment extends BaseFragment {
         }
         @Override
         protected void onPostExecute(String result){
-            dialog.dismiss();
+            BaseActivity.dialogAC.dismiss();
             PopulateModel(result);
         }
     }
@@ -266,7 +267,7 @@ public class TaskAddUpdateFragment extends BaseFragment {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            dialog.show();
+            BaseActivity.dialogAC.show();
         }
 
         @Override
@@ -283,7 +284,7 @@ public class TaskAddUpdateFragment extends BaseFragment {
         }
         @Override
         protected void onPostExecute(String result){
-            dialog.dismiss();
+            BaseActivity.dialogAC.dismiss();
             PopulateModel(result);
         }
     }
@@ -294,7 +295,7 @@ public class TaskAddUpdateFragment extends BaseFragment {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            dialog.show();
+            BaseActivity.dialogAC.show();
         }
 
         @Override
@@ -311,7 +312,7 @@ public class TaskAddUpdateFragment extends BaseFragment {
         }
         @Override
         protected void onPostExecute(String result){
-            dialog.dismiss();
+            BaseActivity.dialogAC.dismiss();
             PopulateModel(result);
         }
     }

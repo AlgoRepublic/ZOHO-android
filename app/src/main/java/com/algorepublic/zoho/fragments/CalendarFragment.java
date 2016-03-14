@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.algorepublic.zoho.BaseActivity;
 import com.algorepublic.zoho.Models.TasksListByOwnerModel;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.services.CallBack;
@@ -67,6 +68,7 @@ public class CalendarFragment extends BaseFragment implements CalendarPickerCont
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment_forums
         View view  = inflater.inflate(R.layout.fragment_calendar, container, false);
+        InitializeDialog(getActivity());
 //        MainActivity.toolbar = (Toolbar) view.findViewById(R.id.toolbar);
 //        setToolbar();
         aq = new AQuery(getActivity(), view);
@@ -93,7 +95,9 @@ public class CalendarFragment extends BaseFragment implements CalendarPickerCont
 //        initCalendarView();
         if(TasksListByOwnerModel.getInstance().responseObject.isEmpty()){
             TaskListService service = new TaskListService(getActivity());
-            service.getTasksListByOwner(baseClass.getUserId(),true, new CallBack(CalendarFragment.this, "TasksList"));
+            service.getTasksListByOwner(baseClass.getUserId(),false,
+                    new CallBack(CalendarFragment.this, "TasksList"));
+            BaseActivity.dialogAC.show();
         }else{
             initCalendarView();
         }
@@ -121,6 +125,7 @@ public class CalendarFragment extends BaseFragment implements CalendarPickerCont
     public void TasksList(Object caller, Object model) {
         TasksListByOwnerModel.getInstance().setList((TasksListByOwnerModel) model);
         initCalendarView();
+        BaseActivity.dialogAC.dismiss();
     }
 
     private void initCalendarView(){

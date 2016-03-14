@@ -3,6 +3,7 @@ package com.algorepublic.zoho;
 import android.content.Context;
 import android.content.res.Resources;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -18,8 +19,12 @@ import android.view.inputmethod.InputMethodManager;
 
 import java.util.Locale;
 
-public class BaseActivity extends AppCompatActivity {
+import cc.cloudist.acplibrary.ACProgressBaseDialog;
+import cc.cloudist.acplibrary.ACProgressConstant;
+import cc.cloudist.acplibrary.ACProgressFlower;
 
+public class BaseActivity extends AppCompatActivity {
+    public static ACProgressFlower dialogAC;
     public static DrawerLayout drawer;public static Toolbar toolbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,6 +96,13 @@ public class BaseActivity extends AppCompatActivity {
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
+    }
+    public void InitializeDialog(Context context){
+        dialogAC = new ACProgressFlower.Builder(context)
+                .direction(ACProgressConstant.DIRECT_CLOCKWISE)
+                .themeColor(Color.WHITE)
+                .fadeColor(Color.DKGRAY).build();
+        dialogAC.setCancelable(true);
     }
 
 }

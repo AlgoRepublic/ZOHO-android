@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Toast;
 
+import com.algorepublic.zoho.BaseActivity;
 import com.algorepublic.zoho.adapters.AdapterTaskAttachment;
 import com.algorepublic.zoho.adapters.AttachmentList;
 import com.algorepublic.zoho.adapters.DocumentsList;
@@ -93,7 +94,9 @@ public class TaskAttachmentFragment extends BaseFragment {
         service = new DocumentsService(getActivity());
         if(TaskAddUpdateFragment.filesList.size()==0) {
             if (TaskAddUpdateFragment.callPosition == 2) {
-                service.getDocsBySubTasks(taskObj.getTaskID(), true, new CallBack(TaskAttachmentFragment.this, "DocumentsList"));
+                service.getDocsBySubTasks(taskObj.getTaskID(), false,
+                        new CallBack(TaskAttachmentFragment.this, "DocumentsList"));
+                BaseActivity.dialogAC.show();
             }
         }
         adapter = new AdapterTaskAttachment(getActivity());

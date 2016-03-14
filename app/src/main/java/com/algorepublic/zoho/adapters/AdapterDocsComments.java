@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.algorepublic.zoho.BaseActivity;
 import com.algorepublic.zoho.Models.GeneralModel;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.fragments.DocsPreviewFragment;
@@ -75,22 +76,23 @@ public class AdapterDocsComments extends BaseAdapter {
                     + "." + BaseClass.getExtensionType(DocsPreviewFragment.arrayList
                     .get(position).getUserImagePath())).into(holder.userImage);
         }
-        aq.id(R.id.btEdit).clicked(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                DocsPreviewFragment.flag = true;
-                DocsPreviewFragment.ClickedPosition = position;
-                DocsPreviewFragment.comment_user.setText(DocsPreviewFragment
-                        .arrayList.get(position).getComment());
-            }
-        });
+//        aq.id(R.id.btEdit).clicked(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                DocsPreviewFragment.flag = true;
+//                DocsPreviewFragment.ClickedPosition = position;
+//                DocsPreviewFragment.comment_user.setText(DocsPreviewFragment
+//                        .arrayList.get(position).getComment());
+//            }
+//        });
         aq.id(R.id.btDelete).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 DocsPreviewFragment.ClickedPosition = position;
                 service.deleteForumComment(DocsPreviewFragment
-                                .arrayList.get(position).getCommentID(), true,
+                                .arrayList.get(position).getCommentID(), false,
                         new CallBack(AdapterDocsComments.this, "DeleteComment"));
+                BaseActivity.dialogAC.show();
             }
         });
         return convertView;
@@ -104,6 +106,7 @@ public class AdapterDocsComments extends BaseAdapter {
             Snackbar.make(((AppCompatActivity) ctx).findViewById(android.R.id.content),
                     ctx.getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
         }
+        BaseActivity.dialogAC.dismiss();
     }
     static class ViewHolder {
         TextView taskComment;

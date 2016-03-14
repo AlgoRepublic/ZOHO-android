@@ -14,6 +14,7 @@ import android.widget.BaseAdapter;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.algorepublic.zoho.BaseActivity;
 import com.algorepublic.zoho.Models.GeneralModel;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.fragments.EditProjectFragment;
@@ -143,6 +144,7 @@ public class AdapterProjectsDeptList extends BaseAdapter implements StickyListHe
         } else {
             Snackbar.make(aq.id(R.id.shadow_item_container).getView(), ctx.getString(R.string.invalid_credential), Snackbar.LENGTH_SHORT).show();
            }
+        BaseActivity.dialogAC.dismiss();
     }
     public void callFragmentWithBackStack(int containerId, Fragment fragment, String tag){
 
@@ -196,8 +198,9 @@ public class AdapterProjectsDeptList extends BaseAdapter implements StickyListHe
                     public void onBtnClick() {
                         dialog.dismiss();
                         lastPosition = position;
-                        service.DeleteProject(ProjectsFragment.ByDepartmentList.get(position).getProjectID(), true
+                        service.DeleteProject(ProjectsFragment.ByDepartmentList.get(position).getProjectID(), false
                                 , new CallBack(AdapterProjectsDeptList.this, "DeleteProject"));
+                        BaseActivity.dialogAC.show();
                     }
                 });
     }

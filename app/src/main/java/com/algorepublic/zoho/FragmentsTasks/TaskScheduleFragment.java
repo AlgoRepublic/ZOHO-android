@@ -66,7 +66,7 @@ public class TaskScheduleFragment extends BaseFragment {
             else
                 aq.id(R.id.start_date).text(BaseClass.db.getString("StartDate"));
         }else{
-            aq.id(R.id.start_date).text(month+"/"+day+"/"+year);
+            aq.id(R.id.start_date).text(day+"/"+month+"/"+year);
         }
 
         if(!BaseClass.db.getString("EndDate").equalsIgnoreCase("")) {
@@ -78,7 +78,7 @@ public class TaskScheduleFragment extends BaseFragment {
             else
                 aq.id(R.id.end_date).text(BaseClass.db.getString("EndDate"));
         }else{
-            aq.id(R.id.end_date).text(month+"/"+day+"/"+year);
+            aq.id(R.id.end_date).text(day+"/"+month+"/"+year);
         }
         SplitStartDate(); SplitEndDate();
 
@@ -110,7 +110,7 @@ public class TaskScheduleFragment extends BaseFragment {
 
         @Override
         public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
-            start_date = (++monthOfYear)+"/"+dayOfMonth+"/"+year;
+            start_date = dayOfMonth+"/"+(++monthOfYear)+"/"+year;
             start_day = dayOfMonth;start_month = monthOfYear-1;start_year = year;
             aq.id(R.id.start_date).text(start_date);
             BaseClass.db.putString("StartDate", start_date);
@@ -119,7 +119,7 @@ public class TaskScheduleFragment extends BaseFragment {
     DatePickerDialog.OnDateSetListener endDatePicker = new DatePickerDialog.OnDateSetListener() {
         @Override
         public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
-            end_date = (++monthOfYear)+"/"+dayOfMonth+"/"+year;
+            end_date = dayOfMonth+"/"+(++monthOfYear)+"/"+year;
             end_day = dayOfMonth;end_month = monthOfYear-1;end_year = year;
             aq.id(R.id.end_date).text(end_date);
             BaseClass.db.putString("EndDate", end_date);

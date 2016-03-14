@@ -14,6 +14,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.BaseAdapter;
 
+import com.algorepublic.zoho.BaseActivity;
 import com.algorepublic.zoho.Models.GeneralModel;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.fragments.DocsPreviewFragment;
@@ -53,6 +54,7 @@ public class AdapterDocumentsList extends BaseAdapter implements StickyListHeade
         this.ctx = context;
         service = new DocumentsService((AppCompatActivity)ctx);
         baseClass = ((BaseClass) ctx.getApplicationContext());
+
     }
 
     @Override
@@ -180,12 +182,13 @@ public class AdapterDocumentsList extends BaseAdapter implements StickyListHeade
                         dialog.dismiss();
                         if(ID==-1) {
                             service.deleteDocument(DocumentsListFragment.deleteDocsList
-                                    , true, new CallBack(AdapterDocumentsList.this, "DeleteDoc"));
+                                    , false, new CallBack(AdapterDocumentsList.this, "DeleteDoc"));
                         }
                         else{
                             service.deleteDocumentByTask(ID, DocumentsListFragment.deleteDocsList
-                                    , true, new CallBack(AdapterDocumentsList.this, "DeleteDoc"));
+                                    , false, new CallBack(AdapterDocumentsList.this, "DeleteDoc"));
                         }
+                        BaseActivity.dialogAC.show();
                     }
                 });
     }
@@ -199,6 +202,7 @@ public class AdapterDocumentsList extends BaseAdapter implements StickyListHeade
         {
             Snackbar.make(((AppCompatActivity)ctx).findViewById(android.R.id.content), ctx.getString(R.string.invalid_credential), Snackbar.LENGTH_SHORT).show();
         }
+        BaseActivity.dialogAC.dismiss();
     }
     public void UpdatedAfterDelete(){
         ArrayList<DocumentsList> arrayList = new ArrayList<>();

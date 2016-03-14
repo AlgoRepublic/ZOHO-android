@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.algorepublic.zoho.BaseActivity;
 import com.algorepublic.zoho.Models.ForumsCommentModel;
 import com.algorepublic.zoho.Models.GeneralModel;
 import com.algorepublic.zoho.R;
@@ -76,21 +77,22 @@ public class AdapterTaskComments extends BaseAdapter {
                     + "." + BaseClass.getExtensionType(TaskCommentFragment.arrayList
                     .get(position).getUserImagePath())).into(holder.userImage);
         }
-        aq.id(R.id.btEdit).clicked(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                TaskCommentFragment.flag = true;TaskCommentFragment.ClickedPosition = position;
-                TaskCommentFragment.comment_user.setText(TaskCommentFragment
-                        .arrayList.get(position).getComment());
-            }
-        });
+//        aq.id(R.id.btEdit).clicked(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                TaskCommentFragment.flag = true;TaskCommentFragment.ClickedPosition = position;
+//                TaskCommentFragment.comment_user.setText(TaskCommentFragment
+//                        .arrayList.get(position).getComment());
+//            }
+//        });
         aq.id(R.id.btDelete).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 TaskCommentFragment.ClickedPosition = position;
                 service.deleteForumComment(TaskCommentFragment
-                                .arrayList.get(position).getCommentID(), true,
+                                .arrayList.get(position).getCommentID(), false,
                         new CallBack(AdapterTaskComments.this, "DeleteComment"));
+                BaseActivity.dialogAC.show();
             }
         });
 
@@ -105,6 +107,7 @@ public class AdapterTaskComments extends BaseAdapter {
             Snackbar.make(((AppCompatActivity) ctx).findViewById(android.R.id.content),
                     ctx.getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
         }
+        BaseActivity.dialogAC.dismiss();
     }
 
     static class ViewHolder {

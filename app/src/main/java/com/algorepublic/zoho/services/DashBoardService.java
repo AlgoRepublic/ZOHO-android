@@ -9,9 +9,9 @@ import com.algorepublic.zoho.utils.Constants;
 /**
  * Created by waqas on 3/12/16.
  */
-public class DashBoradService extends BaseService {
+public class DashBoardService extends BaseService {
 
-    public DashBoradService(Activity act) {
+    public DashBoardService(Activity act) {
         super(act);
     }
 

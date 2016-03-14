@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 
+import com.algorepublic.zoho.BaseActivity;
 import com.algorepublic.zoho.Models.AllProjectsByUserModel;
 import com.algorepublic.zoho.Models.UserListModel;
 import com.algorepublic.zoho.Models.UserRoleModel;
@@ -63,7 +64,6 @@ public class AddUserFragment extends BaseFragment implements MultiSelectionSpinn
     ProjectsListService service ;
     UserService service1;
     MultiSelectionSpinner projectsList;
-    ACProgressFlower dialog;
     BaseClass baseClass;
     static int position;
 
@@ -84,6 +84,7 @@ public class AddUserFragment extends BaseFragment implements MultiSelectionSpinn
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view  = inflater.inflate(R.layout.fragment_add_user, container, false);
+        InitializeDialog(getActivity());
         role_list = (NiceSpinner) view.findViewById(R.id.role_list);
         projectsList = (MultiSelectionSpinner) view.findViewById(R.id.projects_list);
         projectsList.setListener(this);
@@ -92,10 +93,7 @@ public class AddUserFragment extends BaseFragment implements MultiSelectionSpinn
         setHasOptionsMenu(true);
         service = new ProjectsListService(getActivity());
         service1 = new UserService(getActivity());
-        dialog = new ACProgressFlower.Builder(getActivity())
-                .direction(ACProgressConstant.DIRECT_CLOCKWISE)
-                .themeColor(Color.WHITE)
-                .fadeColor(Color.DKGRAY).build();
+
         getToolbar().setTitle(getString(R.string.add_user));
         aq.id(R.id.profile).clicked(new View.OnClickListener() {
             @Override
@@ -106,11 +104,13 @@ public class AddUserFragment extends BaseFragment implements MultiSelectionSpinn
 
         if(baseClass.getSelectedProject().equalsIgnoreCase("0")){
             aq.id(R.id.layout).visibility(View.VISIBLE);
-            service.getAllProjectsByUser_API(baseClass.getUserId(), true, new CallBack(AddUserFragment.this, "AllProjects"));
+            service.getAllProjectsByUser_API(baseClass.getUserId(),
+                    false, new CallBack(AddUserFragment.this, "AllProjects"));
         }else {
             aq.id(R.id.layout).visibility(View.GONE);
         }
-        service1.getUserRole(true,new CallBack(AddUserFragment.this,"UserRole"));
+        service1.getUserRole(false,new CallBack(AddUserFragment.this,"UserRole"));
+        BaseActivity.dialogAC.show();
         return view;
     }
 
@@ -148,7 +148,7 @@ public class AddUserFragment extends BaseFragment implements MultiSelectionSpinn
         }else {
             Snackbar.make(getView(), getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
         }
-
+        BaseActivity.dialogAC.dismiss();
     }
     public void UserRole(Object caller, Object model){
         UserRoleModel.getInstance().setList((UserRoleModel) model);
@@ -283,7 +283,7 @@ public class AddUserFragment extends BaseFragment implements MultiSelectionSpinn
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            dialog.show();
+            BaseActivity.dialogAC.show();
         }
 
         @Override
@@ -306,7 +306,7 @@ public class AddUserFragment extends BaseFragment implements MultiSelectionSpinn
 
         @Override
         protected void onPostExecute(String result) {
-            dialog.dismiss();
+            BaseActivity.dialogAC.dismiss();
             Log.e("Res", result);
             if(result.contains("100")){
                 Snackbar.make(getView(),getString(R.string.user_created),Snackbar.LENGTH_SHORT).show();

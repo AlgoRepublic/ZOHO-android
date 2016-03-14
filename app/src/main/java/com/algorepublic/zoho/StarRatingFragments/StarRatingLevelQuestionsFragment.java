@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.algorepublic.zoho.BaseActivity;
 import com.algorepublic.zoho.Models.StarRatingQuestionModel;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.adapters.AdapterStarRatingQuestions;
@@ -54,7 +55,8 @@ public class StarRatingLevelQuestionsFragment extends BaseFragment {
         Questions.clear();
         service = new StarRatingService(getActivity());
         service.getStarRatingQuestion_API(ID, "en-US",
-                true, new CallBack(StarRatingLevelQuestionsFragment.this, "StarRatingQuestion"));
+                false, new CallBack(StarRatingLevelQuestionsFragment.this, "StarRatingQuestion"));
+        BaseActivity.dialogAC.show();
         return view;
     }
     public void StarRatingQuestion(Object caller, Object model) {
@@ -67,6 +69,7 @@ public class StarRatingLevelQuestionsFragment extends BaseFragment {
         {
             Snackbar.make(getView(), getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
         }
+        BaseActivity.dialogAC.dismiss();
     }
     public void GetListQuestions(){
         for(int loop=0;loop<StarRatingQuestionModel.getInstance().responseData.size();loop++){
@@ -81,7 +84,7 @@ public class StarRatingLevelQuestionsFragment extends BaseFragment {
     public String GetTitle(){
         String value = "";
         if(StarRatingBaseFragment.textLevel3 != ""){
-            value = "  "+StarRatingBaseFragment.arrow+
+            value = "   "+StarRatingBaseFragment.arrow+
                     StarRatingBaseFragment.textLevel3;
         }
         return value;
