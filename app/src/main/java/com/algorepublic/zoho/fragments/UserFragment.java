@@ -65,14 +65,6 @@ public class UserFragment extends BaseFragment implements SwipeRefreshLayout.OnR
                     new CallBack(UserFragment.this, "UserList"));
         }
         BaseActivity.dialogAC.show();
-//        swipeRefreshLayout.post(new Runnable() {
-//                                    @Override
-//                                    public void run() {
-//                                        swipeRefreshLayout.setRefreshing(true);
-//                                        service.getAllUsers(true, new CallBack(UserFragment.this, "UserList"));
-//                                    }
-//                                }
-//        );
             return view;
     }
     @Override

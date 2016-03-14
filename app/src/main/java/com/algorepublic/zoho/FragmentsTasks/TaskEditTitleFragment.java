@@ -6,12 +6,9 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 
 import com.algorepublic.zoho.R;
-import com.algorepublic.zoho.adapters.TasksList;
 import com.algorepublic.zoho.fragments.BaseFragment;
-import com.algorepublic.zoho.fragments.TaskAddUpdateFragment;
 import com.algorepublic.zoho.utils.BaseClass;
 import com.androidquery.AQuery;
 
@@ -43,7 +40,7 @@ public class TaskEditTitleFragment extends BaseFragment {
         aq= new AQuery(view);
         aq.id(R.id.title_name).text(BaseClass.db.getString("TaskDesc"));
         aq.id(R.id.title_name).getEditText().requestFocus();
-        aq.id(R.id.title_name).getEditText().addTextChangedListener(new TextWatcher() {
+            aq.id(R.id.title_name).getEditText().addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
