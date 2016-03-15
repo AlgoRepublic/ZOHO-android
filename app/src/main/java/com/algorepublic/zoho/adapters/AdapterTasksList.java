@@ -15,7 +15,6 @@ import android.view.animation.AnimationUtils;
 import android.widget.BaseAdapter;
 import android.widget.SearchView;
 
-import com.algorepublic.zoho.BaseActivity;
 import com.algorepublic.zoho.Models.GeneralModel;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.fragments.BaseFragment;
@@ -80,7 +79,7 @@ public class AdapterTasksList extends BaseAdapter implements StickyListHeadersAd
         convertView = l_Inflater.inflate(R.layout.layout_taskslist_row, null);
         aq = new AQuery(convertView);
         if (tasksLists.get(position).progress==100){
-            aq.id(R.id.task_image).image(R.drawable.ic_check_circle_black_24dp);
+            aq.id(R.id.task_image).image(R.drawable.ic_notifications_green_24dp);
         }
         Drawable shapeDrawable = aq.id(R.id.priority_bar).getView().getBackground();
         GradientDrawable colorDrawable = (GradientDrawable) shapeDrawable;

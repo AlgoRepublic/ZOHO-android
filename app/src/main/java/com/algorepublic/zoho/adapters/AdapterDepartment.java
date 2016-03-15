@@ -17,7 +17,6 @@
 package com.algorepublic.zoho.adapters;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewCompat;
@@ -29,10 +28,10 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.algorepublic.zoho.BaseActivity;
 import com.algorepublic.zoho.Models.GeneralModel;
 import com.algorepublic.zoho.Models.ProjectsByDepartmentModel;
 import com.algorepublic.zoho.R;
@@ -43,6 +42,7 @@ import com.algorepublic.zoho.services.DepartmentService;
 import com.algorepublic.zoho.services.ProjectsListService;
 import com.algorepublic.zoho.utils.BaseClass;
 import com.algorepublic.zoho.utils.ViewUtils;
+import com.daimajia.swipe.SwipeLayout;
 import com.flyco.animation.BounceEnter.BounceLeftEnter;
 import com.flyco.animation.SlideExit.SlideRightExit;
 import com.flyco.dialog.listener.OnBtnClickL;
@@ -51,9 +51,6 @@ import com.h6ah4i.android.widget.advrecyclerview.draggable.DraggableItemAdapter;
 import com.h6ah4i.android.widget.advrecyclerview.draggable.DraggableItemConstants;
 import com.h6ah4i.android.widget.advrecyclerview.draggable.ItemDraggableRange;
 import com.h6ah4i.android.widget.advrecyclerview.utils.AbstractDraggableItemViewHolder;
-
-import cc.cloudist.acplibrary.ACProgressConstant;
-import cc.cloudist.acplibrary.ACProgressFlower;
 
 public class AdapterDepartment
         extends RecyclerView.Adapter<AdapterDepartment.MyViewHolder>
@@ -72,7 +69,8 @@ public class AdapterDepartment
 
 
     public static class MyViewHolder extends AbstractDraggableItemViewHolder {
-        public RelativeLayout mContainer;
+        public RelativeLayout mContainer;LinearLayout linearLayout;
+        SwipeLayout swipeLayout;
         public TextView project_title;
         public TextView header,task_alert,users_alert,milestone_alert,project_desc;
         public TextView btEdit;
@@ -81,6 +79,8 @@ public class AdapterDepartment
         public MyViewHolder(View v) {
             super(v);
             mContainer = (RelativeLayout) v.findViewById(R.id.container);
+            linearLayout = (LinearLayout) v.findViewById(R.id.main_dept);
+            swipeLayout = (SwipeLayout) v.findViewById(R.id.swipe);
             project_title = (TextView) v.findViewById(R.id.project_title);
             header = (TextView) v.findViewById(R.id.header);
             btEdit = (TextView) v.findViewById(R.id.btEdit);
@@ -141,9 +141,57 @@ public class AdapterDepartment
         }
     }
 
-    private void onBindSectionHeaderViewHolder(MyViewHolder holder, final int position) {
+    private void onBindSectionHeaderViewHolder(final MyViewHolder holder, final int position) {
 
         // set text
+        Log.e("ID","S"+DepartmentFragment.allProjects.get(position).getCompOrDeptID());
+        holder.swipeLayout.addSwipeListener(new SwipeLayout.SwipeListener() {
+            @Override
+            public void onStartOpen(SwipeLayout swipeLayout) {
+                if(DepartmentFragment.allProjects.get(position).getCompOrDeptID().equalsIgnoreCase("0")){
+                    holder.btDelete.setVisibility(View.GONE);
+                    holder.btEdit.setVisibility(View.GONE);
+                    holder. swipeLayout.close();
+                }
+            }
+
+            @Override
+            public void onOpen(SwipeLayout swipeLayout) {
+                if(DepartmentFragment.allProjects.get(position).getCompOrDeptID().equalsIgnoreCase("0")){
+                    holder.btDelete.setVisibility(View.GONE);
+                    holder.btEdit.setVisibility(View.GONE);
+                    holder. swipeLayout.close();
+                }
+            }
+
+            @Override
+            public void onStartClose(SwipeLayout swipeLayout) {
+                if(DepartmentFragment.allProjects.get(position).getCompOrDeptID().equalsIgnoreCase("0")){
+                    holder.btDelete.setVisibility(View.GONE);
+                    holder.btEdit.setVisibility(View.GONE);
+                   holder. swipeLayout.close();
+                }
+            }
+
+            @Override
+            public void onClose(SwipeLayout swipeLayout) {
+
+            }
+
+            @Override
+            public void onUpdate(SwipeLayout swipeLayout, int i, int i1) {
+
+            }
+
+            @Override
+            public void onHandRelease(SwipeLayout swipeLayout, float v, float v1) {
+                if(DepartmentFragment.allProjects.get(position).getCompOrDeptID().equalsIgnoreCase("0")){
+                    holder.btDelete.setVisibility(View.GONE);
+                    holder.btEdit.setVisibility(View.GONE);
+                    holder. swipeLayout.close();
+                }
+            }
+        });
         holder.header.setText(DepartmentFragment.allProjects.get(position).getCompOrDeptName());
         holder.btDelete.setOnClickListener(new View.OnClickListener() {
             @Override
