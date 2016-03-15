@@ -20,6 +20,8 @@ import com.algorepublic.zoho.services.TaskListService;
 import com.algorepublic.zoho.utils.BaseClass;
 import com.androidquery.AQuery;
 
+import cc.cloudist.acplibrary.ACProgressFlower;
+
 /**
  * A simple {@link Fragment} subclass.
  */
@@ -29,6 +31,7 @@ public class TaskAssignFragment extends BaseFragment {
     AQuery aq;
     TaskListService service;
     BaseClass baseClass;
+    ACProgressFlower dialogAC;
     public static ListView listView;
     static TasksList tasksList;
     public TaskAssignFragment() {
@@ -56,6 +59,7 @@ public class TaskAssignFragment extends BaseFragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment_forums
        View view =  inflater.inflate(R.layout.fragment_task_assign, container, false);
+        dialogAC = InitializeDialog(getActivity());
         listView = (ListView) view.findViewById(R.id.listview_employees);
         aq = new AQuery(view);
         baseClass = ((BaseClass) getActivity().getApplicationContext());
@@ -68,7 +72,7 @@ public class TaskAssignFragment extends BaseFragment {
           service.getTaskAssignee(tasksList.getProjectID(), false,
                   new CallBack(TaskAssignFragment.this, "TaskAssignee"));
       }
-        BaseActivity.dialogAC.show();
+        dialogAC.show();
             return view;
     }
     public void TaskAssignee(Object caller, Object model) {
@@ -80,6 +84,6 @@ public class TaskAssignFragment extends BaseFragment {
         {
             Snackbar.make(getView(),getString(R.string.response_error),Snackbar.LENGTH_SHORT).show();
         }
-        BaseActivity.dialogAC.dismiss();
+        dialogAC.dismiss();
     }
 }

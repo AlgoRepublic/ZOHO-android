@@ -34,6 +34,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
+import cc.cloudist.acplibrary.ACProgressFlower;
 import se.emilsjolander.stickylistheaders.StickyListHeadersAdapter;
 import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
 
@@ -47,6 +48,7 @@ public class TaskListBySubTasksFragment extends BaseFragment {
     TaskListService taskListService;
     StickyListHeadersAdapter adapterTasksList;
     AQuery aq;View view;
+    ACProgressFlower dialogAC;
     RadioGroup radioGroup;
     public static ArrayList<TasksList> allTaskList = new ArrayList<>();
     public static ArrayList<TasksList> generalList = new ArrayList<>();
@@ -114,7 +116,7 @@ public class TaskListBySubTasksFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_taskslist, container, false);
-        InitializeDialog(getActivity());
+        dialogAC = InitializeDialog(getActivity());
         setHasOptionsMenu(true);
         radioGroup = (RadioGroup) view.findViewById(R.id.radioGroup);
         listView = (StickyListHeadersListView) view.findViewById(R.id.list_taskslist);
@@ -133,7 +135,7 @@ public class TaskListBySubTasksFragment extends BaseFragment {
         taskListService = new TaskListService(getActivity());
         taskListService.getTasksListBySubTasks(tasksList.getTaskID(), false,
                 new CallBack(TaskListBySubTasksFragment.this, "TaskListBySubTasks"));
-        BaseActivity.dialogAC.show();
+        dialogAC.show();
         aq.id(R.id.add_task).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -276,7 +278,7 @@ public class TaskListBySubTasksFragment extends BaseFragment {
         {
             Toast.makeText(getActivity(), getString(R.string.response_error), Toast.LENGTH_SHORT).show();
         }
-        BaseActivity.dialogAC.dismiss();
+        dialogAC.dismiss();
     }
     public void GetGeneralList(){
         generalList.clear();

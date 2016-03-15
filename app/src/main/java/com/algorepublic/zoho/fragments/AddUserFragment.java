@@ -57,6 +57,7 @@ public class AddUserFragment extends BaseFragment implements MultiSelectionSpinn
     File newFile;
     AQuery aq;
     int[] Ids;
+    ACProgressFlower dialogAC;
     ArrayList<Integer> selectedIds = new ArrayList<>();
     ArrayList<String> roleList;
     ArrayList<String> projectList;
@@ -84,7 +85,7 @@ public class AddUserFragment extends BaseFragment implements MultiSelectionSpinn
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view  = inflater.inflate(R.layout.fragment_add_user, container, false);
-        InitializeDialog(getActivity());
+        dialogAC = InitializeDialog(getActivity());
         role_list = (NiceSpinner) view.findViewById(R.id.role_list);
         projectsList = (MultiSelectionSpinner) view.findViewById(R.id.projects_list);
         projectsList.setListener(this);
@@ -110,7 +111,7 @@ public class AddUserFragment extends BaseFragment implements MultiSelectionSpinn
             aq.id(R.id.layout).visibility(View.GONE);
         }
         service1.getUserRole(false,new CallBack(AddUserFragment.this,"UserRole"));
-        BaseActivity.dialogAC.show();
+        dialogAC.show();
         return view;
     }
 
@@ -148,7 +149,7 @@ public class AddUserFragment extends BaseFragment implements MultiSelectionSpinn
         }else {
             Snackbar.make(getView(), getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
         }
-        BaseActivity.dialogAC.dismiss();
+        dialogAC.dismiss();
     }
     public void UserRole(Object caller, Object model){
         UserRoleModel.getInstance().setList((UserRoleModel) model);
@@ -283,7 +284,7 @@ public class AddUserFragment extends BaseFragment implements MultiSelectionSpinn
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            BaseActivity.dialogAC.show();
+            dialogAC.show();
         }
 
         @Override
@@ -306,7 +307,7 @@ public class AddUserFragment extends BaseFragment implements MultiSelectionSpinn
 
         @Override
         protected void onPostExecute(String result) {
-            BaseActivity.dialogAC.dismiss();
+            dialogAC.dismiss();
             Log.e("Res", result);
             if(result.contains("100")){
                 Snackbar.make(getView(),getString(R.string.user_created),Snackbar.LENGTH_SHORT).show();

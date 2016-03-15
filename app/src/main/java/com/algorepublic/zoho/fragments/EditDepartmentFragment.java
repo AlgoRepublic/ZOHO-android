@@ -19,6 +19,8 @@ import com.algorepublic.zoho.services.TaskListService;
 import com.algorepublic.zoho.utils.BaseClass;
 import com.androidquery.AQuery;
 
+import cc.cloudist.acplibrary.ACProgressFlower;
+
 /**
  * Created by android on 2/29/16.
  */
@@ -29,6 +31,7 @@ public class EditDepartmentFragment extends BaseFragment {
     TaskListService service;
     View view;
     static int Pos;
+    ACProgressFlower dialogAC;
     static EditDepartmentFragment fragment;
 
     public EditDepartmentFragment() {
@@ -68,7 +71,7 @@ public class EditDepartmentFragment extends BaseFragment {
         DepartmentService service = new DepartmentService(getActivity());
         service.updateDepartment(baseClass.getUserId(), aq.id(R.id.dept_title).getText().toString(), baseClass.getUserId()
                 , false, new CallBack(EditDepartmentFragment.this, "UpdateDept"));
-        BaseActivity.dialogAC.show();
+        dialogAC.show();
     }
 
     public void UpdateDept(Object caller, Object model){
@@ -78,7 +81,7 @@ public class EditDepartmentFragment extends BaseFragment {
         }else {
             Snackbar.make(getView(), getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
         }
-        BaseActivity.dialogAC.dismiss();
+        dialogAC.dismiss();
     }
 
     @Override
@@ -90,7 +93,7 @@ public class EditDepartmentFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view  = inflater.inflate(R.layout.fragment_add_department, container, false);
-        InitializeDialog(getActivity());
+        dialogAC =InitializeDialog(getActivity());
         aq = new AQuery(view);
         aq.id(R.id.dept_title).text(DepartmentFragment.allProjects.get(Pos).getCompOrDeptName());
         aq.id(R.id.lblListHeader).text(getString(R.string.edit_dept));

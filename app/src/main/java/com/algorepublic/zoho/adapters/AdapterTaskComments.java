@@ -92,7 +92,7 @@ public class AdapterTaskComments extends BaseAdapter {
                 service.deleteForumComment(TaskCommentFragment
                                 .arrayList.get(position).getCommentID(), false,
                         new CallBack(AdapterTaskComments.this, "DeleteComment"));
-                BaseActivity.dialogAC.show();
+                TaskCommentFragment.dialogAC.show();
             }
         });
 
@@ -107,7 +107,7 @@ public class AdapterTaskComments extends BaseAdapter {
             Snackbar.make(((AppCompatActivity) ctx).findViewById(android.R.id.content),
                     ctx.getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
         }
-        BaseActivity.dialogAC.dismiss();
+        TaskCommentFragment.dialogAC.dismiss();
     }
 
     static class ViewHolder {

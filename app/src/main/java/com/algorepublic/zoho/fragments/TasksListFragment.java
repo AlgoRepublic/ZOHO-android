@@ -49,6 +49,7 @@ public class TasksListFragment extends BaseFragment {
     StickyListHeadersAdapter adapterTasksList;
     AQuery aq;View view;
     RadioGroup radioGroup;
+    public static ACProgressFlower dialogAC;
     public static ArrayList<TaskListName> taskListName = new ArrayList<>();
     public static ArrayList<TasksList> allTaskList = new ArrayList<>();
     public static ArrayList<TasksList> generalList = new ArrayList<>();
@@ -116,7 +117,7 @@ public class TasksListFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_taskslist, container, false);
-        InitializeDialog(getActivity());
+        dialogAC = InitializeDialog(getActivity());
         setHasOptionsMenu(true);
         radioGroup = (RadioGroup) view.findViewById(R.id.radioGroup);
         searchView = (SearchView) view.findViewById(R.id.searchView);
@@ -133,7 +134,8 @@ public class TasksListFragment extends BaseFragment {
             taskListService.getTasksListByProject(baseClass.getSelectedProject(), false,
                     new CallBack(TasksListFragment.this, "OwnerTasksList"));
         }
-        BaseActivity.dialogAC.show();
+        aq.id(R.id.all).checked(true);
+        dialogAC.show();
         aq.id(R.id.add_task).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -285,7 +287,7 @@ public class TasksListFragment extends BaseFragment {
         {
             Toast.makeText(getActivity(), getString(R.string.invalid_credential), Toast.LENGTH_SHORT).show();
         }
-        BaseActivity.dialogAC.dismiss();
+        dialogAC.dismiss();
     }
     public void GetGeneralList(){
         generalList.clear();
@@ -350,8 +352,10 @@ public class TasksListFragment extends BaseFragment {
                 if (!(allTaskList.get(loop).getStartMilli().equalsIgnoreCase("62135535600000")
                         || allTaskList.get(loop).getStartMilli().equalsIgnoreCase("-62135571600000")
                         || allTaskList.get(loop).getStartMilli().equalsIgnoreCase("62135571600000"))) {
-                    allTaskList.get(loop).setHeader(allTaskList.get(loop).getStartMilli());
-                    generalList.add(allTaskList.get(loop));
+                    if(allTaskList.get(loop).getProgress()<100) {
+                        allTaskList.get(loop).setHeader(allTaskList.get(loop).getStartMilli());
+                        generalList.add(allTaskList.get(loop));
+                    }
                 }
             }
         }
@@ -363,8 +367,10 @@ public class TasksListFragment extends BaseFragment {
             if(Long.parseLong(allTaskList.get(loop).getEndMilli()) < System.currentTimeMillis()
                     && !baseClass.DateFormatter(allTaskList.get(loop).getStartMilli())
                     .equalsIgnoreCase(baseClass.DateFormatter(String.valueOf(System.currentTimeMillis())))) {
-                allTaskList.get(loop).setHeader(allTaskList.get(loop).getEndMilli());
-                generalList.add(allTaskList.get(loop));
+                if(allTaskList.get(loop).getProgress()<100) {
+                    allTaskList.get(loop).setHeader(allTaskList.get(loop).getEndMilli());
+                    generalList.add(allTaskList.get(loop));
+                }
             }
         }
         Collections.sort(generalList,byOverDate);

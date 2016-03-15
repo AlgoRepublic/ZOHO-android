@@ -20,6 +20,8 @@ import com.algorepublic.zoho.services.UserService;
 import com.algorepublic.zoho.utils.BaseClass;
 import com.androidquery.AQuery;
 
+import cc.cloudist.acplibrary.ACProgressFlower;
+
 /**
  * Created by android on 3/11/16.
  */
@@ -28,6 +30,7 @@ public class RestPasswordFragment extends BaseFragment {
     AQuery aq;
     BaseClass baseClass;
     UserService service;
+    ACProgressFlower dialogAC;
     View view;
     static RestPasswordFragment fragment;
 
@@ -79,7 +82,7 @@ public class RestPasswordFragment extends BaseFragment {
         service.restSetPassword(baseClass.getUserId(),
                 aq.id(R.id.confirm_password).getText().toString()
                 , false, new CallBack(RestPasswordFragment.this, "UpdatePassword"));
-        BaseActivity.dialogAC.show();
+        dialogAC.show();
     }
 
     public void UpdatePassword(Object caller, Object model){
@@ -89,7 +92,7 @@ public class RestPasswordFragment extends BaseFragment {
         }else {
             Snackbar.make(getView(), getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
         }
-        BaseActivity.dialogAC.dismiss();
+        dialogAC.dismiss();
     }
 
     @Override
@@ -101,7 +104,7 @@ public class RestPasswordFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view  = inflater.inflate(R.layout.fragment_add_department, container, false);
-        InitializeDialog(getActivity());
+        dialogAC = InitializeDialog(getActivity());
         aq = new AQuery(view);
         setHasOptionsMenu(true);
         baseClass = ((BaseClass) getActivity().getApplicationContext());

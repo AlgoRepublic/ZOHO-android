@@ -24,7 +24,6 @@ import cc.cloudist.acplibrary.ACProgressConstant;
 import cc.cloudist.acplibrary.ACProgressFlower;
 
 public class BaseActivity extends AppCompatActivity {
-    public static ACProgressFlower dialogAC;
     public static DrawerLayout drawer;public static Toolbar toolbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,12 +96,13 @@ public class BaseActivity extends AppCompatActivity {
         drawer.setDrawerListener(toggle);
         toggle.syncState();
     }
-    public void InitializeDialog(Context context){
-        dialogAC = new ACProgressFlower.Builder(context)
+    public ACProgressFlower InitializeDialog(Context context){
+        ACProgressFlower dialogAC= new ACProgressFlower.Builder(context)
                 .direction(ACProgressConstant.DIRECT_CLOCKWISE)
                 .themeColor(Color.WHITE)
                 .fadeColor(Color.DKGRAY).build();
         dialogAC.setCancelable(true);
+        return dialogAC;
     }
 
 }

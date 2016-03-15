@@ -85,7 +85,7 @@ public class AdapterForumComment extends BaseAdapter {
                 service.deleteForumComment(ForumsDetailFragment
                         .arrayList.get(position).getCommentID(),false,
                         new CallBack(AdapterForumComment.this,"DeleteComment"));
-                BaseActivity.dialogAC.show();
+                ForumsDetailFragment.dialogAC.show();
             }
         });
 
@@ -100,7 +100,7 @@ public class AdapterForumComment extends BaseAdapter {
             Snackbar.make(((AppCompatActivity)ctx).findViewById(android.R.id.content),
                     ctx.getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
         }
-        BaseActivity.dialogAC.dismiss();
+        ForumsDetailFragment.dialogAC.dismiss();
     }
 
 }

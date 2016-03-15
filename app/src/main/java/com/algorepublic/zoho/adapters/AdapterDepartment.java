@@ -306,7 +306,7 @@ public class AdapterDepartment
                     public void onBtnClick() {
                         dialog.dismiss();
                         if(Clicked==1) {
-                            BaseActivity.dialogAC.show();
+                            DepartmentFragment.dialogAC.show();
                             service.DeleteDepartment(DepartmentFragment.allProjects.get(position).getCompOrDeptID(), true
                                     , new CallBack(AdapterDepartment.this, "DeleteDept"));
                         }
@@ -379,7 +379,7 @@ public class AdapterDepartment
                 DepartmentFragment.allProjects.add(projectsList);
             }
         }
-        BaseActivity.dialogAC.dismiss();
+        DepartmentFragment.dialogAC.dismiss();
         Snackbar.make(((AppCompatActivity)ctx).findViewById(android.R.id.content),
                 ctx.getString(R.string.department_deleted), Snackbar.LENGTH_SHORT).show();
        notifyDataSetChanged();

@@ -16,6 +16,7 @@ import com.algorepublic.zoho.Models.GeneralModel;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.fragments.EditForumFragment;
 import com.algorepublic.zoho.fragments.ForumsDetailFragment;
+import com.algorepublic.zoho.fragments.ForumsFragment;
 import com.algorepublic.zoho.services.CallBack;
 import com.algorepublic.zoho.services.ForumService;
 import com.algorepublic.zoho.utils.BaseClass;
@@ -86,7 +87,7 @@ public class AdapterForumsList extends BaseAdapter {
                 Clicked = position;
                 service.deleteForum(Integer.toString(ForumsModel.getInstance().responseObject.get(position).ID),
                         false,new CallBack(AdapterForumsList.this,"DeleteForum"));
-                BaseActivity.dialogAC.show();
+                ForumsFragment.dialogAC.show();
             }
         });
         return convertView;
@@ -99,7 +100,7 @@ public class AdapterForumsList extends BaseAdapter {
         }else {
             Snackbar.make(((AppCompatActivity) ctx).findViewById(android.R.id.content), ctx.getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
         }
-        BaseActivity.dialogAC.dismiss();
+        ForumsFragment.dialogAC.dismiss();
     }
     public void UpdatedAfterDelete(int pos){
         ForumsModel.getInstance().responseObject.remove(pos);

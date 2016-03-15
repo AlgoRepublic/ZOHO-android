@@ -188,7 +188,7 @@ public class AdapterDocumentsList extends BaseAdapter implements StickyListHeade
                             service.deleteDocumentByTask(ID, DocumentsListFragment.deleteDocsList
                                     , false, new CallBack(AdapterDocumentsList.this, "DeleteDoc"));
                         }
-                        BaseActivity.dialogAC.show();
+                        DocumentsListFragment.dialogAC.show();
                     }
                 });
     }
@@ -202,7 +202,7 @@ public class AdapterDocumentsList extends BaseAdapter implements StickyListHeade
         {
             Snackbar.make(((AppCompatActivity)ctx).findViewById(android.R.id.content), ctx.getString(R.string.invalid_credential), Snackbar.LENGTH_SHORT).show();
         }
-        BaseActivity.dialogAC.dismiss();
+        DocumentsListFragment.dialogAC.dismiss();
     }
     public void UpdatedAfterDelete(){
         ArrayList<DocumentsList> arrayList = new ArrayList<>();

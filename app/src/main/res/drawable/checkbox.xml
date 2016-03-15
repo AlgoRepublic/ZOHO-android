@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android" android:enterFadeDuration="@android:integer/config_shortAnimTime" android:exitFadeDuration="@android:integer/config_shortAnimTime">
 
-    <item android:drawable="@android:drawable/checkbox_on_background"
+    <item android:drawable="@drawable/ic_check_green_24dp"
         android:state_checked="true"/>
-    <item android:drawable="@android:drawable/checkbox_on_background"
+    <item android:drawable="@drawable/ic_check_green_24dp"
         android:state_pressed="true"/>
-    <item android:drawable="@android:drawable/checkbox_off_background"
-        android:color="@android:color/white" />
+    <item android:drawable="@color/white" />
 
 </selector>

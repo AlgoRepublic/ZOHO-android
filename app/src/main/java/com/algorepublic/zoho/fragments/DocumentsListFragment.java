@@ -27,6 +27,7 @@ import com.flyco.dialog.widget.ActionSheetDialog;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import cc.cloudist.acplibrary.ACProgressFlower;
 import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
 
 /**
@@ -38,6 +39,7 @@ public class DocumentsListFragment extends BaseFragment{
     AQuery aq;
     View view;
     DocumentsService service;
+    public static ACProgressFlower dialogAC;
     public static ArrayList<DocumentsList> generalDocsList = new ArrayList<>();
     public static ArrayList<DocumentsList> allDocsList = new ArrayList<>();
     public static ArrayList<Integer> deleteDocsList = new ArrayList<>();
@@ -68,7 +70,7 @@ public class DocumentsListFragment extends BaseFragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_documents, container, false);
-        InitializeDialog(getActivity());
+        dialogAC = InitializeDialog(getActivity());
         listView = (StickyListHeadersListView) view.findViewById(R.id.list_documents);
         aq = new AQuery(view);
         aq.id(R.id.sort).clicked(new View.OnClickListener() {
@@ -85,7 +87,7 @@ public class DocumentsListFragment extends BaseFragment{
         service = new DocumentsService(getActivity());
         service.getDocuments(baseClass.db.getInt("ProjectID"),
                 false, new CallBack(DocumentsListFragment.this, "DocumentsList"));
-        BaseActivity.dialogAC.show();
+        dialogAC.show();
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -158,15 +160,19 @@ public class DocumentsListFragment extends BaseFragment{
                 if (isLoaded())
                     if (position == 0) {
                         baseClass.setDocsSortType(getString(R.string.all_files));
+                        aq.id(R.id.list_title).text(getString(R.string.all_files));
                     }
                 if (position == 1) {
                     baseClass.setDocsSortType(getString(R.string.picture));
+                    aq.id(R.id.list_title).text(getString(R.string.picture));
                 }
                 if (position == 2) {
                     baseClass.setDocsSortType(getString(R.string.videos));
+                    aq.id(R.id.list_title).text(getString(R.string.videos));
                 }
                 if (position == 3) {
                     baseClass.setDocsSortType(getString(R.string.favorites));
+                    aq.id(R.id.list_title).text(getString(R.string.favorites));
                 }
                 FilterList();
             }
@@ -198,7 +204,7 @@ public class DocumentsListFragment extends BaseFragment{
         } else {
             Toast.makeText(getActivity(), getString(R.string.invalid_credential), Toast.LENGTH_SHORT).show();
         }
-        BaseActivity.dialogAC.dismiss();
+        dialogAC.dismiss();
     }
 
     public void GetAllDocumentsList() {

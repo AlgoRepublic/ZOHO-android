@@ -42,6 +42,7 @@ public class TaskAddUpdateFragment extends BaseFragment {
     static TaskAddUpdateFragment fragment;
     public static GridView gridViewTaskMenu;
     public static TasksList tasksObj;
+    ACProgressFlower dialogAC;
     public static ArrayList<DocumentsList> apiDocsList = new ArrayList<>();
     public static ArrayList<AttachmentList> filesList;
     public static ArrayList<Integer> filesToDelete;
@@ -134,7 +135,7 @@ public class TaskAddUpdateFragment extends BaseFragment {
                              Bundle savedInstanceState) {
         setHasOptionsMenu(true);
         View view = inflater.inflate(R.layout.activity_task, container, false);
-        InitializeDialog(getActivity());
+        dialogAC = InitializeDialog(getActivity());
         gridViewTaskMenu = (GridView) view.findViewById(R.id.gridview_taskmenu);
         filesList = new ArrayList<>();
         filesToDelete = new ArrayList<>();
@@ -213,7 +214,7 @@ public class TaskAddUpdateFragment extends BaseFragment {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            BaseActivity.dialogAC.show();
+            dialogAC.show();
         }
 
         @Override
@@ -229,7 +230,7 @@ public class TaskAddUpdateFragment extends BaseFragment {
         }
         @Override
         protected void onPostExecute(String result){
-            BaseActivity.dialogAC.dismiss();
+            dialogAC.dismiss();
             PopulateModel(result);
         }
     }
@@ -240,7 +241,7 @@ public class TaskAddUpdateFragment extends BaseFragment {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            BaseActivity.dialogAC.show();
+            dialogAC.show();
         }
 
         @Override
@@ -256,7 +257,7 @@ public class TaskAddUpdateFragment extends BaseFragment {
         }
         @Override
         protected void onPostExecute(String result){
-            BaseActivity.dialogAC.dismiss();
+            dialogAC.dismiss();
             PopulateModel(result);
         }
     }
@@ -267,7 +268,7 @@ public class TaskAddUpdateFragment extends BaseFragment {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            BaseActivity.dialogAC.show();
+            dialogAC.show();
         }
 
         @Override
@@ -284,7 +285,7 @@ public class TaskAddUpdateFragment extends BaseFragment {
         }
         @Override
         protected void onPostExecute(String result){
-            BaseActivity.dialogAC.dismiss();
+            dialogAC.dismiss();
             PopulateModel(result);
         }
     }
@@ -295,7 +296,7 @@ public class TaskAddUpdateFragment extends BaseFragment {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            BaseActivity.dialogAC.show();
+            dialogAC.show();
         }
 
         @Override
@@ -312,7 +313,7 @@ public class TaskAddUpdateFragment extends BaseFragment {
         }
         @Override
         protected void onPostExecute(String result){
-            BaseActivity.dialogAC.dismiss();
+            dialogAC.dismiss();
             PopulateModel(result);
         }
     }

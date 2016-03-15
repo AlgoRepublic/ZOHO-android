@@ -37,6 +37,7 @@ public class DashboardFragment extends BaseFragment {
     PieGraph pieGraph;
     BarGraph barGraph;
     int allTasksCount;
+    ACProgressFlower dialogAC;
     ArrayList<Integer> tasksOpen = new ArrayList<>();
     ArrayList<Integer> tasksCloased= new ArrayList<>();
     public static DashboardFragment newInstance() {
@@ -54,9 +55,8 @@ public class DashboardFragment extends BaseFragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment_forums
         View view  = inflater.inflate(R.layout.fragment_dashboard, container, false);
-        InitializeDialog(getActivity());
         aq = new AQuery(view);
-        InitializeDialog(getActivity());
+        dialogAC = InitializeDialog(getActivity());
         baseClass = ((BaseClass) getActivity().getApplicationContext());
         barGraph = (BarGraph)view.findViewById(R.id.graph);
         pieGraph  = (PieGraph)view.findViewById(R.id.graphy);
@@ -67,14 +67,14 @@ public class DashboardFragment extends BaseFragment {
         {
             service.getMileStone(baseClass.getSelectedProject(), false,
                     new CallBack(DashboardFragment.this, "DashBoardList"));
-            BaseActivity.dialogAC.show();
+            dialogAC.show();
         }
         return view;
     }
 
     public void DashBoardList(Object caller, Object model) {
         DashBoardModel.getInstance().setList((DashBoardModel) model);
-        BaseActivity.dialogAC.dismiss();
+        dialogAC.dismiss();
         if (DashBoardModel.getInstance().responseCode == 100) {
 
             ArrayList<Bar> points = new ArrayList<Bar>();

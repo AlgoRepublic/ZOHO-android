@@ -65,17 +65,17 @@ public class AdapterTaskListName extends BaseAdapter {
             aq.id(R.id.priority_checkbox).checked(false);
         }
         aq.id(R.id.priority).text(TasksListFragment.taskListName.get(position).getTaskListName());
-        aq.id(R.id.priority).clicked(new View.OnClickListener() {
+        aq.id(R.id.layout_booklist).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 selectedIndex = position;
                 baseClass.db.putInt("TaskListNameID", TasksListFragment.taskListName.get(selectedIndex).getTaskListID());
                 baseClass.db.putString("TaskListName", TasksListFragment.taskListName.get(selectedIndex).getTaskListName());
-                        View view = getViewByPosition(selectedIndex, TaskPriorityFragment.listView);
+                View view = getViewByPosition(selectedIndex,TaskListNameFragment.listView);
                 RadioButton radioButton = (RadioButton) view.findViewById(R.id.priority_checkbox);
                 for(int loop=0;loop<TasksListFragment.taskListName.size();loop++)
                 {
-                    View  view1 = getViewByPosition(loop, TaskPriorityFragment.listView);
+                    View  view1 = getViewByPosition(loop, TaskListNameFragment.listView);
                     RadioButton radioButton1 = (RadioButton) view1.findViewById(R.id.priority_checkbox);
                     radioButton1.setChecked(false);
                 }

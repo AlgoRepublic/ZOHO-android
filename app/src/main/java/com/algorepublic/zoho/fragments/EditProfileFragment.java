@@ -56,7 +56,7 @@ public class EditProfileFragment extends BaseFragment implements MultiSelectionS
     public static final int RESULT_GALLERY = 2;
     public static final int PICK_File = 3;
     File newFile;
-    AQuery aq;
+    AQuery aq;ACProgressFlower dialogAC;
     ArrayList<Integer> selectedIds = new ArrayList<>();
     ArrayList<String> projectList;
     ProjectsListService service ;
@@ -85,7 +85,7 @@ public class EditProfileFragment extends BaseFragment implements MultiSelectionS
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view  = inflater.inflate(R.layout.fragment_edit_user_profile, container, false);
-        InitializeDialog(getActivity());
+        dialogAC = InitializeDialog(getActivity());
         projectsList = (MultiSelectionSpinner) view.findViewById(R.id.projects_list);
         projectsList.setListener(this);
         baseClass = ((BaseClass) getActivity().getApplicationContext());
@@ -105,7 +105,7 @@ public class EditProfileFragment extends BaseFragment implements MultiSelectionS
                 new CallBack(EditProfileFragment.this, "GetById"));
         service.getAllProjectsByUser_API(baseClass.getUserId(), false,
                 new CallBack(EditProfileFragment.this, "AllProjects"));
-        BaseActivity.dialogAC.show();
+        dialogAC.show();
         return view;
     }
     public void GetById(Object caller,Object model) {
@@ -130,7 +130,7 @@ public class EditProfileFragment extends BaseFragment implements MultiSelectionS
         }else {
             Toast.makeText(getActivity(), getString(R.string.response_error), Toast.LENGTH_SHORT).show();
         }
-        BaseActivity.dialogAC.dismiss();
+        dialogAC.dismiss();
     }
     public void UpdateValues(){
         aq.id(R.id.first_name).text(GetUserModel.getInstance().user.firstName);
@@ -180,7 +180,7 @@ public class EditProfileFragment extends BaseFragment implements MultiSelectionS
         }else {
             Snackbar.make(getView(), getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
         }
-        BaseActivity.dialogAC.dismiss();
+        dialogAC.dismiss();
     }
 
     @Override
@@ -217,7 +217,7 @@ public class EditProfileFragment extends BaseFragment implements MultiSelectionS
                         aq.id(R.id.user_phoneno).getText().toString(),
                         GetUserModel.getInstance().user.userRole.ID, selectedIds
                         , false, new CallBack(EditProfileFragment.this, "UpdateUser"));
-                BaseActivity.dialogAC.show();
+                dialogAC.show();
         }
         return super.onOptionsItemSelected(item);
     }
@@ -319,7 +319,7 @@ public class EditProfileFragment extends BaseFragment implements MultiSelectionS
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            BaseActivity.dialogAC.show();
+            dialogAC.show();
         }
 
         @Override
@@ -336,7 +336,7 @@ public class EditProfileFragment extends BaseFragment implements MultiSelectionS
 
         @Override
         protected void onPostExecute(String result) {
-            BaseActivity.dialogAC.dismiss();
+            dialogAC.dismiss();
             if(result != null) {
                 if (result.contains("100")) {
                     loginService.GetById(baseClass.getUserId(),

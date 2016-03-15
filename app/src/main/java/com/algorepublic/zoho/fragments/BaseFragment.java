@@ -77,12 +77,13 @@ public class BaseFragment extends Fragment {
         }
         return null;
     }
-    public void InitializeDialog(Context context){
-        BaseActivity.dialogAC = new ACProgressFlower.Builder(context)
+    public ACProgressFlower InitializeDialog(Context context){
+        ACProgressFlower dialogAC = new ACProgressFlower.Builder(context)
                 .direction(ACProgressConstant.DIRECT_CLOCKWISE)
                 .themeColor(Color.WHITE)
                 .fadeColor(Color.DKGRAY).build();
-        BaseActivity.dialogAC.setCancelable(true);
+        dialogAC.setCancelable(true);
+        return dialogAC;
     }
     public File getOutputMediaFile() {
         File mediaStorageDir = new File(

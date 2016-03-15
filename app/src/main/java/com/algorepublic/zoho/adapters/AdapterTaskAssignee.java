@@ -5,12 +5,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.CheckBox;
 import android.widget.ListView;
+import android.widget.RadioButton;
 
 import com.algorepublic.zoho.FragmentsTasks.TaskAssignFragment;
+import com.algorepublic.zoho.FragmentsTasks.TaskListNameFragment;
 import com.algorepublic.zoho.fragments.TaskAddUpdateFragment;
 import com.algorepublic.zoho.Models.TaskUserModel;
 import com.algorepublic.zoho.R;
+import com.algorepublic.zoho.fragments.TasksListFragment;
 import com.algorepublic.zoho.utils.BaseClass;
 import com.androidquery.AQuery;
 
@@ -59,6 +63,27 @@ public class AdapterTaskAssignee extends BaseAdapter {
         }else{
             aq.id(R.id.assignee_name).text(TaskUserModel.getInstance().responseObject.get(position).firstName);
         }
+        aq.id(R.id.layout_booklist).clicked(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(TaskAddUpdateFragment.assigneeList.size()>0) {
+                    for (int loop = 0; loop < TaskAddUpdateFragment.assigneeList.size(); loop++) {
+                        View view = getViewByPosition(position,TaskAssignFragment.listView);
+                        AQuery aQuery = new AQuery(view);
+                        if (aQuery.id(R.id.assignee_checkbox).isChecked()) {
+                            TaskAddUpdateFragment.assigneeList.add(TaskUserModel.getInstance().responseObject.get(position).ID);
+                            break;
+                        } else if (TaskAddUpdateFragment.assigneeList.get(loop) ==
+                                TaskUserModel.getInstance().responseObject.get(position).ID) {
+                            TaskAddUpdateFragment.assigneeList.remove(loop);
+                        }
+                    }
+                }else {
+                    aq.id(R.id.assignee_checkbox).checked(true);
+                    TaskAddUpdateFragment.assigneeList.add(TaskUserModel.getInstance().responseObject.get(position).ID);
+                }
+            }
+        });
         aq.id(R.id.assignee_checkbox).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

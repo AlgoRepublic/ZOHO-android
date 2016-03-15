@@ -25,6 +25,8 @@ import org.angmarch.views.NiceSpinner;
 
 import java.util.LinkedList;
 
+import cc.cloudist.acplibrary.ACProgressFlower;
+
 /**
  * Created by waqas on 2/25/16.
  */
@@ -35,6 +37,7 @@ public class EditForumFragment extends BaseFragment  {
     BaseClass baseClass;
     NiceSpinner category_list;
     ForumService service;
+    ACProgressFlower dialogAC;
     LinkedList<String> categoryList;
     static int Pos;
 
@@ -87,7 +90,7 @@ public class EditForumFragment extends BaseFragment  {
                     true,
                     categoryID,baseClass.getUserId(),
                     false, new CallBack(EditForumFragment.this, "UpdateForum"));
-            BaseActivity.dialogAC.show();
+            dialogAC.show();
         }else{
             Snackbar.make(getView(),getString(R.string.select_project),Snackbar.LENGTH_SHORT).show();
         }
@@ -100,13 +103,13 @@ public class EditForumFragment extends BaseFragment  {
         }else {
             Snackbar.make(getView(), getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
         }
-        BaseActivity.dialogAC.dismiss();
+        dialogAC.dismiss();
     }
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view  = inflater.inflate(R.layout.fragment_add_forums, container, false);
-        InitializeDialog(getActivity());
+        dialogAC =InitializeDialog(getActivity());
         aq = new AQuery(getActivity(), view);
         aq.id(R.id.lblListHeader).text(getString(R.string.edit_forum_post));
         setHasOptionsMenu(true);
@@ -115,7 +118,7 @@ public class EditForumFragment extends BaseFragment  {
         service = new ForumService(getActivity());
         service.getCategoryList(baseClass.getSelectedProject(), false,
                 new CallBack(EditForumFragment.this, "GetAllCategory"));
-        BaseActivity.dialogAC.show();
+        dialogAC.show();
         return view;
     }
     public void GetAllCategory(Object caller, Object model) {
@@ -133,7 +136,7 @@ public class EditForumFragment extends BaseFragment  {
         {
             Snackbar.make(getView(), getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
         }
-        BaseActivity.dialogAC.dismiss();
+        dialogAC.dismiss();
     }
     public void UpdateValues(){
         aq.id(R.id.lblListHeader).text(getString(R.string.edit_forum_post));

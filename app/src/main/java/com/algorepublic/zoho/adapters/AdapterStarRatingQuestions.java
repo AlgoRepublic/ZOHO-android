@@ -89,7 +89,7 @@ public class AdapterStarRatingQuestions extends BaseAdapter {
                         .get(position).getID(), StarRatingLevelQuestionsFragment.Questions
                         .get(position).getComment(), false, new
                         CallBack(AdapterStarRatingQuestions.this, "UpdateComment"));
-                BaseActivity.dialogAC.show();
+                StarRatingLevelQuestionsFragment.dialogAC.show();
             }
         });
         aq.id(R.id.seekBar).getSeekBar().setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -111,7 +111,7 @@ public class AdapterStarRatingQuestions extends BaseAdapter {
                         .get(position).getID(), StarRatingLevelQuestionsFragment.Questions
                         .get(position).getProgress(), false, new
                         CallBack(AdapterStarRatingQuestions.this, "UpdateProgress"));
-                BaseActivity.dialogAC.show();
+                StarRatingLevelQuestionsFragment.dialogAC.show();
             }
         });
         return convertView;
@@ -125,7 +125,7 @@ public class AdapterStarRatingQuestions extends BaseAdapter {
             Snackbar.make(((AppCompatActivity) mContext).findViewById(android.R.id.content),
                     mContext.getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
         }
-        BaseActivity.dialogAC.dismiss();
+        StarRatingLevelQuestionsFragment.dialogAC.dismiss();
     }
     public void UpdateProgress(Object caller, Object model) {
         GeneralModel.getInstance().setList((GeneralModel) model);
@@ -143,7 +143,7 @@ public class AdapterStarRatingQuestions extends BaseAdapter {
             Snackbar.make(((AppCompatActivity) mContext).findViewById(android.R.id.content),
                     mContext.getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
         }
-        BaseActivity.dialogAC.dismiss();
+        StarRatingLevelQuestionsFragment.dialogAC.dismiss();
     }
     public int GetStarValue(int progress)
     {

@@ -51,6 +51,7 @@ public class TaskDetailFragment extends BaseFragment {
     static int position;
     TaskListService service;
     int click=0;
+    ACProgressFlower dialogAC;
     DonutProgress seekBarCompat;
     TwoWayView twoWayAssignee;
     SeekBar seekBar;
@@ -89,7 +90,7 @@ public class TaskDetailFragment extends BaseFragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment_forums
         final View view =  inflater.inflate(R.layout.fragment_task_detail, container, false);
-        InitializeDialog(getActivity());
+        dialogAC = InitializeDialog(getActivity());
         baseClass = ((BaseClass) getActivity().getApplicationContext());
         setHasOptionsMenu(true);
         seekBarCompat = (DonutProgress) view.findViewById(R.id.circularprogressBar);
@@ -116,7 +117,7 @@ public class TaskDetailFragment extends BaseFragment {
         service = new TaskListService(getActivity());
         service.getTasksById(tasksList.getTaskID(),false
                 ,new CallBack(TaskDetailFragment.this,"TaskDetails"));
-        BaseActivity.dialogAC.show();
+        dialogAC.show();
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progres, boolean fromUser) {
@@ -140,7 +141,7 @@ public class TaskDetailFragment extends BaseFragment {
                     service.updateTaskProgress(tasksList.getTaskID()
                             , progress, false, new CallBack(TaskDetailFragment.this, "UpdateProgress"));
                 }
-                BaseActivity.dialogAC.show();
+                dialogAC.show();
             }
         });
 
@@ -197,7 +198,7 @@ public class TaskDetailFragment extends BaseFragment {
         } else {
             Snackbar.make(getView(), getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
         }
-        BaseActivity.dialogAC.dismiss();
+        dialogAC.dismiss();
     }
 
     public void UpdateValue(){
@@ -281,7 +282,7 @@ public class TaskDetailFragment extends BaseFragment {
         {
             Snackbar.make(getView(), getString(R.string.invalid_credential), Snackbar.LENGTH_SHORT).show();
         }
-        BaseActivity.dialogAC.dismiss();
+        dialogAC.dismiss();
     }
     public void DeleteTask(Object caller, Object model) {
         GeneralModel.getInstance().setList((GeneralModel) model);
@@ -293,11 +294,11 @@ public class TaskDetailFragment extends BaseFragment {
         {
             Snackbar.make(getView(), getString(R.string.invalid_credential), Snackbar.LENGTH_SHORT).show();
         }
-        BaseActivity.dialogAC.dismiss();
+        dialogAC.dismiss();
     }
     public void CompleteTask(Object caller, Object model) {
         GeneralModel.getInstance().setList((GeneralModel) model);
-        BaseActivity.dialogAC.dismiss();
+        dialogAC.dismiss();
         if (GeneralModel.getInstance().responseCode.equalsIgnoreCase("100")) {
             Snackbar.make(getView(), getString(R.string.task_done), Snackbar.LENGTH_SHORT).show();
             seekBar.setProgress(100);
@@ -310,11 +311,11 @@ public class TaskDetailFragment extends BaseFragment {
         {
             Snackbar.make(getView(), getString(R.string.invalid_credential), Snackbar.LENGTH_SHORT).show();
         }
-        BaseActivity.dialogAC.dismiss();
+        dialogAC.dismiss();
     }
     public void UpdateTask(Object caller, Object model) {
         GeneralModel.getInstance().setList((GeneralModel) model);
-        BaseActivity.dialogAC.dismiss();
+        dialogAC.dismiss();
         if (GeneralModel.getInstance().responseCode.equalsIgnoreCase("100")) {
             Snackbar.make(getView(), getString(R.string.reopen_task), Snackbar.LENGTH_SHORT).show();
             seekBar.setProgress(0);
@@ -322,7 +323,7 @@ public class TaskDetailFragment extends BaseFragment {
             aq.id(R.id.mark_as_done).text(getString(R.string.mark_as_done));
             tasksList.setProgress(0);
         }
-        BaseActivity.dialogAC.dismiss();
+        dialogAC.dismiss();
     }
 
 
@@ -330,7 +331,7 @@ public class TaskDetailFragment extends BaseFragment {
 
     public void ReOpenTask(Object caller, Object model) {
         GeneralModel.getInstance().setList((GeneralModel) model);
-        BaseActivity.dialogAC.dismiss();
+        dialogAC.dismiss();
         if (GeneralModel.getInstance().responseCode.equalsIgnoreCase("100")) {
             Snackbar.make(getView(), getString(R.string.reopen_task), Snackbar.LENGTH_SHORT).show();
             seekBar.setProgress(0);
@@ -342,7 +343,7 @@ public class TaskDetailFragment extends BaseFragment {
         {
             Snackbar.make(getView(), getString(R.string.invalid_credential), Snackbar.LENGTH_SHORT).show();
         }
-        BaseActivity.dialogAC.dismiss();
+        dialogAC.dismiss();
     }
 
     private void NormalDialogCustomAttr(String content) {
@@ -387,7 +388,7 @@ public class TaskDetailFragment extends BaseFragment {
                             service.updateTaskProgress(TasksListFragment.generalList.get(position).getTaskID()
                                     , 0, false, new CallBack(TaskDetailFragment.this, "ReOpenTask"));
                         }
-                        BaseActivity.dialogAC.show();
+                        dialogAC.show();
                     }
                 });
     }

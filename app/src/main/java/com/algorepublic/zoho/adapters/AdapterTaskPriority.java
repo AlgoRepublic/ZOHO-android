@@ -65,7 +65,7 @@ public class AdapterTaskPriority extends BaseAdapter {
             aq.id(R.id.priority_checkbox).checked(false);
         }
         aq.id(R.id.priority).text(arraylist.get(position));
-        aq.id(R.id.priority).clicked(new View.OnClickListener() {
+        aq.id(R.id.layout_booklist).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 selectedIndex = position;

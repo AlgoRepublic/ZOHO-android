@@ -26,6 +26,8 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
+import cc.cloudist.acplibrary.ACProgressFlower;
+
 
 /**
  * Use the {@link CalendarFragment#newInstance} factory method to
@@ -36,7 +38,7 @@ public class CalendarFragment extends BaseFragment implements CalendarPickerCont
     AQuery aq;
     AgendaCalendarView calendarView;
     BaseClass baseClass;
-
+    ACProgressFlower dialogAC;
     public CalendarFragment() {
         // Required empty public constructor
     }
@@ -68,7 +70,7 @@ public class CalendarFragment extends BaseFragment implements CalendarPickerCont
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment_forums
         View view  = inflater.inflate(R.layout.fragment_calendar, container, false);
-        InitializeDialog(getActivity());
+        dialogAC = InitializeDialog(getActivity());
 //        MainActivity.toolbar = (Toolbar) view.findViewById(R.id.toolbar);
 //        setToolbar();
         aq = new AQuery(getActivity(), view);
@@ -97,7 +99,7 @@ public class CalendarFragment extends BaseFragment implements CalendarPickerCont
             TaskListService service = new TaskListService(getActivity());
             service.getTasksListByOwner(baseClass.getUserId(),false,
                     new CallBack(CalendarFragment.this, "TasksList"));
-            BaseActivity.dialogAC.show();
+            dialogAC.show();
         }else{
             initCalendarView();
         }
@@ -125,7 +127,7 @@ public class CalendarFragment extends BaseFragment implements CalendarPickerCont
     public void TasksList(Object caller, Object model) {
         TasksListByOwnerModel.getInstance().setList((TasksListByOwnerModel) model);
         initCalendarView();
-        BaseActivity.dialogAC.dismiss();
+        dialogAC.dismiss();
     }
 
     private void initCalendarView(){

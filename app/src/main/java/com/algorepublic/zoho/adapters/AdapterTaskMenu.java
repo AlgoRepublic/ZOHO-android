@@ -78,7 +78,10 @@ public class AdapterTaskMenu extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
         final AQuery aq = new AQuery(convertView);
-
+        if(lastPosition == 0){
+            aq.id(R.id.checkbox).checked(true);
+            aq.id(R.id.checkbox).getCheckBox().setAlpha(0.7f);
+        }
         holder.title.setText(menu_names[position]);
         holder.title.setTextColor(ctx.getResources().getColor(R.color.white));
         aq.id(R.id.imageview).image(menu_icon_white[position]);
@@ -87,6 +90,7 @@ public class AdapterTaskMenu extends BaseAdapter {
         aq.id(R.id.checkbox).getCheckBox().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                lastPosition = position;
                 for (int loop = 0; loop < menu_names.length; loop++) {
                     if (loop == position) {
                         aq.id(R.id.checkbox).getCheckBox().setAlpha(0.7f);

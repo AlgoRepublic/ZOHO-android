@@ -21,6 +21,8 @@ import com.algorepublic.zoho.services.ForumService;
 import com.algorepublic.zoho.utils.BaseClass;
 import com.androidquery.AQuery;
 
+import cc.cloudist.acplibrary.ACProgressFlower;
+
 /**
  * Created by waqas on 2/1/16.
  */
@@ -28,6 +30,7 @@ public class ForumsFragment extends BaseFragment{
 
     private AQuery aq;
     private BaseClass baseClass;
+    public static ACProgressFlower dialogAC;
 
 
     public static ForumsFragment newInstance() {
@@ -62,14 +65,14 @@ public class ForumsFragment extends BaseFragment{
         setHasOptionsMenu(true);
         aq = new AQuery(getActivity(), view);
         baseClass = ((BaseClass) getActivity().getApplicationContext());
-        InitializeDialog(getActivity());
+        dialogAC = InitializeDialog(getActivity());
         ForumService service = new ForumService(getActivity());
         if (baseClass.getSelectedProject().equalsIgnoreCase("0")) {
             Toast.makeText(getActivity(), "Please Select Project", Toast.LENGTH_SHORT).show();
         }else {
             service.getForumsList(baseClass.getSelectedProject(), false,
                     new CallBack(ForumsFragment.this, "ForumListCallback"));
-            BaseActivity.dialogAC.show();
+            dialogAC.show();
         }
         setHasOptionsMenu(true);
         getToolbar().setTitle(getString(R.string.forums));
@@ -92,6 +95,6 @@ public class ForumsFragment extends BaseFragment{
         }else {
             Snackbar.make(getView(), getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
         }
-        BaseActivity.dialogAC.dismiss();
+        dialogAC.dismiss();
     }
 }

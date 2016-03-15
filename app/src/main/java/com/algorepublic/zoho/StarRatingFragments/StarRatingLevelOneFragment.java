@@ -20,6 +20,8 @@ import com.algorepublic.zoho.services.StarRatingService;
 
 import java.util.ArrayList;
 
+import cc.cloudist.acplibrary.ACProgressFlower;
+
 /**
  * Created by android on 2/1/16.
  */
@@ -28,7 +30,7 @@ public class StarRatingLevelOneFragment extends BaseFragment {
     public static ArrayList<StarRatingHeadsLevelOne> levelOneHead = new ArrayList<>();
     ListView mListView;
     StarRatingService service;
-
+    ACProgressFlower dialogAC;
     public static StarRatingLevelOneFragment newInstance() {
         fragment = new StarRatingLevelOneFragment();
         return fragment;
@@ -44,11 +46,12 @@ public class StarRatingLevelOneFragment extends BaseFragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_star_rating, container, false);
         mListView = (ListView) view.findViewById(R.id.starListView);
+        dialogAC = InitializeDialog(getActivity());
         service = new StarRatingService(getActivity());
         if(levelOneHead.size()==0) {
             service.getStarRatingHeads_API("en-Us", false,
                     new CallBack(StarRatingLevelOneFragment.this, "StarRatingHeads"));
-            BaseActivity.dialogAC.show();
+            dialogAC.show();
         }else{
             mListView.setAdapter(new AdapterStarRatingLevelOne(getActivity(),levelOneHead));
         }
@@ -65,7 +68,7 @@ public class StarRatingLevelOneFragment extends BaseFragment {
         {
             Snackbar.make(getView(), getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
         }
-        BaseActivity.dialogAC.dismiss();
+        dialogAC.dismiss();
     }
 
     public void GetListHeads() {

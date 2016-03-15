@@ -26,6 +26,7 @@ import com.flyco.dialog.widget.ActionSheetDialog;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import cc.cloudist.acplibrary.ACProgressFlower;
 import se.emilsjolander.stickylistheaders.StickyListHeadersAdapter;
 import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
 
@@ -39,6 +40,7 @@ public class DocumentsListBySubTaskFragment extends BaseFragment {
     AQuery aq;
     View view;
     DocumentsService service;
+    ACProgressFlower dialogAC;
     public static ArrayList<DocumentsList> generalDocsList = new ArrayList<>();
     public static ArrayList<DocumentsList> allDocsList = new ArrayList<>();
     public static ArrayList<Integer> deleteDocsList = new ArrayList<>();
@@ -70,7 +72,7 @@ public class DocumentsListBySubTaskFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_documents, container, false);
-        InitializeDialog(getActivity());
+        dialogAC = InitializeDialog(getActivity());
         listView = (StickyListHeadersListView) view.findViewById(R.id.list_documents);
         aq = new AQuery(view);
         aq.id(R.id.sort).clicked(new View.OnClickListener() {
@@ -86,7 +88,7 @@ public class DocumentsListBySubTaskFragment extends BaseFragment {
         service = new DocumentsService(getActivity());
         service.getDocsBySubTasks(ID, false,
                 new CallBack(DocumentsListBySubTaskFragment.this, "DocumentsList"));
-        BaseActivity.dialogAC.show();
+        dialogAC.show();
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -197,7 +199,7 @@ public class DocumentsListBySubTaskFragment extends BaseFragment {
         } else {
             Snackbar.make(getView(),getString(R.string.invalid_credential),Snackbar.LENGTH_SHORT).show();
         }
-        BaseActivity.dialogAC.dismiss();
+        dialogAC.dismiss();
     }
 
     public void GetAllDocumentsList() {

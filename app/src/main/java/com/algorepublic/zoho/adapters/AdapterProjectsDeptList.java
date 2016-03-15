@@ -28,6 +28,7 @@ import com.flyco.animation.SlideExit.SlideRightExit;
 import com.flyco.dialog.listener.OnBtnClickL;
 import com.flyco.dialog.widget.NormalDialog;
 
+import cc.cloudist.acplibrary.ACProgressFlower;
 import se.emilsjolander.stickylistheaders.StickyListHeadersAdapter;
 
 /**
@@ -38,6 +39,7 @@ public class AdapterProjectsDeptList extends BaseAdapter implements StickyListHe
     Context ctx;
     AQuery aq,aq_header;
     BaseClass baseClass;
+
     private LayoutInflater l_Inflater;
     ProjectsListService service;
     private int lastPosition;
@@ -144,7 +146,7 @@ public class AdapterProjectsDeptList extends BaseAdapter implements StickyListHe
         } else {
             Snackbar.make(aq.id(R.id.shadow_item_container).getView(), ctx.getString(R.string.invalid_credential), Snackbar.LENGTH_SHORT).show();
            }
-        BaseActivity.dialogAC.dismiss();
+        ProjectsFragment.dialogAC.dismiss();
     }
     public void callFragmentWithBackStack(int containerId, Fragment fragment, String tag){
 
@@ -200,7 +202,7 @@ public class AdapterProjectsDeptList extends BaseAdapter implements StickyListHe
                         lastPosition = position;
                         service.DeleteProject(ProjectsFragment.ByDepartmentList.get(position).getProjectID(), false
                                 , new CallBack(AdapterProjectsDeptList.this, "DeleteProject"));
-                        BaseActivity.dialogAC.show();
+                        ProjectsFragment.dialogAC.show();
                     }
                 });
     }

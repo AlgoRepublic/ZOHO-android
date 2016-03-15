@@ -24,6 +24,8 @@ import org.angmarch.views.NiceSpinner;
 
 import java.util.LinkedList;
 
+import cc.cloudist.acplibrary.ACProgressFlower;
+
 /**
  * Created by waqas on 2/24/16.
  */
@@ -33,6 +35,7 @@ public class AddForumsFragment extends BaseFragment{
     BaseClass baseClass;
     NiceSpinner category_list;
     ForumService service;
+    public static ACProgressFlower dialogAC;
     LinkedList<String> categoryList;
 
     public static AddForumsFragment newInstance() {
@@ -45,7 +48,7 @@ public class AddForumsFragment extends BaseFragment{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view  = inflater.inflate(R.layout.fragment_add_forums, container, false);
-
+        dialogAC = InitializeDialog(getActivity());
         aq = new AQuery(getActivity(), view);
         aq.id(R.id.lblListHeader).text(getString(R.string.new_forum_post));
         setHasOptionsMenu(true);
@@ -55,7 +58,7 @@ public class AddForumsFragment extends BaseFragment{
         service = new ForumService(getActivity());
         service.getCategoryList(baseClass.getUserId(), false,
                 new CallBack(AddForumsFragment.this, "GetAllCategory"));
-        BaseActivity.dialogAC.show();
+        dialogAC.show();
         return view;
     }
 
@@ -73,7 +76,7 @@ public class AddForumsFragment extends BaseFragment{
         {
             Snackbar.make(getView(), getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
         }
-        BaseActivity.dialogAC.dismiss();
+        dialogAC.dismiss();
     }
 
     public void CreateForum(){
@@ -94,7 +97,7 @@ public class AddForumsFragment extends BaseFragment{
                     true
                     ,categoryID,baseClass.getUserId(),
                     false, new CallBack(AddForumsFragment.this, "CreateForum"));
-            BaseActivity.dialogAC.show();
+            dialogAC.show();
         }else{
             Snackbar.make(getView(),getString(R.string.select_project),Snackbar.LENGTH_SHORT).show();
         }
@@ -107,7 +110,7 @@ public class AddForumsFragment extends BaseFragment{
         }else {
             Snackbar.make(getView(), getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
         }
-        BaseActivity.dialogAC.dismiss();
+        dialogAC.dismiss();
     }
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {

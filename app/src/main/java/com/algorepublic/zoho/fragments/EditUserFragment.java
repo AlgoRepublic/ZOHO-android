@@ -62,6 +62,7 @@ public class EditUserFragment extends BaseFragment implements MultiSelectionSpin
     public static final int PICK_File = 3;
     File newFile;
     AQuery aq;
+    ACProgressFlower dialogAC;
     ArrayList<Integer> selectedIds = new ArrayList<>();
     ArrayList<String> roleList;
     ArrayList<String> projectList;
@@ -89,7 +90,7 @@ public class EditUserFragment extends BaseFragment implements MultiSelectionSpin
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view  = inflater.inflate(R.layout.fragment_add_user, container, false);
-        InitializeDialog(getActivity());
+       dialogAC =  InitializeDialog(getActivity());
         role_list = (NiceSpinner) view.findViewById(R.id.role_list);
         projectsList = (MultiSelectionSpinner) view.findViewById(R.id.projects_list);
         projectsList.setListener(this);
@@ -116,7 +117,7 @@ public class EditUserFragment extends BaseFragment implements MultiSelectionSpin
             aq.id(R.id.layout).visibility(View.GONE);
         }
         service1.getUserRole(false, new CallBack(EditUserFragment.this, "UserRole"));
-        BaseActivity.dialogAC.show();
+        dialogAC.show();
         UpdateValues();
         return view;
     }
@@ -174,7 +175,7 @@ public class EditUserFragment extends BaseFragment implements MultiSelectionSpin
         }else {
             Snackbar.make(getView(), getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
         }
-        BaseActivity.dialogAC.dismiss();
+        dialogAC.dismiss();
     }
     public void UserRole(Object caller, Object model){
         UserRoleModel.getInstance().setList((UserRoleModel) model);
@@ -248,7 +249,7 @@ public class EditUserFragment extends BaseFragment implements MultiSelectionSpin
                                     (role_list.getSelectedIndex()).ID
                             , false, new CallBack(EditUserFragment.this, "UpdateUser"));
                 }
-                BaseActivity.dialogAC.show();
+                dialogAC.show();
         }
         return super.onOptionsItemSelected(item);
     }
@@ -259,7 +260,7 @@ public class EditUserFragment extends BaseFragment implements MultiSelectionSpin
         }else {
             Toast.makeText(getActivity(), getString(R.string.response_error), Toast.LENGTH_SHORT).show();
         }
-        BaseActivity.dialogAC.dismiss();
+        dialogAC.dismiss();
     }
     private void CallForAttachments() {
         String[] menuItems = {getString(R.string.camera),getString(R.string.gallery)
@@ -351,7 +352,7 @@ public class EditUserFragment extends BaseFragment implements MultiSelectionSpin
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            BaseActivity.dialogAC.show();
+            dialogAC.show();
         }
 
         @Override
@@ -370,8 +371,8 @@ public class EditUserFragment extends BaseFragment implements MultiSelectionSpin
         @Override
         protected void onPostExecute(String result) {
 
-            if ((BaseActivity.dialogAC != null) && BaseActivity.dialogAC.isShowing()) {
-                BaseActivity.dialogAC.dismiss();
+            if ((dialogAC != null) && dialogAC.isShowing()) {
+                dialogAC.dismiss();
             }
             if(result != null) {
                 if (result.contains("100")) {

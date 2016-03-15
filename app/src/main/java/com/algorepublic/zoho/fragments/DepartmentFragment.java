@@ -35,6 +35,8 @@ import com.h6ah4i.android.widget.advrecyclerview.utils.WrapperAdapterUtils;
 
 import java.util.ArrayList;
 
+import cc.cloudist.acplibrary.ACProgressFlower;
+
 /**
  * Created by android on 2/24/16.
  */
@@ -45,6 +47,7 @@ public class DepartmentFragment extends BaseFragment implements SwipeRefreshLayo
     private ProjectsListService service;
     private BaseClass baseClass;
     Parcelable eimSavedState;
+    public static ACProgressFlower dialogAC;
     private RecyclerView mRecyclerView;
     private RecyclerView.LayoutManager mLayoutManager;
     private RecyclerView.Adapter mWrappedAdapter;
@@ -67,7 +70,7 @@ public class DepartmentFragment extends BaseFragment implements SwipeRefreshLayo
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_department, container, false);
-        InitializeDialog(getActivity());
+        dialogAC = InitializeDialog(getActivity());
         baseClass = ((BaseClass) getActivity().getApplicationContext());
         swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe_refresh_layout);
         swipeRefreshLayout.setOnRefreshListener(this);
@@ -88,7 +91,7 @@ public class DepartmentFragment extends BaseFragment implements SwipeRefreshLayo
         service = new ProjectsListService(getActivity());
         service.getProjectsByDepartment(baseClass.getUserId(),
                 false, new CallBack(this, "ProjectsByDepartment"));
-        BaseActivity.dialogAC.show();
+        dialogAC.show();
 //        swipeRefreshLayout.post(new Runnable() {
 //                                    @Override
 //                                    public void run() {
@@ -108,7 +111,7 @@ public class DepartmentFragment extends BaseFragment implements SwipeRefreshLayo
         } else {
             Toast.makeText(getActivity(), getString(R.string.projects_list_empty), Toast.LENGTH_SHORT).show();
         }
-        BaseActivity.dialogAC.dismiss();
+        dialogAC.dismiss();
     }
     public void AddDepartmentProjects(){
         allProjects.clear();

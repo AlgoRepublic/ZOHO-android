@@ -1,24 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="85dp"
+    android:layout_height="100dp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <RelativeLayout
-        android:id="@+id/top_parent"
+        android:id="@+id/layout123"
         android:layout_toRightOf="@+id/selected_project"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginBottom="6dp"
         android:orientation="horizontal">
+
+        <com.h6ah4i.android.materialshadowninepatch.MaterialShadowContainerView
+            android:id="@+id/shadow_item_container"
+            android:layout_width="match_parent"
+            style="@style/ms9_DefaultShadowStyle"
+            android:layout_height="match_parent"
+            app:ms9_affectsDisplayedPosition="true"
+            app:ms9_shadowElevation="2dp"
+            app:ms9_shadowTranslationZ="1dp"
+            app:ms9_useAmbientShadow="true">
+
+            <RelativeLayout
+                android:id="@+id/top_parent"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="4dp"
+                android:background="@color/colorBaseWrapper"
+                android:orientation="horizontal">
+            <RelativeLayout
+                android:id="@+id/container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
         <com.daimajia.swipe.SwipeLayout
             android:id="@+id/swipe"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:clickToClose="true">
         <LinearLayout
-            android:layout_width="160dp"
+            android:layout_width="150dp"
             android:layout_height="match_parent"
             android:weightSum="2"
-            android:layout_marginBottom="5dp"
             android:orientation="horizontal"
             >
             <TextView
@@ -48,25 +71,14 @@
                 android:text="Delete"
                 />
         </LinearLayout>
-    <com.h6ah4i.android.materialshadowninepatch.MaterialShadowContainerView
-        android:id="@+id/shadow_item_container"
-        android:layout_width="match_parent"
-        style="@style/ms9_DefaultShadowStyle"
-        android:layout_height="match_parent"
-        app:ms9_useAmbientShadow="true"
-        app:ms9_affectsDisplayedPosition="true"
-        app:ms9_shadowTranslationZ="1dp"
-        app:ms9_shadowElevation="2dp">
         <RelativeLayout
             android:id="@+id/parent2"
-            android:layout_marginBottom="5dp"
             android:background="@color/colorBaseWrapper"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
         <RelativeLayout
             android:id="@+id/parent1"
             android:layout_toLeftOf="@+id/rightarrow_layout"
-            android:layout_alignParentTop="true"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:padding="5dp"
@@ -143,7 +155,9 @@
                 android:background="@mipmap/circle_left"/>
         </LinearLayout>
         </RelativeLayout>
-    </com.h6ah4i.android.materialshadowninepatch.MaterialShadowContainerView>
 </com.daimajia.swipe.SwipeLayout>
-        </RelativeLayout>
     </RelativeLayout>
+    </RelativeLayout>
+</com.h6ah4i.android.materialshadowninepatch.MaterialShadowContainerView>
+    </RelativeLayout>
+</RelativeLayout>

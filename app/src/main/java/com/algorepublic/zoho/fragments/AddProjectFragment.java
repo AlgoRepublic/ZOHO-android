@@ -31,6 +31,8 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.LinkedList;
 
+import cc.cloudist.acplibrary.ACProgressFlower;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link AddProjectFragment#newInstance} factory method to
@@ -45,6 +47,7 @@ public class AddProjectFragment extends BaseFragment {
     LinkedList<String> deptList;
     View view;
     boolean isprivate= false;
+    ACProgressFlower dialogAC;
     NiceSpinner owner_list,departments_list;
     RadioGroup radioGroup;
     static AddProjectFragment fragment;
@@ -94,7 +97,7 @@ public class AddProjectFragment extends BaseFragment {
                 ,ProjectsFragment.allDeptList.get(
                 departments_list.getSelectedIndex()).getDeptID(),isprivate
                 ,false,new CallBack(AddProjectFragment.this,"CreateProject"));
-        BaseActivity.dialogAC.show();
+        dialogAC.show();
     }
 
     public void CreateProject(Object caller, Object model){
@@ -105,7 +108,7 @@ public class AddProjectFragment extends BaseFragment {
         }else {
             Snackbar.make(getView() , getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
         }
-        BaseActivity.dialogAC.dismiss();
+        dialogAC.dismiss();
     }
 
     @Override
@@ -146,7 +149,7 @@ public class AddProjectFragment extends BaseFragment {
         departments_list.attachDataSource(deptList);
         service.getTaskAssignee(Integer.parseInt(baseClass.getSelectedProject()), false,
                 new CallBack(AddProjectFragment.this, "GetAllUsers"));
-        BaseActivity.dialogAC.show();
+        dialogAC.show();
         return view;
     }
     public void GetAllUsers(Object caller, Object model) {
@@ -161,7 +164,7 @@ public class AddProjectFragment extends BaseFragment {
         }else{
             Toast.makeText(getActivity(), getString(R.string.response_error), Toast.LENGTH_SHORT).show();
         }
-        BaseActivity.dialogAC.dismiss();
+        dialogAC.dismiss();
     }
     Comparator<String> ByAlphabet = new Comparator<String>() {
         @Override

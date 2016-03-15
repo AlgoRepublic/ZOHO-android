@@ -21,6 +21,8 @@ import com.androidquery.AQuery;
 
 import java.util.ArrayList;
 
+import cc.cloudist.acplibrary.ACProgressFlower;
+
 /**
  * Created by waqas on 2/8/16.
  */
@@ -32,6 +34,7 @@ public class UserFragment extends BaseFragment implements SwipeRefreshLayout.OnR
     public static ArrayList<Integer> assigneeList = new ArrayList<>();
     BaseClass baseClass;
     UserService service;
+    public static ACProgressFlower dialogAC;
 
 
     public UserFragment() {
@@ -49,7 +52,7 @@ public class UserFragment extends BaseFragment implements SwipeRefreshLayout.OnR
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view  = inflater.inflate(R.layout.fragment_user, container, false);
-        InitializeDialog(getActivity());
+        dialogAC = InitializeDialog(getActivity());
         baseClass = ((BaseClass) getActivity().getApplicationContext());
         aq = new AQuery(getActivity(), view);
         setHasOptionsMenu(true);
@@ -64,7 +67,7 @@ public class UserFragment extends BaseFragment implements SwipeRefreshLayout.OnR
             service.getUserListByProject(Integer.parseInt(baseClass.getSelectedProject()), false,
                     new CallBack(UserFragment.this, "UserList"));
         }
-        BaseActivity.dialogAC.show();
+        dialogAC.show();
             return view;
     }
     @Override
@@ -82,7 +85,7 @@ public class UserFragment extends BaseFragment implements SwipeRefreshLayout.OnR
         }else {
             Toast.makeText(getActivity(), getString(R.string.response_error), Toast.LENGTH_SHORT).show();
         }
-        BaseActivity.dialogAC.dismiss();
+        dialogAC.dismiss();
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -95,6 +98,6 @@ public class UserFragment extends BaseFragment implements SwipeRefreshLayout.OnR
 
     @Override
     public void onRefresh() {
-        service.getAllUsers(true, new CallBack(UserFragment.this, "UserList"));
+        service.getAllUsers(false, new CallBack(UserFragment.this, "UserList"));
     }
 }

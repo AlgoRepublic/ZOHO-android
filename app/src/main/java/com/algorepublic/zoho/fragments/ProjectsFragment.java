@@ -34,6 +34,7 @@ import com.flyco.dialog.widget.ActionSheetDialog;
 
 import java.util.ArrayList;
 
+import cc.cloudist.acplibrary.ACProgressFlower;
 import se.emilsjolander.stickylistheaders.StickyListHeadersAdapter;
 import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
 
@@ -52,7 +53,7 @@ public class ProjectsFragment extends BaseFragment implements SwipeRefreshLayout
     StickyListHeadersAdapter projectAdapter;
     AdapterProjectsClientList clientAdapter;
     private SwipeRefreshLayout swipeStickView,swipeListView;
-
+    public static ACProgressFlower dialogAC;
     static  ArrayList<ProjectsList> allProjectsList = new ArrayList<>();
     static  ArrayList<DeptList> allDeptList = new ArrayList<>();
     ArrayList<ProjectsList> ByClientList = new ArrayList<>();
@@ -79,7 +80,7 @@ public class ProjectsFragment extends BaseFragment implements SwipeRefreshLayout
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment_forums
         View view  = inflater.inflate(R.layout.fragment_projects, container, false);
-        InitializeDialog(getActivity());
+        dialogAC = InitializeDialog(getActivity());
         listViewDept = (StickyListHeadersListView) view.findViewById(R.id.projects_liststicky);
         listViewClient = (ListView) view.findViewById(R.id.projects_list);
         aq = new AQuery(getActivity(), view);
@@ -153,7 +154,7 @@ public class ProjectsFragment extends BaseFragment implements SwipeRefreshLayout
         service.getProjectsByClient_API(baseClass.getUserId(), false, new CallBack(this, "ProjectsByClient"));
         service.getProjectsByDepartment(baseClass.getUserId(),
                 false, new CallBack(this, "ProjectsByDepartment"));
-        BaseActivity.dialogAC.show();
+        dialogAC.show();
         applyLightBackground(aq.id(R.id.sort).getView(), baseClass);
 
     }
@@ -166,7 +167,7 @@ public class ProjectsFragment extends BaseFragment implements SwipeRefreshLayout
         } else {
             Snackbar.make(getView(), getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
         }
-        BaseActivity.dialogAC.dismiss();
+        dialogAC.dismiss();
     }
     public void ProjectsByClient(Object caller, Object model){
         ProjectsByClientModel.getInstance().setList((ProjectsByClientModel) model);

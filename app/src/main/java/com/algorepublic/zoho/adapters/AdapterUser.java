@@ -15,6 +15,7 @@ import com.algorepublic.zoho.Models.GeneralModel;
 import com.algorepublic.zoho.Models.UserListModel;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.fragments.EditUserFragment;
+import com.algorepublic.zoho.fragments.UserFragment;
 import com.algorepublic.zoho.services.CallBack;
 import com.algorepublic.zoho.services.UserService;
 import com.algorepublic.zoho.utils.BaseClass;
@@ -87,7 +88,7 @@ public class AdapterUser extends BaseAdapter {
             public void onClick(View v) {
             service.deleteUser(baseClass.getUserId(),baseClass.getSelectedProject()
             ,false,new CallBack(AdapterUser.this,"DeleteUser"));
-                BaseActivity.dialogAC.show();
+                UserFragment.dialogAC.show();
             }
         });
         return convertView;
@@ -99,7 +100,7 @@ public class AdapterUser extends BaseAdapter {
         }else {
             Snackbar.make(((AppCompatActivity)ctx).findViewById(android.R.id.content), ctx.getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
         }
-        BaseActivity.dialogAC.dismiss();
+        UserFragment.dialogAC.dismiss();
     }
     static class ViewHolder {
         CircularImageView userImage;

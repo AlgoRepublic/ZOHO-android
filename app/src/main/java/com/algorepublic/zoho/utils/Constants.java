@@ -32,7 +32,7 @@ public class Constants {
 	public static String UpdateTaskProgress_API = BASE_URL+ "/Task/UpdateProgress"; //taskID,progress
 	public static String TaskCompleted_API = BASE_URL+ "/Task/TaskCompleted"; //taskID,opt
 	public static String GetSubTakById_API = BASE_URL+ "/Task/GetById?";
-	public static String TaskAttachments_API = BASE_URL+ "/Task/AttachmentList"; //taskID
+	public static String TaskAttachments_API = BASE_URL+ "/Task/AttachmentList?"; //taskID
 	public static String TaskById_API = BASE_URL+ "/Task/GetById?"; //taskID
 	// StarRating API
 	public static String StarRatingHeads_API = BASE_URL+ "/StarRating/GetListByLanguage"; //language

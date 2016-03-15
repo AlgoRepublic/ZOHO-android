@@ -35,6 +35,8 @@ import com.androidquery.AQuery;
 
 import java.util.ArrayList;
 
+import cc.cloudist.acplibrary.ACProgressFlower;
+
 /**
  * Created by waqas on 2/2/16.
  */
@@ -47,6 +49,7 @@ public class ForumsDetailFragment extends BaseFragment {
     public static int ClickedPosition;
     public static boolean flag= false;
     ForumService service;
+    public static ACProgressFlower dialogAC;
     public static EditText comment_user;
     AdapterForumComment adapter;
     public static ArrayList<TaskComments> arrayList = new ArrayList<>();
@@ -101,7 +104,7 @@ public class ForumsDetailFragment extends BaseFragment {
         View view  = inflater.inflate(R.layout.fragment_forum_detail, container, false);
         comment_user = (EditText) view.findViewById(R.id.comment_user);
         aq = new AQuery(view);
-        InitializeDialog(getActivity());
+        dialogAC = InitializeDialog(getActivity());
         setHasOptionsMenu(true);
         baseClass = ((BaseClass) getActivity().getApplicationContext());
         adapter = new AdapterForumComment(getActivity());
@@ -109,7 +112,7 @@ public class ForumsDetailFragment extends BaseFragment {
         service = new ForumService(getActivity());
         service.getForumsDetail(ForumsModel.getInstance().responseObject.get(Position).ID
                 , false, new CallBack(ForumsDetailFragment.this, "ForumDetails"));
-        BaseActivity.dialogAC.show();
+        dialogAC.show();
         aq.id(R.id.comment_description).text(getString(R.string.by) + " " + ForumsModel.getInstance().responseObject.get(Position).user.firstName
                 + "," + getString(R.string.last_responce_on) +
                 baseClass.DateFormatter(ForumsModel.getInstance().responseObject.get(Position).updatedAt) + " "
@@ -128,7 +131,7 @@ public class ForumsDetailFragment extends BaseFragment {
                     }else{
                         PerformAction();
                     }
-                    BaseActivity.dialogAC.show();
+                    dialogAC.show();
                     return true;
                 }
                 return false;
@@ -145,7 +148,7 @@ public class ForumsDetailFragment extends BaseFragment {
                 } else {
                     PerformAction();
                 }
-                BaseActivity.dialogAC.show();
+                dialogAC.show();
             }
         });
         return view;
@@ -178,7 +181,7 @@ public class ForumsDetailFragment extends BaseFragment {
             Snackbar.make(getView(),
                     getActivity().getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
         }
-        BaseActivity.dialogAC.dismiss();
+        dialogAC.dismiss();
     }
     public void CreateComment(Object caller, Object model) {
         CreateForumCommentModel.getInstance().setList((CreateForumCommentModel) model);
@@ -199,7 +202,7 @@ public class ForumsDetailFragment extends BaseFragment {
         {
             Snackbar.make(getView(), getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
         }
-        BaseActivity.dialogAC.dismiss();
+        dialogAC.dismiss();
     }
     public void ForumDetails(Object caller, Object model){
         ForumsCommentModel.getInstance().setList((ForumsCommentModel) model);
@@ -208,7 +211,7 @@ public class ForumsDetailFragment extends BaseFragment {
         }else {
             Snackbar.make(getView(),getString(R.string.response_error),Snackbar.LENGTH_SHORT).show();
         }
-        BaseActivity.dialogAC.dismiss();
+        dialogAC.dismiss();
         UpdateValues();
     }
     public void UpdateValues() {
