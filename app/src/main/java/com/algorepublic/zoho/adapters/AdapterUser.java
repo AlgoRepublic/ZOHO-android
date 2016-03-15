@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.algorepublic.zoho.BaseActivity;
 import com.algorepublic.zoho.Models.GeneralModel;
 import com.algorepublic.zoho.Models.UserListModel;
 import com.algorepublic.zoho.R;
@@ -69,17 +68,19 @@ public class AdapterUser extends BaseAdapter {
         holder.btDelete = (TextView) convertView.findViewById(R.id.btDelete);
 
         aq = new AQuery(convertView);
-//        if (getItem(position).userRole.ID==1){
-//            aq.id(R.id.main).visibility(convertView.GONE);
-//        }
+        if (getItem(position).userRole.ID==1){
+            aq.id(R.id.layout123).visibility(View.GONE);
+        }
+
         aq.id(R.id.user_title).text(getItem(position).firstName);
         aq.id(R.id.user_email).text(getItem(position).email);
-        aq.id(R.id.user_role).text(ctx.getString(R.string.role)+getItem(position).userRole.role);
-        if(getItem(position).profileImagePath !=null) {
+        aq.id(R.id.user_role).text(ctx.getString(R.string.role) + getItem(position).userRole.role);
+        if (getItem(position).profileImagePath != null) {
             Glide.with(ctx).load(Constants.Image_URL + getItem(position).profilePictureID
-                    +"."+BaseClass.getExtensionType(getItem(position).profileImagePath))
+                    + "." + BaseClass.getExtensionType(getItem(position).profileImagePath))
                     .into(holder.userImage);
         }
+
         holder.btEdit.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View v) {

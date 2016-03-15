@@ -10,13 +10,14 @@
     <com.algorepublic.zoho.utils.DropDownLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp">
+      >
 
         <com.algorepublic.zoho.utils.ToggleExpandLayout
             android:id="@+id/toogleLayout"
             android:layout_width="wrap_content"
             android:layout_height="160dp"
-            android:layout_margin="16dp">
+
+           >
             <LinearLayout
                 android:id="@+id/id7"
                 android:layout_width="match_parent"
@@ -90,41 +91,82 @@
         android:id="@+id/edit_profile"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:padding="16dp"
+        android:padding="10dp"
+        android:layout_marginBottom="3dp"
+        android:drawableRight="@drawable/right_arrow"
         android:background="@color/white"
         android:elegantTextHeight="true"
-        android:elevation="3dp"
+        android:elevation="5dp"
         android:textStyle="bold"
         android:textSize="18sp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
+
         android:text="@string/edit_profile" />
     <TextView
         android:id="@+id/rest_password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:padding="16dp"
+        android:padding="10dp"
+        android:layout_marginBottom="3dp"
         android:background="@color/white"
         android:elegantTextHeight="true"
-        android:elevation="3dp"
+        android:elevation="5dp"
+        android:drawableRight="@drawable/right_arrow"
         android:textStyle="bold"
         android:textSize="18sp"
-        android:layout_margin="10dp"
+        android:text="@string/rest_password" />
+    <TextView
+        android:id="@+id/about_us"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:layout_marginBottom="3dp"
+        android:background="@color/white"
+        android:elegantTextHeight="true"
+        android:elevation="5dp"
+        android:drawableRight="@drawable/right_arrow"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:text="@string/privacy" />
+    <TextView
+        android:id="@+id/privacy"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:layout_marginBottom="3dp"
+        android:background="@color/white"
+        android:elegantTextHeight="true"
+        android:elevation="5dp"
+        android:textStyle="bold"
+        android:drawableRight="@drawable/right_arrow"
+        android:textSize="18sp"
         android:text="@string/rest_password" />
     <TextView
         android:id="@+id/logout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@android:color/holo_red_light"
+        android:padding="10dp"
         android:gravity="center"
-        android:padding="16dp"
         android:background="@color/white"
         android:elegantTextHeight="true"
         android:elevation="3dp"
         android:textStyle="bold"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="3dp"
+        android:textColor="@android:color/holo_red_light"
         android:textSize="18sp"
-        android:layout_margin="32dp"
         android:text="@string/logout" />
+    <TextView
+        android:id="@+id/delete"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/holo_red_light"
+        android:gravity="center"
+        android:padding="10dp"
+        android:background="@color/white"
+        android:elegantTextHeight="true"
+        android:elevation="3dp"
+
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:text="@string/delete" />
 </LinearLayout>

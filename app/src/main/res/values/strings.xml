@@ -77,7 +77,7 @@
 
     <string name="add_user">Add New User</string>
     <string name="edit_profile">Edit Profile</string>
-    <string name="rest_password">Rest Password</string>
+    <string name="rest_password">Reset Password</string>
     <string name="edit_user">Edit User</string>
     <string name="add_task">Add Task</string>
     <string name="edit">Edit</string>
@@ -300,5 +300,7 @@
     <string name="clear_board">Clear Board</string>
     <string name="rating">Rating</string>
     <string name="stage">Stage</string>
+    <string name="about_us">About Us</string>
+    <string name="privacy">Privacy Policy</string>
     <!-- Documents Strings -->
 </resources>

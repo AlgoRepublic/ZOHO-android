@@ -11,7 +11,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.algorepublic.zoho.BaseActivity;
 import com.algorepublic.zoho.Models.AddforumModel;
 import com.algorepublic.zoho.Models.CreateForumModel;
 import com.algorepublic.zoho.R;
@@ -56,7 +55,7 @@ public class AddForumsFragment extends BaseFragment{
         baseClass = ((BaseClass) getActivity().getApplicationContext());
         category_list = (NiceSpinner) view.findViewById(R.id.forum_list);
         service = new ForumService(getActivity());
-        service.getCategoryList(baseClass.getUserId(), false,
+        service.getCategoryList(baseClass.getSelectedProject(), false,
                 new CallBack(AddForumsFragment.this, "GetAllCategory"));
         dialogAC.show();
         return view;
