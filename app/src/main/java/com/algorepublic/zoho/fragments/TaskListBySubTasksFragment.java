@@ -121,6 +121,7 @@ public class TaskListBySubTasksFragment extends BaseFragment {
         radioGroup = (RadioGroup) view.findViewById(R.id.radioGroup);
         listView = (StickyListHeadersListView) view.findViewById(R.id.list_taskslist);
         aq = new AQuery(view);
+        aq.id(R.id.all).checked(true);
         searchView = (SearchView) view.findViewById(R.id.searchView);
         searchView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -242,13 +243,13 @@ public class TaskListBySubTasksFragment extends BaseFragment {
     public void FilterList(){
         if(baseClass.getTaskFilterType().equalsIgnoreCase("DueDate")){
             Collections.sort(generalList, Date);
-            ArrayList<TasksList> lists = new ArrayList<>();
-            lists.addAll(generalList);generalList.clear();
-            for(int loop=0;loop<lists.size();loop++){
-                if(lists.get(loop).getProgress()<100){
-                    generalList.add(lists.get(loop));
-                }
-            }
+//            ArrayList<TasksList> lists = new ArrayList<>();
+//            lists.addAll(generalList);generalList.clear();
+//            for(int loop=0;loop<lists.size();loop++){
+//                if(lists.get(loop).getProgress()<100){
+//                    generalList.add(lists.get(loop));
+//                }
+//            }
         }
         if(baseClass.getTaskFilterType().equalsIgnoreCase("Priority")){
             Collections.sort(generalList, byPriority);
@@ -337,8 +338,10 @@ public class TaskListBySubTasksFragment extends BaseFragment {
                 if (!(allTaskList.get(loop).getStartMilli().equalsIgnoreCase("62135535600000")
                         || allTaskList.get(loop).getStartMilli().equalsIgnoreCase("-62135571600000")
                         || allTaskList.get(loop).getStartMilli().equalsIgnoreCase("62135571600000"))) {
-                    allTaskList.get(loop).setHeader(allTaskList.get(loop).getStartMilli());
-                    generalList.add(allTaskList.get(loop));
+                    if(allTaskList.get(loop).getProgress()<100) {
+                        allTaskList.get(loop).setHeader(allTaskList.get(loop).getEndMilli());
+                        generalList.add(allTaskList.get(loop));
+                    }
                 }
             }
         }
@@ -350,8 +353,10 @@ public class TaskListBySubTasksFragment extends BaseFragment {
             if(Long.parseLong(allTaskList.get(loop).getEndMilli()) < System.currentTimeMillis()
                     && !baseClass.DateFormatter(allTaskList.get(loop).getStartMilli())
                     .equalsIgnoreCase(baseClass.DateFormatter(String.valueOf(System.currentTimeMillis())))) {
-                allTaskList.get(loop).setHeader(allTaskList.get(loop).getEndMilli());
-                generalList.add(allTaskList.get(loop));
+                if(allTaskList.get(loop).getProgress()<100) {
+                    allTaskList.get(loop).setHeader(allTaskList.get(loop).getEndMilli());
+                    generalList.add(allTaskList.get(loop));
+                }
             }
         }
         Collections.sort(generalList, byOverDate);

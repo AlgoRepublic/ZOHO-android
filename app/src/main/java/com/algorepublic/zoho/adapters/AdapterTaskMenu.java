@@ -67,18 +67,13 @@ public class AdapterTaskMenu extends BaseAdapter {
     public View getView(final int position, View convertView, ViewGroup parent) {
 
         final ViewHolder holder;
-        if (convertView == null) {
-            convertView = inflater.inflate(R.layout.layout_taskmenu, parent, false);
-            holder = new ViewHolder();
-            holder.title = (TextView) convertView.findViewById(R.id.textview);
-            holder.checkBox = (CheckBox) convertView.findViewById(R.id.checkbox);
+        convertView = inflater.inflate(R.layout.layout_taskmenu, parent, false);
+        holder = new ViewHolder();
+        holder.title = (TextView) convertView.findViewById(R.id.textview);
+        holder.checkBox = (CheckBox) convertView.findViewById(R.id.checkbox);
 
-            convertView.setTag(holder);
-        } else {
-            holder = (ViewHolder) convertView.getTag();
-        }
         final AQuery aq = new AQuery(convertView);
-        if(lastPosition == 0){
+        if(lastPosition == position){
             aq.id(R.id.checkbox).checked(true);
             aq.id(R.id.checkbox).getCheckBox().setAlpha(0.7f);
         }

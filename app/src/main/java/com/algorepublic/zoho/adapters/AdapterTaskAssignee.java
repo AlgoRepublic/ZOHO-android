@@ -70,16 +70,20 @@ public class AdapterTaskAssignee extends BaseAdapter {
                     for (int loop = 0; loop < TaskAddUpdateFragment.assigneeList.size(); loop++) {
                         View view = getViewByPosition(position,TaskAssignFragment.listView);
                         AQuery aQuery = new AQuery(view);
-                        if (aQuery.id(R.id.assignee_checkbox).isChecked()) {
+                        if (!aQuery.id(R.id.assignee_checkbox).isChecked()) {
+                            aQuery.id(R.id.assignee_checkbox).checked(true);
                             TaskAddUpdateFragment.assigneeList.add(TaskUserModel.getInstance().responseObject.get(position).ID);
                             break;
                         } else if (TaskAddUpdateFragment.assigneeList.get(loop) ==
                                 TaskUserModel.getInstance().responseObject.get(position).ID) {
                             TaskAddUpdateFragment.assigneeList.remove(loop);
+                            aQuery.id(R.id.assignee_checkbox).checked(false);
                         }
                     }
                 }else {
-                    aq.id(R.id.assignee_checkbox).checked(true);
+                    View view = getViewByPosition(position,TaskAssignFragment.listView);
+                    CheckBox checkBox = (CheckBox) view.findViewById(R.id.assignee_checkbox);
+                    checkBox.setChecked(true);
                     TaskAddUpdateFragment.assigneeList.add(TaskUserModel.getInstance().responseObject.get(position).ID);
                 }
             }
