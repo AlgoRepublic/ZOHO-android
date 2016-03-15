@@ -12,10 +12,12 @@ import android.view.ViewGroup;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import com.algorepublic.zoho.BaseActivity;
 import com.algorepublic.zoho.Models.CreateProjectModel;
 import com.algorepublic.zoho.Models.TaskUserModel;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.adapters.ProjectsList;
+import com.algorepublic.zoho.adapters.TasksList;
 import com.algorepublic.zoho.services.CallBack;
 import com.algorepublic.zoho.services.ProjectsListService;
 import com.algorepublic.zoho.services.TaskListService;
@@ -25,6 +27,8 @@ import com.androidquery.AQuery;
 import org.angmarch.views.NiceSpinner;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.LinkedList;
 
 /**
@@ -98,7 +102,8 @@ public class EditProjectFragment extends BaseFragment {
                         get(owner_list.getSelectedIndex()).ID, isactive
                 , projectsLists.get(
                         departments_list.getSelectedIndex()).getCompOrDeptID(), isprivate
-                , true, new CallBack(EditProjectFragment.this, "UpdateProject"));
+                , false, new CallBack(EditProjectFragment.this, "UpdateProject"));
+        BaseActivity.dialogAC.show();
     }
     public void UpdateProject(Object caller, Object model){
         CreateProjectModel.getInstance().setList((CreateProjectModel) model);
@@ -108,7 +113,7 @@ public class EditProjectFragment extends BaseFragment {
         }else {
             Snackbar.make(getView(), getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
         }
-
+        BaseActivity.dialogAC.dismiss();
     }
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -119,6 +124,7 @@ public class EditProjectFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view  = inflater.inflate(R.layout.fragment_add_project, container, false);
+        InitializeDialog(getActivity());
         getToolbar().setTitle(getString(R.string.edit_project));
         radioGroup1 = (RadioGroup) view.findViewById(R.id.private_public_group);
         radioGroup2 = (RadioGroup) view.findViewById(R.id.active_archive_status);
@@ -161,7 +167,9 @@ public class EditProjectFragment extends BaseFragment {
             deptList.add(ProjectsFragment.allDeptList.get(loop).getDeptName());
         }
         departments_list.attachDataSource(deptList);
-        service.getTaskAssignee(Integer.parseInt(baseClass.getSelectedProject()), true, new CallBack(EditProjectFragment.this, "GetAllUsers"));
+        service.getTaskAssignee(Integer.parseInt(baseClass.getSelectedProject()), false,
+                new CallBack(EditProjectFragment.this, "GetAllUsers"));
+        BaseActivity.dialogAC.show();
         return view;
     }
     public void UpdateValues() {
@@ -202,11 +210,19 @@ public class EditProjectFragment extends BaseFragment {
             for(int loop=0;loop< TaskUserModel.getInstance().responseObject.size();loop++) {
                 userList.add(TaskUserModel.getInstance().responseObject.get(loop).firstName);
             }
+            Collections.sort(userList,ByAlphabet);
             owner_list.attachDataSource(userList);
             UpdateValues();
         }
         else {
             Toast.makeText(getActivity(), getString(R.string.response_error), Toast.LENGTH_SHORT).show();
         }
+        BaseActivity.dialogAC.dismiss();
     }
+    Comparator<String>  ByAlphabet = new Comparator<String>() {
+        @Override
+        public int compare(String lhs, String rhs) {
+            return (Double.valueOf(rhs).compareTo(Double.valueOf(lhs)));
+        }
+    };
 }

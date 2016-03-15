@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 
+import com.algorepublic.zoho.BaseActivity;
 import com.algorepublic.zoho.Models.SubTaskAttachmentsModel;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.adapters.AdapterDocumentsList;
@@ -69,6 +70,7 @@ public class DocumentsListBySubTaskFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_documents, container, false);
+        InitializeDialog(getActivity());
         listView = (StickyListHeadersListView) view.findViewById(R.id.list_documents);
         aq = new AQuery(view);
         aq.id(R.id.sort).clicked(new View.OnClickListener() {
@@ -82,7 +84,9 @@ public class DocumentsListBySubTaskFragment extends BaseFragment {
         setHasOptionsMenu(true);
         getToolbar().setTitle(getString(R.string.documents));
         service = new DocumentsService(getActivity());
-        service.getDocsBySubTasks(ID, true, new CallBack(DocumentsListBySubTaskFragment.this, "DocumentsList"));
+        service.getDocsBySubTasks(ID, false,
+                new CallBack(DocumentsListBySubTaskFragment.this, "DocumentsList"));
+        BaseActivity.dialogAC.show();
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -193,6 +197,7 @@ public class DocumentsListBySubTaskFragment extends BaseFragment {
         } else {
             Snackbar.make(getView(),getString(R.string.invalid_credential),Snackbar.LENGTH_SHORT).show();
         }
+        BaseActivity.dialogAC.dismiss();
     }
 
     public void GetAllDocumentsList() {

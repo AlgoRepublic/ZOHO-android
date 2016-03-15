@@ -19,6 +19,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Toast;
 
+import com.algorepublic.zoho.BaseActivity;
 import com.algorepublic.zoho.Models.AllProjectsByUserModel;
 import com.algorepublic.zoho.Models.GeneralModel;
 import com.algorepublic.zoho.Models.GetUserModel;
@@ -62,7 +63,6 @@ public class EditProfileFragment extends BaseFragment implements MultiSelectionS
     UserService service1;
     LoginService loginService;
     MultiSelectionSpinner projectsList;
-    ACProgressFlower dialog;
     BaseClass baseClass;
 
     public EditProfileFragment() {
@@ -85,6 +85,7 @@ public class EditProfileFragment extends BaseFragment implements MultiSelectionS
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view  = inflater.inflate(R.layout.fragment_edit_user_profile, container, false);
+        InitializeDialog(getActivity());
         projectsList = (MultiSelectionSpinner) view.findViewById(R.id.projects_list);
         projectsList.setListener(this);
         baseClass = ((BaseClass) getActivity().getApplicationContext());
@@ -92,10 +93,7 @@ public class EditProfileFragment extends BaseFragment implements MultiSelectionS
         service = new ProjectsListService(getActivity());
         service1 = new UserService(getActivity());
         loginService = new LoginService(getActivity());
-        dialog = new ACProgressFlower.Builder(getActivity())
-                .direction(ACProgressConstant.DIRECT_CLOCKWISE)
-                .themeColor(Color.WHITE)
-                .fadeColor(Color.DKGRAY).build();
+
         getToolbar().setTitle(getString(R.string.edit_user));
         aq.id(R.id.profile).clicked(new View.OnClickListener() {
             @Override
@@ -103,8 +101,11 @@ public class EditProfileFragment extends BaseFragment implements MultiSelectionS
                 CallForAttachments();
             }
         });
-        loginService.GetById(baseClass.getUserId(), true, new CallBack(EditProfileFragment.this, "GetById"));
-        service.getAllProjectsByUser_API(baseClass.getUserId(), true, new CallBack(EditProfileFragment.this, "AllProjects"));
+        loginService.GetById(baseClass.getUserId(), false,
+                new CallBack(EditProfileFragment.this, "GetById"));
+        service.getAllProjectsByUser_API(baseClass.getUserId(), false,
+                new CallBack(EditProfileFragment.this, "AllProjects"));
+        BaseActivity.dialogAC.show();
         return view;
     }
     public void GetById(Object caller,Object model) {
@@ -129,6 +130,7 @@ public class EditProfileFragment extends BaseFragment implements MultiSelectionS
         }else {
             Toast.makeText(getActivity(), getString(R.string.response_error), Toast.LENGTH_SHORT).show();
         }
+        BaseActivity.dialogAC.dismiss();
     }
     public void UpdateValues(){
         aq.id(R.id.first_name).text(GetUserModel.getInstance().user.firstName);
@@ -178,7 +180,7 @@ public class EditProfileFragment extends BaseFragment implements MultiSelectionS
         }else {
             Snackbar.make(getView(), getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
         }
-
+        BaseActivity.dialogAC.dismiss();
     }
 
     @Override
@@ -214,19 +216,19 @@ public class EditProfileFragment extends BaseFragment implements MultiSelectionS
                         aq.id(R.id.user_email).getText().toString(),
                         aq.id(R.id.user_phoneno).getText().toString(),
                         GetUserModel.getInstance().user.userRole.ID, selectedIds
-                        , true, new CallBack(EditProfileFragment.this, "UpdateUser"));
-
+                        , false, new CallBack(EditProfileFragment.this, "UpdateUser"));
+                BaseActivity.dialogAC.show();
         }
         return super.onOptionsItemSelected(item);
     }
     public void UpdateUser(Object caller, Object model){
         GeneralModel.getInstance().setList((GeneralModel) model);
         if (GeneralModel.getInstance().responseObject ==true) {
-            loginService.GetById(baseClass.getUserId(), true, new CallBack(EditProfileFragment.this, "GetByIdFreshData"));
+            loginService.GetById(baseClass.getUserId(), false,
+                    new CallBack(EditProfileFragment.this, "GetByIdFreshData"));
         }else {
             Toast.makeText(getActivity(), getString(R.string.response_error), Toast.LENGTH_SHORT).show();
         }
-
     }
     private void CallForAttachments() {
         String[] menuItems = {getString(R.string.camera),getString(R.string.gallery)
@@ -317,7 +319,7 @@ public class EditProfileFragment extends BaseFragment implements MultiSelectionS
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            dialog.show();
+            BaseActivity.dialogAC.show();
         }
 
         @Override
@@ -334,7 +336,7 @@ public class EditProfileFragment extends BaseFragment implements MultiSelectionS
 
         @Override
         protected void onPostExecute(String result) {
-            dialog.dismiss();
+            BaseActivity.dialogAC.dismiss();
             if(result != null) {
                 if (result.contains("100")) {
                     loginService.GetById(baseClass.getUserId(),

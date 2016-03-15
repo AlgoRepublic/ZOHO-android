@@ -18,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.SeekBar;
 
+import com.algorepublic.zoho.BaseActivity;
 import com.algorepublic.zoho.Models.GeneralModel;
 import com.algorepublic.zoho.Models.TaskByIdModel;
 import com.algorepublic.zoho.R;
@@ -57,7 +58,6 @@ public class TaskDetailFragment extends BaseFragment {
     int multiple=10;
     int progress=0;
     BaseClass baseClass;
-    public static ACProgressFlower dialog;
 
     @SuppressLint("ValidFragment")
     public TaskDetailFragment() {
@@ -89,12 +89,9 @@ public class TaskDetailFragment extends BaseFragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment_forums
         final View view =  inflater.inflate(R.layout.fragment_task_detail, container, false);
+        InitializeDialog(getActivity());
         baseClass = ((BaseClass) getActivity().getApplicationContext());
         setHasOptionsMenu(true);
-        dialog = new ACProgressFlower.Builder(getActivity())
-                .direction(ACProgressConstant.DIRECT_CLOCKWISE)
-                .themeColor(Color.WHITE)
-                .fadeColor(Color.DKGRAY).build();
         seekBarCompat = (DonutProgress) view.findViewById(R.id.circularprogressBar);
         if(baseClass.getThemePreference() == R.style.AppThemeBlue) {
             seekBarCompat.setFinishedStrokeColor(ContextCompat.getColor(getActivity(), R.color.colorPrimaryBlue));
@@ -117,14 +114,13 @@ public class TaskDetailFragment extends BaseFragment {
         aq = new AQuery(view);
         getToolbar().setTitle(getString(R.string.task_details));
         service = new TaskListService(getActivity());
-        service.getTasksById(tasksList.getTaskID(),true,new CallBack(TaskDetailFragment.this,"TaskDetails"));
-
+        service.getTasksById(tasksList.getTaskID(),false
+                ,new CallBack(TaskDetailFragment.this,"TaskDetails"));
+        BaseActivity.dialogAC.show();
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progres, boolean fromUser) {
-
                 progres = ((int) Math.round(progres / multiple)) * multiple;
-                seekBarCompat.setProgress(progres);
                 progress = progres;
             }
 
@@ -138,12 +134,13 @@ public class TaskDetailFragment extends BaseFragment {
                 if (progress == 100) {
                     aq.id(R.id.mark_as_done).text(getString(R.string.reopen_task));
                     service.updateTaskProgress(tasksList.getTaskID()
-                            , progress, true, new CallBack(TaskDetailFragment.this, "UpdateProgress"));
+                            , progress, false, new CallBack(TaskDetailFragment.this, "UpdateProgress"));
                 }else {
                     aq.id(R.id.mark_as_done).text(getString(R.string.task_as_done));
                     service.updateTaskProgress(tasksList.getTaskID()
-                            , progress, true, new CallBack(TaskDetailFragment.this, "UpdateProgress"));
+                            , progress, false, new CallBack(TaskDetailFragment.this, "UpdateProgress"));
                 }
+                BaseActivity.dialogAC.show();
             }
         });
 
@@ -200,6 +197,7 @@ public class TaskDetailFragment extends BaseFragment {
         } else {
             Snackbar.make(getView(), getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
         }
+        BaseActivity.dialogAC.dismiss();
     }
 
     public void UpdateValue(){
@@ -237,7 +235,6 @@ public class TaskDetailFragment extends BaseFragment {
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.menu_task_details, menu);
         super.onCreateOptionsMenu(menu, inflater);
-
     }
 
     /**
@@ -276,7 +273,7 @@ public class TaskDetailFragment extends BaseFragment {
     public void UpdateProgress(Object caller, Object model) {
         GeneralModel.getInstance().setList((GeneralModel) model);
         if (GeneralModel.getInstance().responseCode.equalsIgnoreCase("100")) {
-            //seekBarCompat.setProgress(100);
+            seekBarCompat.setProgress(progress);
             tasksList.setProgress(progress);
             Snackbar.make(getView(), getString(R.string.update_progress), Snackbar.LENGTH_SHORT).show();
         }
@@ -284,6 +281,7 @@ public class TaskDetailFragment extends BaseFragment {
         {
             Snackbar.make(getView(), getString(R.string.invalid_credential), Snackbar.LENGTH_SHORT).show();
         }
+        BaseActivity.dialogAC.dismiss();
     }
     public void DeleteTask(Object caller, Object model) {
         GeneralModel.getInstance().setList((GeneralModel) model);
@@ -295,10 +293,11 @@ public class TaskDetailFragment extends BaseFragment {
         {
             Snackbar.make(getView(), getString(R.string.invalid_credential), Snackbar.LENGTH_SHORT).show();
         }
+        BaseActivity.dialogAC.dismiss();
     }
     public void CompleteTask(Object caller, Object model) {
         GeneralModel.getInstance().setList((GeneralModel) model);
-        dialog.dismiss();
+        BaseActivity.dialogAC.dismiss();
         if (GeneralModel.getInstance().responseCode.equalsIgnoreCase("100")) {
             Snackbar.make(getView(), getString(R.string.task_done), Snackbar.LENGTH_SHORT).show();
             seekBar.setProgress(100);
@@ -311,24 +310,27 @@ public class TaskDetailFragment extends BaseFragment {
         {
             Snackbar.make(getView(), getString(R.string.invalid_credential), Snackbar.LENGTH_SHORT).show();
         }
+        BaseActivity.dialogAC.dismiss();
     }
     public void UpdateTask(Object caller, Object model) {
         GeneralModel.getInstance().setList((GeneralModel) model);
-        dialog.dismiss();
+        BaseActivity.dialogAC.dismiss();
         if (GeneralModel.getInstance().responseCode.equalsIgnoreCase("100")) {
             Snackbar.make(getView(), getString(R.string.reopen_task), Snackbar.LENGTH_SHORT).show();
             seekBar.setProgress(0);
             seekBarCompat.setProgress(0);
             aq.id(R.id.mark_as_done).text(getString(R.string.mark_as_done));
             tasksList.setProgress(0);
-        }}
+        }
+        BaseActivity.dialogAC.dismiss();
+    }
 
 
 
 
     public void ReOpenTask(Object caller, Object model) {
         GeneralModel.getInstance().setList((GeneralModel) model);
-        dialog.dismiss();
+        BaseActivity.dialogAC.dismiss();
         if (GeneralModel.getInstance().responseCode.equalsIgnoreCase("100")) {
             Snackbar.make(getView(), getString(R.string.reopen_task), Snackbar.LENGTH_SHORT).show();
             seekBar.setProgress(0);
@@ -340,6 +342,7 @@ public class TaskDetailFragment extends BaseFragment {
         {
             Snackbar.make(getView(), getString(R.string.invalid_credential), Snackbar.LENGTH_SHORT).show();
         }
+        BaseActivity.dialogAC.dismiss();
     }
 
     private void NormalDialogCustomAttr(String content) {
@@ -374,16 +377,17 @@ public class TaskDetailFragment extends BaseFragment {
                         if(click==1)
                         {
                             service.deleteTask(tasksList.getTaskID()
-                                    , true, new CallBack(TaskDetailFragment.this, "DeleteTask"));
+                                    , false, new CallBack(TaskDetailFragment.this, "DeleteTask"));
                         }
                         if (click==2) {
                             service.updateTaskProgress(TasksListFragment.generalList.get(position).getTaskID()
-                                    , 100, true, new CallBack(TaskDetailFragment.this, "CompleteTask"));
+                                    , 100, false, new CallBack(TaskDetailFragment.this, "CompleteTask"));
                         }
                         if(click==3){
                             service.updateTaskProgress(TasksListFragment.generalList.get(position).getTaskID()
-                                    , 0, true, new CallBack(TaskDetailFragment.this, "ReOpenTask"));
+                                    , 0, false, new CallBack(TaskDetailFragment.this, "ReOpenTask"));
                         }
+                        BaseActivity.dialogAC.show();
                     }
                 });
     }

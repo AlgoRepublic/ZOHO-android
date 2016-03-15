@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.algorepublic.zoho.BaseActivity;
 import com.algorepublic.zoho.Models.CreateForumModel;
 import com.algorepublic.zoho.Models.GeneralModel;
 import com.algorepublic.zoho.R;
@@ -77,7 +78,8 @@ public class RestPasswordFragment extends BaseFragment {
     public void RestPasswod(){
         service.restSetPassword(baseClass.getUserId(),
                 aq.id(R.id.confirm_password).getText().toString()
-                , true, new CallBack(RestPasswordFragment.this, "UpdatePassword"));
+                , false, new CallBack(RestPasswordFragment.this, "UpdatePassword"));
+        BaseActivity.dialogAC.show();
     }
 
     public void UpdatePassword(Object caller, Object model){
@@ -87,7 +89,7 @@ public class RestPasswordFragment extends BaseFragment {
         }else {
             Snackbar.make(getView(), getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
         }
-
+        BaseActivity.dialogAC.dismiss();
     }
 
     @Override
@@ -99,7 +101,7 @@ public class RestPasswordFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view  = inflater.inflate(R.layout.fragment_add_department, container, false);
-
+        InitializeDialog(getActivity());
         aq = new AQuery(view);
         setHasOptionsMenu(true);
         baseClass = ((BaseClass) getActivity().getApplicationContext());

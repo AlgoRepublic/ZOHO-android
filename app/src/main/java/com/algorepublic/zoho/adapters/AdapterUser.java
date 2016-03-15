@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.algorepublic.zoho.BaseActivity;
 import com.algorepublic.zoho.Models.GeneralModel;
 import com.algorepublic.zoho.Models.UserListModel;
 import com.algorepublic.zoho.R;
@@ -37,7 +38,7 @@ public class AdapterUser extends BaseAdapter {
     public AdapterUser (Context context) {
         l_Inflater = LayoutInflater.from(context);
         this.ctx = context;
-        service = new UserService((AppCompatActivity)ctx.getApplicationContext());
+        service = new UserService((AppCompatActivity)ctx);
         baseClass = ((BaseClass) ctx.getApplicationContext());
     }
 
@@ -88,7 +89,8 @@ public class AdapterUser extends BaseAdapter {
             @Override
             public void onClick(View v) {
             service.deleteUser(baseClass.getUserId(),baseClass.getSelectedProject()
-            ,true,new CallBack(AdapterUser.this,"DeleteUser"));
+            ,false,new CallBack(AdapterUser.this,"DeleteUser"));
+                BaseActivity.dialogAC.show();
             }
         });
         return convertView;
@@ -100,7 +102,7 @@ public class AdapterUser extends BaseAdapter {
         }else {
             Snackbar.make(((AppCompatActivity)ctx).findViewById(android.R.id.content), ctx.getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
         }
-
+        BaseActivity.dialogAC.dismiss();
     }
     static class ViewHolder {
         CircularImageView userImage;

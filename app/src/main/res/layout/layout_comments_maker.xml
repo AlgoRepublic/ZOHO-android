@@ -15,13 +15,13 @@
             android:layout_height="match_parent"
             app:clickToClose="true">
             <LinearLayout
-                android:layout_width="160dp"
+                android:layout_width="80dp"
                 android:layout_height="match_parent"
-                android:weightSum="2"
+                android:weightSum="1"
                 android:layout_marginBottom="5dp"
                 android:orientation="horizontal"
                 >
-                <TextView
+               <!-- <TextView
                     android:id="@+id/btEdit"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -33,7 +33,7 @@
                     android:textColor="@color/white"
                     android:background="@color/colorContentWrapper"
                     android:text="Edit"
-                    />
+                    />-->
                 <TextView
                     android:id="@+id/btDelete"
                     android:layout_width="0dp"

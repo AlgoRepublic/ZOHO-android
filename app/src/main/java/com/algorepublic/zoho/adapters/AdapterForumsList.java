@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Toast;
 
+import com.algorepublic.zoho.BaseActivity;
 import com.algorepublic.zoho.Models.ForumsModel;
 import com.algorepublic.zoho.Models.GeneralModel;
 import com.algorepublic.zoho.R;
@@ -84,7 +85,8 @@ public class AdapterForumsList extends BaseAdapter {
             public void onClick(View v) {
                 Clicked = position;
                 service.deleteForum(Integer.toString(ForumsModel.getInstance().responseObject.get(position).ID),
-                        true,new CallBack(AdapterForumsList.this,"DeleteForum"));
+                        false,new CallBack(AdapterForumsList.this,"DeleteForum"));
+                BaseActivity.dialogAC.show();
             }
         });
         return convertView;
@@ -97,7 +99,7 @@ public class AdapterForumsList extends BaseAdapter {
         }else {
             Snackbar.make(((AppCompatActivity) ctx).findViewById(android.R.id.content), ctx.getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
         }
-
+        BaseActivity.dialogAC.dismiss();
     }
     public void UpdatedAfterDelete(int pos){
         ForumsModel.getInstance().responseObject.remove(pos);

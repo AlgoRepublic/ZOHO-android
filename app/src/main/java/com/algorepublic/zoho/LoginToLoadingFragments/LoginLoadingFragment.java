@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.algorepublic.zoho.BaseActivity;
 import com.algorepublic.zoho.MainActivity;
 import com.algorepublic.zoho.Models.GetUserModel;
 import com.algorepublic.zoho.Models.UserModel;
@@ -56,7 +57,8 @@ public class LoginLoadingFragment extends BaseFragment {
         if (UserModel.getInstance().responseCode.equalsIgnoreCase("100")
                 && !UserModel.getInstance().userToken.equalsIgnoreCase("0")) {
             baseClass.setUserId(UserModel.getInstance().userToken);
-            loginService.GetById(baseClass.getUserId(),true,new CallBack(LoginLoadingFragment.this,"GetById"));
+            loginService.GetById(baseClass.getUserId(), false,
+                    new CallBack(LoginLoadingFragment.this, "GetById"));
         }
         else
         {

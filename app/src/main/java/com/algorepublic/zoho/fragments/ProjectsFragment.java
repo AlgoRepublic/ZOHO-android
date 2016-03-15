@@ -16,6 +16,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.algorepublic.zoho.BaseActivity;
 import com.algorepublic.zoho.Models.AllProjectsByUserModel;
 import com.algorepublic.zoho.Models.ProjectsByClientModel;
 import com.algorepublic.zoho.Models.ProjectsByDepartmentModel;
@@ -78,6 +79,7 @@ public class ProjectsFragment extends BaseFragment implements SwipeRefreshLayout
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment_forums
         View view  = inflater.inflate(R.layout.fragment_projects, container, false);
+        InitializeDialog(getActivity());
         listViewDept = (StickyListHeadersListView) view.findViewById(R.id.projects_liststicky);
         listViewClient = (ListView) view.findViewById(R.id.projects_list);
         aq = new AQuery(getActivity(), view);
@@ -147,15 +149,15 @@ public class ProjectsFragment extends BaseFragment implements SwipeRefreshLayout
         super.onViewCreated(view, savedInstanceState);
         baseClass = ((BaseClass) getActivity().getApplicationContext());
         service = new ProjectsListService(getActivity());
-        service.getAllProjectsByUser_API(baseClass.getUserId(), true, new CallBack(this, "AllProjects"));
-        service.getProjectsByClient_API(baseClass.getUserId(), true, new CallBack(this, "ProjectsByClient"));
+        service.getAllProjectsByUser_API(baseClass.getUserId(), false, new CallBack(this, "AllProjects"));
+        service.getProjectsByClient_API(baseClass.getUserId(), false, new CallBack(this, "ProjectsByClient"));
         service.getProjectsByDepartment(baseClass.getUserId(),
-                true, new CallBack(this, "ProjectsByDepartment"));
+                false, new CallBack(this, "ProjectsByDepartment"));
+        BaseActivity.dialogAC.show();
         applyLightBackground(aq.id(R.id.sort).getView(), baseClass);
 
     }
     public void AllProjects(Object caller, Object model) {
-        swipeListView.setRefreshing(false);
         AllProjectsByUserModel.getInstance().setList((AllProjectsByUserModel) model);
         if (AllProjectsByUserModel.getInstance().responseCode == 100
                 || AllProjectsByUserModel.getInstance().responseData.size() != 0) {
@@ -164,9 +166,9 @@ public class ProjectsFragment extends BaseFragment implements SwipeRefreshLayout
         } else {
             Snackbar.make(getView(), getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
         }
+        BaseActivity.dialogAC.dismiss();
     }
     public void ProjectsByClient(Object caller, Object model){
-        swipeListView.setRefreshing(false);
         ProjectsByClientModel.getInstance().setList((ProjectsByClientModel) model);
         if (ProjectsByClientModel.getInstance().responseCode == 100
                 || ProjectsByClientModel.getInstance().responseData.size() != 0){
@@ -176,7 +178,6 @@ public class ProjectsFragment extends BaseFragment implements SwipeRefreshLayout
         }
     }
     public void ProjectsByDepartment(Object caller, Object model){
-        swipeStickView.setRefreshing(false);
         ProjectsByDepartmentModel.getInstance().setList((ProjectsByDepartmentModel) model);
         if (ProjectsByDepartmentModel.getInstance().responseCode == 100
                 || ProjectsByDepartmentModel.getInstance().responseData.size() != 0) {

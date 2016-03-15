@@ -15,6 +15,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.BaseAdapter;
 import android.widget.SearchView;
 
+import com.algorepublic.zoho.BaseActivity;
 import com.algorepublic.zoho.Models.GeneralModel;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.fragments.BaseFragment;
@@ -285,7 +286,8 @@ public class AdapterTasksList extends BaseAdapter implements StickyListHeadersAd
                     public void onBtnClick() {
                         dialog.dismiss();
                         service.deleteTask(tasksList.getTaskID()
-                                , true, new CallBack(AdapterTasksList.this, "DeleteTask"));
+                                , false, new CallBack(AdapterTasksList.this, "DeleteTask"));
+                        BaseActivity.dialogAC.show();
                     }
                 });
     }
@@ -299,5 +301,6 @@ public class AdapterTasksList extends BaseAdapter implements StickyListHeadersAd
         {
             Snackbar.make(((AppCompatActivity)ctx).findViewById(android.R.id.content), ctx.getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
         }
+        BaseActivity.dialogAC.dismiss();
     }
 }

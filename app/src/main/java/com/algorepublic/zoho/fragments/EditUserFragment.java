@@ -20,6 +20,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Toast;
 
+import com.algorepublic.zoho.BaseActivity;
 import com.algorepublic.zoho.Models.AllProjectsByUserModel;
 import com.algorepublic.zoho.Models.GeneralModel;
 import com.algorepublic.zoho.Models.UserListModel;
@@ -68,7 +69,6 @@ public class EditUserFragment extends BaseFragment implements MultiSelectionSpin
     ProjectsListService service ;
     UserService service1;
     MultiSelectionSpinner projectsList;
-    ACProgressFlower dialog;
     BaseClass baseClass;
     static int position;
 
@@ -89,6 +89,7 @@ public class EditUserFragment extends BaseFragment implements MultiSelectionSpin
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view  = inflater.inflate(R.layout.fragment_add_user, container, false);
+        InitializeDialog(getActivity());
         role_list = (NiceSpinner) view.findViewById(R.id.role_list);
         projectsList = (MultiSelectionSpinner) view.findViewById(R.id.projects_list);
         projectsList.setListener(this);
@@ -98,10 +99,7 @@ public class EditUserFragment extends BaseFragment implements MultiSelectionSpin
         setHasOptionsMenu(true);
         service = new ProjectsListService(getActivity());
         service1 = new UserService(getActivity());
-        dialog = new ACProgressFlower.Builder(getActivity())
-                .direction(ACProgressConstant.DIRECT_CLOCKWISE)
-                .themeColor(Color.WHITE)
-                .fadeColor(Color.DKGRAY).build();
+
         getToolbar().setTitle(getString(R.string.edit_user));
         aq.id(R.id.profile).clicked(new View.OnClickListener() {
             @Override
@@ -112,11 +110,13 @@ public class EditUserFragment extends BaseFragment implements MultiSelectionSpin
 
         if(baseClass.getSelectedProject().equalsIgnoreCase("0")){
             aq.id(R.id.layout).visibility(View.VISIBLE);
-            service.getAllProjectsByUser_API(baseClass.getUserId(), true, new CallBack(EditUserFragment.this, "AllProjects"));
+            service.getAllProjectsByUser_API(baseClass.getUserId(), false,
+                    new CallBack(EditUserFragment.this, "AllProjects"));
         }else {
             aq.id(R.id.layout).visibility(View.GONE);
         }
-        service1.getUserRole(true, new CallBack(EditUserFragment.this, "UserRole"));
+        service1.getUserRole(false, new CallBack(EditUserFragment.this, "UserRole"));
+        BaseActivity.dialogAC.show();
         UpdateValues();
         return view;
     }
@@ -174,7 +174,7 @@ public class EditUserFragment extends BaseFragment implements MultiSelectionSpin
         }else {
             Snackbar.make(getView(), getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
         }
-
+        BaseActivity.dialogAC.dismiss();
     }
     public void UserRole(Object caller, Object model){
         UserRoleModel.getInstance().setList((UserRoleModel) model);
@@ -199,8 +199,6 @@ public class EditUserFragment extends BaseFragment implements MultiSelectionSpin
     @Override
     public void onPause() {
         super.onPause();
-
-        dialog = null;
     }
 
     @Override
@@ -238,7 +236,7 @@ public class EditUserFragment extends BaseFragment implements MultiSelectionSpin
                             aq.id(R.id.user_phoneno).getText().toString(),
                             UserRoleModel.getInstance().responseObject.get
                                     (role_list.getSelectedIndex()).ID, selectedIds
-                            , true, new CallBack(EditUserFragment.this, "UpdateUser"));
+                            , false, new CallBack(EditUserFragment.this, "UpdateUser"));
                 }else {
                     service1.updateUserWithProjectSelected(Integer.toString(UserListModel.getInstance().responseObject.get(position).ID),
                             aq.id(R.id.first_name).getText().toString(),
@@ -248,8 +246,9 @@ public class EditUserFragment extends BaseFragment implements MultiSelectionSpin
                             aq.id(R.id.user_phoneno).getText().toString(),
                             UserRoleModel.getInstance().responseObject.get
                                     (role_list.getSelectedIndex()).ID
-                            , true, new CallBack(EditUserFragment.this, "UpdateUser"));
+                            , false, new CallBack(EditUserFragment.this, "UpdateUser"));
                 }
+                BaseActivity.dialogAC.show();
         }
         return super.onOptionsItemSelected(item);
     }
@@ -260,7 +259,7 @@ public class EditUserFragment extends BaseFragment implements MultiSelectionSpin
         }else {
             Toast.makeText(getActivity(), getString(R.string.response_error), Toast.LENGTH_SHORT).show();
         }
-
+        BaseActivity.dialogAC.dismiss();
     }
     private void CallForAttachments() {
         String[] menuItems = {getString(R.string.camera),getString(R.string.gallery)
@@ -352,7 +351,7 @@ public class EditUserFragment extends BaseFragment implements MultiSelectionSpin
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            dialog.show();
+            BaseActivity.dialogAC.show();
         }
 
         @Override
@@ -371,14 +370,13 @@ public class EditUserFragment extends BaseFragment implements MultiSelectionSpin
         @Override
         protected void onPostExecute(String result) {
 
-            if ((dialog != null) && dialog.isShowing()) {
-                dialog.dismiss();
+            if ((BaseActivity.dialogAC != null) && BaseActivity.dialogAC.isShowing()) {
+                BaseActivity.dialogAC.dismiss();
             }
             if(result != null) {
                 if (result.contains("100")) {
                     Snackbar.make(getView(), getString(R.string.user_updated), Snackbar.LENGTH_SHORT).show();
                 } else {
-
                     Snackbar.make(getView(), getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
                 }
             }

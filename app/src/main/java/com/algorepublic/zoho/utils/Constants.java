@@ -69,7 +69,7 @@ public class Constants {
 	public static String DeleteDepartment_API = BASE_URL+ "/Department/DeleteDepartment?";
 	public static String AddProjectIntoDepartment = BASE_URL+ "/Department/AddProjectIntoDepartment?";
 
-	//DashBoradApi
+	//DashBoardApi
 
 	public static String MilesStone_API= BASE_URL+"/Project/GetByID?";
 

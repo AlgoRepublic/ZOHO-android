@@ -22,6 +22,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Toast;
 
+import com.algorepublic.zoho.BaseActivity;
 import com.algorepublic.zoho.Models.FolderListModel;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.adapters.AdapterUploadAttachment;
@@ -102,7 +103,6 @@ public class UploadDocsFragment extends BaseFragment implements GoogleApiClient.
     private static final String PREF_ACCOUNT_NAME = "accountName";
     private static final String[] SCOPES = { DriveScopes.DRIVE_METADATA_READONLY };
     com.google.api.client.googleapis.extensions.android.gms.auth.GoogleAccountCredential mCredential;
-    ACProgressFlower dialog;
     public static ArrayList<AttachmentList> filesList = new ArrayList<>();
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
@@ -169,6 +169,7 @@ public class UploadDocsFragment extends BaseFragment implements GoogleApiClient.
                              Bundle savedInstanceState) {
         setHasOptionsMenu(true);
         view = inflater.inflate(R.layout.activity_upload_docs, container, false);
+        InitializeDialog(getActivity());
         listView = (ParallaxListView) view.findViewById(R.id.images_layout);
         listView.setParallaxView(getActivity().getLayoutInflater().inflate(R.layout.view_header_upload_doc, listView, false));
         adapter = new AdapterUploadAttachment(getActivity());
@@ -181,12 +182,10 @@ public class UploadDocsFragment extends BaseFragment implements GoogleApiClient.
             folder_list.setVisibility(View.GONE);
         }else {
             folder_list.setVisibility(View.VISIBLE);
-            service.getFolderList(baseClass.getSelectedProject(), true, new CallBack(UploadDocsFragment.this, "FolderList"));
+            service.getFolderList(baseClass.getSelectedProject(), false,
+                    new CallBack(UploadDocsFragment.this, "FolderList"));
+            BaseActivity.dialogAC.show();
         }
-            dialog = new ACProgressFlower.Builder(getActivity())
-                .direction(ACProgressConstant.DIRECT_CLOCKWISE)
-                .themeColor(Color.WHITE)
-                .fadeColor(Color.DKGRAY).build();
         mCredential = GoogleAccountCredential.usingOAuth2(
                 getActivity().getApplicationContext(), Arrays.asList(SCOPES))
                 .setBackOff(new ExponentialBackOff())
@@ -262,6 +261,7 @@ public class UploadDocsFragment extends BaseFragment implements GoogleApiClient.
         } else {
             Toast.makeText(getActivity(), getString(R.string.response_error), Toast.LENGTH_SHORT).show();
         }
+        BaseActivity.dialogAC.dismiss();
     }
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -355,7 +355,7 @@ public class UploadDocsFragment extends BaseFragment implements GoogleApiClient.
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            dialog.show();
+            BaseActivity.dialogAC.show();
         }
 
         @Override
@@ -386,7 +386,7 @@ public class UploadDocsFragment extends BaseFragment implements GoogleApiClient.
 
         @Override
         protected void onPostExecute(String result) {
-            dialog.dismiss();
+            BaseActivity.dialogAC.dismiss();
             checkFileLenght(file);
         }
     }
@@ -476,7 +476,7 @@ public class UploadDocsFragment extends BaseFragment implements GoogleApiClient.
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            dialog.show();
+            BaseActivity.dialogAC.show();
         }
 
         @Override
@@ -494,7 +494,7 @@ public class UploadDocsFragment extends BaseFragment implements GoogleApiClient.
 
         @Override
         protected void onPostExecute(String result) {
-            dialog.dismiss();
+            BaseActivity.dialogAC.dismiss();
             PopulateModel(result);
         }
     }
@@ -505,7 +505,7 @@ public class UploadDocsFragment extends BaseFragment implements GoogleApiClient.
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            dialog.show();
+            BaseActivity.dialogAC.show();
         }
 
         @Override
@@ -522,7 +522,7 @@ public class UploadDocsFragment extends BaseFragment implements GoogleApiClient.
 
         @Override
         protected void onPostExecute(String result) {
-            dialog.dismiss();
+            BaseActivity.dialogAC.dismiss();
             PopulateModel(result);
         }
     }

@@ -13,6 +13,7 @@ import android.widget.BaseAdapter;
 import android.widget.RatingBar;
 import android.widget.SeekBar;
 
+import com.algorepublic.zoho.BaseActivity;
 import com.algorepublic.zoho.Models.GeneralModel;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.StarRatingFragments.StarRatingLevelQuestionsFragment;
@@ -26,6 +27,7 @@ import com.androidquery.AQuery;
 public class AdapterStarRatingQuestions extends BaseAdapter {
     Context mContext;
     StarRatingService service;
+    int ClickedPosition, userProgress;
     private LayoutInflater l_Inflater;
     AQuery aq;
     int multiple=5;
@@ -84,12 +86,13 @@ public class AdapterStarRatingQuestions extends BaseAdapter {
                 Log.e("ID","/"+StarRatingLevelQuestionsFragment.Questions
                         .get(position).getID());
                 service.StarEditComment(StarRatingLevelQuestionsFragment.Questions
-                        .get(position).getID(),StarRatingLevelQuestionsFragment.Questions
-                        .get(position).getComment(),true,new CallBack(AdapterStarRatingQuestions.this,"UpdateComment"));
+                        .get(position).getID(), StarRatingLevelQuestionsFragment.Questions
+                        .get(position).getComment(), false, new
+                        CallBack(AdapterStarRatingQuestions.this, "UpdateComment"));
+                BaseActivity.dialogAC.show();
             }
         });
         aq.id(R.id.seekBar).getSeekBar().setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            private int userProgress;
 
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
@@ -103,16 +106,12 @@ public class AdapterStarRatingQuestions extends BaseAdapter {
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-                View view = StarRatingLevelQuestionsFragment.listView.getChildAt(position);
-                AQuery aq= new AQuery(view);
-                aq.id(R.id.seekBar).progress(userProgress);
-                aq.id(R.id.percent_text).getTextView().setText(userProgress + "%");
-                RatingBar ratingBar  =(RatingBar) view.findViewById(R.id.star_rating);
-                ratingBar.setRating(GetStarValue(userProgress));
-                aq.id(R.id.devstage_text).text(GetStageValue(userProgress));
+                ClickedPosition = position;
                 service.StarUpdateProgress(StarRatingLevelQuestionsFragment.Questions
                         .get(position).getID(), StarRatingLevelQuestionsFragment.Questions
-                        .get(position).getProgress(), true, new CallBack(AdapterStarRatingQuestions.this, "UpdateProgress"));
+                        .get(position).getProgress(), false, new
+                        CallBack(AdapterStarRatingQuestions.this, "UpdateProgress"));
+                BaseActivity.dialogAC.show();
             }
         });
         return convertView;
@@ -126,16 +125,25 @@ public class AdapterStarRatingQuestions extends BaseAdapter {
             Snackbar.make(((AppCompatActivity) mContext).findViewById(android.R.id.content),
                     mContext.getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
         }
+        BaseActivity.dialogAC.dismiss();
     }
     public void UpdateProgress(Object caller, Object model) {
         GeneralModel.getInstance().setList((GeneralModel) model);
         if (GeneralModel.getInstance().responseObject) {
+            View view = StarRatingLevelQuestionsFragment.listView.getChildAt(ClickedPosition);
+            AQuery aq= new AQuery(view);
+            aq.id(R.id.seekBar).progress(userProgress);
+            aq.id(R.id.percent_text).getTextView().setText(userProgress + "%");
+            RatingBar ratingBar  =(RatingBar) view.findViewById(R.id.star_rating);
+            ratingBar.setRating(GetStarValue(userProgress));
+            aq.id(R.id.devstage_text).text(GetStageValue(userProgress));
             Snackbar.make(((AppCompatActivity) mContext).findViewById(android.R.id.content),
                     mContext.getString(R.string.update_progress), Snackbar.LENGTH_SHORT).show();
         } else {
             Snackbar.make(((AppCompatActivity) mContext).findViewById(android.R.id.content),
                     mContext.getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
         }
+        BaseActivity.dialogAC.dismiss();
     }
     public int GetStarValue(int progress)
     {

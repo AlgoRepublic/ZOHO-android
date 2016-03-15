@@ -9,6 +9,7 @@ import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.text.format.DateFormat;
@@ -17,6 +18,7 @@ import android.util.TypedValue;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.webkit.MimeTypeMap;
+import android.widget.EditText;
 
 import com.algorepublic.zoho.R;
 
@@ -33,6 +35,10 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+
+import cc.cloudist.acplibrary.ACProgressBaseDialog;
+import cc.cloudist.acplibrary.ACProgressConstant;
+import cc.cloudist.acplibrary.ACProgressFlower;
 
 /**
  * Created by hasanali on 27/08/14.
@@ -69,6 +75,7 @@ public class BaseClass extends Application {
                 Activity.MODE_PRIVATE);
         this.prefsEditor = appSharedPrefs.edit();
         db = new TinyDB(this);
+
     }
 
     public void setEmail(String email) {
@@ -174,7 +181,15 @@ public class BaseClass extends Application {
         } else
             return true;
     }
-
+    public EditText.OnFocusChangeListener focusChangeListener = new View.OnFocusChangeListener() {
+        @Override
+        public void onFocusChange(View v, boolean hasFocus) {
+            if (hasFocus) {
+                showKeyPad(v);
+            }else
+                hideKeyPad(v);
+        }
+    };
     public static int isTabletDevice(Context activityContext) {
         boolean xlarge = ((activityContext.getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_XLARGE);
         UiModeManager uiModeManager = (UiModeManager) activityContext.getSystemService(UI_MODE_SERVICE);

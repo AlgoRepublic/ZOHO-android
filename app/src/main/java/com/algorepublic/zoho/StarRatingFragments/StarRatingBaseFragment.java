@@ -16,7 +16,7 @@ import com.androidquery.AQuery;
  */
 public class StarRatingBaseFragment extends BaseFragment {
     static StarRatingBaseFragment fragment;
-    public static String arrow ="➪";
+    public static String arrow ="➪ ";
     public static String textLevel1,textLevel2,textLevel3;
     public static TextView textView1,textView2,textView3;
     AQuery aq;

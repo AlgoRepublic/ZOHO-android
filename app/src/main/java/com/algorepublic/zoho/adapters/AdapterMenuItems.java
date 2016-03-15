@@ -20,6 +20,7 @@ import com.algorepublic.zoho.fragments.DashboardFragment;
 import com.algorepublic.zoho.fragments.DepartmentFragment;
 import com.algorepublic.zoho.fragments.DocumentsListFragment;
 import com.algorepublic.zoho.fragments.ForumsFragment;
+import com.algorepublic.zoho.fragments.HomeFragment;
 import com.algorepublic.zoho.fragments.ProjectsFragment;
 import com.algorepublic.zoho.StarRatingFragments.StarRatingBaseFragment;
 import com.algorepublic.zoho.fragments.TasksListFragment;
@@ -113,7 +114,7 @@ public class AdapterMenuItems extends BaseAdapter{
             ((AppCompatActivity)ctx).getSupportFragmentManager().popBackStack();
         }
         if(position==0){
-            callFragmentWithReplace(R.id.container, DashboardFragment.newInstance(), "DashboardFragment");
+            callFragmentWithReplace(R.id.container, HomeFragment.newInstance(), "HomeFragment");
         }if(position==1){
             callFragmentWithReplace(R.id.container, ProjectsFragment.newInstance(), "ProjectsFragment");
         }if(position==2){

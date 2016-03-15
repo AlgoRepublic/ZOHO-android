@@ -32,6 +32,7 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.algorepublic.zoho.BaseActivity;
 import com.algorepublic.zoho.Models.GeneralModel;
 import com.algorepublic.zoho.Models.ProjectsByDepartmentModel;
 import com.algorepublic.zoho.R;
@@ -63,7 +64,6 @@ public class AdapterDepartment
     DepartmentService service;ProjectsListService service1;
     Context ctx;
     BaseClass baseClass;
-    ACProgressFlower dialogAC;
     int Clicked, DeptDeletePosition,ProjectDeletePosition;
 
     // NOTE: Make accessible with short name
@@ -97,10 +97,6 @@ public class AdapterDepartment
         baseClass =((BaseClass) ctx.getApplicationContext());
         service = new DepartmentService((AppCompatActivity)context);
         service1 = new ProjectsListService((AppCompatActivity)context);
-        dialogAC = new ACProgressFlower.Builder(ctx)
-                .direction(ACProgressConstant.DIRECT_CLOCKWISE)
-                .themeColor(Color.WHITE)
-                .fadeColor(Color.DKGRAY).build();
         setHasStableIds(true);
     }
 
@@ -310,7 +306,7 @@ public class AdapterDepartment
                     public void onBtnClick() {
                         dialog.dismiss();
                         if(Clicked==1) {
-                            dialogAC.show();
+                            BaseActivity.dialogAC.show();
                             service.DeleteDepartment(DepartmentFragment.allProjects.get(position).getCompOrDeptID(), true
                                     , new CallBack(AdapterDepartment.this, "DeleteDept"));
                         }
@@ -383,7 +379,7 @@ public class AdapterDepartment
                 DepartmentFragment.allProjects.add(projectsList);
             }
         }
-        dialogAC.dismiss();
+        BaseActivity.dialogAC.dismiss();
         Snackbar.make(((AppCompatActivity)ctx).findViewById(android.R.id.content),
                 ctx.getString(R.string.department_deleted), Snackbar.LENGTH_SHORT).show();
        notifyDataSetChanged();

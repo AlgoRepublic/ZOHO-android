@@ -1,6 +1,7 @@
 package com.algorepublic.zoho.fragments;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.util.Log;
@@ -15,6 +16,7 @@ import android.widget.RadioGroup;
 import android.widget.SearchView;
 import android.widget.Toast;
 
+import com.algorepublic.zoho.BaseActivity;
 import com.algorepublic.zoho.Models.TasksListByOwnerModel;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.adapters.AdapterTasksList;
@@ -32,6 +34,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
+import cc.cloudist.acplibrary.ACProgressConstant;
+import cc.cloudist.acplibrary.ACProgressFlower;
 import se.emilsjolander.stickylistheaders.StickyListHeadersAdapter;
 import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
 
@@ -112,21 +116,24 @@ public class TasksListFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_taskslist, container, false);
+        InitializeDialog(getActivity());
         setHasOptionsMenu(true);
         radioGroup = (RadioGroup) view.findViewById(R.id.radioGroup);
         searchView = (SearchView) view.findViewById(R.id.searchView);
         listView = (StickyListHeadersListView) view.findViewById(R.id.list_taskslist);
         aq = new AQuery(view);
-
+        InitializeDialog(getActivity());
         baseClass = ((BaseClass) getActivity().getApplicationContext());
         applyLightBackground(aq.id(R.id.layout_bottom).getView(), baseClass);
         taskListService = new TaskListService(getActivity());
         if(baseClass.getSelectedProject().equalsIgnoreCase("0")) {
-            taskListService.getTasksListByOwner(baseClass.getUserId(), true, new CallBack(TasksListFragment.this, "OwnerTasksList"));
+            taskListService.getTasksListByOwner(baseClass.getUserId(), false,
+                    new CallBack(TasksListFragment.this, "OwnerTasksList"));
         }else{
-            taskListService.getTasksListByProject(baseClass.getSelectedProject(), true, new CallBack(TasksListFragment.this, "OwnerTasksList"));
+            taskListService.getTasksListByProject(baseClass.getSelectedProject(), false,
+                    new CallBack(TasksListFragment.this, "OwnerTasksList"));
         }
-
+        BaseActivity.dialogAC.show();
         aq.id(R.id.add_task).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -278,6 +285,7 @@ public class TasksListFragment extends BaseFragment {
         {
             Toast.makeText(getActivity(), getString(R.string.invalid_credential), Toast.LENGTH_SHORT).show();
         }
+        BaseActivity.dialogAC.dismiss();
     }
     public void GetGeneralList(){
         generalList.clear();

@@ -14,6 +14,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.algorepublic.zoho.BaseActivity;
 import com.algorepublic.zoho.Models.CreateCommentModel;
 import com.algorepublic.zoho.Models.DocumentsListModel;
 import com.algorepublic.zoho.Models.GeneralModel;
@@ -73,6 +74,7 @@ public class DocsPreviewFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_documens_preview, container, false);
+        InitializeDialog(getActivity());
         listView = (ListView) view.findViewById(R.id.listView_comments);
         btSend = (Button) view.findViewById(R.id.send);
         comment_user = (EditText) view.findViewById(R.id.comment_user);
@@ -107,11 +109,12 @@ public class DocsPreviewFragment extends BaseFragment {
                     if (flag == true) {
                         forumService.updateforumComments(DocsPreviewFragment
                                 .arrayList.get(ClickedPosition).getCommentID(), DocsPreviewFragment
-                                .comment_user.getText().toString(), true, new
+                                .comment_user.getText().toString(), false, new
                                 CallBack(DocsPreviewFragment.this, "UpdateComment"));
                     }else{
                         PerformAction();
                     }
+                    BaseActivity.dialogAC.show();
                     return true;
                 }
                 return false;
@@ -123,14 +126,17 @@ public class DocsPreviewFragment extends BaseFragment {
                 if (flag == true) {
                     forumService.updateforumComments(DocsPreviewFragment
                             .arrayList.get(ClickedPosition).getCommentID(), DocsPreviewFragment
-                            .comment_user.getText().toString(), true, new
+                            .comment_user.getText().toString(), false, new
                             CallBack(DocsPreviewFragment.this, "UpdateComment"));
-                }else{
+                } else {
                     PerformAction();
                 }
+                BaseActivity.dialogAC.show();
             }
         });
-        service.getDocumentComments(docObject.getID(),true,new CallBack(DocsPreviewFragment.this,"AllDocComments"));
+        service.getDocumentComments(docObject.getID(), false,
+                new CallBack(DocsPreviewFragment.this, "AllDocComments"));
+        BaseActivity.dialogAC.show();
         return view;
     }
     public void UpdateComment(Object caller, Object model){
@@ -149,6 +155,7 @@ public class DocsPreviewFragment extends BaseFragment {
             Snackbar.make(getView(),
                     getActivity().getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
         }
+        BaseActivity.dialogAC.dismiss();
     }
     public void AllDocComments(Object caller, Object model) {
         TaskCommentsModel.getInstance().setList((TaskCommentsModel) model);
@@ -157,6 +164,7 @@ public class DocsPreviewFragment extends BaseFragment {
         } else {
             Toast.makeText(getActivity(), getString(R.string.response_error), Toast.LENGTH_SHORT).show();
         }
+        BaseActivity.dialogAC.dismiss();
     }
     public void GetGeneralList() {
         arrayList.clear();
@@ -191,6 +199,7 @@ public class DocsPreviewFragment extends BaseFragment {
         {
             Snackbar.make(getView(), getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
         }
+        BaseActivity.dialogAC.dismiss();
     }
     public void PerformAction()
     {

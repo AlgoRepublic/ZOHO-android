@@ -28,7 +28,11 @@
         <item name="android:textColor">@android:color/white</item>
         <item name="android:background">@color/colorBaseHeader</item>
     </style>
-
+    <style name="blackListViewStyle" parent="@android:style/Widget.ListView">
+        <item name="android:scrollbarThumbVertical">@color/colorBaseHeader</item>
+        <item name="android:background">@color/white</item>
+        <item name="android:fadeScrollbars">false</item>
+    </style>
 
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
@@ -63,6 +67,12 @@
     <style name="blueCheckBoxStyle" parent="@android:style/Widget.CompoundButton.CheckBox">
         <item name="android:textColor">@android:color/white</item>
         <item name="android:background">@color/colorPrimaryBlue</item>
+    </style>
+
+    <style name="blueListViewStyle" parent="@android:style/Widget.ListView">
+        <item name="android:scrollbarThumbVertical">@color/colorPrimaryBlue</item>
+        <item name="android:background">@color/white</item>
+        <item name="android:fadeScrollbars">false</item>
     </style>
     <style name="commonListItemStyle">
     </style>

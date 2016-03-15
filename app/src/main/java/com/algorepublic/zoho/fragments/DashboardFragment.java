@@ -9,10 +9,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.algorepublic.zoho.BaseActivity;
 import com.algorepublic.zoho.Models.DashBoardModel;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.services.CallBack;
-import com.algorepublic.zoho.services.DashBoradService;
+import com.algorepublic.zoho.services.DashBoardService;
 import com.algorepublic.zoho.utils.BaseClass;
 import com.androidquery.AQuery;
 import com.echo.holographlibrary.Bar;
@@ -22,12 +23,15 @@ import com.echo.holographlibrary.PieSlice;
 
 import java.util.ArrayList;
 
+import cc.cloudist.acplibrary.ACProgressConstant;
+import cc.cloudist.acplibrary.ACProgressFlower;
+
 /**
  * Created by waqas on 3/10/16.
  */
 public class DashboardFragment extends BaseFragment {
 
-    DashBoradService dashBoardService;
+    DashBoardService service;
     AQuery aq;
     BaseClass baseClass;
     PieGraph pieGraph;
@@ -50,24 +54,28 @@ public class DashboardFragment extends BaseFragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment_forums
         View view  = inflater.inflate(R.layout.fragment_dashboard, container, false);
+        InitializeDialog(getActivity());
         aq = new AQuery(view);
+        InitializeDialog(getActivity());
         baseClass = ((BaseClass) getActivity().getApplicationContext());
         barGraph = (BarGraph)view.findViewById(R.id.graph);
         pieGraph  = (PieGraph)view.findViewById(R.id.graphy);
-        dashBoardService = new DashBoradService(getActivity());
+        service = new DashBoardService(getActivity());
         if(baseClass.getSelectedProject().equalsIgnoreCase("0")) {
             Toast.makeText(getActivity(), "Please Select Project", Toast.LENGTH_SHORT).show();
         }else
         {
-            dashBoardService.getMileStone(baseClass.getSelectedProject(), true, new CallBack(DashboardFragment.this, "DashBoardList"));
+            service.getMileStone(baseClass.getSelectedProject(), false,
+                    new CallBack(DashboardFragment.this, "DashBoardList"));
+            BaseActivity.dialogAC.show();
         }
         return view;
     }
 
     public void DashBoardList(Object caller, Object model) {
         DashBoardModel.getInstance().setList((DashBoardModel) model);
+        BaseActivity.dialogAC.dismiss();
         if (DashBoardModel.getInstance().responseCode == 100) {
-
 
             ArrayList<Bar> points = new ArrayList<Bar>();
             Bar d = new Bar();

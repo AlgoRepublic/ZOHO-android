@@ -13,9 +13,11 @@ import android.view.ViewGroup;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import com.algorepublic.zoho.BaseActivity;
 import com.algorepublic.zoho.Models.CreateProjectModel;
 import com.algorepublic.zoho.Models.TaskUserModel;
 import com.algorepublic.zoho.R;
+import com.algorepublic.zoho.adapters.ProjectsList;
 import com.algorepublic.zoho.services.CallBack;
 import com.algorepublic.zoho.services.ProjectsListService;
 import com.algorepublic.zoho.services.TaskListService;
@@ -24,6 +26,9 @@ import com.androidquery.AQuery;
 
 import org.angmarch.views.NiceSpinner;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.LinkedList;
 
 /**
@@ -88,7 +93,8 @@ public class AddProjectFragment extends BaseFragment {
                 get(owner_list.getSelectedIndex()).ID
                 ,ProjectsFragment.allDeptList.get(
                 departments_list.getSelectedIndex()).getDeptID(),isprivate
-                ,true,new CallBack(AddProjectFragment.this,"CreateProject"));
+                ,false,new CallBack(AddProjectFragment.this,"CreateProject"));
+        BaseActivity.dialogAC.show();
     }
 
     public void CreateProject(Object caller, Object model){
@@ -99,18 +105,19 @@ public class AddProjectFragment extends BaseFragment {
         }else {
             Snackbar.make(getView() , getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
         }
-
+        BaseActivity.dialogAC.dismiss();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view  = inflater.inflate(R.layout.fragment_add_project, container, false);
+        InitializeDialog(getActivity());
         radioGroup = (RadioGroup) view.findViewById(R.id.private_public_group);
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
-                switch(checkedId) {
+                switch (checkedId) {
                     case R.id.public_radio:
                         isprivate = false;
                         break;
@@ -122,19 +129,24 @@ public class AddProjectFragment extends BaseFragment {
         });
         getToolbar().setTitle(getString(R.string.add_project));
         aq = new AQuery(view);
+        baseClass = ((BaseClass) getActivity().getApplicationContext());
+        aq.id(R.id.project_name).getEditText().setOnFocusChangeListener(baseClass.focusChangeListener);
+        aq.id(R.id.project_desc).getEditText().setOnFocusChangeListener(baseClass.focusChangeListener);
+
         aq.id(R.id.public_radio).checked(true);
         aq.id(R.id.lblListHeader).text(getString(R.string.new_project));
         setHasOptionsMenu(true);
         owner_list = (NiceSpinner) view.findViewById(R.id.owner_list);
         departments_list= (NiceSpinner) view.findViewById(R.id.departments_list);
         service = new TaskListService(getActivity());
-        baseClass = ((BaseClass) getActivity().getApplicationContext());
         deptList = new LinkedList<>();
         for(int loop=0;loop<ProjectsFragment.allDeptList.size();loop++){
             deptList.add(ProjectsFragment.allDeptList.get(loop).getDeptName());
         }
         departments_list.attachDataSource(deptList);
-        service.getTaskAssignee(Integer.parseInt(baseClass.getSelectedProject()),true, new CallBack(AddProjectFragment.this, "GetAllUsers"));
+        service.getTaskAssignee(Integer.parseInt(baseClass.getSelectedProject()), false,
+                new CallBack(AddProjectFragment.this, "GetAllUsers"));
+        BaseActivity.dialogAC.show();
         return view;
     }
     public void GetAllUsers(Object caller, Object model) {
@@ -144,12 +156,17 @@ public class AddProjectFragment extends BaseFragment {
             for(int loop=0;loop< TaskUserModel.getInstance().responseObject.size();loop++) {
                 userList.add(TaskUserModel.getInstance().responseObject.get(loop).firstName);
             }
+            Collections.sort(userList,ByAlphabet);
             owner_list.attachDataSource(userList);
-        }
-        else
-        {
+        }else{
             Toast.makeText(getActivity(), getString(R.string.response_error), Toast.LENGTH_SHORT).show();
         }
+        BaseActivity.dialogAC.dismiss();
     }
-
+    Comparator<String> ByAlphabet = new Comparator<String>() {
+        @Override
+        public int compare(String lhs, String rhs) {
+            return (Double.valueOf(rhs).compareTo(Double.valueOf(lhs)));
+        }
+    };
 }
