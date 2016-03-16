@@ -39,7 +39,6 @@ public class TaskCommentFragment extends BaseFragment {
     static TaskCommentFragment fragment;
     static int position;
     BaseClass baseClass;
-    public static ACProgressFlower dialogAC;
     public static EditText comment_user;
     public static boolean flag= false;
     public static int ClickedPosition;
@@ -73,7 +72,6 @@ public class TaskCommentFragment extends BaseFragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment_forums
         View view = inflater.inflate(R.layout.fragment_task_comments, container, false);
-        dialogAC = InitializeDialog(getActivity());
         listView = (ListView) view.findViewById(R.id.listView_comments);
         comment_user = (EditText) view.findViewById(R.id.comment_user);
         aq = new AQuery(view);
@@ -83,8 +81,7 @@ public class TaskCommentFragment extends BaseFragment {
         listView.setAdapter(adapter);
         baseClass = ((BaseClass) getActivity().getApplicationContext());
        service.getCommentsByTask(position,
-               false,new CallBack(TaskCommentFragment.this,"TaskComments"));
-        dialogAC.show();
+               true,new CallBack(TaskCommentFragment.this,"TaskComments"));
         aq.id(R.id.comment_user).getTextView().setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
@@ -92,12 +89,11 @@ public class TaskCommentFragment extends BaseFragment {
                     if (flag == true) {
                         forumService.updateforumComments(ForumsDetailFragment
                                 .arrayList.get(ClickedPosition).getCommentID(), ForumsDetailFragment
-                                .comment_user.getText().toString(), false, new
+                                .comment_user.getText().toString(), true, new
                                 CallBack(TaskCommentFragment.this, "UpdateComment"));
                     }else{
                         PerformAction();
                     }
-                    dialogAC.show();
                     return true;
                 }
                 return false;
@@ -109,12 +105,11 @@ public class TaskCommentFragment extends BaseFragment {
                 if (flag == true) {
                     forumService.updateforumComments(TaskCommentFragment
                             .arrayList.get(ClickedPosition).getCommentID(), TaskCommentFragment
-                            .comment_user.getText().toString(), false, new
+                            .comment_user.getText().toString(), true, new
                             CallBack(TaskCommentFragment.this, "UpdateComment"));
                 }else{
                     PerformAction();
                 }
-                dialogAC.show();
             }
         });
         return view;
@@ -129,7 +124,6 @@ public class TaskCommentFragment extends BaseFragment {
         {
             Snackbar.make(getView(), getString(R.string.invalid_credential), Snackbar.LENGTH_SHORT).show();
         }
-        dialogAC.dismiss();
     }
     public void GetGeneralList() {
         arrayList.clear();
@@ -161,7 +155,6 @@ public class TaskCommentFragment extends BaseFragment {
             Snackbar.make(getView(),
                     getActivity().getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
         }
-        dialogAC.dismiss();
     }
     public void CreateComment(Object caller, Object model) {
         CreateCommentModel.getInstance().setList((CreateCommentModel) model);
@@ -182,7 +175,6 @@ public class TaskCommentFragment extends BaseFragment {
         {
             Snackbar.make(getView(), getString(R.string.invalid_credential), Snackbar.LENGTH_SHORT).show();
         }
-        dialogAC.dismiss();
     }
     public void PerformAction()
     {
@@ -191,7 +183,7 @@ public class TaskCommentFragment extends BaseFragment {
             Snackbar.make(getView(),getString(R.string.enter_comment),Snackbar.LENGTH_SHORT).show();
             return;
         }
-        service.createComment(comment, position, Integer.parseInt(baseClass.getUserId()), false,
+        service.createComment(comment, position, Integer.parseInt(baseClass.getUserId()), true,
                 new CallBack(TaskCommentFragment.this, "CreateComment"));
     }
 }

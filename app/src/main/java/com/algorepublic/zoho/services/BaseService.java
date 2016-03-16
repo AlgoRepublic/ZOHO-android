@@ -1,8 +1,11 @@
 package com.algorepublic.zoho.services;
 
 import android.app.Activity;
+import android.content.Context;
+import android.graphics.Color;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.utils.NetworkUtil;
@@ -17,6 +20,9 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 
+import cc.cloudist.acplibrary.ACProgressConstant;
+import cc.cloudist.acplibrary.ACProgressFlower;
+
 
 /**
  * Created by hasanali on 1/10/14.
@@ -27,6 +33,7 @@ public class BaseService{
     AQuery aq;
     Activity context;
     ProgressBar progressBar;
+    ACProgressFlower dialogAC;
     // private AlertDialog mAlertDialogBuilder;
 
     public BaseService(Activity act){
@@ -47,10 +54,15 @@ public class BaseService{
             NetworkUtil.internetFailedDialog(context);
             return;
         }
-        if (aq.id(R.id.progress_bar).isExist() && showProgress) {
-            progressBar = (ProgressBar) aq.id(R.id.progress_bar).getView();
-            progressBar.setVisibility(View.VISIBLE);
+        if (showProgress) {
+            dialogAC = new ACProgressFlower.Builder(context)
+                    .direction(ACProgressConstant.DIRECT_CLOCKWISE)
+                    .themeColor(Color.WHITE)
+                    .fadeColor(Color.DKGRAY).build();
+            dialogAC.setCancelable(true);
+            dialogAC.show();
         }
+
         aq.ajax(url, JSONObject.class,
                 new AjaxCallback<JSONObject>() {
 
@@ -76,7 +88,7 @@ public class BaseService{
                             }
                             showServerError(status);
                         }
-
+                        dialogAC.dismiss();
                     }
                 });
     }
@@ -114,9 +126,13 @@ public class BaseService{
             NetworkUtil.internetFailedDialog(context);
             return;
         }
-        if(aq.id(R.id.progress_bar).isExist() && showProgress){
-            progressBar = (ProgressBar) aq.id(R.id.progress_bar).getView();
-            progressBar.setVisibility(View.VISIBLE);
+        if (showProgress) {
+            dialogAC = new ACProgressFlower.Builder(context)
+                    .direction(ACProgressConstant.DIRECT_CLOCKWISE)
+                    .themeColor(Color.WHITE)
+                    .fadeColor(Color.DKGRAY).build();
+            dialogAC.setCancelable(true);
+            dialogAC.show();
         }
 
         aq.ajax(url, params, JSONObject.class,
@@ -151,11 +167,10 @@ public class BaseService{
                                 progressBar.setVisibility(View.GONE);
                             }
                             showServerError(status);
-                            return;
                         }
-
                     }
                 });
+        dialogAC.dismiss();
     }
 
     /**
@@ -175,6 +190,7 @@ public class BaseService{
             progressBar = (ProgressBar) aq.id(R.id.progress_bar).getView();
             progressBar.setVisibility(View.VISIBLE);
         }
+
         aq.ajax(url, params, JSONObject.class,
                 new AjaxCallback<JSONObject>() {
 
@@ -210,7 +226,10 @@ public class BaseService{
 
     private void showServerError(AjaxStatus status) {
         _.log("status.getError(): "+status.getError());
-        _.log("status.getCode(): "+status.getCode());
+        _.log("status.getCode(): " + status.getCode());
+        if(status.getCode()== -101 || status.getCode()==500) {
+            Toast.makeText(context,context.getString(R.string.response_error),Toast.LENGTH_SHORT).show();
+        }
     }
 
 }

@@ -101,12 +101,12 @@ public class AgendaCalendarView extends FrameLayout implements StickyListHeaders
             mFabColor = R.color.colorBaseHeader;
         }else if(ThemeType == 1) {
             mAgendaCurrentDayTextColor = R.color.theme_primary;
-            mCalendarHeaderColor = R.color.theme_primary_dark;
-            mCalendarBackgroundColor = R.color.theme_primary;
-            mCalendarDayTextColor = R.color.theme_text_icons;
-            mCalendarCurrentDayColor = R.color.calendar_text_current_day;
-            mCalendarPastDayTextColor = R.color.theme_light_primary;
-            mFabColor = R.color.theme_accent;
+            mCalendarHeaderColor = R.color.colorWhite;
+            mCalendarBackgroundColor = R.color.colorWhite;
+            mCalendarDayTextColor = R.color.colorWhite;
+            mCalendarCurrentDayColor = R.color.colorWhite;
+            mCalendarPastDayTextColor = R.color.colorWhite;
+            mFabColor = R.color.colorWhite;
         }
         LayoutInflater inflater = (LayoutInflater) context
                         .getSystemService(Context.LAYOUT_INFLATER_SERVICE);

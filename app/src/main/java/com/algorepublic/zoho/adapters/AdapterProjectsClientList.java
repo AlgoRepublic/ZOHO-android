@@ -145,7 +145,6 @@ public class AdapterProjectsClientList extends BaseAdapter {
         } else {
             Toast.makeText(ctx, ctx.getString(R.string.invalid_credential), Toast.LENGTH_SHORT).show();
         }
-        ProjectsFragment.dialogAC.dismiss();
     }
 
     public void callFragmentWithBackStack(int containerId, Fragment fragment, String tag){
@@ -188,9 +187,8 @@ public class AdapterProjectsClientList extends BaseAdapter {
                     public void onBtnClick() {
                         dialog.dismiss();
                         lastPosition =position;
-                        service.DeleteProject(arrayList.get(position).getProjectID(), false
+                        service.DeleteProject(arrayList.get(position).getProjectID(), true
                                 , new CallBack(AdapterProjectsClientList.this, "DeleteProject"));
-                        ProjectsFragment.dialogAC.show();
                     }
                 });
     }

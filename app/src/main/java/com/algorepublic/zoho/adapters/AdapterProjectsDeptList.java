@@ -146,7 +146,6 @@ public class AdapterProjectsDeptList extends BaseAdapter implements StickyListHe
         } else {
             Snackbar.make(aq.id(R.id.shadow_item_container).getView(), ctx.getString(R.string.invalid_credential), Snackbar.LENGTH_SHORT).show();
            }
-        ProjectsFragment.dialogAC.dismiss();
     }
     public void callFragmentWithBackStack(int containerId, Fragment fragment, String tag){
 
@@ -200,9 +199,8 @@ public class AdapterProjectsDeptList extends BaseAdapter implements StickyListHe
                     public void onBtnClick() {
                         dialog.dismiss();
                         lastPosition = position;
-                        service.DeleteProject(ProjectsFragment.ByDepartmentList.get(position).getProjectID(), false
+                        service.DeleteProject(ProjectsFragment.ByDepartmentList.get(position).getProjectID(), true
                                 , new CallBack(AdapterProjectsDeptList.this, "DeleteProject"));
-                        ProjectsFragment.dialogAC.show();
                     }
                 });
     }

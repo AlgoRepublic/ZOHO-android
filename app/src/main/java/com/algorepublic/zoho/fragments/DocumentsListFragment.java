@@ -39,7 +39,6 @@ public class DocumentsListFragment extends BaseFragment{
     AQuery aq;
     View view;
     DocumentsService service;
-    public static ACProgressFlower dialogAC;
     public static ArrayList<DocumentsList> generalDocsList = new ArrayList<>();
     public static ArrayList<DocumentsList> allDocsList = new ArrayList<>();
     public static ArrayList<Integer> deleteDocsList = new ArrayList<>();
@@ -70,7 +69,6 @@ public class DocumentsListFragment extends BaseFragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_documents, container, false);
-        dialogAC = InitializeDialog(getActivity());
         listView = (StickyListHeadersListView) view.findViewById(R.id.list_documents);
         aq = new AQuery(view);
         aq.id(R.id.sort).clicked(new View.OnClickListener() {
@@ -86,8 +84,7 @@ public class DocumentsListFragment extends BaseFragment{
         getToolbar().setTitle(getString(R.string.documents));
         service = new DocumentsService(getActivity());
         service.getDocuments(baseClass.db.getInt("ProjectID"),
-                false, new CallBack(DocumentsListFragment.this, "DocumentsList"));
-        dialogAC.show();
+                true, new CallBack(DocumentsListFragment.this, "DocumentsList"));
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -204,7 +201,6 @@ public class DocumentsListFragment extends BaseFragment{
         } else {
             Toast.makeText(getActivity(), getString(R.string.invalid_credential), Toast.LENGTH_SHORT).show();
         }
-        dialogAC.dismiss();
     }
 
     public void GetAllDocumentsList() {

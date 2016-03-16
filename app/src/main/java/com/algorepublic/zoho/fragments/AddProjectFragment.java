@@ -47,7 +47,6 @@ public class AddProjectFragment extends BaseFragment {
     LinkedList<String> deptList;
     View view;
     boolean isprivate= false;
-    ACProgressFlower dialogAC;
     NiceSpinner owner_list,departments_list;
     RadioGroup radioGroup;
     static AddProjectFragment fragment;
@@ -96,8 +95,7 @@ public class AddProjectFragment extends BaseFragment {
                 get(owner_list.getSelectedIndex()).ID
                 ,ProjectsFragment.allDeptList.get(
                 departments_list.getSelectedIndex()).getDeptID(),isprivate
-                ,false,new CallBack(AddProjectFragment.this,"CreateProject"));
-        dialogAC.show();
+                ,true,new CallBack(AddProjectFragment.this,"CreateProject"));
     }
 
     public void CreateProject(Object caller, Object model){
@@ -108,7 +106,6 @@ public class AddProjectFragment extends BaseFragment {
         }else {
             Snackbar.make(getView() , getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
         }
-        dialogAC.dismiss();
     }
 
     @Override
@@ -149,7 +146,6 @@ public class AddProjectFragment extends BaseFragment {
         departments_list.attachDataSource(deptList);
         service.getTaskAssignee(Integer.parseInt(baseClass.getSelectedProject()), false,
                 new CallBack(AddProjectFragment.this, "GetAllUsers"));
-        dialogAC.show();
         return view;
     }
     public void GetAllUsers(Object caller, Object model) {
@@ -164,7 +160,6 @@ public class AddProjectFragment extends BaseFragment {
         }else{
             Toast.makeText(getActivity(), getString(R.string.response_error), Toast.LENGTH_SHORT).show();
         }
-        dialogAC.dismiss();
     }
     Comparator<String> ByAlphabet = new Comparator<String>() {
         @Override

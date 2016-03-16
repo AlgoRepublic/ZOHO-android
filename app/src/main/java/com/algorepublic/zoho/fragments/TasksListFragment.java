@@ -49,7 +49,6 @@ public class TasksListFragment extends BaseFragment {
     StickyListHeadersAdapter adapterTasksList;
     AQuery aq;View view;
     RadioGroup radioGroup;
-    public static ACProgressFlower dialogAC;
     public static ArrayList<TaskListName> taskListName = new ArrayList<>();
     public static ArrayList<TasksList> allTaskList = new ArrayList<>();
     public static ArrayList<TasksList> generalList = new ArrayList<>();
@@ -117,7 +116,6 @@ public class TasksListFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_taskslist, container, false);
-        dialogAC = InitializeDialog(getActivity());
         setHasOptionsMenu(true);
         radioGroup = (RadioGroup) view.findViewById(R.id.radioGroup);
         searchView = (SearchView) view.findViewById(R.id.searchView);
@@ -128,14 +126,13 @@ public class TasksListFragment extends BaseFragment {
         applyLightBackground(aq.id(R.id.layout_bottom).getView(), baseClass);
         taskListService = new TaskListService(getActivity());
         if(baseClass.getSelectedProject().equalsIgnoreCase("0")) {
-            taskListService.getTasksListByOwner(baseClass.getUserId(), false,
+            taskListService.getTasksListByOwner(baseClass.getUserId(), true,
                     new CallBack(TasksListFragment.this, "OwnerTasksList"));
         }else{
-            taskListService.getTasksListByProject(baseClass.getSelectedProject(), false,
+            taskListService.getTasksListByProject(baseClass.getSelectedProject(), true,
                     new CallBack(TasksListFragment.this, "OwnerTasksList"));
         }
         aq.id(R.id.all).checked(true);
-        dialogAC.show();
         aq.id(R.id.add_task).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -287,7 +284,6 @@ public class TasksListFragment extends BaseFragment {
         {
             Toast.makeText(getActivity(), getString(R.string.invalid_credential), Toast.LENGTH_SHORT).show();
         }
-        dialogAC.dismiss();
     }
     public void GetGeneralList(){
         generalList.clear();

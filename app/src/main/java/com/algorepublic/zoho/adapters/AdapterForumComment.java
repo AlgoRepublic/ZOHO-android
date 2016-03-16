@@ -83,9 +83,8 @@ public class AdapterForumComment extends BaseAdapter {
             public void onClick(View v) {
                 ForumsDetailFragment.ClickedPosition = position;
                 service.deleteForumComment(ForumsDetailFragment
-                        .arrayList.get(position).getCommentID(),false,
+                        .arrayList.get(position).getCommentID(),true,
                         new CallBack(AdapterForumComment.this,"DeleteComment"));
-                ForumsDetailFragment.dialogAC.show();
             }
         });
 
@@ -100,7 +99,6 @@ public class AdapterForumComment extends BaseAdapter {
             Snackbar.make(((AppCompatActivity)ctx).findViewById(android.R.id.content),
                     ctx.getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
         }
-        ForumsDetailFragment.dialogAC.dismiss();
     }
 
 }

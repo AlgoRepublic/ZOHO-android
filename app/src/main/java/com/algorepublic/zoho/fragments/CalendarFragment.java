@@ -38,7 +38,6 @@ public class CalendarFragment extends BaseFragment implements CalendarPickerCont
     AQuery aq;
     AgendaCalendarView calendarView;
     BaseClass baseClass;
-    ACProgressFlower dialogAC;
     public CalendarFragment() {
         // Required empty public constructor
     }
@@ -70,9 +69,6 @@ public class CalendarFragment extends BaseFragment implements CalendarPickerCont
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment_forums
         View view  = inflater.inflate(R.layout.fragment_calendar, container, false);
-        dialogAC = InitializeDialog(getActivity());
-//        MainActivity.toolbar = (Toolbar) view.findViewById(R.id.toolbar);
-//        setToolbar();
         aq = new AQuery(getActivity(), view);
         setHasOptionsMenu(true);
         getToolbar().setTitle(getString(R.string.calendar));
@@ -97,9 +93,8 @@ public class CalendarFragment extends BaseFragment implements CalendarPickerCont
 //        initCalendarView();
         if(TasksListByOwnerModel.getInstance().responseObject.isEmpty()){
             TaskListService service = new TaskListService(getActivity());
-            service.getTasksListByOwner(baseClass.getUserId(),false,
+            service.getTasksListByOwner(baseClass.getUserId(),true,
                     new CallBack(CalendarFragment.this, "TasksList"));
-            dialogAC.show();
         }else{
             initCalendarView();
         }
@@ -127,7 +122,6 @@ public class CalendarFragment extends BaseFragment implements CalendarPickerCont
     public void TasksList(Object caller, Object model) {
         TasksListByOwnerModel.getInstance().setList((TasksListByOwnerModel) model);
         initCalendarView();
-        dialogAC.dismiss();
     }
 
     private void initCalendarView(){

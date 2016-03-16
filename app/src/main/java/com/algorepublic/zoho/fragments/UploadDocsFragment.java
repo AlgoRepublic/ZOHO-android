@@ -182,9 +182,8 @@ public class UploadDocsFragment extends BaseFragment implements GoogleApiClient.
             folder_list.setVisibility(View.GONE);
         }else {
             folder_list.setVisibility(View.VISIBLE);
-            service.getFolderList(baseClass.getSelectedProject(), false,
+            service.getFolderList(baseClass.getSelectedProject(), true,
                     new CallBack(UploadDocsFragment.this, "FolderList"));
-            dialogAC.show();
         }
         mCredential = GoogleAccountCredential.usingOAuth2(
                 getActivity().getApplicationContext(), Arrays.asList(SCOPES))
@@ -261,7 +260,6 @@ public class UploadDocsFragment extends BaseFragment implements GoogleApiClient.
         } else {
             Toast.makeText(getActivity(), getString(R.string.response_error), Toast.LENGTH_SHORT).show();
         }
-        dialogAC.dismiss();
     }
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {

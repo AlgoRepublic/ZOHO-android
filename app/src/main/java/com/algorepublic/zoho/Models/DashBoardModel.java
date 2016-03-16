@@ -38,25 +38,23 @@ public class DashBoardModel {
 
     public class ResponseObject {
 
-        @SerializedName("Tasks")
-        public ArrayList<Tasks> tasks = new ArrayList<>();
+        @SerializedName("TotlTasksNo")
+        public Integer totalTasksNo;
 
-        @SerializedName("TaskLists")
-        public ArrayList<TaskLists> tasksList =new ArrayList<>();
+        @SerializedName("CompletedTasksNo")
+        public Integer completedTasksNo;
 
-        @SerializedName("Milestones")
-        public ArrayList<Milestones> milestones = new ArrayList<>();
+        @SerializedName("TotalMilestonesNo")
+        public Integer totalMilestonesNo;
+
+        @SerializedName("CompletedMilestonesNo")
+        public Integer completedMilestonesNo;
+
+        @SerializedName("TotalTaskList")
+        public Integer totalTaskList;
+
+        @SerializedName("CompletedTaskList")
+        public Integer completedTaskList;
     }
 
-    public class Tasks {
-       public int Position;
-    }
-
-    public class TaskLists {
-
-    }
-
-    public class Milestones {
-
-    }
 }

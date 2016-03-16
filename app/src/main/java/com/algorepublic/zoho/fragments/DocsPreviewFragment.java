@@ -48,7 +48,6 @@ public class DocsPreviewFragment extends BaseFragment {
     ForumService forumService;
     static DocumentsList docObject;
     BaseClass baseClass;
-    public static ACProgressFlower dialogAC;
     public static Button btSend;
     public static EditText comment_user;
     public static boolean flag= false;
@@ -77,7 +76,6 @@ public class DocsPreviewFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_documens_preview, container, false);
-        dialogAC = InitializeDialog(getActivity());
         listView = (ListView) view.findViewById(R.id.listView_comments);
         btSend = (Button) view.findViewById(R.id.send);
         comment_user = (EditText) view.findViewById(R.id.comment_user);
@@ -112,12 +110,11 @@ public class DocsPreviewFragment extends BaseFragment {
                     if (flag == true) {
                         forumService.updateforumComments(DocsPreviewFragment
                                 .arrayList.get(ClickedPosition).getCommentID(), DocsPreviewFragment
-                                .comment_user.getText().toString(), false, new
+                                .comment_user.getText().toString(), true, new
                                 CallBack(DocsPreviewFragment.this, "UpdateComment"));
                     }else{
                         PerformAction();
                     }
-                    dialogAC.show();
                     return true;
                 }
                 return false;
@@ -129,17 +126,15 @@ public class DocsPreviewFragment extends BaseFragment {
                 if (flag == true) {
                     forumService.updateforumComments(DocsPreviewFragment
                             .arrayList.get(ClickedPosition).getCommentID(), DocsPreviewFragment
-                            .comment_user.getText().toString(), false, new
+                            .comment_user.getText().toString(), true, new
                             CallBack(DocsPreviewFragment.this, "UpdateComment"));
                 } else {
                     PerformAction();
                 }
-                dialogAC.show();
             }
         });
-        service.getDocumentComments(docObject.getID(), false,
+        service.getDocumentComments(docObject.getID(), true,
                 new CallBack(DocsPreviewFragment.this, "AllDocComments"));
-        dialogAC.show();
         return view;
     }
     public void UpdateComment(Object caller, Object model){
@@ -158,7 +153,6 @@ public class DocsPreviewFragment extends BaseFragment {
             Snackbar.make(getView(),
                     getActivity().getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
         }
-        dialogAC.dismiss();
     }
     public void AllDocComments(Object caller, Object model) {
         TaskCommentsModel.getInstance().setList((TaskCommentsModel) model);
@@ -167,7 +161,6 @@ public class DocsPreviewFragment extends BaseFragment {
         } else {
             Toast.makeText(getActivity(), getString(R.string.response_error), Toast.LENGTH_SHORT).show();
         }
-        dialogAC.dismiss();
     }
     public void GetGeneralList() {
         arrayList.clear();
@@ -202,7 +195,6 @@ public class DocsPreviewFragment extends BaseFragment {
         {
             Snackbar.make(getView(), getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
         }
-        dialogAC.dismiss();
     }
     public void PerformAction()
     {

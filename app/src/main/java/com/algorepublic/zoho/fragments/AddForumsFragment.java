@@ -34,7 +34,6 @@ public class AddForumsFragment extends BaseFragment{
     BaseClass baseClass;
     NiceSpinner category_list;
     ForumService service;
-    public static ACProgressFlower dialogAC;
     LinkedList<String> categoryList;
 
     public static AddForumsFragment newInstance() {
@@ -47,7 +46,6 @@ public class AddForumsFragment extends BaseFragment{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view  = inflater.inflate(R.layout.fragment_add_forums, container, false);
-        dialogAC = InitializeDialog(getActivity());
         aq = new AQuery(getActivity(), view);
         aq.id(R.id.lblListHeader).text(getString(R.string.new_forum_post));
         setHasOptionsMenu(true);
@@ -55,9 +53,8 @@ public class AddForumsFragment extends BaseFragment{
         baseClass = ((BaseClass) getActivity().getApplicationContext());
         category_list = (NiceSpinner) view.findViewById(R.id.forum_list);
         service = new ForumService(getActivity());
-        service.getCategoryList(baseClass.getSelectedProject(), false,
+        service.getCategoryList(baseClass.getSelectedProject(), true,
                 new CallBack(AddForumsFragment.this, "GetAllCategory"));
-        dialogAC.show();
         return view;
     }
 
@@ -75,7 +72,6 @@ public class AddForumsFragment extends BaseFragment{
         {
             Snackbar.make(getView(), getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
         }
-        dialogAC.dismiss();
     }
 
     public void CreateForum(){
@@ -95,8 +91,7 @@ public class AddForumsFragment extends BaseFragment{
                     true,
                     true
                     ,categoryID,baseClass.getUserId(),
-                    false, new CallBack(AddForumsFragment.this, "CreateForum"));
-            dialogAC.show();
+                    true, new CallBack(AddForumsFragment.this, "CreateForum"));
         }else{
             Snackbar.make(getView(),getString(R.string.select_project),Snackbar.LENGTH_SHORT).show();
         }
@@ -109,7 +104,6 @@ public class AddForumsFragment extends BaseFragment{
         }else {
             Snackbar.make(getView(), getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
         }
-        dialogAC.dismiss();
     }
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {

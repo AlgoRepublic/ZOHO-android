@@ -87,9 +87,8 @@ public class AdapterStarRatingQuestions extends BaseAdapter {
                         .get(position).getID());
                 service.StarEditComment(StarRatingLevelQuestionsFragment.Questions
                         .get(position).getID(), StarRatingLevelQuestionsFragment.Questions
-                        .get(position).getComment(), false, new
+                        .get(position).getComment(), true, new
                         CallBack(AdapterStarRatingQuestions.this, "UpdateComment"));
-                StarRatingLevelQuestionsFragment.dialogAC.show();
             }
         });
         aq.id(R.id.seekBar).getSeekBar().setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -109,9 +108,8 @@ public class AdapterStarRatingQuestions extends BaseAdapter {
                 ClickedPosition = position;
                 service.StarUpdateProgress(StarRatingLevelQuestionsFragment.Questions
                         .get(position).getID(), StarRatingLevelQuestionsFragment.Questions
-                        .get(position).getProgress(), false, new
+                        .get(position).getProgress(), true, new
                         CallBack(AdapterStarRatingQuestions.this, "UpdateProgress"));
-                StarRatingLevelQuestionsFragment.dialogAC.show();
             }
         });
         return convertView;
@@ -125,7 +123,6 @@ public class AdapterStarRatingQuestions extends BaseAdapter {
             Snackbar.make(((AppCompatActivity) mContext).findViewById(android.R.id.content),
                     mContext.getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
         }
-        StarRatingLevelQuestionsFragment.dialogAC.dismiss();
     }
     public void UpdateProgress(Object caller, Object model) {
         GeneralModel.getInstance().setList((GeneralModel) model);
@@ -143,7 +140,6 @@ public class AdapterStarRatingQuestions extends BaseAdapter {
             Snackbar.make(((AppCompatActivity) mContext).findViewById(android.R.id.content),
                     mContext.getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
         }
-        StarRatingLevelQuestionsFragment.dialogAC.dismiss();
     }
     public int GetStarValue(int progress)
     {

@@ -111,13 +111,12 @@ public class EditUserFragment extends BaseFragment implements MultiSelectionSpin
 
         if(baseClass.getSelectedProject().equalsIgnoreCase("0")){
             aq.id(R.id.layout).visibility(View.VISIBLE);
-            service.getAllProjectsByUser_API(baseClass.getUserId(), false,
+            service.getAllProjectsByUser_API(baseClass.getUserId(), true,
                     new CallBack(EditUserFragment.this, "AllProjects"));
         }else {
             aq.id(R.id.layout).visibility(View.GONE);
         }
-        service1.getUserRole(false, new CallBack(EditUserFragment.this, "UserRole"));
-        dialogAC.show();
+        service1.getUserRole(true, new CallBack(EditUserFragment.this, "UserRole"));
         UpdateValues();
         return view;
     }
@@ -128,8 +127,7 @@ public class EditUserFragment extends BaseFragment implements MultiSelectionSpin
         aq.id(R.id.user_email).text(UserListModel.getInstance().responseObject.get(position).email);
         String imagePath =UserListModel
                 .getInstance().responseObject.get(position).profileImagePath;
-        Log.e("Image", Constants.UserImage_URL + UserListModel
-                .getInstance().responseObject.get(position).profileImagePath);
+
         if(imagePath != null) {
             Glide.with(getActivity()).load(Constants.Image_URL + UserListModel.getInstance()
                     .responseObject.get(position).profilePictureID
@@ -237,7 +235,7 @@ public class EditUserFragment extends BaseFragment implements MultiSelectionSpin
                             aq.id(R.id.user_phoneno).getText().toString(),
                             UserRoleModel.getInstance().responseObject.get
                                     (role_list.getSelectedIndex()).ID, selectedIds
-                            , false, new CallBack(EditUserFragment.this, "UpdateUser"));
+                            , true, new CallBack(EditUserFragment.this, "UpdateUser"));
                 }else {
                     service1.updateUserWithProjectSelected(Integer.toString(UserListModel.getInstance().responseObject.get(position).ID),
                             aq.id(R.id.first_name).getText().toString(),
@@ -247,9 +245,8 @@ public class EditUserFragment extends BaseFragment implements MultiSelectionSpin
                             aq.id(R.id.user_phoneno).getText().toString(),
                             UserRoleModel.getInstance().responseObject.get
                                     (role_list.getSelectedIndex()).ID
-                            , false, new CallBack(EditUserFragment.this, "UpdateUser"));
+                            , true, new CallBack(EditUserFragment.this, "UpdateUser"));
                 }
-                dialogAC.show();
         }
         return super.onOptionsItemSelected(item);
     }
@@ -260,7 +257,6 @@ public class EditUserFragment extends BaseFragment implements MultiSelectionSpin
         }else {
             Toast.makeText(getActivity(), getString(R.string.response_error), Toast.LENGTH_SHORT).show();
         }
-        dialogAC.dismiss();
     }
     private void CallForAttachments() {
         String[] menuItems = {getString(R.string.camera),getString(R.string.gallery)

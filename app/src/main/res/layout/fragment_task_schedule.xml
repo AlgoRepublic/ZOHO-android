@@ -2,23 +2,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="10dp"
     tools:context=".FragmentsTasks.TaskScheduleFragment">
 
     <!-- TODO: Update blank fragment_forums layout -->
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:weightSum="2"
-        android:layout_marginTop="40dp"
-        android:orientation="horizontal" >
+        android:layout_marginLeft="7dp"
+        android:layout_marginRight="7dp"
+        android:layout_marginTop="50dp">
         <RelativeLayout
-            android:layout_width="0dp"
+            android:layout_width="110dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_marginRight="20dp"
-            android:layout_gravity="center_vertical"
-            android:id="@+id/btn_end_date"
+            android:layout_alignParentLeft="true"
+            android:id="@+id/btn_start_date"
             android:orientation="horizontal"
             >
 
@@ -36,13 +33,12 @@
             <TextView
                 android:id="@+id/text1"
                 android:layout_toRightOf="@+id/start_date_image"
-                android:layout_width="match_parent"
-                android:layout_weight="1"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/start_date"
                 android:singleLine="true"
                 android:gravity="center_vertical|center_horizontal"
-                android:layout_marginLeft="2dp"
+                android:layout_marginLeft="5dp"
                 android:textColor="@color/colorBaseHeader"
                 android:textSize="15sp"
                 android:typeface="monospace" />
@@ -50,10 +46,11 @@
                 android:id="@+id/start_date"
                 android:layout_marginTop="5dp"
                 android:layout_below="@+id/text1"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:text="@string/start_date"
+                android:layout_alignParentLeft="true"
+                android:layout_alignRight="@+id/text1"
                 android:textSize="12sp"
-              
                 android:gravity="center"
                 android:paddingRight="2dp"
                 android:textColor="@color/colorBaseHeader"
@@ -64,13 +61,10 @@
         </RelativeLayout>
 
         <RelativeLayout
-            android:layout_width="0dp"
+            android:layout_width="110dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_gravity="center_vertical"
-            android:id="@+id/btn_start_date"
-            android:orientation="horizontal"
-            android:layout_marginLeft="20dp"
+            android:layout_alignParentRight="true"
+            android:id="@+id/btn_end_date"
             >
 
             <ImageView
@@ -81,18 +75,17 @@
                 android:background="@mipmap/calendar"
                 android:layout_gravity="center_vertical"
                 android:layout_height="15dp"
-
                 />
             <TextView
                 android:id="@+id/text2"
-                android:layout_toRightOf="@+id/start_date_image"
-                android:layout_width="match_parent"
+                android:layout_alignParentRight="true"
+                android:layout_width="wrap_content"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:text="@string/end_date"
                 android:singleLine="true"
                 android:gravity="center_vertical|center_horizontal"
-                android:layout_marginLeft="2dp"
+                android:layout_marginLeft="5dp"
                 android:textColor="@color/colorBaseHeader"
                 android:textSize="15sp"
                 android:typeface="monospace" />
@@ -100,8 +93,10 @@
                 android:id="@+id/end_date"
                 android:layout_marginTop="5dp"
                 android:layout_below="@+id/text2"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:text="@string/end_date"
+                android:layout_alignLeft="@+id/end_date_image"
+                android:layout_alignParentRight="true"
                 android:textSize="12sp"
                 android:gravity="center"
                 android:paddingRight="2dp"
@@ -112,9 +107,6 @@
 
         </RelativeLayout>
 
-    </LinearLayout>
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"></LinearLayout>
+    </RelativeLayout>
 
 </FrameLayout>

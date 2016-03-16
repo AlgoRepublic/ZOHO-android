@@ -106,12 +106,11 @@ public class AddUserFragment extends BaseFragment implements MultiSelectionSpinn
         if(baseClass.getSelectedProject().equalsIgnoreCase("0")){
             aq.id(R.id.layout).visibility(View.VISIBLE);
             service.getAllProjectsByUser_API(baseClass.getUserId(),
-                    false, new CallBack(AddUserFragment.this, "AllProjects"));
+                    true, new CallBack(AddUserFragment.this, "AllProjects"));
         }else {
             aq.id(R.id.layout).visibility(View.GONE);
         }
-        service1.getUserRole(false,new CallBack(AddUserFragment.this,"UserRole"));
-        dialogAC.show();
+        service1.getUserRole(true,new CallBack(AddUserFragment.this,"UserRole"));
         return view;
     }
 
@@ -149,7 +148,6 @@ public class AddUserFragment extends BaseFragment implements MultiSelectionSpinn
         }else {
             Snackbar.make(getView(), getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
         }
-        dialogAC.dismiss();
     }
     public void UserRole(Object caller, Object model){
         UserRoleModel.getInstance().setList((UserRoleModel) model);
@@ -162,7 +160,6 @@ public class AddUserFragment extends BaseFragment implements MultiSelectionSpinn
         }else {
             Snackbar.make(getView() , getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
         }
-
     }
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {

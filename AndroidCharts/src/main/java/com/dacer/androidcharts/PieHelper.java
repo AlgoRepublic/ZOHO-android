@@ -3,6 +3,8 @@ package com.dacer.androidcharts;
 
 import android.graphics.Color;
 
+import java.text.DecimalFormat;
+
 /**
  * Created by Dacer on 11/14/13.
  */
@@ -90,7 +92,8 @@ public class PieHelper {
 
     String getPercentStr(){
         float percent = sweepDegree / 360 * 100;
-        return String.valueOf((int)percent) + "%";
+        DecimalFormat decimalFormat = new DecimalFormat("#0.00");
+        return String.valueOf(decimalFormat.format(percent)) + "%";
     }
 
     public int getColor(){ return color; }

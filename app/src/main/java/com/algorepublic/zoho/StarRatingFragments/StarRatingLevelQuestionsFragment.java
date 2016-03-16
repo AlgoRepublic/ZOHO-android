@@ -30,7 +30,6 @@ public class StarRatingLevelQuestionsFragment extends BaseFragment {
     AQuery aq;
     public static StarRatingService service;
     public static ListView listView;
-    public static ACProgressFlower dialogAC;
 
     public  static ArrayList<StarRatingQuestion> Questions = new ArrayList<>();
     static int ID;
@@ -52,7 +51,6 @@ public class StarRatingLevelQuestionsFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_star_rating_question, container, false);
-        dialogAC = InitializeDialog(getActivity());
         StarRatingBaseFragment.textView3.setVisibility(View.VISIBLE);
         StarRatingBaseFragment.textView3.setText(GetTitle());
         listView = (ListView) view.findViewById(R.id.questListView);
@@ -60,8 +58,7 @@ public class StarRatingLevelQuestionsFragment extends BaseFragment {
         Questions.clear();
         service = new StarRatingService(getActivity());
         service.getStarRatingQuestion_API(ID, "en-US",
-                false, new CallBack(StarRatingLevelQuestionsFragment.this, "StarRatingQuestion"));
-        dialogAC.show();
+                true, new CallBack(StarRatingLevelQuestionsFragment.this, "StarRatingQuestion"));
         return view;
     }
     public void StarRatingQuestion(Object caller, Object model) {
@@ -74,7 +71,6 @@ public class StarRatingLevelQuestionsFragment extends BaseFragment {
         {
             Snackbar.make(getView(), getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
         }
-        dialogAC.dismiss();
     }
     public void GetListQuestions(){
         for(int loop=0;loop<StarRatingQuestionModel.getInstance().responseData.size();loop++){

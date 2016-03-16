@@ -90,9 +90,8 @@ public class AdapterDocsComments extends BaseAdapter {
             public void onClick(View v) {
                 DocsPreviewFragment.ClickedPosition = position;
                 service.deleteForumComment(DocsPreviewFragment
-                                .arrayList.get(position).getCommentID(), false,
+                                .arrayList.get(position).getCommentID(), true,
                         new CallBack(AdapterDocsComments.this, "DeleteComment"));
-                DocsPreviewFragment.dialogAC.show();
             }
         });
         return convertView;
@@ -106,7 +105,6 @@ public class AdapterDocsComments extends BaseAdapter {
             Snackbar.make(((AppCompatActivity) ctx).findViewById(android.R.id.content),
                     ctx.getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
         }
-        DocsPreviewFragment.dialogAC.dismiss();
     }
     static class ViewHolder {
         TextView taskComment;

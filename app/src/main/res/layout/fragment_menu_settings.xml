@@ -168,5 +168,5 @@
 
         android:textStyle="bold"
         android:textSize="18sp"
-        android:text="@string/delete" />
+        android:text="@string/delete_account" />
 </LinearLayout>

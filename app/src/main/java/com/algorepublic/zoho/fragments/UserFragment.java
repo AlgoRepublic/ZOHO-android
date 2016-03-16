@@ -34,7 +34,6 @@ public class UserFragment extends BaseFragment implements SwipeRefreshLayout.OnR
     public static ArrayList<Integer> assigneeList = new ArrayList<>();
     BaseClass baseClass;
     UserService service;
-    public static ACProgressFlower dialogAC;
 
 
     public UserFragment() {
@@ -52,7 +51,6 @@ public class UserFragment extends BaseFragment implements SwipeRefreshLayout.OnR
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view  = inflater.inflate(R.layout.fragment_user, container, false);
-        dialogAC = InitializeDialog(getActivity());
         baseClass = ((BaseClass) getActivity().getApplicationContext());
         aq = new AQuery(getActivity(), view);
         setHasOptionsMenu(true);
@@ -64,10 +62,9 @@ public class UserFragment extends BaseFragment implements SwipeRefreshLayout.OnR
         if(baseClass.getSelectedProject().equalsIgnoreCase("0")){
             service.getAllUsers(false, new CallBack(UserFragment.this, "UserList"));
         }else {
-            service.getUserListByProject(Integer.parseInt(baseClass.getSelectedProject()), false,
+            service.getUserListByProject(Integer.parseInt(baseClass.getSelectedProject()), true,
                     new CallBack(UserFragment.this, "UserList"));
         }
-        dialogAC.show();
             return view;
     }
     @Override
@@ -85,7 +82,6 @@ public class UserFragment extends BaseFragment implements SwipeRefreshLayout.OnR
         }else {
             Toast.makeText(getActivity(), getString(R.string.response_error), Toast.LENGTH_SHORT).show();
         }
-        dialogAC.dismiss();
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

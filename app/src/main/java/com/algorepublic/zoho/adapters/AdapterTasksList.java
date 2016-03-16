@@ -286,8 +286,7 @@ public class AdapterTasksList extends BaseAdapter implements StickyListHeadersAd
                     public void onBtnClick() {
                         dialog.dismiss();
                         service.deleteTask(tasksList.getTaskID()
-                                , false, new CallBack(AdapterTasksList.this, "DeleteTask"));
-                        TasksListFragment.dialogAC.show();
+                                , true, new CallBack(AdapterTasksList.this, "DeleteTask"));
                     }
                 });
     }
@@ -301,6 +300,5 @@ public class AdapterTasksList extends BaseAdapter implements StickyListHeadersAd
         {
             Snackbar.make(((AppCompatActivity)ctx).findViewById(android.R.id.content), ctx.getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
         }
-        TasksListFragment.dialogAC.dismiss();
     }
 }

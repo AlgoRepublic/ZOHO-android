@@ -16,7 +16,6 @@ import com.algorepublic.zoho.BaseActivity;
 import com.algorepublic.zoho.MainActivity;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.fragments.CalendarFragment;
-import com.algorepublic.zoho.fragments.DashboardFragment;
 import com.algorepublic.zoho.fragments.DepartmentFragment;
 import com.algorepublic.zoho.fragments.DocumentsListFragment;
 import com.algorepublic.zoho.fragments.ForumsFragment;
@@ -41,7 +40,7 @@ public class AdapterMenuItems extends BaseAdapter{
             R.string.documents,
             R.string.users,
             R.string.forums,
-            R.string.start_rating,
+            R.string.star_rating,
             R.string.departments,
     };
     int[] menu_icon_white = {
@@ -110,6 +109,7 @@ public class AdapterMenuItems extends BaseAdapter{
         return convertView;
     }
     public void CallFragment(int position){
+        BaseActivity.drawer.closeDrawer(GravityCompat.START);
         for(int loop = 0;loop < ((AppCompatActivity)ctx).getSupportFragmentManager().getBackStackEntryCount();loop++) {
             ((AppCompatActivity)ctx).getSupportFragmentManager().popBackStack();
         }
@@ -132,7 +132,6 @@ public class AdapterMenuItems extends BaseAdapter{
         }if(position==8){
             callFragmentWithReplace(R.id.container, DepartmentFragment.newInstance(), "DepartmentFragment");
         }
-        BaseActivity.drawer.closeDrawer(GravityCompat.START);
     }
     public void callFragmentWithReplace(int containerId, Fragment fragment, String tag){
 

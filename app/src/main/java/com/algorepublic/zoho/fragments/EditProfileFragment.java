@@ -101,11 +101,10 @@ public class EditProfileFragment extends BaseFragment implements MultiSelectionS
                 CallForAttachments();
             }
         });
-        loginService.GetById(baseClass.getUserId(), false,
+        loginService.GetById(baseClass.getUserId(), true,
                 new CallBack(EditProfileFragment.this, "GetById"));
-        service.getAllProjectsByUser_API(baseClass.getUserId(), false,
+        service.getAllProjectsByUser_API(baseClass.getUserId(), true,
                 new CallBack(EditProfileFragment.this, "AllProjects"));
-        dialogAC.show();
         return view;
     }
     public void GetById(Object caller,Object model) {
@@ -130,7 +129,6 @@ public class EditProfileFragment extends BaseFragment implements MultiSelectionS
         }else {
             Toast.makeText(getActivity(), getString(R.string.response_error), Toast.LENGTH_SHORT).show();
         }
-        dialogAC.dismiss();
     }
     public void UpdateValues(){
         aq.id(R.id.first_name).text(GetUserModel.getInstance().user.firstName);
@@ -180,7 +178,6 @@ public class EditProfileFragment extends BaseFragment implements MultiSelectionS
         }else {
             Snackbar.make(getView(), getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
         }
-        dialogAC.dismiss();
     }
 
     @Override
@@ -216,15 +213,14 @@ public class EditProfileFragment extends BaseFragment implements MultiSelectionS
                         aq.id(R.id.user_email).getText().toString(),
                         aq.id(R.id.user_phoneno).getText().toString(),
                         GetUserModel.getInstance().user.userRole.ID, selectedIds
-                        , false, new CallBack(EditProfileFragment.this, "UpdateUser"));
-                dialogAC.show();
+                        , true, new CallBack(EditProfileFragment.this, "UpdateUser"));
         }
         return super.onOptionsItemSelected(item);
     }
     public void UpdateUser(Object caller, Object model){
         GeneralModel.getInstance().setList((GeneralModel) model);
         if (GeneralModel.getInstance().responseObject ==true) {
-            loginService.GetById(baseClass.getUserId(), false,
+            loginService.GetById(baseClass.getUserId(), true,
                     new CallBack(EditProfileFragment.this, "GetByIdFreshData"));
         }else {
             Toast.makeText(getActivity(), getString(R.string.response_error), Toast.LENGTH_SHORT).show();

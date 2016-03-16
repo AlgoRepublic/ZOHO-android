@@ -48,7 +48,6 @@ public class TaskListBySubTasksFragment extends BaseFragment {
     TaskListService taskListService;
     StickyListHeadersAdapter adapterTasksList;
     AQuery aq;View view;
-    ACProgressFlower dialogAC;
     RadioGroup radioGroup;
     public static ArrayList<TasksList> allTaskList = new ArrayList<>();
     public static ArrayList<TasksList> generalList = new ArrayList<>();
@@ -116,7 +115,6 @@ public class TaskListBySubTasksFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_taskslist, container, false);
-        dialogAC = InitializeDialog(getActivity());
         setHasOptionsMenu(true);
         radioGroup = (RadioGroup) view.findViewById(R.id.radioGroup);
         listView = (StickyListHeadersListView) view.findViewById(R.id.list_taskslist);
@@ -134,9 +132,8 @@ public class TaskListBySubTasksFragment extends BaseFragment {
         });
         baseClass = ((BaseClass) getActivity().getApplicationContext());
         taskListService = new TaskListService(getActivity());
-        taskListService.getTasksListBySubTasks(tasksList.getTaskID(), false,
+        taskListService.getTasksListBySubTasks(tasksList.getTaskID(), true,
                 new CallBack(TaskListBySubTasksFragment.this, "TaskListBySubTasks"));
-        dialogAC.show();
         aq.id(R.id.add_task).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -279,7 +276,6 @@ public class TaskListBySubTasksFragment extends BaseFragment {
         {
             Toast.makeText(getActivity(), getString(R.string.response_error), Toast.LENGTH_SHORT).show();
         }
-        dialogAC.dismiss();
     }
     public void GetGeneralList(){
         generalList.clear();

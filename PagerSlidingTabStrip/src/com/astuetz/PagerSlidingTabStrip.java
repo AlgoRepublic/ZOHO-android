@@ -278,20 +278,20 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 //					if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
 //						tab.setAllCaps(true);
 //					} else {
-//						tab.setText(tab.getText().toString().toUpperCase(locale));
+					tab.setText(tab.getText().toString());
 //					}
 //				}
 //				else
-                if (i == 0)
-                    tab.setText("All");
-                else if (i == 1)
-                    tab.setText("New");
-                else if (i == 2)
-                    tab.setText("Used");
-                else if (i == 3)
-                    tab.setText("Rental");
-                else if (i == 4)
-                    tab.setText("eBook");
+//                if (i == 0)
+//                    tab.setText("All");
+//                else if (i == 1)
+//                    tab.setText("New");
+//                else if (i == 2)
+//                    tab.setText("Used");
+//                else if (i == 3)
+//                    tab.setText("Rental");
+//                else if (i == 4)
+//                    tab.setText("eBook");
             }
         }
 

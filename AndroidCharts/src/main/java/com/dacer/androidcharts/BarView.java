@@ -31,9 +31,9 @@ public class BarView extends View {
     private final int MINI_BAR_WIDTH;
     private final int BAR_SIDE_MARGIN;
     private final int TEXT_TOP_MARGIN;
-    private final int TEXT_COLOR = Color.parseColor("#9B9A9B");
+    private final int TEXT_COLOR = Color.parseColor("#414042");
     private final int BACKGROUND_COLOR = Color.parseColor("#F6F6F6");
-    private final int FOREGROUND_COLOR = Color.parseColor("#FC496D");
+    private final int FOREGROUND_COLOR = Color.parseColor("#39B54B");
 
     private Runnable animator = new Runnable() {
         @Override
@@ -108,16 +108,15 @@ public class BarView extends View {
         setMinimumWidth(2);
         postInvalidate();
     }
-
     /**
      *
      * @param list The ArrayList of Integer with the range of [0-max].
      */
-    public void setDataList(ArrayList<Integer> list, int max){
+    public void setDataList(ArrayList<Float> list, int max){
         targetPercentList = new ArrayList<Float>();
         if(max == 0) max = 1;
 
-        for(Integer integer : list){
+        for(Float integer : list){
             targetPercentList.add(1-(float)integer/(float)max);
         }
 
@@ -159,7 +158,7 @@ public class BarView extends View {
 				rect.set(BAR_SIDE_MARGIN*i+barWidth*(i-1),
                         topMargin+(int)((getHeight()-topMargin-bottomTextHeight-TEXT_TOP_MARGIN)*percentList.get(i-1)),
                         (BAR_SIDE_MARGIN+barWidth)* i,
-                        getHeight()-bottomTextHeight-TEXT_TOP_MARGIN);		
+                        getHeight()-bottomTextHeight-TEXT_TOP_MARGIN);
                 canvas.drawRect(rect,fgPaint);
                 i++;
             }
@@ -167,9 +166,11 @@ public class BarView extends View {
 
         if(bottomTextList != null && !bottomTextList.isEmpty()){
             i = 1;
-            for(String s:bottomTextList){
-                canvas.drawText(s,BAR_SIDE_MARGIN*i+barWidth*(i-1)+barWidth/2,
-                        getHeight()-bottomTextDescent,textPaint);
+            for(int loop=0;loop<bottomTextList.size();loop++){
+                canvas.drawText(bottomTextList.get(loop), BAR_SIDE_MARGIN * i + barWidth * (i - 1) + barWidth / 2,
+                        getHeight()-bottomTextDescent, textPaint);
+                canvas.drawText(bottomTextList.get(++loop), BAR_SIDE_MARGIN * i + barWidth * (i - 1) + barWidth / 2,
+                        getHeight() / 2, textPaint);
                 i++;
             }
         }

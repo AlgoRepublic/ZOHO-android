@@ -2,6 +2,7 @@ package com.algorepublic.zoho.fragments;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -21,6 +22,7 @@ import com.dacer.androidcharts.LineView;
 import com.dacer.androidcharts.PieHelper;
 import com.dacer.androidcharts.PieView;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import cc.cloudist.acplibrary.ACProgressConstant;
@@ -36,10 +38,6 @@ public class DashboardFragment extends BaseFragment {
     BaseClass baseClass;
     PieView pieGraph;
     BarView barGraph;
-    int allTasksCount;
-    ACProgressFlower dialogAC;
-    ArrayList<Integer> tasksOpen = new ArrayList<>();
-    ArrayList<Integer> tasksCloased= new ArrayList<>();
     public static DashboardFragment newInstance() {
         DashboardFragment fragment = new DashboardFragment();
         return fragment;
@@ -56,7 +54,6 @@ public class DashboardFragment extends BaseFragment {
         // Inflate the layout for this fragment_forums
         View view  = inflater.inflate(R.layout.fragment_dashboard, container, false);
         aq = new AQuery(view);
-        dialogAC = InitializeDialog(getActivity());
         baseClass = ((BaseClass) getActivity().getApplicationContext());
         barGraph = (BarView)view.findViewById(R.id.line_view);
         pieGraph  = (PieView)view.findViewById(R.id.pie_view);
@@ -65,37 +62,31 @@ public class DashboardFragment extends BaseFragment {
             Toast.makeText(getActivity(), "Please Select Project", Toast.LENGTH_SHORT).show();
         }else
         {
-            service.getMileStone(baseClass.getSelectedProject(), false,
+            service.getMileStone(baseClass.getSelectedProject(), true,
                     new CallBack(DashboardFragment.this, "DashBoardList"));
-            dialogAC.show();
         }
         return view;
     }
 
     public void DashBoardList(Object caller, Object model) {
         DashBoardModel.getInstance().setList((DashBoardModel) model);
-        dialogAC.dismiss();
         if (DashBoardModel.getInstance().responseCode == 100) {
             ArrayList<PieHelper> pieHelperArrayList = new ArrayList<PieHelper>();
-
-            allTasksCount =DashBoardModel.getInstance().responseObject.tasks.size();
-            for (int i=0;i< allTasksCount;i++){
-                int progress=DashBoardModel.getInstance().responseObject.tasks.get(i).Position;
-                if (progress==100){
-                    tasksCloased.add(i);
-                }else {
-                    tasksOpen.add(i);
-                }
-            }
-            PieHelper pieHelper = new PieHelper(30,
-                    "Title",R.color.colorBaseWrapperBlue);
-            PieHelper pieHelper1 = new PieHelper(70,
-                    "Title1",R.color.theme_accent);
+            DashBoardModel.ResponseObject object = DashBoardModel.getInstance().responseObject;
+            float closed = (Float.parseFloat(""+object.completedTasksNo)/
+                    Float.parseFloat(""+object.totalTasksNo))*100;
+            float opened = ((Float.parseFloat(""+object.totalTasksNo) - Float.parseFloat(""+object.completedTasksNo))
+                    /Float.parseFloat(""+object.totalTasksNo))*100;
+            PieHelper pieHelper = new PieHelper(closed,
+                    "Closed Tasks",R.color.low_priority);
+            PieHelper pieHelper1 = new PieHelper(opened,
+                    "Opened Tasks",R.color.high_priority);
             pieHelperArrayList.add(pieHelper);
             pieHelperArrayList.add(pieHelper1);
 
             pieGraph.selectedPie(PieView.NO_SELECTED_INDEX);
             pieGraph.showPercentLabel(true);
+            //pieGraph.setTextSize(12);
             pieGraph.setDate(pieHelperArrayList);
             randomSet();
 
@@ -110,18 +101,29 @@ public class DashboardFragment extends BaseFragment {
         super.onCreateOptionsMenu(menu, inflater);
     }
     private void randomSet(){
-            int random = (int)(Math.random()*20)+6;
-        ArrayList<String> titles = new ArrayList<String>();
-        titles.add("Task");
-        titles.add("Tasks List");
-        titles.add("Milestones");
-        barGraph.setBottomTextList(titles);
 
-        ArrayList<Integer> barDataList = new ArrayList<Integer>();
-        for(int i=0; i<3; i++){
-            barDataList.add((int)(Math.random() * 100));
-        }
+        ArrayList<Float> barDataList = new ArrayList<Float>();
+        ArrayList<String> barDataList1 = new ArrayList<String>();
 
-        barGraph.setDataList(barDataList,100);
+        DecimalFormat decimalFormat = new DecimalFormat("#0.00");
+        DashBoardModel.ResponseObject object = DashBoardModel.getInstance().responseObject;
+        float taskClosed = (Float.parseFloat(""+object.completedTasksNo)/
+                Float.parseFloat(""+object.totalTasksNo))*100;
+        float taskListClosed = (Float.parseFloat(""+object.completedTaskList))
+                /Float.parseFloat(""+object.totalTasksNo)*100;
+        float milestoneClosed = (Float.parseFloat(""+object.completedTaskList))
+                /Float.parseFloat(""+object.totalTasksNo)*100;
+
+        barDataList.add(taskClosed);
+        barDataList.add(taskListClosed);
+        barDataList.add(milestoneClosed);
+        barDataList1.add("Task");
+        barDataList1.add(decimalFormat.format(taskClosed)+"%");
+        barDataList1.add("Tasks List");
+        barDataList1.add(decimalFormat.format(taskListClosed)+"%");
+        barDataList1.add("Milestones");
+        barDataList1.add(decimalFormat.format(milestoneClosed)+"%");
+        barGraph.setBottomTextList(barDataList1);
+        barGraph.setDataList(barDataList, 100);
     }
 }

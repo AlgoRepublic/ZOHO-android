@@ -43,6 +43,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
                 class="com.dacer.androidcharts.PieView"
+                android:textSize="14sp"
                 android:id="@+id/pie_view" />
             </RelativeLayout>
         </LinearLayout>

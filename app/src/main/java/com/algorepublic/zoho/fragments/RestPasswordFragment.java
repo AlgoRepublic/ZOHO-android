@@ -30,7 +30,6 @@ public class RestPasswordFragment extends BaseFragment {
     AQuery aq;
     BaseClass baseClass;
     UserService service;
-    ACProgressFlower dialogAC;
     View view;
     static RestPasswordFragment fragment;
 
@@ -81,8 +80,7 @@ public class RestPasswordFragment extends BaseFragment {
     public void RestPasswod(){
         service.restSetPassword(baseClass.getUserId(),
                 aq.id(R.id.confirm_password).getText().toString()
-                , false, new CallBack(RestPasswordFragment.this, "UpdatePassword"));
-        dialogAC.show();
+                , true, new CallBack(RestPasswordFragment.this, "UpdatePassword"));
     }
 
     public void UpdatePassword(Object caller, Object model){
@@ -92,7 +90,6 @@ public class RestPasswordFragment extends BaseFragment {
         }else {
             Snackbar.make(getView(), getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
         }
-        dialogAC.dismiss();
     }
 
     @Override
@@ -103,11 +100,11 @@ public class RestPasswordFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        view  = inflater.inflate(R.layout.fragment_add_department, container, false);
-        dialogAC = InitializeDialog(getActivity());
+        view  = inflater.inflate(R.layout.fragment_rest_password, container, false);
         aq = new AQuery(view);
         setHasOptionsMenu(true);
         baseClass = ((BaseClass) getActivity().getApplicationContext());
+        service =  new UserService(getActivity());
         return view;
     }
 

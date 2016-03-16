@@ -12,6 +12,8 @@
         <item name="android:colorForeground">@color/colorBaseHeader</item>
         <item name="colorAccent">@color/colorBaseHeader</item>
         <item name="checkboxStyle">@style/blackCheckBoxStyle</item>
+        <item name="android:listViewStyle">@style/blackListViewStyle</item>
+        <item name="android:tabWidgetStyle">@style/blackPagerTitleStrip</item>
     </style>
     <style name="myRecyclerViewStyle">
         <!-- NOTE: clipChildren should be true on API level 10 -->
@@ -62,6 +64,8 @@
         <item name="android:colorForeground">@color/colorPrimaryBlue</item>
         <item name="colorAccent">@color/colorPrimaryBlue</item>
         <item name="checkboxStyle">@style/blueCheckBoxStyle</item>
+        <item name="android:listViewStyle">@style/blueListViewStyle</item>
+        <item name="android:tabWidgetStyle">@style/bluePagerTitleStrip</item>
     </style>
 
     <style name="blueCheckBoxStyle" parent="@android:style/Widget.CompoundButton.CheckBox">
@@ -76,4 +80,19 @@
     </style>
     <style name="commonListItemStyle">
     </style>
+
+    <style name="blackPagerTitleStrip" parent="AppTheme">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="pstsIndicatorColor">@color/colorBaseMenu</item>
+        <item name="pstsDividerColor">@color/white</item>
+        <item name="pstsUnderlineColor">@color/white</item>
+        <item name="pstsTabBackground">@color/colorBaseHeader</item>
+        <item name="android:background">@color/colorPrimaryBlue</item>
+    </style>
+
+    <style name="bluePagerTitleStrip" parent="AppTheme">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:background">@color/colorPrimaryBlue</item>
+    </style>
+
 </resources>

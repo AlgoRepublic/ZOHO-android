@@ -49,7 +49,7 @@ public class LoginLoadingFragment extends BaseFragment {
         baseClass = ((BaseClass) getActivity().getApplicationContext());
         loginService = new LoginService(getActivity());
         loginService.login(aq.id(R.id.email).getText().toString(), aq.id(R.id.password).getText().toString()
-                , true, new CallBack(LoginLoadingFragment.this, "LoginCall"));
+                , false, new CallBack(LoginLoadingFragment.this, "LoginCall"));
         return view;
     }
     public void LoginCall(Object caller, Object model) {

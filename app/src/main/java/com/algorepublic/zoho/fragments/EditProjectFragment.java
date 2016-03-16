@@ -45,7 +45,6 @@ public class EditProjectFragment extends BaseFragment {
     TaskListService service;
     RadioGroup radioGroup1,radioGroup2;
     LinkedList<String> userList;
-    ACProgressFlower dialogAC;
     LinkedList<String> deptList;
     boolean isprivate= false;
     boolean isactive = false;
@@ -105,8 +104,7 @@ public class EditProjectFragment extends BaseFragment {
                         get(owner_list.getSelectedIndex()).ID, isactive
                 , projectsLists.get(
                         departments_list.getSelectedIndex()).getCompOrDeptID(), isprivate
-                , false, new CallBack(EditProjectFragment.this, "UpdateProject"));
-        dialogAC.show();
+                , true, new CallBack(EditProjectFragment.this, "UpdateProject"));
     }
     public void UpdateProject(Object caller, Object model){
         CreateProjectModel.getInstance().setList((CreateProjectModel) model);
@@ -116,7 +114,6 @@ public class EditProjectFragment extends BaseFragment {
         }else {
             Snackbar.make(getView(), getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
         }
-        dialogAC.dismiss();
     }
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -127,7 +124,6 @@ public class EditProjectFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view  = inflater.inflate(R.layout.fragment_add_project, container, false);
-        dialogAC = InitializeDialog(getActivity());
         getToolbar().setTitle(getString(R.string.edit_project));
         radioGroup1 = (RadioGroup) view.findViewById(R.id.private_public_group);
         radioGroup2 = (RadioGroup) view.findViewById(R.id.active_archive_status);
@@ -170,9 +166,8 @@ public class EditProjectFragment extends BaseFragment {
             deptList.add(ProjectsFragment.allDeptList.get(loop).getDeptName());
         }
         departments_list.attachDataSource(deptList);
-        service.getTaskAssignee(Integer.parseInt(baseClass.getSelectedProject()), false,
+        service.getTaskAssignee(Integer.parseInt(baseClass.getSelectedProject()), true,
                 new CallBack(EditProjectFragment.this, "GetAllUsers"));
-        dialogAC.show();
         return view;
     }
     public void UpdateValues() {
@@ -220,7 +215,6 @@ public class EditProjectFragment extends BaseFragment {
         else {
             Toast.makeText(getActivity(), getString(R.string.response_error), Toast.LENGTH_SHORT).show();
         }
-        dialogAC.dismiss();
     }
     Comparator<String>  ByAlphabet = new Comparator<String>() {
         @Override

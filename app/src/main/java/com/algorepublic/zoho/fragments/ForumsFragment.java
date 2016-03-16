@@ -30,7 +30,6 @@ public class ForumsFragment extends BaseFragment{
 
     private AQuery aq;
     private BaseClass baseClass;
-    public static ACProgressFlower dialogAC;
 
 
     public static ForumsFragment newInstance() {
@@ -65,14 +64,12 @@ public class ForumsFragment extends BaseFragment{
         setHasOptionsMenu(true);
         aq = new AQuery(getActivity(), view);
         baseClass = ((BaseClass) getActivity().getApplicationContext());
-        dialogAC = InitializeDialog(getActivity());
         ForumService service = new ForumService(getActivity());
         if (baseClass.getSelectedProject().equalsIgnoreCase("0")) {
             Toast.makeText(getActivity(), "Please Select Project", Toast.LENGTH_SHORT).show();
         }else {
-            service.getForumsList(baseClass.getSelectedProject(), false,
+            service.getForumsList(baseClass.getSelectedProject(), true,
                     new CallBack(ForumsFragment.this, "ForumListCallback"));
-            dialogAC.show();
         }
         setHasOptionsMenu(true);
         getToolbar().setTitle(getString(R.string.forums));
@@ -95,6 +92,5 @@ public class ForumsFragment extends BaseFragment{
         }else {
             Snackbar.make(getView(), getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
         }
-        dialogAC.dismiss();
     }
 }

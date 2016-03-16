@@ -28,7 +28,6 @@ public class AddDepartmentFragment extends BaseFragment {
     AQuery aq;
     BaseClass baseClass;
     TaskListService service;
-    public static ACProgressFlower dialogAC;
 
     View view;
     static AddDepartmentFragment fragment;
@@ -68,8 +67,7 @@ public class AddDepartmentFragment extends BaseFragment {
     public void CreateProject(){
         DepartmentService service = new DepartmentService(getActivity());
         service.createDepartment(aq.id(R.id.dept_title).getText().toString(), baseClass.getUserId()
-                , false, new CallBack(AddDepartmentFragment.this, "CreateDept"));
-        dialogAC.show();
+                , true, new CallBack(AddDepartmentFragment.this, "CreateDept"));
     }
 
     public void CreateDept(Object caller, Object model){
@@ -79,7 +77,6 @@ public class AddDepartmentFragment extends BaseFragment {
         }else {
             Snackbar.make(getView(), getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
         }
-        dialogAC.dismiss();
     }
 
     @Override
@@ -91,7 +88,6 @@ public class AddDepartmentFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view  = inflater.inflate(R.layout.fragment_add_department, container, false);
-        dialogAC = InitializeDialog(getActivity());
         aq = new AQuery(view);
         setHasOptionsMenu(true);
         baseClass = ((BaseClass) getActivity().getApplicationContext());

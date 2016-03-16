@@ -86,8 +86,7 @@ public class AdapterForumsList extends BaseAdapter {
             public void onClick(View v) {
                 Clicked = position;
                 service.deleteForum(Integer.toString(ForumsModel.getInstance().responseObject.get(position).ID),
-                        false,new CallBack(AdapterForumsList.this,"DeleteForum"));
-                ForumsFragment.dialogAC.show();
+                        true,new CallBack(AdapterForumsList.this,"DeleteForum"));
             }
         });
         return convertView;
@@ -100,7 +99,6 @@ public class AdapterForumsList extends BaseAdapter {
         }else {
             Snackbar.make(((AppCompatActivity) ctx).findViewById(android.R.id.content), ctx.getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
         }
-        ForumsFragment.dialogAC.dismiss();
     }
     public void UpdatedAfterDelete(int pos){
         ForumsModel.getInstance().responseObject.remove(pos);

@@ -54,7 +54,6 @@ public class TaskAttachmentFragment extends BaseFragment {
     AdapterTaskAttachment adapter;
     public static ParallaxListView listView;
     static TasksList taskObj;
-    ACProgressFlower dialogAC;
     DocumentsService service;
     public TaskAttachmentFragment() {
 
@@ -85,7 +84,6 @@ public class TaskAttachmentFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_task_attachment, container, false);
-        dialogAC = InitializeDialog(getActivity());
         listView = (ParallaxListView) view.findViewById(R.id.images_layout);
         listView.setParallaxView(getActivity().getLayoutInflater().inflate(R.layout.view_header, listView, false));
         aq= new AQuery(view);
@@ -98,9 +96,8 @@ public class TaskAttachmentFragment extends BaseFragment {
         service = new DocumentsService(getActivity());
         if(TaskAddUpdateFragment.filesList.size()==0) {
             if (TaskAddUpdateFragment.callPosition == 2) {
-                service.getDocsBySubTasks(taskObj.getTaskID(), false,
+                service.getDocsBySubTasks(taskObj.getTaskID(), true,
                         new CallBack(TaskAttachmentFragment.this, "DocumentsList"));
-                dialogAC.show();
             }
         }
         adapter = new AdapterTaskAttachment(getActivity());
@@ -114,7 +111,6 @@ public class TaskAttachmentFragment extends BaseFragment {
         } else {
             Toast.makeText(getActivity(), getString(R.string.response_error), Toast.LENGTH_SHORT).show();
         }
-        dialogAC.dismiss();
     }
     public void GetAllDocumentsList() {
         TaskAddUpdateFragment.apiDocsList.clear();

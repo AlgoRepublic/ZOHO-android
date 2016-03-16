@@ -91,8 +91,7 @@ public class AdapterUser extends BaseAdapter {
             @Override
             public void onClick(View v) {
             service.deleteUser(baseClass.getUserId(),baseClass.getSelectedProject()
-            ,false,new CallBack(AdapterUser.this,"DeleteUser"));
-                UserFragment.dialogAC.show();
+            ,true,new CallBack(AdapterUser.this,"DeleteUser"));
             }
         });
         return convertView;
@@ -104,7 +103,6 @@ public class AdapterUser extends BaseAdapter {
         }else {
             Snackbar.make(((AppCompatActivity)ctx).findViewById(android.R.id.content), ctx.getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
         }
-        UserFragment.dialogAC.dismiss();
     }
     static class ViewHolder {
         CircularImageView userImage;
