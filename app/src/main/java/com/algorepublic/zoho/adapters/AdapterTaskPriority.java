@@ -28,10 +28,12 @@ public class AdapterTaskPriority extends BaseAdapter {
     BaseClass baseClass;
     int selectedIndex =-1;
     private LayoutInflater l_Inflater;
+    ListView listView;
     ArrayList<String> arraylist = new ArrayList<String>();
 
-    public AdapterTaskPriority(Context context, ArrayList<String> results) {
+    public AdapterTaskPriority(Context context,ListView listview, ArrayList<String> results) {
         arraylist.addAll(results);
+        listView =  listview;
         l_Inflater = LayoutInflater.from(context);
         this.ctx = context;
         baseClass = ((BaseClass) ctx.getApplicationContext());
@@ -70,11 +72,11 @@ public class AdapterTaskPriority extends BaseAdapter {
             public void onClick(View v) {
                 selectedIndex = position;
                 baseClass.db.putInt("Priority", position);
-                View  view = getViewByPosition(selectedIndex, TaskPriorityFragment.listView);
+                View  view = getViewByPosition(selectedIndex, listView);
                 RadioButton radioButton = (RadioButton) view.findViewById(R.id.priority_checkbox);
                 for(int loop=0;loop<arraylist.size();loop++)
                 {
-                    View  view1 = getViewByPosition(loop, TaskPriorityFragment.listView);
+                    View  view1 = getViewByPosition(loop, listView);
                     RadioButton radioButton1 = (RadioButton) view1.findViewById(R.id.priority_checkbox);
                     radioButton1.setChecked(false);
                 }
@@ -86,11 +88,11 @@ public class AdapterTaskPriority extends BaseAdapter {
             public void onClick(View v) {
                 selectedIndex = position;
                 baseClass.db.putInt("Priority", position);
-                View  view = getViewByPosition(selectedIndex, TaskPriorityFragment.listView);
+                View  view = getViewByPosition(selectedIndex, listView);
                 RadioButton radioButton = (RadioButton) view.findViewById(R.id.priority_checkbox);
                 for(int loop=0;loop<arraylist.size();loop++)
                 {
-                    View  view1 = getViewByPosition(loop, TaskPriorityFragment.listView);
+                    View  view1 = getViewByPosition(loop, listView);
                     RadioButton radioButton1 = (RadioButton) view1.findViewById(R.id.priority_checkbox);
                     radioButton1.setChecked(false);
                 }
@@ -113,5 +115,9 @@ public class AdapterTaskPriority extends BaseAdapter {
     public void setSelectedIndex(int index)
     {
         selectedIndex = index;
+    }
+    public int getSelectedIndex()
+    {
+        return selectedIndex;
     }
 }

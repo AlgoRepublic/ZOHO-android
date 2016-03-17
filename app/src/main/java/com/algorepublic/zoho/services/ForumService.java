@@ -3,14 +3,12 @@ package com.algorepublic.zoho.services;
 import android.app.Activity;
 import android.util.Log;
 
-import com.algorepublic.zoho.Models.AddforumModel;
-import com.algorepublic.zoho.Models.CreateCommentModel;
+import com.algorepublic.zoho.Models.ForumCategoryModel;
 import com.algorepublic.zoho.Models.CreateForumCommentModel;
 import com.algorepublic.zoho.Models.CreateForumModel;
 import com.algorepublic.zoho.Models.ForumsCommentModel;
 import com.algorepublic.zoho.Models.ForumsModel;
 import com.algorepublic.zoho.Models.GeneralModel;
-import com.algorepublic.zoho.Models.UserModel;
 import com.algorepublic.zoho.utils.Constants;
 
 import java.util.HashMap;
@@ -35,8 +33,8 @@ public class ForumService extends BaseService {
     }
 
     public void getCategoryList(String projectID, boolean message, CallBack obj){
-        String url = Constants.GetForumsList_API+"projectID="+projectID;
-        this.get(url, obj, AddforumModel.getInstance(), message);
+        String url = Constants.GetForumCategoryList_API+"projectID="+projectID;
+        this.get(url, obj, ForumCategoryModel.getInstance(), message);
         Log.e("AddforumModel", url);
     }
 

@@ -1,5 +1,7 @@
 package com.github.tibolte.agendacalendarview.models;
 
+import android.util.Log;
+
 import com.github.tibolte.agendacalendarview.weather.models.DataPoint;
 
 import java.util.Calendar;
@@ -29,6 +31,7 @@ public class BaseCalendarEvent implements CalendarEvent {
      * Where the event takes place.
      */
     private String mLocation;
+    private int mUserCount;
     /**
      * Calendar instance helping sorting the events per section in the agenda view.
      */
@@ -59,6 +62,9 @@ public class BaseCalendarEvent implements CalendarEvent {
      * Duration of the event.
      */
     private String mDuration;
+
+    private String mStartDate;
+    private String mEndDate;
     /**
      * References to a DayItem instance for that event, used to link interaction between the
      * calendar view and the agenda view.
@@ -118,10 +124,13 @@ public class BaseCalendarEvent implements CalendarEvent {
      * @param endTime The end time of the event.
      * @param allDay Indicates if the event lasts the whole day.
      */
-    public BaseCalendarEvent(String title, String description, String location, int color, Calendar startTime, Calendar endTime, boolean allDay) {
+    public BaseCalendarEvent(String title, String description, String location,int userCount,String startDate,String endDate, int color, Calendar startTime, Calendar endTime, boolean allDay) {
         this.mTitle = title;
         this.mDescription = description;
         this.mLocation = location;
+        this.mUserCount = userCount;
+        this.mStartDate = startDate;
+        this.mEndDate = endDate;
         this.mColor = color;
         this.mStartTime = startTime;
         this.mEndTime = endTime;
@@ -183,6 +192,14 @@ public class BaseCalendarEvent implements CalendarEvent {
         this.mColor = mColor;
     }
 
+    public int getmUserCount() {
+        return mUserCount;
+    }
+
+    public void setmUserCount(int mColor) {
+        this.mUserCount = mColor;
+    }
+
     public String getDescription() {
         return mDescription;
     }
@@ -220,6 +237,7 @@ public class BaseCalendarEvent implements CalendarEvent {
         this.mEndTime = mEndTime;
     }
 
+
     public long getId() {
         return mId;
     }
@@ -243,6 +261,22 @@ public class BaseCalendarEvent implements CalendarEvent {
     public void setStartTime(Calendar mStartTime) {
         this.mStartTime = mStartTime;
     }
+
+    public void setStartDate(String startDate) {
+        this.mStartDate = startDate;
+    }
+    public String getStartDate() {
+        return mStartDate;
+    }
+
+    public String getEndDate() {
+        return mEndDate;
+    }
+
+    public void setEndDate(String endDate) {
+        this.mEndDate = endDate;
+    }
+
 
     public String getTitle() {
         return mTitle;

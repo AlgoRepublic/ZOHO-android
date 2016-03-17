@@ -52,6 +52,7 @@ public class Constants {
 	public static String DeleteProject_API = BASE_URL+ "/Project/DeleteProject?";
 	// Forum API
 	public static String GetForumsList_API = BASE_URL+ "/Forum/GetListByProjectID?";
+	public static String GetForumCategoryList_API = BASE_URL+ "/ForumCategory/GetListByProjectID?";
 	public static String GetForumDetail_API = BASE_URL+ "/Forum/GetById?";
 	public static String DeleteForum_API = BASE_URL+ "/Forum/Delete?"; //id
 	public static String DeleteForumComment_API = BASE_URL+ "/Comment/RemoveComment?"; //id,ForumId)

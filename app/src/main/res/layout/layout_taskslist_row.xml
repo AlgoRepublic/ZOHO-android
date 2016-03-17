@@ -179,7 +179,7 @@
                                                 android:layout_centerVertical="true"
                                                 android:layout_toLeftOf="@+id/bar"
                                                 android:gravity="left"
-                                                android:text="@string/comment"
+                                                android:text="@string/task_comment"
                                                 android:textSize="12sp" />
 
                                             <View
@@ -197,7 +197,7 @@
                                                 android:layout_alignParentRight="true"
                                                 android:layout_centerVertical="true"
                                                 android:gravity="left"
-                                                android:text="@string/user"
+                                                android:text="@string/task_user"
                                                 android:textSize="12sp" />
                                         </RelativeLayout>
                                     </LinearLayout>

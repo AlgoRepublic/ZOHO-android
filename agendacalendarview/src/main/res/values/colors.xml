@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Colors for Calendar view -->
+    <color name="red">#FFFF0000</color>
+
     <color name="calendar_future_days_bg">#FFFFFF</color>
     <color name="calendar_past_days_bg">#F5F5F5</color>
     <color name="calendar_text_current_day">#000000</color>

@@ -161,6 +161,10 @@
     <string name="reopen_task">Reopen Task</string>
     <string name="mark_as_done">Mark as done?</string>
     <string name="task_as_done">Mark as done</string>
+    <string name="closed_tasks">Closed Tasks</string>
+    <string name="opened_tasks">Opened Tasks</string>
+    <string name="tasks_list">Tasks List</string>
+    <string name="milestones">MileStones</string>
     <string name="task_done">Task done</string>
     <string name="task_created">Task Created/Updated Successfully</string>
     <string name="delete_task">Delete Task?</string>
@@ -198,6 +202,7 @@
     <string name="email">Email</string>
     <string name="phone_number">Phone Number</string>
     <string name="user_role">User Role</string>
+    <string name="user_roles">User Roles</string>
     <string name="select_folder">Select Folder</string>
     <string name="logout">Logout</string>
     <string name="change_theme">Change Theme</string>

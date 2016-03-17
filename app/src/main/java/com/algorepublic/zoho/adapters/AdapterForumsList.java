@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +22,10 @@ import com.algorepublic.zoho.services.CallBack;
 import com.algorepublic.zoho.services.ForumService;
 import com.algorepublic.zoho.utils.BaseClass;
 import com.androidquery.AQuery;
+import com.flyco.animation.BounceEnter.BounceLeftEnter;
+import com.flyco.animation.SlideExit.SlideRightExit;
+import com.flyco.dialog.listener.OnBtnClickL;
+import com.flyco.dialog.widget.NormalDialog;
 
 /**
  * Created by waqas on 2/2/16.
@@ -85,8 +90,7 @@ public class AdapterForumsList extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 Clicked = position;
-                service.deleteForum(Integer.toString(ForumsModel.getInstance().responseObject.get(position).ID),
-                        true,new CallBack(AdapterForumsList.this,"DeleteForum"));
+               NormalDialogCustomAttr(ctx.getString(R.string.deleted_forum),Clicked);
             }
         });
         return convertView;
@@ -110,5 +114,39 @@ public class AdapterForumsList extends BaseAdapter {
                 .replace(containerId, fragment, tag)
                 .addToBackStack(null)
                 .commit();
+    }
+    private void NormalDialogCustomAttr(String content,final int position) {
+        final NormalDialog dialog = new NormalDialog(ctx);
+        dialog.isTitleShow(false)//
+                .bgColor(ctx.getResources().getColor(R.color.colorBaseWrapper))//
+                .cornerRadius(5)//
+                .content(content)//
+                .contentGravity(Gravity.CENTER)//
+                .contentTextColor(ctx.getResources().getColor(R.color.colorBaseHeader))//
+                .dividerColor(ctx.getResources().getColor(R.color.colorContentWrapper))//
+                .btnTextSize(15.5f, 15.5f)//
+                .btnTextColor(ctx.getResources().getColor(R.color.colorBaseHeader)
+                        , ctx.getResources().getColor(R.color.colorBaseHeader))//
+                .btnPressColor(ctx.getResources().getColor(R.color.colorBaseMenu))//
+                .widthScale(0.85f)//
+                .showAnim(new BounceLeftEnter())//
+                .dismissAnim(new SlideRightExit())//
+                .show();
+
+        dialog.setOnBtnClickL(
+                new OnBtnClickL() {
+                    @Override
+                    public void onBtnClick() {
+                        dialog.dismiss();
+                    }
+                },
+                new OnBtnClickL() {
+                    @Override
+                    public void onBtnClick() {
+                        dialog.dismiss();
+                        service.deleteForum(Integer.toString(ForumsModel.getInstance().responseObject.get(position).ID),
+                                true, new CallBack(AdapterForumsList.this, "DeleteForum"));
+                    }
+                });
     }
 }

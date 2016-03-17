@@ -108,12 +108,14 @@ public class CalendarFragment extends BaseFragment implements CalendarPickerCont
                 Calendar startTime = Calendar.getInstance();
                 long startInMillis = Long.parseLong(DateMilli(task.startDate));
                 startTime.setTimeInMillis(startInMillis);
-
+                String startDate = DateFormatter(task.startDate);
                 Calendar endTime = Calendar.getInstance();
                 long endInMillis = Long.parseLong(DateMilli(task.endDate));
                 endTime.setTimeInMillis(endInMillis);
+                String endDate = DateFormatter(task.endDate);
 
-                eventList.add(new BaseCalendarEvent(task.title, task.projectName, "", getPriorityWiseColor(task.priority), startTime, endTime, true));
+                eventList.add(new BaseCalendarEvent(task.title, task.projectName, Integer.toString(task.commentsCount),task.userObject.size()
+                       ,startDate,endDate , getPriorityWiseColor(task.priority), startTime, endTime, true));
             }
         }
         return eventList;

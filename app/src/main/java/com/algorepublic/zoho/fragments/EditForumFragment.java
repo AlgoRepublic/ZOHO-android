@@ -11,8 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.algorepublic.zoho.BaseActivity;
-import com.algorepublic.zoho.Models.AddforumModel;
+import com.algorepublic.zoho.Models.ForumCategoryModel;
 import com.algorepublic.zoho.Models.CreateForumModel;
 import com.algorepublic.zoho.Models.ForumsModel;
 import com.algorepublic.zoho.R;
@@ -24,8 +23,6 @@ import com.androidquery.AQuery;
 import org.angmarch.views.NiceSpinner;
 
 import java.util.LinkedList;
-
-import cc.cloudist.acplibrary.ACProgressFlower;
 
 /**
  * Created by waqas on 2/25/16.
@@ -77,7 +74,7 @@ public class EditForumFragment extends BaseFragment  {
             categoryID = 0;
         }else
         {
-            categoryID = AddforumModel.getInstance().responseObject.
+            categoryID = ForumCategoryModel.getInstance().responseObject.
                     get(category_list.getSelectedIndex()).ID;
         }
         if (!baseClass.getSelectedProject().equalsIgnoreCase("0")) {
@@ -117,12 +114,12 @@ public class EditForumFragment extends BaseFragment  {
         return view;
     }
     public void GetAllCategory(Object caller, Object model) {
-        AddforumModel.getInstance().setList((AddforumModel) model);
-        if (AddforumModel.getInstance().responseCode == 100) {
+        ForumCategoryModel.getInstance().setList((ForumCategoryModel) model);
+        if (ForumCategoryModel.getInstance().responseCode == 100) {
             categoryList= new LinkedList<>();
             categoryList.add("None");
-            for(int loop=0;loop<AddforumModel.getInstance().responseObject.size();loop++) {
-                categoryList.add(AddforumModel.getInstance().responseObject.get(loop).Title);
+            for(int loop=0;loop< ForumCategoryModel.getInstance().responseObject.size();loop++) {
+                categoryList.add(ForumCategoryModel.getInstance().responseObject.get(loop).categoryName);
             }
             category_list.attachDataSource(categoryList);
             UpdateValues();

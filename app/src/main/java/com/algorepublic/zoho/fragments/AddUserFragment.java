@@ -16,12 +16,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ListView;
 
 import com.algorepublic.zoho.BaseActivity;
 import com.algorepublic.zoho.Models.AllProjectsByUserModel;
 import com.algorepublic.zoho.Models.UserListModel;
 import com.algorepublic.zoho.Models.UserRoleModel;
 import com.algorepublic.zoho.R;
+import com.algorepublic.zoho.adapters.AdapterTaskPriority;
 import com.algorepublic.zoho.services.CallBack;
 import com.algorepublic.zoho.services.ProjectsListService;
 import com.algorepublic.zoho.services.UserService;
@@ -61,7 +63,8 @@ public class AddUserFragment extends BaseFragment implements MultiSelectionSpinn
     ArrayList<Integer> selectedIds = new ArrayList<>();
     ArrayList<String> roleList;
     ArrayList<String> projectList;
-    NiceSpinner role_list;
+    ListView role_list;
+    AdapterTaskPriority adapter;
     ProjectsListService service ;
     UserService service1;
     MultiSelectionSpinner projectsList;
@@ -86,7 +89,7 @@ public class AddUserFragment extends BaseFragment implements MultiSelectionSpinn
                              Bundle savedInstanceState) {
         View view  = inflater.inflate(R.layout.fragment_add_user, container, false);
         dialogAC = InitializeDialog(getActivity());
-        role_list = (NiceSpinner) view.findViewById(R.id.role_list);
+        role_list = (ListView) view.findViewById(R.id.role_list);
         projectsList = (MultiSelectionSpinner) view.findViewById(R.id.projects_list);
         projectsList.setListener(this);
         baseClass = ((BaseClass) getActivity().getApplicationContext());
@@ -156,7 +159,9 @@ public class AddUserFragment extends BaseFragment implements MultiSelectionSpinn
             for(int loop=0;loop< UserRoleModel.getInstance().responseObject.size();loop++) {
                 roleList.add(UserRoleModel.getInstance().responseObject.get(loop).role);
             }
-            role_list.attachDataSource(roleList);
+            adapter = new AdapterTaskPriority(getActivity(),role_list, roleList);
+            adapter.setSelectedIndex(0);
+            role_list.setAdapter(adapter);
         }else {
             Snackbar.make(getView() , getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
         }
@@ -295,7 +300,7 @@ public class AddUserFragment extends BaseFragment implements MultiSelectionSpinn
                         aq.id(R.id.user_email).getText().toString(),
                         aq.id(R.id.user_phoneno).getText().toString(),
                         UserRoleModel.getInstance().responseObject.get
-                                (role_list.getSelectedIndex()).ID,selectedIds,newFile);
+                                (adapter.getSelectedIndex()).ID,selectedIds,newFile);
             } catch (IOException e) {
                 e.printStackTrace();
             }

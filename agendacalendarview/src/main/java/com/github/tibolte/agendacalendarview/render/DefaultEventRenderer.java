@@ -5,8 +5,11 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
 import android.support.annotation.NonNull;
+import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.github.tibolte.agendacalendarview.R;
@@ -22,24 +25,18 @@ public class DefaultEventRenderer extends EventRenderer<BaseCalendarEvent> {
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     @Override
     public void render(@NonNull View view, @NonNull BaseCalendarEvent event) {
-        TextView txtTitle = (TextView) view.findViewById(R.id.view_agenda_event_title);
-        TextView txtLocation = (TextView) view.findViewById(R.id.view_agenda_event_location);
-        TextView txtDescription = (TextView) view.findViewById(R.id.view_agenda_event_description);
+        TextView txtTitle = (TextView) view.findViewById(R.id.task_name);
+        TextView txtProject = (TextView) view.findViewById(R.id.project_name);
+        TextView txtComment = (TextView) view.findViewById(R.id.task_comment);
+        TextView txtUser = (TextView) view.findViewById(R.id.task_users);
+        TextView txtDate = (TextView) view.findViewById(R.id.task_date);
+        RelativeLayout parent = (RelativeLayout) view.findViewById(R.id.parent1);
         View priority = view.findViewById(R.id.priority_bar);
-        LinearLayout descriptionContainer = (LinearLayout) view.findViewById(R.id.view_agenda_event_description_container);
-        LinearLayout locationContainer = (LinearLayout) view.findViewById(R.id.view_agenda_event_location_container);
 
-        descriptionContainer.setVisibility(View.VISIBLE);
+
         txtTitle.setTextColor(view.getResources().getColor(android.R.color.black));
 
         txtTitle.setText(event.getTitle());
-        txtLocation.setText(event.getLocation());
-        if (event.getLocation().length() > 0) {
-            locationContainer.setVisibility(View.VISIBLE);
-            txtLocation.setText(event.getLocation());
-        } else {
-            locationContainer.setVisibility(View.GONE);
-        }
 
         Drawable shapeDrawable = priority.getBackground();
         GradientDrawable colorDrawable = (GradientDrawable) shapeDrawable;
@@ -47,8 +44,17 @@ public class DefaultEventRenderer extends EventRenderer<BaseCalendarEvent> {
         priority.setBackground(shapeDrawable);
 
         txtTitle.setTextColor(view.getResources().getColor(android.R.color.black));
-        txtDescription.setText(event.getDescription());
-        txtLocation.setTextColor(view.getResources().getColor(R.color.theme_text_icons));
+        txtProject.setText(event.getDescription());
+        txtComment.setText(event.getLocation()+ " " + view.getResources().getString(R.string.task_comment));
+        txtUser.setText(Integer.toString(event.getmUserCount())+ " " + view.getResources().getString(R.string.task_user));
+        txtDate.setText(event.getEndDate());
+
+        parent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
     }
 
     @Override

@@ -16,6 +16,14 @@ public interface CalendarEvent {
 
     void setEndTime(Calendar mEndTime);
 
+    String getStartDate();
+
+    void setStartDate(String startDate);
+
+    String getEndDate();
+
+    void setEndDate(String endDate);
+
     String getTitle();
 
     void setTitle(String mTitle);
