@@ -42,12 +42,8 @@ public class PieView extends View {
     private boolean showPercentLabel = true;
     public static final int NO_SELECTED_INDEX = -999;
     private final int[] DEFAULT_COLOR_LIST = {
-            Color.parseColor("#39B54B"),
-            Color.parseColor("#ef5350"),
-            Color.parseColor("#39B54B"),
-            Color.parseColor("#ef5350"),
-            Color.parseColor("#39B54B"),
-            Color.parseColor("#ef5350")};
+            Color.parseColor("#DFEFB4"),
+            Color.parseColor("#FDEADD")};
 
 
     private Runnable animator = new Runnable() {
@@ -156,11 +152,11 @@ public class PieView extends View {
         for(PieHelper pieHelper : pieHelperList){
             boolean selected = (selectedIndex == index);
             RectF rect = selected? cirSelectedRect: cirRect;
-            if(pieHelper.isColorSetted()){
-                cirPaint.setColor(pieHelper.getColor());
-            }else {
-                cirPaint.setColor(DEFAULT_COLOR_LIST[index%6]);
-            }
+//            if(pieHelper.isColorSetted()){
+//                cirPaint.setColor(pieHelper.getColor());
+//            }else {
+                cirPaint.setColor(DEFAULT_COLOR_LIST[index]);
+//            }
             canvas.drawArc(rect, pieHelper.getStartDegree(), pieHelper.getSweep(), true, cirPaint);
             drawPercentText(canvas, pieHelper);
             drawText(canvas,pieHelper);

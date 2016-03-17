@@ -60,7 +60,7 @@ public class StarRatingLevelTwoFragment extends BaseFragment {
 
     @Override
     public void onDestroy() {
-        StarRatingBaseFragment.textView1.setText("➪ ");
+        StarRatingBaseFragment.textView1.setText("➪");
         StarRatingBaseFragment.textLevel1="";
         super.onDestroy();
     }

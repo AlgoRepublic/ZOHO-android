@@ -23,6 +23,7 @@ import com.github.tibolte.agendacalendarview.models.DayItem;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Locale;
 
@@ -108,12 +109,14 @@ public class CalendarFragment extends BaseFragment implements CalendarPickerCont
                 Calendar startTime = Calendar.getInstance();
                 long startInMillis = Long.parseLong(DateMilli(task.startDate));
                 startTime.setTimeInMillis(startInMillis);
-
+                String startDate = DateFormatter(task.startDate);
                 Calendar endTime = Calendar.getInstance();
                 long endInMillis = Long.parseLong(DateMilli(task.endDate));
                 endTime.setTimeInMillis(endInMillis);
+                String endDate = DateFormatter(task.endDate);
 
-                eventList.add(new BaseCalendarEvent(task.title, task.projectName, "", getPriorityWiseColor(task.priority), startTime, endTime, true));
+                eventList.add(new BaseCalendarEvent(task.title, task.projectName, Integer.toString(task.commentsCount),task.userObject.size()
+                       ,startDate,endDate , getPriorityWiseColor(task.priority), startTime, endTime, true));
             }
         }
         return eventList;
@@ -125,9 +128,14 @@ public class CalendarFragment extends BaseFragment implements CalendarPickerCont
     }
 
     private void initCalendarView(){
+        Locale locale;
         // Get a reference for the week view in the layout.
         calendarView = (AgendaCalendarView) aq.id(R.id.agenda_calendar_view).getView();
-
+       // Calendar minCal = new GregorianCalendar(2016, Calendar.JANUARY, 1);
+        if(true) // update this check as language button goes functional
+         locale = new Locale("ar");
+        else
+            locale = Locale.US;
         Calendar minDate = Calendar.getInstance();
         Calendar maxDate = Calendar.getInstance();
 
@@ -137,7 +145,7 @@ public class CalendarFragment extends BaseFragment implements CalendarPickerCont
         List<CalendarEvent> events = getTasksList();
         if(events.size() != 0 ){
             try {
-                calendarView.init(events, minDate, maxDate, Locale.getDefault(), this);
+                calendarView.init(events, minDate, maxDate, locale, this);
             }catch (Exception e){
                 e.printStackTrace();
             }

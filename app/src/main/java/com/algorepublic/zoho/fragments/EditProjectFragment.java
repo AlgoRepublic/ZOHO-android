@@ -219,7 +219,7 @@ public class EditProjectFragment extends BaseFragment {
     Comparator<String>  ByAlphabet = new Comparator<String>() {
         @Override
         public int compare(String lhs, String rhs) {
-            return (Double.valueOf(rhs).compareTo(Double.valueOf(lhs)));
+            return (rhs.compareTo(lhs));
         }
     };
 }

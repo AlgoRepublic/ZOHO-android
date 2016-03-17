@@ -4,6 +4,9 @@
     <string name="month_name_format">MMMM</string>
     <string name="day_name_format">EEEEE</string>
 
+    <string name="task_user">User(s)</string>
+    <string name="task_comment">Comment(s)</string>
+
     <!-- Agenda -->
     <string name="today">Today</string>
     <string name="tomorrow">Tomorrow</string>

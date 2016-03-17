@@ -44,7 +44,7 @@ public class DashboardFragment extends BaseFragment {
     }
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
-        setRetainInstance(true);
+        setHasOptionsMenu(true);
         getToolbar().setTitle(getString(R.string.dashboard));
         super.onViewCreated(view, savedInstanceState);
     }
@@ -59,7 +59,7 @@ public class DashboardFragment extends BaseFragment {
         pieGraph  = (PieView)view.findViewById(R.id.pie_view);
         service = new DashBoardService(getActivity());
         if(baseClass.getSelectedProject().equalsIgnoreCase("0")) {
-            Toast.makeText(getActivity(), "Please Select Project", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), getString(R.string.select_project), Toast.LENGTH_SHORT).show();
         }else
         {
             service.getMileStone(baseClass.getSelectedProject(), true,
@@ -75,14 +75,15 @@ public class DashboardFragment extends BaseFragment {
             DashBoardModel.ResponseObject object = DashBoardModel.getInstance().responseObject;
             float closed = (Float.parseFloat(""+object.completedTasksNo)/
                     Float.parseFloat(""+object.totalTasksNo))*100;
-            float opened = ((Float.parseFloat(""+object.totalTasksNo) - Float.parseFloat(""+object.completedTasksNo))
+            int opentask = object.totalTasksNo -  object.completedTasksNo;
+            float opened = ((Float.parseFloat(""+opentask))
                     /Float.parseFloat(""+object.totalTasksNo))*100;
             PieHelper pieHelper = new PieHelper(closed,
-                    "Closed Tasks",R.color.low_priority);
+                    getString(R.string.closed_tasks),0);
             PieHelper pieHelper1 = new PieHelper(opened,
-                    "Opened Tasks",R.color.high_priority);
-            pieHelperArrayList.add(pieHelper);
+                    getString(R.string.opened_tasks),0);
             pieHelperArrayList.add(pieHelper1);
+            pieHelperArrayList.add(pieHelper);
 
             pieGraph.selectedPie(PieView.NO_SELECTED_INDEX);
             pieGraph.showPercentLabel(true);
@@ -95,11 +96,7 @@ public class DashboardFragment extends BaseFragment {
             Toast.makeText(getActivity(), getString(R.string.invalid_credential), Toast.LENGTH_SHORT).show();
         }
     }
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.menu_tasklist, menu);
-        super.onCreateOptionsMenu(menu, inflater);
-    }
+
     private void randomSet(){
 
         ArrayList<Float> barDataList = new ArrayList<Float>();
@@ -123,11 +120,11 @@ public class DashboardFragment extends BaseFragment {
         barDataList.add(taskClosed);
         barDataList.add(taskListClosed);
         barDataList.add(milestoneClosed);
-        barDataList1.add("Task");
+        barDataList1.add(getString(R.string.tasks));
         barDataList1.add(decimalFormat.format(taskClosed)+"%");
-        barDataList1.add("Tasks List");
+        barDataList1.add(getString(R.string.tasks_list));
         barDataList1.add(decimalFormat.format(taskListClosed)+"%");
-        barDataList1.add("Milestones");
+        barDataList1.add(getString(R.string.milestones));
         barDataList1.add(decimalFormat.format(milestoneClosed)+"%");
         barGraph.setBottomTextList(barDataList1);
         barGraph.setDataList(barDataList, 100);

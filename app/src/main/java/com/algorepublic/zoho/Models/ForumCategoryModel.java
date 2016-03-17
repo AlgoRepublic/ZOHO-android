@@ -8,23 +8,23 @@ import java.util.ArrayList;
 /**
  * Created by waqas on 2/24/16.
  */
-public class AddforumModel
+public class ForumCategoryModel
 {
 
-    private static AddforumModel _obj = null;
+    private static ForumCategoryModel _obj = null;
 
-    private AddforumModel() {
+    private ForumCategoryModel() {
 
     }
 
-    public static AddforumModel getInstance() {
+    public static ForumCategoryModel getInstance() {
         if (_obj == null) {
-            _obj = new AddforumModel();
+            _obj = new ForumCategoryModel();
         }
         return _obj;
     }
 
-    public void setList(AddforumModel obj) {
+    public void setList(ForumCategoryModel obj) {
         _obj = obj;
     }
 
@@ -49,8 +49,8 @@ public class AddforumModel
         @Expose
         public Integer CategoryId;
 
-        @SerializedName("Title")
-        public String Title;
+        @SerializedName("CategoryName")
+        public String categoryName;
 
         @SerializedName("ProjectID")
         public Integer ProjectID;

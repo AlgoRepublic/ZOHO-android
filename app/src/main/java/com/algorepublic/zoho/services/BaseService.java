@@ -171,6 +171,7 @@ public class BaseService{
                         }
                     }
                 });
+
         if (showProgress)
         dialogAC.dismiss();
     }

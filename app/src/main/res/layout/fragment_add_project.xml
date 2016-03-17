@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+<ScrollView xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
@@ -76,7 +76,6 @@
             android:layout_below="@+id/owner_list"
             android:layout_width="match_parent"
             android:layout_height="100dp"
-            style="@style/blackListViewStyle"
             android:hint="@string/project_description"
             android:inputType="textMultiLine"
             android:gravity="top|left"
@@ -121,7 +120,8 @@
                 android:textColor="@color/colorBaseHeader"/>
         </RadioGroup>
 
-        <RadioGroup android:id="@+id/private_public_group"
+        <RadioGroup
+            android:id="@+id/private_public_group"
             android:layout_width="match_parent"
             android:layout_below="@+id/active_archive_status"
             android:layout_height="wrap_content"
@@ -149,4 +149,4 @@
         </RelativeLayout>
     </android.support.v7.widget.CardView>
     </RelativeLayout>
-</RelativeLayout>
+</ScrollView>

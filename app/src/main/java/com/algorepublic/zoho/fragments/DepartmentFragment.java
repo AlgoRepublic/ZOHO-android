@@ -89,15 +89,6 @@ public class DepartmentFragment extends BaseFragment implements SwipeRefreshLayo
         service = new ProjectsListService(getActivity());
         service.getProjectsByDepartment(baseClass.getUserId(),
                 true, new CallBack(this, "ProjectsByDepartment"));
-//        swipeRefreshLayout.post(new Runnable() {
-//                                    @Override
-//                                    public void run() {
-//                                        swipeRefreshLayout.setRefreshing(true);
-//                                        service.getProjectsByDepartment(baseClass.getUserId(),
-//                                                true, new CallBack(this, "ProjectsByDepartment"));
-//                                    }
-//                                }
-//        );
         return view;
     }
     public void ProjectsByDepartment(Object caller, Object model){

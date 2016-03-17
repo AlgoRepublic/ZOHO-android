@@ -85,7 +85,7 @@ public class StarRatingLevelQuestionsFragment extends BaseFragment {
     public String GetTitle(){
         String value = "";
         if(StarRatingBaseFragment.textLevel3 != ""){
-            value = "   "+StarRatingBaseFragment.arrow+
+            value = "    "+StarRatingBaseFragment.arrow+
                     StarRatingBaseFragment.textLevel3;
         }
         return value;
