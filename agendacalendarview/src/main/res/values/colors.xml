@@ -9,6 +9,9 @@
     <color name="calendar_text_first_day_of_month">#FD9635</color>
     <color name="calendar_month_transparent_background">#CCFFFFFF</color>
     <color name="calendar_divider_color">#F3F3F3</color>
+    <!-- theme 1-->
+    <color name="calendar_bg_theme_1">#F2F3F6</color>
+    <color name="calendar_header_bg_theme_1">#414042</color>
 
 
     <color name="colorContentWrapper">#808285</color>

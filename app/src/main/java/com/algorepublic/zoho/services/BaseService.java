@@ -170,6 +170,7 @@ public class BaseService{
                         }
                     }
                 });
+        if(dialogAC!=null && dialogAC.isShowing())
         dialogAC.dismiss();
     }
 
