@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.AnimationUtils;
 
@@ -19,7 +20,7 @@ public class BarView extends View {
     private ArrayList<Float> targetPercentList;
     private Paint textPaint;
     private Paint bgPaint;
-    private Paint fgPaint;
+    private Paint fgPaint1,fgPaint2,fgPaint3;
     private Rect rect;
     private int barWidth;
 //    private boolean showSideMargin = true;
@@ -33,7 +34,9 @@ public class BarView extends View {
     private final int TEXT_TOP_MARGIN;
     private final int TEXT_COLOR = Color.parseColor("#414042");
     private final int BACKGROUND_COLOR = Color.parseColor("#F6F6F6");
-    private final int FOREGROUND_COLOR = Color.parseColor("#39B54B");
+    private final int FOREGROUND_COLOR1 = Color.parseColor("#DDF4FD");
+    private final int FOREGROUND_COLOR2 = Color.parseColor("#DFEFB4");
+    private final int FOREGROUND_COLOR3 = Color.parseColor("#FDEADD");
 
     private Runnable animator = new Runnable() {
         @Override
@@ -66,8 +69,15 @@ public class BarView extends View {
         bgPaint = new Paint();
         bgPaint.setAntiAlias(true);
         bgPaint.setColor(BACKGROUND_COLOR);
-        fgPaint = new Paint(bgPaint);
-        fgPaint.setColor(FOREGROUND_COLOR);
+
+        fgPaint1 = new Paint(bgPaint);
+        fgPaint2 = new Paint(bgPaint);
+        fgPaint3 = new Paint(bgPaint);
+
+        fgPaint1.setColor(FOREGROUND_COLOR1);
+        fgPaint2.setColor(FOREGROUND_COLOR2);
+        fgPaint3.setColor(FOREGROUND_COLOR3);
+
         rect = new Rect();
         topMargin = MyUtils.dip2px(context, 5);
         int textSize = MyUtils.sp2px(context, 15);
@@ -155,11 +165,17 @@ public class BarView extends View {
 				  * The correct total height is "getHeight()-topMargin-bottomTextHeight-TEXT_TOP_MARGIN",not "getHeight()-topMargin".
 				  * fix by zhenghuiy@gmail.com on 11/11/13.
 				  */
-				rect.set(BAR_SIDE_MARGIN*i+barWidth*(i-1),
-                        topMargin+(int)((getHeight()-topMargin-bottomTextHeight-TEXT_TOP_MARGIN)*percentList.get(i-1)),
-                        (BAR_SIDE_MARGIN+barWidth)* i,
-                        getHeight()-bottomTextHeight-TEXT_TOP_MARGIN);
-                canvas.drawRect(rect,fgPaint);
+				rect.set(BAR_SIDE_MARGIN * i + barWidth * (i - 1),
+                        topMargin + (int) ((getHeight() - topMargin - bottomTextHeight - TEXT_TOP_MARGIN) * percentList.get(i - 1)),
+                        (BAR_SIDE_MARGIN + barWidth) * i,
+                        getHeight() - bottomTextHeight - TEXT_TOP_MARGIN);
+
+                if(i==1)
+                canvas.drawRect(rect,fgPaint1);
+                if(i==2)
+                canvas.drawRect(rect, fgPaint2);
+                if(i==3)
+                canvas.drawRect(rect,fgPaint3);
                 i++;
             }
         }

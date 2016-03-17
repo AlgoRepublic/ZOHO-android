@@ -32,6 +32,7 @@ import com.androidquery.AQuery;
 public class AdapterMenuItems extends BaseAdapter{
 
     Context ctx; private LayoutInflater inflater;
+    int lastPosition=0;
     int[] menu_names = {
             R.string.dashboard,
             R.string.projects,
@@ -74,18 +75,17 @@ public class AdapterMenuItems extends BaseAdapter{
 
     public View getView(final int position, View convertView, ViewGroup parent) {
 
-        final ViewHolder holder;
-        if (convertView == null) {
+        ViewHolder holder;
             convertView = inflater.inflate(R.layout.layout_menu_items, parent, false);
             holder = new ViewHolder();
             holder.title = (TextView) convertView.findViewById(R.id.textview);
             holder.checkBox = (CheckBox) convertView.findViewById(R.id.checkbox);
 
-            convertView.setTag(holder);
-        } else {
-            holder = (ViewHolder) convertView.getTag();
-        }
         final AQuery aq = new AQuery(convertView);
+        if(lastPosition == position){
+            aq.id(R.id.checkbox).checked(true);
+            aq.id(R.id.checkbox).getCheckBox().setAlpha(0.7f);
+        }
         holder.title.setText(menu_names[position]);
         holder.title.setTextColor(ctx.getResources().getColor(R.color.white));
         aq.id(R.id.imageview).image(menu_icon_white[position]);

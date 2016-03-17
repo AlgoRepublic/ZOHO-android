@@ -88,7 +88,8 @@ public class BaseService{
                             }
                             showServerError(status);
                         }
-                        dialogAC.dismiss();
+                        if (showProgress)
+                            dialogAC.dismiss();
                     }
                 });
     }
@@ -170,6 +171,7 @@ public class BaseService{
                         }
                     }
                 });
+        if (showProgress)
         dialogAC.dismiss();
     }
 
