@@ -155,15 +155,19 @@ public class DocumentsListBySubTaskFragment extends BaseFragment {
                 if (isLoaded())
                     if (position == 0) {
                         baseClass.setDocsSortType(getString(R.string.all_files));
+                        aq.id(R.id.list_title).text(getString(R.string.all_files));
                     }
                 if (position == 1) {
                     baseClass.setDocsSortType(getString(R.string.picture));
+                    aq.id(R.id.list_title).text(getString(R.string.picture));
                 }
                 if (position == 2) {
                     baseClass.setDocsSortType(getString(R.string.videos));
+                    aq.id(R.id.list_title).text(getString(R.string.videos));
                 }
                 if (position == 3) {
                     baseClass.setDocsSortType(getString(R.string.favorites));
+                    aq.id(R.id.list_title).text(getString(R.string.favorites));
                 }
                 FilterList();
             }

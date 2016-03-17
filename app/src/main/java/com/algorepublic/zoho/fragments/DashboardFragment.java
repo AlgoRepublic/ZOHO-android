@@ -34,7 +34,7 @@ import cc.cloudist.acplibrary.ACProgressFlower;
 public class DashboardFragment extends BaseFragment {
 
     DashBoardService service;
-    AQuery aq;
+    AQuery aq;float taskClosed,taskListClosed,milestoneClosed;
     BaseClass baseClass;
     PieView pieGraph;
     BarView barGraph;
@@ -107,12 +107,18 @@ public class DashboardFragment extends BaseFragment {
 
         DecimalFormat decimalFormat = new DecimalFormat("#0.00");
         DashBoardModel.ResponseObject object = DashBoardModel.getInstance().responseObject;
-        float taskClosed = (Float.parseFloat(""+object.completedTasksNo)/
-                Float.parseFloat(""+object.totalTasksNo))*100;
-        float taskListClosed = (Float.parseFloat(""+object.completedTaskList))
-                /Float.parseFloat(""+object.totalTasksNo)*100;
-        float milestoneClosed = (Float.parseFloat(""+object.completedTaskList))
-                /Float.parseFloat(""+object.totalTasksNo)*100;
+        if(object.completedTasksNo >0) {
+            taskClosed = (Float.parseFloat("" + object.completedTasksNo) /
+                    Float.parseFloat("" + object.totalTasksNo)) * 100;
+        }
+        if(object.completedTaskList >0) {
+            taskListClosed = (Float.parseFloat("" + object.completedTaskList))
+                    / Float.parseFloat("" + object.totalTasksNo) * 100;
+        }
+        if(object.completedMilestonesNo >0) {
+            milestoneClosed = (Float.parseFloat("" + object.completedMilestonesNo))
+                    / Float.parseFloat("" + object.totalMilestonesNo) * 100;
+        }
 
         barDataList.add(taskClosed);
         barDataList.add(taskListClosed);

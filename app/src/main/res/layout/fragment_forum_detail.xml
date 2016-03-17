@@ -48,7 +48,6 @@
             android:layout_below="@+id/textView5"
             android:paddingBottom="5dp"
             android:singleLine="false"
-            android:lines="10"
             android:paddingTop="5dp"
             android:textColor="@color/colorBaseHeader" />
 
