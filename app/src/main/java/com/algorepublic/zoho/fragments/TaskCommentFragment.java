@@ -2,19 +2,15 @@ package com.algorepublic.zoho.fragments;
 
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.algorepublic.zoho.BaseActivity;
 import com.algorepublic.zoho.Models.CreateCommentModel;
-import com.algorepublic.zoho.Models.ForumsCommentModel;
 import com.algorepublic.zoho.Models.GeneralModel;
 import com.algorepublic.zoho.Models.TaskCommentsModel;
 import com.algorepublic.zoho.R;
@@ -27,8 +23,6 @@ import com.algorepublic.zoho.utils.BaseClass;
 import com.androidquery.AQuery;
 
 import java.util.ArrayList;
-
-import cc.cloudist.acplibrary.ACProgressFlower;
 
 /**
  * Created by android on 1/1/16.
@@ -47,6 +41,7 @@ public class TaskCommentFragment extends BaseFragment {
     TaskListService service;
     ForumService forumService;
     public static ArrayList<TaskComments> arrayList = new ArrayList<>();
+    TextView textView;
 
 
     public TaskCommentFragment() {
@@ -76,6 +71,7 @@ public class TaskCommentFragment extends BaseFragment {
         comment_user = (EditText) view.findViewById(R.id.comment_user);
         aq = new AQuery(view);
         service = new TaskListService(getActivity());
+        textView=(TextView)view.findViewById(R.id.comment_user);
         forumService = new ForumService(getActivity());
         adapter = new AdapterTaskComments(getActivity());
         listView.setAdapter(adapter);
@@ -140,9 +136,11 @@ public class TaskCommentFragment extends BaseFragment {
         adapter.notifyDataSetChanged();
     }
     public void UpdateComment(Object caller, Object model){
+
         GeneralModel.getInstance().setList((GeneralModel) model);
         if (GeneralModel.getInstance().responseObject ==true) {
             flag = false;
+
             TaskCommentFragment
                     .arrayList.get(ClickedPosition).setComment(TaskCommentFragment
                     .comment_user.getText().toString());
@@ -157,10 +155,10 @@ public class TaskCommentFragment extends BaseFragment {
         }
     }
     public void CreateComment(Object caller, Object model) {
+
         CreateCommentModel.getInstance().setList((CreateCommentModel) model);
         if (CreateCommentModel.getInstance().responseCode ==100){
             Snackbar.make(getView(), "Comment Added", Snackbar.LENGTH_SHORT).show();
-            aq.id(R.id.comment_user).text("");
             TaskComments taskComments = new TaskComments();
             taskComments.setCommentID(CreateCommentModel.getInstance().responseObject.Id);
             taskComments.setComment(CreateCommentModel.getInstance().responseObject.message);
@@ -179,11 +177,12 @@ public class TaskCommentFragment extends BaseFragment {
     public void PerformAction()
     {
         String comment = aq.id(R.id.comment_user).getText().toString();
-        if(aq.id(R.id.comment_user).getText().toString().equalsIgnoreCase("")) {
+        if(aq.id(R.id.comment_user).getText().toString().isEmpty()) {
             Snackbar.make(getView(),getString(R.string.enter_comment),Snackbar.LENGTH_SHORT).show();
             return;
         }
         service.createComment(comment, position, Integer.parseInt(baseClass.getUserId()), true,
                 new CallBack(TaskCommentFragment.this, "CreateComment"));
+        aq.id(R.id.comment_user).text("");
     }
 }

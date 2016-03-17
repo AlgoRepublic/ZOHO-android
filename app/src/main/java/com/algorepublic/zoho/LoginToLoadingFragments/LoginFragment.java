@@ -98,15 +98,9 @@ public class LoginFragment extends BaseFragment {
 
             }
         });
-        aq.id(R.id.password).getEditText().setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (hasFocus) {
-                    baseClass.showKeyPad(v);
-                } else
-                    baseClass.hideKeyPad(v);
-            }
-        });
+
+
+
         return view;
     }
 

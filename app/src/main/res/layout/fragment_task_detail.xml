@@ -178,7 +178,7 @@
                         android:id="@+id/header_layout3"
                         android:layout_below="@+id/header_layout2"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:layout_marginTop="10dp"
                         android:orientation="vertical">
                         <TextView
@@ -192,14 +192,13 @@
                             android:layout_toLeftOf="@+id/textView"
 
                             />
-                        <TextView
+                        <WebView
                             android:id="@+id/task_desc"
                             android:layout_width="match_parent"
                             android:layout_below="@+id/task_name"
                             android:layout_height="wrap_content"
                             android:textSize="12sp"
                             android:textColor="@color/colorBaseHeader"
-                            android:lines="4"
                             android:ellipsize="end"
 
                             />

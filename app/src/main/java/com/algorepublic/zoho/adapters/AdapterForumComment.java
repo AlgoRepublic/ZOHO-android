@@ -3,13 +3,12 @@ package com.algorepublic.zoho.adapters;
 import android.content.Context;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
-import com.algorepublic.zoho.BaseActivity;
-import com.algorepublic.zoho.Models.ForumsCommentModel;
 import com.algorepublic.zoho.Models.GeneralModel;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.fragments.ForumsDetailFragment;
@@ -19,7 +18,6 @@ import com.algorepublic.zoho.utils.BaseClass;
 import com.algorepublic.zoho.utils.Constants;
 import com.androidquery.AQuery;
 import com.bumptech.glide.Glide;
-import com.mikhaellopez.circularimageview.CircularImageView;
 
 /**
  * Created by waqas on 2/3/16.
@@ -60,7 +58,7 @@ public class AdapterForumComment extends BaseAdapter {
         convertView = l_Inflater.inflate(R.layout.layout_comments_maker, null);
         aq = new AQuery(convertView);
 
-        aq.id(R.id.comment_description).text(ForumsDetailFragment.arrayList.get(position).getComment());
+        aq.id(R.id.comment_description).text(Html.fromHtml(ForumsDetailFragment.arrayList.get(position).getComment()));
         aq.id(R.id.comment_title).text(ForumsDetailFragment.arrayList.get(position).getUserName()
                 + " , " + ForumsDetailFragment.arrayList.get(position).getDateTime());
         if(ForumsDetailFragment.arrayList

@@ -303,5 +303,6 @@
     <string name="stage">Stage</string>
     <string name="about_us">About Us</string>
     <string name="privacy">Privacy Policy</string>
+    <string name="type_comment">Please type comment</string>
     <!-- Documents Strings -->
 </resources>

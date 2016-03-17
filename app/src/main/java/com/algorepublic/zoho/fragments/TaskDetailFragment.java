@@ -2,12 +2,12 @@ package com.algorepublic.zoho.fragments;
 
 
 import android.annotation.SuppressLint;
-import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
+import android.text.Html;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -16,9 +16,9 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
 import android.widget.SeekBar;
 
-import com.algorepublic.zoho.BaseActivity;
 import com.algorepublic.zoho.Models.GeneralModel;
 import com.algorepublic.zoho.Models.TaskByIdModel;
 import com.algorepublic.zoho.R;
@@ -36,9 +36,6 @@ import com.github.lzyzsd.circleprogress.DonutProgress;
 
 import org.lucasr.twowayview.TwoWayLayoutManager;
 import org.lucasr.twowayview.widget.TwoWayView;
-
-import cc.cloudist.acplibrary.ACProgressConstant;
-import cc.cloudist.acplibrary.ACProgressFlower;
 
 
 
@@ -58,6 +55,7 @@ public class TaskDetailFragment extends BaseFragment {
     int multiple=10;
     int progress=0;
     BaseClass baseClass;
+    WebView webView;
 
     @SuppressLint("ValidFragment")
     public TaskDetailFragment() {
@@ -106,6 +104,11 @@ public class TaskDetailFragment extends BaseFragment {
         views =(View) view.findViewById(R.id.priority_bar);
         twoWayAssignee.setHasFixedSize(true);
         twoWayAssignee.setLongClickable(true);
+        webView=(WebView)view.findViewById(R.id.task_desc);
+        webView.getSettings().setJavaScriptEnabled(true);
+        webView.getSettings().setLoadWithOverviewMode(true);
+        webView.getSettings().setUseWideViewPort(true);
+        webView.getSettings().setBuiltInZoomControls(true);
         twoWayAssignee.setOrientation(TwoWayLayoutManager.Orientation.HORIZONTAL);
         twoWayAssignee.setAdapter(new AdapterTaskDetailAssignee(getActivity(),
                 tasksList.getListAssignees()));
@@ -206,14 +209,17 @@ public class TaskDetailFragment extends BaseFragment {
 
         if(DateFormatter(TaskByIdModel.getInstance().responseObject.endDate).equalsIgnoreCase("12/31/3938")){
             aq.id(R.id.end_date).text("No Date");
-        }else if(DateFormatter(TaskByIdModel.getInstance().responseObject.endDate).equalsIgnoreCase("3/0/1")){
+        }else if(DateFormatter(TaskByIdModel.getInstance().responseObject.endDate).equalsIgnoreCase("3/0/1")) {
             aq.id(R.id.end_date).text("No Date");
         }else
         aq.id(R.id.end_date).text(DateFormatter(TaskByIdModel.getInstance().responseObject.endDate));
         aq.id(R.id.user_counter).text(String.valueOf(TaskByIdModel.getInstance().responseObject.userObject.size()));
         aq.id(R.id.category).text(baseClass.db.getString("TaskListName"));
         aq.id(R.id.task_name).text(TaskByIdModel.getInstance().responseObject.title);
-        aq.id(R.id.task_desc).text(TaskByIdModel.getInstance().responseObject.description);
+        webView.loadDataWithBaseURL("", TaskByIdModel.getInstance().responseObject.description, "text/html", "UTF-8", "");
+//        aq.id(R.id.task_desc).text(Html.fromHtml(TaskByIdModel.getInstance().responseObject.description));
+
+        aq.id(R.id.task_desc).text(Html.fromHtml(TaskByIdModel.getInstance().responseObject.description));
         aq.id(R.id.comment_count).text(Integer.toString(TaskByIdModel.getInstance().responseObject.commentsCount));
         aq.id(R.id.docs_count).text(Integer.toString(TaskByIdModel.getInstance().responseObject.documentsCount));
         aq.id(R.id.subtask_count).text(Integer.toString(TaskByIdModel.getInstance().responseObject.subTasksCount));
@@ -227,6 +233,13 @@ public class TaskDetailFragment extends BaseFragment {
         aq.id(R.id.priority_bar).getView().setBackground(shapeDrawable);
         views.setBackgroundColor(getPriorityWiseColor(TaskByIdModel.getInstance().responseObject.priority));
     }
+//    private int getScale(){
+//        Display display = ((WindowManager) getActivity().getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
+//        int width = display.getWidth();
+//        Double val = new Double(width)/new Double(PIC_WIDTH);
+//        val = val * 100d;
+//        return val.intValue();
+//    }
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.menu_task_details, menu);

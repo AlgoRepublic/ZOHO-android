@@ -1,7 +1,6 @@
 package com.algorepublic.zoho;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.net.Uri;
@@ -12,19 +11,16 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
-import java.util.Locale;
-
-import cc.cloudist.acplibrary.ACProgressBaseDialog;
 import cc.cloudist.acplibrary.ACProgressConstant;
 import cc.cloudist.acplibrary.ACProgressFlower;
 
 public class BaseActivity extends AppCompatActivity {
     public static DrawerLayout drawer;public static Toolbar toolbar;
+    public static ActionBarDrawerToggle toggle;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -91,10 +87,17 @@ public class BaseActivity extends AppCompatActivity {
     }
     public void setToolbar(){
         setSupportActionBar(toolbar);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+        toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
+//        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                hideKeyPad(v);
+//            }
+//        });
+
     }
     public ACProgressFlower InitializeDialog(Context context){
         ACProgressFlower dialogAC= new ACProgressFlower.Builder(context)
@@ -104,5 +107,9 @@ public class BaseActivity extends AppCompatActivity {
         dialogAC.setCancelable(true);
         return dialogAC;
     }
-
+    public void hideKeyPad(View view) {
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(view.getWindowToken(),
+                InputMethodManager.RESULT_UNCHANGED_SHOWN);
+    }
 }

@@ -3,17 +3,16 @@ package com.algorepublic.zoho.adapters;
 import android.content.Context;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.algorepublic.zoho.BaseActivity;
 import com.algorepublic.zoho.Models.GeneralModel;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.fragments.DocsPreviewFragment;
-import com.algorepublic.zoho.fragments.TaskCommentFragment;
 import com.algorepublic.zoho.services.CallBack;
 import com.algorepublic.zoho.services.ForumService;
 import com.algorepublic.zoho.utils.BaseClass;
@@ -66,7 +65,7 @@ public class AdapterDocsComments extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
         aq = new AQuery(convertView);
-        holder.taskComment.setText(DocsPreviewFragment.arrayList.get(position).getComment());
+        holder.taskComment.setText(Html.fromHtml(DocsPreviewFragment.arrayList.get(position).getComment()));
         holder.userName.setText(DocsPreviewFragment.arrayList.get(position).getUserName()
                 + " , " + DocsPreviewFragment.arrayList.get(position).getDateTime());
         if(DocsPreviewFragment.arrayList
