@@ -2,6 +2,7 @@ package com.algorepublic.zoho.FragmentsTasks;
 
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.Html;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -38,7 +39,7 @@ public class TaskEditTitleFragment extends BaseFragment {
         View view = inflater.inflate(R.layout.fragment_edit_title_tasks, container, false);
         baseClass = ((BaseClass) getActivity().getApplicationContext());
         aq= new AQuery(view);
-        aq.id(R.id.title_name).text(BaseClass.db.getString("TaskDesc"));
+        aq.id(R.id.title_name).text(Html.fromHtml(BaseClass.db.getString("TaskDesc")));
         aq.id(R.id.title_name).getEditText().requestFocus();
             aq.id(R.id.title_name).getEditText().addTextChangedListener(new TextWatcher() {
             @Override
