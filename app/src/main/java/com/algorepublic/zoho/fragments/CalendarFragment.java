@@ -23,6 +23,7 @@ import com.github.tibolte.agendacalendarview.models.DayItem;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Locale;
 
@@ -127,9 +128,14 @@ public class CalendarFragment extends BaseFragment implements CalendarPickerCont
     }
 
     private void initCalendarView(){
+        Locale locale;
         // Get a reference for the week view in the layout.
         calendarView = (AgendaCalendarView) aq.id(R.id.agenda_calendar_view).getView();
-
+       // Calendar minCal = new GregorianCalendar(2016, Calendar.JANUARY, 1);
+        if(true) // update this check as language button goes functional
+         locale = new Locale("ar");
+        else
+            locale = Locale.US;
         Calendar minDate = Calendar.getInstance();
         Calendar maxDate = Calendar.getInstance();
 
@@ -139,7 +145,7 @@ public class CalendarFragment extends BaseFragment implements CalendarPickerCont
         List<CalendarEvent> events = getTasksList();
         if(events.size() != 0 ){
             try {
-                calendarView.init(events, minDate, maxDate, Locale.getDefault(), this);
+                calendarView.init(events, minDate, maxDate, locale, this);
             }catch (Exception e){
                 e.printStackTrace();
             }

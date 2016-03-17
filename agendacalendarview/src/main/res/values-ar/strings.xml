@@ -1,0 +1,13 @@
+<resources>
+    <!-- Agenda -->
+    <string name="today">اليوم</string>
+    <string name="tomorrow">يوم غد</string>
+    <string name="agenda_event_day_duration">d</string>
+    <string name="agenda_event_all_day">كل يوم</string>
+    <string name="agenda_event_no_events">لا أحداث</string>
+
+    <!-- Weather -->
+    <string name="morning">صباح</string>
+    <string name="afternoon">بعد الظهر</string>
+    <string name="evening">مساء</string>
+</resources>

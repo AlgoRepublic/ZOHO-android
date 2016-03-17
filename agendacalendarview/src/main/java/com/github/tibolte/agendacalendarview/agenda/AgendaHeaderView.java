@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Locale;
 
 /**
  * Header view for the StickyHeaderListView of the agenda view
@@ -53,8 +54,8 @@ public class AgendaHeaderView extends LinearLayout {
 
         SimpleDateFormat dayWeekFormatter = new SimpleDateFormat("E");
 
-        txtDayOfMonth.setTextColor(getResources().getColor(R.color.calendar_text_default));
-        txtDayOfWeek.setTextColor(getResources().getColor(R.color.calendar_text_default));
+        txtDayOfMonth.setTextColor(currentDayTextColor);
+        txtDayOfWeek.setTextColor(currentDayTextColor);
 
         if (DateHelper.sameDate(day, today)) {
             txtDayOfMonth.setTextColor(currentDayTextColor);
