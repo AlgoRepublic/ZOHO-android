@@ -2,7 +2,6 @@ package com.algorepublic.zoho.fragments;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -19,7 +18,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Toast;
 
-import com.algorepublic.zoho.BaseActivity;
 import com.algorepublic.zoho.Models.AllProjectsByUserModel;
 import com.algorepublic.zoho.Models.GeneralModel;
 import com.algorepublic.zoho.Models.GetUserModel;
@@ -44,7 +42,6 @@ import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
-import cc.cloudist.acplibrary.ACProgressConstant;
 import cc.cloudist.acplibrary.ACProgressFlower;
 
 /**
@@ -86,8 +83,8 @@ public class EditProfileFragment extends BaseFragment implements MultiSelectionS
                              Bundle savedInstanceState) {
         View view  = inflater.inflate(R.layout.fragment_edit_user_profile, container, false);
         dialogAC = InitializeDialog(getActivity());
-        projectsList = (MultiSelectionSpinner) view.findViewById(R.id.projects_list);
-        projectsList.setListener(this);
+//        projectsList = (MultiSelectionSpinner) view.findViewById(R.id.projects_list);
+//        projectsList.setListener(this);
         baseClass = ((BaseClass) getActivity().getApplicationContext());
         aq = new AQuery(getActivity(), view);
         service = new ProjectsListService(getActivity());

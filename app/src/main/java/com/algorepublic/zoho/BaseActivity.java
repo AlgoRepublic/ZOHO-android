@@ -99,7 +99,6 @@ public class BaseActivity extends AppCompatActivity {
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
-
     }
     public ACProgressFlower InitializeDialog(Context context){
         ACProgressFlower dialogAC= new ACProgressFlower.Builder(context)
