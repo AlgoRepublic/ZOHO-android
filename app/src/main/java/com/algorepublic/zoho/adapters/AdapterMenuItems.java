@@ -15,13 +15,13 @@ import android.widget.TextView;
 import com.algorepublic.zoho.BaseActivity;
 import com.algorepublic.zoho.MainActivity;
 import com.algorepublic.zoho.R;
+import com.algorepublic.zoho.StarRatingFragments.StarRatingBaseFragment;
 import com.algorepublic.zoho.fragments.CalendarFragment;
 import com.algorepublic.zoho.fragments.DepartmentFragment;
 import com.algorepublic.zoho.fragments.DocumentsListFragment;
 import com.algorepublic.zoho.fragments.ForumsFragment;
 import com.algorepublic.zoho.fragments.HomeFragment;
 import com.algorepublic.zoho.fragments.ProjectsFragment;
-import com.algorepublic.zoho.StarRatingFragments.StarRatingBaseFragment;
 import com.algorepublic.zoho.fragments.TasksListFragment;
 import com.algorepublic.zoho.fragments.UserFragment;
 import com.androidquery.AQuery;
@@ -77,6 +77,7 @@ public class AdapterMenuItems extends BaseAdapter{
 
         ViewHolder holder;
             convertView = inflater.inflate(R.layout.layout_menu_items, parent, false);
+
             holder = new ViewHolder();
             holder.title = (TextView) convertView.findViewById(R.id.textview);
             holder.checkBox = (CheckBox) convertView.findViewById(R.id.checkbox);
@@ -156,4 +157,5 @@ public class AdapterMenuItems extends BaseAdapter{
             return listView.getChildAt(childIndex);
         }
     }
+   
 }

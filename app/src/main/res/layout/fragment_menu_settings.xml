@@ -74,15 +74,17 @@
                         android:textSize="16sp"
                         android:textColor="@color/blackBackground"
                         android:text="@string/change_theme" />
-                    <Switch
+                    <CheckBox
                         android:id="@+id/switch_theme"
                         android:layout_alignParentRight="true"
                         android:layout_marginRight="10dp"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="25dp"
+                        android:checked="true"
                         android:layout_centerInParent="true"
-                        android:padding="16dp"
-                        />
+                        android:button="@drawable/selector_check"
+                        android:background="@android:color/white"
+                       />
                 </RelativeLayout>
             </LinearLayout>
         </com.algorepublic.zoho.utils.ToggleExpandLayout>
@@ -155,18 +157,5 @@
         android:textColor="@android:color/holo_red_light"
         android:textSize="18sp"
         android:text="@string/logout" />
-    <TextView
-        android:id="@+id/delete"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColor="@android:color/holo_red_light"
-        android:gravity="center"
-        android:padding="10dp"
-        android:background="@color/white"
-        android:elegantTextHeight="true"
-        android:elevation="3dp"
 
-        android:textStyle="bold"
-        android:textSize="18sp"
-        android:text="@string/delete_account" />
 </LinearLayout>

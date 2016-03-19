@@ -3,16 +3,18 @@ package com.algorepublic.zoho.fragments;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
+import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.algorepublic.zoho.Models.ForumCategoryModel;
 import com.algorepublic.zoho.Models.CreateForumModel;
+import com.algorepublic.zoho.Models.ForumCategoryModel;
 import com.algorepublic.zoho.Models.ForumsModel;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.services.CallBack;
@@ -108,6 +110,14 @@ public class EditForumFragment extends BaseFragment  {
         setHasOptionsMenu(true);
         baseClass = ((BaseClass) getActivity().getApplicationContext());
         category_list = (NiceSpinner) view.findViewById(R.id.forum_list);
+
+        category_list.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                baseClass.hideKeyPad(v);
+                return false;
+            }
+        });
         service = new ForumService(getActivity());
         service.getCategoryList(baseClass.getSelectedProject(), true,
                 new CallBack(EditForumFragment.this, "GetAllCategory"));
@@ -121,7 +131,8 @@ public class EditForumFragment extends BaseFragment  {
             for(int loop=0;loop< ForumCategoryModel.getInstance().responseObject.size();loop++) {
                 categoryList.add(ForumCategoryModel.getInstance().responseObject.get(loop).categoryName);
             }
-            category_list.attachDataSource(categoryList);
+                 category_list.attachDataSource(categoryList);
+
             UpdateValues();
         }
         else
@@ -130,16 +141,19 @@ public class EditForumFragment extends BaseFragment  {
         }
     }
     public void UpdateValues(){
+
         aq.id(R.id.lblListHeader).text(getString(R.string.edit_forum_post));
-        aq.id(R.id.comment_title).text(ForumsModel.getInstance().responseObject.get(Pos).title);
-        aq.id(R.id.comment_description).text(ForumsModel.getInstance().responseObject.get(Pos).forumContent);
+        aq.id(R.id.comment_title).text(Html.fromHtml(ForumsModel.getInstance().responseObject.get(Pos).title));
+        aq.id(R.id.comment_description).text(Html.fromHtml(ForumsModel.getInstance().responseObject.get(Pos).forumContent));
         if(ForumsModel.getInstance().responseObject.get(Pos).categoryID==0){
             category_list.setSelectedIndex(0);
         }else {
             String categoryName = ForumsModel.getInstance().responseObject.get(Pos).categoryName;
             if (!categoryName.equals(null)) {
+
                 for (int loop = 0; loop < categoryList.size(); loop++) {
                     if (categoryList.get(loop).equalsIgnoreCase(categoryName)) {
+
                         category_list.setSelectedIndex(loop);
                     }
                 }

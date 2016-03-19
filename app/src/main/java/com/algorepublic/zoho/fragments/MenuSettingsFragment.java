@@ -6,9 +6,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.RadioGroup;
-import android.widget.Switch;
 
 import com.algorepublic.zoho.ActivitySplash;
 import com.algorepublic.zoho.MainActivity;
@@ -27,6 +27,7 @@ public class MenuSettingsFragment extends BaseFragment {
 
     BaseClass baseClass;
     static MenuSettingsFragment fragment;
+    CheckBox checkBox;
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -44,14 +45,17 @@ public class MenuSettingsFragment extends BaseFragment {
         View view = inflater.inflate(R.layout.fragment_menu_settings, container, false);
         baseClass = ((BaseClass) getActivity().getApplicationContext());
         getToolbar().setTitle(getString(R.string.settings));
+        aq = new AQuery(view);
+checkBox=(CheckBox)view.findViewById(R.id.switch_theme);
         final ToggleExpandLayout layout = (ToggleExpandLayout) view.findViewById(R.id.toogleLayout);
-        ((Switch) view.findViewById(R.id.switch_theme)).setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        ((CheckBox) view.findViewById(R.id.switch_theme)).setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
                 if (isChecked) {
-                    layout.open();
-                } else {
                     layout.close();
+
+                } else {
+                    layout.open();
                 }
             }
         });

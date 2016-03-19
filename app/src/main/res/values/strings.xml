@@ -55,7 +55,7 @@
     <string name="file_size">File Size Alert!</string>
     <string name="file_size_content">File size should be less than five(5) MB</string>
     <string name="task_desc">Description</string>
-    <string name="category">Category</string>
+    <string name="category">Category:</string>
     <string name="employees">Users</string>
     <string name="assigned_projects">Assigned Projects</string>
     <string name="TaskListName">TaskList Name</string>
@@ -162,7 +162,11 @@
     <string name="mark_as_done">Mark as done?</string>
     <string name="task_as_done">Mark as done</string>
     <string name="closed_tasks">Closed Tasks</string>
-    <string name="opened_tasks">Opened Tasks</string>
+    <string name="closed_taskslists">Closed Taskslist</string>
+    <string name="closed_milestone">Closed Milestone</string>
+    <string name="opened_tasks">Open Tasks  </string>
+    <string name="opened_milestone">Open Milestone</string>
+    <string name="opened_taskslist">Open Taskslist</string>
     <string name="tasks_list">Tasks List</string>
     <string name="milestones">MileStones</string>
     <string name="task_done">Task done</string>

@@ -1,16 +1,11 @@
 package com.algorepublic.zoho.fragments;
 
-import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.algorepublic.zoho.BaseActivity;
 import com.algorepublic.zoho.Models.DashBoardModel;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.services.CallBack;
@@ -18,15 +13,11 @@ import com.algorepublic.zoho.services.DashBoardService;
 import com.algorepublic.zoho.utils.BaseClass;
 import com.androidquery.AQuery;
 import com.dacer.androidcharts.BarView;
-import com.dacer.androidcharts.LineView;
 import com.dacer.androidcharts.PieHelper;
 import com.dacer.androidcharts.PieView;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-
-import cc.cloudist.acplibrary.ACProgressConstant;
-import cc.cloudist.acplibrary.ACProgressFlower;
 
 /**
  * Created by waqas on 3/10/16.
@@ -110,13 +101,18 @@ public class DashboardFragment extends BaseFragment {
         }
         if(object.completedTaskList >0) {
             taskListClosed = (Float.parseFloat("" + object.completedTaskList))
-                    / Float.parseFloat("" + object.totalTasksNo) * 100;
+                    / Float.parseFloat("" + object.totalTaskList) * 100;
         }
         if(object.completedMilestonesNo >0) {
             milestoneClosed = (Float.parseFloat("" + object.completedMilestonesNo))
                     / Float.parseFloat("" + object.totalMilestonesNo) * 100;
         }
-
+        aq.id(R.id.open1).text(getString(R.string.opened_tasks)+" "+(object.totalTasksNo-object.completedTasksNo));
+        aq.id(R.id.close1).text(getString(R.string.closed_tasks)+" "+object.completedTasksNo);
+        aq.id(R.id.open2).text(getString(R.string.opened_taskslist)+" "+(object.totalTaskList-object.completedTaskList));
+        aq.id(R.id.close2).text(getString(R.string.closed_taskslists)+" "+object.completedTaskList);
+        aq.id(R.id.open3).text(getString(R.string.opened_milestone)+" "+(object.totalMilestonesNo-object.completedMilestonesNo));
+        aq.id(R.id.close3).text(getString(R.string.closed_milestone)+" "+object.completedMilestonesNo);
         barDataList.add(taskClosed);
         barDataList.add(taskListClosed);
         barDataList.add(milestoneClosed);

@@ -7,17 +7,16 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
-import com.algorepublic.zoho.BaseActivity;
 import com.algorepublic.zoho.Models.CreateProjectModel;
 import com.algorepublic.zoho.Models.TaskUserModel;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.adapters.ProjectsList;
-import com.algorepublic.zoho.adapters.TasksList;
 import com.algorepublic.zoho.services.CallBack;
 import com.algorepublic.zoho.services.ProjectsListService;
 import com.algorepublic.zoho.services.TaskListService;
@@ -30,8 +29,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.LinkedList;
-
-import cc.cloudist.acplibrary.ACProgressFlower;
 
 /**
  * Created by android on 2/15/16.
@@ -157,6 +154,21 @@ public class EditProjectFragment extends BaseFragment {
         aq.id(R.id.lblListHeader).text(getString(R.string.edit_project));
         owner_list = (NiceSpinner) view.findViewById(R.id.owner_list);
         departments_list= (NiceSpinner) view.findViewById(R.id.departments_list);
+        owner_list.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                baseClass.hideKeyPad(v);
+                return false;
+            }
+        });
+        departments_list.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                baseClass.hideKeyPad(v);
+                return false;
+            }
+        });
+
         service = new TaskListService(getActivity());
         setHasOptionsMenu(true);
         aq.id(R.id.active_archive_status).visible();
