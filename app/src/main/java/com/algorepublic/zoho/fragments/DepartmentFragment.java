@@ -26,6 +26,7 @@ import com.algorepublic.zoho.adapters.ProjectsList;
 import com.algorepublic.zoho.services.CallBack;
 import com.algorepublic.zoho.services.ProjectsListService;
 import com.algorepublic.zoho.utils.BaseClass;
+import com.androidquery.AQuery;
 import com.h6ah4i.android.widget.advrecyclerview.animator.GeneralItemAnimator;
 import com.h6ah4i.android.widget.advrecyclerview.animator.RefactoredDefaultItemAnimator;
 import com.h6ah4i.android.widget.advrecyclerview.decoration.ItemShadowDecorator;
@@ -47,6 +48,7 @@ public class DepartmentFragment extends BaseFragment implements SwipeRefreshLayo
     private ProjectsListService service;
     private BaseClass baseClass;
     Parcelable eimSavedState;
+    AQuery aq;
     private RecyclerView mRecyclerView;
     private RecyclerView.LayoutManager mLayoutManager;
     private RecyclerView.Adapter mWrappedAdapter;
@@ -69,6 +71,7 @@ public class DepartmentFragment extends BaseFragment implements SwipeRefreshLayo
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_department, container, false);
+        aq=  new AQuery(view);
         baseClass = ((BaseClass) getActivity().getApplicationContext());
         swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe_refresh_layout);
         swipeRefreshLayout.setOnRefreshListener(this);
@@ -134,7 +137,6 @@ public class DepartmentFragment extends BaseFragment implements SwipeRefreshLayo
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(getString(R.string.departments));
     }
 
@@ -155,7 +157,12 @@ public class DepartmentFragment extends BaseFragment implements SwipeRefreshLayo
 
 
     private void addColumnList() {
-
+        aq.id(R.id.alertMessage).text("No Departments");
+        if(allProjects.size() ==0){
+            aq.id(R.id.response_alert).visibility(View.VISIBLE);
+        }else{
+            aq.id(R.id.response_alert).visibility(View.GONE);
+        }
         AdapterDepartment listAdapter = new AdapterDepartment(getActivity());
         mRecyclerViewDragDropManager = new RecyclerViewDragDropManager();
         mRecyclerViewDragDropManager.setDraggingItemShadowDrawable(

@@ -354,7 +354,7 @@ public class EditProfileFragment extends BaseFragment implements MultiSelectionS
 
     @Override
     public void selectedStrings(List<String> strings) {
-        projectsList.setSelection(strings);
+       // projectsList.setSelection(strings);
     }
 
     @Override

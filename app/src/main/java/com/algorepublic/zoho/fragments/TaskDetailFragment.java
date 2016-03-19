@@ -266,7 +266,6 @@ public class TaskDetailFragment extends BaseFragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.edit_task:
-                baseClass.hideKeyPad(getView());
                 Log.e("TaskName","/"+tasksList.getProjectName());
                 baseClass.setSelectedProject(Integer.toString(tasksList.getProjectID()));
                 if (tasksList.getProjectID() >0) {

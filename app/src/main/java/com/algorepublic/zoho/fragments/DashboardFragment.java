@@ -2,6 +2,8 @@ package com.algorepublic.zoho.fragments;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -45,8 +47,12 @@ public class DashboardFragment extends BaseFragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         setHasOptionsMenu(true);
-        getToolbar().setTitle(getString(R.string.dashboard));
         super.onViewCreated(view, savedInstanceState);
+    }
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(getString(R.string.dashboard));
     }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

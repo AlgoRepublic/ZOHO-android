@@ -87,9 +87,12 @@ public class ForumsFragment extends BaseFragment{
 
     public void ForumListCallback(Object caller, Object model){
         ForumsModel.getInstance().setList((ForumsModel) model);
+        aq.id(R.id.alertMessage).text("No Forums");
         if (ForumsModel.getInstance().responseObject.size()!=0) {
+            aq.id(R.id.response_alert).visibility(View.GONE);
             aq.id(R.id.forums_list).adapter(new AdapterForumsList(getActivity()));
         }else {
+            aq.id(R.id.response_alert).visibility(View.VISIBLE);
             Snackbar.make(getView(), getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
         }
     }

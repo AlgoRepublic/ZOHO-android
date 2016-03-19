@@ -2,6 +2,7 @@ package com.algorepublic.zoho.adapters;
 
 import android.content.Context;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
@@ -130,10 +131,12 @@ public class AdapterTaskMenu extends BaseAdapter {
     public void callFragmentWithReplace(int containerId, Fragment fragment, String tag){
 
         ((AppCompatActivity) ctx).getSupportFragmentManager()
-                .beginTransaction().setCustomAnimations(R.anim.slide_in_enter, R.anim.slide_in_exit, R.anim.slide_pop_enter, R.anim.slide_pop_exit)
+                .beginTransaction()
+//                .setCustomAnimations(R.anim.slide_in_enter, R.anim.slide_in_exit,
+//                        R.anim.slide_pop_enter, R.anim.slide_pop_exit)
                 .replace(containerId, fragment, tag)
-                .commit();
 
+                .commit();
     }
     static class ViewHolder {
         TextView title;

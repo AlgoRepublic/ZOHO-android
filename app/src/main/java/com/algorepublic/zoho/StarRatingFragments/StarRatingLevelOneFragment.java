@@ -17,6 +17,7 @@ import com.algorepublic.zoho.adapters.StarRatingHeadsLevelTwo;
 import com.algorepublic.zoho.fragments.BaseFragment;
 import com.algorepublic.zoho.services.CallBack;
 import com.algorepublic.zoho.services.StarRatingService;
+import com.androidquery.AQuery;
 
 import java.util.ArrayList;
 
@@ -29,6 +30,7 @@ public class StarRatingLevelOneFragment extends BaseFragment {
     static StarRatingLevelOneFragment fragment;
     public static ArrayList<StarRatingHeadsLevelOne> levelOneHead = new ArrayList<>();
     ListView mListView;
+    AQuery aq;
     StarRatingService service;
     public static StarRatingLevelOneFragment newInstance() {
         fragment = new StarRatingLevelOneFragment();
@@ -44,6 +46,7 @@ public class StarRatingLevelOneFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_star_rating, container, false);
+        aq= new AQuery(view);
         mListView = (ListView) view.findViewById(R.id.starListView);
         service = new StarRatingService(getActivity());
         if(levelOneHead.size()==0) {
@@ -59,6 +62,12 @@ public class StarRatingLevelOneFragment extends BaseFragment {
         StarRatingModel.getInstance().setList((StarRatingModel) model);
         if (StarRatingModel.getInstance().responseCode == 100) {
             GetListHeads();
+            aq.id(R.id.alertMessage).text("No Star Rating");
+            if(levelOneHead.size() ==0){
+                aq.id(R.id.response_alert).visibility(View.VISIBLE);
+            }else{
+                aq.id(R.id.response_alert).visibility(View.GONE);
+            }
             mListView.setAdapter(new AdapterStarRatingLevelOne(getActivity(), levelOneHead));
         }
         else

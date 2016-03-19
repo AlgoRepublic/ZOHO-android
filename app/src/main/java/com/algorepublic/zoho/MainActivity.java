@@ -42,8 +42,17 @@ public class MainActivity extends BaseActivity {
         setContentView(R.layout.activity_main);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-
         setToolbar();
+        drawer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (drawer.isDrawerOpen(GravityCompat.START)) {
+                    baseClass.hideKeyPad(v);
+                } else {
+                    baseClass.hideKeyPad(v);
+                }
+            }
+        });
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         View headerLayout =navigationView.getHeaderView(0);
         gridView = (GridView) headerLayout.findViewById(R.id.gridview_menu);
@@ -65,6 +74,7 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(MainActivity.this, SettingsActivity.class));
+                MainActivity.this.finish();
             }
         });
         callFragment(R.id.container, HomeFragment.newInstance(), "HomeFragment");

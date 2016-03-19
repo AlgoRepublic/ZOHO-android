@@ -1,6 +1,9 @@
 package com.algorepublic.zoho;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.Toolbar;
 
 import com.algorepublic.zoho.fragments.MenuSettingsFragment;
@@ -25,5 +28,13 @@ public class SettingsActivity extends BaseActivity {
         setSupportActionBar(toolbar);
         toolbar.setTitle(getResources().getString(R.string.settings));
         callFragment(R.id.container, MenuSettingsFragment.newInstance(), "FragmentMenuSettings");
+    }
+    @Override
+    public void onBackPressed() {
+        if(getSupportFragmentManager().getBackStackEntryCount()==0){
+            startActivity(new Intent(this,MainActivity.class));
+            this.finish();
+        }
+        super.onBackPressed();
     }
 }

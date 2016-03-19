@@ -1,6 +1,9 @@
 package com.algorepublic.zoho.LoginToLoadingFragments;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.text.Editable;
@@ -9,6 +12,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.ImageView;
 
 import com.algorepublic.zoho.ActivityLoginToLoading;
 import com.algorepublic.zoho.MainActivity;
@@ -55,16 +61,29 @@ public class LoginFragment extends BaseFragment {
             getActivity().finish();
         }
         view  = inflater.inflate(R.layout.fragment_login, container, false);
+
         aq= new AQuery(getActivity(),view);
+        if(!BaseClass.db.getString("Password").equalsIgnoreCase("")){
+            aq.id(R.id.password).text(BaseClass.db.getString("Password"));
+        }
+        if (baseClass.getUserLanguage().equalsIgnoreCase("en")) {
+            aq.id(R.id.lang_text).text(R.string.arabic);
+            changeLanguage(getString(R.string.lang_arabic));
+        }else{
+            changeLanguage(getString(R.string.lang_english));
+                aq.id(R.id.lang_text).text(R.string.english);
+        }
         aq.id(R.id.lang_text).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (aq.id(R.id.lang_text).getText().toString().equalsIgnoreCase("English")) {
-                    changeLanguage(getString(R.string.lang_english));
-                    baseClass.setUserLanguage(getString(R.string.lang_english));
-                } else {
+                if (baseClass.getUserLanguage().equalsIgnoreCase("en")) {
                     changeLanguage(getString(R.string.lang_arabic));
                     baseClass.setUserLanguage(getString(R.string.lang_arabic));
+                    aq.id(R.id.lang_text).text(R.string.arabic);
+                } else {
+                    changeLanguage(getString(R.string.lang_english));
+                    baseClass.setUserLanguage(getString(R.string.lang_english));
+                    aq.id(R.id.lang_text).text(R.string.english);
                 }
                 startActivity(new Intent(getActivity(), ActivityLoginToLoading.class));
                 getActivity().finish();
@@ -76,30 +95,23 @@ public class LoginFragment extends BaseFragment {
                LoginClick(v);
             }
         });
+        aq.id(R.id.checkbox).getCheckBox().setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                baseClass.hideKeyPad(view);
+                if(isChecked ==true){
+                    BaseClass.db.putString("Password", aq.id(R.id.password).getText().toString());
+                }else
+                    BaseClass.db.putString("Password", "");
+            }
+        });
         aq.id(R.id.linkedin_here).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               LinkedInClick(v);
+                LinkedInClick(v);
             }
         });
-        aq.id(R.id.password).getEditText().addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                BaseClass.db.putString("TaskDesc", s.toString());
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
-
-
 
         return view;
     }

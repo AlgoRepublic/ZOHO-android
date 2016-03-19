@@ -75,6 +75,12 @@ public class TaskAssignFragment extends BaseFragment {
     public void TaskAssignee(Object caller, Object model) {
         TaskUserModel.getInstance().setList((TaskUserModel) model);
         if (TaskUserModel.getInstance().responseCode == 100) {
+            aq.id(R.id.alertMessage).text("No Users");
+            if(TaskUserModel.getInstance().responseObject.size() ==0){
+                aq.id(R.id.response_alert).visibility(View.VISIBLE);
+            }else{
+                aq.id(R.id.response_alert).visibility(View.GONE);
+            }
             listView.setAdapter(new AdapterTaskAssignee(getActivity()));
         }
         else

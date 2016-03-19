@@ -265,6 +265,12 @@ public class TasksListFragment extends BaseFragment {
     }
     public void SetAdapterList(){
         if (TasksListByOwnerModel.getInstance().responseCode == 100) {
+            aq.id(R.id.alertMessage).text("No Tasks");
+            if(generalList.size() ==0){
+                aq.id(R.id.response_alert).visibility(View.VISIBLE);
+            }else{
+                aq.id(R.id.response_alert).visibility(View.GONE);
+            }
             adapterTasksList = new AdapterTasksList(getActivity(),generalList);
             listView.setAreHeadersSticky(true);
             listView.setAdapter(adapterTasksList);

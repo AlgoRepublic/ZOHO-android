@@ -15,5 +15,10 @@
         android:divider="@null"
         android:dividerHeight="5dp"
         android:scrollbars="none" />
-
+    <include
+        layout="@layout/layout_alert_message"
+        android:layout_width="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_height="wrap_content" />
 </RelativeLayout>

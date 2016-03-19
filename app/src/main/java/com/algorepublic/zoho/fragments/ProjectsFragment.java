@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -18,6 +19,7 @@ import android.widget.Toast;
 
 import com.algorepublic.zoho.BaseActivity;
 import com.algorepublic.zoho.Models.AllProjectsByUserModel;
+import com.algorepublic.zoho.Models.ForumsModel;
 import com.algorepublic.zoho.Models.ProjectsByClientModel;
 import com.algorepublic.zoho.Models.ProjectsByDepartmentModel;
 import com.algorepublic.zoho.R;
@@ -124,8 +126,8 @@ public class ProjectsFragment extends BaseFragment implements SwipeRefreshLayout
             SetGeneralClientAdapter();
         }
         if (position == 1) {
-            swipeListView.setVisibility(View.VISIBLE);
-            swipeStickView.setVisibility(View.GONE);
+            swipeListView.setVisibility(View.GONE);
+            swipeStickView.setVisibility(View.VISIBLE);
             SetClientProjectsAdapter();
         }
         if (position == 2) {
@@ -209,6 +211,7 @@ public class ProjectsFragment extends BaseFragment implements SwipeRefreshLayout
             for(int loop1=0;loop1<ProjectsByClientModel.getInstance().responseData.get(loop).projects.size();loop1++){
                 ProjectsList projectsList = new ProjectsList();
                 projectsList.setCompOrDeptName(ProjectsByClientModel.getInstance().responseData.get(loop).companyName);
+                Log.e("S","S"+ProjectsByClientModel.getInstance().responseData.get(loop).companyName);
                 projectsList.setCompOrDeptID(ProjectsByClientModel.getInstance().responseData.get(loop).ID);
                 projectsList.setProjectID(ProjectsByClientModel.getInstance().responseData.get(loop).projects.get(loop1).projectID);
                 projectsList.setProjectName(ProjectsByClientModel.getInstance().responseData.get(loop).projects.get(loop1).projectName);
@@ -225,7 +228,7 @@ public class ProjectsFragment extends BaseFragment implements SwipeRefreshLayout
         }
     }
     public void AddDepartmentProjects(){
-        ByDepartmentList.clear();
+        ByDepartmentList.clear();allDeptList.clear();
         for (int loop = 0; loop < ProjectsByDepartmentModel.getInstance().responseData.size(); loop++) {
             DeptList deptList = new DeptList();
             deptList.setDeptID(ProjectsByDepartmentModel.getInstance().responseData.get(loop).ID);
@@ -255,17 +258,29 @@ public class ProjectsFragment extends BaseFragment implements SwipeRefreshLayout
     }
 
     public void SetGeneralClientAdapter() {
+        ShowAlert(allProjectsList);
         clientAdapter = new AdapterProjectsClientList(getActivity(), allProjectsList);
         listViewClient.setAdapter(clientAdapter);
     }
     public void SetClientProjectsAdapter(){
-        clientAdapter = new AdapterProjectsClientList(getActivity(), ByClientList);
-        listViewClient.setAdapter(clientAdapter);
-    }
-    public void SetDepartmentProjectsAdapter(){
-        projectAdapter = new AdapterProjectsDeptList(getActivity());
+        ShowAlert(ByDepartmentList);
+        projectAdapter = new AdapterProjectsDeptList(getActivity(), ByClientList);
         listViewDept.setAreHeadersSticky(false);
         listViewDept.setAdapter(projectAdapter);
+    }
+    public void SetDepartmentProjectsAdapter(){
+        ShowAlert(ByDepartmentList);
+        projectAdapter = new AdapterProjectsDeptList(getActivity(),ByDepartmentList);
+        listViewDept.setAreHeadersSticky(false);
+        listViewDept.setAdapter(projectAdapter);
+    }
+    public void ShowAlert(ArrayList<ProjectsList> arrayList){
+        aq.id(R.id.alertMessage).text("No Projects");
+        if(arrayList.size() ==0){
+            aq.id(R.id.response_alert).visibility(View.VISIBLE);
+        }else{
+            aq.id(R.id.response_alert).visibility(View.GONE);
+        }
     }
     /**
      * Initialize the contents of the Activity's standard options menu.  You

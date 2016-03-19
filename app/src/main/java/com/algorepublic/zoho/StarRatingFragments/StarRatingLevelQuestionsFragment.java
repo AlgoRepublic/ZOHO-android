@@ -65,6 +65,12 @@ public class StarRatingLevelQuestionsFragment extends BaseFragment {
         StarRatingQuestionModel.getInstance().setList((StarRatingQuestionModel) model);
         if (StarRatingQuestionModel.getInstance().responseCode == 100) {
             GetListQuestions();
+            aq.id(R.id.alertMessage).text("No Questions");
+            if(Questions.size() ==0){
+                aq.id(R.id.response_alert).visibility(View.VISIBLE);
+            }else{
+                aq.id(R.id.response_alert).visibility(View.GONE);
+            }
           listView.setAdapter(new AdapterStarRatingQuestions(getActivity()));
         }
         else

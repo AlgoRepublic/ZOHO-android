@@ -131,23 +131,6 @@ public class AddUserFragment extends BaseFragment implements MultiSelectionSpinn
                 }catch (NullPointerException e){}
             }
             projectsList.setItems(projectList);
-            if(position > -1) {
-                if (UserListModel.getInstance().responseObject.get(position).projectIDs != null) {
-                    for (int loop = 0; loop < UserListModel.getInstance()
-                            .responseObject.get(position).projectIDs.size(); loop++) {
-                        for (int loop1 = 0; loop1 < AllProjectsByUserModel.getInstance()
-                                .responseData.size(); loop1++) {
-                            if (UserListModel.getInstance()
-                                    .responseObject.get(position).projectIDs.get(loop) == AllProjectsByUserModel
-                                    .getInstance().responseData.get(loop1).projectID)
-                                Ids[loop] = loop1;
-                            selectedIds.add(AllProjectsByUserModel
-                                    .getInstance().responseData.get(loop1).projectID);
-                        }
-                        projectsList.setSelection(Ids);
-                    }
-                }
-            }
         }else {
             Snackbar.make(getView(), getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
         }
@@ -160,7 +143,6 @@ public class AddUserFragment extends BaseFragment implements MultiSelectionSpinn
                 roleList.add(UserRoleModel.getInstance().responseObject.get(loop).role);
             }
             adapter = new AdapterTaskPriority(getActivity(),role_list, roleList);
-            adapter.setSelectedIndex(0);
             role_list.setAdapter(adapter);
         }else {
             Snackbar.make(getView() , getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();

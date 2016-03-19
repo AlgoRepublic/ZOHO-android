@@ -25,7 +25,7 @@
             android:background="@color/colorBaseHeader"></View>
 
         <RelativeLayout
-            android:layout_width="152dp"
+            android:layout_width="252dp"
             android:layout_height="match_parent"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
@@ -39,13 +39,14 @@
                 android:ellipsize="end"
                 android:padding="2dp"
                 android:text="Files"
+                android:singleLine="true"
                 android:textColor="@color/white"
                 android:textSize="12sp"
                 android:typeface="monospace" />
         </RelativeLayout>
 
         <RelativeLayout
-            android:layout_width="150dp"
+            android:layout_width="50dp"
             android:layout_height="match_parent"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"

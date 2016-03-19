@@ -279,7 +279,7 @@ public class UploadDocsFragment extends BaseFragment implements GoogleApiClient.
                 if (null != data) {
                     String thePath = getUriFromUrl("file://"+
                             getDataColumn(getActivity(), data.getData(),null,null)).toString();
-                    File  newFile = new File(URI.create(thePath));
+                    newFile = new File(URI.create(thePath));
                     checkFileLenght(newFile);
                 }
                 break;
@@ -291,13 +291,13 @@ public class UploadDocsFragment extends BaseFragment implements GoogleApiClient.
                     path.replace("file://", "");
                     Log.e("Path", path.toString());
                     Log.e("Call", result.getLink().toString());
-                    File file = null;
+                    newFile = null;
                     try {
-                        file = new File(new URI(path));
+                        newFile = new File(new URI(path));
                     } catch (URISyntaxException e) {
                         e.printStackTrace();
                     }
-                    checkFileLenght(file);
+                    checkFileLenght(newFile);
                 }
                 break;
             case REQUEST_ACCOUNT_PICKER:

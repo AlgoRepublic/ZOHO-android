@@ -19,6 +19,7 @@ import com.algorepublic.zoho.Models.ForumsModel;
 import com.algorepublic.zoho.Models.GeneralModel;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.fragments.BaseFragment;
+import com.algorepublic.zoho.fragments.TaskAddUpdateFragment;
 import com.algorepublic.zoho.fragments.TaskDetailFragment;
 import com.algorepublic.zoho.fragments.TasksListFragment;
 import com.algorepublic.zoho.services.CallBack;
@@ -111,13 +112,19 @@ public class AdapterTasksList extends BaseAdapter implements StickyListHeadersAd
         aq.id(R.id.parent1).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                callFragmentWithBackStack(R.id.container, TaskDetailFragment.newInstance(tasksLists.get(position), position),"TaskDetail");
+                callFragmentWithBackStack(R.id.container, TaskDetailFragment.newInstance(tasksLists.get(position), position), "TaskDetail");
             }
         });
         aq.id(R.id.btEdit).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                callFragmentWithBackStack(R.id.container, TaskDetailFragment.newInstance(tasksLists.get(position), position),"TaskDetail");
+                baseClass.setSelectedProject(Integer.toString(tasksLists.get(position).getProjectID()));
+                if (tasksLists.get(position).getProjectID() >0) {
+                    baseClass.db.putString("ProjectName",tasksLists.get(position).getProjectName());
+                    baseClass.setSelectedProject(Integer.toString(tasksLists.get(position).getProjectID()));
+                    callFragmentWithBackStack(R.id.container, TaskAddUpdateFragment.newInstance(tasksLists.get(position)),
+                            "TaskAddUpdateFragment");
+                }
             }
         });
         aq.id(R.id.btDelete).clicked(new View.OnClickListener() {

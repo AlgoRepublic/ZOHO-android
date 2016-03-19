@@ -136,23 +136,26 @@ public class BaseFragment extends Fragment {
     protected void callFragment(int containerId, Fragment fragment, String tag){
         getActivity().getSupportFragmentManager()
                 .beginTransaction()
-                .setCustomAnimations(R.anim.slide_in_enter, R.anim.slide_in_exit, R.anim.slide_pop_enter, R.anim.slide_pop_exit)
                 .add(containerId, fragment, tag)
+                .setCustomAnimations(R.anim.slide_in_enter, R.anim.slide_in_exit,
+                        R.anim.slide_pop_enter, R.anim.slide_pop_exit)
                 .commit();
     }
     public void callFragmentWithBackStack(int containerId, Fragment fragment, String tag){
         getActivity().getSupportFragmentManager()
                 .beginTransaction()
-                .setCustomAnimations(R.anim.slide_in_enter, R.anim.slide_in_exit, R.anim.slide_pop_enter, R.anim.slide_pop_exit)
                 .replace(containerId, fragment, tag)
+                .setCustomAnimations(R.anim.slide_in_enter, R.anim.slide_in_exit,
+                        R.anim.slide_pop_enter, R.anim.slide_pop_exit)
                 .addToBackStack(null)
                 .commit();
     }
     public void callFragmentWithReplace(int containerId, Fragment fragment, String tag){
         getActivity().getSupportFragmentManager()
                 .beginTransaction()
-                .setCustomAnimations(R.anim.slide_in_enter, R.anim.slide_in_exit, R.anim.slide_pop_enter, R.anim.slide_pop_exit)
                 .replace(containerId, fragment, tag)
+                .setCustomAnimations(R.anim.slide_in_enter, R.anim.slide_in_exit,
+                        R.anim.slide_pop_enter, R.anim.slide_pop_exit)
                 .commit();
     }
     public String DaysDifference(String milli){

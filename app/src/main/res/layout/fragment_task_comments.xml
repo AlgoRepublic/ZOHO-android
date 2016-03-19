@@ -22,7 +22,12 @@
             android:layout_marginBottom="60dp"
             android:id="@+id/listView_comments" />
 
-
+        <include
+            layout="@layout/layout_alert_message"
+            android:layout_width="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_height="wrap_content" />
         <include
             android:id="@+id/include"
             android:layout_alignParentBottom="true"

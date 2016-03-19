@@ -4,15 +4,24 @@
     android:layout_height="match_parent"
     tools:context="com.algorepublic.zoho.FragmentsTasks.TaskAssignFragment">
 
+    <SearchView
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:id="@+id/searchView"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
+
     <se.emilsjolander.stickylistheaders.StickyListHeadersListView
         android:id="@+id/list_taskslist"
+
         android:layout_width="match_parent"
+        android:layout_below="@+id/searchView"
         android:layout_height="match_parent"
         android:layout_above="@+id/layout_bottom"
         android:background="@color/colorWhite"
         android:divider="@android:color/transparent"
         android:dividerHeight="-2dp"
-        android:fadeScrollbars="false"
+        android:fadeScrollbars="true"
         android:scrollbarAlwaysDrawVerticalTrack="true"
         android:scrollbarSize="3dp"
         android:scrollbars="vertical" />
@@ -42,9 +51,9 @@
                 android:layout_gravity="center"
                 android:layout_weight=".8"
                 android:adjustViewBounds="true"
-                android:background="@drawable/black_radiobutton"
                 android:button="@null"
                 android:gravity="center"
+                android:background="@drawable/black_radiobutton"
                 android:scaleType="fitXY"
                 android:text="@string/all"
                 android:textAlignment="gravity"
@@ -63,9 +72,9 @@
                 android:layout_gravity="center"
                 android:layout_weight="1.1"
                 android:adjustViewBounds="true"
-                android:background="@drawable/black_radiobutton"
                 android:button="@null"
                 android:gravity="center"
+                android:background="@drawable/black_radiobutton"
                 android:scaleType="fitXY"
                 android:text="@string/up_coming"
                 android:textAlignment="gravity"
@@ -84,9 +93,9 @@
                 android:layout_gravity="center"
                 android:layout_weight="1.1"
                 android:adjustViewBounds="true"
-                android:background="@drawable/black_radiobutton"
                 android:button="@null"
                 android:gravity="center"
+                android:background="@drawable/black_radiobutton"
                 android:scaleType="fitXY"
                 android:text="@string/over_due"
                 android:textAlignment="gravity"
@@ -114,8 +123,14 @@
                 android:layout_gravity="center"
                 android:layout_marginBottom="12dp"
                 android:layout_marginTop="12dp"
-                android:background="@mipmap/task_image"
-                android:scaleX="-1" />
+                android:background="@mipmap/task_image" />
         </RelativeLayout>
     </LinearLayout>
+    <include
+        layout="@layout/layout_alert_message"
+        android:layout_width="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_height="wrap_content" />
+
 </RelativeLayout>

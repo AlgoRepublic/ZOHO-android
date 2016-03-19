@@ -82,13 +82,11 @@ public class MenuSettingsFragment extends BaseFragment {
             @Override
             public void onClick(View view) {
                 baseClass.setUserId("");
-                getActivity().finish();
                 Intent intent = new Intent(getActivity(), ActivitySplash.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
-
-
+                getActivity().finish();
             }
         });
         aq.id(R.id.edit_profile).clicked(new View.OnClickListener() {

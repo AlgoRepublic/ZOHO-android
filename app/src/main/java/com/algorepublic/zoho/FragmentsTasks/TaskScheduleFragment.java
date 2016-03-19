@@ -135,8 +135,8 @@ public class TaskScheduleFragment extends BaseFragment {
             start_day = calendar.get(Calendar.DAY_OF_MONTH);
         }else{
             String[] splited = start_date.split("/");
-            start_day = Integer.parseInt(splited[1]);
-            start_month = Integer.parseInt(splited[0])-1;
+            start_day = Integer.parseInt(splited[0]);
+            start_month = Integer.parseInt(splited[1])-1;
             start_year = Integer.parseInt(splited[2]);
         }
     }
@@ -150,8 +150,8 @@ public class TaskScheduleFragment extends BaseFragment {
             end_day = calendar.get(Calendar.DAY_OF_MONTH);
         }else{
             String[] splited = end_date.split("/");
-            end_day = Integer.parseInt(splited[1]);
-            end_month = Integer.parseInt(splited[0])-1;
+            end_day = Integer.parseInt(splited[0]);
+            end_month = Integer.parseInt(splited[1])-1;
             end_year = Integer.parseInt(splited[2]);
         }
     }

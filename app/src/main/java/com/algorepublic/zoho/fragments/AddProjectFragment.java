@@ -141,8 +141,12 @@ public class AddProjectFragment extends BaseFragment {
         service = new TaskListService(getActivity());
         deptList = new LinkedList<>();
         for(int loop=0;loop<ProjectsFragment.allDeptList.size();loop++){
+            if(ProjectsFragment.allDeptList.get(loop).getDeptID()=="0"){
+                deptList.add("None");
+            }else
             deptList.add(ProjectsFragment.allDeptList.get(loop).getDeptName());
         }
+        Collections.sort(deptList,ByAlphabet);
         departments_list.attachDataSource(deptList);
         service.getTaskAssignee(Integer.parseInt(baseClass.getSelectedProject()), false,
                 new CallBack(AddProjectFragment.this, "GetAllUsers"));
@@ -153,6 +157,10 @@ public class AddProjectFragment extends BaseFragment {
         if (TaskUserModel.getInstance().responseCode == 100) {
             userList= new LinkedList<>();
             for(int loop=0;loop< TaskUserModel.getInstance().responseObject.size();loop++) {
+                if(TaskUserModel.getInstance().responseObject.get(loop).ID==
+                        Integer.parseInt(baseClass.getUserId())){
+                    userList.add("Me");
+                }else
                 userList.add(TaskUserModel.getInstance().responseObject.get(loop).firstName);
             }
             Collections.sort(userList,ByAlphabet);
@@ -164,7 +172,7 @@ public class AddProjectFragment extends BaseFragment {
     Comparator<String> ByAlphabet = new Comparator<String>() {
         @Override
         public int compare(String lhs, String rhs) {
-            return (rhs.compareTo(lhs));
+            return (lhs.compareTo(rhs));
         }
     };
 }

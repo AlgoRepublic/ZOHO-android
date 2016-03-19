@@ -152,24 +152,25 @@ public class DocumentsListBySubTaskFragment extends BaseFragment {
             @Override
             public void onOperItemClick(AdapterView<?> parent, View view, int position, long id) {
                 dialog.dismiss();
-                if (isLoaded())
+                if (isLoaded()) {
                     if (position == 0) {
                         baseClass.setDocsSortType(getString(R.string.all_files));
                         aq.id(R.id.list_title).text(getString(R.string.all_files));
                     }
-                if (position == 1) {
-                    baseClass.setDocsSortType(getString(R.string.picture));
-                    aq.id(R.id.list_title).text(getString(R.string.picture));
+                    if (position == 1) {
+                        baseClass.setDocsSortType(getString(R.string.picture));
+                        aq.id(R.id.list_title).text(getString(R.string.picture));
+                    }
+                    if (position == 2) {
+                        baseClass.setDocsSortType(getString(R.string.videos));
+                        aq.id(R.id.list_title).text(getString(R.string.videos));
+                    }
+                    if (position == 3) {
+                        baseClass.setDocsSortType(getString(R.string.favorites));
+                        aq.id(R.id.list_title).text(getString(R.string.favorites));
+                    }
+                    FilterList();
                 }
-                if (position == 2) {
-                    baseClass.setDocsSortType(getString(R.string.videos));
-                    aq.id(R.id.list_title).text(getString(R.string.videos));
-                }
-                if (position == 3) {
-                    baseClass.setDocsSortType(getString(R.string.favorites));
-                    aq.id(R.id.list_title).text(getString(R.string.favorites));
-                }
-                FilterList();
             }
         });
     }
@@ -187,6 +188,12 @@ public class DocumentsListBySubTaskFragment extends BaseFragment {
     }
     public void SetAdapterList(){
         if (SubTaskAttachmentsModel.getInstance().responseCode == 100) {
+            aq.id(R.id.alertMessage).text("No Documents");
+            if(generalDocsList.size() ==0){
+                aq.id(R.id.response_alert).visibility(View.VISIBLE);
+            }else{
+                aq.id(R.id.response_alert).visibility(View.GONE);
+            }
             adapterDocsList = new AdapterDocumentsList(getActivity(),ID,generalDocsList);
             listView.setAreHeadersSticky(true);
             listView.setAdapter(adapterDocsList);

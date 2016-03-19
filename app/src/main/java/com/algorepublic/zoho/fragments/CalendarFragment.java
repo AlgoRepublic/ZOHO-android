@@ -92,12 +92,13 @@ public class CalendarFragment extends BaseFragment implements CalendarPickerCont
         super.onViewCreated(view, savedInstanceState);
 
 //        initCalendarView();
-        if(TasksListByOwnerModel.getInstance().responseObject.isEmpty()){
-            TaskListService service = new TaskListService(getActivity());
-            service.getTasksListByOwner(baseClass.getUserId(),true,
-                    new CallBack(CalendarFragment.this, "TasksList"));
+        TaskListService service = new TaskListService(getActivity());
+        if(baseClass.getSelectedProject().equalsIgnoreCase("0")) {
+            service.getTasksListByOwner(baseClass.getUserId(), true,
+                    new CallBack(CalendarFragment.this, "OwnerTasksList"));
         }else{
-            initCalendarView();
+            service.getTasksListByProject(baseClass.getSelectedProject(), true,
+                    new CallBack(CalendarFragment.this, "OwnerTasksList"));
         }
     }
 
@@ -122,12 +123,13 @@ public class CalendarFragment extends BaseFragment implements CalendarPickerCont
         return eventList;
     }
 
-    public void TasksList(Object caller, Object model) {
+    public void OwnerTasksList(Object caller, Object model) {
         TasksListByOwnerModel.getInstance().setList((TasksListByOwnerModel) model);
         initCalendarView();
     }
 
     private void initCalendarView(){
+        aq.id(R.id.alertMessage).text("No Tasks");
         Locale locale;
         // Get a reference for the week view in the layout.
         calendarView = (AgendaCalendarView) aq.id(R.id.agenda_calendar_view).getView();
@@ -149,9 +151,12 @@ public class CalendarFragment extends BaseFragment implements CalendarPickerCont
             }catch (Exception e){
                 e.printStackTrace();
             }
+            aq.id(R.id.response_alert).visibility(View.GONE);
         }
-        else
-            Snackbar.make(getView(),getString(R.string.no_task_found),Snackbar.LENGTH_SHORT).show();
+        else {
+            aq.id(R.id.response_alert).visibility(View.VISIBLE);
+            Snackbar.make(getView(), getString(R.string.no_task_found), Snackbar.LENGTH_SHORT).show();
+        }
 
     }
 

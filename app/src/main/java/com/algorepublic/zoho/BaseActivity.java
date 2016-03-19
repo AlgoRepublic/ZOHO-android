@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -15,15 +16,19 @@ import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
+import com.algorepublic.zoho.utils.BaseClass;
+
 import cc.cloudist.acplibrary.ACProgressConstant;
 import cc.cloudist.acplibrary.ACProgressFlower;
 
 public class BaseActivity extends AppCompatActivity {
     public static DrawerLayout drawer;public static Toolbar toolbar;
     public static ActionBarDrawerToggle toggle;
+    BaseClass baseClass;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        baseClass = ((BaseClass) getApplicationContext());
     }
 
 
@@ -31,6 +36,8 @@ public class BaseActivity extends AppCompatActivity {
         getSupportFragmentManager()
                 .beginTransaction()
                 .add(containerId, fragment, tag)
+                .setCustomAnimations(R.anim.slide_in_enter, R.anim.slide_in_exit,
+                        R.anim.slide_pop_enter, R.anim.slide_pop_exit)
                 .commit();
     }
     public void callFragmentWithReplace(int containerId, Fragment fragment, String tag){
@@ -52,6 +59,8 @@ public class BaseActivity extends AppCompatActivity {
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(containerId, fragment, tag)
+                .setCustomAnimations(R.anim.slide_in_enter, R.anim.slide_in_exit,
+                        R.anim.slide_pop_enter, R.anim.slide_pop_exit)
                 .addToBackStack(null)
                 .commit();
     }
@@ -82,7 +91,6 @@ public class BaseActivity extends AppCompatActivity {
         Cursor cursor = getContentResolver().query(contentUri, projection, null, null, null);
         int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
         cursor.moveToFirst();
-        Log.e("Link",cursor.getString(column_index));
         return cursor.getString(column_index);
     }
     public void setToolbar(){
@@ -91,12 +99,6 @@ public class BaseActivity extends AppCompatActivity {
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
-//        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                hideKeyPad(v);
-//            }
-//        });
 
     }
     public ACProgressFlower InitializeDialog(Context context){

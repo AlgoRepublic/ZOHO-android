@@ -204,6 +204,12 @@ public class ForumsDetailFragment extends BaseFragment {
         }else {
             Snackbar.make(getView(),getString(R.string.response_error),Snackbar.LENGTH_SHORT).show();
         }
+        aq.id(R.id.alertMessage).text("No Comments");
+        if(arrayList.size() ==0){
+            aq.id(R.id.response_alert).visibility(View.VISIBLE);
+        }else{
+            aq.id(R.id.response_alert).visibility(View.GONE);
+        }
         UpdateValues();
     }
     public void UpdateValues() {

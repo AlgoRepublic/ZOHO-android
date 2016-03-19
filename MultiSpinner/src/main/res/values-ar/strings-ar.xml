@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Lib Multi Spinner</string>
+    <string name="please_select">Please Select!</string>
+    <string name="selected_projects">Selected Project(s)  </string>
+    <string name="submit">Submit</string>
+    <string name="cancel">Cancel</string>
+</resources>

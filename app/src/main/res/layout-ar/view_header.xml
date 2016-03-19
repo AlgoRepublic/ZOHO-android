@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorBaseWrapper"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/underline_textview"
+            android:gravity="center_horizontal"
+            android:padding="10dp"
+            android:text="Attachments"
+            android:textColor="@color/colorContentWrapper"
+            android:textSize="14sp"
+            android:typeface="monospace" />
+
+        <Button
+            android:id="@+id/add_file"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_margin="10dp"
+            android:padding="5dp"
+            android:text="Add"
+            android:textAllCaps="false"
+            android:textColor="@color/colorBaseWrapper"
+            android:textSize="12sp" />
+
+    </LinearLayout>
+</LinearLayout>

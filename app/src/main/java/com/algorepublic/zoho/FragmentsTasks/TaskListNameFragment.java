@@ -47,6 +47,12 @@ public class TaskListNameFragment extends BaseFragment {
         aq = new AQuery(view);
         baseClass = ((BaseClass) getActivity().getApplicationContext());
         adapter = new AdapterTaskListName(getActivity());
+        aq.id(R.id.alertMessage).text("No Tasks List");
+        if(TasksListFragment.taskListName.size() ==0){
+            aq.id(R.id.response_alert).visibility(View.VISIBLE);
+        }else{
+            aq.id(R.id.response_alert).visibility(View.GONE);
+        }
         for(int loop=0;loop<TasksListFragment.taskListName.size();loop++) {
             if (baseClass.db.getInt("TaskListNameID") ==
                     TasksListFragment.taskListName.get(loop).getTaskListID()) {

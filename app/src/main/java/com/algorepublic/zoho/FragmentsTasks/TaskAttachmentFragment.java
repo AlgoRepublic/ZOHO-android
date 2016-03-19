@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -55,6 +56,7 @@ public class TaskAttachmentFragment extends BaseFragment {
     public static ParallaxListView listView;
     static TasksList taskObj;
     DocumentsService service;
+    File newFile;
     public TaskAttachmentFragment() {
 
     }
@@ -133,6 +135,12 @@ public class TaskAttachmentFragment extends BaseFragment {
             File file = null;
             showFileInList(file, link,ID,name);
         }
+        aq.id(R.id.alertMessage).text("No Attachments");
+        if(TaskAddUpdateFragment.apiDocsList.size() ==0){
+            aq.id(R.id.response_alert).visibility(View.VISIBLE);
+        }else{
+            aq.id(R.id.response_alert).visibility(View.GONE);
+        }
     }
     private void CallForAttachments() {
         String[] menuItems = {getString(R.string.camera),getString(R.string.gallery)
@@ -146,7 +154,9 @@ public class TaskAttachmentFragment extends BaseFragment {
                 dialog.dismiss();
                 if (position == 0) {
                     Intent intent = new Intent(
-                            "android.media.action.IMAGE_CAPTURE");
+                            android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+                    newFile = getOutputMediaFile();
+                    intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(newFile));
                     startActivityForResult(intent, TAKE_PICTURE);
                 }
                 if (position == 1) {
@@ -175,11 +185,13 @@ public class TaskAttachmentFragment extends BaseFragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         Log.e("code", requestCode + "/" + resultCode + "/");
+        if (resultCode == Activity.RESULT_CANCELED) {
+            Toast.makeText(getActivity(), "Cancelled",
+                    Toast.LENGTH_SHORT).show();
+        }
         switch (requestCode) {
             case TAKE_PICTURE:
                 if (resultCode == getActivity().RESULT_OK) {
-                    Uri selectedImageUri = data.getData();
-                    File newFile = new File(getRealPathFromURI(selectedImageUri));
                     checkFileLenght(newFile);
                 }
                 break;
@@ -187,14 +199,14 @@ public class TaskAttachmentFragment extends BaseFragment {
                 if (null != data) {
                     String thePath = getUriFromUrl("file://"+
                             getDataColumn(getActivity(), data.getData(),null,null)).toString();
-                    File  newFile = new File(URI.create(thePath));
+                    newFile = new File(URI.create(thePath));
                     checkFileLenght(newFile);
                 }
                 break;
             case PICK_File:
                 if (resultCode == Activity.RESULT_OK) {
                     Uri contactData = data.getData();
-                    File  newFile = null;
+                    newFile = null;
                     String thePath = getUriFromUrl("file://"+
                             getDataColumn(getActivity(), contactData,null,null)).toString();
                     try {
@@ -218,13 +230,14 @@ public class TaskAttachmentFragment extends BaseFragment {
     }
 
     private void showFileInList(File file,String ApiUrl,Integer ID,String name) {
-            AttachmentList attachmentList = new AttachmentList();
-            attachmentList.setFileID(ID);
-            attachmentList.setFileName(name);
-            attachmentList.setFileUrl(ApiUrl);
-            attachmentList.setFile(file);
-            TaskAddUpdateFragment.filesList.add(attachmentList);
-            adapter.notifyDataSetChanged();
+        AttachmentList attachmentList = new AttachmentList();
+        attachmentList.setFileID(ID);
+        attachmentList.setFileName(name);
+        attachmentList.setFileUrl(ApiUrl);
+        attachmentList.setFile(file);
+        TaskAddUpdateFragment.filesList.add(attachmentList);
+        aq.id(R.id.response_alert).visibility(View.GONE);
+        adapter.notifyDataSetChanged();
     }
     public void MaterialAlertDialog(){
         final MaterialDialog dialog = new MaterialDialog(getActivity());

@@ -6,6 +6,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,6 +29,8 @@ import com.flyco.animation.SlideExit.SlideRightExit;
 import com.flyco.dialog.listener.OnBtnClickL;
 import com.flyco.dialog.widget.NormalDialog;
 
+import java.util.ArrayList;
+
 import cc.cloudist.acplibrary.ACProgressFlower;
 import se.emilsjolander.stickylistheaders.StickyListHeadersAdapter;
 
@@ -43,10 +46,12 @@ public class AdapterProjectsDeptList extends BaseAdapter implements StickyListHe
     private LayoutInflater l_Inflater;
     ProjectsListService service;
     private int lastPosition;
+    ArrayList<ProjectsList> arrayList = new ArrayList<>();
 
 
-    public AdapterProjectsDeptList(Context context) {
+    public AdapterProjectsDeptList(Context context,ArrayList<ProjectsList> lists) {
         l_Inflater = LayoutInflater.from(context);
+        arrayList.addAll(lists);
         this.ctx = context;
         service = new ProjectsListService((AppCompatActivity)ctx);
         baseClass = ((BaseClass) ctx.getApplicationContext());
@@ -54,12 +59,12 @@ public class AdapterProjectsDeptList extends BaseAdapter implements StickyListHe
 
     @Override
     public int getCount() {
-        return ProjectsFragment.ByDepartmentList.size();
+        return arrayList.size();
     }
 
     @Override
     public Object getItem(int pos) {
-        return ProjectsFragment.ByDepartmentList.get(pos);
+        return arrayList.get(pos);
     }
 
     @Override
@@ -87,19 +92,19 @@ public class AdapterProjectsDeptList extends BaseAdapter implements StickyListHe
             holder = (ViewHolder) convertView.getTag();
         }
         aq = new AQuery(convertView);
-        holder.projectTitle.setText(ProjectsFragment.ByDepartmentList.get(position).getProjectName());
-        if(!ProjectsFragment.ByDepartmentList.get(position).getTotalTasks().isEmpty())
-            holder.taskAlert.setText(ProjectsFragment.ByDepartmentList.get(position).getTotalTasks());
-        if(!ProjectsFragment.ByDepartmentList.get(position).getTotalMilestones().isEmpty())
-            holder.milestoneAlert.setText(ProjectsFragment.ByDepartmentList.get(position).getTotalMilestones());
-        if(!ProjectsFragment.ByDepartmentList.get(position).getTotalUsers().isEmpty())
-            holder.userAlert.setText(ProjectsFragment.ByDepartmentList.get(position).getTotalUsers());
+        holder.projectTitle.setText(arrayList.get(position).getProjectName());
+        if(!arrayList.get(position).getTotalTasks().isEmpty())
+            holder.taskAlert.setText(arrayList.get(position).getTotalTasks());
+        if(!arrayList.get(position).getTotalMilestones().isEmpty())
+            holder.milestoneAlert.setText(arrayList.get(position).getTotalMilestones());
+        if(!arrayList.get(position).getTotalUsers().isEmpty())
+            holder.userAlert.setText(arrayList.get(position).getTotalUsers());
 
-        holder.projectId.setText(ProjectsFragment.ByDepartmentList.get(position).getProjectID());
-        if(ProjectsFragment.ByDepartmentList.get(position).getProjectDesc() != null)
-            holder.projectDesc.setText(Html.fromHtml(ProjectsFragment.ByDepartmentList.get(position).getProjectDesc()));
+        holder.projectId.setText(arrayList.get(position).getProjectID());
+        if(arrayList.get(position).getProjectDesc() != null)
+            holder.projectDesc.setText(Html.fromHtml(arrayList.get(position).getProjectDesc()));
 
-        if(baseClass.getSelectedProject().equals(ProjectsFragment.ByDepartmentList.get(position).getProjectID())){
+        if(baseClass.getSelectedProject().equals(arrayList.get(position).getProjectID())){
             aq.id(R.id.selected_project).getView().setBackgroundColor(Color.parseColor("#99cc00"));
         }else{
             aq.id(R.id.selected_project).getView().setBackgroundColor(Color.parseColor("#FFFFFF"));
@@ -124,7 +129,7 @@ public class AdapterProjectsDeptList extends BaseAdapter implements StickyListHe
             public void onClick(View v) {
                 if (!baseClass.getSelectedProject().equalsIgnoreCase("0")) {
                     callFragmentWithBackStack(R.id.container, EditProjectFragment.
-                            newInstance(ProjectsFragment.ByDepartmentList, position), "EditProjectFragment");
+                            newInstance(arrayList, position), "EditProjectFragment");
                 }
             }
         });
@@ -140,7 +145,7 @@ public class AdapterProjectsDeptList extends BaseAdapter implements StickyListHe
     public void DeleteProject(Object caller, Object model) {
         GeneralModel.getInstance().setList((GeneralModel) model);
         if (GeneralModel.getInstance().responseCode.equalsIgnoreCase("100")) {
-            ProjectsFragment.ByDepartmentList.remove(lastPosition);
+            arrayList.remove(lastPosition);
             notifyDataSetChanged();
             Snackbar.make(aq.id(R.id.shadow_item_container).getView(), ctx.getString(R.string.project_deleted), Snackbar.LENGTH_SHORT).show();
         } else {
@@ -161,13 +166,14 @@ public class AdapterProjectsDeptList extends BaseAdapter implements StickyListHe
 
         convertView = l_Inflater.inflate(R.layout.layout_generic_header, parent , false);
         aq_header = new AQuery(convertView);
-        aq_header.id(R.id.header).text(ProjectsFragment.ByDepartmentList.get(position).getCompOrDeptName());
+        aq_header.id(R.id.header).text(arrayList.get(position).getCompOrDeptName());
+        Log.e("SS","S"+arrayList.get(position).getCompOrDeptName());
         return convertView;
     }
 
     @Override
     public long getHeaderId(int position) {
-        return Long.valueOf(ProjectsFragment.ByDepartmentList.get(position).getCompOrDeptID());
+        return Long.valueOf(arrayList.get(position).getCompOrDeptID());
     }
     private void NormalDialogCustomAttr(String content,final int position) {
         final NormalDialog dialog = new NormalDialog(ctx);
@@ -199,7 +205,7 @@ public class AdapterProjectsDeptList extends BaseAdapter implements StickyListHe
                     public void onBtnClick() {
                         dialog.dismiss();
                         lastPosition = position;
-                        service.DeleteProject(ProjectsFragment.ByDepartmentList.get(position).getProjectID(), true
+                        service.DeleteProject(arrayList.get(position).getProjectID(), true
                                 , new CallBack(AdapterProjectsDeptList.this, "DeleteProject"));
                     }
                 });

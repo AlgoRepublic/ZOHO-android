@@ -3,28 +3,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorBaseWrapper"
+    android:background="@color/colorWhite"
     tools:context="com.algorepublic.zoho.fragments.CalendarFragment">
 
     <com.github.tibolte.agendacalendarview.AgendaCalendarView
         android:id="@+id/agenda_calendar_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="gone"
-        agendaCalendar:calendarHeaderColor="@color/colorBaseHeader"
-        agendaCalendar:calendarColor="@color/white"
-        agendaCalendar:calendarDayTextColor="@color/white"
-        agendaCalendar:agendaCurrentDayTextColor="@color/colorBaseHeader"
-        agendaCalendar:fabColor="@color/colorBaseWrapper" />
+        android:layout_height="match_parent"/>
 
-    <com.github.tibolte.agendacalendarview.AgendaCalendarView
-        android:id="@+id/agenda_calendar_blue"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="gone"
-        agendaCalendar:calendarHeaderColor="@color/colorPrimaryBlue"
-        agendaCalendar:calendarColor="@color/colorSecondaryBlue"
-        agendaCalendar:calendarDayTextColor="@color/white"
-        agendaCalendar:agendaCurrentDayTextColor="@color/colorPrimaryBlue"
-        agendaCalendar:fabColor="@color/colorSecondaryBlue" />
+    <include
+        layout="@layout/layout_alert_message"
+        android:layout_width="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_height="wrap_content" />
+
 </RelativeLayout>
