@@ -155,7 +155,7 @@ public class EditProfileFragment extends BaseFragment implements MultiSelectionS
                         projectList.add(AllProjectsByUserModel.getInstance().responseData.get(loop).projectName);
                 }catch (NullPointerException e){}
             }
-            projectsList.setItems(projectList);
+                projectsList.setItems(projectList);
                 if (GetUserModel.getInstance().user.projectIDs != null) {
 
                     int[] Ids = new int[GetUserModel.getInstance().user.projectIDs.size()];

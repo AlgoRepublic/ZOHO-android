@@ -90,7 +90,7 @@ public class DocsPreviewFragment extends BaseFragment {
                 baseClass.getProfileImage()));
         aq.id(R.id.user_name).text(docObject.getFileName());
         aq.id(R.id.doc_title).text(docObject.getFileName());
-        aq.id(R.id.doc_size).text(docObject.getFileSizeInByte());
+        aq.id(R.id.doc_size).text(docObject.getFileSizeInByte()+"K");
         if(docObject.getFileTypeID()>=0 &&
                 docObject.getFileTypeID()<=4 ){
             if(docObject.getFileDescription() != null) {

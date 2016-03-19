@@ -68,7 +68,7 @@ public class DocumentsListModel {
 
         @SerializedName("FileSizeInByte")
         @Expose
-        public String fileSizeInByte;
+        public Integer fileSizeInByte;
 
         @SerializedName("UpdatedAt")
         @Expose

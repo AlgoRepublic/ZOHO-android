@@ -121,7 +121,7 @@ public class TaskAttachmentFragment extends BaseFragment {
             documentsList.setID(SubTaskAttachmentsModel.getInstance().responseObject.get(loop).Id);
             documentsList.setFileName(SubTaskAttachmentsModel.getInstance().responseObject.get(loop).fileDescription);
             documentsList.setFileDescription(SubTaskAttachmentsModel.getInstance().responseObject.get(loop).fileName);
-            documentsList.setFileSizeInByte(SubTaskAttachmentsModel.getInstance().responseObject.get(loop).fileSizeInByte);
+            documentsList.setFileSizeInByte(Integer.toString(SubTaskAttachmentsModel.getInstance().responseObject.get(loop).fileSizeInByte/1000));
             documentsList.setUpdatedAt(DateFormatter(SubTaskAttachmentsModel.getInstance().responseObject.get(loop).updatedAt));
             documentsList.setUpdatedMilli(DateMilli(SubTaskAttachmentsModel.getInstance().responseObject.get(loop).updatedAt));
             documentsList.setFileTypeID(SubTaskAttachmentsModel.getInstance().responseObject.get(loop).fileTypeID);

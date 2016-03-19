@@ -47,7 +47,7 @@ public class SubTaskAttachmentsModel {
         public String fileDescription;
 
         @SerializedName("FileSizeInByte")
-        public String fileSizeInByte;
+        public Integer fileSizeInByte;
 
         @SerializedName("UpdatedAt")
         public String updatedAt;

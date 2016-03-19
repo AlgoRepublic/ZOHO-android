@@ -57,7 +57,8 @@ public class TaskScheduleFragment extends BaseFragment {
         day = calendar.get(Calendar.DAY_OF_MONTH);
         year = calendar.get(Calendar.YEAR);
 
-        if(!BaseClass.db.getString("StartDate").equalsIgnoreCase("")) {
+        if(!BaseClass.db.getString("StartDate").equalsIgnoreCase("")||
+                BaseClass.db.getString("StartDate").equalsIgnoreCase("0001-01-01")) {
             if (BaseClass.db.getString("StartDate").equalsIgnoreCase("3/0/1")) {
                 aq.id(R.id.start_date).text("No Date");
             } else if (BaseClass.db.getString("StartDate").equalsIgnoreCase("12/31/3938")) {
@@ -69,7 +70,8 @@ public class TaskScheduleFragment extends BaseFragment {
             aq.id(R.id.start_date).text(day+"/"+month+"/"+year);
         }
 
-        if(!BaseClass.db.getString("EndDate").equalsIgnoreCase("")) {
+        if(!BaseClass.db.getString("EndDate").equalsIgnoreCase("") ||
+                BaseClass.db.getString("EndDate").equalsIgnoreCase("0001-01-01")) {
             if (BaseClass.db.getString("EndDate").equalsIgnoreCase("3/0/1")) {
                 aq.id(R.id.end_date).text("No Date");
             } else if (BaseClass.db.getString("EndDate").equalsIgnoreCase("12/31/3938")) {

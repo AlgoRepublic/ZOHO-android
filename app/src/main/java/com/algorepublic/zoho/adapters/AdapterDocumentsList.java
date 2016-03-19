@@ -81,6 +81,7 @@ public class AdapterDocumentsList extends BaseAdapter implements StickyListHeade
 
         aq.id(R.id.file_id).text(Integer.toString(documentsLists.get(position).getID()));
         aq.id(R.id.file_name).text(documentsLists.get(position).getFileName());
+        aq.id(R.id.file_size).text(documentsLists.get(position).getFileSizeInByte()+"K");
         aq.id(R.id.file_time).text(GetTime(documentsLists.get(position).getUpdatedMilli()));
         aq.id(R.id.doc_checkbox).image(BaseClass.getIcon(documentsLists.
                 get(position).getFileTypeID()));

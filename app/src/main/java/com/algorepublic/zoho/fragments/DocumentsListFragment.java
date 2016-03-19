@@ -3,6 +3,7 @@ package com.algorepublic.zoho.fragments;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -221,7 +222,7 @@ public class DocumentsListFragment extends BaseFragment{
                 documentsList.setID(DocumentsListModel.getInstance().responseObject.get(loop).files.get(loop1).ID);
                 documentsList.setFileName(DocumentsListModel.getInstance().responseObject.get(loop).files.get(loop1).fileDescription);
                 documentsList.setFileDescription(DocumentsListModel.getInstance().responseObject.get(loop).files.get(loop1).fileName);
-                documentsList.setFileSizeInByte(DocumentsListModel.getInstance().responseObject.get(loop).files.get(loop1).fileSizeInByte);
+                documentsList.setFileSizeInByte(Integer.toString(DocumentsListModel.getInstance().responseObject.get(loop).files.get(loop1).fileSizeInByte/1000));
                 documentsList.setUpdatedAt(DateFormatter(DocumentsListModel.getInstance().responseObject.get(loop).files.get(loop1).updatedAt));
                 documentsList.setUpdatedMilli(DateMilli(DocumentsListModel.getInstance().responseObject.get(loop).files.get(loop1).updatedAt));
                 documentsList.setFileTypeID(DocumentsListModel.getInstance().responseObject.get(loop).files.get(loop1).fileTypeID);

@@ -55,7 +55,7 @@ public class TaskDetailFragment extends BaseFragment {
     int multiple=10;
     int progress=0;
     BaseClass baseClass;
-    WebView webView;
+   // WebView webView;
 
     @SuppressLint("ValidFragment")
     public TaskDetailFragment() {
@@ -104,11 +104,11 @@ public class TaskDetailFragment extends BaseFragment {
         views =(View) view.findViewById(R.id.priority_bar);
         twoWayAssignee.setHasFixedSize(true);
         twoWayAssignee.setLongClickable(true);
-        webView=(WebView)view.findViewById(R.id.task_desc);
-        webView.getSettings().setJavaScriptEnabled(true);
-        webView.getSettings().setLoadWithOverviewMode(true);
-        webView.getSettings().setUseWideViewPort(true);
-        webView.getSettings().setBuiltInZoomControls(true);
+//        webView=(WebView)view.findViewById(R.id.task_desc);
+//        webView.getSettings().setJavaScriptEnabled(true);
+//        webView.getSettings().setLoadWithOverviewMode(true);
+//        webView.getSettings().setUseWideViewPort(true);
+//        webView.getSettings().setBuiltInZoomControls(true);
         twoWayAssignee.setOrientation(TwoWayLayoutManager.Orientation.HORIZONTAL);
         twoWayAssignee.setAdapter(new AdapterTaskDetailAssignee(getActivity(),
                 tasksList.getListAssignees()));
@@ -216,10 +216,11 @@ public class TaskDetailFragment extends BaseFragment {
         aq.id(R.id.user_counter).text(String.valueOf(TaskByIdModel.getInstance().responseObject.userObject.size()));
         aq.id(R.id.category).text(baseClass.db.getString("TaskListName"));
         aq.id(R.id.task_name).text(TaskByIdModel.getInstance().responseObject.title);
-        webView.loadDataWithBaseURL("", TaskByIdModel.getInstance().responseObject.description, "text/html", "UTF-8", "");
-//        aq.id(R.id.task_desc).text(Html.fromHtml(TaskByIdModel.getInstance().responseObject.description));
+        //webView.loadDataWithBaseURL("", TaskByIdModel.getInstance().responseObject.description, "text/html", "UTF-8", "");
 
+        if (TaskByIdModel.getInstance().responseObject.description !=null)
         aq.id(R.id.task_desc).text(Html.fromHtml(TaskByIdModel.getInstance().responseObject.description));
+
         aq.id(R.id.comment_count).text(Integer.toString(TaskByIdModel.getInstance().responseObject.commentsCount));
         aq.id(R.id.docs_count).text(Integer.toString(TaskByIdModel.getInstance().responseObject.documentsCount));
         aq.id(R.id.subtask_count).text(Integer.toString(TaskByIdModel.getInstance().responseObject.subTasksCount));

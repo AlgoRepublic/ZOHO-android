@@ -29,8 +29,8 @@ public class AdapterTaskAssignee extends BaseAdapter {
     private LayoutInflater l_Inflater;
 
     public AdapterTaskAssignee(Context context) {
-        l_Inflater = LayoutInflater.from(context);
         this.ctx = context;
+        l_Inflater = LayoutInflater.from(context);
         baseClass = ((BaseClass) ctx.getApplicationContext());
     }
 

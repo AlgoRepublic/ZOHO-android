@@ -278,7 +278,7 @@ public class AdapterDepartment
     }
     public void MoveProject(Object caller, Object model) {
         GeneralModel.getInstance().setList((GeneralModel) model);
-        if (GeneralModel.getInstance().responseCode.equalsIgnoreCase("100")) {
+        if (GeneralModel.getInstance().responseObject ==true) {
             Snackbar.make(((AppCompatActivity)ctx).findViewById(android.R.id.content)
                     , ctx.getString(R.string.project_moved), Snackbar.LENGTH_SHORT).show();
         } else {
