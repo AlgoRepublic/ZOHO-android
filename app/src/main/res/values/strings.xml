@@ -90,7 +90,7 @@
     <string name="new_forum_post">New Forum Post</string>
     <string name="new_dept">New Department</string>
     <string name="edit_forum_post">Edit Forum Post</string>
-    <string name="new_project">New Project</string>
+    <string name="new_project">Add New Project</string>
     <string name="edit_project">Edit Project</string>
     <string name="edit_dept">Edit Department</string>
     <!-- Strings related to Settings -->

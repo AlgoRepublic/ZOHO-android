@@ -58,7 +58,9 @@ public class AdapterForumComment extends BaseAdapter {
         convertView = l_Inflater.inflate(R.layout.layout_comments_maker, null);
         aq = new AQuery(convertView);
 
+        if(ForumsDetailFragment.arrayList.get(position).getComment() !=null)
         aq.id(R.id.comment_description).text(Html.fromHtml(ForumsDetailFragment.arrayList.get(position).getComment()));
+
         aq.id(R.id.comment_title).text(ForumsDetailFragment.arrayList.get(position).getUserName()
                 + " , " + ForumsDetailFragment.arrayList.get(position).getDateTime());
         if(ForumsDetailFragment.arrayList
