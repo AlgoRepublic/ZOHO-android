@@ -106,6 +106,7 @@ public class ForumsDetailFragment extends BaseFragment {
         setHasOptionsMenu(true);
         baseClass = ((BaseClass) getActivity().getApplicationContext());
         adapter = new AdapterForumComment(getActivity());
+        arrayList.clear();
         aq.id(R.id.forums_comment_list).adapter(adapter);
         service = new ForumService(getActivity());
         service.getForumsDetail(ForumsModel.getInstance().responseObject.get(Position).ID
@@ -159,6 +160,17 @@ public class ForumsDetailFragment extends BaseFragment {
         service.createforumComments(Integer.toString(ForumsModel.getInstance().responseObject.get(Position).ID)
                 , comment, baseClass.getUserId(), false,
                 new CallBack(ForumsDetailFragment.this, "CreateComment"));
+        aq.id(R.id.comment_user).text("");
+        TaskComments taskComments = new TaskComments();
+        taskComments.setCommentID(CreateForumCommentModel.getInstance().responseObject.Id);
+        taskComments.setComment(CreateForumCommentModel.getInstance().responseObject.message);
+        taskComments.setDateTime(GetDateTimeComment(DateMilli(CreateForumCommentModel.getInstance().responseObject.updatedAt)));
+        taskComments.setUserName(baseClass.getFirstName());
+        taskComments.setUserImagePath(baseClass.getProfileImage());
+        taskComments.setUserImageID(baseClass.getProfileImageID());
+        arrayList.add(taskComments);
+        adapter.notifyDataSetChanged();
+        aq.id(R.id.response_alert).visibility(View.GONE);
     }
     public void UpdateComment(Object caller, Object model){
         GeneralModel.getInstance().setList((GeneralModel) model);
@@ -181,16 +193,6 @@ public class ForumsDetailFragment extends BaseFragment {
         CreateForumCommentModel.getInstance().setList((CreateForumCommentModel) model);
         if (CreateForumCommentModel.getInstance().responseCode ==100){
             Snackbar.make(getView(),"Comment Added",Snackbar.LENGTH_SHORT).show();
-            aq.id(R.id.comment_user).text("");
-            TaskComments taskComments = new TaskComments();
-            taskComments.setCommentID(CreateForumCommentModel.getInstance().responseObject.Id);
-            taskComments.setComment(CreateForumCommentModel.getInstance().responseObject.message);
-            taskComments.setDateTime(GetDateTimeComment(DateMilli(CreateForumCommentModel.getInstance().responseObject.updatedAt)));
-            taskComments.setUserName(baseClass.getFirstName());
-            taskComments.setUserImagePath(baseClass.getProfileImage());
-            taskComments.setUserImageID(baseClass.getProfileImageID());
-            arrayList.add(taskComments);
-            adapter.notifyDataSetChanged();
         }
         else
         {

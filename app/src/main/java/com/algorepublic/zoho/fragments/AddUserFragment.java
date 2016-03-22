@@ -98,7 +98,6 @@ public class AddUserFragment extends BaseFragment implements MultiSelectionSpinn
         service = new ProjectsListService(getActivity());
         service1 = new UserService(getActivity());
 
-        getToolbar().setTitle(getString(R.string.add_user));
         aq.id(R.id.profile).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

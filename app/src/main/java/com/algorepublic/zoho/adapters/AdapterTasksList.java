@@ -6,6 +6,7 @@ import android.graphics.drawable.GradientDrawable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,7 +14,10 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.SearchView;
+import android.widget.TextView;
 
 import com.algorepublic.zoho.Models.ForumsModel;
 import com.algorepublic.zoho.Models.GeneralModel;
@@ -77,27 +81,43 @@ public class AdapterTasksList extends BaseAdapter implements StickyListHeadersAd
 
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
-
-        convertView = l_Inflater.inflate(R.layout.layout_taskslist_row, null);
+        ViewHolder holder;
+        if(convertView == null){
+            holder = new ViewHolder();
+            convertView = l_Inflater.inflate(R.layout.layout_taskslist_row, null);
+            holder.taskTitle = (TextView) convertView.findViewById(R.id.task_name);
+            holder.projectTitle = (TextView) convertView.findViewById(R.id.project_name);
+            holder.taskUsers = (TextView) convertView.findViewById(R.id.task_users);
+            holder.taskComments = (TextView) convertView.findViewById(R.id.task_comment);
+            holder.btEdit = (TextView) convertView.findViewById(R.id.btEdit);
+            holder.btDelete = (TextView) convertView.findViewById(R.id.btDelete);
+            holder.taskDate = (TextView) convertView.findViewById(R.id.task_date);
+            holder.taskImage = (ImageView) convertView.findViewById(R.id.task_image);
+            holder.priorityBar = (View) convertView.findViewById(R.id.priority_bar);
+            holder.parentLayout = (RelativeLayout) convertView.findViewById(R.id.parent1);
+            convertView.setTag(holder);
+        }else{
+            holder = (ViewHolder) convertView.getTag();
+        }
         aq = new AQuery(convertView);
         if (tasksLists.get(position).progress==100){
-            aq.id(R.id.task_image).image(R.drawable.ic_notifications_green_24dp);
+            holder.taskImage.setImageResource(R.drawable.ic_notifications_green_24dp);
         }
-        Drawable shapeDrawable = aq.id(R.id.priority_bar).getView().getBackground();
+        Drawable shapeDrawable = holder.priorityBar.getBackground();
         GradientDrawable colorDrawable = (GradientDrawable) shapeDrawable;
         colorDrawable.setColor(getPriorityWiseColor(tasksLists.get(position).getPriority()));
-        aq.id(R.id.priority_bar).getView().setBackground(shapeDrawable);
+        holder.priorityBar.setBackground(shapeDrawable);
 
-        aq.id(R.id.task_comment).text(tasksLists.get(position).getCommentsCount() + " " + ctx.getString(R.string.task_comment));
-        aq.id(R.id.task_users).text(tasksLists.get(position).getListAssignees().size() + " " + ctx.getString(R.string.task_user));
-        aq.id(R.id.task_name).text(tasksLists.get(position).getTaskName());
-        aq.id(R.id.project_name).text(tasksLists.get(position).getProjectName());
+        holder.taskComments.setText(tasksLists.get(position).getCommentsCount() + " " + ctx.getString(R.string.task_comment));
+        holder.taskUsers.setText(tasksLists.get(position).getListAssignees().size() + " " + ctx.getString(R.string.task_user));
+        holder.taskTitle.setText(tasksLists.get(position).getTaskName());
+        holder.projectTitle.setText(tasksLists.get(position).getProjectName());
 
         if(tasksLists.get(position).getEndDate().equalsIgnoreCase("3/0/1")
                 || tasksLists.get(position).getEndDate().equalsIgnoreCase("12/31/3938")) {
-            aq.id(R.id.task_date).text(ctx.getString(R.string.no_date));
+            holder.taskDate.setText(ctx.getString(R.string.no_date));
         }else {
-            aq.id(R.id.task_date).text(tasksLists.get(position).getEndDate());
+            holder.taskDate.setText(tasksLists.get(position).getEndDate());
         }
 
 
@@ -109,29 +129,29 @@ public class AdapterTasksList extends BaseAdapter implements StickyListHeadersAd
         }catch (Exception e){
             e.printStackTrace();
         }
-        aq.id(R.id.parent1).clicked(new View.OnClickListener() {
+        holder.parentLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 callFragmentWithBackStack(R.id.container, TaskDetailFragment.newInstance(tasksLists.get(position), position), "TaskDetail");
             }
         });
-        aq.id(R.id.btEdit).clicked(new View.OnClickListener() {
+        holder.btEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 baseClass.setSelectedProject(Integer.toString(tasksLists.get(position).getProjectID()));
-                if (tasksLists.get(position).getProjectID() >0) {
-                    baseClass.db.putString("ProjectName",tasksLists.get(position).getProjectName());
+                if (tasksLists.get(position).getProjectID() > 0) {
+                    baseClass.db.putString("ProjectName", tasksLists.get(position).getProjectName());
                     baseClass.setSelectedProject(Integer.toString(tasksLists.get(position).getProjectID()));
                     callFragmentWithBackStack(R.id.container, TaskAddUpdateFragment.newInstance(tasksLists.get(position)),
                             "TaskAddUpdateFragment");
                 }
             }
         });
-        aq.id(R.id.btDelete).clicked(new View.OnClickListener() {
+        holder.btDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 clickedPosition = position;
-            NormalDialogCustomAttr(ctx.getString(R.string.delete_task),tasksLists.get(position));
+                NormalDialogCustomAttr(ctx.getString(R.string.delete_task), tasksLists.get(position));
             }
         });
         Animation animation = AnimationUtils.loadAnimation(ctx, (position > lastPosition) ? R.anim.up_from_bottom : R.anim.down_from_top);
@@ -151,6 +171,18 @@ public class AdapterTasksList extends BaseAdapter implements StickyListHeadersAd
         });
 
         return convertView;
+    }
+    static class ViewHolder {
+        private TextView taskTitle;
+        private TextView projectTitle;
+        private TextView taskUsers;
+        private TextView taskComments;
+        private View priorityBar;
+        private ImageView taskImage;
+        private TextView taskDate;
+        private TextView btEdit;
+        private TextView btDelete;
+        private RelativeLayout parentLayout;
     }
     public void Filter(String text){
         text = text.toLowerCase(Locale.getDefault());

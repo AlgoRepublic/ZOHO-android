@@ -127,7 +127,6 @@ public class AddProjectFragment extends BaseFragment {
                 }
             }
         });
-        getToolbar().setTitle(getString(R.string.add_project));
         aq = new AQuery(view);
         baseClass = ((BaseClass) getActivity().getApplicationContext());
         aq.id(R.id.project_name).getEditText().setOnFocusChangeListener(baseClass.focusChangeListener);
