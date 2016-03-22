@@ -110,5 +110,21 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Dark" />
 
+    <style name="blackPagerTitleStrip" parent="Widget.Design.TabLayout">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="tabIndicatorColor">@color/colorBaseMenu</item>
+        <item name="tabIndicatorHeight">4dp</item>
+        <item name="tabBackground">@color/colorBaseHeader</item>
+        <item name="tabSelectedTextColor">@color/colorWhite</item>
+
+    </style>
+
+    <style name="bluePagerTitleStrip" parent="Widget.Design.TabLayout">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="tabIndicatorColor">@color/colorBaseMenu</item>
+        <item name="tabIndicatorHeight">4dp</item>
+        <item name="tabBackground">@color/colorPrimaryBlue</item>
+        <item name="tabSelectedTextColor">@color/colorWhite</item>
+    </style>
 
 </resources>
