@@ -332,9 +332,7 @@ public class TaskAddUpdateFragment extends BaseFragment {
             baseClass.db.putString("ProjectName", tasksObj.getProjectName());
             getToolbar().setTitle(baseClass.db.getString("ProjectName"));
             baseClass.db.putInt("ProjectID", tasksObj.getProjectID());
-            if(tasksObj.getDescription() != null) {
-                baseClass.db.putString("TaskDesc", tasksObj.getDescription());
-            }
+            baseClass.db.putString("TaskDesc", tasksObj.getDescription());
             baseClass.db.putString("StartDate", tasksObj.getStartDate());
             baseClass.db.putString("EndDate", tasksObj.getEndDate());
             baseClass.db.putInt("Priority", tasksObj.getPriority());

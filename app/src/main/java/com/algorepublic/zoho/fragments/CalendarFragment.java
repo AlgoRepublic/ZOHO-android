@@ -1,9 +1,12 @@
 package com.algorepublic.zoho.fragments;
 
 
+import android.annotation.TargetApi;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -128,11 +131,13 @@ public class CalendarFragment extends BaseFragment implements CalendarPickerCont
         initCalendarView();
     }
 
+    @TargetApi(Build.VERSION_CODES.M)
     private void initCalendarView(){
         aq.id(R.id.alertMessage).text("No Tasks");
         Locale locale;
         // Get a reference for the week view in the layout.
         calendarView = (AgendaCalendarView) aq.id(R.id.agenda_calendar_view).getView();
+
        // Calendar minCal = new GregorianCalendar(2016, Calendar.JANUARY, 1);
         if(true) // update this check as language button goes functional
          locale = new Locale("ar");
@@ -167,6 +172,6 @@ public class CalendarFragment extends BaseFragment implements CalendarPickerCont
 
     @Override
     public void onEventSelected(CalendarEvent event) {
-//        Log.d(LOG_TAG, String.format("Selected event: %s", event));
+       Log.e("LOG_TAG", String.format("Selected event: %s", event));
     }
 }

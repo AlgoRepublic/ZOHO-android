@@ -83,15 +83,14 @@ public class EditProfileFragment extends BaseFragment implements MultiSelectionS
                              Bundle savedInstanceState) {
         View view  = inflater.inflate(R.layout.fragment_edit_user_profile, container, false);
         dialogAC = InitializeDialog(getActivity());
-//        projectsList = (MultiSelectionSpinner) view.findViewById(R.id.projects_list);
-//        projectsList.setListener(this);
+
         baseClass = ((BaseClass) getActivity().getApplicationContext());
         aq = new AQuery(getActivity(), view);
         service = new ProjectsListService(getActivity());
         service1 = new UserService(getActivity());
         loginService = new LoginService(getActivity());
 
-        getToolbar().setTitle(getString(R.string.edit_user));
+        getToolbar().setTitle(getString(R.string.profile));
         aq.id(R.id.profile).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -100,8 +99,7 @@ public class EditProfileFragment extends BaseFragment implements MultiSelectionS
         });
         loginService.GetById(baseClass.getUserId(), true,
                 new CallBack(EditProfileFragment.this, "GetById"));
-        service.getAllProjectsByUser_API(baseClass.getUserId(), true,
-                new CallBack(EditProfileFragment.this, "AllProjects"));
+
         return view;
     }
     public void GetById(Object caller,Object model) {
@@ -142,41 +140,6 @@ public class EditProfileFragment extends BaseFragment implements MultiSelectionS
         }
         aq.id(R.id.user_phoneno).text(GetUserModel.getInstance().user.mobile);
     }
-    public void AllProjects(Object caller, Object model){
-        AllProjectsByUserModel.getInstance().setList((AllProjectsByUserModel) model);
-        if (AllProjectsByUserModel.getInstance().responseCode == 100
-                || AllProjectsByUserModel.getInstance().responseData.size() != 0) {
-            projectList = new ArrayList<>();
-            for(int loop=0;loop< AllProjectsByUserModel.getInstance().responseData.size();loop++) {
-                try {
-                    if(AllProjectsByUserModel.getInstance().responseData.get(loop).projectName ==null){
-                        projectList.add("No Data");
-                    }else
-                        projectList.add(AllProjectsByUserModel.getInstance().responseData.get(loop).projectName);
-                }catch (NullPointerException e){}
-            }
-                projectsList.setItems(projectList);
-                if (GetUserModel.getInstance().user.projectIDs != null) {
-
-                    int[] Ids = new int[GetUserModel.getInstance().user.projectIDs.size()];
-                    for (int loop = 0; loop < GetUserModel.getInstance().user.projectIDs.size(); loop++) {
-                        for (int loop1 = 0; loop1 < AllProjectsByUserModel.getInstance()
-                                .responseData.size(); loop1++) {
-                            if (GetUserModel.getInstance().user.projectIDs.get(loop)
-                                    == AllProjectsByUserModel
-                                    .getInstance().responseData.get(loop1).projectID)
-                                Ids[loop] = loop1;
-                        }
-                        projectsList.setSelection(Ids);
-                        selectedIds.add(AllProjectsByUserModel
-                                .getInstance().responseData.get(loop).projectID);
-                    }
-                }
-        }else {
-            Snackbar.make(getView(), getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
-        }
-    }
-
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.menu_save_project, menu);

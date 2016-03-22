@@ -78,16 +78,6 @@
                 android:textSize="18sp"
                 android:text="sd"
                 android:layout_gravity="center_vertical" />
-            <TextView
-                android:id="@+id/doc_size"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:singleLine="true"
-                android:layout_below="@+id/doc_title"
-                android:ellipsize="end"
-                android:textSize="14sp"
-                android:text="sd"
-                android:layout_gravity="center_vertical" />
 
         </RelativeLayout>
     </RelativeLayout>

@@ -141,6 +141,15 @@ public class BaseFragment extends Fragment {
                         R.anim.slide_pop_enter, R.anim.slide_pop_exit)
                 .commit();
     }
+    protected void callFragmentWithAddBackStack(int containerId, Fragment fragment, String tag){
+        getActivity().getSupportFragmentManager()
+                .beginTransaction()
+                .add(containerId, fragment, tag)
+                .setCustomAnimations(R.anim.slide_in_enter, R.anim.slide_in_exit,
+                        R.anim.slide_pop_enter, R.anim.slide_pop_exit)
+                .addToBackStack(null)
+                .commit();
+    }
     public void callFragmentWithBackStack(int containerId, Fragment fragment, String tag){
         getActivity().getSupportFragmentManager()
                 .beginTransaction()

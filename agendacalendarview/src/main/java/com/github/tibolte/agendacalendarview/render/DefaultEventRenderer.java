@@ -1,6 +1,8 @@
 package com.github.tibolte.agendacalendarview.render;
 
 import android.annotation.TargetApi;
+import android.app.SearchManager;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
@@ -52,7 +54,7 @@ public class DefaultEventRenderer extends EventRenderer<BaseCalendarEvent> {
         parent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Log.e("LOG_TAG", "String.format(");
             }
         });
     }

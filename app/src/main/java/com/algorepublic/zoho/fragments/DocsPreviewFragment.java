@@ -90,7 +90,7 @@ public class DocsPreviewFragment extends BaseFragment {
                 baseClass.getProfileImage()));
         aq.id(R.id.user_name).text(docObject.getFileName());
         aq.id(R.id.doc_title).text(docObject.getFileName());
-        aq.id(R.id.doc_size).text(docObject.getFileSizeInByte()+"K");
+       // aq.id(R.id.doc_size).text(docObject.getFileSizeInByte()+"K");
         if(docObject.getFileTypeID()>=0 &&
                 docObject.getFileTypeID()<=4 ){
             if(docObject.getFileDescription() != null) {
@@ -196,6 +196,7 @@ public class DocsPreviewFragment extends BaseFragment {
             taskComments.setUserImageID(CreateCommentModel.getInstance().responseObject.userObject.profilePictureID);
             arrayList.add(taskComments);
             adapter.notifyDataSetChanged();
+            aq.id(R.id.response_alert).visibility(View.GONE);
         }
         else
         {

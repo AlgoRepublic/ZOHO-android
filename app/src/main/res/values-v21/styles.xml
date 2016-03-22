@@ -60,8 +60,12 @@
         <item name="android:textViewStyle">@style/blackTextView</item>
         <item name="seekBarStyle">@style/blackSeekBar</item>
         <item name="android:buttonStyle">@style/blackButton</item>
+        <item name="android:editTextStyle">@style/EditTextStyle</item>
     </style>
-
+    <style name="EditTextStyle" parent="@android:style/Widget.EditText">
+        <item name="android:textColor">@color/colorBaseHeader</item>
+        <item name="android:textColorHint">@color/colorBaseHeader</item>
+    </style>
     <style name="blackButton" parent="@android:style/Widget.Button">
         <item name="android:background">@color/colorContentWrapper</item>
     </style>

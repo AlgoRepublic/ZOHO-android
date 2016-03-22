@@ -2,12 +2,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorWhite"
     tools:context="com.algorepublic.zoho.FragmentsTasks.TaskAssignFragment">
 
     <SearchView
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:id="@+id/searchView"
+        android:background="@color/colorBaseWrapper"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true" />
 
@@ -18,7 +20,6 @@
         android:layout_below="@+id/searchView"
         android:layout_height="match_parent"
         android:layout_above="@+id/layout_bottom"
-        android:background="@color/colorWhite"
         android:divider="@android:color/transparent"
         android:dividerHeight="-2dp"
         android:fadeScrollbars="true"

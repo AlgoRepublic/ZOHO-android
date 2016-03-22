@@ -60,7 +60,7 @@ public class UserFragment extends BaseFragment implements SwipeRefreshLayout.OnR
         swipeRefreshLayout.setProgressViewOffset(false, 0, 200);
             service = new UserService(getActivity());
         if(baseClass.getSelectedProject().equalsIgnoreCase("0")){
-            service.getAllUsers(false, new CallBack(UserFragment.this, "UserList"));
+            service.getAllUsers(true, new CallBack(UserFragment.this, "UserList"));
         }else {
             service.getUserListByProject(Integer.parseInt(baseClass.getSelectedProject()), true,
                     new CallBack(UserFragment.this, "UserList"));

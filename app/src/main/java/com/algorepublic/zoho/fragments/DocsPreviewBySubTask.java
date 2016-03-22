@@ -48,7 +48,7 @@ public class DocsPreviewBySubTask extends BaseFragment {
         aq.id(R.id.user_image).image(Constants.UserImage_URL+baseClass.getProfileImage());
         aq.id(R.id.user_name).text(docObject.getFileName());
         aq.id(R.id.doc_title).text(docObject.getFileName());
-        aq.id(R.id.doc_size).text(docObject.getFileSizeInByte());
+        //aq.id(R.id.doc_size).text(docObject.getFileSizeInByte());
         if(docObject.getFileTypeID()>=0 &&
                 docObject.getFileTypeID()<=4 ){
             Glide.with(getActivity()).load(Constants.Image_URL +

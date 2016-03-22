@@ -5,10 +5,31 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     tools:context="com.algorepublic.zoho.fragments.ProjectsFragment">
+    <LinearLayout
+        android:id="@+id/top_layout"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorBaseWrapper"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/underline_textview"
+            android:gravity="center_horizontal"
+            android:padding="10dp"
+            android:text="@string/all_projects"
+            android:textColor="@color/colorContentWrapper"
+            android:textSize="14sp"
+            android:typeface="monospace" />
+    </LinearLayout>
     <android.support.v4.widget.SwipeRefreshLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/swipe_stickyView"
         android:layout_above="@+id/sort"
+        android:layout_below="@+id/top_layout"
         android:visibility="gone"
         android:layout_margin="10dp"
         android:layout_width="match_parent"
@@ -26,6 +47,7 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/swipe_listView"
         android:layout_above="@+id/sort"
+        android:layout_below="@+id/top_layout"
         android:visibility="visible"
         android:layout_margin="10dp"
         android:layout_width="match_parent"
