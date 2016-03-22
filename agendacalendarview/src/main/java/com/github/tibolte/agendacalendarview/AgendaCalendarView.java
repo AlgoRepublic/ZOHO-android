@@ -1,24 +1,9 @@
 package com.github.tibolte.agendacalendarview;
 
-import com.github.tibolte.agendacalendarview.agenda.AgendaAdapter;
-import com.github.tibolte.agendacalendarview.agenda.AgendaView;
-import com.github.tibolte.agendacalendarview.calendar.CalendarView;
-import com.github.tibolte.agendacalendarview.models.BaseCalendarEvent;
-import com.github.tibolte.agendacalendarview.models.CalendarEvent;
-import com.github.tibolte.agendacalendarview.render.DefaultEventRenderer;
-import com.github.tibolte.agendacalendarview.render.EventRenderer;
-import com.github.tibolte.agendacalendarview.utils.BusProvider;
-import com.github.tibolte.agendacalendarview.utils.Events;
-import com.github.tibolte.agendacalendarview.utils.ListViewScrollTracker;
-import com.github.tibolte.agendacalendarview.widgets.FloatingActionButton;
-
 import android.animation.Animator;
 import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.res.ColorStateList;
-import android.content.res.Resources;
-import android.content.res.TypedArray;
-import android.graphics.Color;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
@@ -31,8 +16,18 @@ import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.FrameLayout;
 
+import com.github.tibolte.agendacalendarview.agenda.AgendaAdapter;
+import com.github.tibolte.agendacalendarview.agenda.AgendaView;
+import com.github.tibolte.agendacalendarview.calendar.CalendarView;
+import com.github.tibolte.agendacalendarview.models.CalendarEvent;
+import com.github.tibolte.agendacalendarview.render.DefaultEventRenderer;
+import com.github.tibolte.agendacalendarview.render.EventRenderer;
+import com.github.tibolte.agendacalendarview.utils.BusProvider;
+import com.github.tibolte.agendacalendarview.utils.Events;
+import com.github.tibolte.agendacalendarview.utils.ListViewScrollTracker;
+import com.github.tibolte.agendacalendarview.widgets.FloatingActionButton;
+
 import java.util.Calendar;
-import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Locale;
 
@@ -44,43 +39,15 @@ import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
 public class AgendaCalendarView extends FrameLayout implements StickyListHeadersListView.OnStickyHeaderChangedListener {
 
     private static final String LOG_TAG = AgendaCalendarView.class.getSimpleName();
-    public static TinyDB db;
+    private static TinyDB db;
     private CalendarView mCalendarView;
     private AgendaView mAgendaView;
     private FloatingActionButton mFloatingActionButton;
 
     private int mAgendaCurrentDayTextColor, mCalendarHeaderColor, mCalendarBackgroundColor, mCalendarDayTextColor, mCalendarPastDayTextColor, mCalendarCurrentDayColor, mFabColor;
     private CalendarPickerController mCalendarPickerController;
-    private int ThemeType;
     private ListViewScrollTracker mAgendaListViewScrollTracker;
-    private AbsListView.OnScrollListener mAgendaScrollListener = new AbsListView.OnScrollListener() {
-        int mCurrentAngle;
-        int mMaxAngle = 85;
-
-        @Override
-        public void onScrollStateChanged(AbsListView view, int scrollState) {
-
-        }
-
-        @Override
-        public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-            int scrollY = mAgendaListViewScrollTracker.calculateScrollY(firstVisibleItem, visibleItemCount);
-            if (scrollY != 0) {
-                mFloatingActionButton.show();
-            }
-            Log.d(LOG_TAG, String.format("Agenda listView scrollY: %d", scrollY));
-            int toAngle = scrollY / 100;
-            if (toAngle > mMaxAngle) {
-                toAngle = mMaxAngle;
-            } else if (toAngle < -mMaxAngle) {
-                toAngle = -mMaxAngle;
-            }
-            RotateAnimation rotate = new RotateAnimation(mCurrentAngle, toAngle, mFloatingActionButton.getWidth() / 2, mFloatingActionButton.getHeight() / 2);
-            rotate.setFillAfter(true);
-            mCurrentAngle = toAngle;
-            mFloatingActionButton.startAnimation(rotate);
-        }
-    };
+    private AbsListView.OnScrollListener mAgendaScrollListener;
 
     // region Constructors
 
@@ -88,12 +55,40 @@ public class AgendaCalendarView extends FrameLayout implements StickyListHeaders
         super(context);
         db = new TinyDB(context);
         db.putInt("ThemeType", themeType);
+        mAgendaScrollListener = new AbsListView.OnScrollListener() {
+            int mCurrentAngle;
+            int mMaxAngle = 85;
+
+            @Override
+            public void onScrollStateChanged(AbsListView view, int scrollState) {
+
+            }
+
+            @Override
+            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+                int scrollY = mAgendaListViewScrollTracker.calculateScrollY(firstVisibleItem, visibleItemCount);
+                if (scrollY != 0) {
+                    mFloatingActionButton.show();
+                }
+                Log.d(LOG_TAG, String.format("Agenda listView scrollY: %d", scrollY));
+                int toAngle = scrollY / 100;
+                if (toAngle > mMaxAngle) {
+                    toAngle = mMaxAngle;
+                } else if (toAngle < -mMaxAngle) {
+                    toAngle = -mMaxAngle;
+                }
+                RotateAnimation rotate = new RotateAnimation(mCurrentAngle, toAngle, mFloatingActionButton.getWidth() / 2, mFloatingActionButton.getHeight() / 2);
+                rotate.setFillAfter(true);
+                mCurrentAngle = toAngle;
+                mFloatingActionButton.startAnimation(rotate);
+            }
+        };
     }
 
     public AgendaCalendarView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        ThemeType =db.getInt("ThemeType");
-        if(ThemeType == 0) {
+        int themeType = db.getInt("ThemeType");
+        if(themeType == 0) {
             mAgendaCurrentDayTextColor = ContextCompat.getColor(getContext(), R.color.calendar_header_bg_theme_1);
             mCalendarHeaderColor = ContextCompat.getColor(getContext(),R.color.calendar_header_bg_theme_1);
             mCalendarBackgroundColor = ContextCompat.getColor(getContext(),R.color.calendar_bg_theme_1);
@@ -101,7 +96,7 @@ public class AgendaCalendarView extends FrameLayout implements StickyListHeaders
             mCalendarCurrentDayColor = ContextCompat.getColor(getContext(),R.color.calendar_header_bg_theme_1);
             mCalendarPastDayTextColor = ContextCompat.getColor(getContext(),R.color.calendar_header_bg_theme_1);
             mFabColor = ContextCompat.getColor(getContext(),R.color.calendar_header_bg_theme_1);
-        }else if(ThemeType == 1) {
+        }else if(themeType == 1) {
             mAgendaCurrentDayTextColor = ContextCompat.getColor(getContext(),R.color.theme_primary_dark);
             mCalendarHeaderColor = ContextCompat.getColor(getContext(),R.color.theme_primary_dark);
             mCalendarBackgroundColor = ContextCompat.getColor(getContext(),R.color.calendar_bg_theme_1);
@@ -115,6 +110,34 @@ public class AgendaCalendarView extends FrameLayout implements StickyListHeaders
         inflater.inflate(R.layout.view_agendacalendar, this, true);
 
         setAlpha(0f);
+        mAgendaScrollListener = new AbsListView.OnScrollListener() {
+            int mCurrentAngle;
+            int mMaxAngle = 85;
+
+            @Override
+            public void onScrollStateChanged(AbsListView view, int scrollState) {
+
+            }
+
+            @Override
+            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+                int scrollY = mAgendaListViewScrollTracker.calculateScrollY(firstVisibleItem, visibleItemCount);
+                if (scrollY != 0) {
+                    mFloatingActionButton.show();
+                }
+                Log.d(LOG_TAG, String.format("Agenda listView scrollY: %d", scrollY));
+                int toAngle = scrollY / 100;
+                if (toAngle > mMaxAngle) {
+                    toAngle = mMaxAngle;
+                } else if (toAngle < -mMaxAngle) {
+                    toAngle = -mMaxAngle;
+                }
+                RotateAnimation rotate = new RotateAnimation(mCurrentAngle, toAngle, mFloatingActionButton.getWidth() / 2, mFloatingActionButton.getHeight() / 2);
+                rotate.setFillAfter(true);
+                mCurrentAngle = toAngle;
+                mFloatingActionButton.startAnimation(rotate);
+            }
+        };
     }
 
     // endregion
@@ -133,7 +156,7 @@ public class AgendaCalendarView extends FrameLayout implements StickyListHeaders
         mCalendarView.findViewById(R.id.cal_day_names).setBackgroundColor(mCalendarHeaderColor);
         mCalendarView.findViewById(R.id.list_week).setBackgroundColor(mCalendarBackgroundColor);
 
-        mAgendaView.getAgendaListView().setOnItemClickListener((AdapterView<?> parent, View view, int position, long id)->{
+        mAgendaView.getAgendaListView().setOnItemClickListener((AdapterView<?> parent, View view, int position, long id) -> {
             mCalendarPickerController.onEventSelected(CalendarManager.getInstance().getEvents().get(position));
         });
 
@@ -213,13 +236,14 @@ public class AgendaCalendarView extends FrameLayout implements StickyListHeaders
         AgendaAdapter agendaAdapter = new AgendaAdapter(mAgendaCurrentDayTextColor);
         mAgendaView.getAgendaListView().setAdapter(agendaAdapter);
         mAgendaView.getAgendaListView().setOnStickyHeaderChangedListener(this);
+
         CalendarManager.getInstance().loadEvents(eventList);
 
         // add default event renderer
         addEventRenderer(new DefaultEventRenderer());
     }
 
-    public void addEventRenderer(@NonNull final EventRenderer<?> renderer) {
+    private void addEventRenderer(@NonNull final EventRenderer<?> renderer) {
         AgendaAdapter adapter = (AgendaAdapter) mAgendaView.getAgendaListView().getAdapter();
         adapter.addEventRenderer(renderer);
     }

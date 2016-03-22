@@ -1,7 +1,6 @@
 package com.github.tibolte.agendacalendarview.models;
 
 import java.util.Calendar;
-import java.util.Locale;
 
 public interface CalendarEvent {
 
@@ -18,6 +17,8 @@ public interface CalendarEvent {
     void setEndTime(Calendar mEndTime);
 
     String getStartDate();
+    void setPosition(int position);
+    int getPosition();
 
     void setStartDate(String startDate);
 

@@ -1,14 +1,18 @@
 package com.algorepublic.zoho.fragments;
 
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
-import com.algorepublic.zoho.BaseActivity;
 import com.algorepublic.zoho.Models.TasksListByOwnerModel;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.services.CallBack;
@@ -23,11 +27,8 @@ import com.github.tibolte.agendacalendarview.models.DayItem;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Locale;
-
-import cc.cloudist.acplibrary.ACProgressFlower;
 
 
 /**
@@ -36,11 +37,14 @@ import cc.cloudist.acplibrary.ACProgressFlower;
  */
 public class CalendarFragment extends BaseFragment implements CalendarPickerController {
 
-    AQuery aq;
-    AgendaCalendarView calendarView;
-    BaseClass baseClass;
+    private AQuery aq;
+    private AgendaCalendarView calendarView;
+    private BaseClass baseClass;
+    private Receiver receiver;
     public CalendarFragment() {
         // Required empty public constructor
+        if (receiver ==null)
+        receiver = new Receiver();
     }
 
     /**
@@ -63,6 +67,8 @@ public class CalendarFragment extends BaseFragment implements CalendarPickerCont
 //            mParam1 = getArguments().getString(ARG_PARAM1);
 //            mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        IntentFilter filter = new IntentFilter("com.algorepublic.zoho.Event_Click");
+        getActivity().registerReceiver(receiver, filter);
     }
 
     @Override
@@ -115,8 +121,8 @@ public class CalendarFragment extends BaseFragment implements CalendarPickerCont
                 long endInMillis = Long.parseLong(DateMilli(task.endDate));
                 endTime.setTimeInMillis(endInMillis);
                 String endDate = DateFormatter(task.endDate);
-
-                eventList.add(new BaseCalendarEvent(task.title, task.projectName, Integer.toString(task.commentsCount),task.userObject.size()
+                task.position = eventList.size();
+                eventList.add(new BaseCalendarEvent(eventList.size(),task.title, task.projectName, Integer.toString(task.commentsCount),task.userObject.size()
                        ,startDate,endDate , getPriorityWiseColor(task.priority), startTime, endTime, true));
             }
         }
@@ -169,4 +175,28 @@ public class CalendarFragment extends BaseFragment implements CalendarPickerCont
     public void onEventSelected(CalendarEvent event) {
 //        Log.d(LOG_TAG, String.format("Selected event: %s", event));
     }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        getActivity().unregisterReceiver(receiver);
+    }
+
+    private class Receiver extends BroadcastReceiver {
+
+        @Override
+        public void onReceive(Context arg0, Intent arg1) {
+            String action=null;int position;
+            position = arg1.getIntExtra("position",0);
+            if(arg1.hasExtra("Action"))
+             action = arg1.getExtras().getString("Action");
+            if(action.contentEquals("Detail"))
+            Toast.makeText(getContext(), position+": "+action, Toast.LENGTH_SHORT).show();
+            if(action.contentEquals("Edit"))
+                Toast.makeText(getContext(), position+": "+action, Toast.LENGTH_SHORT).show();
+            if(action.contentEquals("Delete"))
+                Toast.makeText(getContext(), position+": "+action, Toast.LENGTH_SHORT).show();
+        }
+    }
+
 }

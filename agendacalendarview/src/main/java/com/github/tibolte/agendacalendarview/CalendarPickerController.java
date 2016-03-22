@@ -7,5 +7,5 @@ import com.github.tibolte.agendacalendarview.models.DayItem;
 public interface CalendarPickerController {
     void onDaySelected(DayItem dayItem);
 
-    void onEventSelected(CalendarEvent event);
+     void onEventSelected(CalendarEvent event);
 }
