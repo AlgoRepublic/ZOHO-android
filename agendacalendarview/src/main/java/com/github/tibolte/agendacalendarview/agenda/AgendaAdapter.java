@@ -13,6 +13,7 @@ import android.widget.BaseAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import se.emilsjolander.stickylistheaders.StickyListHeadersAdapter;
 

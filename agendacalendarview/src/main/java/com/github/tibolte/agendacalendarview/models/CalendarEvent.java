@@ -17,6 +17,8 @@ public interface CalendarEvent {
     void setEndTime(Calendar mEndTime);
 
     String getStartDate();
+    void setPosition(int position);
+    int getPosition();
 
     void setStartDate(String startDate);
 

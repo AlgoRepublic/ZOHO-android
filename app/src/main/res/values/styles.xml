@@ -92,18 +92,23 @@
     <style name="commonListItemStyle">
     </style>
 
-    <style name="blackPagerTitleStrip" parent="AppTheme">
+    <style name="blackPagerTitleStrip" parent="Widget.Design.TabLayout">
         <item name="android:textColor">@android:color/white</item>
-        <item name="pstsIndicatorColor">@color/colorBaseMenu</item>
-        <item name="pstsDividerColor">@color/white</item>
-        <item name="pstsUnderlineColor">@color/white</item>
-        <item name="pstsTabBackground">@color/colorBaseHeader</item>
-        <item name="android:background">@color/colorPrimaryBlue</item>
+        <item name="tabIndicatorColor">@color/colorBaseMenu</item>
+        <item name="tabIndicatorHeight">4dp</item>
+        <item name="tabBackground">@color/colorBaseHeader</item>
+        <item name="tabSelectedTextColor">@color/colorWhite</item>
+
+
     </style>
 
-    <style name="bluePagerTitleStrip" parent="AppTheme">
+
+    <style name="bluePagerTitleStrip" parent="Widget.Design.TabLayout">
         <item name="android:textColor">@android:color/white</item>
-        <item name="android:background">@color/colorPrimaryBlue</item>
+        <item name="tabIndicatorColor">@color/colorBaseMenu</item>
+        <item name="tabIndicatorHeight">4dp</item>
+        <item name="tabBackground">@color/colorPrimaryBlue</item>
+        <item name="tabSelectedTextColor">@color/colorWhite</item>
     </style>
 
 </resources>

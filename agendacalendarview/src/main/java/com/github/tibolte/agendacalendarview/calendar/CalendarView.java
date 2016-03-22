@@ -1,8 +1,11 @@
 package com.github.tibolte.agendacalendarview.calendar;
 
 import android.content.Context;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.support.v7.widget.LinearLayoutManager;
 import android.util.AttributeSet;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -139,8 +142,11 @@ public class CalendarView extends LinearLayout {
     // region Public methods
 
     public void init(CalendarManager calendarManager, int dayTextColor, int currentDayTextColor, int pastDayTextColor) {
+        //setLocaleAr(this.getContext());
+
         Calendar today = calendarManager.getToday();
         Locale locale = calendarManager.getLocale();
+
         SimpleDateFormat weekDayFormatter = calendarManager.getWeekdayFormatter();
         List<WeekItem> weeks = calendarManager.getWeeks();
 
@@ -148,6 +154,8 @@ public class CalendarView extends LinearLayout {
         setUpAdapter(today, weeks, dayTextColor, currentDayTextColor, pastDayTextColor);
         scrollToDate(today, weeks);
     }
+
+
 
     /**
      * Fired when the Agenda list view changes section.
