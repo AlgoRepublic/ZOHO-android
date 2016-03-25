@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBaseWrapper"
+    android:orientation="vertical">
+    <RelativeLayout
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent">
+    <com.h6ah4i.android.materialshadowninepatch.MaterialShadowContainerView
+        android:id="@+id/shadow_item_container"
+        android:layout_width="match_parent"
+        style="@style/ms9_DefaultShadowStyle"
+        android:layout_height="wrap_content"
+        app:ms9_useAmbientShadow="true"
+        app:ms9_affectsDisplayedPosition="true"
+        app:ms9_shadowTranslationZ="1dp"
+        app:ms9_shadowElevation="3dp">
+        <RelativeLayout
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:layout_marginBottom="6dp"
+            android:layout_marginTop="2dp"
+            android:background="@color/colorContentWrapper"
+            android:layout_width="match_parent">
+            <TextView
+                android:id="@+id/lblListHeader"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:text="@string/add_user"
+                android:gravity="center"
+                android:textColor="@color/white" />
+        </RelativeLayout>
+    </com.h6ah4i.android.materialshadowninepatch.MaterialShadowContainerView>
+    <android.support.v7.widget.CardView
+        android:id="@+id/card_view"
+        android:layout_margin="10dp"
+        android:layout_below="@+id/shadow_item_container"
+        android:layout_gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardElevation="4dp"
+        app:cardCornerRadius="4dp">
+        <RelativeLayout
+            android:padding="10dp"
+            android:layout_gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.mikhaellopez.circularimageview.CircularImageView
+                app:civ_border="true"
+                app:civ_shadow="true"
+                app:civ_shadow_color="@color/colorBaseMenu"
+                app:civ_shadow_radius="3"
+                android:id="@+id/profile"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_centerHorizontal="true"
+                android:layout_margin="20dp"
+                android:src="@drawable/nav_user"
+                app:civ_border_color="@color/colorContentWrapper"
+                app:civ_border_width="4dp"/>
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/first_name"
+                android:layout_below="@+id/profile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:hint="@string/first_name"
+                android:textSize="18sp"
+                app:met_floatingLabel="normal"
+                app:met_primaryColor="@color/colorBaseHeader"
+                app:met_singleLineEllipsis="true" />
+
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/last_name"
+                android:layout_below="@+id/first_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:hint="@string/last_name"
+                android:inputType="textMultiLine"
+                android:textSize="18sp"
+                app:met_singleLineEllipsis="true"
+                app:met_floatingLabel="normal"
+                app:met_primaryColor="@color/colorBaseHeader" />
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/nick_name"
+                android:layout_below="@+id/last_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:hint="@string/nick_name"
+                android:inputType="textMultiLine"
+                android:textSize="18sp"
+                app:met_singleLineEllipsis="true"
+                app:met_floatingLabel="normal"
+                app:met_primaryColor="@color/colorBaseHeader" />
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/user_email"
+                android:layout_below="@+id/nick_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:hint="@string/email"
+                android:inputType="textMultiLine"
+                android:textSize="18sp"
+                app:met_singleLineEllipsis="true"
+                app:met_floatingLabel="normal"
+                app:met_primaryColor="@color/colorBaseHeader" />
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/user_phoneno"
+                android:layout_below="@id/user_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:hint="@string/phone_number"
+                android:inputType="phone"
+                android:textSize="18sp"
+                app:met_singleLineEllipsis="true"
+                app:met_floatingLabel="normal"
+                app:met_primaryColor="@color/colorBaseHeader" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/user_phoneno"
+            android:id="@+id/layout3"
+            >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/user_roles"
+                android:textColor="@color/colorContentWrapper"
+                android:id="@+id/category"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true" />
+            <ListView
+                android:id="@+id/role_list"
+                android:layout_width="match_parent"
+                android:layout_height="380dp"
+                android:hint="@string/user_role"
+                android:textColor="@color/colorBaseHeader"
+                android:textSize="18sp"
+                android:layout_marginTop="20dp" />
+        </RelativeLayout>
+            <LinearLayout
+                android:id="@+id/layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/layout3"
+                android:orientation="vertical">
+            <TextView
+                android:id="@+id/text"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="2dp"
+                android:text="@string/assigned_projects"
+                android:textColor="@color/colorContentWrapper"
+                android:textSize="13.33sp"
+                android:typeface="monospace" />
+
+            <com.guna.libmultispinner.MultiSelectionSpinner
+                android:id="@+id/projects_list"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/text" />
+            </LinearLayout>
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+    </RelativeLayout>
+</ScrollView>

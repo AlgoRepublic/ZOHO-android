@@ -88,7 +88,7 @@
     <string name="title_activity_milestone">MilestoneActivity</string>
     <string name="title_activity_settings">الإعدادات</string>
     <string name="new_forum_post">New Forum Post</string>
-    <string name="new_dept">New Department</string>
+    <string name="new_dept">الإدارة الجديدة</string>
     <string name="edit_forum_post">Edit Forum Post</string>
     <string name="new_project">مشروع جديد</string>
     <string name="edit_project">تعديل المشروع</string>
@@ -178,7 +178,7 @@
     <string name="task_duedate">تاريخ الانتهاء:</string>
     <string name="projects_list_empty">قائمة المشروع فارغة</string>
     <string name="forums_list_empty">قائمة المشروع فارغة</string>
-
+    <string name="dept_name">اسم القسم</string>
     <!-- Task Details Strings -->
     <string name="delete_doc">حذف الملف؟</string>
     <string name="delete">حذف</string>
@@ -259,7 +259,7 @@
     <string name="update_password">تم تحديث كلمة المرور</string>
     <string name="add_phoneno">الرجاء إضافة رقم الهاتف</string>
     <string name="email_already">البريد الإلكتروني</string>
-
+    <string name="user_roles">أدوار المستخدمين</string>
 
     <string name="response_error">خطأ! الرجاء المحاولة لاحقًا</string>
     <string name="select_project">الرجاء اختيار مشروع!</string>
