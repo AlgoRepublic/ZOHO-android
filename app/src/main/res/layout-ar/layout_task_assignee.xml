@@ -4,6 +4,9 @@
     android:layout_height="wrap_content"
     android:descendantFocusability="blocksDescendants"
     android:orientation="horizontal"
+    android:fitsSystemWindows="true"
+    android:layoutDirection="rtl"
+    android:textDirection="rtl"
     android:padding="2dp">
 
     <com.mikhaellopez.circularimageview.CircularImageView

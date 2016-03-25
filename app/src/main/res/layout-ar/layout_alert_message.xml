@@ -4,6 +4,9 @@
     android:id="@+id/response_alert"
     android:background="@color/white"
     android:layout_width="wrap_content"
+    android:fitsSystemWindows="true"
+    android:layoutDirection="rtl"
+    android:textDirection="rtl"
     android:layout_height="wrap_content"
     android:visibility="gone">
         <ImageView

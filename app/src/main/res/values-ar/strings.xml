@@ -1,62 +1,304 @@
 <resources>
     <string name="app_name">ZOHO</string>
-    <string name="title_activity_main">Feeds</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="action_settings">Settings</string>
+    <string name="action_settings">الإعدادات</string>
 
     <!-- Strings related to login -->
     <string name="prompt_email">البريد الإلكتروني</string>
-    <string name="prompt_password">الرمز السري</string>
-    <string name="enter_email">يرجى إدخال البريد الإلكتروني</string>
+    <string name="prompt_password">كلمة المرور</string>
+    <string name="enter_email">الرجاء إدخال البريد الإلكتروني</string>
     <string name="enter_password">الرجاء إدخال كلمة المرور</string>
-    <string name="error_invalid_email">بريد إلكتروني خاطئ</string>
-    <string name="text_or">أو</string>
+    <string name="error_invalid_email">البريد الإلكتروني غير صحيح</string>
+    <string name="text_or">تسجيل الدخول باستخدام</string>
+    <string name="developed_by">تم تطويره من قبل:</string>
     <string name="selected_language">English</string>
-    <string name="invalid_credential">الاعتماد العضو غير صالح !</string>
-    <string name="error_login_response">يرجى التحقق من الإنترنت الخاص بك أو الخادم لا يستجيب</string>
+    <string name="invalid_credential">صلاحيات المستخدم غير صحيحة!</string>
+    <string name="task_incomplete">Please set progress 100% to mark as done </string>
     //...............................................//
+    <!-- <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>-->
     <!-- Strings related to Menu -->
-    <string name="feeds">يغذي</string>
+    <string name="feeds">Feeds</string>
+    <string name="activity">النشاطات</string>
     <string name="tasks">المهام</string>
-    <string name="documents">الوثائق</string>
-    <string name="settings">إعدادات</string>
-    <string name="activity">Activities</string>
+    <string name="task_detail">بيانات المهمة</string>
+    <string name="sub_tasks">المهام الفرعية</string>
+    <string name="task_attachments">مرفقات المهمة</string>
+    <string name="Task_Title">موضوع المهمة</string>
+    <string name="documents">الملفات</string>
+    <string name="settings">الإعدادات</string>
+    <string name="dashboard">الصفحة الرئيسية</string>
+    <string name="forums">Forums</string>
+    <string name="start_rating">البدء بالتقييم</string>
+    <string name="departments">الأقسام</string>
+    <!-- Strings related to Tasks -->
+    <string name="task_title">موضوع المهمة:</string>
+    <string name="task_overview">لمحة عن المهمة:</string>
+    <string name="task_category">فئة المهمة:</string>
+    <string name="task_attachment">المرفقات:</string>
+    <string name="task_employees">الموظفين:</string>
+    <string name="task_schedule">الجدول:</string>
+    <string name="task_priority">الأولوية:</string>
 
-    <!--Related to tasks-->
-    <string name="task_title">Task title:</string>
-    <string name="task_overview">Task Overview:</string>
-    <string name="task_category">Task Category:</string>
-    <string name="task_attachment">Attachment:</string>
-    <string name="task_employees">Employees:</string>
-    <string name="task_schedule">Schedule:</string>
-    <string name="task_priority">Priority:</string>
+    <string name="priority">الأولوية</string>
+    <string name="image">صورة</string>
+    <string name="camera">الكاميرا</string>
+    <string name="gallery">معرض الصور</string>
+    <string name="others">أخرى</string>
+    <string name="OK">موافق</string>
+    <string name="none">لا يوجد</string>
+    <string name="low">منخفض</string>
+    <string name="medium">متوسط</string>
+    <string name="high">مرتفع</string>
+    <string name="file_size">تنبيه حجم الملف!</string>
+    <string name="file_size_content">حجم الملف المرفق يجب أن يكون أقل من 5 ميغابايت</string>
+    <string name="task_desc">الوصف</string>
+    <string name="category">الفئة</string>
+    <string name="employees">المستخدمين</string>
+    <string name="assigned_projects">المشاريع المخصصة</string>
+    <string name="TaskListName">اسم قائمة المهام</string>
+    <string name="users">المستخدمين</string>
+    <string name="schedule">الجدول</string>
+    <string name="start_date">تاريخ البدء</string>
+    <string name="end_date">تاريخ الانتهاء</string>
+
     <!-- Random Strings related to ZOHO -->
-    <string name="lang_arabic">ar</string>
+    <string name="lang_arabic">ع</string>
     <string name="lang_english">en</string>
 
-    <string name="priority">Priority</string>
-    <string name="image">Image</string>
-    <string name="task_title1">Task title</string>
-    <string name="category">Category</string>
-    <string name="employees">Employees</string>
-    <string name="schedule">Schedule</string>
-    <string name="start_date">Start Date</string>
-    <string name="end_date">End Date</string>
-    <string name="calendar">Calendar</string>
-    <string name="add_task">Add Task</string>
+    <string name="calendar">التقويم</string>
+    <string name="task_comment">التعليقات</string>
+    <string name="task_user">المستخدمين</string>
+    <string name="user">المستخدم</string>
+
+    <string name="add_user">إضافة مستخدم جديد</string>
+    <string name="edit_profile">تعديل الملف الشخصي</string>
+    <string name="rest_password">تعديل كلمة المرور</string>
+    <string name="edit_user">تعديل المستخدم</string>
+    <string name="add_task">إضافة مهمة</string>
+    <string name="edit">تعديل</string>
+    <string name="save">حفظ</string>
     <string name="all">All</string>
-    <string name="select_project">Select Project</string>
-    <string name="projects_list_empty">Project list is empty</string>
+    <string name="upcoming">القادمة</string>
+    <string name="overdue">المتراكمة</string>
+    <string name="title_activity_milestone">MilestoneActivity</string>
+    <string name="title_activity_settings">الإعدادات</string>
+    <string name="new_forum_post">New Forum Post</string>
+    <string name="new_dept">New Department</string>
+    <string name="edit_forum_post">Edit Forum Post</string>
+    <string name="new_project">مشروع جديد</string>
+    <string name="edit_project">تعديل المشروع</string>
+    <string name="edit_dept">تعديل القسم</string>
+    <!-- Strings related to Settings -->
+
+    <!-- Example General settings -->
+    <string name="pref_header_general">عام</string>
+
+    <string name="pref_title_social_recommendations">تفعيل خاصية التوصية لمواقع التواصل الاجتماعي</string>
+    <string name="pref_description_social_recommendations">Recommendations for people to contact
+        based on your message history
+    </string>
+
+    <string name="pref_title_display_name">عرض الاسم</string>
+    <string name="pref_default_display_name">جون سميث</string>
+
+    <string name="pref_title_add_friends_to_messages">إضافة أصدقاء إلى الرسالة</string>
+    <string-array name="pref_example_list_titles">
+        <item>دائمًا</item>
+        <item>When possible</item>
+        <item>أبدًا</item>
+    </string-array>
+    <string-array name="pref_example_list_values">
+        <item>1</item>
+        <item>0</item>
+        <item>-1</item>
+    </string-array>
+
+    <!-- Example settings for Data & Sync -->
+    <string name="pref_header_data_sync">Data &amp; sync</string>
+
+    <string name="pref_title_sync_frequency">Sync frequency</string>
+    <string-array name="pref_sync_frequency_titles">
+        <item>15 دقيقة</item>
+        <item>30 دقيقة</item>
+        <item>1 ساعة</item>
+        <item>3 ساعات</item>
+        <item>6 ساعات</item>
+        <item>أبدًا</item>
+    </string-array>
+    <string-array name="pref_sync_frequency_values">
+        <item>15</item>
+        <item>30</item>
+        <item>60</item>
+        <item>180</item>
+        <item>360</item>
+        <item>-1</item>
+    </string-array>
+
+    <string name="pref_title_system_sync_settings">إعدادات تزامن النظام</string>
+
+    <!-- Example settings for Notifications -->
+    <string name="pref_header_notifications">التنبيهات</string>
+
+    <string name="pref_title_new_message_notifications">تنبيهات لرسالة جديدة</string>
+
+    <string name="pref_title_ringtone">نغمة الرنين</string>
+    <string name="pref_ringtone_silent">صامت</string>
+
+    <string name="pref_title_vibrate">الاهتزاز</string>
+    <string name="projects">المشاريع</string>
+    <string name="project_title">
+    
+    </string>
+    <string name="forums_description">Forums Description</string>
+    <string name="forums_title">Test Forum</string>
+    <string name="title">الموضوع</string>
+    <string name="content">المحتويات</string>
+    <!-- Task Details Strings -->
+    <string name="reopen">إعادة فتح المهمة؟</string>
+    <string name="reopen_task">إعادة فتح المهمة</string>
+    <string name="mark_as_done">تحديد كمنجز؟</string>
+    <string name="task_as_done">تحديد كمنجز</string>
+    <string name="task_done">تم إنجاز المهمة</string>
+    <string name="task_created">تم إنجاز المهمة / تم تحديث المهمة</string>
+    <string name="delete_task">حذف المهمة؟</string>
+    <string name="task_deleted">حذف المهمة</string>
+    <string name="update_progress">Progress Updated</string>
+    <string name="update_comment">تم تحديث التعليق</string>
+    <string name="task_name">اسم المهمة</string>
+    <string name="task_details">تفاصيل المهمة:</string>
+    <string name="task_added">أضاف</string>
+    <string name="task_users">المستخدمين:</string>
+    <string name="project_status">حالة المشروع:</string>
+    <string name="task_startdate">تاريخ البدء:</string>
+    <string name="task_duedate">تاريخ الانتهاء:</string>
+    <string name="projects_list_empty">قائمة المشروع فارغة</string>
+    <string name="forums_list_empty">قائمة المشروع فارغة</string>
+
+    <!-- Task Details Strings -->
+    <string name="delete_doc">حذف الملف؟</string>
+    <string name="delete">حذف</string>
+    <string name="doc_deleted">حذف الملف</string>
     <string name="_private">Private - Only project users can access</string>
+    <string name="_active">نشط</string>
     <string name="_public">Public - Portal users can view/follow</string>
-    <string name="project_name">Project Name</string>
-    <string name="project_description">Project Description</string>
-    <string name="project_access">Project Access</string>
-    <string name="remember_password">Remember Password?</string>
-    <string name="over_due">Over Due</string>
-    <string name="up_coming">Up Coming</string>
-    <string name="logout">Logout</string>
-    <string name="change_theme">Change Theme</string>
-    <string name="add_project">Add Project</string>
+    <string name="_archive">أرشيف</string>
+    <string name="project_name">اسم المشروع</string>
+    <string name="project_description">وصف المشروع</string>
+    <string name="project_access">الوصول للمشروع</string>
+    <string name="remember_password">حفظ كلمة المرور؟</string>
+    <string name="over_due">المتراكمة</string>
+    <string name="up_coming">القادمة</string>
+    <string name="first_name">الاسم الاول</string>
+    <string name="last_name">الاسم الاخير</string>
+    <string name="nick_name">الاسم المستعار</string>
+    <string name="email">البريد الالكتروني</string>
+    <string name="phone_number">رقم الهاتف</string>
+    <string name="user_role">دور المستخدم</string>
+    <string name="select_folder">اختيار الملف</string>
+    <string name="logout">تسجيل الخروج</string>
+    <string name="change_theme">تغيير القالب</string>
+    <string name="old_password">كلمة المرور القديمة</string>
+    <string name="new_password">كلمة المرور الجديدة</string>
+    <string name="confirm_password">تأكيد كلمة المرور</string>
+
+    <!-- Star Rating Strings -->
+    <string name="ratingPrimaryStage">المرحلة الابتدائية</string>
+    <string name="ratingDevelopmentStage">مرحلة التطوير</string>
+    <string name="ratingMaturityStage">مرحلة الريادة</string>
+    <string name="ratingLeadingStage">مرحلة القيادة</string>
+    <string name="Q">Q</string>
+
+    <!-- Star Department Strings -->
+    <string name="department_created">تم إنشاء القسم</string>
+    <string name="department_updated">تم إنشاء القسم</string>
+    <string name="department_deleted">تم إنشاء القسم</string>
+    <string name="deleted_dept">حذف القسم؟</string>
+    <string name="department_name">الرجاء إضافة اسم القسم</string>
+
+    <!-- Star Forum Strings -->
+    <string name="forum_created">Forum Created</string>
+    <string name="forum_updated">Forum Updated</string>
+    <string name="forum_deleted">Forum Deleted</string>
+    <string name="deleted_forum">Delete Forum?</string>
+    <string name="forum_addname">Please Add Forum Name</string>
+    <string name="forum_add_description">Please Add Forum Description</string>
+
+    <!-- Star Projects Strings -->
+    <string name="project_created">تم إنشاء المشروع</string>
+    <string name="project_moved">تم نقل المشروع بنجاح</string>
+    <string name="project_updated">تم تحديث المشروع</string>
+    <string name="project_deleted">تم حذف المشروع</string>
+    <string name="deleted_project">حذف المشروع؟</string>
+    <string name="project_loading">الرجاء الانتظار للتحميل</string>
+    <string name="all_projects">كل المشاريع</string>
+    <string name="by_client">حسب المتعامل</string>
+    <string name="by_dept">حسب القسم</string>
+    <string name="un_assigned">حسب القسم</string>
+    <string name="project_addname">الرجاء إضافة اسم المشروع</string>
+    <string name="project_add_description">الرجاء إضافة وصف للمشروع</string>
+    <string name="project_access_option">الرجاء اختيار الوصول للمشروع</string>
+    <string name="project_status_option">الرجاء اختيار حالة المشروع</string>
+
+    <!-- Star User Strings -->
+    <string name="user_created">User Created</string>
+    <string name="user_updated">User Updated</string>
+    <string name="user_deleted">User Deleted</string>
+    <string name="deleted_user">Delete User?</string>
+    <string name="user_first_name">الرجاء إضافة الاسم الاول</string>
+    <string name="user_last_name">الرجاء إضافة الاسم الاخير</string>
+    <string name="add_email">الرجاء إضافة البريد الإلكتروني</string>
+    <string name="alert_old_password">الرجاء إضافة كلمة المرور القديمة</string>
+    <string name="alert_new_password">الرجاء إضافة كلمة المرور الجديدة</string>
+    <string name="alert_confirm_password">الرجاء تأكيد كلمة المرور</string>
+    <string name="alert_match_password">الرجاء التأكد من تطابق كلمةا لمرور</string>
+    <string name="update_password">تم تحديث كلمة المرور</string>
+    <string name="add_phoneno">الرجاء إضافة رقم الهاتف</string>
+    <string name="email_already">البريد الإلكتروني</string>
+
+
+    <string name="response_error">خطأ! الرجاء المحاولة لاحقًا</string>
+    <string name="select_project">الرجاء اختيار مشروع!</string>
+    <string name="add_project">إضافة مشروع</string>
+    <string name="enter_comment">أدخل تعليقك!</string>
+    <string name="no_date">لا يوجد تاريخ</string>
+    <string name="by">By</string>
+    <string name="last_responce_on">آخر رد في</string>
+    <string name="me">Me</string>
+    <string name="no_due_date">No Due Date</string>
+    <string name="role">الدور:</string>
+    <string name="no_data">لا يوجد بيانات</string>
+    <string name="late_by">Late By</string>
+    <string name="days">الأيام</string>
+    <string name="days_left">الأيام المتبقية</string>
+    <string name="no_task_found">day(s) No tasks found</string>
+    <string name="all_files">كل الملفات</string>
+    <string name="picture">الصور</string>
+    <string name="videos">الفيديو</string>
+    <string name="favorites">المفضلة</string>
+    <string name="file_size_alert">File size alert!</string>
+    <string name="file_size_lessthan5mb">File size should be less than (5) five MB</string>
+    <string name="file_loaded_succesfully">File(s) uploaded successfully</string>
+    <string name="login">تسجيل الدخول!</string>
+    <string name="comments">التعليقات</string>
+    <string name="questions">الاسئلة:</string>
+    <string name="loading">تحميل</string>
+    <string name="connecting_to_user">الاتصال بالمستخدم</string>
+    <string name="test_forum">Test Forum 1</string>
+    <string name="add">إضافة</string>
+    <string name="comment">التعليقات</string>
+    <string name="file">الملف</string>
+    <string name="name">الإسم</string>
+    <string name="sample_email">admin@admin.com</string>
+    <string name="arabic">العربية</string>
+    <string name="action_disable_drag">action disable drag</string>
+    <string name="action_enable_drag">action enable drag</string>
+    <string name="add_column">إضافة عمود</string>
+    <string name="remove_column">حذف عمود</string>
+    <string name="clear_board">Clear Board</string>
+    <string name="rating">التقييم</string>
+    <string name="stage">المرحلة</string>
+    <!-- Documents Strings -->
 </resources>

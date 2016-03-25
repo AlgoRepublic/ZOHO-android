@@ -3,6 +3,9 @@
     android:id="@+id/swipe"
     android:clickable="true"
     android:focusable="true"
+    android:fitsSystemWindows="true"
+    android:layoutDirection="rtl"
+    android:textDirection="rtl"
     android:background="@color/white"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
