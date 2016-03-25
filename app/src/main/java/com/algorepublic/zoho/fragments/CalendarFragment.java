@@ -127,7 +127,7 @@ public class CalendarFragment extends BaseFragment implements CalendarPickerCont
                 endTime.setTimeInMillis(endInMillis);
                 String endDate = DateFormatter(task.endDate);
                 task.position = eventList.size();
-                eventList.add(new BaseCalendarEvent(eventList.size(),task.title, task.projectName, Integer.toString(task.commentsCount),task.userObject.size()
+                eventList.add(new BaseCalendarEvent(task.position,task.title, task.projectName, task.commentsCount,task.userObject.size()
                        ,startDate,endDate , getPriorityWiseColor(task.priority), startTime, endTime, true));
             }
         }
@@ -198,7 +198,7 @@ public class CalendarFragment extends BaseFragment implements CalendarPickerCont
             if(arg1.hasExtra("Action"))
              action = arg1.getExtras().getString("Action");
             if(action.contentEquals("Detail"))
-            Toast.makeText(getContext(), position+": "+action, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), position+": "+action, Toast.LENGTH_SHORT).show();
             if(action.contentEquals("Edit"))
                 Toast.makeText(getContext(), position+": "+action, Toast.LENGTH_SHORT).show();
             if(action.contentEquals("Delete"))
