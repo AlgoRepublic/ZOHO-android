@@ -38,7 +38,6 @@ public class AdapterStarRatingLevelThree extends BaseExpandableListAdapter {
     LayoutInflater layoutInflater;
     int ClickedPosition, userProgress;
     int multiple=5;
-    boolean flag =true;
     LinearLayout QuestLayout;
     public  static ArrayList<StarRatingQuestion> Questions = new ArrayList<>();
     private final List<StarRatingHeadsLevelThree> mListDataHeader;
@@ -69,18 +68,16 @@ public class AdapterStarRatingLevelThree extends BaseExpandableListAdapter {
         }
         aq = new AQuery(convertView);
         QuestLayout = (LinearLayout) aq
-                .id(R.id.questListView).getView();
+                .id(R.id.questListView).visible().getView();
+        QuestLayout.removeAllViews();
+        QuestLayout.invalidate();
         try {
             Questions.clear();
         }catch (NullPointerException e){}
-        QuestLayout.removeAllViews();
-        QuestLayout.invalidate();
-        if(flag) {
-            flag=false;
-            service = new StarRatingService((AppCompatActivity) mContext);
-            service.getStarRatingQuestion_API(mListDataHeader.get(groupPosition).getID(), "enUS",
-                    true, new CallBack(AdapterStarRatingLevelThree.this, "StarRatingQuestion"));
-        }
+        StarRatingQuestionModel.getInstance().responseData.clear();
+        service = new StarRatingService((AppCompatActivity) mContext);
+        service.getStarRatingQuestion_API(mListDataHeader.get(groupPosition).getID(), "enUS",
+                true, new CallBack(AdapterStarRatingLevelThree.this, "StarRatingQuestion"));
         return convertView;
     }
     public void StarRatingQuestion(Object caller, Object model) {
@@ -130,12 +127,12 @@ public class AdapterStarRatingLevelThree extends BaseExpandableListAdapter {
                 @Override
                 public void afterTextChanged(Editable s) {
 
-                    Log.e("ID", "/" + Questions
-                            .get(ClickedPosition).getID());
-                    service.StarEditComment(Questions
-                            .get(ClickedPosition).getID(), Questions
-                            .get(ClickedPosition).getComment(), true, new
-                            CallBack(AdapterStarRatingLevelThree.this, "UpdateComment"));
+//                    Log.e("ID", "/" + Questions
+//                            .get(ClickedPosition).getID());
+//                    service.StarEditComment(Questions
+//                            .get(ClickedPosition).getID(), Questions
+//                            .get(ClickedPosition).getComment(), true, new
+//                            CallBack(AdapterStarRatingLevelThree.this, "UpdateComment"));
                 }
             });
             aq_quest.id(R.id.comment_edittext).getEditText().setOnTouchListener(new View.OnTouchListener() {
@@ -166,27 +163,27 @@ public class AdapterStarRatingLevelThree extends BaseExpandableListAdapter {
 
                 @Override
                 public void onStopTrackingTouch(SeekBar seekBar) {
-                    View view = QuestLayout.getChildAt(ClickedPosition);
-                    Log.e("D",ClickedPosition+"/"+(Integer)view.getTag());
-                    AQuery aq= new AQuery(view);
-                    aq.id(R.id.seekBar).progress(userProgress);
-                    aq.id(R.id.percent_text).getTextView().setText(userProgress + "%");
-                    RatingBar ratingBar  =(RatingBar) view.findViewById(R.id.star_rating);
-                    ratingBar.setRating(GetStarValue(userProgress));
-                    aq.id(R.id.devstage_text).text(GetStageValue(userProgress));
-
-
-                    service.StarUpdateProgress(Questions
-                            .get(ClickedPosition).getID(), Questions
-                            .get(ClickedPosition).getProgress(), true, new
-                            CallBack(AdapterStarRatingLevelThree.this, "UpdateProgress"));
+//                    View view = QuestLayout.getChildAt(ClickedPosition);
+//                    Log.e("D",ClickedPosition+"/"+(Integer)view.getTag());
+//                    AQuery aq= new AQuery(view);
+//                    aq.id(R.id.seekBar).progress(userProgress);
+//                    aq.id(R.id.percent_text).getTextView().setText(userProgress + "%");
+//                    RatingBar ratingBar  =(RatingBar) view.findViewById(R.id.star_rating);
+//                    ratingBar.setRating(GetStarValue(userProgress));
+//                    aq.id(R.id.devstage_text).text(GetStageValue(userProgress));
+//
+//
+//                    service.StarUpdateProgress(Questions
+//                            .get(ClickedPosition).getID(), Questions
+//                            .get(ClickedPosition).getProgress(), true, new
+//                            CallBack(AdapterStarRatingLevelThree.this, "UpdateProgress"));
                 }
             });
             QuestLayout.addView(QuestionLayout);
         }
-        flag=true;
     }
     public void GetListQuestions(){
+        Questions.clear();
         for(int loop=0;loop<StarRatingQuestionModel.getInstance().responseData.size();loop++){
             StarRatingQuestion question = new StarRatingQuestion();
             question.setID(StarRatingQuestionModel.getInstance().responseData.get(loop).ID);
