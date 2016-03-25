@@ -1,0 +1,24 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:agendaCalendar="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:layoutDirection="rtl"
+    android:textDirection="rtl"
+    android:background="@color/colorWhite"
+    tools:context="com.algorepublic.zoho.fragments.CalendarFragment">
+
+    <com.github.tibolte.agendacalendarview.AgendaCalendarView
+        android:id="@+id/agenda_calendar_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <include
+        layout="@layout/layout_alert_message"
+        android:layout_width="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_height="wrap_content" />
+
+</RelativeLayout>
