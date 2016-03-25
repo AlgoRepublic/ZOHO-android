@@ -9,6 +9,7 @@ import java.util.Calendar;
  */
 public class BaseCalendarEvent implements CalendarEvent {
 
+    private int mCommentCount;
     /**
      * Id of the event.
      */
@@ -126,10 +127,10 @@ public class BaseCalendarEvent implements CalendarEvent {
      * @param endTime The end time of the event.
      * @param allDay Indicates if the event lasts the whole day.
      */
-    public BaseCalendarEvent(int position,String title, String description, String location,int userCount,String startDate,String endDate, int color, Calendar startTime, Calendar endTime, boolean allDay) {
+    public BaseCalendarEvent(int position,String title, String description, int mCommentCount,int userCount, String startDate,String endDate, int color, Calendar startTime, Calendar endTime, boolean allDay) {
         this.mTitle = title;
         this.mDescription = description;
-        this.mLocation = location;
+        this.mCommentCount = mCommentCount;
         this.mUserCount = userCount;
         this.mStartDate = startDate;
         this.mEndDate = endDate;
@@ -150,6 +151,10 @@ public class BaseCalendarEvent implements CalendarEvent {
         this.mLocation = calendarEvent.getLocation();
         this.mStartTime = calendarEvent.getStartTime();
         this.mEndTime = calendarEvent.getEndTime();
+        this.mPosition = calendarEvent.getPosition();
+        this.mUserCount = calendarEvent.getmUserCount();
+        this.mCommentCount = calendarEvent.getmCommentCount();
+        this.mEndDate = calendarEvent.getEndDate();
     }
 
     /**
@@ -199,8 +204,8 @@ public class BaseCalendarEvent implements CalendarEvent {
         return mUserCount;
     }
 
-    public void setmUserCount(int mColor) {
-        this.mUserCount = mColor;
+    public void setmUserCount(int mUserCount) {
+        this.mUserCount = mUserCount;
     }
 
     public String getDescription() {
@@ -370,5 +375,13 @@ public class BaseCalendarEvent implements CalendarEvent {
                 + ", instanceDay= "
                 + mInstanceDay.getTime()
                 + "}";
+    }
+
+    public int getmCommentCount() {
+        return mCommentCount;
+    }
+
+    public void setmCommentCount(int mCommentCount) {
+        this.mCommentCount = mCommentCount;
     }
 }

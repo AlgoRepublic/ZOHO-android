@@ -45,7 +45,7 @@ public class DefaultEventRenderer extends EventRenderer<BaseCalendarEvent> {
 
         txtTitle.setTextColor(view.getResources().getColor(android.R.color.black));
         txtProject.setText(event.getDescription());
-        txtComment.setText(event.getLocation()+ " " + view.getResources().getString(R.string.task_comment));
+        txtComment.setText(event.getmCommentCount()+ " " + view.getResources().getString(R.string.task_comment));
         txtUser.setText(Integer.toString(event.getmUserCount())+ " " + view.getResources().getString(R.string.task_user));
         txtDate.setText(event.getEndDate());
 

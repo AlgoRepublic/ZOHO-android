@@ -3,8 +3,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorBaseWrapper"
+    android:gravity="center_horizontal"
+    android:layoutDirection="locale"
     android:fitsSystemWindows="true"
-    android:layoutDirection="rtl"
     android:textDirection="rtl"
     android:orientation="vertical"
     tools:context=".ActivityLoginToLoading">
@@ -99,6 +100,7 @@
                         android:paddingLeft="10dp"
                         android:paddingRight="10dp"
                         android:singleLine="true"
+                        android:text="admin@admin.com"
                         android:textColor="@color/colorBaseHeader"
                         android:textColorHint="@color/colorBaseMenu"
                         android:textCursorDrawable="@null" />

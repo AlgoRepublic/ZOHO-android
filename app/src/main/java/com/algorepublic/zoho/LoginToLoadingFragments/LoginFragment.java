@@ -1,27 +1,25 @@
 package com.algorepublic.zoho.LoginToLoadingFragments;
 
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.PorterDuff;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
 import android.widget.CompoundButton;
-import android.widget.ImageView;
 
-import com.algorepublic.zoho.ActivityLoginToLoading;
+import android.widget.EditText;
+import android.widget.TextView;
+
+
 import com.algorepublic.zoho.MainActivity;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.fragments.BaseFragment;
 import com.algorepublic.zoho.utils.BaseClass;
 import com.algorepublic.zoho.utils.Constants;
+import com.algorepublic.zoho.utils.LocaleHelper;
 import com.androidquery.AQuery;
 import com.linkedin.platform.APIHelper;
 import com.linkedin.platform.LISession;
@@ -44,6 +42,8 @@ public class LoginFragment extends BaseFragment {
     static LoginFragment fragment;
     View view;AQuery aq;
     BaseClass baseClass;
+    EditText editText;
+    public static boolean flag= false;
     public LoginFragment() {
     }
 
@@ -63,49 +63,55 @@ public class LoginFragment extends BaseFragment {
         view  = inflater.inflate(R.layout.fragment_login, container, false);
 
         aq= new AQuery(getActivity(),view);
+        editText=(EditText)view.findViewById(R.id.password);
         if(!BaseClass.db.getString("Password").equalsIgnoreCase("")){
             aq.id(R.id.password).text(BaseClass.db.getString("Password"));
         }
-        if (baseClass.getUserLanguage().equalsIgnoreCase("ar")) {
+        if (LocaleHelper.getLanguage(getContext()).equalsIgnoreCase("ar")) {
             aq.id(R.id.lang_text).text(R.string.arabic);
-            changeLanguage(getString(R.string.lang_arabic));
+
+            //changeLanguage(getString(R.string.lang_arabic));
         }else{
-            changeLanguage(getString(R.string.lang_english));
+           // changeLanguage(getString(R.string.lang_english));
                 aq.id(R.id.lang_text).text(R.string.english);
         }
         aq.id(R.id.lang_text).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (baseClass.getUserLanguage().equalsIgnoreCase("en")) {
-                    changeLanguage(getString(R.string.lang_arabic));
+
+                    LocaleHelper.setLocale(baseClass.getApplicationContext(), "ar");
+                  //  changeLanguage(getString(R.string.lang_arabic));
                     baseClass.setUserLanguage(getString(R.string.lang_arabic));
                     aq.id(R.id.lang_text).text(R.string.arabic);
                 } else {
-                    changeLanguage(getString(R.string.lang_english));
+                    LocaleHelper.setLocale(baseClass.getApplicationContext(), "en");
+                   // changeLanguage(getString(R.string.lang_english));
                     baseClass.setUserLanguage(getString(R.string.lang_english));
                     aq.id(R.id.lang_text).text(R.string.english);
                 }
-                startActivity(new Intent(getActivity(), ActivityLoginToLoading.class));
-                getActivity().finish();
+                getActivity().recreate();
+//                startActivity(new Intent(getActivity(), ActivityLoginToLoading.class));
+//                getActivity().finish();
             }
         });
         aq.id(R.id.email_sign_in_button).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               LoginClick(v);
+                LoginClick(v);
             }
         });
-        aq.id(R.id.checkbox).getCheckBox().setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+           aq.id(R.id.checkbox).getCheckBox().setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                baseClass.hideKeyPad(view);
-                if(isChecked ==true){
-                    BaseClass.db.putString("Password", aq.id(R.id.password).getText().toString());
-                }else
-                    BaseClass.db.putString("Password", "");
-            }
-        });
+               @Override
+               public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                   baseClass.hideKeyPad(view);
+                   if (isChecked == true) {
+                       BaseClass.db.putString("Password", aq.id(R.id.password).getText().toString());
+                   } else
+                       BaseClass.db.putString("Password", "");
+               }
+           });
         aq.id(R.id.linkedin_here).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -113,6 +119,26 @@ public class LoginFragment extends BaseFragment {
             }
         });
 
+        aq.id(R.id.password).getTextView().setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == getResources().getInteger(R.integer.add_comment)) {
+                    flag = true;
+                    if (flag == true) {
+                        LoginClick(v);
+                    }
+                    return true;
+                }
+                return false;
+            }
+        });
+
+        aq.id(R.id.main).clicked(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+           baseClass.hideKeyPad(v);
+            }
+        });
         return view;
     }
 

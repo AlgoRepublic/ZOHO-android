@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:fitsSystemWindows="true"
@@ -34,21 +34,198 @@
                     android:layout_margin="20dp"
                     class="com.dacer.androidcharts.BarView"
                     android:id="@+id/line_view" />
+                <RelativeLayout
+                    android:id="@+id/layout1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    android:layout_below="@+id/line_view">
+                <TextView
+                    android:id="@+id/open1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="14sp"
+                    android:layout_centerVertical="true"
+                    android:layout_toLeftOf="@+id/imag22"
+                    android:gravity="center_vertical"
+                    android:layout_marginRight="4dp"/>
+                        <View
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:text="@string/closed_tasks"
+                            android:textSize="14sp"
+                            android:id="@+id/imag22"
+                            android:background="@drawable/drawer_tasks"
+                            android:layout_centerVertical="true"
+                            />
 
+                        <TextView
+                            android:id="@+id/close1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="14sp"
+                            android:layout_centerVertical="true"
+                            android:layout_toRightOf="@+id/imag22"
+                            android:gravity="center_vertical"
+                            android:layout_marginLeft="4dp"/>
+                    </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/layout2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    android:layout_below="@+id/layout1">
+
+
+                <TextView
+                    android:id="@+id/open2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="14sp"
+                    android:layout_centerVertical="true"
+                    android:layout_toLeftOf="@+id/imag223"
+                    android:gravity="center_vertical"
+                    android:layout_marginRight="4dp"/>
+                        <View
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:text="@string/closed_tasks"
+                            android:textSize="14sp"
+                            android:id="@+id/imag223"
+                            android:background="@drawable/opened_tasks"
+                            android:layout_centerVertical="true"
+                            />
+
+                        <TextView
+                            android:id="@+id/close2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="14sp"
+                            android:layout_centerVertical="true"
+                            android:layout_toRightOf="@+id/imag223"
+                            android:gravity="center_vertical"
+                            android:layout_marginLeft="4dp"/>
+                    </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/layout3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    android:layout_below="@+id/layout2">
+
+                <TextView
+                    android:id="@+id/open3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="14sp"
+                    android:layout_centerVertical="true"
+                    android:layout_toLeftOf="@+id/imag222"
+                    android:gravity="center_vertical"
+                    android:layout_marginRight="4dp"/>
+                        <View
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:text="@string/closed_tasks"
+                            android:textSize="14sp"
+                            android:id="@+id/imag222"
+                            android:background="@drawable/cloased_tasks"
+                            android:layout_centerVertical="true"
+                            />
+
+                        <TextView
+                            android:id="@+id/close3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="14sp"
+                            android:layout_centerVertical="true"
+                            android:layout_toRightOf="@+id/imag222"
+                            android:gravity="center_vertical"
+                            android:layout_marginLeft="4dp"/>
+                    </RelativeLayout>
             </RelativeLayout>
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1">
-            <view
-                android:layout_width="200dp"
-                android:layout_height="200dp"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"
-                class="com.dacer.androidcharts.PieView"
-                android:textSize="14sp"
-                android:id="@+id/pie_view" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_weight="1">
+                <view
+                    android:layout_width="200dp"
+                    android:layout_height="200dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    class="com.dacer.androidcharts.PieView"
+                    android:textSize="14sp"
+                    android:id="@+id/pie_view" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:layout_below="@+id/pie_view">
+
+                    <RelativeLayout
+                        android:id="@+id/open"
+                        android:layout_marginRight="5dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+                        <View
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:textSize="14sp"
+                            android:id="@+id/imag1"
+                            android:background="@drawable/opened_tasks"
+                            android:layout_centerVertical="true"
+                            />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/opened_tasks"
+                            android:textSize="14sp"
+                            android:layout_centerVertical="true"
+                            android:layout_toRightOf="@+id/imag1"
+                            android:gravity="center_vertical"
+                            android:layout_marginLeft="4dp"/>
+                    </RelativeLayout>
+                    <RelativeLayout
+                        android:id="@+id/close"
+                        android:layout_marginLeft="5dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+                        <View
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:text="@string/closed_tasks"
+                            android:textSize="14sp"
+                            android:id="@+id/imag"
+                            android:background="@drawable/cloased_tasks"
+                            android:layout_centerVertical="true"
+                           />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/closed_tasks"
+                            android:textSize="14sp"
+                            android:layout_centerVertical="true"
+                           android:layout_toRightOf="@+id/imag"
+                            android:gravity="center_vertical"
+                            android:layout_marginLeft="4dp"/>
+                    </RelativeLayout>
+
+
+                </LinearLayout>
             </RelativeLayout>
+
         </LinearLayout>
     </android.support.v7.widget.CardView>
-</LinearLayout>
+</ScrollView>

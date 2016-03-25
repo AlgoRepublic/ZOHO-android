@@ -2,16 +2,13 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="120dp"
-    android:fitsSystemWindows="true"
-    android:layoutDirection="rtl"
-    android:textDirection="rtl"
     android:descendantFocusability="blocksDescendants"
     android:orientation="horizontal">
     <View
         android:id="@+id/selected_project"
         android:layout_width="5dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
         android:layout_height="match_parent"
         android:layout_alignBottom="@+id/layout123"
         android:layout_alignTop="@+id/layout123"
@@ -116,7 +113,7 @@
                                     android:orientation="horizontal">
 
                                     <TextView
-                                        android:layout_toLeftOf="@+id/layout_tasks"
+                                        android:layout_toRightOf="@+id/layout_tasks"
                                         android:id="@+id/project_title"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
