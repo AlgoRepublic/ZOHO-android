@@ -6,6 +6,7 @@
 
     <string name="task_user">User(s)</string>
     <string name="task_comment">Comment(s)</string>
+    <string name="divider">|</string>
 
     <!-- Agenda -->
     <string name="today">Today</string>

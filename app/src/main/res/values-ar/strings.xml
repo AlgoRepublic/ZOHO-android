@@ -68,6 +68,7 @@
     <string name="lang_arabic">ع</string>
     <string name="lang_english">en</string>
 
+
     <string name="calendar">التقويم</string>
     <string name="task_comment">التعليقات</string>
     <string name="task_user">المستخدمين</string>
@@ -80,6 +81,7 @@
     <string name="add_task">إضافة مهمة</string>
     <string name="edit">تعديل</string>
     <string name="save">حفظ</string>
+
     <string name="all">All</string>
     <string name="upcoming">القادمة</string>
     <string name="overdue">المتراكمة</string>
