@@ -3,9 +3,7 @@ package com.algorepublic.zoho.fragments;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -13,18 +11,14 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.algorepublic.zoho.BaseActivity;
-import com.algorepublic.zoho.Models.CreateCommentModel;
 import com.algorepublic.zoho.Models.CreateForumCommentModel;
 import com.algorepublic.zoho.Models.ForumsCommentModel;
 import com.algorepublic.zoho.Models.ForumsModel;
 import com.algorepublic.zoho.Models.GeneralModel;
-import com.algorepublic.zoho.Models.TaskCommentsModel;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.adapters.AdapterForumComment;
 import com.algorepublic.zoho.adapters.TaskComments;
@@ -34,8 +28,6 @@ import com.algorepublic.zoho.utils.BaseClass;
 import com.androidquery.AQuery;
 
 import java.util.ArrayList;
-
-import cc.cloudist.acplibrary.ACProgressFlower;
 
 /**
  * Created by waqas on 2/2/16.
@@ -160,16 +152,7 @@ public class ForumsDetailFragment extends BaseFragment {
         service.createforumComments(Integer.toString(ForumsModel.getInstance().responseObject.get(Position).ID)
                 , comment, baseClass.getUserId(), false,
                 new CallBack(ForumsDetailFragment.this, "CreateComment"));
-        aq.id(R.id.comment_user).text("");
-        TaskComments taskComments = new TaskComments();
-        taskComments.setCommentID(CreateForumCommentModel.getInstance().responseObject.Id);
-        taskComments.setComment(CreateForumCommentModel.getInstance().responseObject.message);
-        taskComments.setDateTime(GetDateTimeComment(DateMilli(CreateForumCommentModel.getInstance().responseObject.updatedAt)));
-        taskComments.setUserName(baseClass.getFirstName());
-        taskComments.setUserImagePath(baseClass.getProfileImage());
-        taskComments.setUserImageID(baseClass.getProfileImageID());
-        arrayList.add(taskComments);
-        adapter.notifyDataSetChanged();
+
         aq.id(R.id.response_alert).visibility(View.GONE);
     }
     public void UpdateComment(Object caller, Object model){
@@ -193,6 +176,16 @@ public class ForumsDetailFragment extends BaseFragment {
         CreateForumCommentModel.getInstance().setList((CreateForumCommentModel) model);
         if (CreateForumCommentModel.getInstance().responseCode ==100){
             Snackbar.make(getView(),"Comment Added",Snackbar.LENGTH_SHORT).show();
+            aq.id(R.id.comment_user).text("");
+            TaskComments taskComments = new TaskComments();
+            taskComments.setCommentID(CreateForumCommentModel.getInstance().responseObject.Id);
+            taskComments.setComment(CreateForumCommentModel.getInstance().responseObject.message);
+            taskComments.setDateTime(GetDateTimeComment(DateMilli(CreateForumCommentModel.getInstance().responseObject.updatedAt)));
+            taskComments.setUserName(baseClass.getFirstName());
+            taskComments.setUserImagePath(baseClass.getProfileImage());
+            taskComments.setUserImageID(baseClass.getProfileImageID());
+            arrayList.add(taskComments);
+            adapter.notifyDataSetChanged();
         }
         else
         {

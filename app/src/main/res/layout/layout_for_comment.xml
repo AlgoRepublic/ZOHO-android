@@ -24,7 +24,7 @@
                 android:textCursorDrawable="@null"
                 android:hint="Type a comment"
                 android:textColor="@color/colorBaseHeader"
-                android:textColorHint="@color/colorBaseHeader"
+                android:textColorHint="@color/colorBaseMenu"
                 android:imeActionId="@integer/add_comment"
                 android:background="@color/white"
                 android:imeOptions="actionDone"

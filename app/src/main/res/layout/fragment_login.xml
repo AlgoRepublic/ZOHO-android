@@ -9,6 +9,7 @@
     tools:context=".ActivityLoginToLoading">
 
     <RelativeLayout
+        android:id="@+id/main"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -39,7 +40,6 @@
                 android:ellipsize="end"
                 android:singleLine="true"
                 android:text="@string/selected_language"
-                android:textColor="@android:color/white"
                 android:textSize="20sp" />
         </RelativeLayout>
 
@@ -121,6 +121,8 @@
                         android:completionHint="@string/prompt_password"
                         android:hint="@string/prompt_password"
                         android:imeOptions="actionDone"
+                        android:imeActionId="@integer/add_comment"
+                        android:imeActionLabel="@string/login"
                         android:inputType="textPassword"
                         android:maxLines="1"
                         android:paddingLeft="10dp"
@@ -140,10 +142,12 @@
 
                     <CheckBox
                         android:id="@+id/checkbox"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
                         android:layout_centerVertical="true"
-                        android:layout_margin="8dp"
+                     android:layout_marginRight="8dp"
+                        android:button="@null"
+                        android:background="@drawable/checkbox_drawable"
                         android:layout_toLeftOf="@+id/forgot_password" />
 
                     <TextView
