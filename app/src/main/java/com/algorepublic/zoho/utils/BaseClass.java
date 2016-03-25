@@ -9,7 +9,6 @@ import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.text.format.DateFormat;
@@ -35,10 +34,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
-
-import cc.cloudist.acplibrary.ACProgressBaseDialog;
-import cc.cloudist.acplibrary.ACProgressConstant;
-import cc.cloudist.acplibrary.ACProgressFlower;
 
 /**
  * Created by hasanali on 27/08/14.
@@ -75,6 +70,10 @@ public class BaseClass extends Application {
                 Activity.MODE_PRIVATE);
         this.prefsEditor = appSharedPrefs.edit();
         db = new TinyDB(this);
+        if (LocaleHelper.getLanguage(this).equalsIgnoreCase("ar"))
+        LocaleHelper.onCreate(this, "ar");
+            else
+            LocaleHelper.onCreate(this, "en");
 
     }
 

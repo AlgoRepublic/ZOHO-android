@@ -98,6 +98,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_toLeftOf="@+id/rightarrow_layout"
+
                                 android:background="@color/colorBaseWrapper">
 
                                 <ImageView
@@ -109,6 +110,7 @@
                                     android:layout_marginRight="5dp"
                                     android:layout_marginTop="10dp"
                                     android:adjustViewBounds="true"
+                                    android:layout_alignParentLeft="true"
                                     android:scaleType="fitXY"
                                     android:src="@mipmap/task_progress" />
 
@@ -129,14 +131,6 @@
                                         android:orientation="horizontal"
                                         android:weightSum="2">
 
-                                        <TextView
-                                            android:id="@+id/task_name"
-                                            android:layout_width="0dp"
-                                            android:layout_height="wrap_content"
-                                            android:layout_weight="1"
-                                            android:gravity="left"
-                                            android:textSize="14sp"
-                                            android:textStyle="bold" />
 
                                         <TextView
                                             android:id="@+id/task_date"
@@ -145,6 +139,14 @@
                                             android:layout_weight="1"
                                             android:gravity="right|end"
                                             android:textSize="12sp" />
+                                        <TextView
+                                            android:id="@+id/task_name"
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_weight="1"
+                                            android:gravity="left"
+                                            android:textSize="14sp"
+                                            android:textStyle="bold" />
                                     </LinearLayout>
 
                                     <LinearLayout
@@ -154,17 +156,7 @@
                                         android:orientation="horizontal"
                                         android:weightSum="2">
 
-                                        <TextView
-                                            android:id="@+id/project_name"
-                                            android:layout_width="0dp"
-                                            android:layout_height="wrap_content"
-                                            android:layout_gravity="center_vertical"
-                                            android:layout_weight=".8"
-                                            android:gravity="left"
-                                            android:singleLine="true"
-                                            android:ellipsize="end"
-                                            android:textSize="14sp"
-                                            android:textStyle="bold" />
+
 
                                         <RelativeLayout
                                             android:layout_width="0dp"
@@ -182,13 +174,15 @@
                                                 android:text="@string/task_comment"
                                                 android:textSize="12sp" />
 
-                                            <View
+                                            <RadioButton
                                                 android:id="@+id/bar"
                                                 android:layout_width="1dp"
-                                                android:layout_height="match_parent"
                                                 android:layout_margin="5dp"
-                                                android:layout_toLeftOf="@+id/task_users"
-                                                android:background="@color/colorBaseHeader"></View>
+                                                android:layout_height="match_parent"
+                                                android:layout_centerVertical="true"
+                                                android:text="@string/divider"
+                                                android:checked="true"
+                                                android:layout_toLeftOf="@+id/task_users"></RadioButton>
 
                                             <TextView
                                                 android:id="@+id/task_users"
@@ -200,6 +194,17 @@
                                                 android:text="@string/task_user"
                                                 android:textSize="12sp" />
                                         </RelativeLayout>
+                                        <TextView
+                                            android:id="@+id/project_name"
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_gravity="center_vertical"
+                                            android:layout_weight=".8"
+                                            android:gravity="left"
+                                            android:singleLine="true"
+                                            android:ellipsize="end"
+                                            android:textSize="14sp"
+                                            android:textStyle="bold" />
                                     </LinearLayout>
                                 </LinearLayout>
                             </RelativeLayout>

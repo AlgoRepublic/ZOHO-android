@@ -12,22 +12,28 @@
         android:layout_marginRight="7dp"
         android:layout_marginTop="50dp">
         <RelativeLayout
-            android:layout_width="110dp"
+            android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:id="@+id/btn_start_date"
             android:orientation="horizontal"
             >
-
+            <RelativeLayout
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:id="@+id/btn_start_date1"
+                android:orientation="horizontal"
+                >
             <ImageView
                 android:id="@+id/start_date_image"
-                android:layout_width="15dp"
+                android:layout_width="20dp"
                 android:text="@string/start_date"
                 android:textAllCaps="false"
                 android:background="@mipmap/calendar"
                 android:layout_alignParentLeft="true"
-                android:layout_gravity="center_vertical"
-                android:layout_height="15dp"
+                android:layout_centerVertical="true"
+                android:layout_height="20dp"
 
                 />
             <TextView
@@ -37,20 +43,19 @@
                 android:layout_height="wrap_content"
                 android:text="@string/start_date"
                 android:singleLine="true"
-                android:gravity="center_vertical|center_horizontal"
+                android:layout_centerVertical="true"
                 android:layout_marginLeft="5dp"
                 android:textColor="@color/colorBaseHeader"
-                android:textSize="15sp"
+                android:textSize="17sp"
                 android:typeface="monospace" />
+                </RelativeLayout>
             <TextView
                 android:id="@+id/start_date"
                 android:layout_marginTop="5dp"
-                android:layout_below="@+id/text1"
-                android:layout_width="wrap_content"
+                android:layout_below="@+id/btn_start_date1"
+                android:layout_width="match_parent"
                 android:text="@string/start_date"
-                android:layout_alignParentLeft="true"
-                android:layout_alignRight="@+id/text1"
-                android:textSize="12sp"
+                android:textSize="17sp"
                 android:gravity="center"
                 android:paddingRight="2dp"
                 android:textColor="@color/colorBaseHeader"
@@ -61,43 +66,48 @@
         </RelativeLayout>
 
         <RelativeLayout
-            android:layout_width="110dp"
+            android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:id="@+id/btn_end_date"
             >
-
+            <RelativeLayout
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:id="@+id/btn_end_date1"
+                android:orientation="horizontal"
+                >
             <ImageView
                 android:id="@+id/end_date_image"
-                android:layout_width="15dp"
+                android:layout_width="20dp"
                 android:text="@string/start_date"
                 android:textAllCaps="false"
                 android:background="@mipmap/calendar"
-                android:layout_gravity="center_vertical"
-                android:layout_height="15dp"
+                android:layout_centerVertical="true"
+                android:layout_height="20dp"
                 />
             <TextView
                 android:id="@+id/text2"
-                android:layout_alignParentRight="true"
                 android:layout_width="wrap_content"
                 android:layout_weight="1"
+                android:layout_toRightOf="@+id/end_date_image"
                 android:layout_height="wrap_content"
                 android:text="@string/end_date"
                 android:singleLine="true"
-                android:gravity="center_vertical|center_horizontal"
+                android:layout_centerVertical="true"
                 android:layout_marginLeft="5dp"
                 android:textColor="@color/colorBaseHeader"
-                android:textSize="15sp"
+                android:textSize="17sp"
                 android:typeface="monospace" />
+                </RelativeLayout>
             <TextView
                 android:id="@+id/end_date"
                 android:layout_marginTop="5dp"
-                android:layout_below="@+id/text2"
-                android:layout_width="wrap_content"
+                android:layout_below="@+id/btn_end_date1"
+                android:layout_width="match_parent"
                 android:text="@string/end_date"
-                android:layout_alignLeft="@+id/end_date_image"
-                android:layout_alignParentRight="true"
-                android:textSize="12sp"
+                android:textSize="17sp"
                 android:gravity="center"
                 android:paddingRight="2dp"
                 android:textColor="@color/colorBaseHeader"

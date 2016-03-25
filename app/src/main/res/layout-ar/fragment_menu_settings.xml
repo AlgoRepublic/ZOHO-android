@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     tools:context=".FragmentMenuSettings">
 
@@ -14,7 +13,7 @@
 
         <com.algorepublic.zoho.utils.ToggleExpandLayout
             android:id="@+id/toogleLayout"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="160dp"
 
            >
@@ -66,7 +65,7 @@
                     >
                     <TextView
                         android:layout_marginTop="4dp"
-                        android:layout_marginLeft="8dp"
+                        android:layout_marginRight="8dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
@@ -74,15 +73,17 @@
                         android:textSize="16sp"
                         android:textColor="@color/blackBackground"
                         android:text="@string/change_theme" />
-                    <Switch
+                    <CheckBox
                         android:id="@+id/switch_theme"
-                        android:layout_alignParentRight="true"
-                        android:layout_marginRight="10dp"
+                        android:layout_alignParentLeft="true"
+                        android:layout_marginLeft="10dp"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="25dp"
+                        android:checked="true"
                         android:layout_centerInParent="true"
-                        android:padding="16dp"
-                        />
+                        android:button="@drawable/selector_check"
+                        android:background="@android:color/white"
+                       />
                 </RelativeLayout>
             </LinearLayout>
         </com.algorepublic.zoho.utils.ToggleExpandLayout>
@@ -93,7 +94,7 @@
         android:layout_height="wrap_content"
         android:padding="10dp"
         android:layout_marginBottom="3dp"
-        android:drawableRight="@drawable/right_arrow"
+        android:drawableLeft="@drawable/left_arrow"
         android:background="@color/white"
         android:elegantTextHeight="true"
         android:elevation="5dp"
@@ -110,7 +111,7 @@
         android:background="@color/white"
         android:elegantTextHeight="true"
         android:elevation="5dp"
-        android:drawableRight="@drawable/right_arrow"
+        android:drawableLeft="@drawable/left_arrow"
         android:textStyle="bold"
         android:textSize="18sp"
         android:text="@string/rest_password" />
@@ -123,7 +124,7 @@
         android:background="@color/white"
         android:elegantTextHeight="true"
         android:elevation="5dp"
-        android:drawableRight="@drawable/right_arrow"
+        android:drawableLeft="@drawable/left_arrow"
         android:textStyle="bold"
         android:textSize="18sp"
         android:text="@string/privacy" />
@@ -137,7 +138,7 @@
         android:elegantTextHeight="true"
         android:elevation="5dp"
         android:textStyle="bold"
-        android:drawableRight="@drawable/right_arrow"
+        android:drawableLeft="@drawable/left_arrow"
         android:textSize="18sp"
         android:text="@string/rest_password" />
     <TextView
@@ -155,18 +156,5 @@
         android:textColor="@android:color/holo_red_light"
         android:textSize="18sp"
         android:text="@string/logout" />
-    <TextView
-        android:id="@+id/delete"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColor="@android:color/holo_red_light"
-        android:gravity="center"
-        android:padding="10dp"
-        android:background="@color/white"
-        android:elegantTextHeight="true"
-        android:elevation="3dp"
 
-        android:textStyle="bold"
-        android:textSize="18sp"
-        android:text="@string/delete_account" />
 </LinearLayout>

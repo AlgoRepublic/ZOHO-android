@@ -4,6 +4,9 @@
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:fitsSystemWindows="true"
+    android:layoutDirection="rtl"
+    android:textDirection="rtl"
     android:orientation="vertical">
 
     <android.support.design.widget.TabLayout
@@ -12,7 +15,7 @@
         android:layout_height="55dp"
         app:tabGravity="fill"
         app:tabMode="fixed"
-        style="@style/blackPagerTitleStrip"
+        app:tabIndicatorHeight="7dp"
         />
 
 
