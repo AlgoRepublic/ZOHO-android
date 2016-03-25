@@ -1,12 +1,10 @@
-package com.algorepublic.zoho.StarRatingFragments;
+package com.algorepublic.zoho.fragments;
 
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ExpandableListView;
-import android.widget.ListView;
 
 import com.algorepublic.zoho.Models.StarRatingModel;
 import com.algorepublic.zoho.R;
@@ -14,7 +12,6 @@ import com.algorepublic.zoho.adapters.AdapterStarRatingLevelOne;
 import com.algorepublic.zoho.adapters.StarRatingHeadsLevelOne;
 import com.algorepublic.zoho.adapters.StarRatingHeadsLevelThree;
 import com.algorepublic.zoho.adapters.StarRatingHeadsLevelTwo;
-import com.algorepublic.zoho.fragments.BaseFragment;
 import com.algorepublic.zoho.services.CallBack;
 import com.algorepublic.zoho.services.StarRatingService;
 import com.algorepublic.zoho.utils.CustomExpListView;
@@ -23,7 +20,7 @@ import com.androidquery.AQuery;
 import java.util.ArrayList;
 
 /**
- * Created by android on 2/1/16.
+ * Created by android on 3/25/16.
  */
 public class StarRatingFragment extends BaseFragment {
     static StarRatingFragment fragment;

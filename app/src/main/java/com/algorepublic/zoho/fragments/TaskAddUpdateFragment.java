@@ -1,6 +1,5 @@
 package com.algorepublic.zoho.fragments;
 
-import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
@@ -16,15 +15,22 @@ import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.GridView;
 
-import com.algorepublic.zoho.BaseActivity;
 import com.algorepublic.zoho.FragmentsTasks.TaskEditTitleFragment;
+import com.algorepublic.zoho.Models.StarRatingModel;
 import com.algorepublic.zoho.R;
+import com.algorepublic.zoho.adapters.AdapterStarRatingLevelOne;
 import com.algorepublic.zoho.adapters.AdapterTaskMenu;
 import com.algorepublic.zoho.adapters.AttachmentList;
 import com.algorepublic.zoho.adapters.DocumentsList;
+import com.algorepublic.zoho.adapters.StarRatingHeadsLevelOne;
+import com.algorepublic.zoho.adapters.StarRatingHeadsLevelThree;
+import com.algorepublic.zoho.adapters.StarRatingHeadsLevelTwo;
 import com.algorepublic.zoho.adapters.TasksList;
+import com.algorepublic.zoho.services.CallBack;
+import com.algorepublic.zoho.services.StarRatingService;
 import com.algorepublic.zoho.utils.BaseClass;
 import com.algorepublic.zoho.utils.Constants;
+import com.algorepublic.zoho.utils.CustomExpListView;
 import com.algorepublic.zoho.utils.GenericHttpClient;
 import com.androidquery.AQuery;
 
@@ -32,7 +38,6 @@ import com.androidquery.AQuery;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import cc.cloudist.acplibrary.ACProgressConstant;
 import cc.cloudist.acplibrary.ACProgressFlower;
 
 

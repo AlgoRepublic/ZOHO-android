@@ -44,7 +44,7 @@ public class AdapterStarRatingLevelOne extends BaseExpandableListAdapter {
                              boolean isLastChild, View convertView, ViewGroup parent) {
         CustomExpListView secondLevelExpListView = new CustomExpListView(this.mContext);
         secondLevelExpListView.setAdapter(new AdapterStarRatingLevelTwo
-                (this.mContext, mListDataHeader.get(childPosition).getLevelTwos()));
+                (this.mContext, mListDataHeader.get(groupPosition).getLevelTwos()));
         secondLevelExpListView.setGroupIndicator(null);
 
         return secondLevelExpListView;
@@ -52,12 +52,12 @@ public class AdapterStarRatingLevelOne extends BaseExpandableListAdapter {
 
     @Override
     public int getChildrenCount(int groupPosition) {
-        return mListDataHeader.get(groupPosition).getLevelTwos().size();
+        return 1;
     }
 
     @Override
     public Object getGroup(int groupPosition) {
-        return groupPosition;
+        return mListDataHeader.get(groupPosition);
     }
 
     @Override

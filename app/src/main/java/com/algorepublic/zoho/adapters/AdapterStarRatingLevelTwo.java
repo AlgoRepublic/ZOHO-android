@@ -51,13 +51,12 @@ public class AdapterStarRatingLevelTwo extends BaseExpandableListAdapter {
 
     @Override
     public int getChildrenCount(int groupPosition) {
-        Log.e("S",groupPosition+"/"+mListDataHeader.get(groupPosition).getLevelThrees().size());
-        return mListDataHeader.get(groupPosition).getLevelThrees().size();
+        return 1;
     }
 
     @Override
     public Object getGroup(int groupPosition) {
-        return groupPosition;
+        return mListDataHeader.get(groupPosition);
     }
 
     @Override

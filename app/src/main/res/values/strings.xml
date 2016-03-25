@@ -58,7 +58,7 @@
     <string name="file_size">File Size Alert!</string>
     <string name="file_size_content">File size should be less than five(5) MB</string>
     <string name="task_desc">Description</string>
-    <string name="category">Category:</string>
+    <string name="category">Category</string>
     <string name="employees">Users</string>
     <string name="assigned_projects">Assigned Projects</string>
     <string name="TaskListName">TaskList Name</string>
@@ -297,7 +297,7 @@
     <string name="file_size_alert">File size alert!</string>
     <string name="file_size_lessthan5mb">File size should be less than (5) five MB</string>
     <string name="file_loaded_succesfully">File(s) uploaded successfully</string>
-    <string name="login">Login!</string>
+    <string name="login">Login</string>
     <string name="comments">Comments</string>
     <string name="questions">Questions:</string>
     <string name="loading">Loading</string>

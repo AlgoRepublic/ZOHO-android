@@ -190,5 +190,6 @@ public class TaskCommentFragment extends BaseFragment {
         service.createComment(comment, position, Integer.parseInt(baseClass.getUserId()), true,
                 new CallBack(TaskCommentFragment.this, "CreateComment"));
         aq.id(R.id.comment_user).text("");
+        aq.id(R.id.response_alert).visibility(View.GONE);
     }
 }
