@@ -15,7 +15,7 @@ import android.widget.TextView;
 import com.algorepublic.zoho.BaseActivity;
 import com.algorepublic.zoho.MainActivity;
 import com.algorepublic.zoho.R;
-import com.algorepublic.zoho.StarRatingFragments.StarRatingBaseFragment;
+import com.algorepublic.zoho.StarRatingFragments.StarRatingFragment;
 import com.algorepublic.zoho.fragments.CalendarFragment;
 import com.algorepublic.zoho.fragments.DepartmentFragment;
 import com.algorepublic.zoho.fragments.DocumentsListFragment;
@@ -129,7 +129,7 @@ public class AdapterMenuItems extends BaseAdapter{
         }if(position==6){
             callFragmentWithReplace(R.id.container, ForumsFragment.newInstance(), "ForumsFragment");
         }if(position==7){
-            callFragmentWithReplace(R.id.container, StarRatingBaseFragment.newInstance(), "StarRatingLevelOneFragment");
+            callFragmentWithReplace(R.id.container, StarRatingFragment.newInstance(), "StarRatingFragment");
         }if(position==8){
             callFragmentWithReplace(R.id.container, DepartmentFragment.newInstance(), "DepartmentFragment");
         }

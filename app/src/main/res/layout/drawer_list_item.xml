@@ -150,9 +150,6 @@
                 android:isIndicator="true"
                 android:max="5"
                 android:numStars="5"
-                android:progressBackgroundTint="@color/colorContentWrapper"
-                android:progressTint="@color/colorBaseHeader"
-                android:secondaryProgressTint="@color/colorBaseHeader"
                 android:stepSize="0.1" />
 
         </RelativeLayout>

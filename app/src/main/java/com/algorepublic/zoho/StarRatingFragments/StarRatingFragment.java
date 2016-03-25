@@ -5,9 +5,9 @@ import android.support.design.widget.Snackbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ExpandableListView;
 import android.widget.ListView;
 
-import com.algorepublic.zoho.BaseActivity;
 import com.algorepublic.zoho.Models.StarRatingModel;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.adapters.AdapterStarRatingLevelOne;
@@ -17,23 +17,22 @@ import com.algorepublic.zoho.adapters.StarRatingHeadsLevelTwo;
 import com.algorepublic.zoho.fragments.BaseFragment;
 import com.algorepublic.zoho.services.CallBack;
 import com.algorepublic.zoho.services.StarRatingService;
+import com.algorepublic.zoho.utils.CustomExpListView;
 import com.androidquery.AQuery;
 
 import java.util.ArrayList;
 
-import cc.cloudist.acplibrary.ACProgressFlower;
-
 /**
  * Created by android on 2/1/16.
  */
-public class StarRatingLevelOneFragment extends BaseFragment {
-    static StarRatingLevelOneFragment fragment;
+public class StarRatingFragment extends BaseFragment {
+    static StarRatingFragment fragment;
     public static ArrayList<StarRatingHeadsLevelOne> levelOneHead = new ArrayList<>();
-    ListView mListView;
     AQuery aq;
+    CustomExpListView mListView;
     StarRatingService service;
-    public static StarRatingLevelOneFragment newInstance() {
-        fragment = new StarRatingLevelOneFragment();
+    public static StarRatingFragment newInstance() {
+        fragment = new StarRatingFragment();
         return fragment;
     }
 
@@ -46,18 +45,25 @@ public class StarRatingLevelOneFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_star_rating, container, false);
+        mListView = (CustomExpListView) view.findViewById(R.id.starListView);
         aq= new AQuery(view);
-        mListView = (ListView) view.findViewById(R.id.starListView);
         service = new StarRatingService(getActivity());
         if(levelOneHead.size()==0) {
             service.getStarRatingHeads_API("en-Us", true,
-                    new CallBack(StarRatingLevelOneFragment.this, "StarRatingHeads"));
+                    new CallBack(StarRatingFragment.this, "StarRatingHeads"));
         }else{
-            mListView.setAdapter(new AdapterStarRatingLevelOne(getActivity(),levelOneHead));
+            setAdapter();
         }
+
+
         return view;
     }
-
+    private void setAdapter(){
+        if (mListView != null) {
+            AdapterStarRatingLevelOne parentLevelAdapter = new AdapterStarRatingLevelOne(getActivity(), levelOneHead);
+            mListView.setAdapter(parentLevelAdapter);
+        }
+    }
     public void StarRatingHeads(Object caller, Object model) {
         StarRatingModel.getInstance().setList((StarRatingModel) model);
         if (StarRatingModel.getInstance().responseCode == 100) {
@@ -68,7 +74,7 @@ public class StarRatingLevelOneFragment extends BaseFragment {
             }else{
                 aq.id(R.id.response_alert).visibility(View.GONE);
             }
-            mListView.setAdapter(new AdapterStarRatingLevelOne(getActivity(), levelOneHead));
+            setAdapter();
         }
         else
         {

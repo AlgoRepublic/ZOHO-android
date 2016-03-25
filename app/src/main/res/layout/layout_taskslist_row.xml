@@ -182,13 +182,15 @@
                                                 android:text="@string/task_comment"
                                                 android:textSize="12sp" />
 
-                                            <View
+                                            <RadioButton
                                                 android:id="@+id/bar"
                                                 android:layout_width="1dp"
-                                                android:layout_height="match_parent"
                                                 android:layout_margin="5dp"
-                                                android:layout_toLeftOf="@+id/task_users"
-                                                android:background="@color/colorBaseHeader"></View>
+                                                android:layout_height="match_parent"
+                                                android:layout_centerVertical="true"
+                                                android:text="@string/divider"
+                                                android:checked="true"
+                                                android:layout_toLeftOf="@+id/task_users"></RadioButton>
 
                                             <TextView
                                                 android:id="@+id/task_users"

@@ -51,8 +51,6 @@ public class StarRatingLevelQuestionsFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_star_rating_question, container, false);
-        StarRatingBaseFragment.textView3.setVisibility(View.VISIBLE);
-        StarRatingBaseFragment.textView3.setText(GetTitle());
         listView = (ListView) view.findViewById(R.id.questListView);
         aq = new AQuery(view);
         Questions.clear();
@@ -88,19 +86,9 @@ public class StarRatingLevelQuestionsFragment extends BaseFragment {
             Questions.add(question);
         }
     }
-    public String GetTitle(){
-        String value = "";
-        if(StarRatingBaseFragment.textLevel3 != ""){
-            value = "    "+StarRatingBaseFragment.arrow+
-                    StarRatingBaseFragment.textLevel3;
-        }
-        return value;
-    }
 
     @Override
     public void onDestroy() {
-        StarRatingBaseFragment.textView3.setVisibility(View.GONE);
-        StarRatingBaseFragment.textLevel3="";
         super.onDestroy();
     }
 }
