@@ -141,12 +141,16 @@ public class AddProjectFragment extends BaseFragment {
         deptList = new LinkedList<>();
         for(int loop=0;loop<ProjectsFragment.allDeptList.size();loop++){
             if(ProjectsFragment.allDeptList.get(loop).getDeptID()=="0"){
-                deptList.add("None");
+                deptList.add(getString(R.string.none));
             }else
             deptList.add(ProjectsFragment.allDeptList.get(loop).getDeptName());
         }
         Collections.sort(deptList,ByAlphabet);
         departments_list.attachDataSource(deptList);
+        for(int loop=0;loop<deptList.size();loop++)
+            if(deptList.get(loop).equalsIgnoreCase(getString(R.string.none)))
+                departments_list.setSelectedIndex(loop);
+
         service.getTaskAssignee(Integer.parseInt(baseClass.getSelectedProject()), false,
                 new CallBack(AddProjectFragment.this, "GetAllUsers"));
         return view;
@@ -158,12 +162,15 @@ public class AddProjectFragment extends BaseFragment {
             for(int loop=0;loop< TaskUserModel.getInstance().responseObject.size();loop++) {
                 if(TaskUserModel.getInstance().responseObject.get(loop).ID==
                         Integer.parseInt(baseClass.getUserId())){
-                    userList.add("Me");
+                    userList.add(getString(R.string.me));
                 }else
                 userList.add(TaskUserModel.getInstance().responseObject.get(loop).firstName);
             }
             Collections.sort(userList,ByAlphabet);
             owner_list.attachDataSource(userList);
+            for(int loop=0;loop<userList.size();loop++)
+                if(userList.get(loop).equalsIgnoreCase(getString(R.string.me)))
+                    owner_list.setSelectedIndex(loop);
         }else{
             Toast.makeText(getActivity(), getString(R.string.response_error), Toast.LENGTH_SHORT).show();
         }

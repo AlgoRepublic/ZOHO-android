@@ -101,14 +101,9 @@ public class TaskDetailFragment extends BaseFragment {
         seekBar =(SeekBar) view.findViewById(R.id.seekBar);
         twoWayAssignee = (TwoWayView) view.findViewById(R.id.task_assignee);
         twoWayAssignee.setHasFixedSize(true);
-        views =(View) view.findViewById(R.id.priority_bar);
+        views = view.findViewById(R.id.priority_bar);
         twoWayAssignee.setHasFixedSize(true);
         twoWayAssignee.setLongClickable(true);
-//        webView=(WebView)view.findViewById(R.id.task_desc);
-//        webView.getSettings().setJavaScriptEnabled(true);
-//        webView.getSettings().setLoadWithOverviewMode(true);
-//        webView.getSettings().setUseWideViewPort(true);
-//        webView.getSettings().setBuiltInZoomControls(true);
         twoWayAssignee.setOrientation(TwoWayLayoutManager.Orientation.HORIZONTAL);
         twoWayAssignee.setAdapter(new AdapterTaskDetailAssignee(getActivity(),
                 tasksList.getListAssignees()));
@@ -116,6 +111,7 @@ public class TaskDetailFragment extends BaseFragment {
         aq = new AQuery(view);
         getToolbar().setTitle(getString(R.string.task_details));
         service = new TaskListService(getActivity());
+        Log.e("SS","S"+tasksList.getTaskID());
         service.getTasksById(tasksList.getTaskID(),true
                 ,new CallBack(TaskDetailFragment.this,"TaskDetails"));
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -132,11 +128,15 @@ public class TaskDetailFragment extends BaseFragment {
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
+                seekBarCompat.setProgress(progress);
+                tasksList.setProgress(progress);
                 if (progress == 100) {
+                    aq.id(R.id.icon).image(R.drawable.ic_notifications_green_24dp);
                     aq.id(R.id.mark_as_done).text(getString(R.string.reopen_task));
                     service.updateTaskProgress(tasksList.getTaskID()
                             , progress, true, new CallBack(TaskDetailFragment.this, "UpdateProgress"));
                 }else {
+                    aq.id(R.id.icon).image(R.mipmap.taskdetail_icon);
                     aq.id(R.id.mark_as_done).text(getString(R.string.task_as_done));
                     service.updateTaskProgress(tasksList.getTaskID()
                             , progress, true, new CallBack(TaskDetailFragment.this, "UpdateProgress"));
@@ -147,23 +147,24 @@ public class TaskDetailFragment extends BaseFragment {
         aq.id(R.id.comment).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            callFragmentWithBackStack(R.id.container, TaskCommentFragment.newInstance(tasksList.getTaskID())
+            callFragmentWithAddBackStack(R.id.container, TaskCommentFragment.newInstance(tasksList.getTaskID())
                     , "TaskComment");
             }
         });
         aq.id(R.id.documents).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            callFragmentWithBackStack(R.id.container, DocumentsListBySubTaskFragment.newInstance(tasksList.getTaskID()), "DocumentsListBySubTaskFragment");
+                callFragmentWithAddBackStack(R.id.container, DocumentsListBySubTaskFragment.newInstance(tasksList.getTaskID()), "DocumentsListBySubTaskFragment");
             }
         });
         aq.id(R.id.subtask).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            callFragmentWithBackStack(R.id.container, new TaskListBySubTasksFragment(tasksList), "TaskListBySubTasksFragment");
+                callFragmentWithAddBackStack(R.id.container, new TaskListBySubTasksFragment(tasksList), "TaskListBySubTasksFragment");
             }
         });
         if(tasksList.getProgress()==100){
+            aq.id(R.id.icon).image(R.drawable.ic_notifications_green_24dp);
             aq.id(R.id.mark_as_done).text(getString(R.string.reopen_task));
 
         }
@@ -200,25 +201,32 @@ public class TaskDetailFragment extends BaseFragment {
     }
 
     public void UpdateValue(){
-        if(DateFormatter(TaskByIdModel.getInstance().responseObject.startDate).equalsIgnoreCase("12/31/3938")){
-            aq.id(R.id.start_date).text("No Date");
-        }else if(DateFormatter(TaskByIdModel.getInstance().responseObject.startDate).equalsIgnoreCase("3/0/1")){
-            aq.id(R.id.start_date).text("No Date");
-        }else
-            aq.id(R.id.start_date).text(DateFormatter(TaskByIdModel.getInstance().responseObject.startDate));
-
-        if(DateFormatter(TaskByIdModel.getInstance().responseObject.endDate).equalsIgnoreCase("12/31/3938")){
-            aq.id(R.id.end_date).text("No Date");
-        }else if(DateFormatter(TaskByIdModel.getInstance().responseObject.endDate).equalsIgnoreCase("3/0/1")) {
-            aq.id(R.id.end_date).text("No Date");
-        }else
-        aq.id(R.id.end_date).text(DateFormatter(TaskByIdModel.getInstance().responseObject.endDate));
+        if(TaskByIdModel.getInstance().responseObject.startDate != null) {
+            if (DateFormatter(TaskByIdModel.getInstance().responseObject.startDate).equalsIgnoreCase("12/31/3938")||
+            DateFormatter(TaskByIdModel.getInstance().responseObject.startDate).equalsIgnoreCase("2/1/3938")) {
+                aq.id(R.id.start_date).text("No Date");
+            } else if (DateFormatter(TaskByIdModel.getInstance().responseObject.startDate).equalsIgnoreCase("3/0/1")) {
+                aq.id(R.id.start_date).text("No Date");
+            } else
+                aq.id(R.id.start_date).text(DateFormatter(TaskByIdModel.getInstance().responseObject.startDate));
+        }
+        if(TaskByIdModel.getInstance().responseObject.endDate != null) {
+            if (DateFormatter(TaskByIdModel.getInstance().responseObject.endDate).equalsIgnoreCase("12/31/3938")||
+                    DateFormatter(TaskByIdModel.getInstance().responseObject.endDate).equalsIgnoreCase("2/1/3938")) {
+                aq.id(R.id.end_date).text("No Date");
+            } else if (DateFormatter(TaskByIdModel.getInstance().responseObject.endDate).equalsIgnoreCase("3/0/1")) {
+                aq.id(R.id.end_date).text("No Date");
+            } else
+                aq.id(R.id.end_date).text(DateFormatter(TaskByIdModel.getInstance().responseObject.endDate));
+        }
         aq.id(R.id.user_counter).text(String.valueOf(TaskByIdModel.getInstance().responseObject.userObject.size()));
         aq.id(R.id.category).text(baseClass.db.getString("TaskListName"));
         aq.id(R.id.task_name).text(TaskByIdModel.getInstance().responseObject.title);
         //webView.loadDataWithBaseURL("", TaskByIdModel.getInstance().responseObject.description, "text/html", "UTF-8", "");
 
-        if (TaskByIdModel.getInstance().responseObject.description !=null)
+        if (TaskByIdModel.getInstance().responseObject.description ==null){
+            aq.id(R.id.task_desc).text(getActivity().getString(R.string.n_a));
+        }else
         aq.id(R.id.task_desc).text(Html.fromHtml(TaskByIdModel.getInstance().responseObject.description));
 
         aq.id(R.id.comment_count).text(Integer.toString(TaskByIdModel.getInstance().responseObject.commentsCount));
@@ -227,22 +235,18 @@ public class TaskDetailFragment extends BaseFragment {
         applyLightBackground(aq.id(R.id.parent2).getView(), baseClass);
         seekBar.setProgress(TaskByIdModel.getInstance().responseObject.progress);
         seekBarCompat.setProgress(TaskByIdModel.getInstance().responseObject.progress);
-
+        if(TaskByIdModel.getInstance().responseObject.progress==100){
+            aq.id(R.id.icon).image(R.drawable.ic_notifications_green_24dp);
+        }
         Drawable shapeDrawable = aq.id(R.id.priority_bar).getView().getBackground();
         GradientDrawable colorDrawable = (GradientDrawable) shapeDrawable;
         colorDrawable.setColor(getPriorityWiseColor(TaskByIdModel.getInstance().responseObject.priority));
         aq.id(R.id.priority_bar).getView().setBackground(shapeDrawable);
         views.setBackgroundColor(getPriorityWiseColor(TaskByIdModel.getInstance().responseObject.priority));
     }
-//    private int getScale(){
-//        Display display = ((WindowManager) getActivity().getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
-//        int width = display.getWidth();
-//        Double val = new Double(width)/new Double(PIC_WIDTH);
-//        val = val * 100d;
-//        return val.intValue();
-//    }
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        menu.clear();
         inflater.inflate(R.menu.menu_task_details, menu);
         super.onCreateOptionsMenu(menu, inflater);
     }
@@ -282,8 +286,6 @@ public class TaskDetailFragment extends BaseFragment {
     public void UpdateProgress(Object caller, Object model) {
         GeneralModel.getInstance().setList((GeneralModel) model);
         if (GeneralModel.getInstance().responseCode.equalsIgnoreCase("100")) {
-            seekBarCompat.setProgress(progress);
-            tasksList.setProgress(progress);
             Snackbar.make(getView(), getString(R.string.update_progress), Snackbar.LENGTH_SHORT).show();
         }
         else

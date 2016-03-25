@@ -65,8 +65,10 @@ public class AdapterTaskComments extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
         aq = new AQuery(convertView);
-        holder.taskComment.setText(Html.fromHtml(TaskCommentFragment.arrayList.get(position).getComment()));
-        holder.userName.setText(TaskCommentFragment.arrayList.get(position).getUserName()
+        if(TaskCommentFragment.arrayList.get(position).getComment() !=null) {
+            holder.taskComment.setText(Html.fromHtml(TaskCommentFragment.arrayList.get(position).getComment()));
+        }
+            holder.userName.setText(TaskCommentFragment.arrayList.get(position).getUserName()
                 + " , " + TaskCommentFragment.arrayList.get(position).getDateTime());
         if(TaskCommentFragment.arrayList
                 .get(position).getUserImagePath() !=null) {

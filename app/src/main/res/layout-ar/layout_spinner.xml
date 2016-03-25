@@ -8,6 +8,7 @@
     android:background="@drawable/underline_textview"
     android:gravity="center"
     android:padding="5dp"
+
     android:singleLine="true"
     android:textColor="@color/colorBaseHeader"
     android:textSize="14sp" />

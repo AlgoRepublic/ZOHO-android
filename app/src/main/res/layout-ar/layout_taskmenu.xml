@@ -5,6 +5,9 @@
     android:layout_height="100dp"
     android:background="@android:drawable/dialog_holo_light_frame"
     android:padding="5dp"
+    android:fitsSystemWindows="true"
+    android:layoutDirection="rtl"
+    android:textDirection="rtl"
     tools:context=".MainActivity">
 
     <CheckBox

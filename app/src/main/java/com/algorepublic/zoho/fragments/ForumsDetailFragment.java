@@ -121,6 +121,7 @@ public class ForumsDetailFragment extends BaseFragment {
                     }else{
                         PerformAction();
                     }
+                    baseClass.hideKeyPad(getView());
                     return true;
                 }
                 return false;
@@ -137,6 +138,7 @@ public class ForumsDetailFragment extends BaseFragment {
                 } else {
                     PerformAction();
                 }
+                baseClass.hideKeyPad(getView());
             }
         });
         return view;
@@ -152,8 +154,9 @@ public class ForumsDetailFragment extends BaseFragment {
         service.createforumComments(Integer.toString(ForumsModel.getInstance().responseObject.get(Position).ID)
                 , comment, baseClass.getUserId(), false,
                 new CallBack(ForumsDetailFragment.this, "CreateComment"));
+        aq.id(R.id.comment_user).text("");
+        baseClass.hideKeyPad(getView());
 
-        aq.id(R.id.response_alert).visibility(View.GONE);
     }
     public void UpdateComment(Object caller, Object model){
         GeneralModel.getInstance().setList((GeneralModel) model);
@@ -186,6 +189,7 @@ public class ForumsDetailFragment extends BaseFragment {
             taskComments.setUserImageID(baseClass.getProfileImageID());
             arrayList.add(taskComments);
             adapter.notifyDataSetChanged();
+            aq.id(R.id.response_alert).visibility(View.GONE);
         }
         else
         {

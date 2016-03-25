@@ -3,6 +3,9 @@
     android:layout_height="match_parent"
     android:layout_alignParentBottom="true"
     android:background="@color/colorBaseWrapper"
+    android:fitsSystemWindows="true"
+    android:layoutDirection="rtl"
+    android:textDirection="rtl"
     android:orientation="horizontal">
 
     <ImageView

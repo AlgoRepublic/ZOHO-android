@@ -13,6 +13,7 @@ import android.widget.BaseAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import se.emilsjolander.stickylistheaders.StickyListHeadersAdapter;
 
@@ -84,7 +85,6 @@ public class AgendaAdapter extends BaseAdapter implements StickyListHeadersAdapt
     public View getView(int position, View convertView, ViewGroup parent) {
         EventRenderer eventRenderer = new DefaultEventRenderer();
         final CalendarEvent event = getItem(position);
-
         // Search for the correct event renderer
         for (EventRenderer renderer : mRenderers) {
             if(event.getClass().isAssignableFrom(renderer.getRenderType())) {

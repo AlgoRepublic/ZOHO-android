@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorBaseWrapper">#E6E7E8</color>
-    <color name="colorBaseMenu">#B3B5B7</color>
+    <color name="light_gray">#fff5f5f5</color>
+    <color name="white">#FAFAFA</color>
     <color name="colorBaseHeader">#414042</color>
 </resources>

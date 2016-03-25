@@ -100,6 +100,8 @@ public class TasksListByOwnerModel {
         @SerializedName("ParentTaskID")
         public Integer parentTaskID;
 
+        public int position;
+
         @SerializedName("Users")
         @Expose
         public ArrayList<Users> userObject = new ArrayList<Users>();

@@ -65,7 +65,7 @@ public class LoginFragment extends BaseFragment {
         if(!BaseClass.db.getString("Password").equalsIgnoreCase("")){
             aq.id(R.id.password).text(BaseClass.db.getString("Password"));
         }
-        if (baseClass.getUserLanguage().equalsIgnoreCase("en")) {
+        if (baseClass.getUserLanguage().equalsIgnoreCase("ar")) {
             aq.id(R.id.lang_text).text(R.string.arabic);
             changeLanguage(getString(R.string.lang_arabic));
         }else{

@@ -47,6 +47,7 @@ import com.flyco.animation.BounceEnter.BounceLeftEnter;
 import com.flyco.animation.SlideExit.SlideRightExit;
 import com.flyco.dialog.listener.OnBtnClickL;
 import com.flyco.dialog.widget.NormalDialog;
+import com.h6ah4i.android.materialshadowninepatch.MaterialShadowContainerView;
 import com.h6ah4i.android.widget.advrecyclerview.draggable.DraggableItemAdapter;
 import com.h6ah4i.android.widget.advrecyclerview.draggable.DraggableItemConstants;
 import com.h6ah4i.android.widget.advrecyclerview.draggable.ItemDraggableRange;
@@ -75,9 +76,11 @@ public class AdapterDepartment
         public TextView header,task_alert,users_alert,milestone_alert,project_desc;
         public TextView btEdit;
         public TextView btDelete;
+        SwipeLayout shadowContainerView;
 
         public MyViewHolder(View v) {
             super(v);
+            shadowContainerView = (SwipeLayout) v.findViewById(R.id.swipe);
             mContainer = (RelativeLayout) v.findViewById(R.id.container);
             linearLayout = (LinearLayout) v.findViewById(R.id.main_dept);
             swipeLayout = (SwipeLayout) v.findViewById(R.id.swipe);
@@ -245,13 +248,14 @@ public class AdapterDepartment
             int bgResId;
             if ((dragState & Draggable.STATE_FLAG_IS_ACTIVE) != 0) {
                 bgResId = R.drawable.bg_item_dragging_active_state;
-                holder.mContainer.setBackgroundResource(bgResId);
             } else if (
                     ((dragState & Draggable.STATE_FLAG_DRAGGING) != 0) &&
                             ((dragState & Draggable.STATE_FLAG_IS_IN_RANGE) != 0)) {
                 bgResId = R.drawable.bg_item_dragging_state;
-                holder.mContainer.setBackgroundResource(bgResId);
+            }else {
+                bgResId = R.drawable.bg_item_normal_state;
             }
+            holder.shadowContainerView.setBackgroundResource(bgResId);
         }
     }
 

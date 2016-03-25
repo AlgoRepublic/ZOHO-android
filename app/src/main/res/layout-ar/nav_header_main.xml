@@ -5,6 +5,9 @@
     android:layout_height="wrap_content"
     android:background="@color/colorBaseWrapper"
     android:gravity="top"
+    android:fitsSystemWindows="true"
+    android:layoutDirection="rtl"
+    android:textDirection="rtl"
     android:orientation="vertical">
 
     <View

@@ -17,6 +17,7 @@
         android:layout_margin="20dp"
         android:overScrollMode="never"
         android:scrollbars="none"
+
         android:scrollingCache="false"/>
 
 </merge>

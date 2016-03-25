@@ -16,7 +16,7 @@
             android:background="@drawable/underline_textview"
             android:gravity="center_horizontal"
             android:padding="10dp"
-            android:text="Attachments"
+            android:text="@string/documents"
             android:textColor="@color/colorContentWrapper"
             android:textSize="14sp"
             android:typeface="monospace" />
@@ -37,7 +37,7 @@
             android:layout_height="35dp"
             android:layout_margin="10dp"
             android:padding="5dp"
-            android:text="Add"
+            android:text="@string/add_documents"
             android:textAllCaps="false"
             android:textColor="@color/colorBaseWrapper"
             android:textSize="12sp" />

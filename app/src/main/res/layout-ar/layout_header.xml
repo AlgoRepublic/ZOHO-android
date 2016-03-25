@@ -3,6 +3,9 @@
     android:layout_height="wrap_content"
     android:layout_centerHorizontal="true"
     android:background="@color/colorBaseMenu"
+    android:fitsSystemWindows="true"
+    android:layoutDirection="rtl"
+    android:textDirection="rtl"
     android:descendantFocusability="blocksDescendants"
     android:padding="1dp">
 

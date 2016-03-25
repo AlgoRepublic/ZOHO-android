@@ -1,6 +1,5 @@
 package com.algorepublic.zoho.fragments;
 
-import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
@@ -13,17 +12,25 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
 import android.widget.GridView;
 
-import com.algorepublic.zoho.BaseActivity;
 import com.algorepublic.zoho.FragmentsTasks.TaskEditTitleFragment;
+import com.algorepublic.zoho.Models.StarRatingModel;
 import com.algorepublic.zoho.R;
+import com.algorepublic.zoho.adapters.AdapterStarRatingLevelOne;
 import com.algorepublic.zoho.adapters.AdapterTaskMenu;
 import com.algorepublic.zoho.adapters.AttachmentList;
 import com.algorepublic.zoho.adapters.DocumentsList;
+import com.algorepublic.zoho.adapters.StarRatingHeadsLevelOne;
+import com.algorepublic.zoho.adapters.StarRatingHeadsLevelThree;
+import com.algorepublic.zoho.adapters.StarRatingHeadsLevelTwo;
 import com.algorepublic.zoho.adapters.TasksList;
+import com.algorepublic.zoho.services.CallBack;
+import com.algorepublic.zoho.services.StarRatingService;
 import com.algorepublic.zoho.utils.BaseClass;
 import com.algorepublic.zoho.utils.Constants;
+import com.algorepublic.zoho.utils.CustomExpListView;
 import com.algorepublic.zoho.utils.GenericHttpClient;
 import com.androidquery.AQuery;
 
@@ -31,7 +38,6 @@ import com.androidquery.AQuery;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import cc.cloudist.acplibrary.ACProgressConstant;
 import cc.cloudist.acplibrary.ACProgressFlower;
 
 
@@ -178,20 +184,17 @@ public class TaskAddUpdateFragment extends BaseFragment {
             }
         });
 
-        aq.id(R.id.btn_title).clicked(new View.OnClickListener() {
+        aq.id(R.id.btn_title).getCheckBox().setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
-            public void onClick(View v) {
-                aq.id(R.id.title_text).enabled(true);
-                aq.id(R.id.title_text).getEditText().requestFocus();
-                aq.id(R.id.title_text).getEditText().
-                        setSelection(aq.id(R.id.title_text).getText().length());
-                baseClass.showKeyPad(v);
-            }
-        });
-        aq.id(R.id.title_bar).clicked(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                aq.id(R.id.title_text).enabled(false);
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    aq.id(R.id.title_text).enabled(true);
+                    aq.id(R.id.title_text).getEditText().requestFocus();
+                    aq.id(R.id.title_text).getEditText().
+                            setSelection(aq.id(R.id.title_text).getText().length());
+                    baseClass.showKeyPad(buttonView);
+                }else
+                    aq.id(R.id.title_text).enabled(false);
             }
         });
         gridViewTaskMenu.setAdapter(new AdapterTaskMenu(getActivity()));
@@ -332,9 +335,7 @@ public class TaskAddUpdateFragment extends BaseFragment {
             baseClass.db.putString("ProjectName", tasksObj.getProjectName());
             getToolbar().setTitle(baseClass.db.getString("ProjectName"));
             baseClass.db.putInt("ProjectID", tasksObj.getProjectID());
-            if(tasksObj.getDescription() != null) {
-                baseClass.db.putString("TaskDesc", tasksObj.getDescription());
-            }
+            baseClass.db.putString("TaskDesc", tasksObj.getDescription());
             baseClass.db.putString("StartDate", tasksObj.getStartDate());
             baseClass.db.putString("EndDate", tasksObj.getEndDate());
             baseClass.db.putInt("Priority", tasksObj.getPriority());

@@ -75,6 +75,7 @@ public class TaskListBySubTasksFragment extends BaseFragment {
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        menu.clear();
         inflater.inflate(R.menu.menu_tasklist, menu);
         super.onCreateOptionsMenu(menu, inflater);
     }
@@ -134,12 +135,7 @@ public class TaskListBySubTasksFragment extends BaseFragment {
         taskListService = new TaskListService(getActivity());
         taskListService.getTasksListBySubTasks(tasksList.getTaskID(), true,
                 new CallBack(TaskListBySubTasksFragment.this, "TaskListBySubTasks"));
-        aq.id(R.id.add_task).clicked(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getActivity(), TaskAddUpdateFragment.class));
-            }
-        });
+
         aq.id(R.id.sort).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -4,6 +4,9 @@
     android:paddingLeft="10dp"
     android:paddingRight="10dp"
     android:paddingStart="10dp"
+    android:fitsSystemWindows="true"
+    android:layoutDirection="rtl"
+    android:textDirection="rtl"
     android:paddingTop="5dp"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">

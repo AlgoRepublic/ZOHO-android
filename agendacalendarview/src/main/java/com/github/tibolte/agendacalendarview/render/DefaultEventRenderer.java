@@ -1,19 +1,19 @@
 package com.github.tibolte.agendacalendarview.render;
 
 import android.annotation.TargetApi;
+
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
 import android.support.annotation.NonNull;
-import android.util.Log;
 import android.view.View;
-import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.github.tibolte.agendacalendarview.R;
 import com.github.tibolte.agendacalendarview.models.BaseCalendarEvent;
+
 
 /**
  * Class helping to inflate our default layout in the AgendaAdapter
@@ -52,7 +52,32 @@ public class DefaultEventRenderer extends EventRenderer<BaseCalendarEvent> {
         parent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setAction("com.algorepublic.zoho.Event_Click");
+                intent.putExtra("position", event.getPosition());
+                intent.putExtra("Action","Detail");
+                view.getContext().sendBroadcast(intent);
+            }
+        });
+        view.findViewById(R.id.btDelete).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setAction("com.algorepublic.zoho.Event_Click");
+                intent.putExtra("position", event.getPosition());
+                intent.putExtra("Action","Delete");
+                view.getContext().sendBroadcast(intent);
+            }
+        });
 
+        view.findViewById(R.id.btEdit).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setAction("com.algorepublic.zoho.Event_Click");
+                intent.putExtra("position", event.getPosition());
+                intent.putExtra("Action","Edit");
+                view.getContext().sendBroadcast(intent);
             }
         });
     }
@@ -61,6 +86,8 @@ public class DefaultEventRenderer extends EventRenderer<BaseCalendarEvent> {
     public int getEventLayout() {
         return R.layout.view_agenda_event;
     }
+
+
 
     // endregion
 }

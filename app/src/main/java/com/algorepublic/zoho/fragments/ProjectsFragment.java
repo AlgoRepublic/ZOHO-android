@@ -121,16 +121,19 @@ public class ProjectsFragment extends BaseFragment implements SwipeRefreshLayout
     public void Filter(int position) {
 
         if (position == 0) {
+            aq.id(R.id.header).text(getString(R.string.all_projects));
             swipeListView.setVisibility(View.VISIBLE);
             swipeStickView.setVisibility(View.GONE);
             SetGeneralClientAdapter();
         }
         if (position == 1) {
+            aq.id(R.id.header).text(getString(R.string.by_client));
             swipeListView.setVisibility(View.GONE);
             swipeStickView.setVisibility(View.VISIBLE);
             SetClientProjectsAdapter();
         }
         if (position == 2) {
+            aq.id(R.id.header).text(getString(R.string.by_dept));
             swipeListView.setVisibility(View.GONE);
             swipeStickView.setVisibility(View.VISIBLE);
             SetDepartmentProjectsAdapter();

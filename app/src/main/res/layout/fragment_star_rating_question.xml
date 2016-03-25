@@ -21,16 +21,9 @@
         android:textStyle="bold" />
     </RelativeLayout>
 
-    <ListView
+    <LinearLayout
         android:id="@+id/questListView"
-        android:divider="@null"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-
-    <include
-        layout="@layout/layout_alert_message"
-        android:layout_width="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:orientation="vertical" />
 </LinearLayout>

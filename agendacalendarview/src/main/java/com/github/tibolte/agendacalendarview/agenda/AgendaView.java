@@ -1,21 +1,22 @@
 package com.github.tibolte.agendacalendarview.agenda;
 
-import com.github.tibolte.agendacalendarview.CalendarManager;
-import com.github.tibolte.agendacalendarview.R;
-import com.github.tibolte.agendacalendarview.utils.BusProvider;
-import com.github.tibolte.agendacalendarview.utils.Events;
-
 import android.animation.Animator;
-import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
-import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.FrameLayout;
+
+import com.github.tibolte.agendacalendarview.CalendarManager;
+import com.github.tibolte.agendacalendarview.R;
+import com.github.tibolte.agendacalendarview.models.CalendarEvent;
+import com.github.tibolte.agendacalendarview.utils.BusProvider;
+import com.github.tibolte.agendacalendarview.utils.Events;
+
+import java.util.List;
 
 public class AgendaView extends FrameLayout {
 
@@ -56,7 +57,8 @@ public class AgendaView extends FrameLayout {
                         int offset = (int) (3 * getResources().getDimension(R.dimen.day_cell_height));
                         translateList(offset);
                     } else if (event instanceof Events.EventsFetched) {
-                        ((AgendaAdapter) getAgendaListView().getAdapter()).updateEvents(CalendarManager.getInstance().getEvents());
+                        List<CalendarEvent> calendarEvents = CalendarManager.getInstance().getEvents();
+                        ((AgendaAdapter) getAgendaListView().getAdapter()).updateEvents(calendarEvents);
 
                         getViewTreeObserver().addOnGlobalLayoutListener(
                                 new ViewTreeObserver.OnGlobalLayoutListener() {

@@ -1,5 +1,6 @@
 package com.algorepublic.zoho.fragments;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
@@ -10,6 +11,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.RadioGroup;
 import android.widget.SearchView;
@@ -56,9 +58,7 @@ public class TasksListFragment extends BaseFragment {
 
     @SuppressWarnings("unused")
     public static TasksListFragment newInstance() {
-        if (fragment==null) {
-            fragment = new TasksListFragment();
-        }
+        fragment = new TasksListFragment();
         return fragment;
     }
 
@@ -72,6 +72,7 @@ public class TasksListFragment extends BaseFragment {
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        menu.clear();
         inflater.inflate(R.menu.menu_tasklist, menu);
         super.onCreateOptionsMenu(menu, inflater);
     }
@@ -315,7 +316,11 @@ public class TasksListFragment extends BaseFragment {
                 tasksList.setStartDate(DateFormatter(taskModel.startDate));
                 tasksList.setEndDate(DateFormatter(taskModel.endDate));
                 tasksList.setHeader(DateMilli(taskModel.endDate));
-                tasksList.setDescription(taskModel.description);
+                if(taskModel.description == null){
+                    tasksList.setDescription(getActivity().getString(R.string.n_a));
+                }else {
+                    tasksList.setDescription(taskModel.description);
+                }
                 tasksList.setPriority(taskModel.priority);
                 tasksList.setProgress(taskModel.progress);
                 tasksList.setParentTaskID(taskModel.parentTaskID);

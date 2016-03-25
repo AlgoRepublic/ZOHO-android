@@ -6,6 +6,9 @@
     android:background="@android:color/white"
     android:descendantFocusability="blocksDescendants"
     android:orientation="horizontal"
+    android:fitsSystemWindows="true"
+    android:layoutDirection="rtl"
+    android:textDirection="rtl"
     android:padding="5dp"
     android:weightSum="5">
 

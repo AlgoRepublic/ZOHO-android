@@ -114,7 +114,8 @@ public class AdapterTasksList extends BaseAdapter implements StickyListHeadersAd
         holder.projectTitle.setText(tasksLists.get(position).getProjectName());
 
         if(tasksLists.get(position).getEndDate().equalsIgnoreCase("3/0/1")
-                || tasksLists.get(position).getEndDate().equalsIgnoreCase("12/31/3938")) {
+                || tasksLists.get(position).getEndDate().equalsIgnoreCase("12/31/3938")
+                || tasksLists.get(position).getEndDate().equalsIgnoreCase("2/1/3938")) {
             holder.taskDate.setText(ctx.getString(R.string.no_date));
         }else {
             holder.taskDate.setText(tasksLists.get(position).getEndDate());
@@ -200,7 +201,7 @@ public class AdapterTasksList extends BaseAdapter implements StickyListHeadersAd
     public void callFragmentWithBackStack(int containerId, Fragment fragment, String tag){
         ((AppCompatActivity)ctx).getSupportFragmentManager()
                 .beginTransaction().setCustomAnimations( R.anim.slide_in_enter, R.anim.slide_in_exit, R.anim.slide_pop_enter, R.anim.slide_pop_exit)
-                .replace(containerId, fragment, tag)
+                .add(containerId, fragment, tag)
                 .addToBackStack(null)
                 .commit();
     }

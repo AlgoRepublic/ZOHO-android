@@ -121,7 +121,6 @@ public class EditProjectFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view  = inflater.inflate(R.layout.fragment_add_project, container, false);
-        getToolbar().setTitle(getString(R.string.edit_project));
         radioGroup1 = (RadioGroup) view.findViewById(R.id.private_public_group);
         radioGroup2 = (RadioGroup) view.findViewById(R.id.active_archive_status);
         radioGroup1.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -176,12 +175,13 @@ public class EditProjectFragment extends BaseFragment {
         deptList = new LinkedList<>();
         for(int loop=0;loop<ProjectsFragment.allDeptList.size();loop++){
             if(ProjectsFragment.allDeptList.get(loop).getDeptID()=="0"){
-                deptList.add("None");
+                deptList.add(getString(R.string.none));
             }else
             deptList.add(ProjectsFragment.allDeptList.get(loop).getDeptName());
         }
         Collections.sort(deptList,ByAlphabet);
         departments_list.attachDataSource(deptList);
+
         service.getTaskAssignee(Integer.parseInt(baseClass.getSelectedProject()), true,
                 new CallBack(EditProjectFragment.this, "GetAllUsers"));
         return view;
@@ -224,7 +224,7 @@ public class EditProjectFragment extends BaseFragment {
             for(int loop=0;loop< TaskUserModel.getInstance().responseObject.size();loop++) {
                 if(TaskUserModel.getInstance().responseObject.get(loop).ID==
                         Integer.parseInt(baseClass.getUserId())){
-                    userList.add("Me");
+                    userList.add(getString(R.string.me));
                 }else
                 userList.add(TaskUserModel.getInstance().responseObject.get(loop).firstName);
             }
