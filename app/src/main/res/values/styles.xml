@@ -14,10 +14,10 @@
         <item name="checkboxStyle">@style/blackCheckBoxStyle</item>
         <item name="android:listViewStyle">@style/blackListViewStyle</item>
         <item name="android:tabWidgetStyle">@style/blackPagerTitleStrip</item>
-        <item name="actionButtonStyle">@style/MyMenuTextAppearance</item>
+        <item name="android:actionMenuTextAppearance">@style/MyMenuTextAppearance</item>
         <item name="android:editTextStyle">@style/EditTextStyle</item>
     </style>
-    <style name="MyMenuTextAppearance" parent="@style/TextAppearance.AppCompat.Widget.ActionBar.Menu">
+    <style name="MyMenuTextAppearance" parent="@android:style/TextAppearance.Holo.Widget.ActionBar.Title">
         <item name="android:textAllCaps">false</item>
     </style>
     <style name="EditTextStyle" parent="@android:style/Widget.EditText">

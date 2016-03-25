@@ -31,6 +31,7 @@ import com.github.tibolte.agendacalendarview.models.DayItem;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Locale;
 
@@ -145,7 +146,7 @@ public class CalendarFragment extends BaseFragment implements CalendarPickerCont
         // Get a reference for the week view in the layout.
         calendarView = (AgendaCalendarView) aq.id(R.id.agenda_calendar_view).getView();
 
-       // Calendar minCal = new GregorianCalendar(2016, Calendar.JANUARY, 1);
+        Calendar minCal = new GregorianCalendar(2016, Calendar.MARCH, 1);
         if(true) // update this check as language button goes functional
          locale = new Locale("ar");
         else

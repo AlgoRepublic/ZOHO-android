@@ -60,7 +60,11 @@
         <item name="android:textViewStyle">@style/blackTextView</item>
         <item name="seekBarStyle">@style/blackSeekBar</item>
         <item name="android:buttonStyle">@style/blackButton</item>
+        <item name="android:actionMenuTextAppearance">@style/MyMenuTextAppearance</item>
         <item name="android:editTextStyle">@style/EditTextStyle</item>
+    </style>
+    <style name="MyMenuTextAppearance" parent="@android:style/TextAppearance.Holo.Widget.ActionBar.Title">
+        <item name="android:textAllCaps">false</item>
     </style>
     <style name="EditTextStyle" parent="@android:style/Widget.EditText">
         <item name="android:textColor">@color/colorBaseHeader</item>

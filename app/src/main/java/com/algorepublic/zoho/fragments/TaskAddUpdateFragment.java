@@ -13,6 +13,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
 import android.widget.GridView;
 
 import com.algorepublic.zoho.BaseActivity;
@@ -178,20 +179,17 @@ public class TaskAddUpdateFragment extends BaseFragment {
             }
         });
 
-        aq.id(R.id.btn_title).clicked(new View.OnClickListener() {
+        aq.id(R.id.btn_title).getCheckBox().setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
-            public void onClick(View v) {
-                aq.id(R.id.title_text).enabled(true);
-                aq.id(R.id.title_text).getEditText().requestFocus();
-                aq.id(R.id.title_text).getEditText().
-                        setSelection(aq.id(R.id.title_text).getText().length());
-                baseClass.showKeyPad(v);
-            }
-        });
-        aq.id(R.id.title_bar).clicked(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                aq.id(R.id.title_text).enabled(false);
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    aq.id(R.id.title_text).enabled(true);
+                    aq.id(R.id.title_text).getEditText().requestFocus();
+                    aq.id(R.id.title_text).getEditText().
+                            setSelection(aq.id(R.id.title_text).getText().length());
+                    baseClass.showKeyPad(buttonView);
+                }else
+                    aq.id(R.id.title_text).enabled(false);
             }
         });
         gridViewTaskMenu.setAdapter(new AdapterTaskMenu(getActivity()));
