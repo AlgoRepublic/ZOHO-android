@@ -1,7 +1,6 @@
 package com.algorepublic.zoho.fragments;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.util.Log;
@@ -16,9 +15,7 @@ import android.widget.RadioGroup;
 import android.widget.SearchView;
 import android.widget.Toast;
 
-import com.algorepublic.zoho.BaseActivity;
 import com.algorepublic.zoho.Models.TaskListBySubTaskModel;
-import com.algorepublic.zoho.Models.TasksListByOwnerModel;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.adapters.AdapterTasksList;
 import com.algorepublic.zoho.adapters.TaskListAssignee;
@@ -34,7 +31,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
-import cc.cloudist.acplibrary.ACProgressFlower;
 import se.emilsjolander.stickylistheaders.StickyListHeadersAdapter;
 import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
 
@@ -135,6 +131,7 @@ public class TaskListBySubTasksFragment extends BaseFragment {
         taskListService = new TaskListService(getActivity());
         taskListService.getTasksListBySubTasks(tasksList.getTaskID(), true,
                 new CallBack(TaskListBySubTasksFragment.this, "TaskListBySubTasks"));
+        applyLightBackground(aq.id(R.id.layout_bottom).getView(), baseClass);
 
         aq.id(R.id.sort).clicked(new View.OnClickListener() {
             @Override

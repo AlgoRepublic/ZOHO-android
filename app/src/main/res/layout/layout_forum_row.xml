@@ -94,7 +94,6 @@
                     android:id="@+id/comment_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/colorBaseHeader"
                     android:textSize="14sp"
                     android:layout_toLeftOf="@+id/layout_comment"
                     android:layout_centerVertical="true"
@@ -117,8 +116,7 @@
                         android:textSize="7dp"
                         android:layout_alignParentRight="true"
                         android:background="@mipmap/bubble_alert_black"
-                        android:layout_alignParentTop="true"
-                        android:textColor="@color/colorBaseHeader" />
+                        android:layout_alignParentTop="true" />
 
                     <ImageView
                         android:id="@+id/delete1"
@@ -132,7 +130,6 @@
                 android:id="@+id/comment_description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/colorContentWrapper"
                 android:textSize="12sp"
                 android:layout_below="@+id/layout1"
                 android:padding="5dp"

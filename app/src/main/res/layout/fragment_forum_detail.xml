@@ -16,7 +16,6 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:text="@string/test_forum"
-            android:textColor="@color/colorBaseHeader"
             android:textSize="14sp"
             android:textStyle="bold" />
 
@@ -27,7 +26,6 @@
             android:layout_below="@+id/comment_title"
             android:paddingBottom="5dp"
             android:paddingTop="5dp"
-            android:textColor="@color/colorBaseHeader"
             android:textSize="12sp" />
 
         <TextView
@@ -37,7 +35,6 @@
             android:layout_below="@+id/comment_description"
             android:layout_marginTop="10dp"
             android:text="@string/content"
-            android:textColor="@color/colorBaseHeader"
             android:textSize="14sp"
             android:textStyle="bold" />
 
@@ -48,8 +45,7 @@
             android:layout_below="@+id/textView5"
             android:paddingBottom="5dp"
             android:singleLine="false"
-            android:paddingTop="5dp"
-            android:textColor="@color/colorBaseHeader" />
+            android:paddingTop="5dp"/>
 
         <TextView
             android:id="@+id/textView7"
@@ -59,7 +55,6 @@
             android:layout_marginTop="10dp"
             android:text="@string/comment"
             android:paddingBottom="10dp"
-            android:textColor="@color/colorBaseHeader"
             android:textStyle="bold" />
 
         <ListView
