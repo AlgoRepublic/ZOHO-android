@@ -38,71 +38,65 @@
         android:layout_height="wrap_content"
         card_view:cardElevation="4dp"
         card_view:cardCornerRadius="4dp">
-    <RelativeLayout
-        android:padding="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/layout2">
+        <RelativeLayout
+            android:padding="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/layout2">
 
-        <com.rengwuxian.materialedittext.MaterialEditText
-            android:id="@+id/comment_title"
-            android:textSize="18sp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/title"
-            android:inputType="textMultiLine"
-            android:layout_marginTop="10dp"
-            app:met_floatingLabel="normal"
-            app:met_singleLineEllipsis="true"
-            android:textColor="@color/colorBaseHeader"
-            app:met_primaryColor="@color/colorBaseHeader"/>
+                <com.rengwuxian.materialedittext.MaterialEditText
+                    android:id="@+id/comment_title"
+                    android:textSize="18sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/title"
+                    android:inputType="textMultiLine"
+                    android:layout_marginTop="10dp"
+                    app:met_floatingLabel="normal"
+                    app:met_singleLineEllipsis="true" />
 
-    </RelativeLayout>
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/layout2"
-        android:id="@+id/layout3"
-        >
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/layout2"
+                android:id="@+id/layout3"
+                >
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/category"
-            android:textColor="@color/colorContentWrapper"
-            android:id="@+id/category"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentStart="true" />
-        <org.angmarch.views.NiceSpinner
-            android:id="@+id/forum_list"
-            android:layout_width="match_parent"
-            android:layout_below="@+id/category"
-            android:layout_height="55dp"
-            android:textColor="@color/colorBaseHeader"
-            android:textSize="18sp" />
-    </RelativeLayout>
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/layout3"
-        >
-        <com.rengwuxian.materialedittext.MaterialEditText
-            android:id="@+id/comment_description"
-            android:textSize="18sp"
-            android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:hint="@string/content"
-            android:inputType="textMultiLine"
-            android:padding="5dp"
-            android:gravity="top|left"
-            android:layout_marginTop="10dp"
-            android:textColor="@color/colorBaseHeader"
-            app:met_floatingLabel="normal"
-            app:met_primaryColor="@color/colorBaseHeader"/>
-    </RelativeLayout>
-    </RelativeLayout>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/category"
+                    android:id="@+id/category"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentStart="true" />
+                <org.angmarch.views.NiceSpinner
+                    android:id="@+id/forum_list"
+                    android:layout_width="match_parent"
+                    android:layout_below="@+id/category"
+                    android:layout_height="55dp"
+                    android:textSize="18sp" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/layout3"
+                >
+                <com.rengwuxian.materialedittext.MaterialEditText
+                    android:id="@+id/comment_description"
+                    android:textSize="18sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:hint="@string/content"
+                    android:inputType="textMultiLine"
+                    android:padding="5dp"
+                    android:gravity="top|left"
+                    android:layout_marginTop="10dp"
+                    app:met_floatingLabel="normal" />
+            </RelativeLayout>
+        </RelativeLayout>
     </android.support.v7.widget.CardView>
 </RelativeLayout>
