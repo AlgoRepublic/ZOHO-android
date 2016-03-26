@@ -2,15 +2,11 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    android:layoutDirection="rtl"
-    android:textDirection="rtl"
-    android:background="@color/white">
+    android:background="@color/colorBaseWrapper">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/include"
         android:padding="15dp">
 
         <TextView
@@ -18,7 +14,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:text="@string/test_forum"
+            android:text="Test Forum 1"
             android:textColor="@color/colorBaseHeader"
             android:textSize="14sp"
             android:textStyle="bold" />
@@ -39,7 +35,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/comment_description"
             android:layout_marginTop="10dp"
-            android:text="@string/content"
+            android:text="Contents"
             android:textColor="@color/colorBaseHeader"
             android:textSize="14sp"
             android:textStyle="bold" />
@@ -50,7 +46,6 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/textView5"
             android:paddingBottom="5dp"
-            android:singleLine="false"
             android:paddingTop="5dp"
             android:textColor="@color/colorBaseHeader" />
 
@@ -60,8 +55,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/content_description"
             android:layout_marginTop="10dp"
-            android:text="@string/comment"
-            android:paddingBottom="10dp"
+            android:text="Comments"
             android:textColor="@color/colorBaseHeader"
             android:textStyle="bold" />
 
@@ -73,19 +67,52 @@
             android:choiceMode="singleChoice"
             android:descendantFocusability="beforeDescendants"
             android:divider="@null"
+            android:dividerHeight="5dp"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp"
             android:scrollbars="none" />
     </RelativeLayout>
 
-    <include
-        android:id="@+id/include"
+    <RelativeLayout
+        android:id="@+id/layout_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
         android:layout_alignParentBottom="true"
-        layout="@layout/layout_for_comment"
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent"/>
-    <include
-        layout="@layout/layout_alert_message"
-        android:layout_width="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:layout_height="wrap_content" />
+        android:background="@color/colorContentWrapper">
+
+        <RelativeLayout
+            android:id="@+id/layout1"
+            android:layout_width="60dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="2dp"
+            android:layout_marginRight="2dp">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center"
+                android:layout_marginLeft="2dp"
+                android:layout_marginRight="2dp">
+
+                <ImageView
+                    android:id="@+id/delete"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_gravity="center"
+                    android:src="@mipmap/edit" />
+
+                <TextView
+                    android:id="@+id/editText3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/delete"
+                    android:text="Add comment"
+                    android:textSize="8sp" />
+            </RelativeLayout>
+        </RelativeLayout>
+
+    </RelativeLayout>
 </RelativeLayout>

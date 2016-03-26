@@ -4,9 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorBaseWrapper"
-    android:fitsSystemWindows="true"
-    android:layoutDirection="rtl"
-    android:textDirection="rtl"
     android:orientation="vertical">
 
     <com.wang.avi.AVLoadingIndicatorView
@@ -25,7 +22,7 @@
         android:layout_below="@+id/avloadingIndicatorView"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="15dp"
-        android:text="@string/connecting_to_user"
+        android:text="Connecting to User"
         android:textColor="@color/colorContentWrapper"
         android:textSize="16sp" />
 
@@ -44,7 +41,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:text="@string/loading"
+        android:text="Loading"
         android:textAllCaps="true"
         android:textColor="@color/colorContentWrapper" />
 </RelativeLayout>

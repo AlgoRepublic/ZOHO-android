@@ -3,6 +3,7 @@ package com.algorepublic.zoho.adapters;
 import android.content.Context;
 import android.support.v4.view.PagerAdapter;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -57,7 +58,7 @@ public class AdapterTaskDetailAssignee extends RecyclerView.Adapter<AdapterTaskD
 
     @Override
     public void onBindViewHolder(SimpleViewHolder holder, int position) {
-        if(baseClass.getProfileImage() != null) {
+        if(arraylist.get(position).getProfileImage() != null) {
             Glide.with(ctx).load(Constants.Image_URL + arraylist.get(position).getUserID()
                     + "." + BaseClass.getExtensionType(arraylist.get(position).getProfileImage())).into(holder.imageView);
         }

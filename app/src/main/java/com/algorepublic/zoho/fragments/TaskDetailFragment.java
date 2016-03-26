@@ -225,6 +225,9 @@ public class TaskDetailFragment extends BaseFragment {
         }else
         aq.id(R.id.task_desc).text(Html.fromHtml(TaskByIdModel.getInstance().responseObject.description));
 
+        twoWayAssignee.setAdapter(new AdapterTaskDetailAssignee(getActivity(),
+                tasksList.getListAssignees()));
+
         aq.id(R.id.comment_count).text(Integer.toString(TaskByIdModel.getInstance().responseObject.commentsCount));
         aq.id(R.id.docs_count).text(Integer.toString(TaskByIdModel.getInstance().responseObject.documentsCount));
         aq.id(R.id.subtask_count).text(Integer.toString(TaskByIdModel.getInstance().responseObject.subTasksCount));
@@ -311,7 +314,7 @@ public class TaskDetailFragment extends BaseFragment {
         switch (item.getItemId()){
             case R.id.edit_task:
 
-                baseClass.setSelectedProject(tasksList.getProjectName());
+                baseClass.setSelectedProject(Integer.toString(tasksList.getProjectID()));
                 if (Integer.parseInt(baseClass.getSelectedProject()) >0) {
                     baseClass.db.putString("ProjectName", tasksList.getProjectName());
                     baseClass.setSelectedProject(Integer.toString(tasksList.getProjectID()));

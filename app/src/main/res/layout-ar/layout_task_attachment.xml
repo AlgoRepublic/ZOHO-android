@@ -21,18 +21,19 @@
             android:layout_above="@+id/file_title"
             android:layout_alignParentTop="true"
             android:layout_gravity="center"
+            android:layout_margin="10dp"
             android:scaleType="fitXY" />
 
         <TextView
             android:id="@+id/file_title"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:ellipsize="end"
-            android:gravity="center"
+            android:gravity="left"
             android:lines="2"
-            android:text="@string/name"
+            android:text="name"
             android:textColor="@color/colorBaseWrapper"
             android:textSize="14sp" />
     </RelativeLayout>

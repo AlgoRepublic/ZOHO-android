@@ -58,9 +58,7 @@ public class StarRatingLevelQuestionsFragment extends BaseFragment {
         aq = new AQuery(view);
         QuestLayout = (LinearLayout) aq
                         .id(R.id.questListView).visible().getView();
-//        QuestLayout.removeAllViews();
-//        QuestLayout.invalidate();
-//        StarRatingQuestionModel.getInstance().responseData.clear();
+
         service = new StarRatingService(getActivity());
         service.getStarRatingQuestion_API(ID, "enUS",
                         true, new CallBack(StarRatingLevelQuestionsFragment.this, "StarRatingQuestion"));
@@ -111,11 +109,9 @@ public class StarRatingLevelQuestionsFragment extends BaseFragment {
                 @Override
                 public void afterTextChanged(Editable s) {
 
-                    Log.e("ID", "/" + Questions
-                            .get(ClickedPosition).getID());
                     service.StarEditComment(Questions
-                            .get(ClickedPosition).getID(), Questions
-                            .get(ClickedPosition).getComment(), true, new
+                            .get(ClickedPosition).getID(),
+                            aq_quest.id(R.id.comment_edittext).getText().toString(), true, new
                             CallBack(StarRatingLevelQuestionsFragment.this, "UpdateComment"));
                 }
             });
@@ -148,7 +144,6 @@ public class StarRatingLevelQuestionsFragment extends BaseFragment {
                 @Override
                 public void onStopTrackingTouch(SeekBar seekBar) {
                     View view = QuestLayout.getChildAt(ClickedPosition);
-                    Log.e("D", ClickedPosition + "/" + (Integer) view.getTag());
                     AQuery aq= new AQuery(view);
                     aq.id(R.id.seekBar).progress(userProgress);
                     aq.id(R.id.percent_text).getTextView().setText(userProgress + "%");
@@ -156,10 +151,9 @@ public class StarRatingLevelQuestionsFragment extends BaseFragment {
                     ratingBar.setRating(GetStarValue(userProgress));
                     aq.id(R.id.devstage_text).text(GetStageValue(userProgress));
 
-
                     service.StarUpdateProgress(Questions
-                            .get(ClickedPosition).getID(), Questions
-                            .get(ClickedPosition).getProgress(), true, new
+                            .get(ClickedPosition).getID(),
+                            userProgress, true, new
                             CallBack(StarRatingLevelQuestionsFragment.this, "UpdateProgress"));
                 }
             });
