@@ -159,10 +159,20 @@
                         android:textColor="@color/colorBaseHeader"/>
                 </RadioGroup>
 
+                <TextView
+                    android:id="@+id/project_access"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/project_access"
+                    android:paddingTop="10dp"
+                    android:paddingLeft="5dp"
+                    android:paddingStart="5dp"
+                    android:layout_below="@id/layout1"/>
+
                 <RadioGroup
                     android:id="@+id/private_public_group"
                     android:layout_width="match_parent"
-                    android:layout_below="@+id/active_archive_status"
+                    android:layout_below="@+id/project_access"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp">
 

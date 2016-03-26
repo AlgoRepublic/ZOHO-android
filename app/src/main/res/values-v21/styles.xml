@@ -20,7 +20,7 @@
         <item name="android:editTextStyle">@style/blueEditTextStyle</item>
     </style>
 
-    <style name="blueButton" parent="@android:style/Widget.Button">
+    <style name="blueButton" parent="Widget.AppCompat.EditText">
         <item name="android:background">@color/colorSecondaryBlue</item>
     </style>
     <style name="blueRatingBar" parent="@android:style/Widget.RatingBar">
@@ -105,7 +105,7 @@
         <item name="android:scrollbarSize">4dp</item>
         <item name="android:fadeScrollbars">false</item>
     </style>
-    <style name="blackEditTextStyle" parent="@android:style/Widget.EditText">
+    <style name="blackEditTextStyle" parent="Widget.AppCompat.EditText">
         <item name="android:textColor">@color/colorBaseHeader</item>
         <item name="android:textColorHint">@color/colorBaseHeader</item>
     </style>
