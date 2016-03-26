@@ -10,6 +10,7 @@ import android.widget.ExpandableListView;
 import android.widget.TextView;
 
 import com.algorepublic.zoho.R;
+import com.algorepublic.zoho.fragments.StarRatingLevelQuestionsFragment;
 import com.algorepublic.zoho.utils.CustomExpListView;
 
 import java.util.ArrayList;
@@ -27,7 +28,11 @@ public class AdapterStarRatingLevelTwo extends BaseExpandableListAdapter {
         this.mListDataHeader = new ArrayList<>();
         this.mListDataHeader.addAll(mListDataHeader);
     }
-
+    @Override
+    public void onGroupCollapsed(int groupPosition) {
+        StarRatingLevelQuestionsFragment.fragment = null;
+        super.onGroupCollapsed(groupPosition);
+    }
     @Override
     public Object getChild(int groupPosition, int childPosition) {
         return childPosition;
