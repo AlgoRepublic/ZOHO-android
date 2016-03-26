@@ -1,12 +1,10 @@
 package com.algorepublic.zoho.adapters;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
-import android.widget.ExpandableListView;
 import android.widget.TextView;
 
 import com.algorepublic.zoho.R;
@@ -75,7 +73,7 @@ public class AdapterStarRatingLevelTwo extends BaseExpandableListAdapter {
         if (convertView == null) {
             LayoutInflater layoutInflater = (LayoutInflater) this.mContext
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = layoutInflater.inflate(R.layout.drawer_list_level_one, parent, false);
+            convertView = layoutInflater.inflate(R.layout.drawer_list_level_two, parent, false);
         }
         TextView lblListHeader = (TextView) convertView
                 .findViewById(R.id.lblListHeader);
