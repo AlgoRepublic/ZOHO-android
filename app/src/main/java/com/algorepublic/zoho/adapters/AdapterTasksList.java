@@ -52,12 +52,14 @@ public class AdapterTasksList extends BaseAdapter implements StickyListHeadersAd
     private LayoutInflater l_Inflater;
     private int lastPosition = -1;
     int clickedPosition;
+    ArrayList<TaskListName> taskListNames = new ArrayList<>();
     ArrayList<TasksList> lists = new ArrayList<>();
     ArrayList<TasksList> tasksLists = new ArrayList<>();
 
-    public AdapterTasksList(Context context, ArrayList<TasksList> arrayList) {
+    public AdapterTasksList(Context context, ArrayList<TasksList> arrayList,ArrayList<TaskListName> listNames) {
         tasksLists.addAll(arrayList);
         lists.addAll(arrayList);
+        taskListNames = listNames;
         l_Inflater = LayoutInflater.from(context);
         this.ctx = context;
         service = new TaskListService((AppCompatActivity)ctx);
@@ -133,7 +135,8 @@ public class AdapterTasksList extends BaseAdapter implements StickyListHeadersAd
         holder.parentLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                callFragmentWithBackStack(R.id.container, TaskDetailFragment.newInstance(tasksLists.get(position), position), "TaskDetail");
+                callFragmentWithBackStack(R.id.container, TaskDetailFragment.newInstance
+                        (tasksLists.get(position),taskListNames), "TaskDetail");
             }
         });
         holder.btEdit.setOnClickListener(new View.OnClickListener() {
@@ -143,7 +146,9 @@ public class AdapterTasksList extends BaseAdapter implements StickyListHeadersAd
                 if (tasksLists.get(position).getProjectID() > 0) {
                     baseClass.db.putString("ProjectName", tasksLists.get(position).getProjectName());
                     baseClass.setSelectedProject(Integer.toString(tasksLists.get(position).getProjectID()));
-                    callFragmentWithBackStack(R.id.container, TaskAddUpdateFragment.newInstance(tasksLists.get(position)),
+                    callFragmentWithBackStack(R.id.container,
+                            TaskAddUpdateFragment.newInstance(tasksLists.get(position),
+                                    TasksListFragment.taskListName),
                             "TaskAddUpdateFragment");
                 }
             }

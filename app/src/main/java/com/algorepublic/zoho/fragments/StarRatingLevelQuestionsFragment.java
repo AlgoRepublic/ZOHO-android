@@ -1,8 +1,7 @@
-package com.algorepublic.zoho.adapters;
+package com.algorepublic.zoho.fragments;
 
-import android.content.Context;
+import android.os.Bundle;
 import android.support.design.widget.Snackbar;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -11,79 +10,65 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseExpandableListAdapter;
-import android.widget.ExpandableListView;
-import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.SeekBar;
-import android.widget.TextView;
+import android.widget.Toast;
 
 import com.algorepublic.zoho.Models.GeneralModel;
 import com.algorepublic.zoho.Models.StarRatingQuestionModel;
 import com.algorepublic.zoho.R;
-import com.algorepublic.zoho.fragments.StarRatingLevelQuestionsFragment;
+import com.algorepublic.zoho.adapters.AdapterStarRatingQuestions;
+import com.algorepublic.zoho.adapters.StarRatingQuestion;
+import com.algorepublic.zoho.fragments.BaseFragment;
 import com.algorepublic.zoho.services.CallBack;
 import com.algorepublic.zoho.services.StarRatingService;
 import com.androidquery.AQuery;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by android on 2/24/16.
  */
-public class AdapterStarRatingLevelThree extends BaseExpandableListAdapter {
+public class StarRatingLevelQuestionsFragment extends BaseFragment {
+    static StarRatingLevelQuestionsFragment fragment;
     AQuery aq;
-    public static StarRatingService service;
-    private final Context mContext;
+    StarRatingService service;
     LayoutInflater layoutInflater;
     int ClickedPosition, userProgress;
     int multiple=5;
     LinearLayout QuestLayout;
     public  static ArrayList<StarRatingQuestion> Questions = new ArrayList<>();
-    private final List<StarRatingHeadsLevelThree> mListDataHeader;
+    static int ID;
 
-    public AdapterStarRatingLevelThree(Context mContext, List<StarRatingHeadsLevelThree> mListDataHeader) {
-        this.mContext = mContext;
-        layoutInflater = (LayoutInflater) this.mContext
-                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        this.mListDataHeader = new ArrayList<>();
-        this.mListDataHeader.addAll(mListDataHeader);
-    }
-
-    @Override
-    public Object getChild(int groupPosition, int childPosition) {
-        return childPosition;
-    }
-
-    @Override
-    public long getChildId(int groupPosition, int childPosition) {
-        return childPosition;
-    }
-
-    @Override
-    public View getChildView(int groupPosition, int childPosition,
-                             boolean isLastChild, View convertView, ViewGroup parent) {
-        if (convertView == null) {
-            convertView = layoutInflater.inflate(R.layout.frame_layout, parent, false);
+    public static StarRatingLevelQuestionsFragment newInstance(int Id) {
+        ID =Id;
+        if (fragment==null) {
+            fragment = new StarRatingLevelQuestionsFragment();
         }
-       // if(parent.getChildCount()==0){
-            callFragmentWithReplace(R.id.star_container,
-                    StarRatingLevelQuestionsFragment.
-                            newInstance(mListDataHeader.
-                                    get(groupPosition).getID()), "StarRatingLevelQuestionsFragment");
-       // }
-        return convertView;
+        return fragment;
     }
-    public void callFragmentWithReplace(int containerId, Fragment fragment, String tag){
-        ((AppCompatActivity)mContext).getSupportFragmentManager()
-                .beginTransaction()
-                .replace(containerId, fragment, tag)
-                .setCustomAnimations(R.anim.slide_in_enter, R.anim.slide_in_exit,
-                        R.anim.slide_pop_enter, R.anim.slide_pop_exit)
-                .commit();
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_star_rating_question, container, false);
+        aq = new AQuery(view);
+        QuestLayout = (LinearLayout) aq
+                        .id(R.id.questListView).visible().getView();
+        QuestLayout.removeAllViews();
+        QuestLayout.invalidate();
+        StarRatingQuestionModel.getInstance().responseData.clear();
+        service = new StarRatingService(getActivity());
+        service.getStarRatingQuestion_API(ID, "enUS",
+                        true, new CallBack(StarRatingLevelQuestionsFragment.this, "StarRatingQuestion"));
+        return view;
     }
     public void StarRatingQuestion(Object caller, Object model) {
         StarRatingQuestionModel.getInstance().setList((StarRatingQuestionModel) model);
@@ -93,8 +78,7 @@ public class AdapterStarRatingLevelThree extends BaseExpandableListAdapter {
         }
         else
         {
-            Snackbar.make(((AppCompatActivity)mContext).findViewById(android.R.id.content),
-                    mContext.getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), getString(R.string.invalid_credential), Toast.LENGTH_SHORT).show();
         }
     }
     public void AddViews(){
@@ -105,7 +89,7 @@ public class AdapterStarRatingLevelThree extends BaseExpandableListAdapter {
                     R.layout.drawer_list_item, null);
 
             final AQuery aq_quest = new AQuery(QuestionLayout);
-            aq_quest.id(R.id.quest_text).text(mContext.getString(R.string.Q) + ": " + Questions
+            aq_quest.id(R.id.quest_text).text(getString(R.string.Q) + ": " + Questions
                     .get(loop).getQuestion());
             aq_quest.id(R.id.comment_edittext).text(Questions
                     .get(loop).getComment());
@@ -132,12 +116,12 @@ public class AdapterStarRatingLevelThree extends BaseExpandableListAdapter {
                 @Override
                 public void afterTextChanged(Editable s) {
 
-//                    Log.e("ID", "/" + Questions
-//                            .get(ClickedPosition).getID());
-//                    service.StarEditComment(Questions
-//                            .get(ClickedPosition).getID(), Questions
-//                            .get(ClickedPosition).getComment(), true, new
-//                            CallBack(AdapterStarRatingLevelThree.this, "UpdateComment"));
+                    Log.e("ID", "/" + Questions
+                            .get(ClickedPosition).getID());
+                    service.StarEditComment(Questions
+                            .get(ClickedPosition).getID(), Questions
+                            .get(ClickedPosition).getComment(), true, new
+                            CallBack(StarRatingLevelQuestionsFragment.this, "UpdateComment"));
                 }
             });
             aq_quest.id(R.id.comment_edittext).getEditText().setOnTouchListener(new View.OnTouchListener() {
@@ -168,25 +152,26 @@ public class AdapterStarRatingLevelThree extends BaseExpandableListAdapter {
 
                 @Override
                 public void onStopTrackingTouch(SeekBar seekBar) {
-//                    View view = QuestLayout.getChildAt(ClickedPosition);
-//                    Log.e("D",ClickedPosition+"/"+(Integer)view.getTag());
-//                    AQuery aq= new AQuery(view);
-//                    aq.id(R.id.seekBar).progress(userProgress);
-//                    aq.id(R.id.percent_text).getTextView().setText(userProgress + "%");
-//                    RatingBar ratingBar  =(RatingBar) view.findViewById(R.id.star_rating);
-//                    ratingBar.setRating(GetStarValue(userProgress));
-//                    aq.id(R.id.devstage_text).text(GetStageValue(userProgress));
-//
-//
-//                    service.StarUpdateProgress(Questions
-//                            .get(ClickedPosition).getID(), Questions
-//                            .get(ClickedPosition).getProgress(), true, new
-//                            CallBack(AdapterStarRatingLevelThree.this, "UpdateProgress"));
+                    View view = QuestLayout.getChildAt(ClickedPosition);
+                    Log.e("D", ClickedPosition + "/" + (Integer) view.getTag());
+                    AQuery aq= new AQuery(view);
+                    aq.id(R.id.seekBar).progress(userProgress);
+                    aq.id(R.id.percent_text).getTextView().setText(userProgress + "%");
+                    RatingBar ratingBar  =(RatingBar) view.findViewById(R.id.star_rating);
+                    ratingBar.setRating(GetStarValue(userProgress));
+                    aq.id(R.id.devstage_text).text(GetStageValue(userProgress));
+
+
+                    service.StarUpdateProgress(Questions
+                            .get(ClickedPosition).getID(), Questions
+                            .get(ClickedPosition).getProgress(), true, new
+                            CallBack(StarRatingLevelQuestionsFragment.this, "UpdateProgress"));
                 }
             });
             QuestLayout.addView(QuestionLayout);
         }
     }
+
     public void GetListQuestions(){
         Questions.clear();
         for(int loop=0;loop<StarRatingQuestionModel.getInstance().responseData.size();loop++){
@@ -197,50 +182,6 @@ public class AdapterStarRatingLevelThree extends BaseExpandableListAdapter {
             question.setProgress(StarRatingQuestionModel.getInstance().responseData.get(loop).progress);
             Questions.add(question);
         }
-    }
-    @Override
-    public int getChildrenCount(int groupPosition) {
-        return 1;
-    }
-
-    @Override
-    public Object getGroup(int groupPosition) {
-        return mListDataHeader.get(groupPosition);
-    }
-
-    @Override
-    public int getGroupCount() {
-        return this.mListDataHeader.size();
-    }
-
-    @Override
-    public long getGroupId(int groupPosition) {
-        return groupPosition;
-    }
-
-    @Override
-    public View getGroupView(int groupPosition, boolean isExpanded,
-                             View convertView, ViewGroup parent) {
-        if (convertView == null) {
-            LayoutInflater layoutInflater = (LayoutInflater) this.mContext
-                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = layoutInflater.inflate(R.layout.drawer_list_level_one, parent, false);
-        }
-        TextView lblListHeader = (TextView) convertView
-                .findViewById(R.id.lblListHeader);
-
-        lblListHeader.setText(mListDataHeader.get(groupPosition).getTitle());
-        return convertView;
-    }
-
-    @Override
-    public boolean hasStableIds() {
-        return true;
-    }
-
-    @Override
-    public boolean isChildSelectable(int groupPosition, int childPosition) {
-        return true;
     }
     public int GetStarValue(int progress)
     {
@@ -268,34 +209,35 @@ public class AdapterStarRatingLevelThree extends BaseExpandableListAdapter {
     {
         String starValue = "";
         if (progress >= 0 && progress <= 25)
-            starValue =  mContext.getString(R.string.ratingPrimaryStage);
+            starValue =  getString(R.string.ratingPrimaryStage);
         else if (progress > 25 && progress <= 50)
-            starValue =  mContext.getString(R.string.ratingDevelopmentStage);
+            starValue =  getString(R.string.ratingDevelopmentStage);
         else if (progress > 50 && progress <= 75)
-            starValue =  mContext.getString(R.string.ratingMaturityStage);
+            starValue =  getString(R.string.ratingMaturityStage);
         else
-            starValue =  mContext.getString(R.string.ratingLeadingStage);
+            starValue =  getString(R.string.ratingLeadingStage);
 
         return starValue;
     }
     public void UpdateComment(Object caller, Object model) {
         GeneralModel.getInstance().setList((GeneralModel) model);
         if (GeneralModel.getInstance().responseObject) {
-            Snackbar.make(((AppCompatActivity) mContext).findViewById(android.R.id.content),
-                    mContext.getString(R.string.update_comment), Snackbar.LENGTH_SHORT).show();
+            Snackbar.make(getView(),
+                    getString(R.string.update_comment), Snackbar.LENGTH_SHORT).show();
         } else {
-            Snackbar.make(((AppCompatActivity) mContext).findViewById(android.R.id.content),
-                    mContext.getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
+            Snackbar.make(getView(),
+                    getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
         }
     }
     public void UpdateProgress(Object caller, Object model) {
         GeneralModel.getInstance().setList((GeneralModel) model);
         if (GeneralModel.getInstance().responseObject) {
-            Snackbar.make(((AppCompatActivity) mContext).findViewById(android.R.id.content),
-                    mContext.getString(R.string.update_progress), Snackbar.LENGTH_SHORT).show();
+            Snackbar.make(getView(),
+                    getString(R.string.update_progress), Snackbar.LENGTH_SHORT).show();
         } else {
-            Snackbar.make(((AppCompatActivity) mContext).findViewById(android.R.id.content),
-                    mContext.getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
+            Snackbar.make(getView(),
+                    getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
         }
     }
+
 }

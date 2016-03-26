@@ -21,8 +21,11 @@ import android.widget.SeekBar;
 
 import com.algorepublic.zoho.Models.GeneralModel;
 import com.algorepublic.zoho.Models.TaskByIdModel;
+import com.algorepublic.zoho.Models.TaskByIdModel;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.adapters.AdapterTaskDetailAssignee;
+import com.algorepublic.zoho.adapters.TaskListAssignee;
+import com.algorepublic.zoho.adapters.TaskListName;
 import com.algorepublic.zoho.adapters.TasksList;
 import com.algorepublic.zoho.services.CallBack;
 import com.algorepublic.zoho.services.TaskListService;
@@ -37,6 +40,7 @@ import com.github.lzyzsd.circleprogress.DonutProgress;
 import org.lucasr.twowayview.TwoWayLayoutManager;
 import org.lucasr.twowayview.widget.TwoWayView;
 
+import java.util.ArrayList;
 
 
 @SuppressLint("ValidFragment")
@@ -44,30 +48,28 @@ public class TaskDetailFragment extends BaseFragment {
 
     AQuery aq;
     static TaskDetailFragment fragment;
-    static TasksList tasksList;
-    static int position;
     TaskListService service;
     int click=0;
     DonutProgress seekBarCompat;
     TwoWayView twoWayAssignee;
     SeekBar seekBar;
+    static ArrayList<TaskListName> taskListName = new ArrayList<>();
     View views;
     int multiple=10;
+    static TasksList tasksList;
     int progress=0;
     BaseClass baseClass;
    // WebView webView;
 
     @SuppressLint("ValidFragment")
     public TaskDetailFragment() {
-        // Required empty public constructor
-//        tasksList = tasksList1;
-//        position =pos;
     }
 
+
     // TODO: Rename and change types and number of parameters
-    public static TaskDetailFragment newInstance(TasksList tasksList1,int pos) {
-        tasksList = tasksList1;
-        position =pos;
+    public static TaskDetailFragment newInstance(TasksList tasks,ArrayList<TaskListName> listNames) {
+        tasksList =tasks;
+        taskListName = listNames;
         fragment = new TaskDetailFragment();
         return fragment;
     }
@@ -111,7 +113,6 @@ public class TaskDetailFragment extends BaseFragment {
         aq = new AQuery(view);
         getToolbar().setTitle(getString(R.string.task_details));
         service = new TaskListService(getActivity());
-        Log.e("SS","S"+tasksList.getTaskID());
         service.getTasksById(tasksList.getTaskID(),true
                 ,new CallBack(TaskDetailFragment.this,"TaskDetails"));
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -129,7 +130,6 @@ public class TaskDetailFragment extends BaseFragment {
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
                 seekBarCompat.setProgress(progress);
-                tasksList.setProgress(progress);
                 if (progress == 100) {
                     aq.id(R.id.icon).image(R.drawable.ic_notifications_green_24dp);
                     aq.id(R.id.mark_as_done).text(getString(R.string.reopen_task));
@@ -160,26 +160,21 @@ public class TaskDetailFragment extends BaseFragment {
         aq.id(R.id.subtask).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                callFragmentWithAddBackStack(R.id.container, new TaskListBySubTasksFragment(tasksList), "TaskListBySubTasksFragment");
+                callFragmentWithAddBackStack(R.id.container, new TaskListBySubTasksFragment(tasksList.getTaskID()), "TaskListBySubTasksFragment");
             }
         });
-        if(tasksList.getProgress()==100){
-            aq.id(R.id.icon).image(R.drawable.ic_notifications_green_24dp);
-            aq.id(R.id.mark_as_done).text(getString(R.string.reopen_task));
-
-        }
-            aq.id(R.id.mark_as_done).clicked(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if(tasksList.getProgress()==100){
-                        click= 3;
-                        NormalDialogCustomAttr(getString(R.string.reopen_task));
-                    }else {
-                        click=2;
-                        NormalDialogCustomAttr(getString(R.string.mark_as_done));
-                    }
+        aq.id(R.id.mark_as_done).clicked(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(TaskByIdModel.getInstance().responseObject.progress==100){
+                    click= 3;
+                    NormalDialogCustomAttr(getString(R.string.reopen_task));
+                }else {
+                    click=2;
+                    NormalDialogCustomAttr(getString(R.string.mark_as_done));
                 }
-            });
+            }
+        });
         aq.id(R.id.delete).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -202,6 +197,7 @@ public class TaskDetailFragment extends BaseFragment {
 
     public void UpdateValue(){
         if(TaskByIdModel.getInstance().responseObject.startDate != null) {
+            AddTasks();
             if (DateFormatter(TaskByIdModel.getInstance().responseObject.startDate).equalsIgnoreCase("12/31/3938")||
             DateFormatter(TaskByIdModel.getInstance().responseObject.startDate).equalsIgnoreCase("2/1/3938")) {
                 aq.id(R.id.start_date).text("No Date");
@@ -237,12 +233,55 @@ public class TaskDetailFragment extends BaseFragment {
         seekBarCompat.setProgress(TaskByIdModel.getInstance().responseObject.progress);
         if(TaskByIdModel.getInstance().responseObject.progress==100){
             aq.id(R.id.icon).image(R.drawable.ic_notifications_green_24dp);
+            aq.id(R.id.mark_as_done).text(getString(R.string.reopen_task));
         }
         Drawable shapeDrawable = aq.id(R.id.priority_bar).getView().getBackground();
         GradientDrawable colorDrawable = (GradientDrawable) shapeDrawable;
         colorDrawable.setColor(getPriorityWiseColor(TaskByIdModel.getInstance().responseObject.priority));
         aq.id(R.id.priority_bar).getView().setBackground(shapeDrawable);
         views.setBackgroundColor(getPriorityWiseColor(TaskByIdModel.getInstance().responseObject.priority));
+    }
+    public void AddTasks(){
+        tasksList = new TasksList();
+        TaskByIdModel.Tasks taskModel = TaskByIdModel.getInstance().responseObject;
+        if (taskModel.title == null) {
+            tasksList.setTaskName("-");
+        } else {
+            tasksList.setTaskName(taskModel.title.substring(0, 1).toUpperCase() + taskModel.title.substring(1));
+        }
+        tasksList.setTaskID(taskModel.taskID);
+        tasksList.setEndMilli(DateMilli(taskModel.endDate));
+        tasksList.setStartMilli(DateMilli(taskModel.startDate));
+        tasksList.setProjectName(taskModel.projectName);
+        tasksList.setProjectID(TaskByIdModel.getInstance().responseObject.projectID);
+        tasksList.setStartDate(DateFormatter(taskModel.startDate));
+        tasksList.setEndDate(DateFormatter(taskModel.endDate));
+        tasksList.setHeader(DateMilli(taskModel.endDate));
+        if(taskModel.description == null){
+            tasksList.setDescription(getActivity().getString(R.string.n_a));
+        }else {
+            tasksList.setDescription(taskModel.description);
+        }
+        tasksList.setPriority(taskModel.priority);
+        tasksList.setProgress(taskModel.progress);
+        tasksList.setParentTaskID(taskModel.parentTaskID);
+        tasksList.setCommentsCount(taskModel.commentsCount);
+        tasksList.setDocumentsCount(taskModel.documentsCount);
+        tasksList.setSubTasksCount(taskModel.subTasksCount);
+        tasksList.setTaskListName(TaskByIdModel.getInstance().responseObject.taskListName);
+        tasksList.setTaskListNameID(TaskByIdModel.getInstance().responseObject.tasklistID);
+        //************** Assignee List ************//
+        ArrayList<TaskListAssignee> listAssignees = new ArrayList<>();
+        for (int loop = 0; loop < TaskByIdModel.getInstance().responseObject.userObject.size(); loop++) {
+            TaskByIdModel.Users users = TaskByIdModel.getInstance().responseObject.userObject.get(loop);
+            TaskListAssignee assignee = new TaskListAssignee();
+            assignee.setUserID(users.responsibleID);
+            assignee.setFirstName(users.firstName);
+            assignee.setLastName(users.lastName);
+            assignee.setProfileImage(users.profileImagePath);
+            listAssignees.add(assignee);
+        }
+        tasksList.setListAssignees(listAssignees);
     }
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
@@ -271,12 +310,12 @@ public class TaskDetailFragment extends BaseFragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.edit_task:
-                Log.e("TaskName","/"+tasksList.getProjectName());
-                baseClass.setSelectedProject(Integer.toString(tasksList.getProjectID()));
-                if (tasksList.getProjectID() >0) {
-                    baseClass.db.putString("ProjectName",tasksList.getProjectName());
+
+                baseClass.setSelectedProject(tasksList.getProjectName());
+                if (Integer.parseInt(baseClass.getSelectedProject()) >0) {
+                    baseClass.db.putString("ProjectName", tasksList.getProjectName());
                     baseClass.setSelectedProject(Integer.toString(tasksList.getProjectID()));
-                    callFragmentWithBackStack(R.id.container, TaskAddUpdateFragment.newInstance(tasksList), "TaskAddUpdateFragment");
+                    callFragmentWithBackStack(R.id.container, TaskAddUpdateFragment.newInstance(tasksList,taskListName), "TaskAddUpdateFragment");
                 }
                     break;
         }
@@ -311,8 +350,6 @@ public class TaskDetailFragment extends BaseFragment {
             seekBar.setProgress(100);
             seekBarCompat.setProgress(100);
             aq.id(R.id.mark_as_done).text(getString(R.string.reopen_task));
-            tasksList.setProgress(100);
-
         }
         else
         {
@@ -326,7 +363,6 @@ public class TaskDetailFragment extends BaseFragment {
             seekBar.setProgress(0);
             seekBarCompat.setProgress(0);
             aq.id(R.id.mark_as_done).text(getString(R.string.mark_as_done));
-            tasksList.setProgress(0);
         }
     }
 
@@ -383,11 +419,11 @@ public class TaskDetailFragment extends BaseFragment {
                                     , true, new CallBack(TaskDetailFragment.this, "DeleteTask"));
                         }
                         if (click==2) {
-                            service.updateTaskProgress(TasksListFragment.generalList.get(position).getTaskID()
+                            service.updateTaskProgress(tasksList.getTaskID()
                                     , 100, true, new CallBack(TaskDetailFragment.this, "CompleteTask"));
                         }
                         if(click==3){
-                            service.updateTaskProgress(TasksListFragment.generalList.get(position).getTaskID()
+                            service.updateTaskProgress(tasksList.getTaskID()
                                     , 0, true, new CallBack(TaskDetailFragment.this, "ReOpenTask"));
                         }
                     }

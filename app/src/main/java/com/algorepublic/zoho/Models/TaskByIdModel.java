@@ -84,6 +84,15 @@ public class TaskByIdModel {
         @SerializedName("ParentTaskID")
         public Integer parentTaskID;
 
+        @SerializedName("ID")
+        @Expose
+        public Integer tasklistID;
+
+        @SerializedName("Name")
+        @Expose
+        public String taskListName;
+
+
         @SerializedName("Users")
         @Expose
         public ArrayList<Users> userObject = new ArrayList<Users>();
@@ -105,5 +114,9 @@ public class TaskByIdModel {
         @SerializedName("ProfileImagePath")
         @Expose
         public String profileImagePath;
+
+        @SerializedName("ProfilePictureID")
+        @Expose
+        public int profilePictureID;
     }
 }
