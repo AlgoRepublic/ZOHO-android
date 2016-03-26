@@ -11,9 +11,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
-import android.widget.ExpandableListView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -222,7 +220,7 @@ public class AdapterStarRatingLevelThree extends BaseExpandableListAdapter {
         if (convertView == null) {
             LayoutInflater layoutInflater = (LayoutInflater) this.mContext
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = layoutInflater.inflate(R.layout.drawer_list_level_one, parent, false);
+            convertView = layoutInflater.inflate(R.layout.drawer_list_level_three, parent, false);
         }
         TextView lblListHeader = (TextView) convertView
                 .findViewById(R.id.lblListHeader);
