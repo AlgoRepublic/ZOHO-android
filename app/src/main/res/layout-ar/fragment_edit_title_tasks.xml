@@ -3,9 +3,6 @@
     android:layout_height="match_parent"
     android:layout_alignParentBottom="true"
     android:background="@color/colorBaseWrapper"
-    android:fitsSystemWindows="true"
-    android:layoutDirection="rtl"
-    android:textDirection="rtl"
     android:orientation="horizontal">
 
     <ImageView
@@ -25,9 +22,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="10dp"
-        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
-        android:layout_toRightOf="@+id/task_image"
+        android:layout_toLeftOf="@+id/task_image"
         android:background="@drawable/round_border"
         android:gravity="top"
         android:hint="@string/task_desc"

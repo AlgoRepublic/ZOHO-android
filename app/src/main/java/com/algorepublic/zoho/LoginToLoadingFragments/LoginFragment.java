@@ -9,15 +9,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
+
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.algorepublic.zoho.ActivityLoginToLoading;
+
 import com.algorepublic.zoho.MainActivity;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.fragments.BaseFragment;
 import com.algorepublic.zoho.utils.BaseClass;
 import com.algorepublic.zoho.utils.Constants;
+import com.algorepublic.zoho.utils.LocaleHelper;
 import com.androidquery.AQuery;
 import com.linkedin.platform.APIHelper;
 import com.linkedin.platform.LISession;
@@ -65,27 +67,32 @@ public class LoginFragment extends BaseFragment {
         if(!BaseClass.db.getString("Password").equalsIgnoreCase("")){
             aq.id(R.id.password).text(BaseClass.db.getString("Password"));
         }
-        if (baseClass.getUserLanguage().equalsIgnoreCase("ar")) {
+        if (LocaleHelper.getLanguage(getContext()).equalsIgnoreCase("ar")) {
             aq.id(R.id.lang_text).text(R.string.arabic);
-            changeLanguage(getString(R.string.lang_arabic));
+
+            //changeLanguage(getString(R.string.lang_arabic));
         }else{
-            changeLanguage(getString(R.string.lang_english));
+           // changeLanguage(getString(R.string.lang_english));
                 aq.id(R.id.lang_text).text(R.string.english);
         }
         aq.id(R.id.lang_text).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (baseClass.getUserLanguage().equalsIgnoreCase("en")) {
-                    changeLanguage(getString(R.string.lang_arabic));
+
+                    LocaleHelper.setLocale(baseClass.getApplicationContext(), "ar");
+                  //  changeLanguage(getString(R.string.lang_arabic));
                     baseClass.setUserLanguage(getString(R.string.lang_arabic));
                     aq.id(R.id.lang_text).text(R.string.arabic);
                 } else {
-                    changeLanguage(getString(R.string.lang_english));
+                    LocaleHelper.setLocale(baseClass.getApplicationContext(), "en");
+                   // changeLanguage(getString(R.string.lang_english));
                     baseClass.setUserLanguage(getString(R.string.lang_english));
                     aq.id(R.id.lang_text).text(R.string.english);
                 }
-                startActivity(new Intent(getActivity(), ActivityLoginToLoading.class));
-                getActivity().finish();
+                getActivity().recreate();
+//                startActivity(new Intent(getActivity(), ActivityLoginToLoading.class));
+//                getActivity().finish();
             }
         });
         aq.id(R.id.email_sign_in_button).clicked(new View.OnClickListener() {

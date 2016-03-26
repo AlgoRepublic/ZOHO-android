@@ -5,9 +5,6 @@
     android:layout_height="wrap_content"
     android:background="@color/colorBaseWrapper"
     android:gravity="top"
-    android:fitsSystemWindows="true"
-    android:layoutDirection="rtl"
-    android:textDirection="rtl"
     android:orientation="vertical">
 
     <View
@@ -29,9 +26,9 @@
             android:layout_width="28dp"
             android:layout_height="28dp"
             android:layout_centerVertical="true"
-            android:layout_marginEnd="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_alignParentRight="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_alignParentLeft="true"
             android:src="@drawable/settings" />
     </RelativeLayout>
 
@@ -62,7 +59,7 @@
                     android:layout_centerVertical="true"
                     android:layout_toLeftOf="@+id/profile"
                     android:layout_toStartOf="@+id/profile"
-                    android:gravity="right"
+                    android:gravity="left"
                     android:lines="2"
                     android:padding="5dp"
                     android:text="@string/first_name"
@@ -89,7 +86,7 @@
                     android:layout_centerVertical="true"
                     android:layout_toEndOf="@id/profile"
                     android:layout_toRightOf="@id/profile"
-                    android:gravity="left"
+                    android:gravity="right"
                     android:lines="2"
                     android:padding="5dp"
                     android:text="@string/last_name"

@@ -3,9 +3,6 @@
     android:id="@+id/single_image_row"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:fitsSystemWindows="true"
-    android:layoutDirection="rtl"
-    android:textDirection="rtl"
     android:background="@color/colorBaseWrapper">
 
     <RelativeLayout
@@ -24,8 +21,7 @@
             android:layout_above="@+id/file_title"
             android:layout_alignParentTop="true"
             android:layout_gravity="center"
-            android:layout_margin="10dp"
-            android:scaleType="fitCenter" />
+            android:scaleType="fitXY" />
 
         <TextView
             android:id="@+id/file_title"

@@ -37,19 +37,23 @@
             android:hint="@string/Task_Title"
             android:layout_toLeftOf="@+id/btn_title"
             app:met_floatingLabel="normal"
-            android:textColor="@color/white"
-            android:textColorHint="@color/white"
+            app:met_textColor="@color/white"
+            app:met_textColorHint="@color/white"
+            app:met_underlineColor="@color/white"
+
+            app:met_primaryColor="@color/white"
             android:textSize="18sp" />
 
-        <Button
+        <CheckBox
             android:id="@+id/btn_title"
             android:layout_width="20dp"
-            android:layout_height="20dp"
+            android:layout_height="25dp"
+            android:button="@null"
             android:layout_marginRight="10dp"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginBottom="10dp"
-            android:background="@mipmap/edit_white" />
+            android:background="@drawable/checkbox_edit_unedit" />
 
         <View
             android:layout_width="match_parent"
@@ -73,8 +77,7 @@
         <GridView
             android:id="@+id/gridview_taskmenu"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_height="wrap_content"
             android:background="@color/colorContentWrapper"
             android:horizontalSpacing="0dp"
             android:numColumns="3"
@@ -87,8 +90,7 @@
         <FrameLayout
             android:id="@+id/edittask_container"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_height="wrap_content"
             android:padding="5dp"/>
     </LinearLayout>
 </LinearLayout>

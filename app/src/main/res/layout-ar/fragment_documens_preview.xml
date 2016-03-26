@@ -4,10 +4,10 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:weightSum="2"
-    android:background="@color/white"
     android:fitsSystemWindows="true"
     android:layoutDirection="rtl"
     android:textDirection="rtl"
+    android:background="@color/white"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <RelativeLayout
@@ -80,16 +80,6 @@
                 android:textSize="18sp"
                 android:text="sd"
                 android:layout_gravity="center_vertical" />
-            <TextView
-                android:id="@+id/doc_size"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:singleLine="true"
-                android:layout_below="@+id/doc_title"
-                android:ellipsize="end"
-                android:textSize="14sp"
-                android:text="sd"
-                android:layout_gravity="center_vertical" />
 
         </RelativeLayout>
     </RelativeLayout>
@@ -102,26 +92,43 @@
         android:paddingRight="10dp"
         android:paddingBottom="10dp"
         android:layout_height="0dp">
+        <LinearLayout
+            android:id="@+id/header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorBaseWrapper"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/list_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/underline_textview"
+                android:gravity="center_horizontal"
+                android:padding="10dp"
+                android:text="@string/comments"
+                android:textSize="14sp"
+                android:typeface="monospace" />
+        </LinearLayout>
         <ListView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
             android:transcriptMode="alwaysScroll"
+            android:layout_below="@id/header"
             android:stackFromBottom="true"
             android:dividerHeight="5dp"
             android:layout_marginBottom="60dp"
             android:id="@+id/listView_comments" />
-
+        <include
+            layout="@layout/layout_alert_message"
+            android:layout_width="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_height="wrap_content" />
         <include
             android:layout_alignParentBottom="true"
             layout="@layout/layout_for_comment"
             android:layout_height="wrap_content"
             android:layout_width="match_parent"/>
     </RelativeLayout>
-    <include
-        layout="@layout/layout_alert_message"
-        android:layout_width="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:layout_height="wrap_content" />
 </LinearLayout>

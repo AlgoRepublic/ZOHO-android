@@ -15,7 +15,7 @@
         android:layout_height="55dp"
         app:tabGravity="fill"
         app:tabMode="fixed"
-        style="@style/blackPagerTitleStrip"
+        app:tabIndicatorHeight="7dp"
         />
 
 
