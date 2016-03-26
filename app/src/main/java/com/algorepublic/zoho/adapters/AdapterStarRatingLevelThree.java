@@ -12,10 +12,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
-import android.widget.ExpandableListView;
-import android.widget.FrameLayout;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -39,10 +36,6 @@ public class AdapterStarRatingLevelThree extends BaseExpandableListAdapter {
     public static StarRatingService service;
     private final Context mContext;
     LayoutInflater layoutInflater;
-    int ClickedPosition, userProgress;
-    int multiple=5;
-    LinearLayout QuestLayout;
-    public  static ArrayList<StarRatingQuestion> Questions = new ArrayList<>();
     private final List<StarRatingHeadsLevelThree> mListDataHeader;
 
     public AdapterStarRatingLevelThree(Context mContext, List<StarRatingHeadsLevelThree> mListDataHeader) {
@@ -117,7 +110,7 @@ public class AdapterStarRatingLevelThree extends BaseExpandableListAdapter {
         if (convertView == null) {
             LayoutInflater layoutInflater = (LayoutInflater) this.mContext
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = layoutInflater.inflate(R.layout.drawer_list_level_one, parent, false);
+            convertView = layoutInflater.inflate(R.layout.drawer_list_level_three, parent, false);
         }
         TextView lblListHeader = (TextView) convertView
                 .findViewById(R.id.lblListHeader);
