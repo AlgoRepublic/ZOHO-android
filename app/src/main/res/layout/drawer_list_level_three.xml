@@ -35,7 +35,7 @@
                 android:layout_width="15dp"
                 android:layout_height="15dp"
                 android:id="@+id/imageView6"
-                android:background="@mipmap/level_two_down_black"
+                android:background="@drawable/level_two_down_black"
                 android:layout_alignParentRight="true"
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"

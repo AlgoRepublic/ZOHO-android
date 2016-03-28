@@ -11,7 +11,7 @@
         android:layout_height="50dp"
         android:layout_margin="10dp"
         android:adjustViewBounds="true"
-        android:background="@mipmap/ic_listview_word"
+        android:background="@drawable/ic_listview_word"
         android:scaleType="fitXY"></ImageView>
 
     <RelativeLayout

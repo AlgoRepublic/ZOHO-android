@@ -47,7 +47,7 @@
             android:layout_centerVertical="true"
             android:layout_marginBottom="10dp"
             android:layout_toRightOf="@+id/title_text"
-            android:background="@mipmap/edit_white" />
+            android:background="@drawable/edit_white" />
 
         <View
             android:layout_width="match_parent"

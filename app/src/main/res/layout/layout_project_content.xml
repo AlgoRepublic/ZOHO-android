@@ -118,11 +118,11 @@
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:layout_centerVertical="true"
-                                        android:drawableLeft="@mipmap/folder_black"
+                                        android:drawableLeft="@drawable/folder_black"
                                         android:drawablePadding="5dp"
                                         android:singleLine="true"
                                         android:ellipsize="end"
-                                        android:drawableStart="@mipmap/folder_black"
+                                        android:drawableStart="@drawable/folder_black"
                                         android:paddingLeft="5dp"
                                         android:paddingStart="5dp"
                                         android:text="@string/projects"
@@ -143,7 +143,7 @@
                                             android:layout_height="20dp"
                                             android:layout_alignParentEnd="true"
                                             android:layout_alignParentRight="true"
-                                            android:background="@mipmap/bubble_alert_black"
+                                            android:background="@drawable/bubble_alert_black"
                                             android:gravity="center"
                                             android:singleLine="true"
                                             android:text="112"
@@ -154,7 +154,7 @@
                                             android:layout_width="20dp"
                                             android:layout_height="20dp"
                                             android:layout_alignParentBottom="true"
-                                            android:src="@mipmap/milestone" />
+                                            android:src="@drawable/milestone" />
                                     </RelativeLayout>
 
                                     <RelativeLayout
@@ -171,7 +171,7 @@
                                             android:layout_height="20dp"
                                             android:layout_alignParentEnd="true"
                                             android:layout_alignParentRight="true"
-                                            android:background="@mipmap/bubble_alert_black"
+                                            android:background="@drawable/bubble_alert_black"
                                             android:gravity="center"
                                             android:singleLine="true"
                                             android:text="1"
@@ -199,7 +199,7 @@
                                             android:layout_height="20dp"
                                             android:layout_alignParentEnd="true"
                                             android:layout_alignParentRight="true"
-                                            android:background="@mipmap/bubble_alert_black"
+                                            android:background="@drawable/bubble_alert_black"
                                             android:gravity="center"
                                             android:singleLine="true"
                                             android:text="112"
@@ -210,7 +210,7 @@
                                             android:layout_width="20dp"
                                             android:layout_height="20dp"
                                             android:layout_alignParentBottom="true"
-                                            android:src="@mipmap/task_desc_small" />
+                                            android:src="@drawable/task_desc_small" />
                                     </RelativeLayout>
                                 </RelativeLayout>
 
@@ -257,7 +257,7 @@
                                     android:layout_width="15dp"
                                     android:layout_height="15dp"
                                     android:layout_margin="5dp"
-                                    android:background="@mipmap/circle_left"/>
+                                    android:background="@drawable/circle_left"/>
                             </LinearLayout>
 
                         </RelativeLayout>

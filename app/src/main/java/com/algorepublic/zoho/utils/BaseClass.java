@@ -295,22 +295,22 @@ public class BaseClass extends Application {
     }
 
     static int icon[] = {
-            R.mipmap.ic_listview_txt,
-            R.mipmap.ic_listview_jpg,
-            R.mipmap.ic_listview_jpeg,
-            R.mipmap.ic_listview_png,
-            R.mipmap.ic_listview_gif,
-            R.mipmap.ic_listview_pdf,
-            R.mipmap.ic_listview_word,
-            R.mipmap.ic_listview_word,
-            R.mipmap.ic_listview_mp3,
-            R.mipmap.ic_listview_mp4a,
-            R.mipmap.ic_listview_wav,
-            R.mipmap.ic_listview_mp4,
-            R.mipmap.ic_listview_3gp,
-            R.mipmap.ic_listview_txt,
-            R.mipmap.ic_listview_xml,
-            R.mipmap.ic_listview_html,
+            R.drawable.ic_listview_txt,
+            R.drawable.ic_listview_jpg,
+            R.drawable.ic_listview_jpeg,
+            R.drawable.ic_listview_png,
+            R.drawable.ic_listview_gif,
+            R.drawable.ic_listview_pdf,
+            R.drawable.ic_listview_word,
+            R.drawable.ic_listview_word,
+            R.drawable.ic_listview_mp3,
+            R.drawable.ic_listview_mp4a,
+            R.drawable.ic_listview_wav,
+            R.drawable.ic_listview_mp4,
+            R.drawable.ic_listview_3gp,
+            R.drawable.ic_listview_txt,
+            R.drawable.ic_listview_xml,
+            R.drawable.ic_listview_html,
     };
     public void hideKeyPad(View view) {
         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);

@@ -61,7 +61,7 @@
                 android:layout_height="match_parent"
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
-                android:background="@mipmap/fastlink_black" />
+                android:background="@drawable/fastlink_black" />
         </RelativeLayout>
 
         <ScrollView
@@ -168,7 +168,7 @@
                         android:layout_height="match_parent"
                         android:layout_centerHorizontal="true"
                         android:layout_centerVertical="true"
-                        android:background="@mipmap/login" />
+                        android:background="@drawable/login" />
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -202,7 +202,7 @@
                         android:layout_height="wrap_content"
                         android:layout_centerHorizontal="true"
                         android:layout_centerVertical="true"
-                        android:background="@mipmap/linkedin" />
+                        android:background="@drawable/linkedin" />
                 </RelativeLayout>
 
                 <LinearLayout

@@ -35,7 +35,7 @@
                 android:layout_height="20dp"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentTop="true"
-                android:background="@mipmap/bubble_alert_black"
+                android:background="@drawable/bubble_alert_black"
                 android:gravity="center"
                 android:singleLine="true"
                 android:text="112"
@@ -47,7 +47,7 @@
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:layout_alignParentBottom="true"
-                android:src="@mipmap/forums" />
+                android:src="@drawable/forums" />
         </RelativeLayout>
 
 
