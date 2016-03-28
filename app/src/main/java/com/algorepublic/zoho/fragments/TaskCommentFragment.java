@@ -76,8 +76,9 @@ public class TaskCommentFragment extends BaseFragment {
         adapter = new AdapterTaskComments(getActivity());
         listView.setAdapter(adapter);
         baseClass = ((BaseClass) getActivity().getApplicationContext());
-       service.getCommentsByTask(position,
-               true,new CallBack(TaskCommentFragment.this,"TaskComments"));
+        getToolbar().setTitle(getResources().getString(R.string.comments));
+        service.getCommentsByTask(position,
+                true,new CallBack(TaskCommentFragment.this,"TaskComments"));
         aq.id(R.id.comment_user).getTextView().setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {

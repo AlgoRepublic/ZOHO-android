@@ -14,9 +14,9 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.BaseAdapter;
 
-import com.algorepublic.zoho.BaseActivity;
 import com.algorepublic.zoho.Models.GeneralModel;
 import com.algorepublic.zoho.R;
+import com.algorepublic.zoho.fragments.DocsPreviewBySubTask;
 import com.algorepublic.zoho.fragments.DocsPreviewFragment;
 import com.algorepublic.zoho.fragments.DocumentsListFragment;
 import com.algorepublic.zoho.services.CallBack;
@@ -45,6 +45,7 @@ public class AdapterDocumentsList extends BaseAdapter implements StickyListHeade
     private LayoutInflater l_Inflater;
     private int lastPosition = -1;
     static int ID;
+    int Type;
     ArrayList<DocumentsList> documentsLists = new ArrayList<>();
 
     public AdapterDocumentsList(Context context,int Id,ArrayList<DocumentsList> arrayList ) {
@@ -108,7 +109,14 @@ public class AdapterDocumentsList extends BaseAdapter implements StickyListHeade
         aq.id(R.id.parent1).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                callFragmentWithBackStack(R.id.container,  DocsPreviewFragment.newInstance(documentsLists.get(position)), "DocsPreview");
+                if(ID==-1) {
+                    callFragmentWithBackStack(R.id.container,
+                            DocsPreviewFragment.newInstance(documentsLists.get(position)), "DocsPreview");
+                }else
+                {
+                    callFragmentWithBackStack(R.id.container,
+                            DocsPreviewBySubTask.newInstance(documentsLists.get(position)), "DocsPreview");
+                }
             }
         });
 //        aq.id(R.id.doc_checkbox).clicked(new View.OnClickListener() {

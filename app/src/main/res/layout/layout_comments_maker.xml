@@ -103,7 +103,6 @@
                                 android:textStyle="bold"
                                 android:layout_marginTop="5dp"
                                 android:layout_marginLeft="5dp"
-                                android:textColor="@color/colorBaseHeader"
                                 android:textSize="14sp"
                                 android:id="@+id/comment_title"
                                 android:layout_alignTop="@+id/comment_image"
@@ -116,7 +115,6 @@
                                 android:textSize="14sp"
                                 android:lines="2"
                                 android:text="@string/test_forum"
-                                android:textColor="@color/colorBaseHeader"
                                 android:layout_below="@+id/comment_image"
                                 android:layout_alignStart="@+id/comment_title" />
                         </RelativeLayout>

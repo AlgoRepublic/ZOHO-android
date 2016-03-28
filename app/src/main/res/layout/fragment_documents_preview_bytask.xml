@@ -29,7 +29,7 @@
                 android:id="@+id/user_image"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:scaleType="fitXY"
+
                 app:civ_border_width="1dp"
                 app:civ_border_color="@color/colorBaseHeader"
                 android:layout_centerVertical="true"
@@ -63,23 +63,8 @@
             android:layout_below="@+id/view"
             android:layout_above="@+id/layout_tasktitle"
             android:layout_centerVertical="true"/>
-        <RelativeLayout
-            android:id="@+id/layout_tasktitle"
-            android:orientation="horizontal"
-            android:layout_alignParentBottom="true"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <TextView
-                android:id="@+id/doc_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:singleLine="true"
-                android:ellipsize="end"
-                android:textSize="18sp"
-                android:text="sd"
-                android:layout_gravity="center_vertical" />
 
-        </RelativeLayout>
+
     </RelativeLayout>
 
 </LinearLayout>

@@ -55,7 +55,7 @@
                         android:paddingBottom="25dp"
                         android:paddingTop="35dp"
                         android:scaleType="fitXY"
-                        android:text="@string/task_title1"
+                        android:text="@string/task_title"
                         android:textAlignment="gravity"
                         android:textColor="@android:color/white"
                         android:textSize="13sp" />
