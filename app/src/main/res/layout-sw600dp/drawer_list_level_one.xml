@@ -25,7 +25,7 @@
         android:textSize="21sp"
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
-        android:drawableRight="@drawable/drawer_level_one"
+        android:drawableRight="@drawable/level_one_down"
         android:text="lksahdgiuasdsdsds" />
         </RelativeLayout>
     </com.h6ah4i.android.materialshadowninepatch.MaterialShadowContainerView>
