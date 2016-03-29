@@ -99,9 +99,9 @@ public class AdapterStarRatingLevelTwo extends BaseExpandableListAdapter {
                 .findViewById(R.id.lblListHeader);
         lblListHeader.setText(mListDataHeader.get(groupPosition).getTitle());
         if(isExpanded){
-            holder.imageView.setBackgroundResource(R.mipmap.level_two_up);
+            holder.imageView.setBackgroundResource(R.drawable.level_two_up);
         }else{
-            holder.imageView.setBackgroundResource(R.mipmap.level_two_down);
+            holder.imageView.setBackgroundResource(R.drawable.level_two_down);
         }
         return convertView;
     }

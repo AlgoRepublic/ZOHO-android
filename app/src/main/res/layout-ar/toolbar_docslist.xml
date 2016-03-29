@@ -20,7 +20,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginRight="5dp"
+            android:layout_marginEnd="5dp"
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
@@ -28,7 +28,7 @@
                 android:id="@+id/upload_files"
                 android:layout_width="40dp"
                 android:layout_height="35dp"
-                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
                 android:background="@drawable/ic_cloud_upload"
                 android:textAllCaps="false"

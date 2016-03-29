@@ -110,7 +110,7 @@
                                     android:layout_marginTop="10dp"
                                     android:adjustViewBounds="true"
                                     android:scaleType="fitXY"
-                                    android:src="@mipmap/task_progress" />
+                                    android:src="@drawable/task_progress" />
 
                                 <LinearLayout
                                     android:id="@+id/layout1"
@@ -218,7 +218,7 @@
                                     android:layout_width="15dp"
                                     android:layout_height="15dp"
                                     android:layout_margin="5dp"
-                                    android:background="@mipmap/circle_left"/>
+                                    android:background="@drawable/circle_left"/>
                             </LinearLayout>
                         </RelativeLayout>
                     </com.daimajia.swipe.SwipeLayout>

@@ -91,7 +91,7 @@
                     <!--android:scaleType="fitXY"-->
                     <!--android:adjustViewBounds="true"-->
                     <!--android:layout_height="50dp"-->
-                    <!--android:background="@mipmap/ic_listview_word"-->
+                    <!--android:background="@drawable/ic_listview_word"-->
                     <!--android:layout_margin="10dp" >-->
                     <!--</ImageView>-->
 
@@ -150,7 +150,7 @@
                         android:layout_width="15dp"
                         android:layout_height="15dp"
                         android:layout_margin="5dp"
-                        android:background="@mipmap/circle_left"/>
+                        android:background="@drawable/circle_left"/>
                 </LinearLayout>
             </RelativeLayout>
         </com.daimajia.swipe.SwipeLayout>

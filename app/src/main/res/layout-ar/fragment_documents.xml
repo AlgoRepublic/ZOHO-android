@@ -46,7 +46,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
                 android:layout_gravity="center"
-                android:src="@mipmap/trash" />
+                android:src="@drawable/trash" />
 
             <TextView
                 android:id="@+id/text8"
@@ -83,7 +83,7 @@
                 android:layout_gravity="center"
                 android:layout_marginBottom="10dp"
                 android:layout_marginTop="10dp"
-                android:background="@mipmap/task_image" />
+                android:background="@drawable/task_image" />
         </RelativeLayout>
     </RelativeLayout>
 </RelativeLayout>

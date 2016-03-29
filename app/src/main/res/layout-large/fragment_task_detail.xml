@@ -43,7 +43,7 @@
                     android:layout_width="15dp"
                     android:layout_marginLeft="15dp"
                     android:layout_toRightOf="@+id/priority_bar"
-                    android:src="@mipmap/taskdetail_icon"
+                    android:src="@drawable/taskdetail_icon"
                     android:layout_centerVertical="true"
                     android:layout_centerHorizontal="true"
                     android:layout_height="20dp" />
@@ -329,14 +329,14 @@
                     android:singleLine="true"
                     android:textSize="8dp"
                     android:layout_alignParentRight="true"
-                    android:background="@mipmap/bubble_alert_white"
+                    android:background="@drawable/bubble_alert_white"
                     android:layout_alignParentTop="true"
                     android:textColor="@color/colorBaseWrapper" />
 
                 <ImageView
                     android:id="@+id/delete1"
                     android:layout_width="25dp"
-                    android:src="@mipmap/task_comment"
+                    android:src="@drawable/task_comment"
                     android:layout_centerHorizontal="true"
                     android:layout_above="@+id/text1"
                     android:layout_height="25dp" />
@@ -379,14 +379,14 @@
                     android:singleLine="true"
                     android:textSize="8dp"
                     android:layout_alignParentRight="true"
-                    android:background="@mipmap/bubble_alert_white"
+                    android:background="@drawable/bubble_alert_white"
                     android:layout_alignParentTop="true"
                     android:textColor="@color/colorBaseWrapper" />
 
                 <ImageView
                     android:id="@+id/delete2"
                     android:layout_width="25dp"
-                    android:src="@mipmap/task_undone"
+                    android:src="@drawable/task_undone"
                     android:layout_centerHorizontal="true"
                     android:layout_above="@+id/text3"
                     android:layout_height="25dp" />
@@ -429,14 +429,14 @@
                     android:singleLine="true"
                     android:textSize="8dp"
                     android:layout_alignParentRight="true"
-                    android:background="@mipmap/bubble_alert_white"
+                    android:background="@drawable/bubble_alert_white"
                     android:layout_alignParentTop="true"
                     android:textColor="@color/colorBaseWrapper" />
 
                 <ImageView
                     android:id="@+id/delete3"
                     android:layout_width="25dp"
-                    android:src="@mipmap/sub_tasks"
+                    android:src="@drawable/sub_tasks"
                     android:layout_centerHorizontal="true"
                     android:layout_above="@+id/text6"
                     android:layout_height="25dp" />
@@ -470,7 +470,7 @@
                 android:layout_width="25dp"
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
-                android:src="@mipmap/trash"
+                android:src="@drawable/trash"
                 android:layout_gravity="center"
                 android:layout_height="25dp" />
             <TextView

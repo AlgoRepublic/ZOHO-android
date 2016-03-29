@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
     <item
         android:id="@+id/add_project"
-        android:icon="@mipmap/user_add"
+        android:icon="@drawable/user_add"
         android:orderInCategory="100"
         app:showAsAction="always"
         android:title=""

@@ -22,7 +22,6 @@ import com.algorepublic.zoho.fragments.ForumsFragment;
 import com.algorepublic.zoho.fragments.HomeFragment;
 import com.algorepublic.zoho.fragments.ProjectsFragment;
 import com.algorepublic.zoho.fragments.StarRatingFragment;
-import com.algorepublic.zoho.fragments.TaskAddUpdateFragment;
 import com.algorepublic.zoho.fragments.TasksListFragment;
 import com.algorepublic.zoho.fragments.UserFragment;
 import com.androidquery.AQuery;
@@ -46,15 +45,15 @@ public class AdapterMenuItems extends BaseAdapter{
             R.string.departments,
     };
     int[] menu_icon_white = {
-            R.mipmap.dashboard_white,
-            R.mipmap.projects_white,
-            R.mipmap.tasks_white,
-            R.mipmap.calender_white,
-            R.mipmap.document_white,
-            R.mipmap.users_white,
-            R.mipmap.forums_white,
-            R.mipmap.star_white,
-            R.mipmap.departments_white
+            R.drawable.dashboard_white,
+            R.drawable.projects_white,
+            R.drawable.tasks_white,
+            R.drawable.calender_white,
+            R.drawable.document_white,
+            R.drawable.users_white,
+            R.drawable.forums_white,
+            R.drawable.star_white,
+            R.drawable.departments_white
     };
     public AdapterMenuItems(Context context) {
         this.ctx = context;
@@ -97,12 +96,13 @@ public class AdapterMenuItems extends BaseAdapter{
             public void onClick(View v) {
                 for (int loop = 0; loop < menu_names.length; loop++) {
                     if (loop == position) {
-                        aq.id(R.id.checkbox).getCheckBox().setAlpha(0.7f);
+                        aq.id(R.id.checkbox).getCheckBox().animate().alpha(0.7f);
+
                     } else {
                         View view = getViewByPosition(loop, MainActivity.gridView);
                         AQuery aQuery = new AQuery(view);
                         aQuery.id(R.id.checkbox).checked(false);
-                        aQuery.id(R.id.checkbox).getCheckBox().setAlpha(1.0f);
+                        aQuery.id(R.id.checkbox).getCheckBox().animate().alpha(1.0f);
                     }
                 }
                 CallFragment(position);

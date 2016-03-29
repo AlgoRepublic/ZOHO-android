@@ -35,7 +35,7 @@
                 android:layout_width="19dp"
                 android:layout_height="19dp"
                 android:id="@+id/imageViewlevelthree"
-                android:background="@drawable/drawer_level_three"
+                android:background="@drawable/level_three_down"
                 android:layout_alignParentRight="true"
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"

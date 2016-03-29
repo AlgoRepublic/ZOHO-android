@@ -126,9 +126,9 @@ public class AdapterStarRatingLevelThree extends BaseExpandableListAdapter {
                 .findViewById(R.id.lblListHeader);
         lblListHeader.setText(mListDataHeader.get(groupPosition).getTitle());
         if(isExpanded){
-            holder.imageView.setBackgroundResource(R.mipmap.level_three_up);
+            holder.imageView.setBackgroundResource(R.drawable.level_three_up);
         }else{
-            holder.imageView.setBackgroundResource(R.mipmap.level_three_down);
+            holder.imageView.setBackgroundResource(R.drawable.level_three_down);
         }
         return convertView;
     }

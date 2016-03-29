@@ -62,6 +62,7 @@
                 android:background="@color/colorContentWrapper"
                 android:text="Add"
                 android:textAllCaps="false"
+                android:gravity="center"
                 android:textColor="@android:color/white"
                 android:textSize="11sp"
                 android:textStyle="bold" />

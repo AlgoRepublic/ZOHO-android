@@ -77,7 +77,6 @@ dependencies {
     compile 'com.mikhaellopez:circularimageview:3.0.2'
     compile 'com.h6ah4i.android.materialshadowninepatch:materialshadowninepatch:0.6.5'
     compile 'com.rengwuxian.materialedittext:library:2.1.4'
-  //  compile 'com.google.android.gms:play-services-appindexing:8.4.0'
     compile 'com.daimajia.swipelayout:library:1.2.0@aar'
     compile 'com.daimajia.androidanimations:library:1.1.2@aar'
     compile 'com.daimajia.easing:library:1.0.1@aar'
