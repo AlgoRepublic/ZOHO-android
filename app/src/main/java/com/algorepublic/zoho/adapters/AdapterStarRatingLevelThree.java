@@ -12,6 +12,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.SeekBar;
@@ -36,6 +37,7 @@ public class AdapterStarRatingLevelThree extends BaseExpandableListAdapter {
     public static StarRatingService service;
     private final Context mContext;
     LayoutInflater layoutInflater;
+    ImageView imageView;
     private final List<StarRatingHeadsLevelThree> mListDataHeader;
 
     public AdapterStarRatingLevelThree(Context mContext, List<StarRatingHeadsLevelThree> mListDataHeader) {
@@ -45,6 +47,7 @@ public class AdapterStarRatingLevelThree extends BaseExpandableListAdapter {
         this.mListDataHeader = new ArrayList<>();
         this.mListDataHeader.addAll(mListDataHeader);
     }
+
 
     @Override
     public void onGroupCollapsed(int groupPosition) {
@@ -107,18 +110,31 @@ public class AdapterStarRatingLevelThree extends BaseExpandableListAdapter {
     @Override
     public View getGroupView(int groupPosition, boolean isExpanded,
                              View convertView, ViewGroup parent) {
+        ViewHolder holder;
         if (convertView == null) {
+            holder = new ViewHolder();
             LayoutInflater layoutInflater = (LayoutInflater) this.mContext
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = layoutInflater.inflate(R.layout.drawer_list_level_three, parent, false);
+            holder.imageView = (ImageView) convertView
+                    .findViewById(R.id.imageViewlevelthree);
+            convertView.setTag(holder);
+        }else{
+            holder = (ViewHolder) convertView.getTag();
         }
         TextView lblListHeader = (TextView) convertView
                 .findViewById(R.id.lblListHeader);
-
         lblListHeader.setText(mListDataHeader.get(groupPosition).getTitle());
+        if(isExpanded){
+            holder.imageView.setBackgroundResource(R.drawable.level_three_up);
+        }else{
+            holder.imageView.setBackgroundResource(R.drawable.level_three_down);
+        }
         return convertView;
     }
-
+    static class ViewHolder {
+        private ImageView imageView;
+    }
     @Override
     public boolean hasStableIds() {
         return true;

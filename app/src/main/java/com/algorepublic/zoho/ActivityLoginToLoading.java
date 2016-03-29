@@ -12,6 +12,7 @@ import com.algorepublic.zoho.utils.BaseClass;
 public class ActivityLoginToLoading extends BaseActivity{
 
     BaseClass baseClass;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,6 +21,7 @@ public class ActivityLoginToLoading extends BaseActivity{
             setTheme(R.style.AppThemeBlue);
         else
             setTheme(R.style.AppTheme);
+
         setContentView(R.layout.activity_login_to_loading);
         callFragment(R.id.logintoloading_container, LoginFragment.newInstance(),"LoginFragment");
     }

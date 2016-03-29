@@ -26,7 +26,7 @@
         android:layout_height="20dp"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
-        android:src="@drawable/drawer_level_one" />
+        android:src="@drawable/level_one_down" />
 </RelativeLayout>
 
 
