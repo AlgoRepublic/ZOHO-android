@@ -25,8 +25,19 @@
         android:textSize="17sp"
         android:paddingTop="5dp"
         android:paddingBottom="5dp"
-        android:drawableRight="@drawable/drawer_level_one"
         android:text="lksahdgiuasdsdsds" />
+
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:id="@+id/imageViewlevelone"
+            android:background="@drawable/drawer_level_one"
+            android:layout_alignParentRight="true"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="3dp"
+
+            />
         </RelativeLayout>
     </com.h6ah4i.android.materialshadowninepatch.MaterialShadowContainerView>
 

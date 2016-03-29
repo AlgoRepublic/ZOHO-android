@@ -186,7 +186,7 @@ public class PieView extends View {
             sth = -1;
         }
         float x = (float)(mViewHeight/2 + Math.cos(Math.toRadians(-angel)) * pieRadius/2);
-        float y = (float)(mViewHeight/2 + sth * Math.abs(Math.sin(Math.toRadians(-angel))) * pieRadius/2);
+        float y = (float)(mViewHeight/2 + sth * Math.abs(Math.sin(Math.toRadians(-angel))) * pieRadius/3);
         canvas.drawText(pieHelper.getPercentStr(), x, y, textPaint);
     }
 
@@ -197,9 +197,11 @@ public class PieView extends View {
         if(angel%360 > 180 && angel%360 < 360){
             sth = -1;
         }
+        Rect bounds = new Rect();
+        textPaint.getTextBounds(pieHelper.getTitle(), 0, 2, bounds);
         float x = (float)(mViewHeight/2 + Math.cos(Math.toRadians(-angel)) * pieRadius/2);
         float y = (float)(mViewHeight/2 + sth * Math.abs(Math.sin(Math.toRadians(-angel))) * pieRadius/3);
-        canvas.drawText(pieHelper.getTitle(), x, y, textPaint);
+        canvas.drawText(pieHelper.getTitle(), x, y+bounds.height()+5, textPaint);
     }
 
     @Override

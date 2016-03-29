@@ -53,19 +53,31 @@ public class AllProjectsByUserModel {
         public Integer projectID;
 
         @SerializedName("TotlTasksNo")
-        public String totalTasks;
+        public Integer totalTasks;
 
         @SerializedName("UsersCount")
         public String usersCount;
 
         @SerializedName("TotalMilestonesNo")
-        public String toalMilestones;
+        public Integer toalMilestones;
 
         @SerializedName("IsDeleted")
         public boolean IsDeleted;
 
         @SerializedName("Isprivate")
         public boolean Isprivate;
+
+        @SerializedName("CompletedTasksNo")
+        public Integer completedTasksNo;
+
+        @SerializedName("CompletedTaskList")
+        public Integer completedTaskList;
+
+        @SerializedName("CompletedMilestonesNo")
+        public Integer completedMilestonesNo;
+
+        @SerializedName("TotalTaskList")
+        public Integer totalTaskList;
     }
 
     @SerializedName("ResponseCode")

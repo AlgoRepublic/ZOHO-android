@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:drawable="@mipmap/level_three_up_white"
+    <item android:drawable="@mipmap/level_three_up"
         android:state_expanded="true" />
-    <item android:drawable="@mipmap/level_three_down_white" />
+    <item android:drawable="@mipmap/level_three_down" />
 </selector>
