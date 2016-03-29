@@ -11,7 +11,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -28,6 +27,7 @@ import com.algorepublic.zoho.adapters.TasksList;
 import com.algorepublic.zoho.services.CallBack;
 import com.algorepublic.zoho.services.TaskListService;
 import com.algorepublic.zoho.utils.BaseClass;
+import com.algorepublic.zoho.utils.LocaleHelper;
 import com.androidquery.AQuery;
 import com.flyco.animation.BounceEnter.BounceLeftEnter;
 import com.flyco.animation.SlideExit.SlideRightExit;
@@ -226,10 +226,7 @@ public class CalendarFragment extends BaseFragment implements CalendarPickerCont
         // Get a reference for the week view in the layout.
         calendarView = (AgendaCalendarView) aq.id(R.id.agenda_calendar_view).getView();
 
-        if(true) // update this check as language button goes functional
-         locale = new Locale("ar");
-        else
-            locale = Locale.US;
+        locale = new Locale(LocaleHelper.getLanguage(getContext()));
         Calendar minDate = Calendar.getInstance();
         Calendar maxDate = Calendar.getInstance();
 

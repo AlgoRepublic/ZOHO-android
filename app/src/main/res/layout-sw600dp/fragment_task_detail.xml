@@ -4,6 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:clickable="true"
     tools:context=".fragments.TaskDetailFragment"
     android:background="@color/colorBaseWrapper">
     <RelativeLayout
@@ -15,52 +16,57 @@
             android:layout_height="wrap_content"
             app:ms9_useAmbientShadow="true"
             app:ms9_affectsDisplayedPosition="true"
-            app:ms9_shadowTranslationZ="1dp"
-            app:ms9_shadowElevation="2dp">
+            app:ms9_shadowTranslationZ="2dp"
+            app:ms9_shadowElevation="4dp">
             >
             <RelativeLayout
                 android:id="@+id/layout_tasktitle"
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:layout_marginTop="20dp"
+                android:layout_height="60dp"
+                android:layout_marginTop="40dp"
+                android:layout_marginBottom="10dp"
                 android:background="@color/colorContentWrapper">
+
+
                 <View
                     android:id="@+id/priority_bar"
-                    android:layout_width="4dp"
-                    android:layout_marginRight="3dp"
-                    android:layout_marginEnd="3dp"
+                    android:layout_width="8dp"
+                    android:layout_marginRight="6dp"
                     android:layout_alignBottom="@+id/layout1"
                     android:layout_alignTop="@+id/layout1"
                     android:background="@drawable/roundable_prioritybar"
                     android:layout_height="match_parent"
-                    android:layout_alignParentStart="true"
                     android:layout_alignParentLeft="true">
                 </View>
                 <ImageView
                     android:id="@+id/icon"
-                    android:layout_width="15dp"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginStart="15dp"
+                    android:layout_width="30dp"
+                    android:layout_marginLeft="30dp"
                     android:layout_toRightOf="@+id/priority_bar"
-                    android:layout_toEndOf="@id/priority_bar"
                     android:src="@drawable/taskdetail_icon"
                     android:layout_centerVertical="true"
                     android:layout_centerHorizontal="true"
-                    android:layout_height="20dp" />
+                    android:layout_height="40dp" />
                 <TextView
                     android:id="@+id/task_name"
                     android:layout_width="fill_parent"
                     android:text="@string/task_name"
                     android:layout_height="wrap_content"
-                    android:textSize="14sp"
-                    android:gravity="start"
-                    android:layout_marginLeft="50dp"
-                    android:layout_marginStart="50dp"
+                    android:textSize="20sp"
+                    android:singleLine="true"
+                    android:ellipsize="end"
+                    android:gravity="left"
+                    android:layout_marginLeft="100dp"
                     android:layout_centerVertical="true"
                     android:textStyle="bold"
                     android:textColor="@color/white"
                     />
+
             </RelativeLayout>
+            <View
+                android:layout_width="match_parent"
+                android:background="@android:drawable/dialog_holo_light_frame"
+                android:layout_height="2dp"/>
         </com.h6ah4i.android.materialshadowninepatch.MaterialShadowContainerView>
     </RelativeLayout>
     <ScrollView
@@ -71,8 +77,8 @@
         android:layout_height="match_parent">
         <RelativeLayout
             android:id="@+id/parent1"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="60dp"
             android:layout_above="@+id/layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -83,17 +89,15 @@
                 android:layout_height="match_parent">
                 <RelativeLayout
                     android:id="@+id/layout3"
-                    android:paddingTop="15dp"
-                    android:paddingBottom="15dp"
+                    android:paddingTop="30dp"
+                    android:paddingBottom="30dp"
                     android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
+                    android:layout_marginRight="40dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                     <RelativeLayout
                         android:id="@+id/header_layout1"
                         android:layout_width="match_parent"
-                        android:layout_marginRight="10dp"
-                        android:layout_marginEnd="10dp"
                         android:layout_alignParentTop="true"
                         android:layout_height="wrap_content">
                         <TextView
@@ -101,47 +105,40 @@
                             android:layout_width="wrap_content"
                             android:text="@string/task_startdate"
                             android:layout_height="wrap_content"
-                            android:textSize="12sp"
+                            android:textSize="18sp"
                             android:textStyle="bold"
                             android:layout_alignParentLeft="true"
-                            android:layout_alignParentStart="true"
-                            android:textColor="@color/colorBaseHeader"
                             />
                         <TextView
                             android:id="@+id/start_date"
                             android:layout_width="wrap_content"
                             android:text="dsds"
-                            android:paddingLeft="3dp"
-                            android:paddingStart="3dp"
+                            android:paddingLeft="10dp"
                             android:layout_height="wrap_content"
-                            android:textSize="12sp"
+                            android:textSize="18sp"
                             android:layout_toRightOf="@+id/text2"
-                            android:layout_toEndOf="@+id/text2"
-                            android:textColor="@color/colorBaseHeader"
+
                             />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:text="@string/task_duedate"
                             android:layout_height="wrap_content"
-                            android:textSize="12sp"
+                            android:textSize="18sp"
                             android:textStyle="bold"
                             android:layout_toLeftOf="@+id/end_date"
-                            android:layout_toStartOf="@+id/end_date"
-                            android:textColor="@color/colorBaseHeader"
+
                             />
                         <TextView
                             android:id="@+id/end_date"
                             android:layout_width="wrap_content"
                             android:text="dsds"
-                            android:paddingLeft="3dp"
-                            android:paddingStart="3dp"
+                            android:paddingLeft="10dp"
                             android:layout_height="wrap_content"
-                            android:textSize="13sp"
+                            android:textSize="18sp"
                             android:layout_alignParentRight="true"
-                            android:layout_alignParentEnd="true"
                             android:layout_toLeftOf="@+id/textView"
-                            android:textColor="@color/colorBaseHeader"
+
                             />
 
                     </RelativeLayout>
@@ -149,88 +146,90 @@
                         android:id="@+id/header_layout2"
                         android:layout_below="@+id/header_layout1"
                         android:layout_width="match_parent"
-                        android:layout_marginRight="25dp"
-                        android:layout_marginEnd="25dp"
+                        android:layout_marginRight="50dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp">
+                        android:layout_marginTop="20dp">
                         <TextView
                             android:layout_width="wrap_content"
                             android:text="@string/category"
                             android:layout_height="wrap_content"
-                            android:textSize="12sp"
+                            android:textSize="18sp"
                             android:textStyle="bold"
                             android:layout_toLeftOf="@+id/textView"
-                            android:layout_toStartOf="@+id/textView"
-                            android:textColor="@color/colorBaseHeader"
+
                             />
                         <TextView
                             android:id="@+id/category"
                             android:layout_width="wrap_content"
                             android:text="dsds"
-                            android:paddingLeft="3dp"
-                            android:paddingStart="3dp"
+                            android:paddingLeft="6dp"
                             android:layout_height="wrap_content"
-                            android:textSize="12sp"
+                            android:textSize="18sp"
                             android:layout_toLeftOf="@+id/textView"
-                            android:layout_toStartOf="@+id/textView"
-                            android:textColor="@color/colorBaseHeader"
+
                             />
                     </LinearLayout>
                     <LinearLayout
                         android:id="@+id/header_layout3"
                         android:layout_below="@+id/header_layout2"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="20dp"
                         android:orientation="vertical">
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_weight="1"
                             android:text="@string/task_details"
                             android:layout_height="wrap_content"
-                            android:textSize="12sp"
+                            android:textSize="18sp"
                             android:textStyle="bold"
                             android:layout_toLeftOf="@+id/textView"
-                            android:layout_toStartOf="@+id/textView"
-                            android:textColor="@color/colorBaseHeader"
+
                             />
                         <TextView
                             android:id="@+id/task_desc"
                             android:layout_width="match_parent"
                             android:layout_below="@+id/task_name"
                             android:layout_height="wrap_content"
-                            android:textSize="12sp"
-                            android:lines="4"
+                            android:textSize="18sp"
                             android:ellipsize="end"
-                            android:textColor="@color/colorBaseHeader"
+
                             />
                     </LinearLayout>
                     <LinearLayout
                         android:id="@+id/header_layout4"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:weightSum="3"
-                        android:layout_marginTop="10dp"
+                        android:layout_marginTop="20dp"
                         android:layout_below="@+id/header_layout3"
                         android:orientation="horizontal">
                         <TextView
-                            android:layout_width="0dp"
-                            android:layout_weight="1"
+                            android:layout_width="wrap_content"
                             android:text="@string/task_users"
                             android:layout_height="wrap_content"
-                            android:textSize="12sp"
+                            android:textSize="18sp"
                             android:textStyle="bold"
                             android:layout_toLeftOf="@+id/textView"
-                            android:layout_toStartOf="@+id/textView"
-                            android:textColor="@color/colorBaseHeader"
-                            />
+                            android:id="@+id/users"
 
+                            />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="18sp"
+                            android:layout_marginLeft="10dp"
+                            android:layout_toRightOf="@+id/users"
+                            android:textColor="@color/colorBaseHeader"
+                            android:textStyle="bold"
+                            android:id="@+id/user_counter"
+
+                            />
                     </LinearLayout>
                     <org.lucasr.twowayview.widget.TwoWayView
                         android:id="@+id/task_assignee"
                         android:layout_below="@+id/header_layout4"
                         android:layout_width="match_parent"
-                        android:layout_height="40dp"
+                        android:layout_height="80dp"
                         app:twowayview_layoutManager="ListLayoutManager"
                         android:orientation="horizontal">
                     </org.lucasr.twowayview.widget.TwoWayView>
@@ -245,54 +244,45 @@
                         android:layout_width="wrap_content"
                         android:text="@string/project_status"
                         android:layout_height="wrap_content"
-                        android:textSize="12sp"
+                        android:textSize="18sp"
                         android:textStyle="bold"
                         android:layout_marginLeft="20dp"
-                        android:layout_marginRight="20dp"
+                        android:layout_marginRight="40dp"
                         android:layout_toLeftOf="@+id/textView"
-                        android:layout_toStartOf="@+id/textView"
-                        android:textColor="@color/colorBaseHeader"
+
                         />
 
                     <RelativeLayout
                         android:layout_below="@+id/active_archive_status"
                         android:id="@+id/layout4"
                         android:layout_width="match_parent"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
                         android:layout_height="wrap_content">
 
                         <SeekBar
-                            style="@style/tallerBarStyle"
                             android:id="@+id/seekBar"
+                            android:padding="25dp"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_centerVertical="true"
-                            android:thumb="@drawable/thumb_image"
-                            android:thumbTint="@color/colorBaseHeader"
-                            android:progressTint="@color/colorBaseHeader"
-                            android:foreground="@color/colorBaseHeader"
-                            android:max="100"
-                         >
+                            android:layout_height="match_parent"
+                            android:max="100">
                         </SeekBar>
                     </RelativeLayout>
 
                     <com.github.lzyzsd.circleprogress.DonutProgress
-                        android:layout_marginLeft="50dp"
+                        android:layout_marginLeft="100dp"
                         android:id="@+id/circularprogressBar"
-                        android:layout_width="120dp"
-                        android:layout_height="120dp"
+                        android:layout_width="200dp"
+                        android:layout_height="200dp"
                         app:max="100"
                         android:layout_centerHorizontal="true"
-                        android:layout_margin="5dp"
+                        android:layout_margin="10dp"
                         app:wheel_size="8"
-                        app:donut_text_size="20dp"
+                        app:donut_text_size="28dp"
                         android:layout_below="@+id/layout4"
                         android:layout_marginTop="10dp"
                         android:layout_centerInParent="true"
                         app:donut_text_color="@color/colorBaseHeader"
-                        app:donut_finished_stroke_width="5dp"
-                        app:donut_unfinished_stroke_width="5dp"
+                        app:donut_finished_stroke_width="7dp"
+                        app:donut_unfinished_stroke_width="7dp"
                         app:donut_finished_color="@color/colorBaseHeader"/>
 
                 </RelativeLayout>
@@ -303,10 +293,10 @@
     <LinearLayout
         android:id="@+id/parent2"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="100dp"
         android:weightSum="4.72"
         android:layout_alignParentBottom="true"
-        android:background="@drawable/topborder"
+        android:background="@color/colorContentWrapper"
         android:orientation="horizontal">
         <RelativeLayout
             android:layout_width="0dp"
@@ -317,41 +307,39 @@
             android:layout_height="match_parent">
             <RelativeLayout
                 android:id="@+id/comment"
-                android:layout_width="60dp"
+                android:layout_width="100dp"
                 android:layout_centerHorizontal="true"
                 android:layout_height="match_parent">
                 <TextView
-                    android:id="@+id/notify_alert1"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:text="112"
+                    android:id="@+id/comment_count"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:text="0"
                     android:gravity="center"
                     android:singleLine="true"
-
-                    android:textSize="8dp"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
+                    android:textSize="12sp"
+                    android:layout_alignParentRight="true"
                     android:background="@drawable/bubble_alert_white"
                     android:layout_alignParentTop="true"
                     android:textColor="@color/colorBaseWrapper" />
 
                 <ImageView
                     android:id="@+id/delete1"
-                    android:layout_width="25dp"
+                    android:layout_width="40dp"
                     android:src="@drawable/task_comment"
                     android:layout_centerHorizontal="true"
                     android:layout_above="@+id/text1"
-                    android:layout_height="25dp" />
+                    android:layout_height="40dp" />
 
                 <TextView
                     android:id="@+id/text1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Comments"
+                    android:text="@string/comments"
                     android:gravity="center"
                     android:layout_alignParentBottom="true"
                     android:textColor="@color/white"
-                    android:textSize="10sp"
+                    android:textSize="16sp"
                     android:layout_marginBottom="3dp"/>
             </RelativeLayout>
 
@@ -369,41 +357,39 @@
             android:layout_marginRight="2dp"
             android:layout_height="match_parent">
             <RelativeLayout
-                android:layout_width="53dp"
+                android:layout_width="100dp"
                 android:layout_centerHorizontal="true"
                 android:layout_height="match_parent">
                 <TextView
-                    android:id="@+id/notify_alert2"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:text="112"
+                    android:id="@+id/docs_count"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:text="0"
                     android:gravity="center"
                     android:singleLine="true"
-
-                    android:textSize="8dp"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
+                    android:textSize="12sp"
+                    android:layout_alignParentRight="true"
                     android:background="@drawable/bubble_alert_white"
                     android:layout_alignParentTop="true"
                     android:textColor="@color/colorBaseWrapper" />
 
                 <ImageView
                     android:id="@+id/delete2"
-                    android:layout_width="25dp"
+                    android:layout_width="40dp"
                     android:src="@drawable/task_undone"
                     android:layout_centerHorizontal="true"
                     android:layout_above="@+id/text3"
-                    android:layout_height="25dp" />
+                    android:layout_height="40dp" />
 
                 <TextView
                     android:id="@+id/text3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Documents"
+                    android:text="@string/documents"
                     android:gravity="center"
                     android:layout_alignParentBottom="true"
                     android:textColor="@color/white"
-                    android:textSize="10sp"
+                    android:textSize="16sp"
                     android:layout_marginBottom="3dp"/>
             </RelativeLayout>
 
@@ -413,7 +399,6 @@
             android:layout_weight=".03"
             android:background="@color/white"/>
         <RelativeLayout
-            android:id="@+id/subtask"
             android:layout_width="0dp"
             android:layout_weight=".9"
             android:layout_gravity="center"
@@ -421,41 +406,40 @@
             android:layout_marginRight="2dp"
             android:layout_height="match_parent">
             <RelativeLayout
-                android:layout_width="53dp"
+                android:id="@+id/subtask"
+                android:layout_width="100dp"
                 android:layout_centerHorizontal="true"
                 android:layout_height="match_parent">
                 <TextView
-                    android:id="@+id/notify_alert3"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:text="112"
+                    android:id="@+id/subtask_count"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:text="0"
                     android:gravity="center"
                     android:singleLine="true"
-
-                    android:textSize="8dp"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentLeft="true"
+                    android:textSize="12sp"
+                    android:layout_alignParentRight="true"
                     android:background="@drawable/bubble_alert_white"
                     android:layout_alignParentTop="true"
                     android:textColor="@color/colorBaseWrapper" />
 
                 <ImageView
                     android:id="@+id/delete3"
-                    android:layout_width="25dp"
+                    android:layout_width="50dp"
                     android:src="@drawable/sub_tasks"
                     android:layout_centerHorizontal="true"
                     android:layout_above="@+id/text6"
-                    android:layout_height="25dp" />
+                    android:layout_height="50dp" />
 
                 <TextView
                     android:id="@+id/text6"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Sub tasks"
+                    android:text="@string/sub_tasks"
                     android:gravity="center"
                     android:layout_alignParentBottom="true"
                     android:textColor="@color/white"
-                    android:textSize="10sp"
+                    android:textSize="16sp"
                     android:layout_marginBottom="3dp"/>
             </RelativeLayout>
 
@@ -467,27 +451,27 @@
         <RelativeLayout
             android:id="@+id/delete"
             android:layout_width="0dp"
-            android:layout_weight=".7"
+            android:layout_weight=".8"
             android:layout_gravity="center"
             android:layout_marginLeft="2dp"
             android:layout_marginRight="2dp"
             android:layout_height="match_parent">
             <ImageView
-                android:layout_width="25dp"
+                android:layout_width="47dp"
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
                 android:src="@drawable/trash"
                 android:layout_gravity="center"
-                android:layout_height="25dp" />
+                android:layout_height="47dp" />
             <TextView
                 android:id="@+id/text8"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Delete"
+                android:text="@string/delete"
                 android:gravity="center"
                 android:layout_alignParentBottom="true"
                 android:textColor="@color/white"
-                android:textSize="10sp"
+                android:textSize="16sp"
                 android:layout_marginBottom="3dp"/>
         </RelativeLayout>
         <View android:layout_height="fill_parent"
@@ -497,13 +481,13 @@
         <TextView
             android:id="@+id/mark_as_done"
             android:layout_width="0dp"
-            android:text="Mark as done"
-            android:padding="2dp"
+            android:text="@string/task_as_done"
+            android:padding="4dp"
             android:gravity="center"
-            android:layout_weight="1.2"
+            android:layout_weight="1.1"
             android:layout_gravity="center"
             android:layout_height="match_parent"
-            android:textSize="12sp"
+            android:textSize="18sp"
             android:textColor="@android:color/white"
             />
     </LinearLayout>
