@@ -85,8 +85,8 @@
                     android:id="@+id/layout3"
                     android:paddingTop="15dp"
                     android:paddingBottom="15dp"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="20dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                     <RelativeLayout
@@ -200,9 +200,7 @@
                             android:layout_below="@+id/task_name"
                             android:layout_height="wrap_content"
                             android:textSize="12sp"
-                            android:lines="4"
                             android:ellipsize="end"
-                            android:textColor="@color/colorBaseHeader"
                             />
                     </LinearLayout>
                     <LinearLayout
@@ -247,8 +245,8 @@
                         android:layout_height="wrap_content"
                         android:textSize="12sp"
                         android:textStyle="bold"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginRight="20dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="20dp"
                         android:layout_toLeftOf="@+id/textView"
                         android:layout_toStartOf="@+id/textView"
                         android:textColor="@color/colorBaseHeader"
@@ -258,23 +256,15 @@
                         android:layout_below="@+id/active_archive_status"
                         android:id="@+id/layout4"
                         android:layout_width="match_parent"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
+
                         android:layout_height="wrap_content">
 
                         <SeekBar
-                            style="@style/tallerBarStyle"
                             android:id="@+id/seekBar"
+                            android:padding="18dp"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_centerVertical="true"
-                            android:thumb="@drawable/thumb_image"
-                            android:thumbTint="@color/colorBaseHeader"
-                            android:progressTint="@color/colorBaseHeader"
-                            android:foreground="@color/colorBaseHeader"
-                            android:max="100"
-                         >
-                        </SeekBar>
+                            android:layout_height="match_parent"
+                            android:max="100"/>
                     </RelativeLayout>
 
                     <com.github.lzyzsd.circleprogress.DonutProgress
