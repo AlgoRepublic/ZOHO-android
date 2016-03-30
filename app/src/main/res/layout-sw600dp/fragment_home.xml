@@ -9,10 +9,10 @@
     <android.support.design.widget.TabLayout
         android:id="@+id/tabs"
         android:layout_width="match_parent"
-        android:layout_height="110dp"
+        android:layout_height="55dp"
         app:tabGravity="fill"
         app:tabMode="fixed"
-        app:tabIndicatorHeight="10dp"
+        app:tabIndicatorHeight="7dp"
         />
 
 

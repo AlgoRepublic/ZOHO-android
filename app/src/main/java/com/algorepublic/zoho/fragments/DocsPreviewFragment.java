@@ -80,6 +80,7 @@ public class DocsPreviewFragment extends BaseFragment {
     }
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        menu.clear();
         inflater.inflate(R.menu.menu_board, menu);
         super.onCreateOptionsMenu(menu, inflater);
     }
@@ -115,7 +116,7 @@ public class DocsPreviewFragment extends BaseFragment {
         adapter = new AdapterDocsComments(getActivity());
         listView.setAdapter(adapter);
         aq.id(R.id.user_image).image(Constants.Image_URL + baseClass.getProfileImageID()
-               + "." + BaseClass.getExtensionType(
+                + "." + BaseClass.getExtensionType(
                 baseClass.getProfileImage()));
         aq.id(R.id.user_name).text(docObject.getFileName());
         aq.id(R.id.doc_title).text(docObject.getFileName());
@@ -169,6 +170,8 @@ public class DocsPreviewFragment extends BaseFragment {
     public void downloadFile(String url, String title, String extention) {
         Log.e("Url",url);
         Uri Download_Uri = Uri.parse(url);
+        DownloadManager downloadManager = (DownloadManager) getActivity()
+                .getSystemService(Context.DOWNLOAD_SERVICE);
         DownloadManager.Request request = new DownloadManager.Request(Download_Uri);
 
         //Restrict the types of networks over which this download may proceed.
@@ -182,7 +185,9 @@ public class DocsPreviewFragment extends BaseFragment {
         //Set the local destination for the downloaded file to a path within the application's external files directory
         request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, title + System.currentTimeMillis() + extention);
         request.allowScanningByMediaScanner();
-        request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+        request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE
+                | DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+        downloadManager.enqueue(request);
     }
     public void UpdateComment(Object caller, Object model){
         GeneralModel.getInstance().setList((GeneralModel) model);
@@ -233,14 +238,13 @@ public class DocsPreviewFragment extends BaseFragment {
         CreateCommentModel.getInstance().setList((CreateCommentModel) model);
         if (CreateCommentModel.getInstance().responseCode ==100){
             Snackbar.make(getView(), "Comment Added", Snackbar.LENGTH_SHORT).show();
-            aq.id(R.id.comment_user).text("");
             TaskComments taskComments = new TaskComments();
             taskComments.setCommentID(CreateCommentModel.getInstance().responseObject.Id);
             taskComments.setComment(CreateCommentModel.getInstance().responseObject.message);
             taskComments.setDateTime(GetDateTimeComment(DateMilli(CreateCommentModel.getInstance().responseObject.updatedAt)));
-            taskComments.setUserName(CreateCommentModel.getInstance().responseObject.userObject.firstName);
-            taskComments.setUserImagePath(CreateCommentModel.getInstance().responseObject.userObject.profileImagePath);
-            taskComments.setUserImageID(CreateCommentModel.getInstance().responseObject.userObject.profilePictureID);
+            taskComments.setUserName(baseClass.getFirstName());
+            taskComments.setUserImagePath(baseClass.getProfileImage());
+            taskComments.setUserImageID(baseClass.getProfileImageID());
             arrayList.add(taskComments);
             adapter.notifyDataSetChanged();
             aq.id(R.id.response_alert).visibility(View.GONE);
@@ -259,5 +263,7 @@ public class DocsPreviewFragment extends BaseFragment {
         }
         service.createDocComments(Integer.toString(docObject.getID()), comment, baseClass.getUserId(), false,
                 new CallBack(DocsPreviewFragment.this, "CreateComment"));
+        aq.id(R.id.comment_user).text("");
+        baseClass.hideKeyPad(getView());
     }
 }

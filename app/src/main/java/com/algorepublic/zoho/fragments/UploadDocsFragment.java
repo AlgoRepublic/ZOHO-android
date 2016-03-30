@@ -348,7 +348,11 @@ public class UploadDocsFragment extends BaseFragment implements GoogleApiClient.
                     }
                     Metadata metadata = result.getMetadata();
                     ArrayList<String> passed = new ArrayList<>();
-                    passed.add(metadata.getOriginalFilename());
+                 if(metadata.getOriginalFilename()== null){
+                     passed.add("GoogleDrive");
+                    }else {
+                     passed.add(metadata.getOriginalFilename());
+                 }
                     new DownloadFile().execute(passed);
                 }
             };
@@ -396,21 +400,17 @@ public class UploadDocsFragment extends BaseFragment implements GoogleApiClient.
 
 
     private void checkFileLenght(File file) {
-    showFileInList(file, "", -1, file.getName(), false);
-        Log.e("File",file.getName());
+    showFileInList(file, "", -1, file.getName());
     }
 
-    private void showFileInList(File file,String ApiUrl,Integer ID,String name,boolean IsDeleted) {
-        if(IsDeleted== false) {
-            AttachmentList attachmentList = new AttachmentList();
-            attachmentList.setFileID(ID);
-            attachmentList.setFileName(name);
-            attachmentList.setFileUrl(ApiUrl);
-            attachmentList.setFile(file);
-            attachmentList.setIsDeleted(IsDeleted);
-            filesList.add(attachmentList);
-            adapter.notifyDataSetChanged();
-        }
+    private void showFileInList(File file,String ApiUrl,Integer ID,String name) {
+        AttachmentList attachmentList = new AttachmentList();
+        attachmentList.setFileID(ID);
+        attachmentList.setFileName(name);
+        attachmentList.setFileUrl(ApiUrl);
+        attachmentList.setFile(file);
+        filesList.add(attachmentList);
+        adapter.notifyDataSetChanged();
     }
 
     public void MaterialAlertDialog() {

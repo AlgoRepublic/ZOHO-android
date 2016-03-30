@@ -59,6 +59,7 @@
             <intent-filter>
                 <action android:name="com.google.android.apps.drive.DRIVE_OPEN" />
                 <data android:mimeType="application/vnd.google-apps.drive-sdk.1234567890" />
+                <data android:mimeType="application/vnd.google-apps" />
                 <data android:mimeType="application/*" />
             </intent-filter>
 

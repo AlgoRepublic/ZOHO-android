@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.algorepublic.zoho.Models.FeedsModel;
 import com.algorepublic.zoho.Models.ForumsModel;
 import com.algorepublic.zoho.R;
+import com.algorepublic.zoho.adapters.AdapterFeeds;
 import com.algorepublic.zoho.adapters.AdapterForumsList;
 import com.algorepublic.zoho.services.CallBack;
 import com.algorepublic.zoho.services.DashBoardService;
@@ -86,7 +87,7 @@ public class FeedsFragment extends BaseFragment{
         aq.id(R.id.alertMessage).text("No Forums");
         if (FeedsModel.getInstance().responseObject.size()!=0) {
             aq.id(R.id.response_alert).visibility(View.GONE);
-            aq.id(R.id.forums_list).adapter(new AdapterForumsList(getActivity()));
+            aq.id(R.id.forums_list).adapter(new AdapterFeeds(getActivity()));
         }else {
             aq.id(R.id.response_alert).visibility(View.VISIBLE);
             Snackbar.make(getView(), getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();

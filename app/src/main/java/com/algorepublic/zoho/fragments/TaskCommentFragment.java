@@ -171,11 +171,12 @@ public class TaskCommentFragment extends BaseFragment {
             taskComments.setCommentID(CreateCommentModel.getInstance().responseObject.Id);
             taskComments.setComment(CreateCommentModel.getInstance().responseObject.message);
             taskComments.setDateTime(GetDateTimeComment(DateMilli(CreateCommentModel.getInstance().responseObject.updatedAt)));
-            taskComments.setUserName(CreateCommentModel.getInstance().responseObject.userObject.firstName);
-            taskComments.setUserImagePath(CreateCommentModel.getInstance().responseObject.userObject.profileImagePath);
-            taskComments.setUserImageID(CreateCommentModel.getInstance().responseObject.userObject.profilePictureID);
+            taskComments.setUserName(baseClass.getFirstName());
+            taskComments.setUserImagePath(baseClass.getProfileImage());
+            taskComments.setUserImageID(baseClass.getProfileImageID());
             arrayList.add(taskComments);
             adapter.notifyDataSetChanged();
+            aq.id(R.id.response_alert).visibility(View.GONE);
         }
         else
         {
@@ -192,6 +193,7 @@ public class TaskCommentFragment extends BaseFragment {
         service.createComment(comment, position, Integer.parseInt(baseClass.getUserId()), true,
                 new CallBack(TaskCommentFragment.this, "CreateComment"));
         aq.id(R.id.comment_user).text("");
-        aq.id(R.id.response_alert).visibility(View.GONE);
+        baseClass.hideKeyPad(getView());
+
     }
 }

@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
 import android.text.Html;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -72,7 +73,7 @@ public class TaskDetailFragment extends BaseFragment {
     }
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
-        setRetainInstance(true);
+        setHasOptionsMenu(true);
         getToolbar().setTitle(getString(R.string.task_detail));
         super.onViewCreated(view, savedInstanceState);
     }
@@ -87,7 +88,6 @@ public class TaskDetailFragment extends BaseFragment {
         // Inflate the layout for this fragment_forums
         final View view =  inflater.inflate(R.layout.fragment_task_detail, container, false);
         baseClass = ((BaseClass) getActivity().getApplicationContext());
-        setHasOptionsMenu(true);
         seekBarCompat = (DonutProgress) view.findViewById(R.id.circularprogressBar);
         if(baseClass.getThemePreference() == R.style.AppThemeBlue) {
             seekBarCompat.setFinishedStrokeColor(ContextCompat.getColor(getActivity(), R.color.colorPrimaryBlue));
@@ -186,6 +186,7 @@ public class TaskDetailFragment extends BaseFragment {
     public void TaskDetails(Object caller, Object model) {
         TaskByIdModel.getInstance().setList((TaskByIdModel) model);
         if (TaskByIdModel.getInstance().responseCode == 100) {
+            AddTasks();
             UpdateValue();
         } else {
             Snackbar.make(getView(), getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
@@ -194,7 +195,6 @@ public class TaskDetailFragment extends BaseFragment {
 
     public void UpdateValue(){
         if(TaskByIdModel.getInstance().responseObject.startDate != null) {
-            AddTasks();
             if (DateFormatter(TaskByIdModel.getInstance().responseObject.startDate).equalsIgnoreCase("12/31/3938")||
             DateFormatter(TaskByIdModel.getInstance().responseObject.startDate).equalsIgnoreCase("2/1/3938")) {
                 aq.id(R.id.start_date).text("No Date");
@@ -310,7 +310,7 @@ public class TaskDetailFragment extends BaseFragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.edit_task:
-
+                Log.e("S","/"+tasksList.getListAssignees().size());
                 baseClass.setSelectedProject(Integer.toString(tasksList.getProjectID()));
                 if (Integer.parseInt(baseClass.getSelectedProject()) >0) {
                     baseClass.db.putString("ProjectName", tasksList.getProjectName());

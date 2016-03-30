@@ -34,17 +34,10 @@ public class AttachmentList {
         this.file = file;
     }
 
-    public boolean getIsDeleted() {
-        return isDeleted;
-    }
-    public void setIsDeleted(boolean isDeleted) {
-        this.isDeleted = isDeleted;
-    }
 
 
     private File file;
     private String fileName;
     private Integer fileID;
     private String fileUrl;
-    private boolean isDeleted;
 }

@@ -152,12 +152,13 @@
                         android:layout_height="wrap_content"
                         android:text="@string/_private"
                         android:button="@null"
-
-                        android:drawableLeft="@drawable/radiobutton" />
+/>
                     <RadioButton
                         android:id="@+id/public_radio"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:background="@color/white"
+                        android:layout_marginTop="5dp"
                         android:text="@string/_public"
                         android:button="@null"
 
@@ -177,6 +178,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/_active"
+                        android:background="@color/white"
                         android:button="@null"
                         android:drawableLeft="@drawable/radiobutton"/>
                     <RadioButton
@@ -184,6 +186,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/_archive"
+                        android:layout_marginTop="5dp"
+                        android:background="@color/white"
                         android:button="@null"
                         android:drawableLeft="@drawable/radiobutton"/>
                 </RadioGroup>
