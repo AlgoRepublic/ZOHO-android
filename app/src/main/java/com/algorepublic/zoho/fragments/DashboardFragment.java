@@ -11,7 +11,6 @@ import android.widget.Toast;
 import com.algorepublic.zoho.Models.AllProjectsByUserModel;
 import com.algorepublic.zoho.Models.DashBoardModel;
 import com.algorepublic.zoho.R;
-import com.algorepublic.zoho.adapters.ProjectsList;
 import com.algorepublic.zoho.services.CallBack;
 import com.algorepublic.zoho.services.DashBoardService;
 import com.algorepublic.zoho.services.ProjectsListService;
@@ -37,7 +36,8 @@ public class DashboardFragment extends BaseFragment {
     static DashboardFragment fragment;
 
     public static DashboardFragment newInstance() {
-        return new DashboardFragment();
+        fragment = new DashboardFragment();
+        return fragment;
     }
 //    @Override
 //    public void onResume() {
@@ -45,12 +45,18 @@ public class DashboardFragment extends BaseFragment {
 //        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(getString(R.string.dashboard));
 //        getActivity().supportInvalidateOptionsMenu();
 //    }
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        getToolbar().setTitle(getString(R.string.dashboard));
-        getActivity().supportInvalidateOptionsMenu();
-    }
+@Override
+public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+    setRetainInstance(true);
+    getToolbar().setTitle(getString(R.string.dashboard));
+    super.onViewCreated(view, savedInstanceState);
+}
+//    @Override
+//    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+//        super.onActivityCreated(savedInstanceState);
+//        getToolbar().setTitle(getString(R.string.dashboard));
+//        getActivity().supportInvalidateOptionsMenu();
+//    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -71,8 +77,8 @@ public class DashboardFragment extends BaseFragment {
             service.getMileStone(baseClass.getSelectedProject(), true,
                     new CallBack(DashboardFragment.this, "DashBoardList"));
         }
-        getToolbar().setTitle(getString(R.string.dashboard));
         setHasOptionsMenu(true);
+        getToolbar().setTitle(getString(R.string.dashboard));
         return view;
     }
     public void AllProjects(Object caller, Object model) {

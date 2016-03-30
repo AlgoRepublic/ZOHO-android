@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="100dp"
+    android:layout_height="110dp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <RelativeLayout
         android:id="@+id/layout123"
@@ -52,7 +52,7 @@
                 android:layout_weight="1"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
-                android:textSize="16sp"
+                android:textSize="17sp"
                 android:textColor="@color/white"
                 android:background="@color/colorContentWrapper"
                 android:text="Edit"
@@ -65,7 +65,7 @@
                 android:gravity="center"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
-                android:textSize="16sp"
+                android:textSize="17sp"
                 android:textColor="@color/white"
                 android:background="@color/red"
                 android:text="Delete"
@@ -94,26 +94,27 @@
                     android:id="@+id/comment_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="14sp"
+                    android:textSize="16sp"
                     android:layout_toLeftOf="@+id/layout_comment"
+                    android:layout_toStartOf="@+id/layout_comment"
                     android:layout_centerVertical="true"
                     android:text="@string/forums_title"
                     android:textStyle="bold" />
 
                 <RelativeLayout
                     android:id="@+id/layout_comment"
-                    android:layout_width="35dp"
+                    android:layout_width="45dp"
                     android:layout_alignParentRight="true"
                     android:layout_centerHorizontal="true"
-                    android:layout_height="35dp">
+                    android:layout_height="45dp">
                     <TextView
                         android:id="@+id/notify_alert1"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
                         android:text="112"
                         android:gravity="center"
                         android:singleLine="true"
-                        android:textSize="7dp"
+                        android:textSize="8sp"
                         android:layout_alignParentRight="true"
                         android:background="@drawable/bubble_alert_black"
                         android:layout_alignParentTop="true" />
@@ -130,7 +131,7 @@
                 android:id="@+id/comment_description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="12sp"
+                android:textSize="14sp"
                 android:layout_below="@+id/layout1"
                 android:padding="5dp"
                 android:text="@string/forums_description"
