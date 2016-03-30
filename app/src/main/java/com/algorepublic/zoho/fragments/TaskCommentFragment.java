@@ -99,6 +99,7 @@ public class TaskCommentFragment extends BaseFragment {
         aq.id(R.id.send).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                baseClass.hideKeyPad(getActivity().getCurrentFocus());
                 if (flag == true) {
                     forumService.updateforumComments(TaskCommentFragment
                             .arrayList.get(ClickedPosition).getCommentID(), TaskCommentFragment

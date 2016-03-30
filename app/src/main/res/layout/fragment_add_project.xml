@@ -152,6 +152,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/_private"
                         android:button="@null"
+
                         android:drawableLeft="@drawable/radiobutton" />
                     <RadioButton
                         android:id="@+id/public_radio"
@@ -159,6 +160,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/_public"
                         android:button="@null"
+
                         android:drawableLeft="@drawable/radiobutton" />
                 </RadioGroup>
 
