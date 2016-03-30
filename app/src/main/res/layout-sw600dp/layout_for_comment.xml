@@ -8,9 +8,9 @@
         android:weightSum="2"
         android:id="@+id/layout_comment"
         android:background="@color/colorBaseWrapper"
-        android:padding="5dp"
+        android:padding="10dp"
         android:layout_width="match_parent"
-        android:layout_height="60dp">
+        android:layout_height="100dp">
         <LinearLayout
             android:orientation="horizontal"
             android:weightSum="2"
@@ -28,9 +28,9 @@
                 android:imeActionId="@integer/add_comment"
                 android:background="@color/white"
                 android:imeOptions="actionDone"
-                android:paddingLeft="5dp"
-                android:paddingRight="5dp"
-                android:textSize="16sp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:textSize="20sp"
                 android:layout_gravity="center_vertical" />
             <requestFocus/>
 
@@ -40,9 +40,9 @@
                 android:layout_height="match_parent"
                 android:text="@string/add"
                 android:textAllCaps="false"
-                android:textSize="18sp"
-                android:gravity="center"
+                android:textSize="22sp"
                 android:layout_weight=".5"
+                android:gravity="center"
                 android:layout_gravity="center_vertical"
                 android:textColor="@android:color/white"
                 android:textStyle="bold"/>

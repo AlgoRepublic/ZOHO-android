@@ -1,1 +1,17 @@
+
+
+#################
+## Android Studio
+#################
+gradlew
+gradlew.bat
+bin/
+.idea/
+*.iml
+
+app/build
 /build
+.gradle/
+gradle/wrapper
+build/intermediates
+local.properties
