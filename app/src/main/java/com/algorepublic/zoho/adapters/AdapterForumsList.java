@@ -11,13 +11,11 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Toast;
 
-import com.algorepublic.zoho.BaseActivity;
 import com.algorepublic.zoho.Models.ForumsModel;
 import com.algorepublic.zoho.Models.GeneralModel;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.fragments.EditForumFragment;
 import com.algorepublic.zoho.fragments.ForumsDetailFragment;
-import com.algorepublic.zoho.fragments.ForumsFragment;
 import com.algorepublic.zoho.services.CallBack;
 import com.algorepublic.zoho.services.ForumService;
 import com.algorepublic.zoho.utils.BaseClass;
@@ -97,7 +95,7 @@ public class AdapterForumsList extends BaseAdapter {
     }
     public void DeleteForum(Object caller, Object model){
         GeneralModel.getInstance().setList((GeneralModel) model);
-        if (GeneralModel.getInstance().responseObject == true) {
+        if (GeneralModel.getInstance().responseObject) {
             UpdatedAfterDelete(Clicked);
             Snackbar.make(((AppCompatActivity) ctx).findViewById(android.R.id.content), ctx.getString(R.string.forum_deleted), Snackbar.LENGTH_SHORT).show();
         }else {

@@ -20,7 +20,7 @@
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="123dp"
-            android:background="@mipmap/img_splash" />
+            android:background="@drawable/img_splash" />
 
         <ImageView
             android:id="@+id/imageView3"
@@ -31,7 +31,7 @@
             android:layout_marginLeft="35dp"
             android:layout_marginRight="35dp"
             android:layout_marginTop="13dp"
-            android:background="@mipmap/fastlink_white" />
+            android:background="@drawable/fastlink_white" />
 
         <TextView
             android:id="@+id/textView"
@@ -56,7 +56,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
-            android:background="@mipmap/img_splashh" />
+            android:background="@drawable/img_splashh" />
 
     </RelativeLayout>
 </RelativeLayout>

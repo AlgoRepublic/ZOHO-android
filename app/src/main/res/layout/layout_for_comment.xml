@@ -41,8 +41,8 @@
                 android:text="@string/add"
                 android:textAllCaps="false"
                 android:textSize="18sp"
+                android:gravity="center"
                 android:layout_weight=".5"
-                android:background="@color/colorContentWrapper"
                 android:layout_gravity="center_vertical"
                 android:textColor="@android:color/white"
                 android:textStyle="bold"/>

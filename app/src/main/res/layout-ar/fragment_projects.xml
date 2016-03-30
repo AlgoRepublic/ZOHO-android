@@ -35,13 +35,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    <se.emilsjolander.stickylistheaders.StickyListHeadersListView
-        android:layout_above="@+id/sort"
-        android:id="@+id/projects_liststicky"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:divider="@null"
-        android:scrollbars="none" />
+        <se.emilsjolander.stickylistheaders.StickyListHeadersListView
+            android:layout_above="@+id/sort"
+            android:id="@+id/projects_liststicky"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:divider="@null"
+            android:scrollbars="none" />
     </android.support.v4.widget.SwipeRefreshLayout>
     <android.support.v4.widget.SwipeRefreshLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
@@ -76,7 +76,7 @@
             android:layout_marginEnd="10dp"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
-            android:background="@mipmap/task_image" />
+            android:background="@drawable/task_image" />
 
         <View android:layout_width="1dp"
             android:layout_height="match_parent"

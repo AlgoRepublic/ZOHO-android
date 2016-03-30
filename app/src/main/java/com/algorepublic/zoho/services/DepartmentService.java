@@ -27,7 +27,7 @@ public class DepartmentService extends BaseService {
         params.put("pid", pid);
         params.put("did", did);
         params.put("userID", userID);
-        this.post(url, params, obj, CreateForumModel.getInstance(), message);
+        this.post(url, params, obj, GeneralModel.getInstance(), message);
         Log.e("AddToDeptService", url);
     }
     public void createDepartment(String name,String createBy, boolean message, CallBack obj){
@@ -35,7 +35,7 @@ public class DepartmentService extends BaseService {
         HashMap<String, String> params = new HashMap<String, String>();
         params.put("Name", name);
         params.put("CreateBy", createBy);
-        this.post(url, params, obj, CreateForumModel.getInstance(), message);
+        this.post(url, params, obj, GeneralModel.getInstance(), message);
         Log.e("CreateDepartmentService", url);
     }
     public void updateDepartment(String Id,String name,String updateBy, boolean message, CallBack obj){
@@ -44,14 +44,15 @@ public class DepartmentService extends BaseService {
         params.put("Name", name);
         params.put("UpdateBy", updateBy);
         params.put("ID", Id);
-        this.post(url, params, obj, CreateForumModel.getInstance(), message);
+        this.post(url, params, obj, GeneralModel.getInstance(), message);
         Log.e("UpdateDepartmentService", url);
     }
-    public void DeleteDepartment(String ID, boolean message, CallBack obj){
+    public void DeleteDepartment(String ID,String userId, boolean message, CallBack obj){
         String url = Constants.DeleteDepartment_API;
         HashMap<String, String> params = new HashMap<String, String>();
-        params.put("ID", ID);
-        this.post(url, params, obj, CreateForumModel.getInstance(), message);
+        params.put("departmentID", ID);
+        params.put("userID", userId);
+        this.post(url, params, obj, GeneralModel.getInstance(), message);
         Log.e("DeleteService", url);
     }
 }

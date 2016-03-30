@@ -4,10 +4,9 @@
     android:layout_height="match_parent"
     android:background="@color/colorBaseWrapper"
     android:gravity="center_horizontal"
-    android:layoutDirection="locale"
-    android:fitsSystemWindows="true"
-    android:textDirection="rtl"
+    android:layoutDirection="rtl"
     android:orientation="vertical"
+    android:textDirection="rtl"
     tools:context=".ActivityLoginToLoading">
 
     <RelativeLayout
@@ -62,7 +61,7 @@
                 android:layout_height="match_parent"
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
-                android:background="@mipmap/fastlink_black" />
+                android:background="@drawable/fastlink_black" />
         </RelativeLayout>
 
         <ScrollView
@@ -90,9 +89,9 @@
                         android:id="@+id/email"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_toRightOf="@+id/logo"
                         android:background="@drawable/round_border"
                         android:completionHint="@string/prompt_email"
+                        android:gravity="start|center_vertical"
                         android:hint="@string/prompt_email"
                         android:imeOptions="actionNext"
                         android:inputType="textEmailAddress"
@@ -118,9 +117,9 @@
                         android:id="@+id/password"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_toRightOf="@+id/logo1"
                         android:background="@drawable/round_border"
                         android:completionHint="@string/prompt_password"
+                        android:gravity="end|center_vertical"
                         android:hint="@string/prompt_password"
                         android:imeOptions="actionDone"
                         android:inputType="textPassword"
@@ -140,14 +139,6 @@
                     android:layout_marginTop="15dp"
                     android:orientation="vertical">
 
-                    <CheckBox
-                        android:id="@+id/checkbox"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_margin="8dp"
-                        android:layout_toLeftOf="@+id/forgot_password" />
-
                     <TextView
                         android:id="@+id/forgot_password"
                         android:layout_width="wrap_content"
@@ -156,19 +147,28 @@
                         android:layout_centerVertical="true"
                         android:text="@string/remember_password"
                         android:textColor="@color/colorContentWrapper" />
+
+                    <CheckBox
+                        android:id="@+id/checkbox"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_toLeftOf="@+id/forgot_password"
+                        android:layout_toStartOf="@+id/forgot_password" />
+
                 </RelativeLayout>
 
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="40dp">
 
-                    <ImageView
+                    <Button
                         android:id="@+id/email_sign_in_button"
                         android:layout_width="130dp"
                         android:layout_height="match_parent"
                         android:layout_centerHorizontal="true"
                         android:layout_centerVertical="true"
-                        android:background="@mipmap/login" />
+                        android:background="@drawable/login" />
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -202,7 +202,7 @@
                         android:layout_height="wrap_content"
                         android:layout_centerHorizontal="true"
                         android:layout_centerVertical="true"
-                        android:background="@mipmap/linkedin" />
+                        android:background="@drawable/linkedin" />
                 </RelativeLayout>
 
                 <LinearLayout

@@ -2,7 +2,6 @@ package com.algorepublic.zoho.fragments;
 
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -11,7 +10,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.SeekBar;
 import android.widget.Toast;
@@ -19,9 +17,7 @@ import android.widget.Toast;
 import com.algorepublic.zoho.Models.GeneralModel;
 import com.algorepublic.zoho.Models.StarRatingQuestionModel;
 import com.algorepublic.zoho.R;
-import com.algorepublic.zoho.adapters.AdapterStarRatingQuestions;
 import com.algorepublic.zoho.adapters.StarRatingQuestion;
-import com.algorepublic.zoho.fragments.BaseFragment;
 import com.algorepublic.zoho.services.CallBack;
 import com.algorepublic.zoho.services.StarRatingService;
 import com.androidquery.AQuery;
@@ -32,10 +28,9 @@ import java.util.ArrayList;
  * Created by android on 2/24/16.
  */
 public class StarRatingLevelQuestionsFragment extends BaseFragment {
-    static StarRatingLevelQuestionsFragment fragment;
+    public static StarRatingLevelQuestionsFragment fragment;
     AQuery aq;
     StarRatingService service;
-    LayoutInflater layoutInflater;
     int ClickedPosition, userProgress;
     int multiple=5;
     LinearLayout QuestLayout;
@@ -44,11 +39,12 @@ public class StarRatingLevelQuestionsFragment extends BaseFragment {
 
     public static StarRatingLevelQuestionsFragment newInstance(int Id) {
         ID =Id;
-        if (fragment==null) {
+        if(fragment==null) {
             fragment = new StarRatingLevelQuestionsFragment();
         }
         return fragment;
     }
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -62,9 +58,7 @@ public class StarRatingLevelQuestionsFragment extends BaseFragment {
         aq = new AQuery(view);
         QuestLayout = (LinearLayout) aq
                         .id(R.id.questListView).visible().getView();
-        QuestLayout.removeAllViews();
-        QuestLayout.invalidate();
-        StarRatingQuestionModel.getInstance().responseData.clear();
+
         service = new StarRatingService(getActivity());
         service.getStarRatingQuestion_API(ID, "enUS",
                         true, new CallBack(StarRatingLevelQuestionsFragment.this, "StarRatingQuestion"));
@@ -74,7 +68,6 @@ public class StarRatingLevelQuestionsFragment extends BaseFragment {
         StarRatingQuestionModel.getInstance().setList((StarRatingQuestionModel) model);
         if (StarRatingQuestionModel.getInstance().responseCode == 100) {
             GetListQuestions();
-            AddViews();
         }
         else
         {
@@ -85,7 +78,7 @@ public class StarRatingLevelQuestionsFragment extends BaseFragment {
         View QuestionLayout;
         for(int loop=0;loop<Questions.size();loop++) {
 
-            QuestionLayout = layoutInflater.inflate(
+            QuestionLayout = LayoutInflater.from(getActivity()).inflate(
                     R.layout.drawer_list_item, null);
 
             final AQuery aq_quest = new AQuery(QuestionLayout);
@@ -116,11 +109,9 @@ public class StarRatingLevelQuestionsFragment extends BaseFragment {
                 @Override
                 public void afterTextChanged(Editable s) {
 
-                    Log.e("ID", "/" + Questions
-                            .get(ClickedPosition).getID());
                     service.StarEditComment(Questions
-                            .get(ClickedPosition).getID(), Questions
-                            .get(ClickedPosition).getComment(), true, new
+                            .get(ClickedPosition).getID(),
+                            aq_quest.id(R.id.comment_edittext).getText().toString(), true, new
                             CallBack(StarRatingLevelQuestionsFragment.this, "UpdateComment"));
                 }
             });
@@ -153,7 +144,6 @@ public class StarRatingLevelQuestionsFragment extends BaseFragment {
                 @Override
                 public void onStopTrackingTouch(SeekBar seekBar) {
                     View view = QuestLayout.getChildAt(ClickedPosition);
-                    Log.e("D", ClickedPosition + "/" + (Integer) view.getTag());
                     AQuery aq= new AQuery(view);
                     aq.id(R.id.seekBar).progress(userProgress);
                     aq.id(R.id.percent_text).getTextView().setText(userProgress + "%");
@@ -161,10 +151,9 @@ public class StarRatingLevelQuestionsFragment extends BaseFragment {
                     ratingBar.setRating(GetStarValue(userProgress));
                     aq.id(R.id.devstage_text).text(GetStageValue(userProgress));
 
-
                     service.StarUpdateProgress(Questions
-                            .get(ClickedPosition).getID(), Questions
-                            .get(ClickedPosition).getProgress(), true, new
+                            .get(ClickedPosition).getID(),
+                            userProgress, true, new
                             CallBack(StarRatingLevelQuestionsFragment.this, "UpdateProgress"));
                 }
             });
@@ -182,6 +171,7 @@ public class StarRatingLevelQuestionsFragment extends BaseFragment {
             question.setProgress(StarRatingQuestionModel.getInstance().responseData.get(loop).progress);
             Questions.add(question);
         }
+        AddViews();
     }
     public int GetStarValue(int progress)
     {
@@ -209,7 +199,7 @@ public class StarRatingLevelQuestionsFragment extends BaseFragment {
     {
         String starValue = "";
         if (progress >= 0 && progress <= 25)
-            starValue =  getString(R.string.ratingPrimaryStage);
+            starValue = getString(R.string.ratingPrimaryStage);
         else if (progress > 25 && progress <= 50)
             starValue =  getString(R.string.ratingDevelopmentStage);
         else if (progress > 50 && progress <= 75)

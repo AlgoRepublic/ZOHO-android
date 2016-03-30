@@ -84,11 +84,11 @@ public class TaskByIdModel {
         @SerializedName("ParentTaskID")
         public Integer parentTaskID;
 
-        @SerializedName("ID")
+        @SerializedName("TaskListID")
         @Expose
         public Integer tasklistID;
 
-        @SerializedName("Name")
+        @SerializedName("TaskListName")
         @Expose
         public String taskListName;
 

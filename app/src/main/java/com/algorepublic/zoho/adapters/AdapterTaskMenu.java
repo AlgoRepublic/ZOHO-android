@@ -2,7 +2,6 @@ package com.algorepublic.zoho.adapters;
 
 import android.content.Context;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
@@ -40,12 +39,12 @@ public class AdapterTaskMenu extends BaseAdapter {
             R.string.priority
     };
     int[] menu_icon_white = {
-            R.mipmap.task_desc_white,
-            R.mipmap.category,
-            R.mipmap.camera,
-            R.mipmap.employee,
-            R.mipmap.schedule,
-            R.mipmap.priority
+            R.drawable.task_desc_white,
+            R.drawable.category,
+            R.drawable.camera,
+            R.drawable.employee,
+            R.drawable.schedule,
+            R.drawable.priority
     };
     public AdapterTaskMenu(Context context) {
         this.ctx = context;

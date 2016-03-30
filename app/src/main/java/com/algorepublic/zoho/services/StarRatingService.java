@@ -34,7 +34,7 @@ public class StarRatingService extends BaseService {
     public void StarUpdateProgress(int ID,int progress, boolean message, CallBack obj){
         String url = Constants.StarUpdateProgress_API;
         HashMap<String, String> params = new HashMap<String, String>();
-        params.put("questionId", Integer.toString(ID));
+        params.put("questionID", Integer.toString(ID));
         params.put("progress", String.valueOf(progress));
         this.post(url, params, obj, GeneralModel.getInstance(), message);
         Log.e("StarProgressService", url);
@@ -42,7 +42,7 @@ public class StarRatingService extends BaseService {
     public void StarEditComment(int ID,String comment, boolean message, CallBack obj){
         String url = Constants.StarEditComment_API;
         HashMap<String, String> params = new HashMap<String, String>();
-        params.put("questionId", Integer.toString(ID));
+        params.put("questionID", Integer.toString(ID));
         params.put("comment", comment);
         this.post(url, params, obj, GeneralModel.getInstance(), message);
         Log.e("StarEditCommentService", url);

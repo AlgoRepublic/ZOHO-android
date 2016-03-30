@@ -3,13 +3,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/colorBaseWrapper"
     android:orientation="vertical"
-    android:fitsSystemWindows="true"
-    android:layoutDirection="rtl"
-    android:textDirection="rtl"
     tools:context=".fragments.TaskAddUpdateFragment">
+
+    <include
+        android:id="@+id/toolbar_actionbar"
+        layout="@layout/toolbar_default"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize" />
 
     <RelativeLayout
         android:id="@+id/title_bar"
@@ -18,42 +20,34 @@
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
         android:background="@color/colorContentWrapper"
-        android:padding="5dp">
+        android:paddingBottom="5dp"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:paddingTop="20dp">
 
-        <com.rengwuxian.materialedittext.MaterialEditText
+        <EditText
             android:id="@+id/title_text"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:ellipsize="end"
-            android:gravity="center"
-            android:layout_marginLeft="10dp"
-            android:scrollHorizontally="true"
-            android:scrollbarAlwaysDrawHorizontalTrack="true"
             android:enabled="false"
+            android:maxLength="24"
             android:padding="5dp"
             android:singleLine="true"
-            android:hint="@string/Task_Title"
-            android:layout_toLeftOf="@+id/btn_title"
-            app:met_floatingLabel="normal"
-            app:met_textColor="@color/white"
-            app:met_textColorHint="@color/white"
-            app:met_underlineColor="@color/white"
+            android:text="Task Title"
+            android:textColor="@color/white"
+            android:textSize="22sp" />
 
-            app:met_primaryColor="@color/white"
-            android:textSize="18sp" />
-
-        <CheckBox
+        <Button
             android:id="@+id/btn_title"
             android:layout_width="20dp"
-            android:layout_height="25dp"
-            android:button="@null"
-            android:layout_marginRight="10dp"
-            android:layout_alignParentRight="true"
+            android:layout_height="20dp"
             android:layout_centerVertical="true"
             android:layout_marginBottom="10dp"
-            android:background="@drawable/checkbox_edit_unedit" />
+            android:layout_toRightOf="@+id/title_text"
+            android:background="@drawable/edit_white" />
 
         <View
             android:layout_width="match_parent"
@@ -77,20 +71,20 @@
         <GridView
             android:id="@+id/gridview_taskmenu"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
             android:background="@color/colorContentWrapper"
             android:horizontalSpacing="0dp"
             android:numColumns="3"
             android:padding="5dp"
-            android:layout_gravity="center"
-            android:gravity="center"
             android:stretchMode="columnWidth"
-            android:verticalSpacing="0dp"/>
+            android:verticalSpacing="0dp"></GridView>
 
         <FrameLayout
             android:id="@+id/edittask_container"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="5dp"/>
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:padding="5dp"></FrameLayout>
     </LinearLayout>
 </LinearLayout>

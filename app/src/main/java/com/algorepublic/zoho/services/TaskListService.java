@@ -71,6 +71,7 @@ public class TaskListService extends BaseService {
         String url = Constants.DeleteTask_API;
         HashMap<String, String> params = new HashMap<String, String>();
         params.put("taskID", String.valueOf(taskID));
+        Log.e("A", "A" + taskID);
         this.post(url, params, obj, GeneralModel.getInstance(), message);
         Log.e("DeleteTaskService", url);
     }

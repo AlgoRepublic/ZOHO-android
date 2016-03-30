@@ -5,6 +5,8 @@ import android.support.design.widget.Snackbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ExpandableListView;
+import android.widget.ImageView;
 
 import com.algorepublic.zoho.Models.StarRatingModel;
 import com.algorepublic.zoho.R;
@@ -26,7 +28,9 @@ public class StarRatingFragment extends BaseFragment {
     static StarRatingFragment fragment;
     public static ArrayList<StarRatingHeadsLevelOne> levelOneHead = new ArrayList<>();
     AQuery aq;
-    CustomExpListView mListView;
+    public static CustomExpListView mListView1;
+    public static CustomExpListView mListView2;
+    public static CustomExpListView mListView3;
     StarRatingService service;
     public static StarRatingFragment newInstance() {
         fragment = new StarRatingFragment();
@@ -42,7 +46,8 @@ public class StarRatingFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_star_rating, container, false);
-        mListView = (CustomExpListView) view.findViewById(R.id.starListView);
+        mListView1 = (CustomExpListView) view.findViewById(R.id.starListView);
+        mListView1.setGroupIndicator(null);
         aq= new AQuery(view);
         service = new StarRatingService(getActivity());
         if(levelOneHead.size()==0) {
@@ -51,14 +56,12 @@ public class StarRatingFragment extends BaseFragment {
         }else{
             setAdapter();
         }
-
-
         return view;
     }
     private void setAdapter(){
-        if (mListView != null) {
+        if (mListView1 != null) {
             AdapterStarRatingLevelOne parentLevelAdapter = new AdapterStarRatingLevelOne(getActivity(), levelOneHead);
-            mListView.setAdapter(parentLevelAdapter);
+            mListView1.setAdapter(parentLevelAdapter);
         }
     }
     public void StarRatingHeads(Object caller, Object model) {

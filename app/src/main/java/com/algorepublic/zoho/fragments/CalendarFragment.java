@@ -11,7 +11,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -28,6 +27,7 @@ import com.algorepublic.zoho.adapters.TasksList;
 import com.algorepublic.zoho.services.CallBack;
 import com.algorepublic.zoho.services.TaskListService;
 import com.algorepublic.zoho.utils.BaseClass;
+import com.algorepublic.zoho.utils.LocaleHelper;
 import com.androidquery.AQuery;
 import com.flyco.animation.BounceEnter.BounceLeftEnter;
 import com.flyco.animation.SlideExit.SlideRightExit;
@@ -41,7 +41,6 @@ import com.github.tibolte.agendacalendarview.models.DayItem;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Locale;
 
@@ -227,17 +226,13 @@ public class CalendarFragment extends BaseFragment implements CalendarPickerCont
         // Get a reference for the week view in the layout.
         calendarView = (AgendaCalendarView) aq.id(R.id.agenda_calendar_view).getView();
 
-        Calendar minCal = new GregorianCalendar(2016, Calendar.MARCH, 1);
-        if(true) // update this check as language button goes functional
-         locale = new Locale("ar");
-        else
-            locale = Locale.US;
+        locale = new Locale(LocaleHelper.getLanguage(getContext()));
         Calendar minDate = Calendar.getInstance();
         Calendar maxDate = Calendar.getInstance();
 
         minDate.add(Calendar.MONTH, -11);
         minDate.set(Calendar.DAY_OF_MONTH, 1);
-        maxDate.add(Calendar.YEAR, 2);
+        maxDate.add(Calendar.YEAR, 1);
         List<CalendarEvent> events = getTasksList();
         if(events.size() != 0 ){
             try {
@@ -279,6 +274,7 @@ public class CalendarFragment extends BaseFragment implements CalendarPickerCont
             if(arg1.hasExtra("Action"))
              action = arg1.getExtras().getString("Action");
             if(action.contentEquals("Detail")) {
+
                 callFragmentWithBackStack(R.id.container, TaskDetailFragment.newInstance
                         (allTaskList.get(position), taskListName), "TaskDetail");
                 Toast.makeText(getContext(), position + ": " + action, Toast.LENGTH_SHORT).show();

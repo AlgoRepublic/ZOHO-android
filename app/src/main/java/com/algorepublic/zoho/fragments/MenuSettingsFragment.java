@@ -1,7 +1,6 @@
 package com.algorepublic.zoho.fragments;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -44,7 +43,7 @@ public class MenuSettingsFragment extends BaseFragment {
         baseClass = ((BaseClass) getActivity().getApplicationContext());
         getToolbar().setTitle(getString(R.string.settings));
         aq = new AQuery(view);
-checkBox=(CheckBox)view.findViewById(R.id.switch_theme);
+        checkBox=(CheckBox)view.findViewById(R.id.switch_theme);
         final ToggleExpandLayout layout = (ToggleExpandLayout) view.findViewById(R.id.toogleLayout);
         ((CheckBox) view.findViewById(R.id.switch_theme)).setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override

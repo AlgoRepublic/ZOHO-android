@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
 import android.text.Html;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -16,11 +15,9 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebView;
 import android.widget.SeekBar;
 
 import com.algorepublic.zoho.Models.GeneralModel;
-import com.algorepublic.zoho.Models.TaskByIdModel;
 import com.algorepublic.zoho.Models.TaskByIdModel;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.adapters.AdapterTaskDetailAssignee;
@@ -136,7 +133,7 @@ public class TaskDetailFragment extends BaseFragment {
                     service.updateTaskProgress(tasksList.getTaskID()
                             , progress, true, new CallBack(TaskDetailFragment.this, "UpdateProgress"));
                 }else {
-                    aq.id(R.id.icon).image(R.mipmap.taskdetail_icon);
+                    aq.id(R.id.icon).image(R.drawable.taskdetail_icon);
                     aq.id(R.id.mark_as_done).text(getString(R.string.task_as_done));
                     service.updateTaskProgress(tasksList.getTaskID()
                             , progress, true, new CallBack(TaskDetailFragment.this, "UpdateProgress"));
@@ -225,6 +222,9 @@ public class TaskDetailFragment extends BaseFragment {
         }else
         aq.id(R.id.task_desc).text(Html.fromHtml(TaskByIdModel.getInstance().responseObject.description));
 
+        twoWayAssignee.setAdapter(new AdapterTaskDetailAssignee(getActivity(),
+                tasksList.getListAssignees()));
+
         aq.id(R.id.comment_count).text(Integer.toString(TaskByIdModel.getInstance().responseObject.commentsCount));
         aq.id(R.id.docs_count).text(Integer.toString(TaskByIdModel.getInstance().responseObject.documentsCount));
         aq.id(R.id.subtask_count).text(Integer.toString(TaskByIdModel.getInstance().responseObject.subTasksCount));
@@ -311,7 +311,7 @@ public class TaskDetailFragment extends BaseFragment {
         switch (item.getItemId()){
             case R.id.edit_task:
 
-                baseClass.setSelectedProject(tasksList.getProjectName());
+                baseClass.setSelectedProject(Integer.toString(tasksList.getProjectID()));
                 if (Integer.parseInt(baseClass.getSelectedProject()) >0) {
                     baseClass.db.putString("ProjectName", tasksList.getProjectName());
                     baseClass.setSelectedProject(Integer.toString(tasksList.getProjectID()));
