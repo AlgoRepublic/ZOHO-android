@@ -12,9 +12,9 @@
         android:layout_width="match_parent"
         android:id="@+id/layout_preview"
         android:layout_weight="1.5"
-        android:paddingTop="20dp"
-        android:paddingRight="20dp"
-        android:paddingLeft="20dp"
+        android:paddingTop="10dp"
+        android:paddingRight="10dp"
+        android:paddingLeft="10dp"
         android:layout_height="0dp">
         <RelativeLayout
             android:orientation="vertical"
@@ -25,11 +25,12 @@
                 app:civ_border="true"
                 app:civ_shadow="true"
                 app:civ_shadow_color="@color/colorBaseMenu"
-                app:civ_shadow_radius="6"
+                app:civ_shadow_radius="3"
                 android:id="@+id/user_image"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                app:civ_border_width="2dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+
+                app:civ_border_width="1dp"
                 app:civ_border_color="@color/colorBaseHeader"
                 android:layout_centerVertical="true"
                 android:src="@drawable/nav_user" />
@@ -39,19 +40,19 @@
                 android:layout_height="wrap_content"
                 android:maxLines="2"
                 android:ellipsize="end"
-                android:textSize="20sp"
+                android:textSize="16sp"
                 android:text="sd"
                 android:layout_toRightOf="@+id/user_image"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="20dp" />
+                android:layout_marginLeft="10dp" />
         </RelativeLayout>
         <View
             android:id="@+id/view"
             android:layout_below="@+id/layout1"
             android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
             android:background="@color/colorBaseMenu"/>
         <ImageView
             android:id="@+id/doc_image"

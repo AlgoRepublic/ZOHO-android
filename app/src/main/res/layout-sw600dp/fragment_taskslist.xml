@@ -7,7 +7,7 @@
 
     <SearchView
         android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_height="40dp"
         android:id="@+id/searchView"
         android:background="@color/colorBaseWrapper"
         android:layout_alignParentTop="true"
@@ -15,7 +15,6 @@
 
     <se.emilsjolander.stickylistheaders.StickyListHeadersListView
         android:id="@+id/list_taskslist"
-
         android:layout_width="match_parent"
         android:layout_below="@+id/searchView"
         android:layout_height="match_parent"
@@ -24,13 +23,13 @@
         android:dividerHeight="-2dp"
         android:fadeScrollbars="true"
         android:scrollbarAlwaysDrawVerticalTrack="true"
-        android:scrollbarSize="5dp"
+        android:scrollbarSize="3dp"
         android:scrollbars="vertical" />
 
     <LinearLayout
         android:id="@+id/layout_bottom"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="54dp"
         android:layout_alignParentBottom="true"
         android:background="@color/colorContentWrapper"
         android:orientation="horizontal"
@@ -41,7 +40,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_below="@+id/view"
-            android:layout_weight="3.2"
+            android:layout_weight="3.7"
             android:orientation="horizontal"
             android:weightSum="3">
 
@@ -55,10 +54,9 @@
                 android:gravity="center"
                 android:scaleType="fitXY"
                 android:text="@string/all"
-                android:button="@null"
                 android:textAlignment="gravity"
                 android:textColor="@android:color/white"
-                android:textSize="26sp" />
+                android:textSize="14sp" />
 
             <View
                 android:layout_width="2dp"
@@ -74,11 +72,10 @@
                 android:adjustViewBounds="true"
                 android:gravity="center"
                 android:scaleType="fitXY"
-                android:button="@null"
                 android:text="@string/up_coming"
                 android:textAlignment="gravity"
                 android:textColor="@android:color/white"
-                android:textSize="26sp" />
+                android:textSize="14sp" />
 
             <View
                 android:layout_width="2dp"
@@ -92,13 +89,12 @@
                 android:layout_gravity="center"
                 android:layout_weight="1.1"
                 android:adjustViewBounds="true"
-                android:button="@null"
                 android:gravity="center"
                 android:scaleType="fitXY"
                 android:text="@string/over_due"
                 android:textAlignment="gravity"
                 android:textColor="@android:color/white"
-                android:textSize="26sp" />
+                android:textSize="14sp" />
         </RadioGroup>
 
         <View
@@ -110,17 +106,17 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_gravity="center"
-
-
-            android:layout_weight="0.8">
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="40dp"
+            android:layout_weight=".5">
 
             <Button
                 android:id="@+id/sort"
-                android:layout_width="match_parent"
+                android:layout_width="45dp"
                 android:layout_height="match_parent"
-
-                android:layout_margin="25dp"
-              android:layout_centerInParent="true"
+                android:layout_gravity="center"
+                android:layout_marginBottom="12dp"
+                android:layout_marginTop="12dp"
                 android:background="@drawable/task_image" />
         </RelativeLayout>
     </LinearLayout>

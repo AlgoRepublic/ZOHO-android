@@ -12,8 +12,8 @@
         class="com.poliveira.apps.parallaxlistview.ParallaxListView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="10dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="5dp"
         android:visibility="visible"
         app:scrollMultiplier="0.5"></view>
     <include
@@ -21,7 +21,7 @@
         android:layout_width="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:layout_marginBottom="40dp"
+        android:layout_marginBottom="20dp"
         android:layout_alignParentBottom="true"
         android:layout_height="wrap_content" />
 </RelativeLayout>

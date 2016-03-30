@@ -8,13 +8,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:padding="40dp">
+        android:padding="20dp">
 
         <TextView
             android:id="@+id/task_overview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="32dp"
+            android:paddingTop="@dimen/nav_header_vertical_spacing"
             android:text="@string/task_overview"
             android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
 
@@ -22,7 +22,7 @@
             android:id="@+id/task_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="32dp"
+            android:paddingTop="@dimen/nav_header_vertical_spacing"
             android:text="@string/task_title"
             android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
 
@@ -30,7 +30,7 @@
             android:id="@+id/task_category"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="32dp"
+            android:paddingTop="@dimen/nav_header_vertical_spacing"
             android:text="@string/task_category"
             android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
 
@@ -38,21 +38,21 @@
             android:id="@+id/task_attachment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="32dp"
+            android:paddingTop="@dimen/nav_header_vertical_spacing"
             android:text="@string/task_attachment"
             android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
 
         <ImageView
             android:id="@+id/imageView"
-            android:layout_width="140dp"
-            android:layout_height="140dp"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
             android:src="@android:drawable/ic_menu_report_image" />
 
         <TextView
             android:id="@+id/task_employees"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="32dp"
+            android:paddingTop="@dimen/nav_header_vertical_spacing"
             android:text="@string/task_employees"
             android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
 
@@ -60,7 +60,7 @@
             android:id="@+id/task_schedule"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="32dp"
+            android:paddingTop="@dimen/nav_header_vertical_spacing"
             android:text="@string/task_schedule"
             android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
 
@@ -68,7 +68,7 @@
             android:id="@+id/task_priority"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="32dp"
+            android:paddingTop="@dimen/nav_header_vertical_spacing"
             android:text="@string/task_priority"
             android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
     </LinearLayout>

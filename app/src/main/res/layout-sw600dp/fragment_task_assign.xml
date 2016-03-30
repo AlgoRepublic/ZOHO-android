@@ -10,10 +10,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/underline_textview"
-        android:paddingBottom="4dp"
+        android:paddingBottom="2dp"
         android:text="@string/employees"
         android:textColor="@color/colorContentWrapper"
-        android:textSize="17.33sp"
+        android:textSize="13.33sp"
         android:typeface="monospace" />
 
     <ListView
@@ -21,7 +21,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/text"
-        android:layout_marginTop="10dp" />
+        android:layout_marginTop="5dp" />
     <include
         layout="@layout/layout_alert_message"
         android:layout_width="wrap_content"

@@ -15,20 +15,19 @@
         <RelativeLayout
             android:id="@+id/language_selector"
             android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:layout_margin="32dp"
+            android:layout_height="40dp"
+            android:layout_margin="16dp"
             android:gravity="end"
-            android:paddingBottom="10dp">
+            android:paddingBottom="5dp">
 
             <ImageView
                 android:id="@+id/lang_selector"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="10dp"
+                android:layout_marginLeft="5dp"
                 android:layout_toRightOf="@+id/lang_text"
                 android:scaleType="fitXY"
-                android:adjustViewBounds="true"
                 android:src="@drawable/globe" />
 
             <TextView
@@ -40,7 +39,7 @@
                 android:ellipsize="end"
                 android:singleLine="true"
                 android:text="@string/selected_language"
-                android:textSize="24sp" />
+                android:textSize="20sp" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -52,16 +51,15 @@
         <RelativeLayout
             android:id="@+id/spacer"
             android:layout_width="match_parent"
-            android:layout_height="80dp"
+            android:layout_height="50dp"
             android:layout_below="@+id/spacer1">
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="200dp"
+                android:layout_height="match_parent"
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
-                android:adjustViewBounds="true"
-                android:src="@drawable/fastlink_black" />
+                android:background="@drawable/fastlink_black" />
         </RelativeLayout>
 
         <ScrollView
@@ -75,13 +73,13 @@
                 android:id="@+id/email_login_form"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="30dp"
+                android:layout_margin="15dp"
                 android:background="@drawable/roundable_corner"
                 android:orientation="vertical">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="60dp"
+                    android:layout_height="40dp"
                     android:layout_margin="15dp"
                     android:orientation="vertical">
 
@@ -89,17 +87,15 @@
                         android:id="@+id/email"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-
                         android:background="@drawable/round_border"
                         android:completionHint="@string/prompt_email"
                         android:hint="@string/prompt_email"
                         android:imeOptions="actionNext"
                         android:inputType="textEmailAddress"
                         android:maxLines="1"
-                        android:paddingLeft="20dp"
-                        android:paddingRight="20dp"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
                         android:singleLine="true"
-                        android:textSize="22sp"
                         android:text="admin@admin.com"
                         android:textColor="@color/colorBaseHeader"
                         android:textColorHint="@color/colorBaseMenu"
@@ -109,7 +105,7 @@
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="60dp"
+                    android:layout_height="40dp"
                     android:layout_marginLeft="15dp"
                     android:layout_marginRight="15dp"
                     android:orientation="vertical">
@@ -127,9 +123,8 @@
                         android:imeActionLabel="@string/login"
                         android:inputType="textPassword"
                         android:maxLines="1"
-                        android:textSize="22sp"
-                        android:paddingLeft="20dp"
-                        android:paddingRight="20dp"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
                         android:singleLine="true"
                         android:textColor="@color/colorBaseHeader"
                         android:textColorHint="@color/colorBaseMenu"
@@ -139,16 +134,16 @@
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:layout_marginTop="25dp"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="15dp"
                     android:orientation="vertical">
 
                     <CheckBox
                         android:id="@+id/checkbox"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
                         android:layout_centerVertical="true"
-                     android:layout_marginRight="16dp"
+                     android:layout_marginRight="8dp"
                         android:button="@null"
                         android:background="@drawable/checkbox_drawable"
                         android:layout_toLeftOf="@+id/forgot_password" />
@@ -159,30 +154,27 @@
                         android:layout_height="wrap_content"
                         android:layout_centerHorizontal="true"
                         android:layout_centerVertical="true"
-                        android:textSize="22sp"
                         android:text="@string/remember_password"
                         android:textColor="@color/colorContentWrapper" />
                 </RelativeLayout>
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="40dp">
 
                     <ImageView
                         android:id="@+id/email_sign_in_button"
-                        android:layout_width="230dp"
-                        android:layout_height="wrap_content"
+                        android:layout_width="130dp"
+                        android:layout_height="match_parent"
                         android:layout_centerHorizontal="true"
-                        android:adjustViewBounds="true"
-
                         android:layout_centerVertical="true"
-                        android:src="@drawable/login" />
+                        android:background="@drawable/login" />
                 </RelativeLayout>
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="5dp"
                     android:orientation="vertical">
 
                     <TextView
@@ -196,17 +188,17 @@
                         android:text="@string/text_or"
                         android:textAppearance="?android:attr/textAppearanceMedium"
                         android:textColor="@color/colorContentWrapper"
-                        android:textSize="22sp" />
+                        android:textSize="16sp" />
                 </RelativeLayout>
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="60dp"
+                    android:layout_height="40dp"
                     android:orientation="vertical">
 
                     <Button
                         android:id="@+id/linkedin_here"
-                        android:layout_width="230dp"
+                        android:layout_width="130dp"
                         android:layout_height="wrap_content"
                         android:layout_centerHorizontal="true"
                         android:layout_centerVertical="true"
