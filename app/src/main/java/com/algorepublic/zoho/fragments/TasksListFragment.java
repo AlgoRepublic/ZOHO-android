@@ -130,12 +130,6 @@ public class TasksListFragment extends BaseFragment {
                     new CallBack(TasksListFragment.this, "OwnerTasksList"));
         }
         aq.id(R.id.all).checked(true);
-        aq.id(R.id.add_task).clicked(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getActivity(), TaskAddUpdateFragment.class));
-            }
-        });
        searchView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

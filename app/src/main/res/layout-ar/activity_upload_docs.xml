@@ -1,62 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/colorBaseWrapper"
-    tools:context=".fragments.TaskAddUpdateFragment">
-
-    <include
-        android:id="@+id/toolbar_actionbar"
-        layout="@layout/toolbar_default"
-        android:layout_width="match_parent"
-        android:layout_height="50dp" />
-
-    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <view
+        android:id="@+id/images_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/toolbar_actionbar"
-        android:padding="10dp"
-        android:scrollbars="none">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/underline_textview"
-                android:paddingBottom="2dp"
-                android:text="Files"
-                android:textColor="@color/colorContentWrapper"
-                android:textSize="13.33sp"
-                android:typeface="monospace" />
-
-            <Button
-                android:id="@+id/add_file"
-                android:layout_width="match_parent"
-                android:layout_height="35dp"
-                android:layout_margin="10dp"
-                android:background="@drawable/roundable_gray"
-                android:padding="5dp"
-                android:text="Add"
-                android:textAllCaps="false"
-                android:textColor="@color/colorBaseWrapper"
-                android:textSize="12sp" />
-
-            <LinearLayout
-                android:id="@+id/images_layout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                android:layout_marginTop="5dp"
-                android:orientation="vertical"
-                android:visibility="visible"></LinearLayout>
-
-        </LinearLayout>
-    </ScrollView>
-
-
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        app:scrollMultiplier="0.5"
+        class="com.poliveira.apps.parallaxlistview.ParallaxListView"
+        android:visibility="visible" >
+    </view>
 </RelativeLayout>
