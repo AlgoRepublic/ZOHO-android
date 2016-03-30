@@ -3,6 +3,7 @@ package com.algorepublic.zoho.fragments;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.text.Html;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -86,6 +87,8 @@ public class EditProjectFragment extends BaseFragment {
                     Snackbar.make(getView(), getString(R.string.project_status_option), Snackbar.LENGTH_SHORT).show();
                     return false;
                 }
+
+
                 UpdateProject();
                 break;
 
@@ -93,15 +96,28 @@ public class EditProjectFragment extends BaseFragment {
         return super.onOptionsItemSelected(item);
     }
     public void UpdateProject(){
+        Integer ownerId=0;String deptId=null;
+        String deptName = deptList.get(departments_list.getSelectedIndex());
+        String ownerName = userList.get(owner_list.getSelectedIndex());
+        if (deptName != null) {
+            for(int loop=0;loop<ProjectsFragment.allDeptList.size();loop++)
+                if(ProjectsFragment.allDeptList.get(loop).getDeptName().equalsIgnoreCase(deptName))
+                   deptId = ProjectsFragment.allDeptList.get(loop).getDeptID();
+        }
+        if (ownerName != null) {
+            for(int loop=0;loop<TaskUserModel.getInstance().responseObject.size();loop++)
+                if(TaskUserModel.getInstance().responseObject.get(loop).firstName.equalsIgnoreCase(ownerName))
+                    ownerId = TaskUserModel.getInstance().responseObject.get(loop).ID;
+        }
         ProjectsListService service = new ProjectsListService(getActivity());
         service.updateProject(projectsLists.get(position).getProjectID()
                 , aq.id(R.id.project_name).getText().toString(), baseClass.getUserId()
                 , aq.id(R.id.project_desc).getText().toString()
-                , TaskUserModel.getInstance().responseObject.
-                        get(owner_list.getSelectedIndex()).ID, isactive
-                , projectsLists.get(
-                        departments_list.getSelectedIndex()).getCompOrDeptID(), isprivate
+                , ownerId, isactive
+                , deptId, isprivate
                 , true, new CallBack(EditProjectFragment.this, "UpdateProject"));
+        Log.e("Owner", String.valueOf(owner_list.getSelectedIndex()));
+
     }
     public void UpdateProject(Object caller, Object model){
         CreateProjectModel.getInstance().setList((CreateProjectModel) model);

@@ -3,7 +3,6 @@ package com.algorepublic.zoho.fragments;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,6 +34,8 @@ public class DashboardFragment extends BaseFragment {
     BaseClass baseClass;
     PieView pieGraph;
     BarView barGraph;
+    static DashboardFragment fragment;
+
     public static DashboardFragment newInstance() {
         return new DashboardFragment();
     }
@@ -44,11 +45,6 @@ public class DashboardFragment extends BaseFragment {
 //        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(getString(R.string.dashboard));
 //        getActivity().supportInvalidateOptionsMenu();
 //    }
-    @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-        setHasOptionsMenu(true);
-        super.onViewCreated(view, savedInstanceState);
-    }
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -60,6 +56,7 @@ public class DashboardFragment extends BaseFragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment_forums
         View view  = inflater.inflate(R.layout.fragment_dashboard, container, false);
+
         aq = new AQuery(view);
         baseClass = ((BaseClass) getActivity().getApplicationContext());
         barGraph = (BarView)view.findViewById(R.id.line_view);
@@ -74,6 +71,8 @@ public class DashboardFragment extends BaseFragment {
             service.getMileStone(baseClass.getSelectedProject(), true,
                     new CallBack(DashboardFragment.this, "DashBoardList"));
         }
+        getToolbar().setTitle(getString(R.string.dashboard));
+        setHasOptionsMenu(true);
         return view;
     }
     public void AllProjects(Object caller, Object model) {

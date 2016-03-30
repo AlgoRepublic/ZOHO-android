@@ -166,7 +166,14 @@ public class EditProfileFragment extends BaseFragment implements MultiSelectionS
                     Snackbar.make(getView(),getString(R.string.add_phoneno),Snackbar.LENGTH_SHORT).show();
                     return false;
                 }
-                service1.updateUserWithoutProjectSelected(GetUserModel.getInstance().user.Id,
+                Log.e("firstName", aq.id(R.id.first_name).getText().toString());
+                Log.e("last_name", aq.id(R.id.last_name).getText().toString());
+                Log.e("nick_name", aq.id(R.id.nick_name).getText().toString());
+                Log.e("user_email", aq.id(R.id.user_email).getText().toString());
+                Log.e("user_phoneno", aq.id(R.id.user_phoneno).getText().toString());
+                Log.e("userRole", String.valueOf(GetUserModel.getInstance().user.userRole.ID));
+                Log.e("selectedIds",selectedIds.toString());
+                service1.updateUserWithoutProjectSelected(baseClass.getUserId(),
                         aq.id(R.id.first_name).getText().toString(),
                         aq.id(R.id.last_name).getText().toString(),
                         aq.id(R.id.nick_name).getText().toString(),
