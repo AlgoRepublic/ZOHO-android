@@ -59,7 +59,7 @@
                 android:layout_height="match_parent"
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
-                android:background="@mipmap/fastlink_black" />
+                android:background="@drawable/fastlink_black" />
         </RelativeLayout>
 
         <ScrollView
@@ -87,7 +87,6 @@
                         android:id="@+id/email"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_toRightOf="@+id/logo"
                         android:background="@drawable/round_border"
                         android:completionHint="@string/prompt_email"
                         android:hint="@string/prompt_email"
@@ -115,7 +114,7 @@
                         android:id="@+id/password"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_toRightOf="@+id/logo1"
+
                         android:background="@drawable/round_border"
                         android:completionHint="@string/prompt_password"
                         android:hint="@string/prompt_password"
@@ -169,7 +168,7 @@
                         android:layout_height="match_parent"
                         android:layout_centerHorizontal="true"
                         android:layout_centerVertical="true"
-                        android:background="@mipmap/login" />
+                        android:background="@drawable/login" />
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -203,7 +202,7 @@
                         android:layout_height="wrap_content"
                         android:layout_centerHorizontal="true"
                         android:layout_centerVertical="true"
-                        android:background="@mipmap/linkedin" />
+                        android:background="@drawable/linkedin" />
                 </RelativeLayout>
 
                 <LinearLayout

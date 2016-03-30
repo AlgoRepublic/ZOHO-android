@@ -15,7 +15,6 @@
 
     <se.emilsjolander.stickylistheaders.StickyListHeadersListView
         android:id="@+id/list_taskslist"
-
         android:layout_width="match_parent"
         android:layout_below="@+id/searchView"
         android:layout_height="match_parent"
@@ -55,7 +54,6 @@
                 android:gravity="center"
                 android:scaleType="fitXY"
                 android:text="@string/all"
-                android:button="@null"
                 android:textAlignment="gravity"
                 android:textColor="@android:color/white"
                 android:textSize="14sp" />
@@ -74,7 +72,6 @@
                 android:adjustViewBounds="true"
                 android:gravity="center"
                 android:scaleType="fitXY"
-                android:button="@null"
                 android:text="@string/up_coming"
                 android:textAlignment="gravity"
                 android:textColor="@android:color/white"
@@ -92,7 +89,6 @@
                 android:layout_gravity="center"
                 android:layout_weight="1.1"
                 android:adjustViewBounds="true"
-                android:button="@null"
                 android:gravity="center"
                 android:scaleType="fitXY"
                 android:text="@string/over_due"
@@ -121,7 +117,7 @@
                 android:layout_gravity="center"
                 android:layout_marginBottom="12dp"
                 android:layout_marginTop="12dp"
-                android:background="@mipmap/task_image" />
+                android:background="@drawable/task_image" />
         </RelativeLayout>
     </LinearLayout>
     <include

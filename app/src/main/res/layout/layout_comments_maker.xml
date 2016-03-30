@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="95dp"
+    android:layout_height="80dp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <RelativeLayout
         android:id="@+id/layout123"
@@ -114,8 +114,9 @@
                                 android:id="@+id/comment_description"
                                 android:textSize="14sp"
                                 android:lines="2"
+                                android:layout_marginTop="5dp"
+                                android:layout_below="@+id/comment_title"
                                 android:text="@string/test_forum"
-                                android:layout_below="@+id/comment_image"
                                 android:layout_alignStart="@+id/comment_title" />
                         </RelativeLayout>
                     <LinearLayout
@@ -131,7 +132,7 @@
                             android:layout_width="15dp"
                             android:layout_height="15dp"
                             android:layout_margin="5dp"
-                            android:background="@mipmap/circle_left"/>
+                            android:background="@drawable/circle_left"/>
                     </LinearLayout>
                 </RelativeLayout>
         </com.daimajia.swipe.SwipeLayout>

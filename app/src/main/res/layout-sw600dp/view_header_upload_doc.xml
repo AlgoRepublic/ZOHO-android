@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorBaseWrapper"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/underline_textview"
+            android:gravity="center_horizontal"
+            android:padding="20dp"
+            android:text="@string/documents"
+            android:textColor="@color/colorContentWrapper"
+            android:textSize="22sp"
+            android:typeface="monospace" />
+
+        <org.angmarch.views.NiceSpinner
+            android:id="@+id/folder_list"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:padding="20dp"
+            android:layout_below="@id/user_phoneno"
+            android:hint="@string/select_folder"
+            android:textColor="@color/colorBaseHeader"
+            android:textSize="22sp"/>
+
+        <Button
+            android:id="@+id/add_file"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_margin="20dp"
+            android:padding="10dp"
+            android:text="@string/add_documents"
+            android:textAllCaps="false"
+            android:gravity="center"
+            android:textColor="@color/colorBaseWrapper"
+            android:textSize="20sp" />
+
+    </LinearLayout>
+</LinearLayout>

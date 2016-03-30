@@ -20,6 +20,7 @@ import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.adapters.AdapterTaskMenu;
 import com.algorepublic.zoho.adapters.AttachmentList;
 import com.algorepublic.zoho.adapters.DocumentsList;
+import com.algorepublic.zoho.adapters.TaskListName;
 import com.algorepublic.zoho.adapters.TasksList;
 import com.algorepublic.zoho.utils.BaseClass;
 import com.algorepublic.zoho.utils.Constants;
@@ -40,26 +41,30 @@ public class TaskAddUpdateFragment extends BaseFragment {
     public static GridView gridViewTaskMenu;
     public static TasksList tasksObj;
     ACProgressFlower dialogAC;
+    public static ArrayList<TaskListName> taskListName = new ArrayList<>();
     public static ArrayList<DocumentsList> apiDocsList = new ArrayList<>();
     public static ArrayList<AttachmentList> filesList;
     public static ArrayList<Integer> filesToDelete;
     public static ArrayList<Integer> assigneeList;
     public static int callPosition=0;
 
-    public static TaskAddUpdateFragment newInstance() {
+    public static TaskAddUpdateFragment newInstance(ArrayList<TaskListName> listNames) {
         callPosition = 0;
+        taskListName = listNames;
         fragment = new TaskAddUpdateFragment();
         return fragment;
     }
-    public static TaskAddUpdateFragment newInstance(int taskId) {
+    public static TaskAddUpdateFragment newInstance(int taskId,ArrayList<TaskListName> listNames) {
         tasID = taskId;
         callPosition = 1;
+        taskListName = listNames;
         fragment = new TaskAddUpdateFragment();
         return fragment;
     }
-    public static TaskAddUpdateFragment newInstance(TasksList tasksList) {
+    public static TaskAddUpdateFragment newInstance(TasksList tasksList,ArrayList<TaskListName> listNames) {
         tasksObj = tasksList;
         callPosition= 2;
+        taskListName = listNames;
         fragment = new TaskAddUpdateFragment();
         return fragment;
     }

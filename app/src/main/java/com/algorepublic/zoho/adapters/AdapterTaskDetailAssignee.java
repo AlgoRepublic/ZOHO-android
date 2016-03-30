@@ -3,12 +3,15 @@ package com.algorepublic.zoho.adapters;
 import android.content.Context;
 import android.support.v4.view.PagerAdapter;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 
+import com.algorepublic.zoho.FragmentsTasks.TaskAssignFragment;
+import com.algorepublic.zoho.Models.TaskByIdModel;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.fragments.DocsPreviewFragment;
 import com.algorepublic.zoho.fragments.ForumsDetailFragment;
@@ -30,7 +33,7 @@ public class AdapterTaskDetailAssignee extends RecyclerView.Adapter<AdapterTaskD
     Context ctx;
     BaseClass baseClass;
     private LayoutInflater l_Inflater;
-    ArrayList<TaskListAssignee> arraylist = new ArrayList<TaskListAssignee>();
+    ArrayList<TaskListAssignee> arraylist = new ArrayList<>();
 
     public AdapterTaskDetailAssignee(Context context, ArrayList<TaskListAssignee> results) {
         arraylist.addAll(results);
@@ -55,9 +58,9 @@ public class AdapterTaskDetailAssignee extends RecyclerView.Adapter<AdapterTaskD
 
     @Override
     public void onBindViewHolder(SimpleViewHolder holder, int position) {
-        if(baseClass.getProfileImage() != null) {
-            Glide.with(ctx).load(Constants.Image_URL + baseClass.getProfileImageID()
-                    + "." + BaseClass.getExtensionType(baseClass.getProfileImage())).into(holder.imageView);
+        if(arraylist.get(position).getProfileImage() != null) {
+            Glide.with(ctx).load(Constants.Image_URL + arraylist.get(position).getUserID()
+                    + "." + BaseClass.getExtensionType(arraylist.get(position).getProfileImage())).into(holder.imageView);
         }
     }
 

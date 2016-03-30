@@ -19,6 +19,7 @@ import com.algorepublic.zoho.Models.TaskListBySubTaskModel;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.adapters.AdapterTasksList;
 import com.algorepublic.zoho.adapters.TaskListAssignee;
+import com.algorepublic.zoho.adapters.TaskListName;
 import com.algorepublic.zoho.adapters.TasksList;
 import com.algorepublic.zoho.services.CallBack;
 import com.algorepublic.zoho.services.TaskListService;
@@ -45,14 +46,15 @@ public class TaskListBySubTasksFragment extends BaseFragment {
     StickyListHeadersAdapter adapterTasksList;
     AQuery aq;View view;
     RadioGroup radioGroup;
+    private static ArrayList<TaskListName> taskListName = new ArrayList<>();
     public static ArrayList<TasksList> allTaskList = new ArrayList<>();
     public static ArrayList<TasksList> generalList = new ArrayList<>();
     BaseClass baseClass;
     StickyListHeadersListView listView;
-    static TasksList tasksList;
+    static int taskID;
     @SuppressLint("ValidFragment")
-    public TaskListBySubTasksFragment (TasksList list) {
-        tasksList = list;
+    public TaskListBySubTasksFragment (int taskId) {
+        taskID = taskId;
     }
 //    @SuppressWarnings("unused")
 //    public static TaskListBySubTasksFragment newInstance(int Id) {
@@ -100,7 +102,7 @@ public class TaskListBySubTasksFragment extends BaseFragment {
                 if(baseClass.db.getInt("ProjectID") == 0){
                     Snackbar.make(getView(),getString(R.string.select_project),Snackbar.LENGTH_SHORT).show();
                 }else {
-                    callFragmentWithBackStack(R.id.container, TaskAddUpdateFragment.newInstance(tasksList.getTaskID()),"TaskAddUpdateFragment");
+                    callFragmentWithBackStack(R.id.container, TaskAddUpdateFragment.newInstance(taskID,taskListName),"TaskAddUpdateFragment");
                 }
                 break;
         }
@@ -129,10 +131,9 @@ public class TaskListBySubTasksFragment extends BaseFragment {
         });
         baseClass = ((BaseClass) getActivity().getApplicationContext());
         taskListService = new TaskListService(getActivity());
-        taskListService.getTasksListBySubTasks(tasksList.getTaskID(), true,
+        taskListService.getTasksListBySubTasks(taskID, true,
                 new CallBack(TaskListBySubTasksFragment.this, "TaskListBySubTasks"));
         applyLightBackground(aq.id(R.id.layout_bottom).getView(), baseClass);
-
         aq.id(R.id.sort).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -260,7 +261,7 @@ public class TaskListBySubTasksFragment extends BaseFragment {
             }else{
                 aq.id(R.id.response_alert).visibility(View.GONE);
             }
-            adapterTasksList = new AdapterTasksList(getActivity(),generalList);
+            adapterTasksList = new AdapterTasksList(getActivity(),generalList,taskListName);
             listView.setAreHeadersSticky(true);
             listView.setAdapter(adapterTasksList);
         }
@@ -282,9 +283,14 @@ public class TaskListBySubTasksFragment extends BaseFragment {
         FilterList();
     }
     public void AddAllTasks(){
-        allTaskList.clear();
+        allTaskList.clear();taskListName.clear();
         Log.e("E","/"+TaskListBySubTaskModel.getInstance().responseObject.size());
         for (int loop = 0; loop < TaskListBySubTaskModel.getInstance().responseObject.size(); loop++) {
+            TaskListName tasklistName = new TaskListName();
+            tasklistName.setTaskListID(TaskListBySubTaskModel.getInstance().responseObject.get(loop).tasklistID);
+            tasklistName.setTaskListName(TaskListBySubTaskModel.getInstance().responseObject.get(loop).taskListName);
+            taskListName.add(tasklistName);
+
             TaskListBySubTaskModel.ResponseObject taskModel = TaskListBySubTaskModel.getInstance().responseObject.get(loop);
             TasksList tasksList = new TasksList();
             if (taskModel.title == null) {

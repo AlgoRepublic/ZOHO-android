@@ -87,7 +87,6 @@ public class DocumentsListBySubTaskFragment extends BaseFragment {
         service.getDocsBySubTasks(ID, true,
                 new CallBack(DocumentsListBySubTaskFragment.this, "DocumentsList"));
 
-
         applyLightBackground(aq.id(R.id.layout_bottom).getView(), baseClass);
         return view;
     }

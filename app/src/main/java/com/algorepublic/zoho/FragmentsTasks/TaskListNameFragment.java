@@ -11,6 +11,7 @@ import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.adapters.AdapterTaskListName;
 import com.algorepublic.zoho.adapters.TasksList;
 import com.algorepublic.zoho.fragments.BaseFragment;
+import com.algorepublic.zoho.fragments.TaskAddUpdateFragment;
 import com.algorepublic.zoho.fragments.TasksListFragment;
 import com.algorepublic.zoho.utils.BaseClass;
 import com.androidquery.AQuery;
@@ -48,14 +49,14 @@ public class TaskListNameFragment extends BaseFragment {
         baseClass = ((BaseClass) getActivity().getApplicationContext());
         adapter = new AdapterTaskListName(getActivity());
         aq.id(R.id.alertMessage).text("No Tasks List");
-        if(TasksListFragment.taskListName.size() ==0){
+        if(TaskAddUpdateFragment.taskListName.size() ==0){
             aq.id(R.id.response_alert).visibility(View.VISIBLE);
         }else{
             aq.id(R.id.response_alert).visibility(View.GONE);
         }
-        for(int loop=0;loop<TasksListFragment.taskListName.size();loop++) {
+        for(int loop=0;loop<TaskAddUpdateFragment.taskListName.size();loop++) {
             if (baseClass.db.getInt("TaskListNameID") ==
-                    TasksListFragment.taskListName.get(loop).getTaskListID()) {
+                    TaskAddUpdateFragment.taskListName.get(loop).getTaskListID()) {
                 adapter.setSelectedIndex(loop);
             }
         }

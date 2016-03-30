@@ -5,6 +5,8 @@ import android.support.design.widget.Snackbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ExpandableListView;
+import android.widget.ImageView;
 
 import com.algorepublic.zoho.Models.StarRatingModel;
 import com.algorepublic.zoho.R;
@@ -25,8 +27,7 @@ import java.util.ArrayList;
 public class StarRatingFragment extends BaseFragment {
     static StarRatingFragment fragment;
     public static ArrayList<StarRatingHeadsLevelOne> levelOneHead = new ArrayList<>();
-    AQuery aq;
-    CustomExpListView mListView;
+    AQuery aq; CustomExpListView mListView;
     StarRatingService service;
     public static StarRatingFragment newInstance() {
         fragment = new StarRatingFragment();
@@ -52,8 +53,6 @@ public class StarRatingFragment extends BaseFragment {
         }else{
             setAdapter();
         }
-
-
         return view;
     }
     private void setAdapter(){

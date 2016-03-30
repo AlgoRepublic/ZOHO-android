@@ -266,19 +266,18 @@ public class AdapterDepartment
 
     @Override
     public void onMoveItem(int fromPosition, int toPosition) {
-        Log.d(TAG, "onMoveItem(fromPosition = " + fromPosition + ", toPosition = " + toPosition + ")");
+        Log.e(TAG, "onMoveItem(fromPosition = " + fromPosition + ", toPosition = " + toPosition + ")");
 
         if (fromPosition == toPosition) {
             return;
         }
-
+        service.addProjectIntoDepartment(DepartmentFragment.allProjects.get(toPosition).getCompOrDeptID()
+                , DepartmentFragment.allProjects.get(fromPosition).getProjectID(), baseClass.getUserId()
+                , true, new CallBack(AdapterDepartment.this, "MoveProject"));
         ProjectsList projectsList = DepartmentFragment.allProjects.get(fromPosition);
         DepartmentFragment.allProjects.remove(fromPosition);
         DepartmentFragment.allProjects.add(toPosition, projectsList);
         notifyItemMoved(fromPosition, toPosition);
-        service.addProjectIntoDepartment(DepartmentFragment.allProjects.get(toPosition).getCompOrDeptID()
-                , DepartmentFragment.allProjects.get(fromPosition).getProjectID(), baseClass.getUserId()
-                , true, new CallBack(AdapterDepartment.this, "MoveProject"));
     }
     public void MoveProject(Object caller, Object model) {
         GeneralModel.getInstance().setList((GeneralModel) model);
@@ -358,12 +357,15 @@ public class AdapterDepartment
                     public void onBtnClick() {
                         dialog.dismiss();
                         if(Clicked==1) {
-                            service.DeleteDepartment(DepartmentFragment.allProjects.get(position).getCompOrDeptID(), true
+                            Log.e("D",DepartmentFragment.allProjects.get(position).getCompOrDeptID());
+                            service.DeleteDepartment(DepartmentFragment.allProjects.get(position).getCompOrDeptID(),
+                                   baseClass.getUserId() , true
                                     , new CallBack(AdapterDepartment.this, "DeleteDept"));
                         }
                         if(Clicked==2){
-                            service1.DeleteProject(DepartmentFragment.allProjects.get(position).getProjectID(), true
-                                    , new CallBack(AdapterDepartment.this, "DeleteProject"));
+                            service.addProjectIntoDepartment("0"
+                                    , DepartmentFragment.allProjects.get(position).getProjectID(), baseClass.getUserId()
+                                    , true, new CallBack(AdapterDepartment.this, "DeleteProject"));
                         }
                     }
                 });

@@ -4,10 +4,6 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:weightSum="2"
-    android:fitsSystemWindows="true"
-    android:layoutDirection="rtl"
-    android:textDirection="rtl"
-    android:background="@color/white"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <RelativeLayout
@@ -25,13 +21,10 @@
             android:id="@+id/layout1"
             android:layout_height="wrap_content">
             <com.mikhaellopez.circularimageview.CircularImageView
-                app:civ_border="true"
-                app:civ_shadow="true"
-                app:civ_shadow_color="@color/colorBaseMenu"
-                app:civ_shadow_radius="3"
                 android:id="@+id/user_image"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
+                android:scaleType="fitXY"
                 app:civ_border_width="1dp"
                 app:civ_border_color="@color/colorBaseHeader"
                 android:layout_centerVertical="true"
@@ -40,6 +33,7 @@
                 android:id="@+id/user_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/colorBaseHeader"
                 android:maxLines="2"
                 android:ellipsize="end"
                 android:textSize="16sp"
@@ -75,9 +69,21 @@
                 android:id="@+id/doc_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/colorBaseHeader"
                 android:singleLine="true"
                 android:ellipsize="end"
                 android:textSize="18sp"
+                android:text="sd"
+                android:layout_gravity="center_vertical" />
+            <TextView
+                android:id="@+id/doc_size"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorBaseHeader"
+                android:singleLine="true"
+                android:layout_below="@+id/doc_title"
+                android:ellipsize="end"
+                android:textSize="14sp"
                 android:text="sd"
                 android:layout_gravity="center_vertical" />
 
@@ -92,43 +98,60 @@
         android:paddingRight="10dp"
         android:paddingBottom="10dp"
         android:layout_height="0dp">
-        <LinearLayout
-            android:id="@+id/header"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/colorBaseWrapper"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/list_title"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/underline_textview"
-                android:gravity="center_horizontal"
-                android:padding="10dp"
-                android:text="@string/comments"
-                android:textSize="14sp"
-                android:typeface="monospace" />
-        </LinearLayout>
         <ListView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
             android:transcriptMode="alwaysScroll"
-            android:layout_below="@id/header"
             android:stackFromBottom="true"
             android:dividerHeight="5dp"
-            android:layout_marginBottom="60dp"
+            android:layout_marginBottom="5dp"
+            android:layout_above="@+id/layout_comment"
             android:id="@+id/listView_comments" />
-        <include
-            layout="@layout/layout_alert_message"
-            android:layout_width="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:layout_height="wrap_content" />
-        <include
+
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:weightSum="2"
             android:layout_alignParentBottom="true"
-            layout="@layout/layout_for_comment"
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent"/>
+            android:id="@+id/layout_comment"
+            android:layout_width="match_parent"
+            android:layout_height="40dp">
+            <EditText
+                android:id="@+id/comment_user"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:maxLines="1"
+                android:layout_weight="1.5"
+                android:background="@android:color/white"
+                android:textColor="@android:color/black"
+                android:textCursorDrawable="@null"
+                android:hint="Send a comment"
+                android:singleLine="true"
+                android:ellipsize="end"
+                android:imeActionId="@integer/add_comment"
+                android:imeOptions="actionSend"
+                android:imeActionLabel="Add"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:scrollHorizontally="true"
+                android:textSize="13sp"
+                android:layout_gravity="center_vertical" />
+            <requestFocus/>
+
+            <Button
+                android:id="@+id/send"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:text="Add"
+                android:textAllCaps="false"
+                android:textSize="11sp"
+                android:gravity="center"
+                android:layout_weight=".5"
+                android:background="@color/colorContentWrapper"
+                android:layout_gravity="center_vertical"
+                android:textColor="@android:color/white"
+                android:textStyle="bold"/>
+        </LinearLayout>
     </RelativeLayout>
 </LinearLayout>

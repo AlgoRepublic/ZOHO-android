@@ -6,9 +6,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/colorBaseWrapper"
     android:orientation="vertical"
-    android:fitsSystemWindows="true"
-    android:layoutDirection="rtl"
-    android:textDirection="rtl"
     tools:context=".fragments.TaskAddUpdateFragment">
 
     <RelativeLayout
@@ -40,7 +37,6 @@
             app:met_textColor="@color/white"
             app:met_textColorHint="@color/white"
             app:met_underlineColor="@color/white"
-
             app:met_primaryColor="@color/white"
             android:textSize="18sp" />
 

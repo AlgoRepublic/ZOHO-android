@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -77,6 +78,10 @@ public class AdapterTaskComments extends BaseAdapter {
                     + "." + BaseClass.getExtensionType(TaskCommentFragment.arrayList
                     .get(position).getUserImagePath())).into(holder.userImage);
         }
+        Log.e("A","S"+Constants.Image_URL + TaskCommentFragment
+                .arrayList.get(position).getUserImageID()
+                + "." + BaseClass.getExtensionType(TaskCommentFragment.arrayList
+                .get(position).getUserImagePath()));
 //        aq.id(R.id.btEdit).clicked(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {

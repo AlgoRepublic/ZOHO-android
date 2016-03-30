@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:background="@color/white"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorBaseWrapper"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/list_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/underline_textview"
+            android:gravity="center_horizontal"
+            android:padding="20dp"
+            android:text="@string/comments"
+            android:textSize="18sp"
+            android:typeface="monospace" />
+    </LinearLayout>
+    <RelativeLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_margin="10dp"
+        android:id="@+id/layout_comments"
+        android:layout_height="match_parent">
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:transcriptMode="alwaysScroll"
+            android:stackFromBottom="true"
+            android:layout_marginBottom="100dp"
+            android:id="@+id/listView_comments" />
+
+        <include
+            layout="@layout/layout_alert_message"
+            android:layout_width="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_height="wrap_content" />
+        <include
+            android:id="@+id/include"
+            android:layout_alignParentBottom="true"
+            layout="@layout/layout_for_comment"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"/>
+    </RelativeLayout>
+</LinearLayout>

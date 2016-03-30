@@ -4,9 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorBaseWrapper"
-    android:fitsSystemWindows="true"
-    android:layoutDirection="rtl"
-    android:textDirection="rtl"
     android:orientation="vertical">
 
     <com.wang.avi.AVLoadingIndicatorView
@@ -36,7 +33,7 @@
         android:layout_below="@+id/editText"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="15dp"
-        android:background="@mipmap/fastlink_white" />
+        android:background="@drawable/fastlink_white" />
 
     <TextView
         android:id="@+id/editText2"

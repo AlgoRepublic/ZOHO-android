@@ -5,9 +5,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.algorepublic.zoho.R;
+import com.algorepublic.zoho.fragments.StarRatingLevelQuestionsFragment;
 import com.algorepublic.zoho.utils.CustomExpListView;
 
 import java.util.ArrayList;
@@ -27,7 +29,11 @@ public class AdapterStarRatingLevelOne extends BaseExpandableListAdapter {
         this.mListDataHeader = new ArrayList<>();
         this.mListDataHeader.addAll(mListDataHeader);
     }
-
+    @Override
+    public void onGroupCollapsed(int groupPosition) {
+        StarRatingLevelQuestionsFragment.fragment = null;
+        super.onGroupCollapsed(groupPosition);
+    }
     @Override
     public Object getChild(int groupPosition, int childPosition) {
         return childPosition;
@@ -41,12 +47,14 @@ public class AdapterStarRatingLevelOne extends BaseExpandableListAdapter {
     @Override
     public View getChildView(int groupPosition, int childPosition,
                              boolean isLastChild, View convertView, ViewGroup parent) {
-        CustomExpListView secondLevelExpListView = new CustomExpListView(this.mContext);
-        secondLevelExpListView.setAdapter(new AdapterStarRatingLevelTwo
+        LayoutInflater layoutInflater = (LayoutInflater) this.mContext
+                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View view = layoutInflater.inflate(R.layout.fragment_star_rating, parent, false);
+        CustomExpListView mListView = (CustomExpListView) view.findViewById(R.id.starListView);
+        mListView.setAdapter(new AdapterStarRatingLevelTwo
                 (this.mContext, mListDataHeader.get(groupPosition).getLevelTwos()));
-        secondLevelExpListView.setGroupIndicator(null);
 
-        return secondLevelExpListView;
+        return mListView;
     }
 
     @Override
@@ -73,17 +81,32 @@ public class AdapterStarRatingLevelOne extends BaseExpandableListAdapter {
     @Override
     public View getGroupView(int groupPosition, boolean isExpanded,
                              View convertView, ViewGroup parent) {
+        ViewHolder holder;
         if (convertView == null) {
+            holder = new ViewHolder();
             LayoutInflater layoutInflater = (LayoutInflater) this.mContext
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = layoutInflater.inflate(R.layout.drawer_list_level_one, parent, false);
+            holder.imageView = (ImageView) convertView
+                    .findViewById(R.id.imageViewlevelone);
+            convertView.setTag(holder);
+        }else{
+            holder = (ViewHolder) convertView.getTag();
         }
      lblListHeader = (TextView) convertView
                 .findViewById(R.id.lblListHeader);
         lblListHeader.setText(mListDataHeader.get(groupPosition).getTitle());
+        if (isExpanded) {
+            holder.imageView.setBackgroundResource(R.drawable.level_one_up);
+        }else{
+            holder.imageView.setBackgroundResource(R.drawable.level_one_down);
+        }
+
         return convertView;
     }
-
+    static class ViewHolder {
+        private ImageView imageView;
+    }
     @Override
     public boolean hasStableIds() {
         return true;

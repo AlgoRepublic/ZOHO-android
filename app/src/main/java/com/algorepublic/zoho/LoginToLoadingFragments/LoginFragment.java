@@ -68,31 +68,21 @@ public class LoginFragment extends BaseFragment {
             aq.id(R.id.password).text(BaseClass.db.getString("Password"));
         }
         if (LocaleHelper.getLanguage(getContext()).equalsIgnoreCase("ar")) {
-            aq.id(R.id.lang_text).text(R.string.arabic);
-
-            //changeLanguage(getString(R.string.lang_arabic));
+            aq.id(R.id.lang_text).text(R.string.english);
         }else{
-           // changeLanguage(getString(R.string.lang_english));
-                aq.id(R.id.lang_text).text(R.string.english);
+            aq.id(R.id.lang_text).text(R.string.arabic);
         }
         aq.id(R.id.lang_text).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (baseClass.getUserLanguage().equalsIgnoreCase("en")) {
-
                     LocaleHelper.setLocale(baseClass.getApplicationContext(), "ar");
-                  //  changeLanguage(getString(R.string.lang_arabic));
                     baseClass.setUserLanguage(getString(R.string.lang_arabic));
-                    aq.id(R.id.lang_text).text(R.string.arabic);
                 } else {
                     LocaleHelper.setLocale(baseClass.getApplicationContext(), "en");
-                   // changeLanguage(getString(R.string.lang_english));
                     baseClass.setUserLanguage(getString(R.string.lang_english));
-                    aq.id(R.id.lang_text).text(R.string.english);
                 }
                 getActivity().recreate();
-//                startActivity(new Intent(getActivity(), ActivityLoginToLoading.class));
-//                getActivity().finish();
             }
         });
         aq.id(R.id.email_sign_in_button).clicked(new View.OnClickListener() {

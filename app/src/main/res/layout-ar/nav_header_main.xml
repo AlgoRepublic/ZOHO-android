@@ -26,103 +26,104 @@
             android:layout_width="28dp"
             android:layout_height="28dp"
             android:layout_centerVertical="true"
-            android:layout_marginStart="10dp"
-            android:layout_marginLeft="10dp"
-            android:layout_alignParentLeft="true"
+            android:layout_marginEnd="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_alignParentEnd="true"
             android:src="@drawable/settings" />
     </RelativeLayout>
 
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="top"
-        android:orientation="vertical">
 
-        <RelativeLayout
-            android:id="@+id/parent"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:theme="@style/ThemeOverlay.AppCompat.Dark">
+            android:layout_gravity="top"
+            android:orientation="vertical">
 
             <RelativeLayout
-                android:id="@+id/parent_child2"
+                android:id="@+id/parent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
                 android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
-                <TextView
-                    android:id="@+id/first_name"
+                <RelativeLayout
+                    android:id="@+id/parent_child2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_toLeftOf="@+id/profile"
-                    android:layout_toStartOf="@+id/profile"
-                    android:gravity="left"
-                    android:lines="2"
-                    android:padding="5dp"
-                    android:text="@string/first_name"
-                    android:textSize="18dp" />
+                    android:layout_margin="10dp"
+                    android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
-                <com.mikhaellopez.circularimageview.CircularImageView
-                    app:civ_border="true"
-                    app:civ_shadow="true"
-                    app:civ_shadow_color="@color/colorBaseMenu"
-                    app:civ_shadow_radius="3"
-                    android:id="@+id/profile"
-                    android:layout_width="70dp"
-                    android:layout_height="70dp"
-                    android:layout_centerHorizontal="true"
-                    android:layout_centerVertical="true"
-                    android:src="@drawable/nav_user"
-                    app:civ_border_color="@color/colorContentWrapper"
-                    app:civ_border_width="4dp" />
+                    <TextView
+                        android:id="@+id/user_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_toLeftOf="@+id/profile"
+                        android:layout_toStartOf="@+id/profile"
+                        android:gravity="right|end"
+                        android:lines="2"
+                        android:padding="5dp"
+                        android:text="John Doe"
+                        android:textColor="@color/colorBaseHeader"
+                        android:textSize="18dp" />
 
-                <TextView
-                    android:id="@+id/last_name"
+                    <com.mikhaellopez.circularimageview.CircularImageView
+                        app:civ_border="true"
+                        app:civ_shadow="true"
+                        app:civ_shadow_color="@color/colorBaseMenu"
+                        app:civ_shadow_radius="3"
+                        android:id="@+id/profile"
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/nav_user"
+                        app:civ_border_color="@color/colorContentWrapper"
+                        app:civ_border_width="4dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_toEndOf="@id/profile"
+                        android:layout_toRightOf="@id/profile"
+                        android:gravity="left|start"
+                        android:lines="2"
+                        android:padding="5dp"
+                        android:text="admin"
+                        android:textColor="@color/colorBaseHeader"
+                        android:textSize="18sp" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/parent_child3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_toEndOf="@id/profile"
-                    android:layout_toRightOf="@id/profile"
-                    android:gravity="right"
-                    android:lines="2"
-                    android:padding="5dp"
-                    android:text="@string/last_name"
-                    android:textSize="18sp" />
+                    android:layout_below="@id/parent_child2"
+                    android:layout_margin="10dp">
+
+                    <TextView
+                        android:id="@+id/email"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:gravity="center"
+                        android:singleLine="true"
+                        android:text="admin@admin.com"
+                        android:textColor="@color/colorBaseHeader"
+                        android:textSize="16sp" />
+                </RelativeLayout>
             </RelativeLayout>
 
-            <RelativeLayout
-                android:id="@+id/parent_child3"
+            <GridView
+                android:id="@+id/gridview_menu"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/parent_child2"
-                android:layout_margin="10dp">
-
-                <TextView
-                    android:id="@+id/email"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:gravity="center"
-                    android:singleLine="true"
-                    android:text="@string/sample_email"
-                    android:textSize="16sp" />
-            </RelativeLayout>
-        </RelativeLayout>
-
-        <GridView
-            android:id="@+id/gridview_menu"
-            android:layout_width="match_parent"
-            android:layout_height="320dp"
-            android:gravity="center"
-            android:horizontalSpacing="5dp"
-            android:numColumns="3"
-            android:choiceMode="singleChoice"
-            android:orientation="vertical"
-            android:padding="10dp"
-            android:stretchMode="columnWidth"/>
-    </LinearLayout>
-
+                android:layout_height="320dp"
+                android:gravity="center"
+                android:horizontalSpacing="5dp"
+                android:numColumns="3"
+                android:orientation="vertical"
+                android:padding="10dp"
+                android:stretchMode="columnWidth"></GridView>
+        </LinearLayout>
 </LinearLayout>

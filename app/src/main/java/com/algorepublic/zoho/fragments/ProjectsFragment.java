@@ -202,9 +202,9 @@ public class ProjectsFragment extends BaseFragment implements SwipeRefreshLayout
                 projectsList.setOwnerID(AllProjectsByUserModel.getInstance().responseData.get(loop).ownerID);
                 projectsList.setOwnerName(AllProjectsByUserModel.getInstance().responseData.get(loop).ownerName);
                 projectsList.setProjectDesc(AllProjectsByUserModel.getInstance().responseData.get(loop).description);
-                projectsList.setTotalTasks(AllProjectsByUserModel.getInstance().responseData.get(loop).totalTasks);
+                projectsList.setTotalTasks(Integer.toString(AllProjectsByUserModel.getInstance().responseData.get(loop).totalTasks));
                 projectsList.setTotalUsers(AllProjectsByUserModel.getInstance().responseData.get(loop).usersCount);
-                projectsList.setTotalMilestones(AllProjectsByUserModel.getInstance().responseData.get(loop).toalMilestones);
+                projectsList.setTotalMilestones(Integer.toString(AllProjectsByUserModel.getInstance().responseData.get(loop).toalMilestones));
                 projectsList.setDeleted(AllProjectsByUserModel.getInstance().responseData.get(loop).IsDeleted);
                 projectsList.setPrivate(AllProjectsByUserModel.getInstance().responseData.get(loop).Isprivate);
                 allProjectsList.add(projectsList);

@@ -99,7 +99,7 @@ public class TasksListFragment extends BaseFragment {
                     Snackbar.make(getView(),getString(R.string.select_project),Snackbar.LENGTH_SHORT).show();
 
                 }else {
-                    callFragmentWithBackStack(R.id.container, TaskAddUpdateFragment.newInstance(), "TaskAddUpdateFragment");
+                    callFragmentWithBackStack(R.id.container, TaskAddUpdateFragment.newInstance(taskListName), "TaskAddUpdateFragment");
                 }
                 break;
         }
@@ -128,13 +128,6 @@ public class TasksListFragment extends BaseFragment {
                     new CallBack(TasksListFragment.this, "OwnerTasksList"));
         }
         aq.id(R.id.all).checked(true);
-        aq.id(R.id.add_task).clicked(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                startActivity(new Intent(getActivity(), TaskAddUpdateFragment.class));
-            }
-        });
        searchView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -271,7 +264,7 @@ public class TasksListFragment extends BaseFragment {
             }else{
                 aq.id(R.id.response_alert).visibility(View.GONE);
             }
-            adapterTasksList = new AdapterTasksList(getActivity(),generalList);
+            adapterTasksList = new AdapterTasksList(getActivity(),generalList,taskListName);
             listView.setAreHeadersSticky(true);
             listView.setAdapter(adapterTasksList);
         }

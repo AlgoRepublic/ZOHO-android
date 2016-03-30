@@ -10,13 +10,7 @@
     android:paddingRight="10dp"
     android:paddingStart="10dp">
 
-    <View
-        android:id="@+id/priority_bar"
-        android:layout_width="8dp"
-        android:layout_height="match_parent"
-        android:layout_marginBottom="9dp"
-        android:layout_marginTop="4dp"
-        android:background="@drawable/roundable_prioritybar"/>
+
     <RelativeLayout
         android:id="@+id/layout123"
         android:layout_toRightOf="@+id/priority_bar"
@@ -30,6 +24,7 @@
             android:id="@+id/shadow_item_container"
             android:layout_width="match_parent"
             style="@style/ms9_DefaultShadowStyle"
+            android:layout_toStartOf="@+id/priority_bar"
             android:layout_height="match_parent"
             app:ms9_affectsDisplayedPosition="true"
             app:ms9_shadowElevation="2dp"
@@ -72,7 +67,7 @@
                                 android:background="@color/colorContentWrapper"
                                 android:text="Edit"
                                 />
-                                />
+                            />
                             <TextView
                                 android:id="@+id/btDelete"
                                 android:layout_width="0dp"
@@ -98,7 +93,6 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_toLeftOf="@+id/rightarrow_layout"
-
                                 android:background="@color/colorBaseWrapper">
 
                                 <ImageView
@@ -110,18 +104,18 @@
                                     android:layout_marginRight="5dp"
                                     android:layout_marginTop="10dp"
                                     android:adjustViewBounds="true"
-                                    android:layout_alignParentLeft="true"
                                     android:scaleType="fitXY"
-                                    android:src="@mipmap/task_progress" />
+                                    android:src="@drawable/task_progress" />
 
                                 <LinearLayout
                                     android:id="@+id/layout1"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:layout_toRightOf="@+id/task_image"
+                                    android:layout_toLeftOf="@+id/task_image"
+                                    android:layout_toEndOf="@+id/task_image"
                                     android:orientation="vertical"
                                     android:paddingBottom="10dp"
-                                    android:paddingRight="10dp"
+                                    android:paddingRight="5dp"
                                     android:paddingTop="10dp">
 
                                     <LinearLayout
@@ -131,22 +125,23 @@
                                         android:orientation="horizontal"
                                         android:weightSum="2">
 
+                                        <TextView
+                                            android:id="@+id/task_name"
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_weight="1"
+                                            android:gravity="start"
+                                            android:textSize="14sp"
+                                            android:textStyle="bold" />
 
                                         <TextView
                                             android:id="@+id/task_date"
                                             android:layout_width="0dp"
                                             android:layout_height="wrap_content"
                                             android:layout_weight="1"
-                                            android:gravity="right|end"
+                                            android:gravity="end"
+                                            android:paddingEnd="5dp"
                                             android:textSize="12sp" />
-                                        <TextView
-                                            android:id="@+id/task_name"
-                                            android:layout_width="0dp"
-                                            android:layout_height="wrap_content"
-                                            android:layout_weight="1"
-                                            android:gravity="left"
-                                            android:textSize="14sp"
-                                            android:textStyle="bold" />
                                     </LinearLayout>
 
                                     <LinearLayout
@@ -156,12 +151,23 @@
                                         android:orientation="horizontal"
                                         android:weightSum="2">
 
-
+                                        <TextView
+                                            android:id="@+id/project_name"
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_gravity="center_vertical"
+                                            android:layout_weight=".8"
+                                            android:gravity="start"
+                                            android:singleLine="true"
+                                            android:ellipsize="end"
+                                            android:textSize="14sp"
+                                            android:textStyle="bold" />
 
                                         <RelativeLayout
                                             android:layout_width="0dp"
                                             android:layout_height="wrap_content"
                                             android:layout_below="@+id/general"
+                                            android:paddingEnd="5dp"
                                             android:layout_weight="1.2">
 
                                             <TextView
@@ -169,7 +175,8 @@
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="wrap_content"
                                                 android:layout_centerVertical="true"
-                                                android:layout_toLeftOf="@+id/bar"
+                                                android:layout_toStartOf="@+id/bar"
+
                                                 android:gravity="left"
                                                 android:text="@string/task_comment"
                                                 android:textSize="12sp" />
@@ -182,29 +189,18 @@
                                                 android:layout_centerVertical="true"
                                                 android:text="@string/divider"
                                                 android:checked="true"
-                                                android:layout_toLeftOf="@+id/task_users"></RadioButton>
+                                                android:layout_toStartOf="@+id/task_users"/>
 
                                             <TextView
                                                 android:id="@+id/task_users"
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="wrap_content"
-                                                android:layout_alignParentRight="true"
+                                                android:layout_alignParentEnd="true"
                                                 android:layout_centerVertical="true"
                                                 android:gravity="left"
                                                 android:text="@string/task_user"
                                                 android:textSize="12sp" />
                                         </RelativeLayout>
-                                        <TextView
-                                            android:id="@+id/project_name"
-                                            android:layout_width="0dp"
-                                            android:layout_height="wrap_content"
-                                            android:layout_gravity="center_vertical"
-                                            android:layout_weight=".8"
-                                            android:gravity="left"
-                                            android:singleLine="true"
-                                            android:ellipsize="end"
-                                            android:textSize="14sp"
-                                            android:textStyle="bold" />
                                     </LinearLayout>
                                 </LinearLayout>
                             </RelativeLayout>
@@ -221,12 +217,20 @@
                                     android:layout_width="15dp"
                                     android:layout_height="15dp"
                                     android:layout_margin="5dp"
-                                    android:background="@mipmap/circle_left"/>
+                                    android:background="@drawable/circle_left"/>
                             </LinearLayout>
                         </RelativeLayout>
                     </com.daimajia.swipe.SwipeLayout>
                 </RelativeLayout>
             </RelativeLayout>
         </com.h6ah4i.android.materialshadowninepatch.MaterialShadowContainerView>
+        <View
+            android:id="@+id/priority_bar"
+            android:layout_width="8dp"
+            android:layout_height="match_parent"
+
+            android:layout_alignParentEnd="true"
+            android:background="@drawable/roundable_prioritybar"/>
     </RelativeLayout>
+
 </LinearLayout>

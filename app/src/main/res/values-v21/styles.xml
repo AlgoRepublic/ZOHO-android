@@ -11,16 +11,15 @@
         <item name="colorAccent">@color/colorPrimaryBlue</item>
         <item name="checkboxStyle">@style/blueCheckBoxStyle</item>
         <item name="android:textViewStyle">@style/blueTextView</item>
-        <item name="radioButtonStyle">@style/blueRadioButton</item>
         <item name="seekBarStyle">@style/blueSeekBar</item>
         <item name="android:ratingBarStyle">@style/blueRatingBar</item>
-        <item name="android:radioButtonStyle">@style/blueRadioButtonStyle</item>
+        <item name="android:radioButtonStyle">@style/blueRadioButton</item>
         <item name="android:tabWidgetStyle">@style/bluePagerTitleStrip</item>
         <item name="android:buttonStyle">@style/blueButton</item>
         <item name="android:editTextStyle">@style/blueEditTextStyle</item>
     </style>
 
-    <style name="blueButton" parent="Widget.AppCompat.EditText">
+    <style name="blueButton" parent="@android:style/Widget.Button">
         <item name="android:background">@color/colorSecondaryBlue</item>
     </style>
     <style name="blueRatingBar" parent="@android:style/Widget.RatingBar">
@@ -60,11 +59,8 @@
         <item name="tabBackground">@color/colorPrimaryBlue</item>
         <item name="tabSelectedTextColor">@color/colorWhite</item>
     </style>
-    <style name="blueRadioButtonStyle" parent="@android:style/Widget.CompoundButton.RadioButton">
-        <item name="android:background">@drawable/blue_radiobutton</item>
-        <item name="android:button">@null</item>
-    </style>
-    <style name="blueEditTextStyle" parent="@android:style/Widget.EditText">
+
+    <style name="blueEditTextStyle" parent="Widget.AppCompat.EditText">
         <item name="android:textColor">@color/colorPrimaryBlue</item>
         <item name="android:textColorHint">@color/colorPrimaryBlue</item>
     </style>
@@ -86,7 +82,7 @@
         <item name="android:tabWidgetStyle">@style/blackPagerTitleStrip</item>
         <item name="android:buttonStyle">@style/blackButton</item>
         <item name="android:ratingBarStyle">@style/blackRatingBar</item>
-        <item name="android:radioButtonStyle">@style/blackRadioButtonStyle</item>
+        <item name="android:radioButtonStyle">@style/blackRadioButton</item>
         <item name="android:actionMenuTextAppearance">@style/MyMenuTextAppearance</item>
         <item name="editTextStyle">@style/blackEditTextStyle</item>
     </style>
@@ -124,6 +120,8 @@
 
     <style name="blackRadioButton" parent="@android:style/Widget.CompoundButton.RadioButton">
         <item name="android:background">@drawable/black_radiobutton</item>
+        <item name="android:textColor">@color/colorBaseHeader</item>
+        <item name="android:button">@null</item>
     </style>
 
 
@@ -169,9 +167,5 @@
         <item name="textAllCaps">false</item>
         <item name="android:textColor">@android:color/white</item>
     </style>
-    <style name="blackRadioButtonStyle" parent="@android:style/Widget.CompoundButton.RadioButton">
-        <item name="android:background">@drawable/black_radiobutton</item>
-        <item name="android:textColor">@color/colorBaseHeader</item>
-        <item name="android:button">@null</item>
-    </style>
+
 </resources>

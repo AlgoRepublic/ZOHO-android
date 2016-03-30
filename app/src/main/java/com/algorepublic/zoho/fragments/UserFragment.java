@@ -54,7 +54,7 @@ public class UserFragment extends BaseFragment implements SwipeRefreshLayout.OnR
         baseClass = ((BaseClass) getActivity().getApplicationContext());
         aq = new AQuery(getActivity(), view);
         setHasOptionsMenu(true);
-        getToolbar().setTitle(getString(R.string.user));
+        getToolbar().setTitle(getString(R.string.users));
         swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe_refresh_layout);
         swipeRefreshLayout.setOnRefreshListener(this);
         swipeRefreshLayout.setProgressViewOffset(false, 0, 200);

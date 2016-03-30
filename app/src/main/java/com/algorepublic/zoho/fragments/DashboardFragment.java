@@ -2,15 +2,19 @@ package com.algorepublic.zoho.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.algorepublic.zoho.Models.AllProjectsByUserModel;
 import com.algorepublic.zoho.Models.DashBoardModel;
 import com.algorepublic.zoho.R;
+import com.algorepublic.zoho.adapters.ProjectsList;
 import com.algorepublic.zoho.services.CallBack;
 import com.algorepublic.zoho.services.DashBoardService;
+import com.algorepublic.zoho.services.ProjectsListService;
 import com.algorepublic.zoho.utils.BaseClass;
 import com.androidquery.AQuery;
 import com.dacer.androidcharts.BarView;
@@ -25,26 +29,27 @@ import java.util.ArrayList;
  */
 public class DashboardFragment extends BaseFragment {
 
-    DashBoardService service;
+    DashBoardService service;ProjectsListService service1;
     AQuery aq;float taskClosed,taskListClosed,milestoneClosed;
     BaseClass baseClass;
     PieView pieGraph;
     BarView barGraph;
     static DashboardFragment fragment;
-    public  static DashboardFragment newInstance() {
 
-            fragment = new DashboardFragment();
-
-        return fragment;
+    public static DashboardFragment newInstance() {
+        return new DashboardFragment();
     }
+//    @Override
+//    public void onResume() {
+//        super.onResume();
+//        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(getString(R.string.dashboard));
+//        getActivity().supportInvalidateOptionsMenu();
+//    }
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-       // ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(getString(R.string.dashboard));
-    }
-    @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+        getToolbar().setTitle(getString(R.string.dashboard));
+        getActivity().supportInvalidateOptionsMenu();
     }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -57,8 +62,10 @@ public class DashboardFragment extends BaseFragment {
         barGraph = (BarView)view.findViewById(R.id.line_view);
         pieGraph  = (PieView)view.findViewById(R.id.pie_view);
         service = new DashBoardService(getActivity());
+        service1 = new ProjectsListService(getActivity());
         if(baseClass.getSelectedProject().equalsIgnoreCase("0")) {
-            Toast.makeText(getActivity(), getString(R.string.select_project), Toast.LENGTH_SHORT).show();
+            service1.getAllProjectsByUser_API(baseClass.getUserId(),
+                    true, new CallBack(this, "AllProjects"));
         }else
         {
             service.getMileStone(baseClass.getSelectedProject(), true,
@@ -68,13 +75,39 @@ public class DashboardFragment extends BaseFragment {
         setHasOptionsMenu(true);
         return view;
     }
+    public void AllProjects(Object caller, Object model) {
+        AllProjectsByUserModel.getInstance().setList((AllProjectsByUserModel) model);
+        if (AllProjectsByUserModel.getInstance().responseCode == 100
+                || AllProjectsByUserModel.getInstance().responseData.size() != 0) {
+            int completedTasks=0,totalTasks =0;
+            ArrayList<PieHelper> pieHelperArrayList = new ArrayList<PieHelper>();
+            for(int loop=0;loop<AllProjectsByUserModel.getInstance().responseData.size();loop++) {
+                AllProjectsByUserModel.Response object = AllProjectsByUserModel.getInstance()
+                        .responseData.get(loop);
+                completedTasks +=object.completedTasksNo;
+                totalTasks +=object.totalTasks;
+            }
+            float closed = (Float.parseFloat("" + completedTasks) /
+                    Float.parseFloat("" + totalTasks)) * 100;
+            int opentask = totalTasks - completedTasks;
+            float opened = ((Float.parseFloat("" + opentask))
+                    / Float.parseFloat("" + totalTasks)) * 100;
+            PieHelper pieHelper = new PieHelper(closed,
+                    getString(R.string.closed_tasks), 0);
+            PieHelper pieHelper1 = new PieHelper(opened,
+                    getString(R.string.opened_tasks), 0);
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
+            pieHelperArrayList.add(pieHelper1);
+            pieHelperArrayList.add(pieHelper);
+            pieGraph.selectedPie(PieView.NO_SELECTED_INDEX);
+            pieGraph.showPercentLabel(true);
+            pieGraph.setDate(pieHelperArrayList);
+            randomSet1();
 
-        super.onCreate(savedInstanceState);
+        } else {
+            Snackbar.make(getView(), getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
+        }
     }
-
     public void DashBoardList(Object caller, Object model) {
         DashBoardModel.getInstance().setList((DashBoardModel) model);
         if (DashBoardModel.getInstance().responseCode == 100) {
@@ -94,7 +127,6 @@ public class DashboardFragment extends BaseFragment {
 
             pieGraph.selectedPie(PieView.NO_SELECTED_INDEX);
             pieGraph.showPercentLabel(true);
-            //pieGraph.setTextSize(12);
             pieGraph.setDate(pieHelperArrayList);
             randomSet();
 
@@ -103,7 +135,53 @@ public class DashboardFragment extends BaseFragment {
             Toast.makeText(getActivity(), getString(R.string.invalid_credential), Toast.LENGTH_SHORT).show();
         }
     }
+    private void randomSet1(){
 
+        ArrayList<Float> barDataList = new ArrayList<Float>();
+        ArrayList<String> barDataList1 = new ArrayList<String>();
+        int completedTasksNo=0,totalTasksNo=0,
+                completedTaskList=0,totalTaskList=0,completedMilestonesNo=0,totalMilestonesNo=0;
+        DecimalFormat decimalFormat = new DecimalFormat("#0.00");
+        for(int loop=0;loop<AllProjectsByUserModel.getInstance().responseData.size();loop++) {
+            AllProjectsByUserModel.Response object = AllProjectsByUserModel.getInstance()
+                    .responseData.get(loop);
+            completedTasksNo +=object.completedTasksNo;
+            totalTasksNo +=object.totalTasks;
+            completedTaskList +=object.completedTaskList;
+            totalTaskList +=object.totalTaskList;
+            completedMilestonesNo +=object.completedMilestonesNo;
+            totalMilestonesNo +=object.toalMilestones;
+        }
+        if(completedTasksNo >0) {
+            taskClosed = (Float.parseFloat("" + completedTasksNo) /
+                    Float.parseFloat("" + totalTasksNo)) * 100;
+        }
+        if(completedTaskList >0) {
+            taskListClosed = (Float.parseFloat("" + completedTaskList))
+                    / Float.parseFloat("" + totalTaskList) * 100;
+        }
+        if(completedMilestonesNo >0) {
+            milestoneClosed = (Float.parseFloat("" + completedMilestonesNo))
+                    / Float.parseFloat("" + totalMilestonesNo) * 100;
+        }
+        aq.id(R.id.open1).text(getString(R.string.opened_tasks)+" "+(totalTasksNo-completedTasksNo));
+        aq.id(R.id.close1).text(getString(R.string.closed_tasks)+" "+completedTasksNo);
+        aq.id(R.id.open2).text(getString(R.string.opened_taskslist)+" "+(totalTaskList-completedTaskList));
+        aq.id(R.id.close2).text(getString(R.string.closed_taskslists)+" "+completedTaskList);
+        aq.id(R.id.open3).text(getString(R.string.opened_milestone)+" "+(totalMilestonesNo-completedMilestonesNo));
+        aq.id(R.id.close3).text(getString(R.string.closed_milestone)+" "+completedMilestonesNo);
+        barDataList.add(taskClosed);
+        barDataList.add(taskListClosed);
+        barDataList.add(milestoneClosed);
+        barDataList1.add(getString(R.string.tasks));
+        barDataList1.add(decimalFormat.format(taskClosed)+"%");
+        barDataList1.add(getString(R.string.tasks_list));
+        barDataList1.add(decimalFormat.format(taskListClosed)+"%");
+        barDataList1.add(getString(R.string.milestones));
+        barDataList1.add(decimalFormat.format(milestoneClosed)+"%");
+        barGraph.setBottomTextList(barDataList1);
+        barGraph.setDataList(barDataList, 100);
+    }
     private void randomSet(){
 
         ArrayList<Float> barDataList = new ArrayList<Float>();
