@@ -16,24 +16,15 @@ import android.widget.CompoundButton;
 import android.widget.GridView;
 
 import com.algorepublic.zoho.FragmentsTasks.TaskEditTitleFragment;
-import com.algorepublic.zoho.Models.StarRatingModel;
 import com.algorepublic.zoho.R;
-import com.algorepublic.zoho.adapters.AdapterStarRatingLevelOne;
 import com.algorepublic.zoho.adapters.AdapterTaskMenu;
 import com.algorepublic.zoho.adapters.AttachmentList;
 import com.algorepublic.zoho.adapters.DocumentsList;
-import com.algorepublic.zoho.adapters.StarRatingHeadsLevelOne;
-import com.algorepublic.zoho.adapters.StarRatingHeadsLevelThree;
-import com.algorepublic.zoho.adapters.StarRatingHeadsLevelTwo;
 import com.algorepublic.zoho.adapters.TasksList;
-import com.algorepublic.zoho.services.CallBack;
-import com.algorepublic.zoho.services.StarRatingService;
 import com.algorepublic.zoho.utils.BaseClass;
 import com.algorepublic.zoho.utils.Constants;
-import com.algorepublic.zoho.utils.CustomExpListView;
 import com.algorepublic.zoho.utils.GenericHttpClient;
 import com.androidquery.AQuery;
-
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -139,7 +130,7 @@ public class TaskAddUpdateFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        setHasOptionsMenu(true);
+//        setHasOptionsMenu(true);
         View view = inflater.inflate(R.layout.activity_task, container, false);
         dialogAC = InitializeDialog(getActivity());
         gridViewTaskMenu = (GridView) view.findViewById(R.id.gridview_taskmenu);

@@ -43,6 +43,7 @@ public class StarRatingFragment extends BaseFragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_star_rating, container, false);
         mListView = (CustomExpListView) view.findViewById(R.id.starListView);
+
         aq= new AQuery(view);
         service = new StarRatingService(getActivity());
         if(levelOneHead.size()==0) {

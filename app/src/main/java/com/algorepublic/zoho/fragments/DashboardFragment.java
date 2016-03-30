@@ -2,7 +2,6 @@ package com.algorepublic.zoho.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,25 +30,28 @@ public class DashboardFragment extends BaseFragment {
     BaseClass baseClass;
     PieView pieGraph;
     BarView barGraph;
-    public static DashboardFragment newInstance() {
-        DashboardFragment fragment = new DashboardFragment();
+    static DashboardFragment fragment;
+    public  static DashboardFragment newInstance() {
+
+            fragment = new DashboardFragment();
+
         return fragment;
-    }
-    @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-        setHasOptionsMenu(true);
-        super.onViewCreated(view, savedInstanceState);
     }
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(getString(R.string.dashboard));
+       // ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(getString(R.string.dashboard));
+    }
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
     }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment_forums
         View view  = inflater.inflate(R.layout.fragment_dashboard, container, false);
+
         aq = new AQuery(view);
         baseClass = ((BaseClass) getActivity().getApplicationContext());
         barGraph = (BarView)view.findViewById(R.id.line_view);
@@ -62,7 +64,15 @@ public class DashboardFragment extends BaseFragment {
             service.getMileStone(baseClass.getSelectedProject(), true,
                     new CallBack(DashboardFragment.this, "DashBoardList"));
         }
+        getToolbar().setTitle(getString(R.string.dashboard));
+        setHasOptionsMenu(true);
         return view;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+
+        super.onCreate(savedInstanceState);
     }
 
     public void DashBoardList(Object caller, Object model) {
