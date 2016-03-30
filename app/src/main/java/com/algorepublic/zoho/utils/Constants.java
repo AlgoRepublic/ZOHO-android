@@ -78,6 +78,7 @@ public class Constants {
 	//DashBoardApi
 
 	public static String MilesStone_API= BASE_URL+"/Project/GetByID?";
-
+	public static String FeedsByUser_API= BASE_URL+"/UserStatusUpdate/GetByUserId?"; //UserId
+	public static String FeedsByProject_API= BASE_URL+"/UserStatusUpdate/GetByProjectId?"; //ProjectId
 
 }

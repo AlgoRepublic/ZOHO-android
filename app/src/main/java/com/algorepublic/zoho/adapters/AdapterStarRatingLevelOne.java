@@ -52,12 +52,11 @@ public class AdapterStarRatingLevelOne extends BaseExpandableListAdapter {
         LayoutInflater layoutInflater = (LayoutInflater) this.mContext
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = layoutInflater.inflate(R.layout.fragment_star_rating, parent, false);
-        StarRatingFragment.mListView2 = (CustomExpListView) view.findViewById(R.id.starListView);
-        StarRatingFragment.mListView2.setAdapter(new AdapterStarRatingLevelTwo
+        CustomExpListView mListView = (CustomExpListView) view.findViewById(R.id.starListView);
+        mListView.setAdapter(new AdapterStarRatingLevelTwo
                 (this.mContext, mListDataHeader.get(groupPosition).getLevelTwos()));
-        StarRatingFragment.mListView2.setGroupIndicator(null);
 
-        return StarRatingFragment.mListView2;
+        return mListView;
     }
 
     @Override

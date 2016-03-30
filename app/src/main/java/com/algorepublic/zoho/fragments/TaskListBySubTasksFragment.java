@@ -134,7 +134,6 @@ public class TaskListBySubTasksFragment extends BaseFragment {
         taskListService.getTasksListBySubTasks(taskID, true,
                 new CallBack(TaskListBySubTasksFragment.this, "TaskListBySubTasks"));
         applyLightBackground(aq.id(R.id.layout_bottom).getView(), baseClass);
-
         aq.id(R.id.sort).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

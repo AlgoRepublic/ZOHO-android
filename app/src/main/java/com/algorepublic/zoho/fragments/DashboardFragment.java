@@ -36,9 +36,14 @@ public class DashboardFragment extends BaseFragment {
     PieView pieGraph;
     BarView barGraph;
     public static DashboardFragment newInstance() {
-        DashboardFragment fragment = new DashboardFragment();
-        return fragment;
+        return new DashboardFragment();
     }
+//    @Override
+//    public void onResume() {
+//        super.onResume();
+//        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(getString(R.string.dashboard));
+//        getActivity().supportInvalidateOptionsMenu();
+//    }
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         setHasOptionsMenu(true);
@@ -47,7 +52,8 @@ public class DashboardFragment extends BaseFragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(getString(R.string.dashboard));
+        getToolbar().setTitle(getString(R.string.dashboard));
+        getActivity().supportInvalidateOptionsMenu();
     }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

@@ -44,6 +44,7 @@
                 android:layout_toRightOf="@+id/user_image"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="10dp" />
+
         </RelativeLayout>
         <View
             android:id="@+id/view"
@@ -98,6 +99,7 @@
             android:transcriptMode="alwaysScroll"
             android:layout_below="@id/header"
             android:choiceMode="singleChoice"
+            android:layout_marginTop="5dp"
             android:stackFromBottom="true"
             android:descendantFocusability="beforeDescendants"
             android:divider="@null"

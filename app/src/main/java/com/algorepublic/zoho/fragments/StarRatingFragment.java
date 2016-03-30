@@ -27,10 +27,7 @@ import java.util.ArrayList;
 public class StarRatingFragment extends BaseFragment {
     static StarRatingFragment fragment;
     public static ArrayList<StarRatingHeadsLevelOne> levelOneHead = new ArrayList<>();
-    AQuery aq;
-    public static CustomExpListView mListView1;
-    public static CustomExpListView mListView2;
-    public static CustomExpListView mListView3;
+    AQuery aq; CustomExpListView mListView;
     StarRatingService service;
     public static StarRatingFragment newInstance() {
         fragment = new StarRatingFragment();
@@ -46,8 +43,7 @@ public class StarRatingFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_star_rating, container, false);
-        mListView1 = (CustomExpListView) view.findViewById(R.id.starListView);
-        mListView1.setGroupIndicator(null);
+        mListView = (CustomExpListView) view.findViewById(R.id.starListView);
         aq= new AQuery(view);
         service = new StarRatingService(getActivity());
         if(levelOneHead.size()==0) {
@@ -59,9 +55,9 @@ public class StarRatingFragment extends BaseFragment {
         return view;
     }
     private void setAdapter(){
-        if (mListView1 != null) {
+        if (mListView != null) {
             AdapterStarRatingLevelOne parentLevelAdapter = new AdapterStarRatingLevelOne(getActivity(), levelOneHead);
-            mListView1.setAdapter(parentLevelAdapter);
+            mListView.setAdapter(parentLevelAdapter);
         }
     }
     public void StarRatingHeads(Object caller, Object model) {

@@ -4,15 +4,18 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.GridView;
 import android.widget.ImageView;
 
 import com.algorepublic.zoho.adapters.AdapterMenuItems;
 import com.algorepublic.zoho.fragments.HomeFragment;
+import com.algorepublic.zoho.fragments.UploadDocsFragment;
 import com.algorepublic.zoho.utils.BaseClass;
 import com.algorepublic.zoho.utils.Constants;
 import com.androidquery.AQuery;
@@ -105,7 +108,15 @@ public class MainActivity extends BaseActivity {
         } else {
             super.onBackPressed();
         }
-
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        Log.e("code1", requestCode + "/" + resultCode + "/");
+        Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.container);
+        if(fragment instanceof UploadDocsFragment) {
+            fragment.onActivityResult(requestCode, resultCode, data);
+        }
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
 }

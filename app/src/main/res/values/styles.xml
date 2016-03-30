@@ -12,7 +12,7 @@
         <item name="android:colorForeground">@color/colorBaseHeader</item>
         <item name="colorAccent">@color/colorBaseHeader</item>
         <item name="checkboxStyle">@style/blackCheckBoxStyle</item>
-        <item name="android:radioButtonStyle">@style/blackRadioButtonStyle</item>
+        <item name="android:radioButtonStyle">@style/blackRadioButton</item>
         <item name="android:listViewStyle">@style/blackListViewStyle</item>
         <item name="android:tabWidgetStyle">@style/blackPagerTitleStrip</item>
         <item name="android:actionMenuTextAppearance">@style/MyMenuTextAppearance</item>
@@ -63,7 +63,8 @@
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Dark" />
-    <style name="blackRadioButtonStyle" parent="@android:style/Widget.CompoundButton.RadioButton">
+
+    <style name="blackRadioButton" parent="@android:style/Widget.CompoundButton.RadioButton">
         <item name="android:background">@drawable/black_radiobutton</item>
         <item name="android:textColor">@color/colorBaseHeader</item>
         <item name="android:button">@null</item>
@@ -81,7 +82,7 @@
         <item name="android:colorForeground">@color/colorPrimaryBlue</item>
         <item name="colorAccent">@color/colorPrimaryBlue</item>
         <item name="checkboxStyle">@style/blueCheckBoxStyle</item>
-        <item name="android:radioButtonStyle">@style/blueRadioButtonStyle</item>
+        <item name="android:radioButtonStyle">@style/blueRadioButton</item>
         <item name="android:listViewStyle">@style/blueListViewStyle</item>
         <item name="android:tabWidgetStyle">@style/bluePagerTitleStrip</item>
         <item name="android:editTextStyle">@style/blueEditTextStyle</item>
@@ -123,7 +124,7 @@
         <item name="textAllCaps">false</item>
     </style>
 
-    <style name="blueRadioButtonStyle" parent="@android:style/Widget.CompoundButton.RadioButton">
+    <style name="blueRadioButton" parent="@android:style/Widget.CompoundButton.RadioButton">
         <item name="android:background">@drawable/blue_radiobutton</item>
         <item name="android:textColor">@color/colorPrimaryBlue</item>
         <item name="android:button">@null</item>
