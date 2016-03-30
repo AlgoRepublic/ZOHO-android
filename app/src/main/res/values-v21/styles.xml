@@ -84,7 +84,7 @@
         <item name="android:ratingBarStyle">@style/blackRatingBar</item>
         <item name="android:radioButtonStyle">@style/blackRadioButton</item>
         <item name="android:actionMenuTextAppearance">@style/MyMenuTextAppearance</item>
-        <item name="editTextStyle">@style/blackEditTextStyle</item>
+        <item name="android:editTextStyle">@style/blackEditTextStyle</item>
     </style>
 
     <style name="blackRatingBar" parent="@android:style/Widget.RatingBar">

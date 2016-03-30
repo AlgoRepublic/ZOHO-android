@@ -32,4 +32,6 @@
     <color name="pressed_color">#4d90fe</color>
     <color name="default_color">#ffffff</color>
 
+    <color name="light_gray">#FAFAFA</color>
+
 </resources>

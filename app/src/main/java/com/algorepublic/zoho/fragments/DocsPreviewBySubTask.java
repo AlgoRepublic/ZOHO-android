@@ -1,8 +1,16 @@
 package com.algorepublic.zoho.fragments;
 
 import android.annotation.SuppressLint;
+import android.app.DownloadManager;
+import android.content.Context;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -37,7 +45,47 @@ public class DocsPreviewBySubTask extends BaseFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        menu.clear();
+        inflater.inflate(R.menu.menu_board, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.save_file:
+                downloadFile(Constants.Image_URL + docObject.getID()
+                        + "." + BaseClass.getExtensionType(
+                        docObject.getFileDescription()),docObject.getFileName(),BaseClass.getExtensionType(
+                        docObject.getFileName()));
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+    public void downloadFile(String url, String title, String extention) {
+        Log.e("Url", url);
+        Uri Download_Uri = Uri.parse(url);
+        DownloadManager downloadManager = (DownloadManager) getActivity()
+                .getSystemService(Context.DOWNLOAD_SERVICE);
+        DownloadManager.Request request = new DownloadManager.Request(Download_Uri);
+
+        //Restrict the types of networks over which this download may proceed.
+        request.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI | DownloadManager.Request.NETWORK_MOBILE);
+        //Set whether this download may proceed over a roaming connection.
+        request.setAllowedOverRoaming(false);
+        //Set the title of this download, to be displayed in notifications (if enabled).
+        request.setTitle("Downloading");
+        //Set a description of this download, to be displayed in notifications (if enabled)
+        request.setDescription("Downloading File");
+        //Set the local destination for the downloaded file to a path within the application's external files directory
+        request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, title + System.currentTimeMillis() + extention);
+        request.allowScanningByMediaScanner();
+        request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE
+                | DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+        downloadManager.enqueue(request);
+    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

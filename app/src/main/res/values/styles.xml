@@ -89,7 +89,7 @@
     </style>
 
     <style name="blueCheckBoxStyle" parent="@android:style/Widget.CompoundButton.CheckBox">
-        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textColor">@color/colorPrimaryBlue</item>
         <item name="android:background">@color/colorPrimaryBlue</item>
     </style>
 

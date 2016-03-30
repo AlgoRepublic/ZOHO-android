@@ -374,7 +374,7 @@ public class UploadDocsFragment extends BaseFragment implements GoogleApiClient.
                 root.mkdirs();
             }
             file = new File(root ,passed.get(0));
-
+            Log.e("Name","/"+passed.get(0));
             try {
                 inputStream = mService.files().get(driveId.getResourceId())
                         .executeMediaAsInputStream();
