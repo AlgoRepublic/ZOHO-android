@@ -4,7 +4,7 @@
     android:layout_centerHorizontal="true"
     android:background="@color/colorBaseMenu"
     android:descendantFocusability="blocksDescendants"
-    android:padding="1dp">
+    android:padding="2dp">
 
     <TextView
         android:id="@+id/header"
@@ -12,6 +12,6 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:textColor="@color/colorBaseWrapper"
-        android:textSize="14sp" />
+        android:textSize="24sp" />
 
 </RelativeLayout>

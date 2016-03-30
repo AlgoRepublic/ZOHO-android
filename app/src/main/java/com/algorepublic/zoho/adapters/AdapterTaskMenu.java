@@ -131,8 +131,6 @@ public class AdapterTaskMenu extends BaseAdapter {
 
         ((AppCompatActivity) ctx).getSupportFragmentManager()
                 .beginTransaction()
-//                .setCustomAnimations(R.anim.slide_in_enter, R.anim.slide_in_exit,
-//                        R.anim.slide_pop_enter, R.anim.slide_pop_exit)
                 .replace(containerId, fragment, tag)
 
                 .commit();

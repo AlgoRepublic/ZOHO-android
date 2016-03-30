@@ -18,7 +18,7 @@
             android:padding="20dp"
             android:text="@string/documents"
             android:textColor="@color/colorContentWrapper"
-            android:textSize="18sp"
+            android:textSize="22sp"
             android:typeface="monospace" />
 
         <org.angmarch.views.NiceSpinner
@@ -41,7 +41,7 @@
             android:textAllCaps="false"
             android:gravity="center"
             android:textColor="@color/colorBaseWrapper"
-            android:textSize="18sp" />
+            android:textSize="20sp" />
 
     </LinearLayout>
 </LinearLayout>

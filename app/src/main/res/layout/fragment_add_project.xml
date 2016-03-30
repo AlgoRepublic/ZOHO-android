@@ -70,7 +70,6 @@
                         android:layout_marginTop="10dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="5dp"
                         android:text="@string/users"
                         android:textSize="13.33sp" />
                     <com.h6ah4i.android.materialshadowninepatch.MaterialShadowContainerView
@@ -85,7 +84,6 @@
                             android:id="@+id/owner_list"
                             android:layout_width="match_parent"
                             android:layout_height="55dp"
-                            android:layout_marginStart="5dp"
                             android:textSize="18sp"
                             android:layout_marginTop="5dp" />
                     </com.h6ah4i.android.materialshadowninepatch.MaterialShadowContainerView>
@@ -112,7 +110,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/dept_name"
-                        android:layout_marginStart="5dp"
                         android:textSize="13.33sp" />
                     <com.h6ah4i.android.materialshadowninepatch.MaterialShadowContainerView
                         android:layout_width="match_parent"
@@ -127,7 +124,6 @@
                             android:layout_width="match_parent"
                             android:layout_height="55dp"
                             android:textSize="18sp"
-                            android:layout_marginStart="5dp"
                             android:layout_marginTop="5dp" />
                     </com.h6ah4i.android.materialshadowninepatch.MaterialShadowContainerView>
                 </LinearLayout>

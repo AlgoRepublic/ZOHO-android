@@ -1,29 +1,29 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="70dp"
-    android:layout_marginBottom="3dp"
+    android:layout_height="140dp"
+    android:layout_marginBottom="6dp"
     android:descendantFocusability="blocksDescendants"
     android:orientation="horizontal"
-    android:paddingEnd="10dp"
-    android:paddingLeft="10dp"
-    android:paddingRight="10dp"
-    android:paddingStart="10dp">
+    android:paddingEnd="20dp"
+    android:paddingLeft="20dp"
+    android:paddingRight="20dp"
+    android:paddingStart="20dp">
 
     <View
         android:id="@+id/priority_bar"
-        android:layout_width="8dp"
+        android:layout_width="16dp"
         android:layout_height="match_parent"
-        android:layout_marginBottom="9dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginBottom="18dp"
+        android:layout_marginTop="8dp"
         android:background="@drawable/roundable_prioritybar"/>
     <RelativeLayout
         android:id="@+id/layout123"
         android:layout_toRightOf="@+id/priority_bar"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="6dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginBottom="12dp"
+        android:layout_marginTop="8dp"
         android:orientation="horizontal">
 
         <com.h6ah4i.android.materialshadowninepatch.MaterialShadowContainerView
@@ -32,15 +32,15 @@
             style="@style/ms9_DefaultShadowStyle"
             android:layout_height="match_parent"
             app:ms9_affectsDisplayedPosition="true"
-            app:ms9_shadowElevation="2dp"
-            app:ms9_shadowTranslationZ="1dp"
+            app:ms9_shadowElevation="5dp"
+            app:ms9_shadowTranslationZ="2dp"
             app:ms9_useAmbientShadow="true">
 
             <RelativeLayout
                 android:id="@+id/top_parent"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginBottom="3dp"
+                android:layout_marginBottom="6dp"
                 android:background="@color/colorBaseWrapper"
                 android:orientation="horizontal">
                 <RelativeLayout
@@ -54,7 +54,7 @@
                         android:layout_height="match_parent"
                         app:clickToClose="true">
                         <LinearLayout
-                            android:layout_width="150dp"
+                            android:layout_width="300dp"
                             android:layout_height="match_parent"
                             android:weightSum="2"
                             android:orientation="horizontal"
@@ -65,9 +65,9 @@
                                 android:layout_weight="1"
                                 android:layout_height="match_parent"
                                 android:gravity="center"
-                                android:paddingLeft="10dp"
-                                android:paddingRight="10dp"
-                                android:textSize="16sp"
+                                android:paddingLeft="20dp"
+                                android:paddingRight="20dp"
+                                android:textSize="26sp"
                                 android:textColor="@color/white"
                                 android:background="@color/colorContentWrapper"
                                 android:text="Edit"
@@ -79,9 +79,9 @@
                                 android:layout_weight="1"
                                 android:layout_height="match_parent"
                                 android:gravity="center"
-                                android:paddingLeft="10dp"
-                                android:paddingRight="10dp"
-                                android:textSize="16sp"
+                                android:paddingLeft="20dp"
+                                android:paddingRight="20dp"
+                                android:textSize="26sp"
                                 android:textColor="@color/white"
                                 android:background="@color/red"
                                 android:text="Delete"
@@ -102,12 +102,12 @@
 
                                 <ImageView
                                     android:id="@+id/task_image"
-                                    android:layout_width="25dp"
-                                    android:layout_height="25dp"
+                                    android:layout_width="50dp"
+                                    android:layout_height="50dp"
                                     android:layout_gravity="center"
-                                    android:layout_marginLeft="5dp"
-                                    android:layout_marginRight="5dp"
-                                    android:layout_marginTop="10dp"
+                                    android:layout_marginLeft="10dp"
+                                    android:layout_marginRight="10dp"
+                                    android:layout_marginTop="20dp"
                                     android:adjustViewBounds="true"
                                     android:scaleType="fitXY"
                                     android:src="@drawable/task_progress" />
@@ -118,9 +118,9 @@
                                     android:layout_height="wrap_content"
                                     android:layout_toRightOf="@+id/task_image"
                                     android:orientation="vertical"
-                                    android:paddingBottom="10dp"
-                                    android:paddingRight="10dp"
-                                    android:paddingTop="10dp">
+                                    android:paddingBottom="20dp"
+                                    android:paddingRight="20dp"
+                                    android:paddingTop="20dp">
 
                                     <LinearLayout
                                         android:id="@+id/layout2"
@@ -135,7 +135,7 @@
                                             android:layout_height="wrap_content"
                                             android:layout_weight="1"
                                             android:gravity="left"
-                                            android:textSize="14sp"
+                                            android:textSize="24sp"
                                             android:textStyle="bold" />
 
                                         <TextView
@@ -144,13 +144,13 @@
                                             android:layout_height="wrap_content"
                                             android:layout_weight="1"
                                             android:gravity="right|end"
-                                            android:textSize="12sp" />
+                                            android:textSize="22sp" />
                                     </LinearLayout>
 
                                     <LinearLayout
                                         android:id="@+id/layout3"
                                         android:layout_width="match_parent"
-                                        android:layout_height="20dp"
+                                        android:layout_height="40dp"
                                         android:orientation="horizontal"
                                         android:weightSum="2">
 
@@ -163,7 +163,7 @@
                                             android:gravity="left"
                                             android:singleLine="true"
                                             android:ellipsize="end"
-                                            android:textSize="14sp"
+                                            android:textSize="24sp"
                                             android:textStyle="bold" />
 
                                         <RelativeLayout
@@ -180,12 +180,12 @@
                                                 android:layout_toLeftOf="@+id/bar"
                                                 android:gravity="left"
                                                 android:text="@string/task_comment"
-                                                android:textSize="12sp" />
+                                                android:textSize="22sp" />
 
                                             <RadioButton
                                                 android:id="@+id/bar"
-                                                android:layout_width="1dp"
-                                                android:layout_margin="5dp"
+                                                android:layout_width="2dp"
+                                                android:layout_margin="10dp"
                                                 android:layout_height="match_parent"
                                                 android:layout_centerVertical="true"
                                                 android:text="@string/divider"
@@ -200,14 +200,14 @@
                                                 android:layout_centerVertical="true"
                                                 android:gravity="left"
                                                 android:text="@string/task_user"
-                                                android:textSize="12sp" />
+                                                android:textSize="22sp" />
                                         </RelativeLayout>
                                     </LinearLayout>
                                 </LinearLayout>
                             </RelativeLayout>
                             <LinearLayout
                                 android:id="@+id/rightarrow_layout"
-                                android:layout_width="20dp"
+                                android:layout_width="40dp"
                                 android:layout_alignParentRight="true"
                                 android:layout_height="match_parent"
                                 android:gravity="center"
@@ -215,9 +215,9 @@
 
                                 <ImageView
                                     android:id="@+id/right_arrow_image"
-                                    android:layout_width="15dp"
-                                    android:layout_height="15dp"
-                                    android:layout_margin="5dp"
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp"
+                                    android:layout_margin="10dp"
                                     android:background="@drawable/circle_left"/>
                             </LinearLayout>
                         </RelativeLayout>

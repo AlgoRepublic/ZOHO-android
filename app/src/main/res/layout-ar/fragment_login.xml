@@ -150,10 +150,12 @@
 
                     <CheckBox
                         android:id="@+id/checkbox"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
                         android:layout_centerVertical="true"
-                        android:layout_toLeftOf="@+id/forgot_password"
+                        android:layout_marginEnd="8dp"
+                        android:button="@null"
+                        android:background="@drawable/checkbox_drawable"
                         android:layout_toStartOf="@+id/forgot_password" />
 
                 </RelativeLayout>
