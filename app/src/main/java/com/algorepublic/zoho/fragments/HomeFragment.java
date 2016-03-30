@@ -70,8 +70,9 @@ public class HomeFragment extends BaseFragment {
         public Fragment getItem(int position) {
             switch (position) {
                 case 0:
-                case 1:
                     return DashboardFragment.newInstance();
+                case 1:
+                    return FeedsFragment.newInstance();
             }
             return null;
         }

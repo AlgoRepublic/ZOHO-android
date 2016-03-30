@@ -87,7 +87,6 @@
                         android:id="@+id/email"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-
                         android:background="@drawable/round_border"
                         android:completionHint="@string/prompt_email"
                         android:hint="@string/prompt_email"

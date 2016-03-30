@@ -73,12 +73,21 @@
                     android:id="@+id/category"
                     android:layout_alignParentTop="true"
                     android:layout_alignParentStart="true" />
+                <com.h6ah4i.android.materialshadowninepatch.MaterialShadowContainerView
+                    android:layout_width="match_parent"
+                    style="@style/ms9_DefaultShadowStyle"
+                    android:layout_height="wrap_content"
+                    app:ms9_useAmbientShadow="true"
+                    android:layout_below="@+id/category"
+                    app:ms9_affectsDisplayedPosition="true"
+                    app:ms9_shadowTranslationZ="1dp"
+                    app:ms9_shadowElevation="3dp">
                 <org.angmarch.views.NiceSpinner
                     android:id="@+id/forum_list"
                     android:layout_width="match_parent"
-                    android:layout_below="@+id/category"
                     android:layout_height="55dp"
                     android:textSize="18sp" />
+                </com.h6ah4i.android.materialshadowninepatch.MaterialShadowContainerView>
             </RelativeLayout>
             <RelativeLayout
                 android:layout_width="match_parent"

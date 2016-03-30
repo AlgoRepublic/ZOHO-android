@@ -244,13 +244,6 @@ public class BaseFragment extends Fragment {
         return a;
     }
 
-    public void setToolbar(){
-//        ((AppCompatActivity)getActivity()).setSupportActionBar(BaseActivity.toolbar);
-//        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-//                getActivity(), BaseActivity.drawer, BaseActivity.toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-//        BaseActivity.drawer.setDrawerListener(toggle);
-//        toggle.syncState();
-    }
 
     protected Toolbar getToolbar(){
         return BaseActivity.toolbar;

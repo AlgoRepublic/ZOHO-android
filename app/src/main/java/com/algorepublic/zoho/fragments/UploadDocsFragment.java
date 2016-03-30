@@ -117,7 +117,7 @@ public class UploadDocsFragment extends BaseFragment implements GoogleApiClient.
     }
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.menu_save_project, menu);
+        inflater.inflate(R.menu.menu_docs, menu);
         super.onCreateOptionsMenu(menu, inflater);
 
     }
@@ -131,7 +131,7 @@ public class UploadDocsFragment extends BaseFragment implements GoogleApiClient.
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
-            case R.id.save_project:
+            case R.id.add_files:
                 if(ProjectID==0){
                     new UploadDocsBYTask().execute();
                 }else {
@@ -313,20 +313,20 @@ public class UploadDocsFragment extends BaseFragment implements GoogleApiClient.
                 break;
             case RESULT_GOOGLEDRIVE:
                 if (resultCode == getActivity().RESULT_OK) {
-                try {
-                    driveId = data.getParcelableExtra(
-                            OpenFileActivityBuilder.EXTRA_RESPONSE_DRIVE_ID);//this extra contains the drive id of the selected file
-                }catch (NullPointerException e){
-                    buildGoogleApiClient();
-                }
-                HttpTransport transport = AndroidHttp.newCompatibleTransport();
-                JsonFactory jsonFactory = JacksonFactory.getDefaultInstance();
-                mService = new com.google.api.services.drive.Drive.Builder(
-                        transport, jsonFactory, mCredential)
-                        .setApplicationName("ZOHO")
-                        .build();
-                selectedFile  = Drive.DriveApi.getFile(mGoogleApiClient, driveId);
-                selectedFile.getMetadata(mGoogleApiClient).setResultCallback(metadataRetrievedCallback);
+                    try {
+                        driveId = data.getParcelableExtra(
+                                OpenFileActivityBuilder.EXTRA_RESPONSE_DRIVE_ID);//this extra contains the drive id of the selected file
+                    }catch (NullPointerException e){
+                        buildGoogleApiClient();
+                    }
+                    HttpTransport transport = AndroidHttp.newCompatibleTransport();
+                    JsonFactory jsonFactory = JacksonFactory.getDefaultInstance();
+                    mService = new com.google.api.services.drive.Drive.Builder(
+                            transport, jsonFactory, mCredential)
+                            .setApplicationName("ZOHO")
+                            .build();
+                    selectedFile  = Drive.DriveApi.getFile(mGoogleApiClient, driveId);
+                    selectedFile.getMetadata(mGoogleApiClient).setResultCallback(metadataRetrievedCallback);
                 }
                 break;
             default:
@@ -364,7 +364,7 @@ public class UploadDocsFragment extends BaseFragment implements GoogleApiClient.
             if (!root.exists()) {
                 root.mkdirs();
             }
-           file = new File(root ,passed.get(0));
+            file = new File(root ,passed.get(0));
 
             try {
                 inputStream = mService.files().get(driveId.getResourceId())
@@ -527,8 +527,8 @@ public class UploadDocsFragment extends BaseFragment implements GoogleApiClient.
     private void PopulateModel(String json) {
         Log.e("Json", "/" + json);
         //if(json.contains("true")) {
-            filesList.clear();
-            Snackbar.make(getView(), "File(s) uploaded successfully.", Snackbar.LENGTH_SHORT).show();
+        filesList.clear();
+        Snackbar.make(getView(), "File(s) uploaded successfully.", Snackbar.LENGTH_SHORT).show();
 //        }else{
 //            Snackbar.make(getView(), "Server not responding", Snackbar.LENGTH_SHORT).show();
 //        }

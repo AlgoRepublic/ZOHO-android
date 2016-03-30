@@ -166,10 +166,10 @@ public class EditUserFragment extends BaseFragment implements MultiSelectionSpin
                                     .responseObject.get(position).projectIDs.get(loop) == AllProjectsByUserModel
                                     .getInstance().responseData.get(loop1).projectID)
                                 Ids[loop] = loop1;
+                            selectedIds.add(AllProjectsByUserModel
+                                    .getInstance().responseData.get(loop1).projectID);
                         }
                         projectsList.setSelection(Ids);
-                        selectedIds.add(AllProjectsByUserModel
-                                .getInstance().responseData.get(loop).projectID);
                     }
                 }
             }
@@ -238,7 +238,7 @@ public class EditUserFragment extends BaseFragment implements MultiSelectionSpin
                             aq.id(R.id.user_email).getText().toString(),
                             aq.id(R.id.user_phoneno).getText().toString(),
                             UserRoleModel.getInstance().responseObject.get
-                                    (role_list.getSelectedItemPosition()).ID, selectedIds
+                                    (adapter.getSelectedIndex()).ID, selectedIds
                             , true, new CallBack(EditUserFragment.this, "UpdateUser"));
                 }else {
                     service1.updateUserWithProjectSelected(Integer.toString(UserListModel.getInstance().responseObject.get(position).ID),

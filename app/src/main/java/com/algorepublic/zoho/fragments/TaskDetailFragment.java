@@ -325,6 +325,7 @@ public class TaskDetailFragment extends BaseFragment {
     public void UpdateProgress(Object caller, Object model) {
         GeneralModel.getInstance().setList((GeneralModel) model);
         if (GeneralModel.getInstance().responseCode.equalsIgnoreCase("100")) {
+            TaskByIdModel.getInstance().responseObject.progress=100;
             Snackbar.make(getView(), getString(R.string.update_progress), Snackbar.LENGTH_SHORT).show();
         }
         else
@@ -349,6 +350,7 @@ public class TaskDetailFragment extends BaseFragment {
             Snackbar.make(getView(), getString(R.string.task_done), Snackbar.LENGTH_SHORT).show();
             seekBar.setProgress(100);
             seekBarCompat.setProgress(100);
+            TaskByIdModel.getInstance().responseObject.progress=100;
             aq.id(R.id.mark_as_done).text(getString(R.string.reopen_task));
         }
         else
@@ -356,16 +358,6 @@ public class TaskDetailFragment extends BaseFragment {
             Snackbar.make(getView(), getString(R.string.invalid_credential), Snackbar.LENGTH_SHORT).show();
         }
     }
-    public void UpdateTask(Object caller, Object model) {
-        GeneralModel.getInstance().setList((GeneralModel) model);
-        if (GeneralModel.getInstance().responseCode.equalsIgnoreCase("100")) {
-            Snackbar.make(getView(), getString(R.string.reopen_task), Snackbar.LENGTH_SHORT).show();
-            seekBar.setProgress(0);
-            seekBarCompat.setProgress(0);
-            aq.id(R.id.mark_as_done).text(getString(R.string.mark_as_done));
-        }
-    }
-
 
 
 
@@ -377,6 +369,7 @@ public class TaskDetailFragment extends BaseFragment {
             seekBarCompat.setProgress(0);
             aq.id(R.id.mark_as_done).text(getString(R.string.mark_as_done));
             tasksList.setProgress(0);
+            TaskByIdModel.getInstance().responseObject.progress=0;
         }
         else
         {

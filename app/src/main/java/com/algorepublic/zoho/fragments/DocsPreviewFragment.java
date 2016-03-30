@@ -1,11 +1,21 @@
 package com.algorepublic.zoho.fragments;
 
 import android.annotation.SuppressLint;
+import android.app.DownloadManager;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.design.widget.Snackbar;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -69,8 +79,27 @@ public class DocsPreviewFragment extends BaseFragment {
         return fragment;
     }
     @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_board, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.save_file:
+                downloadFile(Constants.Image_URL + docObject.getID()
+                        + "." + BaseClass.getExtensionType(
+                        docObject.getFileDescription()),docObject.getFileName(),BaseClass.getExtensionType(
+                        docObject.getFileName()));
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
     }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -112,7 +141,7 @@ public class DocsPreviewFragment extends BaseFragment {
                                 .arrayList.get(ClickedPosition).getCommentID(), DocsPreviewFragment
                                 .comment_user.getText().toString(), true, new
                                 CallBack(DocsPreviewFragment.this, "UpdateComment"));
-                    }else{
+                    } else {
                         PerformAction();
                     }
                     return true;
@@ -136,6 +165,24 @@ public class DocsPreviewFragment extends BaseFragment {
         service.getDocumentComments(docObject.getID(), true,
                 new CallBack(DocsPreviewFragment.this, "AllDocComments"));
         return view;
+    }
+    public void downloadFile(String url, String title, String extention) {
+        Log.e("Url",url);
+        Uri Download_Uri = Uri.parse(url);
+        DownloadManager.Request request = new DownloadManager.Request(Download_Uri);
+
+        //Restrict the types of networks over which this download may proceed.
+        request.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI | DownloadManager.Request.NETWORK_MOBILE);
+        //Set whether this download may proceed over a roaming connection.
+        request.setAllowedOverRoaming(false);
+        //Set the title of this download, to be displayed in notifications (if enabled).
+        request.setTitle("Downloading");
+        //Set a description of this download, to be displayed in notifications (if enabled)
+        request.setDescription("Downloading File");
+        //Set the local destination for the downloaded file to a path within the application's external files directory
+        request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, title + System.currentTimeMillis() + extention);
+        request.allowScanningByMediaScanner();
+        request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
     }
     public void UpdateComment(Object caller, Object model){
         GeneralModel.getInstance().setList((GeneralModel) model);

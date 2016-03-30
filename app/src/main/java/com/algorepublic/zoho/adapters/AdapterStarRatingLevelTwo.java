@@ -53,11 +53,10 @@ public class AdapterStarRatingLevelTwo extends BaseExpandableListAdapter {
         LayoutInflater layoutInflater = (LayoutInflater) this.mContext
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = layoutInflater.inflate(R.layout.fragment_star_rating, parent, false);
-        StarRatingFragment.mListView3 = (CustomExpListView) view.findViewById(R.id.starListView);
-        StarRatingFragment.mListView3.setAdapter(new AdapterStarRatingLevelThree
+        CustomExpListView mListView = (CustomExpListView) view.findViewById(R.id.starListView);
+        mListView.setAdapter(new AdapterStarRatingLevelThree
                 (this.mContext, mListDataHeader.get(childPosition).getLevelThrees()));
-        StarRatingFragment.mListView3.setGroupIndicator(null);
-        return StarRatingFragment.mListView3;
+        return mListView;
     }
 
     @Override
