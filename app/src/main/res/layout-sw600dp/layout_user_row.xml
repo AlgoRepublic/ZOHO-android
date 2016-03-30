@@ -1,7 +1,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="100dp">
+    android:layout_height="110dp">
     <RelativeLayout
         android:id="@+id/layout123"
         android:layout_toRightOf="@+id/selected_project"
@@ -52,7 +52,7 @@
                     android:layout_weight="1"
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
-                    android:textSize="16sp"
+                    android:textSize="17sp"
                     android:textColor="@color/white"
                     android:background="@color/colorContentWrapper"
                     android:text="Edit"
@@ -65,7 +65,7 @@
                     android:gravity="center"
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
-                    android:textSize="16sp"
+                    android:textSize="17sp"
                     android:textColor="@color/white"
                     android:background="@color/red"
                     android:text="Delete"
@@ -92,9 +92,9 @@
                         app:civ_shadow_color="@color/colorBaseMenu"
                         app:civ_shadow_radius="3"
                         android:id="@+id/user_image"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        app:civ_border_width="1dp"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        app:civ_border_width="2dp"
                         app:civ_border_color="@color/colorBaseHeader"
                         android:src="@drawable/nav_user" />
                     <TextView
@@ -104,7 +104,7 @@
                         android:textStyle="bold"
                         android:layout_marginTop="5dp"
                         android:layout_marginLeft="5dp"
-                        android:textSize="14sp"
+                        android:textSize="16sp"
                         android:id="@+id/user_title"
                         android:layout_toEndOf="@+id/user_image" />
 
@@ -112,7 +112,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:id="@+id/user_email"
-                        android:textSize="14sp"
+                        android:textSize="16sp"
                         android:text="daadadad"
                         android:layout_below="@+id/user_image"
                         android:layout_alignStart="@+id/user_title" />
@@ -121,7 +121,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:id="@+id/user_role"
-                        android:textSize="14sp"
+                        android:textSize="16sp"
                         android:text="daadadad"
                         android:layout_below="@+id/user_email"
                         android:layout_alignStart="@+id/user_title" />
