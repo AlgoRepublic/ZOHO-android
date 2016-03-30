@@ -1,12 +1,11 @@
 package com.algorepublic.zoho.fragments;
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ExpandableListView;
-import android.widget.ImageView;
 
 import com.algorepublic.zoho.Models.StarRatingModel;
 import com.algorepublic.zoho.R;
@@ -33,7 +32,12 @@ public class StarRatingFragment extends BaseFragment {
         fragment = new StarRatingFragment();
         return fragment;
     }
-
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        setRetainInstance(true);
+        getToolbar().setTitle(getString(R.string.star_rating));
+        super.onViewCreated(view, savedInstanceState);
+    }
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +57,8 @@ public class StarRatingFragment extends BaseFragment {
         }else{
             setAdapter();
         }
+        setHasOptionsMenu(true);
+        getToolbar().setTitle(getString(R.string.star_rating));
         return view;
     }
     private void setAdapter(){

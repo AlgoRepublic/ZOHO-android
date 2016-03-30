@@ -46,6 +46,10 @@ public class ForumsModel {
         @SerializedName("ForumComments")
         public String forumComments;
 
+
+        @SerializedName("CommentCount")
+        public String commentCount;
+
         @SerializedName("CategoryName")
         public String categoryName;
 
