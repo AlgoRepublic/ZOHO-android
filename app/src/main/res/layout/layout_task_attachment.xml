@@ -3,7 +3,7 @@
     android:id="@+id/single_image_row"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/colorBaseWrapper">
+    android:background="@color/white">
 
     <RelativeLayout
         android:id="@+id/layout"

@@ -11,7 +11,6 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Toast;
 
-import com.algorepublic.zoho.Models.FeedsModel;
 import com.algorepublic.zoho.Models.ForumsModel;
 import com.algorepublic.zoho.Models.GeneralModel;
 import com.algorepublic.zoho.R;
@@ -47,12 +46,12 @@ public class AdapterForumsList extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return FeedsModel.getInstance().responseObject.size();
+        return ForumsModel.getInstance().responseObject.size();
     }
 
     @Override
-    public FeedsModel.ResponseObject getItem(int position) {
-        return FeedsModel.getInstance().responseObject.get(position);
+    public ForumsModel.ResponseObject getItem(int position) {
+        return ForumsModel.getInstance().responseObject.get(position);
     }
 
     @Override
@@ -62,36 +61,36 @@ public class AdapterForumsList extends BaseAdapter {
 
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
-        convertView = l_Inflater.inflate(R.layout.layout_feeds_row, null);
+        convertView = l_Inflater.inflate(R.layout.layout_forum_row, null);
         aq = new AQuery(convertView);
-        aq.id(R.id.feed_title).text(getItem(position).userName);
-        aq.id(R.id.feed_description).text(getItem(position).message);
-        aq.id(R.id.feed_comment_date).text(
-                getItem(position).comments.size()+"-"+ctx.getString(R.string.comments));
-
-//        aq.id(R.id.parent1).clicked(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                callFragmentWithBackStack(R.id.container, ForumsDetailFragment.newInstance(position), "ForumsDetailFragment");
-//            }
-//        });
-//        aq.id(R.id.btEdit).clicked(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                if (baseClass.getSelectedProject().equalsIgnoreCase("0")) {
-//                    Toast.makeText((AppCompatActivity)ctx,"Please Select Project",Toast.LENGTH_SHORT).show();
-//                    return;
-//                }
-//                callFragmentWithBackStack(R.id.container, EditForumFragment.newInstance(position), "EditForumFragment");
-//            }
-//        });
-//        aq.id(R.id.btDelete).clicked(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Clicked = position;
-//               NormalDialogCustomAttr(ctx.getString(R.string.deleted_forum),Clicked);
-//            }
-//        });
+        aq.id(R.id.comment_title).text(getItem(position).title);
+        aq.id(R.id.comment_description).text(ctx.getString(R.string.by)+ " "+ getItem(position).user.firstName
+                +" "+getItem(position).user.lastName
+                +", "+ctx.getString(R.string.last_responce_on)+ " "+ baseClass.DateFormatter(getItem(position).updatedAt)
+                +" "+ baseClass.GetTime(baseClass.DateMilli(getItem(position).updatedAt)));
+        aq.id(R.id.parent1).clicked(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                callFragmentWithBackStack(R.id.container, ForumsDetailFragment.newInstance(position), "ForumsDetailFragment");
+            }
+        });
+        aq.id(R.id.btEdit).clicked(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (baseClass.getSelectedProject().equalsIgnoreCase("0")) {
+                    Toast.makeText((AppCompatActivity)ctx,"Please Select Project",Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                callFragmentWithBackStack(R.id.container, EditForumFragment.newInstance(position), "EditForumFragment");
+            }
+        });
+        aq.id(R.id.btDelete).clicked(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Clicked = position;
+               NormalDialogCustomAttr(ctx.getString(R.string.deleted_forum),Clicked);
+            }
+        });
         return convertView;
     }
     public void DeleteForum(Object caller, Object model){

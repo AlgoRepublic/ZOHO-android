@@ -69,6 +69,7 @@ public class UserFragment extends BaseFragment implements SwipeRefreshLayout.OnR
     }
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        menu.clear();
         inflater.inflate(R.menu.menu_user, menu);
         super.onCreateOptionsMenu(menu, inflater);
     }
