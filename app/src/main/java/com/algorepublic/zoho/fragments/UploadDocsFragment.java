@@ -2,6 +2,7 @@ package com.algorepublic.zoho.fragments;
 
 import android.accounts.AccountManager;
 import android.app.Activity;
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.graphics.Color;
@@ -245,8 +246,12 @@ public class UploadDocsFragment extends BaseFragment implements GoogleApiClient.
         });
     }
     private void chooseAccount() {
-        startActivityForResult(
-                mCredential.newChooseAccountIntent(), REQUEST_ACCOUNT_PICKER);
+        try {
+            startActivityForResult(
+                    mCredential.newChooseAccountIntent(), REQUEST_ACCOUNT_PICKER);
+        }catch (ActivityNotFoundException e){
+            Toast.makeText(getActivity(),"Application not found",Toast.LENGTH_SHORT).show();
+        }
     }
 
     public void FolderList(Object caller, Object model) {
@@ -391,11 +396,8 @@ public class UploadDocsFragment extends BaseFragment implements GoogleApiClient.
 
 
     private void checkFileLenght(File file) {
-        if (file.length() > 1048576 * 5) {
-            MaterialAlertDialog();
-        } else {
-            showFileInList(file, "", -1, file.getName(), false);
-        }
+    showFileInList(file, "", -1, file.getName(), false);
+        Log.e("File",file.getName());
     }
 
     private void showFileInList(File file,String ApiUrl,Integer ID,String name,boolean IsDeleted) {
