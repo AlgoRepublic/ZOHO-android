@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     android:descendantFocusability="blocksDescendants"
     android:orientation="horizontal"
-    android:padding="4dp">
+    android:padding="2dp">
 
     <com.mikhaellopez.circularimageview.CircularImageView
         app:civ_border="true"
@@ -13,8 +13,8 @@
         app:civ_shadow_color="@color/colorBaseMenu"
         app:civ_shadow_radius="3"
         android:id="@+id/assignee_image"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
         android:background="@drawable/nav_user"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"

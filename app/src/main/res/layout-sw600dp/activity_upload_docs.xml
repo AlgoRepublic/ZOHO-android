@@ -10,11 +10,11 @@
         android:id="@+id/images_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginLeft="20dp"
-        app:scrollMultiplier="0.7"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        app:scrollMultiplier="0.5"
         class="com.poliveira.apps.parallaxlistview.ParallaxListView"
         android:visibility="visible" >
     </view>

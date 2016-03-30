@@ -1,13 +1,13 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="200dp">
+    android:layout_height="100dp">
     <RelativeLayout
         android:id="@+id/layout123"
         android:layout_toRightOf="@+id/selected_project"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="8dp"
         android:orientation="horizontal">
 
         <com.h6ah4i.android.materialshadowninepatch.MaterialShadowContainerView
@@ -16,15 +16,15 @@
             style="@style/ms9_DefaultShadowStyle"
             android:layout_height="match_parent"
             app:ms9_affectsDisplayedPosition="true"
-            app:ms9_shadowElevation="5dp"
-            app:ms9_shadowTranslationZ="2dp"
+            app:ms9_shadowElevation="2dp"
+            app:ms9_shadowTranslationZ="1dp"
             app:ms9_useAmbientShadow="true">
 
             <RelativeLayout
                 android:id="@+id/top_parent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
+                android:layout_marginBottom="4dp"
                 android:background="@color/colorBaseWrapper"
                 android:orientation="horizontal">
             <RelativeLayout
@@ -39,7 +39,7 @@
             app:clickToClose="true">
             <LinearLayout
                 android:id="@+id/main"
-                android:layout_width="300dp"
+                android:layout_width="150dp"
                 android:layout_height="match_parent"
                 android:weightSum="2"
                 android:orientation="horizontal"
@@ -50,9 +50,9 @@
                     android:layout_height="match_parent"
                     android:gravity="center"
                     android:layout_weight="1"
-                    android:paddingLeft="20dp"
-                    android:paddingRight="20dp"
-                    android:textSize="26sp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:textSize="16sp"
                     android:textColor="@color/white"
                     android:background="@color/colorContentWrapper"
                     android:text="Edit"
@@ -63,9 +63,9 @@
                     android:layout_weight="1"
                     android:layout_height="match_parent"
                     android:gravity="center"
-                    android:paddingLeft="20dp"
-                    android:paddingRight="20dp"
-                    android:textSize="26sp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:textSize="16sp"
                     android:textColor="@color/white"
                     android:background="@color/red"
                     android:text="Delete"
@@ -85,16 +85,16 @@
                     android:layout_height="match_parent"
                     android:orientation="horizontal"
                     android:background="@color/colorBaseWrapper"
-                    android:padding="10dp">
+                    android:padding="5dp">
                     <com.mikhaellopez.circularimageview.CircularImageView
                         app:civ_border="true"
                         app:civ_shadow="true"
                         app:civ_shadow_color="@color/colorBaseMenu"
-                        app:civ_shadow_radius="4"
+                        app:civ_shadow_radius="3"
                         android:id="@+id/user_image"
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
-                        app:civ_border_width="2dp"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        app:civ_border_width="1dp"
                         app:civ_border_color="@color/colorBaseHeader"
                         android:src="@drawable/nav_user" />
                     <TextView
@@ -102,9 +102,9 @@
                         android:layout_height="wrap_content"
                         android:text="@string/test_forum"
                         android:textStyle="bold"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginLeft="10dp"
-                        android:textSize="24sp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginLeft="5dp"
+                        android:textSize="14sp"
                         android:id="@+id/user_title"
                         android:layout_toEndOf="@+id/user_image" />
 
@@ -112,7 +112,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:id="@+id/user_email"
-                        android:textSize="24sp"
+                        android:textSize="14sp"
                         android:text="daadadad"
                         android:layout_below="@+id/user_image"
                         android:layout_alignStart="@+id/user_title" />
@@ -121,14 +121,14 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:id="@+id/user_role"
-                        android:textSize="24sp"
+                        android:textSize="14sp"
                         android:text="daadadad"
                         android:layout_below="@+id/user_email"
                         android:layout_alignStart="@+id/user_title" />
                     </RelativeLayout>
                 <LinearLayout
                     android:id="@+id/rightarrow_layout"
-                    android:layout_width="40dp"
+                    android:layout_width="20dp"
                     android:layout_alignParentRight="true"
                     android:layout_height="match_parent"
                     android:gravity="center"
@@ -136,9 +136,9 @@
 
                     <ImageView
                         android:id="@+id/right_arrow_image"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:layout_margin="10dp"
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:layout_margin="5dp"
                         android:background="@drawable/circle_left"/>
                 </LinearLayout>
                 </RelativeLayout>
