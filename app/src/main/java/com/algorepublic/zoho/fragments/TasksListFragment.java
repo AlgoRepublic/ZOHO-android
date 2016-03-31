@@ -1,6 +1,5 @@
 package com.algorepublic.zoho.fragments;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.util.Log;
@@ -65,8 +64,10 @@ public class TasksListFragment extends BaseFragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         setRetainInstance(true);
         getToolbar().setTitle(getString(R.string.tasks));
+        getToolbar().setSubtitle("");
         super.onViewCreated(view, savedInstanceState);
     }
+
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {

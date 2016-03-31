@@ -235,6 +235,7 @@ public class TaskDetailFragment extends BaseFragment {
             aq.id(R.id.icon).image(R.drawable.ic_notifications_green_24dp);
             aq.id(R.id.mark_as_done).text(getString(R.string.reopen_task));
         }
+        getToolbar().setSubtitle(TaskByIdModel.getInstance().responseObject.projectName);
         Drawable shapeDrawable = aq.id(R.id.priority_bar).getView().getBackground();
         GradientDrawable colorDrawable = (GradientDrawable) shapeDrawable;
         colorDrawable.setColor(getPriorityWiseColor(TaskByIdModel.getInstance().responseObject.priority));
@@ -426,6 +427,7 @@ public class TaskDetailFragment extends BaseFragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+        getToolbar().setSubtitle("");
     }
 
 }

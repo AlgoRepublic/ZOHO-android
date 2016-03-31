@@ -321,5 +321,15 @@
     <string name="about_us">About Us</string>
     <string name="privacy">Privacy Policy</string>
     <string name="type_comment">Please type comment</string>
-    <!-- Documents Strings -->
+    <!-- User Status Strings -->
+    <string name="added_status">added Status</string>
+    <string name="added_project">added Project</string>
+    <string name="added_tasklist">added TaskList</string>
+    <string name="added_task">added Task</string>
+    <string name="updated_task">updated Task</string>
+    <string name="added_page">added Page</string>
+    <string name="added_event">added Event</string>
+    <string name="added_forum">added Forum</string>
+    <string name="added_document">added Document</string>
+    <string name="added_milestone">added Milestone</string>
 </resources>

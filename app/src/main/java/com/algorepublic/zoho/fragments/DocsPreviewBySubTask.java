@@ -105,7 +105,7 @@ public class DocsPreviewBySubTask extends BaseFragment {
             Glide.with(getActivity()).load(BaseClass.
                     getIcon(docObject.getFileTypeID())).into(aq.id(R.id.doc_image).getImageView());
         }
-
+        setHasOptionsMenu(true);
         return view;
     }
 

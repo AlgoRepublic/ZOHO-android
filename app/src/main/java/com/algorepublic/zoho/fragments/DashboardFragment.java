@@ -47,7 +47,6 @@ public class DashboardFragment extends BaseFragment {
 //    }
 @Override
 public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-    setRetainInstance(true);
     getToolbar().setTitle(getString(R.string.dashboard));
     super.onViewCreated(view, savedInstanceState);
 }

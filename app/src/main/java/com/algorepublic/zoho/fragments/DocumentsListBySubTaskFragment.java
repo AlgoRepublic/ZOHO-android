@@ -106,6 +106,7 @@ public class DocumentsListBySubTaskFragment extends BaseFragment {
      */
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        menu.clear();
         inflater.inflate(R.menu.menu_document_list, menu);
         super.onCreateOptionsMenu(menu, inflater);
     }

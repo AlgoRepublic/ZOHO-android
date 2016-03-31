@@ -111,6 +111,7 @@ public class AdapterMenuItems extends BaseAdapter{
         return convertView;
     }
     public void CallFragment(int position){
+        ((AppCompatActivity)ctx).getSupportActionBar().setSubtitle("");
         BaseActivity.drawer.closeDrawer(GravityCompat.START);
         for(int loop = 0;loop < ((AppCompatActivity)ctx).getSupportFragmentManager().getBackStackEntryCount();loop++) {
             ((AppCompatActivity)ctx).getSupportFragmentManager().popBackStack();

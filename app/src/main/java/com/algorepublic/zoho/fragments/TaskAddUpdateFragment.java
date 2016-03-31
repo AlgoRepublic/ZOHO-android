@@ -47,16 +47,19 @@ public class TaskAddUpdateFragment extends BaseFragment {
     public static ArrayList<Integer> filesToDelete;
     public static ArrayList<Integer> assigneeList;
     public static int callPosition=0;
+    static String Title;
 
     public static TaskAddUpdateFragment newInstance(ArrayList<TaskListName> listNames) {
         callPosition = 0;
         taskListName = listNames;
+        Title = "Add Task";
         fragment = new TaskAddUpdateFragment();
         return fragment;
     }
     public static TaskAddUpdateFragment newInstance(int taskId,ArrayList<TaskListName> listNames) {
         tasID = taskId;
         callPosition = 1;
+        Title = "Edit Task";
         taskListName = listNames;
         fragment = new TaskAddUpdateFragment();
         return fragment;
@@ -64,6 +67,7 @@ public class TaskAddUpdateFragment extends BaseFragment {
     public static TaskAddUpdateFragment newInstance(TasksList tasksList,ArrayList<TaskListName> listNames) {
         tasksObj = tasksList;
         callPosition= 2;
+        Title = "Edit Task";
         taskListName = listNames;
         fragment = new TaskAddUpdateFragment();
         return fragment;
@@ -161,8 +165,9 @@ public class TaskAddUpdateFragment extends BaseFragment {
         applyLightBackground(aq.id(R.id.gridview_taskmenu).getView(), baseClass);
         applyLightBackground(aq.id(R.id.title_bar).getView(), baseClass);
         SetValues();
+        getToolbar().setTitle(Title);
         if( baseClass.db.getString("ProjectName") != null) {
-           getToolbar().setTitle(baseClass.db.getString("ProjectName"));
+           getToolbar().setSubtitle(baseClass.db.getString("ProjectName"));
         }
         aq.id(R.id.title_text).getEditText().addTextChangedListener(new TextWatcher() {
             @Override

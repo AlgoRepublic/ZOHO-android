@@ -67,8 +67,6 @@ public class GetUserModel {
         @SerializedName("UserRole")
         public UserRole userRole = new UserRole();
 
-        @SerializedName("ProjectIDs")
-        public ArrayList<Integer> projectIDs = new ArrayList<>();
     }
 
     public class UserRole {
@@ -83,6 +81,9 @@ public class GetUserModel {
 
         @SerializedName("Role_AR")
         public String role_AR;
+
+        @SerializedName("PermissionIds")
+        public ArrayList<Integer> permissionIds = new ArrayList<>();
 
     }
 

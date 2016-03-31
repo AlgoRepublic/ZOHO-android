@@ -217,7 +217,6 @@ public class ProjectsFragment extends BaseFragment implements SwipeRefreshLayout
             for(int loop1=0;loop1<ProjectsByClientModel.getInstance().responseData.get(loop).projects.size();loop1++){
                 ProjectsList projectsList = new ProjectsList();
                 projectsList.setCompOrDeptName(ProjectsByClientModel.getInstance().responseData.get(loop).companyName);
-                Log.e("S","S"+ProjectsByClientModel.getInstance().responseData.get(loop).companyName);
                 projectsList.setCompOrDeptID(ProjectsByClientModel.getInstance().responseData.get(loop).ID);
                 projectsList.setProjectID(ProjectsByClientModel.getInstance().responseData.get(loop).projects.get(loop1).projectID);
                 projectsList.setProjectName(ProjectsByClientModel.getInstance().responseData.get(loop).projects.get(loop1).projectName);
@@ -303,6 +302,7 @@ public class ProjectsFragment extends BaseFragment implements SwipeRefreshLayout
      */
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        menu.clear();
         inflater.inflate(R.menu.menu_tasklist, menu);
         super.onCreateOptionsMenu(menu, inflater);
     }
