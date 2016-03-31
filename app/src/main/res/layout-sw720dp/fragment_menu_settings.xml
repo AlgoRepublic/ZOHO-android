@@ -19,7 +19,7 @@
                 android:id="@+id/id7"
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
-                android:background="@color/white"
+                android:background="#ffffff"
                 android:orientation="horizontal"
                 android:elevation="3dp"
                 android:outlineProvider="bounds">
@@ -35,7 +35,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:button="@null"
-                        android:background="@color/white"
                         android:drawableLeft="@drawable/radiobutton"
                         android:text="Blue Theme"
                         android:textColor="@color/blackBackground"/>
@@ -44,7 +43,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:button="@null"
-                        android:background="@color/white"
                         android:drawableLeft="@drawable/radiobutton"
                         android:text="Black Theme"
                         android:textColor="@color/blackBackground"/>
@@ -55,7 +53,7 @@
                 android:id="@+id/id8"
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
-                android:background="@color/white"
+                android:background="#ffffff"
                 android:elevation="4dp"
                 android:outlineProvider="bounds"
                 >
