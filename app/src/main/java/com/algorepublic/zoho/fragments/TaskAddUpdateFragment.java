@@ -70,6 +70,7 @@ public class TaskAddUpdateFragment extends BaseFragment {
     }
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        menu.clear();
         inflater.inflate(R.menu.menu_save_project, menu);
         super.onCreateOptionsMenu(menu, inflater);
 
@@ -115,17 +116,17 @@ public class TaskAddUpdateFragment extends BaseFragment {
     }
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
-        setRetainInstance(true);
+
         super.onViewCreated(view, savedInstanceState);
     }
 
     @Override
-    public void onDestroyView() {
+    public void onDestroy() {
         //baseClass.setSelectedProject("0");
-        tasksObj=null;
-        tasID =0;
+       // tasksObj=null;
+       // tasID =0;
         assigneeList.clear();
-        super.onDestroyView();
+        super.onDestroy();
     }
 
     @Override
@@ -135,7 +136,7 @@ public class TaskAddUpdateFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-//        setHasOptionsMenu(true);
+       setHasOptionsMenu(true);
         View view = inflater.inflate(R.layout.activity_task, container, false);
         dialogAC = InitializeDialog(getActivity());
         gridViewTaskMenu = (GridView) view.findViewById(R.id.gridview_taskmenu);

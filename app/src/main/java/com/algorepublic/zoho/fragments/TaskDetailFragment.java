@@ -213,7 +213,7 @@ public class TaskDetailFragment extends BaseFragment {
                 aq.id(R.id.end_date).text(DateFormatter(TaskByIdModel.getInstance().responseObject.endDate));
         }
         aq.id(R.id.user_counter).text(String.valueOf(TaskByIdModel.getInstance().responseObject.userObject.size()));
-        aq.id(R.id.category).text(baseClass.db.getString("TaskListName"));
+        aq.id(R.id.category).text(TaskByIdModel.getInstance().responseObject.taskListName);
         aq.id(R.id.task_name).text(TaskByIdModel.getInstance().responseObject.title);
         //webView.loadDataWithBaseURL("", TaskByIdModel.getInstance().responseObject.description, "text/html", "UTF-8", "");
 
@@ -262,14 +262,18 @@ public class TaskDetailFragment extends BaseFragment {
         }else {
             tasksList.setDescription(taskModel.description);
         }
+        if(taskModel.tasklistID==0){
+            taskModel.taskListName = getString(R.string.general);
+        }
+        tasksList.setTaskListName(TaskByIdModel.getInstance().responseObject.taskListName);
+        tasksList.setTaskListNameID(TaskByIdModel.getInstance().responseObject.tasklistID);
         tasksList.setPriority(taskModel.priority);
         tasksList.setProgress(taskModel.progress);
         tasksList.setParentTaskID(taskModel.parentTaskID);
         tasksList.setCommentsCount(taskModel.commentsCount);
         tasksList.setDocumentsCount(taskModel.documentsCount);
         tasksList.setSubTasksCount(taskModel.subTasksCount);
-        tasksList.setTaskListName(TaskByIdModel.getInstance().responseObject.taskListName);
-        tasksList.setTaskListNameID(TaskByIdModel.getInstance().responseObject.tasklistID);
+
         //************** Assignee List ************//
         ArrayList<TaskListAssignee> listAssignees = new ArrayList<>();
         for (int loop = 0; loop < TaskByIdModel.getInstance().responseObject.userObject.size(); loop++) {
