@@ -22,9 +22,10 @@
             <RelativeLayout
                 android:id="@+id/layout_tasktitle"
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
+                android:layout_height="40dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="5dp"
+                android:gravity="center_vertical"
                 android:background="@color/colorContentWrapper">
 
 
@@ -42,7 +43,7 @@
                 </View>
                 <ImageView
                     android:id="@+id/icon"
-                    android:layout_width="15dp"
+                    android:layout_width="20dp"
                     android:layout_marginLeft="15dp"
                     android:layout_marginStart="15dp"
                     android:layout_toRightOf="@+id/priority_bar"
@@ -50,25 +51,25 @@
                     android:src="@drawable/taskdetail_icon"
                     android:layout_centerVertical="true"
                     android:layout_centerHorizontal="true"
-                    android:layout_height="20dp" />
+                    android:layout_height="25dp" />
                 <TextView
                     android:id="@+id/task_name"
                     android:layout_width="match_parent"
                     android:text="@string/task_name"
                     android:layout_height="wrap_content"
-                    android:textSize="14sp"
+                    android:textSize="16sp"
                     android:singleLine="true"
                     android:ellipsize="end"
                     android:gravity="left|start"
-                    android:layout_marginLeft="50dp"
-                    android:layout_marginStart="50dp"
+                    android:layout_marginLeft="60dp"
+                    android:layout_marginStart="60dp"
                     android:layout_centerVertical="true"
                     android:textStyle="bold"
                     android:textColor="@color/white"
                     />
 
             </RelativeLayout>
-            <View
+        <View
                 android:layout_width="match_parent"
                 android:background="@android:drawable/dialog_holo_light_frame"
                 android:layout_height="1dp"/>
@@ -84,6 +85,8 @@
             android:id="@+id/parent1"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="30dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="30dp"
             android:layout_above="@+id/layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -94,12 +97,12 @@
                 android:layout_height="match_parent">
                 <RelativeLayout
                     android:id="@+id/layout3"
-                    android:paddingTop="15dp"
+                    android:paddingTop="25dp"
                     android:paddingBottom="15dp"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginLeft="15dp"
                     android:layout_marginRight="20dp"
 
-                    android:layout_marginStart="10dp"
+                    android:layout_marginStart="15dp"
                     android:layout_marginEnd="20dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
@@ -113,7 +116,7 @@
                             android:layout_width="wrap_content"
                             android:text="@string/task_startdate"
                             android:layout_height="wrap_content"
-                            android:textSize="12sp"
+                            android:textSize="16sp"
                             android:textStyle="bold"
                             android:layout_alignParentLeft="true"
                             android:layout_alignParentStart="true"
@@ -125,7 +128,7 @@
                             android:paddingLeft="5dp"
                             android:paddingStart="5dp"
                             android:layout_height="wrap_content"
-                            android:textSize="12sp"
+                            android:textSize="16sp"
                             android:layout_toRightOf="@+id/text2"
                             android:layout_toEndOf="@+id/text2"
                             />
@@ -134,7 +137,7 @@
                             android:layout_width="wrap_content"
                             android:text="@string/task_duedate"
                             android:layout_height="wrap_content"
-                            android:textSize="12sp"
+                            android:textSize="16sp"
                             android:textStyle="bold"
                             android:layout_toLeftOf="@+id/end_date"
                             android:layout_toStartOf="@+id/end_date"
@@ -146,7 +149,7 @@
                             android:paddingLeft="5dp"
                             android:paddingStart="5dp"
                             android:layout_height="wrap_content"
-                            android:textSize="13sp"
+                            android:textSize="16sp"
                             android:layout_alignParentRight="true"
                             android:layout_alignParentEnd="true"
                             android:layout_toLeftOf="@+id/textView"
@@ -166,7 +169,7 @@
                             android:layout_width="wrap_content"
                             android:text="@string/category"
                             android:layout_height="wrap_content"
-                            android:textSize="12sp"
+                            android:textSize="16sp"
                             android:textStyle="bold"
                             android:layout_toLeftOf="@+id/textView"
                             android:layout_toEndOf="@+id/textView"
@@ -178,7 +181,7 @@
                             android:paddingLeft="3dp"
                             android:paddingStart="3dp"
                             android:layout_height="wrap_content"
-                            android:textSize="12sp"
+                            android:textSize="16sp"
                             android:layout_toLeftOf="@+id/textView"
                             android:layout_toStartOf="@+id/textView"
                             />
@@ -195,7 +198,7 @@
                             android:layout_weight="1"
                             android:text="@string/task_details"
                             android:layout_height="wrap_content"
-                            android:textSize="12sp"
+                            android:textSize="16sp"
                             android:textStyle="bold"
                             android:layout_toLeftOf="@+id/textView"
                             android:layout_toStartOf="@+id/textView"
@@ -221,7 +224,7 @@
                             android:layout_width="wrap_content"
                             android:text="@string/task_users"
                             android:layout_height="wrap_content"
-                            android:textSize="12sp"
+                            android:textSize="16sp"
                             android:textStyle="bold"
                             android:layout_toStartOf="@+id/textView"
                             android:layout_toLeftOf="@+id/textView"
@@ -246,7 +249,7 @@
                         android:id="@+id/task_assignee"
                         android:layout_below="@+id/header_layout4"
                         android:layout_width="match_parent"
-                        android:layout_height="40dp"
+                        android:layout_height="60dp"
                         app:twowayview_layoutManager="ListLayoutManager"
                         android:orientation="horizontal">
                     </org.lucasr.twowayview.widget.TwoWayView>
@@ -261,7 +264,7 @@
                         android:layout_width="wrap_content"
                         android:text="@string/project_status"
                         android:layout_height="wrap_content"
-                        android:textSize="12sp"
+                        android:textSize="16sp"
                         android:textStyle="bold"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="20dp"
@@ -291,8 +294,8 @@
                         android:layout_marginLeft="50dp"
                         android:layout_marginStart="50dp"
                         android:id="@+id/circularprogressBar"
-                        android:layout_width="120dp"
-                        android:layout_height="120dp"
+                        android:layout_width="130dp"
+                        android:layout_height="130dp"
                         app:max="100"
                         android:layout_centerHorizontal="true"
                         android:layout_margin="5dp"
@@ -314,7 +317,7 @@
     <LinearLayout
         android:id="@+id/parent2"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="70dp"
         android:weightSum="4.72"
         android:layout_alignParentBottom="true"
         android:background="@color/colorContentWrapper"
@@ -334,13 +337,13 @@
                 android:layout_height="match_parent">
                 <TextView
                     android:id="@+id/comment_count"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
                     android:text="0"
                     android:gravity="center"
                     android:singleLine="true"
-                    android:textSize="8dp"
-                 android:layout_marginStart="5dp"
+                    android:textSize="14sp"
+
                     android:background="@drawable/bubble_alert_white"
                     android:layout_alignParentTop="true"
                     android:textColor="@color/colorBaseWrapper" />
@@ -363,7 +366,7 @@
                     android:gravity="center"
                     android:layout_alignParentBottom="true"
                     android:textColor="@color/white"
-                    android:textSize="10sp"
+                    android:textSize="14sp"
                     android:layout_marginBottom="3dp"/>
             </RelativeLayout>
 
@@ -386,13 +389,13 @@
                 android:layout_height="match_parent">
                 <TextView
                     android:id="@+id/docs_count"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
                     android:text="0"
                     android:gravity="center"
                     android:singleLine="true"
-                    android:textSize="8dp"
-                   android:layout_marginStart="5dp"
+                    android:textSize="14sp"
+
                     android:background="@drawable/bubble_alert_white"
                     android:layout_alignParentTop="true"
                     android:textColor="@color/colorBaseWrapper" />
@@ -415,7 +418,7 @@
                     android:gravity="center"
                     android:layout_alignParentBottom="true"
                     android:textColor="@color/white"
-                    android:textSize="10sp"
+                    android:textSize="14sp"
                     android:layout_marginBottom="3dp"/>
             </RelativeLayout>
 
@@ -428,23 +431,22 @@
             android:layout_width="0dp"
             android:layout_weight=".9"
             android:layout_gravity="center"
-            android:layout_marginLeft="2dp"
-            android:layout_marginRight="2dp"
+
             android:layout_height="match_parent">
             <RelativeLayout
                 android:id="@+id/subtask"
-                android:layout_width="53dp"
+                android:layout_width="70dp"
                 android:layout_centerHorizontal="true"
                 android:layout_height="match_parent">
                 <TextView
                     android:id="@+id/subtask_count"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
                     android:text="0"
                     android:gravity="center"
                     android:singleLine="true"
-                    android:textSize="8dp"
-               android:layout_marginStart="5dp"
+                    android:textSize="14sp"
+             android:layout_marginStart="5dp"
                     android:background="@drawable/bubble_alert_white"
                     android:layout_alignParentTop="true"
                     android:textColor="@color/colorBaseWrapper" />
@@ -457,6 +459,8 @@
                     android:layout_alignParentRight="true"
                     android:layout_alignParentEnd="true"
                     android:layout_above="@+id/text6"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginRight="5dp"
                     android:layout_height="25dp" />
 
                 <TextView
@@ -465,9 +469,10 @@
                     android:layout_height="wrap_content"
                     android:text="@string/sub_tasks"
                     android:gravity="center"
+                    android:singleLine="true"
                     android:layout_alignParentBottom="true"
                     android:textColor="@color/white"
-                    android:textSize="10sp"
+                    android:textSize="14sp"
                     android:layout_marginBottom="3dp"/>
             </RelativeLayout>
 
@@ -499,7 +504,7 @@
                 android:gravity="center"
                 android:layout_alignParentBottom="true"
                 android:textColor="@color/white"
-                android:textSize="10sp"
+                android:textSize="14sp"
                 android:layout_marginBottom="3dp"/>
         </RelativeLayout>
         <View android:layout_height="fill_parent"
@@ -515,7 +520,7 @@
             android:layout_weight="1.2"
             android:layout_gravity="center"
             android:layout_height="match_parent"
-            android:textSize="12sp"
+            android:textSize="16sp"
             android:textColor="@android:color/white"
             />
     </LinearLayout>
