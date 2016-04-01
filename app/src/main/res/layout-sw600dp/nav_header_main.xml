@@ -59,11 +59,11 @@
                     android:layout_centerVertical="true"
                     android:layout_toLeftOf="@+id/profile"
                     android:layout_toStartOf="@+id/profile"
-                    android:gravity="right"
+                    android:gravity="right|end"
                     android:lines="2"
                     android:padding="5dp"
                     android:text="@string/first_name"
-                    android:textSize="18dp" />
+                    android:textSize="20sp" />
 
                 <com.mikhaellopez.circularimageview.CircularImageView
                     app:civ_border="true"
@@ -71,8 +71,8 @@
                     app:civ_shadow_color="@color/colorBaseMenu"
                     app:civ_shadow_radius="3"
                     android:id="@+id/profile"
-                    android:layout_width="70dp"
-                    android:layout_height="70dp"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
                     android:layout_centerHorizontal="true"
                     android:layout_centerVertical="true"
                     android:src="@drawable/nav_user"
@@ -90,7 +90,7 @@
                     android:lines="2"
                     android:padding="5dp"
                     android:text="@string/last_name"
-                    android:textSize="18sp" />
+                    android:textSize="20sp" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -108,16 +108,16 @@
                     android:gravity="center"
                     android:singleLine="true"
                     android:text="@string/sample_email"
-                    android:textSize="16sp" />
+                    android:textSize="18sp" />
             </RelativeLayout>
         </RelativeLayout>
 
         <GridView
             android:id="@+id/gridview_menu"
             android:layout_width="match_parent"
-            android:layout_height="320dp"
+            android:layout_height="525dp"
             android:gravity="center"
-            android:horizontalSpacing="5dp"
+            android:horizontalSpacing="20dp"
             android:numColumns="3"
             android:choiceMode="singleChoice"
             android:orientation="vertical"

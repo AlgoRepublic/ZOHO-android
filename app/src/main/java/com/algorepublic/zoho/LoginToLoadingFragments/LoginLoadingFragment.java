@@ -75,6 +75,7 @@ public class LoginLoadingFragment extends BaseFragment {
             baseClass.setProfileImage(GetUserModel.getInstance().user.profileImagePath);
             baseClass.setProfileImageID(GetUserModel.getInstance().user.profilePictureID);
             baseClass.setEmail(GetUserModel.getInstance().user.eMail);
+            baseClass.db.putListInt("Permissions",GetUserModel.getInstance().user.userRole.permissionIds);
             startActivity(new Intent(getActivity(), MainActivity.class));
             getActivity().finish();
         }else {

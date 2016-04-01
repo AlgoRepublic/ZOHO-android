@@ -39,7 +39,7 @@
             android:layout_height="match_parent"
             app:clickToClose="true">
         <LinearLayout
-            android:layout_width="150dp"
+            android:layout_width="160dp"
             android:layout_height="match_parent"
             android:weightSum="2"
             android:orientation="horizontal"

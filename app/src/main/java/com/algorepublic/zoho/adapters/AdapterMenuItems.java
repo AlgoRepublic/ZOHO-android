@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.algorepublic.zoho.BaseActivity;
@@ -57,7 +58,7 @@ public class AdapterMenuItems extends BaseAdapter{
     };
     public AdapterMenuItems(Context context) {
         this.ctx = context;
-       inflater = LayoutInflater.from(context);
+        inflater = LayoutInflater.from(context);
     }
 
 
@@ -76,11 +77,11 @@ public class AdapterMenuItems extends BaseAdapter{
     public View getView(final int position, View convertView, ViewGroup parent) {
 
         ViewHolder holder;
-            convertView = inflater.inflate(R.layout.layout_menu_items, parent, false);
+        convertView = inflater.inflate(R.layout.layout_menu_items, parent, false);
 
-            holder = new ViewHolder();
-            holder.title = (TextView) convertView.findViewById(R.id.textview);
-            holder.checkBox = (CheckBox) convertView.findViewById(R.id.checkbox);
+        holder = new ViewHolder();
+        holder.title = (TextView) convertView.findViewById(R.id.textview);
+        holder.checkBox = (CheckBox) convertView.findViewById(R.id.checkbox);
 
         final AQuery aq = new AQuery(convertView);
         if(lastPosition == position){
@@ -90,7 +91,8 @@ public class AdapterMenuItems extends BaseAdapter{
         holder.title.setText(menu_names[position]);
         holder.title.setTextColor(ctx.getResources().getColor(R.color.white));
         aq.id(R.id.imageview).image(menu_icon_white[position]);
-
+        aq.id(R.id.imageview).getImageView()
+                .setScaleType(ImageView.ScaleType.CENTER_INSIDE);
         aq.id(R.id.checkbox).getCheckBox().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -111,6 +113,7 @@ public class AdapterMenuItems extends BaseAdapter{
         return convertView;
     }
     public void CallFragment(int position){
+        ((AppCompatActivity)ctx).getSupportActionBar().setSubtitle("");
         BaseActivity.drawer.closeDrawer(GravityCompat.START);
         for(int loop = 0;loop < ((AppCompatActivity)ctx).getSupportFragmentManager().getBackStackEntryCount();loop++) {
             ((AppCompatActivity)ctx).getSupportFragmentManager().popBackStack();
@@ -126,7 +129,7 @@ public class AdapterMenuItems extends BaseAdapter{
         }if(position==4){
             callFragmentWithReplace(R.id.container, DocumentsListFragment.newInstance(), "DocumentsListFragment");
         }if(position==5){
-           callFragmentWithReplace(R.id.container, UserFragment.newInstance(),"UserFragment");
+            callFragmentWithReplace(R.id.container, UserFragment.newInstance(),"UserFragment");
         }if(position==6){
             callFragmentWithReplace(R.id.container, ForumsFragment.newInstance(), "ForumsFragment");
         }if(position==7){
@@ -159,5 +162,5 @@ public class AdapterMenuItems extends BaseAdapter{
             return listView.getChildAt(childIndex);
         }
     }
-   
+
 }

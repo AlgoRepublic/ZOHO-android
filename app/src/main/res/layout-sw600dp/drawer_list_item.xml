@@ -64,7 +64,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/round_border"
-                android:gravity="top|left"
+                android:gravity="top|left|start"
                 android:lines="3"
                 android:layout_marginLeft="5dp"
                 android:layout_marginStart="5dp"
@@ -80,18 +80,20 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/layout1"
-            android:paddingBottom="5dp"
-            android:paddingTop="5dp">
+            android:paddingBottom="7dp"
+            android:paddingTop="7dp">
 
             <TextView
                 android:id="@+id/rating_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
                 android:layout_centerVertical="true"
                 android:gravity="center_vertical"
                 android:text="@string/rating"
-                android:textSize="16sp"                android:textStyle="bold" />
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
             <SeekBar
                 android:id="@+id/seekBar"
@@ -99,11 +101,15 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="22dp"
+                android:layout_marginStart="22dp"
                 android:paddingLeft="8dp"
                 android:paddingRight="8dp"
                 android:layout_marginRight="5dp"
+                android:layout_marginEnd="5dp"
                 android:layout_toLeftOf="@+id/percent_text"
                 android:layout_toRightOf="@+id/rating_text"
+                android:layout_toStartOf="@+id/percent_text"
+                android:layout_toEndOf="@+id/rating_text"
                 android:max="100" />
 
             <TextView
@@ -111,6 +117,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
                 android:text="0%"
                 android:textSize="12sp"
@@ -121,14 +128,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/layout2"
-            android:paddingBottom="5dp"
-            android:paddingTop="5dp">
+            android:paddingBottom="7dp"
+            android:paddingTop="7dp">
 
             <TextView
                 android:id="@+id/stage_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
                 android:gravity="center_vertical"
                 android:text="@string/stage"
                 android:textSize="16sp"
@@ -140,6 +148,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_toRightOf="@+id/stage_text"
+                android:layout_toEndOf="@+id/stage_text"
                 android:padding="3dp"
                 android:layout_marginStart="30dp"
                 android:text="Development Stage"
@@ -150,6 +159,7 @@
                 style="?android:attr/ratingBarStyleSmall"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:isIndicator="true"

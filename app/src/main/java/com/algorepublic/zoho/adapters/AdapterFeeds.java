@@ -59,20 +59,17 @@ public class AdapterFeeds extends BaseAdapter {
     public long getItemId(int position) {
         return 0;
     }
-    @Override
-    public int getViewTypeCount() {
-        return 2;
-    }
 
     @Override
     public int getItemViewType(int position) {
-        return position % 2;
+       // return if(getItem(position).message==);
+        return 0;
     }
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
         convertView = l_Inflater.inflate(R.layout.layout_feeds_row, null);
         aq = new AQuery(convertView);
-        aq.id(R.id.feed_title).text(getItem(position).userName);
+        aq.id(R.id.feed_title).text(getItem(position).userName+" "+getStringLine(getItem(position).updateType));
         aq.id(R.id.feed_description).text(getItem(position).message);
         aq.id(R.id.feed_comment_date).text(
                 getItem(position).comments.size()+"-"+ctx.getString(R.string.comments));
@@ -92,7 +89,7 @@ public class AdapterFeeds extends BaseAdapter {
 //                }
 //                callFragmentWithBackStack(R.id.container, EditForumFragment.newInstance(position), "EditForumFragment");
 //            }
-//        });
+//        });.
 //        aq.id(R.id.btDelete).clicked(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
@@ -101,6 +98,41 @@ public class AdapterFeeds extends BaseAdapter {
 //            }
 //        });
         return convertView;
+    }
+    protected String getStringLine(int stringType){
+        String lines=null;
+        if(stringType==1)   // Status
+        {
+            lines = ctx.getString(R.string.added_status);
+        }else if(stringType==2)   // Project
+        {
+            lines = ctx.getString(R.string.added_project);
+        }else if(stringType==3)   // TaskList
+        {
+            lines = ctx.getString(R.string.added_tasklist);
+        }else if(stringType==4)   // Task
+        {
+            lines = ctx.getString(R.string.added_task);
+        }else if(stringType==41)   // TaskUpdate
+        {
+            lines = ctx.getString(R.string.updated_task);
+        }else if(stringType==5)   // Page
+        {
+            lines = ctx.getString(R.string.added_page);
+        }else if(stringType==6)   // Event
+        {
+            lines = ctx.getString(R.string.added_event);
+        }else if(stringType==7)   // Forum
+        {
+            lines = ctx.getString(R.string.added_forum);
+        }else if(stringType==8)   // Document
+        {
+            lines = ctx.getString(R.string.added_document);
+        }else if(stringType==9)   // Milestone
+        {
+            lines = ctx.getString(R.string.added_milestone);
+        }
+        return lines;
     }
     public void DeleteForum(Object caller, Object model){
         GeneralModel.getInstance().setList((GeneralModel) model);

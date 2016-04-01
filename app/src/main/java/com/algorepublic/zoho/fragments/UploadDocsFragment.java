@@ -118,6 +118,7 @@ public class UploadDocsFragment extends BaseFragment implements GoogleApiClient.
     }
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        menu.clear();
         inflater.inflate(R.menu.menu_docs, menu);
         super.onCreateOptionsMenu(menu, inflater);
 
@@ -310,10 +311,13 @@ public class UploadDocsFragment extends BaseFragment implements GoogleApiClient.
                         data.getExtras() != null) {
                     String accountName =
                             data.getStringExtra(AccountManager.KEY_ACCOUNT_NAME);
+                    Log.e("AcName", "/" + accountName);
                     if (accountName != null) {
                         mCredential.setSelectedAccountName(accountName);
+                        buildGoogleApiClient();
+                    }else{
+                        chooseAccount();
                     }
-                    buildGoogleApiClient();
                 }
                 break;
             case RESULT_GOOGLEDRIVE:
@@ -323,6 +327,10 @@ public class UploadDocsFragment extends BaseFragment implements GoogleApiClient.
                                 OpenFileActivityBuilder.EXTRA_RESPONSE_DRIVE_ID);//this extra contains the drive id of the selected file
                     }catch (NullPointerException e){
                         buildGoogleApiClient();
+                    }
+                    if(driveId==null){
+                        buildGoogleApiClient();
+                        return;
                     }
                     HttpTransport transport = AndroidHttp.newCompatibleTransport();
                     JsonFactory jsonFactory = JacksonFactory.getDefaultInstance();
@@ -374,6 +382,7 @@ public class UploadDocsFragment extends BaseFragment implements GoogleApiClient.
                 root.mkdirs();
             }
             file = new File(root ,passed.get(0));
+            Log.e("Name",driveId.getResourceId()+"/"+passed.get(0));
 
             try {
                 inputStream = mService.files().get(driveId.getResourceId())
@@ -437,13 +446,16 @@ public class UploadDocsFragment extends BaseFragment implements GoogleApiClient.
 
     @Override
     public void onConnected(Bundle bundle) {
-        IntentSender intentSender = Drive.DriveApi.newOpenFileActivityBuilder()
-                .build(mGoogleApiClient);
-        try {
-            getActivity().startIntentSenderForResult(
-                    intentSender, RESULT_GOOGLEDRIVE, null, 0, 0, 0);
-        } catch (IntentSender.SendIntentException e) {
-        }
+        if(mGoogleApiClient.isConnected()){
+            IntentSender intentSender = Drive.DriveApi.newOpenFileActivityBuilder()
+                    .build(mGoogleApiClient);
+            try {
+                getActivity().startIntentSenderForResult(
+                        intentSender, RESULT_GOOGLEDRIVE, null, 0, 0, 0);
+            } catch (IntentSender.SendIntentException e) {
+            }
+        }else
+        mGoogleApiClient.connect();
     }
 
     @Override

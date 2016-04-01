@@ -1,6 +1,5 @@
 package com.algorepublic.zoho.fragments;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.util.Log;
@@ -65,8 +64,10 @@ public class TasksListFragment extends BaseFragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         setRetainInstance(true);
         getToolbar().setTitle(getString(R.string.tasks));
+        getToolbar().setSubtitle("");
         super.onViewCreated(view, savedInstanceState);
     }
+
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
@@ -198,13 +199,13 @@ public class TasksListFragment extends BaseFragment {
         return view;
     }
     public void SortList(){
-        if(baseClass.getTaskSortType().equalsIgnoreCase("All")){
+        if(baseClass.getTaskSortType().equalsIgnoreCase(getString(R.string.all))){
             GetGeneralList();
         }
-        if(baseClass.getTaskSortType().equalsIgnoreCase("UpComing")){
+        if(baseClass.getTaskSortType().equalsIgnoreCase(getString(R.string.upcoming))){
             UpComing();
         }
-        if(baseClass.getTaskSortType().equalsIgnoreCase("OverDue")){
+        if(baseClass.getTaskSortType().equalsIgnoreCase(getString(R.string.overdue))){
             OverDueDate();
         }
         FilterList();

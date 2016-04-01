@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:weightSum="2"
+        android:id="@+id/layout_comment"
+        android:background="@color/colorBaseWrapper"
+        android:padding="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="70dp">
+        <LinearLayout
+            android:orientation="horizontal"
+            android:weightSum="2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <EditText
+                android:id="@+id/comment_user"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1.5"
+                android:textCursorDrawable="@null"
+                android:hint="Type a comment"
+                android:textColor="@color/colorBaseHeader"
+                android:textColorHint="@color/colorBaseMenu"
+                android:imeActionId="@integer/add_comment"
+                android:background="@color/white"
+                android:imeOptions="actionDone"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:textSize="18sp"
+                android:layout_gravity="center_vertical" />
+            <requestFocus/>
+
+            <Button
+                android:id="@+id/send"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:text="@string/add"
+                android:textAllCaps="false"
+                android:textSize="20sp"
+                android:gravity="center"
+                android:layout_weight=".5"
+                android:layout_gravity="center_vertical"
+                android:textColor="@android:color/white"
+                android:textStyle="bold"/>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

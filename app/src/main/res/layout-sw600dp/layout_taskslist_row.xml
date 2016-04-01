@@ -1,7 +1,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="70dp"
+    android:layout_height="80dp"
     android:layout_marginBottom="3dp"
     android:descendantFocusability="blocksDescendants"
     android:orientation="horizontal"
@@ -67,7 +67,7 @@
                                 android:gravity="center"
                                 android:paddingLeft="10dp"
                                 android:paddingRight="10dp"
-                                android:textSize="16sp"
+                                android:textSize="17sp"
                                 android:textColor="@color/white"
                                 android:background="@color/colorContentWrapper"
                                 android:text="Edit"
@@ -81,7 +81,7 @@
                                 android:gravity="center"
                                 android:paddingLeft="10dp"
                                 android:paddingRight="10dp"
-                                android:textSize="16sp"
+                                android:textSize="17sp"
                                 android:textColor="@color/white"
                                 android:background="@color/red"
                                 android:text="Delete"
@@ -134,8 +134,8 @@
                                             android:layout_width="0dp"
                                             android:layout_height="wrap_content"
                                             android:layout_weight="1"
-                                            android:gravity="left"
-                                            android:textSize="14sp"
+                                            android:gravity="left|start"
+                                            android:textSize="16sp"
                                             android:textStyle="bold" />
 
                                         <TextView
@@ -144,7 +144,7 @@
                                             android:layout_height="wrap_content"
                                             android:layout_weight="1"
                                             android:gravity="right|end"
-                                            android:textSize="12sp" />
+                                            android:textSize="14sp" />
                                     </LinearLayout>
 
                                     <LinearLayout
@@ -160,10 +160,10 @@
                                             android:layout_height="wrap_content"
                                             android:layout_gravity="center_vertical"
                                             android:layout_weight=".8"
-                                            android:gravity="left"
+                                            android:gravity="left|start"
                                             android:singleLine="true"
                                             android:ellipsize="end"
-                                            android:textSize="14sp"
+                                            android:textSize="16sp"
                                             android:textStyle="bold" />
 
                                         <RelativeLayout
@@ -178,29 +178,32 @@
                                                 android:layout_height="wrap_content"
                                                 android:layout_centerVertical="true"
                                                 android:layout_toLeftOf="@+id/bar"
-                                                android:gravity="left"
+                                                android:layout_toStartOf="@+id/bar"
+                                                android:gravity="left|start"
                                                 android:text="@string/task_comment"
-                                                android:textSize="12sp" />
+                                                android:textSize="14sp" />
 
                                             <RadioButton
                                                 android:id="@+id/bar"
-                                                android:layout_width="1dp"
+                                                android:layout_width="1.5dp"
                                                 android:layout_margin="5dp"
                                                 android:layout_height="match_parent"
                                                 android:layout_centerVertical="true"
                                                 android:text="@string/divider"
                                                 android:checked="true"
-                                                android:layout_toLeftOf="@+id/task_users"></RadioButton>
+                                                android:layout_toStartOf="@+id/task_users"
+                                                android:layout_toLeftOf="@+id/task_users"/>
 
                                             <TextView
                                                 android:id="@+id/task_users"
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="wrap_content"
                                                 android:layout_alignParentRight="true"
+                                                android:layout_alignParentEnd="true"
                                                 android:layout_centerVertical="true"
-                                                android:gravity="left"
+                                                android:gravity="left|start"
                                                 android:text="@string/task_user"
-                                                android:textSize="12sp" />
+                                                android:textSize="14sp" />
                                         </RelativeLayout>
                                     </LinearLayout>
                                 </LinearLayout>

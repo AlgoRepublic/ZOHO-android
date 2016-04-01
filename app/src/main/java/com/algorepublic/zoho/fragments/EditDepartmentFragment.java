@@ -47,6 +47,7 @@ public class EditDepartmentFragment extends BaseFragment {
     }
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        menu.clear();
         inflater.inflate(R.menu.menu_save_project, menu);
         super.onCreateOptionsMenu(menu, inflater);
     }
