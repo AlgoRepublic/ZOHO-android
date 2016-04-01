@@ -1,45 +1,90 @@
 <resources>
+    <!-- BLUE THEME -->
+    <style name="AppThemeBlue" parent="Theme.AppCompat.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="colorPrimary">@color/colorPrimaryBlue</item>
+        <item name="android:colorBackground">@color/colorBaseWrapperBlue</item>
+        <item name="android:colorForeground">@color/colorPrimaryBlue</item>
+        <item name="colorAccent">@color/colorPrimaryBlue</item>
+        <item name="checkboxStyle">@style/blueCheckBoxStyle</item>
+        <item name="android:textViewStyle">@style/blueTextView</item>
+        <item name="seekBarStyle">@style/blueSeekBar</item>
+        <item name="android:ratingBarStyle">@style/blueRatingBar</item>
+        <item name="android:radioButtonStyle">@style/blueRadioButton</item>
+        <item name="android:tabWidgetStyle">@style/bluePagerTitleStrip</item>
+        <item name="android:buttonStyle">@style/blueButton</item>
+        <item name="android:editTextStyle">@style/blueEditTextStyle</item>
+    </style>
 
+    <style name="blueButton" parent="@android:style/Widget.Button">
+        <item name="android:background">@color/colorSecondaryBlue</item>
+    </style>
+    <style name="blueRatingBar" parent="@android:style/Widget.RatingBar">
+    </style>
+
+    <style name="blueRadioButton" parent="@android:style/Widget.CompoundButton.RadioButton">
+        <item name="android:background">@drawable/blue_radiobutton</item>
+        <item name="android:textColor">@color/colorPrimaryBlue</item>
+        <item name="android:button">@null</item>
+    </style>
+
+    <style name="blueCheckBoxStyle" parent="@android:style/Widget.CompoundButton.CheckBox">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:background">@color/colorPrimaryBlue</item>
+    </style>
+    <style name="blueTextView" parent="@android:style/Widget.TextView">
+        <item name="android:textColor">@color/colorPrimaryBlue</item>
+    </style>
+
+    <style name="blueSeekBar" parent="@android:style/Widget.SeekBar">
+        <item name="android:indeterminateOnly">false</item>
+        <item name="android:progressDrawable">@drawable/progress_horizontal</item>
+        <item name="android:indeterminateDrawable">@drawable/progress_horizontal</item>
+        <item name="android:thumb">@drawable/thumb_image</item>
+        <item name="android:minHeight">6dip</item>
+        <item name="android:maxHeight">6dip</item>
+    </style>
+    <style name="bluePagerTitleStrip" parent="Widget.Design.TabLayout">
+        <item name="tabIndicatorColor">@color/white</item>
+        <item name="tabIndicatorHeight">4dp</item>
+        <item name="tabTextAppearance">@style/TabTextAppearance</item>
+        <item name="tabBackground">@color/colorPrimaryBlue</item>
+        <item name="tabSelectedTextColor">@color/colorWhite</item>
+    </style>
+
+    <style name="blueEditTextStyle" parent="Widget.AppCompat.EditText">
+        <item name="android:textColor">@color/colorPrimaryBlue</item>
+        <item name="android:textColorHint">@color/colorPrimaryBlue</item>
+    </style>
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
         <item name="colorPrimary">@color/colorBaseHeader</item>
-        <item name="colorPrimaryDark">@color/colorBaseHeader</item>
+        <item name="colorPrimaryDark">@color/colorBaseDark</item>
         <item name="android:colorBackground">@color/colorBaseWrapper</item>
         <item name="android:textColorPrimary">@color/colorWhite</item>
         <item name="android:colorForeground">@color/colorBaseHeader</item>
         <item name="colorAccent">@color/colorBaseHeader</item>
         <item name="checkboxStyle">@style/blackCheckBoxStyle</item>
-        <item name="android:radioButtonStyle">@style/blackRadioButton</item>
+        <item name="android:textViewStyle">@style/blackTextView</item>
         <item name="android:listViewStyle">@style/blackListViewStyle</item>
+        <item name="seekBarStyle">@style/blackSeekBar</item>
         <item name="android:tabWidgetStyle">@style/blackPagerTitleStrip</item>
+        <item name="android:buttonStyle">@style/blackButton</item>
+        <item name="android:ratingBarStyle">@style/blackRatingBar</item>
+        <item name="android:radioButtonStyle">@style/blackRadioButton</item>
         <item name="android:actionMenuTextAppearance">@style/MyMenuTextAppearance</item>
         <item name="android:editTextStyle">@style/blackEditTextStyle</item>
     </style>
 
+    <style name="blackRatingBar" parent="@android:style/Widget.RatingBar">
+    </style>
     <style name="MyMenuTextAppearance" parent="@android:style/TextAppearance.Holo.Widget.ActionBar.Title">
         <item name="android:textAllCaps">false</item>
-    </style>
-    <style name="blackEditTextStyle" parent="Widget.AppCompat.EditText">
-        <item name="android:textColor">@color/colorBaseHeader</item>
-        <item name="android:textColorHint">@color/colorBaseHeader</item>
-    </style>
-    <style name="myRecyclerViewStyle">
-        <!-- NOTE: clipChildren should be true on API level 10 -->
-        <item name="android:clipChildren">true</item>
-        <item name="android:clipToPadding">false</item>
-        <item name="android:paddingBottom">@dimen/activity_vertical_margin</item>
-        <item name="android:paddingLeft">@dimen/activity_horizontal_margin</item>
-        <item name="android:paddingRight">@dimen/activity_horizontal_margin</item>
-        <item name="android:paddingTop">@dimen/activity_vertical_margin</item>
-        <item name="android:scrollbarStyle">outsideOverlay</item>
-        <item name="android:scrollbars">vertical</item>
-    </style>
-    <style name="blackCheckBoxStyle" parent="@android:style/Widget.CompoundButton.CheckBox">
-        <item name="android:textColor">@android:color/white</item>
-        <item name="android:background">@color/colorBaseHeader</item>
     </style>
     <style name="blackListViewStyle" parent="@android:style/Widget.ListView">
         <item name="android:scrollbarThumbVertical">@color/colorBaseHeader</item>
@@ -47,7 +92,41 @@
         <item name="android:scrollbarSize">4dp</item>
         <item name="android:fadeScrollbars">false</item>
     </style>
+    <style name="blackEditTextStyle" parent="Widget.AppCompat.EditText">
+        <item name="android:textColor">@color/colorBaseHeader</item>
+        <item name="android:textColorHint">@color/colorBaseHeader</item>
+    </style>
+    <style name="blackButton" parent="@android:style/Widget.Button">
+        <item name="android:background">@color/colorContentWrapper</item>
+    </style>
 
+    <style name="blackCheckBoxStyle" parent="@android:style/Widget.CompoundButton.CheckBox">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:background">@color/colorBaseHeader</item>
+    </style>
+
+    <style name="blackTextView" parent="@android:style/Widget.TextView">
+        <item name="android:textColor">@color/colorBaseHeader</item>
+    </style>
+
+    <style name="blackRadioButton" parent="@android:style/Widget.CompoundButton.RadioButton">
+        <item name="android:background">@drawable/black_radiobutton</item>
+        <item name="android:textColor">@color/colorBaseHeader</item>
+        <item name="android:button">@null</item>
+    </style>
+
+
+    <style name="blackSeekBar" parent="@android:style/Widget.SeekBar">
+        <item name="android:indeterminateOnly">false</item>
+        <item name="android:progressDrawable">@drawable/progress_horizontal</item>
+        <item name="android:indeterminateDrawable">@drawable/progress_horizontal</item>
+        <item name="android:thumb">@drawable/thumb_image</item>
+        <item name="android:minHeight">6dip</item>
+        <item name="android:maxHeight">6dip</item>
+    </style>
+
+
+    <!--not sure yet-->
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
@@ -64,75 +143,18 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Dark" />
 
-    <style name="blackRadioButton" parent="@android:style/Widget.CompoundButton.RadioButton">
-        <item name="android:background">@drawable/black_radiobutton</item>
-        <item name="android:textColor">@color/colorBaseHeader</item>
-        <item name="android:button">@null</item>
-    </style>
-
-    <!-- BLUE THEME -->
-    <style name="AppThemeBlue" parent="Theme.AppCompat.NoActionBar">
-        <!-- Customize your theme here. -->
-        <item name="windowNoTitle">true</item>
-        <item name="windowActionBar">false</item>
-        <item name="colorPrimary">@color/colorPrimaryBlue</item>
-        <item name="colorPrimaryDark">@color/colorBaseDark</item>
-        <item name="android:colorBackground">@color/colorBaseWrapper</item>
-        <item name="android:textColorPrimary">@color/colorWhite</item>
-        <item name="android:colorForeground">@color/colorPrimaryBlue</item>
-        <item name="colorAccent">@color/colorPrimaryBlue</item>
-        <item name="checkboxStyle">@style/blueCheckBoxStyle</item>
-        <item name="android:radioButtonStyle">@style/blueRadioButton</item>
-        <item name="android:listViewStyle">@style/blueListViewStyle</item>
-        <item name="android:tabWidgetStyle">@style/bluePagerTitleStrip</item>
-        <item name="android:editTextStyle">@style/blueEditTextStyle</item>
-    </style>
-
-    <style name="blueCheckBoxStyle" parent="@android:style/Widget.CompoundButton.CheckBox">
-        <item name="android:textColor">@color/colorPrimaryBlue</item>
-        <item name="android:background">@color/colorPrimaryBlue</item>
-    </style>
-
-    <style name="blueListViewStyle" parent="@android:style/Widget.ListView">
-        <item name="android:scrollbarThumbVertical">@color/colorPrimaryBlue</item>
-        <item name="android:background">@color/white</item>
-        <item name="android:scrollbarSize">4dp</item>
-        <item name="android:fadeScrollbars">false</item>
-    </style>
-    <style name="commonListItemStyle">
-    </style>
-
     <style name="blackPagerTitleStrip" parent="Widget.Design.TabLayout">
-        <item name="android:textColor">@android:color/white</item>
-        <item name="tabIndicatorColor">@color/colorBaseMenu</item>
+        <item name="tabIndicatorColor">@color/white</item>
         <item name="tabIndicatorHeight">4dp</item>
         <item name="tabTextAppearance">@style/TabTextAppearance</item>
         <item name="tabBackground">@color/colorBaseHeader</item>
         <item name="tabSelectedTextColor">@color/colorWhite</item>
+
     </style>
 
-
-    <style name="bluePagerTitleStrip" parent="Widget.Design.TabLayout">
-        <item name="android:textColor">@android:color/white</item>
-        <item name="tabIndicatorColor">@color/colorBaseMenu</item>
-        <item name="tabIndicatorHeight">4dp</item>
-        <item name="tabTextAppearance">@style/TabTextAppearance</item>
-        <item name="tabBackground">@color/colorPrimaryBlue</item>
-        <item name="tabSelectedTextColor">@color/colorWhite</item>
-    </style>
     <style name="TabTextAppearance" parent="TextAppearance.Design.Tab">
         <item name="textAllCaps">false</item>
+        <item name="android:textColor">@android:color/white</item>
     </style>
-
-    <style name="blueRadioButton" parent="@android:style/Widget.CompoundButton.RadioButton">
-        <item name="android:background">@drawable/blue_radiobutton</item>
-        <item name="android:textColor">@color/colorPrimaryBlue</item>
-        <item name="android:button">@null</item>
-    </style>
-    <style name="blueEditTextStyle" parent="Widget.AppCompat.EditText">
-        <item name="android:textColor">@color/colorPrimaryBlue</item>
-        <item name="android:textColorHint">@color/colorPrimaryBlue</item>
-    </style>
-
 
 </resources>

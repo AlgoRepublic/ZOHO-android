@@ -65,6 +65,7 @@
                 android:background="@drawable/round_border"
                 android:gravity="top|left"
                 android:lines="3"
+                android:textColor="@color/colorBaseHeader"
                 android:layout_marginLeft="5dp"
                 android:layout_marginStart="5dp"
                 android:paddingRight="23dp"
