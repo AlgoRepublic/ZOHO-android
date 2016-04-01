@@ -35,7 +35,7 @@ public class DefaultEventRenderer extends EventRenderer<BaseCalendarEvent> {
 
 
         txtTitle.setTextColor(view.getResources().getColor(android.R.color.black));
-
+        txtTitle.setSelected(true);
         txtTitle.setText(event.getTitle());
 
         Drawable shapeDrawable = priority.getBackground();

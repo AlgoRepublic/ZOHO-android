@@ -199,13 +199,13 @@ public class TasksListFragment extends BaseFragment {
         return view;
     }
     public void SortList(){
-        if(baseClass.getTaskSortType().equalsIgnoreCase("All")){
+        if(baseClass.getTaskSortType().equalsIgnoreCase(getString(R.string.all))){
             GetGeneralList();
         }
-        if(baseClass.getTaskSortType().equalsIgnoreCase("UpComing")){
+        if(baseClass.getTaskSortType().equalsIgnoreCase(getString(R.string.upcoming))){
             UpComing();
         }
-        if(baseClass.getTaskSortType().equalsIgnoreCase("OverDue")){
+        if(baseClass.getTaskSortType().equalsIgnoreCase(getString(R.string.overdue))){
             OverDueDate();
         }
         FilterList();

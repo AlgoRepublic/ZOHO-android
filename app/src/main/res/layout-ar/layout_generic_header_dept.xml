@@ -74,9 +74,8 @@
         <RelativeLayout
             android:layout_width="252dp"
             android:layout_height="match_parent"
-            android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:background="@drawable/left_header">
+            android:background="@drawable/left_header_ar">
 
             <TextView
                 android:id="@+id/header"
@@ -95,8 +94,7 @@
             android:layout_width="50dp"
             android:layout_height="match_parent"
             android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:background="@drawable/right_header" />
+            android:background="@drawable/right_header_ar" />
     </RelativeLayout>
 </RelativeLayout>
         </com.daimajia.swipe.SwipeLayout>

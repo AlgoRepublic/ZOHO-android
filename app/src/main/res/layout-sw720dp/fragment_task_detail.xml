@@ -17,12 +17,12 @@
             app:ms9_useAmbientShadow="true"
             app:ms9_affectsDisplayedPosition="true"
             app:ms9_shadowTranslationZ="1dp"
-            app:ms9_shadowElevation="2dp">
+            app:ms9_shadowElevation="4dp">
             >
             <RelativeLayout
                 android:id="@+id/layout_tasktitle"
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
+                android:layout_height="50dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="5dp"
                 android:background="@color/colorContentWrapper">
@@ -30,7 +30,7 @@
 
                 <View
                     android:id="@+id/priority_bar"
-                    android:layout_width="4dp"
+                    android:layout_width="8dp"
                     android:layout_marginRight="3dp"
                     android:layout_alignBottom="@+id/layout1"
                     android:layout_alignTop="@+id/layout1"
@@ -40,19 +40,19 @@
                 </View>
                 <ImageView
                     android:id="@+id/icon"
-                    android:layout_width="15dp"
+                    android:layout_width="25dp"
                     android:layout_marginLeft="15dp"
                     android:layout_toRightOf="@+id/priority_bar"
                     android:src="@drawable/taskdetail_icon"
                     android:layout_centerVertical="true"
                     android:layout_centerHorizontal="true"
-                    android:layout_height="20dp" />
+                    android:layout_height="30dp" />
                 <TextView
                     android:id="@+id/task_name"
                     android:layout_width="fill_parent"
                     android:text="@string/task_name"
                     android:layout_height="wrap_content"
-                    android:textSize="14sp"
+                    android:textSize="25sp"
                     android:singleLine="true"
                     android:ellipsize="end"
                     android:gravity="left"
@@ -89,7 +89,7 @@
                 android:layout_height="match_parent">
                 <RelativeLayout
                     android:id="@+id/layout3"
-                    android:paddingTop="15dp"
+                    android:paddingTop="25dp"
                     android:paddingBottom="15dp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="20dp"
@@ -105,7 +105,7 @@
                             android:layout_width="wrap_content"
                             android:text="@string/task_startdate"
                             android:layout_height="wrap_content"
-                            android:textSize="12sp"
+                            android:textSize="22sp"
                             android:textStyle="bold"
                             android:layout_alignParentLeft="true"
                             />
@@ -115,7 +115,7 @@
                             android:text="dsds"
                             android:paddingLeft="5dp"
                             android:layout_height="wrap_content"
-                            android:textSize="12sp"
+                            android:textSize="22sp"
                             android:layout_toRightOf="@+id/text2"
 
                             />
@@ -124,7 +124,7 @@
                             android:layout_width="wrap_content"
                             android:text="@string/task_duedate"
                             android:layout_height="wrap_content"
-                            android:textSize="12sp"
+                            android:textSize="22sp"
                             android:textStyle="bold"
                             android:layout_toLeftOf="@+id/end_date"
 
@@ -135,7 +135,7 @@
                             android:text="dsds"
                             android:paddingLeft="5dp"
                             android:layout_height="wrap_content"
-                            android:textSize="13sp"
+                            android:textSize="22sp"
                             android:layout_alignParentRight="true"
                             android:layout_toLeftOf="@+id/textView"
 
@@ -148,12 +148,12 @@
                         android:layout_width="match_parent"
                         android:layout_marginRight="25dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp">
+                        android:layout_marginTop="15dp">
                         <TextView
                             android:layout_width="wrap_content"
                             android:text="@string/category"
                             android:layout_height="wrap_content"
-                            android:textSize="12sp"
+                            android:textSize="22sp"
                             android:textStyle="bold"
                             android:layout_toLeftOf="@+id/textView"
 
@@ -164,7 +164,7 @@
                             android:text="dsds"
                             android:paddingLeft="3dp"
                             android:layout_height="wrap_content"
-                            android:textSize="12sp"
+                            android:textSize="22sp"
                             android:layout_toLeftOf="@+id/textView"
 
                             />
@@ -174,14 +174,14 @@
                         android:layout_below="@+id/header_layout2"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_marginTop="10dp"
+                        android:layout_marginTop="15dp"
                         android:orientation="vertical">
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_weight="1"
                             android:text="@string/task_details"
                             android:layout_height="wrap_content"
-                            android:textSize="12sp"
+                            android:textSize="22sp"
                             android:textStyle="bold"
                             android:layout_toLeftOf="@+id/textView"
 
@@ -191,7 +191,7 @@
                             android:layout_width="match_parent"
                             android:layout_below="@+id/task_name"
                             android:layout_height="wrap_content"
-                            android:textSize="12sp"
+                            android:textSize="22sp"
                             android:ellipsize="end"
 
                             />
@@ -200,14 +200,14 @@
                         android:id="@+id/header_layout4"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
+                        android:layout_marginTop="15dp"
                         android:layout_below="@+id/header_layout3"
                         android:orientation="horizontal">
                         <TextView
                             android:layout_width="wrap_content"
                             android:text="@string/task_users"
                             android:layout_height="wrap_content"
-                            android:textSize="12sp"
+                            android:textSize="22sp"
                             android:textStyle="bold"
                             android:layout_toLeftOf="@+id/textView"
                             android:id="@+id/users"
@@ -216,7 +216,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textSize="12sp"
+                            android:textSize="22sp"
                             android:layout_marginLeft="5dp"
                             android:layout_toRightOf="@+id/users"
                             android:textColor="@color/colorBaseHeader"
@@ -229,7 +229,7 @@
                         android:id="@+id/task_assignee"
                         android:layout_below="@+id/header_layout4"
                         android:layout_width="match_parent"
-                        android:layout_height="40dp"
+                        android:layout_height="80dp"
                         app:twowayview_layoutManager="ListLayoutManager"
                         android:orientation="horizontal">
                     </org.lucasr.twowayview.widget.TwoWayView>
@@ -244,7 +244,7 @@
                         android:layout_width="wrap_content"
                         android:text="@string/project_status"
                         android:layout_height="wrap_content"
-                        android:textSize="12sp"
+                        android:textSize="22sp"
                         android:textStyle="bold"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="20dp"
@@ -270,19 +270,19 @@
                     <com.github.lzyzsd.circleprogress.DonutProgress
                         android:layout_marginLeft="50dp"
                         android:id="@+id/circularprogressBar"
-                        android:layout_width="120dp"
-                        android:layout_height="120dp"
+                        android:layout_width="220dp"
+                        android:layout_height="220dp"
                         app:max="100"
                         android:layout_centerHorizontal="true"
-                        android:layout_margin="5dp"
-                        app:wheel_size="8"
-                        app:donut_text_size="20dp"
+                        android:layout_margin="15dp"
+                        app:wheel_size="16"
+                        app:donut_text_size="30dp"
                         android:layout_below="@+id/layout4"
-                        android:layout_marginTop="10dp"
+                        android:layout_marginTop="15dp"
                         android:layout_centerInParent="true"
                         app:donut_text_color="@color/colorBaseHeader"
-                        app:donut_finished_stroke_width="5dp"
-                        app:donut_unfinished_stroke_width="5dp"
+                        app:donut_finished_stroke_width="10dp"
+                        app:donut_unfinished_stroke_width="10dp"
                         app:donut_finished_color="@color/colorBaseHeader"/>
 
                 </RelativeLayout>
@@ -293,7 +293,7 @@
     <LinearLayout
         android:id="@+id/parent2"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="100dp"
         android:weightSum="4.72"
         android:layout_alignParentBottom="true"
         android:background="@color/colorContentWrapper"
@@ -307,17 +307,17 @@
             android:layout_height="match_parent">
             <RelativeLayout
                 android:id="@+id/comment"
-                android:layout_width="60dp"
+                android:layout_width="100dp"
                 android:layout_centerHorizontal="true"
                 android:layout_height="match_parent">
                 <TextView
                     android:id="@+id/comment_count"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
                     android:text="0"
                     android:gravity="center"
                     android:singleLine="true"
-                    android:textSize="8dp"
+                    android:textSize="10dp"
                     android:layout_alignParentRight="true"
                     android:background="@drawable/bubble_alert_white"
                     android:layout_alignParentTop="true"
@@ -325,11 +325,11 @@
 
                 <ImageView
                     android:id="@+id/delete1"
-                    android:layout_width="25dp"
+                    android:layout_width="40dp"
                     android:src="@drawable/task_comment"
                     android:layout_centerHorizontal="true"
                     android:layout_above="@+id/text1"
-                    android:layout_height="25dp" />
+                    android:layout_height="40dp" />
 
                 <TextView
                     android:id="@+id/text1"
@@ -339,7 +339,7 @@
                     android:gravity="center"
                     android:layout_alignParentBottom="true"
                     android:textColor="@color/white"
-                    android:textSize="10sp"
+                    android:textSize="18sp"
                     android:layout_marginBottom="3dp"/>
             </RelativeLayout>
 
@@ -357,17 +357,17 @@
             android:layout_marginRight="2dp"
             android:layout_height="match_parent">
             <RelativeLayout
-                android:layout_width="53dp"
+                android:layout_width="93dp"
                 android:layout_centerHorizontal="true"
                 android:layout_height="match_parent">
                 <TextView
                     android:id="@+id/docs_count"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
+                    android:layout_width="42dp"
+                    android:layout_height="42dp"
                     android:text="0"
                     android:gravity="center"
                     android:singleLine="true"
-                    android:textSize="8dp"
+                    android:textSize="10dp"
                     android:layout_alignParentRight="true"
                     android:background="@drawable/bubble_alert_white"
                     android:layout_alignParentTop="true"
@@ -375,11 +375,11 @@
 
                 <ImageView
                     android:id="@+id/delete2"
-                    android:layout_width="25dp"
+                    android:layout_width="40dp"
                     android:src="@drawable/task_undone"
                     android:layout_centerHorizontal="true"
                     android:layout_above="@+id/text3"
-                    android:layout_height="25dp" />
+                    android:layout_height="40dp" />
 
                 <TextView
                     android:id="@+id/text3"
@@ -389,7 +389,7 @@
                     android:gravity="center"
                     android:layout_alignParentBottom="true"
                     android:textColor="@color/white"
-                    android:textSize="10sp"
+                    android:textSize="18sp"
                     android:layout_marginBottom="3dp"/>
             </RelativeLayout>
 
@@ -407,17 +407,17 @@
             android:layout_height="match_parent">
             <RelativeLayout
                 android:id="@+id/subtask"
-                android:layout_width="53dp"
+                android:layout_width="93dp"
                 android:layout_centerHorizontal="true"
                 android:layout_height="match_parent">
                 <TextView
                     android:id="@+id/subtask_count"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
+                    android:layout_width="42dp"
+                    android:layout_height="42dp"
                     android:text="0"
                     android:gravity="center"
                     android:singleLine="true"
-                    android:textSize="8dp"
+                    android:textSize="10dp"
                     android:layout_alignParentRight="true"
                     android:background="@drawable/bubble_alert_white"
                     android:layout_alignParentTop="true"
@@ -425,11 +425,11 @@
 
                 <ImageView
                     android:id="@+id/delete3"
-                    android:layout_width="25dp"
+                    android:layout_width="42dp"
                     android:src="@drawable/sub_tasks"
                     android:layout_centerHorizontal="true"
                     android:layout_above="@+id/text6"
-                    android:layout_height="25dp" />
+                    android:layout_height="42dp" />
 
                 <TextView
                     android:id="@+id/text6"
@@ -439,7 +439,7 @@
                     android:gravity="center"
                     android:layout_alignParentBottom="true"
                     android:textColor="@color/white"
-                    android:textSize="10sp"
+                    android:textSize="18sp"
                     android:layout_marginBottom="3dp"/>
             </RelativeLayout>
 
@@ -457,12 +457,12 @@
             android:layout_marginRight="2dp"
             android:layout_height="match_parent">
             <ImageView
-                android:layout_width="25dp"
+                android:layout_width="42dp"
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
                 android:src="@drawable/trash"
                 android:layout_gravity="center"
-                android:layout_height="25dp" />
+                android:layout_height="42dp" />
             <TextView
                 android:id="@+id/text8"
                 android:layout_width="match_parent"
@@ -471,7 +471,7 @@
                 android:gravity="center"
                 android:layout_alignParentBottom="true"
                 android:textColor="@color/white"
-                android:textSize="10sp"
+                android:textSize="18sp"
                 android:layout_marginBottom="3dp"/>
         </RelativeLayout>
         <View android:layout_height="fill_parent"
@@ -487,7 +487,7 @@
             android:layout_weight="1.2"
             android:layout_gravity="center"
             android:layout_height="match_parent"
-            android:textSize="12sp"
+            android:textSize="25sp"
             android:textColor="@android:color/white"
             />
     </LinearLayout>

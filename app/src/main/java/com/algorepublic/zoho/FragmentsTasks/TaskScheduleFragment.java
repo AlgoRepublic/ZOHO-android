@@ -3,14 +3,12 @@ package com.algorepublic.zoho.FragmentsTasks;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.fragments.BaseFragment;
-import com.algorepublic.zoho.fragments.TaskAddUpdateFragment;
 import com.algorepublic.zoho.utils.BaseClass;
 import com.androidquery.AQuery;
 import com.fourmob.datetimepicker.date.DatePickerDialog;
@@ -61,7 +59,7 @@ public class TaskScheduleFragment extends BaseFragment {
                 BaseClass.db.getString("StartDate").equalsIgnoreCase("0001-01-01")) {
             if (BaseClass.db.getString("StartDate").equalsIgnoreCase("3/0/1")) {
                 aq.id(R.id.start_date).text("No Date");
-            } else if (BaseClass.db.getString("StartDate").equalsIgnoreCase("12/31/3938")) {
+            } else if (BaseClass.db.getString("StartDate").equalsIgnoreCase("31/12/3938")) {
                 aq.id(R.id.start_date).text("No Date");
             }
             else
@@ -74,7 +72,7 @@ public class TaskScheduleFragment extends BaseFragment {
                 BaseClass.db.getString("EndDate").equalsIgnoreCase("0001-01-01")) {
             if (BaseClass.db.getString("EndDate").equalsIgnoreCase("3/0/1")) {
                 aq.id(R.id.end_date).text("No Date");
-            } else if (BaseClass.db.getString("EndDate").equalsIgnoreCase("12/31/3938")) {
+            } else if (BaseClass.db.getString("EndDate").equalsIgnoreCase("31/12/3938")) {
                 aq.id(R.id.end_date).text("No Date");
             }
             else
@@ -112,6 +110,7 @@ public class TaskScheduleFragment extends BaseFragment {
 
         @Override
         public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
+
             start_date = dayOfMonth+"/"+(++monthOfYear)+"/"+year;
             start_day = dayOfMonth;start_month = monthOfYear-1;start_year = year;
             aq.id(R.id.start_date).text(start_date);

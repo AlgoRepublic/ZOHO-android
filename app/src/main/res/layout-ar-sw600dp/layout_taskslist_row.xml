@@ -1,14 +1,18 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="80dp"
+    android:layout_height="110dp"
     android:layout_marginBottom="3dp"
     android:descendantFocusability="blocksDescendants"
     android:orientation="horizontal"
-    android:paddingEnd="10dp"
-    android:paddingLeft="10dp"
-    android:paddingRight="10dp"
-    android:paddingStart="10dp">
+    android:paddingEnd="5dp"
+    android:layoutDirection="rtl"
+    android:textDirection="rtl"
+    android:gravity="center_vertical"
+    android:fitsSystemWindows="true"
+    android:paddingLeft="5dp"
+    android:paddingRight="5dp"
+    android:paddingStart="5dp">
 
 
     <RelativeLayout
@@ -17,7 +21,6 @@
         android:layout_height="match_parent"
         android:layout_marginBottom="6dp"
         android:layout_marginTop="4dp"
-
         android:orientation="horizontal">
 
         <com.h6ah4i.android.materialshadowninepatch.MaterialShadowContainerView
@@ -63,11 +66,11 @@
                                 android:paddingLeft="10dp"
                                 android:paddingRight="10dp"
                                 android:textSize="17sp"
-                                android:textColor="@color/white"
+                                android:textColor="@color/colorWhite"
                                 android:background="@color/colorContentWrapper"
                                 android:text="Edit"
                                 />
-                                />
+                            />
                             <TextView
                                 android:id="@+id/btDelete"
                                 android:layout_width="0dp"
@@ -77,7 +80,7 @@
                                 android:paddingLeft="10dp"
                                 android:paddingRight="10dp"
                                 android:textSize="17sp"
-                                android:textColor="@color/white"
+                                android:textColor="@color/colorWhite"
                                 android:background="@color/red"
                                 android:text="Delete"
                                 />
@@ -92,14 +95,15 @@
                                 android:id="@+id/parent1"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
+                                android:gravity="center_vertical"
                                 android:layout_toRightOf="@+id/rightarrow_layout"
                                 android:layout_toEndOf="@+id/rightarrow_layout"
                                 android:background="@color/colorBaseWrapper">
 
                                 <ImageView
                                     android:id="@+id/task_image"
-                                    android:layout_width="25dp"
-                                    android:layout_height="25dp"
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp"
                                     android:layout_gravity="center"
                                     android:layout_marginLeft="5dp"
                                     android:layout_marginRight="5dp"
@@ -130,46 +134,55 @@
                                             android:id="@+id/task_name"
                                             android:layout_width="0dp"
                                             android:layout_height="wrap_content"
-                                            android:layout_weight="1"
+                                            android:layout_weight="1.1"
                                             android:gravity="left|start"
-                                            android:textSize="16sp"
+                                            android:ellipsize="marquee"
+                                            android:singleLine="true"
+                                            android:marqueeRepeatLimit="marquee_forever"
+                                            android:textSize="18sp"
                                             android:textStyle="bold" />
 
                                         <TextView
                                             android:id="@+id/task_date"
                                             android:layout_width="0dp"
                                             android:paddingEnd="5dp"
+                                            android:singleLine="true"
+
                                             android:layout_height="wrap_content"
-                                            android:layout_weight="1"
+                                            android:layout_weight="0.9"
                                             android:gravity="right|end"
-                                            android:textSize="14sp" />
+                                            android:textSize="16sp" />
                                     </LinearLayout>
 
                                     <LinearLayout
                                         android:id="@+id/layout3"
                                         android:layout_width="match_parent"
-                                        android:layout_height="20dp"
+                                        android:layout_height="wrap_content"
                                         android:orientation="horizontal"
+                                        android:gravity="top"
                                         android:weightSum="2">
 
                                         <TextView
                                             android:id="@+id/project_name"
                                             android:layout_width="0dp"
                                             android:layout_height="wrap_content"
-                                            android:layout_gravity="center_vertical"
-                                            android:layout_weight=".8"
+                                            android:layout_gravity="top"
+                                            android:layout_weight="1.2"
                                             android:gravity="left|start"
-                                            android:singleLine="true"
                                             android:ellipsize="end"
-                                            android:textSize="16sp"
+                                            android:maxLines="2"
+                                            android:text=""
+                                            android:textSize="18sp"
                                             android:textStyle="bold" />
 
                                         <RelativeLayout
                                             android:layout_width="0dp"
-                                            android:layout_height="wrap_content"
+                                            android:layout_height="20dp"
                                             android:layout_below="@+id/general"
+                                            android:gravity="center_vertical"
                                             android:paddingEnd="5dp"
-                                            android:layout_weight="1.2">
+
+                                            android:layout_weight="0.8">
 
                                             <TextView
                                                 android:id="@+id/task_comment"
@@ -180,7 +193,7 @@
                                                 android:layout_toStartOf="@+id/bar"
                                                 android:gravity="left|start"
                                                 android:text="@string/task_comment"
-                                                android:textSize="14sp" />
+                                                android:textSize="16sp" />
 
                                             <RadioButton
                                                 android:id="@+id/bar"
@@ -202,7 +215,7 @@
                                                 android:layout_centerVertical="true"
                                                 android:gravity="left|start"
                                                 android:text="@string/task_user"
-                                                android:textSize="14sp" />
+                                                android:textSize="16sp" />
                                         </RelativeLayout>
                                     </LinearLayout>
                                 </LinearLayout>
@@ -236,7 +249,6 @@
             android:layout_width="8dp"
             android:layout_height="match_parent"
             android:layout_marginBottom="2dp"
-
             android:layout_alignParentEnd="true"
             android:background="@drawable/roundable_prioritybar"/>
     </RelativeLayout>
