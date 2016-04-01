@@ -3,7 +3,6 @@ package com.algorepublic.zoho.Models;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import java.io.File;
 import java.util.ArrayList;
 
 /**
@@ -83,7 +82,7 @@ public class DocumentsListModel {
         @Expose
         public boolean isFav;
 
-        @SerializedName("responseObject")
+        @SerializedName("User")
         public User user = new User();
 
     }

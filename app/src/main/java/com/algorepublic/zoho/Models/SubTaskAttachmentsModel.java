@@ -57,7 +57,11 @@ public class SubTaskAttachmentsModel {
 
         @SerializedName("IsDeleted")
         public boolean isDeleted;
-
+        @SerializedName("User")
+        public User user = new User();
     }
-
+    public class User {
+        @SerializedName("FirstName")
+        public String firstName;
+    }
 }

@@ -57,6 +57,15 @@ public class FeedsModel {
         @Expose
         public ArrayList<Comments> comments = new ArrayList<>();
 
+        @SerializedName("User")
+        public User user = new User();
+
+    }
+    public class User {
+
+        @SerializedName("ProfileImagePath")
+        public String profileImagePath;
+
     }
     private class Comments{
 

@@ -12,13 +12,10 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.algorepublic.zoho.Models.FeedsModel;
-import com.algorepublic.zoho.Models.ForumsModel;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.adapters.AdapterFeeds;
-import com.algorepublic.zoho.adapters.AdapterForumsList;
 import com.algorepublic.zoho.services.CallBack;
 import com.algorepublic.zoho.services.DashBoardService;
-import com.algorepublic.zoho.services.ForumService;
 import com.algorepublic.zoho.utils.BaseClass;
 import com.androidquery.AQuery;
 
@@ -79,7 +76,7 @@ public class FeedsFragment extends BaseFragment{
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        getToolbar().setTitle(getString(R.string.forums));
+        getToolbar().setTitle(getString(R.string.feeds));
         super.onViewCreated(view, savedInstanceState);
     }
 
