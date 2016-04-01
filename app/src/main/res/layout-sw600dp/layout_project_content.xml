@@ -7,8 +7,8 @@
     <View
         android:id="@+id/selected_project"
         android:layout_width="5dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
         android:layout_height="match_parent"
         android:layout_alignBottom="@+id/layout123"
         android:layout_alignTop="@+id/layout123"
@@ -16,8 +16,8 @@
         android:background="@color/white" />
     <RelativeLayout
         android:id="@+id/layout123"
-        android:layout_toStartOf="@+id/selected_project"
-        android:layout_toLeftOf="@+id/selected_project"
+        android:layout_toEndOf="@+id/selected_project"
+        android:layout_toRightOf="@+id/selected_project"
 
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -144,7 +144,8 @@
                                             android:id="@+id/milestone_alert"
                                             android:layout_width="30dp"
                                             android:layout_height="30dp"
-
+                                            android:layout_alignParentEnd="true"
+                                            android:layout_alignParentRight="true"
                                             android:background="@drawable/bubble_alert_black"
                                             android:gravity="center"
                                             android:singleLine="true"
@@ -155,8 +156,7 @@
                                             android:id="@+id/delete1"
                                             android:layout_width="25dp"
                                             android:layout_height="25dp"
-                                            android:layout_alignParentEnd="true"
-                                            android:layout_alignParentRight="true"
+
                                             android:layout_alignParentBottom="true"
                                             android:src="@drawable/milestone" />
                                     </RelativeLayout>
@@ -173,7 +173,8 @@
                                             android:id="@+id/users_alert"
                                             android:layout_width="30dp"
                                             android:layout_height="30dp"
-
+                                            android:layout_alignParentEnd="true"
+                                            android:layout_alignParentRight="true"
                                             android:background="@drawable/bubble_alert_black"
                                             android:gravity="center"
                                             android:singleLine="true"
@@ -184,8 +185,7 @@
                                             android:id="@+id/delete2"
                                             android:layout_width="25dp"
                                             android:layout_height="25dp"
-                                            android:layout_alignParentEnd="true"
-                                            android:layout_alignParentRight="true"
+
                                             android:layout_alignParentBottom="true"
                                             android:src="@drawable/nav_user" />
                                     </RelativeLayout>
@@ -204,6 +204,8 @@
                                             android:layout_height="30dp"
                                             android:background="@drawable/bubble_alert_black"
                                             android:gravity="center"
+                                            android:layout_alignParentEnd="true"
+                                            android:layout_alignParentRight="true"
                                             android:singleLine="true"
                                             android:text="112"
                                             android:textSize="10sp" />
@@ -212,8 +214,7 @@
                                             android:id="@+id/delete3"
                                             android:layout_width="25dp"
                                             android:layout_height="25dp"
-                                            android:layout_alignParentEnd="true"
-                                            android:layout_alignParentRight="true"
+
                                             android:layout_alignParentBottom="true"
                                             android:src="@drawable/task_desc_small" />
                                     </RelativeLayout>
