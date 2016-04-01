@@ -60,6 +60,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignTop="@+id/comment_text"
+            android:layout_toEndOf="@+id/comment_text"
             android:layout_toRightOf="@+id/comment_text">
 
             <EditText
@@ -72,6 +73,7 @@
                 android:layout_marginLeft="5dp"
                 android:layout_marginStart="5dp"
                 android:paddingRight="23dp"
+                android:paddingEnd="23dp"
                 android:text="Comments:\n wdwdw\nwdww"
                 android:textSize="12sp"
                 android:textStyle="bold" />

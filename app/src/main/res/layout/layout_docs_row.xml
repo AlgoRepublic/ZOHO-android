@@ -115,9 +115,23 @@
                             android:layout_alignParentLeft="true"
                             />
                         <RelativeLayout
-                            android:id="@+id/layout2"
+                            android:id="@+id/layout3"
                             android:layout_marginTop="3dp"
                             android:layout_below="@+id/file_name"
+                            android:layout_height="wrap_content"
+                            android:layout_width="match_parent" >
+                            <TextView
+                                android:id="@+id/uploaded_name"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="14sp"
+                                android:text="@string/uploaded_by"
+                                />
+                        </RelativeLayout>
+                        <RelativeLayout
+                            android:id="@+id/layout2"
+                            android:layout_marginTop="3dp"
+                            android:layout_below="@+id/layout3"
                             android:layout_height="wrap_content"
                             android:layout_width="match_parent" >
                             <TextView

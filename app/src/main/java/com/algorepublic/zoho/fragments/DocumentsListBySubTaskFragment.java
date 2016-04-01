@@ -11,7 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 
-import com.algorepublic.zoho.BaseActivity;
 import com.algorepublic.zoho.Models.SubTaskAttachmentsModel;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.adapters.AdapterDocumentsList;
@@ -26,7 +25,6 @@ import com.flyco.dialog.widget.ActionSheetDialog;
 import java.util.ArrayList;
 import java.util.Collections;
 
-import cc.cloudist.acplibrary.ACProgressFlower;
 import se.emilsjolander.stickylistheaders.StickyListHeadersAdapter;
 import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
 
@@ -211,12 +209,14 @@ public class DocumentsListBySubTaskFragment extends BaseFragment {
                 documentsList.setID(SubTaskAttachmentsModel.getInstance().responseObject.get(loop).Id);
                 documentsList.setFileName(SubTaskAttachmentsModel.getInstance().responseObject.get(loop).fileDescription);
                 documentsList.setFileDescription(SubTaskAttachmentsModel.getInstance().responseObject.get(loop).fileName);
-                documentsList.setFileSizeInByte(Integer.toString(SubTaskAttachmentsModel.getInstance().responseObject.get(loop).fileSizeInByte/1000));
+                documentsList.setFileSizeInByte(Integer.toString(SubTaskAttachmentsModel.getInstance().responseObject.get(loop).fileSizeInByte / 1000));
                 documentsList.setUpdatedAt(DateFormatter(SubTaskAttachmentsModel.getInstance().responseObject.get(loop).updatedAt));
                 documentsList.setUpdatedMilli(DateMilli(SubTaskAttachmentsModel.getInstance().responseObject.get(loop).updatedAt));
                 documentsList.setFileTypeID(SubTaskAttachmentsModel.getInstance().responseObject.get(loop).fileTypeID);
                 documentsList.setIsFav(SubTaskAttachmentsModel.getInstance().responseObject.get(loop).isFav);
-                allDocsList.add(documentsList);
+            documentsList.setUserName(SubTaskAttachmentsModel.getInstance().responseObject.get(loop).user.firstName);
+
+            allDocsList.add(documentsList);
             }
         Collections.sort(allDocsList);
     }

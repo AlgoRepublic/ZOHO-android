@@ -1,0 +1,30 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.algorepublic.zoho.FragmentsTasks.TaskAssignFragment">
+    <!-- TODO: Update blank fragment_forums layout -->
+    <TextView
+        android:id="@+id/text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/underline_textview"
+        android:paddingBottom="2dp"
+        android:text="@string/employees"
+        android:textColor="@color/colorContentWrapper"
+        android:textSize="25sp"
+        android:typeface="monospace" />
+
+    <ListView
+        android:id="@+id/listview_employees"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/text"
+        android:layout_marginTop="5dp" />
+    <include
+        layout="@layout/layout_alert_message"
+        android:layout_width="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_height="wrap_content" />
+</RelativeLayout>

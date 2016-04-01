@@ -9,18 +9,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Toast;
 
 import com.algorepublic.zoho.Models.FeedsModel;
 import com.algorepublic.zoho.Models.ForumsModel;
 import com.algorepublic.zoho.Models.GeneralModel;
 import com.algorepublic.zoho.R;
-import com.algorepublic.zoho.fragments.EditForumFragment;
-import com.algorepublic.zoho.fragments.ForumsDetailFragment;
-import com.algorepublic.zoho.services.CallBack;
 import com.algorepublic.zoho.services.ForumService;
 import com.algorepublic.zoho.utils.BaseClass;
+import com.algorepublic.zoho.utils.Constants;
 import com.androidquery.AQuery;
+import com.bumptech.glide.Glide;
 import com.flyco.animation.BounceEnter.BounceLeftEnter;
 import com.flyco.animation.SlideExit.SlideRightExit;
 import com.flyco.dialog.listener.OnBtnClickL;
@@ -73,6 +71,11 @@ public class AdapterFeeds extends BaseAdapter {
         aq.id(R.id.feed_description).text(getItem(position).message);
         aq.id(R.id.feed_comment_date).text(
                 getItem(position).comments.size()+"-"+ctx.getString(R.string.comments));
+
+        if(getItem(position).user.profileImagePath != null) {
+            Glide.with(ctx).load(Constants.UserImage_URL + getItem(position).user.profileImagePath)
+                    .into(aq.id(R.id.feed_image).getImageView());
+        }
 
 //        aq.id(R.id.parent1).clicked(new View.OnClickListener() {
 //            @Override

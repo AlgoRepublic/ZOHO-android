@@ -2,10 +2,7 @@ package com.algorepublic.zoho.fragments;
 
 import android.annotation.SuppressLint;
 import android.app.DownloadManager;
-import android.content.BroadcastReceiver;
 import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -24,12 +21,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.algorepublic.zoho.BaseActivity;
 import com.algorepublic.zoho.Models.CreateCommentModel;
-import com.algorepublic.zoho.Models.DocumentsListModel;
 import com.algorepublic.zoho.Models.GeneralModel;
 import com.algorepublic.zoho.Models.TaskCommentsModel;
-import com.algorepublic.zoho.Models.UserListModel;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.adapters.AdapterDocsComments;
 import com.algorepublic.zoho.adapters.DocumentsList;
@@ -43,8 +37,6 @@ import com.androidquery.AQuery;
 import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
-
-import cc.cloudist.acplibrary.ACProgressFlower;
 
 /**
  * Created by android on 1/13/16.
@@ -118,7 +110,7 @@ public class DocsPreviewFragment extends BaseFragment {
         aq.id(R.id.user_image).image(Constants.Image_URL + baseClass.getProfileImageID()
                 + "." + BaseClass.getExtensionType(
                 baseClass.getProfileImage()));
-        aq.id(R.id.user_name).text(docObject.getFileName());
+        aq.id(R.id.user_name).text(docObject.getUserName());
         aq.id(R.id.doc_title).text(docObject.getFileName());
        // aq.id(R.id.doc_size).text(docObject.getFileSizeInByte()+"K");
         if(docObject.getFileTypeID()>=0 &&

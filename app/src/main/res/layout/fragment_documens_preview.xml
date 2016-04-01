@@ -34,11 +34,11 @@
                 android:layout_centerVertical="true"
                 android:src="@drawable/nav_user" />
             <TextView
-                android:id="@+id/user_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:maxLines="2"
                 android:ellipsize="end"
+                android:id="@+id/user_name"
                 android:textSize="16sp"
                 android:text="sd"
                 android:layout_toRightOf="@+id/user_image"
@@ -54,6 +54,7 @@
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
             android:background="@color/colorBaseMenu"/>
+
         <ImageView
             android:id="@+id/doc_image"
             android:layout_width="match_parent"
@@ -64,6 +65,26 @@
             android:layout_below="@+id/view"
             android:layout_above="@+id/layout_tasktitle"
             android:layout_centerVertical="true"/>
+
+    </RelativeLayout>
+    <RelativeLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:id="@+id/layout2"
+        android:layout_margin="5dp"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/doc_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="2"
+            android:ellipsize="end"
+            android:textSize="16sp"
+            android:text="sd"
+            android:layout_toRightOf="@+id/user_image"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp" />
 
     </RelativeLayout>
     <RelativeLayout

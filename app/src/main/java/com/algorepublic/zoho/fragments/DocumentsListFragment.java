@@ -2,8 +2,6 @@ package com.algorepublic.zoho.fragments;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -13,7 +11,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Toast;
 
-import com.algorepublic.zoho.BaseActivity;
 import com.algorepublic.zoho.Models.DocumentsListModel;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.adapters.AdapterDocumentsList;
@@ -28,7 +25,6 @@ import com.flyco.dialog.widget.ActionSheetDialog;
 import java.util.ArrayList;
 import java.util.Collections;
 
-import cc.cloudist.acplibrary.ACProgressFlower;
 import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
 
 /**
@@ -222,11 +218,13 @@ public class DocumentsListFragment extends BaseFragment{
                 documentsList.setID(DocumentsListModel.getInstance().responseObject.get(loop).files.get(loop1).ID);
                 documentsList.setFileName(DocumentsListModel.getInstance().responseObject.get(loop).files.get(loop1).fileDescription);
                 documentsList.setFileDescription(DocumentsListModel.getInstance().responseObject.get(loop).files.get(loop1).fileName);
-                documentsList.setFileSizeInByte(Integer.toString(DocumentsListModel.getInstance().responseObject.get(loop).files.get(loop1).fileSizeInByte/1000));
+                documentsList.setFileSizeInByte(Integer.toString(DocumentsListModel.getInstance().responseObject.get(loop).files.get(loop1).fileSizeInByte / 1000));
                 documentsList.setUpdatedAt(DateFormatter(DocumentsListModel.getInstance().responseObject.get(loop).files.get(loop1).updatedAt));
                 documentsList.setUpdatedMilli(DateMilli(DocumentsListModel.getInstance().responseObject.get(loop).files.get(loop1).updatedAt));
                 documentsList.setFileTypeID(DocumentsListModel.getInstance().responseObject.get(loop).files.get(loop1).fileTypeID);
                 documentsList.setIsFav(DocumentsListModel.getInstance().responseObject.get(loop).files.get(loop1).isFav);
+                documentsList.setUserName(DocumentsListModel.getInstance().responseObject.get(loop).files.get(loop1).user.firstName);
+
                 allDocsList.add(documentsList);
             }
         }

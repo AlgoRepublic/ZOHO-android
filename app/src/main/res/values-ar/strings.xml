@@ -64,6 +64,7 @@
     <string name="start_date">تاريخ البدء</string>
     <string name="end_date">تاريخ الانتهاء</string>
     <string name="general">جنرال لواء</string>
+
     <!-- Random Strings related to ZOHO -->
     <string name="lang_arabic">ar</string>
     <string name="lang_english">en</string>

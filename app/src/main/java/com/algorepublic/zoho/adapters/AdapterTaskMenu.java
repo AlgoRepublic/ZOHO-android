@@ -128,11 +128,9 @@ public class AdapterTaskMenu extends BaseAdapter {
         BaseActivity.drawer.closeDrawer(GravityCompat.START);
     }
     public void callFragmentWithReplace(int containerId, Fragment fragment, String tag){
-
         ((AppCompatActivity) ctx).getSupportFragmentManager()
                 .beginTransaction()
                 .replace(containerId, fragment, tag)
-
                 .commit();
     }
     static class ViewHolder {
