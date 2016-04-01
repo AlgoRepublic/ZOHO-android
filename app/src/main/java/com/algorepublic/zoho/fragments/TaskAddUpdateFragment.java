@@ -126,8 +126,8 @@ public class TaskAddUpdateFragment extends BaseFragment {
     @Override
     public void onDestroyView() {
         //baseClass.setSelectedProject("0");
-        tasksObj=null;
-        tasID =0;
+//        tasksObj=null;
+//        tasID =0;
         assigneeList.clear();
         super.onDestroyView();
     }

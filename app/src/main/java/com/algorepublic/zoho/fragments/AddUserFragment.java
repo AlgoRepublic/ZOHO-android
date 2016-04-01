@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.design.widget.Snackbar;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -31,8 +32,12 @@ import com.algorepublic.zoho.utils.BaseClass;
 import com.algorepublic.zoho.utils.Constants;
 import com.algorepublic.zoho.utils.GenericHttpClient;
 import com.androidquery.AQuery;
+import com.flyco.animation.SlideEnter.SlideLeftEnter;
+import com.flyco.animation.SlideExit.SlideRightExit;
+import com.flyco.dialog.listener.OnBtnClickL;
 import com.flyco.dialog.listener.OnOperItemClickL;
 import com.flyco.dialog.widget.ActionSheetDialog;
+import com.flyco.dialog.widget.MaterialDialog;
 import com.guna.libmultispinner.MultiSelectionSpinner;
 
 import org.angmarch.views.NiceSpinner;
@@ -112,7 +117,7 @@ public class AddUserFragment extends BaseFragment implements MultiSelectionSpinn
         }else {
             aq.id(R.id.layout).visibility(View.GONE);
         }
-        service1.getUserRole(true,new CallBack(AddUserFragment.this,"UserRole"));
+        service1.getUserRole(true, new CallBack(AddUserFragment.this, "UserRole"));
         return view;
     }
 
@@ -190,7 +195,9 @@ public class AddUserFragment extends BaseFragment implements MultiSelectionSpinn
                 dialog.dismiss();
                 if (position == 0) {
                     Intent intent = new Intent(
-                            "android.media.action.IMAGE_CAPTURE");
+                            android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+                    newFile = getOutputMediaFile();
+                    intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(newFile));
                     startActivityForResult(intent, TAKE_PICTURE);
                 }
                 if (position == 1) {
@@ -214,7 +221,34 @@ public class AddUserFragment extends BaseFragment implements MultiSelectionSpinn
             }
         });
     }
+    private void checkFileLenght(File file){
+        if(file.length() > 1048576 * 5) {
+            MaterialAlertDialog();
+        }else {
+            aq.id(R.id.profile).image(newFile, 200);
+        }
+    }
+    public void MaterialAlertDialog(){
+        final MaterialDialog dialog = new MaterialDialog(getActivity());
+        dialog//
+                .btnNum(1)
+                .title(getString(R.string.file_size))
+                .titleTextColor(getResources().getColor(R.color.colorBaseHeader))
+                .content(getString(R.string.file_size_content))//
+                .contentTextColor(getResources().getColor(R.color.colorContentWrapper))
+                .btnText(getString(R.string.OK))//
+                .btnTextColor(getResources().getColor(R.color.colorContentWrapper))
+                .showAnim(new SlideLeftEnter())//
+                .dismissAnim(new SlideRightExit())//
+                .show();
 
+        dialog.setOnBtnClickL(new OnBtnClickL() {
+            @Override
+            public void onBtnClick() {
+                dialog.dismiss();
+            }
+        });
+    }
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -222,20 +256,23 @@ public class AddUserFragment extends BaseFragment implements MultiSelectionSpinn
         switch (requestCode) {
             case TAKE_PICTURE:
                 if (resultCode == getActivity().RESULT_OK) {
-                    Uri selectedImageUri = data.getData();
-                    newFile = new File(getRealPathFromURI(selectedImageUri));
+                    checkFileLenght(newFile);
                 }
                 break;
             case RESULT_GALLERY:
                 if (null != data) {
-                     newFile = new File(URI.create("file://" + getDataColumn(getActivity(), data.getData(), null, null)));
+                     newFile = new File(URI.create("file://" +
+                             getDataColumn(getActivity(), data.getData(), null, null)));
+                    checkFileLenght(newFile);
                 }
                 break;
             case PICK_File:
                 if (resultCode == Activity.RESULT_OK) {
                     Uri contactData = data.getData();
                     try {
-                        newFile = new File(new URI("file://"+getDataColumn(getActivity(), contactData,null,null)));
+                        newFile = new File(new URI("file://"+getDataColumn(getActivity()
+                                , contactData,null,null)));
+                        checkFileLenght(newFile);
                     } catch (URISyntaxException e) {
                         e.printStackTrace();
                     }
@@ -244,7 +281,6 @@ public class AddUserFragment extends BaseFragment implements MultiSelectionSpinn
             default:
                 break;
         }
-        aq.id(R.id.profile).image(newFile,200);
     }
 
     @Override

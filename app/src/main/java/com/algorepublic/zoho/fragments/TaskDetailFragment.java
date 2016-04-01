@@ -263,6 +263,9 @@ public class TaskDetailFragment extends BaseFragment {
         }else {
             tasksList.setDescription(taskModel.description);
         }
+        if(taskModel.tasklistID==0){
+            taskModel.taskListName = getString(R.string.general);
+        }
         tasksList.setPriority(taskModel.priority);
         tasksList.setProgress(taskModel.progress);
         tasksList.setParentTaskID(taskModel.parentTaskID);

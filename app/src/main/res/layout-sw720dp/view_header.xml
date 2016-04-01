@@ -19,19 +19,19 @@
             android:padding="10dp"
             android:text="@string/attachments"
             android:textColor="@color/colorContentWrapper"
-            android:textSize="14sp"
+            android:textSize="30sp"
             android:typeface="monospace" />
 
         <Button
             android:id="@+id/add_file"
             android:layout_width="match_parent"
-            android:layout_height="35dp"
+            android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:padding="5dp"
             android:text="@string/add_attachments"
             android:textAllCaps="false"
             android:textColor="@color/colorBaseWrapper"
-            android:textSize="12sp" />
+            android:textSize="30sp" />
 
     </LinearLayout>
 </LinearLayout>

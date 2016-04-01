@@ -103,7 +103,7 @@
                                 android:textStyle="bold"
                                 android:layout_marginTop="5dp"
                                 android:layout_marginLeft="5dp"
-                                android:textSize="30sp"
+                                android:textSize="25sp"
                                 android:id="@+id/comment_title"
                                 android:layout_alignTop="@+id/comment_image"
                                 android:layout_toEndOf="@+id/comment_image" />
@@ -112,7 +112,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:id="@+id/comment_description"
-                                android:textSize="30sp"
+                                android:textSize="25sp"
                                 android:lines="2"
                                 android:layout_marginTop="5dp"
                                 android:layout_below="@+id/comment_title"

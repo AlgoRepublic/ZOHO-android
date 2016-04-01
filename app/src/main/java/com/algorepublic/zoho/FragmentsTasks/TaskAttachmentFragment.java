@@ -192,7 +192,7 @@ public class TaskAttachmentFragment extends BaseFragment {
         switch (requestCode) {
             case TAKE_PICTURE:
                 if (resultCode == getActivity().RESULT_OK) {
-                    checkFileLenght(newFile);
+                    // No need here
                 }
                 break;
             case RESULT_GALLERY:
@@ -200,7 +200,6 @@ public class TaskAttachmentFragment extends BaseFragment {
                     String thePath = getUriFromUrl("file://"+
                             getDataColumn(getActivity(), data.getData(),null,null)).toString();
                     newFile = new File(URI.create(thePath));
-                    checkFileLenght(newFile);
                 }
                 break;
             case PICK_File:
@@ -211,7 +210,6 @@ public class TaskAttachmentFragment extends BaseFragment {
                             getDataColumn(getActivity(), contactData,null,null)).toString();
                     try {
                         newFile = new File(new URI(thePath));
-                        checkFileLenght(newFile);
                     } catch (URISyntaxException e) {
                         e.printStackTrace();
                     }
@@ -219,13 +217,6 @@ public class TaskAttachmentFragment extends BaseFragment {
                 break;
             default:
                 break;
-        }
-    }
-    private void checkFileLenght(File file){
-        if(file.length() > 1048576 * 5) {
-            MaterialAlertDialog();
-        }else {
-            showFileInList(file,"",-1,file.getName());
         }
     }
 
@@ -238,26 +229,5 @@ public class TaskAttachmentFragment extends BaseFragment {
         TaskAddUpdateFragment.filesList.add(attachmentList);
         aq.id(R.id.response_alert).visibility(View.GONE);
         adapter.notifyDataSetChanged();
-    }
-    public void MaterialAlertDialog(){
-        final MaterialDialog dialog = new MaterialDialog(getActivity());
-        dialog//
-                .btnNum(1)
-                .title(getString(R.string.file_size))
-                .titleTextColor(getResources().getColor(R.color.colorBaseHeader))
-                .content(getString(R.string.file_size_content))//
-                .contentTextColor(getResources().getColor(R.color.colorContentWrapper))
-                .btnText(getString(R.string.OK))//
-                .btnTextColor(getResources().getColor(R.color.colorContentWrapper))
-                .showAnim(new SlideLeftEnter())//
-                .dismissAnim(new SlideRightExit())//
-                .show();
-
-        dialog.setOnBtnClickL(new OnBtnClickL() {
-            @Override
-            public void onBtnClick() {
-                dialog.dismiss();
-            }
-        });
     }
 }

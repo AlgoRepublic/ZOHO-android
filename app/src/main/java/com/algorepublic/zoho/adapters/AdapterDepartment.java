@@ -191,7 +191,7 @@ public class AdapterDepartment
                 if(DepartmentFragment.allProjects.get(position).getCompOrDeptID().equalsIgnoreCase("0")){
                     holder.btDelete.setVisibility(View.GONE);
                     holder.btEdit.setVisibility(View.GONE);
-                    holder. swipeLayout.close();
+                    holder.swipeLayout.close();
                 }
             }
         });
@@ -434,6 +434,6 @@ public class AdapterDepartment
         }
         Snackbar.make(((AppCompatActivity)ctx).findViewById(android.R.id.content),
                 ctx.getString(R.string.department_deleted), Snackbar.LENGTH_SHORT).show();
-       notifyDataSetChanged();
+
     }
 }

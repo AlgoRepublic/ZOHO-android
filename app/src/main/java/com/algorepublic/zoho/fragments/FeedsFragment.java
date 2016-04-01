@@ -37,31 +37,10 @@ public class FeedsFragment extends BaseFragment{
         fragment.setArguments(args);
         return fragment;
     }
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        menu.clear();
-        inflater.inflate(R.menu.menu_forum, menu);
-        super.onCreateOptionsMenu(menu, inflater);
-    }
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
-            case R.id.add_project:
-                baseClass.hideKeyPad(getView());
-                if (baseClass.getSelectedProject().equalsIgnoreCase("0")) {
-                    Toast.makeText(getActivity(), "Please Select Project", Toast.LENGTH_SHORT).show();
-                    return false;
-                }
-                callFragmentWithBackStack(R.id.container, AddForumsFragment.newInstance(), "AddForumsFragment");
-                break;
-        }
-        return super.onOptionsItemSelected(item);
-
-    }
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_forums, container, false);
-        setHasOptionsMenu(true);
         aq = new AQuery(getActivity(), view);
         baseClass = ((BaseClass) getActivity().getApplicationContext());
         DashBoardService service = new DashBoardService(getActivity());

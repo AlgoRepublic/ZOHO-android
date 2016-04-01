@@ -1,7 +1,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="110dp">
+    android:layout_height="130dp">
     <RelativeLayout
         android:id="@+id/layout123"
         android:layout_toRightOf="@+id/selected_project"
@@ -39,7 +39,7 @@
             app:clickToClose="true">
             <LinearLayout
                 android:id="@+id/main"
-                android:layout_width="150dp"
+                android:layout_width="220dp"
                 android:layout_height="match_parent"
                 android:weightSum="2"
                 android:orientation="horizontal"
@@ -52,7 +52,7 @@
                     android:layout_weight="1"
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
-                    android:textSize="17sp"
+                    android:textSize="25sp"
                     android:textColor="@color/white"
                     android:background="@color/colorContentWrapper"
                     android:text="Edit"
@@ -65,7 +65,7 @@
                     android:gravity="center"
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
-                    android:textSize="17sp"
+                    android:textSize="25sp"
                     android:textColor="@color/white"
                     android:background="@color/red"
                     android:text="Delete"
@@ -92,8 +92,8 @@
                         app:civ_shadow_color="@color/colorBaseMenu"
                         app:civ_shadow_radius="3"
                         android:id="@+id/user_image"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
                         app:civ_border_width="2dp"
                         app:civ_border_color="@color/colorBaseHeader"
                         android:src="@drawable/nav_user" />
@@ -104,7 +104,7 @@
                         android:textStyle="bold"
                         android:layout_marginTop="5dp"
                         android:layout_marginLeft="5dp"
-                        android:textSize="16sp"
+                        android:textSize="30sp"
                         android:id="@+id/user_title"
                         android:layout_toEndOf="@+id/user_image" />
 
@@ -112,23 +112,24 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:id="@+id/user_email"
-                        android:textSize="16sp"
+                        android:textSize="25sp"
                         android:text="daadadad"
-                        android:layout_below="@+id/user_image"
+                        android:layout_marginTop="5dp"
+                        android:layout_below="@+id/user_title"
                         android:layout_alignStart="@+id/user_title" />
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:id="@+id/user_role"
-                        android:textSize="16sp"
+                        android:textSize="25sp"
                         android:text="daadadad"
                         android:layout_below="@+id/user_email"
                         android:layout_alignStart="@+id/user_title" />
                     </RelativeLayout>
                 <LinearLayout
                     android:id="@+id/rightarrow_layout"
-                    android:layout_width="20dp"
+                    android:layout_width="30dp"
                     android:layout_alignParentRight="true"
                     android:layout_height="match_parent"
                     android:gravity="center"
@@ -136,8 +137,8 @@
 
                     <ImageView
                         android:id="@+id/right_arrow_image"
-                        android:layout_width="15dp"
-                        android:layout_height="15dp"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
                         android:layout_margin="5dp"
                         android:background="@drawable/circle_left"/>
                 </LinearLayout>

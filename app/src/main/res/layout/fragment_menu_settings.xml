@@ -6,55 +6,12 @@
 
     <com.algorepublic.zoho.utils.DropDownLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-      >
+        android:layout_height="wrap_content">
 
-        <com.algorepublic.zoho.utils.ToggleExpandLayout
-            android:id="@+id/toogleLayout"
-            android:layout_width="wrap_content"
-            android:layout_height="160dp"
-
-           >
-            <LinearLayout
-                android:id="@+id/id7"
-                android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:background="@color/white"
-                android:orientation="horizontal"
-                android:elevation="3dp"
-                android:outlineProvider="bounds">
-                <RadioGroup
-                    android:id="@+id/radio_theme"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:gravity="center"
-                    android:orientation="horizontal">
-                    <RadioButton
-                        android:id="@+id/blue_theme"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:button="@null"
-                        android:background="@color/white"
-                        android:drawableLeft="@drawable/radiobutton"
-                        android:text="Blue Theme"
-                        android:textColor="@color/blackBackground"/>
-                    <RadioButton
-                        android:id="@+id/black_theme"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:button="@null"
-                        android:background="@color/white"
-                        android:drawableLeft="@drawable/radiobutton"
-                        android:text="Black Theme"
-                        android:textColor="@color/blackBackground"/>
-                </RadioGroup>
-
-            </LinearLayout>
             <LinearLayout
                 android:id="@+id/id8"
                 android:layout_width="match_parent"
-                android:layout_height="80dp"
+                android:layout_height="wrap_content"
                 android:background="@color/white"
                 android:elevation="4dp"
                 android:outlineProvider="bounds"
@@ -65,32 +22,24 @@
                     android:layout_height="match_parent">
                     <TextView
                         android:layout_marginTop="4dp"
-                        android:layout_marginLeft="8dp"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:textStyle="bold"
-                        android:textSize="16sp"
+                        android:padding="10dp"
+                        android:layout_marginBottom="3dp"
+                        android:drawableRight="@drawable/right_arrow"
+                        android:textSize="18sp"
                         android:text="@string/change_theme" />
-                    <CheckBox
-                        android:id="@+id/switch_theme"
-                        android:layout_alignParentRight="true"
-                        android:layout_alignParentEnd="true"
-                        android:layout_width="24dp"
-                        android:layout_height="match_parent"
-                        android:checked="true"
-                        android:button="@drawable/selector_check"
-                        android:background="@android:color/white"
-                       />
                 </RelativeLayout>
             </LinearLayout>
-        </com.algorepublic.zoho.utils.ToggleExpandLayout>
     </com.algorepublic.zoho.utils.DropDownLayout>
     <TextView
         android:id="@+id/edit_profile"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="10dp"
+        android:layout_marginTop="50dp"
         android:layout_marginBottom="3dp"
         android:drawableRight="@drawable/right_arrow"
         android:background="@color/white"

@@ -5,7 +5,7 @@
     android:focusable="true"
     android:background="@color/white"
     android:layout_width="match_parent"
-    android:layout_height="135dp">
+    android:layout_height="185dp">
 
     <ImageView
         android:layout_width="wrap_content"

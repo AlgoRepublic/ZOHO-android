@@ -122,11 +122,11 @@ public class BarView extends View {
      *
      * @param list The ArrayList of Integer with the range of [0-max].
      */
-    public void setDataList(ArrayList<Float> list, int max){
+    public void setDataList(ArrayList<Integer> list, int max){
         targetPercentList = new ArrayList<Float>();
         if(max == 0) max = 1;
 
-        for(Float integer : list){
+        for(Integer integer : list){
             targetPercentList.add(1-(float)integer/(float)max);
         }
 

@@ -18,7 +18,7 @@
             android:padding="10dp"
             android:text="@string/documents"
             android:textColor="@color/colorContentWrapper"
-            android:textSize="14sp"
+            android:textSize="30sp"
             android:typeface="monospace" />
 
         <org.angmarch.views.NiceSpinner
@@ -29,19 +29,19 @@
             android:layout_below="@id/user_phoneno"
             android:hint="@string/select_folder"
             android:textColor="@color/colorBaseHeader"
-            android:textSize="18sp"/>
+            android:textSize="30sp"/>
 
         <Button
             android:id="@+id/add_file"
             android:layout_width="match_parent"
-            android:layout_height="35dp"
+            android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:padding="5dp"
             android:text="@string/add_documents"
             android:textAllCaps="false"
             android:gravity="center"
             android:textColor="@color/colorBaseWrapper"
-            android:textSize="12sp" />
+            android:textSize="30sp" />
 
     </LinearLayout>
 </LinearLayout>

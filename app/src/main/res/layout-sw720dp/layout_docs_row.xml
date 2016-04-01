@@ -1,5 +1,5 @@
 <RelativeLayout
-    android:layout_height="100dp"
+    android:layout_height="140dp"
     android:layout_width="match_parent"
     android:paddingLeft="10dp"
     android:paddingRight="10dp"
@@ -43,7 +43,7 @@
             android:layout_height="match_parent"
             app:clickToClose="true">
             <LinearLayout
-                android:layout_width="70dp"
+                android:layout_width="120dp"
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
                 >
@@ -54,7 +54,7 @@
                     android:gravity="center"
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
-                    android:textSize="16sp"
+                    android:textSize="25sp"
                     android:textColor="@color/white"
                     android:background="@color/red"
                     android:text="Delete"
@@ -75,10 +75,10 @@
                     android:layout_width="match_parent">
                     <ImageView
                         android:id="@+id/doc_checkbox"
-                        android:layout_width="45dp"
+                        android:layout_width="75dp"
                         android:scaleType="fitXY"
                         android:adjustViewBounds="true"
-                        android:layout_height="50dp"
+                        android:layout_height="80dp"
                         android:button="@null"
                         android:layout_margin="10dp"
                         android:checked="false"
@@ -106,7 +106,7 @@
                             android:id="@+id/file_name"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textSize="14sp"
+                            android:textSize="30sp"
                             android:text="@string/file"
                             android:singleLine="true"
                             android:layout_marginTop="3dp"
@@ -124,7 +124,7 @@
                                 android:id="@+id/file_time"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:textSize="14sp"
+                                android:textSize="30sp"
                                 android:text="4:00 PM"
                                 />
                         </RelativeLayout>
@@ -139,7 +139,7 @@
                 </RelativeLayout>
                 <LinearLayout
                     android:id="@+id/rightarrow_layout"
-                    android:layout_width="20dp"
+                    android:layout_width="30dp"
                     android:layout_alignParentRight="true"
                     android:layout_height="match_parent"
                     android:gravity="center"
@@ -147,8 +147,8 @@
 
                     <ImageView
                         android:id="@+id/right_arrow_image"
-                        android:layout_width="15dp"
-                        android:layout_height="15dp"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
                         android:layout_margin="5dp"
                         android:background="@drawable/circle_left"/>
                 </LinearLayout>

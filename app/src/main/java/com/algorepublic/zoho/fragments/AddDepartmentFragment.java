@@ -59,7 +59,6 @@ public class AddDepartmentFragment extends BaseFragment {
                     Snackbar.make(getView(), getString(R.string.department_name), Snackbar.LENGTH_SHORT).show();
                     return false;
                 }
-
                 CreateProject();
                 break;
         }

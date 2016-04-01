@@ -43,41 +43,6 @@ public class MenuSettingsFragment extends BaseFragment {
         baseClass = ((BaseClass) getActivity().getApplicationContext());
         getToolbar().setTitle(getString(R.string.settings));
         aq = new AQuery(view);
-        checkBox=(CheckBox)view.findViewById(R.id.switch_theme);
-        final ToggleExpandLayout layout = (ToggleExpandLayout) view.findViewById(R.id.toogleLayout);
-        ((CheckBox) view.findViewById(R.id.switch_theme)).setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
-                if (isChecked) {
-                    layout.close();
-
-                } else {
-                    layout.open();
-                }
-            }
-        });
-
-        ((RadioGroup) view.findViewById(R.id.radio_theme)).setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup radioGroup, int id) {
-                switch (id) {
-                    case R.id.blue_theme:
-                        baseClass.setThemePreference(R.style.AppThemeBlue);
-                        break;
-                    case R.id.black_theme:
-                        baseClass.setThemePreference(R.style.AppTheme);
-                        break;
-                }
-
-                getActivity().finish();
-                Intent intent = new Intent(getActivity(), MainActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intent);
-            }
-        });
-
-        aq = new AQuery(view);
 
         aq.id(R.id.logout).clicked(new View.OnClickListener() {
             @Override
@@ -88,6 +53,12 @@ public class MenuSettingsFragment extends BaseFragment {
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
                 getActivity().finish();
+            }
+        });
+        aq.id(R.id.checkbox_layout).clicked(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                callFragmentWithBackStack(R.id.container, ThemeSelectorFragment.newInstance(), "ThemeSelectorFragment");
             }
         });
         aq.id(R.id.edit_profile).clicked(new View.OnClickListener() {
