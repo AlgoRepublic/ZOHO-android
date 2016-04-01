@@ -41,7 +41,7 @@
             android:layout_marginTop="10dp"
             android:ellipsize="end"
             android:text="@string/questions"
-            android:textSize="16sp"
+            android:textSize="22sp"
             android:textStyle="bold" />
 
         <TextView
@@ -51,7 +51,7 @@
             android:layout_below="@+id/quest_text"
             android:layout_marginTop="10dp"
             android:gravity="center_vertical"
-            android:textSize="16sp"
+            android:textSize="22sp"
             android:text="@string/comments"
             android:textStyle="bold" />
 
@@ -75,7 +75,7 @@
                 android:paddingRight="23dp"
                 android:paddingEnd="23dp"
                 android:text="Comments:\n wdwdw\nwdww"
-                android:textSize="12sp"
+                android:textSize="18sp"
                 android:textStyle="bold" />
         <requestFocus/>
         </RelativeLayout>
@@ -85,8 +85,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/layout1"
-            android:paddingBottom="7dp"
-            android:paddingTop="7dp">
+            android:paddingBottom="5dp"
+            android:paddingTop="5dp">
 
             <TextView
                 android:id="@+id/rating_text"
@@ -97,8 +97,7 @@
                 android:layout_centerVertical="true"
                 android:gravity="center_vertical"
                 android:text="@string/rating"
-                android:textSize="16sp"
-                android:textStyle="bold" />
+                android:textSize="22sp"                android:textStyle="bold" />
 
             <SeekBar
                 android:id="@+id/seekBar"
@@ -125,7 +124,7 @@
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
                 android:text="0%"
-                android:textSize="12sp"
+                android:textSize="18sp"
                 android:textStyle="bold" />
         </RelativeLayout>
 
@@ -133,8 +132,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/layout2"
-            android:paddingBottom="7dp"
-            android:paddingTop="7dp">
+            android:paddingBottom="5dp"
+            android:paddingTop="5dp">
 
             <TextView
                 android:id="@+id/stage_text"
@@ -144,7 +143,7 @@
                 android:layout_alignParentStart="true"
                 android:gravity="center_vertical"
                 android:text="@string/stage"
-                android:textSize="16sp"
+                android:textSize="22sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -157,15 +156,15 @@
                 android:padding="3dp"
                 android:layout_marginStart="30dp"
                 android:text="Development Stage"
-                android:textSize="12sp" />
+                android:textSize="18sp" />
 
             <RatingBar
                 android:id="@+id/star_rating"
                 style="?android:attr/ratingBarStyleSmall"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
                 android:isIndicator="true"
                 android:max="5"
