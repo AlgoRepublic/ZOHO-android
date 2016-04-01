@@ -9,7 +9,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.algorepublic.zoho.BaseActivity;
 import com.algorepublic.zoho.Models.CreateForumModel;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.services.CallBack;
@@ -17,8 +16,6 @@ import com.algorepublic.zoho.services.DepartmentService;
 import com.algorepublic.zoho.services.TaskListService;
 import com.algorepublic.zoho.utils.BaseClass;
 import com.androidquery.AQuery;
-
-import cc.cloudist.acplibrary.ACProgressFlower;
 
 /**
  * Created by android on 2/25/16.
@@ -60,12 +57,12 @@ public class AddDepartmentFragment extends BaseFragment {
                     return false;
                 }
 
-                CreateProject();
+                CreateDepartment();
                 break;
         }
         return super.onOptionsItemSelected(item);
     }
-    public void CreateProject(){
+    public void CreateDepartment(){
         DepartmentService service = new DepartmentService(getActivity());
         service.createDepartment(aq.id(R.id.dept_title).getText().toString(), baseClass.getUserId()
                 , true, new CallBack(AddDepartmentFragment.this, "CreateDept"));
