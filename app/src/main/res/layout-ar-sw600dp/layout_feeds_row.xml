@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="105dp"
+    android:layout_height="122dp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <RelativeLayout
         android:id="@+id/layout123"
@@ -44,8 +44,8 @@
                         android:orientation="horizontal">
 
                         <com.mikhaellopez.circularimageview.CircularImageView
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
                             app:civ_border="true"
                             app:civ_shadow="true"
                             app:civ_border_width="2dp"
@@ -61,7 +61,7 @@
                             android:layout_marginTop="5dp"
                             android:layout_marginLeft="5dp"
                             android:layout_marginStart="5dp"
-                            android:textSize="16sp"
+                            android:textSize="18sp"
                             android:id="@+id/feed_title"
                             android:layout_alignTop="@+id/feed_image"
                             android:layout_toEndOf="@+id/feed_image" />
@@ -70,7 +70,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:id="@+id/feed_description"
-                            android:textSize="14sp"
+                            android:textSize="16sp"
                             android:lines="2"
                             android:layout_marginTop="5dp"
                             android:layout_below="@+id/feed_title"
@@ -80,9 +80,10 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:id="@+id/feed_comment_date"
-                            android:textSize="14sp"
+                            android:textSize="16sp"
                             android:singleLine="true"
                             android:layout_marginTop="5dp"
+
                             android:layout_below="@+id/feed_description"
                             android:text="@string/test_forum"
                             android:layout_alignStart="@+id/feed_description" />
