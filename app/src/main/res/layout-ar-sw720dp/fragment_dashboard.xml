@@ -2,7 +2,6 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:layout_marginTop="10dp"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -46,7 +45,9 @@
                     android:textSize="14sp"
                     android:layout_centerVertical="true"
                     android:layout_toLeftOf="@+id/imag22"
+                    android:layout_toStartOf="@+id/imag22"
                     android:gravity="center_vertical"
+                    android:layout_marginEnd="4dp"
                     android:layout_marginRight="4dp"/>
                         <View
                             android:layout_width="20dp"
@@ -66,8 +67,10 @@
                             android:textSize="14sp"
                             android:layout_centerVertical="true"
                             android:layout_toRightOf="@+id/imag22"
+                            android:layout_toEndOf="@+id/imag22"
                             android:gravity="center_vertical"
-                            android:layout_marginLeft="4dp"/>
+                            android:layout_marginLeft="4dp"
+                            android:layout_marginStart="4dp"/>
                     </RelativeLayout>
 
                 <RelativeLayout
@@ -84,6 +87,8 @@
                     android:layout_height="wrap_content"
                     android:textSize="14sp"
                     android:layout_centerVertical="true"
+                    android:layout_toStartOf="@+id/imag223"
+                    android:layout_marginEnd="4dp"
                     android:layout_toLeftOf="@+id/imag223"
                     android:layout_marginRight="4dp"/>
                         <View
@@ -103,6 +108,9 @@
                             android:layout_height="wrap_content"
                             android:textSize="14sp"
                             android:layout_centerVertical="true"
+                            android:layout_toEndOf="@+id/imag223"
+
+                            android:layout_marginStart="4dp"
                             android:layout_toRightOf="@+id/imag223"
                             android:gravity="center_vertical"
                             android:layout_marginLeft="4dp"/>
@@ -122,8 +130,10 @@
                     android:textSize="14sp"
                     android:layout_centerVertical="true"
                     android:layout_toLeftOf="@+id/imag222"
+                    android:layout_toStartOf="@+id/imag222"
                     android:gravity="center_vertical"
-                    android:layout_marginRight="4dp"/>
+                    android:layout_marginRight="4dp"
+                    android:layout_marginEnd="4dp"/>
                         <View
                             android:layout_width="20dp"
                             android:layout_height="20dp"
@@ -142,8 +152,10 @@
                             android:textSize="14sp"
                             android:layout_centerVertical="true"
                             android:layout_toRightOf="@+id/imag222"
+                            android:layout_toEndOf="@+id/imag222"
                             android:gravity="center_vertical"
-                            android:layout_marginLeft="4dp"/>
+                            android:layout_marginLeft="4dp"
+                            android:layout_marginStart="4dp"/>
                     </RelativeLayout>
             </RelativeLayout>
 
@@ -173,6 +185,7 @@
                     <RelativeLayout
                         android:id="@+id/open"
                         android:layout_marginRight="5dp"
+                        android:layout_marginEnd="5dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content">
                         <View
@@ -191,12 +204,15 @@
                             android:textSize="14sp"
                             android:layout_centerVertical="true"
                             android:layout_toRightOf="@+id/imag1"
+                            android:layout_toEndOf="@+id/imag1"
                             android:gravity="center_vertical"
+                            android:layout_marginStart="4dp"
                             android:layout_marginLeft="4dp"/>
                     </RelativeLayout>
                     <RelativeLayout
                         android:id="@+id/close"
                         android:layout_marginLeft="5dp"
+                        android:layout_marginStart="5dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content">
                         <View
@@ -216,7 +232,10 @@
                             android:textSize="14sp"
                             android:layout_centerVertical="true"
                            android:layout_toRightOf="@+id/imag"
+                            android:layout_toEndOf="@+id/imag"
                             android:gravity="center_vertical"
+                            android:layout_marginStart="4dp"
+
                             android:layout_marginLeft="4dp"/>
                     </RelativeLayout>
 

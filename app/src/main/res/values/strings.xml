@@ -174,7 +174,7 @@
     <string name="opened_milestone">Open Milestone</string>
     <string name="opened_taskslist">Open Taskslist</string>
     <string name="tasks_list">Tasks List</string>
-    <string name="milestones">MileStones</string>
+    <string name="milestones">Milestones</string>
     <string name="task_done">Task done</string>
     <string name="task_created">Task Created/Updated Successfully</string>
     <string name="delete_task">Delete Task?</string>

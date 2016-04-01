@@ -1,0 +1,131 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorWhite"
+    tools:context="com.algorepublic.zoho.FragmentsTasks.TaskAssignFragment">
+
+    <SearchView
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:id="@+id/searchView"
+        android:background="@color/colorBaseWrapper"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
+
+    <se.emilsjolander.stickylistheaders.StickyListHeadersListView
+        android:id="@+id/list_taskslist"
+        android:layout_width="match_parent"
+        android:layout_below="@+id/searchView"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/layout_bottom"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="-2dp"
+        android:fadeScrollbars="true"
+        android:scrollbarAlwaysDrawVerticalTrack="true"
+        android:scrollbarSize="3dp"
+        android:scrollbars="vertical" />
+
+    <LinearLayout
+        android:id="@+id/layout_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="94dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/colorContentWrapper"
+        android:orientation="horizontal"
+        android:weightSum="4">
+
+        <RadioGroup
+            android:id="@+id/radioGroup"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/view"
+            android:layout_weight="3.7"
+            android:orientation="horizontal"
+            android:weightSum="3">
+
+            <RadioButton
+                android:id="@+id/all"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_weight=".8"
+                android:adjustViewBounds="true"
+                android:gravity="center"
+                android:scaleType="fitXY"
+                android:text="@string/all"
+                android:textAlignment="gravity"
+                android:textColor="@android:color/white"
+                android:textSize="30sp" />
+
+            <View
+                android:layout_width="2dp"
+                android:layout_height="fill_parent"
+                android:background="@color/white" />
+
+            <RadioButton
+                android:id="@+id/up_coming"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_weight="1.1"
+                android:adjustViewBounds="true"
+                android:gravity="center"
+                android:scaleType="fitXY"
+                android:text="@string/up_coming"
+                android:textAlignment="gravity"
+                android:textColor="@android:color/white"
+                android:textSize="30sp" />
+
+            <View
+                android:layout_width="2dp"
+                android:layout_height="fill_parent"
+                android:background="@color/white" />
+
+            <RadioButton
+                android:id="@+id/over_due"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_weight="1.1"
+                android:adjustViewBounds="true"
+                android:gravity="center"
+                android:scaleType="fitXY"
+                android:text="@string/over_due"
+                android:textAlignment="gravity"
+                android:textColor="@android:color/white"
+                android:textSize="30sp" />
+        </RadioGroup>
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="fill_parent"
+            android:background="@color/white" />
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="40dp"
+            android:layout_weight=".5">
+
+            <Button
+                android:id="@+id/sort"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_marginBottom="12dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/task_image" />
+        </RelativeLayout>
+    </LinearLayout>
+    <include
+        layout="@layout/layout_alert_message"
+        android:layout_width="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_height="wrap_content" />
+
+</RelativeLayout>
