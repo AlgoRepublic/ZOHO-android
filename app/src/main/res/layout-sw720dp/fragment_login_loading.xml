@@ -8,8 +8,8 @@
 
     <com.wang.avi.AVLoadingIndicatorView
         android:id="@+id/avloadingIndicatorView"
-        android:layout_width="140dp"
-        android:layout_height="140dp"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         app:indicator="BallSpinFadeLoader"
@@ -24,12 +24,12 @@
         android:layout_marginTop="15dp"
         android:text="@string/connecting_to_user"
         android:textColor="@color/colorContentWrapper"
-        android:textSize="16sp" />
+        android:textSize="25sp" />
 
     <ImageView
         android:id="@+id/imageView5"
-        android:layout_width="200dp"
-        android:layout_height="50dp"
+        android:layout_width="300dp"
+        android:layout_height="70dp"
         android:layout_below="@+id/editText"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="15dp"
@@ -42,6 +42,7 @@
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:text="@string/loading"
+        android:textSize="25sp"
         android:textAllCaps="true"
         android:textColor="@color/colorContentWrapper" />
 </RelativeLayout>

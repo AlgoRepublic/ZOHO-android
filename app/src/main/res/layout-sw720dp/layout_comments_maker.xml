@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="80dp"
+    android:layout_height="140dp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <RelativeLayout
         android:id="@+id/layout123"
@@ -87,8 +87,8 @@
                         android:orientation="horizontal">
 
                             <com.mikhaellopez.circularimageview.CircularImageView
-                                android:layout_width="40dp"
-                                android:layout_height="40dp"
+                                android:layout_width="80dp"
+                                android:layout_height="80dp"
                                 app:civ_border="true"
                                 app:civ_shadow="true"
                                 app:civ_border_width="1dp"
@@ -103,7 +103,7 @@
                                 android:textStyle="bold"
                                 android:layout_marginTop="5dp"
                                 android:layout_marginLeft="5dp"
-                                android:textSize="14sp"
+                                android:textSize="30sp"
                                 android:id="@+id/comment_title"
                                 android:layout_alignTop="@+id/comment_image"
                                 android:layout_toEndOf="@+id/comment_image" />
@@ -112,7 +112,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:id="@+id/comment_description"
-                                android:textSize="14sp"
+                                android:textSize="30sp"
                                 android:lines="2"
                                 android:layout_marginTop="5dp"
                                 android:layout_below="@+id/comment_title"

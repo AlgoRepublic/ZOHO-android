@@ -8,8 +8,8 @@
     android:visibility="gone">
         <ImageView
             android:id="@+id/alertImage"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:layout_centerHorizontal="true"
             android:src="@drawable/alerticon" />
         <TextView

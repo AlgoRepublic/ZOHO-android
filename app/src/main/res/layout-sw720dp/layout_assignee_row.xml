@@ -6,7 +6,7 @@
     android:background="@android:color/white"
     android:descendantFocusability="blocksDescendants"
     android:orientation="horizontal"
-    android:padding="5dp"
+    android:padding="10dp"
     android:weightSum="5">
 
     <TextView
@@ -18,19 +18,18 @@
         android:layout_margin="10dp"
         android:layout_toLeftOf="@+id/assignee_checkbox"
         android:textColor="@color/colorContentWrapper"
-        android:textSize="16sp" />
+        android:textSize="30sp" />
 
     <CheckBox
         android:id="@+id/assignee_checkbox"
-        android:layout_width="15dp"
-        android:layout_height="15dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:layout_margin="5dp"
         android:background="@drawable/checkbox"
         android:button="@null"
-        android:textColor="@color/colorContentWrapper"
-        android:textSize="16sp" />
+        android:textColor="@color/colorContentWrapper" />
 
     <TextView
         android:id="@+id/assignee_id"
@@ -41,6 +40,5 @@
         android:layout_margin="10dp"
         android:layout_toLeftOf="@+id/assignee_checkbox"
         android:textColor="@color/colorContentWrapper"
-        android:textSize="16sp"
         android:visibility="gone" />
 </RelativeLayout>

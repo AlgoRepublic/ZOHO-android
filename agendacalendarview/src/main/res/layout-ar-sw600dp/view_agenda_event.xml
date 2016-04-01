@@ -4,28 +4,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="70dp"
+    android:layout_marginBottom="3dp"
     android:descendantFocusability="blocksDescendants"
     android:gravity="center_vertical"
     android:orientation="horizontal">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="3dp"
-        android:descendantFocusability="blocksDescendants"
-        android:orientation="horizontal">
 
-        <View
-            android:id="@+id/priority_bar"
-            android:layout_width="8dp"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="9dp"
-            android:layout_marginTop="4dp"
-            android:background="@drawable/roundable_prioritybar"/>
         <RelativeLayout
             android:id="@+id/layout123"
-            android:layout_toRightOf="@+id/priority_bar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginBottom="6dp"
@@ -39,6 +25,7 @@
                 android:layout_height="match_parent"
                 app:ms9_affectsDisplayedPosition="true"
                 app:ms9_shadowElevation="2dp"
+                android:layout_toEndOf="@+id/priority_bar"
                 app:ms9_shadowTranslationZ="1dp"
                 app:ms9_useAmbientShadow="true">
 
@@ -229,6 +216,12 @@
                     </RelativeLayout>
                 </RelativeLayout>
             </com.h6ah4i.android.materialshadowninepatch.MaterialShadowContainerView>
+            <View
+                android:id="@+id/priority_bar"
+                android:layout_width="8dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentStart="true"
+                android:background="@drawable/roundable_prioritybar"/>
         </RelativeLayout>
-    </LinearLayout>
+
 </com.github.tibolte.agendacalendarview.agenda.AgendaEventView>
