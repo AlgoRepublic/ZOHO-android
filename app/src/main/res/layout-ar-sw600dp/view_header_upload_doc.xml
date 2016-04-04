@@ -17,7 +17,6 @@
             android:gravity="center_horizontal"
             android:padding="10dp"
             android:text="@string/documents"
-            android:textColor="@color/colorContentWrapper"
             android:textSize="16sp"
             android:typeface="monospace" />
 

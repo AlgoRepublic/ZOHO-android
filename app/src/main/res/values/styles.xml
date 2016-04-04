@@ -94,7 +94,7 @@
     </style>
     <style name="blackEditTextStyle" parent="Widget.AppCompat.EditText">
         <item name="android:textColor">@color/colorBaseHeader</item>
-        <item name="android:textColorHint">@color/colorBaseHeader</item>
+        <item name="android:textColorHint">@color/colorContentWrapper</item>
     </style>
     <style name="blackButton" parent="@android:style/Widget.Button">
         <item name="android:background">@color/colorContentWrapper</item>

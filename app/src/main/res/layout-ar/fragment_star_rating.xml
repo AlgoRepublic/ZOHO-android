@@ -3,14 +3,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ExpandableListView
-        android:id="@+id/expandableListView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/include"
-        android:layout_margin="5dp"
-        android:background="@drawable/roundable_corner"
-        android:groupIndicator="@null"
-        android:nestedScrollingEnabled="true" />
+        <com.algorepublic.zoho.utils.CustomExpListView
+            android:id="@+id/starListView"
+            android:divider="@null"
+            android:groupIndicator="@null"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <include
+            layout="@layout/layout_alert_message"
+            android:layout_width="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_height="wrap_content" />
 
 </RelativeLayout>

@@ -16,6 +16,7 @@ import android.widget.ImageView;
 
 import com.algorepublic.zoho.adapters.AdapterMenuItems;
 import com.algorepublic.zoho.fragments.HomeFragment;
+import com.algorepublic.zoho.fragments.StarRatingFragment;
 import com.algorepublic.zoho.fragments.UploadDocsFragment;
 import com.algorepublic.zoho.utils.BaseClass;
 import com.algorepublic.zoho.utils.Constants;
@@ -103,6 +104,7 @@ public class MainActivity extends BaseActivity {
     }
     @Override
     public void onBackPressed() {
+        StarRatingFragment.levelOneHead.clear();
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);

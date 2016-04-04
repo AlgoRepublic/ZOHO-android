@@ -40,6 +40,7 @@ public class HomeFragment extends BaseFragment {
         MyPagerAdapter adapter = new MyPagerAdapter(getActivity().getSupportFragmentManager());
         pager.setAdapter(adapter);
         tabs.setupWithViewPager(pager);
+        pager.setCurrentItem(1);
 
         return view;
     }
