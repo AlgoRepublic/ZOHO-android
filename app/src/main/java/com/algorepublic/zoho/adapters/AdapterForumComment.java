@@ -1,13 +1,14 @@
 package com.algorepublic.zoho.adapters;
 
 import android.content.Context;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Toast;
 
 import com.algorepublic.zoho.Models.GeneralModel;
 import com.algorepublic.zoho.R;
@@ -18,6 +19,10 @@ import com.algorepublic.zoho.utils.BaseClass;
 import com.algorepublic.zoho.utils.Constants;
 import com.androidquery.AQuery;
 import com.bumptech.glide.Glide;
+import com.flyco.animation.BounceEnter.BounceLeftEnter;
+import com.flyco.animation.SlideExit.SlideRightExit;
+import com.flyco.dialog.listener.OnBtnClickL;
+import com.flyco.dialog.widget.NormalDialog;
 
 /**
  * Created by waqas on 2/3/16.
@@ -81,12 +86,47 @@ public class AdapterForumComment extends BaseAdapter {
         aq.id(R.id.btDelete).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String content = ctx.getString(R.string.delete_comment);
                 ForumsDetailFragment.ClickedPosition = position;
-                service.deleteForumComment(ForumsDetailFragment
-                        .arrayList.get(position).getCommentID(),true,
-                        new CallBack(AdapterForumComment.this,"DeleteComment"));
+                final NormalDialog dialog = new NormalDialog(((AppCompatActivity) ctx));
+                dialog.isTitleShow(false)//
+                        .bgColor(ctx.getResources().getColor(R.color.colorBaseWrapper))//
+                        .cornerRadius(5)//
+                        .content(content)//
+                        .contentGravity(Gravity.CENTER)//
+                        .contentTextColor(ctx.getResources().getColor(R.color.colorBaseHeader))//
+                        .dividerColor(ctx.getResources().getColor(R.color.colorContentWrapper))//
+                        .btnTextSize(15.5f, 15.5f)//
+                        .btnTextColor(ctx.getResources().getColor(R.color.colorBaseHeader)
+                                , ctx.getResources().getColor(R.color.colorBaseHeader))//
+                        .btnPressColor(ctx.getResources().getColor(R.color.colorBaseMenu))//
+                        .widthScale(0.85f)//
+                        .showAnim(new BounceLeftEnter())//
+                        .dismissAnim(new SlideRightExit())//
+                        .show();
+
+                dialog.setOnBtnClickL(
+                        new OnBtnClickL() {
+                            @Override
+                            public void onBtnClick() {
+                                dialog.dismiss();
+                            }
+                        },
+                        new OnBtnClickL() {
+                            @Override
+                            public void onBtnClick() {
+                                dialog.dismiss();
+                                service.deleteForumComment(ForumsDetailFragment
+                                                .arrayList.get(position).getCommentID(), true,
+                                        new CallBack(AdapterForumComment.this, "DeleteComment"));
+                            }
+                        });
+
+
             }
         });
+
+
 
         return convertView;
     }
@@ -96,8 +136,7 @@ public class AdapterForumComment extends BaseAdapter {
             ForumsDetailFragment.arrayList.remove(ForumsDetailFragment.ClickedPosition);
             notifyDataSetChanged();
         }else {
-            Snackbar.make(((AppCompatActivity)ctx).findViewById(android.R.id.content),
-                    ctx.getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
+            Toast.makeText(ctx, ctx.getString(R.string.response_error), Toast.LENGTH_SHORT).show();
         }
     }
 

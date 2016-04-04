@@ -2,7 +2,6 @@ package com.algorepublic.zoho.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.Snackbar;
 import android.text.Html;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -149,7 +148,7 @@ public class ForumsDetailFragment extends BaseFragment {
     {
         String comment = aq.id(R.id.comment_user).getText().toString();
         if(aq.id(R.id.comment_user).getText().toString().equalsIgnoreCase("")) {
-            Snackbar.make(getView(),getString(R.string.enter_comment),Snackbar.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), getActivity().getString(R.string.enter_comment), Toast.LENGTH_SHORT).show();
             return;
         }
         service.createforumComments(Integer.toString(ForumsModel.getInstance().responseObject.get(Position).ID)
@@ -172,14 +171,14 @@ public class ForumsDetailFragment extends BaseFragment {
             ForumsDetailFragment
                     .comment_user.setText("");
         }else {
-            Snackbar.make(getView(),
-                    getActivity().getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), getActivity().getString(R.string.response_error), Toast.LENGTH_SHORT).show();
+
         }
     }
     public void CreateComment(Object caller, Object model) {
         CreateForumCommentModel.getInstance().setList((CreateForumCommentModel) model);
         if (CreateForumCommentModel.getInstance().responseCode ==100){
-            Snackbar.make(getView(),"Comment Added",Snackbar.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), getActivity().getString(R.string.comments_added), Toast.LENGTH_SHORT).show();
             aq.id(R.id.comment_user).text("");
             TaskComments taskComments = new TaskComments();
             taskComments.setCommentID(CreateForumCommentModel.getInstance().responseObject.Id);
@@ -194,7 +193,8 @@ public class ForumsDetailFragment extends BaseFragment {
         }
         else
         {
-            Snackbar.make(getView(), getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), getActivity().getString(R.string.response_error), Toast.LENGTH_SHORT).show();
+
         }
     }
     public void ForumDetails(Object caller, Object model){
@@ -202,7 +202,7 @@ public class ForumsDetailFragment extends BaseFragment {
         if (ForumsCommentModel.getInstance().responseObject.forumComments.size()!=0) {
             GetGeneralList();
         }else {
-            Snackbar.make(getView(),getString(R.string.response_error),Snackbar.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), getActivity().getString(R.string.response_error), Toast.LENGTH_SHORT).show();
         }
         aq.id(R.id.alertMessage).text("No Comments");
         if(arrayList.size() ==0){

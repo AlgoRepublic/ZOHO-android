@@ -2,7 +2,6 @@ package com.algorepublic.zoho.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.Snackbar;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -88,7 +87,8 @@ public class FeedsFragment extends BaseFragment{
             aq.id(R.id.forums_list).adapter(new AdapterFeeds(getActivity()));
         }else {
             aq.id(R.id.response_alert).visibility(View.VISIBLE);
-            Snackbar.make(getView(), getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), getActivity().getString(R.string.response_error), Toast.LENGTH_SHORT).show();
+
         }
     }
 }

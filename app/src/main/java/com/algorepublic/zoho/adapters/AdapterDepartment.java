@@ -17,7 +17,6 @@
 package com.algorepublic.zoho.adapters;
 
 import android.content.Context;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -31,6 +30,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.algorepublic.zoho.Models.GeneralModel;
 import com.algorepublic.zoho.Models.ProjectsByDepartmentModel;
@@ -47,7 +47,6 @@ import com.flyco.animation.BounceEnter.BounceLeftEnter;
 import com.flyco.animation.SlideExit.SlideRightExit;
 import com.flyco.dialog.listener.OnBtnClickL;
 import com.flyco.dialog.widget.NormalDialog;
-import com.h6ah4i.android.materialshadowninepatch.MaterialShadowContainerView;
 import com.h6ah4i.android.widget.advrecyclerview.draggable.DraggableItemAdapter;
 import com.h6ah4i.android.widget.advrecyclerview.draggable.DraggableItemConstants;
 import com.h6ah4i.android.widget.advrecyclerview.draggable.ItemDraggableRange;
@@ -282,11 +281,11 @@ public class AdapterDepartment
     public void MoveProject(Object caller, Object model) {
         GeneralModel.getInstance().setList((GeneralModel) model);
         if (GeneralModel.getInstance().responseObject ==true) {
-            Snackbar.make(((AppCompatActivity)ctx).findViewById(android.R.id.content)
-                    , ctx.getString(R.string.project_moved), Snackbar.LENGTH_SHORT).show();
+            Toast.makeText(ctx, ctx.getString(R.string.project_moved), Toast.LENGTH_SHORT).show();
+
         } else {
-            Snackbar.make(((AppCompatActivity) ctx).findViewById(android.R.id.content),ctx. getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
-        }
+            Toast.makeText(ctx, ctx.getString(R.string.response_error), Toast.LENGTH_SHORT).show();
+            }
     }
     @Override
     public boolean onCheckCanStartDrag(MyViewHolder holder, int position, int x, int y) {
@@ -375,8 +374,8 @@ public class AdapterDepartment
         if (GeneralModel.getInstance().responseCode.equalsIgnoreCase("100")) {
             UpdateList();
         } else {
-            Snackbar.make(((AppCompatActivity) ctx).findViewById(android.R.id.content),
-                    ctx.getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
+            Toast.makeText(ctx, ctx.getString(R.string.response_error), Toast.LENGTH_SHORT).show();
+
         }
     }
     public void DeleteProject(Object caller, Object model) {
@@ -384,11 +383,10 @@ public class AdapterDepartment
         if (GeneralModel.getInstance().responseCode.equalsIgnoreCase("100")) {
             DepartmentFragment.allProjects.remove(ProjectDeletePosition);
             notifyDataSetChanged();
-            Snackbar.make(((AppCompatActivity)ctx).findViewById(android.R.id.content),
-                   ctx.getString(R.string.project_deleted),Snackbar.LENGTH_SHORT).show();
+            Toast.makeText(ctx, ctx.getString(R.string.project_deleted), Toast.LENGTH_SHORT).show();
+
         } else {
-            Snackbar.make(((AppCompatActivity) ctx).findViewById(android.R.id.content),
-                    ctx.getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
+            Toast.makeText(ctx, ctx.getString(R.string.response_error), Toast.LENGTH_SHORT).show();
         }
     }
     public void UpdateList() {
@@ -402,8 +400,7 @@ public class AdapterDepartment
             AddDepartmentProjects();
 
         } else {
-            Snackbar.make(((AppCompatActivity)ctx).findViewById(android.R.id.content),
-                    ctx.getString(R.string.projects_list_empty), Snackbar.LENGTH_SHORT).show();
+            Toast.makeText(ctx, ctx.getString(R.string.projects_list_empty), Toast.LENGTH_SHORT).show();
         }
     }
     public void AddDepartmentProjects(){
@@ -432,8 +429,8 @@ public class AdapterDepartment
                 DepartmentFragment.allProjects.add(projectsList);
             }
         }
-        Snackbar.make(((AppCompatActivity)ctx).findViewById(android.R.id.content),
-                ctx.getString(R.string.department_deleted), Snackbar.LENGTH_SHORT).show();
+        Toast.makeText(ctx, ctx.getString(R.string.department_deleted), Toast.LENGTH_SHORT).show();
+
        notifyDataSetChanged();
     }
 }

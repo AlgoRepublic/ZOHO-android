@@ -303,6 +303,8 @@
     <string name="clear_board">Clear Board</string>
     <string name="rating">التقييم</string>
     <string name="stage">المرحلة</string>
+    <string name="comments_added">التعليق واضاف</string>
+    <string name="uploaded_succesful">اتم رفع الملف بنجاح</string>
     <!-- User Status Strings -->
     <string name="added_status">الحالة أضاف</string>
     <string name="added_project">مشروع أضيفت</string>
@@ -314,4 +316,5 @@
     <string name="added_forum">واضاف المنتدى</string>
     <string name="added_document">وثيقة وأضاف</string>
     <string name="added_milestone">المعلم وأضاف</string>
+    <string name="exit">هل تريد حقا للخروج ؟</string>
 </resources>

@@ -1,10 +1,8 @@
 package com.algorepublic.zoho.fragments;
 
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -212,21 +210,21 @@ public class StarRatingLevelQuestionsFragment extends BaseFragment {
     public void UpdateComment(Object caller, Object model) {
         GeneralModel.getInstance().setList((GeneralModel) model);
         if (GeneralModel.getInstance().responseObject) {
-            Snackbar.make(getView(),
-                    getString(R.string.update_comment), Snackbar.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), getActivity().getString(R.string.update_comment), Toast.LENGTH_SHORT).show();
+
         } else {
-            Snackbar.make(getView(),
-                    getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), getActivity().getString(R.string.response_error), Toast.LENGTH_SHORT).show();
+
         }
     }
     public void UpdateProgress(Object caller, Object model) {
         GeneralModel.getInstance().setList((GeneralModel) model);
         if (GeneralModel.getInstance().responseObject) {
-            Snackbar.make(getView(),
-                    getString(R.string.update_progress), Snackbar.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), getActivity().getString(R.string.update_progress), Toast.LENGTH_SHORT).show();
+
         } else {
-            Snackbar.make(getView(),
-                    getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), getActivity().getString(R.string.response_error), Toast.LENGTH_SHORT).show();
+
         }
     }
 

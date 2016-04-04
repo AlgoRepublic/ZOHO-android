@@ -3,10 +3,8 @@ package com.algorepublic.zoho.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -17,9 +15,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.algorepublic.zoho.BaseActivity;
 import com.algorepublic.zoho.Models.AllProjectsByUserModel;
-import com.algorepublic.zoho.Models.ForumsModel;
 import com.algorepublic.zoho.Models.ProjectsByClientModel;
 import com.algorepublic.zoho.Models.ProjectsByDepartmentModel;
 import com.algorepublic.zoho.R;
@@ -36,7 +32,6 @@ import com.flyco.dialog.widget.ActionSheetDialog;
 
 import java.util.ArrayList;
 
-import cc.cloudist.acplibrary.ACProgressFlower;
 import se.emilsjolander.stickylistheaders.StickyListHeadersAdapter;
 import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
 
@@ -168,7 +163,8 @@ public class ProjectsFragment extends BaseFragment implements SwipeRefreshLayout
             AddAllProjects();
 
         } else {
-            Snackbar.make(getView(), getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), getActivity().getString(R.string.response_error), Toast.LENGTH_SHORT).show();
+
         }
     }
     public void ProjectsByClient(Object caller, Object model){
@@ -329,8 +325,8 @@ public class ProjectsFragment extends BaseFragment implements SwipeRefreshLayout
             case R.id.add_project:
                 baseClass.hideKeyPad(getView());
                 if(allDeptList.size()==0){
-                    Snackbar.make(getView(),getString(R.string.project_loading),Snackbar.LENGTH_SHORT).show();
-                }else {
+                    Toast.makeText(getActivity(), getActivity().getString(R.string.project_loading), Toast.LENGTH_SHORT).show();
+ }else {
                     callFragmentWithBackStack(R.id.container, AddProjectFragment.newInstance(), "AddProjectFragment");
                 }
                 break;

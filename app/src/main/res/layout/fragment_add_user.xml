@@ -63,7 +63,7 @@
                 app:civ_border_color="@color/colorContentWrapper"
                 app:civ_border_width="4dp"/>
 
-            <com.rengwuxian.materialedittext.MaterialEditText
+            <EditText
                 android:id="@+id/first_name"
                 android:layout_below="@+id/profile"
                 android:layout_width="match_parent"
@@ -71,12 +71,11 @@
                 android:layout_marginTop="15dp"
                 android:hint="@string/first_name"
                 android:textSize="18sp"
-                app:met_floatingLabel="normal"
-                app:met_primaryColor="@color/colorBaseHeader"
-                app:met_singleLineEllipsis="true" />
+                android:textColor="@color/colorBaseHeader"
+                android:textColorHint="@color/colorBaseMenu" />
 
 
-            <com.rengwuxian.materialedittext.MaterialEditText
+            <EditText
                 android:id="@+id/last_name"
                 android:layout_below="@+id/first_name"
                 android:layout_width="match_parent"
@@ -85,11 +84,10 @@
                 android:hint="@string/last_name"
                 android:inputType="textMultiLine"
                 android:textSize="18sp"
-                app:met_singleLineEllipsis="true"
-                app:met_floatingLabel="normal"
-                app:met_primaryColor="@color/colorBaseHeader" />
+                android:textColor="@color/colorBaseHeader"
+                android:textColorHint="@color/colorBaseMenu" />
 
-            <com.rengwuxian.materialedittext.MaterialEditText
+            <EditText
                 android:id="@+id/nick_name"
                 android:layout_below="@+id/last_name"
                 android:layout_width="match_parent"
@@ -98,11 +96,10 @@
                 android:hint="@string/nick_name"
                 android:inputType="textMultiLine"
                 android:textSize="18sp"
-                app:met_singleLineEllipsis="true"
-                app:met_floatingLabel="normal"
-                app:met_primaryColor="@color/colorBaseHeader" />
+                android:textColor="@color/colorBaseHeader"
+                android:textColorHint="@color/colorBaseMenu"/>
 
-            <com.rengwuxian.materialedittext.MaterialEditText
+            <EditText
                 android:id="@+id/user_email"
                 android:layout_below="@+id/nick_name"
                 android:layout_width="match_parent"
@@ -111,11 +108,10 @@
                 android:hint="@string/email"
                 android:inputType="textMultiLine"
                 android:textSize="18sp"
-                app:met_singleLineEllipsis="true"
-                app:met_floatingLabel="normal"
-                app:met_primaryColor="@color/colorBaseHeader" />
+                android:textColor="@color/colorBaseHeader"
+                android:textColorHint="@color/colorBaseMenu" />
 
-            <com.rengwuxian.materialedittext.MaterialEditText
+            <EditText
                 android:id="@+id/user_phoneno"
                 android:layout_below="@id/user_email"
                 android:layout_width="match_parent"
@@ -124,9 +120,8 @@
                 android:hint="@string/phone_number"
                 android:inputType="phone"
                 android:textSize="18sp"
-                app:met_singleLineEllipsis="true"
-                app:met_floatingLabel="normal"
-                app:met_primaryColor="@color/colorBaseHeader" />
+                android:textColor="@color/colorBaseHeader"
+                android:textColorHint="@color/colorBaseMenu" />
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

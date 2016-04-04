@@ -7,7 +7,6 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.support.design.widget.Snackbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -106,9 +105,9 @@ public class EditProfileFragment extends BaseFragment implements MultiSelectionS
         GetUserModel.getInstance().setList((GetUserModel) model);
         if (GetUserModel.getInstance().responseCode.equalsIgnoreCase("100")
                 && GetUserModel.getInstance().user.toString() !="null") {
-           UpdateValues();
+            UpdateValues();
         }else {
-            Snackbar.make(getView(), getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), getActivity().getString(R.string.response_error), Toast.LENGTH_SHORT).show();
         }
     }
     public void GetByIdFreshData(Object caller,Object model) {
@@ -120,7 +119,7 @@ public class EditProfileFragment extends BaseFragment implements MultiSelectionS
             baseClass.setProfileImage(GetUserModel.getInstance().user.profileImagePath);
             baseClass.setProfileImageID(GetUserModel.getInstance().user.profilePictureID);
             baseClass.setEmail(GetUserModel.getInstance().user.eMail);
-            Snackbar.make(getView(),getString(R.string.user_updated),Snackbar.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), getActivity().getString(R.string.user_updated), Toast.LENGTH_SHORT).show();
         }else {
             Toast.makeText(getActivity(), getString(R.string.response_error), Toast.LENGTH_SHORT).show();
         }
@@ -152,19 +151,20 @@ public class EditProfileFragment extends BaseFragment implements MultiSelectionS
             case R.id.save_project:
                 baseClass.hideKeyPad(getView());
                 if(aq.id(R.id.first_name).getText().toString().isEmpty()){
-                    Snackbar.make(getView(),getString(R.string.user_first_name),Snackbar.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), getActivity().getString(R.string.user_first_name), Toast.LENGTH_SHORT).show();
                     return false;
                 }
                 if(aq.id(R.id.last_name).getText().toString().isEmpty()){
-                    Snackbar.make(getView(),getString(R.string.user_last_name),Snackbar.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), getActivity().getString(R.string.user_last_name), Toast.LENGTH_SHORT).show();
                     return false;
                 }
                 if(aq.id(R.id.user_email).getText().toString().isEmpty()){
-                    Snackbar.make(getView(),getString(R.string.add_email),Snackbar.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), getActivity().getString(R.string.add_email), Toast.LENGTH_SHORT).show();
+
                     return false;
                 }
                 if(aq.id(R.id.user_phoneno).getText().toString().isEmpty()){
-                    Snackbar.make(getView(),getString(R.string.add_phoneno),Snackbar.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), getActivity().getString(R.string.add_phoneno), Toast.LENGTH_SHORT).show();
                     return false;
                 }
                 Log.e("firstName", aq.id(R.id.first_name).getText().toString());
@@ -306,7 +306,7 @@ public class EditProfileFragment extends BaseFragment implements MultiSelectionS
                     loginService.GetById(baseClass.getUserId(),
                             true, new CallBack(EditProfileFragment.this, "GetByIdFreshData"));
                 } else {
-                    Snackbar.make(getView(), getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), getActivity().getString(R.string.response_error), Toast.LENGTH_SHORT).show();
                 }
             }
         }
@@ -322,7 +322,7 @@ public class EditProfileFragment extends BaseFragment implements MultiSelectionS
 
     @Override
     public void selectedStrings(List<String> strings) {
-       // projectsList.setSelection(strings);
+        // projectsList.setSelection(strings);
     }
 
     @Override

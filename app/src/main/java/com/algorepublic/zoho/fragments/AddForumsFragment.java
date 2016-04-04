@@ -2,7 +2,6 @@ package com.algorepublic.zoho.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.Snackbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -10,9 +9,10 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
-import com.algorepublic.zoho.Models.ForumCategoryModel;
 import com.algorepublic.zoho.Models.CreateForumModel;
+import com.algorepublic.zoho.Models.ForumCategoryModel;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.services.CallBack;
 import com.algorepublic.zoho.services.ForumService;
@@ -68,7 +68,8 @@ public class AddForumsFragment extends BaseFragment{
         }
         else
         {
-            Snackbar.make(getView(), getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), getActivity().getString(R.string.response_error), Toast.LENGTH_SHORT).show();
+
         }
     }
 
@@ -91,16 +92,17 @@ public class AddForumsFragment extends BaseFragment{
                     ,categoryID,baseClass.getUserId(),
                     true, new CallBack(AddForumsFragment.this, "CreateForum"));
         }else{
-            Snackbar.make(getView(),getString(R.string.select_project),Snackbar.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), getActivity().getString(R.string.select_project), Toast.LENGTH_SHORT).show();
         }
     }
 
     public void CreateForum(Object caller, Object model){
         CreateForumModel.getInstance().setList((CreateForumModel) model);
         if (CreateForumModel.getInstance().responseObject != null ) {
-            Snackbar.make(getView(),getString(R.string.forum_created),Snackbar.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), getActivity().getString(R.string.forum_created), Toast.LENGTH_SHORT).show();
         }else {
-            Snackbar.make(getView(), getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), getActivity().getString(R.string.response_error), Toast.LENGTH_SHORT).show();
+
         }
     }
     @Override
@@ -115,11 +117,11 @@ public class AddForumsFragment extends BaseFragment{
             case R.id.save_project:
                 baseClass.hideKeyPad(getView());
                 if(aq.id(R.id.comment_title).getText().toString().isEmpty()){
-                    Snackbar.make(getView(),getString(R.string.forum_addname),Snackbar.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), getActivity().getString(R.string.forum_addname), Toast.LENGTH_SHORT).show();
                     return false;
                 }
                 if(aq.id(R.id.comment_description).getText().toString().isEmpty()){
-                    Snackbar.make(getView(),getString(R.string.forum_add_description),Snackbar.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), getActivity().getString(R.string.forum_add_description), Toast.LENGTH_SHORT).show();
                     return false;
                 }
                 CreateForum();

@@ -49,15 +49,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <com.rengwuxian.materialedittext.MaterialEditText
+                <EditText
                     android:id="@+id/project_name"
                     android:textSize="18sp"
                     android:layout_width="match_parent"
                     android:layout_height="55dp"
                     android:hint="@string/project_name"
                     android:ellipsize="end"
+                    android:textColor="@color/colorBaseHeader"
+                    android:textColorHint="@color/colorBaseMenu"
                     android:singleLine="true"
-                    app:met_floatingLabel="normal"
                     android:layout_marginTop="15dp" />
                 <LinearLayout
                     android:id="@+id/layout"
@@ -88,7 +89,7 @@
                             android:layout_marginTop="5dp" />
                     </com.h6ah4i.android.materialshadowninepatch.MaterialShadowContainerView>
                 </LinearLayout>
-                <com.rengwuxian.materialedittext.MaterialEditText
+                <EditText
                     android:id="@+id/project_desc"
                     android:textSize="18sp"
                     android:layout_below="@+id/layout"
@@ -98,7 +99,8 @@
                     android:inputType="textMultiLine"
                     android:gravity="top|left"
                     android:layout_marginTop="10dp"
-                    app:met_floatingLabel="normal" />
+                    android:textColor="@color/colorBaseHeader"
+                    android:textColorHint="@color/colorBaseMenu" />
                 <LinearLayout
                     android:id="@+id/layout1"
                     android:layout_width="match_parent"

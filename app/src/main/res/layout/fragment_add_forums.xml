@@ -47,7 +47,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/layout2">
 
-                <com.rengwuxian.materialedittext.MaterialEditText
+                <EditText
                     android:id="@+id/comment_title"
                     android:textSize="18sp"
                     android:layout_width="match_parent"
@@ -55,8 +55,8 @@
                     android:hint="@string/title"
                     android:inputType="textMultiLine"
                     android:layout_marginTop="10dp"
-                    app:met_floatingLabel="normal"
-                    app:met_singleLineEllipsis="true" />
+                    android:textCursorDrawable="@null"
+                   />
 
             </RelativeLayout>
             <RelativeLayout
@@ -94,7 +94,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/layout3"
                 >
-                <com.rengwuxian.materialedittext.MaterialEditText
+                <EditText
                     android:id="@+id/comment_description"
                     android:textSize="18sp"
                     android:layout_width="match_parent"
@@ -103,8 +103,10 @@
                     android:inputType="textMultiLine"
                     android:padding="5dp"
                     android:gravity="top|left"
-                    android:layout_marginTop="10dp"
-                    app:met_floatingLabel="normal" />
+                    android:textColor="@color/colorBaseHeader"
+                    android:textColorHint="@color/colorBaseMenu"
+                    android:textCursorDrawable="@null"
+                    android:layout_marginTop="10dp" />
             </RelativeLayout>
         </RelativeLayout>
     </android.support.v7.widget.CardView>

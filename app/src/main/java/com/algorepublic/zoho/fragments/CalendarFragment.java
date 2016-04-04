@@ -10,7 +10,6 @@ import android.content.IntentFilter;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.Snackbar;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -244,7 +243,8 @@ public class CalendarFragment extends BaseFragment implements CalendarPickerCont
         }
         else {
             aq.id(R.id.response_alert).visibility(View.VISIBLE);
-            Snackbar.make(getView(), getString(R.string.no_task_found), Snackbar.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), getActivity().getString(R.string.no_task_found), Toast.LENGTH_SHORT).show();
+
         }
 
     }
@@ -337,11 +337,12 @@ public class CalendarFragment extends BaseFragment implements CalendarPickerCont
         if (GeneralModel.getInstance().responseCode.equalsIgnoreCase("100")) {
             allTaskList.remove(clickedPosition);
             initCalendarView();
-            Snackbar.make(getView(), getString(R.string.task_deleted), Snackbar.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), getActivity().getString(R.string.task_deleted), Toast.LENGTH_SHORT).show();
         }
         else
         {
-            Snackbar.make(getView(), getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), getActivity().getString(R.string.response_error), Toast.LENGTH_SHORT).show();
+
         }
     }
 }

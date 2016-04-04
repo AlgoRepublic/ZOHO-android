@@ -2,17 +2,14 @@ package com.algorepublic.zoho.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.Snackbar;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
 import android.widget.Toast;
 
-import com.algorepublic.zoho.BaseActivity;
 import com.algorepublic.zoho.Models.ForumsModel;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.adapters.AdapterForumsList;
@@ -20,8 +17,6 @@ import com.algorepublic.zoho.services.CallBack;
 import com.algorepublic.zoho.services.ForumService;
 import com.algorepublic.zoho.utils.BaseClass;
 import com.androidquery.AQuery;
-
-import cc.cloudist.acplibrary.ACProgressFlower;
 
 /**
  * Created by waqas on 2/1/16.
@@ -94,7 +89,8 @@ public class ForumsFragment extends BaseFragment{
             aq.id(R.id.forums_list).adapter(new AdapterForumsList(getActivity()));
         }else {
             aq.id(R.id.response_alert).visibility(View.VISIBLE);
-            Snackbar.make(getView(), getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), getActivity().getString(R.string.response_error), Toast.LENGTH_SHORT).show();
+
         }
     }
 }

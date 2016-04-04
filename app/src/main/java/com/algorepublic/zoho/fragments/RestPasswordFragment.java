@@ -1,26 +1,20 @@
 package com.algorepublic.zoho.fragments;
 
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
-import com.algorepublic.zoho.BaseActivity;
-import com.algorepublic.zoho.Models.CreateForumModel;
 import com.algorepublic.zoho.Models.GeneralModel;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.services.CallBack;
-import com.algorepublic.zoho.services.DepartmentService;
-import com.algorepublic.zoho.services.TaskListService;
 import com.algorepublic.zoho.services.UserService;
 import com.algorepublic.zoho.utils.BaseClass;
 import com.androidquery.AQuery;
-
-import cc.cloudist.acplibrary.ACProgressFlower;
 
 /**
  * Created by android on 3/11/16.
@@ -57,20 +51,21 @@ public class RestPasswordFragment extends BaseFragment {
             case R.id.save_project:
                 baseClass.hideKeyPad(getView());
                 if(aq.id(R.id.old_password).getText().toString().isEmpty()){
-                    Snackbar.make(getView(),getString(R.string.alert_old_password),Snackbar.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), getActivity().getString(R.string.alert_old_password), Toast.LENGTH_SHORT).show();
                     return false;
                 }
                 if(aq.id(R.id.new_password).getText().toString().isEmpty()){
-                    Snackbar.make(getView(),getString(R.string.alert_new_password),Snackbar.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), getActivity().getString(R.string.alert_new_password), Toast.LENGTH_SHORT).show();
                     return false;
                 }
                 if(aq.id(R.id.confirm_password).getText().toString().isEmpty()){
-                    Snackbar.make(getView(),getString(R.string.alert_confirm_password),Snackbar.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), getActivity().getString(R.string.alert_confirm_password), Toast.LENGTH_SHORT).show();
+
                     return false;
                 }
                 if(!aq.id(R.id.new_password).getText().toString()
                         .equalsIgnoreCase(aq.id(R.id.confirm_password).getText().toString())){
-                    Snackbar.make(getView(),getString(R.string.alert_match_password),Snackbar.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), getActivity().getString(R.string.alert_match_password), Toast.LENGTH_SHORT).show();
                     return false;
                 }
                 RestPasswod();
@@ -87,9 +82,11 @@ public class RestPasswordFragment extends BaseFragment {
     public void UpdatePassword(Object caller, Object model){
         GeneralModel.getInstance().setList((GeneralModel) model);
         if (GeneralModel.getInstance().responseObject ==true ) {
-            Snackbar.make(getView(),getString(R.string.update_password),Snackbar.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), getActivity().getString(R.string.update_password), Toast.LENGTH_SHORT).show();
+
         }else {
-            Snackbar.make(getView(), getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), getActivity().getString(R.string.response_error), Toast.LENGTH_SHORT).show();
+
         }
     }
 

@@ -3,10 +3,8 @@ package com.algorepublic.zoho.adapters;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,8 +16,8 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.SearchView;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.algorepublic.zoho.Models.ForumsModel;
 import com.algorepublic.zoho.Models.GeneralModel;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.fragments.BaseFragment;
@@ -346,11 +344,11 @@ public class AdapterTasksList extends BaseAdapter implements StickyListHeadersAd
         GeneralModel.getInstance().setList((GeneralModel) model);
         if (GeneralModel.getInstance().responseCode.equalsIgnoreCase("100")) {
             tasksLists.remove(clickedPosition);notifyDataSetChanged();
-            Snackbar.make(((AppCompatActivity)ctx).findViewById(android.R.id.content), ctx.getString(R.string.task_deleted), Snackbar.LENGTH_SHORT).show();
-        }
+            Toast.makeText(ctx, ctx.getString(R.string.task_deleted), Toast.LENGTH_SHORT).show();
+       }
         else
         {
-            Snackbar.make(((AppCompatActivity)ctx).findViewById(android.R.id.content), ctx.getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
+            Toast.makeText(ctx, ctx.getString(R.string.response_error), Toast.LENGTH_SHORT).show();
         }
     }
 }

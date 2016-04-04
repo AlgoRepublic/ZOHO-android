@@ -2,12 +2,10 @@ package com.algorepublic.zoho.fragments;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -17,10 +15,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
-import com.algorepublic.zoho.BaseActivity;
 import com.algorepublic.zoho.Models.AllProjectsByUserModel;
-import com.algorepublic.zoho.Models.UserListModel;
 import com.algorepublic.zoho.Models.UserRoleModel;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.adapters.AdapterTaskPriority;
@@ -35,17 +32,13 @@ import com.flyco.dialog.listener.OnOperItemClickL;
 import com.flyco.dialog.widget.ActionSheetDialog;
 import com.guna.libmultispinner.MultiSelectionSpinner;
 
-import org.angmarch.views.NiceSpinner;
-
 import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
-import cc.cloudist.acplibrary.ACProgressConstant;
 import cc.cloudist.acplibrary.ACProgressFlower;
 
 /**
@@ -131,7 +124,7 @@ public class AddUserFragment extends BaseFragment implements MultiSelectionSpinn
             }
             projectsList.setItems(projectList);
         }else {
-            Snackbar.make(getView(), getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), getActivity().getString(R.string.response_error), Toast.LENGTH_SHORT).show();
         }
     }
     public void UserRole(Object caller, Object model){
@@ -144,7 +137,7 @@ public class AddUserFragment extends BaseFragment implements MultiSelectionSpinn
             adapter = new AdapterTaskPriority(getActivity(),role_list, roleList);
             role_list.setAdapter(adapter);
         }else {
-            Snackbar.make(getView() , getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), getActivity().getString(R.string.response_error), Toast.LENGTH_SHORT).show();
         }
     }
     @Override
@@ -159,19 +152,20 @@ public class AddUserFragment extends BaseFragment implements MultiSelectionSpinn
             case R.id.save_project:
                 baseClass.hideKeyPad(getView());
                 if(aq.id(R.id.first_name).getText().toString().isEmpty()){
-                    Snackbar.make(getView(),getString(R.string.user_first_name),Snackbar.LENGTH_SHORT).show();
-                    return false;
+                    Toast.makeText(getActivity(), getActivity().getString(R.string.user_first_name), Toast.LENGTH_SHORT).show();
+ return false;
                 }
                 if(aq.id(R.id.last_name).getText().toString().isEmpty()){
-                    Snackbar.make(getView(),getString(R.string.user_last_name),Snackbar.LENGTH_SHORT).show();
-                    return false;
+                    Toast.makeText(getActivity(), getActivity().getString(R.string.user_last_name), Toast.LENGTH_SHORT).show();
+  return false;
                 }
                 if(aq.id(R.id.user_email).getText().toString().isEmpty()){
-                    Snackbar.make(getView(),getString(R.string.add_email),Snackbar.LENGTH_SHORT).show();
-                    return false;
+                    Toast.makeText(getActivity(), getActivity().getString(R.string.add_email), Toast.LENGTH_SHORT).show();
+  return false;
                 }
                 if(aq.id(R.id.user_phoneno).getText().toString().isEmpty()){
-                    Snackbar.make(getView(),getString(R.string.add_phoneno),Snackbar.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), getActivity().getString(R.string.add_phoneno), Toast.LENGTH_SHORT).show();
+
                     return false;
                 }
                 new AddUser().execute();
@@ -294,11 +288,14 @@ public class AddUserFragment extends BaseFragment implements MultiSelectionSpinn
             dialogAC.dismiss();
             Log.e("Res", result);
             if(result.contains("100")){
-                Snackbar.make(getView(),getString(R.string.user_created),Snackbar.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), getActivity().getString(R.string.user_created), Toast.LENGTH_SHORT).show();
+
             }else if(result.contains("101")) {
-                Snackbar.make(getView(),getString(R.string.email_already),Snackbar.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), getActivity().getString(R.string.email_already), Toast.LENGTH_SHORT).show();
+
             }else
-                Snackbar.make(getView(),getString(R.string.response_error),Snackbar.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), getActivity().getString(R.string.response_error), Toast.LENGTH_SHORT).show();
+
         }
     }
     @Override

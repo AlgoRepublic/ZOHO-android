@@ -1,13 +1,13 @@
 package com.algorepublic.zoho.fragments;
 
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.algorepublic.zoho.Models.CreateForumModel;
 import com.algorepublic.zoho.R;
@@ -53,7 +53,7 @@ public class AddDepartmentFragment extends BaseFragment {
             case R.id.save_project:
                 baseClass.hideKeyPad(getView());
                 if(aq.id(R.id.dept_title).getText().toString().isEmpty()){
-                    Snackbar.make(getView(), getString(R.string.department_name), Snackbar.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), getActivity().getString(R.string.department_name), Toast.LENGTH_SHORT).show();
                     return false;
                 }
 
@@ -71,9 +71,9 @@ public class AddDepartmentFragment extends BaseFragment {
     public void CreateDept(Object caller, Object model){
         CreateForumModel.getInstance().setList((CreateForumModel) model);
         if (CreateForumModel.getInstance().responseObject !=null ) {
-            Snackbar.make(getView(),getString(R.string.department_created),Snackbar.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), getActivity().getString(R.string.department_created), Toast.LENGTH_SHORT).show();
         }else {
-            Snackbar.make(getView(), getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), getActivity().getString(R.string.response_error), Toast.LENGTH_SHORT).show();
         }
     }
 

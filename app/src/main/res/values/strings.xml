@@ -154,7 +154,7 @@
 
     <string name="pref_title_ringtone">Ringtone</string>
     <string name="pref_ringtone_silent">Silent</string>
-
+    <string name="delete_comment">DeleteComment?</string>
     <string name="pref_title_vibrate">Vibrate</string>
     <string name="projects">Projects</string>
     <string name="project_title">Project Title</string>
@@ -190,7 +190,8 @@
     <string name="task_duedate">Due Date:</string>
     <string name="projects_list_empty">Project list is empty</string>
     <string name="forums_list_empty">Project list is empty</string>
-
+    <string name="comments_added">Comment Added</string>
+    <string name="uploaded_succesful">File(s) uploaded successfully</string>
     <!-- Task Details Strings -->
     <string name="delete_doc">Delete Document?</string>
     <string name="delete">Delete</string>
@@ -274,7 +275,7 @@
     <string name="update_password">Password Updated</string>
     <string name="add_phoneno">Please Add Phone Number</string>
     <string name="email_already">Email already exists</string>
-
+    <string name="exit">Are you really want to exit?</string>
 
     <string name="response_error">Error! Please Try Later</string>
     <string name="select_project">Please! Select Project</string>
