@@ -70,7 +70,9 @@ public class AdapterFeeds extends BaseAdapter {
         aq.id(R.id.feed_title).text(getItem(position).userName+" "+getStringLine(getItem(position).updateType));
         aq.id(R.id.feed_description).text(getItem(position).message);
         aq.id(R.id.feed_comment_date).text(
-                getItem(position).comments.size()+"-"+ctx.getString(R.string.comments));
+                getItem(position).comments.size()+"-"+ctx.getString(R.string.comments) +" "+
+                        baseClass.DateFormatter(getItem(position).createdAt)+" "+
+                baseClass.GetTime(baseClass.DateMilli(getItem(position).createdAt)));
 
         if(getItem(position).user.profileImagePath != null) {
             Glide.with(ctx).load(Constants.UserImage_URL + getItem(position).user.profileImagePath)
