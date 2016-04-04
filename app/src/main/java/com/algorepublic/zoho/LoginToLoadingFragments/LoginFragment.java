@@ -7,11 +7,13 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.algorepublic.zoho.BaseActivity;
 import com.algorepublic.zoho.MainActivity;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.fragments.BaseFragment;
@@ -42,6 +44,7 @@ public class LoginFragment extends BaseFragment {
     BaseClass baseClass;
     EditText editText;
     public static boolean flag= false;
+
     public LoginFragment() {
     }
 
@@ -80,6 +83,7 @@ public class LoginFragment extends BaseFragment {
                     LocaleHelper.setLocale(baseClass.getApplicationContext(), "en");
                     baseClass.setUserLanguage(getString(R.string.lang_english));
                 }
+                BaseActivity.imeManager.showInputMethodPicker();
                 getActivity().recreate();
             }
         });

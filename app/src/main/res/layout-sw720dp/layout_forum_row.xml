@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="110dp"
+    android:layout_height="130dp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <RelativeLayout
         android:id="@+id/layout123"
@@ -39,7 +39,7 @@
             android:layout_height="match_parent"
             app:clickToClose="true">
         <LinearLayout
-            android:layout_width="150dp"
+            android:layout_width="200dp"
             android:layout_height="match_parent"
             android:weightSum="2"
             android:orientation="horizontal"
@@ -52,7 +52,7 @@
                 android:layout_weight="1"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
-                android:textSize="17sp"
+                android:textSize="19sp"
                 android:textColor="@color/white"
                 android:background="@color/colorContentWrapper"
                 android:text="Edit"
@@ -65,7 +65,7 @@
                 android:gravity="center"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
-                android:textSize="17sp"
+                android:textSize="19sp"
                 android:textColor="@color/white"
                 android:background="@color/red"
                 android:text="Delete"
@@ -94,7 +94,7 @@
                     android:id="@+id/comment_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="16sp"
+                    android:textSize="25sp"
                     android:layout_toLeftOf="@+id/layout_comment"
                     android:layout_toStartOf="@+id/layout_comment"
                     android:layout_centerVertical="true"
@@ -103,35 +103,35 @@
 
                 <RelativeLayout
                     android:id="@+id/layout_comment"
-                    android:layout_width="45dp"
+                    android:layout_width="55dp"
                     android:layout_alignParentRight="true"
                     android:layout_centerHorizontal="true"
-                    android:layout_height="45dp">
+                    android:layout_height="65dp">
                     <TextView
                         android:id="@+id/notify_alert1"
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
-                        android:text="112"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:text="0"
                         android:gravity="center"
                         android:singleLine="true"
-                        android:textSize="8sp"
+                        android:textSize="12sp"
                         android:layout_alignParentRight="true"
                         android:background="@drawable/bubble_alert_black"
                         android:layout_alignParentTop="true" />
 
                     <ImageView
                         android:id="@+id/delete1"
-                        android:layout_width="20dp"
+                        android:layout_width="30dp"
                         android:layout_alignParentBottom="true"
                         android:src="@drawable/forums"
-                        android:layout_height="20dp" />
+                        android:layout_height="30dp" />
                 </RelativeLayout>
             </RelativeLayout>
             <TextView
                 android:id="@+id/comment_description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="14sp"
+                android:textSize="25sp"
                 android:layout_below="@+id/layout1"
                 android:padding="5dp"
                 android:text="@string/forums_description"
@@ -139,7 +139,7 @@
         </RelativeLayout>
         <LinearLayout
             android:id="@+id/rightarrow_layout"
-            android:layout_width="20dp"
+            android:layout_width="30dp"
             android:layout_alignParentRight="true"
             android:layout_height="match_parent"
             android:gravity="center"
@@ -147,8 +147,8 @@
 
             <ImageView
                 android:id="@+id/right_arrow_image"
-                android:layout_width="15dp"
-                android:layout_height="15dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:layout_margin="5dp"
                 android:background="@drawable/circle_left"/>
         </LinearLayout>

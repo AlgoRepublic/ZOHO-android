@@ -13,6 +13,7 @@
         app:tabGravity="fill"
         app:tabMode="fixed"
         app:tabIndicatorHeight="7dp"
+        app:tabMaxWidth="0dp"
         app:tabTextColor="@color/colorBaseHeader"
         />
 

@@ -32,7 +32,7 @@ public class BarView extends View {
     private final int MINI_BAR_WIDTH;
     private final int BAR_SIDE_MARGIN;
     private final int TEXT_TOP_MARGIN;
-    private final int TEXT_COLOR = Color.parseColor("#414042");
+   // private final int TEXT_COLOR = Color.parseColor("#414042");
     private final int BACKGROUND_COLOR = Color.parseColor("#F6F6F6");
     private final int FOREGROUND_COLOR1 = Color.parseColor("#DDF4FD");
     private final int FOREGROUND_COLOR2 = Color.parseColor("#DFEFB4");
@@ -80,14 +80,13 @@ public class BarView extends View {
 
         rect = new Rect();
         topMargin = MyUtils.dip2px(context, 5);
-        int textSize = MyUtils.sp2px(context, 15);
-        barWidth = MyUtils.dip2px(context,22);
-        MINI_BAR_WIDTH = MyUtils.dip2px(context,22);
-        BAR_SIDE_MARGIN  = MyUtils.dip2px(context,22);
+        int textSize = MyUtils.sp2px(context, 18);
+        barWidth = MyUtils.dip2px(context,40);
+        MINI_BAR_WIDTH = MyUtils.dip2px(context,30);
+        BAR_SIDE_MARGIN  = MyUtils.dip2px(context,10);
         TEXT_TOP_MARGIN = MyUtils.dip2px(context, 5);
         textPaint = new Paint();
         textPaint.setAntiAlias(true);
-        textPaint.setColor(TEXT_COLOR);
         textPaint.setTextSize(textSize);
         textPaint.setTextAlign(Paint.Align.CENTER);
         percentList = new ArrayList<Float>();
@@ -97,8 +96,9 @@ public class BarView extends View {
      * dataList will be reset when called is method.
      * @param bottomStringList The String ArrayList in the bottom.
      */
-    public void setBottomTextList(ArrayList<String> bottomStringList){
+    public void setBottomTextList(ArrayList<String> bottomStringList,int Color){
 //        this.dataList = null;
+        textPaint.setColor(Color);
         this.bottomTextList = bottomStringList;
         Rect r = new Rect();
         bottomTextDescent = 0;
@@ -122,11 +122,11 @@ public class BarView extends View {
      *
      * @param list The ArrayList of Integer with the range of [0-max].
      */
-    public void setDataList(ArrayList<Float> list, int max){
+    public void setDataList(ArrayList<Integer> list, int max){
         targetPercentList = new ArrayList<Float>();
         if(max == 0) max = 1;
 
-        for(Float integer : list){
+        for(Integer integer : list){
             targetPercentList.add(1-(float)integer/(float)max);
         }
 

@@ -96,6 +96,7 @@
                     android:layout_height="wrap_content"
                     android:textSize="14sp"
                     android:layout_toLeftOf="@+id/layout_comment"
+                    android:layout_toStartOf="@+id/layout_comment"
                     android:layout_centerVertical="true"
                     android:text="@string/forums_title"
                     android:textStyle="bold" />
@@ -104,6 +105,7 @@
                     android:id="@+id/layout_comment"
                     android:layout_width="35dp"
                     android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
                     android:layout_centerHorizontal="true"
                     android:layout_height="35dp">
                     <TextView

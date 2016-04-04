@@ -127,8 +127,8 @@ public class TaskAddUpdateFragment extends BaseFragment {
     @Override
     public void onDestroy() {
         //baseClass.setSelectedProject("0");
-       // tasksObj=null;
-       // tasID =0;
+//        tasksObj=null;
+//        tasID =0;
         assigneeList.clear();
         super.onDestroy();
     }

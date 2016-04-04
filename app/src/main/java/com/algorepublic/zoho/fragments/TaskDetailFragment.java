@@ -268,6 +268,7 @@ public class TaskDetailFragment extends BaseFragment {
         if(taskModel.tasklistID==0){
             taskModel.taskListName = getString(R.string.general);
         }
+
         tasksList.setTaskListName(TaskByIdModel.getInstance().responseObject.taskListName);
         tasksList.setTaskListNameID(TaskByIdModel.getInstance().responseObject.tasklistID);
         tasksList.setPriority(taskModel.priority);

@@ -56,7 +56,6 @@ public class AddDepartmentFragment extends BaseFragment {
                     Toast.makeText(getActivity(), getActivity().getString(R.string.department_name), Toast.LENGTH_SHORT).show();
                     return false;
                 }
-
                 CreateDepartment();
                 break;
         }

@@ -35,7 +35,7 @@ public class DepartmentService extends BaseService {
         HashMap<String, String> params = new HashMap<String, String>();
         params.put("Name", name);
         params.put("CreateBy", createBy);
-        this.post(url, params, obj, GeneralModel.getInstance(), message);
+        this.post(url, params, obj, CreateForumModel.getInstance(), message);
         Log.e("CreateDepartmentService", url);
     }
     public void updateDepartment(String Id,String name,String updateBy, boolean message, CallBack obj){

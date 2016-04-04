@@ -6,6 +6,7 @@
     <RelativeLayout
         android:id="@+id/layout123"
         android:layout_toRightOf="@+id/selected_project"
+        android:layout_toEndOf="@+id/selected_project"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="6dp"
@@ -97,8 +98,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="16sp"
-                    android:layout_toRightOf="@+id/layout_comment"
-                    android:layout_toEndOf="@+id/layout_comment"
+                    android:layout_toLeftOf="@+id/layout_comment"
+                    android:layout_toStartOf="@+id/layout_comment"
                     android:layout_centerVertical="true"
                     android:text="@string/forums_title"
                     android:textStyle="bold" />
@@ -106,8 +107,8 @@
                 <RelativeLayout
                     android:id="@+id/layout_comment"
                     android:layout_width="45dp"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
                     android:layout_centerHorizontal="true"
                     android:layout_height="45dp">
                     <TextView

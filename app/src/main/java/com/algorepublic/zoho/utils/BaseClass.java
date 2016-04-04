@@ -403,7 +403,7 @@ public class BaseClass extends Application {
         int mYear = calendar.get(Calendar.YEAR);
         int mMonth = calendar.get(Calendar.MONTH) + 1;
         int mDay = calendar.get(Calendar.DAY_OF_MONTH);
-        return (mMonth+"/"+mDay+"/"+mYear);
+        return (mDay+"/"+mMonth+"/"+mYear);
     }
     public String GetDateTime(){
         Calendar calendar = Calendar.getInstance();

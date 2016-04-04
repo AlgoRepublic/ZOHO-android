@@ -1,5 +1,6 @@
 package com.algorepublic.zoho.fragments;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -28,10 +29,11 @@ import java.util.ArrayList;
 public class DashboardFragment extends BaseFragment {
 
     DashBoardService service;ProjectsListService service1;
-    AQuery aq;float taskClosed,taskListClosed,milestoneClosed;
+    AQuery aq;int taskClosed,taskListClosed,milestoneClosed;
     BaseClass baseClass;
     PieView pieGraph;
     BarView barGraph;
+    int Color;
     static DashboardFragment fragment;
 
     public static DashboardFragment newInstance() {
@@ -63,6 +65,11 @@ public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
 
         aq = new AQuery(view);
         baseClass = ((BaseClass) getActivity().getApplicationContext());
+        if(baseClass.getThemePreference() == R.style.AppThemeBlue) {
+           Color = android.graphics.Color.parseColor("#4B7BAA");
+        }else {
+            Color = android.graphics.Color.parseColor("#414042");
+        }
         barGraph = (BarView)view.findViewById(R.id.line_view);
         pieGraph  = (PieView)view.findViewById(R.id.pie_view);
         service = new DashBoardService(getActivity());
@@ -104,7 +111,7 @@ public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
             pieHelperArrayList.add(pieHelper1);
             pieHelperArrayList.add(pieHelper);
             pieGraph.selectedPie(PieView.NO_SELECTED_INDEX);
-            pieGraph.showPercentLabel(true);
+            pieGraph.showPercentLabel(true,Color);
             pieGraph.setDate(pieHelperArrayList);
             randomSet1();
 
@@ -131,7 +138,7 @@ public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
             pieHelperArrayList.add(pieHelper);
 
             pieGraph.selectedPie(PieView.NO_SELECTED_INDEX);
-            pieGraph.showPercentLabel(true);
+            pieGraph.showPercentLabel(true,Color);
             pieGraph.setDate(pieHelperArrayList);
             randomSet();
 
@@ -142,11 +149,11 @@ public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
     }
     private void randomSet1(){
 
-        ArrayList<Float> barDataList = new ArrayList<Float>();
+        ArrayList<Integer> barDataList = new ArrayList<>();
         ArrayList<String> barDataList1 = new ArrayList<String>();
         int completedTasksNo=0,totalTasksNo=0,
                 completedTaskList=0,totalTaskList=0,completedMilestonesNo=0,totalMilestonesNo=0;
-        DecimalFormat decimalFormat = new DecimalFormat("#0.00");
+
         for(int loop=0;loop<AllProjectsByUserModel.getInstance().responseData.size();loop++) {
             AllProjectsByUserModel.Response object = AllProjectsByUserModel.getInstance()
                     .responseData.get(loop);
@@ -158,16 +165,16 @@ public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
             totalMilestonesNo +=object.toalMilestones;
         }
         if(completedTasksNo >0) {
-            taskClosed = (Float.parseFloat("" + completedTasksNo) /
-                    Float.parseFloat("" + totalTasksNo)) * 100;
+            taskClosed = (Integer.parseInt("" + completedTasksNo) /
+                    Integer.parseInt("" + totalTasksNo)) * 100;
         }
         if(completedTaskList >0) {
-            taskListClosed = (Float.parseFloat("" + completedTaskList))
-                    / Float.parseFloat("" + totalTaskList) * 100;
+            taskListClosed = (Integer.parseInt("" + completedTaskList))
+                    / Integer.parseInt("" + totalTaskList) * 100;
         }
         if(completedMilestonesNo >0) {
-            milestoneClosed = (Float.parseFloat("" + completedMilestonesNo))
-                    / Float.parseFloat("" + totalMilestonesNo) * 100;
+            milestoneClosed = (Integer.parseInt("" + completedMilestonesNo))
+                    / Integer.parseInt("" + totalMilestonesNo) * 100;
         }
         aq.id(R.id.open1).text(getString(R.string.opened_tasks)+" "+(totalTasksNo-completedTasksNo));
         aq.id(R.id.close1).text(getString(R.string.closed_tasks)+" "+completedTasksNo);
@@ -179,32 +186,31 @@ public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         barDataList.add(taskListClosed);
         barDataList.add(milestoneClosed);
         barDataList1.add(getString(R.string.tasks));
-        barDataList1.add(decimalFormat.format(taskClosed)+"%");
+        barDataList1.add(taskClosed+"%");
         barDataList1.add(getString(R.string.tasks_list));
-        barDataList1.add(decimalFormat.format(taskListClosed)+"%");
+        barDataList1.add(taskListClosed+"%");
         barDataList1.add(getString(R.string.milestones));
-        barDataList1.add(decimalFormat.format(milestoneClosed)+"%");
-        barGraph.setBottomTextList(barDataList1);
+        barDataList1.add(milestoneClosed+"%");
+        barGraph.setBottomTextList(barDataList1,Color);
         barGraph.setDataList(barDataList, 100);
     }
     private void randomSet(){
 
-        ArrayList<Float> barDataList = new ArrayList<Float>();
+        ArrayList<Integer> barDataList = new ArrayList<>();
         ArrayList<String> barDataList1 = new ArrayList<String>();
 
-        DecimalFormat decimalFormat = new DecimalFormat("#0.00");
         DashBoardModel.ResponseObject object = DashBoardModel.getInstance().responseObject;
         if(object.completedTasksNo >0) {
-            taskClosed = (Float.parseFloat("" + object.completedTasksNo) /
-                    Float.parseFloat("" + object.totalTasksNo)) * 100;
+            taskClosed = (Integer.parseInt("" + object.completedTasksNo) /
+                    Integer.parseInt("" + object.totalTasksNo)) * 100;
         }
         if(object.completedTaskList >0) {
-            taskListClosed = (Float.parseFloat("" + object.completedTaskList))
-                    / Float.parseFloat("" + object.totalTaskList) * 100;
+            taskListClosed = (Integer.parseInt("" + object.completedTaskList))
+                    / Integer.parseInt("" + object.totalTaskList) * 100;
         }
         if(object.completedMilestonesNo >0) {
-            milestoneClosed = (Float.parseFloat("" + object.completedMilestonesNo))
-                    / Float.parseFloat("" + object.totalMilestonesNo) * 100;
+            milestoneClosed = (Integer.parseInt("" + object.completedMilestonesNo))
+                    / Integer.parseInt("" + object.totalMilestonesNo) * 100;
         }
         aq.id(R.id.open1).text(getString(R.string.opened_tasks)+" "+(object.totalTasksNo-object.completedTasksNo));
         aq.id(R.id.close1).text(getString(R.string.closed_tasks)+" "+object.completedTasksNo);
@@ -216,12 +222,12 @@ public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         barDataList.add(taskListClosed);
         barDataList.add(milestoneClosed);
         barDataList1.add(getString(R.string.tasks));
-        barDataList1.add(decimalFormat.format(taskClosed)+"%");
+        barDataList1.add(taskClosed+"%");
         barDataList1.add(getString(R.string.tasks_list));
-        barDataList1.add(decimalFormat.format(taskListClosed)+"%");
+        barDataList1.add(taskListClosed+"%");
         barDataList1.add(getString(R.string.milestones));
-        barDataList1.add(decimalFormat.format(milestoneClosed)+"%");
-        barGraph.setBottomTextList(barDataList1);
+        barDataList1.add(milestoneClosed+"%");
+        barGraph.setBottomTextList(barDataList1,Color);
         barGraph.setDataList(barDataList, 100);
     }
 }

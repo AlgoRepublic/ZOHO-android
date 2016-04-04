@@ -11,10 +11,6 @@ public class Constants {
 	public static String Image_URL = "http://jitpac.com/FileUploadsManager/uploads/";
 	public static String UserImage_URL = "http://jitpac.com";
 
-//	public static String BASE_URL = "http://api.jitpac.com";
-//	public static String Image_URL = "http://jitpac.com/FileUploadsManager/uploads/";
-//	public static String UserImage_URL = "http://jitpac.com";
-
 
 	public static String UploadImage_URL = BASE_URL +"/User/UploadPicture";// userID, file,  createdBy
 	// Login API

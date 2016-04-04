@@ -1,0 +1,54 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <com.h6ah4i.android.materialshadowninepatch.MaterialShadowContainerView
+        android:id="@+id/shadow_item_container"
+        android:layout_width="match_parent"
+        style="@style/ms9_DefaultShadowStyle"
+        android:layout_height="wrap_content"
+        app:ms9_useAmbientShadow="true"
+        app:ms9_affectsDisplayedPosition="true"
+        app:ms9_shadowTranslationZ="1dp"
+        app:ms9_shadowElevation="3dp">
+        <RelativeLayout
+            android:id="@+id/listClick"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:layout_marginTop="3dp"
+            android:layout_marginBottom="3dp"
+            android:layout_marginRight="6dp"
+            android:layout_marginEnd="6dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/roundable_corner"
+            android:layout_width="match_parent">
+            <TextView
+                android:id="@+id/lblListHeader"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:paddingEnd="20dp"
+                android:layout_toLeftOf="@+id/imageViewleveltwo"
+                android:layout_toStartOf="@+id/imageViewleveltwo"
+                android:text="lksahdgiuasdsdsds" />
+
+            <ImageView
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:id="@+id/imageViewleveltwo"
+                android:background="@drawable/level_two_down"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="3dp"
+                android:layout_marginEnd="3dp"
+
+                />
+        </RelativeLayout>
+    </com.h6ah4i.android.materialshadowninepatch.MaterialShadowContainerView>
+
+</RelativeLayout>

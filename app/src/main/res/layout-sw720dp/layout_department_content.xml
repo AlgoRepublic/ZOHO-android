@@ -40,7 +40,7 @@
             android:layout_height="wrap_content"
             app:clickToClose="true">
             <LinearLayout
-                android:layout_width="80dp"
+                android:layout_width="100dp"
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
                 >
@@ -100,84 +100,84 @@
 
                         <RelativeLayout
                             android:id="@+id/layout_comment"
-                            android:layout_width="40dp"
-                            android:layout_height="45dp"
+                            android:layout_width="50dp"
+                            android:layout_height="60dp"
                             android:layout_alignParentEnd="true"
                             android:layout_alignParentRight="true"
                             android:layout_centerHorizontal="true">
 
                             <TextView
                                 android:id="@+id/milestone_alert"
-                                android:layout_width="23dp"
-                                android:layout_height="23dp"
+                                android:layout_width="33dp"
+                                android:layout_height="33dp"
                                 android:layout_alignParentEnd="true"
                                 android:layout_alignParentRight="true"
                                 android:background="@drawable/bubble_alert_black"
                                 android:gravity="center"
                                 android:singleLine="true"
-                                android:text="112"
-                                android:textSize="7sp" />
+                                android:text="0"
+                                android:textSize="12sp" />
 
                             <ImageView
                                 android:id="@+id/delete1"
-                                android:layout_width="23dp"
-                                android:layout_height="23dp"
+                                android:layout_width="33dp"
+                                android:layout_height="33dp"
                                 android:layout_alignParentBottom="true"
                                 android:src="@drawable/milestone" />
                         </RelativeLayout>
 
                         <RelativeLayout
                             android:id="@+id/layout_users"
-                            android:layout_width="40dp"
-                            android:layout_height="45dp"
+                            android:layout_width="50dp"
+                            android:layout_height="60dp"
                             android:layout_centerHorizontal="true"
                             android:layout_toLeftOf="@+id/layout_comment"
                             android:layout_toStartOf="@id/layout_comment">
 
                             <TextView
                                 android:id="@+id/users_alert"
-                                android:layout_width="23dp"
-                                android:layout_height="23dp"
+                                android:layout_width="33dp"
+                                android:layout_height="33dp"
                                 android:layout_alignParentEnd="true"
                                 android:layout_alignParentRight="true"
                                 android:background="@drawable/bubble_alert_black"
                                 android:gravity="center"
                                 android:singleLine="true"
-                                android:text="1"
-                                android:textSize="8sp" />
+                                android:text="0"
+                                android:textSize="12sp" />
 
                             <ImageView
                                 android:id="@+id/delete2"
-                                android:layout_width="23dp"
-                                android:layout_height="23dp"
+                                android:layout_width="33dp"
+                                android:layout_height="33dp"
                                 android:layout_alignParentBottom="true"
                                 android:src="@drawable/nav_user" />
                         </RelativeLayout>
 
                         <RelativeLayout
                             android:id="@+id/layout_tasks"
-                            android:layout_width="40dp"
-                            android:layout_height="45dp"
+                            android:layout_width="50dp"
+                            android:layout_height="60dp"
                             android:layout_centerHorizontal="true"
                             android:layout_toLeftOf="@+id/layout_users"
                             android:layout_toStartOf="@+id/layout_users">
 
                             <TextView
                                 android:id="@+id/task_alert"
-                                android:layout_width="23dp"
-                                android:layout_height="23dp"
+                                android:layout_width="33dp"
+                                android:layout_height="33dp"
                                 android:layout_alignParentEnd="true"
                                 android:layout_alignParentRight="true"
                                 android:background="@drawable/bubble_alert_black"
                                 android:gravity="center"
                                 android:singleLine="true"
-                                android:text="112"
-                                android:textSize="8sp" />
+                                android:text="0"
+                                android:textSize="12sp" />
 
                             <ImageView
                                 android:id="@+id/delete3"
-                                android:layout_width="23dp"
-                                android:layout_height="23dp"
+                                android:layout_width="33dp"
+                                android:layout_height="33dp"
                                 android:layout_alignParentBottom="true"
                                 android:src="@drawable/task_desc_small" />
                         </RelativeLayout>
@@ -204,7 +204,7 @@
                             android:text=""
                             android:ellipsize="end"
                             android:maxLines="3"
-                            android:textSize="13sp" />
+                            android:textSize="25sp" />
                     </RelativeLayout>
 
                     <TextView
@@ -216,7 +216,7 @@
                 </RelativeLayout>
                 <LinearLayout
                     android:id="@+id/rightarrow_layout"
-                    android:layout_width="20dp"
+                    android:layout_width="30dp"
                     android:layout_alignParentRight="true"
                     android:layout_height="match_parent"
                     android:gravity="center"
@@ -224,14 +224,12 @@
 
                     <ImageView
                         android:id="@+id/right_arrow_image"
-                        android:layout_width="15dp"
-                        android:layout_height="15dp"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
                         android:layout_margin="5dp"
                         android:background="@drawable/circle_left"/>
                 </LinearLayout>
-
             </RelativeLayout>
-
         </com.daimajia.swipe.SwipeLayout>
         </RelativeLayout>
         </RelativeLayout>

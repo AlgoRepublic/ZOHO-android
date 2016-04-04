@@ -28,6 +28,10 @@ public class CreateForumModel {
     public String responseCode;
 
     @SerializedName("responseObject")
-    public Object responseObject;
+    public ResponseObject responseObject = new ResponseObject();
+
+
+    public class ResponseObject {
+    }
 
 }
