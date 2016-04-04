@@ -6,6 +6,8 @@
     <RelativeLayout
         android:id="@+id/layout123"
         android:layout_toRightOf="@+id/selected_project"
+        android:layout_toEndOf="@+id/selected_project"
+
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="8dp"
@@ -37,6 +39,8 @@
                     <RelativeLayout
                         android:id="@+id/parent1"
                         android:layout_toLeftOf="@+id/rightarrow_layout"
+                        android:layout_toStartOf="@+id/rightarrow_layout"
+
                         android:layout_alignParentTop="true"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
