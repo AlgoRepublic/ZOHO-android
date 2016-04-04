@@ -116,7 +116,7 @@
         <GridView
             android:id="@+id/gridview_menu"
             android:layout_width="match_parent"
-            android:layout_height="420dp"
+            android:layout_height="600dp"
             android:gravity="center"
             android:horizontalSpacing="5dp"
             android:numColumns="3"

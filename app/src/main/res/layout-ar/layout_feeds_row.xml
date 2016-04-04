@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="122dp"
+    android:layout_height="95dp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <RelativeLayout
         android:id="@+id/layout123"
@@ -36,6 +36,7 @@
                     android:layout_height="match_parent">
                     <RelativeLayout
                         android:id="@+id/parent1"
+                        android:layout_toLeftOf="@+id/rightarrow_layout"
                         android:layout_alignParentTop="true"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -43,11 +44,11 @@
                         android:orientation="horizontal">
 
                         <com.mikhaellopez.circularimageview.CircularImageView
-                            android:layout_width="60dp"
-                            android:layout_height="60dp"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
                             app:civ_border="true"
                             app:civ_shadow="true"
-                            app:civ_border_width="2dp"
+                            app:civ_border_width="1dp"
                             app:civ_shadow_color="@color/colorBaseMenu"
                             app:civ_border_color="@color/colorBaseHeader"
                             android:src="@drawable/nav_user"
@@ -59,32 +60,31 @@
                             android:textStyle="bold"
                             android:layout_marginTop="5dp"
                             android:layout_marginRight="5dp"
-                            android:layout_marginEnd="5dp"
-                            android:textSize="18sp"
+                            android:textSize="14sp"
                             android:id="@+id/feed_title"
                             android:layout_alignTop="@+id/feed_image"
-                            android:layout_toStartOf="@+id/feed_image" />
+                            android:layout_toEndOf="@+id/feed_image" />
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:id="@+id/feed_description"
-                            android:textSize="16sp"
+                            android:textSize="12sp"
                             android:lines="2"
                             android:layout_marginTop="5dp"
                             android:layout_below="@+id/feed_title"
                             android:text="@string/test_forum"
-                            android:layout_alignEnd="@+id/feed_title" />
+                            android:layout_alignStart="@+id/feed_title" />
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:id="@+id/feed_comment_date"
-                            android:textSize="16sp"
+                            android:textSize="12sp"
                             android:singleLine="true"
                             android:layout_marginTop="5dp"
                             android:layout_below="@+id/feed_description"
                             android:text="@string/test_forum"
-                            android:layout_alignEnd="@+id/feed_description" />
+                            android:layout_alignStart="@+id/feed_description" />
                     </RelativeLayout>
                 </RelativeLayout>
             </RelativeLayout>
