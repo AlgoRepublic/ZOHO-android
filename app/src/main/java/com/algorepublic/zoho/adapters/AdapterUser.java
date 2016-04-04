@@ -1,7 +1,6 @@
 package com.algorepublic.zoho.adapters;
 
 import android.content.Context;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
@@ -10,13 +9,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.algorepublic.zoho.Models.GeneralModel;
 import com.algorepublic.zoho.Models.UserListModel;
 import com.algorepublic.zoho.R;
-import com.algorepublic.zoho.fragments.DepartmentFragment;
 import com.algorepublic.zoho.fragments.EditUserFragment;
-import com.algorepublic.zoho.fragments.UserFragment;
 import com.algorepublic.zoho.services.CallBack;
 import com.algorepublic.zoho.services.UserService;
 import com.algorepublic.zoho.utils.BaseClass;
@@ -108,9 +106,9 @@ public class AdapterUser extends BaseAdapter {
         if (GeneralModel.getInstance().responseObject ==true ) {
             UserListModel.getInstance().responseObject.remove(lastPosition);
             notifyDataSetChanged();
-            Snackbar.make(((AppCompatActivity)ctx).findViewById(android.R.id.content), ctx.getString(R.string.user_deleted), Snackbar.LENGTH_SHORT).show();
+            Toast.makeText(ctx, ctx.getString(R.string.user_deleted), Toast.LENGTH_SHORT).show();
         }else {
-            Snackbar.make(((AppCompatActivity)ctx).findViewById(android.R.id.content), ctx.getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
+            Toast.makeText(ctx, ctx.getString(R.string.response_error), Toast.LENGTH_SHORT).show();
         }
     }
     static class ViewHolder {

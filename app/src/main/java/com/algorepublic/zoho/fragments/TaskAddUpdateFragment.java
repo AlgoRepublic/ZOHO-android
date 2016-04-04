@@ -2,7 +2,6 @@ package com.algorepublic.zoho.fragments;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -14,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.GridView;
+import android.widget.Toast;
 
 import com.algorepublic.zoho.FragmentsTasks.TaskEditTitleFragment;
 import com.algorepublic.zoho.R;
@@ -327,7 +327,8 @@ public class TaskAddUpdateFragment extends BaseFragment {
     private void PopulateModel (String json) {
         Log.e("Json", "/" + json);
         if(json.contains("100")) {
-            Snackbar.make(getView(),getString(R.string.task_created),Snackbar.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), getActivity().getString(R.string.task_created), Toast.LENGTH_SHORT).show();
+
         }
     }
     public void setTaskValuesTinyDB(int position){

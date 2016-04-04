@@ -1,7 +1,6 @@
 package com.algorepublic.zoho.adapters;
 
 import android.content.Context;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.text.format.DateFormat;
@@ -13,6 +12,7 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.BaseAdapter;
+import android.widget.Toast;
 
 import com.algorepublic.zoho.Models.GeneralModel;
 import com.algorepublic.zoho.R;
@@ -206,11 +206,11 @@ public class AdapterDocumentsList extends BaseAdapter implements StickyListHeade
         GeneralModel.getInstance().setList((GeneralModel) model);
         if (GeneralModel.getInstance().responseObject==true) {
             UpdatedAfterDelete();
-            Snackbar.make(((AppCompatActivity)ctx).findViewById(android.R.id.content), ctx.getString(R.string.doc_deleted), Snackbar.LENGTH_SHORT).show();
-        }
+            Toast.makeText(ctx, ctx.getString(R.string.doc_deleted), Toast.LENGTH_SHORT).show();
+       }
         else
         {
-            Snackbar.make(((AppCompatActivity)ctx).findViewById(android.R.id.content), ctx.getString(R.string.invalid_credential), Snackbar.LENGTH_SHORT).show();
+            Toast.makeText(ctx, ctx.getString(R.string.invalid_credential), Toast.LENGTH_SHORT).show();
         }
     }
     public void UpdatedAfterDelete(){

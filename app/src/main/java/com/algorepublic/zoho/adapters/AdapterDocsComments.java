@@ -1,7 +1,6 @@
 package com.algorepublic.zoho.adapters;
 
 import android.content.Context;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
 import android.view.LayoutInflater;
@@ -9,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.algorepublic.zoho.Models.GeneralModel;
 import com.algorepublic.zoho.R;
@@ -101,8 +101,8 @@ public class AdapterDocsComments extends BaseAdapter {
             DocsPreviewFragment.arrayList.remove(DocsPreviewFragment.ClickedPosition);
             notifyDataSetChanged();
         }else {
-            Snackbar.make(((AppCompatActivity) ctx).findViewById(android.R.id.content),
-                    ctx.getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
+            Toast.makeText(ctx, ctx.getString(R.string.response_error), Toast.LENGTH_SHORT).show();
+
         }
     }
     static class ViewHolder {

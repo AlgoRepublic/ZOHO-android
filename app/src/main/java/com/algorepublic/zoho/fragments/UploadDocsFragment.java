@@ -542,7 +542,8 @@ public class UploadDocsFragment extends BaseFragment implements GoogleApiClient.
         Log.e("Json", "/" + json);
         //if(json.contains("true")) {
         filesList.clear();
-        Snackbar.make(getView(), "File(s) uploaded successfully.", Snackbar.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(), getActivity().getString(R.string.uploaded_succesful), Toast.LENGTH_SHORT).show();
+
 //        }else{
 //            Snackbar.make(getView(), "Server not responding", Snackbar.LENGTH_SHORT).show();
 //        }

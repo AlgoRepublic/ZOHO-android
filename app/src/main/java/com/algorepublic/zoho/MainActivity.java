@@ -7,8 +7,10 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.GridView;
@@ -22,6 +24,10 @@ import com.algorepublic.zoho.utils.BaseClass;
 import com.algorepublic.zoho.utils.Constants;
 import com.androidquery.AQuery;
 import com.bumptech.glide.Glide;
+import com.flyco.animation.BounceEnter.BounceLeftEnter;
+import com.flyco.animation.SlideExit.SlideRightExit;
+import com.flyco.dialog.listener.OnBtnClickL;
+import com.flyco.dialog.widget.NormalDialog;
 import com.github.tibolte.agendacalendarview.AgendaCalendarView;
 
 public class MainActivity extends BaseActivity {
@@ -108,9 +114,44 @@ public class MainActivity extends BaseActivity {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
         }
+        if (getSupportFragmentManager().getBackStackEntryCount()==0){
+            String content = getString(R.string.exit);
+            final NormalDialog dialog = new NormalDialog(((AppCompatActivity) this));
+            dialog.isTitleShow(false)//
+                    .bgColor(this.getResources().getColor(R.color.colorBaseWrapper))//
+                    .cornerRadius(5)//
+                    .content(content)//
+                    .contentGravity(Gravity.CENTER)//
+                    .contentTextColor(this.getResources().getColor(R.color.colorBaseHeader))//
+                    .dividerColor(this.getResources().getColor(R.color.colorContentWrapper))//
+                    .btnTextSize(15.5f, 15.5f)//
+                    .btnTextColor(this.getResources().getColor(R.color.colorBaseHeader)
+                            , this.getResources().getColor(R.color.colorBaseHeader))//
+                    .btnPressColor(this.getResources().getColor(R.color.colorBaseMenu))//
+                    .widthScale(0.85f)//
+                    .showAnim(new BounceLeftEnter())//
+                    .dismissAnim(new SlideRightExit())//
+                    .show();
+
+            dialog.setOnBtnClickL(
+                    new OnBtnClickL() {
+                        @Override
+                        public void onBtnClick() {
+                            dialog.dismiss();
+                        }
+                    },
+                    new OnBtnClickL() {
+                        @Override
+                        public void onBtnClick() {
+                            dialog.dismiss();
+                            finish();
+                        }
+                    });
+
+        }else
+            super.onBackPressed();
+
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

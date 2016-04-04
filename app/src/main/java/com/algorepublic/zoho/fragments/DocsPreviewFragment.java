@@ -6,7 +6,6 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
-import android.support.design.widget.Snackbar;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -194,8 +193,8 @@ public class DocsPreviewFragment extends BaseFragment {
             DocsPreviewFragment
                     .comment_user.setText("");
         }else {
-            Snackbar.make(getView(),
-                    getActivity().getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), getActivity().getString(R.string.response_error), Toast.LENGTH_SHORT).show();
+
         }
     }
     public void AllDocComments(Object caller, Object model) {
@@ -229,7 +228,7 @@ public class DocsPreviewFragment extends BaseFragment {
     public void CreateComment(Object caller, Object model) {
         CreateCommentModel.getInstance().setList((CreateCommentModel) model);
         if (CreateCommentModel.getInstance().responseCode ==100){
-            Snackbar.make(getView(), "Comment Added", Snackbar.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), getActivity().getString(R.string.comments_added), Toast.LENGTH_SHORT).show();
             TaskComments taskComments = new TaskComments();
             taskComments.setCommentID(CreateCommentModel.getInstance().responseObject.Id);
             taskComments.setComment(CreateCommentModel.getInstance().responseObject.message);
@@ -243,14 +242,14 @@ public class DocsPreviewFragment extends BaseFragment {
         }
         else
         {
-            Snackbar.make(getView(), getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), getActivity().getString(R.string.response_error), Toast.LENGTH_SHORT).show();
         }
     }
     public void PerformAction()
     {
         String comment = aq.id(R.id.comment_user).getText().toString();
         if(aq.id(R.id.comment_user).getText().toString().equalsIgnoreCase("")) {
-            Snackbar.make(getView(), getString(R.string.enter_comment), Snackbar.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(),getActivity().getString(R.string.enter_comment),Toast.LENGTH_SHORT).show();
             return;
         }
         service.createDocComments(Integer.toString(docObject.getID()), comment, baseClass.getUserId(), false,

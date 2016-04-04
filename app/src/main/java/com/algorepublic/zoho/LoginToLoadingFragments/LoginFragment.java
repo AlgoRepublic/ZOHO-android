@@ -2,7 +2,6 @@ package com.algorepublic.zoho.LoginToLoadingFragments;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -10,10 +9,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.CompoundButton;
-
 import android.widget.EditText;
 import android.widget.TextView;
-
+import android.widget.Toast;
 
 import com.algorepublic.zoho.BaseActivity;
 import com.algorepublic.zoho.MainActivity;
@@ -162,7 +160,8 @@ public class LoginFragment extends BaseFragment {
         LISessionManager.getInstance(getActivity()).init(getActivity(), buildScope(), new AuthListener() {
             @Override
             public void onAuthSuccess() {
-                Snackbar.make(getView(), getString(R.string.login), Snackbar.LENGTH_LONG).show();
+                Toast.makeText(getActivity(), getActivity().getString(R.string.login), Toast.LENGTH_SHORT).show();
+
                 setUpdateState();
                 // startActivity(new Intent(ActivityLogin.this, MainActivity.class));
             }

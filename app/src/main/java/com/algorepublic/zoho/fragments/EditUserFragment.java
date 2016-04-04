@@ -2,14 +2,11 @@ package com.algorepublic.zoho.fragments;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.provider.MediaStore;
-import android.support.design.widget.Snackbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -21,7 +18,6 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.algorepublic.zoho.BaseActivity;
 import com.algorepublic.zoho.Models.AllProjectsByUserModel;
 import com.algorepublic.zoho.Models.GeneralModel;
 import com.algorepublic.zoho.Models.UserListModel;
@@ -40,18 +36,13 @@ import com.flyco.dialog.listener.OnOperItemClickL;
 import com.flyco.dialog.widget.ActionSheetDialog;
 import com.guna.libmultispinner.MultiSelectionSpinner;
 
-import org.angmarch.views.NiceSpinner;
-
 import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
-import cc.cloudist.acplibrary.ACProgressConstant;
 import cc.cloudist.acplibrary.ACProgressFlower;
 
 /**
@@ -93,7 +84,7 @@ public class EditUserFragment extends BaseFragment implements MultiSelectionSpin
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view  = inflater.inflate(R.layout.fragment_add_user, container, false);
-       dialogAC =  InitializeDialog(getActivity());
+        dialogAC =  InitializeDialog(getActivity());
         role_list = (ListView) view.findViewById(R.id.role_list);
         projectsList = (MultiSelectionSpinner) view.findViewById(R.id.projects_list);
         projectsList.setListener(this);
@@ -174,7 +165,8 @@ public class EditUserFragment extends BaseFragment implements MultiSelectionSpin
                 }
             }
         }else {
-            Snackbar.make(getView(), getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), getActivity().getString(R.string.response_error), Toast.LENGTH_SHORT).show();
+
         }
         dialogAC.dismiss();
     }
@@ -194,7 +186,7 @@ public class EditUserFragment extends BaseFragment implements MultiSelectionSpin
             }
             role_list.setAdapter(adapter);
         }else {
-            Snackbar.make(getView() , getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), getActivity().getString(R.string.response_error), Toast.LENGTH_SHORT).show();
         }
 
     }
@@ -216,19 +208,21 @@ public class EditUserFragment extends BaseFragment implements MultiSelectionSpin
             case R.id.save_project:
                 baseClass.hideKeyPad(getView());
                 if(aq.id(R.id.first_name).getText().toString().isEmpty()){
-                    Snackbar.make(getView(),getString(R.string.user_first_name),Snackbar.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), getActivity().getString(R.string.user_first_name), Toast.LENGTH_SHORT).show();
                     return false;
                 }
                 if(aq.id(R.id.last_name).getText().toString().isEmpty()){
-                    Snackbar.make(getView(),getString(R.string.user_last_name),Snackbar.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), getActivity().getString(R.string.user_last_name), Toast.LENGTH_SHORT).show();
+
                     return false;
                 }
                 if(aq.id(R.id.user_email).getText().toString().isEmpty()){
-                    Snackbar.make(getView(),getString(R.string.add_email),Snackbar.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), getActivity().getString(R.string.add_user), Toast.LENGTH_SHORT).show();
+
                     return false;
                 }
                 if(aq.id(R.id.user_phoneno).getText().toString().isEmpty()){
-                    Snackbar.make(getView(),getString(R.string.add_phoneno),Snackbar.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), getActivity().getString(R.string.add_phoneno), Toast.LENGTH_SHORT).show();
                     return false;
                 }
                 if(baseClass.getSelectedProject().equalsIgnoreCase("0")) {
@@ -258,7 +252,8 @@ public class EditUserFragment extends BaseFragment implements MultiSelectionSpin
     public void UpdateUser(Object caller, Object model){
         GeneralModel.getInstance().setList((GeneralModel) model);
         if (GeneralModel.getInstance().responseObject ==true) {
-            Snackbar.make(getView(),getString(R.string.user_updated),Snackbar.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), getActivity().getString(R.string.user_updated), Toast.LENGTH_SHORT).show();
+
         }else {
             Toast.makeText(getActivity(), getString(R.string.response_error), Toast.LENGTH_SHORT).show();
         }
@@ -377,9 +372,10 @@ public class EditUserFragment extends BaseFragment implements MultiSelectionSpin
             }
             if(result != null) {
                 if (result.contains("100")) {
-                    Snackbar.make(getView(), getString(R.string.user_updated), Snackbar.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), getActivity().getString(R.string.user_updated), Toast.LENGTH_SHORT).show();
                 } else {
-                    Snackbar.make(getView(), getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), getActivity().getString(R.string.response_error), Toast.LENGTH_SHORT).show();
+
                 }
             }
         }

@@ -5,7 +5,6 @@ import android.annotation.SuppressLint;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
 import android.text.Html;
 import android.util.Log;
@@ -17,6 +16,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.SeekBar;
+import android.widget.Toast;
 
 import com.algorepublic.zoho.Models.GeneralModel;
 import com.algorepublic.zoho.Models.TaskByIdModel;
@@ -53,7 +53,7 @@ public class TaskDetailFragment extends BaseFragment {
     SeekBar seekBar;
     static ArrayList<TaskListName> taskListName = new ArrayList<>();
     View views;
-    int multiple=10;
+    int multiple=5;
     static TasksList tasksList;
     int progress=0;
     BaseClass baseClass;
@@ -117,6 +117,7 @@ public class TaskDetailFragment extends BaseFragment {
             public void onProgressChanged(SeekBar seekBar, int progres, boolean fromUser) {
                 progres = ((int) Math.round(progres / multiple)) * multiple;
                 progress = progres;
+                seekBarCompat.setProgress(progres);
             }
 
             @Override
@@ -189,7 +190,8 @@ public class TaskDetailFragment extends BaseFragment {
             AddTasks();
             UpdateValue();
         } else {
-            Snackbar.make(getView(), getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), getActivity().getString(R.string.response_error), Toast.LENGTH_SHORT).show();
+
         }
     }
 
@@ -332,28 +334,31 @@ public class TaskDetailFragment extends BaseFragment {
         GeneralModel.getInstance().setList((GeneralModel) model);
         if (GeneralModel.getInstance().responseCode.equalsIgnoreCase("100")) {
             TaskByIdModel.getInstance().responseObject.progress=100;
-            Snackbar.make(getView(), getString(R.string.update_progress), Snackbar.LENGTH_SHORT).show();
-        }
+            Toast.makeText(getActivity(), getActivity().getString(R.string.update_progress), Toast.LENGTH_SHORT).show();
+ }
         else
         {
-            Snackbar.make(getView(), getString(R.string.invalid_credential), Snackbar.LENGTH_SHORT).show();
-        }
+            Toast.makeText(getActivity(), getActivity().getString(R.string.invalid_credential), Toast.LENGTH_SHORT).show();
+ }
     }
     public void DeleteTask(Object caller, Object model) {
         GeneralModel.getInstance().setList((GeneralModel) model);
         if (GeneralModel.getInstance().responseCode.equalsIgnoreCase("100")) {
-            Snackbar.make(getView(), getString(R.string.task_deleted), Snackbar.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), getActivity().getString(R.string.task_deleted), Toast.LENGTH_SHORT).show();
+
+
             getActivity().getSupportFragmentManager().popBackStack();
         }
         else
         {
-            Snackbar.make(getView(), getString(R.string.invalid_credential), Snackbar.LENGTH_SHORT).show();
-        }
+            Toast.makeText(getActivity(), getActivity().getString(R.string.invalid_credential), Toast.LENGTH_SHORT).show();
+   }
     }
     public void CompleteTask(Object caller, Object model) {
         GeneralModel.getInstance().setList((GeneralModel) model);
         if (GeneralModel.getInstance().responseCode.equalsIgnoreCase("100")) {
-            Snackbar.make(getView(), getString(R.string.task_done), Snackbar.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), getActivity().getString(R.string.task_done), Toast.LENGTH_SHORT).show();
+
             seekBar.setProgress(100);
             seekBarCompat.setProgress(100);
             TaskByIdModel.getInstance().responseObject.progress=100;
@@ -361,8 +366,8 @@ public class TaskDetailFragment extends BaseFragment {
         }
         else
         {
-            Snackbar.make(getView(), getString(R.string.invalid_credential), Snackbar.LENGTH_SHORT).show();
-        }
+            Toast.makeText(getActivity(), getActivity().getString(R.string.invalid_credential), Toast.LENGTH_SHORT).show();
+ }
     }
 
 
@@ -370,7 +375,8 @@ public class TaskDetailFragment extends BaseFragment {
     public void ReOpenTask(Object caller, Object model) {
         GeneralModel.getInstance().setList((GeneralModel) model);
         if (GeneralModel.getInstance().responseCode.equalsIgnoreCase("100")) {
-            Snackbar.make(getView(), getString(R.string.reopen_task), Snackbar.LENGTH_SHORT).show();
+           Toast.makeText(getActivity(), getActivity().getString(R.string.reopen_task), Toast.LENGTH_SHORT).show();
+
             seekBar.setProgress(0);
             seekBarCompat.setProgress(0);
             aq.id(R.id.mark_as_done).text(getString(R.string.mark_as_done));
@@ -379,7 +385,8 @@ public class TaskDetailFragment extends BaseFragment {
         }
         else
         {
-            Snackbar.make(getView(), getString(R.string.invalid_credential), Snackbar.LENGTH_SHORT).show();
+           Toast.makeText(getActivity(), getActivity().getString(R.string.invalid_credential), Toast.LENGTH_SHORT).show();
+
         }
     }
 

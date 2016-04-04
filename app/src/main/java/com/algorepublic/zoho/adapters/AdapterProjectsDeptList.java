@@ -2,7 +2,6 @@ package com.algorepublic.zoho.adapters;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
@@ -14,12 +13,11 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.algorepublic.zoho.BaseActivity;
 import com.algorepublic.zoho.Models.GeneralModel;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.fragments.EditProjectFragment;
-import com.algorepublic.zoho.fragments.ProjectsFragment;
 import com.algorepublic.zoho.services.CallBack;
 import com.algorepublic.zoho.services.ProjectsListService;
 import com.algorepublic.zoho.utils.BaseClass;
@@ -31,7 +29,6 @@ import com.flyco.dialog.widget.NormalDialog;
 
 import java.util.ArrayList;
 
-import cc.cloudist.acplibrary.ACProgressFlower;
 import se.emilsjolander.stickylistheaders.StickyListHeadersAdapter;
 
 /**
@@ -147,9 +144,9 @@ public class AdapterProjectsDeptList extends BaseAdapter implements StickyListHe
         if (GeneralModel.getInstance().responseCode.equalsIgnoreCase("100")) {
             arrayList.remove(lastPosition);
             notifyDataSetChanged();
-            Snackbar.make(aq.id(R.id.shadow_item_container).getView(), ctx.getString(R.string.project_deleted), Snackbar.LENGTH_SHORT).show();
+            Toast.makeText(ctx, ctx.getString(R.string.project_deleted), Toast.LENGTH_SHORT).show();
         } else {
-            Snackbar.make(aq.id(R.id.shadow_item_container).getView(), ctx.getString(R.string.invalid_credential), Snackbar.LENGTH_SHORT).show();
+            Toast.makeText(ctx, ctx.getString(R.string.invalid_credential), Toast.LENGTH_SHORT).show();
            }
     }
     public void callFragmentWithBackStack(int containerId, Fragment fragment, String tag){

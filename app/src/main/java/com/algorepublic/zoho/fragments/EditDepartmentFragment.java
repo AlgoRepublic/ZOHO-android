@@ -1,7 +1,6 @@
 package com.algorepublic.zoho.fragments;
 
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -10,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.algorepublic.zoho.BaseActivity;
 import com.algorepublic.zoho.Models.CreateProjectModel;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.services.CallBack;
@@ -18,8 +16,6 @@ import com.algorepublic.zoho.services.DepartmentService;
 import com.algorepublic.zoho.services.TaskListService;
 import com.algorepublic.zoho.utils.BaseClass;
 import com.androidquery.AQuery;
-
-import cc.cloudist.acplibrary.ACProgressFlower;
 
 /**
  * Created by android on 2/29/16.
@@ -58,8 +54,8 @@ public class EditDepartmentFragment extends BaseFragment {
             case R.id.save_project:
                 baseClass.hideKeyPad(getView());
                 if(aq.id(R.id.dept_title).getText().toString().isEmpty()){
-                    Snackbar.make(getView(), getString(R.string.department_name), Snackbar.LENGTH_SHORT).show();
-                    return false;
+                    Toast.makeText(getActivity(), getActivity().getString(R.string.department_name), Toast.LENGTH_SHORT).show();
+    return false;
                 }
 
                 CreateProject();
@@ -76,9 +72,9 @@ public class EditDepartmentFragment extends BaseFragment {
     public void UpdateDept(Object caller, Object model){
         CreateProjectModel.getInstance().setList((CreateProjectModel) model);
         if (CreateProjectModel.getInstance().responseObject ==null ) {
-            Snackbar.make(getView(),getString(R.string.department_updated),Snackbar.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), getActivity().getString(R.string.department_updated), Toast.LENGTH_SHORT).show();
         }else {
-            Snackbar.make(getView(), getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(),getActivity().getString(R.string.response_error),Toast.LENGTH_SHORT).show();
         }
     }
 

@@ -2,7 +2,6 @@ package com.algorepublic.zoho.fragments;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -10,6 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Toast;
 
 import com.algorepublic.zoho.Models.SubTaskAttachmentsModel;
 import com.algorepublic.zoho.R;
@@ -198,7 +198,7 @@ public class DocumentsListBySubTaskFragment extends BaseFragment {
             GetAllDocumentsList();
             FilterList();
         } else {
-            Snackbar.make(getView(),getString(R.string.invalid_credential),Snackbar.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), getActivity().getString(R.string.invalid_credential), Toast.LENGTH_SHORT).show();
         }
     }
 
