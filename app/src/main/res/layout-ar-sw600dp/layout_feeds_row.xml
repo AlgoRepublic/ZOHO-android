@@ -6,6 +6,7 @@
     <RelativeLayout
         android:id="@+id/layout123"
         android:layout_toRightOf="@+id/selected_project"
+        android:layout_toEndOf="@+id/selected_project"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="8dp"
@@ -36,7 +37,6 @@
                     android:layout_height="match_parent">
                     <RelativeLayout
                         android:id="@+id/parent1"
-                        android:layout_toLeftOf="@+id/rightarrow_layout"
                         android:layout_alignParentTop="true"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -59,12 +59,12 @@
                             android:text="@string/test_forum"
                             android:textStyle="bold"
                             android:layout_marginTop="5dp"
-                            android:layout_marginLeft="5dp"
-                            android:layout_marginStart="5dp"
+                            android:layout_marginRight="5dp"
+                            android:layout_marginEnd="5dp"
                             android:textSize="18sp"
                             android:id="@+id/feed_title"
                             android:layout_alignTop="@+id/feed_image"
-                            android:layout_toEndOf="@+id/feed_image" />
+                            android:layout_toStartOf="@+id/feed_image" />
 
                         <TextView
                             android:layout_width="match_parent"
@@ -75,7 +75,7 @@
                             android:layout_marginTop="5dp"
                             android:layout_below="@+id/feed_title"
                             android:text="@string/test_forum"
-                            android:layout_alignStart="@+id/feed_title" />
+                            android:layout_alignEnd="@+id/feed_title" />
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -83,10 +83,9 @@
                             android:textSize="16sp"
                             android:singleLine="true"
                             android:layout_marginTop="5dp"
-
                             android:layout_below="@+id/feed_description"
                             android:text="@string/test_forum"
-                            android:layout_alignStart="@+id/feed_description" />
+                            android:layout_alignEnd="@+id/feed_description" />
                     </RelativeLayout>
                 </RelativeLayout>
             </RelativeLayout>

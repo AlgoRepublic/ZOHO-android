@@ -3,8 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
+    android:layout_marginTop="10dp"
     android:layout_height="match_parent">
-
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
     <android.support.v7.widget.CardView
         android:id="@+id/card_view"
         android:layout_margin="10dp"
@@ -27,7 +30,7 @@
                 android:layout_weight="1">
                 <view
                     android:layout_width="300dp"
-                    android:layout_height="200dp"
+                    android:layout_height="300dp"
                     android:layout_margin="20dp"
                     android:layout_centerHorizontal="true"
                     class="com.dacer.androidcharts.BarView"
@@ -42,7 +45,7 @@
                     android:id="@+id/open1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="14sp"
+                    android:textSize="20sp"
                     android:layout_centerVertical="true"
                     android:layout_toLeftOf="@+id/imag22"
                     android:gravity="center_vertical"
@@ -62,7 +65,7 @@
                             android:id="@+id/close1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textSize="14sp"
+                            android:textSize="20sp"
                             android:layout_centerVertical="true"
                             android:layout_toRightOf="@+id/imag22"
                             android:gravity="center_vertical"
@@ -81,7 +84,7 @@
                     android:id="@+id/open2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="14sp"
+                    android:textSize="20sp"
                     android:layout_centerVertical="true"
                     android:layout_toLeftOf="@+id/imag223"
                     android:layout_marginRight="4dp"/>
@@ -89,7 +92,7 @@
                             android:layout_width="20dp"
                             android:layout_height="20dp"
                             android:text="@string/closed_tasks"
-                            android:textSize="14sp"
+                            android:textSize="25sp"
                             android:id="@+id/imag223"
                             android:layout_centerHorizontal="true"
                             android:background="@drawable/opened_tasks"
@@ -100,7 +103,7 @@
                             android:id="@+id/close2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textSize="14sp"
+                            android:textSize="20sp"
                             android:layout_centerVertical="true"
                             android:layout_toRightOf="@+id/imag223"
                             android:gravity="center_vertical"
@@ -118,7 +121,7 @@
                     android:id="@+id/open3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="14sp"
+                    android:textSize="20sp"
                     android:layout_centerVertical="true"
                     android:layout_toLeftOf="@+id/imag222"
                     android:gravity="center_vertical"
@@ -138,7 +141,7 @@
                             android:id="@+id/close3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textSize="14sp"
+                            android:textSize="20sp"
                             android:layout_centerVertical="true"
                             android:layout_toRightOf="@+id/imag222"
                             android:gravity="center_vertical"
@@ -153,8 +156,8 @@
                 android:layout_marginBottom="10dp"
                 android:layout_weight="1">
                 <view
-                    android:layout_width="200dp"
-                    android:layout_height="200dp"
+                    android:layout_width="300dp"
+                    android:layout_height="300dp"
                     android:layout_alignParentTop="true"
                     android:layout_centerHorizontal="true"
                     class="com.dacer.androidcharts.PieView"
@@ -187,7 +190,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/opened_tasks"
-                            android:textSize="14sp"
+                            android:textSize="20sp"
                             android:layout_centerVertical="true"
                             android:layout_toRightOf="@+id/imag1"
                             android:gravity="center_vertical"
@@ -212,7 +215,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/closed_tasks"
-                            android:textSize="14sp"
+                            android:textSize="20sp"
                             android:layout_centerVertical="true"
                            android:layout_toRightOf="@+id/imag"
                             android:gravity="center_vertical"
@@ -222,7 +225,7 @@
 
                 </LinearLayout>
             </RelativeLayout>
-
         </LinearLayout>
     </android.support.v7.widget.CardView>
+    </RelativeLayout>
 </ScrollView>

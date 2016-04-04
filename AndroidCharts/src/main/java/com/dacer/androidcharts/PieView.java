@@ -78,8 +78,7 @@ public class PieView extends View {
         whiteLinePaint.setStrokeWidth(2f);
         textPaint = new Paint();
         textPaint.setAntiAlias(true);
-        textPaint.setColor(Color.WHITE);
-        textPaint.setTextSize(MyUtils.sp2px(getContext(), 10));
+        textPaint.setTextSize(MyUtils.sp2px(getContext(), 14));
         textPaint.setStrokeWidth(5);
         textPaint.setTextAlign(Paint.Align.CENTER);
         pieCenterPoint = new Point();
@@ -89,8 +88,9 @@ public class PieView extends View {
     public void setTextSize(int size){
         textPaint.setTextSize(MyUtils.sp2px(getContext(), size));
     }
-    public void showPercentLabel(boolean show){
+    public void showPercentLabel(boolean show, int Color){
         showPercentLabel = show;
+        textPaint.setColor(Color);
         postInvalidate();
     }
 

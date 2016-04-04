@@ -53,6 +53,9 @@ public class FeedsModel {
         @SerializedName("UserName")
         public String userName;
 
+        @SerializedName("CreatedAt")
+        public String createdAt;
+
         @SerializedName("Comments")
         @Expose
         public ArrayList<Comments> comments = new ArrayList<>();

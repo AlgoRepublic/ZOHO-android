@@ -1,5 +1,6 @@
 package com.algorepublic.zoho.fragments;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
@@ -33,6 +34,7 @@ public class DashboardFragment extends BaseFragment {
     BaseClass baseClass;
     PieView pieGraph;
     BarView barGraph;
+    int Color;
     static DashboardFragment fragment;
 
     public static DashboardFragment newInstance() {
@@ -64,6 +66,11 @@ public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
 
         aq = new AQuery(view);
         baseClass = ((BaseClass) getActivity().getApplicationContext());
+        if(baseClass.getThemePreference() == R.style.AppThemeBlue) {
+           Color = android.graphics.Color.parseColor("#4B7BAA");
+        }else {
+            Color = android.graphics.Color.parseColor("#414042");
+        }
         barGraph = (BarView)view.findViewById(R.id.line_view);
         pieGraph  = (PieView)view.findViewById(R.id.pie_view);
         service = new DashBoardService(getActivity());
@@ -105,7 +112,7 @@ public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
             pieHelperArrayList.add(pieHelper1);
             pieHelperArrayList.add(pieHelper);
             pieGraph.selectedPie(PieView.NO_SELECTED_INDEX);
-            pieGraph.showPercentLabel(true);
+            pieGraph.showPercentLabel(true,Color);
             pieGraph.setDate(pieHelperArrayList);
             randomSet1();
 
@@ -131,7 +138,7 @@ public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
             pieHelperArrayList.add(pieHelper);
 
             pieGraph.selectedPie(PieView.NO_SELECTED_INDEX);
-            pieGraph.showPercentLabel(true);
+            pieGraph.showPercentLabel(true,Color);
             pieGraph.setDate(pieHelperArrayList);
             randomSet();
 
@@ -184,7 +191,7 @@ public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         barDataList1.add(taskListClosed+"%");
         barDataList1.add(getString(R.string.milestones));
         barDataList1.add(milestoneClosed+"%");
-        barGraph.setBottomTextList(barDataList1);
+        barGraph.setBottomTextList(barDataList1,Color);
         barGraph.setDataList(barDataList, 100);
     }
     private void randomSet(){
@@ -220,7 +227,7 @@ public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         barDataList1.add(taskListClosed+"%");
         barDataList1.add(getString(R.string.milestones));
         barDataList1.add(milestoneClosed+"%");
-        barGraph.setBottomTextList(barDataList1);
+        barGraph.setBottomTextList(barDataList1,Color);
         barGraph.setDataList(barDataList, 100);
     }
 }
