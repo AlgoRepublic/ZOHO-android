@@ -21,6 +21,7 @@
             android:layout_below="@+id/alertImage"
             android:layout_marginTop="5dp"
             android:layout_marginLeft="5dp"
+            android:layout_marginStart="5dp"
             android:textSize="30sp"
             android:id="@+id/alertMessage"/>
 </RelativeLayout>

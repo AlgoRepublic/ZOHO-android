@@ -1,18 +1,14 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="110dp"
+    android:layout_height="90dp"
     android:layout_marginBottom="3dp"
     android:descendantFocusability="blocksDescendants"
     android:orientation="horizontal"
-    android:paddingEnd="5dp"
-    android:layoutDirection="rtl"
-    android:textDirection="rtl"
-    android:gravity="center_vertical"
-    android:fitsSystemWindows="true"
-    android:paddingLeft="5dp"
-    android:paddingRight="5dp"
-    android:paddingStart="5dp">
+    android:paddingEnd="10dp"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+    android:paddingStart="10dp">
 
 
     <RelativeLayout
@@ -28,9 +24,9 @@
             android:layout_width="match_parent"
             style="@style/ms9_DefaultShadowStyle"
             android:layout_height="match_parent"
+            android:layout_toStartOf="@+id/priority_bar"
             app:ms9_affectsDisplayedPosition="true"
             app:ms9_shadowElevation="2dp"
-            android:layout_toStartOf="@+id/priority_bar"
             app:ms9_shadowTranslationZ="1dp"
             app:ms9_useAmbientShadow="true">
 
@@ -65,12 +61,12 @@
                                 android:gravity="center"
                                 android:paddingLeft="10dp"
                                 android:paddingRight="10dp"
-                                android:textSize="17sp"
-                                android:textColor="@color/colorWhite"
+                                android:textSize="16sp"
+                                android:textColor="@color/white"
                                 android:background="@color/colorContentWrapper"
                                 android:text="Edit"
                                 />
-                            />
+                                />
                             <TextView
                                 android:id="@+id/btDelete"
                                 android:layout_width="0dp"
@@ -79,8 +75,8 @@
                                 android:gravity="center"
                                 android:paddingLeft="10dp"
                                 android:paddingRight="10dp"
-                                android:textSize="17sp"
-                                android:textColor="@color/colorWhite"
+                                android:textSize="16sp"
+                                android:textColor="@color/white"
                                 android:background="@color/red"
                                 android:text="Delete"
                                 />
@@ -95,15 +91,14 @@
                                 android:id="@+id/parent1"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:gravity="center_vertical"
                                 android:layout_toRightOf="@+id/rightarrow_layout"
                                 android:layout_toEndOf="@+id/rightarrow_layout"
                                 android:background="@color/colorBaseWrapper">
 
                                 <ImageView
                                     android:id="@+id/task_image"
-                                    android:layout_width="30dp"
-                                    android:layout_height="30dp"
+                                    android:layout_width="40dp"
+                                    android:layout_height="40dp"
                                     android:layout_gravity="center"
                                     android:layout_marginLeft="5dp"
                                     android:layout_marginRight="5dp"
@@ -135,55 +130,44 @@
                                             android:id="@+id/task_name"
                                             android:layout_width="0dp"
                                             android:layout_height="wrap_content"
-                                            android:layout_weight="1.1"
+                                            android:layout_weight="1"
                                             android:gravity="left|start"
-                                            android:ellipsize="marquee"
-                                            android:singleLine="true"
-                                            android:marqueeRepeatLimit="marquee_forever"
-                                            android:textSize="18sp"
+                                            android:textSize="25sp"
                                             android:textStyle="bold" />
 
                                         <TextView
                                             android:id="@+id/task_date"
                                             android:layout_width="0dp"
-                                            android:paddingEnd="5dp"
-                                            android:singleLine="true"
-
                                             android:layout_height="wrap_content"
-                                            android:layout_weight="0.9"
+                                            android:layout_weight="1"
                                             android:gravity="right|end"
-                                            android:textSize="16sp" />
+                                            android:textSize="12sp" />
                                     </LinearLayout>
 
                                     <LinearLayout
                                         android:id="@+id/layout3"
                                         android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
+                                        android:layout_height="20dp"
                                         android:orientation="horizontal"
-                                        android:gravity="top"
                                         android:weightSum="2">
 
                                         <TextView
                                             android:id="@+id/project_name"
                                             android:layout_width="0dp"
                                             android:layout_height="wrap_content"
-                                            android:layout_gravity="top"
-                                            android:layout_weight="1.2"
+                                            android:layout_gravity="center_vertical"
+                                            android:layout_weight=".8"
                                             android:gravity="left|start"
+                                            android:singleLine="true"
                                             android:ellipsize="end"
-                                            android:maxLines="2"
-                                            android:text=""
-                                            android:textSize="18sp"
+                                            android:textSize="25sp"
                                             android:textStyle="bold" />
 
                                         <RelativeLayout
                                             android:layout_width="0dp"
-                                            android:layout_height="20dp"
+                                            android:layout_height="wrap_content"
                                             android:layout_below="@+id/general"
-                                            android:gravity="center_vertical"
-                                            android:paddingEnd="5dp"
-
-                                            android:layout_weight="0.8">
+                                            android:layout_weight="1.2">
 
                                             <TextView
                                                 android:id="@+id/task_comment"
@@ -194,11 +178,11 @@
                                                 android:layout_toStartOf="@+id/bar"
                                                 android:gravity="left|start"
                                                 android:text="@string/task_comment"
-                                                android:textSize="16sp" />
+                                                android:textSize="20sp" />
 
                                             <RadioButton
                                                 android:id="@+id/bar"
-                                                android:layout_width="1.5dp"
+                                                android:layout_width="1dp"
                                                 android:layout_margin="5dp"
                                                 android:layout_height="match_parent"
                                                 android:layout_centerVertical="true"
@@ -216,14 +200,14 @@
                                                 android:layout_centerVertical="true"
                                                 android:gravity="left|start"
                                                 android:text="@string/task_user"
-                                                android:textSize="16sp" />
+                                                android:textSize="20sp" />
                                         </RelativeLayout>
                                     </LinearLayout>
                                 </LinearLayout>
                             </RelativeLayout>
                             <LinearLayout
                                 android:id="@+id/rightarrow_layout"
-                                android:layout_width="20dp"
+                                android:layout_width="30dp"
                                 android:layout_alignParentLeft="true"
                                 android:layout_alignParentStart="true"
                                 android:layout_height="match_parent"
@@ -232,26 +216,23 @@
 
                                 <ImageView
                                     android:id="@+id/right_arrow_image"
-                                    android:layout_width="15dp"
-                                    android:layout_height="15dp"
+                                    android:layout_width="25dp"
+                                    android:layout_height="25dp"
                                     android:layout_margin="5dp"
                                     android:background="@drawable/circle_left"/>
                             </LinearLayout>
                         </RelativeLayout>
                     </com.daimajia.swipe.SwipeLayout>
-
                 </RelativeLayout>
-
             </RelativeLayout>
-
         </com.h6ah4i.android.materialshadowninepatch.MaterialShadowContainerView>
         <View
             android:id="@+id/priority_bar"
             android:layout_width="8dp"
             android:layout_height="match_parent"
-            android:layout_marginBottom="2dp"
+            android:layout_marginBottom="9dp"
+            android:layout_marginTop="4dp"
             android:layout_alignParentEnd="true"
             android:background="@drawable/roundable_prioritybar"/>
     </RelativeLayout>
-
 </LinearLayout>
