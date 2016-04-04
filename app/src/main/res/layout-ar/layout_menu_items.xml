@@ -10,16 +10,15 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentLeft="true"
-        android:background="@color/colorBaseHeader"
         android:button="@null" />
 
     <ImageView
         android:id="@+id/imageview"
         android:layout_width="match_parent"
-        android:layout_height="fill_parent"
+        android:layout_height="match_parent"
         android:layout_above="@+id/textview"
-        android:layout_alignParentLeft="true"
-        android:button="@null"
+        android:layout_centerInParent="true"
+        android:scaleType="centerInside"
         android:padding="10dp" />
 
     <TextView
@@ -30,6 +29,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="5dp"
         android:gravity="bottom|center"
+        android:text=""
         android:singleLine="true"
         android:textColor="@color/white"
         android:textSize="13sp" />

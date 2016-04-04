@@ -9,7 +9,7 @@
         android:id="@+id/forums_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="10dp"
+        android:padding="10dp"
         android:descendantFocusability="beforeDescendants"
         android:divider="@null"
         android:dividerHeight="5dp" />

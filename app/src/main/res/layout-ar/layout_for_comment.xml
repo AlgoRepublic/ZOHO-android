@@ -24,7 +24,7 @@
                 android:textCursorDrawable="@null"
                 android:hint="Type a comment"
                 android:textColor="@color/colorBaseHeader"
-                android:textColorHint="@color/colorBaseHeader"
+                android:textColorHint="@color/colorBaseMenu"
                 android:imeActionId="@integer/add_comment"
                 android:background="@color/white"
                 android:imeOptions="actionDone"
@@ -43,7 +43,6 @@
                 android:textSize="18sp"
                 android:gravity="center"
                 android:layout_weight=".5"
-                android:background="@color/colorContentWrapper"
                 android:layout_gravity="center_vertical"
                 android:textColor="@android:color/white"
                 android:textStyle="bold"/>
