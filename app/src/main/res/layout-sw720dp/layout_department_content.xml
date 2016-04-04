@@ -40,7 +40,7 @@
             android:layout_height="wrap_content"
             app:clickToClose="true">
             <LinearLayout
-                android:layout_width="80dp"
+                android:layout_width="100dp"
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
                 >

@@ -89,6 +89,7 @@ public class AdapterDocumentsList extends BaseAdapter implements StickyListHeade
                 get(position).getFileTypeID()));
         try{
             for(int loop=0;loop<DocumentsListFragment.deleteDocsList.size();loop++) {
+
                 if (DocumentsListFragment.deleteDocsList.get(loop) ==
                         Integer.parseInt(aq.id(R.id.file_id).getText().toString()) ) {
                     Log.e("ID",DocumentsListFragment.deleteDocsList.get(loop)+"/"+
