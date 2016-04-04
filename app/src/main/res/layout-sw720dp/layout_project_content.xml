@@ -50,7 +50,7 @@
                         android:layout_height="wrap_content"
                         app:clickToClose="true">
                         <LinearLayout
-                            android:layout_width="150dp"
+                            android:layout_width="220dp"
                             android:layout_height="match_parent"
                             android:weightSum="2"
                             android:orientation="horizontal"
@@ -66,7 +66,7 @@
                                 android:textIsSelectable="false"
                                 android:clickable="false"
                                 android:focusableInTouchMode="false"
-                                android:textSize="16sp"
+                                android:textSize="18sp"
                                 android:textColor="@color/white"
                                 android:focusable="false"
                                 android:background="@color/colorContentWrapper"
@@ -80,7 +80,7 @@
                                 android:gravity="center"
                                 android:paddingLeft="10dp"
                                 android:paddingRight="10dp"
-                                android:textSize="16sp"
+                                android:textSize="18sp"
                                 android:textIsSelectable="false"
                                 android:textColor="@color/white"
                                 android:background="@color/red"

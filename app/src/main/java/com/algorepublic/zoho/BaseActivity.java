@@ -25,10 +25,12 @@ public class BaseActivity extends AppCompatActivity {
     public static DrawerLayout drawer;public static Toolbar toolbar;
     public static ActionBarDrawerToggle toggle;
     BaseClass baseClass;
+    public static InputMethodManager imeManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         baseClass = ((BaseClass) getApplicationContext());
+        imeManager = (InputMethodManager) getApplicationContext().getSystemService(INPUT_METHOD_SERVICE);
     }
 
 

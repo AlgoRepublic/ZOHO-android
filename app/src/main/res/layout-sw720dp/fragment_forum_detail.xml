@@ -26,7 +26,7 @@
             android:layout_below="@+id/comment_title"
             android:paddingBottom="5dp"
             android:paddingTop="5dp"
-            android:textSize="20sp" />
+            android:textSize="22sp" />
 
         <TextView
             android:id="@+id/textView5"
@@ -45,7 +45,7 @@
             android:layout_below="@+id/textView5"
             android:paddingBottom="5dp"
             android:singleLine="false"
-            android:textSize="20sp"
+            android:textSize="22sp"
             android:paddingTop="5dp"/>
 
         <TextView

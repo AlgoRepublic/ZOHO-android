@@ -28,7 +28,7 @@
                     android:id="@+id/lblListHeader"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="18sp"
+                    android:textSize="20sp"
                     android:text="@string/new_project"
                     android:gravity="center"
                     android:textColor="@color/white" />
@@ -51,9 +51,9 @@
 
                 <com.rengwuxian.materialedittext.MaterialEditText
                     android:id="@+id/project_name"
-                    android:textSize="22sp"
+                    android:textSize="24sp"
                     android:layout_width="match_parent"
-                    android:layout_height="55dp"
+                    android:layout_height="60dp"
                     android:hint="@string/project_name"
                     android:ellipsize="end"
                     android:singleLine="true"
@@ -72,7 +72,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="5dp"
                         android:text="@string/users"
-                        android:textSize="17.33sp" />
+                        android:textSize="19.33sp" />
                     <com.h6ah4i.android.materialshadowninepatch.MaterialShadowContainerView
                         android:layout_width="match_parent"
                         style="@style/ms9_DefaultShadowStyle"
@@ -86,13 +86,13 @@
                             android:layout_width="match_parent"
                             android:layout_height="55dp"
                             android:layout_marginStart="5dp"
-                            android:textSize="22sp"
+                            android:textSize="24sp"
                             android:layout_marginTop="5dp" />
                     </com.h6ah4i.android.materialshadowninepatch.MaterialShadowContainerView>
                 </LinearLayout>
                 <com.rengwuxian.materialedittext.MaterialEditText
                     android:id="@+id/project_desc"
-                    android:textSize="22sp"
+                    android:textSize="24sp"
                     android:layout_below="@+id/layout"
                     android:layout_width="match_parent"
                     android:layout_height="250dp"
@@ -113,7 +113,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/dept_name"
                         android:layout_marginStart="5dp"
-                        android:textSize="17.33sp" />
+                        android:textSize="19.33sp" />
                     <com.h6ah4i.android.materialshadowninepatch.MaterialShadowContainerView
                         android:layout_width="match_parent"
                         style="@style/ms9_DefaultShadowStyle"
@@ -126,7 +126,7 @@
                             android:id="@+id/departments_list"
                             android:layout_width="match_parent"
                             android:layout_height="55dp"
-                            android:textSize="22sp"
+                            android:textSize="24sp"
                             android:layout_marginStart="5dp"
                             android:layout_marginTop="5dp" />
                     </com.h6ah4i.android.materialshadowninepatch.MaterialShadowContainerView>
@@ -141,7 +141,7 @@
                     android:paddingTop="10dp"
                     android:paddingLeft="5dp"
                     android:paddingStart="5dp"
-                    android:textSize="17sp"
+                    android:textSize="19sp"
                     android:layout_below="@id/layout1"/>
 
                 <RadioGroup
@@ -157,7 +157,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/_private"
                         android:button="@null"
-                        android:textSize="22sp"
+                        android:textSize="24sp"
                         android:background="@color/white"
                         android:drawableLeft="@drawable/radiobutton" />
                     <RadioButton
@@ -166,7 +166,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/_public"
                         android:button="@null"
-                        android:textSize="22sp"
+                        android:textSize="24sp"
                         android:layout_marginTop="5dp"
                         android:background="@color/white"
                         android:drawableLeft="@drawable/radiobutton" />

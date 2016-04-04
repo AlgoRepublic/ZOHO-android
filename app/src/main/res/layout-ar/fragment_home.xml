@@ -15,6 +15,7 @@
         android:layout_height="55dp"
         app:tabGravity="fill"
         app:tabMode="fixed"
+        app:tabMaxWidth="0dp"
         app:tabIndicatorHeight="7dp"
         />
 
