@@ -36,7 +36,7 @@ public class DocumentsListBySubTaskFragment extends BaseFragment {
     static DocumentsListBySubTaskFragment fragment;
     StickyListHeadersAdapter adapterDocsList;
     AQuery aq;
-    View view;
+    View view;int Color;
     DocumentsService service;
     public static ArrayList<DocumentsList> generalDocsList = new ArrayList<>();
     public static ArrayList<DocumentsList> allDocsList = new ArrayList<>();
@@ -79,6 +79,11 @@ public class DocumentsListBySubTaskFragment extends BaseFragment {
         });
         deleteDocsList.clear();
         baseClass = ((BaseClass) getActivity().getApplicationContext());
+        if(baseClass.getThemePreference() == R.style.AppThemeBlue) {
+            Color = android.graphics.Color.parseColor("#4B7BAA");
+        }else{
+            Color = android.graphics.Color.parseColor("#414042");
+        }
         setHasOptionsMenu(true);
         getToolbar().setTitle(getString(R.string.documents));
         service = new DocumentsService(getActivity());
@@ -139,7 +144,10 @@ public class DocumentsListBySubTaskFragment extends BaseFragment {
 
     public void callForDocsSorting(){
         String[] menuItems = {"All Files","Pictures","Videos","Favorites"};
-        final ActionSheetDialog dialog = new ActionSheetDialog(getActivity(),menuItems, getView());
+        final ActionSheetDialog dialog = new ActionSheetDialog(getActivity(),menuItems,
+                getString(R.string.cancel) ,getView());
+        dialog.titleTextColor(Color);
+        dialog.itemTextColor(Color);
         dialog.isTitleShow(false).show();
         dialog.setOnOperItemClickL(new OnOperItemClickL() {
             @Override

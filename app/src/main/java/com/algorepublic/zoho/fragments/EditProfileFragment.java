@@ -51,7 +51,7 @@ public class EditProfileFragment extends BaseFragment implements MultiSelectionS
     private static final int TAKE_PICTURE = 1;
     public static final int RESULT_GALLERY = 2;
     public static final int PICK_File = 3;
-    File newFile;
+    File newFile;int Color;
     AQuery aq;ACProgressFlower dialogAC;
     ArrayList<Integer> selectedIds = new ArrayList<>();
     ArrayList<String> projectList;
@@ -84,6 +84,11 @@ public class EditProfileFragment extends BaseFragment implements MultiSelectionS
         dialogAC = InitializeDialog(getActivity());
 
         baseClass = ((BaseClass) getActivity().getApplicationContext());
+        if(baseClass.getThemePreference() == R.style.AppThemeBlue) {
+            Color = android.graphics.Color.parseColor("#4B7BAA");
+        }else{
+            Color = android.graphics.Color.parseColor("#414042");
+        }
         aq = new AQuery(getActivity(), view);
         service = new ProjectsListService(getActivity());
         service1 = new UserService(getActivity());
@@ -197,7 +202,10 @@ public class EditProfileFragment extends BaseFragment implements MultiSelectionS
     private void CallForAttachments() {
         String[] menuItems = {getString(R.string.camera),getString(R.string.gallery)
                 ,getString(R.string.others)};
-        final ActionSheetDialog dialog = new ActionSheetDialog(getActivity(),menuItems, getView());
+        final ActionSheetDialog dialog = new ActionSheetDialog(getActivity(),menuItems,
+                getString(R.string.cancel) ,getView());
+        dialog.titleTextColor(Color);
+        dialog.itemTextColor(Color);
         dialog.isTitleShow(false).show();
         dialog.setOnOperItemClickL(new OnOperItemClickL() {
             @Override

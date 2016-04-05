@@ -41,7 +41,7 @@ public class TasksListFragment extends BaseFragment {
     static TasksListFragment fragment;
     TaskListService taskListService;
     StickyListHeadersAdapter adapterTasksList;
-    AQuery aq;View view;
+    AQuery aq;View view;int Color;
     RadioGroup radioGroup;
     public static ArrayList<TaskListName> taskListName = new ArrayList<>();
     public static ArrayList<TasksList> allTaskList = new ArrayList<>();
@@ -117,6 +117,11 @@ public class TasksListFragment extends BaseFragment {
         aq = new AQuery(view);
         InitializeDialog(getActivity());
         baseClass = ((BaseClass) getActivity().getApplicationContext());
+        if(baseClass.getThemePreference() == R.style.AppThemeBlue) {
+            Color = android.graphics.Color.parseColor("#4B7BAA");
+        }else{
+            Color = android.graphics.Color.parseColor("#414042");
+        }
         applyLightBackground(aq.id(R.id.layout_bottom).getView(), baseClass);
         taskListService = new TaskListService(getActivity());
         if(baseClass.getSelectedProject().equalsIgnoreCase("0")) {
@@ -209,8 +214,12 @@ public class TasksListFragment extends BaseFragment {
         FilterList();
     }
     public void callForTaskSorting(){
-        String[] menuItems = {"Due Date","Priority","Alphabetically","Task List"};
-        final ActionSheetDialog dialog = new ActionSheetDialog(getActivity(),menuItems, getView());
+        String[] menuItems = {getString(R.string.due_date),getString(R.string.priority),
+                getString(R.string.alphabetically),getString(R.string.task_list)};
+        final ActionSheetDialog dialog = new ActionSheetDialog(
+                getActivity(),menuItems,getString(R.string.cancel), getView());
+        dialog.titleTextColor(Color);
+        dialog.itemTextColor(Color);
         dialog.isTitleShow(false).show();
         dialog.setOnOperItemClickL(new OnOperItemClickL() {
             @Override

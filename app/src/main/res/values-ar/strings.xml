@@ -84,7 +84,7 @@
     <string name="edit">تعديل</string>
     <string name="save">حفظ</string>
 
-    <string name="all">All</string>
+    <string name="all">جميع</string>
     <string name="upcoming">القادمة</string>
     <string name="overdue">المتراكمة</string>
     <string name="title_activity_milestone">MilestoneActivity</string>
@@ -340,4 +340,9 @@
     <string name="no_star_rating">لا تصنيف بالنجوم</string>
     <string name="no_departments">لا الإدارات</string>
     <string name="no_users">لا مستخدمين</string>
+
+    <string name="due_date">تاريخ الاستحقاق</string>
+    <string name="alphabetically">أبجديا</string>
+    <string name="task_list">قائمة المهام</string>
+    <string name="cancel">إلغاء</string>
 </resources>

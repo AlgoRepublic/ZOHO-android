@@ -65,7 +65,6 @@ public class AdapterUser extends BaseAdapter {
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
 
-
         ViewHolder holder = null;
         if(convertView == null){
             convertView = l_Inflater.inflate(R.layout.layout_user_row, null);

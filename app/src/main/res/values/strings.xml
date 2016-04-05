@@ -49,6 +49,8 @@
     <string name="image">Image</string>
     <string name="camera">Camera</string>
     <string name="gallery">Gallery</string>
+    <string name="google_drive">Google Drive</string>
+    <string name="drop_box">Drop Box</string>
     <string name="others">Others</string>
     <string name="OK">OK</string>
     <string name="none">None</string>
@@ -293,7 +295,7 @@
     <string name="days">day(s)</string>
     <string name="days_left">day(s) Left</string>
     <string name="no_task_found">day(s) No tasks found</string>
-    <string name="all_files">AllFiles</string>
+    <string name="all_files">All Files</string>
     <string name="picture">Pictures</string>
     <string name="videos">Videos</string>
     <string name="favorites">Favorites</string>
@@ -348,4 +350,9 @@
     <string name="no_star_rating">No Star Rating</string>
     <string name="no_departments">No Departments</string>
     <string name="no_users">No Users</string>
+
+    <string name="due_date">Due Date</string>
+    <string name="alphabetically">Alphabetically</string>
+    <string name="task_list">Task List</string>
+    <string name="cancel">Cancel</string>
 </resources>

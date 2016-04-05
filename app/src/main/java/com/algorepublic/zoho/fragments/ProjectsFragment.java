@@ -42,7 +42,7 @@ import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
  */
 public class ProjectsFragment extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener{
 
-    private AQuery aq;
+    private AQuery aq;int Color;
     private BaseClass baseClass;
     ProjectsListService service;
     public static StickyListHeadersListView listViewDept;
@@ -101,7 +101,10 @@ public class ProjectsFragment extends BaseFragment implements SwipeRefreshLayout
     }
     public void CallForFilter(){
         String[] menuItems = {getString(R.string.all_projects),getString(R.string.by_client),getString(R.string.by_dept)};
-        final ActionSheetDialog dialog = new ActionSheetDialog(getActivity(),menuItems, getView());
+        final ActionSheetDialog dialog = new ActionSheetDialog(getActivity(),menuItems,
+                getString(R.string.cancel),getView());
+        dialog.titleTextColor(Color);
+        dialog.itemTextColor(Color);
         dialog.isTitleShow(false).show();
         dialog.setOnOperItemClickL(new OnOperItemClickL() {
             @Override
@@ -147,6 +150,11 @@ public class ProjectsFragment extends BaseFragment implements SwipeRefreshLayout
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         baseClass = ((BaseClass) getActivity().getApplicationContext());
+        if(baseClass.getThemePreference() == R.style.AppThemeBlue) {
+            Color = android.graphics.Color.parseColor("#4B7BAA");
+        }else{
+            Color = android.graphics.Color.parseColor("#414042");
+        }
         service = new ProjectsListService(getActivity());
         service.getAllProjectsByUser_API(baseClass.getUserId(), true, new CallBack(this, "AllProjects"));
         service.getProjectsByClient_API(baseClass.getUserId(), false, new CallBack(this, "ProjectsByClient"));

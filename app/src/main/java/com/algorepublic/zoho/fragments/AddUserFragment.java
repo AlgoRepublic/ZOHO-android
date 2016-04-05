@@ -58,7 +58,7 @@ public class AddUserFragment extends BaseFragment implements MultiSelectionSpinn
     public static final int PICK_File = 3;
     File newFile;
     AQuery aq;
-    int[] Ids;
+    int Color;
     ACProgressFlower dialogAC;
     ArrayList<Integer> selectedIds = new ArrayList<>();
     ArrayList<String> roleList;
@@ -93,6 +93,11 @@ public class AddUserFragment extends BaseFragment implements MultiSelectionSpinn
         projectsList = (MultiSelectionSpinner) view.findViewById(R.id.projects_list);
         projectsList.setListener(this);
         baseClass = ((BaseClass) getActivity().getApplicationContext());
+        if(baseClass.getThemePreference() == R.style.AppThemeBlue) {
+            Color = android.graphics.Color.parseColor("#4B7BAA");
+        }else{
+            Color = android.graphics.Color.parseColor("#414042");
+        }
         aq = new AQuery(getActivity(), view);
         setHasOptionsMenu(true);
         service = new ProjectsListService(getActivity());
@@ -126,7 +131,7 @@ public class AddUserFragment extends BaseFragment implements MultiSelectionSpinn
                     if(AllProjectsByUserModel.getInstance().responseData.get(loop).projectName ==null){
                         projectList.add(getString(R.string.no_data));
                     }else
-                    projectList.add(AllProjectsByUserModel.getInstance().responseData.get(loop).projectName);
+                        projectList.add(AllProjectsByUserModel.getInstance().responseData.get(loop).projectName);
                 }catch (NullPointerException e){}
             }
             projectsList.setItems(projectList);
@@ -160,15 +165,15 @@ public class AddUserFragment extends BaseFragment implements MultiSelectionSpinn
                 baseClass.hideKeyPad(getView());
                 if(aq.id(R.id.first_name).getText().toString().isEmpty()){
                     Toast.makeText(getActivity(), getActivity().getString(R.string.user_first_name), Toast.LENGTH_SHORT).show();
- return false;
+                    return false;
                 }
                 if(aq.id(R.id.last_name).getText().toString().isEmpty()){
                     Toast.makeText(getActivity(), getActivity().getString(R.string.user_last_name), Toast.LENGTH_SHORT).show();
-  return false;
+                    return false;
                 }
                 if(aq.id(R.id.user_email).getText().toString().isEmpty()){
                     Toast.makeText(getActivity(), getActivity().getString(R.string.add_email), Toast.LENGTH_SHORT).show();
-  return false;
+                    return false;
                 }
                 if(aq.id(R.id.user_phoneno).getText().toString().isEmpty()){
                     Toast.makeText(getActivity(), getActivity().getString(R.string.add_phoneno), Toast.LENGTH_SHORT).show();
@@ -182,7 +187,9 @@ public class AddUserFragment extends BaseFragment implements MultiSelectionSpinn
     private void CallForAttachments() {
         String[] menuItems = {getString(R.string.camera),getString(R.string.gallery)
                 ,getString(R.string.others)};
-        final ActionSheetDialog dialog = new ActionSheetDialog(getActivity(),menuItems, getView());
+        final ActionSheetDialog dialog = new ActionSheetDialog(getActivity(),menuItems,
+                getString(R.string.cancel),getView());
+        dialog.titleTextColor(Color);
         dialog.isTitleShow(false).show();
         dialog.setOnOperItemClickL(new OnOperItemClickL() {
             @Override
@@ -257,8 +264,8 @@ public class AddUserFragment extends BaseFragment implements MultiSelectionSpinn
                 break;
             case RESULT_GALLERY:
                 if (null != data) {
-                     newFile = new File(URI.create("file://" +
-                             getDataColumn(getActivity(), data.getData(), null, null)));
+                    newFile = new File(URI.create("file://" +
+                            getDataColumn(getActivity(), data.getData(), null, null)));
                     checkFileLenght(newFile);
                 }
                 break;
