@@ -10,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.algorepublic.zoho.BaseActivity;
 import com.algorepublic.zoho.Models.UserListModel;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.adapters.AdapterUser;
@@ -21,8 +20,6 @@ import com.androidquery.AQuery;
 
 import java.util.ArrayList;
 
-import cc.cloudist.acplibrary.ACProgressFlower;
-
 /**
  * Created by waqas on 2/8/16.
  */
@@ -30,7 +27,7 @@ public class UserFragment extends BaseFragment implements SwipeRefreshLayout.OnR
 
 
     AQuery aq;
-    private SwipeRefreshLayout swipeRefreshLayout;
+    public static SwipeRefreshLayout swipeRefreshLayout;
     public static ArrayList<Integer> assigneeList = new ArrayList<>();
     BaseClass baseClass;
     UserService service;
@@ -57,7 +54,7 @@ public class UserFragment extends BaseFragment implements SwipeRefreshLayout.OnR
         getToolbar().setTitle(getString(R.string.users));
         swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe_refresh_layout);
         swipeRefreshLayout.setOnRefreshListener(this);
-        swipeRefreshLayout.setProgressViewOffset(false, 0, 200);
+        swipeRefreshLayout.setProgressViewOffset(true, 20,200);
             service = new UserService(getActivity());
         if(baseClass.getSelectedProject().equalsIgnoreCase("0")){
             service.getAllUsers(true, new CallBack(UserFragment.this, "UserList"));
@@ -84,6 +81,7 @@ public class UserFragment extends BaseFragment implements SwipeRefreshLayout.OnR
             aq.id(R.id.response_alert).visibility(View.GONE);
         }
         if (UserListModel.getInstance().responseObject.size()!=0) {
+
             aq.id(R.id.user_list).adapter(new AdapterUser(getActivity()));
             swipeRefreshLayout.setRefreshing(false);
         }else {

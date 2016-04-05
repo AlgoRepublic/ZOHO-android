@@ -25,6 +25,7 @@ import com.algorepublic.zoho.services.CallBack;
 import com.algorepublic.zoho.services.ForumService;
 import com.algorepublic.zoho.utils.BaseClass;
 import com.androidquery.AQuery;
+import com.poliveira.apps.parallaxlistview.ParallaxListView;
 
 import java.util.ArrayList;
 
@@ -42,6 +43,7 @@ public class ForumsDetailFragment extends BaseFragment {
     ForumService service;
     public static EditText comment_user;
     AdapterForumComment adapter;
+    public static ParallaxListView listView;
     public static ArrayList<TaskComments> arrayList = new ArrayList<>();
 
     public static ForumsDetailFragment newInstance(int pos) {
@@ -94,12 +96,14 @@ public class ForumsDetailFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view  = inflater.inflate(R.layout.fragment_forum_detail, container, false);
         comment_user = (EditText) view.findViewById(R.id.comment_user);
+        listView = (ParallaxListView) view.findViewById(R.id.forums_comment_list);
+        listView.setParallaxView(getActivity().getLayoutInflater().inflate(R.layout.view_header_forum, listView, false));
         aq = new AQuery(view);
         setHasOptionsMenu(true);
         baseClass = ((BaseClass) getActivity().getApplicationContext());
         adapter = new AdapterForumComment(getActivity());
         arrayList.clear();
-        aq.id(R.id.forums_comment_list).adapter(adapter);
+        listView.setAdapter(adapter);
         service = new ForumService(getActivity());
         service.getForumsDetail(ForumsModel.getInstance().responseObject.get(Position).ID
                 , true, new CallBack(ForumsDetailFragment.this, "ForumDetails"));
