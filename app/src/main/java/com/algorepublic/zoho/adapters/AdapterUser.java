@@ -64,6 +64,8 @@ public class AdapterUser extends BaseAdapter {
 
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
+
+
         ViewHolder holder = null;
         if(convertView == null){
             convertView = l_Inflater.inflate(R.layout.layout_user_row, null);
@@ -97,12 +99,14 @@ public class AdapterUser extends BaseAdapter {
         holder.btEdit.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View v) {
+
             callFragmentWithBackStack(R.id.container, EditUserFragment.newInstance(position), "EditUserFragment");
         }
         });
         holder.btDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 lastPosition = position;
                 NormalDialogCustomAttr(ctx.getString(R.string.deleted_user),lastPosition);
             }
