@@ -45,7 +45,6 @@ public class AdapterDocumentsList extends BaseAdapter implements StickyListHeade
     private LayoutInflater l_Inflater;
     private int lastPosition = -1;
     static int ID;
-    int Type;
     ArrayList<DocumentsList> documentsLists = new ArrayList<>();
 
     public AdapterDocumentsList(Context context,int Id,ArrayList<DocumentsList> arrayList ) {

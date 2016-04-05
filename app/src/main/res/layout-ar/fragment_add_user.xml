@@ -66,70 +66,80 @@
                 app:civ_border_color="@color/colorContentWrapper"
                 app:civ_border_width="4dp"/>
 
-            <com.rengwuxian.materialedittext.MaterialEditText
+            <EditText
+                android:paddingStart="5dp"
+                android:paddingEnd="5dp"
+                android:background="@drawable/round_border"
+                android:singleLine="true"
+                android:ellipsize="end"
                 android:id="@+id/first_name"
                 android:layout_below="@+id/profile"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="45dp"
                 android:layout_marginTop="15dp"
                 android:hint="@string/first_name"
-                android:textSize="18sp"
-                app:met_floatingLabel="normal"
-                app:met_primaryColor="@color/colorBaseHeader"
-                app:met_singleLineEllipsis="true" />
+                android:textSize="18sp"/>
 
 
-            <com.rengwuxian.materialedittext.MaterialEditText
+            <EditText
+                android:paddingStart="5dp"
+                android:paddingEnd="5dp"
+                android:background="@drawable/round_border"
+                android:singleLine="true"
+                android:ellipsize="end"
                 android:id="@+id/last_name"
                 android:layout_below="@+id/first_name"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="45dp"
                 android:layout_marginTop="10dp"
                 android:hint="@string/last_name"
                 android:inputType="textMultiLine"
-                android:textSize="18sp"
-                app:met_singleLineEllipsis="true"
-                app:met_floatingLabel="normal"
-                app:met_primaryColor="@color/colorBaseHeader" />
+                android:textSize="18sp"/>
 
-            <com.rengwuxian.materialedittext.MaterialEditText
+            <EditText
+                android:paddingStart="5dp"
+                android:paddingEnd="5dp"
+                android:background="@drawable/round_border"
+                android:singleLine="true"
+                android:ellipsize="end"
                 android:id="@+id/nick_name"
                 android:layout_below="@+id/last_name"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="45dp"
                 android:layout_marginTop="10dp"
                 android:hint="@string/nick_name"
                 android:inputType="textMultiLine"
-                android:textSize="18sp"
-                app:met_singleLineEllipsis="true"
-                app:met_floatingLabel="normal"
-                app:met_primaryColor="@color/colorBaseHeader" />
+                android:textSize="18sp" />
 
-            <com.rengwuxian.materialedittext.MaterialEditText
+            <EditText
+                android:paddingStart="5dp"
+                android:paddingEnd="5dp"
+                android:background="@drawable/round_border"
+                android:singleLine="true"
+                android:ellipsize="end"
                 android:id="@+id/user_email"
                 android:layout_below="@+id/nick_name"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="45dp"
                 android:layout_marginTop="10dp"
                 android:hint="@string/email"
                 android:inputType="textMultiLine"
-                android:textSize="18sp"
-                app:met_singleLineEllipsis="true"
-                app:met_floatingLabel="normal"
-                app:met_primaryColor="@color/colorBaseHeader" />
+                android:textSize="18sp" />
 
-            <com.rengwuxian.materialedittext.MaterialEditText
+            <EditText
+                android:paddingStart="5dp"
+                android:paddingEnd="5dp"
+                android:background="@drawable/round_border"
+                android:singleLine="true"
+                android:ellipsize="end"
                 android:id="@+id/user_phoneno"
                 android:layout_below="@id/user_email"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="45dp"
                 android:layout_marginTop="10dp"
                 android:hint="@string/phone_number"
                 android:inputType="phone"
-                android:textSize="18sp"
-                app:met_singleLineEllipsis="true"
-                app:met_floatingLabel="normal"
-                app:met_primaryColor="@color/colorBaseHeader" />
+                android:textSize="18sp" />
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -141,8 +151,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/user_roles"
-                android:textColor="@color/colorContentWrapper"
                 android:id="@+id/category"
+                android:textSize="18sp"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentStart="true" />
             <ListView
@@ -167,15 +177,15 @@
                 android:layout_height="wrap_content"
                 android:paddingBottom="2dp"
                 android:text="@string/assigned_projects"
-                android:textColor="@color/colorContentWrapper"
-                android:textSize="13.33sp"
+                android:textSize="18sp"
                 android:typeface="monospace" />
 
             <com.guna.libmultispinner.MultiSelectionSpinner
                 android:id="@+id/projects_list"
                 android:layout_marginTop="10dp"
+                android:background="@drawable/round_border"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="45dp"
                 android:layout_below="@+id/text" />
             </LinearLayout>
         </RelativeLayout>
