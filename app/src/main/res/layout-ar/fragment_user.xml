@@ -17,6 +17,8 @@
             android:choiceMode="singleChoice"
             android:descendantFocusability="beforeDescendants"
             android:divider="@null"
+            android:scrollingCache="false"
+            android:animationCache="false"
             android:dividerHeight="5dp"
             android:scrollbars="none" />
     </android.support.v4.widget.SwipeRefreshLayout>

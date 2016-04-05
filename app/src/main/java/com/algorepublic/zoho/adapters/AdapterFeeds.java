@@ -8,6 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.algorepublic.zoho.Models.FeedsModel;
@@ -65,44 +67,40 @@ public class AdapterFeeds extends BaseAdapter {
     }
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
-        convertView = l_Inflater.inflate(R.layout.layout_feeds_row, null);
+        ViewHolder holder = null;
+        if(convertView == null){
+            holder = new ViewHolder();
+            convertView = l_Inflater.inflate(R.layout.layout_feeds_row, null);
+
+            holder.feedTitle = (TextView) convertView.findViewById(R.id.feed_title);
+            holder.feedDesc = (TextView) convertView.findViewById(R.id.feed_description);
+            holder.feedCommentDate = (TextView) convertView.findViewById(R.id.feed_comment_date);
+            holder.profileImage = (ImageView) convertView.findViewById(R.id.feed_image);
+            convertView.setTag(holder);
+        }else {
+            holder = (ViewHolder) convertView.getTag();
+        }
+
         aq = new AQuery(convertView);
-        aq.id(R.id.feed_title).text(getItem(position).userName+" "+getStringLine(getItem(position).updateType));
-        aq.id(R.id.feed_description).text(getItem(position).message);
-        aq.id(R.id.feed_comment_date).text(
+        holder.feedTitle.setText(getItem(position).userName+" "+getStringLine(getItem(position).updateType));
+        holder.feedDesc.setText(getItem(position).message);
+        holder.feedCommentDate.setText(
                 getItem(position).comments.size()+"-"+ctx.getString(R.string.comments) +" "+
                         baseClass.DateFormatter(getItem(position).createdAt)+" "+
                 baseClass.GetTime(baseClass.DateMilli(getItem(position).createdAt)));
 
         if(getItem(position).user.profileImagePath != null) {
             Glide.with(ctx).load(Constants.UserImage_URL + getItem(position).user.profileImagePath)
-                    .into(aq.id(R.id.feed_image).getImageView());
+                    .into(holder.profileImage);
         }
-
-//        aq.id(R.id.parent1).clicked(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                callFragmentWithBackStack(R.id.container, ForumsDetailFragment.newInstance(position), "ForumsDetailFragment");
-//            }
-//        });
-//        aq.id(R.id.btEdit).clicked(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                if (baseClass.getSelectedProject().equalsIgnoreCase("0")) {
-//                    Toast.makeText((AppCompatActivity)ctx,"Please Select Project",Toast.LENGTH_SHORT).show();
-//                    return;
-//                }
-//                callFragmentWithBackStack(R.id.container, EditForumFragment.newInstance(position), "EditForumFragment");
-//            }
-//        });.
-//        aq.id(R.id.btDelete).clicked(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Clicked = position;
-//               NormalDialogCustomAttr(ctx.getString(R.string.deleted_forum),Clicked);
-//            }
-//        });
         return convertView;
+    }
+
+    class ViewHolder{
+        TextView feedTitle;
+        TextView feedDesc;
+        TextView feedCommentDate;
+        ImageView profileImage;
     }
     protected String getStringLine(int stringType){
         String lines=null;
