@@ -169,9 +169,6 @@ public class TaskAddUpdateFragment extends BaseFragment {
         applyLightBackground(aq.id(R.id.title_bar).getView(), baseClass);
         SetValues();
         getToolbar().setTitle(Title);
-        if( baseClass.db.getString("ProjectName") != null) {
-           getToolbar().setSubtitle(baseClass.db.getString("ProjectName"));
-        }
         aq.id(R.id.title_text).getEditText().addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {

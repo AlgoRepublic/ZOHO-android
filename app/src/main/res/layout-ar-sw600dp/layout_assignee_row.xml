@@ -19,7 +19,6 @@
         android:layout_margin="10dp"
         android:layout_toLeftOf="@+id/assignee_checkbox"
         android:layout_toStartOf="@+id/assignee_checkbox"
-        android:textColor="@color/colorContentWrapper"
         android:textSize="18sp" />
 
     <CheckBox

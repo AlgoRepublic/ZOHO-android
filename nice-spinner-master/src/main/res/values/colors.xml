@@ -3,4 +3,5 @@
     <color name="light_gray">#FAFAFA</color>
     <color name="white">#FAFAFA</color>
     <color name="colorBaseHeader">#414042</color>
+    <color name="colorContentWrapper">#808285</color>
 </resources>

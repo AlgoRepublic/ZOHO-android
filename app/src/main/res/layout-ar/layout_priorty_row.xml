@@ -17,7 +17,6 @@
         android:layout_centerVertical="true"
         android:layout_margin="10dp"
         android:layout_toLeftOf="@+id/priority_checkbox"
-        android:textColor="@color/colorContentWrapper"
         android:textSize="16sp" />
 
     <CheckBox

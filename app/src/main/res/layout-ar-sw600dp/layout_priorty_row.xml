@@ -21,7 +21,6 @@
         android:textSize="18sp"
         android:layout_toLeftOf="@+id/priority_checkbox"
         android:layout_toStartOf="@+id/priority_checkbox"
-        android:textColor="@color/colorContentWrapper"
         />
     <RadioButton
         android:id="@+id/priority_checkbox"
