@@ -56,6 +56,7 @@
     <string name="file_size_content">حجم الملف المرفق يجب أن يكون أقل من 5 ميغابايت</string>
     <string name="task_desc">الوصف</string>
     <string name="category">الفئة</string>
+    <string name="category_">الفئة:</string>
     <string name="employees">المستخدمين</string>
     <string name="assigned_projects">المشاريع المخصصة</string>
     <string name="TaskListName">اسم قائمة المهام</string>

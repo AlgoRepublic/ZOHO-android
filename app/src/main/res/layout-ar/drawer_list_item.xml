@@ -60,17 +60,16 @@
                     android:layout_toRightOf="@+id/comment_text">
 
                     <EditText
+                        android:paddingStart="5dp"
+                        android:paddingEnd="5dp"
+                        android:background="@drawable/round_border"
                         android:id="@+id/comment_edittext"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/round_border"
                         android:gravity="top|left|start"
                         android:lines="3"
-                        android:textColor="@color/colorBaseHeader"
                         android:layout_marginLeft="5dp"
                         android:layout_marginStart="5dp"
-                        android:paddingRight="23dp"
-                        android:paddingEnd="23dp"
                         android:text="Comments:\n wdwdw\nwdww"
                         android:textSize="10sp"
                         android:textStyle="bold" />

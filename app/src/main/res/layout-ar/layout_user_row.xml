@@ -105,6 +105,7 @@
                         android:textStyle="bold"
                         android:layout_marginTop="5dp"
                         android:layout_marginLeft="5dp"
+                        android:layout_marginStart="5dp"
                         android:textSize="14sp"
                         android:id="@+id/user_title"
                         android:layout_toEndOf="@+id/user_image" />
@@ -140,7 +141,7 @@
                         android:layout_width="15dp"
                         android:layout_height="15dp"
                         android:layout_margin="5dp"
-                        android:background="@drawable/circle_left"/>
+                        android:background="@drawable/circle_right"/>
                 </LinearLayout>
                 </RelativeLayout>
         </com.daimajia.swipe.SwipeLayout>

@@ -41,25 +41,23 @@
         <RelativeLayout
             android:padding="10dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="70dp"
-                android:id="@+id/layout2">
+            android:layout_height="80dp">
 
-                <EditText
-                    android:id="@+id/dept_title"
-                    android:textSize="18sp"
-                    android:layout_width="match_parent"
-                    android:layout_height="55dp"
-                    android:hint="@string/title"
-                    android:inputType="textMultiLine"
-                    android:layout_marginTop="10dp"
-                    android:background="@drawable/round_border"
-                    android:textColor="@color/colorBaseHeader"
-                    android:textColorHint="@color/colorBaseMenu"/>
-
-            </RelativeLayout>
+        <EditText
+            android:paddingStart="5dp"
+            android:paddingEnd="5dp"
+            android:background="@drawable/round_border"
+            android:singleLine="true"
+            android:ellipsize="end"
+            android:id="@+id/dept_title"
+            android:textSize="18sp"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:hint="@string/new_dept"
+            android:inputType="textMultiLine"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/colorBaseHeader"
+            android:textColorHint="@color/colorBaseMenu"/>
 
         </RelativeLayout>
     </android.support.v7.widget.CardView>

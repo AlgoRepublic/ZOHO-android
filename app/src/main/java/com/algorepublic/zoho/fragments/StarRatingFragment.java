@@ -30,13 +30,13 @@ public class StarRatingFragment extends BaseFragment {
     AQuery aq; CustomExpListView mListView;
     StarRatingService service;
     BaseClass baseClass;
+
     public static StarRatingFragment newInstance() {
         fragment = new StarRatingFragment();
         return fragment;
     }
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        setRetainInstance(true);
         getToolbar().setTitle(getString(R.string.star_rating));
         super.onViewCreated(view, savedInstanceState);
     }
@@ -59,7 +59,7 @@ public class StarRatingFragment extends BaseFragment {
                 service.getStarRatingHeads_API("en-Us", true,
                         new CallBack(StarRatingFragment.this, "StarRatingHeads"));
             }else{
-                service.getStarRatingHeads_API("ar-UE", true,
+                service.getStarRatingHeads_API("", true,
                         new CallBack(StarRatingFragment.this, "StarRatingHeads"));
             }
         }else{
