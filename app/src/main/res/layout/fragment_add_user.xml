@@ -77,7 +77,8 @@
                 android:hint="@string/first_name"
                 android:textSize="18sp"
                 android:textColor="@color/colorBaseHeader"
-                android:textColorHint="@color/colorBaseMenu" />
+                android:textColorHint="@color/colorBaseMenu"
+                />
 
 
             <EditText
