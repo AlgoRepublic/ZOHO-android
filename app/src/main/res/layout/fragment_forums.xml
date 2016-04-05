@@ -11,6 +11,9 @@
         android:layout_height="match_parent"
         android:padding="10dp"
         android:descendantFocusability="beforeDescendants"
+        android:smoothScrollbar="true"
+        android:scrollingCache="false"
+        android:animationCache="false"
         android:divider="@null"
         android:dividerHeight="5dp" />
     <include
