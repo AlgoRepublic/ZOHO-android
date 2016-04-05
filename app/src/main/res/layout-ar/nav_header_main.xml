@@ -4,10 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/colorBaseWrapper"
-    android:gravity="top"
-    android:fitsSystemWindows="true"
-    android:layoutDirection="rtl"
-    android:textDirection="rtl"
+    android:gravity="top|center_horizontal"
     android:orientation="vertical">
 
     <View
@@ -31,6 +28,7 @@
             android:layout_centerVertical="true"
             android:layout_marginEnd="10dp"
             android:layout_marginRight="10dp"
+            android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:src="@drawable/settings" />
     </RelativeLayout>
@@ -40,6 +38,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="top"
+        android:gravity="center_horizontal"
         android:orientation="vertical">
 
         <RelativeLayout
@@ -62,7 +61,7 @@
                     android:layout_centerVertical="true"
                     android:layout_toLeftOf="@+id/profile"
                     android:layout_toStartOf="@+id/profile"
-                    android:gravity="right"
+                    android:gravity="end"
                     android:lines="2"
                     android:padding="5dp"
                     android:text="@string/first_name"
@@ -82,25 +81,26 @@
                     app:civ_border_color="@color/colorContentWrapper"
                     app:civ_border_width="4dp" />
 
-                <TextView
+               <TextView
                     android:id="@+id/last_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:layout_toEndOf="@id/profile"
-                    android:layout_toRightOf="@id/profile"
-                    android:gravity="left"
+                    android:layout_toEndOf="@+id/profile"
+                    android:layout_toRightOf="@+id/profile"
+                    android:gravity="start"
                     android:lines="2"
                     android:padding="5dp"
                     android:text="@string/last_name"
-                    android:textSize="18sp" />
+                    android:textSize="18dp" />
+
             </RelativeLayout>
 
             <RelativeLayout
                 android:id="@+id/parent_child3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/parent_child2"
+                android:layout_below="@+id/parent_child2"
                 android:layout_margin="10dp">
 
                 <TextView
@@ -123,9 +123,8 @@
             android:horizontalSpacing="5dp"
             android:numColumns="3"
             android:choiceMode="singleChoice"
-            android:layout_gravity="center_horizontal"
             android:orientation="vertical"
-            android:padding="5dp"
+            android:padding="10dp"
             android:stretchMode="columnWidth"/>
     </LinearLayout>
 

@@ -113,7 +113,7 @@ public class ForumsDetailFragment extends BaseFragment {
                 + baseClass.GetTime(baseClass.DateMilli(ForumsModel.getInstance()
                 .responseObject.get(Position).updatedAt)));
 
-        aq.id(R.id.comment_user).getTextView().setOnEditorActionListener(new TextView.OnEditorActionListener() {
+        comment_user.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if (actionId == getResources().getInteger(R.integer.add_comment)) {
@@ -122,7 +122,7 @@ public class ForumsDetailFragment extends BaseFragment {
                                 .arrayList.get(ClickedPosition).getCommentID(), ForumsDetailFragment
                                 .comment_user.getText().toString(), true, new
                                 CallBack(ForumsDetailFragment.this, "UpdateComment"));
-                    }else{
+                    } else {
                         PerformAction();
                     }
                     baseClass.hideKeyPad(getView());

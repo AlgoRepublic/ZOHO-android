@@ -37,6 +37,7 @@
                         android:id="@+id/swipe"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        app:drag_edge="left"
                         app:clickToClose="true">
                         <LinearLayout
                             android:layout_width="150dp"
@@ -78,7 +79,7 @@
                             android:layout_height="match_parent">
                             <RelativeLayout
                                 android:id="@+id/parent1"
-                                android:layout_toLeftOf="@+id/rightarrow_layout"
+                                android:layout_toRightOf="@+id/rightarrow_layout"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:padding="5dp"
@@ -104,7 +105,7 @@
 
                                     <RelativeLayout
                                         android:id="@+id/layout_comment"
-                                        android:layout_width="40dp"
+                                        android:layout_width="35dp"
                                         android:layout_alignParentRight="true"
                                         android:layout_alignParentEnd="true"
                                         android:layout_centerHorizontal="true"
@@ -117,17 +118,18 @@
                                             android:gravity="center"
                                             android:singleLine="true"
                                             android:textSize="7dp"
-                                            android:layout_alignParentRight="true"
-                                            android:layout_alignParentEnd="true"
-                                            android:background="@drawable/bubble_alert_black_reverse"
+
+                                            android:background="@drawable/bubble_alert_black"
                                             android:layout_alignParentTop="true" />
 
                                         <ImageView
                                             android:id="@+id/delete1"
                                             android:layout_width="20dp"
-
                                             android:layout_alignParentBottom="true"
                                             android:src="@drawable/forums"
+                                            android:scaleX="-1"
+                                            android:layout_alignParentRight="true"
+                                            android:layout_alignParentEnd="true"
                                             android:layout_height="20dp" />
                                     </RelativeLayout>
                                 </RelativeLayout>
@@ -144,7 +146,7 @@
                             <LinearLayout
                                 android:id="@+id/rightarrow_layout"
                                 android:layout_width="20dp"
-                                android:layout_alignParentRight="true"
+                                android:layout_alignParentLeft="true"
                                 android:layout_height="match_parent"
                                 android:gravity="center"
                                 android:background="#E2DBDB">
@@ -154,7 +156,7 @@
                                     android:layout_width="15dp"
                                     android:layout_height="15dp"
                                     android:layout_margin="5dp"
-                                    android:background="@drawable/circle_left"/>
+                                    android:background="@drawable/circle_right"/>
                             </LinearLayout>
                         </RelativeLayout>
                     </com.daimajia.swipe.SwipeLayout>

@@ -16,6 +16,8 @@
         android:layout_height="match_parent"
         android:choiceMode="singleChoice"
         android:descendantFocusability="beforeDescendants"
+        android:scrollingCache="false"
+        android:animationCache="false"
         android:divider="@null"
         android:dividerHeight="5dp"
         android:scrollbars="none" />

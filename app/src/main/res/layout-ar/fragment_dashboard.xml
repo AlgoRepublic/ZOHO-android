@@ -35,7 +35,8 @@
                 <view
                     android:layout_width="300dp"
                     android:layout_height="200dp"
-                    android:layout_margin="20dp"
+                    android:layout_margin="10dp"
+                    android:gravity="center"
                     android:layout_centerHorizontal="true"
                     class="com.dacer.androidcharts.BarView"
                     android:id="@+id/line_view" />
@@ -44,7 +45,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:gravity="center"
                     android:layout_below="@+id/line_view">
                 <TextView
                     android:id="@+id/open1"
@@ -52,15 +52,16 @@
                     android:layout_height="wrap_content"
                     android:textSize="14sp"
                     android:layout_centerVertical="true"
-                    android:layout_toLeftOf="@+id/imag22"
+                    android:layout_toRightOf="@+id/imag22"
                     android:gravity="center_vertical"
-                    android:layout_marginRight="4dp"/>
+                    android:layout_marginLeft="4dp"/>
                         <View
                             android:layout_width="20dp"
                             android:layout_height="20dp"
                             android:text="@string/closed_tasks"
                             android:textSize="14sp"
                             android:id="@+id/imag22"
+                            android:layout_centerHorizontal="true"
                             android:background="@drawable/drawer_tasks"
                             android:layout_centerVertical="true"
                             />
@@ -71,9 +72,9 @@
                             android:layout_height="wrap_content"
                             android:textSize="14sp"
                             android:layout_centerVertical="true"
-                            android:layout_toRightOf="@+id/imag22"
+                            android:layout_toLeftOf="@+id/imag22"
                             android:gravity="center_vertical"
-                            android:layout_marginLeft="4dp"/>
+                            android:layout_marginRight="4dp"/>
                     </RelativeLayout>
 
                 <RelativeLayout
@@ -81,7 +82,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:gravity="center"
                     android:layout_below="@+id/layout1">
 
 
@@ -91,15 +91,16 @@
                     android:layout_height="wrap_content"
                     android:textSize="14sp"
                     android:layout_centerVertical="true"
-                    android:layout_toLeftOf="@+id/imag223"
+                    android:layout_toRightOf="@+id/imag223"
                     android:gravity="center_vertical"
-                    android:layout_marginRight="4dp"/>
+                    android:layout_marginLeft="4dp"/>
                         <View
                             android:layout_width="20dp"
                             android:layout_height="20dp"
                             android:text="@string/closed_tasks"
                             android:textSize="14sp"
                             android:id="@+id/imag223"
+                            android:layout_centerHorizontal="true"
                             android:background="@drawable/opened_tasks"
                             android:layout_centerVertical="true"
                             />
@@ -110,9 +111,9 @@
                             android:layout_height="wrap_content"
                             android:textSize="14sp"
                             android:layout_centerVertical="true"
-                            android:layout_toRightOf="@+id/imag223"
+                            android:layout_toLeftOf="@+id/imag223"
                             android:gravity="center_vertical"
-                            android:layout_marginLeft="4dp"/>
+                            android:layout_marginRight="4dp"/>
                     </RelativeLayout>
 
                 <RelativeLayout
@@ -120,7 +121,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:gravity="center"
                     android:layout_below="@+id/layout2">
 
                 <TextView
@@ -129,15 +129,16 @@
                     android:layout_height="wrap_content"
                     android:textSize="14sp"
                     android:layout_centerVertical="true"
-                    android:layout_toLeftOf="@+id/imag222"
+                    android:layout_toRightOf="@+id/imag222"
                     android:gravity="center_vertical"
-                    android:layout_marginRight="4dp"/>
+                    android:layout_marginLeft="4dp"/>
                         <View
                             android:layout_width="20dp"
                             android:layout_height="20dp"
                             android:text="@string/closed_tasks"
                             android:textSize="14sp"
                             android:id="@+id/imag222"
+                            android:layout_centerHorizontal="true"
                             android:background="@drawable/cloased_tasks"
                             android:layout_centerVertical="true"
                             />
@@ -148,9 +149,9 @@
                             android:layout_height="wrap_content"
                             android:textSize="14sp"
                             android:layout_centerVertical="true"
-                            android:layout_toRightOf="@+id/imag222"
+                            android:layout_toLeftOf="@+id/imag222"
                             android:gravity="center_vertical"
-                            android:layout_marginLeft="4dp"/>
+                            android:layout_marginRight="4dp"/>
                     </RelativeLayout>
             </RelativeLayout>
 
@@ -197,9 +198,9 @@
                             android:text="@string/opened_tasks"
                             android:textSize="14sp"
                             android:layout_centerVertical="true"
-                            android:layout_toRightOf="@+id/imag1"
+                            android:layout_toLeftOf="@+id/imag1"
                             android:gravity="center_vertical"
-                            android:layout_marginLeft="4dp"/>
+                            android:layout_marginRight="4dp"/>
                     </RelativeLayout>
                     <RelativeLayout
                         android:id="@+id/close"
@@ -222,9 +223,9 @@
                             android:text="@string/closed_tasks"
                             android:textSize="14sp"
                             android:layout_centerVertical="true"
-                           android:layout_toRightOf="@+id/imag"
+                           android:layout_toLeftOf="@+id/imag"
                             android:gravity="center_vertical"
-                            android:layout_marginLeft="4dp"/>
+                            android:layout_marginRight="4dp"/>
                     </RelativeLayout>
 
 

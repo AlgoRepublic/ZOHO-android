@@ -60,8 +60,9 @@
         <item name="tabSelectedTextColor">@color/colorWhite</item>
     </style>
 
-    <style name="blueEditTextStyle" parent="Widget.AppCompat.EditText">
+    <style name="blueEditTextStyle" parent="Base.Widget.AppCompat.EditText">
         <item name="android:textColor">@color/colorPrimaryBlue</item>
+        <item name="android:background">@drawable/round_border</item>
         <item name="android:textColorHint">@color/colorPrimaryBlue</item>
     </style>
     <!-- Base application theme. -->
@@ -103,7 +104,7 @@
     </style>
     <style name="blackEditTextStyle" parent="Widget.AppCompat.EditText">
         <item name="android:textColor">@color/colorBaseHeader</item>
-        <item name="android:textColorHint">@color/colorBaseHeader</item>
+        <item name="android:textColorHint">@color/colorContentWrapper</item>
     </style>
     <style name="blackButton" parent="@android:style/Widget.Button">
         <item name="android:background">@color/colorContentWrapper</item>

@@ -40,6 +40,8 @@
             android:id="@+id/projects_liststicky"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:scrollingCache="false"
+            android:animationCache="false"
             android:divider="@null"
             android:scrollbars="none" />
     </android.support.v4.widget.SwipeRefreshLayout>
@@ -59,6 +61,8 @@
             android:divider="@null"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:scrollingCache="false"
+            android:animationCache="false"
             android:scrollbars="none"/>
     </android.support.v4.widget.SwipeRefreshLayout>
     <RelativeLayout

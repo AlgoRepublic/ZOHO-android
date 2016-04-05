@@ -64,23 +64,32 @@ public class AdapterUser extends BaseAdapter {
 
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
-        ViewHolder holder;
 
-        convertView = l_Inflater.inflate(R.layout.layout_user_row, null);
-        holder = new ViewHolder();
 
-        holder.userImage = (CircularImageView) convertView.findViewById(R.id.user_image);
-        holder.btEdit = (TextView) convertView.findViewById(R.id.btEdit);
-        holder.btDelete = (TextView) convertView.findViewById(R.id.btDelete);
+        ViewHolder holder = null;
+        if(convertView == null){
+            convertView = l_Inflater.inflate(R.layout.layout_user_row, null);
+            holder = new ViewHolder();
+
+            holder.userImage = (CircularImageView) convertView.findViewById(R.id.user_image);
+            holder.btEdit = (TextView) convertView.findViewById(R.id.btEdit);
+            holder.btDelete = (TextView) convertView.findViewById(R.id.btDelete);
+            holder.userTitle = (TextView) convertView.findViewById(R.id.user_title);
+            holder.userEmail = (TextView) convertView.findViewById(R.id.user_email);
+            holder.userRole = (TextView) convertView.findViewById(R.id.user_role);
+            convertView.setTag(holder);
+        }else{
+            holder = (ViewHolder) convertView.getTag();
+        }
 
         aq = new AQuery(convertView);
-        if (getItem(position).userRole.ID==1){
+        if (getItem(position).userRole.ID == 1){
             aq.id(R.id.layout123).visibility(View.GONE);
         }
 
-        aq.id(R.id.user_title).text(getItem(position).firstName);
-        aq.id(R.id.user_email).text(getItem(position).email);
-        aq.id(R.id.user_role).text(ctx.getString(R.string.role) + getItem(position).userRole.role);
+        holder.userTitle.setText(getItem(position).firstName);
+        holder.userEmail.setText(getItem(position).email);
+        holder.userRole.setText(ctx.getString(R.string.role) + getItem(position).userRole.role);
         if (getItem(position).profileImagePath != null) {
             Glide.with(ctx).load(Constants.Image_URL + getItem(position).profilePictureID
                     + "." + BaseClass.getExtensionType(getItem(position).profileImagePath))
@@ -106,7 +115,7 @@ public class AdapterUser extends BaseAdapter {
     }
     public void DeleteUser(Object caller, Object model){
         GeneralModel.getInstance().setList((GeneralModel) model);
-        if (GeneralModel.getInstance().responseObject ==true ) {
+        if (GeneralModel.getInstance().responseObject) {
             UserListModel.getInstance().responseObject.remove(lastPosition);
             notifyDataSetChanged();
             Toast.makeText(ctx, ctx.getString(R.string.user_deleted), Toast.LENGTH_SHORT).show();
@@ -115,6 +124,9 @@ public class AdapterUser extends BaseAdapter {
         }
     }
     static class ViewHolder {
+        TextView userTitle;
+        TextView userEmail;
+        TextView userRole;
         CircularImageView userImage;
         TextView btEdit;
         TextView btDelete;

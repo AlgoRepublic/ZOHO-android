@@ -15,6 +15,7 @@ import com.algorepublic.zoho.adapters.StarRatingHeadsLevelThree;
 import com.algorepublic.zoho.adapters.StarRatingHeadsLevelTwo;
 import com.algorepublic.zoho.services.CallBack;
 import com.algorepublic.zoho.services.StarRatingService;
+import com.algorepublic.zoho.utils.BaseClass;
 import com.algorepublic.zoho.utils.CustomExpListView;
 import com.androidquery.AQuery;
 
@@ -28,13 +29,14 @@ public class StarRatingFragment extends BaseFragment {
     public static ArrayList<StarRatingHeadsLevelOne> levelOneHead = new ArrayList<>();
     AQuery aq; CustomExpListView mListView;
     StarRatingService service;
+    BaseClass baseClass;
+
     public static StarRatingFragment newInstance() {
         fragment = new StarRatingFragment();
         return fragment;
     }
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        setRetainInstance(true);
         getToolbar().setTitle(getString(R.string.star_rating));
         super.onViewCreated(view, savedInstanceState);
     }
@@ -47,13 +49,19 @@ public class StarRatingFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_star_rating, container, false);
+        baseClass = ((BaseClass) getActivity().getApplicationContext());
         mListView = (CustomExpListView) view.findViewById(R.id.starListView);
 
         aq= new AQuery(view);
         service = new StarRatingService(getActivity());
         if(levelOneHead.size()==0) {
-            service.getStarRatingHeads_API("en-Us", true,
-                    new CallBack(StarRatingFragment.this, "StarRatingHeads"));
+            if(baseClass.getUserLanguage().equalsIgnoreCase("en")) {
+                service.getStarRatingHeads_API("en-Us", true,
+                        new CallBack(StarRatingFragment.this, "StarRatingHeads"));
+            }else{
+                service.getStarRatingHeads_API("", true,
+                        new CallBack(StarRatingFragment.this, "StarRatingHeads"));
+            }
         }else{
             setAdapter();
         }

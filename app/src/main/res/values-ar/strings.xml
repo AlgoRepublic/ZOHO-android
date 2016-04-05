@@ -20,7 +20,7 @@
         completions."
     </string>-->
     <!-- Strings related to Menu -->
-    <string name="feeds">Feeds</string>
+    <string name="feeds">يغذي</string>
     <string name="activity">النشاطات</string>
     <string name="tasks">المهام</string>
     <string name="task_detail">بيانات المهمة</string>
@@ -30,8 +30,8 @@
     <string name="documents">الملفات</string>
     <string name="settings">الإعدادات</string>
     <string name="dashboard">الصفحة الرئيسية</string>
-    <string name="forums">Forums</string>
-    <string name="start_rating">البدء بالتقييم</string>
+    <string name="forums">المنتديات</string>
+    <string name="star_rating">البدء بالتقييم</string>
     <string name="departments">الأقسام</string>
     <!-- Strings related to Tasks -->
     <string name="task_title">موضوع المهمة:</string>
@@ -56,6 +56,7 @@
     <string name="file_size_content">حجم الملف المرفق يجب أن يكون أقل من 5 ميغابايت</string>
     <string name="task_desc">الوصف</string>
     <string name="category">الفئة</string>
+    <string name="category_">الفئة:</string>
     <string name="employees">المستخدمين</string>
     <string name="assigned_projects">المشاريع المخصصة</string>
     <string name="TaskListName">اسم قائمة المهام</string>
@@ -180,6 +181,15 @@
     <string name="projects_list_empty">قائمة المشروع فارغة</string>
     <string name="forums_list_empty">قائمة المشروع فارغة</string>
     <string name="dept_name">اسم القسم</string>
+
+    <string name="closed_tasks">مهام مغلقة</string>
+    <string name="closed_taskslists">قائمة المهام مغلقة</string>
+    <string name="closed_milestone">المعلم مغلقة</string>
+    <string name="opened_tasks">افتح ياسمسم</string>
+    <string name="opened_milestone">فتح المعلم</string>
+    <string name="opened_taskslist">قائمة افتح ياسمسم</string>
+    <string name="tasks_list">قائمة المهام</string>
+    <string name="milestones">معالم</string>
     <!-- Task Details Strings -->
     <string name="delete_doc">حذف الملف؟</string>
     <string name="delete">حذف</string>
@@ -267,7 +277,7 @@
     <string name="add_project">إضافة مشروع</string>
     <string name="enter_comment">أدخل تعليقك!</string>
     <string name="no_date">لا يوجد تاريخ</string>
-    <string name="by">By</string>
+    <string name="by">بواسطة</string>
     <string name="last_responce_on">آخر رد في</string>
     <string name="me">Me</string>
     <string name="no_due_date">No Due Date</string>
@@ -303,6 +313,7 @@
     <string name="clear_board">Clear Board</string>
     <string name="rating">التقييم</string>
     <string name="stage">المرحلة</string>
+    <string name="about_us">معلومات عنا</string>
     <string name="comments_added">التعليق واضاف</string>
     <string name="uploaded_succesful">اتم رفع الملف بنجاح</string>
     <!-- User Status Strings -->
