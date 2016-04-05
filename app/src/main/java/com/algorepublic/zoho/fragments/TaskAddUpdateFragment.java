@@ -325,7 +325,8 @@ public class TaskAddUpdateFragment extends BaseFragment {
         Log.e("Json", "/" + json);
         if(json.contains("100")) {
             Toast.makeText(getActivity(), getActivity().getString(R.string.task_created), Toast.LENGTH_SHORT).show();
-
+        }else{
+            Toast.makeText(getActivity(), getActivity().getString(R.string.response_error), Toast.LENGTH_SHORT).show();
         }
     }
     public void setTaskValuesTinyDB(int position){

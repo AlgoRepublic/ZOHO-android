@@ -257,7 +257,7 @@ public class TasksListFragment extends BaseFragment {
     }
     public void SetAdapterList(){
         if (TasksListByOwnerModel.getInstance().responseCode == 100) {
-            aq.id(R.id.alertMessage).text("No Tasks");
+            aq.id(R.id.alertMessage).text(getString(R.string.no_tasks));
             if(generalList.size() ==0){
                 aq.id(R.id.response_alert).visibility(View.VISIBLE);
             }else{

@@ -121,7 +121,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:transcriptMode="alwaysScroll"
-            android:layout_below="@id/header"
+            android:layout_below="@+id/header"
             android:choiceMode="singleChoice"
             android:layout_marginTop="5dp"
             android:stackFromBottom="true"

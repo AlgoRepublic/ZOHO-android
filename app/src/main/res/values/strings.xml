@@ -336,4 +336,16 @@
     <string name="added_forum">added Forum</string>
     <string name="added_document">added Document</string>
     <string name="added_milestone">added Milestone</string>
+
+
+
+    <string name="no_comments">No Comments</string>
+    <string name="no_documents">No Documents</string>
+    <string name="no_feeds">No Feeds</string>
+    <string name="no_tasks">No Tasks</string>
+    <string name="no_forums">No Forums</string>
+    <string name="no_projects">No Projects</string>
+    <string name="no_star_rating">No Star Rating</string>
+    <string name="no_departments">No Departments</string>
+    <string name="no_users">No Users</string>
 </resources>

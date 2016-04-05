@@ -204,7 +204,7 @@ public class DocsPreviewFragment extends BaseFragment {
         } else {
             Toast.makeText(getActivity(), getString(R.string.response_error), Toast.LENGTH_SHORT).show();
         }
-        aq.id(R.id.alertMessage).text("No Comments");
+        aq.id(R.id.alertMessage).text(getString(R.string.no_comments));
         if(arrayList.size() ==0){
             aq.id(R.id.response_alert).visibility(View.VISIBLE);
         }else{

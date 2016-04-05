@@ -139,7 +139,7 @@ public class UploadDocsFragment extends BaseFragment implements GoogleApiClient.
                 }else {
                     if(folderList.size()==0)
                     {
-                        Toast.makeText(getActivity(),"Please select folder", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(),getString(R.string.select_project) ,Toast.LENGTH_SHORT).show();
                         return false;
                     }
                     new UploadDocsBYProject().execute();

@@ -90,7 +90,6 @@ public class MainActivity extends BaseActivity {
         });
         callFragment(R.id.container, HomeFragment.newInstance(), "HomeFragment");
         gridView.setAdapter(new AdapterMenuItems(this));
-
     }
 
     @Override

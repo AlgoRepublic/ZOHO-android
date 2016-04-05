@@ -276,7 +276,7 @@ public class ProjectsFragment extends BaseFragment implements SwipeRefreshLayout
         listViewDept.setAdapter(projectAdapter);
     }
     public void ShowAlert(ArrayList<ProjectsList> arrayList){
-        aq.id(R.id.alertMessage).text("No Projects");
+        aq.id(R.id.alertMessage).text(getString(R.string.no_projects));
         if(arrayList.size() ==0){
             aq.id(R.id.response_alert).visibility(View.VISIBLE);
         }else{

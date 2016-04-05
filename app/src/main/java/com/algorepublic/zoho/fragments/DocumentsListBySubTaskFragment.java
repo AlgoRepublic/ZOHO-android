@@ -181,7 +181,7 @@ public class DocumentsListBySubTaskFragment extends BaseFragment {
     }
     public void SetAdapterList(){
         if (SubTaskAttachmentsModel.getInstance().responseCode == 100) {
-            aq.id(R.id.alertMessage).text("No Documents");
+            aq.id(R.id.alertMessage).text(getString(R.string.no_documents));
             if(generalDocsList.size() ==0){
                 aq.id(R.id.response_alert).visibility(View.VISIBLE);
             }else{

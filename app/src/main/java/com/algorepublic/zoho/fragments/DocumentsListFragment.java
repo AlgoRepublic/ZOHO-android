@@ -133,7 +133,7 @@ public class DocumentsListFragment extends BaseFragment{
             case R.id.add_document:
                 baseClass.hideKeyPad(getView());
                 if(baseClass.getSelectedProject().equalsIgnoreCase("0")){
-                    Toast.makeText(getActivity(), "Please Select Project", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), getString(R.string.select_project), Toast.LENGTH_SHORT).show();
                 }else {
                     callFragmentWithBackStack(R.id.container,UploadDocsFragment.
                             newInstance(baseClass.db.getInt("ProjectID"),0), "UploadDocsFragment");
@@ -187,7 +187,7 @@ public class DocumentsListFragment extends BaseFragment{
     }
     public void SetAdapterList(){
         if (DocumentsListModel.getInstance().responseCode == 100) {
-            aq.id(R.id.alertMessage).text("No Documents");
+            aq.id(R.id.alertMessage).text(getString(R.string.no_documents));
             if(generalDocsList.size() ==0){
                 aq.id(R.id.response_alert).visibility(View.VISIBLE);
             }else{

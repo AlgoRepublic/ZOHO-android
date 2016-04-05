@@ -158,7 +158,7 @@ public class DepartmentFragment extends BaseFragment implements SwipeRefreshLayo
 
 
     private void addColumnList() {
-        aq.id(R.id.alertMessage).text("No Departments");
+        aq.id(R.id.alertMessage).text(getString(R.string.no_departments));
         if(allProjects.size() ==0){
             aq.id(R.id.response_alert).visibility(View.VISIBLE);
         }else{

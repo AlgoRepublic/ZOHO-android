@@ -60,7 +60,7 @@ public class FeedsFragment extends BaseFragment{
 
     public void Feeds(Object caller, Object model){
         FeedsModel.getInstance().setList((FeedsModel) model);
-        aq.id(R.id.alertMessage).text("No Forums");
+        aq.id(R.id.alertMessage).text(getString(R.string.no_feeds));
         if (FeedsModel.getInstance().responseObject.size()!=0) {
             aq.id(R.id.response_alert).visibility(View.GONE);
             aq.id(R.id.forums_list).adapter(new AdapterFeeds(getActivity()));

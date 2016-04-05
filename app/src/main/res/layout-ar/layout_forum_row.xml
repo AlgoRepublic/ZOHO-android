@@ -118,9 +118,8 @@
                                             android:gravity="center"
                                             android:singleLine="true"
                                             android:textSize="7dp"
-                                            android:layout_alignParentRight="true"
-                                            android:layout_alignParentEnd="true"
-                                            android:background="@drawable/bubble_alert_black_reverse"
+
+                                            android:background="@drawable/bubble_alert_black"
                                             android:layout_alignParentTop="true" />
 
                                         <ImageView
@@ -128,6 +127,9 @@
                                             android:layout_width="20dp"
                                             android:layout_alignParentBottom="true"
                                             android:src="@drawable/forums"
+                                            android:scaleX="-1"
+                                            android:layout_alignParentRight="true"
+                                            android:layout_alignParentEnd="true"
                                             android:layout_height="20dp" />
                                     </RelativeLayout>
                                 </RelativeLayout>
