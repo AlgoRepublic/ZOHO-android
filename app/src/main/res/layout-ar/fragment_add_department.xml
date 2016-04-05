@@ -59,7 +59,8 @@
                 android:hint="@string/new_dept"
                 android:inputType="textMultiLine"
                 android:layout_marginTop="10dp"
-                android:textColor="@color/colorBaseHeader"/>
+                android:textColor="@color/colorBaseHeader"
+                android:textColorHint="@color/colorBaseMenu"/>
 
         </RelativeLayout>
     </android.support.v7.widget.CardView>

@@ -76,7 +76,7 @@ public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         service1 = new ProjectsListService(getActivity());
         if(baseClass.getSelectedProject().equalsIgnoreCase("0")) {
             service1.getAllProjectsByUser_API(baseClass.getUserId(),
-                    true, new CallBack(this, "AllProjects"));
+                    true, new CallBack(DashboardFragment.this, "AllProjects"));
         }else
         {
             service.getMileStone(baseClass.getSelectedProject(), true,
@@ -165,16 +165,16 @@ public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
             totalMilestonesNo +=object.toalMilestones;
         }
         if(completedTasksNo >0) {
-            taskClosed = (Integer.parseInt("" + completedTasksNo) /
-                    Integer.parseInt("" + totalTasksNo)) * 100;
+            taskClosed = (int) (Float.parseFloat("" + completedTasksNo) /
+                    Float.parseFloat("" + totalTasksNo) * 100);
         }
         if(completedTaskList >0) {
-            taskListClosed = (Integer.parseInt("" + completedTaskList))
-                    / Integer.parseInt("" + totalTaskList) * 100;
+            taskListClosed = (int)(Float.parseFloat("" + completedTaskList)
+                    / Float.parseFloat("" + totalTaskList) * 100);
         }
         if(completedMilestonesNo >0) {
-            milestoneClosed = (Integer.parseInt("" + completedMilestonesNo))
-                    / Integer.parseInt("" + totalMilestonesNo) * 100;
+            milestoneClosed = (int)(Float.parseFloat("" + completedMilestonesNo)
+                    / Float.parseFloat("" + totalMilestonesNo) * 100);
         }
         aq.id(R.id.open1).text(getString(R.string.opened_tasks)+" "+(totalTasksNo-completedTasksNo));
         aq.id(R.id.close1).text(getString(R.string.closed_tasks)+" "+completedTasksNo);
@@ -201,16 +201,16 @@ public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
 
         DashBoardModel.ResponseObject object = DashBoardModel.getInstance().responseObject;
         if(object.completedTasksNo >0) {
-            taskClosed = (Integer.parseInt("" + object.completedTasksNo) /
-                    Integer.parseInt("" + object.totalTasksNo)) * 100;
+            taskClosed = (int)(Float.parseFloat("" + object.completedTasksNo) /
+                    Float.parseFloat("" + object.totalTasksNo) * 100);
         }
         if(object.completedTaskList >0) {
-            taskListClosed = (Integer.parseInt("" + object.completedTaskList))
-                    / Integer.parseInt("" + object.totalTaskList) * 100;
+            taskListClosed = (int) (Float.parseFloat("" + object.completedTaskList)
+                    / Float.parseFloat("" + object.totalTaskList) * 100);
         }
         if(object.completedMilestonesNo >0) {
-            milestoneClosed = (Integer.parseInt("" + object.completedMilestonesNo))
-                    / Integer.parseInt("" + object.totalMilestonesNo) * 100;
+            milestoneClosed =(int) (Float.parseFloat("" + object.completedMilestonesNo)
+                    / Float.parseFloat("" + object.totalMilestonesNo) * 100);
         }
         aq.id(R.id.open1).text(getString(R.string.opened_tasks)+" "+(object.totalTasksNo-object.completedTasksNo));
         aq.id(R.id.close1).text(getString(R.string.closed_tasks)+" "+object.completedTasksNo);

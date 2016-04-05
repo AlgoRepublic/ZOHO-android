@@ -2,6 +2,7 @@ package com.dacer.androidcharts;
 
 
 import android.graphics.Color;
+import android.util.Log;
 
 import java.text.DecimalFormat;
 
