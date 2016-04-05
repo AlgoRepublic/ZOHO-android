@@ -25,7 +25,7 @@ public class SettingsActivity extends BaseActivity {
         setContentView(R.layout.activity_settings);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        toolbar.setTitle(getResources().getString(R.string.settings));
+        toolbar.setTitle(baseClass.getResources().getString(R.string.settings));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         callFragment(R.id.container, MenuSettingsFragment.newInstance(), "FragmentMenuSettings");
     }

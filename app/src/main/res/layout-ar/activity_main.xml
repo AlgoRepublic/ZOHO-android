@@ -6,8 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorBaseWrapper"
-
-    android:layoutDirection="rtl"
+    android:fitsSystemWindows="true"
     android:textDirection="rtl"
     tools:openDrawer="start">
 
@@ -20,9 +19,8 @@
         android:id="@+id/nav_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_gravity="start|left"
+        android:layout_gravity="start"
         android:background="@color/colorBaseWrapper"
-        android:fitsSystemWindows="true"
         app:headerLayout="@layout/nav_header_main" />
 
 </android.support.v4.widget.DrawerLayout>
