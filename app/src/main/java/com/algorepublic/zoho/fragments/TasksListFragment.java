@@ -57,8 +57,6 @@ public class TasksListFragment extends BaseFragment {
         fragment = new TasksListFragment();
         return fragment;
     }
-
-
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         setRetainInstance(true);
@@ -66,8 +64,6 @@ public class TasksListFragment extends BaseFragment {
         getToolbar().setSubtitle("");
         super.onViewCreated(view, savedInstanceState);
     }
-
-
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         menu.clear();

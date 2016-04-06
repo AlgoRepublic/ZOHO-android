@@ -60,6 +60,8 @@
                     android:hint="@string/title"
                     android:inputType="textMultiLine"
                     android:layout_marginTop="10dp"
+                    android:textColor="@color/colorBaseHeader"
+                    android:textColorHint="@color/colorBaseMenu"
                     android:textCursorDrawable="@null"
                    />
 

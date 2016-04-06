@@ -107,11 +107,11 @@ public class ForumsDetailFragment extends BaseFragment {
         service = new ForumService(getActivity());
         service.getForumsDetail(ForumsModel.getInstance().responseObject.get(Position).ID
                 , true, new CallBack(ForumsDetailFragment.this, "ForumDetails"));
-        aq.id(R.id.comment_description).text(getString(R.string.by) + " " + ForumsModel.getInstance().responseObject.get(Position).user.firstName
+        aq.id(R.id.comment_description).text(Html.fromHtml(getString(R.string.by) + " " + ForumsModel.getInstance().responseObject.get(Position).user.firstName
                 + "," + getString(R.string.last_responce_on) +
                 baseClass.DateFormatter(ForumsModel.getInstance().responseObject.get(Position).updatedAt) + " "
                 + baseClass.GetTime(baseClass.DateMilli(ForumsModel.getInstance()
-                .responseObject.get(Position).updatedAt)));
+                .responseObject.get(Position).updatedAt))));
 
         comment_user.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override

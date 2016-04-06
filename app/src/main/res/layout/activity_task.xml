@@ -17,7 +17,7 @@
         android:background="@color/colorContentWrapper"
         android:padding="5dp">
 
-        <com.rengwuxian.materialedittext.MaterialEditText
+        <EditText
             android:id="@+id/title_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -29,15 +29,12 @@
             android:scrollHorizontally="true"
             android:scrollbarAlwaysDrawHorizontalTrack="true"
             android:enabled="false"
-            android:padding="5dp"
+            android:padding="7dp"
             android:singleLine="true"
             android:hint="@string/Task_Title"
             android:layout_toLeftOf="@+id/btn_title"
-            app:met_floatingLabel="normal"
-            app:met_textColor="@color/white"
-            app:met_textColorHint="@color/white"
-            app:met_underlineColor="@color/white"
-            app:met_primaryColor="@color/white"
+            android:textColor="@color/colorBaseHeader"
+            android:textColorHint="@color/colorBaseMenu"
             android:textSize="18sp" />
 
         <CheckBox
