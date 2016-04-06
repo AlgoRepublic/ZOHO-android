@@ -21,7 +21,7 @@
         android:elevation="1dp"
         android:layout_marginBottom="1dp"
         android:textStyle="bold"
-        android:textSize="18sp"
+        android:textSize="25sp"
         android:text="@string/change_theme" />
 
     <TextView
@@ -39,7 +39,7 @@
         android:elevation="1dp"
         android:layout_marginBottom="1dp"
         android:textStyle="bold"
-        android:textSize="18sp"
+        android:textSize="25sp"
         android:text="@string/edit_profile" />
     <TextView
         android:id="@+id/rest_password"
@@ -56,7 +56,7 @@
         android:layout_marginBottom="1dp"
         android:drawableLeft="@drawable/left_arrow"
         android:textStyle="bold"
-        android:textSize="18sp"
+        android:textSize="25sp"
         android:text="@string/rest_password" />
     <TextView
         android:id="@+id/about_us"
@@ -73,7 +73,7 @@
         android:layout_marginBottom="1dp"
         android:drawableLeft="@drawable/left_arrow"
         android:textStyle="bold"
-        android:textSize="18sp"
+        android:textSize="25sp"
         android:text="@string/about_us" />
     <TextView
         android:id="@+id/logout"
@@ -92,7 +92,7 @@
         android:layout_marginTop="40dp"
         android:layout_marginBottom="2dp"
         android:textColor="@android:color/holo_red_light"
-        android:textSize="18sp"
+        android:textSize="25sp"
         android:text="@string/logout" />
 
 </RelativeLayout>

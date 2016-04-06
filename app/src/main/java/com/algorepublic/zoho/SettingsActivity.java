@@ -37,6 +37,7 @@ public class SettingsActivity extends BaseActivity {
                     startActivity(new Intent(this, MainActivity.class));
                     this.finish();
                 }else{
+                    baseClass.hideKeyPad(findViewById(android.R.id.content));
                     getSupportFragmentManager().popBackStack();
                 }
                 return true;

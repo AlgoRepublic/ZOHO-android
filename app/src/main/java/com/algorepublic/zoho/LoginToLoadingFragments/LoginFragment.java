@@ -104,12 +104,6 @@ public class LoginFragment extends BaseFragment {
                        BaseClass.db.putString("Password", "");
                }
            });
-        aq.id(R.id.linkedin_here).clicked(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                LinkedInClick(v);
-            }
-        });
 
         aq.id(R.id.password).getTextView().setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
@@ -156,64 +150,6 @@ public class LoginFragment extends BaseFragment {
         callFragmentWithReplace(R.id.logintoloading_container, LoginLoadingFragment.newInstance(aq), "LoginLoadingFragment");
     }
 
-    public void LinkedInClick(final View view) {
-        LISessionManager.getInstance(getActivity()).init(getActivity(), buildScope(), new AuthListener() {
-            @Override
-            public void onAuthSuccess() {
-                Toast.makeText(getActivity(), getActivity().getString(R.string.login), Toast.LENGTH_SHORT).show();
-
-                setUpdateState();
-                // startActivity(new Intent(ActivityLogin.this, MainActivity.class));
-            }
-
-            @Override
-            public void onAuthError(LIAuthError error) {
-                Log.e("TAG", "onAuthError");
-                Log.e("Error", error.toString());
-            }
-        }, true);
-    }
-    private static Scope buildScope() {
-        return Scope.build(Scope.R_FULLPROFILE, Scope.W_SHARE);
-    }
-
-    private void setUpdateState() {
-        LISessionManager sessionManager = LISessionManager.getInstance(getActivity());
-        LISession session = sessionManager.getSession();
-        boolean accessTokenValid = session.isValid();
-        session.getAccessToken();
-        Log.e("accessTokenValid", session.getAccessToken().toString());
-        if (accessTokenValid) {
-            APIHelper.getInstance(getActivity()).getRequest(getActivity(), Constants.LinkedIn_API, new ApiListener() {
-                @Override
-                public void onApiSuccess(ApiResponse apiResponse) {
-                    Log.e("accessTokenValid1", "/" + apiResponse.getResponseDataAsJson());
-                    try {
-                        Log.e("name:", "" + apiResponse.getResponseDataAsJson().get("firstName").toString());
-                    }catch (Exception e){
-                        e.printStackTrace();
-                    }
-                    try {
-                        JSONObject s = apiResponse.getResponseDataAsJson();
-                        String headline = s.has("headline") ? s.getString("headline") : "";
-                        String pictureUrl = s.has("pictureUrl") ? s.getString("pictureUrl") : null;
-                        JSONObject location = s.getJSONObject("location");
-                        String locationName = location != null && location.has("name") ? location.getString("name") : "";
-                        Log.e("accessTokenValid1111111", locationName + "/" + headline + "/ " + pictureUrl);
-                        if (pictureUrl != null) {
-                            //new FetchImageTask(attendeeImageView).execute(pictureUrl);
-                        } else {
-                            //attendeeImageView.setImageResource(R.drawable.ghost_person);
-                        }
-                    } catch (JSONException e) {
-                    }
-                }
-                @Override
-                public void onApiError(LIApiError apiError) {
-                }
-            });
-        }
-    }
     private boolean isEmailValid(String email) {
         //TODO: Replace this with your own logic
         return email.contains("@");
