@@ -14,6 +14,7 @@
         android:paddingRight="10dp"
         android:paddingTop="15dp"
         android:paddingBottom="15dp"
+        android:gravity="center_vertical"
         android:id="@+id/checkbox_layout"
         android:drawableLeft="@drawable/left_arrow"
         android:background="@color/white"
@@ -35,6 +36,8 @@
         android:layout_below="@+id/checkbox_layout"
         android:drawableLeft="@drawable/left_arrow"
         android:background="@color/white"
+        android:gravity="center_vertical"
+
         android:elegantTextHeight="true"
         android:elevation="1dp"
         android:layout_marginBottom="1dp"
@@ -51,6 +54,8 @@
         android:paddingBottom="15dp"
         android:layout_below="@+id/edit_profile"
         android:background="@color/white"
+        android:gravity="center_vertical"
+
         android:elegantTextHeight="true"
         android:elevation="1dp"
         android:layout_marginBottom="1dp"
@@ -69,6 +74,8 @@
         android:layout_below="@+id/rest_password"
         android:background="@color/white"
         android:elegantTextHeight="true"
+        android:gravity="center_vertical"
+
         android:elevation="1dp"
         android:layout_marginBottom="1dp"
         android:drawableLeft="@drawable/left_arrow"
@@ -87,6 +94,7 @@
         android:gravity="center"
         android:background="@color/white"
         android:elegantTextHeight="true"
+
         android:elevation="2dp"
         android:textStyle="bold"
         android:layout_marginTop="40dp"
