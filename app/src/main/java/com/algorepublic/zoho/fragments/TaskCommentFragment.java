@@ -86,23 +86,23 @@ public class TaskCommentFragment extends BaseFragment {
         getToolbar().setTitle(getResources().getString(R.string.comments));
         service.getCommentsByTask(position,
                 true,new CallBack(TaskCommentFragment.this,"TaskComments"));
-        aq.id(R.id.comment_user).getTextView().setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if (actionId == getResources().getInteger(R.integer.add_comment)) {
-                    if (flag == true) {
-                        forumService.updateforumComments(ForumsDetailFragment
-                                .arrayList.get(ClickedPosition).getCommentID(), ForumsDetailFragment
-                                .comment_user.getText().toString(), true, new
-                                CallBack(TaskCommentFragment.this, "UpdateComment"));
-                    }else{
-                        PerformAction();
-                    }
-                    return true;
-                }
-                return false;
-            }
-        });
+//        aq.id(R.id.comment_user).getTextView().setOnEditorActionListener(new TextView.OnEditorActionListener() {
+//            @Override
+//            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+//                if (actionId == getResources().getInteger(R.integer.add_comment)) {
+//                    if (flag == true) {
+//                        forumService.updateforumComments(ForumsDetailFragment
+//                                .arrayList.get(ClickedPosition).getCommentID(), ForumsDetailFragment
+//                                .comment_user.getText().toString(), true, new
+//                                CallBack(TaskCommentFragment.this, "UpdateComment"));
+//                    }else{
+//                        PerformAction();
+//                    }
+//                    return true;
+//                }
+//                return false;
+//            }
+//        });
         aq.id(R.id.send).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

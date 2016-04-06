@@ -71,6 +71,7 @@
         android:layout_width="match_parent"
         android:id="@+id/layout_comments"
         android:layout_weight="1"
+        android:layout_above="@+id/include"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
         android:paddingBottom="10dp"
@@ -111,10 +112,11 @@
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:layout_height="wrap_content" />
-        <include
-            android:layout_alignParentBottom="true"
-            layout="@layout/layout_for_comment"
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent"/>
     </RelativeLayout>
+    <include
+        android:id="@+id/include"
+        android:layout_alignParentBottom="true"
+        layout="@layout/layout_for_comment"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"/>
 </LinearLayout>
