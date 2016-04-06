@@ -148,6 +148,7 @@ public class AddUserFragment extends BaseFragment implements MultiSelectionSpinn
             }
             adapter = new AdapterTaskPriority(getActivity(),role_list, roleList);
             role_list.setAdapter(adapter);
+            adapter.setSelectedIndex(0);
         }else {
             Toast.makeText(getActivity(), getActivity().getString(R.string.response_error), Toast.LENGTH_SHORT).show();
         }
