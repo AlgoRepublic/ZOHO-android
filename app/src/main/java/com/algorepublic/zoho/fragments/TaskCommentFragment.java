@@ -127,9 +127,9 @@ public class TaskCommentFragment extends BaseFragment {
         }
         else
         {
-            Snackbar.make(getView(), getString(R.string.invalid_credential), Snackbar.LENGTH_SHORT).show();
+            Snackbar.make(getView(), getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
         }
-        aq.id(R.id.alertMessage).text("No Comments");
+        aq.id(R.id.alertMessage).text(getString(R.string.no_comments));
         if(arrayList.size() ==0){
             aq.id(R.id.response_alert).visibility(View.VISIBLE);
         }else{
@@ -187,7 +187,7 @@ public class TaskCommentFragment extends BaseFragment {
         }
         else
         {
-            Snackbar.make(getView(), getString(R.string.invalid_credential), Snackbar.LENGTH_SHORT).show();
+            Snackbar.make(getView(), getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
         }
     }
     public void PerformAction()

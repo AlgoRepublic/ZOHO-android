@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.content.IntentSender;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -81,7 +82,7 @@ import cc.cloudist.acplibrary.ACProgressFlower;
 public class UploadDocsFragment extends BaseFragment implements GoogleApiClient.ConnectionCallbacks, ResultCallback
         , GoogleApiClient.OnConnectionFailedListener {
 
-    AQuery aq;
+    AQuery aq;int Color;
     static UploadDocsFragment fragment;
     private static final int TAKE_PICTURE = 1;
     public static final int RESULT_GALLERY = 2;
@@ -139,7 +140,7 @@ public class UploadDocsFragment extends BaseFragment implements GoogleApiClient.
                 }else {
                     if(folderList.size()==0)
                     {
-                        Toast.makeText(getActivity(),"Please select folder", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(),getString(R.string.select_project) ,Toast.LENGTH_SHORT).show();
                         return false;
                     }
                     new UploadDocsBYProject().execute();
@@ -179,6 +180,11 @@ public class UploadDocsFragment extends BaseFragment implements GoogleApiClient.
         folder_list = (NiceSpinner) view.findViewById(R.id.folder_list);
         aq = new AQuery(view);
         baseClass =  ((BaseClass) getActivity().getApplicationContext());
+        if(baseClass.getThemePreference() == R.style.AppThemeBlue) {
+            Color = android.graphics.Color.parseColor("#4B7BAA");
+        }else{
+            Color = android.graphics.Color.parseColor("#414042");
+        }
         service = new DocumentsService(getActivity());
         if(ProjectID==0){
             folder_list.setVisibility(View.GONE);
@@ -213,8 +219,12 @@ public class UploadDocsFragment extends BaseFragment implements GoogleApiClient.
         mGoogleApiClient.connect();
     }
     private void CallForAttachments() {
-        String[] menuItems = {"Camera", "Gallery",  "Google Drive", "Drop Box"};
-        final ActionSheetDialog dialog = new ActionSheetDialog(getActivity(), menuItems, getView());
+        String[] menuItems = {getString(R.string.camera),getString(R.string.gallery),
+                getString(R.string.google_drive), getString(R.string.camera)};
+        final ActionSheetDialog dialog = new ActionSheetDialog(getActivity(), menuItems,
+                getString(R.string.cancel),getView());
+        dialog.titleTextColor(Color);
+        dialog.itemTextColor(Color);
         dialog.isTitleShow(false).show();
         dialog.setOnOperItemClickL(new OnOperItemClickL() {
             @Override

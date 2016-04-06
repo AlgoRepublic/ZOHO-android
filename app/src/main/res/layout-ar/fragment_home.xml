@@ -4,9 +4,6 @@
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:fitsSystemWindows="true"
-    android:layoutDirection="rtl"
-    android:textDirection="rtl"
     android:orientation="vertical">
 
     <android.support.design.widget.TabLayout
@@ -15,9 +12,9 @@
         android:layout_height="55dp"
         app:tabGravity="fill"
         app:tabMode="fixed"
-        app:tabMaxWidth="0dp"
         app:tabIndicatorHeight="7dp"
-        />
+        app:tabMaxWidth="0dp"
+        app:tabTextColor="@color/colorBaseHeader" />
 
 
     <android.support.v4.view.ViewPager

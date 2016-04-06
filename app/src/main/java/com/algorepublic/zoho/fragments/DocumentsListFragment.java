@@ -34,7 +34,7 @@ public class DocumentsListFragment extends BaseFragment{
 
     static DocumentsListFragment fragment;
     AQuery aq;
-    View view;
+    View view;int Color;
     DocumentsService service;
     public static ArrayList<DocumentsList> generalDocsList = new ArrayList<>();
     public static ArrayList<DocumentsList> allDocsList = new ArrayList<>();
@@ -77,6 +77,11 @@ public class DocumentsListFragment extends BaseFragment{
 
         deleteDocsList.clear();
         baseClass = ((BaseClass) getActivity().getApplicationContext());
+        if(baseClass.getThemePreference() == R.style.AppThemeBlue) {
+            Color = android.graphics.Color.parseColor("#4B7BAA");
+        }else{
+            Color = android.graphics.Color.parseColor("#414042");
+        }
         setHasOptionsMenu(true);
         getToolbar().setTitle(getString(R.string.documents));
         service = new DocumentsService(getActivity());
@@ -133,7 +138,7 @@ public class DocumentsListFragment extends BaseFragment{
             case R.id.add_document:
                 baseClass.hideKeyPad(getView());
                 if(baseClass.getSelectedProject().equalsIgnoreCase("0")){
-                    Toast.makeText(getActivity(), "Please Select Project", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), getString(R.string.select_project), Toast.LENGTH_SHORT).show();
                 }else {
                     callFragmentWithBackStack(R.id.container,UploadDocsFragment.
                             newInstance(baseClass.db.getInt("ProjectID"),0), "UploadDocsFragment");
@@ -144,8 +149,12 @@ public class DocumentsListFragment extends BaseFragment{
     }
 
     public void callForDocsSorting(){
-        String[] menuItems = {"All Files","Pictures","Videos","Favorites"};
-        final ActionSheetDialog dialog = new ActionSheetDialog(getActivity(),menuItems, getView());
+        String[] menuItems = {getString(R.string.all_files),getString(R.string.picture),
+                getString(R.string.videos),getString(R.string.favorites)};
+        final ActionSheetDialog dialog = new ActionSheetDialog(getActivity(),menuItems,
+                getString(R.string.cancel), getView());
+        dialog.titleTextColor(Color);
+        dialog.itemTextColor(Color);
         dialog.isTitleShow(false).show();
         dialog.setOnOperItemClickL(new OnOperItemClickL() {
             @Override
@@ -153,19 +162,19 @@ public class DocumentsListFragment extends BaseFragment{
                 dialog.dismiss();
                 if (isLoaded()) {
                     if (position == 0) {
-                        baseClass.setDocsSortType(getString(R.string.all_files));
+                        baseClass.setDocsSortType("AllFiles");
                         aq.id(R.id.list_title).text(getString(R.string.all_files));
                     }
                     if (position == 1) {
-                        baseClass.setDocsSortType(getString(R.string.picture));
+                        baseClass.setDocsSortType("Pictures");
                         aq.id(R.id.list_title).text(getString(R.string.picture));
                     }
                     if (position == 2) {
-                        baseClass.setDocsSortType(getString(R.string.videos));
+                        baseClass.setDocsSortType("Videos");
                         aq.id(R.id.list_title).text(getString(R.string.videos));
                     }
                     if (position == 3) {
-                        baseClass.setDocsSortType(getString(R.string.favorites));
+                        baseClass.setDocsSortType("Favorites");
                         aq.id(R.id.list_title).text(getString(R.string.favorites));
                     }
                     FilterList();
@@ -174,20 +183,20 @@ public class DocumentsListFragment extends BaseFragment{
         });
     }
     public void FilterList(){
-        if(baseClass.getDocsSortType().equalsIgnoreCase(getString(R.string.all_files)))
+        if(baseClass.getDocsSortType().equalsIgnoreCase("AllFiles"))
             FilterByAllDocs();
-        if(baseClass.getDocsSortType().equalsIgnoreCase(getString(R.string.picture)))
+        if(baseClass.getDocsSortType().equalsIgnoreCase("Pictures"))
             FilterByPicture();
-        if(baseClass.getDocsSortType().equalsIgnoreCase(getString(R.string.videos)))
+        if(baseClass.getDocsSortType().equalsIgnoreCase("Videos"))
             FilterByVideo();
-        if(baseClass.getDocsSortType().equalsIgnoreCase(getString(R.string.favorites)))
+        if(baseClass.getDocsSortType().equalsIgnoreCase("Favorites"))
             FilterByFav();
 
         SetAdapterList();
     }
     public void SetAdapterList(){
         if (DocumentsListModel.getInstance().responseCode == 100) {
-            aq.id(R.id.alertMessage).text("No Documents");
+            aq.id(R.id.alertMessage).text(getString(R.string.no_documents));
             if(generalDocsList.size() ==0){
                 aq.id(R.id.response_alert).visibility(View.VISIBLE);
             }else{
@@ -203,7 +212,7 @@ public class DocumentsListFragment extends BaseFragment{
             GetAllDocumentsList();
             FilterList();
         } else {
-            Toast.makeText(getActivity(), getString(R.string.invalid_credential), Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), getString(R.string.response_error), Toast.LENGTH_SHORT).show();
         }
     }
 

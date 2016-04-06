@@ -24,7 +24,7 @@
             android:layout_width="match_parent"
             style="@style/ms9_DefaultShadowStyle"
             android:layout_height="match_parent"
-            android:layout_toStartOf="@+id/priority_bar"
+            android:layout_toLeftOf="@+id/priority_bar"
             app:ms9_affectsDisplayedPosition="true"
             app:ms9_shadowElevation="2dp"
             app:ms9_shadowTranslationZ="1dp"
@@ -46,6 +46,7 @@
                         android:id="@+id/swipe"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        app:drag_edge="left"
                         app:clickToClose="true">
                         <LinearLayout
                             android:layout_width="150dp"
@@ -92,7 +93,6 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_toRightOf="@+id/rightarrow_layout"
-                                android:layout_toEndOf="@+id/rightarrow_layout"
                                 android:background="@color/colorBaseWrapper">
 
                                 <ImageView
@@ -209,7 +209,6 @@
                                 android:id="@+id/rightarrow_layout"
                                 android:layout_width="30dp"
                                 android:layout_alignParentLeft="true"
-                                android:layout_alignParentStart="true"
                                 android:layout_height="match_parent"
                                 android:gravity="center"
                                 android:background="#E2DBDB">
@@ -219,7 +218,7 @@
                                     android:layout_width="25dp"
                                     android:layout_height="25dp"
                                     android:layout_margin="5dp"
-                                    android:background="@drawable/circle_left"/>
+                                    android:background="@drawable/circle_right"/>
                             </LinearLayout>
                         </RelativeLayout>
                     </com.daimajia.swipe.SwipeLayout>
@@ -230,9 +229,9 @@
             android:id="@+id/priority_bar"
             android:layout_width="8dp"
             android:layout_height="match_parent"
-            android:layout_marginBottom="9dp"
-            android:layout_marginTop="4dp"
-            android:layout_alignParentEnd="true"
-            android:background="@drawable/roundable_prioritybar"/>
+            android:layout_marginBottom="5dp"
+
+            android:layout_alignParentRight="true"
+            android:background="@drawable/roundable_prioritybar_ar"/>
     </RelativeLayout>
 </LinearLayout>

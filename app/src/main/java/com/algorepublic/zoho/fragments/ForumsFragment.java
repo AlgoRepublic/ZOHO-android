@@ -62,7 +62,7 @@ public class ForumsFragment extends BaseFragment{
         baseClass = ((BaseClass) getActivity().getApplicationContext());
         ForumService service = new ForumService(getActivity());
         if (baseClass.getSelectedProject().equalsIgnoreCase("0")) {
-            Toast.makeText(getActivity(), "Please Select Project", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), getString(R.string.select_project), Toast.LENGTH_SHORT).show();
         }else {
             service.getForumsList(baseClass.getSelectedProject(), true,
                     new CallBack(ForumsFragment.this, "ForumListCallback"));
@@ -83,7 +83,7 @@ public class ForumsFragment extends BaseFragment{
 
     public void ForumListCallback(Object caller, Object model){
         ForumsModel.getInstance().setList((ForumsModel) model);
-        aq.id(R.id.alertMessage).text("No Forums");
+        aq.id(R.id.alertMessage).text(getString(R.string.no_forums));
         if (ForumsModel.getInstance().responseObject.size()!=0) {
             aq.id(R.id.response_alert).visibility(View.GONE);
             aq.id(R.id.forums_list).adapter(new AdapterForumsList(getActivity()));

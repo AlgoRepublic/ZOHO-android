@@ -24,7 +24,6 @@ public class MenuSettingsFragment extends BaseFragment {
 
     BaseClass baseClass;
     static MenuSettingsFragment fragment;
-    CheckBox checkBox;
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.

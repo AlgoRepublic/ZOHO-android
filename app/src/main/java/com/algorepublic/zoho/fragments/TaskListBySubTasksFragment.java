@@ -45,6 +45,7 @@ public class TaskListBySubTasksFragment extends BaseFragment {
     StickyListHeadersAdapter adapterTasksList;
     AQuery aq;View view;
     RadioGroup radioGroup;
+    int Color;
     private static ArrayList<TaskListName> taskListName = new ArrayList<>();
     public static ArrayList<TasksList> allTaskList = new ArrayList<>();
     public static ArrayList<TasksList> generalList = new ArrayList<>();
@@ -129,6 +130,11 @@ public class TaskListBySubTasksFragment extends BaseFragment {
             }
         });
         baseClass = ((BaseClass) getActivity().getApplicationContext());
+        if(baseClass.getThemePreference() == R.style.AppThemeBlue) {
+            Color = android.graphics.Color.parseColor("#4B7BAA");
+        }else{
+            Color = android.graphics.Color.parseColor("#414042");
+        }
         taskListService = new TaskListService(getActivity());
         taskListService.getTasksListBySubTasks(taskID, true,
                 new CallBack(TaskListBySubTasksFragment.this, "TaskListBySubTasks"));
@@ -206,8 +212,12 @@ public class TaskListBySubTasksFragment extends BaseFragment {
         FilterList();
     }
     public void callForTaskSorting(){
-        String[] menuItems = {"Due Date","Priority","Alphabetically","Task List"};
-        final ActionSheetDialog dialog = new ActionSheetDialog(getActivity(),menuItems, getView());
+        String[] menuItems = {getString(R.string.due_date),getString(R.string.priority),
+                getString(R.string.alphabetically),getString(R.string.task_list)};
+        final ActionSheetDialog dialog = new ActionSheetDialog(getActivity(),menuItems,
+                getString(R.string.cancel),getView());
+        dialog.titleTextColor(Color);
+        dialog.itemTextColor(Color);
         dialog.isTitleShow(false).show();
         dialog.setOnOperItemClickL(new OnOperItemClickL() {
             @Override
@@ -254,7 +264,7 @@ public class TaskListBySubTasksFragment extends BaseFragment {
     }
     public void SetAdapterList(){
         if (TaskListBySubTaskModel.getInstance().responseCode == 100) {
-            aq.id(R.id.alertMessage).text("No Tasks");
+            aq.id(R.id.alertMessage).text(getString(R.string.no_tasks));
             if(generalList.size() ==0){
                 aq.id(R.id.response_alert).visibility(View.VISIBLE);
             }else{

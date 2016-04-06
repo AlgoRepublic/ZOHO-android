@@ -8,7 +8,6 @@
         android:id="@+id/selected_project"
         android:layout_width="5dp"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
         android:layout_height="match_parent"
         android:layout_alignBottom="@+id/layout123"
         android:layout_alignTop="@+id/layout123"
@@ -17,7 +16,6 @@
     <RelativeLayout
         android:id="@+id/layout123"
         android:layout_toLeftOf="@+id/selected_project"
-        android:layout_toStartOf="@+id/selected_project"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="8dp"
@@ -49,6 +47,7 @@
                         android:id="@+id/swipe"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        app:drag_edge="left"
                         app:clickToClose="true">
                         <LinearLayout
                             android:layout_width="220dp"
@@ -99,7 +98,6 @@
                             android:background="@color/colorBaseWrapper"
                             android:orientation="horizontal">
                             <RelativeLayout
-                                android:layout_toEndOf="@+id/rightarrow_layout"
                                 android:layout_toRightOf="@+id/rightarrow_layout"
                                 android:id="@+id/parent1"
                                 android:layout_width="match_parent"
@@ -254,7 +252,6 @@
                                 android:id="@+id/rightarrow_layout"
                                 android:layout_width="30dp"
                                 android:layout_alignParentLeft="true"
-                                android:layout_alignParentStart="true"
                                 android:layout_height="match_parent"
                                 android:gravity="center"
                                 android:background="#E2DBDB">
@@ -264,7 +261,7 @@
                                     android:layout_width="25dp"
                                     android:layout_height="25dp"
                                     android:layout_margin="5dp"
-                                    android:background="@drawable/circle_left"/>
+                                    android:background="@drawable/circle_right"/>
                             </LinearLayout>
 
                         </RelativeLayout>

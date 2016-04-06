@@ -72,7 +72,9 @@
                         android:layout_marginStart="5dp"
                         android:text="Comments:\n wdwdw\nwdww"
                         android:textSize="10sp"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:textColor="@color/colorBaseHeader"
+                        android:textColorHint="@color/colorBaseMenu"/>
                     <requestFocus/>
                 </RelativeLayout>
 

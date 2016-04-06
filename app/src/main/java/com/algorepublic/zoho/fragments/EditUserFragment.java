@@ -54,7 +54,7 @@ public class EditUserFragment extends BaseFragment implements MultiSelectionSpin
     public static final int RESULT_GALLERY = 2;
     public static final int PICK_File = 3;
     File newFile;
-    AQuery aq;
+    AQuery aq;int Color;
     ACProgressFlower dialogAC;
     ArrayList<Integer> selectedIds = new ArrayList<>();
     ArrayList<String> roleList;
@@ -89,6 +89,11 @@ public class EditUserFragment extends BaseFragment implements MultiSelectionSpin
         projectsList = (MultiSelectionSpinner) view.findViewById(R.id.projects_list);
         projectsList.setListener(this);
         baseClass = ((BaseClass) getActivity().getApplicationContext());
+        if(baseClass.getThemePreference() == R.style.AppThemeBlue) {
+            Color = android.graphics.Color.parseColor("#4B7BAA");
+        }else{
+            Color = android.graphics.Color.parseColor("#414042");
+        }
         aq = new AQuery(getActivity(), view);
         aq.id(R.id.lblListHeader).text(getString(R.string.edit_user));
         setHasOptionsMenu(true);
@@ -261,7 +266,10 @@ public class EditUserFragment extends BaseFragment implements MultiSelectionSpin
     private void CallForAttachments() {
         String[] menuItems = {getString(R.string.camera),getString(R.string.gallery)
                 ,getString(R.string.others)};
-        final ActionSheetDialog dialog = new ActionSheetDialog(getActivity(),menuItems, getView());
+        final ActionSheetDialog dialog = new ActionSheetDialog(getActivity(),menuItems,
+                getString(R.string.cancel),getView());
+        dialog.titleTextColor(Color);
+        dialog.itemTextColor(Color);
         dialog.isTitleShow(false).show();
         dialog.setOnOperItemClickL(new OnOperItemClickL() {
             @Override

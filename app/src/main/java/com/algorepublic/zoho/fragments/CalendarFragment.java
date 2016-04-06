@@ -220,7 +220,7 @@ public class CalendarFragment extends BaseFragment implements CalendarPickerCont
 
     @TargetApi(Build.VERSION_CODES.M)
     private void initCalendarView(){
-        aq.id(R.id.alertMessage).text("No Tasks");
+        aq.id(R.id.alertMessage).text(getString(R.string.no_tasks));
         Locale locale;
         // Get a reference for the week view in the layout.
         calendarView = (AgendaCalendarView) aq.id(R.id.agenda_calendar_view).getView();

@@ -60,6 +60,7 @@ public class ActionSheetDialog extends BottomBaseDialog {
      * title text(标题)
      */
     private String title = "提示";
+    private String cancel;
     /**
      * title height(标题栏高度)
      */
@@ -125,8 +126,9 @@ public class ActionSheetDialog extends BottomBaseDialog {
         init();
     }
 
-    public ActionSheetDialog(Context context, String[] items, View animateView) {
+    public ActionSheetDialog(Context context, String[] items,String cancel, View animateView) {
         super(context, animateView);
+        this.cancel = cancel;
         this.contents = new ArrayList<>();
         for (String item : items) {
             DialogMenuItem customBaseItem = new DialogMenuItem(item, 0);
@@ -219,7 +221,7 @@ public class ActionSheetDialog extends BottomBaseDialog {
 
         /** cancel btn */
         tv_cancel.setHeight(dp2px(itemHeight_DP));
-        tv_cancel.setText("Cancel");
+        tv_cancel.setText(cancel);
         tv_cancel.setTextSize(TypedValue.COMPLEX_UNIT_SP, itemTextSize_SP);
         tv_cancel.setTextColor(itemTextColor);
         tv_cancel.setBackgroundDrawable(CornerUtils.listItemSelector(radius, lvBgColor, itemPressColor, 1, 0));

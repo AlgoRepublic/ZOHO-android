@@ -67,7 +67,6 @@ public class AdapterUser extends BaseAdapter {
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
 
-        Log.e("Userlist",String.valueOf(UserListModel.getInstance().responseObject.size()));
         ViewHolder holder = null;
         if(convertView == null){
             convertView = l_Inflater.inflate(R.layout.layout_user_row, null);

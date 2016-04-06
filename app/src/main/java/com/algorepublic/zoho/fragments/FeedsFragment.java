@@ -64,7 +64,7 @@ public class FeedsFragment extends BaseFragment implements SwipeRefreshLayout.On
     public void Feeds(Object caller, Object model){
         Log.e("Feedslist",String.valueOf(FeedsModel.getInstance().responseObject.size()));
         FeedsModel.getInstance().setList((FeedsModel) model);
-        aq.id(R.id.alertMessage).text("No Forums");
+        aq.id(R.id.alertMessage).text(getString(R.string.no_feeds));
         if (FeedsModel.getInstance().responseObject.size()!=0) {
             Log.e("Feedslist",String.valueOf(FeedsModel.getInstance().responseObject.size()));
             aq.id(R.id.response_alert).visibility(View.GONE);

@@ -84,7 +84,7 @@
     <string name="edit">تعديل</string>
     <string name="save">حفظ</string>
 
-    <string name="all">All</string>
+    <string name="all">جميع</string>
     <string name="upcoming">القادمة</string>
     <string name="overdue">المتراكمة</string>
     <string name="title_activity_milestone">MilestoneActivity</string>
@@ -328,4 +328,21 @@
     <string name="added_document">وثيقة وأضاف</string>
     <string name="added_milestone">المعلم وأضاف</string>
     <string name="exit">هل تريد حقا للخروج ؟</string>
+
+
+
+    <string name="no_comments">بدون تعليقات</string>
+    <string name="no_documents">لا توجد وثائق</string>
+    <string name="no_feeds">لا الخلاصات</string>
+    <string name="no_tasks">لا المهام</string>
+    <string name="no_forums">لا اجعل</string>
+    <string name="no_projects">لا مشاريع</string>
+    <string name="no_star_rating">لا تصنيف بالنجوم</string>
+    <string name="no_departments">لا الإدارات</string>
+    <string name="no_users">لا مستخدمين</string>
+
+    <string name="due_date">تاريخ الاستحقاق</string>
+    <string name="alphabetically">أبجديا</string>
+    <string name="task_list">قائمة المهام</string>
+    <string name="cancel">إلغاء</string>
 </resources>

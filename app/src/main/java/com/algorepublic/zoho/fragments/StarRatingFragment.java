@@ -79,7 +79,7 @@ public class StarRatingFragment extends BaseFragment {
         StarRatingModel.getInstance().setList((StarRatingModel) model);
         if (StarRatingModel.getInstance().responseCode == 100) {
             GetListHeads();
-            aq.id(R.id.alertMessage).text("No Star Rating");
+            aq.id(R.id.alertMessage).text(getString(R.string.no_star_rating));
             if(levelOneHead.size() ==0){
                 aq.id(R.id.response_alert).visibility(View.VISIBLE);
             }else{

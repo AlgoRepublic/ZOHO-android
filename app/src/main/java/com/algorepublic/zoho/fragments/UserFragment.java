@@ -76,7 +76,7 @@ public class UserFragment extends BaseFragment implements SwipeRefreshLayout.OnR
 
     public void UserList(Object caller, Object model){
         UserListModel.getInstance().setList((UserListModel) model);
-        aq.id(R.id.alertMessage).text("No Users");
+        aq.id(R.id.alertMessage).text(getString(R.string.no_users));
         if(UserListModel.getInstance().responseObject.size() ==0){
             aq.id(R.id.response_alert).visibility(View.VISIBLE);
         }else{

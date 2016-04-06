@@ -145,7 +145,8 @@ public class TaskAttachmentFragment extends BaseFragment {
     private void CallForAttachments() {
         String[] menuItems = {getString(R.string.camera),getString(R.string.gallery)
                 ,getString(R.string.others)};
-        final ActionSheetDialog dialog = new ActionSheetDialog(getActivity(),menuItems, getView());
+        final ActionSheetDialog dialog = new ActionSheetDialog(
+                getActivity(),menuItems,getString(R.string.cancel), getView());
         dialog.isTitleShow(false).show();
         dialog.setOnOperItemClickL(new OnOperItemClickL() {
             @Override

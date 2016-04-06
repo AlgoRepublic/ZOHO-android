@@ -309,11 +309,12 @@
                     android:id="@+id/notify_alert1"
                     android:layout_width="25dp"
                     android:layout_height="25dp"
-                    android:text="112"
+                    android:text="0"
                     android:gravity="center"
                     android:singleLine="true"
                     android:textSize="8dp"
-
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
                     android:background="@drawable/bubble_alert_white"
                     android:layout_alignParentTop="true"
                     android:textColor="@color/colorBaseWrapper" />
@@ -359,11 +360,12 @@
                     android:id="@+id/notify_alert2"
                     android:layout_width="25dp"
                     android:layout_height="25dp"
-                    android:text="112"
+                    android:text="0"
                     android:gravity="center"
                     android:singleLine="true"
                     android:textSize="8dp"
-
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
                     android:background="@drawable/bubble_alert_white"
                     android:layout_alignParentTop="true"
                     android:textColor="@color/colorBaseWrapper" />
@@ -413,7 +415,7 @@
                     android:gravity="center"
                     android:singleLine="true"
                     android:textSize="8dp"
-
+                    android:layout_alignParentStart="true"
                     android:background="@drawable/bubble_alert_white"
                     android:layout_alignParentTop="true"
                     android:textColor="@color/colorBaseWrapper" />

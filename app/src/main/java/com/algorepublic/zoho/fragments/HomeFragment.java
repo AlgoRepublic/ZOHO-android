@@ -14,12 +14,15 @@ import android.view.ViewGroup;
 
 
 import com.algorepublic.zoho.R;
+import com.algorepublic.zoho.utils.BaseClass;
 
 
 /**
  * Created by android on 3/14/16.
  */
 public class HomeFragment extends BaseFragment {
+
+    private BaseClass baseClass;
 
     public static HomeFragment newInstance() {
         return new HomeFragment();
@@ -40,6 +43,8 @@ public class HomeFragment extends BaseFragment {
         MyPagerAdapter adapter = new MyPagerAdapter(getActivity().getSupportFragmentManager());
         pager.setAdapter(adapter);
         tabs.setupWithViewPager(pager);
+        baseClass = ((BaseClass) getActivity().getApplicationContext());
+        applyLightBackground(tabs, baseClass);
         pager.setCurrentItem(1);
 
         return view;

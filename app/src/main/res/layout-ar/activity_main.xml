@@ -8,6 +8,7 @@
     android:background="@color/colorBaseWrapper"
     android:fitsSystemWindows="true"
     android:textDirection="rtl"
+    android:layoutDirection="rtl"
     tools:openDrawer="start">
 
     <include

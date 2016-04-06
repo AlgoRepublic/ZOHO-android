@@ -83,7 +83,7 @@ public class ForumsDetailFragment extends BaseFragment {
             case R.id.edit_task:
                 baseClass.hideKeyPad(getView());
                 if (baseClass.getSelectedProject().equalsIgnoreCase("0")) {
-                    Toast.makeText(getActivity(),"Please Select Project",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(),getString(R.string.select_project),Toast.LENGTH_SHORT).show();
                 }else {
                     callFragmentWithBackStack(R.id.container, EditForumFragment.newInstance(Position), "EditForumFragment");
                 }
@@ -208,7 +208,7 @@ public class ForumsDetailFragment extends BaseFragment {
         }else {
             Toast.makeText(getActivity(), getActivity().getString(R.string.response_error), Toast.LENGTH_SHORT).show();
         }
-        aq.id(R.id.alertMessage).text("No Comments");
+        aq.id(R.id.alertMessage).text(getString(R.string.no_comments));
         if(arrayList.size() ==0){
             aq.id(R.id.response_alert).visibility(View.VISIBLE);
         }else{

@@ -78,7 +78,9 @@
                 android:layout_height="45dp"
                 android:layout_marginTop="15dp"
                 android:hint="@string/first_name"
-                android:textSize="18sp"/>
+                android:textSize="18sp"
+                android:textColor="@color/colorBaseHeader"
+                android:textColorHint="@color/colorBaseMenu"/>
 
 
             <EditText
@@ -94,7 +96,9 @@
                 android:layout_marginTop="10dp"
                 android:hint="@string/last_name"
                 android:inputType="textMultiLine"
-                android:textSize="18sp"/>
+                android:textSize="18sp"
+                android:textColor="@color/colorBaseHeader"
+                android:textColorHint="@color/colorBaseMenu"/>
 
             <EditText
                 android:paddingStart="5dp"
@@ -109,7 +113,9 @@
                 android:layout_marginTop="10dp"
                 android:hint="@string/nick_name"
                 android:inputType="textMultiLine"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:textColor="@color/colorBaseHeader"
+                android:textColorHint="@color/colorBaseMenu"/>
 
             <EditText
                 android:paddingStart="5dp"
@@ -124,7 +130,9 @@
                 android:layout_marginTop="10dp"
                 android:hint="@string/email"
                 android:inputType="textMultiLine"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:textColor="@color/colorBaseHeader"
+                android:textColorHint="@color/colorBaseMenu"/>
 
             <EditText
                 android:paddingStart="5dp"
@@ -139,7 +147,9 @@
                 android:layout_marginTop="10dp"
                 android:hint="@string/phone_number"
                 android:inputType="phone"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:textColor="@color/colorBaseHeader"
+                android:textColorHint="@color/colorBaseMenu"/>
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -184,7 +194,6 @@
 
             <com.guna.libmultispinner.MultiSelectionSpinner
                 android:id="@+id/projects_list"
-                android:layout_marginTop="10dp"
                 android:background="@drawable/round_border"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
