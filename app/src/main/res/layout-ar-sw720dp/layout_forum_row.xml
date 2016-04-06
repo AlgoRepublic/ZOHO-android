@@ -6,7 +6,6 @@
     <RelativeLayout
         android:id="@+id/layout123"
         android:layout_toRightOf="@+id/selected_project"
-        android:layout_toEndOf="@+id/selected_project"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="6dp"
@@ -38,6 +37,7 @@
             android:id="@+id/swipe"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            app:drag_edge="left"
             app:clickToClose="true">
         <LinearLayout
             android:layout_width="200dp"
@@ -80,7 +80,6 @@
         <RelativeLayout
             android:id="@+id/parent1"
             android:layout_toRightOf="@+id/rightarrow_layout"
-            android:layout_toEndOf="@+id/rightarrow_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:padding="5dp"
@@ -109,7 +108,7 @@
                     android:layout_alignParentRight="true"
                     android:layout_alignParentEnd="true"
                     android:layout_centerHorizontal="true"
-                    android:layout_height="65dp">
+                    android:layout_height="62dp">
                     <TextView
                         android:id="@+id/notify_alert1"
                         android:layout_width="35dp"
@@ -146,7 +145,6 @@
             android:id="@+id/rightarrow_layout"
             android:layout_width="30dp"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
             android:layout_height="match_parent"
             android:gravity="center"
             android:background="#E2DBDB">
@@ -156,7 +154,7 @@
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:layout_margin="5dp"
-                android:background="@drawable/circle_left"/>
+                android:background="@drawable/circle_right"/>
         </LinearLayout>
         </RelativeLayout>
 </com.daimajia.swipe.SwipeLayout>

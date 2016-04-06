@@ -14,8 +14,7 @@
         android:layout_width="300dp"
         android:layout_height="30dp"
         android:layout_below="@+id/view2"
-        android:layout_marginLeft="5dp"
-        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
         android:background="@color/white">
 
         <View
@@ -27,9 +26,8 @@
         <RelativeLayout
             android:layout_width="252dp"
             android:layout_height="match_parent"
-            android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:background="@drawable/left_header">
+            android:background="@drawable/left_header_ar">
 
             <TextView
                 android:id="@+id/header"
@@ -41,7 +39,7 @@
                 android:text="Files"
                 android:singleLine="true"
                 android:textColor="@color/white"
-                android:textSize="12sp"
+                android:textSize="14sp"
                 android:typeface="monospace" />
         </RelativeLayout>
 
@@ -49,8 +47,7 @@
             android:layout_width="50dp"
             android:layout_height="match_parent"
             android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:background="@drawable/right_header" />
+            android:background="@drawable/right_header_ar" />
     </RelativeLayout>
 
 </RelativeLayout>
