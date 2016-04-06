@@ -40,6 +40,7 @@
             android:id="@+id/swipe"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            app:drag_edge="left"
             app:clickToClose="true">
             <LinearLayout
                 android:layout_width="120dp"
@@ -71,7 +72,6 @@
                     android:background="@color/colorBaseWrapper"
                     android:layout_height="match_parent"
                     android:layout_toRightOf="@+id/rightarrow_layout"
-                    android:layout_toEndOf="@+id/rightarrow_layout"
                     android:layout_width="match_parent">
                     <ImageView
                         android:id="@+id/doc_checkbox"
@@ -143,7 +143,6 @@
                     android:id="@+id/rightarrow_layout"
                     android:layout_width="30dp"
                     android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
                     android:layout_height="match_parent"
                     android:gravity="center"
                     android:background="#E2DBDB">

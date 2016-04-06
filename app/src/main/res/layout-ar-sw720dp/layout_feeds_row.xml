@@ -7,6 +7,7 @@
         android:id="@+id/layout123"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_toRightOf="@+id/selected_project"
         android:layout_marginBottom="8dp"
         android:orientation="horizontal">
 
@@ -57,12 +58,12 @@
                             android:text="@string/test_forum"
                             android:textStyle="bold"
                             android:layout_marginTop="5dp"
-                            android:layout_marginRight="5dp"
-                            android:layout_marginEnd="5dp"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginStart="5dp"
                             android:textSize="25sp"
                             android:id="@+id/feed_title"
                             android:layout_alignTop="@+id/feed_image"
-                            android:layout_toStartOf="@+id/feed_image" />
+                            android:layout_toEndOf="@+id/feed_image" />
 
                         <TextView
                             android:layout_width="match_parent"
@@ -83,7 +84,7 @@
                             android:layout_marginTop="5dp"
                             android:layout_below="@+id/feed_description"
                             android:text="@string/test_forum"
-                            android:layout_alignEnd="@+id/feed_description" />
+                            android:layout_alignStart="@+id/feed_description" />
                     </RelativeLayout>
                 </RelativeLayout>
             </RelativeLayout>
