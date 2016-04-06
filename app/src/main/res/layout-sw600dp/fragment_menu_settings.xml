@@ -12,6 +12,7 @@
         android:paddingRight="10dp"
         android:paddingTop="15dp"
         android:paddingBottom="15dp"
+        android:gravity="center_vertical"
         android:id="@+id/checkbox_layout"
         android:gravity="center_vertical"
         android:drawableRight="@drawable/right_arrow"
@@ -35,11 +36,14 @@
         android:layout_below="@+id/checkbox_layout"
         android:drawableRight="@drawable/right_arrow"
         android:background="@color/white"
+        android:gravity="center_vertical"
+
         android:elegantTextHeight="true"
         android:elevation="1dp"
         android:layout_marginBottom="1dp"
         android:textStyle="bold"
         android:textSize="25sp"
+
         android:text="@string/edit_profile" />
     <TextView
         android:id="@+id/rest_password"
@@ -52,6 +56,8 @@
         android:paddingBottom="15dp"
         android:layout_below="@+id/edit_profile"
         android:background="@color/white"
+        android:gravity="center_vertical"
+
         android:elegantTextHeight="true"
         android:elevation="1dp"
         android:layout_marginBottom="1dp"
@@ -71,6 +77,7 @@
         android:layout_below="@+id/rest_password"
         android:background="@color/white"
         android:elegantTextHeight="true"
+        android:gravity="center_vertical"
         android:elevation="1dp"
         android:layout_marginBottom="1dp"
         android:drawableRight="@drawable/right_arrow"

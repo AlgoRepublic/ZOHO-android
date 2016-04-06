@@ -3,6 +3,7 @@ package com.algorepublic.zoho.adapters;
 import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +22,7 @@ import com.algorepublic.zoho.utils.BaseClass;
 import com.algorepublic.zoho.utils.Constants;
 import com.androidquery.AQuery;
 import com.bumptech.glide.Glide;
+import com.daimajia.swipe.SwipeLayout;
 import com.flyco.animation.BounceEnter.BounceLeftEnter;
 import com.flyco.animation.SlideExit.SlideRightExit;
 import com.flyco.dialog.listener.OnBtnClickL;
@@ -76,6 +78,7 @@ public class AdapterUser extends BaseAdapter {
             holder.userTitle = (TextView) convertView.findViewById(R.id.user_title);
             holder.userEmail = (TextView) convertView.findViewById(R.id.user_email);
             holder.userRole = (TextView) convertView.findViewById(R.id.user_role);
+            holder.swipeLayout=(SwipeLayout)convertView.findViewById(R.id.swipe);
             convertView.setTag(holder);
         }else{
             holder = (ViewHolder) convertView.getTag();
@@ -94,18 +97,16 @@ public class AdapterUser extends BaseAdapter {
                     + "." + BaseClass.getExtensionType(getItem(position).profileImagePath))
                     .into(holder.userImage);
         }
-
         holder.btEdit.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
+            @Override
+            public void onClick(View v) {
 
-            callFragmentWithBackStack(R.id.container, EditUserFragment.newInstance(position), "EditUserFragment");
-        }
+                callFragmentWithBackStack(R.id.container, EditUserFragment.newInstance(position), "EditUserFragment");
+            }
         });
         holder.btDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 lastPosition = position;
                 NormalDialogCustomAttr(ctx.getString(R.string.deleted_user),lastPosition);
             }
@@ -129,6 +130,7 @@ public class AdapterUser extends BaseAdapter {
         CircularImageView userImage;
         TextView btEdit;
         TextView btDelete;
+        SwipeLayout swipeLayout;
     }
     public void callFragmentWithBackStack(int containerId, Fragment fragment, String tag){
         ((AppCompatActivity)ctx).getSupportFragmentManager()
@@ -165,9 +167,9 @@ public class AdapterUser extends BaseAdapter {
                 new OnBtnClickL() {
                     @Override
                     public void onBtnClick() {
-                dialog.dismiss();
-                service.deleteUser(baseClass.getUserId(),baseClass.getSelectedProject()
-                        ,true,new CallBack(AdapterUser.this,"DeleteUser"));
+                        dialog.dismiss();
+                        service.deleteUser(baseClass.getUserId(),baseClass.getSelectedProject()
+                                ,true,new CallBack(AdapterUser.this,"DeleteUser"));
                     }
                 });
     }

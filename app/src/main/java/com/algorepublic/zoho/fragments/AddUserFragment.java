@@ -335,13 +335,10 @@ public class AddUserFragment extends BaseFragment implements MultiSelectionSpinn
             Log.e("Res", result);
             if(result.contains("100")){
                 Toast.makeText(getActivity(), getActivity().getString(R.string.user_created), Toast.LENGTH_SHORT).show();
-
             }else if(result.contains("101")) {
                 Toast.makeText(getActivity(), getActivity().getString(R.string.email_already), Toast.LENGTH_SHORT).show();
-
             }else
                 Toast.makeText(getActivity(), getActivity().getString(R.string.response_error), Toast.LENGTH_SHORT).show();
-
         }
     }
     @Override

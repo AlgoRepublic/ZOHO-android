@@ -27,10 +27,11 @@ public class UserFragment extends BaseFragment implements SwipeRefreshLayout.OnR
 
 
     AQuery aq;
-    public static SwipeRefreshLayout swipeRefreshLayout;
+    private SwipeRefreshLayout swipeRefreshLayout;
     public static ArrayList<Integer> assigneeList = new ArrayList<>();
     BaseClass baseClass;
     UserService service;
+    AdapterUser adapterUser;
 
 
     public UserFragment() {
@@ -51,6 +52,7 @@ public class UserFragment extends BaseFragment implements SwipeRefreshLayout.OnR
         baseClass = ((BaseClass) getActivity().getApplicationContext());
         aq = new AQuery(getActivity(), view);
         setHasOptionsMenu(true);
+        adapterUser=new AdapterUser(getActivity());
         getToolbar().setTitle(getString(R.string.users));
         swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe_refresh_layout);
         swipeRefreshLayout.setOnRefreshListener(this);
@@ -81,8 +83,7 @@ public class UserFragment extends BaseFragment implements SwipeRefreshLayout.OnR
             aq.id(R.id.response_alert).visibility(View.GONE);
         }
         if (UserListModel.getInstance().responseObject.size()!=0) {
-
-            aq.id(R.id.user_list).adapter(new AdapterUser(getActivity()));
+            aq.id(R.id.user_list).adapter(adapterUser);
             swipeRefreshLayout.setRefreshing(false);
         }else {
             Toast.makeText(getActivity(), getString(R.string.response_error), Toast.LENGTH_SHORT).show();
@@ -99,6 +100,9 @@ public class UserFragment extends BaseFragment implements SwipeRefreshLayout.OnR
 
     @Override
     public void onRefresh() {
-        service.getAllUsers(false, new CallBack(UserFragment.this, "UserList"));
+        UserListModel.getInstance().responseObject.clear();
+        service.getUserListByProject(Integer.parseInt(baseClass.getSelectedProject()), true,
+                new CallBack(UserFragment.this, "UserList"));
+
     }
 }
