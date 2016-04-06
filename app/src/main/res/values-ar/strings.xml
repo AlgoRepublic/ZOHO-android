@@ -294,7 +294,7 @@
     <string name="file_size_alert">File size alert!</string>
     <string name="file_size_lessthan5mb">File size should be less than (5) five MB</string>
     <string name="file_loaded_succesfully">File(s) uploaded successfully</string>
-    <string name="login">تسجيل الدخول!</string>
+    <string name="login">تسجيل الدخول</string>
     <string name="comments">التعليقات</string>
     <string name="questions">الاسئلة:</string>
     <string name="loading">تحميل</string>

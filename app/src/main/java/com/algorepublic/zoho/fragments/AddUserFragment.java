@@ -87,6 +87,7 @@ public class AddUserFragment extends BaseFragment implements MultiSelectionSpinn
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        setHasOptionsMenu(true);
         View view  = inflater.inflate(R.layout.fragment_add_user, container, false);
         dialogAC = InitializeDialog(getActivity());
         role_list = (ListView) view.findViewById(R.id.role_list);
@@ -99,7 +100,6 @@ public class AddUserFragment extends BaseFragment implements MultiSelectionSpinn
             Color = android.graphics.Color.parseColor("#414042");
         }
         aq = new AQuery(getActivity(), view);
-        setHasOptionsMenu(true);
         service = new ProjectsListService(getActivity());
         service1 = new UserService(getActivity());
 

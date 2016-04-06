@@ -1,6 +1,7 @@
 package com.algorepublic.zoho;
 
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.net.Uri;
@@ -13,6 +14,8 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
@@ -58,6 +61,7 @@ public class BaseActivity extends AppCompatActivity {
                 .commitAllowingStateLoss();
     }
     public void callFragmentWithBackStack(int containerId, Fragment fragment, String tag){
+        baseClass.hideKeyPad(findViewById(android.R.id.content));
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(containerId, fragment, tag)
@@ -97,6 +101,7 @@ public class BaseActivity extends AppCompatActivity {
     }
     public void setToolbar(){
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);

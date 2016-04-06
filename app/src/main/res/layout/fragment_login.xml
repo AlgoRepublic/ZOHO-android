@@ -157,55 +157,23 @@
                         android:layout_height="wrap_content"
                         android:layout_centerHorizontal="true"
                         android:layout_centerVertical="true"
-                        android:text="@string/remember_password"
-                        android:textColor="@color/colorContentWrapper" />
+                        android:text="@string/remember_password" />
                 </RelativeLayout>
 
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="40dp">
 
-                    <ImageView
+                    <TextView
                         android:id="@+id/email_sign_in_button"
                         android:layout_width="130dp"
                         android:layout_height="match_parent"
                         android:layout_centerHorizontal="true"
                         android:layout_centerVertical="true"
-                        android:background="@drawable/login" />
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:layout_marginTop="5dp"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/textView"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_gravity="center_horizontal"
-                        android:gravity="center|center_horizontal"
-                        android:singleLine="true"
-                        android:text="@string/text_or"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:textColor="@color/colorContentWrapper"
-                        android:textSize="16sp" />
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:orientation="vertical">
-
-                    <Button
-                        android:id="@+id/linkedin_here"
-                        android:layout_width="130dp"
-                        android:layout_height="wrap_content"
-                        android:layout_centerHorizontal="true"
-                        android:layout_centerVertical="true"
-                        android:background="@drawable/linkedin" />
+                        android:text="@string/login"
+                        android:gravity="center"
+                        android:textSize="16sp"
+                        android:background="@drawable/glass_button" />
                 </RelativeLayout>
 
                 <LinearLayout

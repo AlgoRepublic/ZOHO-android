@@ -26,15 +26,22 @@ public class SettingsActivity extends BaseActivity {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolbar.setTitle(baseClass.getResources().getString(R.string.settings));
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_arrow_back_white));
         callFragment(R.id.container, MenuSettingsFragment.newInstance(), "FragmentMenuSettings");
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                startActivity(new Intent(this,MainActivity.class));
-                this.finish();
+                if (getSupportFragmentManager().getBackStackEntryCount()==0) {
+                    startActivity(new Intent(this, MainActivity.class));
+                    this.finish();
+                }else{
+                    baseClass.hideKeyPad(findViewById(android.R.id.content));
+                    getSupportFragmentManager().popBackStack();
+                }
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
