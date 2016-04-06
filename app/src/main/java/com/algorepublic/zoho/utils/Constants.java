@@ -6,7 +6,6 @@ public class Constants {
 	public static String Image_URL = "http://91.74.105.122:9993/FileUploadsManager/uploads/";
 	public static String UserImage_URL = "http://91.74.105.122:9993";
 
-
 //	public static String BASE_URL = "http://api.jitpac.com";
 //	public static String Image_URL = "http://jitpac.com/FileUploadsManager/uploads/";
 //	public static String UserImage_URL = "http://jitpac.com";

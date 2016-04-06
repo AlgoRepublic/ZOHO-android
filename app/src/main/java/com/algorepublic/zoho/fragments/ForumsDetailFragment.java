@@ -3,7 +3,6 @@ package com.algorepublic.zoho.fragments;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.Html;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -11,7 +10,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.algorepublic.zoho.Models.CreateForumCommentModel;
@@ -113,24 +111,7 @@ public class ForumsDetailFragment extends BaseFragment {
                 + baseClass.GetTime(baseClass.DateMilli(ForumsModel.getInstance()
                 .responseObject.get(Position).updatedAt))));
 
-        comment_user.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if (actionId == getResources().getInteger(R.integer.add_comment)) {
-                    if (flag == true) {
-                        service.updateforumComments(ForumsDetailFragment
-                                .arrayList.get(ClickedPosition).getCommentID(), ForumsDetailFragment
-                                .comment_user.getText().toString(), true, new
-                                CallBack(ForumsDetailFragment.this, "UpdateComment"));
-                    } else {
-                        PerformAction();
-                    }
-                    baseClass.hideKeyPad(getView());
-                    return true;
-                }
-                return false;
-            }
-        });
+
         aq.id(R.id.send).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
