@@ -1,6 +1,7 @@
 package com.algorepublic.zoho.LoginToLoadingFragments;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -18,6 +19,7 @@ import com.algorepublic.zoho.services.CallBack;
 import com.algorepublic.zoho.services.LoginService;
 import com.algorepublic.zoho.utils.BaseClass;
 import com.androidquery.AQuery;
+import com.wang.avi.AVLoadingIndicatorView;
 
 import java.lang.reflect.Field;
 
@@ -46,7 +48,16 @@ public class LoginLoadingFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_login_loading, container, false);
+        AVLoadingIndicatorView loadingIndicatorView =
+                (AVLoadingIndicatorView) view.findViewById(R.id.avloadingIndicatorView);
+
         baseClass = ((BaseClass) getActivity().getApplicationContext());
+        if(baseClass.getThemePreference() == R.style.AppThemeBlue) {
+            loadingIndicatorView.setmIndicatorColor(Color.parseColor("#4B7BAA"));
+        }else
+        {
+            loadingIndicatorView.setmIndicatorColor(Color.parseColor("#414042"));
+        }
         loginService = new LoginService(getActivity());
         loginService.login(aq.id(R.id.email).getText().toString(), aq.id(R.id.password).getText().toString()
                 , false, new CallBack(LoginLoadingFragment.this, "LoginCall"));

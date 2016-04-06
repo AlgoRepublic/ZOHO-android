@@ -11,10 +11,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.algorepublic.zoho.adapters.AdapterMenuItems;
 import com.algorepublic.zoho.fragments.HomeFragment;
@@ -54,16 +56,27 @@ public class MainActivity extends BaseActivity {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         setToolbar();
-        drawer.setOnClickListener(new View.OnClickListener() {
+        drawer.addDrawerListener(new DrawerLayout.DrawerListener() {
             @Override
-            public void onClick(View v) {
-                if (drawer.isDrawerOpen(GravityCompat.START)) {
-                    baseClass.hideKeyPad(v);
-                } else {
-                    baseClass.hideKeyPad(v);
-                }
+            public void onDrawerSlide(View drawerView, float slideOffset) {
+
+            }
+
+            @Override
+            public void onDrawerOpened(View v) {
+                baseClass.hideKeyPad(v);
+            }
+
+            @Override
+            public void onDrawerClosed(View drawerView) {
+            }
+
+            @Override
+            public void onDrawerStateChanged(int newState) {
+
             }
         });
+
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         View headerLayout =navigationView.getHeaderView(0);
         gridView = (GridView) headerLayout.findViewById(R.id.gridview_menu);

@@ -176,17 +176,19 @@ public class AVLoadingIndicatorView extends View{
         super(context, attrs, defStyleAttr, defStyleRes);
         init(attrs, defStyleAttr);
     }
+    public void setmIndicatorColor(int color){
 
-    private void init(AttributeSet attrs, int defStyle) {
-        TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.AVLoadingIndicatorView);
-        mIndicatorId=a.getInt(R.styleable.AVLoadingIndicatorView_indicator, BallPulse);
-        mIndicatorColor=a.getColor(R.styleable.AVLoadingIndicatorView_indicator_color, Color.WHITE);
-        a.recycle();
+        mIndicatorColor= color;
         mPaint=new Paint();
         mPaint.setColor(mIndicatorColor);
         mPaint.setStyle(Paint.Style.FILL);
         mPaint.setAntiAlias(true);
         applyIndicator();
+    }
+    private void init(AttributeSet attrs, int defStyle) {
+        TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.AVLoadingIndicatorView);
+        mIndicatorId=a.getInt(R.styleable.AVLoadingIndicatorView_indicator, BallPulse);
+        a.recycle();
     }
 
     private void applyIndicator(){

@@ -10,7 +10,10 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="15dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
         android:id="@+id/checkbox_layout"
         android:drawableLeft="@drawable/left_arrow"
         android:background="@color/white"
@@ -18,14 +21,17 @@
         android:elevation="1dp"
         android:layout_marginBottom="1dp"
         android:textStyle="bold"
-        android:textSize="25sp"
+        android:textSize="30sp"
         android:text="@string/change_theme" />
 
     <TextView
         android:id="@+id/edit_profile"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="15dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
         android:layout_below="@+id/checkbox_layout"
         android:drawableLeft="@drawable/left_arrow"
         android:background="@color/white"
@@ -33,14 +39,16 @@
         android:elevation="1dp"
         android:layout_marginBottom="1dp"
         android:textStyle="bold"
-        android:textSize="25sp"
+        android:textSize="30sp"
         android:text="@string/edit_profile" />
     <TextView
         android:id="@+id/rest_password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="15dp"
-
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
         android:layout_below="@+id/edit_profile"
         android:background="@color/white"
         android:elegantTextHeight="true"
@@ -48,14 +56,16 @@
         android:layout_marginBottom="1dp"
         android:drawableLeft="@drawable/left_arrow"
         android:textStyle="bold"
-        android:textSize="25sp"
+        android:textSize="30sp"
         android:text="@string/rest_password" />
     <TextView
         android:id="@+id/about_us"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="10dp"
-
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
         android:layout_below="@+id/rest_password"
         android:background="@color/white"
         android:elegantTextHeight="true"
@@ -63,7 +73,7 @@
         android:layout_marginBottom="1dp"
         android:drawableLeft="@drawable/left_arrow"
         android:textStyle="bold"
-        android:textSize="25sp"
+        android:textSize="30sp"
         android:text="@string/about_us" />
     <TextView
         android:id="@+id/logout"
@@ -71,8 +81,8 @@
         android:layout_height="wrap_content"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
-        android:paddingTop="15dp"
-        android:paddingBottom="15dp"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
         android:layout_alignParentBottom="true"
         android:gravity="center"
         android:background="@color/white"
@@ -82,7 +92,7 @@
         android:layout_marginTop="40dp"
         android:layout_marginBottom="2dp"
         android:textColor="@android:color/holo_red_light"
-        android:textSize="25sp"
+        android:textSize="30sp"
         android:text="@string/logout" />
 
 </RelativeLayout>

@@ -12,8 +12,7 @@
         android:layout_height="140dp"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        app:indicator="BallSpinFadeLoader"
-        app:indicator_color="@color/colorContentWrapper" />
+        app:indicator="BallSpinFadeLoader"/>
 
     <TextView
         android:id="@+id/editText"
@@ -23,7 +22,6 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="15dp"
         android:text="@string/connecting_to_user"
-        android:textColor="@color/colorContentWrapper"
         android:textSize="16sp" />
 
     <ImageView
@@ -42,6 +40,5 @@
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:text="@string/loading"
-        android:textAllCaps="true"
-        android:textColor="@color/colorContentWrapper" />
+        android:textAllCaps="true" />
 </RelativeLayout>

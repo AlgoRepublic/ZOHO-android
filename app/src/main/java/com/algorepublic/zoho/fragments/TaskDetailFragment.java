@@ -242,6 +242,18 @@ public class TaskDetailFragment extends BaseFragment {
         colorDrawable.setColor(getPriorityWiseColor(TaskByIdModel.getInstance().responseObject.priority));
         aq.id(R.id.priority_bar).getView().setBackground(shapeDrawable);
         views.setBackgroundColor(getPriorityWiseColor(TaskByIdModel.getInstance().responseObject.priority));
+//        if(baseClass.getThemePreference() == R.style.AppThemeBlue) {
+//            seekBar.setth
+//            seekBar.setProgressDrawable(getResources().getDrawable(R.drawable.progress_horizontal));
+//            seekBar.setIndeterminateDrawable(getResources().getDrawable(R.drawable.progress_horizontal));
+//            seekBar.setThumb(getResources().getDrawable(R.drawable.thumb_image));
+//            seekBar.setProgressDrawableTiled(getResources().getDrawable(R.color.colorPrimaryBlue));
+//            seekBar.setSplitTrack(false);
+//            seekBar.setMinimumHeight(6);
+//            seekBar.setMax(6);
+//        }else {
+//            seekBar.setScrollBarStyle(R.style.blackSeekBar);
+//        }
     }
     public void AddTasks(){
         tasksList = new TasksList();

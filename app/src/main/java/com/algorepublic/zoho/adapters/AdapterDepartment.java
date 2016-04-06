@@ -270,6 +270,8 @@ public class AdapterDepartment
         if (fromPosition == toPosition) {
             return;
         }
+        Log.e("ID","S"+DepartmentFragment.allProjects.get(toPosition).getCompOrDeptID()
+        +"S"+DepartmentFragment.allProjects.get(fromPosition).getProjectID());
         service.addProjectIntoDepartment(DepartmentFragment.allProjects.get(toPosition).getCompOrDeptID()
                 , DepartmentFragment.allProjects.get(fromPosition).getProjectID(), baseClass.getUserId()
                 , true, new CallBack(AdapterDepartment.this, "MoveProject"));
