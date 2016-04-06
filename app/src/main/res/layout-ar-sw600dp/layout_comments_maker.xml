@@ -79,7 +79,7 @@
                     android:layout_height="match_parent">
                     <RelativeLayout
                         android:id="@+id/parent1"
-                        android:layout_toLeftOf="@+id/rightarrow_layout"
+                        android:layout_toRightOf="@+id/rightarrow_layout"
                         android:layout_alignParentTop="true"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -123,7 +123,7 @@
                     <LinearLayout
                         android:id="@+id/rightarrow_layout"
                         android:layout_width="20dp"
-                        android:layout_alignParentRight="true"
+                        android:layout_alignParentLeft="true"
                         android:layout_height="match_parent"
                         android:gravity="center"
                         android:background="#E2DBDB">
@@ -133,7 +133,7 @@
                             android:layout_width="18dp"
                             android:layout_height="18dp"
                             android:layout_margin="5dp"
-                            android:background="@drawable/circle_left"/>
+                            android:background="@drawable/circle_right"/>
                     </LinearLayout>
                 </RelativeLayout>
         </com.daimajia.swipe.SwipeLayout>

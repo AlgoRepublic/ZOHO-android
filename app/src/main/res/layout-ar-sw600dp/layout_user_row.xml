@@ -35,6 +35,7 @@
             android:id="@+id/swipe"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:drag_edge="left"
             app:clickToClose="true">
             <LinearLayout
                 android:id="@+id/main"
@@ -79,7 +80,6 @@
                 android:orientation="horizontal">
                 <RelativeLayout
                     android:layout_toRightOf="@+id/rightarrow_layout"
-                    android:layout_toEndOf="@+id/rightarrow_layout"
                     android:id="@+id/parent1"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -130,7 +130,7 @@
                 <LinearLayout
                     android:id="@+id/rightarrow_layout"
                     android:layout_width="20dp"
-                    android:layout_alignParentStart="true"
+                    android:layout_alignParentLeft="true"
                     android:layout_height="match_parent"
                     android:gravity="center"
                     android:background="#E2DBDB">
@@ -140,7 +140,7 @@
                         android:layout_width="15dp"
                         android:layout_height="15dp"
                         android:layout_margin="5dp"
-                        android:background="@drawable/circle_left"/>
+                        android:background="@drawable/circle_right"/>
                 </LinearLayout>
                 </RelativeLayout>
         </com.daimajia.swipe.SwipeLayout>
