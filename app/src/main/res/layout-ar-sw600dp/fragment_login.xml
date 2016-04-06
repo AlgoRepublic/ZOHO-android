@@ -81,7 +81,7 @@
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="60dp"
                     android:layout_margin="15dp"
                     android:orientation="vertical">
 
@@ -95,6 +95,7 @@
                         android:imeOptions="actionNext"
                         android:inputType="textEmailAddress"
                         android:maxLines="1"
+                        android:textSize="25sp"
                         android:paddingLeft="10dp"
                         android:paddingRight="10dp"
                         android:singleLine="true"
@@ -107,7 +108,7 @@
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="60dp"
                     android:layout_marginLeft="15dp"
                     android:layout_marginRight="15dp"
                     android:orientation="vertical">
@@ -125,6 +126,7 @@
                         android:imeActionLabel="@string/login"
                         android:inputType="textPassword"
                         android:maxLines="1"
+                        android:textSize="25sp"
                         android:paddingLeft="10dp"
                         android:paddingRight="10dp"
                         android:singleLine="true"
