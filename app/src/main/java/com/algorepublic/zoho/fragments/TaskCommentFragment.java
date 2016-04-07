@@ -1,6 +1,7 @@
 package com.algorepublic.zoho.fragments;
 
 import android.os.Bundle;
+import android.text.Html;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -176,7 +177,7 @@ public class TaskCommentFragment extends BaseFragment {
 
             TaskComments taskComments = new TaskComments();
             taskComments.setCommentID(CreateCommentModel.getInstance().responseObject.Id);
-            taskComments.setComment(CreateCommentModel.getInstance().responseObject.message);
+            taskComments.setComment(Html.fromHtml(CreateCommentModel.getInstance().responseObject.message).toString());
             taskComments.setDateTime(GetDateTimeComment(DateMilli(CreateCommentModel.getInstance().responseObject.updatedAt)));
             taskComments.setUserName(baseClass.getFirstName());
             taskComments.setUserImagePath(baseClass.getProfileImage());

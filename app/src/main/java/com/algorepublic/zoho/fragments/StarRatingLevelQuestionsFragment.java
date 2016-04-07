@@ -21,6 +21,8 @@ import com.algorepublic.zoho.services.StarRatingService;
 import com.androidquery.AQuery;
 
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * Created by android on 2/24/16.
@@ -31,6 +33,8 @@ public class StarRatingLevelQuestionsFragment extends BaseFragment {
     StarRatingService service;
     int ClickedPosition, userProgress;
     int multiple=5;
+    private Timer timer=new Timer();
+    private final long DELAY = 1000;
     LinearLayout QuestLayout;
     public  static ArrayList<StarRatingQuestion> Questions = new ArrayList<>();
     static int ID;
@@ -106,11 +110,20 @@ public class StarRatingLevelQuestionsFragment extends BaseFragment {
 
                 @Override
                 public void afterTextChanged(Editable s) {
-
-                    service.StarEditComment(Questions
-                            .get(ClickedPosition).getID(),
-                            aq_quest.id(R.id.comment_edittext).getText().toString(), true, new
-                            CallBack(StarRatingLevelQuestionsFragment.this, "UpdateComment"));
+                    timer.cancel();
+                    timer = new Timer();
+                    timer.schedule(
+                            new TimerTask() {
+                                @Override
+                                public void run() {
+                                    service.StarEditComment(Questions
+                                                    .get(ClickedPosition).getID(),
+                                            aq_quest.id(R.id.comment_edittext).getText().toString(), true, new
+                                                    CallBack(StarRatingLevelQuestionsFragment.this, "UpdateComment"));
+                                }
+                            },
+                            DELAY
+                    );
                 }
             });
             aq_quest.id(R.id.comment_edittext).getEditText().setOnTouchListener(new View.OnTouchListener() {
