@@ -187,25 +187,25 @@ public class TaskAddUpdateFragment extends BaseFragment {
             public void afterTextChanged(Editable s) {
             }
         });
-        aq.id(R.id.title_text).getEditText().setOnTouchListener(new View.OnTouchListener() {
+        aq.id(R.id.title_bar).clicked(new View.OnClickListener() {
             @Override
-            public boolean onTouch(View v, MotionEvent event) {
+            public void onClick(View v) {
                 aq.id(R.id.title_text).enabled(true);
                 aq.id(R.id.title_text).getEditText().requestFocus();
                 aq.id(R.id.title_text).getEditText().
                         setSelection(aq.id(R.id.title_text).getText().length());
-                return true;
             }
         });
-//        taskTitle.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-//            @Override
-//            public void onFocusChange(View v, boolean hasFocus) {
-//                if(hasFocus)
-//                    baseClass.showKeyPad(v);
-//                else
-//                    baseClass.hideKeyPad(v);
-//            }
-//        });
+
+        taskTitle.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(hasFocus)
+                    baseClass.showKeyPad(v);
+                else
+                    baseClass.hideKeyPad(v);
+            }
+        });
         gridViewTaskMenu.setAdapter(new AdapterTaskMenu(getActivity()));
         callFragmentWithReplace(R.id.edittask_container, TaskEditTitleFragment.newInstance(), "TaskTitle");
         return  view;
