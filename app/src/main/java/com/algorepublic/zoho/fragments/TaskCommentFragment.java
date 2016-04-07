@@ -2,6 +2,7 @@ package com.algorepublic.zoho.fragments;
 
 import android.os.Bundle;
 import android.text.Html;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -177,7 +178,7 @@ public class TaskCommentFragment extends BaseFragment {
 
             TaskComments taskComments = new TaskComments();
             taskComments.setCommentID(CreateCommentModel.getInstance().responseObject.Id);
-            taskComments.setComment(Html.fromHtml(CreateCommentModel.getInstance().responseObject.message).toString());
+            taskComments.setComment(CreateCommentModel.getInstance().responseObject.message);
             taskComments.setDateTime(GetDateTimeComment(DateMilli(CreateCommentModel.getInstance().responseObject.updatedAt)));
             taskComments.setUserName(baseClass.getFirstName());
             taskComments.setUserImagePath(baseClass.getProfileImage());
@@ -195,6 +196,7 @@ public class TaskCommentFragment extends BaseFragment {
     public void PerformAction()
     {
         String comment = aq.id(R.id.comment_user).getText().toString();
+        comment = comment.replaceAll("\n","<br/>");
         if(aq.id(R.id.comment_user).getText().toString().isEmpty()) {
             Toast.makeText(getActivity(), getString(R.string.enter_comment), Toast.LENGTH_SHORT).show();
             return;

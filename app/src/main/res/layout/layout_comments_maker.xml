@@ -116,7 +116,6 @@
                                 android:lines="2"
                                 android:layout_marginTop="5dp"
                                 android:layout_below="@+id/comment_title"
-                                android:text="@string/test_forum"
                                 android:layout_alignStart="@+id/comment_title" />
                         </RelativeLayout>
                     <LinearLayout

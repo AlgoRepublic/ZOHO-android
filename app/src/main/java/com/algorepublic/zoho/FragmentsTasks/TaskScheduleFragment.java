@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.fragments.BaseFragment;
@@ -48,6 +49,7 @@ public class TaskScheduleFragment extends BaseFragment {
         // Inflate the layout for this fragment_forums
         View view =  inflater.inflate(R.layout.fragment_task_schedule, container, false);
         aq =  new AQuery(view);
+
         baseClass = ((BaseClass) getActivity().getApplicationContext());
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(System.currentTimeMillis());
@@ -65,7 +67,7 @@ public class TaskScheduleFragment extends BaseFragment {
             else
                 aq.id(R.id.start_date).text(BaseClass.db.getString("StartDate"));
         }else{
-            aq.id(R.id.start_date).text(day+"/"+month+"/"+year);
+            aq.id(R.id.start_date).text(month+"/"+day+"/"+year);
         }
 
         if(!BaseClass.db.getString("EndDate").equalsIgnoreCase("") ||
@@ -78,7 +80,7 @@ public class TaskScheduleFragment extends BaseFragment {
             else
                 aq.id(R.id.end_date).text(BaseClass.db.getString("EndDate"));
         }else{
-            aq.id(R.id.end_date).text(day+"/"+month+"/"+year);
+            aq.id(R.id.end_date).text(month+"/"+day+"/"+year);
         }
         SplitStartDate(); SplitEndDate();
 
@@ -110,9 +112,9 @@ public class TaskScheduleFragment extends BaseFragment {
 
         @Override
         public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
-
-            start_date = dayOfMonth+"/"+(++monthOfYear)+"/"+year;
+            start_date = (++monthOfYear)+"/"+dayOfMonth+"/"+year;
             start_day = dayOfMonth;start_month = monthOfYear-1;start_year = year;
+            CheckDate();
             aq.id(R.id.start_date).text(start_date);
             BaseClass.db.putString("StartDate", start_date);
         }
@@ -120,12 +122,21 @@ public class TaskScheduleFragment extends BaseFragment {
     DatePickerDialog.OnDateSetListener endDatePicker = new DatePickerDialog.OnDateSetListener() {
         @Override
         public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
-            end_date = dayOfMonth+"/"+(++monthOfYear)+"/"+year;
+            end_date = (++monthOfYear)+"/"+dayOfMonth+"/"+year;
             end_day = dayOfMonth;end_month = monthOfYear-1;end_year = year;
+            CheckDate();
             aq.id(R.id.end_date).text(end_date);
             BaseClass.db.putString("EndDate", end_date);
         }
     };
+    private void CheckDate(){
+        if (start_day !=0 && start_month !=0 && start_year !=0 && end_day !=0 && end_month !=0 && end_year !=0) {
+            if (end_day < start_day || end_month < start_month || end_year < start_year) {
+                Toast.makeText(getActivity(), "Please choose correct range", Toast.LENGTH_SHORT).show();
+                return;
+            }
+        }
+    }
     public void SplitStartDate() {
         String start_date = aq.id(R.id.start_date).getText().toString();
         if (start_date.equalsIgnoreCase(getString(R.string.start_date))

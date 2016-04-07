@@ -72,7 +72,8 @@ public class AdapterTaskComments extends BaseAdapter {
         }
         aq = new AQuery(convertView);
         if(TaskCommentFragment.arrayList.get(position).getComment() !=null) {
-            holder.taskComment.setText(Html.fromHtml(TaskCommentFragment.arrayList.get(position).getComment()));
+            holder.taskComment.setText(Html.fromHtml(
+                    TaskCommentFragment.arrayList.get(position).getComment()).toString());
         }
             holder.userName.setText(TaskCommentFragment.arrayList.get(position).getUserName()
                 + " , " + TaskCommentFragment.arrayList.get(position).getDateTime());
@@ -83,10 +84,6 @@ public class AdapterTaskComments extends BaseAdapter {
                     + "." + BaseClass.getExtensionType(TaskCommentFragment.arrayList
                     .get(position).getUserImagePath())).into(holder.userImage);
         }
-        Log.e("A","S"+Constants.Image_URL + TaskCommentFragment
-                .arrayList.get(position).getUserImageID()
-                + "." + BaseClass.getExtensionType(TaskCommentFragment.arrayList
-                .get(position).getUserImagePath()));
 //        aq.id(R.id.btEdit).clicked(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
