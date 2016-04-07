@@ -16,10 +16,14 @@
         <item name="android:tabWidgetStyle">@style/bluePagerTitleStrip</item>
         <item name="android:buttonStyle">@style/blueButton</item>
         <item name="android:editTextStyle">@style/blueEditTextStyle</item>
+        <item name="searchViewStyle">@style/blueSearchView</item>
     </style>
 
     <style name="blueButton" parent="@android:style/Widget.Button">
         <item name="android:background">@color/colorSecondaryBlue</item>
+    </style>
+    <style name="blueSearchView" parent="Widget.AppCompat.SearchView">
+        <item name="android:textColor">@color/colorPrimaryBlue</item>
     </style>
     <style name="blueButtonTextView" parent="@android:style/TextAppearance.Widget.Button">
         <item name="android:textColor">@color/colorPrimaryBlue</item>

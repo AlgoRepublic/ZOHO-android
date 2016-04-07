@@ -9,9 +9,11 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.Toast;
 
@@ -36,6 +38,7 @@ import cc.cloudist.acplibrary.ACProgressFlower;
 public class TaskAddUpdateFragment extends BaseFragment {
     AQuery aq;
     static int tasID;
+    public static EditText taskTitle;
     static BaseClass baseClass;
     static TaskAddUpdateFragment fragment;
     public static GridView gridViewTaskMenu;
@@ -146,6 +149,7 @@ public class TaskAddUpdateFragment extends BaseFragment {
         View view = inflater.inflate(R.layout.activity_task, container, false);
         dialogAC = InitializeDialog(getActivity());
         gridViewTaskMenu = (GridView) view.findViewById(R.id.gridview_taskmenu);
+        taskTitle = (EditText) view.findViewById(R.id.title_text);
         filesList = new ArrayList<>();
         filesToDelete = new ArrayList<>();
         assigneeList = new ArrayList<>();
@@ -164,12 +168,11 @@ public class TaskAddUpdateFragment extends BaseFragment {
             }
         }
         aq =new AQuery(view);
-
         applyLightBackground(aq.id(R.id.gridview_taskmenu).getView(), baseClass);
         applyLightBackground(aq.id(R.id.title_bar).getView(), baseClass);
         SetValues();
         getToolbar().setTitle(Title);
-        aq.id(R.id.title_text).getEditText().addTextChangedListener(new TextWatcher() {
+        taskTitle.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -184,20 +187,25 @@ public class TaskAddUpdateFragment extends BaseFragment {
             public void afterTextChanged(Editable s) {
             }
         });
-
-        aq.id(R.id.btn_title).getCheckBox().setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        aq.id(R.id.title_text).getEditText().setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    aq.id(R.id.title_text).enabled(true);
-                    aq.id(R.id.title_text).getEditText().requestFocus();
-                    aq.id(R.id.title_text).getEditText().
-                            setSelection(aq.id(R.id.title_text).getText().length());
-                    baseClass.showKeyPad(buttonView);
-                }else
-                    aq.id(R.id.title_text).enabled(false);
+            public boolean onTouch(View v, MotionEvent event) {
+                aq.id(R.id.title_text).enabled(true);
+                aq.id(R.id.title_text).getEditText().requestFocus();
+                aq.id(R.id.title_text).getEditText().
+                        setSelection(aq.id(R.id.title_text).getText().length());
+                return true;
             }
         });
+//        taskTitle.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+//            @Override
+//            public void onFocusChange(View v, boolean hasFocus) {
+//                if(hasFocus)
+//                    baseClass.showKeyPad(v);
+//                else
+//                    baseClass.hideKeyPad(v);
+//            }
+//        });
         gridViewTaskMenu.setAdapter(new AdapterTaskMenu(getActivity()));
         callFragmentWithReplace(R.id.edittask_container, TaskEditTitleFragment.newInstance(), "TaskTitle");
         return  view;
@@ -323,6 +331,7 @@ public class TaskAddUpdateFragment extends BaseFragment {
     }
     private void PopulateModel (String json) {
         Log.e("Json", "/" + json);
+        setTaskValuesTinyDB(-1);
         if(json.contains("100")) {
             Toast.makeText(getActivity(), getActivity().getString(R.string.task_created), Toast.LENGTH_SHORT).show();
         }else{

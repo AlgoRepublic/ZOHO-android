@@ -23,6 +23,7 @@
                 android:layout_weight="1.5"
                 android:textCursorDrawable="@null"
                 android:hint="Type a comment"
+                android:inputType="textMultiLine"
                 android:textColor="@color/colorBaseHeader"
                 android:textColorHint="@color/colorBaseMenu"
                 android:imeActionId="@integer/add_comment"
