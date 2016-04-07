@@ -164,7 +164,8 @@ public class ProjectsFragment extends BaseFragment implements SwipeRefreshLayout
 
     }
     public void AllProjects(Object caller, Object model) {
-        swipeListView.setRefreshing(false);swipeStickView.setRefreshing(false);
+        swipeListView.setRefreshing(false);
+        swipeStickView.setRefreshing(false);
         AllProjectsByUserModel.getInstance().setList((AllProjectsByUserModel) model);
         if (AllProjectsByUserModel.getInstance().responseCode == 100
                 || AllProjectsByUserModel.getInstance().responseData.size() != 0) {
@@ -176,7 +177,8 @@ public class ProjectsFragment extends BaseFragment implements SwipeRefreshLayout
         }
     }
     public void ProjectsByClient(Object caller, Object model){
-        swipeListView.setRefreshing(false);swipeStickView.setRefreshing(false);
+        swipeListView.setRefreshing(false);
+        swipeStickView.setRefreshing(false);
         ProjectsByClientModel.getInstance().setList((ProjectsByClientModel) model);
         if (ProjectsByClientModel.getInstance().responseCode == 100
                 || ProjectsByClientModel.getInstance().responseData.size() != 0){

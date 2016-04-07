@@ -1,7 +1,7 @@
 package com.algorepublic.zoho.fragments;
 
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
+import android.text.Html;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.algorepublic.zoho.Models.CreateCommentModel;
 import com.algorepublic.zoho.Models.GeneralModel;
@@ -86,23 +87,23 @@ public class TaskCommentFragment extends BaseFragment {
         getToolbar().setTitle(getResources().getString(R.string.comments));
         service.getCommentsByTask(position,
                 true,new CallBack(TaskCommentFragment.this,"TaskComments"));
-        aq.id(R.id.comment_user).getTextView().setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if (actionId == getResources().getInteger(R.integer.add_comment)) {
-                    if (flag == true) {
-                        forumService.updateforumComments(ForumsDetailFragment
-                                .arrayList.get(ClickedPosition).getCommentID(), ForumsDetailFragment
-                                .comment_user.getText().toString(), true, new
-                                CallBack(TaskCommentFragment.this, "UpdateComment"));
-                    }else{
-                        PerformAction();
-                    }
-                    return true;
-                }
-                return false;
-            }
-        });
+//        aq.id(R.id.comment_user).getTextView().setOnEditorActionListener(new TextView.OnEditorActionListener() {
+//            @Override
+//            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+//                if (actionId == getResources().getInteger(R.integer.add_comment)) {
+//                    if (flag == true) {
+//                        forumService.updateforumComments(ForumsDetailFragment
+//                                .arrayList.get(ClickedPosition).getCommentID(), ForumsDetailFragment
+//                                .comment_user.getText().toString(), true, new
+//                                CallBack(TaskCommentFragment.this, "UpdateComment"));
+//                    }else{
+//                        PerformAction();
+//                    }
+//                    return true;
+//                }
+//                return false;
+//            }
+//        });
         aq.id(R.id.send).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -127,7 +128,7 @@ public class TaskCommentFragment extends BaseFragment {
         }
         else
         {
-            Snackbar.make(getView(), getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), getString(R.string.response_error), Toast.LENGTH_SHORT).show();
         }
         aq.id(R.id.alertMessage).text(getString(R.string.no_comments));
         if(arrayList.size() ==0){
@@ -165,18 +166,18 @@ public class TaskCommentFragment extends BaseFragment {
             TaskCommentFragment
                     .comment_user.setText("");
         }else {
-            Snackbar.make(getView(),
-                    getActivity().getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), getString(R.string.response_error), Toast.LENGTH_SHORT).show();
         }
     }
     public void CreateComment(Object caller, Object model) {
 
         CreateCommentModel.getInstance().setList((CreateCommentModel) model);
         if (CreateCommentModel.getInstance().responseCode ==100){
-            Snackbar.make(getView(), "Comment Added", Snackbar.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), getString(R.string.comments_added), Toast.LENGTH_SHORT).show();
+
             TaskComments taskComments = new TaskComments();
             taskComments.setCommentID(CreateCommentModel.getInstance().responseObject.Id);
-            taskComments.setComment(CreateCommentModel.getInstance().responseObject.message);
+            taskComments.setComment(Html.fromHtml(CreateCommentModel.getInstance().responseObject.message).toString());
             taskComments.setDateTime(GetDateTimeComment(DateMilli(CreateCommentModel.getInstance().responseObject.updatedAt)));
             taskComments.setUserName(baseClass.getFirstName());
             taskComments.setUserImagePath(baseClass.getProfileImage());
@@ -187,14 +188,15 @@ public class TaskCommentFragment extends BaseFragment {
         }
         else
         {
-            Snackbar.make(getView(), getString(R.string.response_error), Snackbar.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), getString(R.string.response_error), Toast.LENGTH_SHORT).show();
+
         }
     }
     public void PerformAction()
     {
         String comment = aq.id(R.id.comment_user).getText().toString();
         if(aq.id(R.id.comment_user).getText().toString().isEmpty()) {
-            Snackbar.make(getView(),getString(R.string.enter_comment),Snackbar.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), getString(R.string.enter_comment), Toast.LENGTH_SHORT).show();
             return;
         }
         service.createComment(comment, position, Integer.parseInt(baseClass.getUserId()), true,

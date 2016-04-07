@@ -220,7 +220,7 @@ public class UploadDocsFragment extends BaseFragment implements GoogleApiClient.
     }
     private void CallForAttachments() {
         String[] menuItems = {getString(R.string.camera),getString(R.string.gallery),
-                getString(R.string.google_drive), getString(R.string.camera)};
+                getString(R.string.google_drive), getString(R.string.drop_box)};
         final ActionSheetDialog dialog = new ActionSheetDialog(getActivity(), menuItems,
                 getString(R.string.cancel),getView());
         dialog.titleTextColor(Color);

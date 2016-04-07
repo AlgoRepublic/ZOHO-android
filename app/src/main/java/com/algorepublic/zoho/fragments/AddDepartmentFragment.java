@@ -71,6 +71,8 @@ public class AddDepartmentFragment extends BaseFragment {
         CreateForumModel.getInstance().setList((CreateForumModel) model);
         if (CreateForumModel.getInstance().responseObject !=null ) {
             Toast.makeText(getActivity(), getActivity().getString(R.string.department_created), Toast.LENGTH_SHORT).show();
+            getFragmentManager().popBackStack();
+            aq.id(R.id.dept_title).text(" ");
         }else {
             Toast.makeText(getActivity(), getActivity().getString(R.string.response_error), Toast.LENGTH_SHORT).show();
         }

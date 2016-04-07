@@ -21,7 +21,6 @@
 
     <style name="blueButton" parent="@android:style/Widget.Button">
         <item name="android:background">@color/colorSecondaryBlue</item>
-        <item name="android:textColor">@style/blueButtonTextView</item>
     </style>
     <style name="blueButtonTextView" parent="@android:style/TextAppearance.Widget.Button">
         <item name="android:textColor">@color/colorPrimaryBlue</item>
