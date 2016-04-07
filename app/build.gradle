@@ -8,6 +8,7 @@ android {
 
     defaultConfig {
         applicationId "com.algorepublic.zoho"
+        multiDexEnabled  true
         minSdkVersion 18
         targetSdkVersion 23
         versionCode 1

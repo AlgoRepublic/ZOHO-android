@@ -62,13 +62,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/colorContentWrapper"
-            android:horizontalSpacing="0dp"
             android:numColumns="3"
             android:padding="7dp"
             android:layout_gravity="center"
             android:gravity="center"
+            android:verticalSpacing="20dp"
+            android:horizontalSpacing="-10dp"
             android:stretchMode="columnWidth"
-            android:verticalSpacing="0dp"/>
+         />
 
         <FrameLayout
             android:id="@+id/edittask_container"
