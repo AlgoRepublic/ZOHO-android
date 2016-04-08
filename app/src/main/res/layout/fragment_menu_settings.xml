@@ -15,6 +15,7 @@
         android:elevation="1dp"
         android:layout_marginBottom="1dp"
         android:textStyle="bold"
+        android:gravity="center_vertical"
         android:textSize="18sp"
         android:text="@string/change_theme" />
     <TextView
@@ -24,6 +25,7 @@
         android:padding="10dp"
         android:layout_below="@+id/checkbox_layout"
         android:elevation="1dp"
+        android:gravity="center_vertical"
         android:layout_marginBottom="1dp"
         android:drawableRight="@drawable/right_arrow"
         android:background="@color/white"
@@ -36,6 +38,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="10dp"
+        android:gravity="center_vertical"
         android:layout_below="@+id/edit_profile"
         android:background="@color/white"
         android:elegantTextHeight="true"
@@ -54,6 +57,7 @@
         android:background="@color/white"
         android:elegantTextHeight="true"
         android:elevation="1dp"
+        android:gravity="center_vertical"
         android:layout_marginBottom="1dp"
         android:textStyle="bold"
         android:drawableRight="@drawable/right_arrow"

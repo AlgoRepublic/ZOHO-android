@@ -126,6 +126,7 @@ public class AdapterTaskMenu extends BaseAdapter {
             callFragmentWithReplace(R.id.edittask_container, TaskPriorityFragment.newInstance(), "TasksPriority");
         }
         BaseActivity.drawer.closeDrawer(GravityCompat.START);
+        TaskAddUpdateFragment.taskTitle.setEnabled(false);
     }
     public void callFragmentWithReplace(int containerId, Fragment fragment, String tag){
         ((AppCompatActivity) ctx).getSupportFragmentManager()

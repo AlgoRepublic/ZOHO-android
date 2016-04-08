@@ -266,15 +266,28 @@ public class AdapterDepartment
     @Override
     public void onMoveItem(int fromPosition, int toPosition) {
         Log.e(TAG, "onMoveItem(fromPosition = " + fromPosition + ", toPosition = " + toPosition + ")");
-
-        if (fromPosition == toPosition) {
+        int ToPosition = toPosition;
+        if (fromPosition == toPosition && toPosition ==0) {
             return;
         }
-        Log.e("ID","S"+DepartmentFragment.allProjects.get(toPosition).getCompOrDeptID()
-        +"S"+DepartmentFragment.allProjects.get(fromPosition).getProjectID());
-        service.addProjectIntoDepartment(DepartmentFragment.allProjects.get(toPosition).getCompOrDeptID()
+        if(toPosition<fromPosition){
+            ToPosition--;
+        }
+        Log.e("ID","/"+DepartmentFragment.allProjects.get(ToPosition).getCompOrDeptID()
+                +"/"+DepartmentFragment.allProjects.get(fromPosition).getProjectID());
+
+        service.addProjectIntoDepartment(DepartmentFragment.allProjects.get(ToPosition).getCompOrDeptID()
                 , DepartmentFragment.allProjects.get(fromPosition).getProjectID(), baseClass.getUserId()
                 , true, new CallBack(AdapterDepartment.this, "MoveProject"));
+//        if(fromPosition > toPosition) {
+//            service.addProjectIntoDepartment(DepartmentFragment.allProjects.get(toPosition).getCompOrDeptID()
+//                    , DepartmentFragment.allProjects.get(fromPosition).getProjectID(), baseClass.getUserId()
+//                    , true, new CallBack(AdapterDepartment.this, "MoveProject"));
+//        }else{
+//            service.addProjectIntoDepartment(DepartmentFragment.allProjects.get(fromPosition).getCompOrDeptID()
+//                    , DepartmentFragment.allProjects.get(fromPosition).getProjectID(), baseClass.getUserId()
+//                    , true, new CallBack(AdapterDepartment.this, "MoveProject"));
+//        }
         ProjectsList projectsList = DepartmentFragment.allProjects.get(fromPosition);
         DepartmentFragment.allProjects.remove(fromPosition);
         DepartmentFragment.allProjects.add(toPosition, projectsList);

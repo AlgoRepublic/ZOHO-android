@@ -1,7 +1,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="70dp"
+    android:layout_height="wrap_content"
     android:layout_marginBottom="3dp"
     android:descendantFocusability="blocksDescendants"
     android:orientation="horizontal"
@@ -13,13 +13,12 @@
     <View
         android:id="@+id/priority_bar"
         android:layout_width="8dp"
-        android:layout_height="match_parent"
+        android:layout_height="70dp"
         android:layout_marginBottom="9dp"
         android:layout_marginTop="4dp"
         android:background="@drawable/roundable_prioritybar"/>
     <RelativeLayout
         android:id="@+id/layout123"
-        android:layout_toRightOf="@+id/priority_bar"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="6dp"
@@ -72,7 +71,7 @@
                                 android:background="@color/colorContentWrapper"
                                 android:text="Edit"
                                 />
-                                />
+                            />
                             <TextView
                                 android:id="@+id/btDelete"
                                 android:layout_width="0dp"
@@ -125,7 +124,7 @@
                                     <LinearLayout
                                         android:id="@+id/layout2"
                                         android:layout_width="match_parent"
-                                        android:layout_height="match_parent"
+                                        android:layout_height="wrap_content"
                                         android:orientation="horizontal"
                                         android:weightSum="2">
 
@@ -136,6 +135,7 @@
                                             android:layout_weight="1"
                                             android:gravity="left"
                                             android:textSize="14sp"
+                                            android:text="alpha "
                                             android:textStyle="bold" />
 
                                         <TextView
@@ -144,33 +144,42 @@
                                             android:layout_height="wrap_content"
                                             android:layout_weight="1"
                                             android:gravity="right|end"
-                                            android:textSize="12sp" />
+                                            android:textSize="14sp" />
                                     </LinearLayout>
 
-                                    <LinearLayout
+                                    <RelativeLayout
                                         android:id="@+id/layout3"
                                         android:layout_width="match_parent"
-                                        android:layout_height="20dp"
+                                        android:layout_height="wrap_content"
                                         android:orientation="horizontal"
-                                        android:weightSum="2">
+                                        >
 
                                         <TextView
                                             android:id="@+id/project_name"
-                                            android:layout_width="0dp"
+                                            android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             android:layout_gravity="center_vertical"
-                                            android:layout_weight=".8"
-                                            android:gravity="left"
+                                            android:layout_alignParentLeft="true"
+                                            android:layout_toLeftOf="@+id/commentsView"
+                                            android:gravity="left|center_vertical"
+                                            android:layout_centerVertical="true"
+                                            android:text="lsdfsdfsfsdsdfsf"
                                             android:singleLine="true"
                                             android:ellipsize="end"
                                             android:textSize="14sp"
                                             android:textStyle="bold" />
 
-                                        <RelativeLayout
-                                            android:layout_width="0dp"
+                                        <TableRow
+                                            android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             android:layout_below="@+id/general"
-                                            android:layout_weight="1.2">
+                                            android:layout_alignParentRight="true"
+                                            android:layout_alignParentBottom="true"
+                                            android:layout_centerVertical="true"
+                                            android:gravity="center"
+                                            android:id="@+id/commentsView"
+                                            >
+
 
                                             <TextView
                                                 android:id="@+id/task_comment"
@@ -185,7 +194,8 @@
                                             <RadioButton
                                                 android:id="@+id/bar"
                                                 android:layout_width="1dp"
-                                                android:layout_margin="5dp"
+                                                android:layout_marginLeft="5dp"
+                                                android:layout_marginRight="5dp"
                                                 android:layout_height="match_parent"
                                                 android:layout_centerVertical="true"
                                                 android:text="@string/divider"
@@ -201,8 +211,8 @@
                                                 android:gravity="left"
                                                 android:text="@string/task_user"
                                                 android:textSize="12sp" />
-                                        </RelativeLayout>
-                                    </LinearLayout>
+                                        </TableRow>
+                                    </RelativeLayout>
                                 </LinearLayout>
                             </RelativeLayout>
                             <LinearLayout

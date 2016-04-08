@@ -1,17 +1,22 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="110dp"
+    android:layout_height="wrap_content"
     android:layout_marginBottom="3dp"
     android:descendantFocusability="blocksDescendants"
     android:orientation="horizontal"
-    android:paddingEnd="5dp"
-    android:gravity="center_vertical"
-    android:fitsSystemWindows="true"
-    android:paddingLeft="5dp"
-    android:paddingRight="5dp"
-    android:paddingStart="5dp">
-
+    android:paddingEnd="10dp"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+    android:paddingStart="10dp">
+    <View
+        android:id="@+id/priority_bar"
+        android:layout_width="8dp"
+        android:layout_height="80dp"
+        android:layout_marginBottom="9dp"
+        android:layout_marginTop="4dp"
+        android:layout_alignParentStart="true"
+        android:background="@drawable/roundable_prioritybar_ar"/>
 
     <RelativeLayout
         android:id="@+id/layout123"
@@ -28,7 +33,6 @@
             android:layout_height="match_parent"
             app:ms9_affectsDisplayedPosition="true"
             app:ms9_shadowElevation="2dp"
-            android:layout_toEndOf="@+id/priority_bar"
             app:ms9_shadowTranslationZ="1dp"
             app:ms9_useAmbientShadow="true">
 
@@ -110,7 +114,7 @@
                                     android:scaleType="fitXY"
                                     android:src="@drawable/task_progress" />
 
-                                <LinearLayout
+                                <RelativeLayout
                                     android:id="@+id/layout1"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
@@ -125,19 +129,18 @@
                                     <LinearLayout
                                         android:id="@+id/layout2"
                                         android:layout_width="match_parent"
-                                        android:layout_height="match_parent"
+                                        android:layout_height="wrap_content"
                                         android:orientation="horizontal"
+                                        android:layout_alignParentTop="true"
+                                        android:layout_above="@+id/layout3"
                                         android:weightSum="2">
 
                                         <TextView
                                             android:id="@+id/task_name"
                                             android:layout_width="0dp"
-                                            android:layout_height="wrap_content"
+                                            android:layout_height="match_parent"
                                             android:layout_weight="1.1"
-                                            android:gravity="left|start"
-                                            android:ellipsize="marquee"
-                                            android:singleLine="true"
-                                            android:marqueeRepeatLimit="marquee_forever"
+                                            android:gravity="left|start|center_vertical"
                                             android:textSize="18sp"
                                             android:textStyle="bold" />
 
@@ -147,41 +150,44 @@
                                             android:paddingEnd="5dp"
                                             android:singleLine="true"
 
-                                            android:layout_height="wrap_content"
+                                            android:layout_height="match_parent"
                                             android:layout_weight="0.9"
-                                            android:gravity="right|end"
+                                            android:gravity="right|end|center_vertical"
                                             android:textSize="16sp" />
                                     </LinearLayout>
 
-                                    <LinearLayout
+                                    <RelativeLayout
                                         android:id="@+id/layout3"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:orientation="horizontal"
+                                        android:layout_alignParentBottom="true"
                                         android:gravity="top"
-                                        android:weightSum="2">
+                                       >
 
                                         <TextView
                                             android:id="@+id/project_name"
-                                            android:layout_width="0dp"
+                                            android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
-                                            android:layout_gravity="top"
-                                            android:layout_weight="1.2"
-                                            android:gravity="left|start"
+                                            android:layout_gravity="center_vertical"
+                                            android:layout_alignParentRight="true"
+                                            android:layout_toLeftOf="@+id/commentsView"
+                                            android:gravity="left|start|center_vertical"
                                             android:ellipsize="end"
-                                            android:maxLines="2"
-                                            android:text=""
+                                            android:singleLine="true"
+                                            android:text="dsfsdf"
                                             android:textSize="18sp"
                                             android:textStyle="bold" />
 
-                                        <RelativeLayout
-                                            android:layout_width="0dp"
-                                            android:layout_height="20dp"
+                                        <TableRow
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
                                             android:layout_below="@+id/general"
-                                            android:gravity="center_vertical"
-                                            android:paddingEnd="5dp"
-
-                                            android:layout_weight="0.8">
+                                            android:gravity="center"
+                                            android:id="@+id/commentsView"
+                                            android:layout_alignParentLeft="true"
+                                            android:layout_centerVertical="true"
+                                            android:paddingEnd="5dp">
 
                                             <TextView
                                                 android:id="@+id/task_comment"
@@ -197,7 +203,8 @@
                                             <RadioButton
                                                 android:id="@+id/bar"
                                                 android:layout_width="1.5dp"
-                                                android:layout_margin="5dp"
+                                                android:layout_marginLeft="5dp"
+                                                android:layout_marginRight="5dp"
                                                 android:layout_height="match_parent"
                                                 android:layout_centerVertical="true"
                                                 android:text="@string/divider"
@@ -215,9 +222,9 @@
                                                 android:gravity="left|start"
                                                 android:text="@string/task_user"
                                                 android:textSize="16sp" />
-                                        </RelativeLayout>
-                                    </LinearLayout>
-                                </LinearLayout>
+                                        </TableRow>
+                                    </RelativeLayout>
+                                </RelativeLayout>
                             </RelativeLayout>
                             <LinearLayout
                                 android:id="@+id/rightarrow_layout"
@@ -242,13 +249,7 @@
             </RelativeLayout>
 
         </com.h6ah4i.android.materialshadowninepatch.MaterialShadowContainerView>
-        <View
-            android:id="@+id/priority_bar"
-            android:layout_width="8dp"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="2dp"
-            android:layout_alignParentStart="true"
-            android:background="@drawable/roundable_prioritybar_ar"/>
+
     </RelativeLayout>
 
 </LinearLayout>

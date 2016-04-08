@@ -132,6 +132,7 @@ public class ForumsDetailFragment extends BaseFragment {
     public void PerformAction()
     {
         String comment = aq.id(R.id.comment_user).getText().toString();
+        comment = comment.replaceAll("\n","<br/>");
         if(aq.id(R.id.comment_user).getText().toString().equalsIgnoreCase("")) {
             Toast.makeText(getActivity(), getActivity().getString(R.string.enter_comment), Toast.LENGTH_SHORT).show();
             return;
