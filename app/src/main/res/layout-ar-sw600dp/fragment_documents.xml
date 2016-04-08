@@ -45,8 +45,8 @@
         <View android:layout_height="fill_parent"
             android:layout_width="2dp"
             android:id="@+id/view2"
-            android:layout_toLeftOf="@+id/layout2"
-            android:layout_toStartOf="@+id/layout2"
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@+id/layout2"
             android:background="@color/white"/>
         <RelativeLayout
             android:id="@+id/layout2"
@@ -54,7 +54,7 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:layout_centerVertical="true"
-            android:layout_alignParentRight="true"
+            android:layout_alignParentLeft="true"
             android:layout_height="50dp">
             <Button
                 android:id="@+id/sort"

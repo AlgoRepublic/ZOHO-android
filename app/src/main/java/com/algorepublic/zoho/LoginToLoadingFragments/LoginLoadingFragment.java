@@ -22,6 +22,7 @@ import com.androidquery.AQuery;
 import com.wang.avi.AVLoadingIndicatorView;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
 
 /**
  * Created by android on 1/25/16.
@@ -86,7 +87,7 @@ public class LoginLoadingFragment extends BaseFragment {
             baseClass.setProfileImage(GetUserModel.getInstance().user.profileImagePath);
             baseClass.setProfileImageID(GetUserModel.getInstance().user.profilePictureID);
             baseClass.setEmail(GetUserModel.getInstance().user.eMail);
-            baseClass.db.putListInt("Permissions",GetUserModel.getInstance().user.userRole.permissionIds);
+            baseClass.db.putListInt("Permissions", GetUserModel.getInstance().user.userRole.permissionIds);
             startActivity(new Intent(getActivity(), MainActivity.class));
             getActivity().finish();
         }else {

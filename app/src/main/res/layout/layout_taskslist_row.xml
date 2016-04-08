@@ -19,7 +19,6 @@
         android:background="@drawable/roundable_prioritybar"/>
     <RelativeLayout
         android:id="@+id/layout123"
-        android:layout_toRightOf="@+id/priority_bar"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="6dp"
@@ -136,6 +135,7 @@
                                             android:layout_weight="1"
                                             android:gravity="left"
                                             android:textSize="14sp"
+                                            android:text="alpha "
                                             android:textStyle="bold" />
 
                                         <TextView
@@ -162,8 +162,10 @@
                                             android:layout_alignParentLeft="true"
                                             android:layout_toLeftOf="@+id/commentsView"
                                             android:gravity="left|center_vertical"
-                                            android:text="lsdfsdfsfsdsdfsfsdf \nkljsdfdkf"
-                                            android:maxLines="2"
+                                            android:layout_centerVertical="true"
+                                            android:text="lsdfsdfsfsdsdfsf"
+                                            android:singleLine="true"
+                                            android:ellipsize="end"
                                             android:textSize="14sp"
                                             android:textStyle="bold" />
 
@@ -173,6 +175,7 @@
                                             android:layout_below="@+id/general"
                                             android:layout_alignParentRight="true"
                                             android:layout_alignParentBottom="true"
+                                            android:layout_centerVertical="true"
                                             android:gravity="center"
                                             android:id="@+id/commentsView"
                                             >
