@@ -95,6 +95,7 @@
     <string name="new_project">مشروع جديد</string>
     <string name="edit_project">تعديل المشروع</string>
     <string name="edit_dept">تعديل القسم</string>
+
     <!-- Strings related to Settings -->
 
     <!-- Example General settings -->
@@ -345,4 +346,5 @@
     <string name="alphabetically">أبجديا</string>
     <string name="task_list">قائمة المهام</string>
     <string name="cancel">إلغاء</string>
+    <string name="uploaded_by">تم الرفع بواسطة</string>
 </resources>
