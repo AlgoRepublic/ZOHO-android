@@ -129,7 +129,7 @@
                                     <LinearLayout
                                         android:id="@+id/layout2"
                                         android:layout_width="match_parent"
-                                        android:layout_height="match_parent"
+                                        android:layout_height="wrap_content"
                                         android:orientation="horizontal"
                                         android:layout_alignParentTop="true"
                                         android:layout_above="@+id/layout3"
@@ -141,9 +141,6 @@
                                             android:layout_height="match_parent"
                                             android:layout_weight="1.1"
                                             android:gravity="left|start|center_vertical"
-                                            android:ellipsize="marquee"
-                                            android:singleLine="true"
-                                            android:marqueeRepeatLimit="marquee_forever"
                                             android:textSize="18sp"
                                             android:textStyle="bold" />
 
@@ -177,7 +174,7 @@
                                             android:layout_toLeftOf="@+id/commentsView"
                                             android:gravity="left|start|center_vertical"
                                             android:ellipsize="end"
-                                            android:maxLines="2"
+                                            android:singleLine="true"
                                             android:text="dsfsdf"
                                             android:textSize="18sp"
                                             android:textStyle="bold" />

@@ -19,7 +19,6 @@
         android:background="@drawable/roundable_prioritybar"/>
     <RelativeLayout
         android:id="@+id/layout123"
-        android:layout_toRightOf="@+id/priority_bar"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="6dp"
@@ -125,9 +124,8 @@
                                     <LinearLayout
                                         android:id="@+id/layout2"
                                         android:layout_width="match_parent"
-                                        android:layout_height="match_parent"
+                                        android:layout_height="wrap_content"
                                         android:layout_alignParentTop="true"
-                                        android:layout_above="@+id/layout3"
                                         android:orientation="horizontal"
                                         android:weightSum="2">
 
@@ -137,10 +135,8 @@
                                             android:layout_height="wrap_content"
                                             android:layout_weight="1"
                                             android:gravity="left"
-                                            android:ellipsize="marquee"
-                                            android:singleLine="true"
-                                            android:marqueeRepeatLimit="marquee_forever"
                                             android:textSize="16sp"
+                                            android:text="sdfa \ndkjdsf"
                                             android:textStyle="bold" />
 
                                         <TextView
@@ -156,8 +152,9 @@
                                         android:id="@+id/layout3"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:orientation="horizontal"
+                                       android:layout_below="@+id/layout2"
                                         android:layout_alignParentBottom="true"
+                                        android:orientation="horizontal"
                                        >
 
                                         <TextView
@@ -166,9 +163,11 @@
                                             android:layout_height="wrap_content"
                                             android:layout_gravity="center_vertical"
                                             android:layout_alignParentLeft="true"
+                                            android:layout_centerVertical="true"
                                             android:layout_toLeftOf="@+id/commentsView"
                                             android:gravity="left|center_vertical"
-                                            android:maxLines="2"
+                                            android:singleLine="true"
+                                            android:ellipsize="end"
                                             android:text="sdfdsf\nkhjfkdhf"
                                             android:textSize="16sp"
                                             android:textStyle="bold" />
