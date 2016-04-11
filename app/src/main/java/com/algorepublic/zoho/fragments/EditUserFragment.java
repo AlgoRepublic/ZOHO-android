@@ -218,12 +218,10 @@ public class EditUserFragment extends BaseFragment implements MultiSelectionSpin
                 }
                 if(aq.id(R.id.last_name).getText().toString().isEmpty()){
                     Toast.makeText(getActivity(), getActivity().getString(R.string.user_last_name), Toast.LENGTH_SHORT).show();
-
                     return false;
                 }
                 if(aq.id(R.id.user_email).getText().toString().isEmpty()){
-                    Toast.makeText(getActivity(), getActivity().getString(R.string.add_user), Toast.LENGTH_SHORT).show();
-
+                    Toast.makeText(getActivity(), getActivity().getString(R.string.add_email), Toast.LENGTH_SHORT).show();
                     return false;
                 }
                 if(aq.id(R.id.user_phoneno).getText().toString().isEmpty()){
