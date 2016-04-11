@@ -93,7 +93,6 @@
                 android:layout_height="45dp"
                 android:layout_marginTop="10dp"
                 android:hint="@string/last_name"
-                android:inputType="textMultiLine"
                 android:textSize="18sp"
                 android:textColor="@color/colorBaseHeader"
                 android:textColorHint="@color/colorBaseMenu" />
@@ -110,7 +109,6 @@
                 android:layout_height="45dp"
                 android:layout_marginTop="10dp"
                 android:hint="@string/nick_name"
-                android:inputType="textMultiLine"
                 android:textSize="18sp"
                 android:textColor="@color/colorBaseHeader"
                 android:textColorHint="@color/colorBaseMenu"/>
@@ -127,7 +125,6 @@
                 android:layout_height="45dp"
                 android:layout_marginTop="10dp"
                 android:hint="@string/email"
-                android:inputType="textMultiLine"
                 android:textSize="18sp"
                 android:textColor="@color/colorBaseHeader"
                 android:textColorHint="@color/colorBaseMenu" />
@@ -145,6 +142,7 @@
                 android:layout_marginTop="10dp"
                 android:hint="@string/phone_number"
                 android:inputType="phone"
+                android:imeOptions="actionSend"
                 android:textSize="18sp"
                 android:textColor="@color/colorBaseHeader"
                 android:textColorHint="@color/colorBaseMenu" />

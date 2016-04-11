@@ -59,9 +59,10 @@
                     android:textSize="25sp"
                     android:singleLine="true"
                     android:ellipsize="end"
+                    android:layout_toLeftOf="@+id/icon"
                     android:gravity="left|start"
-                    android:layout_marginStart="50dp"
-                    android:layout_marginLeft="50dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginLeft="10dp"
                     android:layout_centerVertical="true"
                     android:textStyle="bold"
                     android:textColor="@color/white"
@@ -247,7 +248,7 @@
                         android:id="@+id/task_assignee"
                         android:layout_below="@+id/header_layout4"
                         android:layout_width="match_parent"
-                        android:layout_height="80dp"
+                        android:layout_height="90dp"
                         app:twowayview_layoutManager="ListLayoutManager"
                         android:orientation="horizontal">
                     </org.lucasr.twowayview.widget.TwoWayView>

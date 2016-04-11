@@ -24,8 +24,9 @@
         android:layout_height="wrap_content"
         android:textSize="30sp"
         android:paddingTop="5dp"
-        android:layout_toStartOf="@+id/imageViewlevelone"
+        android:layout_toLeftOf="@+id/imageViewlevelone"
         android:paddingBottom="5dp"
+        android:layout_marginLeft="5dp"
         android:text="lksahdgiuasdsdsds" />
 
         <ImageView
@@ -35,7 +36,6 @@
             android:adjustViewBounds="true"
             android:background="@drawable/level_one_down"
             android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="3dp"

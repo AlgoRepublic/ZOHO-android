@@ -3,13 +3,11 @@ package com.algorepublic.zoho.LoginToLoadingFragments;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.algorepublic.zoho.BaseActivity;
 import com.algorepublic.zoho.MainActivity;
 import com.algorepublic.zoho.Models.GetUserModel;
 import com.algorepublic.zoho.Models.UserModel;
@@ -20,9 +18,6 @@ import com.algorepublic.zoho.services.LoginService;
 import com.algorepublic.zoho.utils.BaseClass;
 import com.androidquery.AQuery;
 import com.wang.avi.AVLoadingIndicatorView;
-
-import java.lang.reflect.Field;
-import java.util.ArrayList;
 
 /**
  * Created by android on 1/25/16.
