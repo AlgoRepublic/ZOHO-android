@@ -7,7 +7,11 @@
     android:gravity="top"
     android:orientation="vertical">
 
-
+    <View
+        android:id="@id/view"
+        android:layout_width="match_parent"
+        android:layout_height="24dp"
+        android:background="@color/colorBaseHeader" />
     <RelativeLayout
         android:id="@+id/layout_menu"
         android:layout_width="match_parent"
