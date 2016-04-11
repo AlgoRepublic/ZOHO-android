@@ -1,6 +1,7 @@
 package com.algorepublic.zoho.fragments;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -110,7 +111,7 @@ public class StarRatingLevelQuestionsFragment extends BaseFragment {
 
                 @Override
                 public void afterTextChanged(Editable s) {
-                    timer.cancel();
+              /*      timer.cancel();
                     timer = new Timer();
                     timer.schedule(
                             new TimerTask() {
@@ -123,7 +124,17 @@ public class StarRatingLevelQuestionsFragment extends BaseFragment {
                                 }
                             },
                             DELAY
-                    );
+                    );*/
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            service.StarEditComment(Questions
+                                            .get(ClickedPosition).getID(),
+                                    aq_quest.id(R.id.comment_edittext).getText().toString(), true, new
+                                            CallBack(StarRatingLevelQuestionsFragment.this, "UpdateComment"));
+
+                        }
+                    },DELAY);
                 }
             });
             aq_quest.id(R.id.comment_edittext).getEditText().setOnTouchListener(new View.OnTouchListener() {

@@ -1,7 +1,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="100dp"
+    android:layout_height="wrap_content"
     android:layout_marginBottom="3dp"
     android:descendantFocusability="blocksDescendants"
     android:orientation="horizontal"
@@ -10,7 +10,14 @@
     android:paddingRight="10dp"
     android:paddingStart="10dp">
 
-
+    <View
+        android:id="@+id/priority_bar"
+        android:layout_width="8dp"
+        android:layout_height="110dp"
+        android:layout_marginBottom="9dp"
+        android:layout_marginTop="4dp"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/roundable_prioritybar_ar"/>
     <RelativeLayout
         android:id="@+id/layout123"
         android:layout_width="match_parent"
@@ -23,8 +30,7 @@
             android:id="@+id/shadow_item_container"
             android:layout_width="match_parent"
             style="@style/ms9_DefaultShadowStyle"
-            android:layout_height="match_parent"
-            android:layout_toLeftOf="@+id/priority_bar"
+            android:layout_height="wrap_content"
             app:ms9_affectsDisplayedPosition="true"
             app:ms9_shadowElevation="2dp"
             app:ms9_shadowTranslationZ="1dp"
@@ -33,19 +39,19 @@
             <RelativeLayout
                 android:id="@+id/top_parent"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginBottom="3dp"
                 android:background="@color/colorBaseWrapper"
                 android:orientation="horizontal">
                 <RelativeLayout
                     android:id="@+id/container"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:orientation="horizontal">
                     <com.daimajia.swipe.SwipeLayout
                         android:id="@+id/swipe"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         app:drag_edge="left"
                         app:clickToClose="true">
                         <LinearLayout
@@ -86,7 +92,7 @@
                         <RelativeLayout
                             android:id="@+id/parent"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:layout_height="wrap_content"
                             android:orientation="horizontal">
                             <RelativeLayout
                                 android:id="@+id/parent1"
@@ -111,18 +117,18 @@
                                     android:id="@+id/layout1"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:layout_toRightOf="@+id/task_image"
-                                    android:layout_toEndOf="@+id/task_image"
+                                    android:layout_toLeftOf="@+id/task_image"
                                     android:orientation="vertical"
+                                    android:layout_centerVertical="true"
                                     android:paddingBottom="10dp"
-                                    android:paddingRight="10dp"
-                                    android:paddingEnd="10dp"
+                                    android:paddingLeft="10dp"
                                     android:paddingTop="10dp">
 
                                     <LinearLayout
                                         android:id="@+id/layout2"
                                         android:layout_width="match_parent"
-                                        android:layout_height="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_alignParentTop="true"
                                         android:orientation="horizontal"
                                         android:weightSum="2">
 
@@ -131,8 +137,9 @@
                                             android:layout_width="0dp"
                                             android:layout_height="wrap_content"
                                             android:layout_weight="1"
-                                            android:gravity="left|start"
+                                            android:gravity="right"
                                             android:textSize="25sp"
+                                            android:text="adsf \ndslfj"
                                             android:textStyle="bold" />
 
                                         <TextView
@@ -144,38 +151,45 @@
                                             android:textSize="12sp" />
                                     </LinearLayout>
 
-                                    <LinearLayout
+                                    <RelativeLayout
                                         android:id="@+id/layout3"
                                         android:layout_width="match_parent"
-                                        android:layout_height="30dp"
+                                        android:layout_height="wrap_content"
                                         android:orientation="horizontal"
-                                        android:weightSum="2">
+                                        android:layout_alignParentBottom="true"
+                                        android:layout_below="@+id/layout2">
 
                                         <TextView
                                             android:id="@+id/project_name"
-                                            android:layout_width="0dp"
+                                            android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             android:layout_gravity="center_vertical"
-                                            android:layout_weight=".8"
-                                            android:gravity="left|start"
+                                            android:layout_alignParentRight="true"
+                                            android:layout_centerVertical="true"
+                                            android:layout_toRightOf="@+id/commentsView"
+                                            android:gravity="center_vertical|right"
                                             android:singleLine="true"
                                             android:ellipsize="end"
                                             android:textSize="25sp"
+                                            android:text="asdf"
                                             android:textStyle="bold" />
 
-                                        <RelativeLayout
-                                            android:layout_width="0dp"
+                                        <TableRow
+                                            android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             android:layout_below="@+id/general"
-                                            android:layout_weight="1.2">
+                                            android:layout_alignParentLeft="true"
+                                            android:layout_centerVertical="true"
+                                            android:gravity="center"
+                                            android:id="@+id/commentsView">
 
                                             <TextView
                                                 android:id="@+id/task_comment"
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="wrap_content"
                                                 android:layout_centerVertical="true"
-                                                android:layout_toLeftOf="@+id/bar"
-                                                android:layout_toStartOf="@+id/bar"
+                                                android:layout_toRightOf="@+id/bar"
+
                                                 android:gravity="left|start"
                                                 android:text="@string/task_comment"
                                                 android:textSize="20sp" />
@@ -201,8 +215,8 @@
                                                 android:gravity="left|start"
                                                 android:text="@string/task_user"
                                                 android:textSize="20sp" />
-                                        </RelativeLayout>
-                                    </LinearLayout>
+                                        </TableRow>
+                                    </RelativeLayout>
                                 </LinearLayout>
                             </RelativeLayout>
                             <LinearLayout
@@ -225,13 +239,7 @@
                 </RelativeLayout>
             </RelativeLayout>
         </com.h6ah4i.android.materialshadowninepatch.MaterialShadowContainerView>
-        <View
-            android:id="@+id/priority_bar"
-            android:layout_width="8dp"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="5dp"
 
-            android:layout_alignParentRight="true"
-            android:background="@drawable/roundable_prioritybar_ar"/>
     </RelativeLayout>
+
 </LinearLayout>

@@ -61,6 +61,7 @@ public class LoginFragment extends BaseFragment {
             startActivity(new Intent(getActivity(), MainActivity.class));
             getActivity().finish();
         }
+
         view  = inflater.inflate(R.layout.fragment_login, container, false);
 
         aq= new AQuery(getActivity(),view);
