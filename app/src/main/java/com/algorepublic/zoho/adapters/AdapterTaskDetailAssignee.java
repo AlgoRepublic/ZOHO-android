@@ -2,6 +2,7 @@ package com.algorepublic.zoho.adapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -58,10 +59,10 @@ public class AdapterTaskDetailAssignee extends RecyclerView.Adapter<AdapterTaskD
                     + "." + BaseClass.getExtensionType(arraylist.get(position).getProfileImage())).into(holder.imageView);
 
             }
-//        for (int i=0;i<arraylist.size();i++){
-//            Log.e("name", String.valueOf(arraylist.get(position).getFirstName().charAt(0)));
-//        holder.textView.setText(String.valueOf(arraylist.get(position).getFirstName().charAt(0)));
-//    }
+        for (int i=0;i<arraylist.size();i++){
+            Log.e("name", String.valueOf(arraylist.get(position).getFirstName().charAt(0)));
+        holder.textView.setText(String.valueOf(arraylist.get(position).getFirstName().charAt(1)));
+    }
 
     }
 
