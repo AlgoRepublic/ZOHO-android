@@ -96,7 +96,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:hint="@string/nick_name"
-                android:inputType="textMultiLine"
                 android:textSize="22sp"
                 app:met_singleLineEllipsis="true"
                 app:met_floatingLabel="normal"/>
@@ -108,7 +107,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:hint="@string/email"
-                android:inputType="textMultiLine"
                 android:textSize="22sp"
                 app:met_singleLineEllipsis="true"
                 app:met_floatingLabel="normal"

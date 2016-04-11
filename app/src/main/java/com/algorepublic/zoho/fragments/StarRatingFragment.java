@@ -56,7 +56,7 @@ public class StarRatingFragment extends BaseFragment {
         service = new StarRatingService(getActivity());
         if(levelOneHead.size()==0) {
             if(baseClass.getUserLanguage().equalsIgnoreCase("en")) {
-                service.getStarRatingHeads_API("en-Us", true,
+                service.getStarRatingHeads_API("en-US", true,
                         new CallBack(StarRatingFragment.this, "StarRatingHeads"));
             }else{
                 service.getStarRatingHeads_API("", true,

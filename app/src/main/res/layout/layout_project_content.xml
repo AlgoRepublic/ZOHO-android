@@ -119,7 +119,7 @@
                                         android:src="@drawable/folder_black" />
                                     <TextView
                                         android:layout_toEndOf="@+id/folder"
-                                        android:layout_toLeftOf="@+id/layout_tasks"
+                                        android:layout_toStartOf="@+id/layout_tasks"
                                         android:id="@+id/project_title"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"

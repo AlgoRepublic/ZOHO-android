@@ -56,6 +56,12 @@ public class AdapterTaskDetailAssignee extends RecyclerView.Adapter<AdapterTaskD
             holder.textView.setText(validateAndGetFullNameInitials(fName,lName).toUpperCase());
         }
 
+
+
+        for (int i=0;i<arraylist.size();i++) {
+            Log.e("name", String.valueOf(arraylist.get(position).getFirstName().charAt(0)));
+            holder.textView.setText(String.valueOf(arraylist.get(position).getFirstName().charAt(1)));
+        }
     }
 
     private String validateAndGetFullNameInitials(String fName,String lName){

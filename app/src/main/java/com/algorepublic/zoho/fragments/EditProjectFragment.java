@@ -42,8 +42,7 @@ public class EditProjectFragment extends BaseFragment {
     static int position;
     TaskListService service;
     RadioGroup radioGroup1,radioGroup2;
-    LinkedList<String> userList;
-    LinkedList<String> deptList;
+    LinkedList<String> userList,userListID,deptList,deptListID;
     boolean isprivate= false;
     boolean isactive = false;
     NiceSpinner owner_list,departments_list;
@@ -190,11 +189,13 @@ public class EditProjectFragment extends BaseFragment {
         aq.id(R.id.active_archive_status).visible();
         baseClass = ((BaseClass) getActivity().getApplicationContext());
         deptList = new LinkedList<>();
+        deptListID = new LinkedList<>();
         for(int loop=0;loop<ProjectsFragment.allDeptList.size();loop++){
             if(ProjectsFragment.allDeptList.get(loop).getDeptID()=="0"){
                 deptList.add(getString(R.string.none));
             }else
             deptList.add(ProjectsFragment.allDeptList.get(loop).getDeptName());
+            deptListID.add(ProjectsFragment.allDeptList.get(loop).getDeptID());
         }
         Collections.sort(deptList,ByAlphabet);
         departments_list.attachDataSource(deptList);
@@ -206,16 +207,16 @@ public class EditProjectFragment extends BaseFragment {
     public void UpdateValues() {
         aq.id(R.id.project_name).text(Html.fromHtml(projectsLists.get(position).getProjectName()));
         aq.id(R.id.project_desc).text(Html.fromHtml(projectsLists.get(position).getProjectDesc()));
-        String deptName = projectsLists.get(position).getCompOrDeptName();
-        String ownerName = projectsLists.get(position).getOwnerName();
-        if (deptName != null) {
+        String deptID = projectsLists.get(position).getCompOrDeptID();
+        String ownerID = projectsLists.get(position).getOwnerID();
+        if (deptID != null) {
             for(int loop=0;loop<deptList.size();loop++)
-                if(deptList.get(loop).equalsIgnoreCase(deptName))
+                if(deptListID.get(loop).equalsIgnoreCase(deptID))
                     departments_list.setSelectedIndex(loop);
         }
-        if (ownerName != null) {
+        if (ownerID != null) {
             for(int loop=0;loop<userList.size();loop++)
-                if(userList.get(loop).equalsIgnoreCase(ownerName))
+                if(userListID.get(loop).equalsIgnoreCase(ownerID))
                     owner_list.setSelectedIndex(loop);
         }
         if(projectsLists.get(position).getDeleted()){
@@ -238,12 +239,14 @@ public class EditProjectFragment extends BaseFragment {
         TaskUserModel.getInstance().setList((TaskUserModel) model);
         if (TaskUserModel.getInstance().responseCode == 100) {
             userList= new LinkedList<>();
+            userListID= new LinkedList<>();
             for(int loop=0;loop< TaskUserModel.getInstance().responseObject.size();loop++) {
                 if(TaskUserModel.getInstance().responseObject.get(loop).ID==
                         Integer.parseInt(baseClass.getUserId())){
                     userList.add(getString(R.string.me));
                 }else
                 userList.add(TaskUserModel.getInstance().responseObject.get(loop).firstName);
+                userListID.add(Integer.toString(TaskUserModel.getInstance().responseObject.get(loop).ID));
             }
             Collections.sort(userList,ByAlphabet);
             owner_list.attachDataSource(userList);

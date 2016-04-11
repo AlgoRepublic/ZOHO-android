@@ -31,6 +31,9 @@ public class AllProjectsByUserModel {
 
     public class Response{
 
+        @SerializedName("DepartmentID")
+        public Integer departmentID;
+
         @SerializedName("Name")
         public String projectName;
 
