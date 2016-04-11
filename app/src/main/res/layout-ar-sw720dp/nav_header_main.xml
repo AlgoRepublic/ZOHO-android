@@ -7,7 +7,11 @@
     android:gravity="top"
     android:orientation="vertical">
 
-
+    <View
+        android:id="@id/view"
+        android:layout_width="match_parent"
+        android:layout_height="24dp"
+        android:background="@color/colorBaseHeader" />
     <RelativeLayout
         android:id="@+id/layout_menu"
         android:layout_width="match_parent"
@@ -111,7 +115,7 @@
         <GridView
             android:id="@+id/gridview_menu"
             android:layout_width="match_parent"
-            android:layout_height="600dp"
+            android:layout_height="620dp"
             android:gravity="center"
             android:horizontalSpacing="5dp"
             android:numColumns="3"

@@ -1,10 +1,8 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-
-    android:padding="2dp">
-
+>
     <com.mikhaellopez.circularimageview.CircularImageView
         app:civ_border="true"
         app:civ_border_color="@color/colorContentWrapper"
@@ -15,22 +13,18 @@
         android:layout_width="25dp"
         android:layout_height="25dp"
         android:background="@drawable/nav_user"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
         app:civ_border_width="0dp" />
 
     <TextView
 
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="NT"
-        android:layout_below="@+id/assignee_image"
         android:id="@+id/user_name"
         android:gravity="center"
         android:textSize="10sp"
         android:textColor="@color/colorBaseHeader"
         android:textColorHint="@color/colorBaseMenu"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="2dp"
        />
-</RelativeLayout>
+</LinearLayout>
