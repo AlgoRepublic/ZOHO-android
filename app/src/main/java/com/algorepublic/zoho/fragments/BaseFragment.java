@@ -6,6 +6,7 @@ import android.content.res.Resources;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -111,11 +112,11 @@ public class BaseFragment extends Fragment {
                         projection, MediaStore.Images.Media.DATE_ADDED, null, "date_added ASC");
         cursor.moveToFirst();
         if (cursor != null && cursor.moveToFirst()) {
-                Uri uri = Uri.parse(cursor.getString(cursor
-                        .getColumnIndex(MediaStore.Images.Media.DATA)));
-                path = uri.toString();
+            Uri uri = Uri.parse(cursor.getString(cursor
+                    .getColumnIndex(MediaStore.Images.Media.DATA)));
+            path = uri.toString();
             cursor.close();
-    }
+        }
         return path.toString();
     }
 
@@ -257,16 +258,36 @@ public class BaseFragment extends Fragment {
     }
 
     protected void applyDarkBackground(View view, BaseClass baseClass){
-        if(baseClass.getThemePreference() == R.style.AppThemeBlue)
-            view.setBackgroundColor(ContextCompat.getColor(getActivity(),R.color.colorPrimaryBlue));
-        else
-            view.setBackgroundColor(ContextCompat.getColor(getActivity(),R.color.colorBaseHeader));
+        if(baseClass.getThemePreference() == R.style.AppThemeBlue){
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                view.setBackgroundColor(getActivity().getColor(R.color.colorPrimaryBlue));
+            }else{
+                view.setBackgroundColor(getResources().getColor(R.color.colorPrimaryBlue));
+            }
+        }
+        else{
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            view.setBackgroundColor(getActivity().getColor(R.color.colorBaseHeader));
+        }else{
+            view.setBackgroundColor(getResources().getColor(R.color.colorBaseHeader));
+        }
+        }
     }
 
     protected void applyLightBackground(View view, BaseClass baseClass){
-        if(baseClass.getThemePreference() == R.style.AppThemeBlue)
-            view.setBackgroundColor(ContextCompat.getColor(getActivity(),R.color.colorSecondaryBlue));
-        else
-            view.setBackgroundColor(ContextCompat.getColor(getActivity(),R.color.colorContentWrapper));
+        if(baseClass.getThemePreference() == R.style.AppThemeBlue) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                view.setBackgroundColor(getActivity().getColor(R.color.colorSecondaryBlue));
+            } else {
+                view.setBackgroundColor(getResources().getColor(R.color.colorSecondaryBlue));
+            }
+        }
+        else {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                view.setBackgroundColor(getActivity().getColor(R.color.colorContentWrapper));
+            }else{
+                view.setBackgroundColor(getResources().getColor(R.color.colorContentWrapper));
+            }
+        }
     }
 }

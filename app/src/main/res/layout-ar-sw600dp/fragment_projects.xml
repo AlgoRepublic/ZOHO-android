@@ -83,7 +83,7 @@
             android:layout_alignParentEnd="true"
             android:background="@drawable/task_image" />
 
-        <View android:layout_width="1.5dp"
+        <View android:layout_width="1dp"
             android:layout_height="match_parent"
             android:background="@color/white"
             android:layout_toLeftOf="@id/sort_button"
