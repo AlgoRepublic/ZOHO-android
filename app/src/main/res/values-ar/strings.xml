@@ -223,7 +223,7 @@
     <string name="ratingDevelopmentStage">مرحلة التطوير</string>
     <string name="ratingMaturityStage">مرحلة الريادة</string>
     <string name="ratingLeadingStage">مرحلة القيادة</string>
-    <string name="Q">Q</string>
+    <string name="Q">س</string>
 
     <!-- Star Department Strings -->
     <string name="department_created">تم إنشاء القسم</string>

@@ -447,10 +447,4 @@ public class TaskDetailFragment extends BaseFragment {
                 });
     }
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        getToolbar().setSubtitle("");
-    }
-
 }

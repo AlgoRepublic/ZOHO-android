@@ -99,10 +99,8 @@ public class EditForumFragment extends BaseFragment  {
         CreateForumModel.getInstance().setList((CreateForumModel) model);
         if (CreateForumModel.getInstance().responseObject != null ) {
             Toast.makeText(getActivity(), getActivity().getString(R.string.forum_updated), Toast.LENGTH_SHORT).show();
-
         }else {
             Toast.makeText(getActivity(), getActivity().getString(R.string.response_error), Toast.LENGTH_SHORT).show();
-
         }
     }
     @Nullable
