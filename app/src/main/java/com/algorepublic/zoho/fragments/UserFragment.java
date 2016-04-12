@@ -101,8 +101,7 @@ public class UserFragment extends BaseFragment implements SwipeRefreshLayout.OnR
     @Override
     public void onRefresh() {
         UserListModel.getInstance().responseObject.clear();
-        service.getUserListByProject(Integer.parseInt(baseClass.getSelectedProject()), true,
+        service.getUserListByProject(Integer.parseInt(baseClass.getSelectedProject()), false,
                 new CallBack(UserFragment.this, "UserList"));
-
     }
 }

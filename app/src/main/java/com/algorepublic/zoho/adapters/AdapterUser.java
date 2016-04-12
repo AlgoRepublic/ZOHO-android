@@ -85,9 +85,9 @@ public class AdapterUser extends BaseAdapter {
         }
 
         aq = new AQuery(convertView);
-        if (getItem(position).userRole.ID == 1){
-            aq.id(R.id.layout123).visibility(View.GONE);
-        }
+//        if (getItem(position).userRole.ID == 1){
+//            aq.id(R.id.layout123).visibility(View.GONE);
+//        }
 
         holder.userTitle.setText(getItem(position).firstName);
         holder.userEmail.setText(getItem(position).email);
