@@ -1,20 +1,24 @@
 package com.algorepublic.zoho.fragments;
 
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.algorepublic.zoho.Models.CreateProjectModel;
 import com.algorepublic.zoho.Models.TaskUserModel;
 import com.algorepublic.zoho.R;
+import com.algorepublic.zoho.adapters.DialogList;
 import com.algorepublic.zoho.services.CallBack;
 import com.algorepublic.zoho.services.ProjectsListService;
 import com.algorepublic.zoho.services.TaskListService;
@@ -23,6 +27,7 @@ import com.androidquery.AQuery;
 
 import org.angmarch.views.NiceSpinner;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.LinkedList;
@@ -37,11 +42,12 @@ public class AddProjectFragment extends BaseFragment {
     AQuery aq;
     BaseClass baseClass;
     TaskListService service;
-    LinkedList<String> userList;
-    LinkedList<String> deptList;
+    CharSequence[] userList,departmentList;
     View view;
     boolean isprivate= false;
-    NiceSpinner owner_list,departments_list;
+    EditText owner_list,departments_list;
+    int selectedOwner=-1,selectedDept=-1;
+    ArrayList<DialogList> ownerList,deptList;
     RadioGroup radioGroup;
     static AddProjectFragment fragment;
 
@@ -86,10 +92,8 @@ public class AddProjectFragment extends BaseFragment {
         ProjectsListService service = new ProjectsListService(getActivity());
         service.createProject(aq.id(R.id.project_name).getText().toString(),baseClass.getUserId()
                 ,aq.id(R.id.project_desc).getText().toString()
-                , TaskUserModel.getInstance().responseObject.
-                get(owner_list.getSelectedIndex()).ID
-                ,ProjectsFragment.allDeptList.get(
-                departments_list.getSelectedIndex()).getDeptID(),isprivate
+                ,ownerList.get(selectedOwner).getID()
+                ,deptList.get(selectedDept).getID(),isprivate
                 ,true,new CallBack(AddProjectFragment.this,"CreateProject"));
     }
 
@@ -130,42 +134,87 @@ public class AddProjectFragment extends BaseFragment {
         aq.id(R.id.public_radio).checked(true);
         aq.id(R.id.lblListHeader).text(getString(R.string.new_project));
         setHasOptionsMenu(true);
-        owner_list = (NiceSpinner) view.findViewById(R.id.owner_list);
-        departments_list= (NiceSpinner) view.findViewById(R.id.departments_list);
+        owner_list = (EditText) view.findViewById(R.id.owner_list);
+        departments_list= (EditText) view.findViewById(R.id.departments_list);
         service = new TaskListService(getActivity());
-        deptList = new LinkedList<>();
+        deptList = new ArrayList<>();
         for(int loop=0;loop<ProjectsFragment.allDeptList.size();loop++){
+            DialogList dialogList = new DialogList();
             if(ProjectsFragment.allDeptList.get(loop).getDeptID()=="0"){
-                deptList.add(getString(R.string.none));
-            }else
-                deptList.add(ProjectsFragment.allDeptList.get(loop).getDeptName());
+                dialogList.setName(getString(R.string.none));
+            }else {
+                dialogList.setName(ProjectsFragment.allDeptList.get(loop).getDeptName());
+            }
+            deptList.add(dialogList);
         }
-        Collections.sort(deptList,ByAlphabet);
-        departments_list.attachDataSource(deptList);
-        for(int loop=0;loop<deptList.size();loop++)
-            if(deptList.get(loop).equalsIgnoreCase(getString(R.string.none)))
-                departments_list.setSelectedIndex(loop);
+        Collections.sort(deptList);
+        departmentList = new CharSequence[deptList.size()];
+        for(int loop=0;loop< deptList.size();loop++) {
+            departmentList[loop] = deptList.get(loop).getName();
+        }
 
         service.getTaskAssignee(Integer.parseInt(baseClass.getSelectedProject()), false,
                 new CallBack(AddProjectFragment.this, "GetAllUsers"));
+        owner_list.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+            showOwnerList();
+            }
+        });
+        departments_list.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+            showDeptList();
+            }
+        });
         return view;
+    }
+    private void showOwnerList() {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle(getString(R.string.select_user));
+        builder.setSingleChoiceItems(userList, selectedOwner, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                selectedOwner = which;
+                owner_list.setText(userList[selectedOwner]);
+                dialog.dismiss();
+            }
+        });
+        builder.show();
+    }
+    private void showDeptList() {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle(getString(R.string.select_user));
+        builder.setSingleChoiceItems(departmentList, selectedDept, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                selectedDept = which;
+                departments_list.setText(departmentList[selectedDept]);
+                dialog.dismiss();
+            }
+        });
+        builder.show();
     }
     public void GetAllUsers(Object caller, Object model) {
         TaskUserModel.getInstance().setList((TaskUserModel) model);
         if (TaskUserModel.getInstance().responseCode == 100) {
-            userList= new LinkedList<>();
+            ownerList = new ArrayList<>();
             for(int loop=0;loop< TaskUserModel.getInstance().responseObject.size();loop++) {
+                DialogList dialogList = new DialogList();
                 if(TaskUserModel.getInstance().responseObject.get(loop).ID==
                         Integer.parseInt(baseClass.getUserId())){
-                    userList.add(getString(R.string.me));
-                }else
-                    userList.add(TaskUserModel.getInstance().responseObject.get(loop).firstName);
+                    dialogList.setName(getString(R.string.me));
+                }else {
+                    dialogList.setName(TaskUserModel.getInstance().responseObject.get(loop).firstName);
+                }
+                dialogList.setID(TaskUserModel.getInstance().responseObject.get(loop).ID);
+                ownerList.add(dialogList);
             }
-            Collections.sort(userList,ByAlphabet);
-            owner_list.attachDataSource(userList);
-            for(int loop=0;loop<userList.size();loop++)
-                if(userList.get(loop).equalsIgnoreCase(getString(R.string.me)))
-                    owner_list.setSelectedIndex(loop);
+            Collections.sort(ownerList);
+            userList = new CharSequence[ownerList.size()];
+            for(int loop=0;loop< ownerList.size();loop++) {
+                userList[loop] = ownerList.get(loop).getName();
+            }
         }else{
             Toast.makeText(getActivity(), getString(R.string.response_error), Toast.LENGTH_SHORT).show();
         }

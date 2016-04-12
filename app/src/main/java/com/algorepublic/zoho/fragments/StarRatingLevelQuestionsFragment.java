@@ -111,20 +111,6 @@ public class StarRatingLevelQuestionsFragment extends BaseFragment {
 
                 @Override
                 public void afterTextChanged(Editable s) {
-              /*      timer.cancel();
-                    timer = new Timer();
-                    timer.schedule(
-                            new TimerTask() {
-                                @Override
-                                public void run() {
-                                    service.StarEditComment(Questions
-                                                    .get(ClickedPosition).getID(),
-                                            aq_quest.id(R.id.comment_edittext).getText().toString(), true, new
-                                                    CallBack(StarRatingLevelQuestionsFragment.this, "UpdateComment"));
-                                }
-                            },
-                            DELAY
-                    );*/
                     new Handler().postDelayed(new Runnable() {
                         @Override
                         public void run() {
@@ -156,6 +142,14 @@ public class StarRatingLevelQuestionsFragment extends BaseFragment {
                 @Override
                 public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                     userProgress = Math.round(progress / multiple) * multiple;
+
+                    View view = QuestLayout.getChildAt(ClickedPosition);
+                    AQuery aq= new AQuery(view);
+                    aq.id(R.id.seekBar).progress(userProgress);
+                    aq.id(R.id.percent_text).getTextView().setText(userProgress + "%");
+                    RatingBar ratingBar  =(RatingBar) view.findViewById(R.id.star_rating);
+                    ratingBar.setRating(GetStarValue(userProgress));
+                    aq.id(R.id.devstage_text).text(GetStageValue(userProgress));
                 }
 
                 @Override
@@ -165,14 +159,6 @@ public class StarRatingLevelQuestionsFragment extends BaseFragment {
 
                 @Override
                 public void onStopTrackingTouch(SeekBar seekBar) {
-                    View view = QuestLayout.getChildAt(ClickedPosition);
-                    AQuery aq= new AQuery(view);
-                    aq.id(R.id.seekBar).progress(userProgress);
-                    aq.id(R.id.percent_text).getTextView().setText(userProgress + "%");
-                    RatingBar ratingBar  =(RatingBar) view.findViewById(R.id.star_rating);
-                    ratingBar.setRating(GetStarValue(userProgress));
-                    aq.id(R.id.devstage_text).text(GetStageValue(userProgress));
-
                     service.StarUpdateProgress(Questions
                             .get(ClickedPosition).getID(),
                             userProgress, true, new

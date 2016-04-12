@@ -1,7 +1,9 @@
 package com.algorepublic.zoho.fragments;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,12 +13,14 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.algorepublic.zoho.Models.CreateProjectModel;
 import com.algorepublic.zoho.Models.TaskUserModel;
 import com.algorepublic.zoho.R;
+import com.algorepublic.zoho.adapters.DialogList;
 import com.algorepublic.zoho.adapters.ProjectsList;
 import com.algorepublic.zoho.services.CallBack;
 import com.algorepublic.zoho.services.ProjectsListService;
@@ -42,10 +46,12 @@ public class EditProjectFragment extends BaseFragment {
     static int position;
     TaskListService service;
     RadioGroup radioGroup1,radioGroup2;
-    LinkedList<String> userList,userListID,deptList,deptListID;
+    CharSequence[] userList,departmentList;
     boolean isprivate= false;
     boolean isactive = false;
-    NiceSpinner owner_list,departments_list;
+    EditText owner_list,departments_list;
+    int selectedOwner=-1,selectedDept=-1;
+    ArrayList<DialogList> ownerList,deptList;
     static ArrayList<ProjectsList> projectsLists= new ArrayList<>();
 
     public EditProjectFragment() {
@@ -88,7 +94,6 @@ public class EditProjectFragment extends BaseFragment {
                     return false;
                 }
 
-
                 UpdateProject();
                 break;
 
@@ -96,27 +101,15 @@ public class EditProjectFragment extends BaseFragment {
         return super.onOptionsItemSelected(item);
     }
     public void UpdateProject(){
-        Integer ownerId=0;String deptId=null;
-        String deptName = deptList.get(departments_list.getSelectedIndex());
-        String ownerName = userList.get(owner_list.getSelectedIndex());
-        if (deptName != null) {
-            for(int loop=0;loop<ProjectsFragment.allDeptList.size();loop++)
-                if(ProjectsFragment.allDeptList.get(loop).getDeptName().equalsIgnoreCase(deptName))
-                   deptId = ProjectsFragment.allDeptList.get(loop).getDeptID();
-        }
-        if (ownerName != null) {
-            for(int loop=0;loop<TaskUserModel.getInstance().responseObject.size();loop++)
-                if(TaskUserModel.getInstance().responseObject.get(loop).firstName.equalsIgnoreCase(ownerName))
-                    ownerId = TaskUserModel.getInstance().responseObject.get(loop).ID;
-        }
+
         ProjectsListService service = new ProjectsListService(getActivity());
         service.updateProject(projectsLists.get(position).getProjectID()
                 , aq.id(R.id.project_name).getText().toString(), baseClass.getUserId()
                 , aq.id(R.id.project_desc).getText().toString()
-                , ownerId, isactive
-                , deptId, isprivate
+                , ownerList.get(selectedOwner).getID(), isactive
+                , deptList.get(selectedDept).getID(), isprivate
                 , true, new CallBack(EditProjectFragment.this, "UpdateProject"));
-        Log.e("Owner", String.valueOf(owner_list.getSelectedIndex()));
+        Log.e("Owner", String.valueOf(selectedOwner));
 
     }
     public void UpdateProject(Object caller, Object model){
@@ -167,8 +160,8 @@ public class EditProjectFragment extends BaseFragment {
         });
         aq = new AQuery(getActivity(), view);
         aq.id(R.id.lblListHeader).text(getString(R.string.edit_project));
-        owner_list = (NiceSpinner) view.findViewById(R.id.owner_list);
-        departments_list= (NiceSpinner) view.findViewById(R.id.departments_list);
+        owner_list = (EditText) view.findViewById(R.id.owner_list);
+        departments_list= (EditText) view.findViewById(R.id.departments_list);
         owner_list.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -188,21 +181,61 @@ public class EditProjectFragment extends BaseFragment {
         setHasOptionsMenu(true);
         aq.id(R.id.active_archive_status).visible();
         baseClass = ((BaseClass) getActivity().getApplicationContext());
-        deptList = new LinkedList<>();
-        deptListID = new LinkedList<>();
+        deptList = new ArrayList<>();
         for(int loop=0;loop<ProjectsFragment.allDeptList.size();loop++){
+            DialogList dialogList = new DialogList();
             if(ProjectsFragment.allDeptList.get(loop).getDeptID()=="0"){
-                deptList.add(getString(R.string.none));
-            }else
-            deptList.add(ProjectsFragment.allDeptList.get(loop).getDeptName());
-            deptListID.add(ProjectsFragment.allDeptList.get(loop).getDeptID());
+                dialogList.setName(getString(R.string.none));
+            }else {
+                dialogList.setName(ProjectsFragment.allDeptList.get(loop).getDeptName());
+            }
+            deptList.add(dialogList);
         }
-        Collections.sort(deptList,ByAlphabet);
-        departments_list.attachDataSource(deptList);
-
+        Collections.sort(deptList);
+        for(int loop=0;loop< deptList.size();loop++) {
+            departmentList[loop] = deptList.get(loop).getName();
+        }
         service.getTaskAssignee(Integer.parseInt(baseClass.getSelectedProject()), true,
                 new CallBack(EditProjectFragment.this, "GetAllUsers"));
+        owner_list.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showOwnerList();
+            }
+        });
+        departments_list.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDeptList();
+            }
+        });
         return view;
+    }
+    private void showOwnerList() {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle(getString(R.string.select_user));
+        builder.setSingleChoiceItems(userList, selectedOwner, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                selectedOwner = which;
+                owner_list.setText(userList[selectedOwner]);
+                dialog.dismiss();
+            }
+        });
+        builder.show();
+    }
+    private void showDeptList() {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle(getString(R.string.select_user));
+        builder.setSingleChoiceItems(departmentList, selectedDept, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                selectedOwner = which;
+                departments_list.setText(departmentList[selectedDept]);
+                dialog.dismiss();
+            }
+        });
+        builder.show();
     }
     public void UpdateValues() {
         aq.id(R.id.project_name).text(Html.fromHtml(projectsLists.get(position).getProjectName()));
@@ -211,13 +244,17 @@ public class EditProjectFragment extends BaseFragment {
         String ownerID = projectsLists.get(position).getOwnerID();
         if (deptID != null) {
             for(int loop=0;loop<deptList.size();loop++)
-                if(deptListID.get(loop).equalsIgnoreCase(deptID))
-                    departments_list.setSelectedIndex(loop);
+                if(deptList.get(loop).getID() == Integer.parseInt(deptID)) {
+                    selectedDept = loop;
+                    departments_list.setText(deptList.get(loop).getName());
+                }
         }
         if (ownerID != null) {
-            for(int loop=0;loop<userList.size();loop++)
-                if(userListID.get(loop).equalsIgnoreCase(ownerID))
-                    owner_list.setSelectedIndex(loop);
+            for(int loop=0;loop<ownerList.size();loop++)
+                if(ownerList.get(loop).getID() == Integer.parseInt(ownerID)) {
+                    selectedOwner = loop;
+                    owner_list.setText(ownerList.get(loop).getName());
+                }
         }
         if(projectsLists.get(position).getDeleted()){
             aq.id(R.id.archive_radio).checked(true);
@@ -238,28 +275,27 @@ public class EditProjectFragment extends BaseFragment {
     public void GetAllUsers(Object caller, Object model) {
         TaskUserModel.getInstance().setList((TaskUserModel) model);
         if (TaskUserModel.getInstance().responseCode == 100) {
-            userList= new LinkedList<>();
-            userListID= new LinkedList<>();
+            ownerList = new ArrayList<>();
             for(int loop=0;loop< TaskUserModel.getInstance().responseObject.size();loop++) {
+                DialogList dialogList = new DialogList();
                 if(TaskUserModel.getInstance().responseObject.get(loop).ID==
                         Integer.parseInt(baseClass.getUserId())){
-                    userList.add(getString(R.string.me));
-                }else
-                userList.add(TaskUserModel.getInstance().responseObject.get(loop).firstName);
-                userListID.add(Integer.toString(TaskUserModel.getInstance().responseObject.get(loop).ID));
+                    dialogList.setName(getString(R.string.me));
+                }else {
+                    dialogList.setName(TaskUserModel.getInstance().responseObject.get(loop).firstName);
+                }
+                dialogList.setID(TaskUserModel.getInstance().responseObject.get(loop).ID);
+                ownerList.add(dialogList);
             }
-            Collections.sort(userList,ByAlphabet);
-            owner_list.attachDataSource(userList);
+            Collections.sort(ownerList);
+            for(int loop=0;loop< ownerList.size();loop++) {
+                userList[loop] = ownerList.get(loop).getName();
+            }
             UpdateValues();
         }
         else {
             Toast.makeText(getActivity(), getString(R.string.response_error), Toast.LENGTH_SHORT).show();
         }
     }
-    Comparator<String>  ByAlphabet = new Comparator<String>() {
-        @Override
-        public int compare(String lhs, String rhs) {
-            return (lhs.compareTo(rhs));
-        }
-    };
+
 }

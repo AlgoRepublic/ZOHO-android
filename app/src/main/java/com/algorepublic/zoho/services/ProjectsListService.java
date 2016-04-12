@@ -37,7 +37,7 @@ public class ProjectsListService extends BaseService {
         this.get(url, obj, ProjectsByDepartmentModel.getInstance(), message);
         Log.e("ProjectsDeptService", url);
     }
-    public void createProject(String name,String createBy, String desc,int ownerID, String deptID
+    public void createProject(String name,String createBy, String desc,int ownerID, int deptID
             ,boolean isPrivate, boolean message, CallBack obj){
         String url = Constants.CreateProject_API;
         HashMap<String, String> params = new HashMap<String, String>();
@@ -47,11 +47,11 @@ public class ProjectsListService extends BaseService {
         params.put("OwnerID", String.valueOf(ownerID));
         params.put("Isprivate", String.valueOf(isPrivate));
         params.put("ShowOverview", String.valueOf(false));
-        params.put("DepartmentID", deptID);
+        params.put("DepartmentID", Integer.toString(deptID));
         this.post(url, params, obj, CreateProjectModel.getInstance(), message);
         Log.e("CreateProjectService", url);
     }
-    public void updateProject(String ID,String name,String createBy, String desc,int ownerID,boolean status, String deptID
+    public void updateProject(String ID,String name,String createBy, String desc,int ownerID,boolean status, int deptID
             ,boolean isPrivate, boolean message, CallBack obj){
         String url = Constants.UpdateProject_API;
         HashMap<String, String> params = new HashMap<String, String>();
@@ -63,7 +63,7 @@ public class ProjectsListService extends BaseService {
         params.put("ProjectStatusID", String.valueOf(status));
         params.put("Isprivate", String.valueOf(isPrivate));
         params.put("ShowOverview", String.valueOf(false));
-        params.put("DepartmentID", deptID);
+        params.put("DepartmentID", String.valueOf(deptID));
         this.post(url, params, obj, CreateProjectModel.getInstance(), message);
         Log.e("UpdateProjectService", url);
     }

@@ -1,12 +1,14 @@
 package com.algorepublic.zoho.fragments;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -15,6 +17,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -54,12 +57,12 @@ public class EditUserFragment extends BaseFragment implements MultiSelectionSpin
     public static final int RESULT_GALLERY = 2;
     public static final int PICK_File = 3;
     File newFile;
-    AQuery aq;int Color;
+    AQuery aq;int Color,selectedPosition=-1;
     ACProgressFlower dialogAC;
     ArrayList<Integer> selectedIds = new ArrayList<>();
-    ArrayList<String> roleList;
+    CharSequence[] roleList;
     ArrayList<String> projectList;
-    ListView role_list;
+    EditText role_list;
     AdapterTaskPriority adapter;
     ProjectsListService service ;
     UserService service1;
@@ -85,7 +88,7 @@ public class EditUserFragment extends BaseFragment implements MultiSelectionSpin
                              Bundle savedInstanceState) {
         View view  = inflater.inflate(R.layout.fragment_add_user, container, false);
         dialogAC =  InitializeDialog(getActivity());
-        role_list = (ListView) view.findViewById(R.id.role_list);
+        role_list = (EditText) view.findViewById(R.id.role_list);
         projectsList = (MultiSelectionSpinner) view.findViewById(R.id.projects_list);
         projectsList.setListener(this);
         baseClass = ((BaseClass) getActivity().getApplicationContext());
@@ -117,7 +120,26 @@ public class EditUserFragment extends BaseFragment implements MultiSelectionSpin
         }
         service1.getUserRole(true, new CallBack(EditUserFragment.this, "UserRole"));
         UpdateValues();
+        role_list.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showListView();
+            }
+        });
         return view;
+    }
+    private void showListView() {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle(getString(R.string.select_user));
+        builder.setSingleChoiceItems(roleList, selectedPosition, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                selectedPosition = which;
+                role_list.setText(roleList[selectedPosition]);
+                dialog.dismiss();
+            }
+        });
+        builder.show();
     }
     public void UpdateValues(){
         aq.id(R.id.first_name).text(UserListModel.getInstance().responseObject.get(position).firstName);
@@ -178,18 +200,18 @@ public class EditUserFragment extends BaseFragment implements MultiSelectionSpin
     public void UserRole(Object caller, Object model){
         UserRoleModel.getInstance().setList((UserRoleModel) model);
         if (UserRoleModel.getInstance().responseObject.size() !=0 ) {
-            roleList= new ArrayList<>();
+            ArrayList<String> list= new ArrayList<>();
             for(int loop=0;loop< UserRoleModel.getInstance().responseObject.size();loop++) {
-                roleList.add(UserRoleModel.getInstance().responseObject.get(loop).role);
+                list.add(UserRoleModel.getInstance().responseObject.get(loop).role);
             }
-            adapter = new AdapterTaskPriority(getActivity(),role_list, roleList);
-            for(int loop=0;loop<roleList.size();loop++){
-                if(roleList.get(loop).equalsIgnoreCase(UserListModel.getInstance().responseObject
+            roleList = list.toArray(new CharSequence[list.size()]);
+            for(int loop=0;loop<list.size();loop++){
+                if(list.get(loop).equalsIgnoreCase(UserListModel.getInstance().responseObject
                         .get(position).userRole.role)){
-                    adapter.setSelectedIndex(loop);
+                    selectedPosition = loop;
                 }
             }
-            role_list.setAdapter(adapter);
+            role_list.setText(roleList[selectedPosition]);
         }else {
             Toast.makeText(getActivity(), getActivity().getString(R.string.response_error), Toast.LENGTH_SHORT).show();
         }
@@ -228,6 +250,10 @@ public class EditUserFragment extends BaseFragment implements MultiSelectionSpin
                     Toast.makeText(getActivity(), getActivity().getString(R.string.add_phoneno), Toast.LENGTH_SHORT).show();
                     return false;
                 }
+                if(aq.id(R.id.role_list).getText().toString().isEmpty()){
+                    Toast.makeText(getActivity(), getActivity().getString(R.string.add_userrole), Toast.LENGTH_SHORT).show();
+                    return false;
+                }
                 if(baseClass.getSelectedProject().equalsIgnoreCase("0")) {
                     service1.updateUserWithoutProjectSelected(Integer.toString(UserListModel.getInstance().responseObject.get(position).ID),
                             aq.id(R.id.first_name).getText().toString(),
@@ -236,7 +262,7 @@ public class EditUserFragment extends BaseFragment implements MultiSelectionSpin
                             aq.id(R.id.user_email).getText().toString(),
                             aq.id(R.id.user_phoneno).getText().toString(),
                             UserRoleModel.getInstance().responseObject.get
-                                    (adapter.getSelectedIndex()).ID, selectedIds
+                                    (selectedPosition).ID, selectedIds
                             , true, new CallBack(EditUserFragment.this, "UpdateUser"));
                 }else {
                     service1.updateUserWithProjectSelected(Integer.toString(UserListModel.getInstance().responseObject.get(position).ID),
@@ -246,7 +272,7 @@ public class EditUserFragment extends BaseFragment implements MultiSelectionSpin
                             aq.id(R.id.user_email).getText().toString(),
                             aq.id(R.id.user_phoneno).getText().toString(),
                             UserRoleModel.getInstance().responseObject.get
-                                    (adapter.getSelectedIndex()).ID
+                                    (selectedPosition).ID
                             , true, new CallBack(EditUserFragment.this, "UpdateUser"));
                 }
         }

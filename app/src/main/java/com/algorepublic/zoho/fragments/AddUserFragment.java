@@ -1,6 +1,7 @@
 package com.algorepublic.zoho.fragments;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -9,6 +10,7 @@ import android.os.Bundle;
 
 import android.provider.MediaStore;
 
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -17,7 +19,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.algorepublic.zoho.Models.AllProjectsByUserModel;
@@ -58,14 +62,14 @@ public class AddUserFragment extends BaseFragment implements MultiSelectionSpinn
     public static final int PICK_File = 3;
     File newFile;
     AQuery aq;
-    int Color;
+    int Color,selectedPosition=-1;
     ACProgressFlower dialogAC;
     ArrayList<Integer> selectedIds = new ArrayList<>();
-    ArrayList<String> roleList;
+    CharSequence[] roleList;
     ArrayList<String> projectList;
-    ListView role_list;
+    EditText role_list;
     AdapterTaskPriority adapter;
-    ProjectsListService service ;
+    ProjectsListService service;
     UserService service1;
     MultiSelectionSpinner projectsList;
     BaseClass baseClass;
@@ -90,7 +94,7 @@ public class AddUserFragment extends BaseFragment implements MultiSelectionSpinn
         setHasOptionsMenu(true);
         View view  = inflater.inflate(R.layout.fragment_add_user, container, false);
         dialogAC = InitializeDialog(getActivity());
-        role_list = (ListView) view.findViewById(R.id.role_list);
+        role_list = (EditText) view.findViewById(R.id.role_list);
         projectsList = (MultiSelectionSpinner) view.findViewById(R.id.projects_list);
         projectsList.setListener(this);
         baseClass = ((BaseClass) getActivity().getApplicationContext());
@@ -118,10 +122,28 @@ public class AddUserFragment extends BaseFragment implements MultiSelectionSpinn
             aq.id(R.id.layout).visibility(View.GONE);
         }
         service1.getUserRole(true, new CallBack(AddUserFragment.this, "UserRole"));
+        role_list.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showListView();
+            }
+        });
         return view;
     }
-
-    public void AllProjects(Object caller, Object model){
+    private void showListView() {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle(getString(R.string.select_user));
+        builder.setSingleChoiceItems(roleList, selectedPosition, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                selectedPosition = which;
+                role_list.setText(roleList[selectedPosition]);
+                dialog.dismiss();
+            }
+        });
+        builder.show();
+    }
+    public void AllProjects(Object caller, Object model) {
         AllProjectsByUserModel.getInstance().setList((AllProjectsByUserModel) model);
         if (AllProjectsByUserModel.getInstance().responseCode == 100
                 || AllProjectsByUserModel.getInstance().responseData.size() != 0) {
@@ -142,13 +164,11 @@ public class AddUserFragment extends BaseFragment implements MultiSelectionSpinn
     public void UserRole(Object caller, Object model){
         UserRoleModel.getInstance().setList((UserRoleModel) model);
         if (UserRoleModel.getInstance().responseObject.size() !=0 ) {
-            roleList= new ArrayList<>();
+            ArrayList<String> list = new ArrayList<>();
             for(int loop=0;loop< UserRoleModel.getInstance().responseObject.size();loop++) {
-                roleList.add(UserRoleModel.getInstance().responseObject.get(loop).role);
+                list.add(UserRoleModel.getInstance().responseObject.get(loop).role);
             }
-            adapter = new AdapterTaskPriority(getActivity(),role_list, roleList);
-            role_list.setAdapter(adapter);
-            adapter.setSelectedIndex(0);
+            roleList = list.toArray(new CharSequence[list.size()]);
         }else {
             Toast.makeText(getActivity(), getActivity().getString(R.string.response_error), Toast.LENGTH_SHORT).show();
         }
@@ -179,6 +199,10 @@ public class AddUserFragment extends BaseFragment implements MultiSelectionSpinn
                 if(aq.id(R.id.user_phoneno).getText().toString().isEmpty()){
                     Toast.makeText(getActivity(), getActivity().getString(R.string.add_phoneno), Toast.LENGTH_SHORT).show();
 
+                    return false;
+                }
+                if(aq.id(R.id.role_list).getText().toString().isEmpty()){
+                    Toast.makeText(getActivity(), getActivity().getString(R.string.add_userrole), Toast.LENGTH_SHORT).show();
                     return false;
                 }
                 new AddUser().execute();
@@ -322,7 +346,7 @@ public class AddUserFragment extends BaseFragment implements MultiSelectionSpinn
                         aq.id(R.id.user_email).getText().toString(),
                         aq.id(R.id.user_phoneno).getText().toString(),
                         UserRoleModel.getInstance().responseObject.get
-                                (adapter.getSelectedIndex()).ID,selectedIds,newFile);
+                                (selectedPosition).ID,selectedIds,newFile);
             } catch (IOException e) {
                 e.printStackTrace();
             }
