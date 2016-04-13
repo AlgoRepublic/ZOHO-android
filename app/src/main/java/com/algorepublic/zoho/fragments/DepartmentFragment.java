@@ -94,7 +94,6 @@ public class DepartmentFragment extends BaseFragment implements SwipeRefreshLayo
         baseClass = ((BaseClass) getActivity().getApplicationContext());
         swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe_refresh_layout);
         swipeRefreshLayout.setOnRefreshListener(this);
-        swipeRefreshLayout.setProgressViewOffset(false, 0, 200);
         mRecyclerView = (RecyclerView) view.findViewById(R.id.list_view);
         mLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);

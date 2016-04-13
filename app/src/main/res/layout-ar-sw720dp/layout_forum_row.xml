@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="130dp"
+    android:layout_height="170dp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <RelativeLayout
         android:id="@+id/layout123"
@@ -95,7 +95,7 @@
                     android:id="@+id/comment_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="25sp"
+                    android:textSize="30sp"
                     android:layout_toLeftOf="@+id/layout_comment"
                     android:layout_toStartOf="@+id/layout_comment"
                     android:layout_centerVertical="true"
@@ -104,31 +104,31 @@
 
                 <RelativeLayout
                     android:id="@+id/layout_comment"
-                    android:layout_width="55dp"
+                    android:layout_width="70dp"
                     android:layout_alignParentRight="true"
                     android:layout_alignParentEnd="true"
                     android:layout_centerHorizontal="true"
-                    android:layout_height="62dp">
+                    android:layout_height="72dp">
                     <TextView
                         android:id="@+id/notify_alert1"
-                        android:layout_width="35dp"
-                        android:layout_height="35dp"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
                         android:text="0"
                         android:gravity="center"
                         android:singleLine="true"
-                        android:textSize="12sp"
+                        android:textSize="14sp"
 
                         android:background="@drawable/bubble_alert_black"
                         android:layout_alignParentTop="true" />
 
                     <ImageView
                         android:id="@+id/delete1"
-                        android:layout_width="30dp"
+                        android:layout_width="40dp"
                         android:layout_alignParentBottom="true"
                         android:layout_alignParentRight="true"
                         android:layout_alignParentEnd="true"
                         android:src="@drawable/forums"
-                        android:layout_height="30dp" />
+                        android:layout_height="40dp" />
                 </RelativeLayout>
             </RelativeLayout>
             <TextView
@@ -136,6 +136,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="25sp"
+                android:ellipsize="end"
+                android:lines="2"
                 android:layout_below="@+id/layout1"
                 android:padding="5dp"
                 android:text="@string/forums_description"

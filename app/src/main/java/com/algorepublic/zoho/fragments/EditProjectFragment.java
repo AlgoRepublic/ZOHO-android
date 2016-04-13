@@ -192,6 +192,7 @@ public class EditProjectFragment extends BaseFragment {
             deptList.add(dialogList);
         }
         Collections.sort(deptList);
+        departmentList = new CharSequence[deptList.size()];
         for(int loop=0;loop< deptList.size();loop++) {
             departmentList[loop] = deptList.get(loop).getName();
         }
@@ -288,6 +289,7 @@ public class EditProjectFragment extends BaseFragment {
                 ownerList.add(dialogList);
             }
             Collections.sort(ownerList);
+            userList = new CharSequence[ownerList.size()];
             for(int loop=0;loop< ownerList.size();loop++) {
                 userList[loop] = ownerList.get(loop).getName();
             }

@@ -219,10 +219,4 @@ public class AddProjectFragment extends BaseFragment {
             Toast.makeText(getActivity(), getString(R.string.response_error), Toast.LENGTH_SHORT).show();
         }
     }
-    Comparator<String> ByAlphabet = new Comparator<String>() {
-        @Override
-        public int compare(String lhs, String rhs) {
-            return (lhs.compareTo(rhs));
-        }
-    };
 }

@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:clickable="true"
     tools:context=".fragments.TaskDetailFragment"
     android:background="@color/colorBaseWrapper">
@@ -115,7 +115,7 @@
                             android:layout_width="wrap_content"
                             android:text="@string/task_startdate"
                             android:layout_height="wrap_content"
-                            android:textSize="22sp"
+                            android:textSize="25sp"
                             android:textStyle="bold"
                             android:layout_alignParentStart="true"
                             android:layout_alignParentLeft="true"
@@ -127,7 +127,7 @@
                             android:paddingStart="5dp"
                             android:paddingLeft="5dp"
                             android:layout_height="wrap_content"
-                            android:textSize="22sp"
+                            android:textSize="25sp"
                             android:layout_toRightOf="@+id/text2"
                             android:layout_toEndOf="@+id/text2"
                             />
@@ -136,7 +136,7 @@
                             android:layout_width="wrap_content"
                             android:text="@string/task_duedate"
                             android:layout_height="wrap_content"
-                            android:textSize="22sp"
+                            android:textSize="25sp"
                             android:textStyle="bold"
                             android:layout_toLeftOf="@+id/end_date"
                             android:layout_toStartOf="@+id/end_date"
@@ -148,7 +148,7 @@
                             android:paddingStart="5dp"
                             android:paddingLeft="5dp"
                             android:layout_height="wrap_content"
-                            android:textSize="22sp"
+                            android:textSize="25sp"
                             android:layout_alignParentRight="true"
                             android:layout_toLeftOf="@+id/textView"
                             android:layout_alignParentEnd="true"
@@ -163,7 +163,7 @@
                         android:layout_marginRight="25dp"
                         android:layout_marginEnd="25dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="15dp">
+                        android:layout_marginTop="20dp">
                         <TextView
                             android:layout_width="wrap_content"
                             android:text="@string/category"
@@ -197,7 +197,7 @@
                             android:layout_weight="1"
                             android:text="@string/task_details"
                             android:layout_height="wrap_content"
-                            android:textSize="22sp"
+                            android:textSize="25sp"
                             android:textStyle="bold"
                             android:layout_toLeftOf="@+id/textView"
                             android:layout_toStartOf="@+id/textView"
@@ -207,7 +207,7 @@
                             android:layout_width="match_parent"
                             android:layout_below="@+id/task_name"
                             android:layout_height="wrap_content"
-                            android:textSize="22sp"
+                            android:textSize="25sp"
                             android:ellipsize="end"
 
                             />
@@ -223,7 +223,7 @@
                             android:layout_width="wrap_content"
                             android:text="@string/task_users"
                             android:layout_height="wrap_content"
-                            android:textSize="22sp"
+                            android:textSize="25sp"
                             android:textStyle="bold"
                             android:layout_toLeftOf="@+id/textView"
                             android:layout_toStartOf="@+id/textView"
@@ -241,14 +241,13 @@
                             android:textColor="@color/colorBaseHeader"
                             android:textStyle="bold"
                             android:id="@+id/user_counter"
-
                             />
                     </LinearLayout>
-                    <org.lucasr.twowayview.widget.TwoWayView
+                        <org.lucasr.twowayview.widget.TwoWayView
                         android:id="@+id/task_assignee"
                         android:layout_below="@+id/header_layout4"
                         android:layout_width="match_parent"
-                        android:layout_height="90dp"
+                        android:layout_height="100dp"
                         app:twowayview_layoutManager="ListLayoutManager"
                         android:orientation="horizontal">
                     </org.lucasr.twowayview.widget.TwoWayView>
@@ -257,13 +256,13 @@
                     android:layout_below="@+id/layout3"
                     android:id="@+id/layout_assignee"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="match_parent">
                     <TextView
                         android:id="@+id/active_archive_status"
                         android:layout_width="wrap_content"
                         android:text="@string/project_status"
                         android:layout_height="wrap_content"
-                        android:textSize="22sp"
+                        android:textSize="25sp"
                         android:textStyle="bold"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="20dp"
@@ -292,15 +291,14 @@
                         android:layout_marginStart="50dp"
                         android:layout_marginLeft="50dp"
                         android:id="@+id/circularprogressBar"
-                        android:layout_width="220dp"
-                        android:layout_height="220dp"
+                        android:layout_width="280dp"
+                        android:layout_height="280dp"
                         app:max="100"
                         android:layout_centerHorizontal="true"
-                        android:layout_margin="15dp"
                         app:wheel_size="16"
                         app:donut_text_size="30dp"
                         android:layout_below="@+id/layout4"
-                        android:layout_marginTop="15dp"
+                        android:layout_marginTop="55dp"
                         android:layout_centerInParent="true"
                         app:donut_text_color="@color/colorBaseHeader"
                         app:donut_finished_stroke_width="10dp"
@@ -334,8 +332,8 @@
                 android:layout_height="match_parent">
                 <TextView
                     android:id="@+id/comment_count"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
                     android:text="0"
                     android:gravity="center"
                     android:singleLine="true"
@@ -347,14 +345,14 @@
 
                 <ImageView
                     android:id="@+id/delete1"
-                    android:layout_width="40dp"
+                    android:layout_width="65dp"
                     android:src="@drawable/task_comment"
                     android:layout_centerHorizontal="true"
                     android:layout_alignParentRight="true"
                     android:layout_alignParentEnd="true"
                     android:layout_marginEnd="5dp"
                     android:layout_above="@+id/text1"
-                    android:layout_height="40dp" />
+                    android:layout_height="45dp" />
 
                 <TextView
                     android:id="@+id/text1"
@@ -387,27 +385,26 @@
                 android:layout_height="match_parent">
                 <TextView
                     android:id="@+id/docs_count"
-                    android:layout_width="42dp"
-                    android:layout_height="42dp"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
                     android:text="0"
                     android:gravity="center"
                     android:singleLine="true"
                     android:textSize="10dp"
-
                     android:background="@drawable/bubble_alert_white"
                     android:layout_alignParentTop="true"
                     android:textColor="@color/colorBaseWrapper" />
 
                 <ImageView
                     android:id="@+id/delete2"
-                    android:layout_width="40dp"
+                    android:layout_width="65dp"
                     android:src="@drawable/task_undone"
                     android:layout_centerHorizontal="true"
                     android:layout_alignParentRight="true"
                     android:layout_alignParentEnd="true"
                     android:layout_above="@+id/text3"
                     android:layout_marginEnd="5dp"
-                    android:layout_height="40dp" />
+                    android:layout_height="45dp" />
 
                 <TextView
                     android:id="@+id/text3"
@@ -440,27 +437,26 @@
                 android:layout_height="match_parent">
                 <TextView
                     android:id="@+id/subtask_count"
-                    android:layout_width="42dp"
-                    android:layout_height="42dp"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
                     android:text="0"
                     android:gravity="center"
                     android:singleLine="true"
                     android:textSize="10dp"
-
                     android:background="@drawable/bubble_alert_white"
                     android:layout_alignParentTop="true"
                     android:textColor="@color/colorBaseWrapper" />
 
                 <ImageView
                     android:id="@+id/delete3"
-                    android:layout_width="42dp"
+                    android:layout_width="65dp"
                     android:src="@drawable/sub_tasks"
                     android:layout_centerHorizontal="true"
                     android:layout_alignParentRight="true"
                     android:layout_alignParentEnd="true"
                     android:layout_marginEnd="5dp"
                     android:layout_above="@+id/text6"
-                    android:layout_height="42dp" />
+                    android:layout_height="45dp" />
 
                 <TextView
                     android:id="@+id/text6"
