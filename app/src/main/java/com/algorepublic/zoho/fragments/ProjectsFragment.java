@@ -83,7 +83,6 @@ public class ProjectsFragment extends BaseFragment implements SwipeRefreshLayout
         swipeStickView = (SwipeRefreshLayout) view.findViewById(R.id.swipe_stickyView);
         swipeListView = (SwipeRefreshLayout) view.findViewById(R.id.swipe_listView);
         swipeStickView.setOnRefreshListener(this);
-        swipeStickView.setProgressViewOffset(false, 0, 200);
         getToolbar().setTitle(getString(R.string.projects));
         setHasOptionsMenu(true);
         aq.id(R.id.sort).clicked(new View.OnClickListener() {

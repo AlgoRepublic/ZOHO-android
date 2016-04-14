@@ -98,7 +98,7 @@
         </LinearLayout>
         <ListView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:transcriptMode="alwaysScroll"
             android:layout_below="@id/header"
             android:choiceMode="singleChoice"
@@ -106,7 +106,6 @@
             android:stackFromBottom="true"
             android:descendantFocusability="beforeDescendants"
             android:divider="@null"
-            android:layout_marginBottom="60dp"
             android:id="@+id/listView_comments" />
         <include
             layout="@layout/layout_alert_message"

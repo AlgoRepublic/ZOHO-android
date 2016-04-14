@@ -1,6 +1,7 @@
 package com.algorepublic.zoho.fragments;
 
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -14,6 +15,7 @@ import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.algorepublic.zoho.Models.TasksListByOwnerModel;
+import com.algorepublic.zoho.Models.UserListModel;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.adapters.AdapterTasksList;
 import com.algorepublic.zoho.adapters.TaskListAssignee;
@@ -36,13 +38,14 @@ import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
 /**
  * Created by android on 12/15/15.
  */
-public class TasksListFragment extends BaseFragment {
+public class TasksListFragment extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener{
 
     static TasksListFragment fragment;
     TaskListService taskListService;
     StickyListHeadersAdapter adapterTasksList;
     AQuery aq;View view;int Color;
     RadioGroup radioGroup;
+    private SwipeRefreshLayout swipeRefreshLayout;
     public static ArrayList<TaskListName> taskListName = new ArrayList<>();
     public static ArrayList<TasksList> allTaskList = new ArrayList<>();
     public static ArrayList<TasksList> generalList = new ArrayList<>();
@@ -93,7 +96,7 @@ public class TasksListFragment extends BaseFragment {
             case R.id.add_project:
                 if(baseClass.getSelectedProject().equalsIgnoreCase("0")){
                     Toast.makeText(getActivity(), getActivity().getString(R.string.select_project), Toast.LENGTH_SHORT).show();
- }else {
+                     }else {
                     callFragmentWithBackStack(R.id.container, TaskAddUpdateFragment.newInstance(taskListName), "TaskAddUpdateFragment");
                 }
                 break;
@@ -101,7 +104,16 @@ public class TasksListFragment extends BaseFragment {
         return super.onOptionsItemSelected(item);
 
     }
-
+    @Override
+    public void onRefresh() {
+        if(baseClass.getSelectedProject().equalsIgnoreCase("0")) {
+            taskListService.getTasksListByOwner(baseClass.getUserId(), false,
+                    new CallBack(TasksListFragment.this, "OwnerTasksList"));
+        }else{
+            taskListService.getTasksListByProject(baseClass.getSelectedProject(), false,
+                    new CallBack(TasksListFragment.this, "OwnerTasksList"));
+        }
+    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -110,6 +122,8 @@ public class TasksListFragment extends BaseFragment {
         radioGroup = (RadioGroup) view.findViewById(R.id.radioGroup);
         searchView = (SearchView) view.findViewById(R.id.searchView);
         listView = (StickyListHeadersListView) view.findViewById(R.id.list_taskslist);
+        swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe_refresh_layout);
+        swipeRefreshLayout.setOnRefreshListener(this);
         aq = new AQuery(view);
         InitializeDialog(getActivity());
         baseClass = ((BaseClass) getActivity().getApplicationContext());
@@ -274,6 +288,7 @@ public class TasksListFragment extends BaseFragment {
         }
     }
     public void OwnerTasksList(Object caller, Object model) {
+        swipeRefreshLayout.setRefreshing(false);
         TasksListByOwnerModel.getInstance().setList((TasksListByOwnerModel) model);
         if (TasksListByOwnerModel.getInstance().responseCode == 100) {
             AddAllTasks();

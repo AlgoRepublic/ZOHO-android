@@ -92,7 +92,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
-                          android:drawablePadding="8dp"
+                            android:drawablePadding="8dp"
                             android:singleLine="true"
                             android:ellipsize="end"
                             android:paddingLeft="5dp"

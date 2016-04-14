@@ -85,11 +85,14 @@
                     android:layout_margin="15dp"
                     android:orientation="vertical">
 
-                    <AutoCompleteTextView
+                    <EditText
+                        android:paddingStart="5dp"
+                        android:paddingEnd="5dp"
+                        android:background="@drawable/round_border"
+                        android:ellipsize="end"
                         android:id="@+id/email"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="@drawable/round_border"
                         android:completionHint="@string/prompt_email"
                         android:hint="@string/prompt_email"
                         android:imeOptions="actionNext"
@@ -113,11 +116,14 @@
                     android:layout_marginRight="15dp"
                     android:orientation="vertical">
 
-                    <AutoCompleteTextView
+                    <EditText
+                        android:paddingStart="5dp"
+                        android:paddingEnd="5dp"
+                        android:background="@drawable/round_border"
+                        android:ellipsize="end"
                         android:id="@+id/password"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="@drawable/round_border"
                         android:completionHint="@string/prompt_password"
                         android:hint="@string/prompt_password"
                         android:imeOptions="actionDone"
