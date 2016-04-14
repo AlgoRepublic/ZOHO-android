@@ -75,25 +75,16 @@
                     android:layout_width="match_parent">
                     <ImageView
                         android:id="@+id/doc_checkbox"
-                        android:layout_width="75dp"
+                        android:layout_width="90dp"
                         android:scaleType="fitXY"
                         android:adjustViewBounds="true"
-                        android:layout_height="80dp"
+                        android:layout_height="100dp"
                         android:button="@null"
                         android:layout_margin="10dp"
                         android:checked="false"
                         android:visibility="visible"
                         android:layout_centerVertical="true"
                         />
-                    <!--<ImageView-->
-                    <!--android:id="@+id/file_image"-->
-                    <!--android:layout_width="45dp"-->
-                    <!--android:scaleType="fitXY"-->
-                    <!--android:adjustViewBounds="true"-->
-                    <!--android:layout_height="50dp"-->
-                    <!--android:background="@drawable/ic_listview_word"-->
-                    <!--android:layout_margin="10dp" >-->
-                    <!--</ImageView>-->
 
                     <RelativeLayout
                         android:id="@+id/layout_tasktitle"
@@ -155,7 +146,7 @@
                 </RelativeLayout>
                 <LinearLayout
                     android:id="@+id/rightarrow_layout"
-                    android:layout_width="30dp"
+                    android:layout_width="wrap_content"
                     android:layout_alignParentLeft="true"
                     android:layout_height="match_parent"
                     android:gravity="center"

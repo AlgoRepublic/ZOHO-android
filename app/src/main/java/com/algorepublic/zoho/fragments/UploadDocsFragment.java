@@ -47,12 +47,7 @@ import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.Result;
 import com.google.android.gms.common.api.ResultCallback;
-import com.google.android.gms.drive.Drive;
-import com.google.android.gms.drive.DriveFile;
-import com.google.android.gms.drive.DriveId;
-import com.google.android.gms.drive.DriveResource;
-import com.google.android.gms.drive.Metadata;
-import com.google.android.gms.drive.OpenFileActivityBuilder;
+import com.google.android.gms.drive.*;
 import com.google.api.client.extensions.android.http.AndroidHttp;
 import com.google.api.client.googleapis.extensions.android.gms.auth.GoogleAccountCredential;
 import com.google.api.client.http.HttpTransport;
@@ -103,7 +98,7 @@ public class UploadDocsFragment extends BaseFragment implements GoogleApiClient.
     NiceSpinner folder_list;
     ArrayList<String> folderList;
     private static final String PREF_ACCOUNT_NAME = "accountName";
-    private static final String[] SCOPES = { DriveScopes.DRIVE_METADATA_READONLY };
+    private static final String[] SCOPES = { DriveScopes.DRIVE_READONLY };
     com.google.api.client.googleapis.extensions.android.gms.auth.GoogleAccountCredential mCredential;
     public static ArrayList<AttachmentList> filesList = new ArrayList<>();
     /**
@@ -366,6 +361,7 @@ public class UploadDocsFragment extends BaseFragment implements GoogleApiClient.
                     }
                     Metadata metadata = result.getMetadata();
                     ArrayList<String> passed = new ArrayList<>();
+                    Log.e("Link",metadata.toString());
                  if(metadata.getOriginalFilename()== null){
                      passed.add("GoogleDrive");
                     }else {

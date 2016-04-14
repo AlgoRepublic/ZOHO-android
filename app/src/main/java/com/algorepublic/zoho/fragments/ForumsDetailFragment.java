@@ -106,10 +106,11 @@ public class ForumsDetailFragment extends BaseFragment {
         service.getForumsDetail(ForumsModel.getInstance().responseObject.get(Position).ID
                 , true, new CallBack(ForumsDetailFragment.this, "ForumDetails"));
         aq.id(R.id.comment_description).text(Html.fromHtml(getString(R.string.by) + " " + ForumsModel.getInstance().responseObject.get(Position).user.firstName
-                + "," + getString(R.string.last_responce_on) +
-                baseClass.DateFormatter(ForumsModel.getInstance().responseObject.get(Position).updatedAt) + " "
-                + baseClass.GetTime(baseClass.DateMilli(ForumsModel.getInstance()
-                .responseObject.get(Position).updatedAt))));
+                + " " + ForumsModel.getInstance().responseObject.get(Position).user.lastName));
+//                + ",  " + getString(R.string.last_responce_on) +
+//                baseClass.DateFormatter(ForumsModel.getInstance().responseObject.get(Position).updatedAt) + " "
+//                + baseClass.GetTime(baseClass.DateMilli(ForumsModel.getInstance()
+//                .responseObject.get(Position).updatedAt))));
 
 
         aq.id(R.id.send).clicked(new View.OnClickListener() {

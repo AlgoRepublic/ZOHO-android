@@ -1,7 +1,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:id="@+id/layout1"
+    android:background="@color/colorWhite"
     android:fitsSystemWindows="true"
     android:layoutDirection="rtl"
     android:textDirection="rtl"
@@ -14,6 +15,7 @@
         app:ms9_useAmbientShadow="true"
         app:ms9_affectsDisplayedPosition="true"
         app:ms9_shadowTranslationZ="1dp"
+        android:layout_marginBottom="20dp"
         app:ms9_shadowElevation="3dp">
         <RelativeLayout
             android:layout_height="wrap_content"
@@ -35,6 +37,7 @@
     <android.support.v7.widget.CardView
         xmlns:card_view="http://schemas.android.com/apk/res-auto"
         android:id="@+id/card_view"
+        android:layout_below="@+id/shadow_item_container"
         android:layout_margin="10dp"
         android:layout_centerVertical="true"
         android:layout_width="match_parent"
@@ -50,18 +53,63 @@
                 android:layout_height="85dp"
                 android:id="@+id/layout2">
 
-                <com.rengwuxian.materialedittext.MaterialEditText
+                <EditText
+                    android:paddingStart="5dp"
+                    android:paddingEnd="5dp"
+                    android:background="@drawable/round_border"
+                    android:singleLine="true"
+                    android:ellipsize="end"
+                    android:textColor="@color/colorBaseHeader"
+                    android:textColorHint="@color/colorBaseMenu"
                     android:id="@+id/dept_title"
-                    android:textSize="27sp"
+                    android:textSize="30sp"
                     android:layout_width="match_parent"
                     android:layout_height="70dp"
                     android:hint="@string/title"
                     android:inputType="textMultiLine"
-                    android:layout_marginTop="10dp"
-                    app:met_floatingLabel="normal"/>
+                    android:layout_marginTop="10dp"/>
 
             </RelativeLayout>
 
         </RelativeLayout>
     </android.support.v7.widget.CardView>
+    <View android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/light_gray"
+        android:id="@+id/separator"
+        android:layout_marginTop="30dp"
+        android:layout_below="@+id/card_view"
+        />
+    <TableRow
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/separator"
+        android:weightSum="100"
+        >
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="50"
+            android:text="@string/cancel"
+            android:background="@color/colorWhite"
+            android:padding="25dp"
+            android:textSize="30sp"
+            android:id="@+id/btnCancel" />
+        <View android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="@color/light_gray"
+            />
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="50"
+            android:padding="25dp"
+            android:textSize="30sp"
+            android:text="@string/save"
+            android:background="@color/colorWhite"
+            android:id="@+id/btnSave" />
+
+
+    </TableRow>
 </RelativeLayout>

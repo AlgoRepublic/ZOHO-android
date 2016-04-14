@@ -278,11 +278,13 @@
     <string name="alert_match_password">Please Match Your Password</string>
     <string name="update_password">Password Updated</string>
     <string name="add_phoneno">Please Add Phone Number</string>
+    <string name="add_userrole">Please Add User Role</string>
     <string name="email_already">Email already exists</string>
     <string name="exit">Are you really want to exit?</string>
 
     <string name="response_error">Error! Please Try Later</string>
     <string name="select_project">Please! Select Project</string>
+    <string name="select_user">Please! Select User</string>
     <string name="add_project">Add Project</string>
     <string name="enter_comment">Enter Your Comment!</string>
     <string name="no_date">No Date</string>

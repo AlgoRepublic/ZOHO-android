@@ -37,6 +37,7 @@ public class NiceSpinner extends TextView {
     private static final String INSTANCE_STATE = "instance_state";
     private static final String SELECTED_INDEX = "selected_index";
     private static final String IS_POPUP_SHOWING = "is_popup_showing";
+    String type;
 
     private int mSelectedIndex;
     private Drawable mDrawable;
@@ -183,7 +184,6 @@ public class NiceSpinner extends TextView {
                     DrawableCompat.setTint(mDrawable, resId);
                 }
             }
-            setCompoundDrawablesWithIntrinsicBounds(null, null, mDrawable, null);
         }
 
         typedArray.recycle();
@@ -275,8 +275,9 @@ public class NiceSpinner extends TextView {
         mPopup.showAsDropDown(this);
     }
 
-    public void setTintColor(@ColorRes int resId) {
+    public void setTintColor(@ColorRes int resId,String alignment) {
         if (mDrawable != null && !mHideArrow) {
+            type = alignment;
             DrawableCompat.setTint(mDrawable, getResources().getColor(resId));
         }
     }

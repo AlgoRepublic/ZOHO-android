@@ -158,8 +158,8 @@ public class AdapterTasksList extends BaseAdapter implements StickyListHeadersAd
                 NormalDialogCustomAttr(ctx.getString(R.string.delete_task), tasksLists.get(position));
             }
         });
-        Animation animation = AnimationUtils.loadAnimation(ctx, (position > lastPosition) ? R.anim.up_from_bottom : R.anim.down_from_top);
-        convertView.startAnimation(animation);
+//        Animation animation = AnimationUtils.loadAnimation(ctx, (position > lastPosition) ? R.anim.up_from_bottom : R.anim.down_from_top);
+//        convertView.startAnimation(animation);
         lastPosition = position;
         BaseFragment.searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override

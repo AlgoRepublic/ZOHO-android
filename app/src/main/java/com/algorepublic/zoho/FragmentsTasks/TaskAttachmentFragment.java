@@ -219,6 +219,7 @@ public class TaskAttachmentFragment extends BaseFragment {
             default:
                 break;
         }
+        showFileInList(newFile,"",0,newFile.getName());
     }
 
     private void showFileInList(File file,String ApiUrl,Integer ID,String name) {

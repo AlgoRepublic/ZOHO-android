@@ -31,7 +31,7 @@
                     android:id="@+id/lblListHeader"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="20sp"
+                    android:textSize="22sp"
                     android:text="@string/new_project"
                     android:gravity="center"
                     android:textColor="@color/white" />
@@ -52,15 +52,19 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <com.rengwuxian.materialedittext.MaterialEditText
+                <EditText
+                    android:paddingStart="5dp"
+                    android:paddingEnd="5dp"
+                    android:background="@drawable/round_border"
+                    android:singleLine="true"
+                    android:ellipsize="end"
+                    android:textColor="@color/colorBaseHeader"
+                    android:textColorHint="@color/colorBaseMenu"
                     android:id="@+id/project_name"
                     android:textSize="24sp"
                     android:layout_width="match_parent"
-                    android:layout_height="60dp"
+                    android:layout_height="70dp"
                     android:hint="@string/project_name"
-                    android:ellipsize="end"
-                    android:singleLine="true"
-                    app:met_floatingLabel="normal"
                     android:layout_marginTop="15dp" />
                 <LinearLayout
                     android:id="@+id/layout"
@@ -75,7 +79,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="5dp"
                         android:text="@string/users"
-                        android:textSize="19.33sp" />
+                        android:textSize="22sp" />
                     <com.h6ah4i.android.materialshadowninepatch.MaterialShadowContainerView
                         android:layout_width="match_parent"
                         style="@style/ms9_DefaultShadowStyle"
@@ -84,7 +88,7 @@
                         app:ms9_affectsDisplayedPosition="true"
                         app:ms9_shadowTranslationZ="1dp"
                         app:ms9_shadowElevation="3dp">
-                        <org.angmarch.views.NiceSpinner
+                        <EditText
                             android:id="@+id/owner_list"
                             android:layout_width="match_parent"
                             android:layout_height="55dp"
@@ -93,17 +97,22 @@
                             android:layout_marginTop="5dp" />
                     </com.h6ah4i.android.materialshadowninepatch.MaterialShadowContainerView>
                 </LinearLayout>
-                <com.rengwuxian.materialedittext.MaterialEditText
+                <EditText
+                    android:paddingStart="5dp"
+                    android:paddingEnd="5dp"
+                    android:background="@drawable/round_border"
+                    android:ellipsize="end"
+                    android:textColor="@color/colorBaseHeader"
+                    android:textColorHint="@color/colorBaseMenu"
                     android:id="@+id/project_desc"
                     android:textSize="22sp"
                     android:layout_below="@+id/layout"
                     android:layout_width="match_parent"
-                    android:layout_height="250dp"
+                    android:layout_height="450dp"
                     android:hint="@string/project_description"
                     android:inputType="textMultiLine"
                     android:gravity="top|left|start"
-                    android:layout_marginTop="10dp"
-                    app:met_floatingLabel="normal" />
+                    android:layout_marginTop="10dp" />
                 <LinearLayout
                     android:id="@+id/layout1"
                     android:layout_width="match_parent"
@@ -116,7 +125,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/dept_name"
                         android:layout_marginStart="5dp"
-                        android:textSize="19.33sp" />
+                        android:textSize="22sp" />
                     <com.h6ah4i.android.materialshadowninepatch.MaterialShadowContainerView
                         android:layout_width="match_parent"
                         style="@style/ms9_DefaultShadowStyle"
@@ -125,7 +134,7 @@
                         app:ms9_affectsDisplayedPosition="true"
                         app:ms9_shadowTranslationZ="1dp"
                         app:ms9_shadowElevation="3dp">
-                        <org.angmarch.views.NiceSpinner
+                        <EditText
                             android:id="@+id/departments_list"
                             android:layout_width="match_parent"
                             android:layout_height="60dp"
@@ -144,7 +153,7 @@
                     android:paddingTop="10dp"
                     android:paddingLeft="5dp"
                     android:paddingStart="5dp"
-                    android:textSize="19sp"
+                    android:textSize="22sp"
                     android:layout_below="@id/layout1"/>
 
                 <RadioGroup
@@ -157,20 +166,20 @@
                     <RadioButton
                         android:id="@+id/private_radio"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="70dp"
                         android:text="@string/_private"
                         android:button="@null"
-                        android:textSize="24sp"
+                        android:textSize="30sp"
                         android:background="@color/white"
                         android:drawableStart="@drawable/radiobutton"
                         android:drawableLeft="@drawable/radiobutton" />
                     <RadioButton
                         android:id="@+id/public_radio"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="70dp"
                         android:text="@string/_public"
                         android:button="@null"
-                        android:textSize="24sp"
+                        android:textSize="30sp"
                         android:layout_marginTop="5dp"
                         android:background="@color/white"
                         android:drawableStart="@drawable/radiobutton"

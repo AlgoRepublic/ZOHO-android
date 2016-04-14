@@ -37,8 +37,6 @@
             android:padding="10dp"
             android:singleLine="true"
             android:hint="@string/Task_Title"
-            android:layout_toLeftOf="@+id/btn_title"
-            android:layout_toStartOf="@+id/btn_title"
             android:textColor="@color/colorBaseHeader"
             android:textColorHint="@color/colorBaseMenu"
             android:textSize="25sp" />

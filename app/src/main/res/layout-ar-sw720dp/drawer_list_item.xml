@@ -75,7 +75,7 @@
                 android:paddingRight="23dp"
                 android:paddingEnd="23dp"
                 android:text="Comments:\n wdwdw\nwdww"
-                android:textSize="18sp"
+                android:textSize="22sp"
                 android:textStyle="bold" />
         <requestFocus/>
         </RelativeLayout>
@@ -156,7 +156,7 @@
                 android:padding="3dp"
                 android:layout_marginStart="30dp"
                 android:text="Development Stage"
-                android:textSize="18sp" />
+                android:textSize="22sp" />
 
             <RatingBar
                 android:id="@+id/star_rating"

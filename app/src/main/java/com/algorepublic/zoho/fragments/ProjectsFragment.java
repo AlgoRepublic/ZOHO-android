@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -82,7 +83,6 @@ public class ProjectsFragment extends BaseFragment implements SwipeRefreshLayout
         swipeStickView = (SwipeRefreshLayout) view.findViewById(R.id.swipe_stickyView);
         swipeListView = (SwipeRefreshLayout) view.findViewById(R.id.swipe_listView);
         swipeStickView.setOnRefreshListener(this);
-        swipeStickView.setProgressViewOffset(false, 0, 200);
         getToolbar().setTitle(getString(R.string.projects));
         setHasOptionsMenu(true);
         aq.id(R.id.sort).clicked(new View.OnClickListener() {
@@ -202,7 +202,7 @@ public class ProjectsFragment extends BaseFragment implements SwipeRefreshLayout
         for (int loop = 0; loop < AllProjectsByUserModel.getInstance().responseData.size(); loop++) {
                 ProjectsList projectsList = new ProjectsList();
                 projectsList.setCompOrDeptName("");
-                projectsList.setCompOrDeptID("1");
+                projectsList.setCompOrDeptID(Integer.toString(AllProjectsByUserModel.getInstance().responseData.get(loop).departmentID));
                 projectsList.setProjectID(Integer.toString(AllProjectsByUserModel.getInstance().responseData.get(loop).projectID));
                 projectsList.setProjectName(AllProjectsByUserModel.getInstance().responseData.get(loop).projectName);
                 projectsList.setOwnerID(AllProjectsByUserModel.getInstance().responseData.get(loop).ownerID);
@@ -250,6 +250,7 @@ public class ProjectsFragment extends BaseFragment implements SwipeRefreshLayout
                 if(ProjectsByDepartmentModel.getInstance().responseData.get(loop).ID.equals("0")){
                     projectsList.setCompOrDeptName(getString(R.string.un_assigned));
                 }else {
+                    Log.e("DD","D"+ProjectsByDepartmentModel.getInstance().responseData.get(loop).departmentName);
                     projectsList.setCompOrDeptName(ProjectsByDepartmentModel.getInstance().responseData.get(loop).departmentName);
                 }
                 projectsList.setCompOrDeptID(ProjectsByDepartmentModel.getInstance().responseData.get(loop).ID);

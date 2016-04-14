@@ -16,8 +16,11 @@
 
 package com.algorepublic.zoho.adapters;
 
+import android.app.Activity;
 import android.content.Context;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
@@ -36,6 +39,7 @@ import com.algorepublic.zoho.Models.GeneralModel;
 import com.algorepublic.zoho.Models.ProjectsByDepartmentModel;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.fragments.DepartmentFragment;
+import com.algorepublic.zoho.fragments.EditDepartmentDialogFragment;
 import com.algorepublic.zoho.fragments.EditDepartmentFragment;
 import com.algorepublic.zoho.services.CallBack;
 import com.algorepublic.zoho.services.DepartmentService;
@@ -206,7 +210,12 @@ public class AdapterDepartment
         holder.btEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                callFragmentWithBackStack(R.id.container, EditDepartmentFragment.newInstance(position), "EditDepartmentFragment");
+                Bundle b = new Bundle();
+                b.putInt("pos", position);
+                EditDepartmentDialogFragment departmentDialogFragment = new EditDepartmentDialogFragment();
+                departmentDialogFragment.setArguments(b);
+                departmentDialogFragment.show(((AppCompatActivity) ctx).getSupportFragmentManager(), "EditDepartmentDialogFragment");
+                //callFragmentWithBackStack(R.id.container, EditDepartmentFragment.newInstance(position), "EditDepartmentFragment");
             }
         });
     }

@@ -25,7 +25,7 @@
             android:textSize="25sp"
             android:typeface="monospace" />
     </LinearLayout>
-    <android.support.v4.widget.SwipeRefreshLayout
+    <com.algorepublic.zoho.utils.CustomSwipeRefreshLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/swipe_stickyView"
         android:layout_above="@+id/sort"
@@ -44,8 +44,8 @@
         android:animationCache="false"
         android:divider="@null"
         android:scrollbars="none" />
-    </android.support.v4.widget.SwipeRefreshLayout>
-    <android.support.v4.widget.SwipeRefreshLayout
+    </com.algorepublic.zoho.utils.CustomSwipeRefreshLayout>
+    <com.algorepublic.zoho.utils.CustomSwipeRefreshLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/swipe_listView"
         android:layout_above="@+id/sort"
@@ -64,7 +64,7 @@
             android:scrollingCache="false"
             android:animationCache="false"
             android:scrollbars="none"/>
-    </android.support.v4.widget.SwipeRefreshLayout>
+    </com.algorepublic.zoho.utils.CustomSwipeRefreshLayout>
     <RelativeLayout
         android:id="@+id/sort"
         android:layout_width="match_parent"

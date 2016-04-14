@@ -6,7 +6,7 @@
         android:id="@+id/save_project"
         android:orderInCategory="100"
         android:title="@string/save"
-        android:icon="@android:drawable/ic_menu_save"
+        android:icon="@drawable/ic_menu_save"
         app:showAsAction="always"
         tools:ignore="AppCompatResource" />
 

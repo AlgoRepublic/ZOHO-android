@@ -58,10 +58,10 @@ public class AdapterTaskDetailAssignee extends RecyclerView.Adapter<AdapterTaskD
 
 
 
-        for (int i=0;i<arraylist.size();i++) {
+        /*for (int i=0;i<arraylist.size();i++) {
             Log.e("name", String.valueOf(arraylist.get(position).getFirstName().charAt(0)));
             holder.textView.setText(String.valueOf(arraylist.get(position).getFirstName().charAt(1)));
-        }
+        }*/
     }
 
     private String validateAndGetFullNameInitials(String fName,String lName){
@@ -73,10 +73,10 @@ public class AdapterTaskDetailAssignee extends RecyclerView.Adapter<AdapterTaskD
             return String.valueOf(lName.charAt(0));
         return "";
     }
-   /* @Override
+     @Override
     public void onAttachedToRecyclerView(RecyclerView recyclerView) {
         super.onAttachedToRecyclerView(recyclerView);
-    }*/
+    }
 
     @Override
     public int getItemCount() {
