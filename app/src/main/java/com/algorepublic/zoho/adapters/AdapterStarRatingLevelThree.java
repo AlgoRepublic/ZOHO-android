@@ -24,6 +24,7 @@ import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.fragments.StarRatingLevelQuestionsFragment;
 import com.algorepublic.zoho.services.CallBack;
 import com.algorepublic.zoho.services.StarRatingService;
+import com.algorepublic.zoho.utils.BaseClass;
 import com.androidquery.AQuery;
 
 import java.util.ArrayList;
@@ -127,8 +128,11 @@ public class AdapterStarRatingLevelThree extends BaseExpandableListAdapter {
         lblListHeader.setText(mListDataHeader.get(groupPosition).getTitle());
         if(isExpanded){
             holder.imageView.setBackgroundResource(R.drawable.level_three_up);
+            BaseClass.setViewAccordingToTheme(mContext, convertView, lblListHeader);
         }else{
             holder.imageView.setBackgroundResource(R.drawable.level_three_down);
+            lblListHeader.setTextColor(mContext.getResources().getColor(R.color.colorBaseHeader));
+            convertView.findViewById(R.id.listClick).setBackground(mContext.getResources().getDrawable(R.drawable.roundable_corner));
         }
         return convertView;
     }

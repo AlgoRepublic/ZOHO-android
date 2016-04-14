@@ -7,8 +7,10 @@
         android:id="@+id/starListView"
         android:divider="@null"
         android:groupIndicator="@null"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="match_parent" />
     <include
         layout="@layout/layout_alert_message"
         android:layout_width="wrap_content"

@@ -11,9 +11,11 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.algorepublic.zoho.MainActivity;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.fragments.StarRatingFragment;
 import com.algorepublic.zoho.fragments.StarRatingLevelQuestionsFragment;
+import com.algorepublic.zoho.utils.BaseClass;
 import com.algorepublic.zoho.utils.CustomExpListView;
 
 import java.util.ArrayList;
@@ -99,8 +101,11 @@ public class AdapterStarRatingLevelTwo extends BaseExpandableListAdapter {
         lblListHeader.setText(mListDataHeader.get(groupPosition).getTitle());
         if(isExpanded){
             holder.imageView.setBackgroundResource(R.drawable.level_two_up);
+            BaseClass.setViewAccordingToTheme(mContext, convertView, lblListHeader);
         }else{
             holder.imageView.setBackgroundResource(R.drawable.level_two_down);
+            lblListHeader.setTextColor(mContext.getResources().getColor(R.color.colorBaseHeader));
+            convertView.findViewById(R.id.listClick).setBackground(mContext.getResources().getDrawable(R.drawable.roundable_corner));
         }
         return convertView;
     }

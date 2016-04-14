@@ -75,7 +75,7 @@
         <item name="android:textColorHint">@color/colorPrimaryBlue</item>
     </style>
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.NoActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
@@ -179,7 +179,6 @@
         <item name="textAllCaps">false</item>
         <item name="android:textColor">@android:color/white</item>
     </style>
-
 
     <attr name="buttonface_picture" format="reference"/>
 </resources>
