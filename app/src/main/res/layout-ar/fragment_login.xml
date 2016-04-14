@@ -85,11 +85,14 @@
                     android:orientation="vertical">
 
                     <EditText
+<<<<<<< HEAD
+=======
                         android:paddingStart="5dp"
                         android:paddingEnd="5dp"
                         android:background="@drawable/round_border"
                         android:singleLine="true"
                         android:ellipsize="end"
+>>>>>>> f2867e903a8b7f7a3149bdc0c2e1721e64d33cd0
                         android:id="@+id/email"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -115,11 +118,14 @@
                     android:orientation="vertical">
 
                     <EditText
+<<<<<<< HEAD
+=======
                         android:paddingStart="5dp"
                         android:paddingEnd="5dp"
                         android:background="@drawable/round_border"
                         android:singleLine="true"
                         android:ellipsize="end"
+>>>>>>> f2867e903a8b7f7a3149bdc0c2e1721e64d33cd0
                         android:id="@+id/password"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"

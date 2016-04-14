@@ -38,7 +38,7 @@
                 android:layout_weight="1.5"
                 android:background="@android:color/white"
                 android:ellipsize="end"
-                android:hint="Send a comment"
+                android:hint="@string/send_comments"
                 android:imeActionId="@integer/add_comment"
                 android:imeActionLabel="Add"
                 android:imeOptions="actionSend"
