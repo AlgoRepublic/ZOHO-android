@@ -52,9 +52,11 @@ public class TaskListBySubTasksFragment extends BaseFragment {
     BaseClass baseClass;
     StickyListHeadersListView listView;
     static int taskID;
+    ArrayList<TaskListName> listName = new ArrayList<>();
     @SuppressLint("ValidFragment")
-    public TaskListBySubTasksFragment (int taskId) {
+    public TaskListBySubTasksFragment (int taskId,TaskListName name) {
         taskID = taskId;
+        listName = name;
     }
 //    @SuppressWarnings("unused")
 //    public static TaskListBySubTasksFragment newInstance(int Id) {

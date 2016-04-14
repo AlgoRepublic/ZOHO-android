@@ -51,6 +51,7 @@ public class TaskDetailFragment extends BaseFragment {
     DonutProgress seekBarCompat;
     TwoWayView twoWayAssignee;
     SeekBar seekBar;
+    static TaskListName listName;
     static ArrayList<TaskListName> taskListName = new ArrayList<>();
     View views;
     int multiple=5;
@@ -65,8 +66,10 @@ public class TaskDetailFragment extends BaseFragment {
 
 
     // TODO: Rename and change types and number of parameters
-    public static TaskDetailFragment newInstance(TasksList tasks,ArrayList<TaskListName> listNames) {
+    public static TaskDetailFragment newInstance(TasksList tasks,
+                                                 ArrayList<TaskListName> listNames,TaskListName singleName) {
         tasksList =tasks;
+        listName = singleName;
         taskListName = listNames;
         fragment = new TaskDetailFragment();
         return fragment;
@@ -158,7 +161,7 @@ public class TaskDetailFragment extends BaseFragment {
         aq.id(R.id.subtask).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                callFragmentWithAddBackStack(R.id.container, new TaskListBySubTasksFragment(tasksList.getTaskID()), "TaskListBySubTasksFragment");
+                callFragmentWithAddBackStack(R.id.container, new TaskListBySubTasksFragment(tasksList.getTaskID(),listName), "TaskListBySubTasksFragment");
             }
         });
         aq.id(R.id.mark_as_done).clicked(new View.OnClickListener() {
@@ -242,18 +245,6 @@ public class TaskDetailFragment extends BaseFragment {
         colorDrawable.setColor(getPriorityWiseColor(TaskByIdModel.getInstance().responseObject.priority));
         aq.id(R.id.priority_bar).getView().setBackground(shapeDrawable);
         views.setBackgroundColor(getPriorityWiseColor(TaskByIdModel.getInstance().responseObject.priority));
-//        if(baseClass.getThemePreference() == R.style.AppThemeBlue) {
-//            seekBar.setth
-//            seekBar.setProgressDrawable(getResources().getDrawable(R.drawable.progress_horizontal));
-//            seekBar.setIndeterminateDrawable(getResources().getDrawable(R.drawable.progress_horizontal));
-//            seekBar.setThumb(getResources().getDrawable(R.drawable.thumb_image));
-//            seekBar.setProgressDrawableTiled(getResources().getDrawable(R.color.colorPrimaryBlue));
-//            seekBar.setSplitTrack(false);
-//            seekBar.setMinimumHeight(6);
-//            seekBar.setMax(6);
-//        }else {
-//            seekBar.setScrollBarStyle(R.style.blackSeekBar);
-//        }
     }
     public void AddTasks(){
         tasksList = new TasksList();
