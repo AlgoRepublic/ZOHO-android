@@ -19,7 +19,9 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.webkit.MimeTypeMap;
 import android.widget.EditText;
+import android.widget.TextView;
 
+import com.algorepublic.zoho.MainActivity;
 import com.algorepublic.zoho.R;
 
 import java.io.IOException;
@@ -431,5 +433,17 @@ public class BaseClass extends Application {
         String time  = (String) DateFormat.format(delegate, Calendar.getInstance().getTime());
 
         return (month_name+" "+mDay +", "+mYear+" "+time);
+    }
+    /** Update background and text color on item selection*/
+    public static void setViewAccordingToTheme(Context mContext,View convertView,TextView lblHeader) {
+        if (MainActivity.themeType == 1) {
+            lblHeader.setTextColor(mContext.getResources().getColor(R.color.colorWhite));
+            convertView.findViewById(R.id.listClick).setBackground(mContext.getResources().getDrawable(R.drawable.roundable_cornor_selected_blue));
+            // ((ImageView) convertView.findViewById(R.id.imageViewlevelone)).setImageDrawable(drawable);
+        } else {
+            lblHeader.setTextColor(mContext.getResources().getColor(R.color.colorWhite));
+            convertView.findViewById(R.id.listClick).setBackground(mContext.getResources().getDrawable(R.drawable.roundable_corner_selected));
+            // ((ImageView) convertView.findViewById(R.id.imageViewlevelone)).setImageDrawable(drawable);
+        }
     }
 }
