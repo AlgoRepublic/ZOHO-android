@@ -202,6 +202,7 @@
     <string name="doc_deleted">Document Deleted</string>
     <string name="_private">Private - Only project users can access</string>
     <string name="_active">Active</string>
+    <string name="send_comments">Send a comment</string>
     <string name="_public">Public - Portal users can view/follow</string>
     <string name="_archive">Archive</string>
     <string name="project_name">Project Name</string>

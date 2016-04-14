@@ -194,6 +194,7 @@
     <!-- Task Details Strings -->
     <string name="delete_doc">حذف الملف؟</string>
     <string name="delete">حذف</string>
+    <string name="send_comments">إرسال تعليق</string>
     <string name="doc_deleted">حذف الملف</string>
     <string name="_private">Private - Only project users can access</string>
     <string name="_active">نشط</string>
