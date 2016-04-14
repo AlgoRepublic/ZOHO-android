@@ -9,7 +9,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.MimeTypeMap;
 import android.widget.AdapterView;
 import android.widget.RadioGroup;
 import android.widget.SearchView;
@@ -63,9 +62,7 @@ public class TasksListFragment extends BaseFragment implements SwipeRefreshLayou
     }
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
-        setRetainInstance(true);
         getToolbar().setTitle(getString(R.string.tasks));
-        getToolbar().setSubtitle("");
         super.onViewCreated(view, savedInstanceState);
     }
     @Override

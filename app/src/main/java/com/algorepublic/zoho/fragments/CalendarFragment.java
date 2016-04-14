@@ -274,9 +274,8 @@ public class CalendarFragment extends BaseFragment implements CalendarPickerCont
             if(arg1.hasExtra("Action"))
              action = arg1.getExtras().getString("Action");
             if(action.contentEquals("Detail")) {
-
                 callFragmentWithBackStack(R.id.container, TaskDetailFragment.newInstance
-                        (allTaskList.get(position), taskListName), "TaskDetail");
+                        (allTaskList.get(position), taskListName,position), "TaskDetail");
                 Toast.makeText(getContext(), position + ": " + action, Toast.LENGTH_SHORT).show();
             }
             if(action.contentEquals("Edit")) {

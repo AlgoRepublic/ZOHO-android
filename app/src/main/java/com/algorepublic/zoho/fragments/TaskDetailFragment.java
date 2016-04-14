@@ -56,7 +56,7 @@ public class TaskDetailFragment extends BaseFragment {
     View views;
     int multiple=5;
     static TasksList tasksList;
-    int progress=0;
+    int progress=0;static int position;
     BaseClass baseClass;
    // WebView webView;
 
@@ -67,13 +67,20 @@ public class TaskDetailFragment extends BaseFragment {
 
     // TODO: Rename and change types and number of parameters
     public static TaskDetailFragment newInstance(TasksList tasks,
-                                                 ArrayList<TaskListName> listNames,TaskListName singleName) {
+                                                 ArrayList<TaskListName> listNames,int pos) {
         tasksList =tasks;
-        listName = singleName;
+        position = pos;
         taskListName = listNames;
         fragment = new TaskDetailFragment();
         return fragment;
     }
+
+    @Override
+    public void onResume() {
+        getToolbar().setTitle(getString(R.string.task_detail));
+        super.onResume();
+    }
+
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         setHasOptionsMenu(true);
@@ -161,7 +168,8 @@ public class TaskDetailFragment extends BaseFragment {
         aq.id(R.id.subtask).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                callFragmentWithAddBackStack(R.id.container, new TaskListBySubTasksFragment(tasksList.getTaskID(),listName), "TaskListBySubTasksFragment");
+                callFragmentWithAddBackStack(R.id.container, new TaskListBySubTasksFragment
+                        (tasksList.getTaskID(),taskListName.get(position)), "TaskListBySubTasksFragment");
             }
         });
         aq.id(R.id.mark_as_done).clicked(new View.OnClickListener() {

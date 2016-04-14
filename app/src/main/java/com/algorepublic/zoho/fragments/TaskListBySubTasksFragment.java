@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.algorepublic.zoho.Models.TaskListBySubTaskModel;
 import com.algorepublic.zoho.R;
+import com.algorepublic.zoho.adapters.AdapterSubTasksList;
 import com.algorepublic.zoho.adapters.AdapterTasksList;
 import com.algorepublic.zoho.adapters.TaskListAssignee;
 import com.algorepublic.zoho.adapters.TaskListName;
@@ -46,17 +47,17 @@ public class TaskListBySubTasksFragment extends BaseFragment {
     AQuery aq;View view;
     RadioGroup radioGroup;
     int Color;
-    private static ArrayList<TaskListName> taskListName = new ArrayList<>();
+    private static ArrayList<TaskListName> taskListName ;
     public static ArrayList<TasksList> allTaskList = new ArrayList<>();
     public static ArrayList<TasksList> generalList = new ArrayList<>();
     BaseClass baseClass;
     StickyListHeadersListView listView;
     static int taskID;
-    ArrayList<TaskListName> listName = new ArrayList<>();
     @SuppressLint("ValidFragment")
     public TaskListBySubTasksFragment (int taskId,TaskListName name) {
         taskID = taskId;
-        listName = name;
+        taskListName = new ArrayList<>();
+        taskListName.add(name);
     }
 //    @SuppressWarnings("unused")
 //    public static TaskListBySubTasksFragment newInstance(int Id) {
@@ -68,7 +69,6 @@ public class TaskListBySubTasksFragment extends BaseFragment {
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
-        setRetainInstance(true);
         getToolbar().setTitle(getString(R.string.sub_tasks));
         super.onViewCreated(view, savedInstanceState);
     }
@@ -101,9 +101,9 @@ public class TaskListBySubTasksFragment extends BaseFragment {
         switch (item.getItemId()){
             case R.id.add_project:
                 baseClass.hideKeyPad(getView());
-                if(baseClass.db.getInt("ProjectID") == 0){
+                if(baseClass.getSelectedProject().equalsIgnoreCase("0")){
                     Toast.makeText(getActivity(), getActivity().getString(R.string.select_project), Toast.LENGTH_SHORT).show();
-  }else {
+                    }else {
                     callFragmentWithBackStack(R.id.container, TaskAddUpdateFragment.newInstance(taskID,taskListName),"TaskAddUpdateFragment");
                 }
                 break;
@@ -272,7 +272,7 @@ public class TaskListBySubTasksFragment extends BaseFragment {
             }else{
                 aq.id(R.id.response_alert).visibility(View.GONE);
             }
-            adapterTasksList = new AdapterTasksList(getActivity(),generalList,taskListName);
+            adapterTasksList = new AdapterSubTasksList(getActivity(),generalList,taskListName);
             listView.setAreHeadersSticky(true);
             listView.setAdapter(adapterTasksList);
         }
@@ -294,13 +294,9 @@ public class TaskListBySubTasksFragment extends BaseFragment {
         FilterList();
     }
     public void AddAllTasks(){
-        allTaskList.clear();taskListName.clear();
+        allTaskList.clear();
         Log.e("E","/"+TaskListBySubTaskModel.getInstance().responseObject.size());
         for (int loop = 0; loop < TaskListBySubTaskModel.getInstance().responseObject.size(); loop++) {
-            TaskListName tasklistName = new TaskListName();
-            tasklistName.setTaskListID(TaskListBySubTaskModel.getInstance().responseObject.get(loop).tasklistID);
-            tasklistName.setTaskListName(TaskListBySubTaskModel.getInstance().responseObject.get(loop).taskListName);
-            taskListName.add(tasklistName);
 
             TaskListBySubTaskModel.ResponseObject taskModel = TaskListBySubTaskModel.getInstance().responseObject.get(loop);
             TasksList tasksList = new TasksList();

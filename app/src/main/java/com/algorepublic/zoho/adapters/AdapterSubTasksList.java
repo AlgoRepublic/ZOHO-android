@@ -9,8 +9,6 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -39,9 +37,9 @@ import java.util.Locale;
 import se.emilsjolander.stickylistheaders.StickyListHeadersAdapter;
 
 /**
- * Created by android on 12/23/15.
+ * Created by android on 4/14/16.
  */
-public class AdapterTasksList extends BaseAdapter implements StickyListHeadersAdapter {
+public class AdapterSubTasksList extends BaseAdapter implements StickyListHeadersAdapter {
 
     Context ctx;
     AQuery aq,aq_header;
@@ -54,7 +52,7 @@ public class AdapterTasksList extends BaseAdapter implements StickyListHeadersAd
     ArrayList<TasksList> lists = new ArrayList<>();
     ArrayList<TasksList> tasksLists = new ArrayList<>();
 
-    public AdapterTasksList(Context context, ArrayList<TasksList> arrayList,ArrayList<TaskListName> listNames) {
+    public AdapterSubTasksList(Context context, ArrayList<TasksList> arrayList,ArrayList<TaskListName> listNames) {
         tasksLists.addAll(arrayList);
         lists.addAll(arrayList);
         taskListNames = listNames;
@@ -134,7 +132,7 @@ public class AdapterTasksList extends BaseAdapter implements StickyListHeadersAd
             @Override
             public void onClick(View v) {
                 callFragmentWithBackStack(R.id.container, TaskDetailFragment.newInstance
-                        (tasksLists.get(position),taskListNames,position), "TaskDetail");
+                        (tasksLists.get(position), taskListNames, position), "TaskDetail");
             }
         });
         holder.btEdit.setOnClickListener(new View.OnClickListener() {
@@ -144,6 +142,7 @@ public class AdapterTasksList extends BaseAdapter implements StickyListHeadersAd
                 if (tasksLists.get(position).getProjectID() > 0) {
                     baseClass.db.putString("ProjectName", tasksLists.get(position).getProjectName());
                     baseClass.setSelectedProject(Integer.toString(tasksLists.get(position).getProjectID()));
+
                     callFragmentWithBackStack(R.id.container,
                             TaskAddUpdateFragment.newInstance(tasksLists.get(position),
                                     taskListNames),
@@ -219,7 +218,7 @@ public class AdapterTasksList extends BaseAdapter implements StickyListHeadersAd
             if (Long.parseLong(tasksLists.get(position).getHeader()) < System.currentTimeMillis()) {
                 if(baseClass.DateFormatter(tasksLists.get(position).getHeader())
                         .equalsIgnoreCase(baseClass.DateFormatter(String.valueOf(System.currentTimeMillis()))))
-                aq_header.id(R.id.header).text("Up Coming");
+                    aq_header.id(R.id.header).text("Up Coming");
                 else
                     aq_header.id(R.id.header).text("Over Due");
             }else if (tasksLists.get(position).getHeader().equalsIgnoreCase("62135535600000")
@@ -256,9 +255,9 @@ public class AdapterTasksList extends BaseAdapter implements StickyListHeadersAd
         if(baseClass.getTaskFilterType().equalsIgnoreCase("TaskList"))
         {
             if(tasksLists.get(position).getTaskListNameID() == 0)
-            aq_header.id(R.id.header).text(ctx.getString(R.string.pref_header_general));
+                aq_header.id(R.id.header).text(ctx.getString(R.string.pref_header_general));
             else
-            aq_header.id(R.id.header).text(tasksLists.get(position).getTaskListName());
+                aq_header.id(R.id.header).text(tasksLists.get(position).getTaskListName());
         }
         return convertView;
     }
@@ -276,8 +275,8 @@ public class AdapterTasksList extends BaseAdapter implements StickyListHeadersAd
                     type=1;
             }
             else if (tasksLists.get(position).getHeader().equalsIgnoreCase("62135535600000")
-                || tasksLists.get(position).getHeader().equalsIgnoreCase("-62135571600000")
-                || tasksLists.get(position).getHeader().equalsIgnoreCase("62135571600000"))
+                    || tasksLists.get(position).getHeader().equalsIgnoreCase("-62135571600000")
+                    || tasksLists.get(position).getHeader().equalsIgnoreCase("62135571600000"))
                 type = 2;
             else
                 type=3;
@@ -336,7 +335,7 @@ public class AdapterTasksList extends BaseAdapter implements StickyListHeadersAd
                     public void onBtnClick() {
                         dialog.dismiss();
                         service.deleteTask(tasksList.getTaskID()
-                                , true, new CallBack(AdapterTasksList.this, "DeleteTask"));
+                                , true, new CallBack(AdapterSubTasksList.this, "DeleteTask"));
                     }
                 });
     }
@@ -345,7 +344,7 @@ public class AdapterTasksList extends BaseAdapter implements StickyListHeadersAd
         if (GeneralModel.getInstance().responseCode.equalsIgnoreCase("100")) {
             tasksLists.remove(clickedPosition);notifyDataSetChanged();
             Toast.makeText(ctx, ctx.getString(R.string.task_deleted), Toast.LENGTH_SHORT).show();
-       }
+        }
         else
         {
             Toast.makeText(ctx, ctx.getString(R.string.response_error), Toast.LENGTH_SHORT).show();
