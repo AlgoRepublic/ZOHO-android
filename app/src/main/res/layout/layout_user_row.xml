@@ -95,8 +95,8 @@
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         app:civ_border_width="1dp"
-                        app:civ_border_color="@color/colorBaseHeader"
-                        android:src="@drawable/nav_user_black" />
+                        app:civ_border_color="?attr/color_line"
+                        android:src="?attr/nav_user" />
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -139,7 +139,7 @@
                         android:layout_width="15dp"
                         android:layout_height="15dp"
                         android:layout_margin="5dp"
-                        android:background="@drawable/circle_left_black"/>
+                        android:background="?attr/circle_left"/>
                 </LinearLayout>
                 </RelativeLayout>
         </com.daimajia.swipe.SwipeLayout>

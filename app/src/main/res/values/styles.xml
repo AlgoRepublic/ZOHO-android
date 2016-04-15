@@ -66,7 +66,7 @@
 
     <style name="blueEditTextStyle" parent="Base.Widget.AppCompat.EditText">
         <item name="android:textColor">@color/colorPrimaryBlue</item>
-        <item name="android:background">@drawable/round_border</item>
+        <item name="android:background">@drawable/round_border_black</item>
         <item name="android:textColorHint">@color/colorPrimaryBlue</item>
     </style>
     <!-- Base application theme. -->

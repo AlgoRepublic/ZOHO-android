@@ -64,7 +64,7 @@
                 android:paddingRight="2dp"
                 android:paddingEnd="2dp"
                 android:textColor="@color/colorBaseHeader"
-                android:background="@drawable/round_border"
+                android:background="@drawable/round_border_black"
                 android:layout_height="wrap_content"
                 />
 
@@ -121,7 +121,7 @@
                 android:paddingRight="2dp"
                 android:paddingEnd="2dp"
                 android:textColor="@color/colorBaseHeader"
-                android:background="@drawable/round_border"
+                android:background="@drawable/round_border_black"
                 android:layout_height="wrap_content"
                 />
 

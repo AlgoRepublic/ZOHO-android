@@ -62,7 +62,7 @@
                 android:id="@+id/comment_edittext"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/round_border"
+                android:background="@drawable/round_border_black"
                 android:gravity="top|left"
                 android:lines="3"
                 android:textColor="@color/colorBaseHeader"

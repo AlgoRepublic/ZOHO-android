@@ -116,7 +116,7 @@
                                         android:layout_width="20dp"
                                         android:layout_height="20dp"
                                         android:layout_centerVertical="true"
-                                        android:src="@drawable/folder_black" />
+                                        android:src="?attr/folder" />
                                     <TextView
                                         android:layout_toEndOf="@+id/folder"
                                         android:layout_toStartOf="@+id/layout_tasks"
@@ -147,7 +147,7 @@
                                             android:layout_height="20dp"
                                             android:layout_alignParentEnd="true"
                                             android:layout_alignParentRight="true"
-                                            android:background="@drawable/bubble_alert_black"
+                                            android:background="?attr/bubble_alert"
                                             android:gravity="center"
                                             android:singleLine="true"
                                             android:text="112"
@@ -158,7 +158,7 @@
                                             android:layout_width="20dp"
                                             android:layout_height="20dp"
                                             android:layout_alignParentBottom="true"
-                                            android:src="@drawable/milestone_black" />
+                                            android:src="?attr/milestone" />
                                     </RelativeLayout>
 
                                     <RelativeLayout
@@ -175,7 +175,7 @@
                                             android:layout_height="20dp"
                                             android:layout_alignParentEnd="true"
                                             android:layout_alignParentRight="true"
-                                            android:background="@drawable/bubble_alert_black"
+                                            android:background="?attr/bubble_alert"
                                             android:gravity="center"
                                             android:singleLine="true"
                                             android:text="1"
@@ -186,7 +186,7 @@
                                             android:layout_width="20dp"
                                             android:layout_height="20dp"
                                             android:layout_alignParentBottom="true"
-                                            android:src="@drawable/nav_user_black" />
+                                            android:src="?attr/nav_user" />
                                     </RelativeLayout>
 
                                     <RelativeLayout
@@ -203,7 +203,7 @@
                                             android:layout_height="20dp"
                                             android:layout_alignParentEnd="true"
                                             android:layout_alignParentRight="true"
-                                            android:background="@drawable/bubble_alert_black"
+                                            android:background="?attr/bubble_alert"
                                             android:gravity="center"
                                             android:singleLine="true"
                                             android:text="112"
@@ -214,7 +214,7 @@
                                             android:layout_width="20dp"
                                             android:layout_height="20dp"
                                             android:layout_alignParentBottom="true"
-                                            android:src="@drawable/task_desc_small_black" />
+                                            android:src="?attr/task_desc_small"/>
                                     </RelativeLayout>
                                 </RelativeLayout>
 
@@ -224,7 +224,7 @@
                                     android:layout_height="1dp"
                                     android:layout_below="@+id/layout1"
                                     android:layout_margin="3dp"
-                                    android:background="@color/colorBaseHeader" />
+                                    android:background="?attr/color_line" />
 
                                 <RelativeLayout
                                     android:layout_width="match_parent"
@@ -261,7 +261,7 @@
                                     android:layout_width="15dp"
                                     android:layout_height="15dp"
                                     android:layout_margin="5dp"
-                                    android:background="@drawable/circle_left_black"/>
+                                    android:src="?attr/circle_left"/>
                             </LinearLayout>
 
                         </RelativeLayout>

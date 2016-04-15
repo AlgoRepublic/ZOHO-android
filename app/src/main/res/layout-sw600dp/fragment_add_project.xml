@@ -52,7 +52,7 @@
                 <EditText
                     android:paddingStart="5dp"
                     android:paddingEnd="5dp"
-                    android:background="@drawable/round_border"
+                    android:background="@drawable/round_border_black"
                     android:singleLine="true"
                     android:ellipsize="end"
                     android:id="@+id/project_name"
@@ -65,7 +65,7 @@
                 <EditText
                     android:paddingStart="5dp"
                     android:paddingEnd="5dp"
-                    android:background="@drawable/round_border"
+                    android:background="@drawable/round_border_black"
                     android:singleLine="true"
                     android:ellipsize="end"
                     android:layout_marginTop="10dp"
@@ -83,7 +83,7 @@
                 <EditText
                     android:paddingStart="5dp"
                     android:paddingEnd="5dp"
-                    android:background="@drawable/round_border"
+                    android:background="@drawable/round_border_black"
                     android:id="@+id/project_desc"
                     android:textSize="22sp"
                     android:layout_below="@+id/owner_list"
@@ -98,7 +98,7 @@
                 <EditText
                     android:paddingStart="5dp"
                     android:paddingEnd="5dp"
-                    android:background="@drawable/round_border"
+                    android:background="@drawable/round_border_black"
                     android:singleLine="true"
                     android:ellipsize="end"
                     android:layout_marginTop="10dp"

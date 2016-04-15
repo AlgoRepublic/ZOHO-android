@@ -22,14 +22,14 @@
             android:layout_width="match_parent"
             android:layout_height="11dp"
             android:layout_alignParentBottom="true"
-            android:background="@color/colorBaseHeader"></View>
+            android:background="?attr/color_line"></View>
 
         <RelativeLayout
             android:layout_width="252dp"
             android:layout_height="match_parent"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:background="@drawable/left_header">
+            android:background="?attr/left_header">
 
             <TextView
                 android:id="@+id/header"
