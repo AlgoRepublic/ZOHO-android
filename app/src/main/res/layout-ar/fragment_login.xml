@@ -85,6 +85,10 @@
                     android:orientation="vertical">
 
                     <EditText
+<<<<<<< HEAD
+
+=======
+>>>>>>> cc1b461b4dedb242a6bb26b54fcc2e56fd429af4
                         android:paddingStart="5dp"
                         android:paddingEnd="5dp"
                         android:background="@drawable/round_border"
