@@ -138,10 +138,9 @@ public class AdapterSubTasksList extends BaseAdapter implements StickyListHeader
         holder.btEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                baseClass.setSelectedProject(Integer.toString(tasksLists.get(position).getProjectID()));
                 if (tasksLists.get(position).getProjectID() > 0) {
                     baseClass.db.putString("ProjectName", tasksLists.get(position).getProjectName());
-                    baseClass.setSelectedProject(Integer.toString(tasksLists.get(position).getProjectID()));
+                    baseClass.setSelectedTaskProject(Integer.toString(tasksLists.get(position).getProjectID()));
 
                     callFragmentWithBackStack(R.id.container,
                             TaskAddUpdateFragment.newInstance(tasksLists.get(position),

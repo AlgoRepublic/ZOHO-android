@@ -44,7 +44,7 @@ public class TaskAddUpdateFragment extends BaseFragment {
     public static GridView gridViewTaskMenu;
     public static TasksList tasksObj;
     ACProgressFlower dialogAC;
-    public static ArrayList<TaskListName> taskListName = new ArrayList<>();
+    public static ArrayList<TaskListName> taskListName;
     public static ArrayList<DocumentsList> apiDocsList = new ArrayList<>();
     public static ArrayList<AttachmentList> filesList;
     public static ArrayList<Integer> filesToDelete;
@@ -53,25 +53,32 @@ public class TaskAddUpdateFragment extends BaseFragment {
     static String Title;
 
     public static TaskAddUpdateFragment newInstance(ArrayList<TaskListName> listNames) {
+        // For Add Task
         callPosition = 0;
-        taskListName = listNames;
+        taskListName = new ArrayList<>();
+        taskListName.addAll(listNames);
+        Log.e("Size","S"+taskListName.size());
         Title = "Add Task";
         fragment = new TaskAddUpdateFragment();
         return fragment;
     }
     public static TaskAddUpdateFragment newInstance(int taskId,ArrayList<TaskListName> listNames) {
+        // for Add SubTask
         tasID = taskId;
         callPosition = 1;
-        Title = "Edit Task";
-        taskListName = listNames;
+        Title = "Add Task";
+        taskListName = new ArrayList<>();
+        taskListName.addAll(listNames);
         fragment = new TaskAddUpdateFragment();
         return fragment;
     }
     public static TaskAddUpdateFragment newInstance(TasksList tasksList,ArrayList<TaskListName> listNames) {
+        // For Edit Task/SubTask
         tasksObj = tasksList;
         callPosition= 2;
         Title = "Edit Task";
-        taskListName = listNames;
+        taskListName = new ArrayList<>();
+        taskListName.addAll(listNames);
         fragment = new TaskAddUpdateFragment();
         return fragment;
     }

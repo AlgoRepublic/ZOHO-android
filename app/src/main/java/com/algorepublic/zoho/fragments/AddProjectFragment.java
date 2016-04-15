@@ -25,8 +25,6 @@ import com.algorepublic.zoho.services.TaskListService;
 import com.algorepublic.zoho.utils.BaseClass;
 import com.androidquery.AQuery;
 
-import org.angmarch.views.NiceSpinner;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -142,8 +140,10 @@ public class AddProjectFragment extends BaseFragment {
             DialogList dialogList = new DialogList();
             if(ProjectsFragment.allDeptList.get(loop).getDeptID()=="0"){
                 dialogList.setName(getString(R.string.none));
+                dialogList.setID(0);
             }else {
                 dialogList.setName(ProjectsFragment.allDeptList.get(loop).getDeptName());
+                dialogList.setID(Integer.parseInt(ProjectsFragment.allDeptList.get(loop).getDeptID()));
             }
             deptList.add(dialogList);
         }
@@ -151,6 +151,10 @@ public class AddProjectFragment extends BaseFragment {
         departmentList = new CharSequence[deptList.size()];
         for(int loop=0;loop< deptList.size();loop++) {
             departmentList[loop] = deptList.get(loop).getName();
+            if(deptList.get(loop).getName().equalsIgnoreCase(getString(R.string.none))){
+                selectedDept = loop;
+                departments_list.setText(deptList.get(selectedDept).getName());
+            }
         }
 
         service.getTaskAssignee(Integer.parseInt(baseClass.getSelectedProject()), false,
@@ -199,21 +203,28 @@ public class AddProjectFragment extends BaseFragment {
         TaskUserModel.getInstance().setList((TaskUserModel) model);
         if (TaskUserModel.getInstance().responseCode == 100) {
             ownerList = new ArrayList<>();
+            ArrayList<String> list = new ArrayList<>();
             for(int loop=0;loop< TaskUserModel.getInstance().responseObject.size();loop++) {
                 DialogList dialogList = new DialogList();
                 if(TaskUserModel.getInstance().responseObject.get(loop).ID==
                         Integer.parseInt(baseClass.getUserId())){
                     dialogList.setName(getString(R.string.me));
+                    list.add(getString(R.string.me));
                 }else {
                     dialogList.setName(TaskUserModel.getInstance().responseObject.get(loop).firstName);
+                    list.add(TaskUserModel.getInstance().responseObject.get(loop).firstName);
                 }
                 dialogList.setID(TaskUserModel.getInstance().responseObject.get(loop).ID);
                 ownerList.add(dialogList);
             }
             Collections.sort(ownerList);
-            userList = new CharSequence[ownerList.size()];
+            userList = new CharSequence[list.size()];
             for(int loop=0;loop< ownerList.size();loop++) {
                 userList[loop] = ownerList.get(loop).getName();
+                if(ownerList.get(loop).getName().equalsIgnoreCase(getString(R.string.me))){
+                    selectedOwner = loop;
+                    owner_list.setText(ownerList.get(selectedOwner).getName());
+                }
             }
         }else{
             Toast.makeText(getActivity(), getString(R.string.response_error), Toast.LENGTH_SHORT).show();

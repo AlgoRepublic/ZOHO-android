@@ -3,6 +3,7 @@ package com.algorepublic.zoho.fragments;
 import android.accounts.AccountManager;
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.content.res.Resources;
@@ -14,6 +15,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -22,13 +24,16 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.algorepublic.zoho.BaseActivity;
 import com.algorepublic.zoho.Models.FolderListModel;
+import com.algorepublic.zoho.Models.UserRoleModel;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.adapters.AdapterUploadAttachment;
 import com.algorepublic.zoho.adapters.AttachmentList;
+import com.algorepublic.zoho.adapters.DialogList;
 import com.algorepublic.zoho.services.CallBack;
 import com.algorepublic.zoho.services.DocumentsService;
 import com.algorepublic.zoho.utils.BaseClass;
@@ -57,7 +62,6 @@ import com.google.api.client.util.ExponentialBackOff;
 import com.google.api.services.drive.DriveScopes;
 import com.poliveira.apps.parallaxlistview.ParallaxListView;
 
-import org.angmarch.views.NiceSpinner;
 import org.apache.commons.io.FileUtils;
 
 import java.io.File;
@@ -95,8 +99,10 @@ public class UploadDocsFragment extends BaseFragment implements GoogleApiClient.
     InputStream inputStream;
     DocumentsService service;File newFile;
     static int ProjectID,TaskID;View view;
-    NiceSpinner folder_list;
-    ArrayList<String> folderList;
+    EditText folder_list;
+    CharSequence[] folderList;
+    int selectedPosition=0;
+    ArrayList<DialogList> folder_List;
     private static final String PREF_ACCOUNT_NAME = "accountName";
     private static final String[] SCOPES = { DriveScopes.DRIVE_READONLY };
     com.google.api.client.googleapis.extensions.android.gms.auth.GoogleAccountCredential mCredential;
@@ -133,7 +139,7 @@ public class UploadDocsFragment extends BaseFragment implements GoogleApiClient.
                 if(ProjectID==0){
                     new UploadDocsBYTask().execute();
                 }else {
-                    if(folderList.size()==0)
+                    if(folder_List.size()==0)
                     {
                         Toast.makeText(getActivity(),getString(R.string.select_project) ,Toast.LENGTH_SHORT).show();
                         return false;
@@ -172,7 +178,7 @@ public class UploadDocsFragment extends BaseFragment implements GoogleApiClient.
         listView.setParallaxView(getActivity().getLayoutInflater().inflate(R.layout.view_header_upload_doc, listView, false));
         adapter = new AdapterUploadAttachment(getActivity());
         listView.setAdapter(adapter);
-        folder_list = (NiceSpinner) view.findViewById(R.id.folder_list);
+        folder_list = (EditText) view.findViewById(R.id.folder_list);
         aq = new AQuery(view);
         baseClass =  ((BaseClass) getActivity().getApplicationContext());
         if(baseClass.getThemePreference() == R.style.AppThemeBlue) {
@@ -200,9 +206,27 @@ public class UploadDocsFragment extends BaseFragment implements GoogleApiClient.
             }
         });
 
+        folder_list.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showListView();
+            }
+        });
         return view;
     }
-
+    private void showListView() {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle(getString(R.string.select_user));
+        builder.setSingleChoiceItems(folderList, selectedPosition, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                selectedPosition = which;
+                folder_list.setText(folderList[selectedPosition]);
+                dialog.dismiss();
+            }
+        });
+        builder.show();
+    }
 
     private void buildGoogleApiClient() {
         mGoogleApiClient = new GoogleApiClient.Builder(getActivity())
@@ -263,11 +287,20 @@ public class UploadDocsFragment extends BaseFragment implements GoogleApiClient.
     public void FolderList(Object caller, Object model) {
         FolderListModel.getInstance().setList((FolderListModel) model);
         if (FolderListModel.getInstance().responseCode.equalsIgnoreCase("100")) {
-            folderList = new ArrayList<>();
+            folder_List = new ArrayList<>();
+            ArrayList<String> list =  new ArrayList<>();
             for(int loop=0;loop<FolderListModel.getInstance().responseObject.size();loop++){
-                folderList.add(FolderListModel.getInstance().responseObject.get(loop).folderName);
+                DialogList dialogList = new DialogList();
+                list.add(FolderListModel.getInstance().responseObject.get(loop).folderName);
+                dialogList.setName(FolderListModel.getInstance().responseObject.get(loop).folderName);
+                dialogList.setID(FolderListModel.getInstance().responseObject.get(loop).Id);
+                folder_List.add(dialogList);
             }
-            folder_list.attachDataSource(folderList);
+            folderList = new CharSequence[list.size()];
+            for(int loop=0;loop< folder_List.size();loop++) {
+                folderList[loop] = folder_List.get(loop).getName();
+            }
+            folder_list.setText(folderList[selectedPosition]);
         } else {
             Toast.makeText(getActivity(), getString(R.string.response_error), Toast.LENGTH_SHORT).show();
         }
@@ -502,8 +535,7 @@ public class UploadDocsFragment extends BaseFragment implements GoogleApiClient.
             try {
                 httpClient = new GenericHttpClient();
                 response = httpClient.uploadDocumentsByProject(Constants.UploadDocumentsByProject_API,
-                        ProjectID,FolderListModel.getInstance().responseObject
-                                .get(folder_list.getSelectedIndex()).Id, filesList);
+                        ProjectID,folder_List.get(selectedPosition).getID(), filesList);
             } catch (IOException e) {
                 e.printStackTrace();
             }
