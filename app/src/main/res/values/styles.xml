@@ -17,6 +17,9 @@
         <item name="android:buttonStyle">@style/blueButton</item>
         <item name="android:editTextStyle">@style/blueEditTextStyle</item>
         <item name="searchViewStyle">@style/blueSearchView</item>
+
+        <item name="fastlink_login">@drawable/fastlink_login_blue</item>
+        <item name="fastlink_loading">@drawable/fastlink_loading_blue</item>
     </style>
 
     <style name="blueButton" parent="@android:style/Widget.Button">
@@ -87,6 +90,9 @@
         <item name="android:radioButtonStyle">@style/blackRadioButton</item>
         <item name="android:actionMenuTextAppearance">@style/MyMenuTextAppearance</item>
         <item name="android:editTextStyle">@style/blackEditTextStyle</item>
+
+        <item name="fastlink_login">@drawable/fastlink_login_black</item>
+        <item name="fastlink_loading">@drawable/fastlink_loading_black</item>
     </style>
 
     <style name="blackRatingBar" parent="@android:style/Widget.RatingBar">
