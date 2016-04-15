@@ -33,7 +33,7 @@
                 app:civ_border_width="2dp"
                 app:civ_border_color="@color/colorBaseHeader"
                 android:layout_centerVertical="true"
-                android:src="@drawable/nav_user" />
+                android:src="@drawable/nav_user_black" />
             <TextView
                 android:id="@+id/user_name"
                 android:layout_width="wrap_content"
