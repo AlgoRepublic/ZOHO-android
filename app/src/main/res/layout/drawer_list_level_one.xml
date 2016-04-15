@@ -16,7 +16,6 @@
         android:layout_height="wrap_content"
         android:padding="5dp"
         android:layout_margin="6dp"
-        android:background="@drawable/roundable_corner"
         android:layout_width="match_parent">
     <TextView
         android:id="@+id/lblListHeader"

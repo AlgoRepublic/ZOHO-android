@@ -36,7 +36,7 @@ public class MainActivity extends BaseActivity {
 
     AQuery aq,aq_header;
     BaseClass baseClass;
-    int themeType;
+    public static int themeType;
     public static GridView gridView;
 
     @Override

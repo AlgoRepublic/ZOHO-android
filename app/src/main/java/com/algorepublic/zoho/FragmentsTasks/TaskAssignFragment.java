@@ -14,6 +14,7 @@ import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.adapters.AdapterTaskAssignee;
 import com.algorepublic.zoho.adapters.TasksList;
 import com.algorepublic.zoho.fragments.BaseFragment;
+import com.algorepublic.zoho.fragments.TaskAddUpdateFragment;
 import com.algorepublic.zoho.services.CallBack;
 import com.algorepublic.zoho.services.TaskListService;
 import com.algorepublic.zoho.utils.BaseClass;
@@ -73,7 +74,7 @@ public class TaskAssignFragment extends BaseFragment {
         TaskUserModel.getInstance().setList((TaskUserModel) model);
         if (TaskUserModel.getInstance().responseCode == 100) {
             aq.id(R.id.alertMessage).text("No Users");
-            if(TaskUserModel.getInstance().responseObject.size() ==0){
+            if(TaskAddUpdateFragment.assigneeList.size() ==0){
                 aq.id(R.id.response_alert).visibility(View.VISIBLE);
             }else{
                 aq.id(R.id.response_alert).visibility(View.GONE);

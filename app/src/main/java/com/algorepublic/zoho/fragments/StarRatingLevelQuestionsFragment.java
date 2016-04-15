@@ -1,7 +1,10 @@
 package com.algorepublic.zoho.fragments;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.CardView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -11,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.SeekBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.algorepublic.zoho.Models.GeneralModel;
@@ -60,22 +64,41 @@ public class StarRatingLevelQuestionsFragment extends BaseFragment {
         View view = inflater.inflate(R.layout.fragment_star_rating_question, container, false);
         aq = new AQuery(view);
         QuestLayout = (LinearLayout) aq
-                        .id(R.id.questListView).visible().getView();
+                .id(R.id.questListView).visible().getView();
 
         service = new StarRatingService(getActivity());
         service.getStarRatingQuestion_API(ID, "enUS",
-                        true, new CallBack(StarRatingLevelQuestionsFragment.this, "StarRatingQuestion"));
+                true, new CallBack(StarRatingLevelQuestionsFragment.this, "StarRatingQuestion"));
         return view;
     }
     public void StarRatingQuestion(Object caller, Object model) {
         StarRatingQuestionModel.getInstance().setList((StarRatingQuestionModel) model);
         if (StarRatingQuestionModel.getInstance().responseCode == 100) {
-            GetListQuestions();
+            if(StarRatingQuestionModel.getInstance().responseData!=null && !StarRatingQuestionModel.getInstance().responseData.isEmpty())
+                GetListQuestions();
+            else
+                addNoQuestionView();
         }
         else
         {
             Toast.makeText(getActivity(), getString(R.string.invalid_credential), Toast.LENGTH_SHORT).show();
         }
+    }
+
+    public void addNoQuestionView(){
+        View questionLayout = LayoutInflater.from(getActivity()).inflate(
+                R.layout.fragment_star_rating_question, null);
+        LinearLayout linearLayout =(LinearLayout) questionLayout.findViewById(R.id.star_rating_question_main);
+        linearLayout.removeAllViews();
+        TextView noQuestionTv = new TextView(getActivity());
+        noQuestionTv.setText("No Questions");
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            noQuestionTv.setCompoundDrawables(null, getActivity().getDrawable(R.drawable.alert), null, null);
+        }else{
+            noQuestionTv.setCompoundDrawables(null, ContextCompat.getDrawable(getActivity(), R.drawable.alert), null, null);
+        }
+        noQuestionTv.setCompoundDrawablePadding(40);
+        linearLayout.addView(noQuestionTv);
     }
     public void AddViews(){
         View QuestionLayout;
@@ -160,9 +183,9 @@ public class StarRatingLevelQuestionsFragment extends BaseFragment {
                 @Override
                 public void onStopTrackingTouch(SeekBar seekBar) {
                     service.StarUpdateProgress(Questions
-                            .get(ClickedPosition).getID(),
+                                    .get(ClickedPosition).getID(),
                             userProgress, true, new
-                            CallBack(StarRatingLevelQuestionsFragment.this, "UpdateProgress"));
+                                    CallBack(StarRatingLevelQuestionsFragment.this, "UpdateProgress"));
                 }
             });
             QuestLayout.addView(QuestionLayout);

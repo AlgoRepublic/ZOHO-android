@@ -1,6 +1,7 @@
 package com.algorepublic.zoho.adapters;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,8 +9,11 @@ import android.widget.BaseExpandableListAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.algorepublic.zoho.BaseActivity;
+import com.algorepublic.zoho.MainActivity;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.fragments.StarRatingLevelQuestionsFragment;
+import com.algorepublic.zoho.utils.BaseClass;
 import com.algorepublic.zoho.utils.CustomExpListView;
 
 import java.util.ArrayList;
@@ -23,7 +27,6 @@ public class AdapterStarRatingLevelOne extends BaseExpandableListAdapter {
     private final Context mContext;
     private final List<StarRatingHeadsLevelOne> mListDataHeader;
     TextView lblListHeader;
-
     public AdapterStarRatingLevelOne(Context mContext, List<StarRatingHeadsLevelOne> mListDataHeader) {
         this.mContext = mContext;
         this.mListDataHeader = new ArrayList<>();
@@ -33,6 +36,7 @@ public class AdapterStarRatingLevelOne extends BaseExpandableListAdapter {
     public void onGroupCollapsed(int groupPosition) {
         StarRatingLevelQuestionsFragment.fragment = null;
         super.onGroupCollapsed(groupPosition);
+
     }
     @Override
     public Object getChild(int groupPosition, int childPosition) {
@@ -79,6 +83,11 @@ public class AdapterStarRatingLevelOne extends BaseExpandableListAdapter {
     }
 
     @Override
+    public void onGroupExpanded(int groupPosition) {
+        super.onGroupExpanded(groupPosition);
+
+    }
+    @Override
     public View getGroupView(int groupPosition, boolean isExpanded,
                              View convertView, ViewGroup parent) {
         ViewHolder holder;
@@ -93,17 +102,20 @@ public class AdapterStarRatingLevelOne extends BaseExpandableListAdapter {
         }else{
             holder = (ViewHolder) convertView.getTag();
         }
-     lblListHeader = (TextView) convertView
+        lblListHeader = (TextView) convertView
                 .findViewById(R.id.lblListHeader);
         lblListHeader.setText(mListDataHeader.get(groupPosition).getTitle());
         if (isExpanded) {
             holder.imageView.setBackgroundResource(R.drawable.level_one_up);
+            BaseClass.setViewAccordingToTheme(mContext,convertView,lblListHeader);
         }else{
             holder.imageView.setBackgroundResource(R.drawable.level_one_down);
+            lblListHeader.setTextColor(mContext.getResources().getColor(R.color.colorBaseHeader));
+            convertView.findViewById(R.id.listClick).setBackground(mContext.getResources().getDrawable(R.drawable.roundable_corner));
         }
-
         return convertView;
     }
+
     static class ViewHolder {
         private ImageView imageView;
     }
@@ -116,4 +128,5 @@ public class AdapterStarRatingLevelOne extends BaseExpandableListAdapter {
     public boolean isChildSelectable(int groupPosition, int childPosition) {
         return true;
     }
+
 }

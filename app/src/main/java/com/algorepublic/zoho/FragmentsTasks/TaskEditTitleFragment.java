@@ -39,7 +39,9 @@ public class TaskEditTitleFragment extends BaseFragment {
         View view = inflater.inflate(R.layout.fragment_edit_title_tasks, container, false);
         baseClass = ((BaseClass) getActivity().getApplicationContext());
         aq= new AQuery(view);
-        aq.id(R.id.title_name).text(Html.fromHtml(BaseClass.db.getString("TaskDesc")));
+        if(!BaseClass.db.getString("TaskDesc").equalsIgnoreCase("N/A")) {
+            aq.id(R.id.title_name).text(Html.fromHtml(BaseClass.db.getString("TaskDesc")));
+        }
         aq.id(R.id.title_name).getEditText().requestFocus();
             aq.id(R.id.title_name).getEditText().addTextChangedListener(new TextWatcher() {
             @Override

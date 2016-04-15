@@ -62,9 +62,7 @@ public class TasksListFragment extends BaseFragment implements SwipeRefreshLayou
     }
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
-        setRetainInstance(true);
         getToolbar().setTitle(getString(R.string.tasks));
-        getToolbar().setSubtitle("");
         super.onViewCreated(view, savedInstanceState);
     }
     @Override
@@ -360,14 +358,14 @@ public class TasksListFragment extends BaseFragment implements SwipeRefreshLayou
     public void UpComing(){
         generalList.clear();
         for (int loop = 0; loop < allTaskList.size(); loop++) {
-            if(Long.parseLong(allTaskList.get(loop).getStartMilli()) > System.currentTimeMillis()
-                    || baseClass.DateFormatter(allTaskList.get(loop).getStartMilli())
+            if(Long.parseLong(allTaskList.get(loop).getEndMilli()) > System.currentTimeMillis()
+                    || baseClass.DateFormatter(allTaskList.get(loop).getEndMilli())
                     .equalsIgnoreCase(baseClass.DateFormatter(String.valueOf(System.currentTimeMillis())))) {
-                if (!(allTaskList.get(loop).getStartMilli().equalsIgnoreCase("62135535600000")
-                        || allTaskList.get(loop).getStartMilli().equalsIgnoreCase("-62135571600000")
-                        || allTaskList.get(loop).getStartMilli().equalsIgnoreCase("62135571600000"))) {
+                if (!(allTaskList.get(loop).getEndMilli().equalsIgnoreCase("62135535600000")
+                        || allTaskList.get(loop).getEndMilli().equalsIgnoreCase("-62135571600000")
+                        || allTaskList.get(loop).getEndMilli().equalsIgnoreCase("62135571600000"))) {
                     if(allTaskList.get(loop).getProgress()<100) {
-                        allTaskList.get(loop).setHeader(allTaskList.get(loop).getStartMilli());
+                        allTaskList.get(loop).setHeader(allTaskList.get(loop).getEndMilli());
                         generalList.add(allTaskList.get(loop));
                     }
                 }
