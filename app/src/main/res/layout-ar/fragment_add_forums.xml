@@ -54,7 +54,7 @@
         <EditText
             android:paddingStart="5dp"
             android:paddingEnd="5dp"
-            android:background="@drawable/round_border"
+            android:background="@drawable/round_border_black"
             android:singleLine="true"
             android:ellipsize="end"
             android:id="@+id/comment_title"
@@ -99,7 +99,7 @@
         <EditText
             android:paddingStart="5dp"
             android:paddingEnd="5dp"
-            android:background="@drawable/round_border"
+            android:background="@drawable/round_border_black"
             android:id="@+id/comment_description"
             android:textSize="18sp"
             android:layout_width="match_parent"

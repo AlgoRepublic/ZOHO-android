@@ -52,7 +52,7 @@
                 <EditText
                     android:paddingStart="5dp"
                     android:paddingEnd="5dp"
-                    android:background="@drawable/round_border"
+                    android:background="@drawable/round_border_black"
                     android:id="@+id/project_name"
                     android:textSize="20sp"
                     android:layout_width="match_parent"
@@ -95,7 +95,7 @@
                 <EditText
                     android:paddingStart="5dp"
                     android:paddingEnd="5dp"
-                    android:background="@drawable/round_border"
+                    android:background="@drawable/round_border_black"
                     android:id="@+id/project_desc"
                     android:textSize="20sp"
                     android:layout_below="@+id/layout"
