@@ -89,6 +89,8 @@
                         android:background="@drawable/round_border_black"
                         android:singleLine="true"
                         android:ellipsize="end"
+                        android:textColor="@color/colorBaseHeader"
+                        android:textColorHint="@color/colorBaseMenu"
                         android:id="@+id/email"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -99,9 +101,9 @@
                         android:maxLines="1"
                         android:gravity="center|left"
                         android:textSize="18sp"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
                         android:text="admin@admin.com"
-                        android:textColor="@color/colorBaseHeader"
-                        android:textColorHint="@color/colorBaseMenu"
                         android:textCursorDrawable="@null" />
 
                 </RelativeLayout>
@@ -125,6 +127,8 @@
                         android:completionHint="@string/prompt_password"
                         android:hint="@string/prompt_password"
                         android:imeOptions="actionDone"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
                         android:imeActionId="@integer/add_comment"
                         android:imeActionLabel="@string/login"
                         android:inputType="textPassword"

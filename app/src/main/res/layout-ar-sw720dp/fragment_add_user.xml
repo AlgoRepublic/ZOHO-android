@@ -59,14 +59,14 @@
                 android:layout_height="150dp"
                 android:layout_centerHorizontal="true"
                 android:layout_margin="20dp"
-                android:src="@drawable/nav_user_black"
-                app:civ_border_color="@color/colorContentWrapper"
+                android:src="?attr/nav_user"
+                app:civ_border_color="?attr/color_line"
                 app:civ_border_width="4dp"/>
 
             <EditText
                 android:paddingStart="5dp"
                 android:paddingEnd="5dp"
-                android:background="@drawable/round_border_black"
+                android:background="?attr/round_border"
                 android:singleLine="true"
                 android:ellipsize="end"
                 android:textColor="@color/colorBaseHeader"
@@ -83,7 +83,7 @@
             <EditText
                 android:paddingStart="5dp"
                 android:paddingEnd="5dp"
-                android:background="@drawable/round_border_black"
+                android:background="?attr/round_border"
                 android:singleLine="true"
                 android:ellipsize="end"
                 android:textColor="@color/colorBaseHeader"
@@ -100,7 +100,7 @@
             <EditText
                 android:paddingStart="5dp"
                 android:paddingEnd="5dp"
-                android:background="@drawable/round_border_black"
+                android:background="?attr/round_border"
                 android:singleLine="true"
                 android:ellipsize="end"
                 android:textColor="@color/colorBaseHeader"
@@ -116,7 +116,7 @@
             <EditText
                 android:paddingStart="5dp"
                 android:paddingEnd="5dp"
-                android:background="@drawable/round_border_black"
+                android:background="?attr/round_border"
                 android:singleLine="true"
                 android:ellipsize="end"
                 android:textColor="@color/colorBaseHeader"
@@ -132,7 +132,7 @@
             <EditText
                 android:paddingStart="5dp"
                 android:paddingEnd="5dp"
-                android:background="@drawable/round_border_black"
+                android:background="?attr/round_border"
                 android:singleLine="true"
                 android:ellipsize="end"
                 android:textColor="@color/colorBaseHeader"

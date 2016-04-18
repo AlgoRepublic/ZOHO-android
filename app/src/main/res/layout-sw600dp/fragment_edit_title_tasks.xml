@@ -29,12 +29,12 @@
         android:layout_marginTop="10dp"
         android:layout_toRightOf="@+id/task_image"
         android:layout_toEndOf="@+id/task_image"
-        android:background="@drawable/round_border_black"
+        android:background="?attr/round_border"
         android:gravity="top"
         android:hint="@string/task_desc"
         android:padding="10dp"
         android:textColor="@color/colorBaseHeader"
         android:textColorHint="@color/colorBaseWrapper"
         android:textCursorDrawable="@null"
-        android:textSize="16sp" />
+        android:textSize="18sp" />
 </RelativeLayout>

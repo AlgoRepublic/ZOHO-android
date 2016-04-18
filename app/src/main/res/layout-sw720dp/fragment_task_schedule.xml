@@ -30,7 +30,7 @@
                 android:layout_width="30dp"
                 android:text="@string/start_date"
                 android:textAllCaps="false"
-                android:background="@drawable/calendar_black"
+                android:background="?attr/calendar"
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
                 android:layout_height="30dp"
@@ -45,7 +45,7 @@
                 android:singleLine="true"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="5dp"
-                android:textColor="@color/colorBaseHeader"
+
                 android:textSize="30sp"
                 android:typeface="monospace" />
                 </RelativeLayout>
@@ -58,7 +58,6 @@
                 android:textSize="30sp"
                 android:gravity="center"
                 android:paddingRight="2dp"
-                android:textColor="@color/colorBaseHeader"
                 android:background="@drawable/round_border_black"
                 android:layout_height="wrap_content"
                 />
@@ -83,7 +82,7 @@
                 android:layout_width="30dp"
                 android:text="@string/start_date"
                 android:textAllCaps="false"
-                android:background="@drawable/calendar_black"
+                android:background="?attr/calendar"
                 android:layout_centerVertical="true"
                 android:layout_height="30dp"
                 />
@@ -97,7 +96,6 @@
                 android:singleLine="true"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="5dp"
-                android:textColor="@color/colorBaseHeader"
                 android:textSize="30sp"
                 android:typeface="monospace" />
                 </RelativeLayout>
@@ -110,7 +108,6 @@
                 android:textSize="30sp"
                 android:gravity="center"
                 android:paddingRight="2dp"
-                android:textColor="@color/colorBaseHeader"
                 android:background="@drawable/round_border_black"
                 android:layout_height="wrap_content"
                 />

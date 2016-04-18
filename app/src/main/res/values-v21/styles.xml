@@ -29,6 +29,7 @@
         <item name="nav_user">@drawable/nav_user_blue</item>
         <item name="bubble_alert">@drawable/bubble_alert_blue</item>
         <item name="circle_left">@drawable/circle_left_blue</item>
+        <item name="circle_right">@drawable/circle_right_blue</item>
         <item name="task_progress">@drawable/task_progress_blue</item>
         <item name="underline_textview">@drawable/underline_textview_blue</item>
         <item name="round_border">@drawable/round_border_blue</item>
@@ -122,6 +123,7 @@
         <item name="bubble_alert">@drawable/bubble_alert_black </item>
         <item name="nav_user">@drawable/nav_user_black</item>
         <item name="circle_left">@drawable/circle_left_black</item>
+        <item name="circle_right">@drawable/circle_right</item>
         <item name="task_progress">@drawable/task_progress_black</item>
         <item name="underline_textview">@drawable/underline_textview_black</item>
         <item name="round_border">@drawable/round_border_black</item>
@@ -217,6 +219,7 @@
     <attr name="alerticon_picture" format="reference"/>
     <attr name="calendar" format="reference"/>
     <attr name="circle_left" format="reference"/>
+    <attr name="circle_right" format="reference"/>
     <attr name="folder" format="reference"/>
     <attr name="milestone" format="reference"/>
     <attr name="nav_user" format="reference"/>

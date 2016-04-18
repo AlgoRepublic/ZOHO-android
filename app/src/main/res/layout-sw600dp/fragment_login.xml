@@ -85,7 +85,7 @@
                     android:layout_margin="15dp"
                     android:orientation="vertical">
 
-                    <AutoCompleteTextView
+                    <EditText
                         android:id="@+id/email"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -117,7 +117,6 @@
                         android:id="@+id/password"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-
                         android:background="@drawable/round_border_black"
                         android:completionHint="@string/prompt_password"
                         android:hint="@string/prompt_password"

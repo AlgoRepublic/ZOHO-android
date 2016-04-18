@@ -87,8 +87,6 @@
                     android:orientation="vertical">
 
                     <EditText
-                        android:paddingStart="5dp"
-                        android:paddingEnd="5dp"
                         android:background="@drawable/round_border_black"
                         android:singleLine="true"
                         android:ellipsize="end"
@@ -118,8 +116,6 @@
                     android:orientation="vertical">
 
                     <EditText
-                        android:paddingStart="5dp"
-                        android:paddingEnd="5dp"
                         android:background="@drawable/round_border_black"
                         android:ellipsize="end"
                         android:id="@+id/password"

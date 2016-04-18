@@ -25,7 +25,7 @@
         android:layout_marginRight="10dp"
         android:layout_marginTop="10dp"
         android:layout_toRightOf="@+id/task_image"
-        android:background="@drawable/round_border_black"
+        android:background="?attr/round_border"
         android:gravity="top"
         android:hint="@string/task_desc"
         android:padding="5dp"
