@@ -20,15 +20,24 @@
             android:textSize="14sp"
             android:typeface="monospace" />
 
-        <org.angmarch.views.NiceSpinner
+        <EditText
+            android:paddingStart="5dp"
+            android:paddingEnd="5dp"
+            android:background="@drawable/round_border_black"
+            android:singleLine="true"
+            android:ellipsize="end"
+            android:layout_margin="10dp"
+            android:gravity="center_vertical"
             android:id="@+id/folder_list"
             android:layout_width="match_parent"
-            android:layout_height="35dp"
-            android:padding="5dp"
-            android:layout_below="@id/user_phoneno"
-            android:hint="@string/select_folder"
+            android:layout_height="45dp"
+            android:editable="false"
             android:textColor="@color/colorBaseHeader"
-            android:textSize="18sp"/>
+            android:textColorHint="@color/colorBaseMenu"
+            android:imeOptions="actionNext"
+            android:hint="@string/select_folder"
+            android:layout_below="@+id/user_phoneno"
+            android:textSize="18sp" />
 
         <Button
             android:id="@+id/add_file"

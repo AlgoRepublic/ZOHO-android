@@ -59,90 +59,110 @@
                 android:layout_height="90dp"
                 android:layout_centerHorizontal="true"
                 android:layout_margin="20dp"
-                android:src="@drawable/nav_user_black"
-                app:civ_border_color="@color/colorContentWrapper"
+                android:src="?attr/nav_user"
+                app:civ_border_color="?attr/color_line"
                 app:civ_border_width="4dp"/>
 
-            <com.rengwuxian.materialedittext.MaterialEditText
+            <EditText
                 android:id="@+id/first_name"
                 android:layout_below="@+id/profile"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="60dp"
                 android:layout_marginTop="15dp"
                 android:hint="@string/first_name"
-                android:textSize="18sp"
-                app:met_floatingLabel="normal"
-                app:met_primaryColor="@color/colorBaseHeader"
-                app:met_singleLineEllipsis="true" />
+                android:textSize="25sp"
+                android:paddingStart="5dp"
+                android:paddingEnd="5dp"
+                android:background="?attr/round_border"
+                android:singleLine="true"
+                android:ellipsize="end"
+                android:textColor="@color/colorBaseHeader"
+                android:textColorHint="@color/colorBaseMenu" />
 
 
-            <com.rengwuxian.materialedittext.MaterialEditText
+            <EditText
                 android:id="@+id/last_name"
                 android:layout_below="@+id/first_name"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="60dp"
                 android:layout_marginTop="10dp"
                 android:hint="@string/last_name"
                 android:inputType="textMultiLine"
-                android:textSize="18sp"
-                app:met_singleLineEllipsis="true"
-                app:met_floatingLabel="normal"
-                app:met_primaryColor="@color/colorBaseHeader" />
+                android:textSize="25sp"
+                android:paddingStart="5dp"
+                android:paddingEnd="5dp"
+                android:background="?attr/round_border"
+                android:singleLine="true"
+                android:ellipsize="end"
+                android:textColor="@color/colorBaseHeader"
+                android:textColorHint="@color/colorBaseMenu" />
 
-            <com.rengwuxian.materialedittext.MaterialEditText
+            <EditText
                 android:id="@+id/nick_name"
                 android:layout_below="@+id/last_name"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="60dp"
                 android:layout_marginTop="10dp"
                 android:hint="@string/nick_name"
-                android:textSize="18sp"
-                app:met_singleLineEllipsis="true"
-                app:met_floatingLabel="normal"
-                app:met_primaryColor="@color/colorBaseHeader" />
+                android:textSize="25sp"
+                android:paddingStart="5dp"
+                android:paddingEnd="5dp"
+                android:background="?attr/round_border"
+                android:singleLine="true"
+                android:ellipsize="end"
+                android:textColor="@color/colorBaseHeader"
+                android:textColorHint="@color/colorBaseMenu" />
 
-            <com.rengwuxian.materialedittext.MaterialEditText
+            <EditText
                 android:id="@+id/user_email"
                 android:layout_below="@+id/nick_name"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="60dp"
                 android:layout_marginTop="10dp"
                 android:hint="@string/email"
-                android:textSize="18sp"
-                app:met_singleLineEllipsis="true"
-                app:met_floatingLabel="normal"
-                app:met_primaryColor="@color/colorBaseHeader" />
+                android:textSize="25sp"
+                android:paddingStart="5dp"
+                android:paddingEnd="5dp"
+                android:background="?attr/round_border"
+                android:singleLine="true"
+                android:ellipsize="end"
+                android:textColor="@color/colorBaseHeader"
+                android:textColorHint="@color/colorBaseMenu" />
 
-            <com.rengwuxian.materialedittext.MaterialEditText
+            <EditText
                 android:id="@+id/user_phoneno"
                 android:layout_below="@id/user_email"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="60dp"
                 android:layout_marginTop="10dp"
                 android:hint="@string/phone_number"
                 android:inputType="phone"
-                android:textSize="18sp"
-                app:met_singleLineEllipsis="true"
-                app:met_floatingLabel="normal"
-                app:met_primaryColor="@color/colorBaseHeader" />
+                android:textSize="25sp"
+                android:paddingStart="5dp"
+                android:paddingEnd="5dp"
+                android:background="?attr/round_border"
+                android:singleLine="true"
+                android:ellipsize="end"
+                android:textColor="@color/colorBaseHeader"
+                android:textColorHint="@color/colorBaseMenu" />
             <EditText
                 android:paddingStart="5dp"
                 android:paddingEnd="5dp"
-                android:background="@drawable/round_border_black"
+                android:background="?attr/round_border"
                 android:singleLine="true"
                 android:ellipsize="end"
+                android:textColor="@color/colorBaseHeader"
+                android:textColorHint="@color/colorBaseMenu"
                 android:layout_marginTop="10dp"
                 android:gravity="center_vertical"
                 android:id="@+id/role_list"
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
+                android:layout_height="60dp"
                 android:editable="false"
-                android:textColor="@color/colorBaseHeader"
-                android:textColorHint="@color/colorBaseMenu"
                 android:imeOptions="actionNext"
                 android:hint="@string/user_role"
                 android:layout_below="@+id/user_phoneno"
-                android:textSize="18sp" />
+                android:textSize="25sp" />
             <LinearLayout
                 android:id="@+id/layout"
                 android:layout_width="match_parent"

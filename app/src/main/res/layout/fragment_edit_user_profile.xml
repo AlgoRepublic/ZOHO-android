@@ -28,7 +28,7 @@
                     android:id="@+id/lblListHeader"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="18sp"
+                    android:textSize="12sp"
                     android:text="@string/edit_profile"
                     android:gravity="center"
                     android:textColor="@color/white" />
@@ -103,6 +103,8 @@
                     android:background="@drawable/round_border_black"
                     android:singleLine="true"
                     android:ellipsize="end"
+                    android:textColor="@color/colorBaseHeader"
+                    android:textColorHint="@color/colorBaseMenu"
                     android:id="@+id/nick_name"
                     android:layout_below="@+id/last_name"
                     android:layout_width="match_parent"

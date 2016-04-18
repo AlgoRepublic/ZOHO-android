@@ -22,4 +22,3 @@ public class CustomExpListView extends ExpandableListView
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
     }
 }
-

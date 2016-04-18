@@ -40,6 +40,7 @@ dependencies {
     compile project(':dropboxChooserSDK')
     compile project(':CircleSeekBar')
     compile project(':TwoWayView')
+
     compile('com.google.api-client:google-api-client-android:1.21.0') {
         exclude group: 'org.apache.httpcomponents'
         exclude group: 'com.google.guava'
@@ -50,17 +51,13 @@ dependencies {
     }
     compile project(':libraryLoaders')
     compile project(':parallax-listview')
-    compile project(':nice-spinner-master')
     compile('com.h6ah4i.android.widget.advrecyclerview:advrecyclerview:0.8.6@aar') {
         transitive = true
     }
     compile project(':MultiSpinner')
-//    compile project(':PagerSlidingTabStrip')
+    //    compile project(':PagerSlidingTabStrip')
     compile project(':DialogProgressAC')
     compile project(':AndroidCharts')
-
-
-
     compile 'com.android.support:appcompat-v7:23.2.1'
     compile 'com.android.support:design:23.2.1'
     compile 'com.google.code.gson:gson:2.5'

@@ -33,7 +33,7 @@
             android:layout_marginRight="35dp"
             android:layout_marginTop="13dp"
             android:adjustViewBounds="true"
-            android:src="@drawable/fastlink_white" />
+            android:background="?attr/fastlink_loading" />
 
         <TextView
             android:id="@+id/textView"

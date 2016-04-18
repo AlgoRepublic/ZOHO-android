@@ -19,15 +19,17 @@
         <item name="android:editTextStyle">@style/blueEditTextStyle</item>
         <item name="searchViewStyle">@style/blueSearchView</item>
 
+        <item name="fastlink_login">@drawable/fastlink_login_blue</item>
+        <item name="fastlink_loading">@drawable/fastlink_loading_blue</item>
         <item name="alerticon_picture">@drawable/alerticon_blue</item>
         <item name="calendar">@drawable/calendar_blue</item>
-        <item name="buttonface_picture">@drawable/ic_menu_add_task</item>
         <item name="folder">@drawable/folder_blue</item>
         <item name="milestone">@drawable/milestone_blue</item>
         <item name="task_desc_small">@drawable/task_desc_small_blue</item>
         <item name="nav_user">@drawable/nav_user_blue</item>
         <item name="bubble_alert">@drawable/bubble_alert_blue</item>
         <item name="circle_left">@drawable/circle_left_blue</item>
+        <item name="circle_right">@drawable/circle_right_blue</item>
         <item name="task_progress">@drawable/task_progress_blue</item>
         <item name="underline_textview">@drawable/underline_textview_blue</item>
         <item name="round_border">@drawable/round_border_blue</item>
@@ -110,8 +112,10 @@
         <item name="android:radioButtonStyle">@style/blackRadioButton</item>
         <item name="android:actionMenuTextAppearance">@style/MyMenuTextAppearance</item>
         <item name="android:editTextStyle">@style/blackEditTextStyle</item>
+
+        <item name="fastlink_login">@drawable/fastlink_login_black</item>
+        <item name="fastlink_loading">@drawable/fastlink_loading_black</item>
         <item name="alerticon_picture">@drawable/alerticon_black</item>
-        <item name="buttonface_picture">@drawable/ic_cloud_download_24dp</item>
         <item name="calendar">@drawable/calendar_black</item>
         <item name="folder">@drawable/folder_black</item>
         <item name="milestone">@drawable/milestone_black</item>
@@ -119,6 +123,7 @@
         <item name="bubble_alert">@drawable/bubble_alert_black </item>
         <item name="nav_user">@drawable/nav_user_black</item>
         <item name="circle_left">@drawable/circle_left_black</item>
+        <item name="circle_right">@drawable/circle_right</item>
         <item name="task_progress">@drawable/task_progress_black</item>
         <item name="underline_textview">@drawable/underline_textview_black</item>
         <item name="round_border">@drawable/round_border_black</item>
@@ -209,10 +214,12 @@
         <item name="android:textColor">@android:color/white</item>
     </style>
 
-    <attr name="buttonface_picture" format="reference"/>
+    <attr name="fastlink_login" format="reference"/>
+    <attr name="fastlink_loading" format="reference"/>
     <attr name="alerticon_picture" format="reference"/>
     <attr name="calendar" format="reference"/>
     <attr name="circle_left" format="reference"/>
+    <attr name="circle_right" format="reference"/>
     <attr name="folder" format="reference"/>
     <attr name="milestone" format="reference"/>
     <attr name="nav_user" format="reference"/>

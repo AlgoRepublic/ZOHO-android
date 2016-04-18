@@ -71,6 +71,7 @@ public class TaskDetailFragment extends BaseFragment {
         tasksList =tasks;
         position = pos;
         taskListName = listNames;
+        Log.e("Size","S"+taskListName.size());
         fragment = new TaskDetailFragment();
         return fragment;
     }
@@ -84,6 +85,7 @@ public class TaskDetailFragment extends BaseFragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         setHasOptionsMenu(true);
+        setRetainInstance(true);
         getToolbar().setTitle(getString(R.string.task_detail));
         super.onViewCreated(view, savedInstanceState);
     }
@@ -168,8 +170,9 @@ public class TaskDetailFragment extends BaseFragment {
         aq.id(R.id.subtask).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                callFragmentWithAddBackStack(R.id.container, new TaskListBySubTasksFragment
-                        (tasksList.getTaskID(),taskListName.get(position)), "TaskListBySubTasksFragment");
+                callFragmentWithAddBackStack(R.id.container, TaskListBySubTasksFragment.newInstance(
+                        tasksList.getTaskID(),taskListName.get(position)), "TaskListBySubTasksFragment");
+                Log.e("Size", "S" + taskListName.get(position).getTaskListName());
             }
         });
         aq.id(R.id.mark_as_done).clicked(new View.OnClickListener() {
@@ -308,29 +311,13 @@ public class TaskDetailFragment extends BaseFragment {
         super.onCreateOptionsMenu(menu, inflater);
     }
 
-    /**
-     * This hook is called whenever an item in your options menu is selected.
-     * The default implementation simply returns false to have the normal
-     * processing happen (calling the item's Runnable or sending a message to
-     * its Handler as appropriate).  You can use this method for any items
-     * for which you would like to do processing without those other
-     * facilities.
-     * <p>
-     * <p>Derived classes should call through to the base class for it to
-     * perform the default menu handling.
-     *
-     * @param item The menu item that was selected.
-     * @return boolean Return false to allow normal menu processing to
-     * proceed, true to consume it here.
-     * @see #onCreateOptionsMenu
-     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.edit_task:
                 Log.e("S","/"+tasksList.getListAssignees().size());
-                baseClass.setSelectedProject(Integer.toString(tasksList.getProjectID()));
-                if (Integer.parseInt(baseClass.getSelectedProject()) >0) {
+                baseClass.setSelectedTaskProject(Integer.toString(tasksList.getProjectID()));
+                if (Integer.parseInt(baseClass.getSelectedTaskProject()) >0) {
                     baseClass.db.putString("ProjectName", tasksList.getProjectName());
                     baseClass.setSelectedProject(Integer.toString(tasksList.getProjectID()));
                     callFragmentWithBackStack(R.id.container, TaskAddUpdateFragment.newInstance(tasksList,taskListName), "TaskAddUpdateFragment");

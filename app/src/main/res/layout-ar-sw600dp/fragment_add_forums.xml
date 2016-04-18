@@ -26,7 +26,7 @@
                 android:id="@+id/lblListHeader"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:text="@string/new_forum_post"
                 android:gravity="center"
                 android:textColor="@color/white" />
@@ -51,57 +51,48 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/layout2">
 
-                <com.rengwuxian.materialedittext.MaterialEditText
+                <EditText
                     android:id="@+id/comment_title"
-                    android:textSize="20sp"
+                    android:paddingStart="5dp"
+                    android:paddingEnd="5dp"
+                    android:textColor="@color/colorBaseHeader"
+                    android:textColorHint="@color/colorBaseMenu"
+                    android:background="@drawable/round_border_black"
+                    android:textSize="25sp"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="60dp"
                     android:hint="@string/title"
                     android:inputType="textMultiLine"
                     android:layout_marginTop="10dp"
-                    app:met_floatingLabel="normal"
-                    app:met_singleLineEllipsis="true" />
+                    />
 
             </RelativeLayout>
-            <RelativeLayout
+            <EditText
+                android:paddingStart="5dp"
+                android:paddingEnd="5dp"
+                android:background="@drawable/round_border_black"
+                android:singleLine="true"
+                android:ellipsize="end"
+                android:layout_marginTop="10dp"
+                android:gravity="center_vertical"
+                android:id="@+id/forum_list"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="60dp"
+                android:editable="false"
+                android:textColor="@color/colorBaseHeader"
+                android:textColorHint="@color/colorBaseMenu"
+                android:imeOptions="actionNext"
+                android:hint="@string/category"
                 android:layout_below="@+id/layout2"
-                android:id="@+id/layout3"
-                >
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/category"
-                    android:id="@+id/category"
-                    android:textSize="14sp"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentStart="true" />
-                <com.h6ah4i.android.materialshadowninepatch.MaterialShadowContainerView
-                    android:layout_width="match_parent"
-                    style="@style/ms9_DefaultShadowStyle"
-                    android:layout_height="wrap_content"
-                    app:ms9_useAmbientShadow="true"
-                    android:layout_below="@+id/category"
-                    app:ms9_affectsDisplayedPosition="true"
-                    app:ms9_shadowTranslationZ="1dp"
-                    app:ms9_shadowElevation="3dp">
-                <org.angmarch.views.NiceSpinner
-                    android:id="@+id/forum_list"
-                    android:layout_width="match_parent"
-                    android:layout_height="55dp"
-                    android:textSize="20sp" />
-                </com.h6ah4i.android.materialshadowninepatch.MaterialShadowContainerView>
-            </RelativeLayout>
+                android:textSize="25sp" />
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/layout3"
+                android:layout_below="@+id/forum_list"
                 >
                 <com.rengwuxian.materialedittext.MaterialEditText
                     android:id="@+id/comment_description"
-                    android:textSize="20sp"
+                    android:textSize="25sp"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:hint="@string/content"

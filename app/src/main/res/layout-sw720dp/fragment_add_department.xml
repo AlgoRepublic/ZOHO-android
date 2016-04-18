@@ -50,15 +50,21 @@
                 android:layout_height="85dp"
                 android:id="@+id/layout2">
 
-                <com.rengwuxian.materialedittext.MaterialEditText
+                <EditText
+                    android:paddingStart="5dp"
+                    android:paddingEnd="5dp"
+                    android:background="@drawable/round_border_black"
+                    android:singleLine="true"
+                    android:ellipsize="end"
+                    android:textColor="@color/colorBaseHeader"
+                    android:textColorHint="@color/colorBaseMenu"
                     android:id="@+id/dept_title"
-                    android:textSize="27sp"
+                    android:textSize="30sp"
                     android:layout_width="match_parent"
                     android:layout_height="70dp"
                     android:hint="@string/title"
                     android:inputType="textMultiLine"
-                    android:layout_marginTop="10dp"
-                    app:met_floatingLabel="normal"/>
+                    android:layout_marginTop="10dp"/>
 
             </RelativeLayout>
 
