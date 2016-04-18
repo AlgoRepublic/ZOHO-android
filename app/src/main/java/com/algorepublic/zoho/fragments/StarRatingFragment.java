@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ExpandableListView;
 import android.widget.Toast;
 
 import com.algorepublic.zoho.Models.StarRatingModel;
@@ -27,7 +28,7 @@ import java.util.ArrayList;
 public class StarRatingFragment extends BaseFragment {
     static StarRatingFragment fragment;
     public static ArrayList<StarRatingHeadsLevelOne> levelOneHead = new ArrayList<>();
-    AQuery aq; CustomExpListView mListView;
+    AQuery aq; ExpandableListView mListView;
     StarRatingService service;
     BaseClass baseClass;
 
@@ -50,7 +51,7 @@ public class StarRatingFragment extends BaseFragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_star_rating, container, false);
         baseClass = ((BaseClass) getActivity().getApplicationContext());
-        mListView = (CustomExpListView) view.findViewById(R.id.starListView);
+        mListView = (ExpandableListView) view.findViewById(R.id.starListView);
 
         aq= new AQuery(view);
         service = new StarRatingService(getActivity());

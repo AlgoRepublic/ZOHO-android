@@ -51,7 +51,7 @@ public class FeedsFragment extends BaseFragment implements SwipeRefreshLayout.On
                     new CallBack(FeedsFragment.this, "Feeds"));
         }
         setHasOptionsMenu(true);
-        getToolbar().setTitle(getString(R.string.feeds));
+       // getToolbar().setTitle(getString(R.string.feeds));
         return view;
     }
 

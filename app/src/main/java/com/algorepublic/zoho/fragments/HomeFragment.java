@@ -46,7 +46,29 @@ public class HomeFragment extends BaseFragment {
         baseClass = ((BaseClass) getActivity().getApplicationContext());
         applyLightBackground(tabs, baseClass);
         pager.setCurrentItem(1);
+        getToolbar().setTitle(getString(R.string.dashboard));
 
+        // uncomment below code for toolbar title text change on pager item change.
+   /*     pager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                if(position==0)
+                    getToolbar().setTitle(getResources().getString(R.string.dashboard));
+                if(position==1)
+                    getToolbar().setTitle(getResources().getString(R.string.feeds));
+
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });*/
         return view;
     }
 
