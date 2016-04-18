@@ -14,7 +14,7 @@
         android:layout_marginRight="20dp"
         android:layout_marginLeft="5dp"
         android:adjustViewBounds="true"
-        android:background="@drawable/task_desc_small_black"
+        android:background="?attr/task_desc_small"
         android:scaleType="fitXY" />
 
     <EditText
@@ -25,7 +25,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
         android:layout_toLeftOf="@+id/task_image"
-        android:background="@drawable/round_border_black"
+        android:background="?attr/round_border"
         android:gravity="top"
         android:hint="Task Title"
         android:padding="5dp"

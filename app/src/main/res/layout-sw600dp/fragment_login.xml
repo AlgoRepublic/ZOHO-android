@@ -61,7 +61,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
                 android:adjustViewBounds="true"
-                android:src="@drawable/fastlink_login_black" />
+                android:background="?attr/fastlink_login" />
         </RelativeLayout>
 
         <ScrollView

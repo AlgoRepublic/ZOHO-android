@@ -16,7 +16,7 @@
         android:layout_marginStart="20dp"
         android:layout_marginEnd="5dp"
         android:adjustViewBounds="true"
-        android:background="@drawable/task_desc_small_black"
+        android:background="?attr/task_desc_small"
         android:scaleType="fitXY" />
 
     <EditText
