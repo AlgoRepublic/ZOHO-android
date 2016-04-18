@@ -1,4 +1,4 @@
 include ':app', ':linkedin-sdk', ':FlycoAnimation_Lib', ':datetimepicker',
         ':agendacalendarview', ':FlycoDialog_Lib', 'dropboxChooserSDK', ':CircleSeekBar',
-        ':TwoWayView', ':core', ':libraryLoaders', ':parallax-listview', ':nice-spinner-master',
+        ':TwoWayView', ':core', ':libraryLoaders', ':parallax-listview',
         ':MultiSpinner', ':DialogProgressAC', ':AndroidCharts'

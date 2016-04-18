@@ -112,7 +112,7 @@
                                     android:layout_marginTop="10dp"
                                     android:adjustViewBounds="true"
                                     android:scaleType="fitXY"
-                                    android:src="@drawable/task_progress" />
+                                    android:src="@drawable/task_progress_black" />
 
                                 <RelativeLayout
                                     android:id="@+id/layout1"

@@ -76,11 +76,11 @@ public class DocsPreviewBySubTask extends BaseFragment {
         //Set whether this download may proceed over a roaming connection.
         request.setAllowedOverRoaming(false);
         //Set the title of this download, to be displayed in notifications (if enabled).
-        request.setTitle("Downloading");
+        request.setTitle(title);
         //Set a description of this download, to be displayed in notifications (if enabled)
         request.setDescription("Downloading File");
         //Set the local destination for the downloaded file to a path within the application's external files directory
-        request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, title + System.currentTimeMillis() + extention);
+        request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, title + "." + extention);
         request.allowScanningByMediaScanner();
         request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE
                 | DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
@@ -96,7 +96,17 @@ public class DocsPreviewBySubTask extends BaseFragment {
         aq.id(R.id.user_image).image(Constants.UserImage_URL+baseClass.getProfileImage());
         aq.id(R.id.user_name).text(docObject.getFileName());
         aq.id(R.id.doc_title).text(docObject.getFileName());
-        //aq.id(R.id.doc_size).text(docObject.getFileSizeInByte());
+        aq.id(R.id.doc_image).clicked(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String link = Constants.Image_URL + docObject.getID()
+                        + "." + BaseClass.getExtensionType(
+                        docObject.getFileDescription());
+                Log.e("Doc", link);
+                callFragmentWithBackStack(R.id.container,
+                        WebViewFragment.newInstance(link, docObject.getFileName()), "WebViewFragment");
+            }
+        });
         if(docObject.getFileTypeID()>=0 &&
                 docObject.getFileTypeID()<=4 ){
             Glide.with(getActivity()).load(Constants.Image_URL +

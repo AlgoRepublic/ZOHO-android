@@ -19,7 +19,23 @@
         <item name="android:editTextStyle">@style/blueEditTextStyle</item>
         <item name="searchViewStyle">@style/blueSearchView</item>
 
-        <item name="buttonface_picture">@drawable/ic_menu_add_task</item>
+        <item name="fastlink_login">@drawable/fastlink_login_blue</item>
+        <item name="fastlink_loading">@drawable/fastlink_loading_blue</item>
+        <item name="alerticon_picture">@drawable/alerticon_blue</item>
+        <item name="calendar">@drawable/calendar_blue</item>
+        <item name="folder">@drawable/folder_blue</item>
+        <item name="milestone">@drawable/milestone_blue</item>
+        <item name="task_desc_small">@drawable/task_desc_small_blue</item>
+        <item name="nav_user">@drawable/nav_user_blue</item>
+        <item name="bubble_alert">@drawable/bubble_alert_blue</item>
+        <item name="circle_left">@drawable/circle_left_blue</item>
+        <item name="task_progress">@drawable/task_progress_blue</item>
+        <item name="underline_textview">@drawable/underline_textview_blue</item>
+        <item name="round_border">@drawable/round_border_blue</item>
+        <item name="forums">@drawable/forums_blue</item>
+        <item name="color_line">@color/colorSecondaryBlue</item>
+        <item name="left_header">@drawable/left_header_blue</item>
+
     </style>
 
     <style name="blueButton" parent="@android:style/Widget.Button">
@@ -71,7 +87,7 @@
 
     <style name="blueEditTextStyle" parent="Base.Widget.AppCompat.EditText">
         <item name="android:textColor">@color/colorPrimaryBlue</item>
-        <item name="android:background">@drawable/round_border</item>
+        <item name="android:background">@drawable/round_border_black</item>
         <item name="android:textColorHint">@color/colorPrimaryBlue</item>
     </style>
     <!-- Base application theme. -->
@@ -96,7 +112,23 @@
         <item name="android:actionMenuTextAppearance">@style/MyMenuTextAppearance</item>
         <item name="android:editTextStyle">@style/blackEditTextStyle</item>
 
-        <item name="buttonface_picture">@drawable/ic_cloud_download_24dp</item>
+        <item name="fastlink_login">@drawable/fastlink_login_black</item>
+        <item name="fastlink_loading">@drawable/fastlink_loading_black</item>
+        <item name="alerticon_picture">@drawable/alerticon_black</item>
+        <item name="calendar">@drawable/calendar_black</item>
+        <item name="folder">@drawable/folder_black</item>
+        <item name="milestone">@drawable/milestone_black</item>
+        <item name="task_desc_small">@drawable/task_desc_small_black</item>
+        <item name="bubble_alert">@drawable/bubble_alert_black </item>
+        <item name="nav_user">@drawable/nav_user_black</item>
+        <item name="circle_left">@drawable/circle_left_black</item>
+        <item name="task_progress">@drawable/task_progress_black</item>
+        <item name="underline_textview">@drawable/underline_textview_black</item>
+        <item name="round_border">@drawable/round_border_black</item>
+        <item name="forums">@drawable/forums</item>
+        <item name="color_line">@color/colorBaseHeader</item>
+        <item name="left_header">@drawable/left_header_black</item>
+
     </style>
 
     <style name="blackRatingBar" parent="@android:style/Widget.RatingBar">
@@ -180,5 +212,22 @@
         <item name="android:textColor">@android:color/white</item>
     </style>
 
-    <attr name="buttonface_picture" format="reference"/>
+    <attr name="fastlink_login" format="reference"/>
+    <attr name="fastlink_loading" format="reference"/>
+    <attr name="alerticon_picture" format="reference"/>
+    <attr name="calendar" format="reference"/>
+    <attr name="circle_left" format="reference"/>
+    <attr name="folder" format="reference"/>
+    <attr name="milestone" format="reference"/>
+    <attr name="nav_user" format="reference"/>
+    <attr name="task_desc_small" format="reference"/>
+    <attr name="bubble_alert" format="reference"/>
+    <attr name="color_line" format="reference"/>
+    <attr name="task_progress" format="reference"/>
+    <attr name="underline_textview" format="reference"/>
+    <attr name="round_border" format="reference"/>
+    <attr name="forums" format="reference"/>
+    <attr name="left_header" format="reference"/>
+
+
 </resources>

@@ -48,8 +48,17 @@ public class ThemeSelectorFragment extends BaseFragment {
         ((RelativeLayout) view.findViewById(R.id.black_layout)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                aq.id(R.id.black_theme).checked(true);
                 aq.id(R.id.blue_theme).checked(false);
-                aq.id(R.id.blue_layout).checked(true);
+                baseClass.setThemePreference(R.style.AppTheme);
+                StartActivity();
+            }
+        });
+        aq.id(R.id.black_theme).clicked(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                aq.id(R.id.black_theme).checked(true);
+                aq.id(R.id.blue_theme).checked(false);
                 baseClass.setThemePreference(R.style.AppTheme);
                 StartActivity();
             }
@@ -58,7 +67,16 @@ public class ThemeSelectorFragment extends BaseFragment {
             @Override
             public void onClick(View v) {
                 aq.id(R.id.blue_theme).checked(true);
-                aq.id(R.id.blue_layout).checked(false);
+                aq.id(R.id.black_theme).checked(false);
+                baseClass.setThemePreference(R.style.AppThemeBlue);
+                StartActivity();
+            }
+        });
+        aq.id(R.id.blue_theme).clicked(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                aq.id(R.id.blue_theme).checked(true);
+                aq.id(R.id.black_theme).checked(false);
                 baseClass.setThemePreference(R.style.AppThemeBlue);
                 StartActivity();
             }

@@ -50,8 +50,8 @@
                             app:civ_shadow="true"
                             app:civ_border_width="1dp"
                             app:civ_shadow_color="@color/colorBaseMenu"
-                            app:civ_border_color="@color/colorBaseHeader"
-                            android:src="@drawable/nav_user"
+
+                            android:src="?attr/nav_user"
                             android:id="@+id/feed_image" />
                         <TextView
                             android:layout_width="match_parent"

@@ -278,7 +278,7 @@ public class EditProfileFragment extends BaseFragment implements MultiSelectionS
                 break;
         }
         if(newFile== null){
-            aq.id(R.id.profile).image(R.drawable.nav_user);
+            aq.id(R.id.profile).image(R.drawable.nav_user_black);
         }else {
             aq.id(R.id.profile).image(newFile, 200);
             new UploadPicture().execute();

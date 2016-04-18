@@ -32,6 +32,7 @@
     <string name="add_attachments">Add Attachments</string>
     <string name="Task_Title">Task Title</string>
     <string name="add_documents">Add Documents</string>
+    <string name="document_preview">Document Preview</string>
     <string name="dashboard">Dashboard</string>
     <string name="forums">Forums</string>
     <string name="star_rating">Star Rating</string>
@@ -289,7 +290,7 @@
     <string name="enter_comment">Enter Your Comment!</string>
     <string name="no_date">No Date</string>
     <string name="by">By</string>
-    <string name="last_responce_on">last response on</string>
+    <string name="last_responce_on">last response on </string>
     <string name="me">Me</string>
     <string name="no_due_date">No Due Date</string>
     <string name="role">Role:</string>

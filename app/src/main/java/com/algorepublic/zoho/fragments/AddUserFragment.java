@@ -25,6 +25,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.algorepublic.zoho.Models.AllProjectsByUserModel;
+import com.algorepublic.zoho.Models.UserListModel;
 import com.algorepublic.zoho.Models.UserRoleModel;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.adapters.AdapterTaskPriority;
@@ -169,6 +170,13 @@ public class AddUserFragment extends BaseFragment implements MultiSelectionSpinn
                 list.add(UserRoleModel.getInstance().responseObject.get(loop).role);
             }
             roleList = list.toArray(new CharSequence[list.size()]);
+            for(int loop=0;loop<UserRoleModel.getInstance().responseObject.size();loop++){
+                if(UserRoleModel.getInstance().responseObject
+                        .get(loop).ID == 7){
+                    selectedPosition = loop;
+                }
+            }
+            role_list.setText(roleList[selectedPosition]);
         }else {
             Toast.makeText(getActivity(), getActivity().getString(R.string.response_error), Toast.LENGTH_SHORT).show();
         }

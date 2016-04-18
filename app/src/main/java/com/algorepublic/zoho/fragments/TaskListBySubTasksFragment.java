@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.algorepublic.zoho.Models.TaskListBySubTaskModel;
 import com.algorepublic.zoho.R;
+import com.algorepublic.zoho.adapters.AdapterSubTasksList;
 import com.algorepublic.zoho.adapters.AdapterTasksList;
 import com.algorepublic.zoho.adapters.TaskListAssignee;
 import com.algorepublic.zoho.adapters.TaskListName;
@@ -46,28 +47,31 @@ public class TaskListBySubTasksFragment extends BaseFragment {
     AQuery aq;View view;
     RadioGroup radioGroup;
     int Color;
-    private static ArrayList<TaskListName> taskListName = new ArrayList<>();
+    private static ArrayList<TaskListName> taskListName ;
     public static ArrayList<TasksList> allTaskList = new ArrayList<>();
     public static ArrayList<TasksList> generalList = new ArrayList<>();
     BaseClass baseClass;
     StickyListHeadersListView listView;
     static int taskID;
     @SuppressLint("ValidFragment")
-    public TaskListBySubTasksFragment (int taskId) {
-        taskID = taskId;
+    public TaskListBySubTasksFragment () {
+
     }
-//    @SuppressWarnings("unused")
-//    public static TaskListBySubTasksFragment newInstance(int Id) {
-//        ID = Id;
-//        fragment = new TaskListBySubTasksFragment();
-//        return fragment;
-//    }
+    @SuppressWarnings("unused")
+    public static TaskListBySubTasksFragment newInstance(int taskId,TaskListName name) {
+        taskID = taskId;
+        taskListName = new ArrayList<>();
+        taskListName.add(name);
+        Log.e("Size", "S" + taskListName.size());
+        fragment = new TaskListBySubTasksFragment();
+        return fragment;
+    }
 
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
-        setRetainInstance(true);
         getToolbar().setTitle(getString(R.string.sub_tasks));
+        setRetainInstance(true);
         super.onViewCreated(view, savedInstanceState);
     }
 
@@ -78,31 +82,15 @@ public class TaskListBySubTasksFragment extends BaseFragment {
         super.onCreateOptionsMenu(menu, inflater);
     }
 
-    /**
-     * This hook is called whenever an item in your options menu is selected.
-     * The default implementation simply returns false to have the normal
-     * processing happen (calling the item's Runnable or sending a message to
-     * its Handler as appropriate).  You can use this method for any items
-     * for which you would like to do processing without those other
-     * facilities.
-     * <p>
-     * <p>Derived classes should call through to the base class for it to
-     * perform the default menu handling.
-     *
-     * @param item The menu item that was selected.
-     * @return boolean Return false to allow normal menu processing to
-     * proceed, true to consume it here.
-     * @see #onCreateOptionsMenu
-     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.add_project:
                 baseClass.hideKeyPad(getView());
-                if(baseClass.db.getInt("ProjectID") == 0){
+                if(baseClass.getSelectedTaskProject().equalsIgnoreCase("0")){
                     Toast.makeText(getActivity(), getActivity().getString(R.string.select_project), Toast.LENGTH_SHORT).show();
-  }else {
-                    callFragmentWithBackStack(R.id.container, TaskAddUpdateFragment.newInstance(taskID,taskListName),"TaskAddUpdateFragment");
+                    }else {
+                    callFragmentWithBackStack(R.id.container, TaskAddUpdateFragment.newInstance(taskID, taskListName), "TaskAddUpdateFragment");
                 }
                 break;
         }
@@ -270,7 +258,7 @@ public class TaskListBySubTasksFragment extends BaseFragment {
             }else{
                 aq.id(R.id.response_alert).visibility(View.GONE);
             }
-            adapterTasksList = new AdapterTasksList(getActivity(),generalList,taskListName);
+            adapterTasksList = new AdapterSubTasksList(getActivity(),generalList,taskListName);
             listView.setAreHeadersSticky(true);
             listView.setAdapter(adapterTasksList);
         }
@@ -292,13 +280,9 @@ public class TaskListBySubTasksFragment extends BaseFragment {
         FilterList();
     }
     public void AddAllTasks(){
-        allTaskList.clear();taskListName.clear();
+        allTaskList.clear();
         Log.e("E","/"+TaskListBySubTaskModel.getInstance().responseObject.size());
         for (int loop = 0; loop < TaskListBySubTaskModel.getInstance().responseObject.size(); loop++) {
-            TaskListName tasklistName = new TaskListName();
-            tasklistName.setTaskListID(TaskListBySubTaskModel.getInstance().responseObject.get(loop).tasklistID);
-            tasklistName.setTaskListName(TaskListBySubTaskModel.getInstance().responseObject.get(loop).taskListName);
-            taskListName.add(tasklistName);
 
             TaskListBySubTaskModel.ResponseObject taskModel = TaskListBySubTaskModel.getInstance().responseObject.get(loop);
             TasksList tasksList = new TasksList();

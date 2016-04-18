@@ -12,6 +12,7 @@ import android.widget.CheckBox;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.algorepublic.zoho.BaseActivity;
 import com.algorepublic.zoho.MainActivity;
@@ -25,6 +26,7 @@ import com.algorepublic.zoho.fragments.ProjectsFragment;
 import com.algorepublic.zoho.fragments.StarRatingFragment;
 import com.algorepublic.zoho.fragments.TasksListFragment;
 import com.algorepublic.zoho.fragments.UserFragment;
+import com.algorepublic.zoho.utils.BaseClass;
 import com.androidquery.AQuery;
 
 /**
@@ -34,6 +36,7 @@ public class AdapterMenuItems extends BaseAdapter{
 
     Context ctx; private LayoutInflater inflater;
     int lastPosition=0;
+    BaseClass baseClass;
     int[] menu_names = {
             R.string.dashboard,
             R.string.projects,
@@ -58,6 +61,7 @@ public class AdapterMenuItems extends BaseAdapter{
     };
     public AdapterMenuItems(Context context) {
         this.ctx = context;
+        baseClass = ((BaseClass) ctx.getApplicationContext());
         inflater = LayoutInflater.from(context);
     }
 
@@ -113,11 +117,11 @@ public class AdapterMenuItems extends BaseAdapter{
         return convertView;
     }
     public void CallFragment(int position){
-        ((AppCompatActivity)ctx).getSupportActionBar().setSubtitle("");
         BaseActivity.drawer.closeDrawer(GravityCompat.START);
         for(int loop = 0;loop < ((AppCompatActivity)ctx).getSupportFragmentManager().getBackStackEntryCount();loop++) {
             ((AppCompatActivity)ctx).getSupportFragmentManager().popBackStack();
         }
+
         if(position==0){
             callFragmentWithReplace(R.id.container, HomeFragment.newInstance(), "HomeFragment");
         }if(position==1){
@@ -127,14 +131,30 @@ public class AdapterMenuItems extends BaseAdapter{
         }if(position==3){
             callFragmentWithReplace(R.id.container, CalendarFragment.newInstance(), "FragmentCalendar");
         }if(position==4){
+            if (baseClass.getSelectedProject().equalsIgnoreCase("0")) {
+                Toast.makeText(ctx, "Please Select Project", Toast.LENGTH_SHORT).show();
+                return;
+            }
             callFragmentWithReplace(R.id.container, DocumentsListFragment.newInstance(), "DocumentsListFragment");
         }if(position==5){
             callFragmentWithReplace(R.id.container, UserFragment.newInstance(),"UserFragment");
         }if(position==6){
+            if (baseClass.getSelectedProject().equalsIgnoreCase("0")) {
+                Toast.makeText(ctx, "Please Select Project", Toast.LENGTH_SHORT).show();
+                return;
+            }
             callFragmentWithReplace(R.id.container, ForumsFragment.newInstance(), "ForumsFragment");
         }if(position==7){
+            if (baseClass.getSelectedProject().equalsIgnoreCase("0")) {
+                Toast.makeText(ctx, "Please Select Project", Toast.LENGTH_SHORT).show();
+                return;
+            }
             callFragmentWithReplace(R.id.container, StarRatingFragment.newInstance(), "StarRatingFragment");
         }if(position==8){
+            if (baseClass.getSelectedProject().equalsIgnoreCase("0")) {
+                Toast.makeText(ctx, "Please Select Project", Toast.LENGTH_SHORT).show();
+                return;
+            }
             callFragmentWithReplace(R.id.container, DepartmentFragment.newInstance(), "DepartmentFragment");
         }
     }

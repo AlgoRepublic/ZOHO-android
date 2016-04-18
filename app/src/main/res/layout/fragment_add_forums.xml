@@ -51,7 +51,7 @@
                 <EditText
                     android:paddingStart="5dp"
                     android:paddingEnd="5dp"
-                    android:background="@drawable/round_border"
+                    android:background="@drawable/round_border_black"
                     android:singleLine="true"
                     android:ellipsize="end"
                     android:id="@+id/comment_title"
@@ -66,44 +66,31 @@
                    />
 
             </RelativeLayout>
-            <RelativeLayout
+            <EditText
+                android:paddingStart="5dp"
+                android:paddingEnd="5dp"
+                android:background="@drawable/round_border_black"
+                android:singleLine="true"
+                android:ellipsize="end"
+                android:layout_marginTop="10dp"
+                android:gravity="center_vertical"
+                android:id="@+id/forum_list"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="45dp"
+                android:editable="false"
+                android:textColor="@color/colorBaseHeader"
+                android:textColorHint="@color/colorBaseMenu"
+                android:imeOptions="actionNext"
+                android:hint="@string/category"
                 android:layout_below="@+id/layout2"
-                android:id="@+id/layout3"
-                >
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/category"
-                    android:textSize="18sp"
-                    android:id="@+id/category"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentStart="true" />
-                <com.h6ah4i.android.materialshadowninepatch.MaterialShadowContainerView
-                    android:layout_width="match_parent"
-                    style="@style/ms9_DefaultShadowStyle"
-                    android:layout_height="wrap_content"
-                    app:ms9_useAmbientShadow="true"
-                    android:layout_below="@+id/category"
-                    app:ms9_affectsDisplayedPosition="true"
-                    app:ms9_shadowTranslationZ="1dp"
-                    app:ms9_shadowElevation="3dp">
-                <org.angmarch.views.NiceSpinner
-                    android:id="@+id/forum_list"
-                    android:layout_width="match_parent"
-                    android:layout_height="55dp"
-                    android:textSize="18sp" />
-                </com.h6ah4i.android.materialshadowninepatch.MaterialShadowContainerView>
-            </RelativeLayout>
+                android:textSize="18sp" />
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/layout3"
+                android:layout_below="@+id/forum_list"
                 >
                 <EditText
-                    android:background="@drawable/round_border"
+                    android:background="@drawable/round_border_black"
                     android:id="@+id/comment_description"
                     android:textSize="18sp"
                     android:layout_width="match_parent"

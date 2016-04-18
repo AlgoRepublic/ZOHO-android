@@ -51,11 +51,12 @@ public class TaskDetailFragment extends BaseFragment {
     DonutProgress seekBarCompat;
     TwoWayView twoWayAssignee;
     SeekBar seekBar;
+    static TaskListName listName;
     static ArrayList<TaskListName> taskListName = new ArrayList<>();
     View views;
     int multiple=5;
     static TasksList tasksList;
-    int progress=0;
+    int progress=0;static int position;
     BaseClass baseClass;
    // WebView webView;
 
@@ -65,15 +66,26 @@ public class TaskDetailFragment extends BaseFragment {
 
 
     // TODO: Rename and change types and number of parameters
-    public static TaskDetailFragment newInstance(TasksList tasks,ArrayList<TaskListName> listNames) {
+    public static TaskDetailFragment newInstance(TasksList tasks,
+                                                 ArrayList<TaskListName> listNames,int pos) {
         tasksList =tasks;
+        position = pos;
         taskListName = listNames;
+        Log.e("Size","S"+taskListName.size());
         fragment = new TaskDetailFragment();
         return fragment;
     }
+
+    @Override
+    public void onResume() {
+        getToolbar().setTitle(getString(R.string.task_detail));
+        super.onResume();
+    }
+
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         setHasOptionsMenu(true);
+        setRetainInstance(true);
         getToolbar().setTitle(getString(R.string.task_detail));
         super.onViewCreated(view, savedInstanceState);
     }
@@ -158,7 +170,9 @@ public class TaskDetailFragment extends BaseFragment {
         aq.id(R.id.subtask).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                callFragmentWithAddBackStack(R.id.container, new TaskListBySubTasksFragment(tasksList.getTaskID()), "TaskListBySubTasksFragment");
+                callFragmentWithAddBackStack(R.id.container, TaskListBySubTasksFragment.newInstance(
+                        tasksList.getTaskID(),taskListName.get(position)), "TaskListBySubTasksFragment");
+                Log.e("Size", "S" + taskListName.get(position).getTaskListName());
             }
         });
         aq.id(R.id.mark_as_done).clicked(new View.OnClickListener() {
@@ -242,18 +256,6 @@ public class TaskDetailFragment extends BaseFragment {
         colorDrawable.setColor(getPriorityWiseColor(TaskByIdModel.getInstance().responseObject.priority));
         aq.id(R.id.priority_bar).getView().setBackground(shapeDrawable);
         views.setBackgroundColor(getPriorityWiseColor(TaskByIdModel.getInstance().responseObject.priority));
-//        if(baseClass.getThemePreference() == R.style.AppThemeBlue) {
-//            seekBar.setth
-//            seekBar.setProgressDrawable(getResources().getDrawable(R.drawable.progress_horizontal));
-//            seekBar.setIndeterminateDrawable(getResources().getDrawable(R.drawable.progress_horizontal));
-//            seekBar.setThumb(getResources().getDrawable(R.drawable.thumb_image));
-//            seekBar.setProgressDrawableTiled(getResources().getDrawable(R.color.colorPrimaryBlue));
-//            seekBar.setSplitTrack(false);
-//            seekBar.setMinimumHeight(6);
-//            seekBar.setMax(6);
-//        }else {
-//            seekBar.setScrollBarStyle(R.style.blackSeekBar);
-//        }
     }
     public void AddTasks(){
         tasksList = new TasksList();
@@ -309,29 +311,13 @@ public class TaskDetailFragment extends BaseFragment {
         super.onCreateOptionsMenu(menu, inflater);
     }
 
-    /**
-     * This hook is called whenever an item in your options menu is selected.
-     * The default implementation simply returns false to have the normal
-     * processing happen (calling the item's Runnable or sending a message to
-     * its Handler as appropriate).  You can use this method for any items
-     * for which you would like to do processing without those other
-     * facilities.
-     * <p>
-     * <p>Derived classes should call through to the base class for it to
-     * perform the default menu handling.
-     *
-     * @param item The menu item that was selected.
-     * @return boolean Return false to allow normal menu processing to
-     * proceed, true to consume it here.
-     * @see #onCreateOptionsMenu
-     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.edit_task:
                 Log.e("S","/"+tasksList.getListAssignees().size());
-                baseClass.setSelectedProject(Integer.toString(tasksList.getProjectID()));
-                if (Integer.parseInt(baseClass.getSelectedProject()) >0) {
+                baseClass.setSelectedTaskProject(Integer.toString(tasksList.getProjectID()));
+                if (Integer.parseInt(baseClass.getSelectedTaskProject()) >0) {
                     baseClass.db.putString("ProjectName", tasksList.getProjectName());
                     baseClass.setSelectedProject(Integer.toString(tasksList.getProjectID()));
                     callFragmentWithBackStack(R.id.container, TaskAddUpdateFragment.newInstance(tasksList,taskListName), "TaskAddUpdateFragment");

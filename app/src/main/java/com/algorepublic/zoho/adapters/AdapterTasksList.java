@@ -102,6 +102,8 @@ public class AdapterTasksList extends BaseAdapter implements StickyListHeadersAd
         aq = new AQuery(convertView);
         if (tasksLists.get(position).progress==100){
             holder.taskImage.setImageResource(R.drawable.ic_notifications_green_24dp);
+        }else{
+            holder.taskImage.setImageResource(R.drawable.task_progress);
         }
         Drawable shapeDrawable = holder.priorityBar.getBackground();
         GradientDrawable colorDrawable = (GradientDrawable) shapeDrawable;
@@ -133,20 +135,21 @@ public class AdapterTasksList extends BaseAdapter implements StickyListHeadersAd
         holder.parentLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                baseClass.setSelectedTaskProject(Integer.toString(tasksLists.get(position).getProjectID()));
                 callFragmentWithBackStack(R.id.container, TaskDetailFragment.newInstance
-                        (tasksLists.get(position),taskListNames), "TaskDetail");
+                        (tasksLists.get(position),taskListNames,position), "TaskDetail");
             }
         });
         holder.btEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                baseClass.setSelectedProject(Integer.toString(tasksLists.get(position).getProjectID()));
+                baseClass.setSelectedTaskProject(Integer.toString(tasksLists.get(position).getProjectID()));
                 if (tasksLists.get(position).getProjectID() > 0) {
                     baseClass.db.putString("ProjectName", tasksLists.get(position).getProjectName());
                     baseClass.setSelectedProject(Integer.toString(tasksLists.get(position).getProjectID()));
                     callFragmentWithBackStack(R.id.container,
                             TaskAddUpdateFragment.newInstance(tasksLists.get(position),
-                                    TasksListFragment.taskListName),
+                                    taskListNames),
                             "TaskAddUpdateFragment");
                 }
             }

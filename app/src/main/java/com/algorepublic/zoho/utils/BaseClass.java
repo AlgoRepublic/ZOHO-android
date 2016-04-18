@@ -58,9 +58,11 @@ public class BaseClass extends Application {
     private String Email = "Email";
     private String UserLanguage = "UserLanguage";
     private String SELECTED_PROJECT = "selected_project";
+    private String SELECTED_TASKPROJECT = "selected_taskproject";
     private String TaskFilterType = "TaskFilterType";
     private String TaskSortType = "TaskSortType";
     private String DocsSortType = "DocsSortType";
+    private String taskListName;
 
 
     public static TinyDB db;
@@ -83,6 +85,27 @@ public class BaseClass extends Application {
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(base);
         MultiDex.install(this);
+    }
+    public void setSelectedProject(String selectedProject) {
+        prefsEditor.putString(SELECTED_PROJECT, selectedProject).commit();
+    }
+    public String getSelectedProject() {
+        return appSharedPrefs.getString(SELECTED_PROJECT, "0");
+    }
+
+    public void setSelectedTaskProject(String selectedProject) {
+        prefsEditor.putString(SELECTED_TASKPROJECT, selectedProject).commit();
+    }
+    public String getSelectedTaskProject() {
+        return appSharedPrefs.getString(SELECTED_TASKPROJECT, "0");
+    }
+
+    public void setTaskListName(String taskList) {
+        taskListName = taskList;
+    }
+
+    public String getTaskListName() {
+        return taskListName;
     }
 
     public void setEmail(String email) {
@@ -381,12 +404,6 @@ public class BaseClass extends Application {
         return type;
     }
 
-    public void setSelectedProject(String selectedProject) {
-        prefsEditor.putString(SELECTED_PROJECT, selectedProject).commit();
-    }
-    public String getSelectedProject() {
-        return appSharedPrefs.getString(SELECTED_PROJECT, "0");
-    }
 
     public String GetTime(String milli){
         Calendar calendar = Calendar.getInstance();

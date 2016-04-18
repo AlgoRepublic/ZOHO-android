@@ -24,7 +24,7 @@
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:ellipsize="end"
-            android:background="@drawable/round_border"
+            android:background="@drawable/round_border_black"
             android:gravity="center"
             android:clickable="true"
             android:focusableInTouchMode="true"

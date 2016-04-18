@@ -49,89 +49,70 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <com.rengwuxian.materialedittext.MaterialEditText
-                    android:id="@+id/project_name"
-                    android:textSize="24sp"
-                    android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:hint="@string/project_name"
-                    android:ellipsize="end"
+                <EditText
+                    android:paddingStart="5dp"
+                    android:paddingEnd="5dp"
+                    android:background="@drawable/round_border_black"
                     android:singleLine="true"
-                    app:met_floatingLabel="normal"
-                    android:layout_marginTop="15dp" />
-                <LinearLayout
-                    android:id="@+id/layout"
+                    android:ellipsize="end"
+                    android:id="@+id/project_name"
+                    android:textSize="30sp"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_below="@id/project_name"
-                    android:orientation="vertical">
-                    <TextView
-                        android:id="@+id/text"
-                        android:layout_marginTop="10dp"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="5dp"
-                        android:text="@string/users"
-                        android:textSize="19.33sp" />
-                    <com.h6ah4i.android.materialshadowninepatch.MaterialShadowContainerView
-                        android:layout_width="match_parent"
-                        style="@style/ms9_DefaultShadowStyle"
-                        android:layout_height="wrap_content"
-                        app:ms9_useAmbientShadow="true"
-                        app:ms9_affectsDisplayedPosition="true"
-                        app:ms9_shadowTranslationZ="1dp"
-                        app:ms9_shadowElevation="3dp">
-                        <org.angmarch.views.NiceSpinner
-                            android:id="@+id/owner_list"
-                            android:layout_width="match_parent"
-                            android:layout_height="55dp"
-                            android:layout_marginStart="5dp"
-                            android:textSize="24sp"
-                            android:layout_marginTop="5dp" />
-                    </com.h6ah4i.android.materialshadowninepatch.MaterialShadowContainerView>
-                </LinearLayout>
-                <com.rengwuxian.materialedittext.MaterialEditText
+                    android:layout_height="70dp"
+                    android:hint="@string/project_name"
+                    android:textColor="@color/colorBaseHeader"
+                    android:textColorHint="@color/colorBaseMenu"/>
+                <EditText
+                    android:paddingStart="5dp"
+                    android:paddingEnd="5dp"
+                    android:background="@drawable/round_border_black"
+                    android:singleLine="true"
+                    android:ellipsize="end"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center_vertical"
+                    android:id="@+id/owner_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:editable="false"
+                    android:textColor="@color/colorBaseHeader"
+                    android:textColorHint="@color/colorBaseMenu"
+                    android:imeOptions="actionNext"
+                    android:hint="@string/users"
+                    android:layout_below="@+id/project_name"
+                    android:textSize="30sp" />
+                <EditText
+                    android:paddingStart="5dp"
+                    android:paddingEnd="5dp"
+                    android:background="@drawable/round_border_black"
                     android:id="@+id/project_desc"
-                    android:textSize="24sp"
-                    android:layout_below="@+id/layout"
+                    android:textSize="22sp"
+                    android:layout_below="@+id/owner_list"
                     android:layout_width="match_parent"
-                    android:layout_height="250dp"
+                    android:layout_height="500dp"
                     android:hint="@string/project_description"
                     android:inputType="textMultiLine"
-                    android:gravity="top|left"
+                    android:gravity="top|start"
                     android:layout_marginTop="10dp"
-                    app:met_floatingLabel="normal" />
-                <LinearLayout
-                    android:id="@+id/layout1"
+                    android:textColor="@color/colorBaseHeader"
+                    android:textColorHint="@color/colorBaseMenu" />
+                <EditText
+                    android:paddingStart="5dp"
+                    android:paddingEnd="5dp"
+                    android:background="@drawable/round_border_black"
+                    android:singleLine="true"
+                    android:ellipsize="end"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center_vertical"
+                    android:id="@+id/departments_list"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="70dp"
+                    android:editable="false"
+                    android:textColor="@color/colorBaseHeader"
+                    android:textColorHint="@color/colorBaseMenu"
+                    android:imeOptions="actionNext"
+                    android:hint="@string/dept_name"
                     android:layout_below="@+id/project_desc"
-                    android:orientation="vertical">
-                    <TextView
-                        android:layout_marginTop="10dp"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/dept_name"
-                        android:layout_marginStart="5dp"
-                        android:textSize="19.33sp" />
-                    <com.h6ah4i.android.materialshadowninepatch.MaterialShadowContainerView
-                        android:layout_width="match_parent"
-                        style="@style/ms9_DefaultShadowStyle"
-                        android:layout_height="wrap_content"
-                        app:ms9_useAmbientShadow="true"
-                        app:ms9_affectsDisplayedPosition="true"
-                        app:ms9_shadowTranslationZ="1dp"
-                        app:ms9_shadowElevation="3dp">
-                        <org.angmarch.views.NiceSpinner
-                            android:id="@+id/departments_list"
-                            android:layout_width="match_parent"
-                            android:layout_height="55dp"
-                            android:textSize="24sp"
-                            android:layout_marginStart="5dp"
-                            android:layout_marginTop="5dp" />
-                    </com.h6ah4i.android.materialshadowninepatch.MaterialShadowContainerView>
-                </LinearLayout>
-
+                    android:textSize="30sp" />
 
                 <TextView
                     android:id="@+id/project_access"
@@ -142,7 +123,7 @@
                     android:paddingLeft="5dp"
                     android:paddingStart="5dp"
                     android:textSize="19sp"
-                    android:layout_below="@id/layout1"/>
+                    android:layout_below="@id/departments_list"/>
 
                 <RadioGroup
                     android:id="@+id/private_public_group"

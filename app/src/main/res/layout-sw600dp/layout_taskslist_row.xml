@@ -109,7 +109,7 @@
                                     android:layout_marginTop="10dp"
                                     android:adjustViewBounds="true"
                                     android:scaleType="fitXY"
-                                    android:src="@drawable/task_progress" />
+                                    android:src="@drawable/task_progress_black" />
 
                                 <RelativeLayout
                                     android:id="@+id/layout1"
@@ -232,7 +232,7 @@
                                     android:layout_width="15dp"
                                     android:layout_height="15dp"
                                     android:layout_margin="5dp"
-                                    android:background="@drawable/circle_left"/>
+                                    android:background="@drawable/circle_left_black"/>
                             </LinearLayout>
                         </RelativeLayout>
                     </com.daimajia.swipe.SwipeLayout>

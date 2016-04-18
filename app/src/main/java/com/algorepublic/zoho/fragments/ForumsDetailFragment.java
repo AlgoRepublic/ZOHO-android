@@ -105,13 +105,6 @@ public class ForumsDetailFragment extends BaseFragment {
         service = new ForumService(getActivity());
         service.getForumsDetail(ForumsModel.getInstance().responseObject.get(Position).ID
                 , true, new CallBack(ForumsDetailFragment.this, "ForumDetails"));
-        aq.id(R.id.comment_description).text(Html.fromHtml(getString(R.string.by) + " " + ForumsModel.getInstance().responseObject.get(Position).user.firstName
-                + " " + ForumsModel.getInstance().responseObject.get(Position).user.lastName));
-//                + ",  " + getString(R.string.last_responce_on) +
-//                baseClass.DateFormatter(ForumsModel.getInstance().responseObject.get(Position).updatedAt) + " "
-//                + baseClass.GetTime(baseClass.DateMilli(ForumsModel.getInstance()
-//                .responseObject.get(Position).updatedAt))));
-
 
         aq.id(R.id.send).clicked(new View.OnClickListener() {
             @Override
@@ -201,8 +194,8 @@ public class ForumsDetailFragment extends BaseFragment {
     }
     public void UpdateValues() {
         aq.id(R.id.comment_title).text(ForumsCommentModel.getInstance().responseObject.title);
-        aq.id(R.id.comment_description).text(getString(R.string.by)+" " + ForumsModel.getInstance().responseObject.get(Position).user.firstName
-                + "," + getString(R.string.last_responce_on) +
+        aq.id(R.id.comment_description).text(getString(R.string.by)+"  " + ForumsModel.getInstance().responseObject.get(Position).user.firstName
+                + " , " + getString(R.string.last_responce_on)+" "+
                 baseClass.DateFormatter(ForumsModel.getInstance().responseObject.get(Position).updatedAt) + " "
                 + baseClass.GetTime(baseClass.DateMilli(ForumsModel.getInstance()
                 .responseObject.get(Position).updatedAt)));

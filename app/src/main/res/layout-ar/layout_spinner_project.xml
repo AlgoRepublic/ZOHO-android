@@ -5,7 +5,7 @@
     style="?android:attr/spinnerItemStyle"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/underline_textview"
+    android:background="@drawable/underline_textview_black"
     android:gravity="left"
     android:padding="5dp"
     android:singleLine="true"

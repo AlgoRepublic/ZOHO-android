@@ -52,7 +52,7 @@
                 <EditText
                     android:paddingStart="5dp"
                     android:paddingEnd="5dp"
-                    android:background="@drawable/round_border"
+                    android:background="@drawable/round_border_black"
                     android:id="@+id/project_name"
                     android:textSize="18sp"
                     android:layout_width="match_parent"
@@ -66,7 +66,7 @@
                 <EditText
                     android:paddingStart="5dp"
                     android:paddingEnd="5dp"
-                    android:background="@drawable/round_border"
+                    android:background="@drawable/round_border_black"
                     android:singleLine="true"
                     android:ellipsize="end"
                     android:layout_marginTop="10dp"
@@ -84,7 +84,7 @@
                 <EditText
                     android:paddingStart="5dp"
                     android:paddingEnd="5dp"
-                    android:background="@drawable/round_border"
+                    android:background="@drawable/round_border_black"
                     android:id="@+id/project_desc"
                     android:textSize="18sp"
                     android:layout_below="@+id/owner_list"
@@ -99,7 +99,7 @@
                 <EditText
                     android:paddingStart="5dp"
                     android:paddingEnd="5dp"
-                    android:background="@drawable/round_border"
+                    android:background="@drawable/round_border_black"
                     android:singleLine="true"
                     android:ellipsize="end"
                     android:layout_marginTop="10dp"
@@ -139,6 +139,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/_private"
                         android:button="@null"
+                        android:drawablePadding="5dp"
                         android:background="@color/light_gray"
                         android:drawableStart="@drawable/radiobutton"
                         android:drawableLeft="@drawable/radiobutton" />
@@ -148,6 +149,7 @@
                         android:layout_height="wrap_content"
                         android:background="@color/light_gray"
                         android:layout_marginTop="5dp"
+                        android:drawablePadding="5dp"
                         android:text="@string/_public"
                         android:button="@null"
                         android:drawableStart="@drawable/radiobutton"

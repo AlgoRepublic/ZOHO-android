@@ -33,7 +33,7 @@
         android:layout_below="@+id/editText"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="15dp"
-        android:background="@drawable/fastlink_white" />
+        android:background="@drawable/fastlink_loading_black" />
 
     <TextView
         android:id="@+id/editText2"

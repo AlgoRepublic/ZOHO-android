@@ -32,7 +32,7 @@
                 app:civ_border_width="1dp"
                 app:civ_border_color="@color/colorBaseHeader"
                 android:layout_centerVertical="true"
-                android:src="@drawable/nav_user" />
+                android:src="@drawable/nav_user_black" />
             <TextView
                 android:id="@+id/user_name"
                 android:layout_width="wrap_content"
@@ -87,7 +87,7 @@
                 android:id="@+id/list_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/underline_textview"
+                android:background="@drawable/underline_textview_black"
                 android:gravity="center_horizontal"
                 android:padding="10dp"
                 android:text="@string/comments"

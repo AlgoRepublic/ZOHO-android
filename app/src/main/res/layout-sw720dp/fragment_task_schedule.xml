@@ -30,7 +30,7 @@
                 android:layout_width="30dp"
                 android:text="@string/start_date"
                 android:textAllCaps="false"
-                android:background="@drawable/calendar"
+                android:background="@drawable/calendar_black"
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
                 android:layout_height="30dp"
@@ -59,7 +59,7 @@
                 android:gravity="center"
                 android:paddingRight="2dp"
                 android:textColor="@color/colorBaseHeader"
-                android:background="@drawable/round_border"
+                android:background="@drawable/round_border_black"
                 android:layout_height="wrap_content"
                 />
 
@@ -83,7 +83,7 @@
                 android:layout_width="30dp"
                 android:text="@string/start_date"
                 android:textAllCaps="false"
-                android:background="@drawable/calendar"
+                android:background="@drawable/calendar_black"
                 android:layout_centerVertical="true"
                 android:layout_height="30dp"
                 />
@@ -111,7 +111,7 @@
                 android:gravity="center"
                 android:paddingRight="2dp"
                 android:textColor="@color/colorBaseHeader"
-                android:background="@drawable/round_border"
+                android:background="@drawable/round_border_black"
                 android:layout_height="wrap_content"
                 />
 

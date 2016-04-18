@@ -28,12 +28,8 @@ import com.algorepublic.zoho.services.TaskListService;
 import com.algorepublic.zoho.utils.BaseClass;
 import com.androidquery.AQuery;
 
-import org.angmarch.views.NiceSpinner;
-
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
-import java.util.LinkedList;
 
 /**
  * Created by android on 2/15/16.
@@ -186,8 +182,10 @@ public class EditProjectFragment extends BaseFragment {
             DialogList dialogList = new DialogList();
             if(ProjectsFragment.allDeptList.get(loop).getDeptID()=="0"){
                 dialogList.setName(getString(R.string.none));
+                dialogList.setID(0);
             }else {
                 dialogList.setName(ProjectsFragment.allDeptList.get(loop).getDeptName());
+                dialogList.setID(Integer.parseInt(ProjectsFragment.allDeptList.get(loop).getDeptID()));
             }
             deptList.add(dialogList);
         }
