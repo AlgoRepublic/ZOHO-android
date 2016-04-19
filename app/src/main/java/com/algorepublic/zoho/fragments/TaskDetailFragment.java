@@ -175,7 +175,7 @@ public class TaskDetailFragment extends BaseFragment {
                 obj.setTaskListName(tasksList.getTaskListName());
                 obj.setTaskListID(tasksList.getTaskID());
                 callFragmentWithAddBackStack(R.id.container, TaskListBySubTasksFragment.newInstance(
-                        obj.getTaskListID(),obj), "TaskListBySubTasksFragment");
+                        tasksList.getTaskID(),obj), "TaskListBySubTasksFragment");
                // Log.e("Size", "S" + taskListName.get(position).getTaskListName());
             }
         });

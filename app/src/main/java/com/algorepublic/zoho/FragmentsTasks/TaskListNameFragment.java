@@ -54,9 +54,9 @@ public class TaskListNameFragment extends BaseFragment {
         }else{
             aq.id(R.id.response_alert).visibility(View.GONE);
         }
-        for(int loop=0;loop<TaskAddUpdateFragment.taskListName.size();loop++) {
+        for(int loop=0;loop<TasksListFragment.taskListName.size();loop++) {
             if (baseClass.db.getInt("TaskListNameID") ==
-                    TaskAddUpdateFragment.taskListName.get(loop).getTaskListID()) {
+                    TasksListFragment.taskListName.get(loop).getTaskListID()) {
                 adapter.setSelectedIndex(loop);
             }
         }
