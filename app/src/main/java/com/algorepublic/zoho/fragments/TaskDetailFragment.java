@@ -55,7 +55,7 @@ public class TaskDetailFragment extends BaseFragment {
     static ArrayList<TaskListName> taskListName = new ArrayList<>();
     View views;
     int multiple=5;
-    static TasksList tasksList;
+   public static TasksList tasksList;
     int progress=0;static int position;
     BaseClass baseClass;
    // WebView webView;
@@ -175,7 +175,7 @@ public class TaskDetailFragment extends BaseFragment {
                 obj.setTaskListName(tasksList.getTaskListName());
                 obj.setTaskListID(tasksList.getTaskID());
                 callFragmentWithAddBackStack(R.id.container, TaskListBySubTasksFragment.newInstance(
-                        tasksList.getTaskID(),obj), "TaskListBySubTasksFragment");
+                        obj.getTaskListID(),obj), "TaskListBySubTasksFragment");
                // Log.e("Size", "S" + taskListName.get(position).getTaskListName());
             }
         });
