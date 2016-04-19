@@ -76,6 +76,12 @@ public class TaskListBySubTasksFragment extends BaseFragment {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        getToolbar().setTitle(getString(R.string.sub_tasks));
+    }
+
+    @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         menu.clear();
         inflater.inflate(R.menu.menu_tasklist, menu);

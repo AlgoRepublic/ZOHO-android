@@ -71,7 +71,7 @@ public class TaskDetailFragment extends BaseFragment {
         tasksList =tasks;
         position = pos;
         taskListName = listNames;
-        Log.e("Size","S"+taskListName.size());
+        Log.e("Size", "S" + taskListName.size());
         fragment = new TaskDetailFragment();
         return fragment;
     }
@@ -93,6 +93,7 @@ public class TaskDetailFragment extends BaseFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -170,9 +171,12 @@ public class TaskDetailFragment extends BaseFragment {
         aq.id(R.id.subtask).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                TaskListName obj = new TaskListName();
+                obj.setTaskListName(tasksList.getTaskListName());
+                obj.setTaskListID(tasksList.getTaskID());
                 callFragmentWithAddBackStack(R.id.container, TaskListBySubTasksFragment.newInstance(
-                        tasksList.getTaskID(),taskListName.get(position)), "TaskListBySubTasksFragment");
-                Log.e("Size", "S" + taskListName.get(position).getTaskListName());
+                        tasksList.getTaskID(),obj), "TaskListBySubTasksFragment");
+               // Log.e("Size", "S" + taskListName.get(position).getTaskListName());
             }
         });
         aq.id(R.id.mark_as_done).clicked(new View.OnClickListener() {
@@ -310,6 +314,8 @@ public class TaskDetailFragment extends BaseFragment {
         inflater.inflate(R.menu.menu_task_details, menu);
         super.onCreateOptionsMenu(menu, inflater);
     }
+
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

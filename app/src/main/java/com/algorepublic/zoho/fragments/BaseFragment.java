@@ -148,7 +148,7 @@ public class BaseFragment extends Fragment {
                 .add(containerId, fragment, tag)
                 .setCustomAnimations(R.anim.slide_in_enter, R.anim.slide_in_exit,
                         R.anim.slide_pop_enter, R.anim.slide_pop_exit)
-                .addToBackStack(null)
+                .addToBackStack(tag)
                 .commit();
     }
     public void callFragmentWithBackStack(int containerId, Fragment fragment, String tag){
@@ -157,7 +157,7 @@ public class BaseFragment extends Fragment {
                 .replace(containerId, fragment, tag)
                 .setCustomAnimations(R.anim.slide_in_enter, R.anim.slide_in_exit,
                         R.anim.slide_pop_enter, R.anim.slide_pop_exit)
-                .addToBackStack(null)
+                .addToBackStack(tag)
                 .commit();
     }
     public void callFragmentWithReplace(int containerId, Fragment fragment, String tag){
@@ -253,7 +253,7 @@ public class BaseFragment extends Fragment {
     public void ClearAllFragments(){
         for(int loop=0;loop<getActivity().getSupportFragmentManager().getBackStackEntryCount();loop++)
         {
-            getActivity().getSupportFragmentManager().popBackStack();
+            getActivity().getSupportFragmentManager().popBackStackImmediate();
         }
     }
 
