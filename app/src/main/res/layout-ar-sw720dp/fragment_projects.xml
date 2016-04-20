@@ -17,11 +17,10 @@
             android:id="@+id/header"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/underline_textview_black"
+            android:background="?attr/underline_textview"
             android:gravity="center_horizontal"
             android:padding="15dp"
             android:text="@string/all_projects"
-            android:textColor="@color/colorContentWrapper"
             android:textSize="22sp"
             android:typeface="monospace" />
     </LinearLayout>

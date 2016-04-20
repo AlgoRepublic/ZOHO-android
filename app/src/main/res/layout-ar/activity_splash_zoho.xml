@@ -14,7 +14,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginTop="20dp"
-        android:background="@drawable/roundable_corner">
+        android:background="?attr/roundable_drawable">
 
         <ImageView
             android:id="@+id/imageView2"
@@ -23,7 +23,7 @@
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="123dp"
-            android:background="@drawable/img_splash" />
+            android:background="?attr/image_splash"/>
 
         <ImageView
             android:id="@+id/imageView3"
@@ -49,7 +49,7 @@
             android:layout_marginBottom="5dp"
             android:textAllCaps="true"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="@color/colorContentWrapper"
+            android:textColor="?attr/color_line"
             android:textSize="16sp" />
 
         <ImageView
