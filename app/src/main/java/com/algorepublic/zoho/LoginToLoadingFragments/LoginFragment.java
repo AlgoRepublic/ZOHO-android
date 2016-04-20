@@ -2,37 +2,21 @@ package com.algorepublic.zoho.LoginToLoadingFragments;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.algorepublic.zoho.BaseActivity;
 import com.algorepublic.zoho.MainActivity;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.fragments.BaseFragment;
 import com.algorepublic.zoho.utils.BaseClass;
-import com.algorepublic.zoho.utils.Constants;
 import com.algorepublic.zoho.utils.LocaleHelper;
 import com.androidquery.AQuery;
-import com.linkedin.platform.APIHelper;
-import com.linkedin.platform.LISession;
-import com.linkedin.platform.LISessionManager;
-import com.linkedin.platform.errors.LIApiError;
-import com.linkedin.platform.errors.LIAuthError;
-import com.linkedin.platform.listeners.ApiListener;
-import com.linkedin.platform.listeners.ApiResponse;
-import com.linkedin.platform.listeners.AuthListener;
-import com.linkedin.platform.utils.Scope;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 /**
  * Created by ahmad on 6/22/15.
@@ -91,7 +75,7 @@ public class LoginFragment extends BaseFragment {
         aq.id(R.id.email_sign_in_button).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               // baseClass.setUserId("1");
+//                baseClass.setUserId("1");
                 LoginClick(v);
             }
         });
