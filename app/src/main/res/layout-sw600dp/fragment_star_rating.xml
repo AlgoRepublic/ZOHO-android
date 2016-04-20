@@ -3,10 +3,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.algorepublic.zoho.utils.CustomExpListView
+    <ExpandableListView
         android:id="@+id/starListView"
         android:divider="@null"
         android:groupIndicator="@null"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentTop="true"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
     <include

@@ -83,7 +83,7 @@ public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
                     new CallBack(DashboardFragment.this, "DashBoardList"));
         }
         setHasOptionsMenu(true);
-        getToolbar().setTitle(getString(R.string.dashboard));
+       // getToolbar().setTitle(getString(R.string.dashboard));
         return view;
     }
     public void AllProjects(Object caller, Object model) {

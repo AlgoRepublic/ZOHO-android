@@ -71,7 +71,6 @@ public class AdapterStarRatingLevelThree extends BaseExpandableListAdapter {
                              boolean isLastChild, View convertView, ViewGroup parent) {
 
         convertView = layoutInflater.inflate(R.layout.frame_layout, parent, false);
-
         callFragmentWithReplace(R.id.star_container,
                 StarRatingLevelQuestionsFragment.
                         newInstance(mListDataHeader.
