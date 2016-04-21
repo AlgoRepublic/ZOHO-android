@@ -122,7 +122,7 @@ public class AdapterProjectsClientList extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 callFragmentWithBackStack(R.id.container, EditProjectFragment.
-                        newInstance(arrayList,position), "EditProjectFragment");
+                        newInstance(arrayList, position), "EditProjectFragment");
             }
         });
         holder.delText.setOnClickListener(new View.OnClickListener() {
@@ -131,6 +131,11 @@ public class AdapterProjectsClientList extends BaseAdapter {
                 NormalDialogCustomAttr(ctx.getString(R.string.deleted_project),position);
             }
         });
+
+        if(baseClass.PERMISSION){
+            ((com.daimajia.swipe.SwipeLayout)aq.id(R.id.swipe).getView()).setSwipeEnabled(false);
+            aq.id(R.id.rightarrow_layout).visibility(View.GONE);
+        }
         return convertView;
     }
     public void DeleteProject(Object caller, Object model) {

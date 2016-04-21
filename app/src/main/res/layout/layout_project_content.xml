@@ -254,6 +254,7 @@
                                 android:layout_alignParentRight="true"
                                 android:layout_height="match_parent"
                                 android:gravity="center"
+                                android:visibility="visible"
                                 android:background="#E2DBDB">
 
                                 <ImageView

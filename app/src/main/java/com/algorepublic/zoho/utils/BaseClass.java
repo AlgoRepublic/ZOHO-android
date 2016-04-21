@@ -63,8 +63,7 @@ public class BaseClass extends Application {
     private String TaskSortType = "TaskSortType";
     private String DocsSortType = "DocsSortType";
     private String taskListName;
-
-
+    public static boolean PERMISSION=false;
     public static TinyDB db;
     private String themePreference = "themePreference";
 
