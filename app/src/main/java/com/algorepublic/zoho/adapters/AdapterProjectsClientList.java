@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -21,6 +22,7 @@ import com.algorepublic.zoho.services.CallBack;
 import com.algorepublic.zoho.services.ProjectsListService;
 import com.algorepublic.zoho.utils.BaseClass;
 import com.androidquery.AQuery;
+import com.daimajia.swipe.SwipeLayout;
 import com.flyco.animation.BounceEnter.BounceLeftEnter;
 import com.flyco.animation.SlideExit.SlideRightExit;
 import com.flyco.dialog.listener.OnBtnClickL;
@@ -31,7 +33,7 @@ import java.util.ArrayList;
 /**
  * Created by android on 1/7/16.
  */
-public class AdapterProjectsClientList extends BaseAdapter {
+public class AdapterProjectsClientList extends BaseAdapter{
 
     private Context ctx;
     private BaseClass baseClass;
@@ -80,6 +82,7 @@ public class AdapterProjectsClientList extends BaseAdapter {
             holder.editText = (TextView) convertView.findViewById(R.id.btEdit);
             holder.delText = (TextView) convertView.findViewById(R.id.btDelete);
             holder.projectDesc = (TextView) convertView.findViewById(R.id.project_desc);
+            holder.swipeLayout = (SwipeLayout) convertView.findViewById(R.id.swipe1);
             convertView.setTag(holder);
         }else{
             holder = (ViewHolder) convertView.getTag();
@@ -132,9 +135,9 @@ public class AdapterProjectsClientList extends BaseAdapter {
             }
         });
 
-        if(baseClass.hasPermission(ctx.getResources().getString(R.string.projects_edit_delete))){
-            ((com.daimajia.swipe.SwipeLayout)aq.id(R.id.swipe).getView()).setSwipeEnabled(false);
-            ((com.daimajia.swipe.SwipeLayout)aq.id(R.id.swipe).getView()).setEnabled(false);
+        if(!baseClass.hasPermission(ctx.getResources().getString(R.string.projects_edit_delete))){
+            holder.swipeLayout.findViewById(R.id.editDeleteView).setVisibility(View.GONE);
+            holder.swipeLayout.setSwipeEnabled(false);
             aq.id(R.id.rightarrow_layout).visibility(View.GONE);
         }
         return convertView;
@@ -206,5 +209,6 @@ public class AdapterProjectsClientList extends BaseAdapter {
         private TextView editText;
         private TextView delText;
         private RelativeLayout parent;
+        private SwipeLayout swipeLayout;
     }
 }

@@ -465,7 +465,7 @@ public class BaseClass extends Application {
     /**
      * @param permissionID
      */
-    public boolean hasPermission(String permissionID){
+    public static boolean hasPermission(String permissionID){
         return db.getListInt("Permissions").contains(permissionID);
     }
 
