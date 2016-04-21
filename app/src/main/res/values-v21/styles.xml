@@ -41,8 +41,8 @@
         <item name="roundable_drawable">@drawable/roundable_corner_blue</item>
         <item name="image_splash">@drawable/img_splash_blue</item>
         <item name="left_header_ar">@drawable/left_header_ar_blue</item>
-
     </style>
+    
 
     <style name="blueButton" parent="@android:style/Widget.Button">
         <item name="android:background">@color/colorSecondaryBlue</item>
@@ -221,6 +221,7 @@
         <item name="textAllCaps">false</item>
         <item name="android:textColor">@android:color/white</item>
     </style>
+    
 
     <attr name="fastlink_login" format="reference"/>
     <attr name="fastlink_loading" format="reference"/>
