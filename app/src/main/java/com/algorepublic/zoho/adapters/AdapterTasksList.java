@@ -135,7 +135,8 @@ public class AdapterTasksList extends BaseAdapter implements StickyListHeadersAd
         holder.parentLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                baseClass.setSelectedTaskProject(Integer.toString(tasksLists.get(position).getProjectID()));
+               String selectedTaskProjectId = Integer.toString(tasksLists.get(position).getProjectID());
+                baseClass.setSelectedTaskProject(selectedTaskProjectId);
                 callFragmentWithBackStack(R.id.container, TaskDetailFragment.newInstance
                         (tasksLists.get(position),taskListNames,position), "TaskDetail");
             }

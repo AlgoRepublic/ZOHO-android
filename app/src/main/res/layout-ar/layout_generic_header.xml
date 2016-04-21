@@ -14,20 +14,20 @@
         android:layout_width="300dp"
         android:layout_height="30dp"
         android:layout_below="@+id/view2"
-        android:layout_marginEnd="5dp"
+        android:layout_marginStart="5dp"
         android:background="@color/white">
 
         <View
             android:layout_width="match_parent"
             android:layout_height="11dp"
             android:layout_alignParentBottom="true"
-            android:background="@color/colorBaseHeader"></View>
+            android:background="?attr/color_line"></View>
 
         <RelativeLayout
             android:layout_width="252dp"
             android:layout_height="match_parent"
             android:layout_alignParentStart="true"
-            android:background="@drawable/left_header_ar">
+            android:background="@drawable/left_header_ar_black">
 
             <TextView
                 android:id="@+id/header"

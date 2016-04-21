@@ -75,7 +75,6 @@ public class LoginFragment extends BaseFragment {
         aq.id(R.id.email_sign_in_button).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // baseClass.setUserId("1");
                 LoginClick(v);
             }
         });

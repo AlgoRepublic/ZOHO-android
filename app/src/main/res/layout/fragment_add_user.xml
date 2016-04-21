@@ -66,7 +66,6 @@
             <EditText
                 android:paddingStart="5dp"
                 android:paddingEnd="5dp"
-                android:background="?attr/round_border"
                 android:singleLine="true"
                 android:ellipsize="end"
                 android:id="@+id/first_name"
@@ -76,8 +75,9 @@
                 android:layout_marginTop="15dp"
                 android:hint="@string/first_name"
                 android:textSize="18sp"
-                android:textColor="@color/colorBaseHeader"
+                android:textColor="?attr/color_line"
                 android:textColorHint="@color/colorBaseMenu"
+                android:background="?attr/round_border"
                 />
 
 
@@ -94,7 +94,7 @@
                 android:layout_marginTop="10dp"
                 android:hint="@string/last_name"
                 android:textSize="18sp"
-                android:textColor="@color/colorBaseHeader"
+                android:textColor="?attr/color_line"
                 android:textColorHint="@color/colorBaseMenu" />
 
             <EditText
@@ -110,7 +110,7 @@
                 android:layout_marginTop="10dp"
                 android:hint="@string/nick_name"
                 android:textSize="18sp"
-                android:textColor="@color/colorBaseHeader"
+                android:textColor="?attr/color_line"
                 android:textColorHint="@color/colorBaseMenu"/>
 
             <EditText
@@ -126,7 +126,7 @@
                 android:layout_marginTop="10dp"
                 android:hint="@string/email"
                 android:textSize="18sp"
-                android:textColor="@color/colorBaseHeader"
+                android:textColor="?attr/color_line"
                 android:textColorHint="@color/colorBaseMenu" />
 
             <EditText
@@ -144,7 +144,7 @@
                 android:inputType="phone"
                 android:imeOptions="actionNext"
                 android:textSize="18sp"
-                android:textColor="@color/colorBaseHeader"
+                android:textColor="?attr/color_line"
                 android:textColorHint="@color/colorBaseMenu" />
 
             <EditText
@@ -159,7 +159,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:editable="false"
-                android:textColor="@color/colorBaseHeader"
+                android:textColor="?attr/color_line"
                 android:textColorHint="@color/colorBaseMenu"
                 android:imeOptions="actionNext"
                 android:hint="@string/user_role"

@@ -1,8 +1,8 @@
 package com.algorepublic.zoho.FragmentsTasks;
 
 
+import android.app.FragmentManager;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,14 +12,10 @@ import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.fragments.BaseFragment;
 import com.algorepublic.zoho.utils.BaseClass;
 import com.androidquery.AQuery;
-import com.fourmob.datetimepicker.date.DatePickerDialog;
-
+import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 import java.util.Calendar;
 
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class TaskScheduleFragment extends BaseFragment {
 
     static TaskScheduleFragment fragment;
@@ -90,9 +86,9 @@ public class TaskScheduleFragment extends BaseFragment {
             DatePickerDialog datePickerDialog = DatePickerDialog.newInstance(startDatePicker
                     ,start_year,
                     start_month,
-                    start_day,
-                    false);
-            datePickerDialog.show(getFragmentManager(),DATEPICKER_TAG);
+                    start_day
+                    );
+            datePickerDialog.show(getActivity().getFragmentManager(),DATEPICKER_TAG);
             }
         });
         aq.id(R.id.btn_end_date).clicked(new View.OnClickListener() {
@@ -101,9 +97,9 @@ public class TaskScheduleFragment extends BaseFragment {
             DatePickerDialog datePickerDialog = DatePickerDialog.newInstance(endDatePicker
                     ,end_year,
                     end_month,
-                    end_day,
-                    false);
-            datePickerDialog.show(getFragmentManager(),DATEPICKER_TAG);
+                    end_day
+                    );
+            datePickerDialog.show(getActivity().getFragmentManager(),DATEPICKER_TAG);
             }
         });
         return view;

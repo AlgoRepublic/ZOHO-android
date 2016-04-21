@@ -50,7 +50,7 @@
                             app:civ_shadow="true"
                             app:civ_border_width="1dp"
                             app:civ_shadow_color="@color/colorBaseMenu"
-
+                            app:civ_border_color="?attr/color_line"
                             android:src="?attr/nav_user"
                             android:id="@+id/feed_image" />
                         <TextView

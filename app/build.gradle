@@ -34,7 +34,6 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile project(':linkedin-sdk')
     compile project(':FlycoAnimation_Lib')
-    compile project(':datetimepicker')
     compile project(':agendacalendarview')
     compile project(':FlycoDialog_Lib')
     compile project(':dropboxChooserSDK')
@@ -81,6 +80,8 @@ dependencies {
     compile 'com.daimajia.easing:library:1.0.1@aar'
     compile 'com.android.support:cardview-v7:23.2.1'
     compile 'com.android.support:multidex:1.0.1'
+    compile 'com.wdullaer:materialdatetimepicker:2.3.0'
+
 }
 
 

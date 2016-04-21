@@ -87,6 +87,13 @@ public class TasksListFragment extends BaseFragment implements SwipeRefreshLayou
         return super.onOptionsItemSelected(item);
 
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getToolbar().setTitle(getString(R.string.tasks));
+    }
+
     @Override
     public void onRefresh() {
         if(baseClass.getSelectedProject().equalsIgnoreCase("0")) {

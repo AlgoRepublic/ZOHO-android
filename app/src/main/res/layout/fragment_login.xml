@@ -28,7 +28,7 @@
                 android:layout_marginLeft="5dp"
                 android:layout_toRightOf="@+id/lang_text"
                 android:scaleType="fitXY"
-                android:src="@drawable/globe" />
+                android:src="?attr/globe" />
 
             <TextView
                 android:id="@+id/lang_text"
@@ -74,7 +74,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="15dp"
-                android:background="@drawable/roundable_corner"
+                android:background="?attr/roundable_drawable"
                 android:orientation="vertical">
 
                 <RelativeLayout
@@ -86,11 +86,11 @@
                     <EditText
                         android:paddingStart="5dp"
                         android:paddingEnd="5dp"
-                        android:background="@drawable/round_border_black"
+                        android:background="?attr/round_border"
                         android:singleLine="true"
                         android:ellipsize="end"
-                        android:textColor="@color/colorBaseHeader"
-                        android:textColorHint="@color/colorBaseMenu"
+                        android:textColor="?attr/color_line"
+                        android:textColorHint="?attr/hint_color"
                         android:id="@+id/email"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -118,7 +118,7 @@
                     <EditText
                         android:paddingStart="5dp"
                         android:paddingEnd="5dp"
-                        android:background="@drawable/round_border_black"
+                        android:background="?attr/round_border"
                         android:singleLine="true"
                         android:ellipsize="end"
                         android:id="@+id/password"
@@ -134,8 +134,8 @@
                         android:maxLines="1"
                         android:gravity="center|left"
                         android:textSize="18sp"
-                        android:textColor="@color/colorBaseHeader"
-                        android:textColorHint="@color/colorBaseMenu"
+                        android:textColor="?attr/color_line"
+                        android:textColorHint="?attr/hint_color"
                         android:textCursorDrawable="@null" />
 
                 </RelativeLayout>
@@ -178,7 +178,7 @@
                         android:text="@string/login"
                         android:gravity="center"
                         android:textSize="16sp"
-                        android:background="@drawable/glass_button" />
+                        android:background="?attr/round_border" />
                 </RelativeLayout>
 
                 <LinearLayout
