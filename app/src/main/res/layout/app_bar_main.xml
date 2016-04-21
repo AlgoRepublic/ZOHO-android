@@ -18,6 +18,7 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
+            app:title="@string/feeds"
             android:layout_gravity="center"
             app:popupTheme="@style/AppTheme.PopupOverlay" />
 

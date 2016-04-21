@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<permissions>
+    <entry key="dashboard_feeds_view">18</entry>
+    <entry key="projects_view">212</entry>
+    <entry key="projects_add">224</entry>
+    <entry key="projects_edit_delete">128</entry>
+    <entry key="tasks_view">2</entry>
+    <entry key="tasks_add">150</entry>
+    <entry key="tasks_edit">2</entry>
+    <entry key="tasks_delete">2</entry>
+    <entry key="calendar_view">1</entry>
+    <entry key="calendar_edit_delete">2</entry>
+    <entry key="documents_view">33</entry>
+    <entry key="documents_add">34</entry>
+    <entry key="documents_delete">44</entry>
+    <entry key="documents_comments_add">37</entry>
+    <entry key="documents_comments_edit_delete_own_comment">39</entry>
+    <entry key="documents_comments_edit_delete_others_comment">40</entry>
+    <entry key="documents_comments_view">38</entry>
+    <entry key="users_view">213</entry>
+    <entry key="users_add">216</entry>
+    <entry key="users_edit_others">218</entry>
+    <entry key="users_profile">217</entry>
+    <entry key="forums_add">52</entry>
+    <entry key="forums_add_comment">57</entry>
+    <entry key="forums_edit_delete_own_comments">55</entry>
+    <entry key="forums_edit_delete_others_comments">56</entry>
+    <entry key="star_rating_view">226</entry>
+</permissions>

@@ -59,7 +59,7 @@
                 android:layout_height="match_parent"
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
-                android:background="@drawable/fastlink_login_black" />
+                android:background="?attr/fastlink_login" />
         </RelativeLayout>
 
         <ScrollView
@@ -119,7 +119,6 @@
                         android:completionHint="@string/prompt_password"
                         android:hint="@string/prompt_password"
                         android:imeOptions="actionDone"
-                        android:imeActionId="@integer/add_comment"
                         android:imeActionLabel="@string/login"
                         android:inputType="textPassword"
                         android:maxLines="1"

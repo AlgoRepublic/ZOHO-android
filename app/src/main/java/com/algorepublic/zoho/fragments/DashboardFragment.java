@@ -1,6 +1,5 @@
 package com.algorepublic.zoho.fragments;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -20,7 +19,6 @@ import com.dacer.androidcharts.BarView;
 import com.dacer.androidcharts.PieHelper;
 import com.dacer.androidcharts.PieView;
 
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 /**
@@ -83,7 +81,7 @@ public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
                     new CallBack(DashboardFragment.this, "DashBoardList"));
         }
         setHasOptionsMenu(true);
-        getToolbar().setTitle(getString(R.string.dashboard));
+       // getToolbar().setTitle(getString(R.string.dashboard));
         return view;
     }
     public void AllProjects(Object caller, Object model) {

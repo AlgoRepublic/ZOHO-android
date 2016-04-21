@@ -28,7 +28,7 @@
                     android:id="@+id/lblListHeader"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="20sp"
+                    android:textSize="22sp"
                     android:text="@string/new_project"
                     android:gravity="center"
                     android:textColor="@color/white" />
@@ -65,8 +65,8 @@
                 <EditText
                     android:paddingStart="5dp"
                     android:paddingEnd="5dp"
-                    android:background="@drawable/round_border_black"
                     android:singleLine="true"
+                    android:background="@drawable/round_border_black"
                     android:ellipsize="end"
                     android:layout_marginTop="10dp"
                     android:gravity="center_vertical"
@@ -85,7 +85,7 @@
                     android:paddingEnd="5dp"
                     android:background="@drawable/round_border_black"
                     android:id="@+id/project_desc"
-                    android:textSize="22sp"
+                    android:textSize="30sp"
                     android:layout_below="@+id/owner_list"
                     android:layout_width="match_parent"
                     android:layout_height="500dp"
@@ -114,6 +114,7 @@
                     android:layout_below="@+id/project_desc"
                     android:textSize="30sp" />
 
+
                 <TextView
                     android:id="@+id/project_access"
                     android:layout_width="match_parent"
@@ -122,7 +123,7 @@
                     android:paddingTop="10dp"
                     android:paddingLeft="5dp"
                     android:paddingStart="5dp"
-                    android:textSize="19sp"
+                    android:textSize="22sp"
                     android:layout_below="@id/departments_list"/>
 
                 <RadioGroup
@@ -135,21 +136,23 @@
                     <RadioButton
                         android:id="@+id/private_radio"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="70dp"
                         android:text="@string/_private"
                         android:button="@null"
-                        android:textSize="24sp"
+                        android:textSize="30sp"
                         android:background="@color/white"
+                        android:drawableStart="@drawable/radiobutton"
                         android:drawableLeft="@drawable/radiobutton" />
                     <RadioButton
                         android:id="@+id/public_radio"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="70dp"
                         android:text="@string/_public"
                         android:button="@null"
-                        android:textSize="24sp"
+                        android:textSize="30sp"
                         android:layout_marginTop="5dp"
                         android:background="@color/white"
+                        android:drawableStart="@drawable/radiobutton"
                         android:drawableLeft="@drawable/radiobutton" />
                 </RadioGroup>
 
@@ -167,8 +170,9 @@
                         android:layout_height="wrap_content"
                         android:text="@string/_active"
                         android:button="@null"
-                        android:textSize="22sp"
+                        android:textSize="24sp"
                         android:background="@color/white"
+                        android:drawableStart="@drawable/radiobutton"
                         android:drawableLeft="@drawable/radiobutton"/>
                     <RadioButton
                         android:id="@+id/archive_radio"
@@ -176,8 +180,9 @@
                         android:layout_height="wrap_content"
                         android:text="@string/_archive"
                         android:button="@null"
-                        android:textSize="22sp"
+                        android:textSize="24sp"
                         android:background="@color/white"
+                        android:drawableStart="@drawable/radiobutton"
                         android:drawableLeft="@drawable/radiobutton"/>
                 </RadioGroup>
             </RelativeLayout>

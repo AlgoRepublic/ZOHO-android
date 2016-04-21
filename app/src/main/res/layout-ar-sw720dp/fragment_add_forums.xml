@@ -93,7 +93,7 @@
                 >
                 <com.rengwuxian.materialedittext.MaterialEditText
                     android:id="@+id/comment_description"
-                    android:textSize="25sp"
+                    android:textSize="30sp"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:hint="@string/content"

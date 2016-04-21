@@ -61,7 +61,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
                 android:adjustViewBounds="true"
-                android:src="@drawable/fastlink_login_black" />
+                android:background="?attr/fastlink_login" />
         </RelativeLayout>
 
         <ScrollView
@@ -86,8 +86,8 @@
                     android:orientation="vertical">
 
                     <EditText
-                        android:paddingStart="5dp"
-                        android:paddingEnd="5dp"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
                         android:background="@drawable/round_border_black"
                         android:ellipsize="end"
                         android:id="@+id/email"
@@ -99,8 +99,6 @@
                         android:inputType="textEmailAddress"
                         android:maxLines="1"
                         android:textSize="25sp"
-                        android:paddingLeft="10dp"
-                        android:paddingRight="10dp"
                         android:singleLine="true"
                         android:text="admin@admin.com"
                         android:textColor="@color/colorBaseHeader"
@@ -117,8 +115,6 @@
                     android:orientation="vertical">
 
                     <EditText
-                        android:paddingStart="5dp"
-                        android:paddingEnd="5dp"
                         android:background="@drawable/round_border_black"
                         android:ellipsize="end"
                         android:id="@+id/password"
@@ -127,7 +123,6 @@
                         android:completionHint="@string/prompt_password"
                         android:hint="@string/prompt_password"
                         android:imeOptions="actionDone"
-                        android:imeActionId="@integer/add_comment"
                         android:imeActionLabel="@string/login"
                         android:inputType="textPassword"
                         android:maxLines="1"

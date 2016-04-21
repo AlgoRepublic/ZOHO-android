@@ -31,7 +31,7 @@
                     android:id="@+id/lblListHeader"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="20sp"
+                    android:textSize="18sp"
                     android:text="@string/new_project"
                     android:gravity="center"
                     android:textColor="@color/white" />
@@ -88,7 +88,7 @@
                     android:paddingEnd="5dp"
                     android:background="@drawable/round_border_black"
                     android:id="@+id/project_desc"
-                    android:textSize="22sp"
+                    android:textSize="25sp"
                     android:layout_below="@+id/owner_list"
                     android:layout_width="match_parent"
                     android:layout_height="500dp"

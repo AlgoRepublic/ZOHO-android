@@ -23,7 +23,7 @@
                 android:id="@+id/lblListHeader"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:text="@string/new_forum_post"
                 android:gravity="center"
                 android:textColor="@color/white" />
@@ -48,16 +48,19 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/layout2">
 
-                <com.rengwuxian.materialedittext.MaterialEditText
+                <EditText
                     android:id="@+id/comment_title"
-                    android:textSize="20sp"
+                    android:textSize="25sp"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="60dp"
                     android:hint="@string/title"
                     android:inputType="textMultiLine"
                     android:layout_marginTop="10dp"
-                    app:met_floatingLabel="normal"
-                    app:met_singleLineEllipsis="true" />
+                    android:paddingStart="5dp"
+                    android:paddingEnd="5dp"
+                    android:textColor="@color/colorBaseHeader"
+                    android:textColorHint="@color/colorBaseMenu"
+                    android:background="@drawable/round_border_black" />
 
             </RelativeLayout>
             <EditText
@@ -84,8 +87,11 @@
                 android:layout_below="@+id/forum_list"
                 >
                 <com.rengwuxian.materialedittext.MaterialEditText
+                    android:textColor="@color/colorBaseHeader"
+                    android:textColorHint="@color/colorBaseMenu"
+                    android:background="@drawable/round_border_black"
                     android:id="@+id/comment_description"
-                    android:textSize="20sp"
+                    android:textSize="25sp"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:hint="@string/content"

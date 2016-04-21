@@ -20,7 +20,7 @@
             android:gravity="center_horizontal"
             android:padding="10dp"
             android:text="@string/comments"
-            android:textSize="14sp"
+            android:textSize="12sp"
             android:typeface="monospace" />
     </LinearLayout>
     <RelativeLayout

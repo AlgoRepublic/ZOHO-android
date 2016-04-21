@@ -61,7 +61,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
                 android:adjustViewBounds="true"
-                android:src="@drawable/fastlink_login_black" />
+                android:background="?attr/fastlink_login" />
         </RelativeLayout>
 
         <ScrollView
@@ -85,7 +85,7 @@
                     android:layout_margin="15dp"
                     android:orientation="vertical">
 
-                    <AutoCompleteTextView
+                    <EditText
                         android:id="@+id/email"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -117,12 +117,10 @@
                         android:id="@+id/password"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-
                         android:background="@drawable/round_border_black"
                         android:completionHint="@string/prompt_password"
                         android:hint="@string/prompt_password"
                         android:imeOptions="actionDone"
-                        android:imeActionId="@integer/add_comment"
                         android:imeActionLabel="@string/login"
                         android:inputType="textPassword"
                         android:maxLines="1"

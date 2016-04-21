@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -54,7 +55,8 @@ public class AdapterStarRatingLevelOne extends BaseExpandableListAdapter {
         LayoutInflater layoutInflater = (LayoutInflater) this.mContext
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = layoutInflater.inflate(R.layout.fragment_star_rating, parent, false);
-        CustomExpListView mListView = (CustomExpListView) view.findViewById(R.id.starListView);
+        CustomExpListView mListView = new CustomExpListView(mContext);
+
         mListView.setAdapter(new AdapterStarRatingLevelTwo
                 (this.mContext, mListDataHeader.get(groupPosition).getLevelTwos()));
 
@@ -85,6 +87,7 @@ public class AdapterStarRatingLevelOne extends BaseExpandableListAdapter {
     @Override
     public void onGroupExpanded(int groupPosition) {
         super.onGroupExpanded(groupPosition);
+
 
     }
     @Override
