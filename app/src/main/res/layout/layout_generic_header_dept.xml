@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="20dp"
         android:layout_alignParentTop="true"></View>
-    <RelativeLayoutTHanks
+    <RelativeLayout
         android:id="@+id/top_parent"
         android:layout_below="@+id/view2"
         android:layout_width="match_parent"
@@ -100,5 +100,5 @@
     </RelativeLayout>
 </RelativeLayout>
         </com.daimajia.swipe.SwipeLayout>
-</RelativeLayoutTHanks>
+</RelativeLayout>
 </RelativeLayout>

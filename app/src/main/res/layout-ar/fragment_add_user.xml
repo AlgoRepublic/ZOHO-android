@@ -25,7 +25,7 @@
             android:padding="5dp"
             android:layout_marginBottom="6dp"
             android:layout_marginTop="2dp"
-            android:background="@color/colorContentWrapper"
+            android:background="?attr/color_line"
             android:layout_width="match_parent">
             <TextView
                 android:id="@+id/lblListHeader"
@@ -79,8 +79,8 @@
                 android:layout_marginTop="15dp"
                 android:hint="@string/first_name"
                 android:textSize="18sp"
-                android:textColor="@color/colorBaseHeader"
-                android:textColorHint="@color/colorBaseMenu"/>
+                android:textColor="?attr/color_line"
+                android:textColorHint="?attr/hint_color"/>
 
 
             <EditText
@@ -96,8 +96,8 @@
                 android:layout_marginTop="10dp"
                 android:hint="@string/last_name"
                 android:textSize="18sp"
-                android:textColor="@color/colorBaseHeader"
-                android:textColorHint="@color/colorBaseMenu"/>
+                android:textColor="?attr/color_line"
+                android:textColorHint="?attr/hint_color"/>
 
             <EditText
                 android:paddingStart="5dp"
@@ -112,8 +112,9 @@
                 android:layout_marginTop="10dp"
                 android:hint="@string/nick_name"
                 android:textSize="18sp"
-                android:textColor="@color/colorBaseHeader"
-                android:textColorHint="@color/colorBaseMenu"/>
+                android:textColor="?attr/color_line"
+
+                android:textColorHint="?attr/hint_color"/>
 
             <EditText
                 android:paddingStart="5dp"
@@ -128,8 +129,8 @@
                 android:layout_marginTop="10dp"
                 android:hint="@string/email"
                 android:textSize="18sp"
-                android:textColor="@color/colorBaseHeader"
-                android:textColorHint="@color/colorBaseMenu"/>
+                android:textColor="?attr/color_line"
+                android:textColorHint="?attr/color_line"/>
 
             <EditText
                 android:paddingStart="5dp"
@@ -145,8 +146,8 @@
                 android:hint="@string/phone_number"
                 android:inputType="phone"
                 android:textSize="18sp"
-                android:textColor="@color/colorBaseHeader"
-                android:textColorHint="@color/colorBaseMenu"/>
+                android:textColor="?attr/color_line"
+                android:textColorHint="?attr/hint_color"/>
 
             <EditText
                 android:paddingStart="5dp"
@@ -160,8 +161,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:editable="false"
-                android:textColor="@color/colorBaseHeader"
-                android:textColorHint="@color/colorBaseMenu"
+                android:textColor="?attr/color_line"
+                android:textColorHint="?attr/hint_color"
                 android:imeOptions="actionNext"
                 android:hint="@string/user_role"
                 android:layout_below="@+id/user_phoneno"
