@@ -25,7 +25,6 @@
                 android:hint="Type a comment"
                 android:textColor="@color/colorBaseHeader"
                 android:textColorHint="@color/colorBaseMenu"
-                android:imeActionId="@integer/add_comment"
                 android:background="@color/white"
                 android:imeOptions="actionDone"
                 android:padding="10dp"

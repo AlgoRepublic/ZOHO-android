@@ -7,6 +7,7 @@ import android.app.UiModeManager;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
+import android.content.res.XmlResourceParser;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.ConnectivityManager;
@@ -14,6 +15,7 @@ import android.net.NetworkInfo;
 import android.support.multidex.MultiDex;
 import android.text.format.DateFormat;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -23,6 +25,8 @@ import android.widget.TextView;
 
 import com.algorepublic.zoho.MainActivity;
 import com.algorepublic.zoho.R;
+
+import org.xmlpull.v1.XmlPullParser;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -35,7 +39,10 @@ import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -75,8 +82,8 @@ public class BaseClass extends Application {
         this.prefsEditor = appSharedPrefs.edit();
         db = new TinyDB(this);
         if (LocaleHelper.getLanguage(this).equalsIgnoreCase("ar"))
-        LocaleHelper.onCreate(this, "ar");
-            else
+            LocaleHelper.onCreate(this, "ar");
+        else
             LocaleHelper.onCreate(this, "en");
 
     }
@@ -453,5 +460,65 @@ public class BaseClass extends Application {
             convertView.findViewById(R.id.listClick).setBackground(mContext.getResources().getDrawable(R.drawable.roundable_corner_selected));
             // ((ImageView) convertView.findViewById(R.id.imageViewlevelone)).setImageDrawable(drawable);
         }
+    }
+
+    /**
+     * @param permissionID
+     */
+    public boolean hasPermission(String permissionID){
+        return db.getListInt("Permissions").contains(permissionID);
+    }
+
+    public static Map<String, String> getHashMapResource(Context c, int hashMapResId) {
+        Map<String, String> map = null;
+        XmlResourceParser parser = c.getResources().getXml(hashMapResId);
+
+        String key = null, value = null;
+
+        try {
+            int eventType = parser.getEventType();
+
+            while (eventType != XmlPullParser.END_DOCUMENT) {
+                if (eventType == XmlPullParser.START_DOCUMENT) {
+                    Log.d("utils", "Start document");
+                }
+                else if (eventType == XmlPullParser.START_TAG) {
+                    if (parser.getName().equals("map")) {
+                        boolean isLinked = parser.getAttributeBooleanValue(null, "linked", false);
+
+                        map = isLinked
+                                ? new LinkedHashMap<String, String>()
+                                : new HashMap<String, String>();
+                    }
+                    else if (parser.getName().equals("entry")) {
+                        key = parser.getAttributeValue(null, "key");
+
+                        if (null == key) {
+                            parser.close();
+                            return null;
+                        }
+                    }
+                }
+                else if (eventType == XmlPullParser.END_TAG) {
+                    if (parser.getName().equals("entry")) {
+                        map.put(key, value);
+                        key = null;
+                        value = null;
+                    }
+                }
+                else if (eventType == XmlPullParser.TEXT) {
+                    if (null != key) {
+                        value = parser.getText();
+                    }
+                }
+                eventType = parser.next();
+            }
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+
+        return map;
     }
 }

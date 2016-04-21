@@ -128,12 +128,13 @@ public class AdapterProjectsClientList extends BaseAdapter {
         holder.delText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                NormalDialogCustomAttr(ctx.getString(R.string.deleted_project),position);
+                NormalDialogCustomAttr(ctx.getString(R.string.deleted_project), position);
             }
         });
 
-        if(baseClass.PERMISSION){
+        if(baseClass.hasPermission(ctx.getResources().getString(R.string.projects_edit_delete))){
             ((com.daimajia.swipe.SwipeLayout)aq.id(R.id.swipe).getView()).setSwipeEnabled(false);
+            ((com.daimajia.swipe.SwipeLayout)aq.id(R.id.swipe).getView()).setEnabled(false);
             aq.id(R.id.rightarrow_layout).visibility(View.GONE);
         }
         return convertView;

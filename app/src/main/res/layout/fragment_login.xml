@@ -129,7 +129,6 @@
                         android:imeOptions="actionDone"
                         android:paddingLeft="10dp"
                         android:paddingRight="10dp"
-                        android:imeActionId="@integer/add_comment"
                         android:imeActionLabel="@string/login"
                         android:inputType="textPassword"
                         android:maxLines="1"

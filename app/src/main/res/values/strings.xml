@@ -359,4 +359,34 @@
     <string name="alphabetically">Alphabetically</string>
     <string name="task_list">Task List</string>
     <string name="cancel">Cancel</string>
+
+
+    <!--Permission-->
+    <string name="dashboard_feeds_view">18</string>
+    <string name="projects_view">212</string>
+    <string name="projects_add">224</string>
+    <string name="projects_edit_delete">128</string>
+    <string name="tasks_view">2</string>
+    <string name="tasks_add">150</string>
+    <string name="tasks_edit">2</string>
+    <string name="tasks_delete">2</string>
+    <string name="calendar_view">1</string>
+    <string name="calendar_edit_delete">2</string>
+    <string name="documents_view">33</string>
+    <string name="documents_add">34</string>
+    <string name="documents_delete">44</string>
+    <string name="documents_comments_add">37</string>
+    <string name="documents_comments_edit_delete_own_comment">39</string>
+    <string name="documents_comments_edit_delete_others_comment">40</string>
+    <string name="documents_comments_view">38</string>
+    <string name="users_view">213</string>
+    <string name="users_add">216</string>
+    <string name="users_edit_others">218</string>
+    <string name="users_profile">217</string>
+    <string name="forums_add">52</string>
+    <string name="forums_add_comment">57</string>
+    <string name="forums_edit_delete_own_comments">55</string>
+    <string name="forums_edit_delete_others_comments">56</string>
+    <string name="star_rating_view">226</string>
+
 </resources>

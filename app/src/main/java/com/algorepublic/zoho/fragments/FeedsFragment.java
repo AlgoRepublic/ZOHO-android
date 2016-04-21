@@ -44,21 +44,23 @@ public class FeedsFragment extends BaseFragment implements SwipeRefreshLayout.On
         baseClass = ((BaseClass) getActivity().getApplicationContext());
         service   = new DashBoardService(getActivity());
 
-        if(!baseClass.PERMISSION){
+        if(baseClass.hasPermission(getResources().getString(R.string.dashboard_feeds_view))){
+            if (baseClass.getSelectedProject().equalsIgnoreCase("0")) {
+                service.getFeedsByUser(baseClass.getUserId(), true,
+                        new CallBack(FeedsFragment.this, "Feeds"));
+            }else {
+                service.getFeedsByProject(baseClass.getSelectedProject(), true,
+                        new CallBack(FeedsFragment.this, "Feeds"));
+            }
+        }else {
             aq.id(R.id.response_alert).visibility(View.VISIBLE);
             aq.id(R.id.alertMessage).text("You don't have permissions to view Feeds.");
             swipeRefreshLayout.setRefreshing(false);
             swipeRefreshLayout.setEnabled(false);
         }
-        else if (baseClass.getSelectedProject().equalsIgnoreCase("0")) {
-            service.getFeedsByUser(baseClass.getUserId(), true,
-                    new CallBack(FeedsFragment.this, "Feeds"));
-        }else {
-            service.getFeedsByProject(baseClass.getSelectedProject(), true,
-                    new CallBack(FeedsFragment.this, "Feeds"));
-        }
+
         setHasOptionsMenu(true);
-       // getToolbar().setTitle(getString(R.string.feeds));
+        // getToolbar().setTitle(getString(R.string.feeds));
         return view;
     }
 
