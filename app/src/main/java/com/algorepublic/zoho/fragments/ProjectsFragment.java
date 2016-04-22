@@ -170,7 +170,7 @@ public class ProjectsFragment extends BaseFragment implements SwipeRefreshLayout
      * request will not be send and error msg will show
      */
     public void requestApiBasedOnPermission(){
-        if(!baseClass.hasPermission(getResources().getString(R.string.projects_view))){
+        if(baseClass.hasPermission(getResources().getString(R.string.projects_view))){
             service.getAllProjectsByUser_API(baseClass.getUserId(), true, new CallBack(this, "AllProjects"));
             service.getProjectsByClient_API(baseClass.getUserId(), false, new CallBack(this, "ProjectsByClient"));
             service.getProjectsByDepartment(baseClass.getUserId(), false, new CallBack(this, "ProjectsByDepartment"));

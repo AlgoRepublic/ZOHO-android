@@ -68,7 +68,8 @@ public class ForumsCommentModel {
         @Expose
         public String lastName;
 
-
+        @SerializedName("ID")
+        public Integer ID;
         @SerializedName("ProfileImagePath")
         @Expose
         public String profileImagePath;

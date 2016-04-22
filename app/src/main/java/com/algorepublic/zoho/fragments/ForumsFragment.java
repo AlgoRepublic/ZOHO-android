@@ -57,16 +57,18 @@ public class ForumsFragment extends BaseFragment{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_forums, container, false);
-        setHasOptionsMenu(true);
         aq = new AQuery(getActivity(), view);
         baseClass = ((BaseClass) getActivity().getApplicationContext());
         ForumService service = new ForumService(getActivity());
+
         if (baseClass.getSelectedProject().equalsIgnoreCase("0")) {
             Toast.makeText(getActivity(), getString(R.string.select_project), Toast.LENGTH_SHORT).show();
         }else {
             service.getForumsList(baseClass.getSelectedProject(), true,
                     new CallBack(ForumsFragment.this, "ForumListCallback"));
         }
+        // check if has permissions to add New Forum
+        if(baseClass.hasPermission(getResources().getString(R.string.forums_add)))
         setHasOptionsMenu(true);
         getToolbar().setTitle(getString(R.string.forums));
         return view;
@@ -74,7 +76,6 @@ public class ForumsFragment extends BaseFragment{
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        setRetainInstance(true);
         getToolbar().setTitle(getString(R.string.forums));
         super.onViewCreated(view, savedInstanceState);
     }

@@ -23,6 +23,7 @@ import com.algorepublic.zoho.services.CallBack;
 import com.algorepublic.zoho.services.DocumentsService;
 import com.algorepublic.zoho.utils.BaseClass;
 import com.androidquery.AQuery;
+import com.daimajia.swipe.SwipeLayout;
 import com.flyco.animation.BounceEnter.BounceLeftEnter;
 import com.flyco.animation.SlideExit.SlideRightExit;
 import com.flyco.dialog.listener.OnBtnClickL;
@@ -75,7 +76,7 @@ public class AdapterDocumentsList extends BaseAdapter implements StickyListHeade
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
 
-       convertView = l_Inflater.inflate(R.layout.layout_docs_row, null);
+        convertView = l_Inflater.inflate(R.layout.layout_docs_row, null);
 
         aq = new AQuery(convertView);
 
@@ -103,8 +104,8 @@ public class AdapterDocumentsList extends BaseAdapter implements StickyListHeade
             @Override
             public void onClick(View v) {
                 DocumentsListFragment.deleteDocsList.
-                                    add(documentsLists.get(position).getID());
-        callForDocsDelete(ctx.getResources().getString(R.string.delete_doc));
+                        add(documentsLists.get(position).getID());
+                callForDocsDelete(ctx.getResources().getString(R.string.delete_doc));
             }
         });
         aq.id(R.id.parent1).clicked(new View.OnClickListener() {
@@ -120,6 +121,7 @@ public class AdapterDocumentsList extends BaseAdapter implements StickyListHeade
                 }
             }
         });
+        applyPermissions();
 //        aq.id(R.id.doc_checkbox).clicked(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
@@ -190,11 +192,10 @@ public class AdapterDocumentsList extends BaseAdapter implements StickyListHeade
                     @Override
                     public void onBtnClick() {
                         dialog.dismiss();
-                        if(ID==-1) {
+                        if (ID == -1) {
                             service.deleteDocument(DocumentsListFragment.deleteDocsList
                                     , true, new CallBack(AdapterDocumentsList.this, "DeleteDoc"));
-                        }
-                        else{
+                        } else {
                             service.deleteDocumentByTask(ID, DocumentsListFragment.deleteDocsList
                                     , true, new CallBack(AdapterDocumentsList.this, "DeleteDoc"));
                         }
@@ -206,7 +207,7 @@ public class AdapterDocumentsList extends BaseAdapter implements StickyListHeade
         if (GeneralModel.getInstance().responseObject==true) {
             UpdatedAfterDelete();
             Toast.makeText(ctx, ctx.getString(R.string.doc_deleted), Toast.LENGTH_SHORT).show();
-       }
+        }
         else
         {
             Toast.makeText(ctx, ctx.getString(R.string.invalid_credential), Toast.LENGTH_SHORT).show();
@@ -245,6 +246,14 @@ public class AdapterDocumentsList extends BaseAdapter implements StickyListHeade
     public long getHeaderId(int position) {
         //return the first character of the country as ID because this is what headers are based upon
         return Long.parseLong(documentsLists.get(position).getUpdatedMilli().substring(0, 5));
+    }
+    private void applyPermissions(){
+        if(!baseClass.hasPermission(ctx.getResources().getString(R.string.documents_delete))
+                ){
+            ((SwipeLayout)aq.id(R.id.swipe3).getView()).findViewById(R.id.editDeleteView).setVisibility(View.GONE);
+            ((SwipeLayout)aq.id(R.id.swipe3).getView()).setSwipeEnabled(false);
+            aq.id(R.id.rightarrow_layout).visibility(View.GONE);
+        }
     }
     public String GetTime(String milli){
         Calendar calendar = Calendar.getInstance();

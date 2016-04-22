@@ -78,7 +78,7 @@ public class AdapterUser extends BaseAdapter {
             holder.userTitle = (TextView) convertView.findViewById(R.id.user_title);
             holder.userEmail = (TextView) convertView.findViewById(R.id.user_email);
             holder.userRole = (TextView) convertView.findViewById(R.id.user_role);
-            holder.swipeLayout=(SwipeLayout)convertView.findViewById(R.id.swipe);
+            holder.swipeLayout=(SwipeLayout)convertView.findViewById(R.id.swipe5);
             convertView.setTag(holder);
         }else{
             holder = (ViewHolder) convertView.getTag();
@@ -111,7 +111,18 @@ public class AdapterUser extends BaseAdapter {
                 NormalDialogCustomAttr(ctx.getString(R.string.deleted_user),lastPosition);
             }
         });
+        applyPermissions(holder,position);
         return convertView;
+    }
+    private void applyPermissions(ViewHolder holder,int position){
+        if(!baseClass.hasPermission(ctx.getResources().getString(R.string.users_edit_others))
+                && getItem(position).ID != Integer.parseInt(baseClass.getUserId())
+              //  && !baseClass.hasPermission(ctx.getResources().getString(R.string.tasks_delete))
+                ){
+            holder.swipeLayout.findViewById(R.id.editDeleteView).setVisibility(View.GONE);
+            holder.swipeLayout.setSwipeEnabled(false);
+            aq.id(R.id.rightarrow_layout).visibility(View.GONE);
+        }
     }
     public void DeleteUser(Object caller, Object model){
         GeneralModel.getInstance().setList((GeneralModel) model);

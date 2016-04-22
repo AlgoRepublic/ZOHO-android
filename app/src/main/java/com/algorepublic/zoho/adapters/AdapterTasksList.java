@@ -28,6 +28,7 @@ import com.algorepublic.zoho.services.CallBack;
 import com.algorepublic.zoho.services.TaskListService;
 import com.algorepublic.zoho.utils.BaseClass;
 import com.androidquery.AQuery;
+import com.daimajia.swipe.SwipeLayout;
 import com.flyco.animation.BounceEnter.BounceLeftEnter;
 import com.flyco.animation.SlideExit.SlideRightExit;
 import com.flyco.dialog.listener.OnBtnClickL;
@@ -95,6 +96,7 @@ public class AdapterTasksList extends BaseAdapter implements StickyListHeadersAd
             holder.taskImage = (ImageView) convertView.findViewById(R.id.task_image);
             holder.priorityBar = (View) convertView.findViewById(R.id.priority_bar);
             holder.parentLayout = (RelativeLayout) convertView.findViewById(R.id.parent1);
+            holder.swipeLayout = (SwipeLayout) convertView.findViewById(R.id.swipe2);
             convertView.setTag(holder);
         }else{
             holder = (ViewHolder) convertView.getTag();
@@ -135,7 +137,7 @@ public class AdapterTasksList extends BaseAdapter implements StickyListHeadersAd
         holder.parentLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               String selectedTaskProjectId = Integer.toString(tasksLists.get(position).getProjectID());
+                String selectedTaskProjectId = Integer.toString(tasksLists.get(position).getProjectID());
                 baseClass.setSelectedTaskProject(selectedTaskProjectId);
                 callFragmentWithBackStack(R.id.container, TaskDetailFragment.newInstance
                         (tasksLists.get(position),taskListNames,position), "TaskDetail");
@@ -177,8 +179,23 @@ public class AdapterTasksList extends BaseAdapter implements StickyListHeadersAd
                 return false;
             }
         });
+        applyPermissions(holder);
 
         return convertView;
+    }
+
+    private void applyPermissions(ViewHolder holder){
+        if(!baseClass.hasPermission(ctx.getResources().getString(R.string.tasks_edit)) &&
+                !baseClass.hasPermission(ctx.getResources().getString(R.string.tasks_delete))
+                ){
+            holder.swipeLayout.findViewById(R.id.editDeleteView).setVisibility(View.GONE);
+            holder.swipeLayout.setSwipeEnabled(false);
+            aq.id(R.id.rightarrow_layout).visibility(View.GONE);
+        }else if(!baseClass.hasPermission(ctx.getResources().getString(R.string.tasks_edit))){
+            holder.swipeLayout.findViewById(R.id.btEdit).setVisibility(View.GONE);
+        }else if(!baseClass.hasPermission(ctx.getResources().getString(R.string.tasks_delete))){
+            holder.swipeLayout.findViewById(R.id.btDelete).setVisibility(View.GONE);
+        }
     }
     static class ViewHolder {
         private TextView taskTitle;
@@ -191,6 +208,7 @@ public class AdapterTasksList extends BaseAdapter implements StickyListHeadersAd
         private TextView btEdit;
         private TextView btDelete;
         private RelativeLayout parentLayout;
+        private SwipeLayout swipeLayout;
     }
     public void Filter(String text){
         text = text.toLowerCase(Locale.getDefault());
@@ -223,7 +241,7 @@ public class AdapterTasksList extends BaseAdapter implements StickyListHeadersAd
             if (Long.parseLong(tasksLists.get(position).getHeader()) < System.currentTimeMillis()) {
                 if(baseClass.DateFormatter(tasksLists.get(position).getHeader())
                         .equalsIgnoreCase(baseClass.DateFormatter(String.valueOf(System.currentTimeMillis()))))
-                aq_header.id(R.id.header).text("Up Coming");
+                    aq_header.id(R.id.header).text("Up Coming");
                 else
                     aq_header.id(R.id.header).text("Over Due");
             }else if (tasksLists.get(position).getHeader().equalsIgnoreCase("62135535600000")
@@ -260,9 +278,9 @@ public class AdapterTasksList extends BaseAdapter implements StickyListHeadersAd
         if(baseClass.getTaskFilterType().equalsIgnoreCase("TaskList"))
         {
             if(tasksLists.get(position).getTaskListNameID() == 0)
-            aq_header.id(R.id.header).text(ctx.getString(R.string.pref_header_general));
+                aq_header.id(R.id.header).text(ctx.getString(R.string.pref_header_general));
             else
-            aq_header.id(R.id.header).text(tasksLists.get(position).getTaskListName());
+                aq_header.id(R.id.header).text(tasksLists.get(position).getTaskListName());
         }
         return convertView;
     }
@@ -280,8 +298,8 @@ public class AdapterTasksList extends BaseAdapter implements StickyListHeadersAd
                     type=1;
             }
             else if (tasksLists.get(position).getHeader().equalsIgnoreCase("62135535600000")
-                || tasksLists.get(position).getHeader().equalsIgnoreCase("-62135571600000")
-                || tasksLists.get(position).getHeader().equalsIgnoreCase("62135571600000"))
+                    || tasksLists.get(position).getHeader().equalsIgnoreCase("-62135571600000")
+                    || tasksLists.get(position).getHeader().equalsIgnoreCase("62135571600000"))
                 type = 2;
             else
                 type=3;
@@ -349,7 +367,7 @@ public class AdapterTasksList extends BaseAdapter implements StickyListHeadersAd
         if (GeneralModel.getInstance().responseCode.equalsIgnoreCase("100")) {
             tasksLists.remove(clickedPosition);notifyDataSetChanged();
             Toast.makeText(ctx, ctx.getString(R.string.task_deleted), Toast.LENGTH_SHORT).show();
-       }
+        }
         else
         {
             Toast.makeText(ctx, ctx.getString(R.string.response_error), Toast.LENGTH_SHORT).show();
