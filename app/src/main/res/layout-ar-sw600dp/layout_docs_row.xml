@@ -37,7 +37,7 @@
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
         <com.daimajia.swipe.SwipeLayout
-            android:id="@+id/swipe"
+            android:id="@+id/swipe3"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:drag_edge="left"
@@ -45,6 +45,7 @@
             <LinearLayout
                 android:layout_width="80dp"
                 android:layout_height="match_parent"
+                android:id="@+id/editDeleteView"
                 android:orientation="horizontal"
                 >
                 <TextView

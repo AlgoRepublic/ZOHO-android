@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -49,6 +50,7 @@ public class DocsPreviewFragment extends BaseFragment {
     ForumService forumService;
     static DocumentsList docObject;
     BaseClass baseClass;
+    private LinearLayout layoutCommentsAdd;
     public static Button btSend;
     public static EditText comment_user;
     public static boolean flag= false;
@@ -101,6 +103,7 @@ public class DocsPreviewFragment extends BaseFragment {
         listView = (ListView) view.findViewById(R.id.listView_comments);
         btSend = (Button) view.findViewById(R.id.send);
         comment_user = (EditText) view.findViewById(R.id.comment_user);
+        layoutCommentsAdd = (LinearLayout) view.findViewById(R.id.layoutCommentsAdd);
         aq = new AQuery(view);
         service = new DocumentsService(getActivity());
         forumService = new ForumService(getActivity());
@@ -149,8 +152,19 @@ public class DocsPreviewFragment extends BaseFragment {
                 }
             }
         });
+        if(baseClass.hasPermission(getResources().getString(R.string.documents_comments_view)))
         service.getDocumentComments(docObject.getID(), true,
                 new CallBack(DocsPreviewFragment.this, "AllDocComments"));
+        else{
+            aq.id(R.id.response_alert).visibility(View.VISIBLE);
+            aq.id(R.id.alertMessage).text("You don't have permissions to view Comments.");
+        }
+
+        if(!baseClass.hasPermission(getResources().getString(R.string.documents_comments_add))){
+           // btSend.setVisibility(View.GONE);
+            layoutCommentsAdd.setVisibility(View.GONE);
+
+        }
         return view;
     }
     public void downloadFile(String url, String title, String extention) {
@@ -216,6 +230,7 @@ public class DocsPreviewFragment extends BaseFragment {
             taskComments.setUserName(TaskCommentsModel.getInstance().responseObject.get(loop).userObject.firstName);
             taskComments.setUserImagePath(TaskCommentsModel.getInstance().responseObject.get(loop).userObject.profileImagePath);
             taskComments.setUserImageID(TaskCommentsModel.getInstance().responseObject.get(loop).userObject.profilePictureID);
+            taskComments.setUserId(TaskCommentsModel.getInstance().responseObject.get(loop).userObject.ID);
             arrayList.add(taskComments);
         }
         adapter.notifyDataSetChanged();
@@ -231,6 +246,7 @@ public class DocsPreviewFragment extends BaseFragment {
             taskComments.setUserName(baseClass.getFirstName());
             taskComments.setUserImagePath(baseClass.getProfileImage());
             taskComments.setUserImageID(baseClass.getProfileImageID());
+            taskComments.setUserId(Integer.parseInt(baseClass.getUserId()));
             arrayList.add(taskComments);
             adapter.notifyDataSetChanged();
             aq.id(R.id.response_alert).visibility(View.GONE);

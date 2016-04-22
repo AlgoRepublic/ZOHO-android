@@ -61,7 +61,7 @@ public class CalendarFragment extends BaseFragment implements CalendarPickerCont
     public CalendarFragment() {
         // Required empty public constructor
         if (receiver ==null)
-        receiver = new Receiver();
+            receiver = new Receiver();
     }
 
     /**
@@ -94,6 +94,7 @@ public class CalendarFragment extends BaseFragment implements CalendarPickerCont
         // Inflate the layout for this fragment_forums
         View view  = inflater.inflate(R.layout.fragment_calendar, container, false);
         aq = new AQuery(getActivity(), view);
+        if(baseClass.hasPermission(getResources().getString(R.string.calendar_edit_delete)))
         setHasOptionsMenu(true);
         getToolbar().setTitle(getString(R.string.calendar));
         baseClass = ((BaseClass) getActivity().getApplicationContext());
@@ -115,12 +116,18 @@ public class CalendarFragment extends BaseFragment implements CalendarPickerCont
         super.onViewCreated(view, savedInstanceState);
 
         service = new TaskListService(getActivity());
-        if(baseClass.getSelectedProject().equalsIgnoreCase("0")) {
-            service.getTasksListByOwner(baseClass.getUserId(), true,
-                    new CallBack(CalendarFragment.this, "OwnerTasksList"));
-        }else{
-            service.getTasksListByProject(baseClass.getSelectedProject(), true,
-                    new CallBack(CalendarFragment.this, "OwnerTasksList"));
+        if(baseClass.hasPermission(getResources().getString(R.string.calendar_view))){
+            if(baseClass.getSelectedProject().equalsIgnoreCase("0")) {
+                service.getTasksListByOwner(baseClass.getUserId(), true,
+                        new CallBack(CalendarFragment.this, "OwnerTasksList"));
+            }else{
+                service.getTasksListByProject(baseClass.getSelectedProject(), true,
+                        new CallBack(CalendarFragment.this, "OwnerTasksList"));
+            }
+        }else {
+            calendarView.setVisibility(View.GONE);
+            aq.id(R.id.response_alert).visibility(View.VISIBLE);
+            aq.id(R.id.alertMessage).text("You don't have permissions to view Calendar.");
         }
     }
 
@@ -130,7 +137,7 @@ public class CalendarFragment extends BaseFragment implements CalendarPickerCont
             if (allTaskList.get(loop).getStartMilli().equalsIgnoreCase("62135535600000")
                     || allTaskList.get(loop).getStartMilli().equalsIgnoreCase("-62135571600000")
                     || allTaskList.get(loop).getStartMilli().equalsIgnoreCase("62135571600000")){
-                    startDate = getString(R.string.no_date);
+                startDate = getString(R.string.no_date);
             }else {
                 startDate =allTaskList.get(loop).getStartDate();
             }
@@ -256,7 +263,7 @@ public class CalendarFragment extends BaseFragment implements CalendarPickerCont
 
     @Override
     public void onEventSelected(CalendarEvent event) {
-       Log.e("LOG_TAG", String.format("Selected event: %s", event));
+        Log.e("LOG_TAG", String.format("Selected event: %s", event));
     }
 
     @Override
@@ -272,7 +279,7 @@ public class CalendarFragment extends BaseFragment implements CalendarPickerCont
             String action=null;int position;
             position = arg1.getIntExtra("position",0);
             if(arg1.hasExtra("Action"))
-             action = arg1.getExtras().getString("Action");
+                action = arg1.getExtras().getString("Action");
             if(action.contentEquals("Detail")) {
                 callFragmentWithBackStack(R.id.container, TaskDetailFragment.newInstance
                         (allTaskList.get(position), taskListName,position), "TaskDetail");

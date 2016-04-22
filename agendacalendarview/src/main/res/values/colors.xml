@@ -22,7 +22,7 @@
     <color name="colorBaseMenu">#B3B5B7</color>
     <color name="colorBaseDark">#ff303030</color>
     <color name="colorWhite">#FFFFFF</color>
-
+    <color name="white">#FFFFFF</color>
     <!-- Colors for Agenda view -->
     <color name="agenda_list_header_divider">#E4E4E4</color>
     <!-- General -->

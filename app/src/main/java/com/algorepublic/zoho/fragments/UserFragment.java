@@ -51,18 +51,16 @@ public class UserFragment extends BaseFragment implements SwipeRefreshLayout.OnR
         View view  = inflater.inflate(R.layout.fragment_user, container, false);
         baseClass = ((BaseClass) getActivity().getApplicationContext());
         aq = new AQuery(getActivity(), view);
+        // check if has permissions to add New Project
+        if(baseClass.hasPermission(getResources().getString(R.string.users_add)))
         setHasOptionsMenu(true);
         adapterUser=new AdapterUser(getActivity());
         getToolbar().setTitle(getString(R.string.users));
         swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe_refresh_layout);
         swipeRefreshLayout.setOnRefreshListener(this);
         service = new UserService(getActivity());
-        if(baseClass.getSelectedProject().equalsIgnoreCase("0")){
-            service.getAllUsers(true, new CallBack(UserFragment.this, "UserList"));
-        }else {
-            service.getUserListByProject(Integer.parseInt(baseClass.getSelectedProject()), true,
-                    new CallBack(UserFragment.this, "UserList"));
-        }
+        requestApiBasedOnPermission();
+
             return view;
     }
     @Override
@@ -72,7 +70,26 @@ public class UserFragment extends BaseFragment implements SwipeRefreshLayout.OnR
         super.onCreateOptionsMenu(menu, inflater);
     }
 
-
+    /**
+     * If User Doesn't have permissions to view Users
+     * request will not be send and error msg will show
+     */
+    public void requestApiBasedOnPermission(){
+        if(baseClass.hasPermission(getResources().getString(R.string.users_view))){
+            if(baseClass.getSelectedProject().equalsIgnoreCase("0")){
+                service.getAllUsers(true, new CallBack(UserFragment.this, "UserList"));
+            }else {
+                service.getUserListByProject(Integer.parseInt(baseClass.getSelectedProject()), true,
+                        new CallBack(UserFragment.this, "UserList"));
+            }
+        }else {
+            aq.id(R.id.layout_bottom).visibility(View.GONE);
+            aq.id(R.id.response_alert).visibility(View.VISIBLE);
+            aq.id(R.id.alertMessage).text("You don't have permissions to view Users.");
+            swipeRefreshLayout.setRefreshing(false);
+            swipeRefreshLayout.setEnabled(false);
+        }
+    }
     public void UserList(Object caller, Object model){
         UserListModel.getInstance().setList((UserListModel) model);
         aq.id(R.id.alertMessage).text(getString(R.string.no_users));

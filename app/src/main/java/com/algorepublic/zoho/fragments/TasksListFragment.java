@@ -62,7 +62,6 @@ public class TasksListFragment extends BaseFragment implements SwipeRefreshLayou
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         getToolbar().setTitle(getString(R.string.tasks));
-        setRetainInstance(true);
         super.onViewCreated(view, savedInstanceState);
     }
     @Override
@@ -107,7 +106,9 @@ public class TasksListFragment extends BaseFragment implements SwipeRefreshLayou
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_taskslist, container, false);
-        setHasOptionsMenu(true);
+        // check if has permissions to add New Project
+        if(baseClass.hasPermission(getResources().getString(R.string.tasks_add)))
+            setHasOptionsMenu(true);
         radioGroup = (RadioGroup) view.findViewById(R.id.radioGroup);
         searchView = (SearchView) view.findViewById(R.id.searchView);
         listView = (StickyListHeadersListView) view.findViewById(R.id.list_taskslist);
@@ -123,13 +124,7 @@ public class TasksListFragment extends BaseFragment implements SwipeRefreshLayou
         }
         applyLightBackground(aq.id(R.id.layout_bottom).getView(), baseClass);
         taskListService = new TaskListService(getActivity());
-        if(baseClass.getSelectedProject().equalsIgnoreCase("0")) {
-            taskListService.getTasksListByOwner(baseClass.getUserId(), true,
-                    new CallBack(TasksListFragment.this, "OwnerTasksList"));
-        }else{
-            taskListService.getTasksListByProject(baseClass.getSelectedProject(), true,
-                    new CallBack(TasksListFragment.this, "OwnerTasksList"));
-        }
+        requestApiBasedOnPermission();
         aq.id(R.id.all).checked(true);
        searchView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -199,6 +194,27 @@ public class TasksListFragment extends BaseFragment implements SwipeRefreshLayou
             }
         });
         return view;
+    }
+    /**
+     * If User Doesn't have permissions to view Tasks
+     * request will not be send and error msg will show
+     */
+    public void requestApiBasedOnPermission(){
+        if(baseClass.hasPermission(getResources().getString(R.string.tasks_view))){
+            if(baseClass.getSelectedProject().equalsIgnoreCase("0")) {
+                taskListService.getTasksListByOwner(baseClass.getUserId(), true,
+                        new CallBack(TasksListFragment.this, "OwnerTasksList"));
+            }else{
+                taskListService.getTasksListByProject(baseClass.getSelectedProject(), true,
+                        new CallBack(TasksListFragment.this, "OwnerTasksList"));
+            }
+        }else {
+            aq.id(R.id.layout_bottom).visibility(View.GONE);
+            aq.id(R.id.response_alert).visibility(View.VISIBLE);
+            aq.id(R.id.alertMessage).text("You don't have permissions to view Tasks.");
+            swipeRefreshLayout.setRefreshing(false);
+            swipeRefreshLayout.setEnabled(false);
+        }
     }
     public void SortList(){
         if(baseClass.getTaskSortType().equalsIgnoreCase(getString(R.string.all))){

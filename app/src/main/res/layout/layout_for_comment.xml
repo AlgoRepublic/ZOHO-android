@@ -3,15 +3,12 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <LinearLayout
-        android:weightSum="2"
-        android:id="@+id/layout_comment"
-        android:background="@color/colorBaseWrapper"
-        android:padding="5dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+    android:layout_height="wrap_content">
+
         <LinearLayout
+            android:id="@+id/layout_comment"
+            android:background="@color/colorBaseWrapper"
+            android:padding="5dp"
             android:orientation="horizontal"
             android:weightSum="2"
             android:layout_width="match_parent"
@@ -26,7 +23,6 @@
                 android:inputType="textMultiLine"
                 android:textColor="@color/colorBaseHeader"
                 android:textColorHint="@color/colorBaseMenu"
-                android:imeActionId="@integer/add_comment"
                 android:background="@color/white"
                 android:imeOptions="actionDone"
                 android:textSize="16sp"
@@ -49,4 +45,3 @@
                 android:textStyle="bold"/>
         </LinearLayout>
     </LinearLayout>
-</LinearLayout>

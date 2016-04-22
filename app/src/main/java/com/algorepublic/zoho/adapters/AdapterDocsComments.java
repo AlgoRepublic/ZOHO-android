@@ -19,6 +19,7 @@ import com.algorepublic.zoho.utils.BaseClass;
 import com.algorepublic.zoho.utils.Constants;
 import com.androidquery.AQuery;
 import com.bumptech.glide.Glide;
+import com.daimajia.swipe.SwipeLayout;
 import com.mikhaellopez.circularimageview.CircularImageView;
 
 
@@ -44,7 +45,7 @@ public class AdapterDocsComments extends BaseAdapter {
         return DocsPreviewFragment.arrayList.size();
     }
 
-    public Object getItem(int position) {
+    public TaskComments getItem(int position) {
         return DocsPreviewFragment.arrayList.get(position);
     }
 
@@ -52,6 +53,32 @@ public class AdapterDocsComments extends BaseAdapter {
         return position;
     }
 
+    /**
+     * apply delete comments permissions based on user id;
+     * @param holder
+     * @param pos
+     */
+    private void applyPermissions(ViewHolder holder,int pos){
+        if(!baseClass.hasPermission(ctx.getResources().getString(R.string.documents_comments_edit_delete_own_comment))
+                && !baseClass.hasPermission(ctx.getResources().getString(R.string.documents_comments_edit_delete_others_comment))
+                ){
+            holder.swipeLayout.findViewById(R.id.editDeleteView).setVisibility(View.GONE);
+            holder.swipeLayout.setSwipeEnabled(false);
+            aq.id(R.id.rightarrow_layout).visibility(View.GONE);
+        }else if(!baseClass.hasPermission(ctx.getResources().getString(R.string.documents_comments_edit_delete_own_comment))
+                && getItem(pos).getUserId()==Integer.parseInt(baseClass.getUserId())
+                ){
+            holder.swipeLayout.findViewById(R.id.editDeleteView).setVisibility(View.GONE);
+            holder.swipeLayout.setSwipeEnabled(false);
+            aq.id(R.id.rightarrow_layout).visibility(View.GONE);
+        }else if(!baseClass.hasPermission(ctx.getResources().getString(R.string.documents_comments_edit_delete_others_comment))
+                && getItem(pos).getUserId()!=Integer.parseInt(baseClass.getUserId())
+                ){
+            holder.swipeLayout.findViewById(R.id.editDeleteView).setVisibility(View.GONE);
+            holder.swipeLayout.setSwipeEnabled(false);
+            aq.id(R.id.rightarrow_layout).visibility(View.GONE);
+        }
+    }
     public View getView(final int position, View convertView, ViewGroup parent) {
         final ViewHolder holder;
         if (convertView == null) {
@@ -60,6 +87,7 @@ public class AdapterDocsComments extends BaseAdapter {
             holder.taskComment = (TextView) convertView.findViewById(R.id.comment_description);
             holder.userName = (TextView) convertView.findViewById(R.id.comment_title);
             holder.userImage = (CircularImageView) convertView.findViewById(R.id.comment_image);
+            holder.swipeLayout = (SwipeLayout) convertView.findViewById(R.id.swipe4);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
@@ -93,6 +121,7 @@ public class AdapterDocsComments extends BaseAdapter {
                         new CallBack(AdapterDocsComments.this, "DeleteComment"));
             }
         });
+        applyPermissions(holder,position);
         return convertView;
     }
     public void DeleteComment(Object caller, Object model){
@@ -109,5 +138,6 @@ public class AdapterDocsComments extends BaseAdapter {
         TextView taskComment;
         TextView userName;
         CircularImageView userImage;
+        SwipeLayout swipeLayout;
     }
 }

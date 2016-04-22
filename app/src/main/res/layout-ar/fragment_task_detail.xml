@@ -109,8 +109,9 @@
                         <TextView
                             android:id="@+id/start_date"
                             android:layout_width="wrap_content"
-                            android:text="start date"
+                            android:text="N/A"
                             android:paddingLeft="3dp"
+                            android:gravity="right"
                             android:paddingStart="3dp"
                             android:layout_height="wrap_content"
                             android:textSize="12sp"
@@ -133,7 +134,7 @@
                         <TextView
                             android:id="@+id/end_date"
                             android:layout_width="wrap_content"
-                            android:text="end date"
+                            android:text="N/A"
                             android:paddingLeft="3dp"
                             android:paddingStart="3dp"
                             android:layout_height="wrap_content"
@@ -165,7 +166,7 @@
                         <TextView
                             android:id="@+id/category"
                             android:layout_width="wrap_content"
-                            android:text="dsds"
+                            android:text="N/A"
                             android:paddingLeft="3dp"
                             android:paddingStart="3dp"
                             android:layout_height="wrap_content"

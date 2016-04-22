@@ -124,7 +124,7 @@
                         <TextView
                             android:id="@+id/start_date"
                             android:layout_width="wrap_content"
-                            android:text="dsds"
+                            android:text="N/A"
                             android:paddingLeft="5dp"
                             android:paddingStart="5dp"
                             android:layout_height="wrap_content"
@@ -145,7 +145,7 @@
                         <TextView
                             android:id="@+id/end_date"
                             android:layout_width="wrap_content"
-                            android:text="dsds"
+                            android:text="N/A"
                             android:paddingLeft="5dp"
                             android:paddingStart="5dp"
                             android:layout_height="wrap_content"
@@ -177,7 +177,7 @@
                         <TextView
                             android:id="@+id/category"
                             android:layout_width="wrap_content"
-                            android:text="dsds"
+                            android:text="N/A"
                             android:paddingLeft="3dp"
                             android:paddingStart="3dp"
                             android:layout_height="wrap_content"
@@ -291,11 +291,9 @@
                     </RelativeLayout>
 
                     <com.github.lzyzsd.circleprogress.DonutProgress
-                        android:layout_marginLeft="50dp"
-                        android:layout_marginStart="50dp"
                         android:id="@+id/circularprogressBar"
-                        android:layout_width="130dp"
-                        android:layout_height="130dp"
+                        android:layout_width="140dp"
+                        android:layout_height="140dp"
                         app:max="100"
                         android:layout_centerHorizontal="true"
                         android:layout_margin="5dp"
@@ -317,7 +315,7 @@
     <LinearLayout
         android:id="@+id/parent2"
         android:layout_width="match_parent"
-        android:layout_height="70dp"
+        android:layout_height="65dp"
         android:weightSum="4.72"
         android:layout_alignParentBottom="true"
         android:background="@color/colorContentWrapper"
@@ -331,19 +329,18 @@
             android:layout_height="match_parent">
             <RelativeLayout
                 android:id="@+id/comment"
-                android:layout_width="60dp"
-
+                android:layout_width="75dp"
                 android:layout_centerHorizontal="true"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content">
                 <TextView
                     android:id="@+id/comment_count"
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
                     android:text="0"
                     android:gravity="center"
                     android:singleLine="true"
-                    android:textSize="14sp"
-
+                    android:textSize="8dp"
+                    android:layout_alignParentRight="true"
                     android:background="@drawable/bubble_alert_white"
                     android:layout_alignParentTop="true"
                     android:textColor="@color/colorBaseWrapper" />
@@ -352,8 +349,6 @@
                     android:id="@+id/delete1"
                     android:layout_width="25dp"
                     android:src="@drawable/task_comment"
-                    android:layout_alignParentRight="true"
-                    android:layout_alignParentEnd="true"
                     android:layout_centerHorizontal="true"
                     android:layout_above="@+id/text1"
                     android:layout_height="25dp" />
@@ -366,14 +361,14 @@
                     android:gravity="center"
                     android:layout_alignParentBottom="true"
                     android:textColor="@color/white"
-                    android:textSize="14sp"
-                    android:layout_marginBottom="3dp"/>
+                    android:textSize="13sp"
+                    android:padding="2dp"/>
             </RelativeLayout>
 
         </RelativeLayout>
         <View android:layout_height="fill_parent"
-            android:layout_width="0dp"
-            android:layout_weight=".03"
+            android:layout_width="1dp"
+
             android:background="@color/white"/>
         <RelativeLayout
             android:id="@+id/documents"
@@ -384,18 +379,19 @@
             android:layout_marginRight="2dp"
             android:layout_height="match_parent">
             <RelativeLayout
-                android:layout_width="53dp"
+                android:layout_width="65dp"
                 android:layout_centerHorizontal="true"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content">
                 <TextView
                     android:id="@+id/docs_count"
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
                     android:text="0"
                     android:gravity="center"
                     android:singleLine="true"
-                    android:textSize="14sp"
-
+                    android:textSize="8dp"
+                    android:layout_marginEnd="6dp"
+                    android:layout_alignParentRight="true"
                     android:background="@drawable/bubble_alert_white"
                     android:layout_alignParentTop="true"
                     android:textColor="@color/colorBaseWrapper" />
@@ -404,8 +400,6 @@
                     android:id="@+id/delete2"
                     android:layout_width="25dp"
                     android:src="@drawable/task_undone"
-                    android:layout_alignParentRight="true"
-                    android:layout_alignParentEnd="true"
                     android:layout_centerHorizontal="true"
                     android:layout_above="@+id/text3"
                     android:layout_height="25dp" />
@@ -418,35 +412,38 @@
                     android:gravity="center"
                     android:layout_alignParentBottom="true"
                     android:textColor="@color/white"
-                    android:textSize="14sp"
-                    android:layout_marginBottom="3dp"/>
+                    android:textSize="13sp"
+                    android:padding="2dp"
+                    />
             </RelativeLayout>
 
         </RelativeLayout>
         <View android:layout_height="fill_parent"
-            android:layout_width="0dp"
-            android:layout_weight=".03"
+            android:layout_width="1dp"
+
             android:background="@color/white"/>
         <RelativeLayout
             android:layout_width="0dp"
             android:layout_weight=".9"
             android:layout_gravity="center"
-
+            android:layout_marginLeft="2dp"
+            android:layout_marginRight="2dp"
             android:layout_height="match_parent">
             <RelativeLayout
                 android:id="@+id/subtask"
                 android:layout_width="70dp"
                 android:layout_centerHorizontal="true"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content">
                 <TextView
                     android:id="@+id/subtask_count"
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
                     android:text="0"
                     android:gravity="center"
                     android:singleLine="true"
-                    android:textSize="14sp"
-             android:layout_marginStart="5dp"
+                    android:textSize="8dp"
+                    android:layout_marginEnd="3dp"
+                    android:layout_alignParentRight="true"
                     android:background="@drawable/bubble_alert_white"
                     android:layout_alignParentTop="true"
                     android:textColor="@color/colorBaseWrapper" />
@@ -456,11 +453,7 @@
                     android:layout_width="25dp"
                     android:src="@drawable/sub_tasks"
                     android:layout_centerHorizontal="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_alignParentEnd="true"
                     android:layout_above="@+id/text6"
-                    android:layout_marginEnd="5dp"
-                    android:layout_marginRight="5dp"
                     android:layout_height="25dp" />
 
                 <TextView
@@ -469,17 +462,16 @@
                     android:layout_height="wrap_content"
                     android:text="@string/sub_tasks"
                     android:gravity="center"
-                    android:singleLine="true"
                     android:layout_alignParentBottom="true"
                     android:textColor="@color/white"
-                    android:textSize="14sp"
-                    android:layout_marginBottom="3dp"/>
+                    android:textSize="13sp"
+                    android:padding="2dp"/>
             </RelativeLayout>
 
         </RelativeLayout>
         <View android:layout_height="fill_parent"
-            android:layout_width="0dp"
-            android:layout_weight=".03"
+            android:layout_width="1dp"
+
             android:background="@color/white"/>
         <RelativeLayout
             android:id="@+id/delete"
@@ -488,13 +480,14 @@
             android:layout_gravity="center"
             android:layout_marginLeft="2dp"
             android:layout_marginRight="2dp"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
             <ImageView
                 android:layout_width="25dp"
                 android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"
+
                 android:src="@drawable/trash"
                 android:layout_gravity="center"
+                android:layout_above="@+id/text8"
                 android:layout_height="25dp" />
             <TextView
                 android:id="@+id/text8"
@@ -504,12 +497,11 @@
                 android:gravity="center"
                 android:layout_alignParentBottom="true"
                 android:textColor="@color/white"
-                android:textSize="14sp"
-                android:layout_marginBottom="3dp"/>
+                android:textSize="13sp"
+                android:padding="3dp"/>
         </RelativeLayout>
         <View android:layout_height="fill_parent"
-            android:layout_width="0dp"
-            android:layout_weight=".03"
+            android:layout_width="1dp"
             android:background="@color/white"/>
         <TextView
             android:id="@+id/mark_as_done"

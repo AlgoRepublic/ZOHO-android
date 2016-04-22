@@ -82,11 +82,18 @@ public class DocumentsListFragment extends BaseFragment{
         }else{
             Color = android.graphics.Color.parseColor("#414042");
         }
-        setHasOptionsMenu(true);
+        if(baseClass.hasPermission(getResources().getString(R.string.documents_add)))
+            setHasOptionsMenu(true);
         getToolbar().setTitle(getString(R.string.documents));
         service = new DocumentsService(getActivity());
-        service.getDocuments(baseClass.db.getInt("ProjectID"),
-                true, new CallBack(DocumentsListFragment.this, "DocumentsList"));
+        if(baseClass.hasPermission(getResources().getString(R.string.documents_view))){
+            service.getDocuments(baseClass.db.getInt("ProjectID"),
+                    true, new CallBack(DocumentsListFragment.this, "DocumentsList"));
+        }else {
+            aq.id(R.id.layout_bottom).visibility(View.GONE);
+            aq.id(R.id.response_alert).visibility(View.VISIBLE);
+            aq.id(R.id.alertMessage).text("You don't have permissions to view Documents.");
+        }
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -217,7 +224,7 @@ public class DocumentsListFragment extends BaseFragment{
     }
 
     public void GetAllDocumentsList() {
-       allDocsList.clear();
+        allDocsList.clear();
         for (int loop = 0; loop < DocumentsListModel.getInstance().responseObject.size(); loop++) {
             if(DocumentsListModel.getInstance().responseObject.get(loop).folderName.equalsIgnoreCase("Root")){
                 BaseClass.db.putInt("RootID", DocumentsListModel.getInstance().responseObject.get(loop).ID);
@@ -242,7 +249,7 @@ public class DocumentsListFragment extends BaseFragment{
 
     public void FilterByAllDocs(){
         generalDocsList.clear();
-       generalDocsList.addAll(allDocsList);
+        generalDocsList.addAll(allDocsList);
     }
     public void FilterByPicture(){
         generalDocsList.clear();

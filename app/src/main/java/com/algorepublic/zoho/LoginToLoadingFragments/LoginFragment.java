@@ -75,32 +75,25 @@ public class LoginFragment extends BaseFragment {
         aq.id(R.id.email_sign_in_button).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                baseClass.setUserId("1");
                 LoginClick(v);
             }
         });
-           aq.id(R.id.checkbox).getCheckBox().setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        aq.id(R.id.checkbox).getCheckBox().setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
-               @Override
-               public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                   baseClass.hideKeyPad(view);
-                   if (isChecked == true) {
-                       BaseClass.db.putString("Password", aq.id(R.id.password).getText().toString());
-                   } else
-                       BaseClass.db.putString("Password", "");
-               }
-           });
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                baseClass.hideKeyPad(view);
+                if (isChecked == true) {
+                    BaseClass.db.putString("Password", aq.id(R.id.password).getText().toString());
+                } else
+                    BaseClass.db.putString("Password", "");
+            }
+        });
 
         aq.id(R.id.password).getTextView().setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if (actionId == getResources().getInteger(R.integer.add_comment)) {
-                    flag = true;
-                    if (flag == true) {
-                        LoginClick(v);
-                    }
-                    return true;
-                }
+                LoginClick(v);
                 return false;
             }
         });
@@ -108,7 +101,7 @@ public class LoginFragment extends BaseFragment {
         aq.id(R.id.main).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-           baseClass.hideKeyPad(v);
+                baseClass.hideKeyPad(v);
             }
         });
         return view;
