@@ -13,7 +13,6 @@
       <module fileurl="file://$PROJECT_DIR$/agendacalendarview/agendacalendarview.iml" filepath="$PROJECT_DIR$/agendacalendarview/agendacalendarview.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/core/core.iml" filepath="$PROJECT_DIR$/core/core.iml" />
-      <module fileurl="file://$PROJECT_DIR$/datetimepicker/datetimepicker.iml" filepath="$PROJECT_DIR$/datetimepicker/datetimepicker.iml" />
       <module fileurl="file://$PROJECT_DIR$/dropboxChooserSDK/dropboxChooserSDK.iml" filepath="$PROJECT_DIR$/dropboxChooserSDK/dropboxChooserSDK.iml" />
       <module fileurl="file://$PROJECT_DIR$/libraryLoaders/libraryLoaders.iml" filepath="$PROJECT_DIR$/libraryLoaders/libraryLoaders.iml" />
       <module fileurl="file://$PROJECT_DIR$/linkedin-sdk/linkedin-sdk.iml" filepath="$PROJECT_DIR$/linkedin-sdk/linkedin-sdk.iml" />
