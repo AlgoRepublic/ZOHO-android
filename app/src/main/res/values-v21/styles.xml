@@ -18,7 +18,6 @@
         <item name="android:buttonStyle">@style/blueButton</item>
         <item name="android:editTextStyle">@style/blueEditTextStyle</item>
         <item name="searchViewStyle">@style/blueSearchView</item>
-
         <item name="fastlink_login">@drawable/fastlink_login_blue</item>
         <item name="fastlink_loading">@drawable/fastlink_loading_blue</item>
         <item name="alerticon_picture">@drawable/alerticon_blue</item>
@@ -30,7 +29,7 @@
         <item name="bubble_alert">@drawable/bubble_alert_blue</item>
         <item name="circle_left">@drawable/circle_left_blue</item>
         <item name="circle_right">@drawable/circle_right_blue</item>
-        <item name="task_progress">@drawable/task_progress_blue</item>
+        <item name="task_prog">@drawable/task_progress_blue</item>
         <item name="underline_textview">@drawable/underline_textview_blue</item>
         <item name="round_border">@drawable/round_border_blue</item>
         <item name="forums">@drawable/forums_blue</item>
@@ -129,11 +128,11 @@
         <item name="nav_user">@drawable/nav_user_black</item>
         <item name="circle_left">@drawable/circle_left_black</item>
         <item name="circle_right">@drawable/circle_right</item>
-        <item name="task_progress">@drawable/task_progress_black</item>
+        <item name="task_prog">@drawable/task_progress_black</item>
         <item name="underline_textview">@drawable/underline_textview_black</item>
         <item name="round_border">@drawable/round_border_black</item>
         <item name="forums">@drawable/forums</item>
-        <item name="color_line">@color/colorBaseHeader</item>
+        <item name="color_line">@color/colorContentWrapper</item>
         <item name="left_header">@drawable/left_header_black</item>
         <item name="globe">@drawable/globe</item>
         <item name="roundable_drawable">@drawable/roundable_corner</item>
@@ -234,7 +233,7 @@
     <attr name="task_desc_small" format="reference"/>
     <attr name="bubble_alert" format="reference"/>
     <attr name="color_line" format="reference"/>
-    <attr name="task_progress" format="reference"/>
+    <attr name="task_prog" format="reference"/>
     <attr name="underline_textview" format="reference"/>
     <attr name="round_border" format="reference"/>
     <attr name="forums" format="reference"/>
@@ -244,5 +243,7 @@
     <attr name="roundable_drawable" format="reference"/>
     <attr name="image_splash" format="reference"/>
     <attr name="left_header_ar" format="reference"/>
+
+
 
 </resources>

@@ -49,15 +49,15 @@ public class AdapterMenuItems extends BaseAdapter{
             R.string.departments,
     };
     int[] menu_icon_white = {
-            R.drawable.dashboard_white,
-            R.drawable.projects_white,
-            R.drawable.tasks_white,
-            R.drawable.calender_white,
-            R.drawable.document_white,
-            R.drawable.users_white,
-            R.drawable.forums_white,
-            R.drawable.star_white,
-            R.drawable.departments_white
+            R.drawable.dashboard,
+            R.drawable.projects,
+            R.drawable.task,
+            R.drawable.calendar,
+            R.drawable.documents,
+            R.drawable.users,
+            R.drawable.forums,
+            R.drawable.starrating,
+            R.drawable.departments
     };
     public AdapterMenuItems(Context context) {
         this.ctx = context;

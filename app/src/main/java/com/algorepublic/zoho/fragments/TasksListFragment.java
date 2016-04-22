@@ -15,7 +15,6 @@ import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.algorepublic.zoho.Models.TasksListByOwnerModel;
-import com.algorepublic.zoho.Models.UserListModel;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.adapters.AdapterTasksList;
 import com.algorepublic.zoho.adapters.TaskListAssignee;

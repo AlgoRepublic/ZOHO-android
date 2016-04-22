@@ -118,15 +118,14 @@
                                             android:gravity="center"
                                             android:singleLine="true"
                                             android:textSize="7dp"
-
-                                            android:background="@drawable/bubble_alert_black"
+                                            android:background="?attr/bubble_alert"
                                             android:layout_alignParentTop="true" />
 
                                         <ImageView
                                             android:id="@+id/delete1"
                                             android:layout_width="20dp"
                                             android:layout_alignParentBottom="true"
-                                            android:src="@drawable/forums"
+                                            android:src="?attr/forums"
                                             android:scaleX="-1"
                                             android:layout_alignParentRight="true"
                                             android:layout_alignParentEnd="true"
@@ -156,7 +155,7 @@
                                     android:layout_width="15dp"
                                     android:layout_height="15dp"
                                     android:layout_margin="5dp"
-                                    android:background="@drawable/circle_right"/>
+                                    android:background="?attr/circle_right"/>
                             </LinearLayout>
                         </RelativeLayout>
                     </com.daimajia.swipe.SwipeLayout>

@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="5dp"
-        android:background="@color/colorBaseMenu"
+        android:background="?attr/color_line"
         android:gravity="center"
         android:textColor="@color/colorBaseWrapper"
         android:textSize="30sp" />

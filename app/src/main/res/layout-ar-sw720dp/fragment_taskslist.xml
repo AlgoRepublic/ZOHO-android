@@ -12,7 +12,13 @@
         android:background="@color/colorBaseWrapper"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true" />
-
+    <com.algorepublic.zoho.utils.CustomSwipeRefreshLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/swipe_refresh_layout"
+        android:layout_width="match_parent"
+        android:layout_above="@+id/layout_bottom"
+        android:layout_below="@+id/searchView"
+        android:layout_height="match_parent">
     <se.emilsjolander.stickylistheaders.StickyListHeadersListView
         android:id="@+id/list_taskslist"
         android:layout_width="match_parent"
@@ -25,7 +31,7 @@
         android:scrollbarAlwaysDrawVerticalTrack="true"
         android:scrollbarSize="3dp"
         android:scrollbars="vertical" />
-
+</com.algorepublic.zoho.utils.CustomSwipeRefreshLayout>
     <LinearLayout
         android:id="@+id/layout_bottom"
         android:layout_width="match_parent"

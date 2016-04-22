@@ -9,10 +9,8 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.Toast;
@@ -188,13 +186,14 @@ public class TaskAddUpdateFragment extends BaseFragment {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 baseClass.db.putString("TaskName", s.toString());
+
             }
 
             @Override
             public void afterTextChanged(Editable s) {
             }
         });
-        aq.id(R.id.title_bar).clicked(new View.OnClickListener() {
+        aq.id(R.id.title_text).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 aq.id(R.id.title_text).enabled(true);
@@ -207,7 +206,7 @@ public class TaskAddUpdateFragment extends BaseFragment {
         taskTitle.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                if(hasFocus)
+                if (hasFocus)
                     baseClass.showKeyPad(v);
                 else
                     baseClass.hideKeyPad(v);

@@ -22,7 +22,7 @@
             android:padding="8dp"
             android:layout_marginBottom="6dp"
             android:layout_marginTop="2dp"
-            android:background="@color/colorContentWrapper"
+            android:background="?attr/color_line"
             android:layout_width="match_parent">
             <TextView
                 android:id="@+id/lblListHeader"
@@ -73,11 +73,11 @@
                 android:textSize="25sp"
                 android:paddingStart="5dp"
                 android:paddingEnd="5dp"
-                android:background="?attr/round_border"
                 android:singleLine="true"
                 android:ellipsize="end"
-                android:textColor="@color/colorBaseHeader"
-                android:textColorHint="@color/colorBaseMenu" />
+                android:textColor="?attr/color_line"
+                android:textColorHint="@color/colorBaseMenu"
+                android:background="?attr/round_border" />
 
 
             <EditText
@@ -94,7 +94,7 @@
                 android:background="?attr/round_border"
                 android:singleLine="true"
                 android:ellipsize="end"
-                android:textColor="@color/colorBaseHeader"
+                android:textColor="?attr/color_line"
                 android:textColorHint="@color/colorBaseMenu" />
 
             <EditText
@@ -110,7 +110,7 @@
                 android:background="?attr/round_border"
                 android:singleLine="true"
                 android:ellipsize="end"
-                android:textColor="@color/colorBaseHeader"
+                android:textColor="?attr/color_line"
                 android:textColorHint="@color/colorBaseMenu" />
 
             <EditText
@@ -126,7 +126,7 @@
                 android:background="?attr/round_border"
                 android:singleLine="true"
                 android:ellipsize="end"
-                android:textColor="@color/colorBaseHeader"
+                android:textColor="?attr/color_line"
                 android:textColorHint="@color/colorBaseMenu" />
 
             <EditText
@@ -143,7 +143,7 @@
                 android:background="?attr/round_border"
                 android:singleLine="true"
                 android:ellipsize="end"
-                android:textColor="@color/colorBaseHeader"
+                android:textColor="?attr/color_line"
                 android:textColorHint="@color/colorBaseMenu" />
             <EditText
                 android:paddingStart="5dp"
@@ -151,7 +151,7 @@
                 android:background="?attr/round_border"
                 android:singleLine="true"
                 android:ellipsize="end"
-                android:textColor="@color/colorBaseHeader"
+                android:textColor="?attr/color_line"
                 android:textColorHint="@color/colorBaseMenu"
                 android:layout_marginTop="10dp"
                 android:gravity="center_vertical"
@@ -176,7 +176,8 @@
                 android:layout_height="wrap_content"
                 android:paddingBottom="2dp"
                 android:text="@string/assigned_projects"
-                android:textColor="@color/colorContentWrapper"
+                android:textColor="?attr/color_line"
+                android:textColorHint="@color/colorBaseMenu"
                 android:textSize="13.33sp"
                 android:typeface="monospace" />
 
