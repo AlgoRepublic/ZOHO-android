@@ -26,6 +26,7 @@ import com.algorepublic.zoho.services.CallBack;
 import com.algorepublic.zoho.services.DocumentsService;
 import com.algorepublic.zoho.utils.BaseClass;
 import com.algorepublic.zoho.utils.Constants;
+import com.algorepublic.zoho.utils.ImageUtils;
 import com.androidquery.AQuery;
 import com.flyco.animation.SlideEnter.SlideLeftEnter;
 import com.flyco.animation.SlideExit.SlideRightExit;
@@ -56,6 +57,7 @@ public class TaskAttachmentFragment extends BaseFragment {
     public static ParallaxListView listView;
     static TasksList taskObj;
     DocumentsService service;
+    BaseClass baseClass;
     File newFile;
     public TaskAttachmentFragment() {
 
@@ -89,6 +91,7 @@ public class TaskAttachmentFragment extends BaseFragment {
         listView = (ParallaxListView) view.findViewById(R.id.images_layout);
         listView.setParallaxView(getActivity().getLayoutInflater().inflate(R.layout.view_header, listView, false));
         aq= new AQuery(view);
+        baseClass = ((BaseClass) getActivity().getApplicationContext());
         aq.id(R.id.add_file).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -154,10 +157,12 @@ public class TaskAttachmentFragment extends BaseFragment {
                 Log.e("pos", "/" + position);
                 dialog.dismiss();
                 if (position == 0) {
-                    Intent intent = new Intent(
-                            android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-                    newFile = getOutputMediaFile();
-                    intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(newFile));
+                    Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                    if (intent.resolveActivity(getActivity().getPackageManager()) == null) {
+                        return;
+                    }
+                    File photoFile = baseClass.getTemporaryCameraFile();
+                    intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(photoFile));
                     startActivityForResult(intent, TAKE_PICTURE);
                 }
                 if (position == 1) {
@@ -193,7 +198,8 @@ public class TaskAttachmentFragment extends BaseFragment {
         switch (requestCode) {
             case TAKE_PICTURE:
                 if (resultCode == getActivity().RESULT_OK) {
-                    // No need here
+                    Log.e("Data",Uri.fromFile(ImageUtils.getLastUsedCameraFile()).toString());
+                    newFile = new File(Uri.fromFile(ImageUtils.getLastUsedCameraFile()).toString());
                 }
                 break;
             case RESULT_GALLERY:

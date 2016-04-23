@@ -31,11 +31,7 @@
         android:scrollbarAlwaysDrawVerticalTrack="true"
         android:scrollbarSize="3dp"
         android:scrollbars="vertical" />
-<<<<<<< HEAD
-</com.algorepublic.zoho.utils.CustomSwipeRefreshLayout>
-=======
     </com.algorepublic.zoho.utils.CustomSwipeRefreshLayout>
->>>>>>> df562c428d911f079d4cfe107c7c01a28a634dda
     <LinearLayout
         android:id="@+id/layout_bottom"
         android:layout_width="match_parent"
