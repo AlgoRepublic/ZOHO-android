@@ -33,7 +33,6 @@
             android:background="@drawable/round_border_black"
             android:scrollHorizontally="true"
             android:scrollbarAlwaysDrawHorizontalTrack="true"
-            android:enabled="false"
             android:padding="5dp"
             android:singleLine="true"
             android:hint="@string/Task_Title"

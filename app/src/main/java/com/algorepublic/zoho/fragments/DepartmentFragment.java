@@ -1,36 +1,24 @@
 package com.algorepublic.zoho.fragments;
 
-import android.app.AlertDialog;
-import android.app.Dialog;
-import android.content.DialogInterface;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.NinePatchDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.annotation.Nullable;
-import android.support.annotation.StyleRes;
-import android.support.annotation.StyleableRes;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Toast;
 
-import com.algorepublic.zoho.BaseActivity;
 import com.algorepublic.zoho.Models.ProjectsByDepartmentModel;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.adapters.AdapterDepartment;
@@ -40,10 +28,6 @@ import com.algorepublic.zoho.services.ProjectsListService;
 import com.algorepublic.zoho.utils.AddDepartmentDialog;
 import com.algorepublic.zoho.utils.BaseClass;
 import com.androidquery.AQuery;
-import com.flyco.animation.BounceEnter.BounceLeftEnter;
-import com.flyco.animation.SlideExit.SlideRightExit;
-import com.flyco.dialog.listener.OnBtnClickL;
-import com.flyco.dialog.widget.NormalDialog;
 import com.h6ah4i.android.widget.advrecyclerview.animator.GeneralItemAnimator;
 import com.h6ah4i.android.widget.advrecyclerview.animator.RefactoredDefaultItemAnimator;
 import com.h6ah4i.android.widget.advrecyclerview.decoration.ItemShadowDecorator;
@@ -52,10 +36,6 @@ import com.h6ah4i.android.widget.advrecyclerview.draggable.RecyclerViewDragDropM
 import com.h6ah4i.android.widget.advrecyclerview.utils.WrapperAdapterUtils;
 
 import java.util.ArrayList;
-
-import cc.cloudist.acplibrary.ACProgressFlower;
-
-import static com.algorepublic.zoho.R.layout.fragment_add_department;
 
 /**
  * Created by android on 2/24/16.
@@ -73,6 +53,7 @@ public class DepartmentFragment extends BaseFragment implements SwipeRefreshLayo
     private RecyclerView.Adapter mWrappedAdapter;
     private RecyclerViewDragDropManager mRecyclerViewDragDropManager;
     private SwipeRefreshLayout swipeRefreshLayout;
+
 
     public static DepartmentFragment newInstance() {
         if(fragment == null) {
@@ -98,7 +79,6 @@ public class DepartmentFragment extends BaseFragment implements SwipeRefreshLayo
         mLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);
         eimSavedState = (savedInstanceState != null) ? savedInstanceState.getParcelable(SAVED_STATE_EXPANDABLE_ITEM_MANAGER) : null;
-
 
         // drag & drop manager
         mRecyclerViewDragDropManager = new RecyclerViewDragDropManager();

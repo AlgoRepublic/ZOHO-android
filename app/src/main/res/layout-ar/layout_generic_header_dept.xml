@@ -69,7 +69,7 @@
             android:layout_width="match_parent"
             android:layout_height="11dp"
             android:layout_alignParentBottom="true"
-            android:background="@color/colorBaseHeader"></View>
+            android:background="?attr/color_line"></View>
 
         <RelativeLayout
             android:layout_width="252dp"

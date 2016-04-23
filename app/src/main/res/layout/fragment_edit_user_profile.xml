@@ -21,8 +21,8 @@
                 android:layout_height="wrap_content"
                 android:padding="5dp"
                 android:layout_marginBottom="6dp"
-                android:layout_marginTop="2dp"
-                android:background="@color/colorContentWrapper"
+                android:layout_marginTop="5dp"
+                android:background="?attr/color_line"
                 android:layout_width="match_parent">
                 <TextView
                     android:id="@+id/lblListHeader"
@@ -59,14 +59,13 @@
                     android:layout_height="70dp"
                     android:layout_centerHorizontal="true"
                     android:layout_margin="20dp"
-                    android:src="@drawable/nav_user_black"
-                    app:civ_border_color="@color/colorContentWrapper"
+                    android:src="?attr/nav_user"
+                    app:civ_border_color="?attr/color_line"
                     app:civ_border_width="4dp"/>
 
                 <EditText
                     android:paddingStart="5dp"
                     android:paddingEnd="5dp"
-                    android:background="@drawable/round_border_black"
                     android:singleLine="true"
                     android:ellipsize="end"
                     android:id="@+id/first_name"
@@ -76,14 +75,14 @@
                     android:layout_marginTop="15dp"
                     android:hint="@string/first_name"
                     android:textSize="18sp"
-                    android:textColor="@color/colorBaseHeader"
-                    android:textColorHint="@color/colorBaseMenu"/>
+                    android:textColor="?attr/color_line"
+                    android:textColorHint="@color/colorBaseMenu"
+                    android:background="?attr/round_border"/>
 
 
                 <EditText
                     android:paddingStart="5dp"
                     android:paddingEnd="5dp"
-                    android:background="@drawable/round_border_black"
                     android:singleLine="true"
                     android:ellipsize="end"
                     android:id="@+id/last_name"
@@ -94,17 +93,18 @@
                     android:hint="@string/last_name"
                     android:inputType="textMultiLine"
                     android:textSize="18sp"
-                    android:textColor="@color/colorBaseHeader"
-                    android:textColorHint="@color/colorBaseMenu" />
+                    android:textColor="?attr/color_line"
+                    android:textColorHint="@color/colorBaseMenu"
+                    android:background="?attr/round_border" />
 
                 <EditText
                     android:paddingStart="5dp"
                     android:paddingEnd="5dp"
-                    android:background="@drawable/round_border_black"
                     android:singleLine="true"
                     android:ellipsize="end"
-                    android:textColor="@color/colorBaseHeader"
+                    android:textColor="?attr/color_line"
                     android:textColorHint="@color/colorBaseMenu"
+                    android:background="?attr/round_border"
                     android:id="@+id/nick_name"
                     android:layout_below="@+id/last_name"
                     android:layout_width="match_parent"
@@ -118,8 +118,7 @@
                 <EditText
                     android:paddingStart="5dp"
                     android:paddingEnd="5dp"
-                    android:background="@drawable/round_border_black"
-                    android:singleLine="true"
+                   android:singleLine="true"
                     android:ellipsize="end"
                     android:id="@+id/user_email"
                     android:layout_below="@+id/nick_name"
@@ -129,13 +128,13 @@
                     android:hint="@string/email"
                     android:inputType="textMultiLine"
                     android:textSize="18sp"
-                    android:textColor="@color/colorBaseHeader"
-                    android:textColorHint="@color/colorBaseMenu" />
+                    android:textColor="?attr/color_line"
+                    android:textColorHint="@color/colorBaseMenu"
+                    android:background="?attr/round_border" />
 
                 <EditText
                     android:paddingStart="5dp"
                     android:paddingEnd="5dp"
-                    android:background="@drawable/round_border_black"
                     android:singleLine="true"
                     android:ellipsize="end"
                     android:id="@+id/user_phoneno"
@@ -146,8 +145,9 @@
                     android:hint="@string/phone_number"
                     android:inputType="phone"
                     android:textSize="18sp"
-                    android:textColor="@color/colorBaseHeader"
-                    android:textColorHint="@color/colorBaseMenu" />
+                    android:textColor="?attr/color_line"
+                    android:textColorHint="@color/colorBaseMenu"
+                    android:background="?attr/round_border" />
 
 
                 <!--<LinearLayout-->

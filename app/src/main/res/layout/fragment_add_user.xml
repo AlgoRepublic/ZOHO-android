@@ -52,7 +52,7 @@
             <com.mikhaellopez.circularimageview.CircularImageView
                 app:civ_border="true"
                 app:civ_shadow="true"
-                app:civ_shadow_color="@color/colorBaseMenu"
+                app:civ_shadow_color="?attr/color_line"
                 app:civ_shadow_radius="3"
                 android:id="@+id/profile"
                 android:layout_width="70dp"
@@ -100,7 +100,6 @@
             <EditText
                 android:paddingStart="5dp"
                 android:paddingEnd="5dp"
-                android:background="?attr/round_border"
                 android:singleLine="true"
                 android:ellipsize="end"
                 android:id="@+id/nick_name"
@@ -110,6 +109,7 @@
                 android:layout_marginTop="10dp"
                 android:hint="@string/nick_name"
                 android:textSize="18sp"
+                android:background="?attr/round_border"
                 android:textColor="?attr/color_line"
                 android:textColorHint="@color/colorBaseMenu"/>
 

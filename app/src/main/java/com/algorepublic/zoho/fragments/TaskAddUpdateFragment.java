@@ -159,7 +159,7 @@ public class TaskAddUpdateFragment extends BaseFragment {
         filesToDelete = new ArrayList<>();
         assigneeList = new ArrayList<>();
         baseClass = ((BaseClass) getActivity().getApplicationContext());
-
+       // taskTitle.setFocusable(false);
         if(tasksObj !=null) {
             if (tasksObj.getListAssignees().size() > 0) {
                 try {
@@ -193,15 +193,22 @@ public class TaskAddUpdateFragment extends BaseFragment {
             public void afterTextChanged(Editable s) {
             }
         });
-        aq.id(R.id.title_text).clicked(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                aq.id(R.id.title_text).enabled(true);
-                aq.id(R.id.title_text).getEditText().requestFocus();
-                aq.id(R.id.title_text).getEditText().
-                        setSelection(aq.id(R.id.title_text).getText().length());
-            }
-        });
+//        taskTitle.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(final View v) {
+//                taskTitle.post(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        taskTitle.setFocusable(true);
+//                        taskTitle.requestFocus();
+//                        taskTitle.
+//                                setSelection(aq.id(R.id.title_text).getText().length());
+//                        baseClass.showKeyPad(v);
+//                    }
+//                });
+//            }
+//        });
+
 
         taskTitle.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
