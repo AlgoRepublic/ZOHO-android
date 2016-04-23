@@ -28,6 +28,7 @@ import com.algorepublic.zoho.services.UserService;
 import com.algorepublic.zoho.utils.BaseClass;
 import com.algorepublic.zoho.utils.Constants;
 import com.algorepublic.zoho.utils.GenericHttpClient;
+import com.algorepublic.zoho.utils.ImageUtils;
 import com.androidquery.AQuery;
 import com.bumptech.glide.Glide;
 import com.flyco.dialog.listener.OnOperItemClickL;
@@ -213,10 +214,12 @@ public class EditProfileFragment extends BaseFragment implements MultiSelectionS
                 Log.e("pos", "/" + position);
                 dialog.dismiss();
                 if (position == 0) {
-                    Intent intent = new Intent(
-                            android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-                    newFile = getOutputMediaFile();
-                    intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(newFile));
+                    Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                    if (intent.resolveActivity(getActivity().getPackageManager()) == null) {
+                        return;
+                    }
+                    File photoFile = baseClass.getTemporaryCameraFile();
+                    intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(photoFile));
                     startActivityForResult(intent, TAKE_PICTURE);
                 }
                 if (position == 1) {
@@ -252,7 +255,8 @@ public class EditProfileFragment extends BaseFragment implements MultiSelectionS
         switch (requestCode) {
             case TAKE_PICTURE:
                 if (resultCode == getActivity().RESULT_OK) {
-                    // Already Captured Image
+                    Log.e("Data",Uri.fromFile(ImageUtils.getLastUsedCameraFile()).toString());
+                    newFile = new File(Uri.fromFile(ImageUtils.getLastUsedCameraFile()).toString());
                 }
                 break;
             case RESULT_GALLERY:

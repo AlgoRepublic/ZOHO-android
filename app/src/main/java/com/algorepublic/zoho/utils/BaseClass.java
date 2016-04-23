@@ -5,14 +5,22 @@ import android.app.ActivityManager;
 import android.app.Application;
 import android.app.UiModeManager;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.XmlResourceParser;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
+import android.os.Build;
+import android.os.Environment;
+import android.os.ParcelFileDescriptor;
+import android.provider.MediaStore;
 import android.support.multidex.MultiDex;
+import android.text.TextUtils;
 import android.text.format.DateFormat;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -28,6 +36,12 @@ import com.algorepublic.zoho.R;
 
 import org.xmlpull.v1.XmlPullParser;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileDescriptor;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
@@ -36,8 +50,10 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -73,10 +89,15 @@ public class BaseClass extends Application {
     public static boolean PERMISSION=false;
     public static TinyDB db;
     private String themePreference = "themePreference";
+    private static BaseClass instance;
 
+    public static BaseClass getInstance() {
+        return instance;
+    }
     @Override
     public void onCreate() {
         super.onCreate();
+        instance = this;
         this.appSharedPrefs = getSharedPreferences(SHARED_NAME,
                 Activity.MODE_PRIVATE);
         this.prefsEditor = appSharedPrefs.edit();
@@ -226,6 +247,16 @@ public class BaseClass extends Application {
                 hideKeyPad(v);
         }
     };
+    public File getTemporaryCameraFile() {
+        File storageDir = StorageUtil.getAppExternalDataDirectoryFile();
+        File file = new File(storageDir, ImageUtils.CAMERA_FILE_NAME);
+        try {
+            file.createNewFile();
+        } catch (IOException e) {
+            ErrorUtils.logError(e);
+        }
+        return file;
+    }
     public static int isTabletDevice(Context activityContext) {
         boolean xlarge = ((activityContext.getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_XLARGE);
         UiModeManager uiModeManager = (UiModeManager) activityContext.getSystemService(UI_MODE_SERVICE);
@@ -248,7 +279,6 @@ public class BaseClass extends Application {
             return 0;
         }
     }
-
     public boolean isMyServiceRunning(Class<?> serviceClass) {
         ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
         for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {

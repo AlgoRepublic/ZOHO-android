@@ -8,6 +8,7 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 
+import android.os.Environment;
 import android.provider.MediaStore;
 
 import android.support.v7.app.AlertDialog;
@@ -34,7 +35,11 @@ import com.algorepublic.zoho.services.ProjectsListService;
 import com.algorepublic.zoho.services.UserService;
 import com.algorepublic.zoho.utils.BaseClass;
 import com.algorepublic.zoho.utils.Constants;
+import com.algorepublic.zoho.utils.DateUtilsCore;
+import com.algorepublic.zoho.utils.ErrorUtils;
 import com.algorepublic.zoho.utils.GenericHttpClient;
+import com.algorepublic.zoho.utils.ImageUtils;
+import com.algorepublic.zoho.utils.StorageUtil;
 import com.androidquery.AQuery;
 import com.flyco.animation.SlideEnter.SlideLeftEnter;
 import com.flyco.animation.SlideExit.SlideRightExit;
@@ -49,6 +54,7 @@ import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import cc.cloudist.acplibrary.ACProgressFlower;
@@ -230,10 +236,12 @@ public class AddUserFragment extends BaseFragment implements MultiSelectionSpinn
                 Log.e("pos", "/" + position);
                 dialog.dismiss();
                 if (position == 0) {
-                    Intent intent = new Intent(
-                            android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-                    newFile = getOutputMediaFile();
-                    intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(newFile));
+                    Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                    if (intent.resolveActivity(getActivity().getPackageManager()) == null) {
+                        return;
+                    }
+                    File photoFile = baseClass.getTemporaryCameraFile();
+                    intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(photoFile));
                     startActivityForResult(intent, TAKE_PICTURE);
                 }
                 if (position == 1) {
@@ -257,6 +265,7 @@ public class AddUserFragment extends BaseFragment implements MultiSelectionSpinn
             }
         });
     }
+
     private void checkFileLenght(File file){
         if(file.length() > 1048576 * 5) {
             MaterialAlertDialog();
@@ -292,6 +301,8 @@ public class AddUserFragment extends BaseFragment implements MultiSelectionSpinn
         switch (requestCode) {
             case TAKE_PICTURE:
                 if (resultCode == getActivity().RESULT_OK) {
+                    Log.e("Data",Uri.fromFile(ImageUtils.getLastUsedCameraFile()).toString());
+                    newFile = new File(Uri.fromFile(ImageUtils.getLastUsedCameraFile()).toString());
                     checkFileLenght(newFile);
                 }
                 break;
