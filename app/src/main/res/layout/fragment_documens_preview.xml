@@ -131,10 +131,16 @@
             android:layout_centerVertical="true"
             android:layout_height="wrap_content" />
     </RelativeLayout>
+    <LinearLayout
+        android:id="@+id/layoutCommentsAdd"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
     <include
         android:id="@+id/include"
         android:layout_alignParentBottom="true"
         layout="@layout/layout_for_comment"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"/>
+    </LinearLayout>
 </LinearLayout>

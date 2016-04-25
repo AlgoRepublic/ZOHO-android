@@ -52,4 +52,14 @@ public class TaskComments {
     private String userImagePath;
     private Integer userImageID;
     private String dateTime;
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
+
+    private Integer userId;
 }

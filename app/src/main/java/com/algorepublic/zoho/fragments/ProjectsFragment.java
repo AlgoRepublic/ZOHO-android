@@ -84,7 +84,11 @@ public class ProjectsFragment extends BaseFragment implements SwipeRefreshLayout
         swipeListView = (SwipeRefreshLayout) view.findViewById(R.id.swipe_listView);
         swipeStickView.setOnRefreshListener(this);
         getToolbar().setTitle(getString(R.string.projects));
+
+        // check if has permissions to add New Project
+        if(baseClass.hasPermission(getResources().getString(R.string.projects_add)))
         setHasOptionsMenu(true);
+
         aq.id(R.id.sort).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -156,12 +160,27 @@ public class ProjectsFragment extends BaseFragment implements SwipeRefreshLayout
             Color = android.graphics.Color.parseColor("#414042");
         }
         service = new ProjectsListService(getActivity());
-        service.getAllProjectsByUser_API(baseClass.getUserId(), true, new CallBack(this, "AllProjects"));
-        service.getProjectsByClient_API(baseClass.getUserId(), false, new CallBack(this, "ProjectsByClient"));
-        service.getProjectsByDepartment(baseClass.getUserId(),
-                false, new CallBack(this, "ProjectsByDepartment"));
+        requestApiBasedOnPermission();
         applyLightBackground(aq.id(R.id.sort).getView(), baseClass);
 
+    }
+
+    /**
+     * If User Doesn't have permissions to view Projects
+     * request will not be send and error msg will show
+     */
+    public void requestApiBasedOnPermission(){
+        if(baseClass.hasPermission(getResources().getString(R.string.projects_view))){
+            service.getAllProjectsByUser_API(baseClass.getUserId(), true, new CallBack(this, "AllProjects"));
+            service.getProjectsByClient_API(baseClass.getUserId(), false, new CallBack(this, "ProjectsByClient"));
+            service.getProjectsByDepartment(baseClass.getUserId(), false, new CallBack(this, "ProjectsByDepartment"));
+        }else {
+            aq.id(R.id.sort).visibility(View.GONE);
+            aq.id(R.id.response_alert).visibility(View.VISIBLE);
+            aq.id(R.id.alertMessage).text("You don't have permissions to view Projects.");
+            swipeListView.setRefreshing(false);
+            swipeListView.setEnabled(false);
+        }
     }
     public void AllProjects(Object caller, Object model) {
         swipeListView.setRefreshing(false);

@@ -156,7 +156,7 @@
                                         <LinearLayout
                                             android:id="@+id/layout3"
                                             android:layout_width="match_parent"
-                                            android:layout_height="20dp"
+                                            android:layout_height="25dp"
                                             android:orientation="horizontal"
                                             android:weightSum="2">
 

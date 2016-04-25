@@ -52,9 +52,13 @@ public class FeedsFragment extends BaseFragment implements SwipeRefreshLayout.On
                 service.getFeedsByProject(baseClass.getSelectedProject(), true,
                         new CallBack(FeedsFragment.this, "Feeds"));
             }
-        }else{
-            //show permission required
+        }else {
+            aq.id(R.id.response_alert).visibility(View.VISIBLE);
+            aq.id(R.id.alertMessage).text("You don't have permissions to view Feeds.");
+            swipeRefreshLayout.setRefreshing(false);
+            swipeRefreshLayout.setEnabled(false);
         }
+
         setHasOptionsMenu(true);
         // getToolbar().setTitle(getString(R.string.feeds));
         return view;

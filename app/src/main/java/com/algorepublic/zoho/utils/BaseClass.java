@@ -70,8 +70,7 @@ public class BaseClass extends Application {
     private String TaskSortType = "TaskSortType";
     private String DocsSortType = "DocsSortType";
     private String taskListName;
-
-
+    public static boolean PERMISSION=false;
     public static TinyDB db;
     private String themePreference = "themePreference";
 
@@ -466,8 +465,12 @@ public class BaseClass extends Application {
     /**
      * @param permissionID
      */
-    public boolean hasPermission(String permissionID){
-        return db.getListInt("Permissions").contains(permissionID);
+    public static boolean hasPermission(String permissionID){
+        for(int contain: db.getListInt("Permissions")){
+            if(contain==Integer.parseInt(permissionID))
+                return true;
+        }
+        return false;
     }
 
     public static Map<String, String> getHashMapResource(Context c, int hashMapResId) {

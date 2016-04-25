@@ -33,12 +33,12 @@
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
         <com.daimajia.swipe.SwipeLayout
-            android:id="@+id/swipe"
+            android:id="@+id/swipe5"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:clickToClose="true">
             <LinearLayout
-                android:id="@+id/main"
+                android:id="@+id/editDeleteView"
                 android:layout_width="150dp"
                 android:layout_height="match_parent"
                 android:weightSum="2"

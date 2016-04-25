@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.algorepublic.zoho.Models.CreateForumCommentModel;
@@ -38,6 +39,7 @@ public class ForumsDetailFragment extends BaseFragment {
     static int Position;
     public static int ClickedPosition;
     public static boolean flag= false;
+    private LinearLayout layoutCommentsAdd;
     ForumService service;
     public static EditText comment_user;
     AdapterForumComment adapter;
@@ -93,6 +95,7 @@ public class ForumsDetailFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view  = inflater.inflate(R.layout.fragment_forum_detail, container, false);
+        layoutCommentsAdd = (LinearLayout) view.findViewById(R.id.layoutCommentsAdd);
         comment_user = (EditText) view.findViewById(R.id.comment_user);
         listView = (ParallaxListView) view.findViewById(R.id.forums_comment_list);
         listView.setParallaxView(getActivity().getLayoutInflater().inflate(R.layout.view_header_forum, listView, false));
@@ -120,6 +123,9 @@ public class ForumsDetailFragment extends BaseFragment {
                 baseClass.hideKeyPad(getView());
             }
         });
+        if(!baseClass.hasPermission(getResources().getString(R.string.forums_add_comment))) {
+            layoutCommentsAdd.setVisibility(View.GONE);
+        }
         return view;
     }
 
@@ -167,6 +173,7 @@ public class ForumsDetailFragment extends BaseFragment {
             taskComments.setUserName(baseClass.getFirstName());
             taskComments.setUserImagePath(baseClass.getProfileImage());
             taskComments.setUserImageID(baseClass.getProfileImageID());
+            taskComments.setUserId(Integer.parseInt(baseClass.getUserId()));
             arrayList.add(taskComments);
             adapter.notifyDataSetChanged();
             aq.id(R.id.response_alert).visibility(View.GONE);
@@ -214,6 +221,7 @@ public class ForumsDetailFragment extends BaseFragment {
             taskComments.setDateTime(GetDateTimeComment(DateMilli(forumComments.createdAt)));
             taskComments.setUserName(forumComments.user.firstName);
             taskComments.setUserImagePath(forumComments.user.profileImagePath);
+            taskComments.setUserId(forumComments.user.ID);
             arrayList.add(taskComments);
         }
         adapter.notifyDataSetChanged();

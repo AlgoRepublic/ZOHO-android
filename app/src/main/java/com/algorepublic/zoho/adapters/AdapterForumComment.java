@@ -19,6 +19,7 @@ import com.algorepublic.zoho.utils.BaseClass;
 import com.algorepublic.zoho.utils.Constants;
 import com.androidquery.AQuery;
 import com.bumptech.glide.Glide;
+import com.daimajia.swipe.SwipeLayout;
 import com.flyco.animation.BounceEnter.BounceLeftEnter;
 import com.flyco.animation.SlideExit.SlideRightExit;
 import com.flyco.dialog.listener.OnBtnClickL;
@@ -49,7 +50,7 @@ public class AdapterForumComment extends BaseAdapter {
     }
 
     @Override
-    public Object getItem(int position) {
+    public TaskComments getItem(int position) {
         return ForumsDetailFragment.arrayList.get(position);
     }
 
@@ -126,9 +127,35 @@ public class AdapterForumComment extends BaseAdapter {
             }
         });
 
-
+        applyPermissions(position);
 
         return convertView;
+    }
+
+    /**
+     * apply delete comments permissions based on user id;
+     * @param pos
+     */
+    private void applyPermissions(int pos){
+        if(!baseClass.hasPermission(ctx.getResources().getString(R.string.forums_edit_delete_own_comments))
+                && !baseClass.hasPermission(ctx.getResources().getString(R.string.forums_edit_delete_others_comments))
+                ){
+            ((SwipeLayout)aq.id(R.id.swipe4).getView()).findViewById(R.id.editDeleteView).setVisibility(View.GONE);
+            ((SwipeLayout)aq.id(R.id.swipe4).getView()).setSwipeEnabled(false);
+            aq.id(R.id.rightarrow_layout).visibility(View.GONE);
+        }else if(!baseClass.hasPermission(ctx.getResources().getString(R.string.forums_edit_delete_own_comments))
+                && getItem(pos).getUserId()==Integer.parseInt(baseClass.getUserId())
+                ){
+            ((SwipeLayout)aq.id(R.id.swipe4).getView()).findViewById(R.id.editDeleteView).setVisibility(View.GONE);
+            ((SwipeLayout)aq.id(R.id.swipe4).getView()).setSwipeEnabled(false);
+            aq.id(R.id.rightarrow_layout).visibility(View.GONE);
+        }else if(!baseClass.hasPermission(ctx.getResources().getString(R.string.forums_edit_delete_others_comments))
+                && getItem(pos).getUserId()!=Integer.parseInt(baseClass.getUserId())
+                ){
+            ((SwipeLayout)aq.id(R.id.swipe4).getView()).findViewById(R.id.editDeleteView).setVisibility(View.GONE);
+            ((SwipeLayout)aq.id(R.id.swipe4).getView()).setSwipeEnabled(false);
+            aq.id(R.id.rightarrow_layout).visibility(View.GONE);
+        }
     }
     public void DeleteComment(Object caller, Object model){
         GeneralModel.getInstance().setList((GeneralModel) model);
