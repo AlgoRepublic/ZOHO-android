@@ -23,7 +23,6 @@
     <se.emilsjolander.stickylistheaders.StickyListHeadersListView
         android:id="@+id/list_taskslist"
         android:layout_width="match_parent"
-        android:layout_below="@+id/searchView"
         android:layout_height="match_parent"
         android:layout_above="@+id/layout_bottom"
         android:divider="@android:color/transparent"

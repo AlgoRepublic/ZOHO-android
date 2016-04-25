@@ -21,8 +21,8 @@
             android:layout_height="wrap_content"
             android:padding="7dp"
             android:layout_marginBottom="6dp"
-            android:layout_marginTop="2dp"
-            android:background="@color/colorContentWrapper"
+            android:layout_marginTop="5dp"
+            android:background="?attr/color_line"
             android:layout_width="match_parent">
             <TextView
                 android:id="@+id/lblListHeader"
@@ -56,11 +56,11 @@
                 <EditText
                     android:paddingStart="5dp"
                     android:paddingEnd="5dp"
-                    android:background="@drawable/round_border_black"
                     android:singleLine="true"
                     android:ellipsize="end"
-                    android:textColor="@color/colorBaseHeader"
+                    android:textColor="?attr/color_line"
                     android:textColorHint="@color/colorBaseMenu"
+                    android:background="?attr/round_border"
                     android:id="@+id/dept_title"
                     android:textSize="30sp"
                     android:layout_width="match_parent"

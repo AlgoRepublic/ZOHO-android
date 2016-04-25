@@ -23,9 +23,9 @@
                 android:id="@+id/layout_tasktitle"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp"
-                android:background="@color/colorContentWrapper">
+                android:background="?attr/color_line">
 
 
                 <View
@@ -219,7 +219,6 @@
                             android:textSize="12sp"
                             android:layout_marginLeft="5dp"
                             android:layout_toRightOf="@+id/users"
-                            android:textColor="@color/colorBaseHeader"
                             android:textStyle="bold"
                             android:id="@+id/user_counter"
 

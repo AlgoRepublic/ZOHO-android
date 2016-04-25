@@ -13,7 +13,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/underline_textview_black"
+            android:background="?attr/underline_textview"
             android:gravity="center_horizontal"
             android:padding="10dp"
             android:text="@string/documents"
@@ -23,7 +23,6 @@
         <EditText
             android:paddingStart="5dp"
             android:paddingEnd="5dp"
-            android:background="@drawable/round_border_black"
             android:singleLine="true"
             android:ellipsize="end"
             android:layout_margin="10dp"
@@ -32,8 +31,9 @@
             android:layout_width="match_parent"
             android:layout_height="70dp"
             android:editable="false"
-            android:textColor="@color/colorBaseHeader"
-            android:textColorHint="@color/colorBaseMenu"
+            android:textColor="?attr/color_line"
+            android:textColorHint="?attr/hint_color"
+            android:background="?attr/round_border"
             android:imeOptions="actionNext"
             android:hint="@string/select_folder"
             android:layout_below="@+id/user_phoneno"

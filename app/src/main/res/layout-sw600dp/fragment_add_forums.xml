@@ -16,8 +16,8 @@
             android:layout_height="wrap_content"
             android:padding="5dp"
             android:layout_marginBottom="6dp"
-            android:layout_marginTop="2dp"
-            android:background="@color/colorContentWrapper"
+            android:layout_marginTop="5dp"
+            android:background="?attr/color_line"
             android:layout_width="match_parent">
             <TextView
                 android:id="@+id/lblListHeader"
@@ -58,15 +58,14 @@
                     android:layout_marginTop="10dp"
                     android:paddingStart="5dp"
                     android:paddingEnd="5dp"
-                    android:textColor="@color/colorBaseHeader"
-                    android:textColorHint="@color/colorBaseMenu"
-                    android:background="@drawable/round_border_black" />
+                    android:background="?attr/round_border"
+                    android:textColor="?attr/color_line"
+                    android:textColorHint="@color/colorBaseMenu" />
 
             </RelativeLayout>
             <EditText
                 android:paddingStart="5dp"
                 android:paddingEnd="5dp"
-                android:background="@drawable/round_border_black"
                 android:singleLine="true"
                 android:ellipsize="end"
                 android:layout_marginTop="10dp"
@@ -75,7 +74,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:editable="false"
-                android:textColor="@color/colorBaseHeader"
+                android:background="?attr/round_border"
+                android:textColor="?attr/color_line"
                 android:textColorHint="@color/colorBaseMenu"
                 android:imeOptions="actionNext"
                 android:hint="@string/category"
@@ -86,10 +86,10 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/forum_list"
                 >
-                <com.rengwuxian.materialedittext.MaterialEditText
-                    android:textColor="@color/colorBaseHeader"
+                <EditText
+                    android:background="?attr/round_border"
+                    android:textColor="?attr/color_line"
                     android:textColorHint="@color/colorBaseMenu"
-                    android:background="@drawable/round_border_black"
                     android:id="@+id/comment_description"
                     android:textSize="25sp"
                     android:layout_width="match_parent"
@@ -98,8 +98,7 @@
                     android:inputType="textMultiLine"
                     android:padding="5dp"
                     android:gravity="top|start"
-                    android:layout_marginTop="10dp"
-                    app:met_floatingLabel="normal" />
+                    android:layout_marginTop="10dp" />
             </RelativeLayout>
         </RelativeLayout>
     </android.support.v7.widget.CardView>

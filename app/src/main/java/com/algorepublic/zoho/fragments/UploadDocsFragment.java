@@ -33,6 +33,7 @@ import com.algorepublic.zoho.services.DocumentsService;
 import com.algorepublic.zoho.utils.BaseClass;
 import com.algorepublic.zoho.utils.Constants;
 import com.algorepublic.zoho.utils.GenericHttpClient;
+import com.algorepublic.zoho.utils.ImageUtils;
 import com.androidquery.AQuery;
 import com.dropbox.chooser.android.DbxChooser;
 import com.flyco.animation.SlideEnter.SlideLeftEnter;
@@ -243,10 +244,12 @@ public class UploadDocsFragment extends BaseFragment implements GoogleApiClient.
                 Log.e("pos", "/" + position);
                 dialog.dismiss();
                 if (position == 0) {
-                    Intent intent = new Intent(
-                            android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-                    newFile = getOutputMediaFile();
-                    intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(newFile));
+                    Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                    if (intent.resolveActivity(getActivity().getPackageManager()) == null) {
+                        return;
+                    }
+                    File photoFile = baseClass.getTemporaryCameraFile();
+                    intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(photoFile));
                     startActivityForResult(intent, TAKE_PICTURE);
                 }
                 if (position == 1) {
@@ -308,6 +311,8 @@ public class UploadDocsFragment extends BaseFragment implements GoogleApiClient.
         switch (requestCode) {
             case TAKE_PICTURE:
                 if (resultCode == getActivity().RESULT_OK) {
+                    Log.e("Data",Uri.fromFile(ImageUtils.getLastUsedCameraFile()).toString());
+                    newFile = new File(Uri.fromFile(ImageUtils.getLastUsedCameraFile()).toString());
                     checkFileLenght(newFile);
                 }
                 break;

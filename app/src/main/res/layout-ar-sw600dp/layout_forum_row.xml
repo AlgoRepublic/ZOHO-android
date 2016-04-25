@@ -119,8 +119,7 @@
                         android:gravity="center"
                         android:singleLine="true"
                         android:textSize="8sp"
-
-                        android:background="@drawable/bubble_alert_black"
+                        android:background="?attr/bubble_alert"
                         android:layout_alignParentTop="true" />
 
                     <ImageView
@@ -129,7 +128,7 @@
                         android:layout_alignParentBottom="true"
                         android:layout_alignParentRight="true"
                         android:layout_alignParentEnd="true"
-                        android:src="@drawable/forums"
+                        android:src="?attr/forums"
                         android:layout_height="20dp" />
                 </RelativeLayout>
             </RelativeLayout>
@@ -157,7 +156,7 @@
                 android:layout_width="15dp"
                 android:layout_height="15dp"
                 android:layout_margin="5dp"
-                android:background="@drawable/circle_left_black"/>
+                android:background="?attr/circle_left"/>
         </LinearLayout>
         </RelativeLayout>
 </com.daimajia.swipe.SwipeLayout>

@@ -20,8 +20,8 @@
             android:layout_height="wrap_content"
             android:padding="5dp"
             android:layout_marginBottom="6dp"
-            android:layout_marginTop="2dp"
-            android:background="@color/colorContentWrapper"
+            android:layout_marginTop="5dp"
+            android:background="?attr/color_line"
             android:layout_width="match_parent">
             <TextView
                 android:id="@+id/lblListHeader"
@@ -51,7 +51,6 @@
             <EditText
                 android:paddingStart="5dp"
                 android:paddingEnd="5dp"
-                android:background="@drawable/round_border_black"
                 android:singleLine="true"
                 android:ellipsize="end"
                 android:id="@+id/dept_title"
@@ -60,9 +59,10 @@
                 android:layout_height="45dp"
                 android:hint="@string/new_dept"
                 android:inputType="textMultiLine"
-                android:layout_marginTop="10dp"
-                android:textColor="@color/colorBaseHeader"
-                android:textColorHint="@color/colorBaseMenu"/>
+                android:textColor="?attr/color_line"
+                android:textColorHint="@color/colorBaseMenu"
+                android:background="?attr/round_border"
+                android:layout_marginTop="10dp"/>
 
         </RelativeLayout>
     </android.support.v7.widget.CardView>

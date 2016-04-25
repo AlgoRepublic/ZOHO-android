@@ -9,14 +9,14 @@
 
     <com.mikhaellopez.circularimageview.CircularImageView
         app:civ_border="true"
-        app:civ_border_color="@color/colorContentWrapper"
         app:civ_shadow="true"
-        app:civ_shadow_color="@color/colorBaseMenu"
         app:civ_shadow_radius="3"
         android:id="@+id/assignee_image"
         android:layout_width="35dp"
         android:layout_height="35dp"
-        android:background="@drawable/nav_user_black"
+        app:civ_shadow_color="@color/colorBaseMenu"
+        app:civ_border_color="?attr/color_line"
+        android:src="?attr/nav_user"
         app:civ_border_width="0dp" />
 
     <TextView
@@ -26,8 +26,7 @@
         android:text="NT"
         android:id="@+id/user_name"
         android:gravity="center"
-        android:textSize="11sp"
-        android:textColor="@color/colorBaseHeader"
+        android:textSize="13sp"
         android:textColorHint="@color/colorBaseMenu"
         android:layout_marginTop="2dp"
         />

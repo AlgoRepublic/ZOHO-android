@@ -143,6 +143,7 @@
                                             android:layout_weight="1.1"
                                             android:gravity="left|start|center_vertical"
                                             android:textSize="18sp"
+                                            android:maxLines="2"
                                             android:textStyle="bold" />
 
                                         <TextView
@@ -183,7 +184,6 @@
                                         <TableRow
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
-                                            android:layout_below="@+id/general"
                                             android:gravity="center"
                                             android:id="@+id/commentsView"
                                             android:layout_alignParentLeft="true"
@@ -240,7 +240,7 @@
                                     android:layout_width="15dp"
                                     android:layout_height="15dp"
                                     android:layout_margin="5dp"
-                                    android:background="@drawable/circle_right"/>
+                                    android:background="?attr/circle_right"/>
                             </LinearLayout>
                         </RelativeLayout>
                     </com.daimajia.swipe.SwipeLayout>

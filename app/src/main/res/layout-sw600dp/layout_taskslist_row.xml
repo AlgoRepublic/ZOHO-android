@@ -136,6 +136,7 @@
                                             android:layout_height="wrap_content"
                                             android:layout_weight="1"
                                             android:gravity="left"
+                                            android:maxLines="2"
                                             android:textSize="16sp"
                                             android:text="sdfa \ndkjdsf"
                                             android:textStyle="bold" />
@@ -233,7 +234,7 @@
                                     android:layout_width="15dp"
                                     android:layout_height="15dp"
                                     android:layout_margin="5dp"
-                                    android:background="@drawable/circle_left_black"/>
+                                    android:background="?attr/circle_left"/>
                             </LinearLayout>
                         </RelativeLayout>
                     </com.daimajia.swipe.SwipeLayout>

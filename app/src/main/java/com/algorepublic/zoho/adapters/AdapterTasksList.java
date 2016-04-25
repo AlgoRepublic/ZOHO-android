@@ -9,8 +9,6 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -23,7 +21,6 @@ import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.fragments.BaseFragment;
 import com.algorepublic.zoho.fragments.TaskAddUpdateFragment;
 import com.algorepublic.zoho.fragments.TaskDetailFragment;
-import com.algorepublic.zoho.fragments.TasksListFragment;
 import com.algorepublic.zoho.services.CallBack;
 import com.algorepublic.zoho.services.TaskListService;
 import com.algorepublic.zoho.utils.BaseClass;
@@ -104,14 +101,21 @@ public class AdapterTasksList extends BaseAdapter implements StickyListHeadersAd
         aq = new AQuery(convertView);
         if (tasksLists.get(position).progress==100){
             holder.taskImage.setImageResource(R.drawable.ic_notifications_green_24dp);
-        }else{
-            holder.taskImage.setImageResource(R.drawable.task_progress);
         }
+        else {
+            if (baseClass.getThemePreference() == R.style.AppThemeBlue){
+                holder.taskImage.setImageResource(R.drawable.task_progress_blue);
+            }else{
+                holder.taskImage.setImageResource(R.drawable.task_progress_black);
+            }
+        }
+
+//        holder.taskImage.setImageResource(R.drawable.task_progress  );
+
         Drawable shapeDrawable = holder.priorityBar.getBackground();
         GradientDrawable colorDrawable = (GradientDrawable) shapeDrawable;
         colorDrawable.setColor(getPriorityWiseColor(tasksLists.get(position).getPriority()));
         holder.priorityBar.setBackground(shapeDrawable);
-
         holder.taskComments.setText(tasksLists.get(position).getCommentsCount() + " " + ctx.getString(R.string.task_comment));
         holder.taskUsers.setText(tasksLists.get(position).getListAssignees().size() + " " + ctx.getString(R.string.task_user));
         holder.taskTitle.setText(tasksLists.get(position).getTaskName());

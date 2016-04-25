@@ -27,8 +27,6 @@ import com.androidquery.AQuery;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
-import java.util.LinkedList;
 
 /**
  * A simple {@link Fragment} subclass.

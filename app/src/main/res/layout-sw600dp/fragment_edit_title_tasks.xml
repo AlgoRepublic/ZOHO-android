@@ -33,8 +33,8 @@
         android:gravity="top"
         android:hint="@string/task_desc"
         android:padding="10dp"
-        android:textColor="@color/colorBaseHeader"
-        android:textColorHint="@color/colorBaseWrapper"
+        android:textColor="?attr/color_line"
+        android:textColorHint="?attr/hint_color"
         android:textCursorDrawable="@null"
         android:textSize="18sp" />
 </RelativeLayout>

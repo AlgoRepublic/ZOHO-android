@@ -29,8 +29,8 @@
         android:gravity="top"
         android:hint="Task Title"
         android:padding="5dp"
-        android:textColor="@color/colorBaseHeader"
-        android:textColorHint="@color/colorBaseWrapper"
+        android:textColor="?attr/color_line"
+        android:textColorHint="?attr/hint_color"
         android:textCursorDrawable="@null"
         android:textSize="14sp" />
 </RelativeLayout>

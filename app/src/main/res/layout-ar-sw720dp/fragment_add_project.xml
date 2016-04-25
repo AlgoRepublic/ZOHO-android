@@ -25,7 +25,7 @@
                 android:padding="5dp"
                 android:layout_marginBottom="6dp"
                 android:layout_marginTop="2dp"
-                android:background="@color/colorContentWrapper"
+                android:background="?attr/color_line"
                 android:layout_width="match_parent">
                 <TextView
                     android:id="@+id/lblListHeader"
@@ -86,7 +86,7 @@
                 <EditText
                     android:paddingStart="5dp"
                     android:paddingEnd="5dp"
-                   android:id="@+id/project_desc"
+                    android:id="@+id/project_desc"
                     android:textSize="22sp"
                     android:layout_below="@+id/owner_list"
                     android:layout_width="match_parent"
