@@ -143,6 +143,7 @@
                                             android:layout_weight="1.1"
                                             android:gravity="left|start|center_vertical"
                                             android:textSize="18sp"
+                                            android:maxLines="2"
                                             android:textStyle="bold" />
 
                                         <TextView

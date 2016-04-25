@@ -2,6 +2,7 @@
     <!-- BLUE THEME -->
     <style name="AppThemeBlue" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
+        <item name="android:statusBarColor">@color/colorPrimaryBlue</item>
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
         <item name="colorPrimary">@color/colorPrimaryBlue</item>
@@ -98,6 +99,7 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
+        <item name="android:statusBarColor">@color/colorBaseHeader</item>
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
         <item name="colorPrimary">@color/colorBaseHeader</item>

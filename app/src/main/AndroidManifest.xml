@@ -44,6 +44,8 @@
         <activity
             android:name=".MainActivity"
             android:label="@string/feeds"
+            android:launchMode="singleTask"
+            android:configChanges="orientation|keyboardHidden|screenSize"
             android:windowSoftInputMode="adjustPan"
             android:parentActivityName=".BaseActivity"
             android:screenOrientation="portrait"></activity>

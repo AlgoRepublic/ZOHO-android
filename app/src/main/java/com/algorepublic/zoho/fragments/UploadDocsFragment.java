@@ -6,15 +6,11 @@ import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentSender;
-import android.content.res.Resources;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -27,9 +23,7 @@ import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.algorepublic.zoho.BaseActivity;
 import com.algorepublic.zoho.Models.FolderListModel;
-import com.algorepublic.zoho.Models.UserRoleModel;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.adapters.AdapterUploadAttachment;
 import com.algorepublic.zoho.adapters.AttachmentList;
@@ -39,7 +33,6 @@ import com.algorepublic.zoho.services.DocumentsService;
 import com.algorepublic.zoho.utils.BaseClass;
 import com.algorepublic.zoho.utils.Constants;
 import com.algorepublic.zoho.utils.GenericHttpClient;
-import com.algorepublic.zoho.utils.ImageUtils;
 import com.androidquery.AQuery;
 import com.dropbox.chooser.android.DbxChooser;
 import com.flyco.animation.SlideEnter.SlideLeftEnter;
@@ -73,7 +66,6 @@ import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import cc.cloudist.acplibrary.ACProgressConstant;
 import cc.cloudist.acplibrary.ACProgressFlower;
 
 /**
@@ -252,12 +244,9 @@ public class UploadDocsFragment extends BaseFragment implements GoogleApiClient.
                 Log.e("pos", "/" + position);
                 dialog.dismiss();
                 if (position == 0) {
-                    Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                    if (intent.resolveActivity(getActivity().getPackageManager()) == null) {
-                        return;
-                    }
-                    File photoFile = baseClass.getTemporaryCameraFile();
-                    intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(photoFile));
+                    Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+                    newFile = getOutputMediaFile();
+                    intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(newFile));
                     startActivityForResult(intent, TAKE_PICTURE);
                 }
                 if (position == 1) {
@@ -319,8 +308,6 @@ public class UploadDocsFragment extends BaseFragment implements GoogleApiClient.
         switch (requestCode) {
             case TAKE_PICTURE:
                 if (resultCode == getActivity().RESULT_OK) {
-                    Log.e("Data",Uri.fromFile(ImageUtils.getLastUsedCameraFile()).toString());
-                    newFile = new File(Uri.fromFile(ImageUtils.getLastUsedCameraFile()).toString());
                     checkFileLenght(newFile);
                 }
                 break;
@@ -453,7 +440,7 @@ public class UploadDocsFragment extends BaseFragment implements GoogleApiClient.
 
 
     private void checkFileLenght(File file) {
-    showFileInList(file, "", -1, file.getName());
+        showFileInList(file, "", -1, file.getName());
     }
 
     private void showFileInList(File file,String ApiUrl,Integer ID,String name) {

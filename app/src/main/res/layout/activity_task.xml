@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/colorBaseWrapper"
     android:orientation="vertical"
     tools:context=".fragments.TaskAddUpdateFragment">
@@ -26,18 +25,18 @@
             android:ellipsize="end"
             android:background="@drawable/round_border_black"
             android:gravity="center"
+            android:inputType="text"
             android:clickable="true"
             android:focusableInTouchMode="true"
             android:scrollHorizontally="true"
             android:scrollbarAlwaysDrawHorizontalTrack="true"
-            android:enabled="false"
             android:padding="7dp"
             android:singleLine="true"
             android:hint="@string/Task_Title"
             android:textColor="@color/colorBaseHeader"
             android:textColorHint="@color/colorBaseMenu"
             android:textSize="18sp" />
-
+        <requestFocus />
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"

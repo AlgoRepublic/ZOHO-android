@@ -12,6 +12,8 @@ import android.content.res.XmlResourceParser;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
+import android.media.ExifInterface;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
@@ -247,15 +249,43 @@ public class BaseClass extends Application {
                 hideKeyPad(v);
         }
     };
-    public File getTemporaryCameraFile() {
-        File storageDir = StorageUtil.getAppExternalDataDirectoryFile();
-        File file = new File(storageDir, ImageUtils.CAMERA_FILE_NAME);
+    public Bitmap adjustImageOrientation(File f) {
+        int rotate = 0;
         try {
-            file.createNewFile();
-        } catch (IOException e) {
-            ErrorUtils.logError(e);
+
+            ExifInterface exif = new ExifInterface(f.getAbsolutePath());
+            int orientation = exif.getAttributeInt(
+                    ExifInterface.TAG_ORIENTATION,
+                    ExifInterface.ORIENTATION_NORMAL);
+            switch (orientation) {
+                case ExifInterface.ORIENTATION_ROTATE_270:
+                    rotate = 270;
+                    break;
+                case ExifInterface.ORIENTATION_ROTATE_180:
+                    rotate = 180;
+                    break;
+                case ExifInterface.ORIENTATION_ROTATE_90:
+                    rotate = 90;
+                    break;
+
+                case ExifInterface.ORIENTATION_NORMAL:
+                    rotate = 0;
+                    break;
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        return file;
+        BitmapFactory.Options bmOptions = new BitmapFactory.Options();
+        Bitmap bitmap = BitmapFactory.decodeFile(f.getAbsolutePath(),bmOptions);
+        bitmap = Bitmap.createScaledBitmap(bitmap,80,80,true);
+        if (rotate != 0) {
+            Matrix matrix = new Matrix();
+            matrix.postRotate(rotate);
+            bitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(),
+                    bitmap.getHeight(), matrix, true);
+        }
+        return bitmap;
     }
     public static int isTabletDevice(Context activityContext) {
         boolean xlarge = ((activityContext.getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_XLARGE);

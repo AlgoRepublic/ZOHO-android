@@ -138,6 +138,7 @@
                                             android:layout_weight="1"
                                             android:gravity="left"
                                             android:textSize="25sp"
+                                            android:maxLines="2"
                                             android:text="asdf \ndskfh"
                                             android:textStyle="bold" />
 

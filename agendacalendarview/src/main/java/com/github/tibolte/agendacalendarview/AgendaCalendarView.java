@@ -39,7 +39,7 @@ import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
 public class AgendaCalendarView extends FrameLayout implements StickyListHeadersListView.OnStickyHeaderChangedListener {
 
     private static final String LOG_TAG = AgendaCalendarView.class.getSimpleName();
-    private static TinyDB db;
+    public static TinyDB db;
     private CalendarView mCalendarView;
     private AgendaView mAgendaView;
     private FloatingActionButton mFloatingActionButton;
