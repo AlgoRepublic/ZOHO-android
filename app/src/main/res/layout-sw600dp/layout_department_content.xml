@@ -35,7 +35,7 @@
                     android:layout_height="match_parent"
                     android:orientation="horizontal">
                     <com.daimajia.swipe.SwipeLayout
-                        android:id="@+id/swipe"
+                        android:id="@+id/swipe8"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         app:clickToClose="true">

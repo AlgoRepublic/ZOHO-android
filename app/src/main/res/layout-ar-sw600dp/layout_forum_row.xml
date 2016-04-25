@@ -38,6 +38,7 @@
             android:id="@+id/swipe"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            app:drag_edge="left"
             app:clickToClose="true">
         <LinearLayout
             android:layout_width="160dp"
@@ -80,7 +81,6 @@
         <RelativeLayout
             android:id="@+id/parent1"
             android:layout_toRightOf="@+id/rightarrow_layout"
-            android:layout_toEndOf="@+id/rightarrow_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:padding="5dp"
@@ -98,8 +98,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="16sp"
-                    android:layout_toLeftOf="@+id/layout_comment"
-                    android:layout_toStartOf="@+id/layout_comment"
+                    android:layout_marginLeft="5dp"
+                    android:layout_toRightOf="@+id/layout_comment"
                     android:layout_centerVertical="true"
                     android:text="@string/forums_title"
                     android:textStyle="bold" />
@@ -107,8 +107,7 @@
                 <RelativeLayout
                     android:id="@+id/layout_comment"
                     android:layout_width="45dp"
-                    android:layout_alignParentRight="true"
-                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentLeft="true"
                     android:layout_centerHorizontal="true"
                     android:layout_height="45dp">
                     <TextView
@@ -146,7 +145,6 @@
             android:id="@+id/rightarrow_layout"
             android:layout_width="20dp"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
             android:layout_height="match_parent"
             android:gravity="center"
             android:background="#E2DBDB">
@@ -156,7 +154,7 @@
                 android:layout_width="15dp"
                 android:layout_height="15dp"
                 android:layout_margin="5dp"
-                android:background="?attr/circle_left"/>
+                android:background="?attr/circle_right"/>
         </LinearLayout>
         </RelativeLayout>
 </com.daimajia.swipe.SwipeLayout>
