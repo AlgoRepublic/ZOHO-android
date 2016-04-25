@@ -369,9 +369,24 @@
     <string name="projects_edit_delete">128</string>
 
     <string name="tasks_view">2</string>
+    <string name="tasks_view_own_unassigned">134</string>
+    <string name="tasks_view_others_unassigned">135</string>
+    <string name="tasks_add_comment_own_unassigned">136</string>
+    <string name="tasks_add_comment_others_unassigned">137</string>
+    <string name="tasks_add_comment">193</string>
+    <string name="tasks_view_comment">194</string>
+    <string name="tasks_edit_delete_own_comment">195</string>
+    <string name="tasks_edit_delete_others_comment">195</string>
     <string name="tasks_add">150</string>
-    <string name="tasks_edit">2</string>
-    <string name="tasks_delete">2</string>
+    <string name="tasks_add_subtask">197</string>
+    <string name="tasks_edit_own_others_unassigned">185</string>
+    <string name="tasks_edit_own_assigned_to_others">186</string>
+    <string name="tasks_edit_others_assigned_to_you">187</string>
+    <string name="tasks_edit_others_assigned_to_others">188</string>
+    <string name="tasks_delete_own_others_unassigned">189</string>
+    <string name="tasks_delete_own_assigned_others">190</string>
+    <string name="tasks_delete_others_assigned_you">191</string>
+
 
     <string name="calendar_view">1</string>
     <string name="calendar_edit_delete">2</string>
