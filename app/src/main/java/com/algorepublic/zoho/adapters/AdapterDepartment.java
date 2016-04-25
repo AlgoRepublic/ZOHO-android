@@ -86,7 +86,7 @@ public class AdapterDepartment
             shadowContainerView = (SwipeLayout) v.findViewById(R.id.swipe);
             mContainer = (RelativeLayout) v.findViewById(R.id.container);
             linearLayout = (LinearLayout) v.findViewById(R.id.main_dept);
-            swipeLayout = (SwipeLayout) v.findViewById(R.id.swipe);
+            swipeLayout = (SwipeLayout) v.findViewById(R.id.swipe9);
             project_title = (TextView) v.findViewById(R.id.project_title);
             header = (TextView) v.findViewById(R.id.header);
             btEdit = (TextView) v.findViewById(R.id.btEdit);
@@ -150,8 +150,11 @@ public class AdapterDepartment
     private void onBindSectionHeaderViewHolder(final MyViewHolder holder, final int position) {
 
         // set text
-        Log.e("ID","S"+DepartmentFragment.allProjects.get(position).getCompOrDeptID());
-        holder.swipeLayout.addSwipeListener(new SwipeLayout.SwipeListener() {
+        Log.e("ID", "S" + DepartmentFragment.allProjects.get(position).getCompOrDeptID());
+        if(DepartmentFragment.allProjects.get(position).getCompOrDeptID().equalsIgnoreCase("0")){
+            holder.swipeLayout.setSwipeEnabled(false);
+        }
+  /*      holder.swipeLayout.addSwipeListener(new SwipeLayout.SwipeListener() {
             @Override
             public void onStartOpen(SwipeLayout swipeLayout) {
                 if(DepartmentFragment.allProjects.get(position).getCompOrDeptID().equalsIgnoreCase("0")){
@@ -197,7 +200,7 @@ public class AdapterDepartment
                     holder.swipeLayout.close();
                 }
             }
-        });
+        });*/
         holder.header.setText(DepartmentFragment.allProjects.get(position).getCompOrDeptName());
         holder.btDelete.setOnClickListener(new View.OnClickListener() {
             @Override

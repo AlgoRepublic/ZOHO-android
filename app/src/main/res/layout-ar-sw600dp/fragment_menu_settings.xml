@@ -14,9 +14,10 @@
         android:paddingRight="10dp"
         android:paddingTop="15dp"
         android:paddingBottom="15dp"
+        android:drawableLeft="@drawable/chevron_left"
         android:gravity="center_vertical"
         android:id="@+id/checkbox_layout"
-        android:drawableLeft="@drawable/left_arrow"
+
         android:background="@color/white"
         android:elegantTextHeight="true"
         android:elevation="1dp"
@@ -33,8 +34,9 @@
         android:paddingRight="10dp"
         android:paddingTop="15dp"
         android:paddingBottom="15dp"
+        android:drawableLeft="@drawable/chevron_left"
         android:layout_below="@+id/checkbox_layout"
-        android:drawableLeft="@drawable/left_arrow"
+
         android:background="@color/white"
         android:gravity="center_vertical"
 
@@ -52,14 +54,13 @@
         android:paddingRight="10dp"
         android:paddingTop="15dp"
         android:paddingBottom="15dp"
+        android:drawableLeft="@drawable/chevron_left"
         android:layout_below="@+id/edit_profile"
         android:background="@color/white"
         android:gravity="center_vertical"
-
         android:elegantTextHeight="true"
         android:elevation="1dp"
         android:layout_marginBottom="1dp"
-        android:drawableLeft="@drawable/left_arrow"
         android:textStyle="bold"
         android:textSize="25sp"
         android:text="@string/rest_password" />
@@ -71,14 +72,13 @@
         android:paddingRight="10dp"
         android:paddingTop="15dp"
         android:paddingBottom="15dp"
+        android:drawableLeft="@drawable/chevron_left"
         android:layout_below="@+id/rest_password"
         android:background="@color/white"
         android:elegantTextHeight="true"
         android:gravity="center_vertical"
-
         android:elevation="1dp"
         android:layout_marginBottom="1dp"
-        android:drawableLeft="@drawable/left_arrow"
         android:textStyle="bold"
         android:textSize="25sp"
         android:text="@string/about_us" />

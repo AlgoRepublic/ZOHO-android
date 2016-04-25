@@ -35,6 +35,9 @@ import com.h6ah4i.android.widget.advrecyclerview.decoration.SimpleListDividerDec
 import com.h6ah4i.android.widget.advrecyclerview.draggable.RecyclerViewDragDropManager;
 import com.h6ah4i.android.widget.advrecyclerview.utils.WrapperAdapterUtils;
 
+import org.lucasr.twowayview.widget.DividerItemDecoration;
+import org.lucasr.twowayview.widget.SpacingItemDecoration;
+
 import java.util.ArrayList;
 
 /**
@@ -83,6 +86,7 @@ public class DepartmentFragment extends BaseFragment implements SwipeRefreshLayo
         // drag & drop manager
         mRecyclerViewDragDropManager = new RecyclerViewDragDropManager();
         mRecyclerViewDragDropManager.setInitiateOnLongPress(true);
+
         mRecyclerViewDragDropManager.setInitiateOnMove(false);
         mRecyclerViewDragDropManager.setDraggingItemShadowDrawable(
                 (NinePatchDrawable) ContextCompat.getDrawable(view.getContext(), R.drawable.material_shadow_z3));
@@ -188,7 +192,7 @@ public class DepartmentFragment extends BaseFragment implements SwipeRefreshLayo
         } else {
             mRecyclerView.addItemDecoration(new ItemShadowDecorator((NinePatchDrawable) ContextCompat.getDrawable(aq.getContext(), R.drawable.material_shadow_z1)));
         }
-        mRecyclerView.addItemDecoration(new SimpleListDividerDecorator(ContextCompat.getDrawable(aq.getContext(), R.drawable.list_divider_h), true));
+        mRecyclerView.addItemDecoration(new SimpleListDividerDecorator(null, true));
 
         mRecyclerViewDragDropManager.attachRecyclerView(mRecyclerView);
 
