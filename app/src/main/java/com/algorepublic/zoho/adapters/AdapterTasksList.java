@@ -189,17 +189,17 @@ public class AdapterTasksList extends BaseAdapter implements StickyListHeadersAd
     }
 
     private void applyPermissions(ViewHolder holder){
-        if(!baseClass.hasPermission(ctx.getResources().getString(R.string.tasks_edit)) &&
-                !baseClass.hasPermission(ctx.getResources().getString(R.string.tasks_delete))
-                ){
-            holder.swipeLayout.findViewById(R.id.editDeleteView).setVisibility(View.GONE);
-            holder.swipeLayout.setSwipeEnabled(false);
-            aq.id(R.id.rightarrow_layout).visibility(View.GONE);
-        }else if(!baseClass.hasPermission(ctx.getResources().getString(R.string.tasks_edit))){
-            holder.swipeLayout.findViewById(R.id.btEdit).setVisibility(View.GONE);
-        }else if(!baseClass.hasPermission(ctx.getResources().getString(R.string.tasks_delete))){
-            holder.swipeLayout.findViewById(R.id.btDelete).setVisibility(View.GONE);
-        }
+//        if(!baseClass.hasPermission(ctx.getResources().getString(R.string.tasks_edit_)) &&
+//                !baseClass.hasPermission(ctx.getResources().getString(R.string.tasks_delete))
+//                ){
+//            holder.swipeLayout.findViewById(R.id.editDeleteView).setVisibility(View.GONE);
+//            holder.swipeLayout.setSwipeEnabled(false);
+//            aq.id(R.id.rightarrow_layout).visibility(View.GONE);
+//        }else if(!baseClass.hasPermission(ctx.getResources().getString(R.string.tasks_edit))){
+//            holder.swipeLayout.findViewById(R.id.btEdit).setVisibility(View.GONE);
+//        }else if(!baseClass.hasPermission(ctx.getResources().getString(R.string.tasks_delete))){
+//            holder.swipeLayout.findViewById(R.id.btDelete).setVisibility(View.GONE);
+//        }
     }
     static class ViewHolder {
         private TextView taskTitle;
@@ -250,7 +250,8 @@ public class AdapterTasksList extends BaseAdapter implements StickyListHeadersAd
                     aq_header.id(R.id.header).text("Over Due");
             }else if (tasksLists.get(position).getHeader().equalsIgnoreCase("62135535600000")
                     || tasksLists.get(position).getHeader().equalsIgnoreCase("-62135571600000")
-                    || tasksLists.get(position).getHeader().equalsIgnoreCase("62135571600000"))
+                    || tasksLists.get(position).getHeader().equalsIgnoreCase("62135571600000")
+                    || tasksLists.get(position).getHeader().equalsIgnoreCase("-62135596800000"))
                 aq_header.id(R.id.header).text("No Due Date");
             else {
                 aq_header.id(R.id.header).text("Up Coming");
@@ -303,7 +304,8 @@ public class AdapterTasksList extends BaseAdapter implements StickyListHeadersAd
             }
             else if (tasksLists.get(position).getHeader().equalsIgnoreCase("62135535600000")
                     || tasksLists.get(position).getHeader().equalsIgnoreCase("-62135571600000")
-                    || tasksLists.get(position).getHeader().equalsIgnoreCase("62135571600000"))
+                    || tasksLists.get(position).getHeader().equalsIgnoreCase("62135571600000")
+                    || tasksLists.get(position).getHeader().equalsIgnoreCase("-62135596800000"))
                 type = 2;
             else
                 type=3;
