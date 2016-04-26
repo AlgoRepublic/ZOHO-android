@@ -68,7 +68,7 @@ public class AdapterTasksList extends BaseAdapter implements StickyListHeadersAd
     }
 
     @Override
-    public Object getItem(int pos) {
+    public TasksList getItem(int pos) {
         return tasksLists.get(pos);
     }
 
@@ -183,23 +183,192 @@ public class AdapterTasksList extends BaseAdapter implements StickyListHeadersAd
                 return false;
             }
         });
-        applyPermissions(holder);
+        applyPermissions(holder, R.string.tasks_edit_own_others_unassigned, position);
+        applyPermissions(holder, R.string.tasks_delete_own_others_unassigned, position);
 
         return convertView;
     }
 
-    private void applyPermissions(ViewHolder holder){
-        if(!baseClass.hasPermission(ctx.getResources().getString(R.string.tasks_edit)) &&
-                !baseClass.hasPermission(ctx.getResources().getString(R.string.tasks_delete))
-                ){
-            holder.swipeLayout.findViewById(R.id.editDeleteView).setVisibility(View.GONE);
-            holder.swipeLayout.setSwipeEnabled(false);
-            aq.id(R.id.rightarrow_layout).visibility(View.GONE);
-        }else if(!baseClass.hasPermission(ctx.getResources().getString(R.string.tasks_edit))){
-            holder.swipeLayout.findViewById(R.id.btEdit).setVisibility(View.GONE);
-        }else if(!baseClass.hasPermission(ctx.getResources().getString(R.string.tasks_delete))){
-            holder.swipeLayout.findViewById(R.id.btDelete).setVisibility(View.GONE);
+    /***********Permission Check tasks_edit_own_others_unassigned**********/
+    private void tasks_edit_own_others_unassigned(ViewHolder holder,int position){
+        if(baseClass.hasPermission(ctx.getResources().getString(R.string.tasks_edit_own_others_unassigned))){
+            holder.swipeLayout.findViewById(R.id.editDeleteView)
+                    .findViewById(R.id.btEdit)
+                    .setVisibility(View.VISIBLE);
+        }else {
+            if (getItem(position).getListAssignees().size() < 1) {
+                holder.swipeLayout.findViewById(R.id.editDeleteView)
+                        .findViewById(R.id.btEdit)
+                        .setVisibility(View.GONE);
+            }else{
+                holder.swipeLayout.findViewById(R.id.editDeleteView)
+                        .findViewById(R.id.btEdit)
+                        .setVisibility(View.VISIBLE);
+            }
         }
+
+    }
+    /***********Permission Check tasks_edit_own_assigned_to_others**********/
+    private void tasks_edit_own_assigned_to_others(ViewHolder holder,int position){
+        if(baseClass.hasPermission(ctx.getResources().getString(R.string.tasks_edit_own_assigned_to_others))
+                && getItem(position).getListAssignees().size() > 0
+                && (getItem(position).getOwnerId()==Integer.parseInt(baseClass.getUserId())
+                && (!amIinList(getItem(position).getListAssignees())))
+        ){
+            holder.swipeLayout.findViewById(R.id.editDeleteView)
+                    .findViewById(R.id.btEdit)
+                    .setVisibility(View.VISIBLE);
+        }else {
+                holder.swipeLayout.findViewById(R.id.editDeleteView)
+                        .findViewById(R.id.btEdit)
+                        .setVisibility(View.GONE);
+        }
+
+    }
+    /***********Permission Check tasks_edit_others_assigned_to_you**********/
+    private void tasks_edit_others_assigned_to_you(ViewHolder holder,int position){
+        if(baseClass.hasPermission(ctx.getResources().getString(R.string.tasks_edit_others_assigned_to_you))
+                && getItem(position).getListAssignees().size() > 0
+                && (getItem(position).getOwnerId()!=Integer.parseInt(baseClass.getUserId())
+                && (amIinList(getItem(position).getListAssignees()))
+        )){
+            holder.swipeLayout.findViewById(R.id.editDeleteView)
+                    .findViewById(R.id.btEdit)
+                    .setVisibility(View.VISIBLE);
+        }else {
+            holder.swipeLayout.findViewById(R.id.editDeleteView)
+                    .findViewById(R.id.btEdit)
+                    .setVisibility(View.GONE);
+        }
+
+    }
+    /***********Permission Check tasks_edit_others_assigned_to_others**********/
+    private void tasks_edit_others_assigned_to_others(ViewHolder holder,int position){
+        if(baseClass.hasPermission(ctx.getResources().getString(R.string.tasks_edit_others_assigned_to_others))
+                && getItem(position).getListAssignees().size() > 0
+                && (getItem(position).getOwnerId()!=Integer.parseInt(baseClass.getUserId())
+                && (!amIinList(getItem(position).getListAssignees()))
+        )){
+            holder.swipeLayout.findViewById(R.id.editDeleteView)
+                    .findViewById(R.id.btEdit)
+                    .setVisibility(View.VISIBLE);
+        }else {
+            holder.swipeLayout.findViewById(R.id.editDeleteView)
+                    .findViewById(R.id.btEdit)
+                    .setVisibility(View.GONE);
+        }
+
+    }
+
+
+    /***********Permission Check tasks_delete_own_others_unassigned**********/
+    private void tasks_delete_own_others_unassigned(ViewHolder holder,int position){
+        if(baseClass.hasPermission(ctx.getResources().getString(R.string.tasks_delete_own_others_unassigned)))
+            holder.swipeLayout.findViewById(R.id.editDeleteView)
+                    .findViewById(R.id.btDelete)
+                    .setVisibility(View.VISIBLE);
+        else{
+            if(getItem(position).getListAssignees().size()<1){
+                holder.swipeLayout.findViewById(R.id.editDeleteView)
+                        .findViewById(R.id.btDelete)
+                        .setVisibility(View.GONE);
+            }else{
+                holder.swipeLayout.findViewById(R.id.editDeleteView)
+                        .findViewById(R.id.btDelete)
+                        .setVisibility(View.VISIBLE);
+            }
+        }
+
+    }
+
+    /***********Permission Check tasks_delete_own_assigned_others**********/
+    private void tasks_delete_own_assigned_others(ViewHolder holder,int position){
+        if(baseClass.hasPermission(ctx.getResources().getString(R.string.tasks_delete_own_assigned_others))
+                && getItem(position).getListAssignees().size() > 0
+                && (getItem(position).getOwnerId()==Integer.parseInt(baseClass.getUserId())
+                && (!amIinList(getItem(position).getListAssignees())))
+                ){
+            holder.swipeLayout.findViewById(R.id.editDeleteView)
+                    .findViewById(R.id.btDelete)
+                    .setVisibility(View.VISIBLE);
+        }else {
+            holder.swipeLayout.findViewById(R.id.editDeleteView)
+                    .findViewById(R.id.btDelete)
+                    .setVisibility(View.GONE);
+        }
+
+    }
+
+    /***********Permission Check tasks_delete_others_assigned_you**********/
+    private void tasks_delete_others_assigned_you(ViewHolder holder,int position){
+        if(baseClass.hasPermission(ctx.getResources().getString(R.string.tasks_delete_others_assigned_you))
+                && getItem(position).getListAssignees().size() > 0
+                && (getItem(position).getOwnerId()!=Integer.parseInt(baseClass.getUserId())
+                && (amIinList(getItem(position).getListAssignees())))
+                ){
+            holder.swipeLayout.findViewById(R.id.editDeleteView)
+                    .findViewById(R.id.btDelete)
+                    .setVisibility(View.VISIBLE);
+        }else {
+            holder.swipeLayout.findViewById(R.id.editDeleteView)
+                    .findViewById(R.id.btDelete)
+                    .setVisibility(View.GONE);
+        }
+
+    }
+
+
+
+    private void applyPermissions(ViewHolder holder,int permission,int position){
+        switch (permission){
+            case R.string.tasks_edit_own_others_unassigned:
+                tasks_edit_own_others_unassigned(holder, position);
+                break;
+            case R.string.tasks_edit_own_assigned_to_others:
+                tasks_edit_own_assigned_to_others(holder,position);
+                break;
+            case R.string.tasks_edit_others_assigned_to_you:
+                tasks_edit_others_assigned_to_you(holder,position);
+                break;
+            case R.string.tasks_edit_others_assigned_to_others:
+                tasks_edit_others_assigned_to_others(holder,position);
+                break;
+            case R.string.tasks_delete_own_others_unassigned:
+                tasks_delete_own_others_unassigned(holder,position);
+                break;
+            case R.string.tasks_delete_own_assigned_others:
+                tasks_delete_own_assigned_others(holder,position);
+                break;
+            case R.string.tasks_delete_others_assigned_you:
+                tasks_delete_others_assigned_you(holder,position);
+                break;
+
+        }
+
+    }
+    /*  if(!baseClass.hasPermission(ctx.getResources().getString(R.string.tasks_edit)) &&
+          !baseClass.hasPermission(ctx.getResources().getString(R.string.tasks_delete))
+          ){
+      holder.swipeLayout.findViewById(R.id.editDeleteView).setVisibility(View.GONE);
+      holder.swipeLayout.setSwipeEnabled(false);
+      aq.id(R.id.rightarrow_layout).visibility(View.GONE);
+  }else if(!baseClass.hasPermission(ctx.getResources().getString(R.string.tasks_edit))){
+      holder.swipeLayout.findViewById(R.id.btEdit).setVisibility(View.GONE);
+  }else if(!baseClass.hasPermission(ctx.getResources().getString(R.string.tasks_delete))){
+      holder.swipeLayout.findViewById(R.id.btDelete).setVisibility(View.GONE);
+  }*/
+
+    /**
+     * to check if logged in user is in taskListAssignee
+     * @param taskListAssignee
+     * @return
+     */
+    private boolean amIinList(ArrayList<TaskListAssignee> taskListAssignee){
+        for (TaskListAssignee user:taskListAssignee) {
+            if(user.getUserID()==Integer.parseInt(baseClass.getUserId()))
+                return true;
+        }
+        return false;
     }
     static class ViewHolder {
         private TextView taskTitle;

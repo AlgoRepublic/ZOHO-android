@@ -10,6 +10,7 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -44,6 +45,7 @@ public class TaskCommentFragment extends BaseFragment {
     public static ListView listView;
     TaskListService service;
     ForumService forumService;
+    private LinearLayout layoutCommentsAdd;
     public static ArrayList<TaskComments> arrayList = new ArrayList<>();
     TextView textView;
 
@@ -76,6 +78,7 @@ public class TaskCommentFragment extends BaseFragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment_forums
         View view = inflater.inflate(R.layout.fragment_task_comments, container, false);
+        layoutCommentsAdd = (LinearLayout) view.findViewById(R.id.layoutCommentsAdd);
         listView = (ListView) view.findViewById(R.id.listView_comments);
         comment_user = (EditText) view.findViewById(R.id.comment_user);
         aq = new AQuery(view);
@@ -105,6 +108,9 @@ public class TaskCommentFragment extends BaseFragment {
 //                return false;
 //            }
 //        });
+        if(!baseClass.hasPermission(getResources().getString(R.string.tasks_add_comment)))
+            layoutCommentsAdd.setVisibility(View.GONE);
+
         aq.id(R.id.send).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
