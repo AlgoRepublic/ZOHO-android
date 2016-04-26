@@ -112,6 +112,7 @@ public class TasksListFragment extends BaseFragment implements SwipeRefreshLayou
         radioGroup = (RadioGroup) view.findViewById(R.id.radioGroup);
         searchView = (SearchView) view.findViewById(R.id.searchView);
         listView = (StickyListHeadersListView) view.findViewById(R.id.list_taskslist);
+        listView.setFastScrollEnabled(true);
         swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe_refresh_layout);
         swipeRefreshLayout.setOnRefreshListener(this);
         aq = new AQuery(view);

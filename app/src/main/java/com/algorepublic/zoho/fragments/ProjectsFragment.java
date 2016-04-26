@@ -79,6 +79,9 @@ public class ProjectsFragment extends BaseFragment implements SwipeRefreshLayout
         View view  = inflater.inflate(R.layout.fragment_projects, container, false);
         listViewDept = (StickyListHeadersListView) view.findViewById(R.id.projects_liststicky);
         listViewClient = (ListView) view.findViewById(R.id.projects_list);
+
+        listViewDept.setFastScrollEnabled(true);
+        listViewClient.setFastScrollEnabled(true);
         aq = new AQuery(getActivity(), view);
         swipeStickView = (SwipeRefreshLayout) view.findViewById(R.id.swipe_stickyView);
         swipeListView = (SwipeRefreshLayout) view.findViewById(R.id.swipe_listView);

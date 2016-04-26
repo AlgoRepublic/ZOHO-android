@@ -1,17 +1,15 @@
 package com.algorepublic.zoho.adapters;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
-import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.algorepublic.zoho.BaseActivity;
-import com.algorepublic.zoho.MainActivity;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.fragments.StarRatingLevelQuestionsFragment;
 import com.algorepublic.zoho.utils.BaseClass;
@@ -56,7 +54,8 @@ public class AdapterStarRatingLevelOne extends BaseExpandableListAdapter {
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = layoutInflater.inflate(R.layout.fragment_star_rating, parent, false);
         CustomExpListView mListView = new CustomExpListView(mContext);
-
+        mListView.setChildDivider(new ColorDrawable(Color.TRANSPARENT));
+        mListView.setGroupIndicator(new ColorDrawable(Color.TRANSPARENT));
         mListView.setAdapter(new AdapterStarRatingLevelTwo
                 (this.mContext, mListDataHeader.get(groupPosition).getLevelTwos()));
 

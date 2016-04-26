@@ -369,6 +369,7 @@ public class AdapterTasksList extends BaseAdapter implements StickyListHeadersAd
                 return true;
         }
         return false;
+
     }
     static class ViewHolder {
         private TextView taskTitle;
@@ -419,7 +420,8 @@ public class AdapterTasksList extends BaseAdapter implements StickyListHeadersAd
                     aq_header.id(R.id.header).text("Over Due");
             }else if (tasksLists.get(position).getHeader().equalsIgnoreCase("62135535600000")
                     || tasksLists.get(position).getHeader().equalsIgnoreCase("-62135571600000")
-                    || tasksLists.get(position).getHeader().equalsIgnoreCase("62135571600000"))
+                    || tasksLists.get(position).getHeader().equalsIgnoreCase("62135571600000")
+                    || tasksLists.get(position).getHeader().equalsIgnoreCase("-62135596800000"))
                 aq_header.id(R.id.header).text("No Due Date");
             else {
                 aq_header.id(R.id.header).text("Up Coming");
@@ -472,7 +474,8 @@ public class AdapterTasksList extends BaseAdapter implements StickyListHeadersAd
             }
             else if (tasksLists.get(position).getHeader().equalsIgnoreCase("62135535600000")
                     || tasksLists.get(position).getHeader().equalsIgnoreCase("-62135571600000")
-                    || tasksLists.get(position).getHeader().equalsIgnoreCase("62135571600000"))
+                    || tasksLists.get(position).getHeader().equalsIgnoreCase("62135571600000")
+                    || tasksLists.get(position).getHeader().equalsIgnoreCase("-62135596800000"))
                 type = 2;
             else
                 type=3;
