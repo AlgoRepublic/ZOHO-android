@@ -1,5 +1,6 @@
 package com.algorepublic.zoho;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -32,13 +33,17 @@ import com.flyco.dialog.listener.OnBtnClickL;
 import com.flyco.dialog.widget.NormalDialog;
 import com.github.tibolte.agendacalendarview.AgendaCalendarView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MainActivity extends BaseActivity {
 
     AQuery aq,aq_header;
     BaseClass baseClass;
     public static int themeType;
     public static GridView gridView;
-
+    private List<String> menu_names=null;
+    private List<Integer> menu_icon_white=null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -101,8 +106,66 @@ public class MainActivity extends BaseActivity {
                 MainActivity.this.finish();
             }
         });
+
         callFragment(R.id.container, HomeFragment.newInstance(), "HomeFragment");
-        gridView.setAdapter(new AdapterMenuItems(this));
+        initLists();
+        gridView.setAdapter(new AdapterMenuItems(this,menu_names,menu_icon_white));
+    }
+
+    /**
+     * create Menu Items and apply permissions.
+     */
+    private void initLists(){
+        menu_names = new ArrayList<>();
+        menu_icon_white= new ArrayList<>();
+        menu_names.add(getString(R.string.dashboard));
+        menu_names.add(getString(R.string.projects));
+        menu_names.add(getString(R.string.tasks));
+        menu_names.add(getString(R.string.calendar));
+        menu_names.add(getString(R.string.documents));
+        menu_names.add(getResources().getString(R.string.users));
+        menu_names.add(getResources().getString( R.string.forums));
+        menu_names.add(getResources().getString(R.string.star_rating));
+        menu_names.add(getResources().getString(R.string.departments));
+
+        menu_icon_white.add(R.drawable.dashboard);
+        menu_icon_white.add(R.drawable.projects);
+        menu_icon_white.add(R.drawable.task);
+        menu_icon_white.add(R.drawable.calendar);
+        menu_icon_white.add(R.drawable.documents);
+        menu_icon_white.add(R.drawable.users);
+        menu_icon_white.add(R.drawable.forums);
+        menu_icon_white.add(R.drawable.starrating);
+        menu_icon_white.add(R.drawable.departments);
+        applyPermissions(this);
+    }
+
+    private void applyPermissions(Context context){
+        if(!baseClass.hasPermission(context.getString(R.string.star_rating_view))){
+            updateListsOnPermissions(getString(R.string.star_rating),R.drawable.starrating);
+        }
+
+        if(!baseClass.hasPermission(context.getString(R.string.users_view))){
+            updateListsOnPermissions(getString(R.string.users),R.drawable.users);
+        }
+
+        if(!baseClass.hasPermission(context.getString(R.string.documents_view))){
+            updateListsOnPermissions(getString(R.string.documents),R.drawable.documents);
+        }
+        if(!baseClass.hasPermission(context.getString(R.string.calendar_view))){
+            updateListsOnPermissions(getString(R.string.calendar),R.drawable.calendar);
+        }
+        if(!baseClass.hasPermission(context.getString(R.string.projects_view))){
+            updateListsOnPermissions(getString(R.string.projects),R.drawable.projects);
+        }
+        if(!baseClass.hasPermission(context.getString(R.string.tasks_view))){
+            updateListsOnPermissions(getString(R.string.tasks),R.drawable.task);
+        }
+    }
+
+    private void updateListsOnPermissions(String mName,int mIcon){
+        menu_names.remove(mName);
+        menu_icon_white.remove((Object)mIcon);
     }
 
     @Override

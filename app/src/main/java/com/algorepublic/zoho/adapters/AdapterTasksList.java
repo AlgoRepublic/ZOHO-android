@@ -213,7 +213,7 @@ public class AdapterTasksList extends BaseAdapter implements StickyListHeadersAd
         if(baseClass.hasPermission(ctx.getResources().getString(R.string.tasks_edit_own_assigned_to_others))
                 && getItem(position).getListAssignees().size() > 0
                 && (getItem(position).getOwnerId()==Integer.parseInt(baseClass.getUserId())
-                && (!amIinList(getItem(position).getListAssignees())))
+                && (!amIinList(getItem(position).getListAssignees(),baseClass.getUserId())))
         ){
             holder.swipeLayout.findViewById(R.id.editDeleteView)
                     .findViewById(R.id.btEdit)
@@ -230,7 +230,7 @@ public class AdapterTasksList extends BaseAdapter implements StickyListHeadersAd
         if(baseClass.hasPermission(ctx.getResources().getString(R.string.tasks_edit_others_assigned_to_you))
                 && getItem(position).getListAssignees().size() > 0
                 && (getItem(position).getOwnerId()!=Integer.parseInt(baseClass.getUserId())
-                && (amIinList(getItem(position).getListAssignees()))
+                && (amIinList(getItem(position).getListAssignees(),baseClass.getUserId()))
         )){
             holder.swipeLayout.findViewById(R.id.editDeleteView)
                     .findViewById(R.id.btEdit)
@@ -247,7 +247,7 @@ public class AdapterTasksList extends BaseAdapter implements StickyListHeadersAd
         if(baseClass.hasPermission(ctx.getResources().getString(R.string.tasks_edit_others_assigned_to_others))
                 && getItem(position).getListAssignees().size() > 0
                 && (getItem(position).getOwnerId()!=Integer.parseInt(baseClass.getUserId())
-                && (!amIinList(getItem(position).getListAssignees()))
+                && (!amIinList(getItem(position).getListAssignees(),baseClass.getUserId()))
         )){
             holder.swipeLayout.findViewById(R.id.editDeleteView)
                     .findViewById(R.id.btEdit)
@@ -286,7 +286,7 @@ public class AdapterTasksList extends BaseAdapter implements StickyListHeadersAd
         if(baseClass.hasPermission(ctx.getResources().getString(R.string.tasks_delete_own_assigned_others))
                 && getItem(position).getListAssignees().size() > 0
                 && (getItem(position).getOwnerId()==Integer.parseInt(baseClass.getUserId())
-                && (!amIinList(getItem(position).getListAssignees())))
+                && (!amIinList(getItem(position).getListAssignees(),baseClass.getUserId())))
                 ){
             holder.swipeLayout.findViewById(R.id.editDeleteView)
                     .findViewById(R.id.btDelete)
@@ -304,7 +304,7 @@ public class AdapterTasksList extends BaseAdapter implements StickyListHeadersAd
         if(baseClass.hasPermission(ctx.getResources().getString(R.string.tasks_delete_others_assigned_you))
                 && getItem(position).getListAssignees().size() > 0
                 && (getItem(position).getOwnerId()!=Integer.parseInt(baseClass.getUserId())
-                && (amIinList(getItem(position).getListAssignees())))
+                && (amIinList(getItem(position).getListAssignees(),baseClass.getUserId())))
                 ){
             holder.swipeLayout.findViewById(R.id.editDeleteView)
                     .findViewById(R.id.btDelete)
@@ -363,9 +363,9 @@ public class AdapterTasksList extends BaseAdapter implements StickyListHeadersAd
      * @param taskListAssignee
      * @return
      */
-    private boolean amIinList(ArrayList<TaskListAssignee> taskListAssignee){
+    public static boolean amIinList(ArrayList<TaskListAssignee> taskListAssignee,String UserId){
         for (TaskListAssignee user:taskListAssignee) {
-            if(user.getUserID()==Integer.parseInt(baseClass.getUserId()))
+            if(user.getUserID()==Integer.parseInt(UserId))
                 return true;
         }
         return false;

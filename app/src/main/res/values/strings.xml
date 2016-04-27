@@ -274,6 +274,7 @@
     <string name="user_last_name">Please Add Last Name</string>
     <string name="add_email">Please Add Email</string>
     <string name="alert_old_password">Please Add Old Password</string>
+    <string name="alert_old_password_not_matched">Invalid old Password</string>
     <string name="alert_new_password">Please Add New Password</string>
     <string name="alert_confirm_password">Please Add Confirm Password</string>
     <string name="alert_match_password">Please Match Your Password</string>
@@ -371,12 +372,12 @@
     <string name="tasks_view">2</string>  <!--added-->
     <string name="tasks_view_own_unassigned">134</string> <!--added-->
     <string name="tasks_view_others_unassigned">135</string> <!--added-->
-    <string name="tasks_add_comment_own_unassigned">136</string>
-    <string name="tasks_add_comment_others_unassigned">137</string>
+    <string name="tasks_add_comment_own_unassigned">136</string> <!--added-->
+    <string name="tasks_add_comment_others_unassigned">137</string> <!--added-->
     <string name="tasks_add_comment">193</string> <!--added-->
-    <string name="tasks_view_comment">194</string>
-    <string name="tasks_edit_delete_own_comment">195</string>
-    <string name="tasks_edit_delete_others_comment">195</string>
+    <string name="tasks_view_comment">194</string> <!--added-->
+    <string name="tasks_edit_delete_own_comment">195</string> <!--added-->
+    <string name="tasks_edit_delete_others_comment">195</string> <!--added-->
     <string name="tasks_add">150</string> <!--added-->
     <string name="tasks_add_subtask">197</string> <!--added-->
     <string name="tasks_edit_own_others_unassigned">185</string> <!--added-->

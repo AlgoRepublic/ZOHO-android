@@ -21,6 +21,7 @@ import com.algorepublic.zoho.utils.BaseClass;
 import com.algorepublic.zoho.utils.Constants;
 import com.androidquery.AQuery;
 import com.bumptech.glide.Glide;
+import com.daimajia.swipe.SwipeLayout;
 import com.flyco.animation.BounceEnter.BounceLeftEnter;
 import com.flyco.animation.SlideExit.SlideRightExit;
 import com.flyco.dialog.listener.OnBtnClickL;
@@ -66,6 +67,7 @@ public class AdapterTaskComments extends BaseAdapter {
             holder.taskComment = (TextView) convertView.findViewById(R.id.comment_description);
             holder.userName = (TextView) convertView.findViewById(R.id.comment_title);
             holder.userImage = (CircularImageView) convertView.findViewById(R.id.comment_image);
+            holder.swipeLayout = (SwipeLayout) convertView.findViewById(R.id.swipe4);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
@@ -84,6 +86,7 @@ public class AdapterTaskComments extends BaseAdapter {
                     + "." + BaseClass.getExtensionType(TaskCommentFragment.arrayList
                     .get(position).getUserImagePath())).into(holder.userImage);
         }
+     applyPermissions(holder,position);
 //        aq.id(R.id.btEdit).clicked(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
@@ -137,6 +140,26 @@ public class AdapterTaskComments extends BaseAdapter {
 
         return convertView;
     }
+
+    /**
+     * apply permissions on task delete.
+     */
+    private void applyPermissions(ViewHolder holder,int position){
+        if(!baseClass.hasPermission(ctx.getResources().getString(R.string.tasks_edit_delete_own_comment))
+                && TaskCommentFragment.arrayList.get(position).getUserId()==Integer.parseInt(baseClass.getUserId())
+                ) {
+            holder.swipeLayout.findViewById(R.id.editDeleteView).setVisibility(View.GONE);
+            holder.swipeLayout.setSwipeEnabled(false);
+            holder.swipeLayout.findViewById(R.id.parent2).findViewById(R.id.rightarrow_layout).setVisibility(View.GONE);
+        }
+        if(!baseClass.hasPermission(ctx.getResources().getString(R.string.tasks_edit_delete_others_comment))
+                && TaskCommentFragment.arrayList.get(position).getUserId()!=Integer.parseInt(baseClass.getUserId())
+                ) {
+            holder.swipeLayout.findViewById(R.id.editDeleteView).setVisibility(View.GONE);
+            holder.swipeLayout.setSwipeEnabled(false);
+            holder.swipeLayout.findViewById(R.id.parent2).findViewById(R.id.rightarrow_layout).setVisibility(View.GONE);
+        }
+    }
     public void DeleteComment(Object caller, Object model){
         GeneralModel.getInstance().setList((GeneralModel) model);
         if (GeneralModel.getInstance().responseObject ==true) {
@@ -152,5 +175,6 @@ public class AdapterTaskComments extends BaseAdapter {
         TextView taskComment;
         TextView userName;
         CircularImageView userImage;
+        SwipeLayout swipeLayout;
     }
 }

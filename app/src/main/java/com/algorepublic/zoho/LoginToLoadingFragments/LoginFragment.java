@@ -75,6 +75,7 @@ public class LoginFragment extends BaseFragment {
         aq.id(R.id.email_sign_in_button).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                BaseClass.db.putString("SavePassword", aq.id(R.id.password).getText().toString());
                 LoginClick(v);
             }
         });
