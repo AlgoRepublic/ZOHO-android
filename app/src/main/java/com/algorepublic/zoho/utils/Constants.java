@@ -20,6 +20,7 @@ public class Constants {
 	public static String GetUserRole_API = BASE_URL+ "/User/GetUserRolesList";
 	public static String GetAllUserList_API = BASE_URL+ "/User/GetList";
 	public static String GetUserListByProject_API = BASE_URL+ "/User/GetListByProject?";
+	public static String GetUserListByPermission_API = BASE_URL+ "/User/GetListByPermission?";
 	public static String GetAssigneeByTask_API = BASE_URL+ "/User/GetListByProject";//ProjectID
 	public static String CreateUser_API = BASE_URL+ "/User/CreateUser";
 	public static String UpdateUser_API = BASE_URL+ "/User/UpdateUserProfile";

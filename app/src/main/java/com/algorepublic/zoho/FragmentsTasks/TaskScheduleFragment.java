@@ -109,7 +109,9 @@ public class TaskScheduleFragment extends BaseFragment {
         @Override
         public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
             start_date = (++monthOfYear)+"/"+dayOfMonth+"/"+year;
-            start_day = dayOfMonth;start_month = monthOfYear-1;start_year = year;
+            start_day = dayOfMonth;
+            start_month = monthOfYear-1;
+            start_year = year;
             CheckDate();
             aq.id(R.id.start_date).text(start_date);
             BaseClass.db.putString("StartDate", start_date);
@@ -119,7 +121,9 @@ public class TaskScheduleFragment extends BaseFragment {
         @Override
         public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
             end_date = (++monthOfYear)+"/"+dayOfMonth+"/"+year;
-            end_day = dayOfMonth;end_month = monthOfYear-1;end_year = year;
+            end_day = dayOfMonth;
+            end_month = monthOfYear-1;
+            end_year = year;
             CheckDate();
             aq.id(R.id.end_date).text(end_date);
             BaseClass.db.putString("EndDate", end_date);

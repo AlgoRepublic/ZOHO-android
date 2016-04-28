@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     android:background="@color/colorBaseWrapper"
     android:orientation="vertical"
+    android:clickable="true"
     tools:context=".fragments.TaskAddUpdateFragment">
 
     <RelativeLayout

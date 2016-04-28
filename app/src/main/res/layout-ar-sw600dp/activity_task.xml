@@ -7,6 +7,7 @@
     android:background="@color/colorBaseWrapper"
     android:orientation="vertical"
     android:fitsSystemWindows="true"
+    android:clickable="true"
     android:layoutDirection="rtl"
     android:textDirection="rtl"
     tools:context=".fragments.TaskAddUpdateFragment">

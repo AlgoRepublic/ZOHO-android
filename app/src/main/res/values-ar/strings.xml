@@ -176,7 +176,7 @@
     <string name="task_details">تفاصيل المهمة:</string>
     <string name="task_added">أضاف</string>
     <string name="task_users">المستخدمين:</string>
-    <string name="project_status">حالة المشروع:</string>
+    <string name="project_status">حالة المهمة :</string>
     <string name="task_startdate">تاريخ البدء:</string>
     <string name="task_duedate">تاريخ الانتهاء:</string>
     <string name="projects_list_empty">قائمة المشروع فارغة</string>

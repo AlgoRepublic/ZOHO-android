@@ -194,7 +194,7 @@ public class EditProjectFragment extends BaseFragment {
         for(int loop=0;loop< deptList.size();loop++) {
             departmentList[loop] = deptList.get(loop).getName();
         }
-        service.getTaskAssignee(Integer.parseInt(baseClass.getSelectedProject()), true,
+        service.getOwnersByPermission(getString(R.string.projects_add), true,
                 new CallBack(EditProjectFragment.this, "GetAllUsers"));
         owner_list.setOnClickListener(new View.OnClickListener() {
             @Override

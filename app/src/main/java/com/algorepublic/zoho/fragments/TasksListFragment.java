@@ -360,7 +360,9 @@ public class TasksListFragment extends BaseFragment implements SwipeRefreshLayou
                 }
                 tasksList.setListAssignees(listAssignees);
                 //************** ******* ************//
-                tasksViewUnassigned(tasksList,listAssignees);
+                boolean viewOwnUnAssigned = baseClass.hasPermission(getResources().getString(R.string.tasks_view_own_unassigned));
+                boolean viewOtherUnAssigned = baseClass.hasPermission(getResources().getString(R.string.tasks_view_others_unassigned));
+                tasksViewUnassigned(viewOwnUnAssigned,viewOtherUnAssigned,tasksList,listAssignees);
             }
         }
     }
@@ -370,23 +372,21 @@ public class TasksListFragment extends BaseFragment implements SwipeRefreshLayou
      * @param tasksList
      * @param listAssignees
      */
-    private void tasksViewUnassigned(TasksList tasksList,ArrayList<TaskListAssignee> listAssignees){
-        if(baseClass.hasPermission(getResources().getString(R.string.tasks_view_own_unassigned))){
-            allTaskList.add(tasksList);
-        }else{
-            if(listAssignees.size()<1 &&
-                    (tasksList.getOwnerId()==Integer.parseInt(baseClass.getUserId()))){
-            }else
-                allTaskList.add(tasksList);
+    private void tasksViewUnassigned(boolean viewOwnUnAssigned,boolean viewOtherUnAssigned,TasksList tasksList,ArrayList<TaskListAssignee> listAssignees){
+        if(!viewOwnUnAssigned && !viewOtherUnAssigned){
         }
-        if(baseClass.hasPermission(getResources().getString(R.string.tasks_view_others_unassigned))){
-            allTaskList.add(tasksList);
-        }else {
-            if(listAssignees.size()<1 &&
-                    (tasksList.getOwnerId()!=Integer.parseInt(baseClass.getUserId()))){
-            }else
-                allTaskList.add(tasksList);
+        else if(!viewOwnUnAssigned){ // listAssignees.size() < 1 means "UNASSIGNED"
+                if(tasksList.getOwnerId()==Integer.parseInt(baseClass.getUserId()) &&  listAssignees.size() < 1){}
+                   else allTaskList.add(tasksList);
+
         }
+        else if(!viewOtherUnAssigned) { // listAssignees.size() < 1 means "UNASSIGNED"
+                if((tasksList.getOwnerId() != Integer.parseInt(baseClass.getUserId())) && listAssignees.size() < 1) {}
+                   else allTaskList.add(tasksList);
+
+        }
+        else
+            allTaskList.add(tasksList);
     }
 
 
