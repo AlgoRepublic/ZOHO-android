@@ -349,8 +349,8 @@ public class TasksListFragment extends BaseFragment implements SwipeRefreshLayou
                 tasksList.setTaskListNameID(TasksListByOwnerModel.getInstance().responseObject.get(loop).tasklistID);
                 //************** Assignee List ************//
                 ArrayList<TaskListAssignee> listAssignees = new ArrayList<>();
-                for (int loop2 = 0; loop2 < TasksListByOwnerModel.getInstance().responseObject.get(loop).taskObject.get(loop1).userObject.size(); loop2++) {
-                    TasksListByOwnerModel.Users users = TasksListByOwnerModel.getInstance().responseObject.get(loop).taskObject.get(loop1).userObject.get(loop2);
+                for (int loop2 = 0; loop2 < taskModel.userObject.size(); loop2++) {
+                    TasksListByOwnerModel.Users users = taskModel.userObject.get(loop2);
                     TaskListAssignee assignee = new TaskListAssignee();
                     assignee.setUserID(users.responsibleID);
                     assignee.setFirstName(users.firstName);

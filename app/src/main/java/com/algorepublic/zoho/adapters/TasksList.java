@@ -122,6 +122,7 @@ public class TasksList extends ArrayList<Parcelable> implements Comparable<Tasks
 
 
     public void setListAssignees(ArrayList<TaskListAssignee> listAssignees){
+        this.listAssignees.clear();
         this.listAssignees.addAll(listAssignees);
     }
     public ArrayList<TaskListAssignee> getListAssignees(){

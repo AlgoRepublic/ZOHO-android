@@ -31,6 +31,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
+import java.util.TimeZone;
 import java.util.concurrent.TimeUnit;
 
 import cc.cloudist.acplibrary.ACProgressConstant;
@@ -185,7 +186,7 @@ public class BaseFragment extends Fragment {
         long timeInMillis = Long.parseLong(a);
         if(timeInMillis < 0 )
             return "";
-        Calendar calendar = Calendar.getInstance();
+        Calendar calendar = Calendar.getInstance(TimeZone.getDefault());
         calendar.setTimeInMillis(timeInMillis);
 
         int mYear = calendar.get(Calendar.YEAR);

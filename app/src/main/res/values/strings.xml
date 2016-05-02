@@ -288,6 +288,7 @@
     <string name="select_project">Please! Select Project</string>
     <string name="select_user">Please! Select User</string>
     <string name="select_dept">Please! Select Department</string>
+    <string name="select_category">Please! Select Category</string>
     <string name="add_project">Add Project</string>
     <string name="enter_comment">Enter Your Comment!</string>
     <string name="no_date">No Date</string>
@@ -346,7 +347,6 @@
     <string name="added_milestone">added Milestone</string>
 
 
-
     <string name="no_comments">No Comments</string>
     <string name="no_documents">No Documents</string>
     <string name="no_feeds">No Feeds</string>
@@ -370,24 +370,42 @@
     <string name="projects_add">224</string>
     <string name="projects_edit_delete">128</string>
 
-    <string name="tasks_view">2</string>  <!--added-->
-    <string name="tasks_view_own_unassigned">134</string> <!--added-->
-    <string name="tasks_view_others_unassigned">135</string> <!--added-->
-    <string name="tasks_add_comment_own_unassigned">136</string> <!--added-->
-    <string name="tasks_add_comment_others_unassigned">137</string> <!--added-->
-    <string name="tasks_add_comment">193</string> <!--added-->
-    <string name="tasks_view_comment">194</string> <!--added-->
-    <string name="tasks_edit_delete_own_comment">195</string> <!--added-->
-    <string name="tasks_edit_delete_others_comment">195</string> <!--added-->
-    <string name="tasks_add">150</string> <!--added-->
-    <string name="tasks_add_subtask">197</string> <!--added-->
-    <string name="tasks_edit_own_others_unassigned">185</string> <!--added-->
-    <string name="tasks_edit_own_assigned_to_others">186</string> <!--added-->
-    <string name="tasks_edit_others_assigned_to_you">187</string> <!--added-->
-    <string name="tasks_edit_others_assigned_to_others">188</string> <!--added-->
-    <string name="tasks_delete_own_others_unassigned">189</string> <!--added-->
-    <string name="tasks_delete_own_assigned_others">190</string> <!--added-->
-    <string name="tasks_delete_others_assigned_you">191</string> <!--added-->
+    <string name="tasks_view">2</string>
+    <!--added-->
+    <string name="tasks_view_own_unassigned">134</string>
+    <!--added-->
+    <string name="tasks_view_others_unassigned">135</string>
+    <!--added-->
+    <string name="tasks_add_comment_own_unassigned">136</string>
+    <!--added-->
+    <string name="tasks_add_comment_others_unassigned">137</string>
+    <!--added-->
+    <string name="tasks_add_comment">193</string>
+    <!--added-->
+    <string name="tasks_view_comment">194</string>
+    <!--added-->
+    <string name="tasks_edit_delete_own_comment">195</string>
+    <!--added-->
+    <string name="tasks_edit_delete_others_comment">195</string>
+    <!--added-->
+    <string name="tasks_add">150</string>
+    <!--added-->
+    <string name="tasks_add_subtask">197</string>
+    <!--added-->
+    <string name="tasks_edit_own_others_unassigned">185</string>
+    <!--added-->
+    <string name="tasks_edit_own_assigned_to_others">186</string>
+    <!--added-->
+    <string name="tasks_edit_others_assigned_to_you">187</string>
+    <!--added-->
+    <string name="tasks_edit_others_assigned_to_others">188</string>
+    <!--added-->
+    <string name="tasks_delete_own_others_unassigned">189</string>
+    <!--added-->
+    <string name="tasks_delete_own_assigned_others">190</string>
+    <!--added-->
+    <string name="tasks_delete_others_assigned_you">191</string>
+    <!--added-->
 
 
     <string name="calendar_view">1</string>
@@ -412,5 +430,6 @@
     <string name="forums_edit_delete_others_comments">56</string>
 
     <string name="star_rating_view">226</string>
+    <string name="title_activity_maps">Map</string>
 
 </resources>

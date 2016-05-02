@@ -189,7 +189,7 @@ public class TaskDetailFragment extends BaseFragment {
             public void onClick(View v) {
                 if(TaskByIdModel.getInstance().responseObject.progress==100){
                     click= 3;
-                    NormalDialogCustomAttr(getString(R.string.reopen_task));
+                    NormalDialogCustomAttr(getString(R.string.reopen));
                 }else {
                     click=2;
                     NormalDialogCustomAttr(getString(R.string.mark_as_done));
@@ -387,7 +387,7 @@ public class TaskDetailFragment extends BaseFragment {
 
             seekBar.setProgress(0);
             seekBarCompat.setProgress(0);
-            aq.id(R.id.mark_as_done).text(getString(R.string.mark_as_done));
+            aq.id(R.id.mark_as_done).text(getString(R.string.task_as_done));
             tasksList.setProgress(0);
             TaskByIdModel.getInstance().responseObject.progress=0;
         }
