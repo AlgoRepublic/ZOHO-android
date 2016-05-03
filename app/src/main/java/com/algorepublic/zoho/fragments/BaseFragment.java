@@ -186,9 +186,9 @@ public class BaseFragment extends Fragment {
         long timeInMillis = Long.parseLong(a);
         if(timeInMillis < 0 )
             return "";
-        Calendar calendar = Calendar.getInstance(TimeZone.getDefault());
+        Calendar calendar = Calendar.getInstance(TimeZone.getDefault(),Locale.getDefault());
         calendar.setTimeInMillis(timeInMillis);
-
+       Date _date =  calendar.getTime();
         int mYear = calendar.get(Calendar.YEAR);
         int mMonth = calendar.get(Calendar.MONTH) + 1;
         int mDay = calendar.get(Calendar.DAY_OF_MONTH);

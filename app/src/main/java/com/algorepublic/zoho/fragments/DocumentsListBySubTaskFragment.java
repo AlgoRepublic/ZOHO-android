@@ -204,7 +204,8 @@ public class DocumentsListBySubTaskFragment extends BaseFragment {
         SubTaskAttachmentsModel.getInstance().setList((SubTaskAttachmentsModel) model);
         if (SubTaskAttachmentsModel.getInstance().responseCode == 100) {
             GetAllDocumentsList();
-            FilterList();
+            FilterByAllDocs();
+            SetAdapterList();
         } else {
             Toast.makeText(getActivity(), getActivity().getString(R.string.invalid_credential), Toast.LENGTH_SHORT).show();
         }

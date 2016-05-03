@@ -181,18 +181,9 @@ public class TaskScheduleFragment extends BaseFragment {
     }
 
     public static String dateFormator(String date){
+        String _date=date;
         String[] splited = date.split("/");
-        return new String(splited[1]+"/"+splited[0]+"/"+splited[2]);
+        _date =  splited[1]+"/"+splited[0]+"/"+splited[2];
+        return _date;
     }
-
-
-   /* month = calendar.get(Calendar.MONTH)+1;
-    day = calendar.get(Calendar.DAY_OF_MONTH);
-    year = calendar.get(Calendar.YEAR);
-    start_day = day;
-    start_month=calendar.get(Calendar.MONTH);
-    start_year=year;
-    end_day = day;
-    end_month=calendar.get(Calendar.MONTH);
-    end_year=year;*/
 }

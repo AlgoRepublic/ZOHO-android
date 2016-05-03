@@ -193,8 +193,8 @@ public class GenericHttpClient {
             Log.e("Title", "/" + BaseClass.db.getString("TaskName"));
             Log.e("ID", "/" + BaseClass.db.getInt("TaskID"));
             Log.e("Description", "/" + BaseClass.db.getString("TaskDesc"));
-            Log.e("StartDate", "/" + BaseClass.db.getString("StartDate"));
-            Log.e("EndDate", "/" + BaseClass.db.getString("EndDate"));
+            Log.e("StartDate", "/" + TaskScheduleFragment.dateFormator(BaseClass.db.getString("StartDate")));
+            Log.e("EndDate", "/" + TaskScheduleFragment.dateFormator(BaseClass.db.getString("EndDate")));
             Log.e("TaskListID", "/" + BaseClass.db.getInt("TaskListNameID"));
             Log.e("Priority", "/" + BaseClass.db.getInt("Priority"));
             Log.e("ProjectID", "/" + BaseClass.db.getInt("ProjectID"));
@@ -242,8 +242,8 @@ public class GenericHttpClient {
             mpEntity.addPart("Description", new StringBody(BaseClass.db.getString("TaskDesc")));
             if(BaseClass.db.getString("TaskDesc").contentEquals("N/A"))
                 mpEntity.addPart("Description", new StringBody(""));
-            mpEntity.addPart("StartDate", new StringBody(BaseClass.db.getString("StartDate")));
-            mpEntity.addPart("EndDate", new StringBody(BaseClass.db.getString("EndDate")));
+            mpEntity.addPart("StartDate", new StringBody(TaskScheduleFragment.dateFormator(BaseClass.db.getString("StartDate"))));
+            mpEntity.addPart("EndDate", new StringBody(TaskScheduleFragment.dateFormator(BaseClass.db.getString("EndDate"))));
             p.setEntity(mpEntity);
             Log.e("CreateBy", "/" + baseClass.getUserId());
             Log.e("Title", "/" + BaseClass.db.getString("TaskName"));
