@@ -81,6 +81,7 @@
     <string name="rest_password">تعديل كلمة المرور</string>
     <string name="edit_user">تعديل المستخدم</string>
     <string name="add_task">إضافة مهمة</string>
+    <string name="edit_task">مهمة تحرير</string>
     <string name="edit">تعديل</string>
     <string name="save">حفظ</string>
 

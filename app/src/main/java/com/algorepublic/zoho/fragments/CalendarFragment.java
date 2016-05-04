@@ -282,7 +282,7 @@ public class CalendarFragment extends BaseFragment implements CalendarPickerCont
                 action = arg1.getExtras().getString("Action");
             if(action.contentEquals("Detail")) {
                 callFragmentWithBackStack(R.id.container, TaskDetailFragment.newInstance
-                        (allTaskList.get(position), taskListName,position), "TaskDetail");
+                        (allTaskList.get(position), taskListName,position),getString(R.string.task_detail));
                 Toast.makeText(getContext(), position + ": " + action, Toast.LENGTH_SHORT).show();
             }
             if(action.contentEquals("Edit")) {
@@ -293,7 +293,7 @@ public class CalendarFragment extends BaseFragment implements CalendarPickerCont
                     callFragmentWithBackStack(R.id.container,
                             TaskAddUpdateFragment.newInstance(allTaskList.get(position),
                                     taskListName),
-                            "TaskAddUpdateFragment");
+                            getString(R.string.edit_task));
                 }
                 Toast.makeText(getContext(), position + ": " + action, Toast.LENGTH_SHORT).show();
             }

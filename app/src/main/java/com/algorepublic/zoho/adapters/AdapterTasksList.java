@@ -144,7 +144,7 @@ public class AdapterTasksList extends BaseAdapter implements StickyListHeadersAd
                 String selectedTaskProjectId = Integer.toString(tasksLists.get(position).getProjectID());
                 baseClass.setSelectedTaskProject(selectedTaskProjectId);
                 callFragmentWithBackStack(R.id.container, TaskDetailFragment.newInstance
-                        (tasksLists.get(position),taskListNames,position), "TaskDetail");
+                        (tasksLists.get(position),taskListNames,position), "Task Detail");
             }
         });
         holder.btEdit.setOnClickListener(new View.OnClickListener() {
@@ -157,7 +157,7 @@ public class AdapterTasksList extends BaseAdapter implements StickyListHeadersAd
                     callFragmentWithBackStack(R.id.container,
                             TaskAddUpdateFragment.newInstance(tasksLists.get(position),
                                     taskListNames),
-                            "TaskAddUpdateFragment");
+                            "Edit Task");
                 }
             }
         });
@@ -401,7 +401,7 @@ public class AdapterTasksList extends BaseAdapter implements StickyListHeadersAd
         ((AppCompatActivity)ctx).getSupportFragmentManager()
                 .beginTransaction().setCustomAnimations( R.anim.slide_in_enter, R.anim.slide_in_exit, R.anim.slide_pop_enter, R.anim.slide_pop_exit)
                 .add(containerId, fragment, tag)
-                .addToBackStack(null)
+                .addToBackStack(tag)
                 .commit();
     }
     @Override

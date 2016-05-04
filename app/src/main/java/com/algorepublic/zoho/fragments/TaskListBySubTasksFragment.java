@@ -96,7 +96,7 @@ public class TaskListBySubTasksFragment extends BaseFragment {
                 if(baseClass.getSelectedTaskProject().equalsIgnoreCase("0")){
                     Toast.makeText(getActivity(), getActivity().getString(R.string.select_project), Toast.LENGTH_SHORT).show();
                     }else {
-                    callFragmentWithBackStack(R.id.container, TaskAddUpdateFragment.newInstance(taskID, taskListName), "TaskAddUpdateFragment");
+                    callFragmentWithBackStack(R.id.container, TaskAddUpdateFragment.newInstance(taskID, taskListName), getString(R.string.add_task));
                 }
                 break;
         }

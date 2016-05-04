@@ -162,7 +162,7 @@ public class TaskDetailFragment extends BaseFragment {
             public void onClick(View v) {
                 if(baseClass.hasPermission(getResources().getString(R.string.tasks_view_comment))) //
                     callFragmentWithAddBackStack(R.id.container, TaskCommentFragment.newInstance(tasksList.getTaskID())
-                            , "TaskComment");
+                            , getResources().getString(R.string.comments));
                 else
                     Toast.makeText(v.getContext(), "You don't have Permission to view comments", Toast.LENGTH_SHORT).show();
             }
@@ -170,7 +170,7 @@ public class TaskDetailFragment extends BaseFragment {
         aq.id(R.id.documents).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                callFragmentWithAddBackStack(R.id.container, DocumentsListBySubTaskFragment.newInstance(tasksList.getTaskID()), "DocumentsListBySubTaskFragment");
+                callFragmentWithAddBackStack(R.id.container, DocumentsListBySubTaskFragment.newInstance(tasksList.getTaskID()), getString(R.string.documents));
             }
         });
         aq.id(R.id.subtask).clicked(new View.OnClickListener() {
@@ -180,7 +180,7 @@ public class TaskDetailFragment extends BaseFragment {
                 obj.setTaskListName(tasksList.getTaskListName());
                 obj.setTaskListID(tasksList.getTaskID());
                 callFragmentWithAddBackStack(R.id.container, TaskListBySubTasksFragment.newInstance(
-                        tasksList.getTaskID(),obj), "TaskListBySubTasksFragment");
+                        tasksList.getTaskID(),obj), getString(R.string.sub_tasks));
                 // Log.e("Size", "S" + taskListName.get(position).getTaskListName());
             }
         });
@@ -331,7 +331,7 @@ public class TaskDetailFragment extends BaseFragment {
                 if (Integer.parseInt(baseClass.getSelectedTaskProject()) >0) {
                     baseClass.db.putString("ProjectName", tasksList.getProjectName());
                     baseClass.setSelectedProject(Integer.toString(tasksList.getProjectID()));
-                    callFragmentWithBackStack(R.id.container, TaskAddUpdateFragment.newInstance(tasksList,taskListName), "TaskAddUpdateFragment");
+                    callFragmentWithBackStack(R.id.container, TaskAddUpdateFragment.newInstance(tasksList,taskListName), getString(R.string.edit_task));
                 }
                 break;
         }

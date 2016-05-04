@@ -29,8 +29,6 @@ import com.algorepublic.zoho.fragments.UserFragment;
 import com.algorepublic.zoho.utils.BaseClass;
 import com.androidquery.AQuery;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 /**
@@ -39,7 +37,7 @@ import java.util.List;
 public class AdapterMenuItems extends BaseAdapter{
 
     Context ctx; private LayoutInflater inflater;
-    int lastPosition=0;
+    public int lastPosition=0;
     BaseClass baseClass;
     List<String> menu_names ;
 
@@ -110,49 +108,52 @@ public class AdapterMenuItems extends BaseAdapter{
             ((AppCompatActivity)ctx).getSupportFragmentManager().popBackStack();
         }
         if(getItem(position)==ctx.getResources().getString(R.string.dashboard)){
-            callFragmentWithReplace(R.id.container, HomeFragment.newInstance(), "HomeFragment");
+            callFragmentWithReplace(R.id.container, HomeFragment.newInstance(), ctx.getString(R.string.dashboard));
         }if(getItem(position)==ctx.getResources().getString(R.string.projects)){
-            callFragmentWithReplace(R.id.container, ProjectsFragment.newInstance(), "ProjectsFragment");
+            callFragmentWithReplace(R.id.container, ProjectsFragment.newInstance(), ctx.getString(R.string.projects));
         }if(getItem(position)==ctx.getResources().getString(R.string.tasks)){
-            callFragmentWithReplace(R.id.container, TasksListFragment.newInstance(), "TasksListFragment");
+            callFragmentWithReplace(R.id.container, TasksListFragment.newInstance(), ctx.getString(R.string.tasks));
         }if(getItem(position)==ctx.getResources().getString(R.string.calendar)){
-            callFragmentWithReplace(R.id.container, CalendarFragment.newInstance(), "FragmentCalendar");
+            callFragmentWithReplace(R.id.container, CalendarFragment.newInstance(), ctx.getString(R.string.calendar));
         }if(getItem(position)==ctx.getResources().getString(R.string.documents)){
             if (baseClass.getSelectedProject().equalsIgnoreCase("0")) {
                 Toast.makeText(ctx, "Please Select Project", Toast.LENGTH_SHORT).show();
                 return;
             }
-            callFragmentWithReplace(R.id.container, DocumentsListFragment.newInstance(), "DocumentsListFragment");
+            callFragmentWithReplace(R.id.container, DocumentsListFragment.newInstance(), ctx.getString(R.string.documents));
         }if(getItem(position)==ctx.getResources().getString(R.string.users)){
-            callFragmentWithReplace(R.id.container, UserFragment.newInstance(),"UserFragment");
+            callFragmentWithReplace(R.id.container, UserFragment.newInstance(),ctx.getString(R.string.users));
         }if(getItem(position)==ctx.getResources().getString(R.string.forums)){
             if (baseClass.getSelectedProject().equalsIgnoreCase("0")) {
                 Toast.makeText(ctx, "Please Select Project", Toast.LENGTH_SHORT).show();
                 return;
             }
-            callFragmentWithReplace(R.id.container, ForumsFragment.newInstance(), "ForumsFragment");
+            callFragmentWithReplace(R.id.container, ForumsFragment.newInstance(), ctx.getString(R.string.forums));
         }if(getItem(position)==ctx.getResources().getString(R.string.star_rating)){
             if (baseClass.getSelectedProject().equalsIgnoreCase("0")) {
                 Toast.makeText(ctx, "Please Select Project", Toast.LENGTH_SHORT).show();
                 return;
             }
-            callFragmentWithReplace(R.id.container, StarRatingFragment.newInstance(), "StarRatingFragment");
+            callFragmentWithReplace(R.id.container, StarRatingFragment.newInstance(), ctx.getString(R.string.star_rating));
         }if(getItem(position)==ctx.getResources().getString(R.string.departments)){
             if (baseClass.getSelectedProject().equalsIgnoreCase("0")) {
                 Toast.makeText(ctx, "Please Select Project", Toast.LENGTH_SHORT).show();
                 return;
             }
-            callFragmentWithReplace(R.id.container, DepartmentFragment.newInstance(), "DepartmentFragment");
+            callFragmentWithReplace(R.id.container, DepartmentFragment.newInstance(), ctx.getString(R.string.departments));
         }
     }
     public void callFragmentWithReplace(int containerId, Fragment fragment, String tag){
 
-        ((AppCompatActivity) ctx).getSupportFragmentManager()
+        android.support.v4.app.FragmentTransaction transaction = ((AppCompatActivity) ctx).getSupportFragmentManager()
                 .beginTransaction()
                 .replace(containerId, fragment, tag)
                 .setCustomAnimations(R.anim.slide_in_enter, R.anim.slide_in_exit,
-                        R.anim.slide_pop_enter, R.anim.slide_pop_exit)
-                .commit();
+                        R.anim.slide_pop_enter, R.anim.slide_pop_exit);
+        if(tag!=null)
+            transaction.addToBackStack(tag).commit();
+        else
+            transaction.commit();
     }
     static class ViewHolder {
         TextView title;

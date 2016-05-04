@@ -78,7 +78,7 @@ public class TasksListFragment extends BaseFragment implements SwipeRefreshLayou
                 if(baseClass.getSelectedProject().equalsIgnoreCase("0")){
                     Toast.makeText(getActivity(), getActivity().getString(R.string.select_project), Toast.LENGTH_SHORT).show();
                 }else {
-                    callFragmentWithBackStack(R.id.container, TaskAddUpdateFragment.newInstance(taskListName), "TaskAddUpdateFragment");
+                    callFragmentWithBackStack(R.id.container, TaskAddUpdateFragment.newInstance(taskListName), "Add Task");
                 }
                 break;
         }

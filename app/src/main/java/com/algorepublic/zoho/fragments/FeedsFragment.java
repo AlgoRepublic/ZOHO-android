@@ -66,7 +66,7 @@ public class FeedsFragment extends BaseFragment implements SwipeRefreshLayout.On
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        getToolbar().setTitle(getString(R.string.feeds));
+       // getToolbar().setTitle(getString(R.string.feeds));
         super.onViewCreated(view, savedInstanceState);
     }
 

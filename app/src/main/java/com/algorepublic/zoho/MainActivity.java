@@ -6,6 +6,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -107,9 +108,21 @@ public class MainActivity extends BaseActivity {
             }
         });
 
-        callFragment(R.id.container, HomeFragment.newInstance(), "HomeFragment");
+        callFragmentWithBackStack(R.id.container, HomeFragment.newInstance(), getString(R.string.dashboard));
         initLists();
-        gridView.setAdapter(new AdapterMenuItems(this,menu_names,menu_icon_white));
+        gridView.setAdapter(new AdapterMenuItems(this, menu_names, menu_icon_white));
+        getSupportFragmentManager().addOnBackStackChangedListener(new FragmentManager.OnBackStackChangedListener() {
+            @Override
+            public void onBackStackChanged() {
+                if(getSupportFragmentManager().getBackStackEntryCount()>0) {
+                    FragmentManager.BackStackEntry backStackEntry = getSupportFragmentManager().getBackStackEntryAt(getSupportFragmentManager().getBackStackEntryCount() - 1);
+                    String name = backStackEntry.getName();
+                    Log.i("TopOfStack", name + "");
+                    if(name !=null)
+                    toolbar.setTitle(name);
+                }
+            }
+        });
     }
 
     /**
@@ -187,10 +200,11 @@ public class MainActivity extends BaseActivity {
     public void onBackPressed() {
         StarRatingFragment.levelOneHead.clear();
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        int stackEntryCount = getSupportFragmentManager().getBackStackEntryCount();
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         }
-        if (getSupportFragmentManager().getBackStackEntryCount()==0){
+        if (stackEntryCount==1 && getSupportFragmentManager().getBackStackEntryAt(0).getName().equalsIgnoreCase(getString(R.string.dashboard))){
             String content = getString(R.string.exit);
             final NormalDialog dialog = new NormalDialog(((AppCompatActivity) this));
             dialog.isTitleShow(false)//
@@ -224,9 +238,17 @@ public class MainActivity extends BaseActivity {
                         }
                     });
 
-        }else
+        }else {
             super.onBackPressed();
+            if(getSupportFragmentManager().getBackStackEntryCount()==0) {
+                callFragmentWithBackStack(R.id.container, HomeFragment.newInstance(), getString(R.string.dashboard));
+                ((AdapterMenuItems)gridView.getAdapter()).lastPosition=0;
+                ((AdapterMenuItems)gridView.getAdapter()).notifyDataSetChanged();
+            }
+
+        }
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         Log.e("code1", requestCode + "/" + resultCode + "/");

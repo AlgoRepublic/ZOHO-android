@@ -360,7 +360,7 @@ public class ProjectsFragment extends BaseFragment implements SwipeRefreshLayout
                 if(allDeptList.size()==0){
                     Toast.makeText(getActivity(), getActivity().getString(R.string.project_loading), Toast.LENGTH_SHORT).show();
  }else {
-                    callFragmentWithBackStack(R.id.container, AddProjectFragment.newInstance(), "AddProjectFragment");
+                    callFragmentWithBackStack(R.id.container, AddProjectFragment.newInstance(), getString(R.string.new_project));
                 }
                 break;
         }

@@ -109,7 +109,7 @@ public class UserFragment extends BaseFragment implements SwipeRefreshLayout.OnR
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.add_project:
-                callFragmentWithBackStack(R.id.container,AddUserFragment.newInstance(-1), "AddUserFragment");
+                callFragmentWithBackStack(R.id.container,AddUserFragment.newInstance(-1), getString(R.string.add_user));
         }
         return super.onOptionsItemSelected(item);
     }

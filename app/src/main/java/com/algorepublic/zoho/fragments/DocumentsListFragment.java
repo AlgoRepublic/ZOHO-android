@@ -97,7 +97,7 @@ public class DocumentsListFragment extends BaseFragment{
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                callFragmentWithBackStack(R.id.container,  DocsPreviewFragment.newInstance(generalDocsList.get(position)), "DocsPreview");
+                callFragmentWithBackStack(R.id.container,  DocsPreviewFragment.newInstance(generalDocsList.get(position)), getString(R.string.document_preview));
             }
         });
         applyLightBackground(aq.id(R.id.layout_bottom).getView(), baseClass);
@@ -148,7 +148,7 @@ public class DocumentsListFragment extends BaseFragment{
                     Toast.makeText(getActivity(), getString(R.string.select_project), Toast.LENGTH_SHORT).show();
                 }else {
                     callFragmentWithBackStack(R.id.container,UploadDocsFragment.
-                            newInstance(baseClass.db.getInt("ProjectID"),0), "UploadDocsFragment");
+                            newInstance(baseClass.db.getInt("ProjectID"),0), getString(R.string.documents));
                 }
                 break;
         }
