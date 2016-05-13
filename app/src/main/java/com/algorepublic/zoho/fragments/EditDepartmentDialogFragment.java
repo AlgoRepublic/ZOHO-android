@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.algorepublic.zoho.Models.CreateProjectModel;
+import com.algorepublic.zoho.Models.GeneralModel;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.services.CallBack;
 import com.algorepublic.zoho.services.DepartmentService;
@@ -26,7 +27,8 @@ import com.androidquery.AQuery;
  */
 public class EditDepartmentDialogFragment extends DialogFragment implements View.OnClickListener {
     BaseClass baseClass;
-    static int Pos;
+    private String deptName;
+    private int deptID;
     private EditText editText;
     private Button btnSave,btnCancel;
     private TextView lblListHeader;
@@ -46,7 +48,9 @@ public class EditDepartmentDialogFragment extends DialogFragment implements View
         btnSave = (Button) rootView.findViewById(R.id.btnSave);
         btnCancel = (Button) rootView.findViewById(R.id.btnCancel);
         lblListHeader = (TextView) rootView.findViewById(R.id.lblListHeader);
-        editText.setText(DepartmentFragment.allProjects.get(Pos).getCompOrDeptName());
+        deptName = getArguments().getString("deptName");
+        editText.setText(deptName);
+
         lblListHeader.setText(getString(R.string.edit_dept));
         btnSave.setOnClickListener(this);
         btnCancel.setOnClickListener(this);
@@ -62,21 +66,20 @@ public class EditDepartmentDialogFragment extends DialogFragment implements View
         return dialog;
     }
     public void CreateProject(){
-        Pos = getArguments().getInt("pos");
-        Log.e("Pos", "p" + Pos);
+        deptID = getArguments().getInt("deptID");
         baseClass.hideKeyPad(getView());
         if(editText.getText().toString().isEmpty()){
             Toast.makeText(getActivity(), getActivity().getString(R.string.department_name), Toast.LENGTH_SHORT).show();
             return ;
         }
         DepartmentService service = new DepartmentService(getActivity());
-        service.updateDepartment(baseClass.getUserId(), editText.getText().toString(), baseClass.getUserId()
+        service.updateDepartment(deptID+"", editText.getText().toString(), baseClass.getUserId()
                 , true, new CallBack(EditDepartmentDialogFragment.this, "UpdateDept"));
     }
 
     public void UpdateDept(Object caller, Object model){
-        CreateProjectModel.getInstance().setList((CreateProjectModel) model);
-        if (CreateProjectModel.getInstance().responseObject ==null ) {
+        GeneralModel.getInstance().setList((GeneralModel) model);
+        if (GeneralModel.getInstance().responseObject ==true ) {
             Toast.makeText(getActivity(), getActivity().getString(R.string.department_updated), Toast.LENGTH_SHORT).show();
         }else {
             Toast.makeText(getActivity(),getActivity().getString(R.string.response_error),Toast.LENGTH_SHORT).show();

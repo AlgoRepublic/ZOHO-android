@@ -7,9 +7,9 @@ public class Constants {
 	public static String UserImage_URL = "http://91.74.105.122:9993";
 	public static String DocViewer_URL = "http://drive.google.com/viewerng/viewer?embedded=true&url=";
 
-//	public static String BASE_URL = "http://api.jitpac.com";
-//	public static String Image_URL = "http://jitpac.com/FileUploadsManager/uploads/";
-//	public static String UserImage_URL = "http://jitpac.com";
+	/*public static String BASE_URL = "http://api.jitpac.com";
+	public static String Image_URL = "http://jitpac.com/FileUploadsManager/uploads/";
+	public static String UserImage_URL = "http://jitpac.com";*/
 
 
 	public static String UploadImage_URL = BASE_URL +"/User/UploadPicture";// userID, file,  createdBy
@@ -20,6 +20,7 @@ public class Constants {
 	public static String GetUserRole_API = BASE_URL+ "/User/GetUserRolesList";
 	public static String GetAllUserList_API = BASE_URL+ "/User/GetList";
 	public static String GetUserListByProject_API = BASE_URL+ "/User/GetListByProject?";
+	public static String GetUserListByPermission_API = BASE_URL+ "/User/GetListByPermission?";
 	public static String GetAssigneeByTask_API = BASE_URL+ "/User/GetListByProject";//ProjectID
 	public static String CreateUser_API = BASE_URL+ "/User/CreateUser";
 	public static String UpdateUser_API = BASE_URL+ "/User/UpdateUserProfile";

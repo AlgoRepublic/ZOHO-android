@@ -69,7 +69,7 @@ public class AddForumsFragment extends BaseFragment{
     }
     private void showListView() {
         final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setTitle(getString(R.string.select_user));
+        builder.setTitle(getString(R.string.select_category));
         builder.setSingleChoiceItems(categoryList, selected, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {

@@ -5,6 +5,7 @@ import android.util.Log;
 
 import com.algorepublic.zoho.Models.CreateProjectModel;
 import com.algorepublic.zoho.Models.GeneralModel;
+import com.algorepublic.zoho.Models.TaskUserModel;
 import com.algorepublic.zoho.Models.UserListModel;
 import com.algorepublic.zoho.Models.UserRoleModel;
 import com.algorepublic.zoho.utils.Constants;
@@ -44,7 +45,7 @@ public class UserService extends BaseService {
         params.put("FirstName", firstname);
         params.put("LastName", lastname);
         params.put("NickName", nickName);
-        params.put("Email", email);
+       // params.put("Email", email);
         params.put("Mobile", mobileNo);
         params.put("RoleID", Integer.toString(userRole));
         for(int loop=0;loop<Ids.size();loop++) {
@@ -62,7 +63,7 @@ public class UserService extends BaseService {
         params.put("FirstName", firstname);
         params.put("LastName", lastname);
         params.put("NickName", nickName);
-        params.put("Email", email);
+       // params.put("Email", email);
         params.put("Mobile", mobileNo);
         params.put("RoleID", Integer.toString(userRole));
         this.post(url, params, obj, GeneralModel.getInstance(), message);
@@ -84,4 +85,5 @@ public class UserService extends BaseService {
         this.post(url, params, obj, GeneralModel.getInstance(), message);
         Log.e("PasswordService", url);
     }
+
 }

@@ -113,11 +113,11 @@ public class AdapterDocumentsList extends BaseAdapter implements StickyListHeade
             public void onClick(View v) {
                 if(ID==-1) {
                     callFragmentWithBackStack(R.id.container,
-                            DocsPreviewFragment.newInstance(documentsLists.get(position)), "DocsPreview");
+                            DocsPreviewFragment.newInstance(documentsLists.get(position)), ctx.getString(R.string.document_preview));
                 }else
                 {
                     callFragmentWithBackStack(R.id.container,
-                            DocsPreviewBySubTask.newInstance(documentsLists.get(position)), "DocsPreview");
+                            DocsPreviewBySubTask.newInstance(documentsLists.get(position)), ctx.getString(R.string.document_preview));
                 }
             }
         });
@@ -160,7 +160,7 @@ public class AdapterDocumentsList extends BaseAdapter implements StickyListHeade
         ((AppCompatActivity)ctx).getSupportFragmentManager()
                 .beginTransaction()
                 .replace(containerId, fragment, tag)
-                .addToBackStack(null)
+                .addToBackStack(tag)
                 .commit();
     }
     void callForDocsDelete(String content) {

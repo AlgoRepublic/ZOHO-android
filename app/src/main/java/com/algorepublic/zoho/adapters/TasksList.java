@@ -122,12 +122,19 @@ public class TasksList extends ArrayList<Parcelable> implements Comparable<Tasks
 
 
     public void setListAssignees(ArrayList<TaskListAssignee> listAssignees){
+        this.listAssignees.clear();
         this.listAssignees.addAll(listAssignees);
     }
     public ArrayList<TaskListAssignee> getListAssignees(){
         return listAssignees;
     }
+    public int getOwnerId() {
+        return ownerId;
+    }
 
+    public void setOwnerId(int ownerId) {
+        this.ownerId = ownerId;
+    }
 
 
     @Override
@@ -154,4 +161,5 @@ public class TasksList extends ArrayList<Parcelable> implements Comparable<Tasks
     int projectID;
     String description;
     Integer parentTaskID;
+    int ownerId;
 }

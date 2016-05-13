@@ -1,28 +1,17 @@
 package com.algorepublic.zoho.adapters;
 
 import android.content.Context;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RatingBar;
-import android.widget.SeekBar;
 import android.widget.TextView;
 
-import com.algorepublic.zoho.Models.GeneralModel;
-import com.algorepublic.zoho.Models.StarRatingQuestionModel;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.fragments.StarRatingLevelQuestionsFragment;
-import com.algorepublic.zoho.services.CallBack;
 import com.algorepublic.zoho.services.StarRatingService;
 import com.algorepublic.zoho.utils.BaseClass;
 import com.androidquery.AQuery;
@@ -41,6 +30,8 @@ public class AdapterStarRatingLevelThree extends BaseExpandableListAdapter {
     ImageView imageView;
     private final List<StarRatingHeadsLevelThree> mListDataHeader;
 
+    private int lastGroupExpanded;
+
     public AdapterStarRatingLevelThree(Context mContext, List<StarRatingHeadsLevelThree> mListDataHeader) {
         this.mContext = mContext;
         layoutInflater = (LayoutInflater) this.mContext
@@ -49,6 +40,12 @@ public class AdapterStarRatingLevelThree extends BaseExpandableListAdapter {
         this.mListDataHeader.addAll(mListDataHeader);
     }
 
+    @Override
+    public void onGroupExpanded(int groupPosition) {
+        super.onGroupExpanded(groupPosition);
+        lastGroupExpanded = groupPosition;
+
+    }
 
     @Override
     public void onGroupCollapsed(int groupPosition) {

@@ -55,10 +55,10 @@ public class TaskDetailFragment extends BaseFragment {
     static ArrayList<TaskListName> taskListName = new ArrayList<>();
     View views;
     int multiple=5;
-   public static TasksList tasksList;
+    public static TasksList tasksList;
     int progress=0;static int position;
     BaseClass baseClass;
-   // WebView webView;
+    // WebView webView;
 
     @SuppressLint("ValidFragment")
     public TaskDetailFragment() {
@@ -154,18 +154,23 @@ public class TaskDetailFragment extends BaseFragment {
                 }
             }
         });
-
+        /**
+         * tasks_view_comment Permission impl on click.
+         */
         aq.id(R.id.comment).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            callFragmentWithAddBackStack(R.id.container, TaskCommentFragment.newInstance(tasksList.getTaskID())
-                    , "TaskComment");
+                if(baseClass.hasPermission(getResources().getString(R.string.tasks_view_comment))) //
+                    callFragmentWithAddBackStack(R.id.container, TaskCommentFragment.newInstance(tasksList.getTaskID())
+                            , getResources().getString(R.string.comments));
+                else
+                    Toast.makeText(v.getContext(), "You don't have Permission to view comments", Toast.LENGTH_SHORT).show();
             }
         });
         aq.id(R.id.documents).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                callFragmentWithAddBackStack(R.id.container, DocumentsListBySubTaskFragment.newInstance(tasksList.getTaskID()), "DocumentsListBySubTaskFragment");
+                callFragmentWithAddBackStack(R.id.container, DocumentsListBySubTaskFragment.newInstance(tasksList.getTaskID()), getString(R.string.documents));
             }
         });
         aq.id(R.id.subtask).clicked(new View.OnClickListener() {
@@ -175,8 +180,8 @@ public class TaskDetailFragment extends BaseFragment {
                 obj.setTaskListName(tasksList.getTaskListName());
                 obj.setTaskListID(tasksList.getTaskID());
                 callFragmentWithAddBackStack(R.id.container, TaskListBySubTasksFragment.newInstance(
-                        tasksList.getTaskID(),obj), "TaskListBySubTasksFragment");
-               // Log.e("Size", "S" + taskListName.get(position).getTaskListName());
+                        tasksList.getTaskID(),obj), getString(R.string.sub_tasks));
+                // Log.e("Size", "S" + taskListName.get(position).getTaskListName());
             }
         });
         aq.id(R.id.mark_as_done).clicked(new View.OnClickListener() {
@@ -184,7 +189,7 @@ public class TaskDetailFragment extends BaseFragment {
             public void onClick(View v) {
                 if(TaskByIdModel.getInstance().responseObject.progress==100){
                     click= 3;
-                    NormalDialogCustomAttr(getString(R.string.reopen_task));
+                    NormalDialogCustomAttr(getString(R.string.reopen));
                 }else {
                     click=2;
                     NormalDialogCustomAttr(getString(R.string.mark_as_done));
@@ -216,7 +221,7 @@ public class TaskDetailFragment extends BaseFragment {
     public void UpdateValue(){
         if(TaskByIdModel.getInstance().responseObject.startDate != null) {
             if (DateFormatter(TaskByIdModel.getInstance().responseObject.startDate).equalsIgnoreCase("12/31/3938")||
-            DateFormatter(TaskByIdModel.getInstance().responseObject.startDate).equalsIgnoreCase("2/1/3938")) {
+                    DateFormatter(TaskByIdModel.getInstance().responseObject.startDate).equalsIgnoreCase("2/1/3938")) {
                 aq.id(R.id.start_date).text("No Date");
             } else if (DateFormatter(TaskByIdModel.getInstance().responseObject.startDate).equalsIgnoreCase("3/0/1")) {
                 aq.id(R.id.start_date).text("No Date");
@@ -240,7 +245,7 @@ public class TaskDetailFragment extends BaseFragment {
         if (TaskByIdModel.getInstance().responseObject.description ==null){
             aq.id(R.id.task_desc).text(getActivity().getString(R.string.n_a));
         }else
-        aq.id(R.id.task_desc).text(Html.fromHtml(TaskByIdModel.getInstance().responseObject.description));
+            aq.id(R.id.task_desc).text(Html.fromHtml(TaskByIdModel.getInstance().responseObject.description));
 
         twoWayAssignee.setAdapter(new AdapterTaskDetailAssignee(getActivity(),
                 tasksList.getListAssignees()));
@@ -326,9 +331,9 @@ public class TaskDetailFragment extends BaseFragment {
                 if (Integer.parseInt(baseClass.getSelectedTaskProject()) >0) {
                     baseClass.db.putString("ProjectName", tasksList.getProjectName());
                     baseClass.setSelectedProject(Integer.toString(tasksList.getProjectID()));
-                    callFragmentWithBackStack(R.id.container, TaskAddUpdateFragment.newInstance(tasksList,taskListName), "TaskAddUpdateFragment");
+                    callFragmentWithBackStack(R.id.container, TaskAddUpdateFragment.newInstance(tasksList,taskListName), getString(R.string.edit_task));
                 }
-                    break;
+                break;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -338,11 +343,11 @@ public class TaskDetailFragment extends BaseFragment {
         if (GeneralModel.getInstance().responseCode.equalsIgnoreCase("100")) {
             TaskByIdModel.getInstance().responseObject.progress=100;
             Toast.makeText(getActivity(), getActivity().getString(R.string.update_progress), Toast.LENGTH_SHORT).show();
- }
+        }
         else
         {
             Toast.makeText(getActivity(), getActivity().getString(R.string.invalid_credential), Toast.LENGTH_SHORT).show();
- }
+        }
     }
     public void DeleteTask(Object caller, Object model) {
         GeneralModel.getInstance().setList((GeneralModel) model);
@@ -355,7 +360,7 @@ public class TaskDetailFragment extends BaseFragment {
         else
         {
             Toast.makeText(getActivity(), getActivity().getString(R.string.invalid_credential), Toast.LENGTH_SHORT).show();
-   }
+        }
     }
     public void CompleteTask(Object caller, Object model) {
         GeneralModel.getInstance().setList((GeneralModel) model);
@@ -370,7 +375,7 @@ public class TaskDetailFragment extends BaseFragment {
         else
         {
             Toast.makeText(getActivity(), getActivity().getString(R.string.invalid_credential), Toast.LENGTH_SHORT).show();
- }
+        }
     }
 
 
@@ -378,17 +383,17 @@ public class TaskDetailFragment extends BaseFragment {
     public void ReOpenTask(Object caller, Object model) {
         GeneralModel.getInstance().setList((GeneralModel) model);
         if (GeneralModel.getInstance().responseCode.equalsIgnoreCase("100")) {
-           Toast.makeText(getActivity(), getActivity().getString(R.string.reopen_task), Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), getActivity().getString(R.string.reopen_task), Toast.LENGTH_SHORT).show();
 
             seekBar.setProgress(0);
             seekBarCompat.setProgress(0);
-            aq.id(R.id.mark_as_done).text(getString(R.string.mark_as_done));
+            aq.id(R.id.mark_as_done).text(getString(R.string.task_as_done));
             tasksList.setProgress(0);
             TaskByIdModel.getInstance().responseObject.progress=0;
         }
         else
         {
-           Toast.makeText(getActivity(), getActivity().getString(R.string.invalid_credential), Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), getActivity().getString(R.string.invalid_credential), Toast.LENGTH_SHORT).show();
 
         }
     }

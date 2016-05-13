@@ -74,9 +74,12 @@ public class RestPasswordFragment extends BaseFragment {
         return super.onOptionsItemSelected(item);
     }
     public void RestPasswod(){
+        if(baseClass.db.getString("SavePassword").contentEquals(aq.id(R.id.old_password).getText().toString().trim()))
         service.restSetPassword(baseClass.getUserId(),
                 aq.id(R.id.confirm_password).getText().toString()
                 , true, new CallBack(RestPasswordFragment.this, "UpdatePassword"));
+        else
+            Toast.makeText(getActivity(), getActivity().getString(R.string.alert_old_password_not_matched), Toast.LENGTH_SHORT).show();
     }
 
     public void UpdatePassword(Object caller, Object model){

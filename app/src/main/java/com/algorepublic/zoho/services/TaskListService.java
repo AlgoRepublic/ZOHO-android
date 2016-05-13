@@ -75,6 +75,7 @@ public class TaskListService extends BaseService {
         this.post(url, params, obj, GeneralModel.getInstance(), message);
         Log.e("DeleteTaskService", url);
     }
+
     public void completeTask(int taskID,int opt, boolean message, CallBack obj){
         String url = Constants.TaskCompleted_API;
         HashMap<String, String> params = new HashMap<String, String>();
@@ -89,6 +90,11 @@ public class TaskListService extends BaseService {
         Log.e("TaskAssigneeService", url);
     }
 
+    public void getOwnersByPermission(String permissionId, boolean message, CallBack obj){
+        String url = Constants.GetUserListByPermission_API+"permissionID="+permissionId;
+        this.get(url, obj, TaskUserModel.getInstance(), message);
+        Log.e("GetOwnersService", url);
+    }
     public void getTaskAttachments(int taskID, boolean message, CallBack obj){
         String url = Constants.TaskAttachments_API+"?taskID="+taskID;
         this.get(url, obj, SubTaskAttachmentsModel.getInstance(), message);

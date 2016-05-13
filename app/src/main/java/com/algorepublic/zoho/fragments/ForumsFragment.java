@@ -47,7 +47,7 @@ public class ForumsFragment extends BaseFragment{
                     Toast.makeText(getActivity(),"Please Select Project", Toast.LENGTH_SHORT).show();
                     return false;
                 }
-                callFragmentWithBackStack(R.id.container, AddForumsFragment.newInstance(), "AddForumsFragment");
+                callFragmentWithBackStack(R.id.container, AddForumsFragment.newInstance(), getString(R.string.forums));
                 break;
         }
         return super.onOptionsItemSelected(item);

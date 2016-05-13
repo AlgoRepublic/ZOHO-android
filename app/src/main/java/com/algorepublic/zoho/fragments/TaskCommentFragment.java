@@ -10,6 +10,7 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -19,6 +20,7 @@ import com.algorepublic.zoho.Models.GeneralModel;
 import com.algorepublic.zoho.Models.TaskCommentsModel;
 import com.algorepublic.zoho.R;
 import com.algorepublic.zoho.adapters.AdapterTaskComments;
+import com.algorepublic.zoho.adapters.AdapterTasksList;
 import com.algorepublic.zoho.adapters.TaskComments;
 import com.algorepublic.zoho.services.CallBack;
 import com.algorepublic.zoho.services.ForumService;
@@ -44,6 +46,7 @@ public class TaskCommentFragment extends BaseFragment {
     public static ListView listView;
     TaskListService service;
     ForumService forumService;
+    private LinearLayout layoutCommentsAdd;
     public static ArrayList<TaskComments> arrayList = new ArrayList<>();
     TextView textView;
 
@@ -76,6 +79,7 @@ public class TaskCommentFragment extends BaseFragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment_forums
         View view = inflater.inflate(R.layout.fragment_task_comments, container, false);
+        layoutCommentsAdd = (LinearLayout) view.findViewById(R.id.layoutCommentsAdd);
         listView = (ListView) view.findViewById(R.id.listView_comments);
         comment_user = (EditText) view.findViewById(R.id.comment_user);
         aq = new AQuery(view);
@@ -87,24 +91,9 @@ public class TaskCommentFragment extends BaseFragment {
         baseClass = ((BaseClass) getActivity().getApplicationContext());
         getToolbar().setTitle(getResources().getString(R.string.comments));
         service.getCommentsByTask(position,
-                true,new CallBack(TaskCommentFragment.this,"TaskComments"));
-//        aq.id(R.id.comment_user).getTextView().setOnEditorActionListener(new TextView.OnEditorActionListener() {
-//            @Override
-//            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-//                if (actionId == getResources().getInteger(R.integer.add_comment)) {
-//                    if (flag == true) {
-//                        forumService.updateforumComments(ForumsDetailFragment
-//                                .arrayList.get(ClickedPosition).getCommentID(), ForumsDetailFragment
-//                                .comment_user.getText().toString(), true, new
-//                                CallBack(TaskCommentFragment.this, "UpdateComment"));
-//                    }else{
-//                        PerformAction();
-//                    }
-//                    return true;
-//                }
-//                return false;
-//            }
-//        });
+                true, new CallBack(TaskCommentFragment.this, "TaskComments"));
+
+        applyPermissions();
         aq.id(R.id.send).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -120,6 +109,26 @@ public class TaskCommentFragment extends BaseFragment {
             }
         });
         return view;
+    }
+
+    /**
+     * Apply Add comment Permissions
+     */
+    private void applyPermissions(){
+        if(!baseClass.hasPermission(getResources().getString(R.string.tasks_add_comment)))
+            layoutCommentsAdd.setVisibility(View.GONE);
+
+        if(!baseClass.hasPermission(getResources().getString(R.string.tasks_add_comment_own_unassigned))
+                && (TaskDetailFragment.tasksList.getOwnerId()==Integer.parseInt(baseClass.getUserId()))
+                && (TaskDetailFragment.tasksList.getListAssignees().size()<1)
+                )
+            layoutCommentsAdd.setVisibility(View.GONE);
+
+        if(!baseClass.hasPermission(getResources().getString(R.string.tasks_add_comment_others_unassigned))
+                && (TaskDetailFragment.tasksList.getOwnerId()!=Integer.parseInt(baseClass.getUserId()))
+                && (TaskDetailFragment.tasksList.getListAssignees().size()<1)
+                )
+            layoutCommentsAdd.setVisibility(View.GONE);
     }
     public void TaskComments(Object caller, Object model) {
         TaskCommentsModel.getInstance().setList((TaskCommentsModel) model);
@@ -148,6 +157,7 @@ public class TaskCommentFragment extends BaseFragment {
             taskComments.setUserName(TaskCommentsModel.getInstance().responseObject.get(loop).userObject.firstName);
             taskComments.setUserImagePath(TaskCommentsModel.getInstance().responseObject.get(loop).userObject.profileImagePath);
             taskComments.setUserImageID(TaskCommentsModel.getInstance().responseObject.get(loop).userObject.profilePictureID);
+            taskComments.setUserId(TaskCommentsModel.getInstance().responseObject.get(loop).userObject.ID);
             arrayList.add(taskComments);
         }
         adapter.notifyDataSetChanged();
@@ -183,6 +193,7 @@ public class TaskCommentFragment extends BaseFragment {
             taskComments.setUserName(baseClass.getFirstName());
             taskComments.setUserImagePath(baseClass.getProfileImage());
             taskComments.setUserImageID(baseClass.getProfileImageID());
+            taskComments.setUserId(Integer.parseInt(baseClass.getUserId()));
             arrayList.add(taskComments);
             adapter.notifyDataSetChanged();
             aq.id(R.id.response_alert).visibility(View.GONE);

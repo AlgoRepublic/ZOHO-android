@@ -29,45 +29,32 @@ import com.algorepublic.zoho.fragments.UserFragment;
 import com.algorepublic.zoho.utils.BaseClass;
 import com.androidquery.AQuery;
 
+import java.util.List;
+
 /**
  * Created by android on 8/24/15.
  */
 public class AdapterMenuItems extends BaseAdapter{
 
     Context ctx; private LayoutInflater inflater;
-    int lastPosition=0;
+    public int lastPosition=0;
     BaseClass baseClass;
-    int[] menu_names = {
-            R.string.dashboard,
-            R.string.projects,
-            R.string.tasks,
-            R.string.calendar,
-            R.string.documents,
-            R.string.users,
-            R.string.forums,
-            R.string.star_rating,
-            R.string.departments,
-    };
-    int[] menu_icon_white = {
-            R.drawable.dashboard,
-            R.drawable.projects,
-            R.drawable.task,
-            R.drawable.calendar,
-            R.drawable.documents,
-            R.drawable.users,
-            R.drawable.forums,
-            R.drawable.starrating,
-            R.drawable.departments
-    };
-    public AdapterMenuItems(Context context) {
+    List<String> menu_names ;
+
+    List<Integer> menu_icon_white ;
+
+    public AdapterMenuItems(Context context,List<String> menuName,List<Integer> menuIcon) {
         this.ctx = context;
         baseClass = ((BaseClass) ctx.getApplicationContext());
         inflater = LayoutInflater.from(context);
+        menu_names = menuName;
+        menu_icon_white = menuIcon;
+
     }
 
 
-    public Object getItem(int position) {
-        return menu_names[position];
+    public String getItem(int position) {
+        return menu_names.get(position);
     }
 
     public long getItemId(int position) {
@@ -75,14 +62,13 @@ public class AdapterMenuItems extends BaseAdapter{
     }
 
     public int getCount() {
-        return menu_names.length;
+        return menu_names.size();
     }
 
     public View getView(final int position, View convertView, ViewGroup parent) {
 
         ViewHolder holder;
         convertView = inflater.inflate(R.layout.layout_menu_items, parent, false);
-
         holder = new ViewHolder();
         holder.title = (TextView) convertView.findViewById(R.id.textview);
         holder.checkBox = (CheckBox) convertView.findViewById(R.id.checkbox);
@@ -92,15 +78,15 @@ public class AdapterMenuItems extends BaseAdapter{
             aq.id(R.id.checkbox).checked(true);
             aq.id(R.id.checkbox).getCheckBox().setAlpha(0.7f);
         }
-        holder.title.setText(menu_names[position]);
+        holder.title.setText(menu_names.get(position));
         holder.title.setTextColor(ctx.getResources().getColor(R.color.white));
-        aq.id(R.id.imageview).image(menu_icon_white[position]);
+        aq.id(R.id.imageview).image(menu_icon_white.get(position));
         aq.id(R.id.imageview).getImageView()
                 .setScaleType(ImageView.ScaleType.CENTER_INSIDE);
         aq.id(R.id.checkbox).getCheckBox().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                for (int loop = 0; loop < menu_names.length; loop++) {
+                for (int loop = 0; loop < menu_names.size(); loop++) {
                     if (loop == position) {
                         aq.id(R.id.checkbox).getCheckBox().animate().alpha(0.7f);
 
@@ -121,51 +107,53 @@ public class AdapterMenuItems extends BaseAdapter{
         for(int loop = 0;loop < ((AppCompatActivity)ctx).getSupportFragmentManager().getBackStackEntryCount();loop++) {
             ((AppCompatActivity)ctx).getSupportFragmentManager().popBackStack();
         }
-
-        if(position==0){
-            callFragmentWithReplace(R.id.container, HomeFragment.newInstance(), "HomeFragment");
-        }if(position==1){
-            callFragmentWithReplace(R.id.container, ProjectsFragment.newInstance(), "ProjectsFragment");
-        }if(position==2){
-            callFragmentWithReplace(R.id.container, TasksListFragment.newInstance(), "TasksListFragment");
-        }if(position==3){
-            callFragmentWithReplace(R.id.container, CalendarFragment.newInstance(), "FragmentCalendar");
-        }if(position==4){
+        if(getItem(position)==ctx.getResources().getString(R.string.dashboard)){
+            callFragmentWithReplace(R.id.container, HomeFragment.newInstance(), ctx.getString(R.string.dashboard));
+        }if(getItem(position)==ctx.getResources().getString(R.string.projects)){
+            callFragmentWithReplace(R.id.container, ProjectsFragment.newInstance(), ctx.getString(R.string.projects));
+        }if(getItem(position)==ctx.getResources().getString(R.string.tasks)){
+            callFragmentWithReplace(R.id.container, TasksListFragment.newInstance(), ctx.getString(R.string.tasks));
+        }if(getItem(position)==ctx.getResources().getString(R.string.calendar)){
+            callFragmentWithReplace(R.id.container, CalendarFragment.newInstance(), ctx.getString(R.string.calendar));
+        }if(getItem(position)==ctx.getResources().getString(R.string.documents)){
             if (baseClass.getSelectedProject().equalsIgnoreCase("0")) {
                 Toast.makeText(ctx, "Please Select Project", Toast.LENGTH_SHORT).show();
                 return;
             }
-            callFragmentWithReplace(R.id.container, DocumentsListFragment.newInstance(), "DocumentsListFragment");
-        }if(position==5){
-            callFragmentWithReplace(R.id.container, UserFragment.newInstance(),"UserFragment");
-        }if(position==6){
+            callFragmentWithReplace(R.id.container, DocumentsListFragment.newInstance(), ctx.getString(R.string.documents));
+        }if(getItem(position)==ctx.getResources().getString(R.string.users)){
+            callFragmentWithReplace(R.id.container, UserFragment.newInstance(),ctx.getString(R.string.users));
+        }if(getItem(position)==ctx.getResources().getString(R.string.forums)){
             if (baseClass.getSelectedProject().equalsIgnoreCase("0")) {
                 Toast.makeText(ctx, "Please Select Project", Toast.LENGTH_SHORT).show();
                 return;
             }
-            callFragmentWithReplace(R.id.container, ForumsFragment.newInstance(), "ForumsFragment");
-        }if(position==7){
+            callFragmentWithReplace(R.id.container, ForumsFragment.newInstance(), ctx.getString(R.string.forums));
+        }if(getItem(position)==ctx.getResources().getString(R.string.star_rating)){
             if (baseClass.getSelectedProject().equalsIgnoreCase("0")) {
                 Toast.makeText(ctx, "Please Select Project", Toast.LENGTH_SHORT).show();
                 return;
             }
-            callFragmentWithReplace(R.id.container, StarRatingFragment.newInstance(), "StarRatingFragment");
-        }if(position==8){
+            callFragmentWithReplace(R.id.container, StarRatingFragment.newInstance(), ctx.getString(R.string.star_rating));
+        }if(getItem(position)==ctx.getResources().getString(R.string.departments)){
             if (baseClass.getSelectedProject().equalsIgnoreCase("0")) {
                 Toast.makeText(ctx, "Please Select Project", Toast.LENGTH_SHORT).show();
                 return;
             }
-            callFragmentWithReplace(R.id.container, DepartmentFragment.newInstance(), "DepartmentFragment");
+            callFragmentWithReplace(R.id.container, DepartmentFragment.newInstance(), ctx.getString(R.string.departments));
         }
     }
     public void callFragmentWithReplace(int containerId, Fragment fragment, String tag){
 
-        ((AppCompatActivity) ctx).getSupportFragmentManager()
+        android.support.v4.app.FragmentTransaction transaction = ((AppCompatActivity) ctx).getSupportFragmentManager()
                 .beginTransaction()
                 .replace(containerId, fragment, tag)
                 .setCustomAnimations(R.anim.slide_in_enter, R.anim.slide_in_exit,
-                        R.anim.slide_pop_enter, R.anim.slide_pop_exit)
-                .commit();
+                        R.anim.slide_pop_enter, R.anim.slide_pop_exit);
+        if(tag!=null)
+            transaction.addToBackStack(tag).commit();
+        else
+            transaction.commit();
     }
     static class ViewHolder {
         TextView title;

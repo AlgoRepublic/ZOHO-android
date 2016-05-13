@@ -90,6 +90,7 @@
     <string name="rest_password">Reset Password</string>
     <string name="edit_user">Edit User</string>
     <string name="add_task">Add Task</string>
+    <string name="edit_task">Edit Task</string>
     <string name="edit">Edit</string>
     <string name="save">Save</string>
     <string name="all">All</string>
@@ -189,7 +190,7 @@
     <string name="task_details">Task Details</string>
     <string name="task_added">Added</string>
     <string name="task_users">Users:</string>
-    <string name="project_status">Project Status:</string>
+    <string name="project_status">Task Status:</string>
     <string name="task_startdate">Start Date:</string>
     <string name="task_duedate">Due Date:</string>
     <string name="projects_list_empty">Project list is empty</string>
@@ -274,6 +275,7 @@
     <string name="user_last_name">Please Add Last Name</string>
     <string name="add_email">Please Add Email</string>
     <string name="alert_old_password">Please Add Old Password</string>
+    <string name="alert_old_password_not_matched">Enter valid old Password</string>
     <string name="alert_new_password">Please Add New Password</string>
     <string name="alert_confirm_password">Please Add Confirm Password</string>
     <string name="alert_match_password">Please Match Your Password</string>
@@ -282,10 +284,14 @@
     <string name="add_userrole">Please Add User Role</string>
     <string name="email_already">Email already exists</string>
     <string name="exit">Are you really want to exit?</string>
+    <string name="response_invalid_username_email">Please Enter valid Email/Password.</string>
 
     <string name="response_error">Error! Please Try Later</string>
     <string name="select_project">Please! Select Project</string>
     <string name="select_user">Please! Select User</string>
+    <string name="select_dept">Please! Select Department</string>
+    <string name="select_folder_d">Please! Select Folder</string>
+    <string name="select_category">Please! Select Category</string>
     <string name="add_project">Add Project</string>
     <string name="enter_comment">Enter Your Comment!</string>
     <string name="no_date">No Date</string>
@@ -344,7 +350,6 @@
     <string name="added_milestone">added Milestone</string>
 
 
-
     <string name="no_comments">No Comments</string>
     <string name="no_documents">No Documents</string>
     <string name="no_feeds">No Feeds</string>
@@ -369,23 +374,41 @@
     <string name="projects_edit_delete">128</string>
 
     <string name="tasks_view">2</string>
+    <!--added-->
     <string name="tasks_view_own_unassigned">134</string>
+    <!--added-->
     <string name="tasks_view_others_unassigned">135</string>
+    <!--added-->
     <string name="tasks_add_comment_own_unassigned">136</string>
+    <!--added-->
     <string name="tasks_add_comment_others_unassigned">137</string>
+    <!--added-->
     <string name="tasks_add_comment">193</string>
+    <!--added-->
     <string name="tasks_view_comment">194</string>
+    <!--added-->
     <string name="tasks_edit_delete_own_comment">195</string>
+    <!--added-->
     <string name="tasks_edit_delete_others_comment">195</string>
+    <!--added-->
     <string name="tasks_add">150</string>
+    <!--added-->
     <string name="tasks_add_subtask">197</string>
+    <!--added-->
     <string name="tasks_edit_own_others_unassigned">185</string>
+    <!--added-->
     <string name="tasks_edit_own_assigned_to_others">186</string>
+    <!--added-->
     <string name="tasks_edit_others_assigned_to_you">187</string>
+    <!--added-->
     <string name="tasks_edit_others_assigned_to_others">188</string>
+    <!--added-->
     <string name="tasks_delete_own_others_unassigned">189</string>
+    <!--added-->
     <string name="tasks_delete_own_assigned_others">190</string>
+    <!--added-->
     <string name="tasks_delete_others_assigned_you">191</string>
+    <!--added-->
 
 
     <string name="calendar_view">1</string>
@@ -394,7 +417,6 @@
     <string name="documents_view">33</string>
     <string name="documents_add">34</string>
     <string name="documents_delete">44</string>
-
     <string name="documents_comments_add">37</string>
     <string name="documents_comments_edit_delete_own_comment">39</string>
     <string name="documents_comments_edit_delete_others_comment">40</string>
@@ -411,5 +433,6 @@
     <string name="forums_edit_delete_others_comments">56</string>
 
     <string name="star_rating_view">226</string>
+    <string name="title_activity_maps">Map</string>
 
 </resources>

@@ -96,7 +96,7 @@ public class TaskListBySubTasksFragment extends BaseFragment {
                 if(baseClass.getSelectedTaskProject().equalsIgnoreCase("0")){
                     Toast.makeText(getActivity(), getActivity().getString(R.string.select_project), Toast.LENGTH_SHORT).show();
                     }else {
-                    callFragmentWithBackStack(R.id.container, TaskAddUpdateFragment.newInstance(taskID, taskListName), "TaskAddUpdateFragment");
+                    callFragmentWithBackStack(R.id.container, TaskAddUpdateFragment.newInstance(taskID, taskListName), getString(R.string.add_task));
                 }
                 break;
         }
@@ -108,6 +108,7 @@ public class TaskListBySubTasksFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_taskslist, container, false);
+        if(baseClass.hasPermission(getContext().getString(R.string.tasks_add_subtask)))
         setHasOptionsMenu(true);
         radioGroup = (RadioGroup) view.findViewById(R.id.radioGroup);
         listView = (StickyListHeadersListView) view.findViewById(R.id.list_taskslist);
@@ -314,6 +315,7 @@ public class TaskListBySubTasksFragment extends BaseFragment {
             tasksList.setTaskListName(taskModel.taskListName);
             tasksList.setParentTaskID(taskModel.parentTaskID);
             tasksList.setTaskListNameID(taskModel.tasklistID);
+            tasksList.setOwnerId(taskModel.ownerID);
             //************** Assignee List ************//
             ArrayList<TaskListAssignee> listAssignees = new ArrayList<>();
             for (int loop1 = 0; loop1 < taskModel.userObject.size(); loop1++) {

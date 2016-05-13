@@ -344,12 +344,15 @@ public class TaskAddUpdateFragment extends BaseFragment {
     }
     private void PopulateModel (String json) {
         Log.e("Json", "/" + json);
-        setTaskValuesTinyDB(-1);
+
+        tasksObj.setTaskName(baseClass.db.getString("TaskName"));
         if(json.contains("100")) {
             Toast.makeText(getActivity(), getActivity().getString(R.string.task_created), Toast.LENGTH_SHORT).show();
         }else{
             Toast.makeText(getActivity(), getActivity().getString(R.string.response_error), Toast.LENGTH_SHORT).show();
         }
+        setTaskValuesTinyDB(-1);
+        taskTitle.setSelection(taskTitle.getText().length());
     }
     public void setTaskValuesTinyDB(int position){
         if(position > -1) {
@@ -364,9 +367,10 @@ public class TaskAddUpdateFragment extends BaseFragment {
             baseClass.db.putString("StartDate", tasksObj.getStartDate());
             baseClass.db.putString("EndDate", tasksObj.getEndDate());
             baseClass.db.putInt("Priority", tasksObj.getPriority());
-
+            taskTitle.setText(baseClass.db.getString("TaskName"));
         }else
         {
+            taskTitle.setText(baseClass.db.getString("TaskName"));
             baseClass.db.putString("TaskName", "");
             baseClass.db.putInt("TaskListNameID", 0);
             baseClass.db.putString("StartDate", "");
@@ -374,6 +378,6 @@ public class TaskAddUpdateFragment extends BaseFragment {
             baseClass.db.putInt("Priority", 0);
             baseClass.db.putString("TaskDesc", "");
         }
-        aq.id(R.id.title_text).text(baseClass.db.getString("TaskName"));
+
     }
 }

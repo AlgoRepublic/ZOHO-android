@@ -4,6 +4,7 @@ package com.algorepublic.zoho.utils;
 import android.util.Log;
 import android.webkit.MimeTypeMap;
 
+import com.algorepublic.zoho.FragmentsTasks.TaskScheduleFragment;
 import com.algorepublic.zoho.adapters.AttachmentList;
 
 import org.apache.http.Header;
@@ -184,15 +185,16 @@ public class GenericHttpClient {
             mpEntity.addPart("ID", new StringBody(Integer.toString(BaseClass.db.getInt("TaskID"))));
             mpEntity.addPart("Title", new StringBody(BaseClass.db.getString("TaskName")));
             mpEntity.addPart("Description", new StringBody(BaseClass.db.getString("TaskDesc")));
-            mpEntity.addPart("StartDate", new StringBody(BaseClass.db.getString("StartDate")));
-            mpEntity.addPart("EndDate", new StringBody(BaseClass.db.getString("EndDate")));
+            mpEntity.addPart("StartDate", new StringBody(TaskScheduleFragment.dateFormator(BaseClass.db.getString("StartDate"))));
+            mpEntity.addPart("EndDate", new StringBody(TaskScheduleFragment.dateFormator(BaseClass.db.getString("EndDate"))));
             p.setEntity(mpEntity);
+
             Log.e("CreateBy", "/" + baseClass.getUserId());
             Log.e("Title", "/" + BaseClass.db.getString("TaskName"));
             Log.e("ID", "/" + BaseClass.db.getInt("TaskID"));
             Log.e("Description", "/" + BaseClass.db.getString("TaskDesc"));
-            Log.e("StartDate", "/" + BaseClass.db.getString("StartDate"));
-            Log.e("EndDate", "/" + BaseClass.db.getString("EndDate"));
+            Log.e("StartDate", "/" + TaskScheduleFragment.dateFormator(BaseClass.db.getString("StartDate")));
+            Log.e("EndDate", "/" + TaskScheduleFragment.dateFormator(BaseClass.db.getString("EndDate")));
             Log.e("TaskListID", "/" + BaseClass.db.getInt("TaskListNameID"));
             Log.e("Priority", "/" + BaseClass.db.getInt("Priority"));
             Log.e("ProjectID", "/" + BaseClass.db.getInt("ProjectID"));
@@ -238,8 +240,10 @@ public class GenericHttpClient {
             mpEntity.addPart("ID", new StringBody(Integer.toString(BaseClass.db.getInt("TaskID"))));
             mpEntity.addPart("Title", new StringBody(BaseClass.db.getString("TaskName")));
             mpEntity.addPart("Description", new StringBody(BaseClass.db.getString("TaskDesc")));
-            mpEntity.addPart("StartDate", new StringBody(BaseClass.db.getString("StartDate")));
-            mpEntity.addPart("EndDate", new StringBody(BaseClass.db.getString("EndDate")));
+            if(BaseClass.db.getString("TaskDesc").contentEquals("N/A"))
+                mpEntity.addPart("Description", new StringBody(""));
+            mpEntity.addPart("StartDate", new StringBody(TaskScheduleFragment.dateFormator(BaseClass.db.getString("StartDate"))));
+            mpEntity.addPart("EndDate", new StringBody(TaskScheduleFragment.dateFormator(BaseClass.db.getString("EndDate"))));
             p.setEntity(mpEntity);
             Log.e("CreateBy", "/" + baseClass.getUserId());
             Log.e("Title", "/" + BaseClass.db.getString("TaskName"));
@@ -405,4 +409,5 @@ public class GenericHttpClient {
         // and then we can return your byte array.
         return byteBuffer.toByteArray();
     }
+
 }

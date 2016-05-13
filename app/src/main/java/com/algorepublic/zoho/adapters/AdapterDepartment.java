@@ -154,53 +154,6 @@ public class AdapterDepartment
         if(DepartmentFragment.allProjects.get(position).getCompOrDeptID().equalsIgnoreCase("0")){
             holder.swipeLayout.setSwipeEnabled(false);
         }
-  /*      holder.swipeLayout.addSwipeListener(new SwipeLayout.SwipeListener() {
-            @Override
-            public void onStartOpen(SwipeLayout swipeLayout) {
-                if(DepartmentFragment.allProjects.get(position).getCompOrDeptID().equalsIgnoreCase("0")){
-                    holder.btDelete.setVisibility(View.GONE);
-                    holder.btEdit.setVisibility(View.GONE);
-                    holder. swipeLayout.close();
-                }
-            }
-
-            @Override
-            public void onOpen(SwipeLayout swipeLayout) {
-                if(DepartmentFragment.allProjects.get(position).getCompOrDeptID().equalsIgnoreCase("0")){
-                    holder.btDelete.setVisibility(View.GONE);
-                    holder.btEdit.setVisibility(View.GONE);
-                    holder. swipeLayout.close();
-                }
-            }
-
-            @Override
-            public void onStartClose(SwipeLayout swipeLayout) {
-                if(DepartmentFragment.allProjects.get(position).getCompOrDeptID().equalsIgnoreCase("0")){
-                    holder.btDelete.setVisibility(View.GONE);
-                    holder.btEdit.setVisibility(View.GONE);
-                   holder. swipeLayout.close();
-                }
-            }
-
-            @Override
-            public void onClose(SwipeLayout swipeLayout) {
-
-            }
-
-            @Override
-            public void onUpdate(SwipeLayout swipeLayout, int i, int i1) {
-
-            }
-
-            @Override
-            public void onHandRelease(SwipeLayout swipeLayout, float v, float v1) {
-                if(DepartmentFragment.allProjects.get(position).getCompOrDeptID().equalsIgnoreCase("0")){
-                    holder.btDelete.setVisibility(View.GONE);
-                    holder.btEdit.setVisibility(View.GONE);
-                    holder.swipeLayout.close();
-                }
-            }
-        });*/
         holder.header.setText(DepartmentFragment.allProjects.get(position).getCompOrDeptName());
         holder.btDelete.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -215,7 +168,8 @@ public class AdapterDepartment
             public void onClick(View v) {
                 Bundle b = new Bundle();
                 b.putInt("pos", position);
-                Log.e("Pos","p"+position);
+                b.putInt("deptID", Integer.parseInt(DepartmentFragment.allProjects.get(position).getCompOrDeptID()));
+                b.putString("deptName",DepartmentFragment.allProjects.get(position).getCompOrDeptName());
                 EditDepartmentDialogFragment departmentDialogFragment = new EditDepartmentDialogFragment();
                 departmentDialogFragment.setArguments(b);
                 departmentDialogFragment.show(((AppCompatActivity) ctx).getSupportFragmentManager(), "EditDepartmentDialogFragment");

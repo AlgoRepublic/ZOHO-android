@@ -155,7 +155,7 @@ public class AddProjectFragment extends BaseFragment {
             }
         }
 
-        service.getTaskAssignee(Integer.parseInt(baseClass.getSelectedProject()), false,
+        service.getOwnersByPermission(getString(R.string.projects_add), false,
                 new CallBack(AddProjectFragment.this, "GetAllUsers"));
         owner_list.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -186,7 +186,7 @@ public class AddProjectFragment extends BaseFragment {
     }
     private void showDeptList() {
         final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setTitle(getString(R.string.select_user));
+        builder.setTitle(getString(R.string.select_dept));
         builder.setSingleChoiceItems(departmentList, selectedDept, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {

@@ -77,8 +77,8 @@ public class TasksListFragment extends BaseFragment implements SwipeRefreshLayou
             case R.id.add_project:
                 if(baseClass.getSelectedProject().equalsIgnoreCase("0")){
                     Toast.makeText(getActivity(), getActivity().getString(R.string.select_project), Toast.LENGTH_SHORT).show();
-                     }else {
-                    callFragmentWithBackStack(R.id.container, TaskAddUpdateFragment.newInstance(taskListName), "TaskAddUpdateFragment");
+                }else {
+                    callFragmentWithBackStack(R.id.container, TaskAddUpdateFragment.newInstance(taskListName), "Add Task");
                 }
                 break;
         }
@@ -112,6 +112,7 @@ public class TasksListFragment extends BaseFragment implements SwipeRefreshLayou
         radioGroup = (RadioGroup) view.findViewById(R.id.radioGroup);
         searchView = (SearchView) view.findViewById(R.id.searchView);
         listView = (StickyListHeadersListView) view.findViewById(R.id.list_taskslist);
+        listView.setFastScrollEnabled(true);
         swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe_refresh_layout);
         swipeRefreshLayout.setOnRefreshListener(this);
         aq = new AQuery(view);
@@ -126,7 +127,7 @@ public class TasksListFragment extends BaseFragment implements SwipeRefreshLayou
         taskListService = new TaskListService(getActivity());
         requestApiBasedOnPermission();
         aq.id(R.id.all).checked(true);
-       searchView.setOnClickListener(new View.OnClickListener() {
+        searchView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 searchView.setIconifiedByDefault(true);
@@ -147,7 +148,7 @@ public class TasksListFragment extends BaseFragment implements SwipeRefreshLayou
                 if(isLoaded()) {
                     if(allTaskList.size()>0) {
                         baseClass.setTaskSortType("All");
-                       GetGeneralList();
+                        GetGeneralList();
                     }
                 }
             }
@@ -327,6 +328,7 @@ public class TasksListFragment extends BaseFragment implements SwipeRefreshLayou
                 tasksList.setTaskID(taskModel.taskID);
                 tasksList.setEndMilli(DateMilli(taskModel.endDate));
                 tasksList.setStartMilli(DateMilli(taskModel.startDate));
+                tasksList.setOwnerId(taskModel.ownerID);
                 tasksList.setProjectName(taskModel.projectName);
                 tasksList.setProjectID(TasksListByOwnerModel.getInstance().responseObject.get(loop).projectID);
                 tasksList.setStartDate(DateFormatter(taskModel.startDate));
@@ -347,8 +349,8 @@ public class TasksListFragment extends BaseFragment implements SwipeRefreshLayou
                 tasksList.setTaskListNameID(TasksListByOwnerModel.getInstance().responseObject.get(loop).tasklistID);
                 //************** Assignee List ************//
                 ArrayList<TaskListAssignee> listAssignees = new ArrayList<>();
-                for (int loop2 = 0; loop2 < TasksListByOwnerModel.getInstance().responseObject.get(loop).taskObject.get(loop1).userObject.size(); loop2++) {
-                    TasksListByOwnerModel.Users users = TasksListByOwnerModel.getInstance().responseObject.get(loop).taskObject.get(loop1).userObject.get(loop2);
+                for (int loop2 = 0; loop2 < taskModel.userObject.size(); loop2++) {
+                    TasksListByOwnerModel.Users users = taskModel.userObject.get(loop2);
                     TaskListAssignee assignee = new TaskListAssignee();
                     assignee.setUserID(users.responsibleID);
                     assignee.setFirstName(users.firstName);
@@ -358,10 +360,36 @@ public class TasksListFragment extends BaseFragment implements SwipeRefreshLayou
                 }
                 tasksList.setListAssignees(listAssignees);
                 //************** ******* ************//
-                allTaskList.add(tasksList);
+                boolean viewOwnUnAssigned = baseClass.hasPermission(getResources().getString(R.string.tasks_view_own_unassigned));
+                boolean viewOtherUnAssigned = baseClass.hasPermission(getResources().getString(R.string.tasks_view_others_unassigned));
+                tasksViewUnassigned(viewOwnUnAssigned,viewOtherUnAssigned,tasksList,listAssignees);
             }
         }
     }
+
+    /**
+     * Apply permissions on TasksList. add tasks in list if true
+     * @param tasksList
+     * @param listAssignees
+     */
+    private void tasksViewUnassigned(boolean viewOwnUnAssigned,boolean viewOtherUnAssigned,TasksList tasksList,ArrayList<TaskListAssignee> listAssignees){
+        if(!viewOwnUnAssigned && !viewOtherUnAssigned){
+        }
+        else if(!viewOwnUnAssigned){ // listAssignees.size() < 1 means "UNASSIGNED"
+                if(tasksList.getOwnerId()==Integer.parseInt(baseClass.getUserId()) &&  listAssignees.size() < 1){}
+                   else allTaskList.add(tasksList);
+
+        }
+        else if(!viewOtherUnAssigned) { // listAssignees.size() < 1 means "UNASSIGNED"
+                if((tasksList.getOwnerId() != Integer.parseInt(baseClass.getUserId())) && listAssignees.size() < 1) {}
+                   else allTaskList.add(tasksList);
+
+        }
+        else
+            allTaskList.add(tasksList);
+    }
+
+
     public void UpComing(){
         generalList.clear();
         for (int loop = 0; loop < allTaskList.size(); loop++) {

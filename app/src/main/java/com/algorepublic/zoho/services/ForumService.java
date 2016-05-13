@@ -96,7 +96,7 @@ public class ForumService extends BaseService {
         HashMap<String, String> params = new HashMap<String, String>();
         params.put("id", ID);
         Log.e("S","S"+ID);
-        this.post(url, params, obj, GeneralModel.getInstance(), message);
+        post(url, params, obj, GeneralModel.getInstance(), message);
         Log.e("DeleteForumComService", url);
     }
 }

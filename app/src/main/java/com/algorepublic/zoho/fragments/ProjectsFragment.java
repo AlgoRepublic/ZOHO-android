@@ -79,6 +79,9 @@ public class ProjectsFragment extends BaseFragment implements SwipeRefreshLayout
         View view  = inflater.inflate(R.layout.fragment_projects, container, false);
         listViewDept = (StickyListHeadersListView) view.findViewById(R.id.projects_liststicky);
         listViewClient = (ListView) view.findViewById(R.id.projects_list);
+
+        listViewDept.setFastScrollEnabled(true);
+        listViewClient.setFastScrollEnabled(true);
         aq = new AQuery(getActivity(), view);
         swipeStickView = (SwipeRefreshLayout) view.findViewById(R.id.swipe_stickyView);
         swipeListView = (SwipeRefreshLayout) view.findViewById(R.id.swipe_listView);
@@ -357,7 +360,7 @@ public class ProjectsFragment extends BaseFragment implements SwipeRefreshLayout
                 if(allDeptList.size()==0){
                     Toast.makeText(getActivity(), getActivity().getString(R.string.project_loading), Toast.LENGTH_SHORT).show();
  }else {
-                    callFragmentWithBackStack(R.id.container, AddProjectFragment.newInstance(), "AddProjectFragment");
+                    callFragmentWithBackStack(R.id.container, AddProjectFragment.newInstance(), getString(R.string.new_project));
                 }
                 break;
         }

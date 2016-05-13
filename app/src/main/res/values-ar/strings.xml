@@ -81,6 +81,7 @@
     <string name="rest_password">تعديل كلمة المرور</string>
     <string name="edit_user">تعديل المستخدم</string>
     <string name="add_task">إضافة مهمة</string>
+    <string name="edit_task">مهمة تحرير</string>
     <string name="edit">تعديل</string>
     <string name="save">حفظ</string>
 
@@ -176,7 +177,7 @@
     <string name="task_details">تفاصيل المهمة:</string>
     <string name="task_added">أضاف</string>
     <string name="task_users">المستخدمين:</string>
-    <string name="project_status">حالة المشروع:</string>
+    <string name="project_status">حالة المهمة :</string>
     <string name="task_startdate">تاريخ البدء:</string>
     <string name="task_duedate">تاريخ الانتهاء:</string>
     <string name="projects_list_empty">قائمة المشروع فارغة</string>
@@ -273,8 +274,10 @@
     <string name="add_phoneno">الرجاء إضافة رقم الهاتف</string>
     <string name="email_already">البريد الإلكتروني</string>
     <string name="user_roles">أدوار المستخدمين</string>
-
+    <string name="alert_old_password_not_matched">أدخل كلمة المرور القديمة الصحيحة
+</string>
     <string name="response_error">خطأ! الرجاء المحاولة لاحقًا</string>
+    <string name="response_invalid_username_email">الرجاء إدخال بريد إلكتروني صالح / كلمة المرور .</string>
     <string name="select_project">الرجاء اختيار مشروع!</string>
     <string name="add_project">إضافة مشروع</string>
     <string name="enter_comment">أدخل تعليقك!</string>

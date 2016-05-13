@@ -166,7 +166,6 @@ public class EditProfileFragment extends BaseFragment implements MultiSelectionS
                 }
                 if(aq.id(R.id.user_email).getText().toString().isEmpty()){
                     Toast.makeText(getActivity(), getActivity().getString(R.string.add_email), Toast.LENGTH_SHORT).show();
-
                     return false;
                 }
                 if(aq.id(R.id.user_phoneno).getText().toString().isEmpty()){

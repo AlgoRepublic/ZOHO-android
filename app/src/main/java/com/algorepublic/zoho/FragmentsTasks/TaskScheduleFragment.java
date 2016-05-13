@@ -14,6 +14,7 @@ import com.algorepublic.zoho.utils.BaseClass;
 import com.androidquery.AQuery;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 import java.util.Calendar;
+import java.util.Locale;
 
 
 public class TaskScheduleFragment extends BaseFragment {
@@ -60,10 +61,16 @@ public class TaskScheduleFragment extends BaseFragment {
             } else if (BaseClass.db.getString("StartDate").equalsIgnoreCase("31/12/3938")) {
                 aq.id(R.id.start_date).text("No Date");
             }
-            else
-                aq.id(R.id.start_date).text(BaseClass.db.getString("StartDate"));
+            else {
+
+                String[] splited = BaseClass.db.getString("StartDate").split("/");
+               int startDate = Integer.parseInt(splited[0]);
+               int startMonth = Integer.parseInt(splited[1]);
+               int startYear = Integer.parseInt(splited[2]);
+                aq.id(R.id.start_date).text(startDate+"/"+startMonth+"/"+startYear);
+            }
         }else{
-            aq.id(R.id.start_date).text(month+"/"+day+"/"+year);
+            aq.id(R.id.start_date).text(day+"/"+month+"/"+year);
         }
 
         if(!BaseClass.db.getString("EndDate").equalsIgnoreCase("") ||
@@ -73,33 +80,38 @@ public class TaskScheduleFragment extends BaseFragment {
             } else if (BaseClass.db.getString("EndDate").equalsIgnoreCase("31/12/3938")) {
                 aq.id(R.id.end_date).text("No Date");
             }
-            else
-                aq.id(R.id.end_date).text(BaseClass.db.getString("EndDate"));
+            else {
+                String[] splited = BaseClass.db.getString("EndDate").split("/");
+                int endDate = Integer.parseInt(splited[0]);
+                int endMonth = Integer.parseInt(splited[1]);
+                int endYear = Integer.parseInt(splited[2]);
+                aq.id(R.id.end_date).text(endDate+"/"+endMonth+"/"+endYear);
+            }
         }else{
-            aq.id(R.id.end_date).text(month+"/"+day+"/"+year);
+            aq.id(R.id.end_date).text(day+"/"+month+"/"+year);
         }
         SplitStartDate(); SplitEndDate();
 
         aq.id(R.id.btn_start_date).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            DatePickerDialog datePickerDialog = DatePickerDialog.newInstance(startDatePicker
-                    ,start_year,
-                    start_month,
-                    start_day
-                    );
-            datePickerDialog.show(getActivity().getFragmentManager(),DATEPICKER_TAG);
+                DatePickerDialog datePickerDialog = DatePickerDialog.newInstance(startDatePicker
+                        ,start_year,
+                        start_month,
+                        start_day
+                );
+                datePickerDialog.show(getActivity().getFragmentManager(),DATEPICKER_TAG);
             }
         });
         aq.id(R.id.btn_end_date).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            DatePickerDialog datePickerDialog = DatePickerDialog.newInstance(endDatePicker
-                    ,end_year,
-                    end_month,
-                    end_day
-                    );
-            datePickerDialog.show(getActivity().getFragmentManager(),DATEPICKER_TAG);
+                DatePickerDialog datePickerDialog = DatePickerDialog.newInstance(endDatePicker
+                        ,end_year,
+                        end_month,
+                        end_day
+                );
+                datePickerDialog.show(getActivity().getFragmentManager(),DATEPICKER_TAG);
             }
         });
         return view;
@@ -108,20 +120,24 @@ public class TaskScheduleFragment extends BaseFragment {
 
         @Override
         public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
-            start_date = (++monthOfYear)+"/"+dayOfMonth+"/"+year;
-            start_day = dayOfMonth;start_month = monthOfYear-1;start_year = year;
+            start_date = dayOfMonth+"/"+(++monthOfYear)+"/"+year;
+            start_day = dayOfMonth;
+            start_month = monthOfYear-1;
+            start_year = year;
             CheckDate();
-            aq.id(R.id.start_date).text(start_date);
+            aq.id(R.id.start_date).text( dayOfMonth+"/"+(monthOfYear)+"/"+year);
             BaseClass.db.putString("StartDate", start_date);
         }
     };
     DatePickerDialog.OnDateSetListener endDatePicker = new DatePickerDialog.OnDateSetListener() {
         @Override
         public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
-            end_date = (++monthOfYear)+"/"+dayOfMonth+"/"+year;
-            end_day = dayOfMonth;end_month = monthOfYear-1;end_year = year;
+            end_date =  dayOfMonth+"/"+(++monthOfYear)+"/"+year;
+            end_day = dayOfMonth;
+            end_month = monthOfYear-1;
+            end_year = year;
             CheckDate();
-            aq.id(R.id.end_date).text(end_date);
+            aq.id(R.id.end_date).text(dayOfMonth+"/"+(monthOfYear)+"/"+year);
             BaseClass.db.putString("EndDate", end_date);
         }
     };
@@ -162,5 +178,12 @@ public class TaskScheduleFragment extends BaseFragment {
             end_month = Integer.parseInt(splited[1])-1;
             end_year = Integer.parseInt(splited[2]);
         }
+    }
+
+    public static String dateFormator(String date){
+        String _date=date;
+        String[] splited = date.split("/");
+        _date =  splited[1]+"/"+splited[0]+"/"+splited[2];
+        return _date;
     }
 }

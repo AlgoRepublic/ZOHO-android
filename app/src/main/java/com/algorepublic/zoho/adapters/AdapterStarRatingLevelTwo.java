@@ -1,19 +1,17 @@
 package com.algorepublic.zoho.adapters;
 
 import android.content.Context;
-import android.util.Log;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.algorepublic.zoho.MainActivity;
 import com.algorepublic.zoho.R;
-import com.algorepublic.zoho.fragments.StarRatingFragment;
 import com.algorepublic.zoho.fragments.StarRatingLevelQuestionsFragment;
 import com.algorepublic.zoho.utils.BaseClass;
 import com.algorepublic.zoho.utils.CustomExpListView;
@@ -27,6 +25,8 @@ import java.util.List;
 public class AdapterStarRatingLevelTwo extends BaseExpandableListAdapter {
     private final Context mContext;
     private final List<StarRatingHeadsLevelTwo> mListDataHeader;
+    private int lastGroupExpanded;
+    private AdapterStarRatingLevelThree thirdLevelAdapter;
 
     public AdapterStarRatingLevelTwo(Context mContext, List<StarRatingHeadsLevelTwo> mListDataHeader) {
         this.mContext = mContext;
@@ -55,9 +55,26 @@ public class AdapterStarRatingLevelTwo extends BaseExpandableListAdapter {
         LayoutInflater layoutInflater = (LayoutInflater) this.mContext
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = layoutInflater.inflate(R.layout.fragment_star_rating, parent, false);
-        CustomExpListView mListView = new CustomExpListView(mContext);
-        mListView.setAdapter(new AdapterStarRatingLevelThree
-                (this.mContext, mListDataHeader.get(childPosition).getLevelThrees()));
+        final CustomExpListView mListView = new CustomExpListView(mContext);
+        mListView.setChildDivider(new ColorDrawable(Color.TRANSPARENT));
+        mListView.setDivider(new ColorDrawable(Color.TRANSPARENT));
+        mListView.setGroupIndicator(new ColorDrawable(Color.TRANSPARENT));
+
+        thirdLevelAdapter = new AdapterStarRatingLevelThree
+                (this.mContext, mListDataHeader.get(childPosition).getLevelThrees());
+        mListView.setAdapter(thirdLevelAdapter);
+
+        mListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
+            @Override
+            public void onGroupExpand(int groupPosition) {
+                int len = thirdLevelAdapter.getGroupCount();
+                for (int i = 0; i < len; i++) {
+                    if (i != groupPosition) {
+                        mListView.collapseGroup(i);
+                    }
+                }
+            }
+        });
         return mListView;
     }
 

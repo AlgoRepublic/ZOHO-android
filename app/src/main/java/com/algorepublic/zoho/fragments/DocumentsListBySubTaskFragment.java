@@ -136,7 +136,7 @@ public class DocumentsListBySubTaskFragment extends BaseFragment {
             case R.id.add_document:
                 baseClass.hideKeyPad(getView());
                 callFragmentWithBackStack(R.id.container, UploadDocsFragment.
-                        newInstance(0,ID), "UploadDocsFragment");
+                        newInstance(0,ID), getString(R.string.documents));
                 break;
         }
         return super.onOptionsItemSelected(item);
@@ -204,7 +204,8 @@ public class DocumentsListBySubTaskFragment extends BaseFragment {
         SubTaskAttachmentsModel.getInstance().setList((SubTaskAttachmentsModel) model);
         if (SubTaskAttachmentsModel.getInstance().responseCode == 100) {
             GetAllDocumentsList();
-            FilterList();
+            FilterByAllDocs();
+            SetAdapterList();
         } else {
             Toast.makeText(getActivity(), getActivity().getString(R.string.invalid_credential), Toast.LENGTH_SHORT).show();
         }

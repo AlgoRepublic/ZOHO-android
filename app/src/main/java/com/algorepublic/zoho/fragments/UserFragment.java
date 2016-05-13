@@ -8,6 +8,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.algorepublic.zoho.Models.UserListModel;
@@ -32,6 +34,8 @@ public class UserFragment extends BaseFragment implements SwipeRefreshLayout.OnR
     BaseClass baseClass;
     UserService service;
     AdapterUser adapterUser;
+    private TextView alertMessage;
+    private ListView user_list;
 
 
     public UserFragment() {
@@ -56,6 +60,8 @@ public class UserFragment extends BaseFragment implements SwipeRefreshLayout.OnR
         setHasOptionsMenu(true);
         adapterUser=new AdapterUser(getActivity());
         getToolbar().setTitle(getString(R.string.users));
+        alertMessage = aq.id(R.id.alertMessage).getTextView();
+        user_list = aq.id(R.id.user_list).getListView();
         swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe_refresh_layout);
         swipeRefreshLayout.setOnRefreshListener(this);
         service = new UserService(getActivity());
@@ -92,14 +98,14 @@ public class UserFragment extends BaseFragment implements SwipeRefreshLayout.OnR
     }
     public void UserList(Object caller, Object model){
         UserListModel.getInstance().setList((UserListModel) model);
-        aq.id(R.id.alertMessage).text(getString(R.string.no_users));
+        alertMessage.setText(getString(R.string.no_users));
         if(UserListModel.getInstance().responseObject.size() ==0){
             aq.id(R.id.response_alert).visibility(View.VISIBLE);
         }else{
             aq.id(R.id.response_alert).visibility(View.GONE);
         }
         if (UserListModel.getInstance().responseObject.size()!=0) {
-            aq.id(R.id.user_list).adapter(adapterUser);
+            user_list.setAdapter(adapterUser);
             swipeRefreshLayout.setRefreshing(false);
         }else {
             Toast.makeText(getActivity(), getString(R.string.response_error), Toast.LENGTH_SHORT).show();
@@ -109,7 +115,7 @@ public class UserFragment extends BaseFragment implements SwipeRefreshLayout.OnR
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.add_project:
-                callFragmentWithBackStack(R.id.container,AddUserFragment.newInstance(-1), "AddUserFragment");
+                callFragmentWithBackStack(R.id.container,AddUserFragment.newInstance(-1), getString(R.string.add_user));
         }
         return super.onOptionsItemSelected(item);
     }

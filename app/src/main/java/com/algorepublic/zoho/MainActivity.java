@@ -1,10 +1,12 @@
 package com.algorepublic.zoho;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -32,13 +34,17 @@ import com.flyco.dialog.listener.OnBtnClickL;
 import com.flyco.dialog.widget.NormalDialog;
 import com.github.tibolte.agendacalendarview.AgendaCalendarView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MainActivity extends BaseActivity {
 
     AQuery aq,aq_header;
     BaseClass baseClass;
     public static int themeType;
     public static GridView gridView;
-
+    private List<String> menu_names=null;
+    private List<Integer> menu_icon_white=null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -101,8 +107,78 @@ public class MainActivity extends BaseActivity {
                 MainActivity.this.finish();
             }
         });
-        callFragment(R.id.container, HomeFragment.newInstance(), "HomeFragment");
-        gridView.setAdapter(new AdapterMenuItems(this));
+
+        callFragmentWithBackStack(R.id.container, HomeFragment.newInstance(), getString(R.string.dashboard));
+        initLists();
+        gridView.setAdapter(new AdapterMenuItems(this, menu_names, menu_icon_white));
+        getSupportFragmentManager().addOnBackStackChangedListener(new FragmentManager.OnBackStackChangedListener() {
+            @Override
+            public void onBackStackChanged() {
+                if(getSupportFragmentManager().getBackStackEntryCount()>0) {
+                    FragmentManager.BackStackEntry backStackEntry = getSupportFragmentManager().getBackStackEntryAt(getSupportFragmentManager().getBackStackEntryCount() - 1);
+                    String name = backStackEntry.getName();
+                    Log.i("TopOfStack", name + "");
+                    if(name !=null)
+                    toolbar.setTitle(name);
+                }
+            }
+        });
+    }
+
+    /**
+     * create Menu Items and apply permissions.
+     */
+    private void initLists(){
+        menu_names = new ArrayList<>();
+        menu_icon_white= new ArrayList<>();
+        menu_names.add(getString(R.string.dashboard));
+        menu_names.add(getString(R.string.projects));
+        menu_names.add(getString(R.string.tasks));
+        menu_names.add(getString(R.string.calendar));
+        menu_names.add(getString(R.string.documents));
+        menu_names.add(getResources().getString(R.string.users));
+        menu_names.add(getResources().getString( R.string.forums));
+        menu_names.add(getResources().getString(R.string.star_rating));
+        menu_names.add(getResources().getString(R.string.departments));
+
+        menu_icon_white.add(R.drawable.dashboard);
+        menu_icon_white.add(R.drawable.projects);
+        menu_icon_white.add(R.drawable.task);
+        menu_icon_white.add(R.drawable.calendar);
+        menu_icon_white.add(R.drawable.documents);
+        menu_icon_white.add(R.drawable.users);
+        menu_icon_white.add(R.drawable.forums);
+        menu_icon_white.add(R.drawable.starrating);
+        menu_icon_white.add(R.drawable.departments);
+        applyPermissions(this);
+    }
+
+    private void applyPermissions(Context context){
+        if(!baseClass.hasPermission(context.getString(R.string.star_rating_view))){
+            updateListsOnPermissions(getString(R.string.star_rating),R.drawable.starrating);
+        }
+
+        if(!baseClass.hasPermission(context.getString(R.string.users_view))){
+            updateListsOnPermissions(getString(R.string.users),R.drawable.users);
+        }
+
+        if(!baseClass.hasPermission(context.getString(R.string.documents_view))){
+            updateListsOnPermissions(getString(R.string.documents),R.drawable.documents);
+        }
+        if(!baseClass.hasPermission(context.getString(R.string.calendar_view))){
+            updateListsOnPermissions(getString(R.string.calendar),R.drawable.calendar);
+        }
+        if(!baseClass.hasPermission(context.getString(R.string.projects_view))){
+            updateListsOnPermissions(getString(R.string.projects),R.drawable.projects);
+        }
+        if(!baseClass.hasPermission(context.getString(R.string.tasks_view))){
+            updateListsOnPermissions(getString(R.string.tasks),R.drawable.task);
+        }
+    }
+
+    private void updateListsOnPermissions(String mName,int mIcon){
+        menu_names.remove(mName);
+        menu_icon_white.remove((Object)mIcon);
     }
 
     @Override
@@ -124,10 +200,11 @@ public class MainActivity extends BaseActivity {
     public void onBackPressed() {
         StarRatingFragment.levelOneHead.clear();
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        int stackEntryCount = getSupportFragmentManager().getBackStackEntryCount();
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         }
-        if (getSupportFragmentManager().getBackStackEntryCount()==0){
+        if (stackEntryCount==1 && getSupportFragmentManager().getBackStackEntryAt(0).getName().equalsIgnoreCase(getString(R.string.dashboard))){
             String content = getString(R.string.exit);
             final NormalDialog dialog = new NormalDialog(((AppCompatActivity) this));
             dialog.isTitleShow(false)//
@@ -161,9 +238,17 @@ public class MainActivity extends BaseActivity {
                         }
                     });
 
-        }else
+        }else {
             super.onBackPressed();
+            if(getSupportFragmentManager().getBackStackEntryCount()==0) {
+                callFragmentWithBackStack(R.id.container, HomeFragment.newInstance(), getString(R.string.dashboard));
+                ((AdapterMenuItems)gridView.getAdapter()).lastPosition=0;
+                ((AdapterMenuItems)gridView.getAdapter()).notifyDataSetChanged();
+            }
+
+        }
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         Log.e("code1", requestCode + "/" + resultCode + "/");
