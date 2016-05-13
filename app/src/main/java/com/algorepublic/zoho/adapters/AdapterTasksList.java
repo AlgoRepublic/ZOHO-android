@@ -189,17 +189,17 @@ public class AdapterTasksList extends BaseAdapter implements StickyListHeadersAd
     }
 
     private void applyPermissions(ViewHolder holder){
-        if(!baseClass.hasPermission(ctx.getResources().getString(R.string.tasks_edit)) &&
-                !baseClass.hasPermission(ctx.getResources().getString(R.string.tasks_delete))
-                ){
-            holder.swipeLayout.findViewById(R.id.editDeleteView).setVisibility(View.GONE);
-            holder.swipeLayout.setSwipeEnabled(false);
-            aq.id(R.id.rightarrow_layout).visibility(View.GONE);
-        }else if(!baseClass.hasPermission(ctx.getResources().getString(R.string.tasks_edit))){
-            holder.swipeLayout.findViewById(R.id.btEdit).setVisibility(View.GONE);
-        }else if(!baseClass.hasPermission(ctx.getResources().getString(R.string.tasks_delete))){
-            holder.swipeLayout.findViewById(R.id.btDelete).setVisibility(View.GONE);
-        }
+//        if(!baseClass.hasPermission(ctx.getResources().getString(R.string.tasks_edit)) &&
+//                !baseClass.hasPermission(ctx.getResources().getString(R.string.tasks_delete))
+//                ){
+//            holder.swipeLayout.findViewById(R.id.editDeleteView).setVisibility(View.GONE);
+//            holder.swipeLayout.setSwipeEnabled(false);
+//            aq.id(R.id.rightarrow_layout).visibility(View.GONE);
+//        }else if(!baseClass.hasPermission(ctx.getResources().getString(R.string.tasks_edit))){
+//            holder.swipeLayout.findViewById(R.id.btEdit).setVisibility(View.GONE);
+//        }else if(!baseClass.hasPermission(ctx.getResources().getString(R.string.tasks_delete))){
+//            holder.swipeLayout.findViewById(R.id.btDelete).setVisibility(View.GONE);
+//        }
     }
     static class ViewHolder {
         private TextView taskTitle;

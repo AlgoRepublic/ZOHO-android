@@ -215,6 +215,7 @@ public class AdapterDepartment
             public void onClick(View v) {
                 Bundle b = new Bundle();
                 b.putInt("pos", position);
+                Log.e("Pos","p"+position);
                 EditDepartmentDialogFragment departmentDialogFragment = new EditDepartmentDialogFragment();
                 departmentDialogFragment.setArguments(b);
                 departmentDialogFragment.show(((AppCompatActivity) ctx).getSupportFragmentManager(), "EditDepartmentDialogFragment");

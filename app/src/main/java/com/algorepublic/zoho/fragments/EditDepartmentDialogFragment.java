@@ -3,6 +3,7 @@ package com.algorepublic.zoho.fragments;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -62,6 +63,7 @@ public class EditDepartmentDialogFragment extends DialogFragment implements View
     }
     public void CreateProject(){
         Pos = getArguments().getInt("pos");
+        Log.e("Pos", "p" + Pos);
         baseClass.hideKeyPad(getView());
         if(editText.getText().toString().isEmpty()){
             Toast.makeText(getActivity(), getActivity().getString(R.string.department_name), Toast.LENGTH_SHORT).show();
