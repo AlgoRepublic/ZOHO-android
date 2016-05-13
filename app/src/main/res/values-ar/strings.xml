@@ -274,8 +274,10 @@
     <string name="add_phoneno">الرجاء إضافة رقم الهاتف</string>
     <string name="email_already">البريد الإلكتروني</string>
     <string name="user_roles">أدوار المستخدمين</string>
-    <string name="alert_old_password_not_matched">Invalid old Password</string>
+    <string name="alert_old_password_not_matched">أدخل كلمة المرور القديمة الصحيحة
+</string>
     <string name="response_error">خطأ! الرجاء المحاولة لاحقًا</string>
+    <string name="response_invalid_username_email">الرجاء إدخال بريد إلكتروني صالح / كلمة المرور .</string>
     <string name="select_project">الرجاء اختيار مشروع!</string>
     <string name="add_project">إضافة مشروع</string>
     <string name="enter_comment">أدخل تعليقك!</string>

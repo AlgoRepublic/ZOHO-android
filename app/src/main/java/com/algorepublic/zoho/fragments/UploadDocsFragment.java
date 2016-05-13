@@ -209,7 +209,7 @@ public class UploadDocsFragment extends BaseFragment implements GoogleApiClient.
     }
     private void showListView() {
         final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setTitle(getString(R.string.select_user));
+        builder.setTitle(getString(R.string.select_folder_d));
         builder.setSingleChoiceItems(folderList, selectedPosition, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {

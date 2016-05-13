@@ -66,6 +66,10 @@ public class LoginLoadingFragment extends BaseFragment {
             baseClass.setUserId(UserModel.getInstance().userToken);
             loginService.GetById(baseClass.getUserId(), false,
                     new CallBack(LoginLoadingFragment.this, "GetById"));
+        }else if(UserModel.getInstance().responseCode.equalsIgnoreCase("100")
+                && UserModel.getInstance().userToken.equals("0")){
+            Toast.makeText(getActivity(), getString(R.string.response_invalid_username_email), Toast.LENGTH_SHORT).show();
+            callFragmentWithReplace(R.id.logintoloading_container, LoginFragment.newInstance(), "LoginFragment");
         }
         else
         {

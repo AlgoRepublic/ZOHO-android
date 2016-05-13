@@ -238,7 +238,8 @@ public class CalendarFragment extends BaseFragment implements CalendarPickerCont
 
         minDate.add(Calendar.MONTH, -11);
         minDate.set(Calendar.DAY_OF_MONTH, 1);
-        maxDate.add(Calendar.YEAR, 1);
+      //  maxDate.add(Calendar.YEAR, 1);
+        maxDate.set(2017, 3, 30);
         List<CalendarEvent> events = getTasksList();
         if(events.size() != 0 ){
             try {

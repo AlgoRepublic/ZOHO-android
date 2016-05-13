@@ -116,8 +116,8 @@ public class AdapterDocsComments extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 DocsPreviewFragment.ClickedPosition = position;
-                service.deleteForumComment(DocsPreviewFragment
-                                .arrayList.get(position).getCommentID(), true,
+
+                service.deleteForumComment(getItem(position).getCommentID(), true,
                         new CallBack(AdapterDocsComments.this, "DeleteComment"));
             }
         });
@@ -131,7 +131,6 @@ public class AdapterDocsComments extends BaseAdapter {
             notifyDataSetChanged();
         }else {
             Toast.makeText(ctx, ctx.getString(R.string.response_error), Toast.LENGTH_SHORT).show();
-
         }
     }
     static class ViewHolder {

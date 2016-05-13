@@ -275,7 +275,7 @@
     <string name="user_last_name">Please Add Last Name</string>
     <string name="add_email">Please Add Email</string>
     <string name="alert_old_password">Please Add Old Password</string>
-    <string name="alert_old_password_not_matched">Invalid old Password</string>
+    <string name="alert_old_password_not_matched">Enter valid old Password</string>
     <string name="alert_new_password">Please Add New Password</string>
     <string name="alert_confirm_password">Please Add Confirm Password</string>
     <string name="alert_match_password">Please Match Your Password</string>
@@ -284,11 +284,13 @@
     <string name="add_userrole">Please Add User Role</string>
     <string name="email_already">Email already exists</string>
     <string name="exit">Are you really want to exit?</string>
+    <string name="response_invalid_username_email">Please Enter valid Email/Password.</string>
 
     <string name="response_error">Error! Please Try Later</string>
     <string name="select_project">Please! Select Project</string>
     <string name="select_user">Please! Select User</string>
     <string name="select_dept">Please! Select Department</string>
+    <string name="select_folder_d">Please! Select Folder</string>
     <string name="select_category">Please! Select Category</string>
     <string name="add_project">Add Project</string>
     <string name="enter_comment">Enter Your Comment!</string>
